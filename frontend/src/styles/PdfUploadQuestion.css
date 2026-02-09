@@ -1,0 +1,262 @@
+.pdfq-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pdfq-page {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+}
+
+.pdfq-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem 2rem;
+}
+
+.pdfq-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.pdfq-header-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  column-gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.pdfq-back-btn {
+  justify-self: start;
+  background: none;
+  border: none;
+  color: #8b5cf6;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.pdfq-back-btn:hover {
+  text-decoration: underline;
+}
+
+.pdfq-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+  justify-self: center;
+  text-align: center;
+}
+
+.pdfq-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-self: end;
+}
+
+.pdfq-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.pdfq-btn-secondary {
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.pdfq-btn-secondary:hover {
+  background-color: #f9fafb;
+}
+
+.pdfq-btn-primary {
+  background-color: #8b5cf6;
+  color: #ffffff;
+}
+
+.pdfq-btn-primary:hover {
+  background-color: #7c3aed;
+}
+
+.pdfq-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.pdfq-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pdfq-inline-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.pdfq-field-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.35rem;
+}
+
+.pdfq-required {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.pdfq-select,
+.pdfq-input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.875rem;
+  background-color: #f9fafb;
+  transition: all 0.15s ease;
+}
+
+.pdfq-select:focus,
+.pdfq-input:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  background-color: #ffffff;
+}
+
+.pdfq-upload-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #fafafa;
+}
+
+.pdfq-hint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.pdfq-error-box {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  padding: 0.75rem;
+  border-radius: 10px;
+  color: #7f1d1d;
+  font-size: 0.875rem;
+}
+
+.pdfq-error-box ul {
+  margin-left: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.pdfq-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.pdfq-preview {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+.pdfq-preview-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 0.75rem;
+}
+
+.pdfq-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.pdfq-badge {
+  display: inline-flex;
+  padding: 0.25rem 0.5rem;
+  background: rgba(139, 92, 246, 0.15);
+  color: #5b21b6;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.pdfq-preview-index {
+  font-size: 0.8rem;
+  color: #6b7280;
+  font-weight: 700;
+}
+
+.pdfq-preview-question {
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.pdfq-preview-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.pdfq-preview-answer {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  background: #ecfdf5;
+  border: 1px solid #bbf7d0;
+  color: #065f46;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+@media (max-width: 768px) {
+  .pdfq-card {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+  .pdfq-header-row {
+    grid-template-columns: 1fr;
+    row-gap: 0.75rem;
+  }
+  .pdfq-title {
+    justify-self: start;
+    text-align: left;
+  }
+  .pdfq-actions {
+    width: 100%;
+    justify-content: flex-end;
+    justify-self: start;
+  }
+}
+
+

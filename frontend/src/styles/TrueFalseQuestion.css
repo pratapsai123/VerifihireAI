@@ -1,0 +1,201 @@
+.tfq-page * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.tfq-page {
+  min-height: 100vh;
+  background-color: #f3f4f6;
+}
+
+.tfq-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem 2rem;
+}
+
+.tfq-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.75rem 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.tfq-header-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  column-gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.tfq-back-btn {
+  justify-self: start;
+  background: none;
+  border: none;
+  color: #f59e0b;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.25rem 0;
+}
+
+.tfq-back-btn:hover {
+  text-decoration: underline;
+}
+
+.tfq-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+  justify-self: center;
+  text-align: center;
+}
+
+.tfq-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-self: end;
+}
+
+.tfq-btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.tfq-btn-secondary {
+  background-color: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.tfq-btn-secondary:hover {
+  background-color: #f9fafb;
+}
+
+.tfq-btn-primary {
+  background-color: #f59e0b;
+  color: #ffffff;
+}
+
+.tfq-btn-primary:hover {
+  background-color: #d97706;
+}
+
+.tfq-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.tfq-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tfq-field-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.35rem;
+}
+
+.tfq-required {
+  color: #ef4444;
+  margin-left: 2px;
+}
+
+.tfq-textarea,
+.tfq-select,
+.tfq-input {
+  width: 100%;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.875rem;
+  background-color: #f9fafb;
+  transition: all 0.15s ease;
+}
+
+.tfq-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.tfq-textarea:focus,
+.tfq-select:focus,
+.tfq-input:focus {
+  outline: none;
+  border-color: #f59e0b;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+  background-color: #ffffff;
+}
+
+.tfq-tf-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.tfq-tf-btn {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 700;
+  color: #374151;
+  transition: all 0.15s ease;
+}
+
+.tfq-tf-btn--selected {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.12);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+  color: #92400e;
+}
+
+.tfq-inline-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.tfq-hint {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+@media (max-width: 768px) {
+  .tfq-card {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .tfq-header-row {
+    grid-template-columns: 1fr;
+    row-gap: 0.75rem;
+  }
+
+  .tfq-title {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .tfq-actions {
+    width: 100%;
+    justify-content: flex-end;
+    justify-self: start;
+  }
+}
+
+

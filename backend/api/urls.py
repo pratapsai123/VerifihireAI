@@ -1,0 +1,61 @@
+from django.urls import path
+from . import views
+from . import coding_views
+
+urlpatterns = [
+    path('login/', views.login_view, name='login'),
+    path('verify-login-otp/', views.verify_login_otp_view, name='verify_login_otp'),
+    path('register/', views.register_view, name='register'),
+    path('send-otp/', views.send_otp_view, name='send_otp'),
+    path('verify-otp/', views.verify_otp_view, name='verify_otp'),
+    path('reset-password/', views.reset_password_view, name='reset_password'),
+    path('extract-skills/', views.extract_skills_from_resume_view, name='extract_skills'),
+    path('questions/', views.get_questions_view, name='get_questions'),
+    path('questions/create/', views.create_question_view, name='create_question'),
+    path('questions/bulk-create/', views.bulk_create_questions_view, name='bulk_create_questions'),
+    path('questions/by-skills/', views.get_questions_by_skills_view, name='get_questions_by_skills'),
+    path('questions/manual/', views.get_manual_questions_view, name='get_manual_questions'),
+    path('questions/parse-document/', views.parse_questions_document_view, name='parse_questions_document'),
+    path('custom-assessments/', views.create_custom_assessment_view, name='create_custom_assessment'),
+    path('custom-assessments/<int:custom_assessment_id>/', views.get_custom_assessment_view, name='get_custom_assessment'),
+    path('assessments/', views.create_assessment_view, name='create_assessment'),
+    path('assessments/<int:assessment_id>/', views.get_assessment_detail_view, name='get_assessment_detail'),
+    path('assessments/<int:assessment_id>/invite/', views.create_invitations_and_send_email_view, name='invite_candidates'),
+    path('assessments/public/<uuid:token>/', views.get_assessment_public_view, name='get_assessment_public'),
+
+    # Internal user invitations (HR Manager / HR)
+    path('users/invite/', views.invite_user_view, name='invite_user'),
+    path('users/invite/<uuid:token>/', views.get_invite_view, name='get_invite'),
+    path('users/invite/<uuid:token>/cancel/', views.cancel_invite_view, name='cancel_invite'),
+    path('users/invite/<uuid:token>/resend/', views.resend_invite_view, name='resend_invite'),
+    path('users/accept-invite/', views.accept_invite_view, name='accept_invite'),
+    path('users/team-members/', views.team_members_view, name='team_members'),
+
+    path('invitations/public/<uuid:token>/', views.get_invitation_public_view, name='get_invitation_public'),
+    path('invitations/public/<uuid:token>/submit/', views.submit_invitation_answers_view, name='submit_invitation_answers'),
+    path('invitations/public/<uuid:token>/result/', views.get_invitation_result_view, name='get_invitation_result'),
+    path('invitations/public/<uuid:token>/rating/', views.submit_rating_view, name='submit_rating'),
+    path('candidate-details/', views.save_candidate_details_view, name='save_candidate_details'),
+    path('candidate-details/<uuid:token>/', views.get_candidate_details_view, name='get_candidate_details'),
+    path('invitations/public/<uuid:token>/coding/run/', views.invitation_coding_run_view, name='invitation_coding_run'),
+    path('invitations/public/<uuid:token>/coding/submit/', views.invitation_coding_submit_view, name='invitation_coding_submit'),
+    path('invitations/public/<uuid:token>/coding/finalize/', views.invitation_coding_finalize_view, name='invitation_coding_finalize'),
+    path('results/', views.results_overview_view, name='results_overview'),
+    path('candidates/', views.candidates_overview_view, name='candidates_overview'),
+    path('assessments/backfill-questions/', views.backfill_assessment_questions_view, name='backfill_assessment_questions'),
+
+    # Coding Platform (isolated)
+    path('coding/questions/', coding_views.coding_questions_view, name='coding_questions'),
+    path('coding/questions/<int:question_id>/', coding_views.coding_question_detail_view, name='coding_question_detail'),
+    path('coding/questions/<int:question_id>/testcases/', coding_views.coding_testcases_view, name='coding_testcases'),
+    path('coding/testcases/<int:testcase_id>/', coding_views.coding_testcase_delete_view, name='coding_testcase_delete'),
+    path('coding/questions/<int:question_id>/run/', coding_views.coding_run_view, name='coding_run'),
+    path('coding/questions/<int:question_id>/submit/', coding_views.coding_submit_view, name='coding_submit'),
+    path('coding/questions/<int:question_id>/submissions/', coding_views.coding_submissions_view, name='coding_submissions'),
+    path('coding/invites/', coding_views.coding_invites_view, name='coding_invites_create'),
+    path('coding/invites/<uuid:token>/', coding_views.coding_invite_detail_view, name='coding_invite_detail'),
+    path('coding/invites/<uuid:token>/select-language/', coding_views.coding_invite_select_language_view, name='coding_invite_select_language'),
+    path('coding/invites/<uuid:token>/run/', coding_views.coding_invite_run_view, name='coding_invite_run'),
+    path('coding/invites/<uuid:token>/submit/', coding_views.coding_invite_submit_view, name='coding_invite_submit'),
+]
+

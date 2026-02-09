@@ -1,0 +1,905 @@
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import axios from 'axios';
+import Header from '../components/Header';
+import '../styles/ReviewPage.css';
+
+// Django API base URL
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+const MANUAL_TOPIC_LABEL = 'Custom Questions';
+const REVIEW_STATE_STORAGE_KEY = 'reviewAssessmentState';
+const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';
+const CUSTOM_ASSESSMENT_STORAGE_KEY = 'customAssessmentFormData';
+
+function ReviewPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [assessmentData, setAssessmentData] = useState(null);
+  const [topics, setTopics] = useState([]);
+  const [questions, setQuestions] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [assessmentName, setAssessmentName] = useState('');
+  const [minPassPercentage, setMinPassPercentage] = useState(60);
+  const [timeLimit, setTimeLimit] = useState('00:00:00');
+  const [isTimeEdited, setIsTimeEdited] = useState(false);
+
+  // NOTE: `analyzeAndFetchQuestions` is intentionally omitted from deps to avoid
+  // rerunning on every render; `location`/navigation changes are the trigger.
+  useEffect(() => {
+    // Get assessment data from navigation state; if missing (e.g. user refreshed or navigated away),
+    // restore from localStorage so manual questions still appear until assessment is created.
+    let state = location.state || null;
+    if (!state) {
+      try {
+        const saved = localStorage.getItem(REVIEW_STATE_STORAGE_KEY);
+        if (saved) state = JSON.parse(saved);
+      } catch {
+        // ignore parse errors
+      }
+    }
+
+    // If state exists but customAssessmentId is missing, fall back to draft ID
+    if (state && !state.customAssessmentId) {
+      try {
+        const draftId = localStorage.getItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+        const parsed = Number(draftId);
+        if (draftId && !Number.isNaN(parsed) && parsed > 0) {
+          state = { ...state, customAssessmentId: parsed };
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    if (state) {
+      // If coding questions were passed directly, show them immediately
+      if (Array.isArray(state.codingQuestions) && state.codingQuestions.length > 0) {
+        const codingList = state.codingQuestions;
+        setAssessmentData(state);
+        setTopics(['Coding']);
+        setQuestions({ Coding: codingList });
+        const defaultName =
+          state.assessmentName ||
+          state.role ||
+          (codingList.length === 1 ? codingList[0]?.title : 'Coding Assessment');
+        setAssessmentName(defaultName || 'Coding Assessment');
+        setLoading(false);
+        try {
+          localStorage.setItem(REVIEW_STATE_STORAGE_KEY, JSON.stringify(state));
+        } catch {
+          // ignore
+        }
+        return;
+      }
+
+      setAssessmentData(state);
+      setAssessmentName(
+        state.assessmentName ||
+        state.displayName ||
+        state.role ||
+        'Assessment'
+      );
+      try {
+        localStorage.setItem(REVIEW_STATE_STORAGE_KEY, JSON.stringify(state));
+      } catch {
+        // ignore storage errors
+      }
+      analyzeAndFetchQuestions(state);
+    } else {
+      // If no state, redirect back to custom assessment
+      navigate('/custom-assessment');
+    }
+  }, [location, navigate]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Map experience level to difficulty
+  const getDifficultyFromExperienceLevel = (experienceLevel) => {
+    const difficultyMap = {
+      'entry': 'easy',      // 0-2 years → Easy
+      'mid': 'medium',      // 2-5 years → Medium
+      'senior': 'hard',     // 5-10 years → Hard
+      'expert': 'hard',     // 10+ years → Hard
+    };
+
+
+    return difficultyMap[experienceLevel] || null;
+  };
+
+
+
+
+
+  // Analyze skills and fetch questions
+  const analyzeAndFetchQuestions = async (data) => {
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Get all unique skills from question distribution
+      // If customAssessmentId is missing, fall back to draft ID (covers step-by-step navigation)
+      let customAssessmentId = data.customAssessmentId;
+      if (!customAssessmentId) {
+        try {
+          const draftId = localStorage.getItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+          const parsed = Number(draftId);
+          if (draftId && !Number.isNaN(parsed) && parsed > 0) {
+            customAssessmentId = parsed;
+          }
+        } catch {
+          // ignore
+        }
+      }
+
+      const allSkills = Object.keys(data.questionDistribution || {});
+
+      if (allSkills.length === 0) {
+        // Still try to load manual questions (user may only be using custom questions)
+        const questionsByTopic = {};
+        try {
+          if (customAssessmentId) {
+            const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
+              params: { custom_assessment_id: customAssessmentId }
+            });
+            const manualList = manualResp.data?.results || [];
+            if (manualList.length > 0) {
+              manualList.sort((a, b) => {
+                const ta = new Date(a.created_at || 0).getTime();
+                const tb = new Date(b.created_at || 0).getTime();
+                return ta - tb;
+              });
+              questionsByTopic[MANUAL_TOPIC_LABEL] = manualList;
+              setTopics([MANUAL_TOPIC_LABEL]);
+              setQuestions(questionsByTopic);
+            } else {
+              setTopics([]);
+              setQuestions({});
+            }
+          } else {
+            setTopics([]);
+            setQuestions({});
+          }
+        } catch (manualErr) {
+          console.error('Error fetching manual questions:', manualErr);
+          setTopics([]);
+          setQuestions({});
+        } finally {
+          setLoading(false);
+        }
+        return;
+      }
+
+      // Use skills directly as topics (since each skill is a topic in the database)
+      setTopics(allSkills);
+
+      // Get difficulty based on experience level
+      const difficulty = getDifficultyFromExperienceLevel(data.experienceLevel);
+      console.log('Experience Level:', data.experienceLevel, '→ Difficulty:', difficulty);
+
+      // Fetch questions for all skills at once
+      try {
+        const skillsParam = allSkills.join(',');
+        console.log('Fetching questions for skills:', skillsParam);
+        console.log('Question distribution:', data.questionDistribution);
+
+        // Get max required count to fetch enough questions
+        const maxRequired = Math.max(...Object.values(data.questionDistribution || {}), 50);
+
+        // Build API params
+        const apiParams = {
+          skills: skillsParam,
+          limit_per_skill: maxRequired, // Fetch more than needed, we'll limit client-side
+          visibility: 'GLOBAL'
+        };
+
+
+
+        // Add difficulty filter if experience level is set
+        if (difficulty) {
+          apiParams.difficulty = difficulty;
+        }
+
+        const response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
+          params: apiParams
+        });
+
+        console.log('API Response:', response.data);
+
+        if (response.data && response.data.questions_by_topic) {
+          const questionsByTopic = {};
+
+          // Process the response and limit questions per skill based on distribution
+          allSkills.forEach(skill => {
+            const skillQuestions = response.data.questions_by_topic[skill] || [];
+            const requiredCount = data.questionDistribution[skill] || 0;
+
+            console.log(`Skill: ${skill}, Required: ${requiredCount}, Found: ${skillQuestions.length}`);
+
+            // Limit to required count
+            if (requiredCount > 0) {
+              questionsByTopic[skill] = skillQuestions.slice(0, requiredCount);
+            } else {
+              questionsByTopic[skill] = [];
+            }
+          });
+
+          const totalQuestions = Object.values(questionsByTopic).reduce((sum, qs) => sum + qs.length, 0);
+          console.log('Final questionsByTopic:', questionsByTopic);
+          console.log(`Total questions loaded: ${totalQuestions}`);
+
+          // Fetch manual questions (created from "Create Custom Questions") and show them LAST
+          try {
+            if (customAssessmentId) {
+              const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
+                params: { custom_assessment_id: customAssessmentId }
+              });
+              const manualList = manualResp.data?.results || [];
+
+              if (manualList.length > 0) {
+                // Sort so newest appears last
+                manualList.sort((a, b) => {
+                  const ta = new Date(a.created_at || 0).getTime();
+                  const tb = new Date(b.created_at || 0).getTime();
+                  return ta - tb;
+                });
+                questionsByTopic[MANUAL_TOPIC_LABEL] = manualList;
+                setTopics([...allSkills, MANUAL_TOPIC_LABEL]);
+              } else {
+                setTopics(allSkills);
+              }
+            } else {
+              setTopics(allSkills);
+            }
+          } catch (manualErr) {
+            console.error('Error fetching manual questions:', manualErr);
+            setTopics(allSkills);
+          }
+
+          setQuestions(questionsByTopic);
+        } else {
+          console.warn('No questions_by_topic in response:', response.data);
+          setError('No questions found in database. Please run: python manage.py generate_questions');
+          setQuestions({});
+        }
+      } catch (apiError) {
+        console.error('Error fetching questions:', apiError);
+        console.error('Error details:', apiError.response?.data || apiError.message);
+        setError(`Failed to load questions: ${apiError.response?.data?.error || apiError.message}. Please ensure questions are generated using: python manage.py generate_questions`);
+        setQuestions({});
+      }
+    } catch (err) {
+      console.error('Error analyzing and fetching questions:', err);
+      setError('Failed to load questions. Please try again.');
+      setQuestions({});
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+
+  const handleBack = () => {
+    navigate('/custom-assessment', { state: assessmentData });
+  };
+
+
+
+  const handleCreateAssessment = async () => {
+    if (!assessmentData) {
+      return;
+    }
+
+    if (!assessmentData.customAssessmentId && !(Array.isArray(assessmentData.codingQuestions) && assessmentData.codingQuestions.length > 0)) {
+      alert('Custom assessment ID not found. Please go back and recreate the assessment.');
+      return;
+    }
+
+    try {
+      // Check if we have coding questions from state (coding-only assessment)
+      const codingQuestionsFromState = Array.isArray(assessmentData.codingQuestions) ? assessmentData.codingQuestions : [];
+
+      if (codingQuestionsFromState.length > 0) {
+        // This is a coding-only assessment
+        const codingIds = codingQuestionsFromState
+          .map((q) => Number(q.id))
+          .filter((id) => Number.isFinite(id) && id > 0);
+
+        if (codingIds.length === 0) {
+          alert('No valid coding questions found. Please ensure coding questions are available.');
+          return;
+        }
+
+        const payload = {
+          custom_assessment_id: assessmentData.customAssessmentId,
+          question_ids: [], // Empty for coding-only assessments
+          coding_question_ids: codingIds,
+        };
+
+
+
+        // Extract allowed languages from coding questions if available
+        const allLanguages = new Set();
+        codingQuestionsFromState.forEach((q) => {
+          if (Array.isArray(q.languages)) {
+            q.languages.forEach((lang) => allLanguages.add(lang));
+          } else if (q.language) {
+            allLanguages.add(q.language);
+          }
+        });
+        if (allLanguages.size > 0) {
+          payload.coding_allowed_languages = Array.from(allLanguages);
+        }
+
+        if (assessmentName) {
+          payload.name = assessmentName;
+          payload.display_name = assessmentName;
+        }
+        if (assessmentData.role) payload.role = assessmentData.role;
+        if (assessmentData.experienceLevel) payload.experience_level = assessmentData.experienceLevel;
+
+        const response = await axios.post(`${API_BASE_URL}/assessments/`, payload);
+
+        if (response.data && response.data.assessment_id) {
+          const newId = response.data.assessment_id;
+          alert('Assessment created successfully!');
+          try {
+            localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+            localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+            localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
+          } catch {
+            // ignore
+          }
+          navigate(`/invite-candidates/${newId}`, { state: { assessmentName: assessmentName || 'Assessment' } });
+        } else {
+          alert('Assessment created, but no ID was returned from the server.');
+        }
+        return;
+      }
+
+      // Regular assessment with objective questions (and possibly coding questions mixed in)
+      // Flatten all questions from all topics into a single ordered list
+      const allQuestions = [];
+      const topicsOrder = [...topics];
+      topicsOrder.forEach((topic) => {
+        const topicQuestions = getQuestionsForTopic(topic);
+        topicQuestions.forEach((q) => {
+          const skillBadge = topic === MANUAL_TOPIC_LABEL ? (q.topic || MANUAL_TOPIC_LABEL) : topic;
+          allQuestions.push({ ...q, skill: skillBadge });
+        });
+      });
+
+      // Separate coding questions from regular questions
+      // Coding questions typically have properties like: time_limit_ms, languages, mode, starter_code
+      const regularQuestionIds = [];
+      const codingQuestionIds = [];
+
+      allQuestions.forEach((q) => {
+        const id = q.id;
+        if (id == null || id === undefined) return;
+
+        // Check if it's a coding question (has coding-specific fields)
+        const isCodingQuestion =
+          q.time_limit_ms != null ||
+          q.languages != null ||
+          q.mode != null ||
+          q.starter_code != null ||
+          q.template_code != null;
+
+        if (isCodingQuestion) {
+          codingQuestionIds.push(Number(id));
+        } else {
+          regularQuestionIds.push(Number(id));
+        }
+      });
+
+      if (regularQuestionIds.length === 0 && codingQuestionIds.length === 0) {
+        alert('No questions loaded to create an assessment. Please ensure questions are available.');
+        return;
+      }
+
+      const payload = {
+        custom_assessment_id: assessmentData.customAssessmentId,
+        question_ids: regularQuestionIds,
+        coding_question_ids: codingQuestionIds,
+      };
+
+
+      if (assessmentName) {
+        payload.name = assessmentName;
+        payload.display_name = assessmentName;
+      }
+      if (assessmentData.role) payload.role = assessmentData.role;
+      if (assessmentData.experienceLevel) payload.experience_level = assessmentData.experienceLevel;
+
+      // New fields
+      payload.min_pass_percentage = Number(minPassPercentage) || 60;
+      payload.total_time = timeLimit || formatHHMMSS(getTotalTimeSeconds());
+
+      const response = await axios.post(`${API_BASE_URL}/assessments/`, payload);
+
+      if (response.data && response.data.assessment_id) {
+        const newId = response.data.assessment_id;
+        alert('Assessment created successfully!');
+        // Once assessment is created, clear draft state so a new flow starts fresh
+        try {
+          localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+          localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+          // Also clear CustomAssessment saved form data so the Custom Assessment page opens empty next time
+          localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
+        } catch {
+          // ignore
+        }
+        // Redirect to invite candidates for this assessment
+        navigate(`/invite-candidates/${newId}`, { state: { assessmentName: assessmentName || 'Assessment' } });
+      } else {
+        alert('Assessment created, but no ID was returned from the server.');
+      }
+    } catch (error) {
+      console.error('Error creating assessment:', error);
+      const message =
+        error.response?.data?.error ||
+        error.message ||
+        'An error occurred while creating the assessment.';
+      alert(message);
+    }
+  };
+
+
+
+  const getTotalQuestions = () => {
+    return Object.values(questions).reduce((sum, qList) => sum + qList.length, 0);
+  };
+
+
+
+  const getQuestionSeconds = (q) => {
+    if (!q) return 0;
+    if (q.time_limit_ms != null) return Math.floor(Number(q.time_limit_ms) / 1000);
+    if (q.time_limit != null) return Number(q.time_limit) || 0;
+    return 0;
+  };
+
+
+
+  const getTotalTimeSeconds = () => {
+    return Object.values(questions).reduce((sum, qList) => {
+      const listSeconds = (qList || []).reduce((s, q) => s + getQuestionSeconds(q), 0);
+      return sum + listSeconds;
+    }, 0);
+  };
+
+
+
+  const formatHHMMSS = (totalSeconds) => {
+    const seconds = Math.max(0, Number(totalSeconds) || 0);
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+    return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+  };
+
+  useEffect(() => {
+    if (!isTimeEdited && !loading) {
+      const seconds = getTotalTimeSeconds();
+      setTimeLimit(formatHHMMSS(seconds));
+    }
+  }, [questions, isTimeEdited, loading]);
+
+  const handleRemoveQuestion = (topic, questionId) => {
+    if (!window.confirm('Are you sure you want to remove this question?')) return;
+    setQuestions(prev => {
+      const list = prev[topic] || [];
+      const newList = list.filter(q => q.id !== questionId);
+      return { ...prev, [topic]: newList };
+    });
+  };
+
+
+
+  const buildOptions = (q) => {
+    if (!q) return [];
+
+    if (Array.isArray(q.options) && q.options.length > 0) {
+      return q.options
+        .map((opt, idx) => {
+          if (typeof opt === 'string') {
+            return { key: String.fromCharCode(65 + idx), text: opt };
+          }
+          if (!opt || typeof opt !== 'object') return null;
+          const key = opt.key || opt.label || opt.value || String.fromCharCode(65 + idx);
+          const text = opt.text || opt.label || opt.value || opt.option || '';
+          if (!text) return null;
+          return { key, text };
+        })
+        .filter(Boolean);
+    }
+
+    const opts = [];
+    if (q.option_a) opts.push({ key: 'A', text: q.option_a });
+    if (q.option_b) opts.push({ key: 'B', text: q.option_b });
+    if (q.option_c) opts.push({ key: 'C', text: q.option_c });
+    if (q.option_d) opts.push({ key: 'D', text: q.option_d });
+
+    if ((q.question_type || '').toUpperCase() === 'TF' && opts.length === 0) {
+      return [
+        { key: 'A', text: 'True' },
+        { key: 'B', text: 'False' },
+      ];
+    }
+
+    return opts;
+  };
+
+
+
+  const getQuestionsForTopic = (topic) => {
+    return questions[topic] || [];
+  };
+
+
+
+  if (!assessmentData) {
+    return (
+      <div className="review-page-container">
+        <div className="loading-container">
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="review-page-container">
+      {/* Header */}
+      <Header />
+
+      {/* Main Content */}
+      <div className="page-container">
+        <div className="review-wrapper">
+          <h3 className="page-title-centered">Review Assessment</h3>
+
+          {/* Assessment Summary & Configuration */}
+          <div className="summary-section">
+            <div className="summary-grid">
+              <div className="summary-item">
+                <span className="summary-label">Role:</span>
+                <span className="summary-value">
+                  {assessmentData.role === 'other'
+                    ? assessmentData.customRole
+                    : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                </span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Experience Level:</span>
+                <span className="summary-value">
+                  {assessmentData.experienceLevel?.replace(/\b\w/g, l => l.toUpperCase())}
+                </span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Total Questions:</span>
+                <span className="summary-value">
+                  {loading ? assessmentData.numberOfQuestions : getTotalQuestions()}
+                </span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Time Limit (HH:MM:SS):</span>
+
+                <input
+                  type="text"
+                  className="summary-input"
+                  value={loading ? assessmentData.time : timeLimit}
+                  onChange={(e) => {
+                    // Auto-format logic from CodingReview
+                    let val = e.target.value.replace(/\D/g, '');
+                    if (val.length > 6) val = val.slice(0, 6);
+
+                    let formatted = val;
+                    if (val.length >= 5) {
+                      formatted = `${val.slice(0, 2)}:${val.slice(2, 4)}:${val.slice(4)}`;
+                    } else if (val.length >= 3) {
+                      formatted = `${val.slice(0, 2)}:${val.slice(2)}`;
+                    }
+
+                    setTimeLimit(formatted);
+                    setIsTimeEdited(true);
+                  }}
+                  placeholder="00:00:00"
+                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                />
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Min Pass %:</span>
+
+                <input
+                  type="number"
+                  className="summary-input"
+                  value={minPassPercentage}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    if (val === '') {
+                      setMinPassPercentage('');
+                      return;
+                    }
+                    const num = Number(val);
+                    if (num > 100) setMinPassPercentage(100);
+                    else if (num < 0) setMinPassPercentage(0);
+                    else setMinPassPercentage(val);
+                  }}
+                  min="0" max="100"
+                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* All Questions - Flat List (coding-only simplified) */}
+          <div className="topics-section">
+            {loading ? (
+              <div className="loading-container">
+                <div className="spinner"></div>
+                <span>Loading questions...</span>
+              </div>
+            ) : error ? (
+              <div className="error-container">
+                <p className="error-message">{error}</p>
+                <button onClick={() => analyzeAndFetchQuestions(assessmentData)} className="btn btn-primary">
+                  Retry
+                </button>
+              </div>
+            ) : (
+              <div className="all-questions-list">
+                {(() => {
+                  // Separation Logic
+                  const dbQuestions = [];
+                  const manualQuestions = [];
+
+                  topics.forEach((topic) => {
+                    const topicQuestions = getQuestionsForTopic(topic);
+                    topicQuestions.forEach((q) => {
+                      const enrichedQ = { ...q, _topic: topic };
+                      if (topic === MANUAL_TOPIC_LABEL) {
+                        manualQuestions.push(enrichedQ);
+                      } else {
+                        dbQuestions.push({ ...enrichedQ, skill: topic }); // Skill is topic for DB items
+                      }
+                    });
+                  });
+
+                  // Group Manual Questions by "assessment" (PDF name or Manual set name)
+                  const manualGroups = {};
+                  manualQuestions.forEach((q) => {
+                    const groupName = q.assessment || 'Unknown Source';
+                    if (!manualGroups[groupName]) {
+                      manualGroups[groupName] = [];
+                    }
+                    manualGroups[groupName].push(q);
+                  });
+
+                  const hasDbQuestions = dbQuestions.length > 0;
+                  const hasManualQuestions = manualQuestions.length > 0;
+
+                  if (!hasDbQuestions && !hasManualQuestions) {
+                    return (
+                      <div className="no-questions">
+                        <p>No questions available. Please ensure questions are generated in the database.</p>
+                      </div>
+                    );
+                  }
+
+                  // Handler for Remove All
+                  const handleRemoveAll = (groupType, groupKey) => {
+                    if (!window.confirm(`Are you sure you want to remove all questions from ${groupKey}?`)) return;
+
+                    setQuestions((prev) => {
+                      const newQuestions = { ...prev };
+
+                      if (groupType === 'database') {
+                        // Remove all topics that are NOT MANUAL_TOPIC_LABEL
+                        Object.keys(newQuestions).forEach((t) => {
+                          if (t !== MANUAL_TOPIC_LABEL) {
+                            delete newQuestions[t];
+                          }
+                        });
+                        // Update topics list
+                        setTopics((prevTopics) => prevTopics.filter((t) => t === MANUAL_TOPIC_LABEL));
+                      } else if (groupType === 'manual') {
+                        // Remove questions from MANUAL_TOPIC_LABEL that match the assessment name
+                        const currentManuals = newQuestions[MANUAL_TOPIC_LABEL] || [];
+                        const keptManuals = currentManuals.filter((q) => (q.assessment || 'Unknown Source') !== groupKey);
+
+                        if (keptManuals.length === 0) {
+                          delete newQuestions[MANUAL_TOPIC_LABEL];
+                          setTopics((prevTopics) => prevTopics.filter((t) => t !== MANUAL_TOPIC_LABEL));
+                        } else {
+                          newQuestions[MANUAL_TOPIC_LABEL] = keptManuals;
+                        }
+                      }
+                      return newQuestions;
+                    });
+                  };
+
+                  // Render Function for a list of questions
+                  const renderQuestionList = (list, startIndex = 0) => {
+                    return (
+                      <div className="questions-list">
+                        {list.map((question, idx) => {
+                          const globalIndex = startIndex + idx;
+                          const isMultiSelect = (question.question_type || '').toUpperCase() === 'MSQ';
+                          const controlType = isMultiSelect ? 'checkbox' : 'radio';
+
+                          const isOptionCorrect = (label) => {
+                            const normalized = String(label || '').toUpperCase();
+                            const single = String(question.correct_answer || '').toUpperCase();
+                            if (single && normalized === single) return true;
+                            if (Array.isArray(question.correct_answers)) {
+                              const multi = question.correct_answers.map((c) => String(c || '').toUpperCase());
+                              if (multi.includes(normalized)) return true;
+                            }
+                            return false;
+                          };
+
+                          return (
+                            <div key={question.id || globalIndex} className="question-card relative-card">
+                              <div
+                                className="question-header"
+                                style={{
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'flex-start',
+                                }}
+                              >
+                                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'baseline' }}>
+                                  <span className="question-number">Q{globalIndex + 1}</span>
+                                  <span className="question-title">{question.title || question.question}</span>
+                                </div>
+                                <button
+                                  className="btn-remove-question"
+                                  onClick={() => handleRemoveQuestion(question._topic, question.id)}
+                                  style={{
+                                    background: 'none',
+                                    border: 'none',
+                                    color: '#dc3545',
+                                    cursor: 'pointer',
+                                    fontSize: '0.9rem',
+                                    textDecoration: 'underline',
+                                    padding: 0,
+                                    whiteSpace: 'nowrap',
+                                    marginLeft: '1rem',
+                                    minWidth: 'fit-content',
+                                  }}
+                                >
+                                  Remove
+                                </button>
+                              </div>
+                              {(() => {
+                                const optionList = buildOptions(question);
+                                if (optionList.length === 0) return null;
+
+                                return (
+                                  <div className="question-options">
+                                    {optionList.map((opt, optIdx) => {
+                                      const label = opt.key || String.fromCharCode(65 + optIdx);
+                                      const isCorrect = isOptionCorrect(label);
+                                      return (
+                                        <label
+                                          key={`${question.id || globalIndex}-${label}-${optIdx}`}
+                                          className={`option-item ${isCorrect ? 'option-correct' : ''}`}
+                                        >
+                                          <input type={controlType} className="option-input" disabled />
+                                          <span className={`option-control ${controlType} ${isCorrect ? 'correct' : ''}`}>
+                                            {label}
+                                          </span>
+                                          <span className="option-text">{opt.text}</span>
+                                        </label>
+                                      );
+                                    })}
+                                  </div>
+                                );
+                              })()}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    );
+                  };
+
+                  let runningIndex = 0;
+
+                  return (
+                    <>
+                      {/* Database Questions Section */}
+                      {hasDbQuestions && (
+                        <div className="question-group-section" style={{ marginBottom: '2rem' }}>
+                          <div
+                            className="group-header"
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              marginBottom: '1rem',
+                              borderBottom: '2px solid #e9ecef',
+                              paddingBottom: '0.5rem',
+                            }}
+                          >
+                            <h4 style={{ margin: 0, color: '#495057' }}>Database Questions</h4>
+                            <button
+                              className="btn btn-outline-danger btn-sm"
+                              onClick={() => handleRemoveAll('database', 'Database Questions')}
+                            >
+                              Remove All
+                            </button>
+                          </div>
+                          {renderQuestionList(dbQuestions, runningIndex)}
+                        </div>
+                      )}
+
+                      {/* Manual/PDF Groups */}
+
+                      {(() => {
+                        let currentIndex = hasDbQuestions ? dbQuestions.length : 0;
+                        return Object.entries(manualGroups).map(([groupName, groupList]) => {
+                          const element = (
+                            <div key={groupName} className="question-group-section" style={{ marginBottom: '2rem' }}>
+                              <div
+                                className="group-header"
+                                style={{
+                                  display: 'flex',
+                                  justifyContent: 'space-between',
+                                  alignItems: 'center',
+                                  marginBottom: '1rem',
+                                  borderBottom: '2px solid #e9ecef',
+                                  paddingBottom: '0.5rem',
+                                }}
+                              >
+                                <h4 style={{ margin: 0, color: '#495057' }}>
+                                  Parsed from: <span style={{ color: '#2563eb' }}>{groupName}</span>
+                                </h4>
+                                <button
+                                  className="btn btn-outline-danger btn-sm"
+                                  onClick={() => handleRemoveAll('manual', groupName)}
+                                >
+                                  Remove All
+                                </button>
+                              </div>
+                              {renderQuestionList(groupList, currentIndex)}
+                            </div>
+                          );
+                          currentIndex += groupList.length;
+                          return element;
+                        });
+                      })()}
+                    </>
+                  );
+                })()}
+              </div>
+            )}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="form-actions">
+            <button type="button" onClick={handleBack} className="btn btn-secondary">
+              Back
+            </button>
+            <button type="button" onClick={handleCreateAssessment} className="btn btn-primary">
+              Create Assessment
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Sticky Bottom Button - Create Custom Questions */}
+      <div className="sticky-bottom-button-container">
+        <button
+          type="button"
+          className="btn-create-custom-questions"
+          onClick={() => navigate('/manual-questions', { state: assessmentData })}
+        >
+          Create Custom Questions
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default ReviewPage;
+
+

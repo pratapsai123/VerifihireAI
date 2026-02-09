@@ -1,0 +1,69 @@
+services:
+#   backend:
+#     build:
+#       context: ./backend
+#     container_name: VrrifiHire_backend
+#     restart: unless-stopped
+#     environment:
+#       DJANGO_SECRET_KEY: change-me-in-prod
+#       DJANGO_DEBUG: "False"
+#       DJANGO_ALLOWED_HOSTS: backend,localhost,127.0.0.1,0.0.0.10,192.168.1.22
+#       FRONTEND_BASE_URL: http://localhost:3000
+# 
+#       DB_NAME: ${DB_NAME:-react_user1}
+#       DB_USER: ${DB_USER:-postgres}
+#       DB_PASSWORD: ${DB_PASSWORD:-12345}
+#       DB_HOST: ${DB_HOST:-host.docker.internal}
+#       DB_PORT: ${DB_PORT:-5432}
+#       # DB_SSLMODE: require  # uncomment if you point to Supabase/managed Postgres requiring SSL
+#       EXECUTOR_BASE_URL: http://executor:4000
+#       CORS_ALLOWED_ORIGINS: http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001,http://frontend,http://192.168.1.22:3001
+#       CSRF_TRUSTED_ORIGINS: http://localhost:3000,http://127.0.0.1:3000,http://localhost:3001,http://127.0.0.1:3001,http://frontend,http://192.168.1.22:3001
+#     ports:
+#       - "8001:8000"
+#     volumes:
+#       - verifihireai_media:/app/media
+#     depends_on:
+#       - executor
+# 
+#   frontend:
+#     build:
+#       context: ./frontend
+#       args:
+#         # IMPORTANT: This is used by the browser; it must be reachable from your machine.
+#         REACT_APP_API_BASE_URL: ${REACT_APP_API_BASE_URL:-http://localhost:8001/api}
+#     container_name: VrrifiHire_frontend
+#     restart: unless-stopped
+#     depends_on:
+#       - backend
+#     ports:
+#       - "3000:80"
+
+  executor:
+    build:
+      context: ./executor
+    container_name: VrrifiHire_executor
+    restart: unless-stopped
+    environment:
+      EXECUTOR_PORT: "4000"
+      DEFAULT_TIME_LIMIT_MS: "3000"
+      DEFAULT_MEMORY_MB: "256"
+      DOCKER_HOST: tcp://dind:2375
+      DOCKER_TLS_VERIFY: "0"
+    ports:
+      - "4000:4000"
+    depends_on:
+      - dind
+
+  dind:
+    image: public.ecr.aws/docker/library/docker:24-dind
+    container_name: VrrifiHire_dind
+    privileged: true
+    restart: unless-stopped
+
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    command: ["--host=tcp://0.0.0.0:2375", "--tls=false"]
+
+volumes:
+  verifihireai_media:

@@ -1,0 +1,267 @@
+.coding-attempt-shell {
+  height: calc(100vh - var(--vh-header-height, 56px));
+  display: flex;
+  gap: 0;
+  padding: 12px;
+  background: #f3f4f6;
+  overflow: visible;
+  position: relative;
+}
+
+.coding-pane {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  /* overflow: hidden; Removed to allow sticky header if needed, or we can keep it if direct child scrolls. 
+     Actually, for sticky to work relative to window we need visible, but for sticky inside container we need container scroll.
+     Let's try flex-shrink fix first and sticky. */
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 0;
+}
+
+.coding-pane-left {
+  flex: 0 0 44%;
+  min-width: 280px;
+  position: relative;
+  transition: flex-basis 0.12s ease, width 0.12s ease;
+}
+
+.coding-pane-right {
+  flex: 1 1 auto;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.coding-pane-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  background: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  flex-shrink: 0;
+}
+
+.coding-pane-left .coding-pane-header {
+  padding-left: 44px;
+}
+
+.coding-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #111827;
+}
+
+.coding-meta {
+  margin-top: 6px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.coding-pill-dark {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #111827;
+  color: #ffffff;
+}
+
+.coding-pane-body {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+.coding-problem {
+  white-space: pre-wrap;
+  line-height: 1.55;
+  color: #111827;
+}
+
+.coding-toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Language selector dropdown in code editor toolbar */
+.coding-language-select {
+  min-width: 140px;
+  max-width: 180px;
+  height: 38px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.coding-language-select:hover {
+  border-color: #2563eb;
+}
+
+.coding-language-select:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.coding-pane-left-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.coding-collapse-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #111827;
+}
+
+.coding-pane-left.is-collapsed {
+  min-width: 34px;
+  flex: 0 0 34px;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.coding-pane-left.is-collapsed .coding-collapse-btn {
+  position: static;
+  margin: 4px auto;
+}
+
+.coding-resizer {
+  flex: 0 0 10px;
+  cursor: col-resize;
+  background: linear-gradient(90deg, transparent 0%, #e5e7eb 50%, transparent 100%);
+  margin: 0 6px;
+  transition: background-color 0.1s ease, opacity 0.1s ease;
+}
+
+.coding-resizer.dragging {
+  background: #c7d2fe;
+}
+
+.coding-resizer.disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.coding-editor-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+.coding-monaco {
+  flex: 1 1 auto;
+  min-height: 360px;
+  border-top: 1px solid #e5e7eb;
+  overflow: hidden;
+}
+
+.coding-horizontal-resizer {
+  flex: 0 0 10px;
+  cursor: row-resize;
+  background: linear-gradient(180deg, transparent 0%, #e5e7eb 50%, transparent 100%);
+  transition: background-color 0.1s ease, opacity 0.1s ease;
+}
+
+.coding-horizontal-resizer.dragging {
+  background: #c7d2fe;
+}
+
+.coding-horizontal-resizer.disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+.coding-monaco-loading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+}
+
+.coding-result {
+  border-top: 1px solid #e5e7eb;
+  padding: 12px 16px;
+  max-height: 160px;
+  overflow: auto;
+  font-size: 13px;
+}
+
+.coding-result-summary {
+  margin-bottom: 10px;
+  color: #111827;
+}
+
+.coding-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.coding-table-row.simple-row {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+}
+
+@media (max-width: 1000px) {
+  .coding-attempt-shell {
+    height: auto;
+    flex-direction: column;
+  }
+
+  .coding-pane-left {
+    flex: 1 1 auto;
+  }
+
+  .coding-resizer {
+    display: none;
+  }
+
+  .coding-horizontal-resizer {
+    display: none;
+  }
+}
