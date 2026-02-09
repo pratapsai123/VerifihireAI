@@ -250,12 +250,39 @@ function languageSpec(language, sourceCode, dbEngine) {
         cmd: ["sh", "-c", "dart /tmp/main.dart 2>&1"],
         env: ["DART_Pub_CACHE=/tmp/.pub-cache", "PUB_CACHE=/tmp/.pub-cache"],
       };
+
+      function detectScalaMainClass(source) {
+        if (!source) return "Main";
+
+        // 1. Look for @main (Scala 3)
+        const mainMatch = source.match(/@main\s+def\s+([A-Za-z0-9_$]+)/);
+        if (mainMatch && mainMatch[1]) {
+          return mainMatch[1];
+        }
+
+        // 2. Look for object extending App
+        const objectAppMatch = source.match(/object\s+([A-Za-z0-9_$]+)\s+extends\s+App/);
+        if (objectAppMatch && objectAppMatch[1]) {
+          return objectAppMatch[1];
+        }
+
+        // 3. Fallback: Find any object. 
+        // If the user writes "object Solution { def main... }", we want "Solution".
+        const objectMatch = source.match(/object\s+([A-Za-z0-9_$]+)/);
+        if (objectMatch && objectMatch[1]) {
+          return objectMatch[1];
+        }
+
+        return "Main";
+      }
+
     case "scala":
+      const scalaMain = detectScalaMainClass(sourceCode);
       return {
         image: "sbtscala/scala-sbt:eclipse-temurin-17.0.4_1.7.1_3.2.0",
         workdir: "/tmp",
         files: [{ name: "Main.scala", contentName: "source_code" }],
-        cmd: ["sh", "-c", "scalac /tmp/Main.scala 2>&1 && scala -J-Djava.io.tmpdir=/tmp -classpath /tmp Main 2>&1"],
+        cmd: ["sh", "-c", `scalac /tmp/Main.scala 2>&1 && scala -J-Djava.io.tmpdir=/tmp -classpath /tmp ${scalaMain} 2>&1`],
       };
     case "typescript":
     case "ts":
