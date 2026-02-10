@@ -105,7 +105,8 @@ function Login() {
   };
 
   // Handle OTP Verification - Step 2: Verify OTP
-  const handleVerifyLoginOtp = async () => {
+  const handleVerifyLoginOtp = async (e) => {
+    if (e) e.preventDefault();
     if (otpExpired || (otpExpiresAtMs && Date.now() >= otpExpiresAtMs)) {
       setOtpError('OTP has expired. Please resend OTP.');
       return;
@@ -307,7 +308,7 @@ function Login() {
                 </form>
               ) : (
                 // Step 2: OTP Verification
-                <div className="auth-form">
+                <form className="auth-form" onSubmit={handleVerifyLoginOtp}>
                   {otpError && (
                     <div className="auth-error-message">{otpError}</div>
                   )}
@@ -349,8 +350,7 @@ function Login() {
                   />
 
                   <button
-                    type="button"
-                    onClick={handleVerifyLoginOtp}
+                    type="submit"
                     className="auth-primary-btn"
                     disabled={verifyingOtp || otp.length !== 6 || otpExpired}
                     style={{
@@ -400,7 +400,7 @@ function Login() {
                       Resend OTP
                     </button>
                   </div>
-                </div>
+                </form>
               )}
             </div>
           </div>

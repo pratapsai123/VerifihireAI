@@ -799,6 +799,95 @@ class CodingSubmission(models.Model):
             models.Index(fields=["question_id", "status"]),
         ]
 
+
+class Interview(models.Model):
+    """
+    Stores interview metadata (similar to Assessment but for live interviews).
+    """
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    
+    # Link to company/user who created it
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name='interviews',
+        null=True,
+        blank=True,
+    )
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='created_interviews',
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Interview"
+        verbose_name_plural = "Interviews"
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"Interview #{self.id} - {self.name}"
+
+
+class InterviewInvitation(models.Model):
+    """
+    Stores invited candidate details for a specific Interview and a unique token
+    used to join the live interview from an emailed link.
+    """
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('sent', 'Sent'),
+        ('failed', 'Failed'),
+        ('accepted', 'Accepted'),
+        ('completed', 'Completed'),
+    ]
+
+    interview = models.ForeignKey(
+        Interview,
+        on_delete=models.CASCADE,
+        related_name='invitations',
+        null=True,
+        blank=True,
+    )
+
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    pan_number = models.CharField(max_length=10, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+
+    start_time = models.DateTimeField(blank=True, null=True)
+    end_time = models.DateTimeField(blank=True, null=True)
+    time_zone = models.CharField(max_length=64, blank=True, null=True)
+
+    # Grace period for starting the interview after scheduled start_time.
+    start_grace_minutes = models.IntegerField(default=0)
+
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
+    last_error = models.TextField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Interview Invitation"
+        verbose_name_plural = "Interview Invitations"
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['interview', 'email']),
+            models.Index(fields=['token']),
+        ]
+
+    def __str__(self):
+        return f"Interview Invitation #{self.id} - {self.email} (Interview {self.interview_id if self.interview else 'N/A'})"
+
+
     def __str__(self):
         return f"Submission #{self.id} (Q{self.question_id}) - {self.status}"
 

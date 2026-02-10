@@ -37,6 +37,7 @@ ALLOWED_HOSTS = _env_list("DJANGO_ALLOWED_HOSTS", ["*"])
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'channels',
     'api',
+
 ]
 
 MIDDLEWARE = [
@@ -78,6 +81,13 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'VerifiHireAI_backend.wsgi.application'
+ASGI_APPLICATION = 'VerifiHireAI_backend.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
 
 
 # Database

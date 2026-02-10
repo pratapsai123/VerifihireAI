@@ -22,6 +22,9 @@ urlpatterns = [
     path('assessments/<int:assessment_id>/', views.get_assessment_detail_view, name='get_assessment_detail'),
     path('assessments/<int:assessment_id>/invite/', views.create_invitations_and_send_email_view, name='invite_candidates'),
     path('assessments/public/<uuid:token>/', views.get_assessment_public_view, name='get_assessment_public'),
+    path('interviews/invite/', views.create_interview_invitations_and_send_email_view, name='invite_interview_candidates'),
+    path('interviews/invitations/', views.interview_invitations_overview_view, name='interview_invitations_overview'),
+    path('interviews/invitations/<uuid:token>/', views.get_interview_invitation_by_token_view, name='get_interview_invitation_by_token'),
 
     # Internal user invitations (HR Manager / HR)
     path('users/invite/', views.invite_user_view, name='invite_user'),

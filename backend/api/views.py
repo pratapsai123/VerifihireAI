@@ -28,6 +28,8 @@ from .models import (
     UserInvitation,
     CandidateDetails,
     CodingTestCase,
+    Interview,
+    InterviewInvitation,
 )
 
 from django.conf import settings
@@ -4277,6 +4279,638 @@ def candidates_overview_view(request):
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
+def backfill_assessment_questions_view(request):
+    """
+    Backfill existing AssessmentQuestion records with data from their linked Question records.
+    This is useful if AssessmentQuestion records were created before the snapshot fields were added.
+    
+    Expected request body (JSON):
+    {
+        "assessment_id": 1  // Optional: backfill only this assessment, or omit to backfill all
+    }
+    """
+    try:
+        assessment_id = request.data.get('assessment_id', None)
+        
+        # Get AssessmentQuestion records that need backfilling
+        if assessment_id:
+            aq_records = AssessmentQuestion.objects.filter(
+                assessment_id=assessment_id
+            ).select_related('question')
+        else:
+            # Backfill all records with NULL question_type
+            aq_records = AssessmentQuestion.objects.filter(
+                question_type__isnull=True
+            ).select_related('question')
+        
+        updated_count = 0
+        for aq in aq_records:
+            q = aq.question
+            if not q:
+                continue
+            
+            # Update all fields from the linked Question
+            aq.question_type = getattr(q, 'question_type', '') or ''
+            aq.difficulty = getattr(q, 'difficulty', '') or ''
+            aq.time_limit = getattr(q, 'time_limit', None) or 120
+            aq.option_a = getattr(q, 'option_a', None) or ''
+            aq.option_b = getattr(q, 'option_b', None) or ''
+            aq.option_c = getattr(q, 'option_c', None) or ''
+            aq.option_d = getattr(q, 'option_d', None) or ''
+            aq.correct_answer = getattr(q, 'correct_answer', None) or ''
+            aq.correct_answers = getattr(q, 'correct_answers', None) or []
+            aq.skill = getattr(q, 'topic', '') or aq.skill or ''
+            
+            aq.save()
+            updated_count += 1
+        
+        return Response(
+            {
+                'message': f'Successfully backfilled {updated_count} AssessmentQuestion records.',
+                'updated_count': updated_count,
+            },
+            status=status.HTTP_200_OK
+        )
+        
+    except Exception as e:
+        import traceback
+        print(f"Error in backfill_assessment_questions_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response(
+            {'error': f'An error occurred while backfilling: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@csrf_exempt
+def save_candidate_details_view(request):
+    """
+    Save candidate details before starting the assessment.
+    Expected payload:
+    {
+        "token": "uuid-string",
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "john@example.com",
+        "phone": "1234567890",
+        "pan_number": "ABCDE1234F",
+        "pan_file": <file>,
+        "snapshot": "base64-encoded-image-string"
+    }
+    """
+    try:
+        token = request.data.get('token')
+        if not token:
+            return Response(
+                {'error': 'Token is required'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Validate token exists in CandidateInvitation
+        try:
+            invitation = CandidateInvitation.objects.get(token=token)
+        except CandidateInvitation.DoesNotExist:
+            return Response(
+                {'error': 'Invalid token'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # Extract data
+        first_name = request.data.get('first_name', '').strip()
+        last_name = request.data.get('last_name', '').strip()
+        email = request.data.get('email', '').strip()
+        phone = request.data.get('phone', '').strip()
+        pan_number = request.data.get('pan_number', '').strip().upper()
+        snapshot = request.data.get('snapshot', '').strip()
+        pan_file = request.FILES.get('pan_file')
+
+        # Validation
+        if not all([first_name, last_name, email, phone, pan_number, snapshot]):
+            return Response(
+                {'error': 'All fields are required: first_name, last_name, email, phone, pan_number, snapshot'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Validate PAN format (5 letters, 4 digits, 1 letter)
+        if not re.match(r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$', pan_number):
+            return Response(
+                {'error': 'Invalid PAN number format'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Validate email format
+        if not re.match(r'^[^\s@]+@[^\s@]+\.[^\s@]+$', email):
+            return Response(
+                {'error': 'Invalid email format'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Validate phone (10 digits)
+        if not re.match(r'^[0-9]{10}$', phone):
+            return Response(
+                {'error': 'Invalid phone number format (must be 10 digits)'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Create or update candidate details
+        candidate_details, created = CandidateDetails.objects.update_or_create(
+            token=token,
+            email=email,
+            defaults={
+                'invitation': invitation,
+                'first_name': first_name,
+                'last_name': last_name,
+                'phone': phone,
+                'pan_number': pan_number,
+                'snapshot': snapshot,
+                'pan_file': pan_file,
+            }
+        )
+
+        return Response({
+            'success': True,
+            'message': 'Candidate details saved successfully',
+            'id': candidate_details.id,
+            'created': created,
+            'created_at': candidate_details.created_at.isoformat(),
+        }, status=status.HTTP_201_CREATED if created else status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response(
+            {'error': f'Failed to save candidate details: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+@csrf_exempt
+def get_candidate_details_view(request, token):
+    """
+    Get candidate details for a given token.
+    """
+    try:
+        candidate_details = CandidateDetails.objects.get(token=token)
+        
+        return Response({
+            'success': True,
+            'data': {
+                'id': candidate_details.id,
+                'first_name': candidate_details.first_name,
+                'last_name': candidate_details.last_name,
+                'email': candidate_details.email,
+                'phone': candidate_details.phone,
+                'pan_number': candidate_details.pan_number,
+                'pan_file': candidate_details.pan_file.url if candidate_details.pan_file else None,
+                'snapshot': candidate_details.snapshot,
+                'created_at': candidate_details.created_at.isoformat(),
+                'updated_at': candidate_details.updated_at.isoformat(),
+            }
+        }, status=status.HTTP_200_OK)
+
+    except CandidateDetails.DoesNotExist:
+        return Response(
+            {'error': 'Candidate details not found'},
+            status=status.HTTP_404_NOT_FOUND
+        )
+    except Exception as e:
+        return Response(
+            {'error': f'Failed to retrieve candidate details: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_interview_invitations_and_send_email_view(request):
+    """
+    Create interview invitation(s) and send email(s) immediately.
+    
+    This endpoint creates interview invitations without requiring an existing Interview object.
+    If needed, it creates a default Interview record.
+
+    Body:
+    {
+      "candidates": [
+        {
+          "name":"...",
+          "email":"...",
+          "pan_number":"...",
+          "phone":"...",
+          "start_time": "...iso...",
+          "end_time":"...iso...",
+          "time_zone":"...",
+          "start_grace_minutes": 30
+        },
+        ...
+      ],
+      "interview_name": "Optional interview name" (defaults to "Interview")
+    }
+    """
+    try:
+        data = request.data or {}
+        candidates = data.get('candidates', [])
+        interview_name = data.get('interview_name', 'Interview').strip() or 'Interview'
+        
+        if not isinstance(candidates, list) or len(candidates) == 0:
+            return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Get or create a default interview (or create one per batch)
+        # For simplicity, we'll create one interview per batch of invites
+        interview = Interview.objects.create(
+            name=interview_name,
+            description=f'Interview created on {timezone.now().strftime("%Y-%m-%d %H:%M:%S")}',
+        )
+
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+
+        results = []
+        sent_count = 0
+        fail_count = 0
+
+        for idx, c in enumerate(candidates, start=1):
+            payload = dict(c or {})
+            name = (payload.get('name') or '').strip()
+            email = (payload.get('email') or '').strip().lower()
+            pan_number = (payload.get('pan_number') or payload.get('pan') or '').strip().upper() or None
+            phone = (payload.get('phone') or '').strip() or None
+            start_time_raw = (payload.get('start_time') or '').strip() or None
+            end_time_raw = (payload.get('end_time') or '').strip() or None
+            time_zone = (payload.get('time_zone') or '').strip() or None
+            start_grace_minutes_raw = payload.get('start_grace_minutes', None)
+
+            if not name:
+                return Response({'error': f'Candidate #{idx}: name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            if not email:
+                return Response({'error': f'Candidate #{idx}: email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            if pan_number and not _is_valid_pan(pan_number):
+                return Response({'error': f'Candidate #{idx}: pan_number is invalid.'}, status=status.HTTP_400_BAD_REQUEST)
+
+            start_time = parse_datetime(start_time_raw) if start_time_raw else None
+            end_time = parse_datetime(end_time_raw) if end_time_raw else None
+            try:
+                start_grace_minutes = int(start_grace_minutes_raw) if start_grace_minutes_raw is not None else 0
+            except Exception:
+                start_grace_minutes = 0
+            start_grace_minutes = max(0, start_grace_minutes)
+
+            invitation = InterviewInvitation.objects.create(
+                interview=interview,
+                name=name,
+                email=email,
+                pan_number=pan_number,
+                phone=phone,
+                start_time=start_time,
+                end_time=end_time,
+                time_zone=time_zone,
+                start_grace_minutes=start_grace_minutes,
+                status='draft',
+            )
+
+            # Format date/time for email
+            start_time_str = ''
+            end_time_str = ''
+            if start_time:
+                start_time_str = start_time.strftime('%Y-%m-%d %H:%M:%S')
+            if end_time:
+                end_time_str = end_time.strftime('%Y-%m-%d %H:%M:%S')
+            
+            interview_link = f"{frontend_base.rstrip('/')}/live-interview?token={invitation.token}"
+            subject = f"Interview Invitation - {interview_name}"
+            
+            text_body = (
+                f"Hi {name},\n\n"
+                f"You have been invited to participate in a live interview.\n\n"
+                f"Interview: {interview_name}\n"
+            )
+            
+            if start_time_str:
+                text_body += f"Scheduled Start: {start_time_str}\n"
+            if end_time_str:
+                text_body += f"Scheduled End: {end_time_str}\n"
+            if time_zone:
+                text_body += f"Time Zone: {time_zone}\n"
+            
+            text_body += (
+                f"\nJoin Interview Link: {interview_link}\n\n"
+                "Please join the interview at the scheduled time.\n\n"
+                "Best regards,\n"
+                "VerifiHireAI Team"
+            )
+            
+            html_body = f"""
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111; max-width: 600px;">
+                  <h2 style="color: #2563eb;">Interview Invitation</h2>
+                  <p>Hi <strong>{name}</strong>,</p>
+                  <p>You have been invited to participate in a live interview.</p>
+                  
+                  <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin: 20px 0;">
+                    <p style="margin: 8px 0;"><strong>Interview:</strong> {interview_name}</p>
+            """
+            
+            if start_time_str:
+                html_body += f'<p style="margin: 8px 0;"><strong>Scheduled Start:</strong> {start_time_str}</p>'
+            if end_time_str:
+                html_body += f'<p style="margin: 8px 0;"><strong>Scheduled End:</strong> {end_time_str}</p>'
+            if time_zone:
+                html_body += f'<p style="margin: 8px 0;"><strong>Time Zone:</strong> {time_zone}</p>'
+            
+            html_body += f"""
+                  </div>
+                  
+                  <p style="margin: 24px 0;">
+                    <a href="{interview_link}" target="_blank"
+                       style="background:#2563eb;color:#fff;padding:14px 24px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;">
+                      Join Interview
+                    </a>
+                  </p>
+                  
+                  <p style="font-size:12px;color:#475569;margin-top:24px;">
+                    If the button doesn't work, copy this link:<br/>
+                    <a href="{interview_link}" style="color:#2563eb;word-break:break-all;">{interview_link}</a>
+                  </p>
+                  
+                  <p style="margin-top:24px;color:#64748b;font-size:14px;">
+                    Best regards,<br/>
+                    <strong>VerifiHireAI Team</strong>
+                  </p>
+                </div>
+            """
+
+            try:
+                msg = EmailMultiAlternatives(
+                    subject=subject,
+                    body=text_body,
+                    from_email=getattr(settings, 'DEFAULT_FROM_EMAIL', None),
+                    to=[email],
+                )
+                msg.attach_alternative(html_body, "text/html")
+                msg.send(fail_silently=False)
+                invitation.status = 'sent'
+                invitation.last_error = None
+                invitation.save(update_fields=['status', 'last_error', 'updated_at'])
+                sent_count += 1
+            except Exception as mail_err:
+                invitation.status = 'failed'
+                invitation.last_error = str(mail_err)
+                invitation.save(update_fields=['status', 'last_error', 'updated_at'])
+                fail_count += 1
+
+            results.append(
+                {
+                    'id': invitation.id,
+                    'name': invitation.name,
+                    'email': invitation.email,
+                    'pan_number': invitation.pan_number,
+                    'phone': invitation.phone,
+                    'token': str(invitation.token),
+                    'status': invitation.status,
+                    'interview_link': interview_link,
+                    'error': invitation.last_error,
+                }
+            )
+
+        return Response(
+            {
+                'message': 'Interview invitations processed.',
+                'sent': sent_count,
+                'failed': fail_count,
+                'results': results,
+            },
+            status=status.HTTP_200_OK if fail_count == 0 else status.HTTP_207_MULTI_STATUS
+        )
+    except Exception as e:
+        import traceback
+        print(f"Error in create_interview_invitations_and_send_email_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred while sending invitations: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def interview_invitations_overview_view(request):
+    """
+    Overview: list interview invitations and their status.
+    Query params:
+      - interview_id: optional filter by interview
+    """
+    try:
+        interview_id = request.GET.get('interview_id', None)
+        qs = InterviewInvitation.objects.select_related('interview').order_by('-created_at')
+        if interview_id:
+            try:
+                qs = qs.filter(interview_id=int(interview_id))
+            except Exception:
+                return Response({'error': 'interview_id must be an integer.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        qs = qs[:500]
+        results = []
+        for inv in qs:
+            results.append(
+                {
+                    'id': inv.id,
+                    'name': inv.name,
+                    'email': inv.email,
+                    'pan_number': inv.pan_number,
+                    'phone': inv.phone,
+                    'status': inv.status,
+                    'token': str(inv.token),
+                    'start_time': inv.start_time.isoformat() if inv.start_time else None,
+                    'end_time': inv.end_time.isoformat() if inv.end_time else None,
+                    'time_zone': inv.time_zone,
+                    'start_grace_minutes': inv.start_grace_minutes,
+                    'created_at': inv.created_at.isoformat() if inv.created_at else None,
+                    'updated_at': inv.updated_at.isoformat() if inv.updated_at else None,
+                    'interview': {
+                        'id': inv.interview_id,
+                        'name': inv.interview.name if inv.interview else None,
+                        'description': inv.interview.description if inv.interview else None,
+                    } if inv.interview_id else None,
+                }
+            )
+
+        return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"Error in interview_invitations_overview_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred while fetching interview invitations: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_interview_invitation_by_token_view(request, token):
+    """
+    Get interview invitation details by token.
+    """
+    try:
+        try:
+            invitation = InterviewInvitation.objects.select_related('interview').get(token=token)
+        except InterviewInvitation.DoesNotExist:
+            return Response({'error': 'Interview invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
+        return Response({
+            'id': invitation.id,
+            'name': invitation.name,
+            'email': invitation.email,
+            'pan_number': invitation.pan_number,
+            'phone': invitation.phone,
+            'status': invitation.status,
+            'token': str(invitation.token),
+            'start_time': invitation.start_time.isoformat() if invitation.start_time else None,
+            'end_time': invitation.end_time.isoformat() if invitation.end_time else None,
+            'time_zone': invitation.time_zone,
+            'start_grace_minutes': invitation.start_grace_minutes,
+            'created_at': invitation.created_at.isoformat() if invitation.created_at else None,
+            'interview': {
+                'id': invitation.interview_id,
+                'name': invitation.interview.name if invitation.interview else None,
+                'description': invitation.interview.description if invitation.interview else None,
+            } if invitation.interview_id else None,
+        }, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"Error in get_interview_invitation_by_token_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def results_overview_view(request):
+    """
+    Recruiter overview: list recent results (submissions).
+    """
+    try:
+        qs = CandidateSubmission.objects.select_related('invitation', 'invitation__assessment').order_by('-submitted_at')[:200]
+        results = []
+        for s in qs:
+            inv = s.invitation
+            a = inv.assessment
+            results.append(
+                {
+                    'submission_id': s.id,
+                    'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
+                    'candidate': {
+                        'name': inv.name,
+                        'email': inv.email,
+                    },
+                    'assessment': {
+                        'id': a.id,
+                        'display_name': a.display_name,
+                        'name': a.name,
+                    },
+                    'score': s.score,
+                    'total': s.total,
+                    'percentage': s.percentage,
+                    'status': s.result,
+                }
+            )
+
+        return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"Error in results_overview_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred while fetching results: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def submit_rating_view(request, token):
+    """
+    Candidate submits rating/feedback after submission.
+    Body: { "rating": 1-5, "feedback": "optional" }
+    """
+    try:
+        try:
+            inv = CandidateInvitation.objects.select_related('assessment').get(token=token)
+        except CandidateInvitation.DoesNotExist:
+            return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        submission = getattr(inv, 'submission', None)
+        if not submission:
+            return Response({'error': 'No submission found for this invitation.'}, status=status.HTTP_404_NOT_FOUND)
+
+        data = request.data or {}
+        rating = data.get('rating', None)
+        feedback = (data.get('feedback') or '').strip() or None
+
+        # Prevent multiple ratings for the same submission
+        if submission.rating is not None:
+            return Response({'error': 'Rating already submitted for this invitation.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            rating_int = int(rating)
+        except Exception:
+            return Response({'error': 'rating must be an integer between 1 and 5.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if rating_int < 1 or rating_int > 5:
+            return Response({'error': 'rating must be between 1 and 5.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        submission.rating = rating_int
+        submission.feedback = feedback
+        submission.save(update_fields=['rating', 'feedback'])
+
+        return Response({'message': 'Thanks for your feedback.'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"Error in submit_rating_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred while saving rating: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def candidates_overview_view(request):
+    """
+    Recruiter overview: list invited candidates and their status.
+    Query params:
+      - assessment_id: optional
+    """
+    try:
+        assessment_id = request.GET.get('assessment_id', None)
+        qs = CandidateInvitation.objects.select_related('assessment').order_by('-created_at')
+        if assessment_id:
+            try:
+                qs = qs.filter(assessment_id=int(assessment_id))
+            except Exception:
+                return Response({'error': 'assessment_id must be an integer.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        qs = qs[:500]
+        results = []
+        for inv in qs:
+            sub = getattr(inv, 'submission', None)
+            results.append(
+                {
+                    'id': inv.id,
+                    'name': inv.name,
+                    'email': inv.email,
+                    'pan_number': inv.pan_number,
+                    'phone': inv.phone,
+                    'status': inv.status,
+                    'token': str(inv.token),
+                    'created_at': inv.created_at.isoformat() if inv.created_at else None,
+                    'started_at': inv.started_at.isoformat() if getattr(inv, 'started_at', None) else None,
+                    'expires_at': inv.expires_at.isoformat() if getattr(inv, 'expires_at', None) else None,
+                    'submitted_at': sub.submitted_at.isoformat() if sub and sub.submitted_at else None,
+                    'rating': getattr(sub, 'rating', None) if sub else None,
+                    'assessment': {
+                        'id': inv.assessment_id,
+                        'display_name': inv.assessment.display_name,
+                        'name': inv.assessment.name,
+                    } if inv.assessment_id else None,
+                }
+            )
+
+        return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"Error in candidates_overview_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred while fetching candidates: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 def backfill_assessment_questions_view(request):
     """
     Backfill existing AssessmentQuestion records with data from their linked Question records.

@@ -23,6 +23,10 @@ import CodingHome from './pages/CodingHome';
 import CodingQuestionForm from './pages/CodingQuestionForm';
 import CodingAttempt from './pages/CodingAttempt';
 import CodingReview from './pages/CodingReview';
+import LiveInterview from './pages/LiveInterview';
+import LiveInterviewInterviewer from './pages/LiveInterviewInterviewer';
+import LiveInterviewList from './pages/LiveInterviewList';
+import InterviewInvite from './pages/InterviewInvite';
 import './App.css';
 
 function App() {
@@ -44,7 +48,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <div className="App">
+      <div className="App">
         <div className="app-scroll">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -75,6 +79,11 @@ function App() {
             <Route path="/coding/review" element={<CodingReview />} />
             {/* Back-compat route from ManualQuestions */}
             <Route path="/coding-challenge-question" element={<CodingQuestionForm />} />
+            {/* Interview */}
+            <Route path="/send-invite" element={<InterviewInvite />} />
+            <Route path="/live-interview-list" element={<LiveInterviewList />} />
+            <Route path="/live-interview" element={<LiveInterview />} />
+            <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
           </Routes>
 
           {/* Cookie Consent Banner */}
@@ -106,7 +115,7 @@ function App() {
             </div>
           </div>
         </div>
-    </div>
+      </div>
     </BrowserRouter>
   );
 }

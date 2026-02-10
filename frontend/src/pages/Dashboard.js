@@ -29,7 +29,7 @@ function Dashboard() {
                   style={{ cursor: 'default' }}
                 >
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="split-icon">
-                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                   </svg>
                   <span className="split-text">Assessments</span>
                 </div>
@@ -40,7 +40,7 @@ function Dashboard() {
                   style={{ cursor: 'pointer' }}
                 >
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="split-icon">
-                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                   </svg>
                   <span className="split-text">Coding</span>
                 </div>
@@ -54,13 +54,13 @@ function Dashboard() {
             <div className="dashboard-card card-split">
               <div className="card-number-badge">02</div>
               <div className="split-container">
-                <div 
+                <div
                   className="split-section split-left"
                   onClick={() => navigate('/custom-assessment')}
                   style={{ cursor: 'pointer' }}
                 >
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="split-icon">
-                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                   </svg>
                   <span className="split-text">Question Cart</span>
                 </div>
@@ -71,7 +71,7 @@ function Dashboard() {
                   style={{ cursor: 'pointer' }}
                 >
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="split-icon">
-                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                   </svg>
                   <span className="split-text">Coding</span>
                 </div>
@@ -90,14 +90,34 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* Card 4 */}
+          {/* Card 4 - Split into two sections (Send Invite & Live Interview) */}
           <div className="card-wrapper">
             <h3 className="card-title-above">Interview</h3>
-            <div className="dashboard-card">
+            <div className="dashboard-card card-split">
               <div className="card-number-badge">04</div>
-              <p className="card-description">
-                Schedule and manage traditional interviews with candidates, track progress, and maintain comprehensive interview records.
-              </p>
+              <div className="split-container">
+                <div
+                  className="split-section split-left"
+                  onClick={() => navigate('/send-invite')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="split-icon">
+                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                  </svg>
+                  <span className="split-text">Send Invite</span>
+                </div>
+                <div className="split-divider"></div>
+                <div
+                  className="split-section split-right"
+                  onClick={() => navigate('/live-interview-list')}
+                  style={{ cursor: 'pointer' }}
+                >
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="split-icon">
+                    <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                  </svg>
+                  <span className="split-text">Live Interview</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -128,7 +148,7 @@ function Dashboard() {
                   style={{ cursor: 'pointer' }}
                 >
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="split-icon">
-                    <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3.33 0-6 1.34-6 3v1h12v-1c0-1.66-2.67-3-6-3z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    <path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3.33 0-6 1.34-6 3v1h12v-1c0-1.66-2.67-3-6-3z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                   </svg>
                   <span className="split-text">Candidates</span>
                 </div>
@@ -139,7 +159,7 @@ function Dashboard() {
                   style={{ cursor: 'pointer' }}
                 >
                   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="split-icon">
-                    <path d="M9 11h6M9 15h4m6 4H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8l6 6v8a2 2 0 0 1-2 2zM13 3v6h6" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
+                    <path d="M9 11h6M9 15h4m6 4H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h8l6 6v8a2 2 0 0 1-2 2zM13 3v6h6" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                   </svg>
                   <span className="split-text">Assessments</span>
                 </div>
