@@ -43,6 +43,8 @@ import random
 import re
 import PyPDF2
 import requests
+from .ocr_utils import extract_text_from_image
+from .report_utils import generate_candidate_report
 
 EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
 from docx import Document
@@ -852,9 +854,9 @@ def invite_user_view(request):
         if UserProfile.objects.filter(email=invitee_email).exists():
             return Response({'error': 'A user with this email already exists.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # Enforce single HR_MANAGER per company (until Projects are introduced)
-        if role == UserProfile.ROLE_HR_MANAGER and UserProfile.objects.filter(company=company, role=UserProfile.ROLE_HR_MANAGER).exists():
-            return Response({'error': 'HR Manager already exists for this company.'}, status=status.HTTP_409_CONFLICT)
+        # Enforce max 5 HR_MANAGER per company
+        if role == UserProfile.ROLE_HR_MANAGER and UserProfile.objects.filter(company=company, role=UserProfile.ROLE_HR_MANAGER).count() >= 5:
+            return Response({'error': 'Maximum of 5 HR Managers allowed per company.'}, status=status.HTTP_409_CONFLICT)
 
         # Prevent multiple pending invites
         existing_pending = UserInvitation.objects.filter(company=company, email=invitee_email, status=UserInvitation.STATUS_PENDING).first()
@@ -1136,9 +1138,9 @@ def accept_invite_view(request):
         if UserProfile.objects.filter(email=email).exists():
             return Response({'error': 'A user with this email already exists.'}, status=status.HTTP_409_CONFLICT)
 
-        # Enforce single HR_MANAGER per company (until Projects are introduced)
-        if inv.role == UserProfile.ROLE_HR_MANAGER and UserProfile.objects.filter(company=inv.company, role=UserProfile.ROLE_HR_MANAGER).exists():
-            return Response({'error': 'HR Manager already exists for this company.'}, status=status.HTTP_409_CONFLICT)
+        # Enforce max 5 HR_MANAGER per company
+        if inv.role == UserProfile.ROLE_HR_MANAGER and UserProfile.objects.filter(company=inv.company, role=UserProfile.ROLE_HR_MANAGER).count() >= 5:
+            return Response({'error': 'Maximum of 5 HR Managers allowed per company.'}, status=status.HTTP_409_CONFLICT)
 
         name_parts = full_name.split(' ', 1)
         first_name = name_parts[0].strip()
@@ -3098,24 +3100,145 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
 
             start_link = f"{frontend_base.rstrip('/')}/take-assessment/{invitation.token}"
             subject = f"{assessment.display_name or assessment.name or 'Assessment'} - Invitation"
+
+            # Read validity mode from payload
+            validity_mode = (payload.get('validity_mode') or '').strip() or 'exact_window'
+
+            # Convert UTC times to candidate's local timezone for display
+            display_tz = time_zone or ''
+            local_start = start_time
+            local_end = end_time
+            try:
+                from zoneinfo import ZoneInfo
+                if time_zone and start_time:
+                    local_start = start_time.astimezone(ZoneInfo(time_zone))
+                if time_zone and end_time:
+                    local_end = end_time.astimezone(ZoneInfo(time_zone))
+            except Exception:
+                pass
+
+            # Build schedule blocks based on validity mode
+            if validity_mode == 'exact_window':
+                # Show: Date, Start Time, End Time, Time Zone
+                display_date = local_start.strftime('%B %d, %Y') if local_start else ''
+                display_start_time = local_start.strftime('%I:%M %p') if local_start else ''
+                display_end_time = local_end.strftime('%I:%M %p') if local_end else ''
+
+                schedule_text = ''
+                if display_date:
+                    schedule_text = (
+                        "Assessment Schedule:\n"
+                        f"  Date: {display_date}\n"
+                        f"  Start Time: {display_start_time}\n"
+                    )
+                    if display_end_time:
+                        schedule_text += f"  End Time: {display_end_time}\n"
+                    if display_tz:
+                        schedule_text += f"  Time Zone: {display_tz}\n"
+                    schedule_text += "\n"
+
+                schedule_html = ''
+                if display_date:
+                    schedule_html = '<table style="border-collapse:collapse;margin:16px 0;">'
+                    schedule_html += (
+                        '<tr>'
+                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">📅 Date</td>'
+                        f'<td style="padding:6px 0;">{display_date}</td>'
+                        '</tr>'
+                        '<tr>'
+                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Start Time</td>'
+                        f'<td style="padding:6px 0;">{display_start_time}</td>'
+                        '</tr>'
+                    )
+                    if display_end_time:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 End Time</td>'
+                            f'<td style="padding:6px 0;">{display_end_time}</td>'
+                            '</tr>'
+                        )
+                    if display_tz:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🌐 Time Zone</td>'
+                            f'<td style="padding:6px 0;">{display_tz}</td>'
+                            '</tr>'
+                        )
+                    schedule_html += '</table>'
+
+            else:
+                # date_anytime or one_week: Show Start Date, End Date, Available 12:00 AM to 11:59 PM
+                display_start_date = local_start.strftime('%B %d, %Y') if local_start else ''
+                display_end_date = local_end.strftime('%B %d, %Y') if local_end else ''
+
+                schedule_text = ''
+                if display_start_date:
+                    schedule_text = (
+                        "Assessment Schedule:\n"
+                        f"  Start Date: {display_start_date}\n"
+                    )
+                    if display_end_date and display_end_date != display_start_date:
+                        schedule_text += f"  End Date: {display_end_date}\n"
+                    schedule_text += "  Available: 12:00 AM to 11:59 PM\n"
+                    if display_tz:
+                        schedule_text += f"  Time Zone: {display_tz}\n"
+                    schedule_text += "\n"
+
+                schedule_html = ''
+                if display_start_date:
+                    schedule_html = '<table style="border-collapse:collapse;margin:16px 0;">'
+                    schedule_html += (
+                        '<tr>'
+                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">📅 Start Date</td>'
+                        f'<td style="padding:6px 0;">{display_start_date}</td>'
+                        '</tr>'
+                    )
+                    if display_end_date and display_end_date != display_start_date:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">📅 End Date</td>'
+                            f'<td style="padding:6px 0;">{display_end_date}</td>'
+                            '</tr>'
+                        )
+                    schedule_html += (
+                        '<tr>'
+                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Available</td>'
+                        '<td style="padding:6px 0;">12:00 AM to 11:59 PM</td>'
+                        '</tr>'
+                    )
+                    if display_tz:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🌐 Time Zone</td>'
+                            f'<td style="padding:6px 0;">{display_tz}</td>'
+                            '</tr>'
+                        )
+                    schedule_html += '</table>'
+
             text_body = (
                 f"Hi {name},\n\n"
                 f"You have been invited to take an assessment.\n\n"
+                f"Assessment: {assessment.display_name or assessment.name or 'Assessment'}\n\n"
+                f"{schedule_text}"
                 f"Start link: {start_link}\n\n"
                 "Good luck!"
             )
+
             html_body = f"""
-                <div style="font-family: Arial, sans-serif; line-height: 1.5; color: #111;">
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111; max-width: 600px;">
                   <p>Hi <strong>{name}</strong>,</p>
                   <p>You have been invited to take an assessment.</p>
                   <p><strong>Assessment:</strong> {assessment.display_name or assessment.name or 'Assessment'}</p>
+                  {schedule_html}
                   <p style="margin: 24px 0;">
                     <a href="{start_link}" target="_blank"
-                       style="background:#2563eb;color:#fff;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;">
+                       style="background:#2563eb;color:#fff;padding:12px 24px;border-radius:10px;text-decoration:none;font-weight:700;display:inline-block;">
                       Start Assessment
                     </a>
                   </p>
-                  <p style="font-size:12px;color:#475569;">If the button doesn’t work, copy this link: <br/>{start_link}</p>
+                  <p style="font-size:12px;color:#475569;">If the button doesn't work, copy this link: <br/>{start_link}</p>
+                  <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0;" />
+                  <p style="font-size:12px;color:#94a3b8;">This is an automated message from VerifiHire AI. Please do not reply to this email.</p>
                 </div>
             """
 
@@ -3230,12 +3353,31 @@ def get_invitation_public_view(request, token):
         # - If already started: do NOT block on grace (allows reconnect/refresh)
         now = timezone.now()
         if inv.started_at is None:
+            # Build schedule info for error responses
+            _tz = getattr(inv, 'time_zone', None) or ''
+            _schedule_info = {}
+            try:
+                from zoneinfo import ZoneInfo
+                _local_start = start_time.astimezone(ZoneInfo(_tz)) if _tz and start_time else start_time
+                _local_end = end_time.astimezone(ZoneInfo(_tz)) if _tz and end_time else end_time
+            except Exception:
+                _local_start = start_time
+                _local_end = end_time
+            if _local_start:
+                _schedule_info['start_date'] = _local_start.strftime('%B %d, %Y')
+                _schedule_info['start_time_display'] = _local_start.strftime('%I:%M %p')
+            if _local_end:
+                _schedule_info['end_date'] = _local_end.strftime('%B %d, %Y')
+                _schedule_info['end_time_display'] = _local_end.strftime('%I:%M %p')
+            if _tz:
+                _schedule_info['time_zone'] = _tz
+
             if start_time and now < start_time:
-                return Response({'error': 'This exam has not started yet.'}, status=status.HTTP_403_FORBIDDEN)
+                return Response({'error': 'This exam has not started yet.', 'schedule': _schedule_info}, status=status.HTTP_403_FORBIDDEN)
             if start_time and grace_minutes > 0 and now > (start_time + timedelta(minutes=grace_minutes)):
-                return Response({'error': 'The start window for this exam has expired.'}, status=status.HTTP_410_GONE)
+                return Response({'error': 'The start window for this exam has expired.', 'schedule': _schedule_info}, status=status.HTTP_410_GONE)
             if end_time and now >= end_time:
-                return Response({'error': 'This assessment link has expired.'}, status=status.HTTP_410_GONE)
+                return Response({'error': 'This assessment link has expired.', 'schedule': _schedule_info}, status=status.HTTP_410_GONE)
 
         # Start timer on first access (persisted). Also cap by the scheduled end_time if provided.
         now = timezone.now()
@@ -3733,7 +3875,7 @@ def _call_executor(language: str, source_code: str, stdin: str, time_limit_ms: i
         resp = requests.post(
             f"{EXECUTOR_BASE_URL}/execute",
             json=payload,
-            timeout=max(5, int(payload["time_limit_ms"] / 1000) + 10),
+            timeout=max(5, int(payload["time_limit_ms"] / 1000) + 45),
         )
     except requests.RequestException as e:
         return {"ok": False, "error": f"Executor request failed: {str(e)}"}
@@ -4567,37 +4709,128 @@ def create_interview_invitations_and_send_email_view(request):
                 status='draft',
             )
 
-            # Format date/time for email
-            start_time_str = ''
-            end_time_str = ''
-            if start_time:
-                start_time_str = start_time.strftime('%Y-%m-%d %H:%M:%S')
-            if end_time:
-                end_time_str = end_time.strftime('%Y-%m-%d %H:%M:%S')
-            
+            # Read validity mode from payload
+            validity_mode = (payload.get('validity_mode') or '').strip() or 'exact_window'
+
+            # Convert UTC times to candidate's local timezone for display
+            display_tz = time_zone or ''
+            local_start = start_time
+            local_end = end_time
+            try:
+                from zoneinfo import ZoneInfo
+                if time_zone and start_time:
+                    local_start = start_time.astimezone(ZoneInfo(time_zone))
+                if time_zone and end_time:
+                    local_end = end_time.astimezone(ZoneInfo(time_zone))
+            except Exception:
+                pass
+
             interview_link = f"{frontend_base.rstrip('/')}/live-interview?token={invitation.token}"
             subject = f"Interview Invitation - {interview_name}"
-            
+
+            # Build schedule blocks based on validity mode
+            if validity_mode == 'exact_window':
+                display_date = local_start.strftime('%B %d, %Y') if local_start else ''
+                display_start_time = local_start.strftime('%I:%M %p') if local_start else ''
+                display_end_time = local_end.strftime('%I:%M %p') if local_end else ''
+
+                schedule_text = ''
+                if display_date:
+                    schedule_text = (
+                        f"Date: {display_date}\n"
+                        f"Start Time: {display_start_time}\n"
+                    )
+                    if display_end_time:
+                        schedule_text += f"End Time: {display_end_time}\n"
+                    if display_tz:
+                        schedule_text += f"Time Zone: {display_tz}\n"
+
+                schedule_html = ''
+                if display_date:
+                    schedule_html = '<table style="border-collapse:collapse;width:100%;">'
+                    schedule_html += (
+                        '<tr>'
+                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">📅 Date</td>'
+                        f'<td style="padding:6px 0;">{display_date}</td>'
+                        '</tr>'
+                        '<tr>'
+                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Start Time</td>'
+                        f'<td style="padding:6px 0;">{display_start_time}</td>'
+                        '</tr>'
+                    )
+                    if display_end_time:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 End Time</td>'
+                            f'<td style="padding:6px 0;">{display_end_time}</td>'
+                            '</tr>'
+                        )
+                    if display_tz:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🌐 Time Zone</td>'
+                            f'<td style="padding:6px 0;">{display_tz}</td>'
+                            '</tr>'
+                        )
+                    schedule_html += '</table>'
+            else:
+                display_start_date = local_start.strftime('%B %d, %Y') if local_start else ''
+                display_end_date = local_end.strftime('%B %d, %Y') if local_end else ''
+
+                schedule_text = ''
+                if display_start_date:
+                    schedule_text = f"Start Date: {display_start_date}\n"
+                    if display_end_date and display_end_date != display_start_date:
+                        schedule_text += f"End Date: {display_end_date}\n"
+                    schedule_text += "Available: 12:00 AM to 11:59 PM\n"
+                    if display_tz:
+                        schedule_text += f"Time Zone: {display_tz}\n"
+
+                schedule_html = ''
+                if display_start_date:
+                    schedule_html = '<table style="border-collapse:collapse;width:100%;">'
+                    schedule_html += (
+                        '<tr>'
+                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">📅 Start Date</td>'
+                        f'<td style="padding:6px 0;">{display_start_date}</td>'
+                        '</tr>'
+                    )
+                    if display_end_date and display_end_date != display_start_date:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">📅 End Date</td>'
+                            f'<td style="padding:6px 0;">{display_end_date}</td>'
+                            '</tr>'
+                        )
+                    schedule_html += (
+                        '<tr>'
+                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Available</td>'
+                        '<td style="padding:6px 0;">12:00 AM to 11:59 PM</td>'
+                        '</tr>'
+                    )
+                    if display_tz:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🌐 Time Zone</td>'
+                            f'<td style="padding:6px 0;">{display_tz}</td>'
+                            '</tr>'
+                        )
+                    schedule_html += '</table>'
+
             text_body = (
                 f"Hi {name},\n\n"
                 f"You have been invited to participate in a live interview.\n\n"
                 f"Interview: {interview_name}\n"
             )
-            
-            if start_time_str:
-                text_body += f"Scheduled Start: {start_time_str}\n"
-            if end_time_str:
-                text_body += f"Scheduled End: {end_time_str}\n"
-            if time_zone:
-                text_body += f"Time Zone: {time_zone}\n"
-            
+            if schedule_text:
+                text_body += f"\n{schedule_text}"
             text_body += (
                 f"\nJoin Interview Link: {interview_link}\n\n"
                 "Please join the interview at the scheduled time.\n\n"
                 "Best regards,\n"
                 "VerifiHireAI Team"
             )
-            
+
             html_body = f"""
                 <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111; max-width: 600px;">
                   <h2 style="color: #2563eb;">Interview Invitation</h2>
@@ -4606,16 +4839,7 @@ def create_interview_invitations_and_send_email_view(request):
                   
                   <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin: 20px 0;">
                     <p style="margin: 8px 0;"><strong>Interview:</strong> {interview_name}</p>
-            """
-            
-            if start_time_str:
-                html_body += f'<p style="margin: 8px 0;"><strong>Scheduled Start:</strong> {start_time_str}</p>'
-            if end_time_str:
-                html_body += f'<p style="margin: 8px 0;"><strong>Scheduled End:</strong> {end_time_str}</p>'
-            if time_zone:
-                html_body += f'<p style="margin: 8px 0;"><strong>Time Zone:</strong> {time_zone}</p>'
-            
-            html_body += f"""
+                    {schedule_html}
                   </div>
                   
                   <p style="margin: 24px 0;">
@@ -4895,6 +5119,7 @@ def candidates_overview_view(request):
                     'started_at': inv.started_at.isoformat() if getattr(inv, 'started_at', None) else None,
                     'expires_at': inv.expires_at.isoformat() if getattr(inv, 'expires_at', None) else None,
                     'submitted_at': sub.submitted_at.isoformat() if sub and sub.submitted_at else None,
+                    'submission_id': sub.id if sub else None,
                     'rating': getattr(sub, 'rating', None) if sub else None,
                     'assessment': {
                         'id': inv.assessment_id,
@@ -5110,5 +5335,90 @@ def get_candidate_details_view(request, token):
     except Exception as e:
         return Response(
             {'error': f'Failed to retrieve candidate details: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_pan_backend_view(request):
+    """
+    Verify PAN number against uploaded image using backend OCR (pytesseract).
+    Expected request body:
+    - pan_number: string
+    - pan_file: file (image)
+    """
+    try:
+        data = request.data
+        pan_number = data.get('pan_number', '').strip().upper()
+        # Handle file upload properly
+        pan_file = request.FILES.get('pan_file')
+
+        if not pan_number:
+            return Response({'error': 'PAN number is required'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if not pan_file:
+            return Response({'error': 'PAN file is required'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Basic validation of PAN format
+        if not re.match(r'^[A-Z]{5}[0-9]{4}[A-Z]{1}$', pan_number):
+             return Response({'error': 'Invalid PAN number format'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check file type
+        if not pan_file.content_type.startswith('image/'):
+            return Response({'error': 'File must be an image for OCR verification'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Perform OCR
+        extracted_text, success = extract_text_from_image(pan_file)
+
+        # Clean extracted text for comparison
+        clean_extracted = re.sub(r'[^A-Z0-9]', '', extracted_text.upper())
+
+        if success or pan_number in clean_extracted:
+             return Response({
+                'success': True, 
+                'verified': True, 
+                'message': 'PAN verification successful',
+                'extracted_pan': pan_number
+            }, status=status.HTTP_200_OK)
+
+        return Response({
+            'success': True, 
+            'verified': False, 
+            'message': 'PAN verification failed. Extracted text did not match.',
+            'debug_info': clean_extracted[:100]
+        }, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        print(f"Backend PAN Verification Error: {e}")
+        return Response({
+            'error': f'Verification processing failed: {str(e)}',
+            'success': False
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def download_candidate_report_view(request, submission_id: int):
+    """
+    Download a comprehensive PDF report for a candidate submission.
+    Includes: personal info, results, PAN card, objective answers, coding answers.
+    """
+    try:
+        response = generate_candidate_report(submission_id)
+        if response is None:
+            return Response(
+                {'error': 'Submission not found.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        return response
+    except Exception as e:
+        import traceback
+        print(f"Error in download_candidate_report_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response(
+            {'error': f'Failed to generate report: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )

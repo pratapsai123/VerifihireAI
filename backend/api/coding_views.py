@@ -126,7 +126,7 @@ def _call_executor(*, language: str, source_code: str, stdin: str | None, time_l
         resp = requests.post(
             f"{EXECUTOR_BASE_URL}/execute",
             json=payload,
-            timeout=max(5, int(time_limit_ms / 1000) * (len(testcases) if testcases else 1) + 10),
+            timeout=max(5, int(time_limit_ms / 1000) * (len(testcases) if testcases else 1) + 300),
         )
     except RequestException as e:
         return {"ok": False, "error": f"Executor request failed: {str(e)}"}

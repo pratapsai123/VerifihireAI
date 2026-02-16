@@ -188,6 +188,32 @@ export default function InviteCandidates() {
       // ignore
     }
   }, [assessmentId, draftKey, hydrated, candidates, name, email, pan, phone]);
+  const handlePanChange = (e) => {
+    const val = e.target.value.toUpperCase();
+    // Strict Input Masking based on PAN format: ABCDE1234F
+    // 1. Length 0-5: Must be letters [A-Z]
+    if (val.length <= 5) {
+      if (/^[A-Z]*$/.test(val)) setPan(val);
+      return;
+    }
+    // 2. Length 6-9: First 5 letters, rest numbers [0-9]
+    if (val.length <= 9) {
+      if (/^[A-Z]{5}[0-9]*$/.test(val)) setPan(val);
+      return;
+    }
+    // 3. Length 10: First 5 letters, 4 numbers, last letter [A-Z]
+    if (val.length === 10) {
+      if (/^[A-Z]{5}[0-9]{4}[A-Z]$/.test(val)) setPan(val);
+      return;
+    }
+  };
+  const handlePhoneChange = (e) => {
+    // Only allow numeric input, max 10 digits
+    const val = e.target.value.replace(/\D/g, '');
+    if (val.length <= 10) {
+      setPhone(val);
+    }
+  };
 
   const addCandidate = () => {
     const n = name.trim();
@@ -427,6 +453,7 @@ export default function InviteCandidates() {
       start_time: sched.start_time,
       end_time: sched.end_time,
       time_zone: tz,
+      validity_mode: validityMode,
       start_grace_minutes: validityMode === 'exact_window' ? (sched.start_grace_minutes || 0) : 0,
     }));
 
@@ -608,28 +635,26 @@ export default function InviteCandidates() {
                 onChange={(e) => handleCSVUpload(e.target.files?.[0])}
               />
             </label>
-            <div className="hint">
-              Columns: <span className="mono">name,email,pan_number,phone</span> (PAN/Phone optional)
-            </div>
+
           </div>
           {importMsg ? <div className="hint">{importMsg}</div> : null}
           <div className="form-grid add-inline">
             <div className="field">
               <label>Name *</label>
-              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Candidate name" />
+              <input value={name} onChange={(e) => { if (/^[a-zA-Z\s]*$/.test(e.target.value)) setName(e.target.value); }} placeholder="Candidate name" maxLength={100} />
             </div>
             <div className="field">
               <label>Email *</label>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Candidate email" />
+              <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Candidate email" maxLength={100} />
             </div>
             <div className="field">
-              <label>PAN</label>
-              <input value={pan} onChange={(e) => setPan(e.target.value.toUpperCase())} placeholder="ABCDE1234F" maxLength={10} />
+              <label>PAN Number(Optional)</label>
+              <input value={pan} onChange={handlePanChange} placeholder="ABCDE1234F" maxLength={10} />
               {pan && !isValidPAN(pan) ? <div className="hint error-text">Invalid PAN format.</div> : null}
             </div>
             <div className="field">
-              <label>Phone</label>
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Optional" />
+              <label>Phone NumberOptional</label>
+              <input value={phone} onChange={handlePhoneChange} placeholder="1234567890" />
             </div>
             <div className="field add-btn-cell">
               <label>&nbsp;</label>

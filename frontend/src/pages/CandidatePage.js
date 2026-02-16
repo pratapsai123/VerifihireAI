@@ -166,6 +166,7 @@ export default function CandidatePage() {
                                     <th>Started</th>
                                     <th>Submitted</th>
                                     <th>Rating</th>
+                                    <th>Report</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -184,6 +185,23 @@ export default function CandidatePage() {
                                         <td>{fmtDate(c.started_at)}</td>
                                         <td>{fmtDate(c.submitted_at)}</td>
                                         <td>{c.rating ?? '-'}</td>
+                                        <td>
+                                            {c.submission_id ? (
+                                                <button
+                                                    className="report-download-btn"
+                                                    type="button"
+                                                    title="Download full candidate report"
+                                                    onClick={() => {
+                                                        const url = `${API_BASE_URL}/results/${c.submission_id}/report/`;
+                                                        window.open(url, '_blank');
+                                                    }}
+                                                >
+                                                    ⬇ Download
+                                                </button>
+                                            ) : (
+                                                <span className="cell-sub">-</span>
+                                            )}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

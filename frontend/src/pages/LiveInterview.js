@@ -553,7 +553,6 @@ function LiveInterview() {
   }, []);
 
 
-
   // Handle video offer
   const handleVideoOffer = useCallback(async (offer) => {
     if (!peerConnectionRef.current) return;

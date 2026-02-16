@@ -105,6 +105,35 @@ export default function InterviewInvite() {
   const [startTime, setStartTime] = useState('');
   const [scheduleError, setScheduleError] = useState('');
 
+  const handlePanChange = (e) => {
+    let val = e.target.value.toUpperCase();
+    // Enforce strict format: 5 letters, 4 numbers, 1 letter
+    val = val.replace(/[^A-Z0-9]/g, '');
+    if (val.length > 10) return; // Max 10 chars
+    let newVal = '';
+    for (let i = 0; i < val.length; i++) {
+      const char = val[i];
+      if (i < 5) {
+        // First 5 must be letters
+        if (/[A-Z]/.test(char)) newVal += char;
+      } else if (i < 9) {
+        // Next 4 must be numbers
+        if (/[0-9]/.test(char)) newVal += char;
+      } else if (i === 9) {
+        // Last 1 must be letter
+        if (/[A-Z]/.test(char)) newVal += char;
+      }
+    }
+    setPan(newVal);
+  };
+  const handlePhoneChange = (e) => {
+    const val = e.target.value.replace(/\D/g, ''); // Remove non-digits
+    if (val.length <= 10) {
+      setPhone(val);
+    }
+  };
+
+
   const draftKey = INTERVIEW_INVITE_DRAFT_KEY_PREFIX;
 
   const canAdd = useMemo(() => {
@@ -390,6 +419,7 @@ export default function InterviewInvite() {
       start_time: sched.start_time,
       end_time: sched.end_time,
       time_zone: tz,
+      validity_mode: validityMode,
       start_grace_minutes: validityMode === 'exact_window' ? (sched.start_grace_minutes || 0) : 0,
     }));
 
@@ -402,6 +432,7 @@ export default function InterviewInvite() {
       });
 
       const { sent, failed, results } = resp.data || {};
+
 
       if (failed > 0) {
         const failedEmails = results.filter(r => r.status === 'failed').map(r => r.email).join(', ');
@@ -559,20 +590,20 @@ export default function InterviewInvite() {
           <div className="form-grid add-inline">
             <div className="field">
               <label>Name *</label>
-              <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Candidate name" />
+              <input value={name} onChange={(e) => { if (/^[a-zA-Z\s]*$/.test(e.target.value)) setName(e.target.value); }} placeholder="Candidate name" maxLength={100} />
             </div>
             <div className="field">
               <label>Email *</label>
-              <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Candidate email" />
+              <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Candidate email" maxLength={100} />
             </div>
             <div className="field">
-              <label>PAN</label>
-              <input value={pan} onChange={(e) => setPan(e.target.value.toUpperCase())} placeholder="ABCDE1234F" maxLength={10} />
+              <label>PAN Number (Optional)</label>
+              <input value={pan} onChange={handlePanChange} placeholder="ABCDE1234F" maxLength={10} />
               {pan && !isValidPAN(pan) ? <div className="hint error-text">Invalid PAN format.</div> : null}
             </div>
             <div className="field">
-              <label>Phone</label>
-              <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Optional" />
+              <label>Phone Number (Optional)</label>
+              <input value={phone} onChange={handlePhoneChange} placeholder="1234567890" maxLength={10} />
             </div>
             <div className="field add-btn-cell">
               <label>&nbsp;</label>

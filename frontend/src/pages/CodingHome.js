@@ -36,8 +36,23 @@ export default function CodingHome() {
             if (orgName) params.organization_name = orgName;
 
             const resp = await axios.get(`${API_BASE_URL}/coding/questions/`, { params });
-            setItems(resp.data?.results || []);
-            setSelectedIds((prev) => (prev || []).filter((id) => (resp.data?.results || []).some((q) => q.id === id)));
+            let results = resp.data?.results || [];
+
+            // Fallback: If we filtered by org and got nothing, try fetching all public/allowed questions
+            // This fixes issues where the user's stored org name might be stale or slightly mismatched
+            if (results.length === 0 && orgName) {
+                try {
+                    const fallbackResp = await axios.get(`${API_BASE_URL}/coding/questions/`);
+                    if ((fallbackResp.data?.results || []).length > 0) {
+                        results = fallbackResp.data?.results || [];
+                    }
+                } catch (ignore) {
+                    // If fallback fails, just stick with the empty results from the first call
+                }
+            }
+
+            setItems(results);
+            setSelectedIds((prev) => (prev || []).filter((id) => results.some((q) => q.id === id)));
         } catch (e) {
             setError(e?.response?.data?.error || e?.message || 'Failed to load coding questions');
         } finally {

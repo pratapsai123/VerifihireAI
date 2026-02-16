@@ -140,39 +140,109 @@ const detectFace = async (imageSrc) => {
   });
 };
 
-// Function to extract PAN number from image using OCR
-const extractPanFromImage = async (file) => {
-  try {
-    const { data: { text } } = await Tesseract.recognize(file, 'eng', {
-      logger: (m) => console.log(m) // Optional: log progress
-    });
+// Helper to process image (rotate, contrast, etc.)
+const processImage = (file, rotation = 0, strategy = 'Standard') => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
 
-    // PAN format: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F)
-    const panPattern = /[A-Z]{5}[0-9]{4}[A-Z]{1}/g;
-    const matches = text.match(panPattern);
+      // Handle rotation dimensions
+      if (rotation === 90 || rotation === 270) {
+        canvas.width = img.height;
+        canvas.height = img.width;
+      } else {
+        canvas.width = img.width;
+        canvas.height = img.height;
+      }
 
-    if (matches && matches.length > 0) {
-      // Return the first match (usually the main PAN number on the card)
-      return matches[0].toUpperCase();
-    }
+      // Rotate context
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate((rotation * Math.PI) / 180);
+      ctx.drawImage(img, -img.width / 2, -img.height / 2);
 
-    // If no exact match, try to find any 10-character alphanumeric sequence
-    const altPattern = /[A-Z0-9]{10}/g;
-    const altMatches = text.match(altPattern);
-    if (altMatches) {
-      // Filter to find PAN-like patterns (5 letters, 4 digits, 1 letter)
-      for (const match of altMatches) {
-        if (/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(match)) {
-          return match.toUpperCase();
+      // Get image data for pixel manipulation
+      // We need to reset transform to get data from the whole canvas
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      // Apply strategies
+      if (strategy === 'HighContrast') {
+        // Simple high contrast / thresholding
+        for (let i = 0; i < data.length; i += 4) {
+          const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          const val = avg > 128 ? 255 : 0; // Binary threshold
+          data[i] = val;     // R
+          data[i + 1] = val; // G
+          data[i + 2] = val; // B
+        }
+      } else if (strategy === 'Denoised') {
+        // Simple Grayscale + slight contrast increase (mimicking denoise for OCR)
+        for (let i = 0; i < data.length; i += 4) {
+          const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          // Increase contrast slightly
+          const contrast = 1.2;
+          const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+          const val = factor * (avg - 128) + 128;
+
+          data[i] = val;
+          data[i + 1] = val;
+          data[i + 2] = val;
         }
       }
-    }
 
-    return null;
-  } catch (error) {
-    console.error('OCR Error:', error);
-    return null;
+      ctx.putImageData(imageData, 0, 0);
+      resolve(canvas.toDataURL('image/jpeg'));
+    };
+    img.src = URL.createObjectURL(file);
+  });
+};
+
+// Enhanced PAN Extraction Logic
+const extractPanFromImage = async (file, updateStatus) => {
+  const strategies = ['Standard'];
+  const rotations = [0, 90, 180, 270];
+
+  // PAN format: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F)
+  const panPattern = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
+
+  for (const strategy of strategies) {
+    for (const rotation of rotations) {
+      // Silent rotation attempts
+      try {
+        const processedImageSrc = await processImage(file, rotation, strategy);
+
+        const { data: { text } } = await Tesseract.recognize(processedImageSrc, 'eng', {
+          // logger: (m) => console.log(m) // Quiet logs
+        });
+
+        // Check for exact match
+        const matches = text.match(panPattern); // Use local regex without 'g' to find first match easily
+        if (matches) {
+          console.log(`PAN Found with ${strategy} at ${rotation}°:`, matches[0]);
+          return matches[0].toUpperCase();
+        }
+
+        // Check for 10-char alphanumeric sequences and loose match
+        const words = text.replace(/[^A-Z0-9]/g, ' '); // Replace non-alphanum with space
+        const candidates = words.split(/\s+/);
+
+        for (const word of candidates) {
+          if (word.length === 10 && /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(word)) {
+            console.log(`PAN Found (loose match) with ${strategy} at ${rotation}°:`, word);
+            return word.toUpperCase();
+          }
+        }
+
+      } catch (err) {
+        console.warn(`Extraction failed for ${strategy}/${rotation}:`, err);
+      }
+    }
   }
+
+  return null;
 };
 
 const CandidateDetails = ({ token, onComplete }) => {
@@ -199,6 +269,9 @@ const CandidateDetails = ({ token, onComplete }) => {
     extractedPan: null,
     panMatch: null,
     isExtractingPan: false,
+    extractionFailed: false, // New: track if all strategies failed
+    extractionStatus: '',    // New: show current strategy/rotation
+    manualConfirmation: false, // New: user overrides validaton
     snapshotValid: false, // Whether captured snapshot has face and is not blurry
   });
 
@@ -317,8 +390,28 @@ const CandidateDetails = ({ token, onComplete }) => {
     // For images: must match extracted PAN
     // For PDFs: manual verification (no OCR), so we allow if PAN is entered and valid format
     const isPdf = data.panFile && data.panFile.type === 'application/pdf';
-    const panMismatch = !isPdf && data.extractedPan && data.panMatch === false;
-    const panNotExtracted = !isPdf && data.panFile && !data.extractedPan && !data.isExtractingPan;
+    // Logic: 
+    // 1. If PDF -> Valid (Manual check later)
+    // 2. If Image & Extracted -> Must Match
+    // 3. If Image & Failed Extraction -> Must have Manual Confirmation
+
+    let panMismatch = false;
+    let panNotExtracted = false;
+
+    if (!isPdf && data.panFile) {
+      if (data.extractedPan) {
+        // Extraction successful, must match
+        panMismatch = data.panMatch === false;
+      } else if (data.extractionFailed) {
+        // Extraction failed, must have manual confirmation
+        if (!data.manualConfirmation) {
+          panNotExtracted = true; // Treat as not extracted/verified
+        }
+      } else if (!data.isExtractingPan) {
+        // Not extracting, no result, not failed? changing file...
+        panNotExtracted = true;
+      }
+    }
 
     const isInvalid = emptyInvalid || formatInvalid || panMismatch || panNotExtracted;
     setShowError(isInvalid);
@@ -332,7 +425,9 @@ const CandidateDetails = ({ token, onComplete }) => {
       } else if (panNotExtracted) {
         setData(prev => ({
           ...prev,
-          panFileError: "Could not verify PAN card. Please upload a clear image of your PAN card."
+          panFileError: data.extractionFailed
+            ? "Automatic verification failed. Please check the confirmation box to proceed manually."
+            : "Could not verify PAN card. Please upload a clear image of your PAN card."
         }));
       } else if (!snapshot || !data.snapshotValid) {
         // Error message will be shown in the error text area
@@ -496,43 +591,110 @@ const CandidateDetails = ({ token, onComplete }) => {
                           panFileError: null,
                           isExtractingPan: isImage, // Only extract from images
                           extractedPan: null,
-                          panMatch: null
+                          panMatch: null,
+                          extractionFailed: false,
+                          extractionStatus: '',
+                          manualConfirmation: false,
                         }));
 
                         // Extract PAN from image using OCR (only for images, not PDFs)
                         if (isImage) {
-                          extractPanFromImage(file).then((extractedPan) => {
-                            setData(prev => {
-                              if (extractedPan) {
-                                const enteredPan = (prev.pan || '').toUpperCase().trim();
-                                const panMatches = enteredPan === extractedPan;
+                          // Update UI to show we are verifying
+                          setData(prev => ({ ...prev, extractionStatus: 'Verifying...' }));
 
-                                return {
-                                  ...prev,
-                                  extractedPan,
-                                  panMatch: panMatches,
-                                  isExtractingPan: false,
-                                  panFileError: panMatches ? null : "PAN number in image doesn't match entered PAN number"
-                                };
-                              } else {
-                                return {
+                          extractPanFromImage(file).then((extractedPan) => {
+                            const enteredPan = (data.pan || '').toUpperCase().trim();
+
+                            // 1. Frontend Success & Match
+                            if (extractedPan && enteredPan === extractedPan) {
+                              setData(prev => ({
+                                ...prev,
+                                extractedPan,
+                                panMatch: true,
+                                isExtractingPan: false,
+                                extractionFailed: false,
+                                extractionStatus: 'Verified',
+                                panFileError: null
+                              }));
+                              return;
+                            }
+
+                            // 2. Frontend Failed or Mismatch -> Call Backend
+                            setData(prev => ({ ...prev, extractionStatus: 'Verifying with server...' }));
+
+                            const formData = new FormData();
+                            formData.append('pan_number', enteredPan);
+                            formData.append('pan_file', file);
+
+                            const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+                            axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData, {
+                              headers: { 'Content-Type': 'multipart/form-data' }
+                            })
+                              .then(response => {
+                                if (response.data.verified) {
+                                  // Backend Verified
+                                  setData(prev => ({
+                                    ...prev,
+                                    extractedPan: response.data.extracted_pan || enteredPan, // Use confirmed PAN
+                                    panMatch: true,
+                                    isExtractingPan: false,
+                                    extractionFailed: false,
+                                    extractionStatus: 'Verified',
+                                    panFileError: null
+                                  }));
+                                } else {
+                                  // Backend Failed
+                                  throw new Error('Backend verification failed');
+                                }
+                              })
+                              .catch(err => {
+                                console.warn("Backend verification failed:", err);
+                                // All attempts failed
+                                setData(prev => ({
                                   ...prev,
                                   extractedPan: null,
                                   panMatch: false,
                                   isExtractingPan: false,
-                                  panFileError: "Could not extract PAN number from image. Please ensure the image is clear and readable."
-                                };
-                              }
-                            });
+                                  extractionFailed: true,
+                                  extractionStatus: 'Failed',
+                                  panFileError: null // Show checkbox
+                                }));
+                              });
+
                           }).catch((error) => {
-                            console.error('OCR extraction failed:', error);
-                            setData(prev => ({
-                              ...prev,
-                              extractedPan: null,
-                              panMatch: false,
-                              isExtractingPan: false,
-                              panFileError: "Failed to process image. Please try uploading a clearer image."
-                            }));
+                            console.error('OCR logic error:', error);
+                            // Fallback to backend even if local logic errored (rare)
+                            const enteredPan = (data.pan || '').toUpperCase().trim();
+
+                            const formData = new FormData();
+                            formData.append('pan_number', enteredPan);
+                            formData.append('pan_file', file);
+                            const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+
+                            axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData)
+                              .then(response => {
+                                if (response.data.verified) {
+                                  setData(prev => ({
+                                    ...prev,
+                                    extractedPan: response.data.extracted_pan || enteredPan,
+                                    panMatch: true,
+                                    isExtractingPan: false,
+                                    extractionFailed: false,
+                                    extractionStatus: 'Verified',
+                                    panFileError: null
+                                  }));
+                                } else { throw new Error('Backend failed'); }
+                              })
+                              .catch(() => {
+                                setData(prev => ({
+                                  ...prev,
+                                  extractedPan: null,
+                                  panMatch: false,
+                                  isExtractingPan: false,
+                                  extractionFailed: true,
+                                  extractionStatus: 'Failed'
+                                }));
+                              });
                           });
                         } else {
                           // For PDFs, we can't extract automatically, so require manual verification
@@ -562,7 +724,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 {/* Show feedback */}
                 {data.isExtractingPan && (
                   <div className="candidate-info-text">
-                    🔍 Extracting PAN number from image...
+                    🔍 {data.extractionStatus || 'Initializing extraction...'}
                   </div>
                 )}
                 {!data.isExtractingPan && data.panFileValid === true && data.panFile && data.panFile.type === 'application/pdf' && (
@@ -580,9 +742,21 @@ const CandidateDetails = ({ token, onComplete }) => {
                     ❌ PAN Mismatch: Entered PAN ({data.pan.toUpperCase()})
                   </div>
                 )}
-                {!data.isExtractingPan && data.panFileValid === true && !data.extractedPan && data.panFile && data.panFile.type.startsWith('image/') && (
-                  <div className="candidate-error-text">
-                    ⚠️ Could not extract PAN from image. Please ensure image is clear and readable.
+                {!data.isExtractingPan && data.panFileValid === true && !data.extractedPan && data.extractionFailed && (
+                  <div className="candidate-warning-box">
+                    <div className="candidate-error-text">
+                      ⚠️ Automatic validaton failed. We could not read the PAN number from the image.
+                    </div>
+                    <div style={{ marginTop: '10px' }}>
+                      <label className="candidate-checkbox-label">
+                        <input
+                          type="checkbox"
+                          checked={data.manualConfirmation}
+                          onChange={(e) => setData({ ...data, manualConfirmation: e.target.checked, panFileError: null })}
+                        />
+                        <span>I confirm the uploaded document is my valid PAN card and the details entered above are correct.</span>
+                      </label>
+                    </div>
                   </div>
                 )}
                 {data.panFileValid === false && data.panFileError && (
