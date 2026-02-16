@@ -4,7 +4,7 @@ import axios from 'axios';
 import OtpCountdown from '../components/OtpCountdown';
 
 // Django API base URL - Update this to match your Django backend
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000/api';
 
 function Login() {
   const navigate = useNavigate();
@@ -30,6 +30,7 @@ function Login() {
   const [loginError, setLoginError] = useState('');
   const [loginEmailFocused, setLoginEmailFocused] = useState(false);
   const [loginPasswordFocused, setLoginPasswordFocused] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   // OTP verification state
   const [showOtpStep, setShowOtpStep] = useState(false);
@@ -260,7 +261,7 @@ function Login() {
                   <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
                     <i className="fas fa-lock auth-input-icon"></i>
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       className="auth-input-with-icon"
                       placeholder=" "
                       value={loginPassword}
@@ -270,8 +271,33 @@ function Login() {
                       required
                       maxLength={64}
                       disabled={loginLoading}
+                      style={{ paddingRight: '2.5rem' }}
                     />
                     <label className="auth-floating-label">Password *</label>
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{
+                        position: 'absolute',
+                        right: '0.75rem',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#6b7280',
+                        zIndex: 3,
+                        padding: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '1.5rem',
+                        width: '1.5rem',
+                      }}
+                      tabIndex="-1"
+                    >
+                      <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                    </button>
                   </div>
                   <div style={{ textAlign: 'right', marginBottom: '0.5rem' }}>
                     <Link

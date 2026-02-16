@@ -20,7 +20,6 @@ const validateField = (field, value) => {
 };
 
 const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field }) => {
-  const [focus, setFocus] = useState(false);
   const hasValue = value.trim().length > 0;
   const formatValid = hasValue ? validateField(field, value) : true;
 
@@ -28,10 +27,11 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
 
   return (
     <div className="candidate-input-group">
-      <label className={`candidate-label ${focus || value ? 'candidate-label-float' : ''}`}>{label}</label>
+      <label className="candidate-static-label">{label}</label>
       <input
         type={type}
         value={value}
+        placeholder={label}
         maxLength={field === "pan" ? 10 : undefined}
         onChange={(e) => {
           let val = e.target.value;
@@ -57,8 +57,6 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
 
           onChange(val);
         }}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
         className={`candidate-input ${showRedBorder ? 'candidate-input-error' : ''}`}
       />
     </div>
@@ -70,42 +68,42 @@ const detectBlur = (imageData) => {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const img = new Image();
-  
+
   return new Promise((resolve) => {
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
-      
+
       const imageDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imageDataObj.data;
-      
+
       // Convert to grayscale and calculate Laplacian variance
       let sum = 0;
       let sumSquared = 0;
       const width = canvas.width;
       const height = canvas.height;
-      
+
       for (let y = 1; y < height - 1; y++) {
         for (let x = 1; x < width - 1; x++) {
           const idx = (y * width + x) * 4;
           const gray = (data[idx] + data[idx + 1] + data[idx + 2]) / 3;
-          
+
           // Laplacian kernel
           const laplacian = Math.abs(
             gray * 4 -
             (data[((y - 1) * width + x) * 4] + data[((y + 1) * width + x) * 4] +
-             data[(y * width + x - 1) * 4] + data[(y * width + x + 1) * 4]) / 3
+              data[(y * width + x - 1) * 4] + data[(y * width + x + 1) * 4]) / 3
           );
-          
+
           sum += laplacian;
           sumSquared += laplacian * laplacian;
         }
       }
-      
+
       const mean = sum / ((width - 2) * (height - 2));
       const variance = (sumSquared / ((width - 2) * (height - 2))) - (mean * mean);
-      
+
       // Threshold: values below 100 are considered blurry
       resolve(variance > 100);
     };
@@ -148,16 +146,16 @@ const extractPanFromImage = async (file) => {
     const { data: { text } } = await Tesseract.recognize(file, 'eng', {
       logger: (m) => console.log(m) // Optional: log progress
     });
-    
+
     // PAN format: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F)
     const panPattern = /[A-Z]{5}[0-9]{4}[A-Z]{1}/g;
     const matches = text.match(panPattern);
-    
+
     if (matches && matches.length > 0) {
       // Return the first match (usually the main PAN number on the card)
       return matches[0].toUpperCase();
     }
-    
+
     // If no exact match, try to find any 10-character alphanumeric sequence
     const altPattern = /[A-Z0-9]{10}/g;
     const altMatches = text.match(altPattern);
@@ -169,7 +167,7 @@ const extractPanFromImage = async (file) => {
         }
       }
     }
-    
+
     return null;
   } catch (error) {
     console.error('OCR Error:', error);
@@ -232,7 +230,7 @@ const CandidateDetails = ({ token, onComplete }) => {
         faceDetection.onResults((results) => {
           const hasFace = results.detections && results.detections.length > 0;
           setFaceDetected(hasFace);
-          
+
           // Detect blur
           if (webcamRef.current && webcamRef.current.video) {
             const video = webcamRef.current.video;
@@ -242,10 +240,10 @@ const CandidateDetails = ({ token, onComplete }) => {
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0);
             const imageData = canvas.toDataURL('image/jpeg');
-            
+
             detectBlur(imageData).then((notBlurry) => {
               setIsBlurry(!notBlurry);
-              
+
               // Update status message
               if (!hasFace) {
                 setCaptureStatus('No face detected. Please position yourself in front of the camera.');
@@ -352,7 +350,7 @@ const CandidateDetails = ({ token, onComplete }) => {
       formData.append('phone', data.phone);
       formData.append('pan_number', data.pan);
       formData.append('snapshot', snapshot);
-      
+
       // Add PAN file if available
       if (data.panFile) {
         formData.append('pan_file', data.panFile);
@@ -360,36 +358,36 @@ const CandidateDetails = ({ token, onComplete }) => {
 
       // Send to backend API
       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
-      
+
       axios.post(`${API_BASE_URL}/candidate-details/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
-      .then((response) => {
-        if (response.data.success) {
-          // Store success in localStorage for quick check
-          localStorage.setItem(`candidate_details_${token}`, JSON.stringify({
-            ...data,
-            snapshot,
-            token,
-            saved: true,
-            id: response.data.id,
-          }));
-          
-          // Call onComplete callback to proceed to exam
-          if (onComplete) {
-            onComplete({ ...data, snapshot, token, id: response.data.id });
+        .then((response) => {
+          if (response.data.success) {
+            // Store success in localStorage for quick check
+            localStorage.setItem(`candidate_details_${token}`, JSON.stringify({
+              ...data,
+              snapshot,
+              token,
+              saved: true,
+              id: response.data.id,
+            }));
+
+            // Call onComplete callback to proceed to exam
+            if (onComplete) {
+              onComplete({ ...data, snapshot, token, id: response.data.id });
+            }
+          } else {
+            alert('Failed to save candidate details: ' + (response.data.error || 'Unknown error'));
           }
-        } else {
-          alert('Failed to save candidate details: ' + (response.data.error || 'Unknown error'));
-        }
-      })
-      .catch((error) => {
-        console.error('Error saving candidate details:', error);
-        const errorMessage = error?.response?.data?.error || error?.message || 'Failed to save candidate details';
-        alert('Error: ' + errorMessage);
-      });
+        })
+        .catch((error) => {
+          console.error('Error saving candidate details:', error);
+          const errorMessage = error?.response?.data?.error || error?.message || 'Failed to save candidate details';
+          alert('Error: ' + errorMessage);
+        });
     }
   };
 
@@ -403,37 +401,37 @@ const CandidateDetails = ({ token, onComplete }) => {
           <section className="candidate-card">
             <div className="candidate-section-title">General Information</div>
             <div className="candidate-row">
-              <FloatingInput 
-                label="First Name" 
-                field="firstName" 
-                value={data.firstName} 
-                errorEmpty={submitted && !data.firstName} 
-                onChange={(v) => setData({ ...data, firstName: v })} 
+              <FloatingInput
+                label="First Name"
+                field="firstName"
+                value={data.firstName}
+                errorEmpty={submitted && !data.firstName}
+                onChange={(v) => setData({ ...data, firstName: v })}
               />
-              <FloatingInput 
-                label="Last Name" 
-                field="lastName" 
-                value={data.lastName} 
-                errorEmpty={submitted && !data.lastName} 
-                onChange={(v) => setData({ ...data, lastName: v })} 
+              <FloatingInput
+                label="Last Name"
+                field="lastName"
+                value={data.lastName}
+                errorEmpty={submitted && !data.lastName}
+                onChange={(v) => setData({ ...data, lastName: v })}
               />
             </div>
             <div className="candidate-row">
-              <FloatingInput 
-                label="Email" 
-                type="email" 
-                field="email" 
-                value={data.email} 
-                errorEmpty={submitted && !data.email} 
-                onChange={(v) => setData({ ...data, email: v })} 
+              <FloatingInput
+                label="Email"
+                type="email"
+                field="email"
+                value={data.email}
+                errorEmpty={submitted && !data.email}
+                onChange={(v) => setData({ ...data, email: v })}
               />
-              <FloatingInput 
-                label="Phone Number" 
-                type="tel" 
-                field="phone" 
-                value={data.phone} 
-                errorEmpty={submitted && !data.phone} 
-                onChange={(v) => setData({ ...data, phone: v })} 
+              <FloatingInput
+                label="Phone Number"
+                type="tel"
+                field="phone"
+                value={data.phone}
+                errorEmpty={submitted && !data.phone}
+                onChange={(v) => setData({ ...data, phone: v })}
               />
             </div>
           </section>
@@ -442,20 +440,19 @@ const CandidateDetails = ({ token, onComplete }) => {
           <section className="candidate-card">
             <div className="candidate-section-title">KYC</div>
             <div className="candidate-row">
-              <FloatingInput 
-                label="PAN Card Number" 
-                field="pan" 
-                value={data.pan} 
-                errorEmpty={submitted && !data.pan} 
-                onChange={(v) => setData({ ...data, pan: v })} 
+              <FloatingInput
+                label="PAN Card Number"
+                field="pan"
+                value={data.pan}
+                errorEmpty={submitted && !data.pan}
+                onChange={(v) => setData({ ...data, pan: v })}
               />
               <div className="candidate-input-group">
-                <label className="candidate-label candidate-label-float" style={{ color: "#000" }}>Upload PAN Card</label>
+                <label className="candidate-static-label">Upload PAN Card</label>
                 <input
                   type="file"
                   accept=".png,.jpg,.jpeg,.pdf"
                   className={`candidate-input ${submitted && !data.panFile ? 'candidate-input-error' : ''}`}
-                  style={{ color: "#000" }}
                   onChange={(e) => {
                     const file = e.target.files?.[0] || null;
                     if (file) {
@@ -463,20 +460,20 @@ const CandidateDetails = ({ token, onComplete }) => {
                       const fileName = file.name.toLowerCase();
                       const validExtensions = ['.png', '.jpg', '.jpeg', '.pdf'];
                       const hasValidExtension = validExtensions.some(ext => fileName.endsWith(ext));
-                      
+
                       // Check MIME type
                       const validMimeTypes = [
-                        "image/png", 
-                        "image/jpeg", 
+                        "image/png",
+                        "image/jpeg",
                         "image/jpg",  // Some browsers use jpg instead of jpeg
                         "application/pdf"
                       ];
                       const isValidMimeType = validMimeTypes.includes(file.type);
-                      
+
                       // Accept if either MIME type or extension is valid
                       const isValidType = isValidMimeType || hasValidExtension;
                       const isValidSize = file.size <= 5 * 1024 * 1024; // 5MB (increased from 2MB for PAN card images)
-                      
+
                       // Debug logging
                       console.log('File validation:', {
                         name: file.name,
@@ -490,18 +487,18 @@ const CandidateDetails = ({ token, onComplete }) => {
                       if (isValidType && isValidSize) {
                         // Check if it's an image (not PDF) for OCR extraction
                         const isImage = file.type.startsWith('image/');
-                        
+
                         // ✅ Accept valid PAN card file and extract PAN number
-                        setData(prev => ({ 
-                          ...prev, 
-                          panFile: file, 
-                          panFileValid: true, 
+                        setData(prev => ({
+                          ...prev,
+                          panFile: file,
+                          panFileValid: true,
                           panFileError: null,
                           isExtractingPan: isImage, // Only extract from images
                           extractedPan: null,
                           panMatch: null
                         }));
-                        
+
                         // Extract PAN from image using OCR (only for images, not PDFs)
                         if (isImage) {
                           extractPanFromImage(file).then((extractedPan) => {
@@ -509,7 +506,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                               if (extractedPan) {
                                 const enteredPan = (prev.pan || '').toUpperCase().trim();
                                 const panMatches = enteredPan === extractedPan;
-                                
+
                                 return {
                                   ...prev,
                                   extractedPan,
@@ -631,44 +628,44 @@ const CandidateDetails = ({ token, onComplete }) => {
                       className={`candidate-button-small ${faceDetected && !isBlurry && !isDetecting ? 'candidate-button-ready' : 'candidate-button-disabled'}`}
                       onClick={async () => {
                         if (!webcamRef.current) return;
-                        
+
                         // Check if face is detected and image is not blurry
                         if (!faceDetected) {
                           alert('⚠️ No face detected. Please position yourself in front of the camera.');
                           return;
                         }
-                        
+
                         if (isBlurry) {
                           alert('⚠️ Image is blurry. Please hold still and ensure good lighting.');
                           return;
                         }
-                        
+
                         // Capture snapshot
                         const imageSrc = webcamRef.current.getScreenshot();
                         if (!imageSrc) return;
-                        
+
                         // Validate captured image
                         setIsDetecting(true);
                         const hasFace = await detectFace(imageSrc);
                         const notBlurry = await detectBlur(imageSrc);
-                        
+
                         if (!hasFace) {
                           alert('❌ No face detected in captured image. Please try again.');
                           setIsDetecting(false);
                           return;
                         }
-                        
+
                         if (!notBlurry) {
                           alert('❌ Captured image is blurry. Please try again with better lighting.');
                           setIsDetecting(false);
                           return;
                         }
-                        
+
                         // Image is valid
                         setSnapshot(imageSrc);
                         setData(prev => ({ ...prev, snapshotValid: true }));
                         setIsDetecting(false);
-                        
+
                         // Clear detection interval
                         if (detectionIntervalRef.current) {
                           clearInterval(detectionIntervalRef.current);

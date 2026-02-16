@@ -402,7 +402,7 @@ export default function InterviewInvite() {
       });
 
       const { sent, failed, results } = resp.data || {};
-      
+
       if (failed > 0) {
         const failedEmails = results.filter(r => r.status === 'failed').map(r => r.email).join(', ');
         alert(`Sent ${sent} invite(s). Failed to send ${failed} invite(s): ${failedEmails}`);
@@ -445,9 +445,7 @@ export default function InterviewInvite() {
           </div>
           <div className="interview-invite-actions">
             <button className="btn-secondary" type="button" onClick={() => navigate('/dashboard')}>Back</button>
-            <button className="btn-primary" type="button" onClick={shareInvites} disabled={sending || candidates.length === 0}>
-              {sending ? 'Sharing…' : 'Share'}
-            </button>
+
           </div>
         </div>
 
@@ -531,7 +529,12 @@ export default function InterviewInvite() {
         </div>
 
         <div className="card">
-          <div className="card-title">Add Candidate</div>
+          <div className="card-title">Add Candidate
+            <button className="btn-primary" type="button" onClick={shareInvites} disabled={sending || candidates.length === 0}>
+              {sending ? 'Sharing…' : 'Share'}
+            </button>
+          </div>
+
           <div className="bulk-row">
             <button className="btn-secondary" type="button" onClick={downloadTemplate}>
               Download CSV Template
@@ -550,6 +553,7 @@ export default function InterviewInvite() {
             <div className="hint">
               Columns: <span className="mono">name,email,pan_number,phone</span> (PAN/Phone optional)
             </div>
+
           </div>
           {importMsg ? <div className="hint">{importMsg}</div> : null}
           <div className="form-grid add-inline">

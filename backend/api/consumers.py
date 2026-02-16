@@ -34,44 +34,54 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 'holder': None
             }
         
-        # Join room group
-        await self.channel_layer.group_add(
-            self.room_group_name,
-            self.channel_name
-        )
-        
-        await self.accept()
-        
-        logger.info(f"Γ£à WebSocket connected: {self.role} for session {self.session_id}")
-        
-        # Send current screen share state to new connection
-        session_state = _screen_share_state.get(self.session_id, {})
-        if session_state.get('locked'):
-            await self.send(text_data=json.dumps({
-                'type': 'screen_share_lock',
-                'active': True,
-                'holder': session_state.get('holder'),
-            }))
-        
-        # Notify others that this user joined
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'user_joined',
-                'user': self.role.capitalize(),
-                'session_id': self.session_id,
-            }
-        )
-        
-        # Check if session is expired
-        is_expired = await self.check_session_expired()
-        if is_expired:
-            await self.send(text_data=json.dumps({
-                'type': 'session_expired',
-                'message': 'Session has already been completed.'
-            }))
-            await self.close()
-            return
+        try:
+            # Join room group
+            await self.channel_layer.group_add(
+                self.room_group_name,
+                self.channel_name
+            )
+            
+            await self.accept()
+            
+            logger.info(f"Γ£à WebSocket connected: {self.role} for session {self.session_id}")
+            
+            # Send current screen share state to new connection
+            session_state = _screen_share_state.get(self.session_id, {})
+            if session_state.get('locked'):
+                await self.send(text_data=json.dumps({
+                    'type': 'screen_share_lock',
+                    'active': True,
+                    'holder': session_state.get('holder'),
+                }))
+            
+            # Notify others that this user joined
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'user_joined',
+                    'user': self.role.capitalize(),
+                    'session_id': self.session_id,
+                }
+            )
+            
+            # Check if session is expired
+            is_expired = await self.check_session_expired()
+            if is_expired:
+                await self.send(text_data=json.dumps({
+                    'type': 'session_expired',
+                    'message': 'Session has already been completed.'
+                }))
+                await self.close()
+                return
+
+        except Exception as e:
+            logger.error(f"Error in WebSocket connect: {str(e)}", exc_info=True)
+            # Try to close with error code if possible, or just let it fail
+            try:
+                await self.close(code=4000)
+            except:
+                pass
+
     
     async def disconnect(self, close_code):
         """

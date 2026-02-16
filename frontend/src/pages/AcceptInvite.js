@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
-import MainHeader from '../components/MainHeader';
-import Footer from '../components/Footer';
+// import MainHeader from '../components/MainHeader';
+// import Footer from '../components/Footer';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
@@ -86,10 +86,30 @@ export default function AcceptInvite() {
 
   return (
     <>
-      <MainHeader />
+      {/* <MainHeader /> */}
       <main className="auth-page">
         <div className="container auth-container">
           <div className="auth-card" style={{ maxWidth: 520, width: '100%' }}>
+            <div className="auth-logo-wrapper">
+              <div style={{
+                maxWidth: '450px',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}>
+                <img
+                  src="/auth-logo-v7.png"
+                  alt="VerifiHireAI Logo"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    objectFit: 'contain',
+                    filter: 'brightness(0.85) contrast(1.2) sepia(0.2) saturate(1.3)'
+                  }}
+                />
+              </div>
+            </div>
             <h2 className="auth-title" style={{ textAlign: 'center', marginTop: 0 }}>Accept Invitation</h2>
             <p className="auth-subtitle" style={{ textAlign: 'center' }}>
               Set your password to activate your account.
@@ -162,7 +182,7 @@ export default function AcceptInvite() {
           </div>
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

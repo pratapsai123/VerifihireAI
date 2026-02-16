@@ -33,6 +33,9 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = _env_list("DJANGO_ALLOWED_HOSTS", ["*"])
 
+FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifyhire.duckdns.org")
+
+
 
 # Application definition
 
@@ -50,6 +53,11 @@ INSTALLED_APPS = [
     'api',
 
 ]
+
+# Trust Nginx to handle SSL and Host headers
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -85,7 +93,10 @@ ASGI_APPLICATION = 'VerifiHireAI_backend.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
     },
 }
 
@@ -104,7 +115,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'react_user1'),
+        'NAME': os.environ.get('DB_NAME', 'saipratap'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         # IMPORTANT: In Docker this should be "db"; locally it can be "localhost"
@@ -186,6 +197,7 @@ default_cors_origins = [
     "http://localhost:3001",
     "http://127.0.0.1:3001",
     "http://192.168.1.22:3001",
+    "https://verifyhire.duckdns.org",
 ]
 
 CORS_ALLOWED_ORIGINS = _env_list("CORS_ALLOWED_ORIGINS", default_cors_origins)

@@ -7,12 +7,19 @@
   box-sizing: border-box;
   height: var(--vh-header-height);
   z-index: 1000;
-  background-color: #0c4647;
-  color: #fff;
+  /* Thicker Glassmorphism header */
+  background-color: rgba(255, 255, 255, 0.85);
+  /* Increased opacity */
+  backdrop-filter: blur(16px);
+  /* Stronger blur */
+  -webkit-backdrop-filter: blur(16px);
+  color: #1F2937;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.8);
+  /* Slightly more visible border */
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   display: flex;
   align-items: center;
-  padding: 0;
+  padding: 0 1rem;
 }
 
 .vh-header__container {
@@ -41,7 +48,7 @@
 }
 
 .vh-header__title {
-  color: #fff;
+  color: #111827;
   font-weight: 700;
   font-size: 1.25rem;
   cursor: pointer;
@@ -53,5 +60,3 @@
     padding: 0;
   }
 }
-
-

@@ -40,6 +40,10 @@ function LiveInterviewInterviewer() {
   const [confirmMessage, setConfirmMessage] = useState('');
   const [confirmCallback, setConfirmCallback] = useState(null);
 
+  // Draggable interaction state
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+
   // Interview report states
   const [showInterviewReport, setShowInterviewReport] = useState(false);
   const [showFeedbackSuccess, setShowFeedbackSuccess] = useState(false);
@@ -224,31 +228,75 @@ function LiveInterviewInterviewer() {
     }
   };
 
+  // Draggable Video Logic (Moved to top level)
+  const handleDragStart = useCallback((e) => {
+    if (!selfVideoContainerRef.current) return;
+    const rect = selfVideoContainerRef.current.getBoundingClientRect();
+    setDragOffset({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+    setIsDragging(true);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!isDragging || !selfVideoContainerRef.current) return;
+      e.preventDefault();
+
+      const x = e.clientX - dragOffset.x;
+      const y = e.clientY - dragOffset.y;
+
+      selfVideoContainerRef.current.style.left = `${x}px`;
+      selfVideoContainerRef.current.style.top = `${y}px`;
+      selfVideoContainerRef.current.style.bottom = 'auto';
+      selfVideoContainerRef.current.style.right = 'auto';
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, dragOffset]);
+
   // WebSocket connection
   const buildWsCandidates = useCallback((sessionId) => {
     // Get backend URL from API_BASE_URL
-    const apiUrl = API_BASE_URL.replace('/api', '').replace('http://', '').replace('https://', '');
+    const apiUrl = API_BASE_URL.replace('/api', '').replace('http://', '').replace('https://', '').split(':')[0];
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const isProduction = window.location.hostname.includes('duckdns.org') || API_BASE_URL.includes('duckdns.org');
 
-    // Try backend URL first, then fallback to current host
-    const hosts = [];
-    if (apiUrl) {
-      hosts.push(apiUrl);
-    }
-    hosts.push(window.location.host);
-    hosts.push(window.location.hostname);
-    const bare = window.location.hostname.replace(/^www\./, '');
-    if (!hosts.includes(bare)) hosts.push(bare);
-    if (!hosts.includes(`www.${bare}`)) hosts.push(`www.${bare}`);
+    const candidates = [];
 
-    const paths = [`/ws/interview/${sessionId}/interviewer/`, `/ws/interview/${sessionId}/interviewer`];
-    const urls = [];
-    for (const h of hosts) {
-      for (const p of paths) {
-        urls.push(`${protocol}//${h}${p}`);
-      }
+    // 1. Explicit Production URL
+    if (isProduction) {
+      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/interviewer/`);
     }
-    return urls;
+
+    // 2. API_BASE_URL derived
+    if (apiUrl && apiUrl !== 'localhost') {
+      candidates.push(`${protocol}//${apiUrl}/ws/interview/${sessionId}/interviewer/`);
+    }
+
+    // 3. Current Host
+    const currentHost = window.location.host;
+    candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/interviewer/`);
+
+    // 4. Localhost Fallback
+    if (window.location.hostname === 'localhost') {
+      candidates.push(`ws://localhost:8000/ws/interview/${sessionId}/interviewer/`);
+    }
+
+    return candidates;
   }, []);
 
   const connectWebSocket = useCallback(() => {
@@ -276,9 +324,15 @@ function LiveInterviewInterviewer() {
 
         setupSocketListeners(socket);
 
+        // If it closes immediately or errors, we proceed to next candidate via onclose/onerror
+        socket.addEventListener('error', (e) => {
+          console.warn(`WS Error on ${url}:`, e);
+        });
+
+        // Fallback timeout in case no events fire
         const fallbackTimer = setTimeout(() => {
-          if (!socket || socket.readyState !== 1) {
-            try { socket.close(); } catch { }
+          if (!socket || socket.readyState !== WebSocket.OPEN && socket.readyState !== WebSocket.CONNECTING) {
+            console.warn(`WS detection timeout on ${url}, trying next...`);
             tryNext();
           }
         }, 3000);
@@ -369,12 +423,15 @@ function LiveInterviewInterviewer() {
   const handleSocketMessage = useCallback(async (rawMessage) => {
     try {
       const data = JSON.parse(rawMessage);
-      console.log('📩 Received message:', data);
+      console.log(`📩 Received message type: ${data.type}`, data);
 
       switch (data.type) {
         case 'connection_error':
           console.error('❌ Server reported connection error:', data.error);
           showNotification(`Connection error: ${data.error}`, 'error');
+          break;
+        case 'server_pong':
+          // Heartbeat response - ignore
           break;
         case 'user_joined':
           const joinedUserName = data.user === 'Candidate' ? candidateName : data.user;
@@ -382,13 +439,12 @@ function LiveInterviewInterviewer() {
           if (data.user === 'Candidate' && peerConnectionRef.current) {
             console.log('🎯 Candidate joined, creating video offer...');
             candidateHasJoinedRef.current = true;
-            setTimeout(() => {
-              createVideoOffer();
-            }, 1000);
+            // Initiate offer because Candidate joined AFTER us
+            createVideoOffer();
             setBothPartiesConnected(true);
-            setSessionExpired(true);
+            // Do NOT setSessionExpired(true) here, as it triggers useEffect cleanup and closes the socket!
             localStorage.setItem(sessionKey, 'true');
-            console.log('🔒 Session marked as expired - both parties have connected');
+            console.log('🔒 Session marked as expired in storage - both parties have connected');
           }
           break;
         case 'chat':
@@ -671,12 +727,13 @@ function LiveInterviewInterviewer() {
 
       console.log('✅ WebRTC initialized successfully');
 
-      setTimeout(() => {
-        if (peerConnection && peerConnection.connectionState !== 'connected') {
-          console.log('🔄 Auto-triggering video connection...');
-          createVideoOffer();
-        }
-      }, 3000);
+      // Remove auto-trigger to avoid glare if Candidate is also offering
+      // setTimeout(() => {
+      //   if (peerConnection && peerConnection.connectionState !== 'connected') {
+      //     console.log('🔄 Auto-triggering video connection...');
+      //     createVideoOffer();
+      //   }
+      // }, 3000);
 
     } catch (error) {
       console.error('❌ Error initializing WebRTC:', error);
@@ -728,7 +785,11 @@ function LiveInterviewInterviewer() {
   }, [showNotification]);
 
   const handleVideoOffer = useCallback(async (offer) => {
-    if (!peerConnectionRef.current) return;
+    console.log('📼 Handling incoming VIDEO OFFER');
+    if (!peerConnectionRef.current) {
+      console.error('❌ PeerConnection not initialized when offer received');
+      return;
+    }
 
     try {
       await peerConnectionRef.current.setRemoteDescription(new RTCSessionDescription(offer));
@@ -1311,6 +1372,25 @@ function LiveInterviewInterviewer() {
     navigate(`/feedback-page/?${feedbackParams.toString()}`);
   }, [candidateName, interviewerName, timer, sessionId, navigate]);
 
+  const confirmEndInterview = useCallback((status) => {
+    setShowEndInterviewModal(false);
+
+    // Logic to handle qualification/rejection
+    console.log(`Interview ended with status: ${status}`);
+    setRatings(prev => ({ ...prev, hireRecommendation: status }));
+
+    // Send end interview signal
+    if (socketRef.current?.readyState === WebSocket.OPEN) {
+      socketRef.current.send(JSON.stringify({
+        type: 'end_interview',
+        reason: status
+      }));
+    }
+
+    // Navigate to feedback or dashboard
+    setShowInterviewReport(true);
+  }, []);
+
   if (sessionExpired && !showInterviewReport) {
     return (
       <div style={{
@@ -1357,330 +1437,322 @@ function LiveInterviewInterviewer() {
       </div>
     );
   }
-
+  // Render
   return (
     <div className="live-interview-interviewer">
       {/* Header */}
       <header className="header">
-        <h1>FDI Live Interview</h1>
+        <div className="header-left">
+          <h1>Live Interview</h1>
+        </div>
         <div className="header-controls">
-          <span id="timer" className="timer">{timer}</span>
+          <div className="timer">{timer}</div>
           <button
-            id="endInterviewBtn"
-            className="btn btn-red"
-            onClick={() => setShowEndInterviewModal(true)}
+            className="btn-report"
+            onClick={() => setShowInterviewReport(true)}
           >
-            <i className="fa-solid fa-phone-slash"></i>
-            <span>End Interview</span>
+            📋 Report
           </button>
         </div>
       </header>
 
       {/* Main Content */}
       <div className="main-wrapper">
-        {/* Video Container */}
         <div className="video-container">
-          {/* Main Video Area */}
-          <main id="mainVideoArea" className="main-video-area">
-            {/* Primary remote video feed */}
+
+          {/* REMOTE VIDEO (Target Candidate) */}
+          <video
+            ref={remoteVideoRef}
+            className="remote-video"
+            autoPlay
+            playsInline
+            onContextMenu={e => e.preventDefault()}
+          />
+          {/* Backup/Secondary Remote Video */}
+          <video
+            ref={remoteVideoBackupRef}
+            className="remote-video"
+            autoPlay
+            playsInline
+            style={{ display: 'none' }}
+            onContextMenu={e => e.preventDefault()}
+          />
+
+          {/* Connection Status Overlay */}
+          {connectionStatus !== 'Connected' && (
+            <div className="connection-overlay">
+              <i className="fas fa-spinner spinner"></i>
+              <h3>{connectionStatus}</h3>
+              <p>Waiting for connection...</p>
+            </div>
+          )}
+
+          {/* Name Label for Candidate */}
+          {bothPartiesConnected && (
+            <div className="video-label" style={{ top: '20px', left: '20px', bottom: 'auto' }}>
+              <span>{candidateName}</span>
+              <i className="fas fa-microphone" style={{ fontSize: '12px', marginLeft: '6px' }}></i>
+            </div>
+          )}
+
+          {/* LOCAL VIDEO (Self View) - Draggable */}
+          <div
+            className="self-video-container"
+            ref={selfVideoContainerRef}
+            onMouseDown={handleDragStart}
+          >
             <video
-              id="remoteVideo"
-              ref={remoteVideoRef}
-              className="remote-video"
+              ref={selfVideoRef}
+              className="self-video"
               autoPlay
+              muted
               playsInline
-              muted={false}
-            ></video>
-
-            {/* Fallback video element */}
-            <video
-              id="remoteVideoBackup"
-              ref={remoteVideoBackupRef}
-              className="remote-video"
-              autoPlay
-              playsInline
-              muted={false}
-              style={{ display: 'none' }}
-            ></video>
-
-            {/* Self video */}
-            <div
-              id="selfVideoContainer"
-              ref={selfVideoContainerRef}
-              className="self-video-container"
-              style={{ display: isCameraOn ? '' : 'none' }}
-            >
-              <video
-                id="self-video"
-                ref={selfVideoRef}
-                className="self-video"
-                autoPlay
-                muted
-                playsInline
-              ></video>
-              <div className="video-label">{interviewerName}</div>
-            </div>
-
-            {/* Connection status overlay */}
-            <div
-              id="connectionStatusOverlay"
-              className={`connection-overlay ${connectionStatusClass}`}
-              style={{ display: connectionStatusClass === 'connected' ? 'none' : 'block' }}
-            >
-              <span id="connectionStatusText">{connectionStatus}</span>
-            </div>
-
-            {/* Candidate name label */}
-            <div className="candidate-label">
-              {candidateName}
-            </div>
-          </main>
-
-          {/* Bottom Controls */}
-          <footer>
-            <div>
-              <button id="candidateScreenBtn" className="btn btn-gray">Candidate Screen</button>
-            </div>
-            <div className="footer-controls">
-              <button
-                id="muteBtn"
-                className={`control-btn ${isMuted ? 'bg-red-600' : ''}`}
-                onClick={handleMuteToggle}
-              >
-                <i className={`fas ${isMuted ? 'fa-microphone-slash' : 'fa-microphone'}`}></i>
-              </button>
-              <button
-                id="cameraBtn"
-                className={`control-btn ${!isCameraOn ? 'bg-red-600' : ''}`}
-                onClick={handleCameraToggle}
-              >
-                <i className={`fas ${isCameraOn ? 'fa-video' : 'fa-video-slash'}`}></i>
-              </button>
-              <button
-                id="screenShareBtn"
-                className={`control-btn ${isScreenSharing ? 'bg-blue-600' : ''}`}
-                onClick={handleScreenShareToggle}
-                disabled={screenShareLocked && screenShareHolder && screenShareHolder !== MY_ROLE}
-              >
-                <i className={`fas ${isScreenSharing ? 'fa-stop-circle' : 'fa-desktop'}`}></i>
-              </button>
-              {/* Chat Button */}
-              <button
-                id="chatToggleBtn"
-                className="control-btn"
-                onClick={() => {
-                  setChatPanelVisible(!chatPanelVisible);
-                  if (chatPanelVisible) {
-                    setChatUnreadCount(0);
-                  }
-                }}
-                title="Open Chat"
-                style={{ position: 'relative' }}
-              >
-                <i className="fas fa-comment-dots"></i>
-                {chatUnreadCount > 0 && (
-                  <span style={{
-                    position: 'absolute',
-                    top: '-6px',
-                    right: '-6px',
-                    backgroundColor: '#dc2626',
-                    color: '#fff',
-                    fontSize: '10px',
-                    lineHeight: '10px',
-                    width: '16px',
-                    height: '16px',
-                    borderRadius: '9999px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    padding: '2px'
-                  }}>
-                    {chatUnreadCount > 9 ? '9+' : chatUnreadCount}
-                  </span>
-                )}
-              </button>
-            </div>
-            <div className="session-info">
-              <span>Session: <span id="sessionDisplay">{sessionId}</span></span>
-            </div>
-          </footer>
-        </div>
-
-        {/* Chat Bar */}
-        <div
-          id="chatBar"
-          className={chatPanelVisible ? '' : 'hidden'}
-          style={{ display: chatPanelVisible ? 'block' : 'none' }}
-        >
-          <div className="chat-container">
-            <div className="chat-header">
-              <h3>CHAT</h3>
-              <button
-                id="closeChatBtn"
-                className="chat-close-btn"
-                onClick={() => setChatPanelVisible(false)}
-              >
-                &times;
-              </button>
-            </div>
-            <div
-              id="chatMessages"
-              ref={chatMessagesRef}
-              className="chat-messages hide-scrollbar"
-            >
-              {chatMessages.map((msg) => (
-                <div
-                  key={msg.id}
-                  className={`chat-message-container ${msg.isMyMessage ? 'text-right' : 'text-left'}`}
-                >
-                  <div className={`chat-message-bubble ${msg.isMyMessage ? 'own-message' : 'other-message'}`}>
-                    <div className="chat-message-content">
-                      <div className="chat-message-header">
-                        <span className="chat-message-sender">{msg.sender}</span>
-                        &nbsp;&nbsp;
-                        <span className="chat-message-time">{msg.time}</span>
-                      </div>
-                      <div className="chat-message-text">{msg.message}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="chat-input-container">
-              <input
-                id="chatInput"
-                ref={chatInputRef}
-                type="text"
-                placeholder="Type a message..."
-                className="chat-input"
-                value={chatInput}
-                onChange={(e) => setChatInput(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    sendChatMessage();
-                  }
-                }}
-                autoComplete="off"
-              />
-              <button
-                id="chatSendBtn"
-                className="chat-send-btn"
-                onClick={sendChatMessage}
-              >
-                <i className="fas fa-paper-plane"></i>
-              </button>
+            />
+            <div className="video-label">
+              <span>{interviewerName} (You)</span>
             </div>
           </div>
+
+        </div>
+
+        {/* Chat Sidebar */}
+        <div className={`chat-sidebar ${!chatPanelVisible ? 'closed' : ''}`}>
+          <div className="chat-header">
+            <h3>Meeting Chat</h3>
+            <button className="close-chat" onClick={() => setChatPanelVisible(false)}>
+              <i className="fas fa-times"></i>
+            </button>
+          </div>
+
+          <div className="chat-messages">
+            {chatMessages.map((msg, index) => (
+              <div
+                key={index}
+                className={`chat-msg ${msg.isOwn ? 'sent' : 'received'}`}
+              >
+                <span className="msg-meta">
+                  {msg.sender} • {msg.time}
+                </span>
+                {msg.text}
+              </div>
+            ))}
+            <div ref={chatMessagesRef} />
+          </div>
+
+          <div className="chat-input-area">
+            <input
+              type="text"
+              placeholder="Type a message..."
+              value={chatInput}
+              onChange={(e) => setChatInput(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && sendChatMessage()}
+            />
+            <button className="btn-send" onClick={sendChatMessage}>
+              <i className="fas fa-paper-plane"></i>
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Control Bar (Bottom Floating) */}
+      <div className="control-bar-wrapper">
+        <div className="control-bar">
+          <button
+            className={`control-btn ${!isMuted ? 'active' : 'off'}`}
+            onClick={handleMuteToggle}
+            title={isMuted ? "Unmute" : "Mute"}
+          >
+            <div className="icon-circle">
+              <i className={`fas fa-microphone${isMuted ? '-slash' : ''}`}></i>
+            </div>
+            <span className="control-label">{isMuted ? "Unmute" : "Mute"}</span>
+          </button>
+
+          <button
+            className={`control-btn ${isCameraOn ? 'active' : 'off'}`}
+            onClick={handleCameraToggle}
+            title={isCameraOn ? "Stop Video" : "Start Video"}
+          >
+            <div className="icon-circle">
+              <i className={`fas fa-video${!isCameraOn ? '-slash' : ''}`}></i>
+            </div>
+            <span className="control-label">{isCameraOn ? "Stop Video" : "Start Video"}</span>
+          </button>
+
+          <button
+            className={`control-btn screen-share ${isScreenSharing ? 'active' : ''}`}
+            onClick={handleScreenShareToggle}
+            title="Share Screen"
+          >
+            <div className="icon-circle">
+              <i className="fas fa-desktop"></i>
+            </div>
+            <span className="control-label">Share</span>
+          </button>
+
+          <button
+            className={`control-btn ${chatPanelVisible ? 'active' : ''}`}
+            onClick={() => {
+              setChatPanelVisible(!chatPanelVisible);
+              setChatUnreadCount(0);
+            }}
+            title="Chat"
+            style={{ position: 'relative' }}
+          >
+            <div className="icon-circle">
+              <i className="fas fa-comment-alt"></i>
+              {chatUnreadCount > 0 && <span className="unread-badge">{chatUnreadCount}</span>}
+            </div>
+            <span className="control-label">Chat</span>
+          </button>
+        </div>
+
+        <div style={{ display: 'flex', gap: '10px' }}>
+          <button
+            className="btn-secondary"
+            onClick={() => {
+              console.log('🔄 Manual video retry triggered');
+              createVideoOffer({ iceRestart: true });
+              showNotification('Retrying video connection...', 'info');
+            }}
+            style={{ padding: '0 15px', height: '44px', borderRadius: '22px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.3)', color: 'white', cursor: 'pointer' }}
+          >
+            <i className="fas fa-sync-alt" style={{ marginRight: '8px' }}></i>
+            Retry Video
+          </button>
+
+          <button className="btn-end" onClick={handleEndInterview}>
+            End Call
+          </button>
         </div>
       </div>
 
-      {/* Proxy Violation Notifications */}
-      <div id="proxyNotificationContainer" className="proxy-notification-container">
-        {proxyViolations.map((violation) => {
-          let icon = '⚠️';
-          if (violation.type.includes('Multiple people')) icon = '👥';
-          else if (violation.type.includes('device')) icon = '📱';
-          else if (violation.type.includes('Tab switching')) icon = '🔄';
-          else if (violation.type.includes('No participant')) icon = '👻';
-          else if (violation.type.includes('keyboard') || violation.type.includes('Right-click')) icon = '⌨️';
+      {/* Proxy Notifications */}
+      <div className="proxy-notification-container">
+        {proxyViolations.map((v) => (
+          <div key={v.id} className="proxy-violation-notification">
+            <div className="violation-header">
+              <i className="fas fa-exclamation-triangle"></i>
+              <span>Proxy Warning</span>
+              <span className="violation-count">{v.count}/{v.limit}</span>
+            </div>
+            <p className="violation-details">
+              <strong>{v.type}</strong>
+              <br />
+              Detected at {v.time}
+            </p>
+          </div>
+        ))}
+      </div>
 
-          return (
-            <div key={violation.id} className="proxy-violation-notification">
-              <div className="violation-header">
-                <span>{icon}</span>
-                <span>Proxy Violation Detected</span>
-                <span className="violation-count">{violation.count}/{violation.limit}</span>
+      {/* Report Modal */}
+      {
+        showInterviewReport && (
+          <div className="modal">
+            <div className="modal-content" style={{ maxWidth: '600px', textAlign: 'left' }}>
+              <h2>Interview Feedback Report</h2>
+              <p className="mb-4">Rate the candidate's performance ({candidateName})</p>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px', marginBottom: '20px' }}>
+                <div>
+                  <label className="block mb-2 text-sm font-medium">Coding Skills</label>
+                  <input
+                    type="range" min="1" max="10"
+                    className="w-full"
+                    value={ratings.codingLanguage}
+                    onChange={e => setRatings({ ...ratings, codingLanguage: parseInt(e.target.value) })}
+                  />
+                  <div className="text-right text-sm">{ratings.codingLanguage}/10</div>
+                </div>
+                <div>
+                  <label className="block mb-2 text-sm font-medium">Problem Solving</label>
+                  <input
+                    type="range" min="1" max="10"
+                    className="w-full"
+                    value={ratings.solutionApproach}
+                    onChange={e => setRatings({ ...ratings, solutionApproach: parseInt(e.target.value) })}
+                  />
+                  <div className="text-right text-sm">{ratings.solutionApproach}/10</div>
+                </div>
+                {/* Add more fields as needed */}
               </div>
-              <div className="violation-details">
-                <strong>{candidateName}</strong>: {violation.type}
+
+              <div className="text-right mt-6">
+                <button className="btn-secondary mr-2" onClick={() => setShowInterviewReport(false)}>Cancel</button>
+                <button className="btn-blue" onClick={() => {
+                  setShowInterviewReport(false);
+                  setShowFeedbackSuccess(true);
+                  setTimeout(() => setShowFeedbackSuccess(false), 3000);
+                }}>Submit Report</button>
               </div>
             </div>
-          );
-        })}
-      </div>
+          </div>
+        )
+      }
 
       {/* Confirmation Modal */}
-      {showConfirmModal && (
-        <div id="confirmModal" className="modal">
-          <div className="modal-content">
-            <p id="confirmMessage" className="modal-message">{confirmMessage}</p>
-            <div className="modal-buttons">
-              <button id="confirmYes" className="btn btn-red" onClick={handleConfirmYes}>Yes</button>
-              <button id="confirmNo" className="btn btn-gray" onClick={handleConfirmNo}>No</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Connection Failed Modal */}
-      {showConnectionFailedModal && (
-        <div id="connectionFailedModal" className="connection-failed-modal">
-          <div className="connection-failed-content">
-            <i className="fa-solid fa-tower-broadcast"></i>
-            <h2>Connection Failed</h2>
-            <p>The application could not connect to the required server.</p>
-
-            <div className="troubleshooting">
-              <h3>Troubleshooting Steps:</h3>
-              <ul>
-                <li>Ensure your local WebSocket server is running.</li>
-                <li>Check that it is accessible at the address: <code>ws://www.facedinterview.com</code>.</li>
-                <li>Look for any errors in your server's console output.</li>
-                <li>Make sure no other service is blocking the connection.</li>
-              </ul>
-            </div>
-
-            <button onClick={() => window.location.reload()} className="reload-page-btn">
-              <i className="fa-solid fa-rotate-right"></i>
-              Reload Page
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* End Interview Confirmation Modal */}
-      {showEndInterviewModal && (
-        <div id="endInterviewConfirmModal" className="end-interview-modal">
-          <div className="end-interview-content">
-            <button
-              id="dismissEndInterviewBtn"
-              className="close-modal-btn"
-              onClick={() => setShowEndInterviewModal(false)}
-            >
-              &times;
-            </button>
-            <h2>Do you want to join later or end it?</h2>
-            <div className="end-interview-options">
-              <div className="end-interview-option">
-                <p>This will end the interview for you</p>
-                <button id="joinLaterBtn" className="btn-blue" onClick={handleJoinLater}>
-                  Join Later
-                </button>
-              </div>
-              <div className="end-interview-option">
-                <p>This will end the interview for all and mark it as completed.</p>
-                <button
-                  id="endInterviewWithFeedbackBtn"
-                  className="btn-red"
-                  onClick={handleEndWithFeedback}
-                >
-                  End Interview with Feedback
-                </button>
+      {
+        showConfirmModal && (
+          <div className="modal-overlay">
+            <div className="modal-card">
+              <h2>Confirm Action</h2>
+              <p className="mb-4">{confirmMessage}</p>
+              <div className="modal-buttons">
+                <button className="btn-secondary" onClick={handleConfirmNo}>Cancel</button>
+                <button className="btn-danger" onClick={handleConfirmYes}>Confirm</button>
               </div>
             </div>
-            <div className="text-center">
-              <button
-                id="dismissEndInterviewBtn2"
-                className="dismiss-btn"
-                onClick={() => setShowEndInterviewModal(false)}
-              >
-                Dismiss
+          </div>
+        )
+      }
+
+      {/* End Interview Modal */}
+      {
+        showEndInterviewModal && (
+          <div className="end-interview-modal">
+            <div className="end-interview-content">
+              <button className="close-modal-btn" onClick={() => setShowEndInterviewModal(false)}>
+                <i className="fas fa-times"></i>
               </button>
+
+              <h2>End Interview Session?</h2>
+
+              <div className="end-interview-options">
+                <div className="end-interview-option">
+                  <div style={{ fontSize: '2rem', color: '#10b981', marginBottom: '0.5rem' }}>
+                    <i className="fas fa-check-circle"></i>
+                  </div>
+                  <p>Complete & Qualify</p>
+                  <span className="text-sm text-gray-500 mb-4">Candidate passed requirements</span>
+                  <button
+                    style={{ backgroundColor: '#10b981', color: 'white' }}
+                    onClick={() => confirmEndInterview('Qualified')}
+                  >
+                    Qualify Candidate
+                  </button>
+                </div>
+
+                <div className="end-interview-option">
+                  <div style={{ fontSize: '2rem', color: '#ef4444', marginBottom: '0.5rem' }}>
+                    <i className="fas fa-times-circle"></i>
+                  </div>
+                  <p>Reject</p>
+                  <span className="text-sm text-gray-500 mb-4">Did not meet requirements</span>
+                  <button
+                    style={{ backgroundColor: '#ef4444', color: 'white' }}
+                    onClick={() => confirmEndInterview('Rejected')}
+                  >
+                    Reject Candidate
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
+        )
+      }
+
+    </div >
   );
 }
 

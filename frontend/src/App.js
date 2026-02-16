@@ -55,35 +55,37 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/assessments" element={<Assessment />} />
+            <Route path="/candidates" element={<CandidatePage />} />
+            <Route path="/results" element={<Result />} />
+            <Route path="/result/:token" element={<Result />} />
             <Route path="/custom-assessment" element={<CustomAssessment />} />
             <Route path="/review-assessment" element={<ReviewPage />} />
-            <Route path="/assessments" element={<Assessment />} />
             <Route path="/invite-candidates/:assessmentId" element={<InviteCandidates />} />
-            <Route path="/take-assessment/:token" element={<TakeAssessment />} />
-            <Route path="/result/:token" element={<Result />} />
-            <Route path="/results" element={<Result />} />
-            <Route path="/accept-invite" element={<AcceptInvite />} />
             <Route path="/team-members" element={<TeamMembers />} />
-            <Route path="/candidates" element={<CandidatePage />} />
             <Route path="/manual-questions" element={<ManualQuestions />} />
+            <Route path="/live-interview-list" element={<LiveInterviewList />} />
+            <Route path="/send-invite" element={<InterviewInvite />} />
+            {/* Question Types */}
             <Route path="/multiple-choice-question" element={<MultipleChoiceQuestion />} />
             <Route path="/multiple-selection-question" element={<MultipleSelectionQuestion />} />
             <Route path="/true-false-question" element={<TrueFalseQuestion />} />
             <Route path="/pdf-upload-question" element={<PdfUploadQuestion />} />
-            {/* Coding */}
+            {/* Recruiter Coding Views */}
             <Route path="/coding" element={<CodingHome />} />
             <Route path="/coding/questions/new" element={<CodingQuestionForm />} />
             <Route path="/coding/questions/:id/edit" element={<CodingQuestionForm />} />
-            <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
             <Route path="/coding/review" element={<CodingReview />} />
-            {/* Back-compat route from ManualQuestions */}
             <Route path="/coding-challenge-question" element={<CodingQuestionForm />} />
-            {/* Interview */}
-            <Route path="/send-invite" element={<InterviewInvite />} />
-            <Route path="/live-interview-list" element={<LiveInterviewList />} />
-            <Route path="/live-interview" element={<LiveInterview />} />
+            {/* Interviewer View */}
             <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
+
+            {/* Public / Candidate Routes */}
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/take-assessment/:token" element={<TakeAssessment />} />
+            <Route path="/accept-invite" element={<AcceptInvite />} />
+            <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
+            <Route path="/live-interview" element={<LiveInterview />} />
           </Routes>
 
           {/* Cookie Consent Banner */}
