@@ -546,11 +546,46 @@
             "Thank you for sharing those specific details."
         ];
 
-        // ... (initSession, generateQuestions, addMessage, showTypingIndicator, hideTypingIndicator, askNextQuestion remain same)
+        const negativeResponses = [
+            "No problem, we can move on.",
+            "That's completely fine.",
+            "Understood, let's try a different topic.",
+            "Thanks for being honest.",
+            "Alright, let's proceed to the next question."
+        ];
+
+        let probeCount = 0; // Track how many times we've probed for the current question
+
+        // ... (initSession, generateQuestions, addMessage, showTypingIndicator, hideTypingIndicator remain same)
+
+        function askNextQuestion() {
+            probeCount = 0; // Reset probe count for new question
+
+            if (currentQuestionIndex >= questions.length) {
+                completeInterview();
+                return;
+            }
+
+            showTypingIndicator();
+
+            setTimeout(() => {
+                hideTypingIndicator();
+                addMessage('ai', questions[currentQuestionIndex]);
+                document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+                updateProgress();
+
+                // Re-enable input
+                document.getElementById('responseInput').disabled = false;
+                document.getElementById('submitBtn').disabled = false;
+                document.getElementById('responseInput').focus();
+                isProcessing = false;
+            }, 1500);
+        }
 
         function submitResponse() {
             const input = document.getElementById('responseInput');
             const response = input.value.trim();
+            const lowerResponse = response.toLowerCase();
 
             if (!response) {
                 input.focus();
@@ -582,35 +617,46 @@
                 setTimeout(() => {
                     hideTypingIndicator();
 
-                    // Analyze response length and content
-                    const wordCount = response.split(' ').length;
-                    let nextActionDelay = 1500;
+                    // Check for negative/unknown/skip responses
+                    const negativeKeywords = ["don't know", "dont know", "no idea", "unsure", "skip", "pass", "idk", "not sure", "don't have", "nothing"];
+                    const isNegative = negativeKeywords.some(keyword => lowerResponse.includes(keyword));
 
-                    // Case 1: Answer is too short (less than 5 words)
-                    if (wordCount < 5) {
+                    if (isNegative) {
+                        const negAck = negativeResponses[Math.floor(Math.random() * negativeResponses.length)];
+                        addMessage('ai', negAck);
+
+                        // Move to next question immediately
+                        currentQuestionIndex++;
+                        setTimeout(() => askNextQuestion(), 1500);
+                        return;
+                    }
+
+                    // Check for short answers
+                    const wordCount = response.split(' ').length;
+
+                    // Only probe if it's a short answer AND we haven't probed yet for this question
+                    if (wordCount < 5 && probeCount === 0) {
+                        probeCount++; // Increment probe count
                         const probe = shortAnswerResponses[Math.floor(Math.random() * shortAnswerResponses.length)];
                         addMessage('ai', probe);
 
-                        // Re-enable input for elaboration WITHOUT moving to next question
+                        // Re-enable input for elaboration
                         input.disabled = false;
                         document.getElementById('submitBtn').disabled = false;
                         input.focus();
                         isProcessing = false;
-                        return; // Stop here, wait for user to elaborate
+                        return;
                     }
 
-                    // Case 2: Good length answer - Provide acknowledgement then move on
+                    // If answer is good OR we've already probed once, move on
                     const ack = positiveAcknowledgements[Math.floor(Math.random() * positiveAcknowledgements.length)];
                     addMessage('ai', ack);
 
                     // Move to next question
                     currentQuestionIndex++;
+                    setTimeout(() => askNextQuestion(), 1500);
 
-                    setTimeout(() => {
-                        askNextQuestion();
-                    }, nextActionDelay);
-
-                }, 1000 + Math.random() * 1000); // Random "thinking" time 1-2s
+                }, 1000 + Math.random() * 1000);
             }, 500);
         }
 
