@@ -407,6 +407,18 @@
             "What motivates you professionally, and what are your career goals for the next 2-3 years?"
         ];
 
+        // Polite acknowledgements
+        const acknowledgements = [
+            "Thank you for sharing that.",
+            "That's a great example.",
+            "I appreciate your detailed response.",
+            "Interesting perspective.",
+            "Good to know.",
+            "That's very insightful.",
+            "Thanks for elaborating on that.",
+            "I see, that makes sense."
+        ];
+
         // Initialize session
         function initSession() {
             // Get candidate data from sessionStorage
@@ -507,7 +519,12 @@
                 addMessage('ai', questions[currentQuestionIndex]);
                 document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
                 updateProgress();
+
+                // Re-enable input after question is asked
+                document.getElementById('responseInput').disabled = false;
+                document.getElementById('submitBtn').disabled = false;
                 document.getElementById('responseInput').focus();
+                isProcessing = false;
             }, 1500);
         }
 
@@ -538,19 +555,34 @@
             // Clear input
             input.value = '';
 
-            // Move to next question
+            // Move to next question index but wait to ask
             currentQuestionIndex++;
 
+            // Show typing indicator for acknowledgement
             setTimeout(() => {
-                input.disabled = false;
-                document.getElementById('submitBtn').disabled = false;
-                isProcessing = false;
-                askNextQuestion();
-            }, 800);
+                showTypingIndicator();
+
+                setTimeout(() => {
+                    hideTypingIndicator();
+
+                    // Add acknowledgement if not the last question
+                    if (currentQuestionIndex < questions.length) {
+                        const randomAck = acknowledgements[Math.floor(Math.random() * acknowledgements.length)];
+                        addMessage('ai', randomAck);
+
+                        // Then ask next question
+                        setTimeout(() => {
+                            askNextQuestion();
+                        }, 1000);
+                    } else {
+                        askNextQuestion(); // This will trigger completion
+                    }
+                }, 1000);
+            }, 500);
         }
 
         function updateProgress() {
-            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            const progress = ((currentQuestionIndex) / questions.length) * 100; // Updated progress calculation
             document.getElementById('progressFill').style.width = progress + '%';
         }
 
@@ -571,21 +603,32 @@
             // Show completion message
             setTimeout(() => {
                 const chatContainer = document.getElementById('chatContainer');
-                chatContainer.innerHTML = `
-                    <div class="completion-screen">
-                        <div class="completion-icon">
-                            <i class="fa-solid fa-check"></i>
-                        </div>
-                        <h2>Interview Complete!</h2>
-                        <p>Thank you for completing the AI interview, ${candidateData.name}.<br>
-                        Your responses have been recorded and will be reviewed by our hiring team.<br>
-                        We'll be in touch soon with the next steps.</p>
-                        <button class="back-btn" onclick="window.location.href='ai_interview.html'">
-                            <i class="fa-solid fa-arrow-left"></i> Start New Interview
-                        </button>
-                    </div>
-                `;
-            }, 1000);
+
+                // Add final closing message from AI
+                showTypingIndicator();
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    addMessage('ai', "Thank you for your time today. I've gathered all the information I need.");
+
+                    setTimeout(() => {
+                        chatContainer.innerHTML = `
+                            <div class="completion-screen">
+                                <div class="completion-icon">
+                                    <i class="fa-solid fa-check"></i>
+                                </div>
+                                <h2>Interview Complete!</h2>
+                                <p>Thank you for completing the AI interview, ${candidateData.name}.<br>
+                                Your responses have been recorded and will be reviewed by our hiring team.<br>
+                                We'll be in touch soon with the next steps.</p>
+                                <button class="back-btn" onclick="window.location.href='ai_interview.html'">
+                                    <i class="fa-solid fa-arrow-left"></i> Start New Interview
+                                </button>
+                            </div>
+                        `;
+                    }, 1500);
+                }, 1000);
+
+            }, 500);
         }
 
         // Handle Enter key in textarea
