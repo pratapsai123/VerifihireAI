@@ -35,21 +35,152 @@
             background: #f4f6f8;
         }
 
+        /* Updated Layout for AI Avatar Sidebar */
         .session-container {
-            max-width: 1200px;
-            /* Limit width on very large screens for readability */
+            max-width: 1400px;
+            /* Wider to accommodate sidebar */
             margin: 0 auto;
             width: 100%;
             padding: 1rem;
             height: 100vh;
             display: flex;
+            gap: 1.5rem;
+            /* Space between sidebar and chat */
+            flex-direction: row;
+            /* Horizontal layout */
+        }
+
+        /* Left Sidebar with AI Avatar */
+        .ai-sidebar {
+            width: 300px;
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
             flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .ai-avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 1.5rem;
+        }
+
+        .ai-avatar-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #667eea;
+            border-bottom-color: #764ba2;
+            animation: spin 4s linear infinite;
+        }
+
+        .ai-avatar-ring::before {
+            content: "";
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-left-color: #43e97b;
+            border-right-color: #38f9d7;
+            animation: spin-reverse 3s linear infinite;
+        }
+
+        .ai-avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f0f4ff 0%, #f9faff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #667eea;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .ai-status {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .speaking-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #43e97b;
+            border-radius: 50%;
+            margin-right: 5px;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin-reverse {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(-360deg);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(0.95);
+                opacity: 0.7;
+            }
+        }
+
+        /* Right Content Area */
+        .main-interview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .session-header {
+            /* Existing styles adapted */
             background: white;
             border-bottom: 1px solid #e5e7eb;
-            border-radius: 0 0 15px 15px;
+            border-radius: 20px;
             padding: 0.8rem 1.5rem;
             color: #333;
             margin-bottom: 1rem;
@@ -402,6 +533,37 @@
         .back-btn:hover {
             transform: translateY(-2px);
         }
+
+        /* Hide question count text as requested */
+        .question-count-text {
+            display: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .session-container {
+                flex-direction: column;
+            }
+
+            .ai-sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                padding: 1rem;
+                justify-content: flex-start;
+                gap: 1.5rem;
+            }
+
+            .ai-avatar-container {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 0;
+            }
+
+            .ai-avatar-img {
+                font-size: 1.5rem;
+            }
+        }
     </style>
 </head>
 
@@ -432,39 +594,53 @@
             </header>
 
             <div class="session-container">
-                <div class="session-header">
-                    <div class="header-content">
-                        <h1><i class="fa-solid fa-robot"></i></h1>
-                        <div class="session-info">
-                            <span style="font-weight: 500;" id="candidateName">Candidate</span>
+                <!-- Left AI Sidebar -->
+                <div class="ai-sidebar">
+                    <div class="ai-avatar-container">
+                        <div class="ai-avatar-ring"></div>
+                        <div class="ai-avatar-img">
+                            <i class="fa-solid fa-robot"></i>
                         </div>
-                        <div class="progress-container">
-                            <div class="progress-bar">
-                                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
-                            </div>
-                            <div style="font-size: 0.9rem; white-space: nowrap; font-weight: 600;">
-                                <span id="currentQuestion">1</span>/<span id="totalQuestions">5</span>
-                            </div>
-                        </div>
-                        <a href="ai_interview.html" class="exit-btn">
-                            <i class="fa-solid fa-xmark"></i> Exit
-                        </a>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0; color: #2d3748;">AI Interviewer</h3>
+                        <div class="ai-status" id="aiStatus"><span class="speaking-indicator"></span>Online</div>
                     </div>
                 </div>
 
-                <div class="chat-container" id="chatContainer">
-                    <!-- Messages will be added here dynamically -->
-                </div>
-
-                <div class="input-container" id="inputContainer">
-                    <div class="input-wrapper">
-                        <textarea id="responseInput" class="response-input" placeholder="Type your answer here..."
-                            rows="2"></textarea>
+                <!-- Right Main Content -->
+                <div class="main-interview-area">
+                    <div class="session-header">
+                        <div class="header-content">
+                            <div class="session-info">
+                                <i class="fa-solid fa-user-tie" style="color: #667eea;"></i>
+                                <span style="font-weight: 500;" id="candidateName">Candidate</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <a href="ai_interview.html" class="exit-btn">
+                                <i class="fa-solid fa-xmark"></i> Exit
+                            </a>
+                        </div>
                     </div>
-                    <button class="submit-btn" id="submitBtn" onclick="submitResponse()">
-                        <i class="fa-solid fa-paper-plane"></i>
-                        <span>Send</span>
-                    </button>
+
+                    <div class="chat-container" id="chatContainer">
+                        <!-- Messages will be added here dynamically -->
+                    </div>
+
+                    <div class="input-container" id="inputContainer">
+                        <div class="input-wrapper">
+                            <textarea id="responseInput" class="response-input" placeholder="Type your answer here..."
+                                rows="2"></textarea>
+                        </div>
+                        <button class="submit-btn" id="submitBtn" onclick="submitResponse()">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Send</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </main>
@@ -477,6 +653,44 @@
         let questions = [];
         let responses = [];
         let isProcessing = false;
+
+        // TTS Configuration
+        const synth = window.speechSynthesis;
+        let voice = null;
+
+        function loadVoices() {
+            const voices = synth.getVoices();
+            // Try to find a polite/professional voice
+            voice = voices.find(v => v.name.includes('Google US English')) ||
+                voices.find(v => v.name.includes('Microsoft')) ||
+                voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
+
+        function speak(text) {
+            if (synth.speaking) {
+                synth.cancel();
+            }
+            if (text !== "") {
+                const utterThis = new SpeechSynthesisUtterance(text);
+                if (voice) utterThis.voice = voice;
+                utterThis.pitch = 1;
+                utterThis.rate = 1;
+
+                // Update AI Status
+                const statusEl = document.getElementById('aiStatus');
+                statusEl.innerHTML = '<span class="speaking-indicator"></span>Speaking...';
+
+                utterThis.onend = function (event) {
+                    statusEl.innerHTML = '<span class="speaking-indicator"></span>Listening...';
+                }
+
+                synth.speak(utterThis);
+            }
+        }
 
         // Sample questions based on common resume sections
         const questionTemplates = [
@@ -499,6 +713,34 @@
             "I see, that makes sense."
         ];
 
+        // Contextual acknowledgements
+        const shortAnswerResponses = [
+            "Could you elaborate a bit more on that?",
+            "That's interesting. Can you provide more details?",
+            "I'd love to hear more specific examples if you have them.",
+            "Could you walk me through the details of that?",
+            "Please tell me more about that specific experience."
+        ];
+
+        const positiveAcknowledgements = [
+            "That sounds like a valuable experience.",
+            "It's impressive how you handled that.",
+            "That's a very proactive approach.",
+            "I appreciate the depth of your answer.",
+            "That aligns well with what we're looking for.",
+            "Thank you for sharing those specific details."
+        ];
+
+        const negativeResponses = [
+            "No problem, we can move on.",
+            "That's completely fine.",
+            "Understood, let's try a different topic.",
+            "Thanks for being honest.",
+            "Alright, let's proceed to the next question."
+        ];
+
+        let probeCount = 0; // Track how many times we've probed for the current question
+
         // Initialize session
         function initSession() {
             // Get candidate data from sessionStorage
@@ -516,10 +758,15 @@
             // Generate questions (simulated AI analysis)
             generateQuestions();
 
-            // Show welcome message
+            // Wait for voices to load then start
             setTimeout(() => {
-                addMessage('ai', `Hello ${candidateData.name}! 👋 I'm your AI interviewer. I've analyzed your resume and prepared some questions to better understand your experience and skills. Let's begin!`);
-                setTimeout(() => askNextQuestion(), 1500);
+                loadVoices();
+                // Show welcome message
+                const welcomeMsg = `Hello ${candidateData.name}! I'm your AI interviewer. I've analyzed your resume and prepared some questions. Let's begin!`;
+                addMessage('ai', welcomeMsg);
+                speak(welcomeMsg);
+
+                setTimeout(() => askNextQuestion(), 4000); // Wait for speech to finish roughly
             }, 500);
         }
 
@@ -536,7 +783,7 @@
                 questionTemplates[4]
             ];
 
-            document.getElementById('totalQuestions').textContent = questions.length;
+            // document.getElementById('totalQuestions').textContent = questions.length; // Removed
         }
 
         function addMessage(type, content) {
@@ -587,58 +834,6 @@
         }
 
         function askNextQuestion() {
-            if (currentQuestionIndex >= questions.length) {
-                completeInterview();
-                return;
-            }
-
-            showTypingIndicator();
-
-            setTimeout(() => {
-                hideTypingIndicator();
-                addMessage('ai', questions[currentQuestionIndex]);
-                document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
-                updateProgress();
-
-                // Re-enable input after question is asked
-                document.getElementById('responseInput').disabled = false;
-                document.getElementById('submitBtn').disabled = false;
-                document.getElementById('responseInput').focus();
-                isProcessing = false;
-            }, 1500);
-        }
-
-        // Contextual acknowledgements
-        const shortAnswerResponses = [
-            "Could you elaborate a bit more on that?",
-            "That's interesting. Can you provide more details?",
-            "I'd love to hear more specific examples if you have them.",
-            "Could you walk me through the details of that?",
-            "Please tell me more about that specific experience."
-        ];
-
-        const positiveAcknowledgements = [
-            "That sounds like a valuable experience.",
-            "It's impressive how you handled that.",
-            "That's a very proactive approach.",
-            "I appreciate the depth of your answer.",
-            "That aligns well with what we're looking for.",
-            "Thank you for sharing those specific details."
-        ];
-
-        const negativeResponses = [
-            "No problem, we can move on.",
-            "That's completely fine.",
-            "Understood, let's try a different topic.",
-            "Thanks for being honest.",
-            "Alright, let's proceed to the next question."
-        ];
-
-        let probeCount = 0; // Track how many times we've probed for the current question
-
-        // ... (initSession, generateQuestions, addMessage, showTypingIndicator, hideTypingIndicator remain same)
-
-        function askNextQuestion() {
             probeCount = 0; // Reset probe count for new question
 
             if (currentQuestionIndex >= questions.length) {
@@ -650,8 +845,11 @@
 
             setTimeout(() => {
                 hideTypingIndicator();
-                addMessage('ai', questions[currentQuestionIndex]);
-                document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1;
+                const question = questions[currentQuestionIndex];
+                addMessage('ai', question);
+                speak(question); // Speak the question
+
+                // document.getElementById('currentQuestion').textContent = currentQuestionIndex + 1; // Removed
                 updateProgress();
 
                 // Re-enable input
@@ -674,6 +872,9 @@
 
             if (isProcessing) return;
             isProcessing = true;
+
+            // Stop AI speech if user interrupts (optional, but good UX)
+            // synth.cancel(); 
 
             // Disable input
             input.disabled = true;
@@ -704,6 +905,7 @@
                     if (isNegative) {
                         const negAck = negativeResponses[Math.floor(Math.random() * negativeResponses.length)];
                         addMessage('ai', negAck);
+                        speak(negAck); // Speak ack
 
                         // Move to next question immediately
                         currentQuestionIndex++;
@@ -719,6 +921,7 @@
                         probeCount++; // Increment probe count
                         const probe = shortAnswerResponses[Math.floor(Math.random() * shortAnswerResponses.length)];
                         addMessage('ai', probe);
+                        speak(probe); // Speak probe
 
                         // Re-enable input for elaboration
                         input.disabled = false;
@@ -731,10 +934,11 @@
                     // If answer is good OR we've already probed once, move on
                     const ack = positiveAcknowledgements[Math.floor(Math.random() * positiveAcknowledgements.length)];
                     addMessage('ai', ack);
+                    speak(ack); // Speak ack
 
                     // Move to next question
                     currentQuestionIndex++;
-                    setTimeout(() => askNextQuestion(), 1500);
+                    setTimeout(() => askNextQuestion(), 2500); // Slightly longer wait to let ack finish
 
                 }, 1000 + Math.random() * 1000);
             }, 500);
@@ -767,7 +971,9 @@
                 showTypingIndicator();
                 setTimeout(() => {
                     hideTypingIndicator();
-                    addMessage('ai', "Thank you for your time today. I've gathered all the information I need.");
+                    const goodbye = "Thank you for your time today. I've gathered all the information I need.";
+                    addMessage('ai', goodbye);
+                    speak(goodbye);
 
                     setTimeout(() => {
                         chatContainer.innerHTML = `
@@ -784,7 +990,7 @@
                                 </button>
                             </div>
                         `;
-                    }, 1500);
+                    }, 2500);
                 }, 1000);
 
             }, 500);
@@ -792,6 +998,9 @@
 
         // Handle Enter key in textarea
         document.addEventListener('DOMContentLoaded', () => {
+            // We can't auto-play audio without interaction usually, but since user clicked 'Start Interview' on prev page, 
+            // and we are simulating a seamless session, browsers might block it until interaction.
+            // Best practice: Maybe add a "Start Audio" button overlay if needed, but let's try auto first.
             initSession();
 
             const input = document.getElementById('responseInput');
