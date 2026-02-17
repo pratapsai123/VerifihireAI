@@ -14,6 +14,307 @@
         rel="stylesheet">
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .interview-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interview-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .interview-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .interview-hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-icon i {
+            font-size: 2.5rem;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .form-card h2 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .form-card h2 i {
+            color: #667eea;
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        .enhanced-upload-zone {
+            border: 3px dashed #d1d5db;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enhanced-upload-zone:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8edff 100%);
+            transform: translateY(-2px);
+        }
+
+        .upload-icon-large {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .upload-text-main {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-text-sub {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .upload-text-sub .browse-link {
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .upload-text-sub .browse-link:hover {
+            color: #764ba2;
+        }
+
+        .file-selected {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .file-selected.active {
+            display: flex;
+        }
+
+        .file-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .file-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .file-name-display {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .file-size-display {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .enhanced-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .enhanced-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .enhanced-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+
+        .info-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .info-card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .info-card:nth-child(1) .info-card-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .info-card:nth-child(2) .info-card-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .info-card:nth-child(3) .info-card-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .info-card:nth-child(4) .info-card-icon {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .info-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -34,8 +335,8 @@
         <main class="main-content">
             <header class="top-bar">
                 <div class="page-title">
-                    <h1>AI-Powered Interview</h1>
-                    <p>Conduct intelligent candidate interviews with AI assistance.</p>
+                    <h1 style="font-size: 2rem; margin: 0;">AI Interview Studio</h1>
+                    <p style="margin: 0.5rem 0 0 0;">Transform your hiring with intelligent AI-powered interviews</p>
                 </div>
                 <div class="user-profile">
                     <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
@@ -44,94 +345,119 @@
             </header>
 
             <div class="dashboard-container">
+                <!-- Hero Section -->
+                <div class="interview-hero">
+                    <div class="hero-icon">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h1>AI-Powered Interview</h1>
+                    <p>Experience next-generation candidate assessment with AI that analyzes resumes, generates tailored
+                        questions, and provides intelligent insights in real-time.</p>
+                </div>
+
                 <!-- Interview Setup Form -->
-                <section class="features-section">
-                    <h2 class="section-heading">Start New AI Interview Session</h2>
+                <div class="form-card">
+                    <h2><i class="fa-solid fa-user-plus"></i> Candidate Information</h2>
+                    <p class="form-subtitle">Enter candidate details to begin the AI interview session</p>
 
-                    <div class="auth-card" style="max-width: 600px; margin: 2rem auto; padding: 2rem;">
-                        <form id="aiInterviewForm" class="auth-form">
-                            <!-- Name Field -->
-                            <div class="auth-input-icon-wrapper">
-                                <div class="auth-input-icon"><i class="fa-regular fa-user"></i></div>
-                                <input type="text" id="candidateName" name="candidateName" class="auth-input-with-icon"
-                                    placeholder=" " required>
-                                <label for="candidateName" class="auth-floating-label">Candidate Name</label>
-                            </div>
+                    <form id="aiInterviewForm">
+                        <!-- Name Field -->
+                        <div class="auth-input-icon-wrapper">
+                            <div class="auth-input-icon"><i class="fa-regular fa-user"></i></div>
+                            <input type="text" id="candidateName" name="candidateName" class="auth-input-with-icon"
+                                placeholder=" " required>
+                            <label for="candidateName" class="auth-floating-label">Full Name</label>
+                        </div>
 
-                            <!-- Email Field -->
-                            <div class="auth-input-icon-wrapper">
-                                <div class="auth-input-icon"><i class="fa-regular fa-envelope"></i></div>
-                                <input type="email" id="candidateEmail" name="candidateEmail"
-                                    class="auth-input-with-icon" placeholder=" " required>
-                                <label for="candidateEmail" class="auth-floating-label">Email Address</label>
-                            </div>
+                        <!-- Email Field -->
+                        <div class="auth-input-icon-wrapper">
+                            <div class="auth-input-icon"><i class="fa-regular fa-envelope"></i></div>
+                            <input type="email" id="candidateEmail" name="candidateEmail" class="auth-input-with-icon"
+                                placeholder=" " required>
+                            <label for="candidateEmail" class="auth-floating-label">Email Address</label>
+                        </div>
 
-                            <!-- Resume Upload Field -->
-                            <div class="file-upload-container">
-                                <label class="file-upload-label">Upload Resume</label>
-                                <div class="file-upload-box" id="resumeDropZone">
-                                    <input type="file" id="candidateResume" name="candidateResume" class="file-input"
-                                        accept=".pdf,.doc,.docx" required hidden>
-                                    <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-                                    <p class="upload-text">Drag & drop or <span class="browse-link">browse</span></p>
-                                    <p class="file-name" id="resumeFileName"></p>
+                        <!-- Enhanced Resume Upload -->
+                        <div style="margin-top: 2rem;">
+                            <label class="file-upload-label"
+                                style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; display: block;">
+                                <i class="fa-solid fa-file-pdf" style="margin-right: 0.5rem; color: #667eea;"></i>
+                                Resume / CV
+                            </label>
+                            <div class="enhanced-upload-zone" id="resumeDropZone">
+                                <input type="file" id="candidateResume" name="candidateResume" class="file-input"
+                                    accept=".pdf,.doc,.docx" required hidden>
+                                <div class="upload-icon-large">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                </div>
+                                <p class="upload-text-main">Drop your resume here</p>
+                                <p class="upload-text-sub">or <span class="browse-link">browse files</span> • PDF, DOC,
+                                    DOCX supported</p>
+
+                                <div class="file-selected" id="fileSelected">
+                                    <div class="file-icon">
+                                        <i class="fa-solid fa-file-pdf"></i>
+                                    </div>
+                                    <div class="file-info">
+                                        <div class="file-name-display" id="resumeFileName"></div>
+                                        <div class="file-size-display" id="resumeFileSize"></div>
+                                    </div>
+                                    <button type="button" onclick="removeFile()"
+                                        style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.2rem;">
+                                        <i class="fa-solid fa-xmark"></i>
+                                    </button>
                                 </div>
                             </div>
-
-                            <!-- Start Interview Button -->
-                            <div class="form-actions" style="margin-top: 2rem;">
-                                <button type="submit" class="auth-primary-btn" style="width: 100%;">
-                                    <i class="fa-solid fa-microphone" style="margin-right: 0.5rem;"></i>
-                                    Start AI Interview
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
-
-                <!-- Interview Instructions -->
-                <section class="recent-section" style="margin-top: 2rem;">
-                    <h2 class="section-heading">How AI Interview Works</h2>
-                    <div class="cards-grid"
-                        style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-                        <div class="feature-card" style="padding: 1.5rem;">
-                            <div class="card-icon icon-blue" style="margin-bottom: 1rem;">
-                                <i class="fa-solid fa-user-check"></i>
-                            </div>
-                            <h3 class="card-title" style="font-size: 1rem;">1. Candidate Setup</h3>
-                            <p class="card-desc" style="font-size: 0.9rem;">
-                                Enter candidate details and upload their resume for AI analysis.
-                            </p>
                         </div>
 
-                        <div class="feature-card" style="padding: 1.5rem;">
-                            <div class="card-icon icon-purple" style="margin-bottom: 1rem;">
+                        <!-- Start Interview Button -->
+                        <div style="margin-top: 2.5rem;">
+                            <button type="submit" class="enhanced-btn">
+                                <i class="fa-solid fa-microphone"></i>
+                                <span>Start AI Interview Session</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- How It Works Section -->
+                <section>
+                    <h2 class="section-heading" style="font-size: 1.8rem; margin-bottom: 1.5rem;">
+                        <i class="fa-solid fa-lightbulb" style="color: #667eea; margin-right: 0.75rem;"></i>
+                        How AI Interview Works
+                    </h2>
+                    <div class="info-cards-grid">
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fa-solid fa-upload"></i>
+                            </div>
+                            <h3><span class="step-number">1</span>Upload Resume</h3>
+                            <p>Submit candidate details and resume for instant AI analysis and processing.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-icon">
                                 <i class="fa-solid fa-brain"></i>
                             </div>
-                            <h3 class="card-title" style="font-size: 1rem;">2. AI Analysis</h3>
-                            <p class="card-desc" style="font-size: 0.9rem;">
-                                AI reviews the resume and generates tailored interview questions.
+                            <h3><span class="step-number">2</span>AI Analysis</h3>
+                            <p>Advanced AI reviews skills, experience, and generates personalized interview questions.
                             </p>
                         </div>
 
-                        <div class="feature-card" style="padding: 1.5rem;">
-                            <div class="card-icon icon-teal" style="margin-bottom: 1rem;">
+                        <div class="info-card">
+                            <div class="info-card-icon">
                                 <i class="fa-solid fa-comments"></i>
                             </div>
-                            <h3 class="card-title" style="font-size: 1rem;">3. Conduct Interview</h3>
-                            <p class="card-desc" style="font-size: 0.9rem;">
-                                AI guides the interview process with intelligent question flow.
-                            </p>
+                            <h3><span class="step-number">3</span>Live Interview</h3>
+                            <p>Conduct structured interviews with real-time AI assistance and guidance.</p>
                         </div>
 
-                        <div class="feature-card" style="padding: 1.5rem;">
-                            <div class="card-icon icon-green" style="margin-bottom: 1rem;">
-                                <i class="fa-solid fa-chart-line"></i>
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fa-solid fa-chart-simple"></i>
                             </div>
-                            <h3 class="card-title" style="font-size: 1rem;">4. Get Insights</h3>
-                            <p class="card-desc" style="font-size: 0.9rem;">
-                                Receive detailed analysis and recommendations after the interview.
-                            </p>
+                            <h3><span class="step-number">4</span>Get Insights</h3>
+                            <p>Receive comprehensive evaluation reports with actionable hiring recommendations.</p>
                         </div>
                     </div>
                 </section>
@@ -140,61 +466,75 @@
     </div>
 
     <script>
-        // File Upload Handling
         const dropZone = document.getElementById('resumeDropZone');
         const fileInput = document.getElementById('candidateResume');
         const fileNameDisplay = document.getElementById('resumeFileName');
+        const fileSizeDisplay = document.getElementById('resumeFileSize');
+        const fileSelectedDiv = document.getElementById('fileSelected');
         const browseLink = document.querySelector('.browse-link');
 
-        // Click to browse
-        browseLink.addEventListener('click', () => {
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function displayFile(file) {
+            fileNameDisplay.textContent = file.name;
+            fileSizeDisplay.textContent = formatFileSize(file.size);
+            fileSelectedDiv.classList.add('active');
+        }
+
+        function removeFile() {
+            fileInput.value = '';
+            fileSelectedDiv.classList.remove('active');
+        }
+
+        browseLink.addEventListener('click', (e) => {
+            e.stopPropagation();
             fileInput.click();
         });
 
         dropZone.addEventListener('click', (e) => {
-            if (e.target !== browseLink) {
+            if (!e.target.closest('button') && !fileSelectedDiv.classList.contains('active')) {
                 fileInput.click();
             }
         });
 
-        // File input change
         fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
-            if (file) {
-                fileNameDisplay.textContent = file.name;
-                dropZone.style.borderColor = 'var(--blue-accent)';
-            }
+            if (file) displayFile(file);
         });
 
-        // Drag and drop
         dropZone.addEventListener('dragover', (e) => {
             e.preventDefault();
-            dropZone.style.borderColor = 'var(--blue-accent)';
-            dropZone.style.backgroundColor = 'rgba(99, 102, 241, 0.05)';
+            dropZone.style.borderColor = '#667eea';
+            dropZone.style.background = 'linear-gradient(135deg, #e8edff 0%, #d8e1ff 100%)';
         });
 
         dropZone.addEventListener('dragleave', () => {
             dropZone.style.borderColor = '';
-            dropZone.style.backgroundColor = '';
+            dropZone.style.background = '';
         });
 
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZone.style.borderColor = '';
-            dropZone.style.backgroundColor = '';
+            dropZone.style.background = '';
 
             const file = e.dataTransfer.files[0];
             if (file && (file.type === 'application/pdf' ||
                 file.type === 'application/msword' ||
                 file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
                 fileInput.files = e.dataTransfer.files;
-                fileNameDisplay.textContent = file.name;
+                displayFile(file);
             } else {
                 alert('Please upload a PDF, DOC, or DOCX file.');
             }
         });
 
-        // Form Submission
         document.getElementById('aiInterviewForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -207,32 +547,24 @@
                 return;
             }
 
-            // Show loading state
             const submitBtn = e.target.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="margin-right: 0.5rem;"></i>Processing...';
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Analyzing Resume...</span>';
             submitBtn.disabled = true;
 
             try {
-                // Here you would send the data to your backend
-                // For now, we'll simulate processing
                 await new Promise(resolve => setTimeout(resolve, 2000));
-
-                alert(`AI Interview session started for ${name}!\n\nAI is analyzing the resume and preparing interview questions.`);
-
-                // Reset form
+                alert(`✅ AI Interview Session Started!\n\nCandidate: ${name}\nEmail: ${email}\n\nAI is now analyzing the resume and preparing personalized interview questions.`);
                 e.target.reset();
-                fileNameDisplay.textContent = '';
-
+                removeFile();
             } catch (error) {
                 console.error('Error:', error);
-                alert('Error starting interview session. Please try again.');
+                alert('❌ Error starting interview session. Please try again.');
             } finally {
-                submitBtn.innerHTML = originalText;
+                submitBtn.innerHTML = originalHTML;
                 submitBtn.disabled = false;
             }
         });
     </script>
-</body>
 
 </html>
