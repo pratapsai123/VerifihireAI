@@ -25,5 +25,5 @@ python manage.py migrate
 echo ==========================================
 echo Starting Django Server on Port 8000...
 echo ==========================================
-python manage.py runserver 8000
+python manage.py runserver 8001
 pause

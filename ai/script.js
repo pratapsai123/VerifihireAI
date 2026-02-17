@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Create Candidate via API
-        fetch('http://localhost:8001/api/candidates/', {
+        fetch('http://localhost:8001/api/ai-candidates/', {
             method: 'POST',
             body: apiData // Send FormData directly
         })

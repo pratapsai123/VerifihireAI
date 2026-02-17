@@ -574,37 +574,39 @@
 
         function initSession() {
             const storedData = sessionStorage.getItem('interviewData');
-            if (!storedData) { window.location.href = 'ai_interview.html'; return; }
-            candidateData = JSON.parse(storedData);
-            document.getElementById('candidateName').textContent = candidateData.name;
+            if (!storedData) { window.location.href = 'ai_interview_start.html'; return; } // Redirect if no data
 
-            generateQuestions();
+            const sessionData = JSON.parse(storedData);
+            candidateData = sessionData;
+
+            // USE QUESTIONS FROM SESSION STORAGE
+            if (sessionData.questions && sessionData.questions.length > 0) {
+                questions = sessionData.questions;
+            } else {
+                // Fallback if no questions passed (should not happen with new backend)
+                questions = [
+                    "Tell me about yourself.",
+                    "Why are you a good fit for this role?",
+                    "Describe a technical challenge you overcame."
+                ];
+            }
+
+            document.getElementById('candidateName').textContent = sessionData.candidateName || "Candidate";
+
             setTimeout(() => {
                 loadVoices();
-                const welcome = `Hello ${candidateData.name}! I'm your AI interviewer. Let's begin!`;
+                const welcome = `Hello ${sessionData.candidateName ? sessionData.candidateName.split(' ')[0] : 'Candidate'}! I'm your AI interviewer. Let's begin!`;
                 speak(welcome);
-                updateActiveQuestion("Introduction");
-                addMessage('ai', welcome);
-                setTimeout(() => askNextQuestion(), 3000);
+                // Don't show "Introduction" as a question card, just speak it.
+                // Start first question after welcome
+                setTimeout(() => {
+                    askNextQuestion();
+                }, 3000);
             }, 500);
         }
 
-        function generateQuestions() {
-            questions = [
-                "Can you walk me through your experience with JavaScript?",
-                "Tell me about a challenging project you've worked on."
-            ];
+        // Removed generateQuestions as it is no longer needed
 
-            if (candidateData && candidateData.jobDescription && candidateData.jobDescription.trim().length > 0) {
-                // simple simulated question based on JD
-                questions.push("Based on the job description you provided, why do you think you're a good fit for this specific role?");
-            } else {
-                questions.push("What motivates you to apply for this position?");
-            }
-
-            questions.push("How do you handle tight deadlines?");
-            questions.push("Do you have any questions for us?");
-        }
 
         function askNextQuestion() {
             if (currentQuestionIndex >= questions.length) { completeInterview(); return; }
@@ -621,7 +623,7 @@
             document.getElementById('submitBtn').disabled = false;
         }
 
-        function submitResponse() {
+        async function submitResponse() {
             const input = document.getElementById('responseInput');
             const response = input.value.trim();
             if (!response) return;
@@ -629,22 +631,68 @@
             // Stop speaking if interrupted
             if (synth.speaking) synth.cancel();
 
-            // Add last question to history now that it's answered
+            // Add previous question to history context visually
             if (currentQuestionIndex < questions.length) {
+                // Determine if this was a follow-up or original
+                // We just add it to history for the record
+                // addMessage('ai', questions[currentQuestionIndex]); 
+                // Actually the UI shows active question card, so maybe we don't need to duplicate it in chat history immediately?
+                // Let's stick to adding it to keep history complete
                 addMessage('ai', questions[currentQuestionIndex]);
             }
 
             addMessage('user', response);
             input.value = '';
 
-            // Simulate processing
-            setTimeout(() => {
-                const ack = acknowledgements[Math.floor(Math.random() * acknowledgements.length)];
-                speak(ack);
-                // move next
+            // UI State: Processing
+            document.getElementById('responseInput').disabled = true;
+            document.getElementById('submitBtn').disabled = true;
+            document.getElementById('aiStatusText').innerText = "Analyzing answer...";
+
+            try {
+                const currentQ = questions[currentQuestionIndex];
+
+                // Call Backend for Feedback & Follow-up
+                const apiRes = await fetch('http://127.0.0.1:8001/api/ai-candidates/process-answer/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        question: currentQ,
+                        answer: response
+                    })
+                });
+
+                const data = await apiRes.json();
+
+                // 1. Handle Feedback (Reaction)
+                if (data.feedback) {
+                    addMessage('ai', data.feedback); // Add reaction to chat
+                    speak(data.feedback);
+                }
+
+                // 2. Handle Follow-up
+                if (data.follow_up_question) {
+                    // Insert follow-up into the questions array strictly AFTER current question
+                    // This pushes the rest of the planned questions down
+                    questions.splice(currentQuestionIndex + 1, 0, data.follow_up_question);
+                    console.log("Follow-up added:", data.follow_up_question);
+                }
+
+                // Calculate delay based on feedback length to allow speaking to finish
+                // Estimate: 80ms per character is a safe reading speed
+                const speechDelay = data.feedback ? (data.feedback.length * 60) : 500;
+
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    askNextQuestion();
+                }, Math.min(speechDelay, 8000)); // Cap wait at 8 seconds
+
+            } catch (error) {
+                console.error("AI Interaction Error:", error);
+                // Fallback behavior: just move to next question
                 currentQuestionIndex++;
-                setTimeout(() => askNextQuestion(), 1500);
-            }, 500);
+                setTimeout(() => askNextQuestion(), 1000);
+            }
         }
 
         function completeInterview() {

@@ -82,7 +82,7 @@ function Dashboard() {
               <h3>AI Interview</h3>
             </div>
             <div className="module-actions">
-              <button className="action-btn" onClick={() => { }}>
+              <button className="action-btn" onClick={() => window.location.href = '/ai/ai_interview.html'}>
                 <span>Start Session</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
