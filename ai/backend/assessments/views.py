@@ -93,4 +93,20 @@ class AssessmentListView(APIView):
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content
             })
-        return Response(data, status=status.HTTP_200_OK)
+class AssessmentDetailView(APIView):
+    def get(self, request, pk):
+        try:
+            assessment = Assessment.objects.get(pk=pk)
+            data = {
+                "id": assessment.id,
+                "job_description": assessment.job_description,
+                "required_skills": assessment.required_skills,
+                "mcq_count": assessment.mcq_count,
+                "coding_count": assessment.coding_count,
+                "duration_minutes": assessment.duration_minutes,
+                "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
+                "generated_content": assessment.generated_content
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        except Assessment.DoesNotExist:
+            return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
