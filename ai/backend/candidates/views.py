@@ -16,17 +16,34 @@ genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 class ResumeMatchView(APIView):
     def post(self, request):
         resume_file = request.FILES.get('resume')
+        candidate_id = request.data.get('candidate_id')
         job_description = request.data.get('job_description')
 
-        if not resume_file or not job_description:
-            return Response({"error": "Both resume and job description are required"}, status=status.HTTP_400_BAD_REQUEST)
+        if (not resume_file and not candidate_id) or not job_description:
+            return Response({"error": "Job description and either resume or candidate_id are required"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            # 1. Extract text from PDF
-            pdf_reader = PyPDF2.PdfReader(io.BytesIO(resume_file.read()))
             resume_text = ""
-            for page in pdf_reader.pages:
-                resume_text += page.extract_text()
+            
+            # Case 1: File Upload
+            if resume_file:
+                pdf_reader = PyPDF2.PdfReader(io.BytesIO(resume_file.read()))
+                for page in pdf_reader.pages:
+                    resume_text += page.extract_text()
+            
+            # Case 2: Existing Candidate
+            elif candidate_id:
+                try:
+                    candidate = Candidate.objects.get(id=candidate_id)
+                    # Open the file from storage
+                    with candidate.resume.open('rb') as f:
+                        pdf_reader = PyPDF2.PdfReader(f)
+                        for page in pdf_reader.pages:
+                            resume_text += page.extract_text()
+                except Candidate.DoesNotExist:
+                     return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
+                except Exception as e:
+                     return Response({"error": f"Error reading candidate resume: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             # 2. Call Gemini
             model = genai.GenerativeModel('gemini-flash-latest')

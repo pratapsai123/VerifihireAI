@@ -4,7 +4,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileNameDisplay = document.getElementById('fileName');
     const jobDescInput = document.getElementById('jobDesc');
     const matchBtn = document.getElementById('matchBtn');
-    
+
+    // State
+    let selectedCandidateId = null;
+
+    // Check for Candidate ID in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+
+    if (id) {
+        fetchCandidate(id);
+    }
+
+    async function fetchCandidate(id) {
+        try {
+            const response = await fetch(`http://localhost:8001/api/candidates/${id}/`);
+            if (response.ok) {
+                const candidate = await response.json();
+                selectedCandidateId = candidate.id;
+
+                // Update UI to show candidate selected
+                fileNameDisplay.textContent = `Selected: ${candidate.full_name}'s Resume (On File)`;
+                fileNameDisplay.style.color = '#4318FF';
+                fileNameDisplay.style.fontWeight = '500';
+
+                // Optional: Disable file input visual or just indicate preference
+                dropZone.style.borderColor = '#4318FF';
+                dropZone.style.backgroundColor = '#f5f3ff';
+            }
+        } catch (error) {
+            console.error('Error fetching candidate:', error);
+        }
+    }
+
     // Result Elements
     const inputSection = document.getElementById('inputSection');
     const actionSection = document.getElementById('actionSection');
@@ -20,6 +52,10 @@ document.addEventListener('DOMContentLoaded', () => {
     resumeInput.addEventListener('change', () => {
         if (resumeInput.files.length > 0) {
             fileNameDisplay.textContent = `Selected: ${resumeInput.files[0].name}`;
+            selectedCandidateId = null; // Reset if new file selected
+            fileNameDisplay.style.color = '';
+            dropZone.style.borderColor = '';
+            dropZone.style.backgroundColor = '';
         }
     });
 
@@ -38,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.dataTransfer.files.length > 0) {
             resumeInput.files = e.dataTransfer.files;
             fileNameDisplay.textContent = `Selected: ${resumeInput.files[0].name}`;
+            selectedCandidateId = null; // Reset
         }
     });
 
@@ -46,8 +83,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const resumeFile = resumeInput.files[0];
         const jobDescription = jobDescInput.value.trim();
 
-        if (!resumeFile || !jobDescription) {
-            alert('Please provide both a resume and a job description.');
+        // Validation: Need (File OR CandidateID) AND JobDescription
+        if ((!resumeFile && !selectedCandidateId) || !jobDescription) {
+            alert('Please provide a job description and either upload a resume or select a candidate.');
             return;
         }
 
@@ -56,8 +94,13 @@ document.addEventListener('DOMContentLoaded', () => {
         matchBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analyzing...';
 
         const formData = new FormData();
-        formData.append('resume', resumeFile);
         formData.append('job_description', jobDescription);
+
+        if (selectedCandidateId) {
+            formData.append('candidate_id', selectedCandidateId);
+        } else {
+            formData.append('resume', resumeFile);
+        }
 
         try {
             const response = await fetch('http://localhost:8001/api/candidates/match/', {

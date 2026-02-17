@@ -91,7 +91,9 @@ class AssessmentListView(APIView):
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
-                "generated_content": assessment.generated_content
+                "generated_content": assessment.generated_content,
+                "status": assessment.status,
+                "share_token": str(assessment.share_token)
             })
         return Response(data, status=status.HTTP_200_OK)
 
@@ -107,8 +109,31 @@ class AssessmentDetailView(APIView):
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
-                "generated_content": assessment.generated_content
+                "generated_content": assessment.generated_content,
+                "status": assessment.status,
+                "share_token": str(assessment.share_token)
             }
             return Response(data, status=status.HTTP_200_OK)
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
+
+class PublicAssessmentView(APIView):
+    def get(self, request, token):
+        try:
+            assessment = Assessment.objects.get(share_token=token)
+            data = {
+                "id": assessment.id,
+                "job_description": assessment.job_description,
+                "required_skills": assessment.required_skills,
+                "mcq_count": assessment.mcq_count,
+                "coding_count": assessment.coding_count,
+                "duration_minutes": assessment.duration_minutes,
+                "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
+                "generated_content": assessment.generated_content,
+                "status": assessment.status
+            }
+            return Response(data, status=status.HTTP_200_OK)
+        except Assessment.DoesNotExist:
+            return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception:
+             return Response({"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
