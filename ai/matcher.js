@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileNameDisplay = document.getElementById('fileName');
     const jobDescInput = document.getElementById('jobDesc');
     const matchBtn = document.getElementById('matchBtn');
-    
+
     // Result Elements
     const inputSection = document.getElementById('inputSection');
     const actionSection = document.getElementById('actionSection');
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resumeInput.addEventListener('change', () => {
         if (resumeInput.files.length > 0) {
             fileNameDisplay.textContent = `Selected: ${resumeInput.files[0].name}`;
+            fileNameDisplay.style.display = 'block';
         }
     });
 

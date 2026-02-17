@@ -46,29 +46,30 @@
                 <!-- Input Section -->
                 <div class="matcher-grid" id="inputSection">
                     <div class="matcher-column">
-                        <div class="feature-card matcher-card">
+                        <div class="matcher-card">
                             <h3><i class="fa-solid fa-file-pdf"></i> Step 1: Upload Resume</h3>
-                            <p>Upload the candidate's resume (PDF format).</p>
+                            <p>Upload the candidate's resume in PDF format for analysis.</p>
                             <div class="drop-zone" id="dropZone">
                                 <i class="fa-solid fa-cloud-arrow-up"></i>
                                 <p>Drag & drop or <span>browse</span></p>
                                 <input type="file" id="resumeFile" accept=".pdf" style="display: none;">
-                                <div id="fileName" class="file-name"></div>
+                                <div id="fileName" class="file-name" style="display: none;"></div>
                             </div>
                         </div>
                     </div>
                     <div class="matcher-column">
-                        <div class="feature-card matcher-card">
+                        <div class="matcher-card">
                             <h3><i class="fa-solid fa-pen-to-square"></i> Step 2: Job Description</h3>
-                            <p>Paste the job description or requirements here.</p>
-                            <textarea id="jobDesc" class="jd-textarea" placeholder="Paste JD here..."></textarea>
+                            <p>Paste the job requirements or description to compare.</p>
+                            <textarea id="jobDesc" class="jd-textarea"
+                                placeholder="Paste the Job Description here..."></textarea>
                         </div>
                     </div>
                 </div>
 
                 <div class="matcher-actions" id="actionSection">
                     <button class="auth-primary-btn" id="matchBtn">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Match
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Let's Analyze
                     </button>
                 </div>
 
