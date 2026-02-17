@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -19,6 +22,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'candidates',
+    'assessments',
 ]
 
 MIDDLEWARE = [
