@@ -528,6 +528,26 @@
             }, 1500);
         }
 
+        // Contextual acknowledgements
+        const shortAnswerResponses = [
+            "Could you elaborate a bit more on that?",
+            "That's interesting. Can you provide more details?",
+            "I'd love to hear more specific examples if you have them.",
+            "Could you walk me through the details of that?",
+            "Please tell me more about that specific experience."
+        ];
+
+        const positiveAcknowledgements = [
+            "That sounds like a valuable experience.",
+            "It's impressive how you handled that.",
+            "That's a very proactive approach.",
+            "I appreciate the depth of your answer.",
+            "That aligns well with what we're looking for.",
+            "Thank you for sharing those specific details."
+        ];
+
+        // ... (initSession, generateQuestions, addMessage, showTypingIndicator, hideTypingIndicator, askNextQuestion remain same)
+
         function submitResponse() {
             const input = document.getElementById('responseInput');
             const response = input.value.trim();
@@ -555,29 +575,42 @@
             // Clear input
             input.value = '';
 
-            // Move to next question index but wait to ask
-            currentQuestionIndex++;
-
-            // Show typing indicator for acknowledgement
+            // Smart Analysis Logic
             setTimeout(() => {
                 showTypingIndicator();
 
                 setTimeout(() => {
                     hideTypingIndicator();
 
-                    // Add acknowledgement if not the last question
-                    if (currentQuestionIndex < questions.length) {
-                        const randomAck = acknowledgements[Math.floor(Math.random() * acknowledgements.length)];
-                        addMessage('ai', randomAck);
+                    // Analyze response length and content
+                    const wordCount = response.split(' ').length;
+                    let nextActionDelay = 1500;
 
-                        // Then ask next question
-                        setTimeout(() => {
-                            askNextQuestion();
-                        }, 1000);
-                    } else {
-                        askNextQuestion(); // This will trigger completion
+                    // Case 1: Answer is too short (less than 5 words)
+                    if (wordCount < 5) {
+                        const probe = shortAnswerResponses[Math.floor(Math.random() * shortAnswerResponses.length)];
+                        addMessage('ai', probe);
+
+                        // Re-enable input for elaboration WITHOUT moving to next question
+                        input.disabled = false;
+                        document.getElementById('submitBtn').disabled = false;
+                        input.focus();
+                        isProcessing = false;
+                        return; // Stop here, wait for user to elaborate
                     }
-                }, 1000);
+
+                    // Case 2: Good length answer - Provide acknowledgement then move on
+                    const ack = positiveAcknowledgements[Math.floor(Math.random() * positiveAcknowledgements.length)];
+                    addMessage('ai', ack);
+
+                    // Move to next question
+                    currentQuestionIndex++;
+
+                    setTimeout(() => {
+                        askNextQuestion();
+                    }, nextActionDelay);
+
+                }, 1000 + Math.random() * 1000); // Random "thinking" time 1-2s
             }, 500);
         }
 
