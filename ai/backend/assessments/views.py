@@ -93,6 +93,8 @@ class AssessmentListView(APIView):
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content
             })
+        return Response(data, status=status.HTTP_200_OK)
+
 class AssessmentDetailView(APIView):
     def get(self, request, pk):
         try:
