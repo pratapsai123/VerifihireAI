@@ -79,8 +79,9 @@
             const tableBody = document.getElementById('assessmentsTableBody');
 
             try {
-                const response = await fetch('/api/assessments/');
-                if (!response.ok) throw new Error('Failed to fetch assessments');
+                // Use absolute URL to support local file opening/Live Server
+                const response = await fetch('http://localhost:8001/api/assessments/');
+                if (!response.ok) throw new Error(`Failed to fetch assessments: ${response.status} ${response.statusText}`);
 
                 const assessments = await response.json();
 
@@ -94,7 +95,7 @@
                         <td>
                             <div class="candidate-info">
                                 <div class="candidate-avatar">AI</div>
-                                <span>${assessment.job_description.substring(0, 30)}...</span>
+                                <span>${assessment.job_description ? assessment.job_description.substring(0, 30) : 'No Description'}...</span>
                             </div>
                         </td>
                         <td>${assessment.required_skills}</td>
@@ -110,7 +111,10 @@
 
             } catch (error) {
                 console.error('Error:', error);
-                tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Error loading assessments.</td></tr>';
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">
+                    Error loading assessments: ${error.message}<br>
+                    <small>Ensure Backend is running on port 8001 and you are connected.</small>
+                </td></tr>`;
             }
         });
 
