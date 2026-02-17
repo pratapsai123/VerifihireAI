@@ -632,19 +632,105 @@
                     </div>
 
                     <div class="input-container" id="inputContainer">
-                        <div class="input-wrapper">
-                            <textarea id="responseInput" class="response-input" placeholder="Type your answer here..."
-                                rows="2"></textarea>
+                        <div class="input-controls"
+                            style="width: 100%; display: flex; flex-direction: column; gap: 1rem;">
+
+                            <!-- Audio Interaction Mode -->
+                            <div id="audioControls"
+                                style="display: flex; gap: 1rem; align-items: center; justify-content: center; padding: 1rem;">
+                                <button id="micBtn" class="mic-btn" onclick="toggleRecording()">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </button>
+                                <div class="recording-status" id="recordingStatus">Tap mic to speak</div>
+                            </div>
+
+                            <!-- Text Input Mode (Hidden by default, toggleable) -->
+                            <div id="textControls"
+                                style="display: none; width: 100%; gap: 1rem; align-items: flex-end;">
+                                <div class="input-wrapper">
+                                    <textarea id="responseInput" class="response-input"
+                                        placeholder="Type your answer (or paste code) here..." rows="2"></textarea>
+                                </div>
+                                <button class="submit-btn" id="submitBtn" onclick="submitResponse()">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span>Send</span>
+                                </button>
+                            </div>
+
+                            <div style="text-align: center;">
+                                <button id="modeToggleBtn" class="mode-toggle-btn" onclick="toggleInputMode()">
+                                    <i class="fa-solid fa-keyboard"></i> Switch to Text Input
+                                </button>
+                            </div>
                         </div>
-                        <button class="submit-btn" id="submitBtn" onclick="submitResponse()">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            <span>Send</span>
-                        </button>
                     </div>
                 </div>
             </div>
         </main>
     </div>
+
+    <style>
+        .mic-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mic-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        .mic-btn.listening {
+            background: #e11d48;
+            animation: pulse-red 1.5s infinite;
+        }
+
+        .recording-status {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .mode-toggle-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .mode-toggle-btn:hover {
+            background: #f0f4ff;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(225, 29, 72, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 72, 0);
+            }
+        }
+    </style>
 
     <script>
         // Interview state
@@ -653,10 +739,93 @@
         let questions = [];
         let responses = [];
         let isProcessing = false;
+        let isRecording = false;
+        let recognition = null;
+        let userInputMode = 'audio'; // 'audio' or 'text'
 
         // TTS Configuration
         const synth = window.speechSynthesis;
         let voice = null;
+
+        // Initialize Speech Recognition
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+
+            recognition.onstart = function () {
+                isRecording = true;
+                updateMicUI(true);
+            };
+
+            recognition.onend = function () {
+                isRecording = false;
+                updateMicUI(false);
+            };
+
+            recognition.onresult = function (event) {
+                const transcript = event.results[0][0].transcript;
+                console.log("Heard:", transcript);
+                // Directly submit the transcript as the answer
+                document.getElementById('responseInput').value = transcript;
+                submitResponse();
+            };
+
+            recognition.onerror = function (event) {
+                console.error("Speech Recognition Error", event.error);
+                isRecording = false;
+                updateMicUI(false);
+                document.getElementById('recordingStatus').innerText = "Error. Try again or switch to text.";
+            };
+        } else {
+            console.log("Web Speech API not supported");
+            // Fallback to text mode automatically if not supported
+            toggleInputMode();
+            document.getElementById('modeToggleBtn').style.display = 'none';
+        }
+
+        function toggleRecording() {
+            if (isRecording) {
+                recognition.stop();
+            } else {
+                recognition.start();
+            }
+        }
+
+        function updateMicUI(listening) {
+            const btn = document.getElementById('micBtn');
+            const status = document.getElementById('recordingStatus');
+
+            if (listening) {
+                btn.classList.add('listening');
+                btn.innerHTML = '<i class="fa-solid fa-stop"></i>';
+                status.innerText = "Listening...";
+            } else {
+                btn.classList.remove('listening');
+                btn.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+                status.innerText = "Tap mic to speak";
+            }
+        }
+
+        function toggleInputMode() {
+            const audioControls = document.getElementById('audioControls');
+            const textControls = document.getElementById('textControls');
+            const toggleBtn = document.getElementById('modeToggleBtn');
+
+            if (userInputMode === 'audio') {
+                userInputMode = 'text';
+                audioControls.style.display = 'none';
+                textControls.style.display = 'flex';
+                toggleBtn.innerHTML = '<i class="fa-solid fa-microphone"></i> Switch to Voice Input';
+                setTimeout(() => document.getElementById('responseInput').focus(), 100);
+            } else {
+                userInputMode = 'audio';
+                audioControls.style.display = 'flex';
+                textControls.style.display = 'none';
+                toggleBtn.innerHTML = '<i class="fa-solid fa-keyboard"></i> Switch to Text Input';
+            }
+        }
 
         function loadVoices() {
             const voices = synth.getVoices();
@@ -686,6 +855,7 @@
 
                 utterThis.onend = function (event) {
                     statusEl.innerHTML = '<span class="speaking-indicator"></span>Listening...';
+                    // Auto-start recording if in audio mode ? Maybe too intrusive. Let user tap.
                 }
 
                 synth.speak(utterThis);
