@@ -40,33 +40,57 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        // Handle file name for storage (since we can't store actual files easily in localStorage)
-        data.resumeName = fileInput.files[0] ? fileInput.files[0].name : 'No file uploaded';
-        data.submissionDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-        data.status = 'New';
-        data.id = Date.now().toString(); // Simple ID
+        // Construct API payload matching Django model fields
+        const apiData = {
+            full_name: data.fullName,
+            email: data.email,
+            phone: data.phone,
+            job_title: data.jobTitle,
+            linkedin_url: data.linkedin || '',
+            resume_name: fileInput.files[0] ? fileInput.files[0].name : 'No file uploaded',
+            cover_letter: data.coverLetter || ''
+        };
 
-        // Save to localStorage
-        const candidates = JSON.parse(localStorage.getItem('verifihire_candidates') || '[]');
-        candidates.unshift(data); // Add new candidate to the top
-        localStorage.setItem('verifihire_candidates', JSON.stringify(candidates));
+        // Create Candidate via API
+        fetch('http://localhost:8001/api/candidates/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(apiData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    // UI Feedback
+                    const btn = document.querySelector('.auth-primary-btn');
+                    btn.textContent = 'Application Submitted!';
+                    btn.style.background = 'var(--status-success)';
+                    btn.disabled = false;
 
-        // UI Feedback
-        const btn = document.querySelector('.auth-primary-btn');
-        const originalText = btn.textContent;
-
-        btn.textContent = 'Submitting...';
-        btn.disabled = true;
-
-        setTimeout(() => {
-            btn.textContent = 'Application Submitted!';
-            btn.style.background = 'var(--status-success)';
-
-            setTimeout(() => {
-                // Redirect to candidates page
-                window.location.href = 'candidates.html';
-            }, 1000);
-        }, 1500);
+                    setTimeout(() => {
+                        // Reset form instead of redirecting
+                        form.reset();
+                        fileNameDisplay.textContent = '';
+                        btn.textContent = 'Submit Another Application';
+                        btn.style.background = ''; // Reset to default
+                    }, 2000);
+                } else {
+                    console.error('Submission failed', response);
+                    alert('Error submitting application. Please ensure the backend is running.');
+                    // Reset button
+                    const btn = document.querySelector('.auth-primary-btn');
+                    btn.textContent = 'Submit Application';
+                    btn.disabled = false;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Network error. Is the backend running?');
+                // Reset button
+                const btn = document.querySelector('.auth-primary-btn');
+                btn.textContent = 'Submit Application';
+                btn.disabled = false;
+            });
     });
 
     // Floating label interactions (extra polish for autofill/pre-filled)

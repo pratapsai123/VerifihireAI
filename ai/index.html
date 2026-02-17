@@ -33,25 +33,29 @@
 
                             <div class="auth-input-icon-wrapper">
                                 <div class="auth-input-icon"><i class="fa-regular fa-user"></i></div>
-                                <input type="text" id="fullName" class="auth-input-with-icon" placeholder=" " required>
+                                <input type="text" id="fullName" name="fullName" class="auth-input-with-icon"
+                                    placeholder=" " required>
                                 <label for="fullName" class="auth-floating-label">Full Name</label>
                             </div>
 
                             <div class="auth-input-icon-wrapper">
                                 <div class="auth-input-icon"><i class="fa-regular fa-envelope"></i></div>
-                                <input type="email" id="email" class="auth-input-with-icon" placeholder=" " required>
+                                <input type="email" id="email" name="email" class="auth-input-with-icon" placeholder=" "
+                                    required>
                                 <label for="email" class="auth-floating-label">Email Address</label>
                             </div>
 
                             <div class="auth-input-icon-wrapper">
                                 <div class="auth-input-icon"><i class="fa-solid fa-phone"></i></div>
-                                <input type="tel" id="phone" class="auth-input-with-icon" placeholder=" " required>
+                                <input type="tel" id="phone" name="phone" class="auth-input-with-icon" placeholder=" "
+                                    required>
                                 <label for="phone" class="auth-floating-label">Phone Number</label>
                             </div>
 
                             <div class="auth-input-icon-wrapper">
                                 <div class="auth-input-icon"><i class="fa-brands fa-linkedin"></i></div>
-                                <input type="url" id="linkedin" class="auth-input-with-icon" placeholder=" ">
+                                <input type="url" id="linkedin" name="linkedin" class="auth-input-with-icon"
+                                    placeholder=" ">
                                 <label for="linkedin" class="auth-floating-label">LinkedIn Profile (Optional)</label>
                             </div>
                         </div>
@@ -62,15 +66,16 @@
 
                             <div class="auth-input-icon-wrapper">
                                 <div class="auth-input-icon"><i class="fa-solid fa-briefcase"></i></div>
-                                <input type="text" id="jobTitle" class="auth-input-with-icon" placeholder=" " required>
+                                <input type="text" id="jobTitle" name="jobTitle" class="auth-input-with-icon"
+                                    placeholder=" " required>
                                 <label for="jobTitle" class="auth-floating-label">Current Job Title</label>
                             </div>
 
                             <div class="file-upload-container">
                                 <label class="file-upload-label">Resume / CV</label>
                                 <div class="file-upload-box" id="dropZone">
-                                    <input type="file" id="resume" class="file-input" accept=".pdf,.doc,.docx" required
-                                        hidden>
+                                    <input type="file" id="resume" name="resume" class="file-input"
+                                        accept=".pdf,.doc,.docx" required hidden>
                                     <div class="upload-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                                     <p class="upload-text">Drag & drop or <span class="browse-link">browse</span></p>
                                     <p class="file-name" id="fileName"></p>
@@ -78,8 +83,8 @@
                             </div>
 
                             <div class="auth-input-icon-wrapper" style="margin-top: 1rem;">
-                                <textarea id="coverLetter" class="auth-input-with-icon" placeholder=" " rows="3"
-                                    style="resize: none; height: auto;"></textarea>
+                                <textarea id="coverLetter" name="coverLetter" class="auth-input-with-icon"
+                                    placeholder=" " rows="3" style="resize: none; height: auto;"></textarea>
                                 <label for="coverLetter" class="auth-floating-label" style="top: 1.5rem;">Cover Letter
                                     (Optional)</label>
                             </div>
