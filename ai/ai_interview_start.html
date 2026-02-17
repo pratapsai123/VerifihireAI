@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Interview | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background: #f4f6f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .start-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        h1 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            color: #718096;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .start-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .loader {
+            display: none;
+            margin-top: 1rem;
+            color: #667eea;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="start-card" id="content">
+        <div class="icon-circle">
+            <i class="fa-solid fa-microphone-lines"></i>
+        </div>
+        <h1 id="greeting">Welcome!</h1>
+        <p>You have been invited to an AI-powered video interview for the <strong>Full Stack Developer</strong>
+            position.</p>
+        <p>The session will take approximately 10-15 minutes. Please ensure you are in a quiet environment.</p>
+        <button class="start-btn" onclick="startInterview()">
+            Start Interview Now
+        </button>
+        <div class="loader" id="loader">
+            <i class="fa-solid fa-spinner fa-spin"></i> Setting up your session...
+        </div>
+    </div>
+
+    <script>
+        // On load, check for simulated token/ID or just look for the last "sent" invite
+        // For simulation, we'll grab 'pendingInterview' from localStorage
+
+        let interviewData = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            // In a real app we'd verify a token. Here we simulate by checking localStorage.
+
+            const rawData = localStorage.getItem('pendingInterview');
+
+            if (rawData) {
+                interviewData = JSON.parse(rawData);
+                document.getElementById('greeting').textContent = `Welcome, ${interviewData.name.split(' ')[0]}!`;
+            } else {
+                // Determine if we should show an error or just default
+                console.warn('No pending interview found in simulation storage.');
+            }
+        });
+
+        function startInterview() {
+            const btn = document.querySelector('.start-btn');
+            const loader = document.getElementById('loader');
+
+            btn.style.display = 'none';
+            loader.style.display = 'block';
+
+            // Simulate "Authentication" and session creation
+            setTimeout(() => {
+                if (interviewData) {
+                    // Move data to sessionStorage for the session page to consume
+                    sessionStorage.setItem('interviewData', JSON.stringify(interviewData));
+                }
+                window.location.href = 'ai_interview_session.html';
+            }, 1500);
+        }
+    </script>
+</body>
+
+</html>
