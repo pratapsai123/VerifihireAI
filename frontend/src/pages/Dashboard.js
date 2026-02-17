@@ -26,8 +26,12 @@ function Dashboard() {
               <h3>AI-Powered Assessment</h3>
             </div>
             <div className="module-actions">
-              <button className="action-btn">
+              <button className="action-btn" onClick={() => window.location.href = '/ai/assessments.html'}>
                 <span>Assessments</span>
+                <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
+              <button className="action-btn" onClick={() => window.location.href = '/ai/create_assessment.html'} style={{ marginTop: '8px' }}>
+                <span>Create Assessment</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
             </div>
@@ -53,16 +57,34 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* Module 3: AI Interview */}
-          <div className="module-card highlight-card">
-            <div className="module-content">
+          {/* Module 3a: Resume Screening */}
+          <div className="module-card">
+            <div className="module-header">
+              <div className="module-icon-wrapper indigo-glow">
+                <svg className="module-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+              </div>
+              <h3>Resume Screening</h3>
+            </div>
+            <div className="module-actions">
+              <button className="action-btn" onClick={() => window.location.href = '/ai/resume_matcher.html'}>
+                <span>Analyze Resumes</span>
+                <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Module 3b: AI Interview */}
+          <div className="module-card">
+            <div className="module-header">
               <div className="module-icon-wrapper teal-glow">
                 <svg className="module-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" /></svg>
               </div>
-              <h3>AI-Interview</h3>
-              <p>Intelligent analysis of candidate responses and communication skills.</p>
-              <button className="primary-link-btn" onClick={() => { }}>
-                Start Session
+              <h3>AI Interview</h3>
+            </div>
+            <div className="module-actions">
+              <button className="action-btn" onClick={() => { }}>
+                <span>Start Session</span>
+                <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
             </div>
           </div>

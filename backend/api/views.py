@@ -12,9 +12,11 @@ from django.utils import timezone
 from datetime import timedelta
 from django.db import models, close_old_connections
 from django.db.utils import OperationalError
+from ai_candidates.models import Candidate
 from .models import (
     UserProfile,
     EmailOTP,
+    Question,
     Question,
     CustomAssessment,
     Assessment,
@@ -31,6 +33,7 @@ from .models import (
     Interview,
     InterviewInvitation,
 )
+from ai_assessments.models import AIAssessmentSubmission
 
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
@@ -4271,32 +4274,59 @@ def results_overview_view(request):
         if end_date:
             qs = qs.filter(submitted_at__date__lte=end_date)
         
-        # Limit results (default 200, maybe more if filtered, but limit to prevent overload)
-        qs = qs[:500]
+        # Similar logic for AI assessments
+        ai_qs = AIAssessmentSubmission.objects.select_related('assessment').order_by('-submitted_at')
         
+        if start_date:
+            ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
+        if end_date:
+            ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
+
+        # Combine and limit
         results = []
-        for s in qs:
+        for s in qs[:400]:
             inv = s.invitation
             a = inv.assessment
-            results.append(
-                {
-                    'submission_id': s.id,
-                    'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
-                    'candidate': {
-                        'name': inv.name,
-                        'email': inv.email,
-                    },
-                    'assessment': {
-                        'id': a.id,
-                        'display_name': a.display_name,
-                        'name': a.name,
-                    },
-                    'score': s.score,
-                    'total': s.total,
-                    'percentage': s.final_percentage if s.final_percentage is not None else s.percentage,
-                    'status': s.result,
-                }
-            )
+            results.append({
+                'submission_id': f"std_{s.id}",
+                'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
+                'candidate': {
+                    'name': inv.name,
+                    'email': inv.email,
+                },
+                'assessment': {
+                    'id': a.id,
+                    'display_name': a.display_name or a.name,
+                    'name': a.name,
+                },
+                'score': s.score,
+                'total': s.total,
+                'percentage': s.final_percentage if s.final_percentage is not None else s.percentage,
+                'status': s.result,
+            })
+
+        for s in ai_qs[:100]:
+            a = s.assessment
+            results.append({
+                'submission_id': f"ai_{s.id}",
+                'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
+                'candidate': {
+                    'name': s.candidate_name,
+                    'email': s.candidate_email,
+                },
+                'assessment': {
+                    'id': a.id,
+                    'display_name': f"AI: {a.required_skills}",
+                    'name': "AI Assessment",
+                },
+                'score': s.score,
+                'total': s.total_questions,
+                'percentage': s.percentage,
+                'status': s.status,
+            })
+
+        # Re-sort combined results by submitted_at
+        results.sort(key=lambda x: x['submitted_at'] or '', reverse=True)
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
     except Exception as e:
@@ -4410,6 +4440,51 @@ def candidates_overview_view(request):
                     } if inv.assessment_id else None,
                 }
             )
+
+        # Merge results from Resume Matcher (ai_candidates) if no assessment filter is applied
+        if not assessment_id:
+            try:
+                ai_qs = Candidate.objects.all().order_by('-submission_date')
+                if start_date:
+                    ai_qs = ai_qs.filter(submission_date__date__gte=start_date)
+                if end_date:
+                    ai_qs = ai_qs.filter(submission_date__date__lte=end_date)
+                
+                ai_cands = ai_qs[:50]
+
+                for cand in ai_cands:
+                    results.append({
+                        'id': cand.id,
+                        'name': cand.full_name,
+                        'email': cand.email,
+                        'pan_number': None,
+                        'phone': None,
+                        'status': cand.status,
+                        'token': None,
+                        'created_at': cand.submission_date.isoformat() if cand.submission_date else None,
+                        'started_at': cand.submission_date.isoformat() if cand.submission_date else None,
+                        'expires_at': None,
+                        'submitted_at': None,
+                        'submission_id': None,
+                        'rating': None,
+                        'score': 0,
+                        'total_score': 0,
+                        'final_percentage': 0,
+                        'result': None,
+                        'is_qualified': False,
+                        'assessment': {
+                            'id': 0,
+                            'display_name': cand.job_title,
+                            'name': cand.job_title,
+                        }
+                    })
+                
+                # Re-sort combined results by created_at date
+                def get_date(item):
+                    return item.get('created_at') or ''
+                results.sort(key=get_date, reverse=True)
+            except Exception as e:
+                print(f"Error merging ai_candidates: {e}")
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
     except Exception as e:
@@ -4998,44 +5073,6 @@ def get_interview_invitation_by_token_view(request, token):
         print(traceback.format_exc())
         return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def results_overview_view(request):
-    """
-    Recruiter overview: list recent results (submissions).
-    """
-    try:
-        qs = CandidateSubmission.objects.select_related('invitation', 'invitation__assessment').order_by('-submitted_at')[:200]
-        results = []
-        for s in qs:
-            inv = s.invitation
-            a = inv.assessment
-            results.append(
-                {
-                    'submission_id': s.id,
-                    'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
-                    'candidate': {
-                        'name': inv.name,
-                        'email': inv.email,
-                    },
-                    'assessment': {
-                        'id': a.id,
-                        'display_name': a.display_name,
-                        'name': a.name,
-                    },
-                    'score': s.score,
-                    'total': s.total,
-                    'percentage': s.percentage,
-                    'status': s.result,
-                }
-            )
-
-        return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
-    except Exception as e:
-        import traceback
-        print(f"Error in results_overview_view: {str(e)}")
-        print(traceback.format_exc())
-        return Response({'error': f'An error occurred while fetching results: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @csrf_exempt
@@ -5084,57 +5121,6 @@ def submit_rating_view(request, token):
         return Response({'error': f'An error occurred while saving rating: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@csrf_exempt
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def candidates_overview_view(request):
-    """
-    Recruiter overview: list invited candidates and their status.
-    Query params:
-      - assessment_id: optional
-    """
-    try:
-        assessment_id = request.GET.get('assessment_id', None)
-        qs = CandidateInvitation.objects.select_related('assessment').order_by('-created_at')
-        if assessment_id:
-            try:
-                qs = qs.filter(assessment_id=int(assessment_id))
-            except Exception:
-                return Response({'error': 'assessment_id must be an integer.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        qs = qs[:500]
-        results = []
-        for inv in qs:
-            sub = getattr(inv, 'submission', None)
-            results.append(
-                {
-                    'id': inv.id,
-                    'name': inv.name,
-                    'email': inv.email,
-                    'pan_number': inv.pan_number,
-                    'phone': inv.phone,
-                    'status': inv.status,
-                    'token': str(inv.token),
-                    'created_at': inv.created_at.isoformat() if inv.created_at else None,
-                    'started_at': inv.started_at.isoformat() if getattr(inv, 'started_at', None) else None,
-                    'expires_at': inv.expires_at.isoformat() if getattr(inv, 'expires_at', None) else None,
-                    'submitted_at': sub.submitted_at.isoformat() if sub and sub.submitted_at else None,
-                    'submission_id': sub.id if sub else None,
-                    'rating': getattr(sub, 'rating', None) if sub else None,
-                    'assessment': {
-                        'id': inv.assessment_id,
-                        'display_name': inv.assessment.display_name,
-                        'name': inv.assessment.name,
-                    } if inv.assessment_id else None,
-                }
-            )
-
-        return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
-    except Exception as e:
-        import traceback
-        print(f"Error in candidates_overview_view: {str(e)}")
-        print(traceback.format_exc())
-        return Response({'error': f'An error occurred while fetching candidates: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def backfill_assessment_questions_view(request):
     """

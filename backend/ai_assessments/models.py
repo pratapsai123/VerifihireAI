@@ -1,0 +1,44 @@
+import uuid
+from django.db import models
+
+class Assessment(models.Model):
+    STATUS_CHOICES = [
+        ('SCHEDULED', 'Scheduled'),
+        ('ONGOING', 'Ongoing'),
+        ('COMPLETED', 'Completed'),
+    ]
+
+    job_description = models.TextField()
+    required_skills = models.CharField(max_length=500)
+    mcq_count = models.IntegerField(default=10)
+    coding_count = models.IntegerField(default=2)
+    duration_minutes = models.IntegerField(default=60)
+    generated_content = models.JSONField(blank=True, null=True)  # Store the AI response here
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # New Fields
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='SCHEDULED')
+    share_token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+
+    def __str__(self):
+        return f"Assessment for {self.required_skills} - {self.created_at.strftime('%Y-%m-%d')}"
+
+    class Meta:
+        db_table = 'ai_assessment'
+
+class AIAssessmentSubmission(models.Model):
+    assessment = models.ForeignKey(Assessment, on_delete=models.CASCADE, related_name='submissions')
+    candidate_name = models.CharField(max_length=255)
+    candidate_email = models.EmailField()
+    answers = models.JSONField(default=dict)
+    score = models.IntegerField(default=0)
+    total_questions = models.IntegerField(default=0)
+    percentage = models.FloatField(default=0.0)
+    status = models.CharField(max_length=20, default='rejected')  # 'selected' or 'rejected'
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"AI Submission - {self.candidate_name} ({self.candidate_email})"
+
+    class Meta:
+        db_table = 'ai_assessment_submission'

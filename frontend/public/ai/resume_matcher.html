@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar -->
+
+        <!-- Main Content -->
+        <!-- Main Content -->
+        <main class="main-content" style="margin-left: 0;">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>Resume Matcher</h1>
+                    <p>AI-powered side-by-side analysis of candidate fit.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="avatar">HR</div>
+                </div>
+            </header>
+
+            <div class="dashboard-container">
+                <!-- Input Section -->
+                <div class="matcher-grid" id="inputSection">
+                    <div class="matcher-column">
+                        <div class="feature-card matcher-card">
+                            <h3><i class="fa-solid fa-file-pdf"></i> Step 1: Upload Resume</h3>
+                            <p>Upload the candidate's resume (PDF format).</p>
+                            <div class="drop-zone" id="dropZone">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <p>Drag & drop or <span>browse</span></p>
+                                <input type="file" id="resumeFile" accept=".pdf" style="display: none;">
+                                <div id="fileName" class="file-name"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="matcher-column">
+                        <div class="feature-card matcher-card">
+                            <h3><i class="fa-solid fa-pen-to-square"></i> Step 2: Job Description</h3>
+                            <p>Paste the job description or requirements here.</p>
+                            <textarea id="jobDesc" class="jd-textarea" placeholder="Paste JD here..."></textarea>
+
+                            <div class="input-group" style="margin-top: 1.5rem;">
+                                <label for="minScore"
+                                    style="display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--navy-secondary);">
+                                    <i class="fa-solid fa-percent"></i> Minimum Qualifying Percentage
+                                </label>
+                                <input type="number" id="minScore" class="auth-input-with-icon" placeholder="e.g. 70"
+                                    min="0" max="100" value="70">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="matcher-actions" id="actionSection">
+                    <button class="auth-primary-btn" id="matchBtn">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Match
+                    </button>
+                </div>
+
+                <!-- Result Section (Hidden) -->
+                <div class="result-container" id="resultSection" style="display: none;">
+                    <div class="feature-card result-card">
+                        <div class="result-header">
+                            <h2>Analysis Results</h2>
+                            <button class="action-btn" onclick="location.reload()">New Analysis</button>
+                        </div>
+                        <div class="result-content">
+                            <div class="score-section">
+                                <div class="circular-progress">
+                                    <span id="scoreValue">0%</span>
+                                </div>
+                                <h3 id="eligibilityBadge" class="status-badge">Checking...</h3>
+                            </div>
+                            <div class="summary-section">
+                                <h3>AI Summary</h3>
+                                <p id="matchSummary">Preparing analysis...</p>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="decision-actions"
+                                style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center;">
+                                <button id="approveBtn" class="auth-primary-btn"
+                                    style="background: var(--status-success); border-radius: 12px; padding: 0.8rem 2rem;">
+                                    <i class="fa-solid fa-check"></i> Approve
+                                </button>
+                                <button id="rejectBtn" class="auth-primary-btn"
+                                    style="background: var(--status-error); border-radius: 12px; padding: 0.8rem 2rem;">
+                                    <i class="fa-solid fa-xmark"></i> Reject
+                                </button>
+                            </div>
+                            <div id="decisionMessage"
+                                style="text-align: center; margin-top: 1rem; font-weight: 600; display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="matcher.js"></script>
+</body>
+
+</html>

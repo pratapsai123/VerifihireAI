@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessments | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">VeriFiHireAI</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="ai_adventure.html"><i class="fa-solid fa-robot"></i> AI Adventure</a></li>
+                <li><a href="candidates.html"><i class="fa-solid fa-users"></i> Candidates</a></li>
+                <li class="active"><a href="#"><i class="fa-solid fa-clipboard-list"></i> Assessments</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>Assessments</h1>
+                    <p>Manage scheduled and ongoing candidate assessments.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="avatar">HR</div>
+                </div>
+            </header>
+
+            <div class="dashboard-container">
+                <!-- Filter Tabs -->
+                <div
+                    style="margin-bottom: 1.5rem; display: flex; gap: 1rem; border-bottom: 2px solid #f0f0f0; padding-bottom: 0.5rem;">
+                    <button class="filter-tab active" data-filter="ALL" onclick="filterAssessments('ALL')">
+                        <i class="fa-solid fa-list"></i> All
+                    </button>
+                    <button class="filter-tab" data-filter="SCHEDULED" onclick="filterAssessments('SCHEDULED')">
+                        <i class="fa-solid fa-calendar"></i> Scheduled
+                    </button>
+                    <button class="filter-tab" data-filter="ONGOING" onclick="filterAssessments('ONGOING')">
+                        <i class="fa-solid fa-spinner"></i> Ongoing
+                    </button>
+                    <button class="filter-tab" data-filter="COMPLETED" onclick="filterAssessments('COMPLETED')">
+                        <i class="fa-solid fa-check-circle"></i> Completed
+                    </button>
+                </div>
+
+                <!-- Assessments Section -->
+                <section class="recent-section" style="margin-bottom: 2rem;">
+                    <h2 class="section-heading"
+                        style="display: flex; align-items: center; justify-content: space-between;">
+                        Assessments
+                        <span class="status-badge status-review" style="font-size: 0.8rem;" id="assessmentCount">0
+                            Total</span>
+                    </h2>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Job Description</th>
+                                    <th>Skills</th>
+                                    <th>Status</th>
+                                    <th>Duration</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="assessmentsTableBody">
+                                <!-- Data will be populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Scheduled Assessments Section (Hidden for now as we focus on AI Generated) -->
+                <!-- <section class="recent-section"> ... </section> -->
+            </div>
+        </main>
+    </div>
+
+    <script>
+        let allAssessments = [];
+        let currentFilter = 'ALL';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadAssessments();
+        });
+
+        async function loadAssessments() {
+            const tableBody = document.getElementById('assessmentsTableBody');
+
+            try {
+                const response = await fetch('http://localhost:8001/api/assessments/');
+                if (!response.ok) throw new Error(`Failed to fetch assessments: ${response.status} ${response.statusText}`);
+
+                allAssessments = await response.json();
+                renderAssessments();
+
+            } catch (error) {
+                console.error('Error:', error);
+                tableBody.innerHTML = `<tr><td colspan="5" style="text-align:center; color:red;">
+                    Error loading assessments: ${error.message}<br>
+                    <small>Ensure Backend is running on port 8001 and you are connected.</small>
+                </td></tr>`;
+            }
+        }
+
+        function renderAssessments() {
+            const tableBody = document.getElementById('assessmentsTableBody');
+            const countBadge = document.getElementById('assessmentCount');
+
+            let filtered = allAssessments;
+            if (currentFilter !== 'ALL') {
+                filtered = allAssessments.filter(a => a.status === currentFilter);
+            }
+
+            countBadge.textContent = `${filtered.length} ${currentFilter === 'ALL' ? 'Total' : currentFilter}`;
+
+            if (filtered.length === 0) {
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No assessments found.</td></tr>';
+                return;
+            }
+
+            tableBody.innerHTML = filtered.map(assessment => {
+                const statusClass = assessment.status === 'SCHEDULED' ? 'status-new' :
+                    assessment.status === 'ONGOING' ? 'status-review' : 'status-approved';
+                return `
+                    <tr data-status="${assessment.status}">
+                        <td>
+                            <div class="candidate-info">
+                                <div class="candidate-avatar">AI</div>
+                                <span>${assessment.job_description ? assessment.job_description.substring(0, 30) : 'No Description'}...</span>
+                            </div>
+                        </td>
+                        <td>${assessment.required_skills}</td>
+                        <td>
+                            <span class="status-badge ${statusClass}">${assessment.status}</span>
+                        </td>
+                        <td>${assessment.duration_minutes} mins</td>
+                        <td>
+                            <button class="action-btn" onclick="viewAssessment(${assessment.id})" style="margin-right: 0.5rem;">View</button>
+                            <button class="action-btn" onclick="shareAssessment('${assessment.share_token}')" style="background: #10b981;">
+                                <i class="fa-solid fa-share-nodes"></i> Share
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function filterAssessments(status) {
+            currentFilter = status;
+
+            // Update active tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+                if (tab.dataset.filter === status) {
+                    tab.classList.add('active');
+                }
+            });
+
+            renderAssessments();
+        }
+
+        function viewAssessment(id) {
+            window.location.href = `assessment_detail.html?id=${id}`;
+        }
+
+        function shareAssessment(token) {
+            const shareUrl = `${window.location.origin}/take_assessment.html?token=${token}`;
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                alert('✅ Assessment link copied to clipboard!\n\nShare this link with candidates:\n' + shareUrl);
+            }).catch(err => {
+                prompt('Copy this link:', shareUrl);
+            });
+        }
+    </script>
+
+    <style>
+        .filter-tab {
+            background: transparent;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #64748b;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-tab:hover {
+            color: #4318FF;
+            background: #f8f7ff;
+        }
+
+        .filter-tab.active {
+            color: #4318FF;
+            border-bottom-color: #4318FF;
+        }
+
+        .filter-tab i {
+            font-size: 1rem;
+        }
+    </style>
+</body>
+
+</html>

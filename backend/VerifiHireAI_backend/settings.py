@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'channels',
     'api',
-
+    'ai_assessments',
+    'ai_candidates',
 ]
 
 # Trust Nginx to handle SSL and Host headers
@@ -240,5 +241,6 @@ EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+# AI Configuration
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyDaC2BoqMqY5UPF-cD4PipA_au-Z3aX6YY')
 

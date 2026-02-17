@@ -123,6 +123,8 @@ export default function CandidatePage() {
                         <option value="">All Statuses</option>
                         <option value="completed">Completed</option>
                         <option value="sent">Sent</option>
+                        <option value="resume passed">Resume Passed</option>
+                        <option value="resume failed">Resume Failed</option>
                     </select>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                         <span style={{ fontSize: '14px', color: '#64748b' }}>From:</span>

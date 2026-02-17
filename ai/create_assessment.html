@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Smart Assessment | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">VeriFiHireAI</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li class="active"><a href="ai_adventure.html"><i class="fa-solid fa-robot"></i> AI Adventure</a></li>
+                <li><a href="candidates.html"><i class="fa-solid fa-users"></i> Candidates</a></li>
+                <li><a href="assessments.html"><i class="fa-solid fa-clipboard-list"></i> Assessments</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>Create Smart Assessment</h1>
+                    <p>Generate AI-powered technical tests tailored to your role.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="avatar">HR</div>
+                </div>
+            </header>
+
+            <div class="dashboard-container" style="display: flex; justify-content: center; align-items: flex-start;">
+
+                <!-- Main Card -->
+                <div class="auth-container" style="max-width: 900px; padding: 3rem;">
+
+                    <div class="header-section" style="text-align: left; margin-bottom: 2rem;">
+                        <h2 class="auth-title" style="font-size: 1.8rem;">Assessment Details</h2>
+                        <p class="auth-subtitle">Define the role and let AI craft the perfect test.</p>
+                    </div>
+
+                    <form id="assessmentForm">
+
+                        <!-- Job Description -->
+                        <div class="auth-input-icon-wrapper">
+                            <i class="fa-solid fa-file-lines auth-input-icon" style="top: 1.5rem;"></i>
+                            <textarea id="jobDescription" class="auth-input-with-icon" required placeholder=" "
+                                style="min-height: 120px; resize: vertical; padding-top: 1.5rem;"></textarea>
+                            <label for="jobDescription" class="auth-floating-label">Job Description / Role
+                                Requirements</label>
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="auth-input-icon-wrapper">
+                            <i class="fa-solid fa-tags auth-input-icon"></i>
+                            <input type="text" id="requiredSkills" class="auth-input-with-icon" required
+                                placeholder=" ">
+                            <label for="requiredSkills" class="auth-floating-label">Required Skills (e.g., Python,
+                                React, AWS)</label>
+                        </div>
+
+                        <!-- Configuration Grid -->
+                        <div
+                            style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 1rem;">
+
+                            <!-- MCQ Count -->
+                            <div class="auth-input-icon-wrapper" style="margin-bottom: 0;">
+                                <i class="fa-solid fa-list-check auth-input-icon"></i>
+                                <input type="number" id="mcqCount" class="auth-input-with-icon" min="1" max="20"
+                                    value="10" required placeholder=" ">
+                                <label for="mcqCount" class="auth-floating-label">MCQs</label>
+                            </div>
+
+                            <!-- Coding Count -->
+                            <div class="auth-input-icon-wrapper" style="margin-bottom: 0;">
+                                <i class="fa-solid fa-code auth-input-icon"></i>
+                                <input type="number" id="codingCount" class="auth-input-with-icon" min="0" max="5"
+                                    value="2" required placeholder=" ">
+                                <label for="codingCount" class="auth-floating-label">Coding Challenges</label>
+                            </div>
+
+                            <!-- Duration -->
+                            <div class="auth-input-icon-wrapper" style="margin-bottom: 0;">
+                                <i class="fa-regular fa-clock auth-input-icon"></i>
+                                <input type="number" id="duration" class="auth-input-with-icon" min="15" max="180"
+                                    value="60" required placeholder=" ">
+                                <label for="duration" class="auth-floating-label">Duration (min)</label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-actions" style="margin-top: 2.5rem; text-align: right;">
+                            <button type="submit" class="auth-primary-btn btn-purple"
+                                style="border-radius: 16px; padding: 1rem 2.5rem; display: inline-flex; align-items: center; gap: 0.8rem;">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                                <span>Generate Assessment</span>
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Specific logic for this page
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('assessmentForm');
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const btn = e.target.querySelector('button');
+                    // ... rest of the code
+
+                    const originalContent = btn.innerHTML;
+
+                    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Generating...</span>';
+                    btn.disabled = true;
+
+                    const data = {
+                        job_description: document.getElementById('jobDescription').value,
+                        required_skills: document.getElementById('requiredSkills').value,
+                        mcq_count: document.getElementById('mcqCount').value,
+                        coding_count: document.getElementById('codingCount').value,
+                        duration: document.getElementById('duration').value
+                    };
+
+                    try {
+                        const response = await fetch('http://localhost:8001/api/assessments/generate/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        if (response.ok) {
+                            const result = await response.json();
+                            alert('Assessment Generated Successfully! Redirecting to assessments list...');
+                            window.location.href = 'assessments.html';
+                        } else {
+                            alert('Failed to generate assessment. Please try again.');
+                        }
+                    } catch (error) {
+                        console.error('Error:', error);
+                        alert('An error occurred. Is the backend running?');
+                    } finally {
+                        btn.innerHTML = originalContent;
+                        btn.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
