@@ -377,35 +377,54 @@
                             <label for="candidateEmail" class="auth-floating-label">Email Address</label>
                         </div>
 
-                        <!-- Enhanced Resume Upload -->
-                        <div style="margin-top: 2rem;">
-                            <label class="file-upload-label"
-                                style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; display: block;">
-                                <i class="fa-solid fa-file-pdf" style="margin-right: 0.5rem; color: #667eea;"></i>
-                                Resume / CV
-                            </label>
-                            <div class="enhanced-upload-zone" id="resumeDropZone">
-                                <input type="file" id="candidateResume" name="candidateResume" class="file-input"
-                                    accept=".pdf,.doc,.docx" required hidden>
-                                <div class="upload-icon-large">
-                                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                                </div>
-                                <p class="upload-text-main">Drop your resume here</p>
-                                <p class="upload-text-sub">or <span class="browse-link">browse files</span> • PDF, DOC,
-                                    DOCX supported</p>
+                        <!-- Job Description & Resume Section -->
+                        <div class="input-grid"
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                            <!-- Job Description Field -->
+                            <div>
+                                <label for="jobDescription" class="file-upload-label"
+                                    style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; display: block;">
+                                    <i class="fa-solid fa-briefcase" style="margin-right: 0.5rem; color: #667eea;"></i>
+                                    Job Description
+                                </label>
+                                <textarea id="jobDescription" name="jobDescription"
+                                    style="width: 100%; height: 250px; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 16px; resize: vertical; font-family: inherit; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary); background: #f8f9fa; transition: all 0.3s ease;"
+                                    placeholder="Paste the job description here to help the AI tailor questions..."></textarea>
+                            </div>
 
-                                <div class="file-selected" id="fileSelected">
-                                    <div class="file-icon">
-                                        <i class="fa-solid fa-file-pdf"></i>
+                            <!-- Enhanced Resume Upload -->
+                            <div>
+                                <label class="file-upload-label"
+                                    style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; display: block;">
+                                    <i class="fa-solid fa-file-pdf" style="margin-right: 0.5rem; color: #667eea;"></i>
+                                    Resume / CV
+                                </label>
+                                <div class="enhanced-upload-zone" id="resumeDropZone"
+                                    style="height: 250px; display: flex; flex-direction: column; justify-content: center;">
+                                    <input type="file" id="candidateResume" name="candidateResume" class="file-input"
+                                        accept=".pdf,.doc,.docx" required hidden>
+                                    <div class="upload-content-wrapper">
+                                        <div class="upload-icon-large"
+                                            style="width: 60px; height: 60px; font-size: 2rem; margin-bottom: 1rem;">
+                                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        </div>
+                                        <p class="upload-text-main" style="font-size: 1.1rem;">Drop resume here</p>
+                                        <p class="upload-text-sub">or <span class="browse-link">browse</span></p>
                                     </div>
-                                    <div class="file-info">
-                                        <div class="file-name-display" id="resumeFileName"></div>
-                                        <div class="file-size-display" id="resumeFileSize"></div>
+
+                                    <div class="file-selected" id="fileSelected">
+                                        <div class="file-icon" style="width: 40px; height: 40px; font-size: 1.1rem;">
+                                            <i class="fa-solid fa-file-pdf"></i>
+                                        </div>
+                                        <div class="file-info">
+                                            <div class="file-name-display" id="resumeFileName"
+                                                style="font-size: 0.9rem;"></div>
+                                        </div>
+                                        <button type="button" onclick="removeFile()"
+                                            style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.1rem;">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
                                     </div>
-                                    <button type="button" onclick="removeFile()"
-                                        style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.2rem;">
-                                        <i class="fa-solid fa-xmark"></i>
-                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -465,6 +484,22 @@
         </main>
     </div>
 
+    <!-- Add responsive styles for the grid -->
+    <style>
+        @media (max-width: 768px) {
+            .input-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        #jobDescription:focus {
+            outline: none;
+            border-color: #667eea !important;
+            background: white !important;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+    </style>
+
     <script>
         const dropZone = document.getElementById('resumeDropZone');
         const fileInput = document.getElementById('candidateResume');
@@ -472,6 +507,7 @@
         const fileSizeDisplay = document.getElementById('resumeFileSize');
         const fileSelectedDiv = document.getElementById('fileSelected');
         const browseLink = document.querySelector('.browse-link');
+        const uploadContentWrapper = document.querySelector('.upload-content-wrapper');
 
         function formatFileSize(bytes) {
             if (bytes === 0) return '0 Bytes';
@@ -483,13 +519,15 @@
 
         function displayFile(file) {
             fileNameDisplay.textContent = file.name;
-            fileSizeDisplay.textContent = formatFileSize(file.size);
+            // fileSizeDisplay.textContent = formatFileSize(file.size); // Removed for space in grid
             fileSelectedDiv.classList.add('active');
+            uploadContentWrapper.style.display = 'none'; // Hide upload text when file selected to save space
         }
 
         function removeFile() {
             fileInput.value = '';
             fileSelectedDiv.classList.remove('active');
+            uploadContentWrapper.style.display = 'block'; // Show upload text again
         }
 
         browseLink.addEventListener('click', (e) => {
@@ -541,6 +579,7 @@
             const name = document.getElementById('candidateName').value;
             const email = document.getElementById('candidateEmail').value;
             const resume = document.getElementById('candidateResume').files[0];
+            const jobDescription = document.getElementById('jobDescription').value;
 
             if (!resume) {
                 alert('Please upload a resume.');
@@ -549,7 +588,7 @@
 
             const submitBtn = e.target.querySelector('button[type="submit"]');
             const originalHTML = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Analyzing Resume...</span>';
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Analyzing Resume & JD...</span>';
             submitBtn.disabled = true;
 
             try {
@@ -559,6 +598,7 @@
                     email: email,
                     resumeName: resume.name,
                     resumeSize: resume.size,
+                    jobDescription: jobDescription, // Start storing JD
                     startedAt: new Date().toISOString()
                 };
 

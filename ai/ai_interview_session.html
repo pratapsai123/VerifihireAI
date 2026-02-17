@@ -592,11 +592,18 @@
         function generateQuestions() {
             questions = [
                 "Can you walk me through your experience with JavaScript?",
-                "Tell me about a challenging project you've worked on.",
-                "How do you handle tight deadlines?",
-                "What is your greatest strength?",
-                "Do you have any questions for us?"
+                "Tell me about a challenging project you've worked on."
             ];
+
+            if (candidateData && candidateData.jobDescription && candidateData.jobDescription.trim().length > 0) {
+                // simple simulated question based on JD
+                questions.push("Based on the job description you provided, why do you think you're a good fit for this specific role?");
+            } else {
+                questions.push("What motivates you to apply for this position?");
+            }
+
+            questions.push("How do you handle tight deadlines?");
+            questions.push("Do you have any questions for us?");
         }
 
         function askNextQuestion() {
