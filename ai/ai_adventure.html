@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hiring Adventure | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar (Visual only for now) -->
+        <nav class="sidebar">
+            <div class="logo">VeriFiHireAI</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li class="active"><a href="#"><i class="fa-solid fa-robot"></i> AI Adventure</a></li>
+                <li><a href="candidates.html"><i class="fa-solid fa-users"></i> Candidates</a></li>
+                <li><a href="assessments.html"><i class="fa-solid fa-clipboard-list"></i> Assessments</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>AI Hiring Adventure</h1>
+                    <p>Supercharge your recruitment with AI tools.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="avatar">HR</div>
+                </div>
+            </header>
+
+            <div class="dashboard-container">
+                <!-- Feature Cards Section -->
+                <section class="features-section">
+                    <h2 class="section-heading">AI Tools</h2>
+                    <div class="cards-grid">
+                        <!-- Resume Matcher Card -->
+                        <div class="feature-card">
+                            <div class="card-icon icon-blue"><i class="fa-solid fa-file-contract"></i></div>
+                            <h3 class="card-title">Resume Matcher</h3>
+                            <p class="card-desc">Analyze fit between candidate resumes and job descriptions instantly.
+                            </p>
+                            <button class="card-btn btn-blue">Check Match</button>
+                        </div>
+
+                        <!-- Smart Assessment Card -->
+                        <div class="feature-card">
+                            <div class="card-icon icon-purple"><i class="fa-solid fa-brain"></i></div>
+                            <h3 class="card-title">Smart Assessment</h3>
+                            <p class="card-desc">Generate AI-powered technical assessments tailored to component skills.
+                            </p>
+                            <button class="card-btn btn-purple">Create Assessment</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Recent Resumes Section -->
+                <section class="recent-section">
+                    <h2 class="section-heading">Recent Resumes</h2>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Candidate Name</th>
+                                    <th>Applied For</th>
+                                    <th>Date Uploaded</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="candidate-info">
+                                            <div class="candidate-avatar">JD</div>
+                                            <span>John Doe</span>
+                                        </div>
+                                    </td>
+                                    <td>Frontend Developer</td>
+                                    <td>Oct 24, 2023</td>
+                                    <td><span class="status-badge status-new">New</span></td>
+                                    <td><button class="action-btn">Analyze</button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="candidate-info">
+                                            <div class="candidate-avatar">AS</div>
+                                            <span>Alice Smith</span>
+                                        </div>
+                                    </td>
+                                    <td>Data Scientist</td>
+                                    <td>Oct 23, 2023</td>
+                                    <td><span class="status-badge status-review">In Review</span></td>
+                                    <td><button class="action-btn">Analyze</button></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="candidate-info">
+                                            <div class="candidate-avatar">RJ</div>
+                                            <span>Robert Johnson</span>
+                                        </div>
+                                    </td>
+                                    <td>Unassigned</td>
+                                    <td>Oct 22, 2023</td>
+                                    <td><span class="status-badge status-new">New</span></td>
+                                    <td><button class="action-btn">Analyze</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

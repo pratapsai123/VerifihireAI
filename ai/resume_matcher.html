@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Matcher | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">VeriFiHireAI</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="ai_adventure.html"><i class="fa-solid fa-robot"></i> AI Adventure</a></li>
+                <li class="active"><a href="candidates.html"><i class="fa-solid fa-users"></i> Candidates</a></li>
+                <li><a href="assessments.html"><i class="fa-solid fa-clipboard-list"></i> Assessments</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>Resume Matcher</h1>
+                    <p>AI-powered analysis of candidate fit.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="avatar">HR</div>
+                </div>
+            </header>
+
+            <div class="dashboard-container">
+                <div class="feature-card" style="width: 100%; align-items: center; text-align: center; padding: 4rem;">
+                    <div class="card-icon icon-blue"
+                        style="width: 80px; height: 80px; font-size: 2rem; margin-bottom: 2rem;"><i
+                            class="fa-solid fa-file-contract"></i></div>
+                    <h2 style="font-size: 2rem; color: var(--navy-secondary); margin-bottom: 1rem;">Analyzing Resume...
+                    </h2>
+                    <p style="font-size: 1.1rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 2rem;">
+                        This is the Resume Matcher feature. In a real application, this would compare the uploaded
+                        resume content against the job description using LLMs.
+                    </p>
+                    <div
+                        style="background: var(--bg-main); padding: 1rem 2rem; border-radius: 12px; margin-bottom: 2rem;">
+                        <strong>Candidate ID:</strong> <span id="candidateId">Loading...</span>
+                    </div>
+
+                    <a href="candidates.html" class="auth-secondary-btn" style="text-decoration: none;">Back to
+                        Candidates</a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Display the ID from URL to prove passing of data
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = urlParams.get('id');
+        document.getElementById('candidateId').textContent = id || 'No ID provided';
+    </script>
+</body>
+
+</html>

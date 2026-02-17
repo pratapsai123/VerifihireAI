@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidates | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">VeriFiHireAI</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="ai_adventure.html"><i class="fa-solid fa-robot"></i> AI Adventure</a></li>
+                <li class="active"><a href="#"><i class="fa-solid fa-users"></i> Candidates</a></li>
+                <li><a href="assessments.html"><i class="fa-solid fa-clipboard-list"></i> Assessments</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1>Candidates</h1>
+                    <p>Manage and track all job applicants.</p>
+                </div>
+                <div class="user-profile">
+                    <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="avatar">HR</div>
+                </div>
+            </header>
+
+            <div class="dashboard-container">
+                <section class="recent-section">
+                    <h2 class="section-heading">All Applicants</h2>
+                    <div class="table-container">
+                        <table class="data-table" id="candidatesTable">
+                            <thead>
+                                <tr>
+                                    <th>Candidate Name</th>
+                                    <th>Role / Title</th>
+                                    <th>Email</th>
+                                    <th>Applied Date</th>
+                                    <th>Resume</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Rows will be populated by JS -->
+                            </tbody>
+                        </table>
+                        <div id="noDataMessage"
+                            style="text-align: center; padding: 2rem; color: var(--text-secondary); display: none;">
+                            No candidates found. <a href="index.html"
+                                style="color: var(--blue-accent); font-weight: 600;">Add one now</a>.
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const candidates = JSON.parse(localStorage.getItem('verifihire_candidates') || '[]');
+            const tableBody = document.querySelector('#candidatesTable tbody');
+            const noDataMsg = document.getElementById('noDataMessage');
+
+            if (candidates.length === 0) {
+                noDataMsg.style.display = 'block';
+                return;
+            }
+
+            candidates.forEach(candidate => {
+                const row = document.createElement('tr');
+
+                // Get initials
+                const initials = candidate.fullName
+                    .split(' ')
+                    .map(n => n[0])
+                    .join('')
+                    .toUpperCase()
+                    .slice(0, 2);
+
+                row.innerHTML = `
+                    <td>
+                        <div class="candidate-info">
+                            <div class="candidate-avatar">${initials}</div>
+                            <span>${candidate.fullName}</span>
+                        </div>
+                    </td>
+                    <td>${candidate.jobTitle}</td>
+                    <td>${candidate.email}</td>
+                    <td>${candidate.submissionDate}</td>
+                    <td><span style="color: var(--blue-accent);"><i class="fa-solid fa-paperclip"></i> ${candidate.resumeName}</span></td>
+                    <td>
+                        <a href="resume_matcher.html?id=${candidate.id}" class="action-btn" style="text-decoration: none; display: inline-block;">
+                            Analyze
+                        </a>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+    </script>
+</body>
+
+</html>
