@@ -553,14 +553,26 @@
             submitBtn.disabled = true;
 
             try {
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                alert(`✅ AI Interview Session Started!\n\nCandidate: ${name}\nEmail: ${email}\n\nAI is now analyzing the resume and preparing personalized interview questions.`);
-                e.target.reset();
-                removeFile();
+                // Store candidate data in sessionStorage
+                const interviewData = {
+                    name: name,
+                    email: email,
+                    resumeName: resume.name,
+                    resumeSize: resume.size,
+                    startedAt: new Date().toISOString()
+                };
+
+                sessionStorage.setItem('interviewData', JSON.stringify(interviewData));
+
+                // Simulate resume analysis
+                await new Promise(resolve => setTimeout(resolve, 1500));
+
+                // Redirect to interview session
+                window.location.href = 'ai_interview_session.html';
+
             } catch (error) {
                 console.error('Error:', error);
                 alert('❌ Error starting interview session. Please try again.');
-            } finally {
                 submitBtn.innerHTML = originalHTML;
                 submitBtn.disabled = false;
             }
