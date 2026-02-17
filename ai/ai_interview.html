@@ -592,7 +592,7 @@
             submitBtn.disabled = true;
 
             try {
-                // Store candidate data in localStorage (Simulation of backend DB)
+                // 1. Prepare Interview Data
                 const interviewData = {
                     name: name,
                     email: email,
@@ -603,11 +603,40 @@
                     invitedAt: new Date().toISOString()
                 };
 
-                // Use localStorage for cross-page simulation without direct session pass-through
+                // 2. Generate Link (Frontend based for now to ensure correct host/port)
+                // Assuming ai_interview.html and ai_interview_start.html are in the same dir
+                const interviewLink = window.location.href.replace('ai_interview.html', 'ai_interview_start.html');
+
+                // 3. Store locally for simulation/fallback
                 localStorage.setItem('pendingInterview', JSON.stringify(interviewData));
 
-                // Simulate network delay
-                await new Promise(resolve => setTimeout(resolve, 1500));
+                // 4. Send Invite via Backend API
+                try {
+                    const response = await fetch('http://127.0.0.1:8000/api/candidates/invite/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            link: interviewLink,
+                            job_description: jobDescription
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const err = await response.json();
+                        throw new Error(err.error || 'Failed to send email via backend');
+                    }
+                    console.log('Backend email sent successfully');
+                } catch (backendError) {
+                    console.warn('Backend email failed, falling back to local simulation:', backendError);
+                    alert('⚠️ Note: Backend email service unavailable. Using local simulation only.');
+                }
+
+                // Simulate network delay for UX
+                await new Promise(resolve => setTimeout(resolve, 1000));
 
                 // Show Success Message & "Email Link"
                 const formCard = document.querySelector('.form-card');
@@ -623,8 +652,8 @@
                         
                         <div style="background: #f3f4f6; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px dashed #9ca3af;">
                             <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: #6b7280; font-weight: 600; text-transform: uppercase;">Simulation: Candidate Link</p>
-                            <a href="ai_interview_start.html" target="_blank" style="color: #667eea; font-weight: 600; font-size: 1.1rem; word-break: break-all;">
-                                ${window.location.origin}/ai_interview_start.html
+                            <a href="${interviewLink}" target="_blank" style="color: #667eea; font-weight: 600; font-size: 1.1rem; word-break: break-all;">
+                                ${interviewLink}
                             </a>
                             <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #9ca3af;">(Click to simulate candidate experience)</p>
                         </div>
