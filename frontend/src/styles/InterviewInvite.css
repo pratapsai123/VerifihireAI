@@ -1,0 +1,317 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.interview-invite-page {
+  min-height: 100vh;
+  background: linear-gradient(to bottom, #EEF2FF 0%, #F3F4F6 100%);
+  font-family: 'Inter', sans-serif;
+  color: #1F2937;
+  padding-bottom: 4rem;
+}
+
+.interview-invite-page,
+.interview-invite-page * {
+  box-sizing: border-box;
+}
+
+.interview-invite-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Header Section */
+.interview-invite-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.interview-invite-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.025em;
+}
+
+.interview-invite-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Card Styles */
+.card {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #F3F4F6;
+  padding-bottom: 1rem;
+}
+
+/* Form Styles */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.form-grid.add-inline {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1.5fr 1.5fr auto;
+  /* Adjusted for Add button at end */
+  align-items: flex-end;
+  gap: 1rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #4B5563;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  background-color: #fff;
+  border: 1px solid #D1D5DB;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  color: #111827;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.field input:focus,
+.field select:focus {
+  border-color: #6366F1;
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+}
+
+.field input::placeholder {
+  color: #9CA3AF;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: #6B7280;
+  margin-top: 0.25rem;
+}
+
+.error-text {
+  color: #EF4444;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary,
+.btn-tertiary,
+.btn-danger,
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background-color: #4F46E5;
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #4338CA;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background-color: white;
+  color: #374151;
+  border-color: #D1D5DB;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: #F9FAFB;
+  border-color: #C6CACE;
+}
+
+.add-btn {
+  background-color: #111827;
+  /* Dark for contrast */
+  color: white;
+  white-space: nowrap;
+  padding: 0.625rem 1.75rem;
+}
+
+.add-btn:hover:not(:disabled) {
+  background-color: #1F2937;
+  transform: translateY(-1px);
+}
+
+.add-btn:disabled {
+  background-color: #9CA3AF;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-danger {
+  color: #DC2626;
+  background-color: #FEF2F2;
+  border-color: #FECACA;
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.btn-danger:hover {
+  background-color: #FEE2E2;
+}
+
+/* Bulk Actions Row */
+.bulk-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.file-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #F3F4F6;
+  color: #4B5563;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid #E5E7EB;
+  transition: all 0.2s;
+}
+
+.file-pill:hover {
+  background-color: #E5E7EB;
+  color: #111827;
+}
+
+.file-input {
+  display: none;
+}
+
+/* Table */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #E5E7EB;
+  border-radius: 0.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.table th {
+  background-color: #F9FAFB;
+  text-align: left;
+  padding: 0.875rem 1.5rem;
+  color: #6B7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.table td {
+  padding: 1rem 1.5rem;
+  color: #111827;
+  border-bottom: 1px solid #F3F4F6;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.mono {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9rem;
+  color: #4B5563;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .form-grid.add-inline {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .add-btn-cell {
+    grid-column: span 2;
+    margin-top: 0.5rem;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid.add-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .add-btn-cell {
+    grid-column: span 1;
+  }
+
+  .interview-invite-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .interview-invite-actions {
+    width: 100%;
+  }
+
+  .interview-invite-actions button {
+    flex: 1;
+  }
+}

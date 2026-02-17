@@ -1,0 +1,482 @@
+/* ===========================
+   RESET & BASE STYLES
+   =========================== */
+:root {
+  --bg-dark: #121212;
+  --bg-panel: #1e1e1e;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --accent-color: #0b5cff;
+  --danger-color: #ff443d;
+  --success-color: #28c76f;
+  --control-bg: rgba(40, 40, 40, 0.9);
+  --control-hover: rgba(60, 60, 60, 0.9);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.live-interview-interviewer {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===========================
+   HEADER
+   =========================== */
+.header {
+  height: 60px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-panel);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+}
+
+.header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.timer {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+}
+
+.btn-report {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-report:hover {
+  background: #004ad0;
+}
+
+/* ===========================
+   MAIN STAGE (VIDEO AREA)
+   =========================== */
+.main-wrapper {
+  flex: 1;
+  position: relative;
+  display: flex;
+  background-color: #000;
+}
+
+.video-container {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Remote Video (Full Screen) */
+.remote-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Identify Letterboxing */
+}
+
+/* Local Video (Floating PiP) */
+/* Draggable container style */
+.self-video-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 240px;
+  height: 135px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  z-index: 50;
+  cursor: grab;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background: #2a2a2a;
+}
+
+.self-video-container:active {
+  cursor: grabbing;
+  transform: scale(1.02);
+}
+
+.self-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+  /* Mirror effect */
+}
+
+/* Name Labels */
+.video-label {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  pointer-events: none;
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mic-icon-slash {
+  color: var(--danger-color);
+}
+
+/* Connection Status Overlay on Video */
+.connection-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 40px;
+  border-radius: 12px;
+  text-align: center;
+  z-index: 60;
+}
+
+.connection-overlay i {
+  font-size: 48px;
+  margin-bottom: 16px;
+  color: var(--text-secondary);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* ===========================
+   CONTROL BAR (BOTTOM)
+   =========================== */
+.control-bar-wrapper {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  gap: 12px;
+}
+
+.control-bar {
+  background: var(--control-bg);
+  backdrop-filter: blur(10px);
+  padding: 12px 24px;
+  border-radius: 50px;
+  display: flex;
+  gap: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.control-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  min-width: 60px;
+  transition: all 0.2s;
+}
+
+.icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.control-btn:hover .icon-circle {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.control-btn.active .icon-circle {
+  background: var(--bg-panel);
+  /* Default state is active/on */
+}
+
+.control-btn.off .icon-circle {
+  background: var(--danger-color);
+  color: white;
+}
+
+.control-btn.screen-share.active .icon-circle {
+  background: var(--success-color);
+  color: white;
+}
+
+.control-label {
+  font-size: 11px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.btn-end {
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 0 24px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  height: 50px;
+  /* Match height of control bar effective height */
+  margin-left: 20px;
+  transition: background 0.2s;
+  box-shadow: 0 4px 12px rgba(255, 68, 61, 0.3);
+}
+
+.btn-end:hover {
+  background: #d6302a;
+}
+
+.btn-end:active {
+  transform: scale(0.98);
+}
+
+/* ===========================
+   CHAT SIDEBAR
+   =========================== */
+.chat-sidebar {
+  width: 320px;
+  background: var(--bg-panel);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  transition: margin-right 0.3s ease;
+  z-index: 90;
+}
+
+.chat-sidebar.closed {
+  margin-right: -320px;
+  display: none;
+  /* or use transform */
+}
+
+.chat-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.close-chat {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.chat-msg {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.chat-msg.received {
+  background: rgba(255, 255, 255, 0.1);
+  align-self: flex-start;
+  border-bottom-left-radius: 2px;
+}
+
+.chat-msg.sent {
+  background: var(--accent-color);
+  align-self: flex-end;
+  border-bottom-right-radius: 2px;
+}
+
+.msg-meta {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.chat-input-area {
+  padding: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input-area input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 10px 16px;
+  color: white;
+  outline: none;
+}
+
+.chat-input-area input:focus {
+  border-color: var(--accent-color);
+}
+
+.btn-send {
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  font-size: 18px;
+  /* icon size */
+  cursor: pointer;
+  padding: 0 8px;
+}
+
+/* ===========================
+   MODALS (Review, Confirm, etc)
+   =========================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-card {
+  background: var(--bg-panel);
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-card h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .self-video-container {
+    width: 120px;
+    height: 68px;
+    bottom: 90px;
+    /* Above control bar */
+    right: 16px;
+  }
+
+  .control-bar {
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .btn-end {
+    padding: 0 16px;
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
+  .chat-sidebar {
+    position: absolute;
+    right: 0;
+    top: 60px;
+    /* Below header */
+    bottom: 0;
+    width: 100%;
+  }
+}

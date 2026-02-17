@@ -237,17 +237,15 @@ export default function Result() {
                     </div>
                 </div>
 
-                <div className="toolbar" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <div className="toolbar">
                     <input
-                        className="search"
-                        style={{ flex: '1 1 300px', height: '40px' }}
+                        className="search search-input"
                         placeholder="Search by name / email / assessment"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
                     <select
-                        className="search"
-                        style={{ flex: '0 0 200px', height: '40px', padding: '0 12px', borderRadius: '8px', border: '1px solid #e5e7eb' }}
+                        className="search search-select"
                         value={statusFilter}
                         onChange={(e) => setStatusFilter(e.target.value)}
                     >
@@ -255,22 +253,20 @@ export default function Result() {
                         <option value="selected">Qualified</option>
                         <option value="rejected">Not Qualified</option>
                     </select>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ fontSize: '14px', color: '#64748b' }}>From:</span>
+                    <div className="date-filter">
+                        <span>From:</span>
                         <input
                             type="date"
-                            className="search"
-                            style={{ width: 'auto', height: '40px' }}
+                            className="search search-date"
                             value={fromDate}
                             onChange={(e) => setFromDate(e.target.value)}
                         />
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <span style={{ fontSize: '14px', color: '#64748b' }}>To:</span>
+                    <div className="date-filter">
+                        <span>To:</span>
                         <input
                             type="date"
-                            className="search"
-                            style={{ width: 'auto', height: '40px' }}
+                            className="search search-date"
                             value={toDate}
                             onChange={(e) => setToDate(e.target.value)}
                         />

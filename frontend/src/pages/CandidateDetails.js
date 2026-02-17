@@ -20,7 +20,6 @@ const validateField = (field, value) => {
 };
 
 const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", field }) => {
-  const [focus, setFocus] = useState(false);
   const hasValue = value.trim().length > 0;
   const formatValid = hasValue ? validateField(field, value) : true;
 
@@ -28,10 +27,11 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
 
   return (
     <div className="candidate-input-group">
-      <label className={`candidate-label ${focus || value ? 'candidate-label-float' : ''}`}>{label}</label>
+      <label className="candidate-static-label">{label}</label>
       <input
         type={type}
         value={value}
+        placeholder={label}
         maxLength={field === "pan" ? 10 : undefined}
         onChange={(e) => {
           let val = e.target.value;
@@ -57,8 +57,6 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
 
           onChange(val);
         }}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
         className={`candidate-input ${showRedBorder ? 'candidate-input-error' : ''}`}
       />
     </div>
@@ -70,42 +68,42 @@ const detectBlur = (imageData) => {
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
   const img = new Image();
-  
+
   return new Promise((resolve) => {
     img.onload = () => {
       canvas.width = img.width;
       canvas.height = img.height;
       ctx.drawImage(img, 0, 0);
-      
+
       const imageDataObj = ctx.getImageData(0, 0, canvas.width, canvas.height);
       const data = imageDataObj.data;
-      
+
       // Convert to grayscale and calculate Laplacian variance
       let sum = 0;
       let sumSquared = 0;
       const width = canvas.width;
       const height = canvas.height;
-      
+
       for (let y = 1; y < height - 1; y++) {
         for (let x = 1; x < width - 1; x++) {
           const idx = (y * width + x) * 4;
           const gray = (data[idx] + data[idx + 1] + data[idx + 2]) / 3;
-          
+
           // Laplacian kernel
           const laplacian = Math.abs(
             gray * 4 -
             (data[((y - 1) * width + x) * 4] + data[((y + 1) * width + x) * 4] +
-             data[(y * width + x - 1) * 4] + data[(y * width + x + 1) * 4]) / 3
+              data[(y * width + x - 1) * 4] + data[(y * width + x + 1) * 4]) / 3
           );
-          
+
           sum += laplacian;
           sumSquared += laplacian * laplacian;
         }
       }
-      
+
       const mean = sum / ((width - 2) * (height - 2));
       const variance = (sumSquared / ((width - 2) * (height - 2))) - (mean * mean);
-      
+
       // Threshold: values below 100 are considered blurry
       resolve(variance > 100);
     };
@@ -142,39 +140,109 @@ const detectFace = async (imageSrc) => {
   });
 };
 
-// Function to extract PAN number from image using OCR
-const extractPanFromImage = async (file) => {
-  try {
-    const { data: { text } } = await Tesseract.recognize(file, 'eng', {
-      logger: (m) => console.log(m) // Optional: log progress
-    });
-    
-    // PAN format: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F)
-    const panPattern = /[A-Z]{5}[0-9]{4}[A-Z]{1}/g;
-    const matches = text.match(panPattern);
-    
-    if (matches && matches.length > 0) {
-      // Return the first match (usually the main PAN number on the card)
-      return matches[0].toUpperCase();
-    }
-    
-    // If no exact match, try to find any 10-character alphanumeric sequence
-    const altPattern = /[A-Z0-9]{10}/g;
-    const altMatches = text.match(altPattern);
-    if (altMatches) {
-      // Filter to find PAN-like patterns (5 letters, 4 digits, 1 letter)
-      for (const match of altMatches) {
-        if (/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(match)) {
-          return match.toUpperCase();
+// Helper to process image (rotate, contrast, etc.)
+const processImage = (file, rotation = 0, strategy = 'Standard') => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+
+      // Handle rotation dimensions
+      if (rotation === 90 || rotation === 270) {
+        canvas.width = img.height;
+        canvas.height = img.width;
+      } else {
+        canvas.width = img.width;
+        canvas.height = img.height;
+      }
+
+      // Rotate context
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate((rotation * Math.PI) / 180);
+      ctx.drawImage(img, -img.width / 2, -img.height / 2);
+
+      // Get image data for pixel manipulation
+      // We need to reset transform to get data from the whole canvas
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const data = imageData.data;
+
+      // Apply strategies
+      if (strategy === 'HighContrast') {
+        // Simple high contrast / thresholding
+        for (let i = 0; i < data.length; i += 4) {
+          const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          const val = avg > 128 ? 255 : 0; // Binary threshold
+          data[i] = val;     // R
+          data[i + 1] = val; // G
+          data[i + 2] = val; // B
+        }
+      } else if (strategy === 'Denoised') {
+        // Simple Grayscale + slight contrast increase (mimicking denoise for OCR)
+        for (let i = 0; i < data.length; i += 4) {
+          const avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+          // Increase contrast slightly
+          const contrast = 1.2;
+          const factor = (259 * (contrast + 255)) / (255 * (259 - contrast));
+          const val = factor * (avg - 128) + 128;
+
+          data[i] = val;
+          data[i + 1] = val;
+          data[i + 2] = val;
         }
       }
+
+      ctx.putImageData(imageData, 0, 0);
+      resolve(canvas.toDataURL('image/jpeg'));
+    };
+    img.src = URL.createObjectURL(file);
+  });
+};
+
+// Enhanced PAN Extraction Logic
+const extractPanFromImage = async (file, updateStatus) => {
+  const strategies = ['Standard'];
+  const rotations = [0, 90, 180, 270];
+
+  // PAN format: 5 letters, 4 digits, 1 letter (e.g., ABCDE1234F)
+  const panPattern = /[A-Z]{5}[0-9]{4}[A-Z]{1}/;
+
+  for (const strategy of strategies) {
+    for (const rotation of rotations) {
+      // Silent rotation attempts
+      try {
+        const processedImageSrc = await processImage(file, rotation, strategy);
+
+        const { data: { text } } = await Tesseract.recognize(processedImageSrc, 'eng', {
+          // logger: (m) => console.log(m) // Quiet logs
+        });
+
+        // Check for exact match
+        const matches = text.match(panPattern); // Use local regex without 'g' to find first match easily
+        if (matches) {
+          console.log(`PAN Found with ${strategy} at ${rotation}°:`, matches[0]);
+          return matches[0].toUpperCase();
+        }
+
+        // Check for 10-char alphanumeric sequences and loose match
+        const words = text.replace(/[^A-Z0-9]/g, ' '); // Replace non-alphanum with space
+        const candidates = words.split(/\s+/);
+
+        for (const word of candidates) {
+          if (word.length === 10 && /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(word)) {
+            console.log(`PAN Found (loose match) with ${strategy} at ${rotation}°:`, word);
+            return word.toUpperCase();
+          }
+        }
+
+      } catch (err) {
+        console.warn(`Extraction failed for ${strategy}/${rotation}:`, err);
+      }
     }
-    
-    return null;
-  } catch (error) {
-    console.error('OCR Error:', error);
-    return null;
   }
+
+  return null;
 };
 
 const CandidateDetails = ({ token, onComplete }) => {
@@ -201,6 +269,9 @@ const CandidateDetails = ({ token, onComplete }) => {
     extractedPan: null,
     panMatch: null,
     isExtractingPan: false,
+    extractionFailed: false, // New: track if all strategies failed
+    extractionStatus: '',    // New: show current strategy/rotation
+    manualConfirmation: false, // New: user overrides validaton
     snapshotValid: false, // Whether captured snapshot has face and is not blurry
   });
 
@@ -232,7 +303,7 @@ const CandidateDetails = ({ token, onComplete }) => {
         faceDetection.onResults((results) => {
           const hasFace = results.detections && results.detections.length > 0;
           setFaceDetected(hasFace);
-          
+
           // Detect blur
           if (webcamRef.current && webcamRef.current.video) {
             const video = webcamRef.current.video;
@@ -242,10 +313,10 @@ const CandidateDetails = ({ token, onComplete }) => {
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0);
             const imageData = canvas.toDataURL('image/jpeg');
-            
+
             detectBlur(imageData).then((notBlurry) => {
               setIsBlurry(!notBlurry);
-              
+
               // Update status message
               if (!hasFace) {
                 setCaptureStatus('No face detected. Please position yourself in front of the camera.');
@@ -319,8 +390,28 @@ const CandidateDetails = ({ token, onComplete }) => {
     // For images: must match extracted PAN
     // For PDFs: manual verification (no OCR), so we allow if PAN is entered and valid format
     const isPdf = data.panFile && data.panFile.type === 'application/pdf';
-    const panMismatch = !isPdf && data.extractedPan && data.panMatch === false;
-    const panNotExtracted = !isPdf && data.panFile && !data.extractedPan && !data.isExtractingPan;
+    // Logic: 
+    // 1. If PDF -> Valid (Manual check later)
+    // 2. If Image & Extracted -> Must Match
+    // 3. If Image & Failed Extraction -> Must have Manual Confirmation
+
+    let panMismatch = false;
+    let panNotExtracted = false;
+
+    if (!isPdf && data.panFile) {
+      if (data.extractedPan) {
+        // Extraction successful, must match
+        panMismatch = data.panMatch === false;
+      } else if (data.extractionFailed) {
+        // Extraction failed, must have manual confirmation
+        if (!data.manualConfirmation) {
+          panNotExtracted = true; // Treat as not extracted/verified
+        }
+      } else if (!data.isExtractingPan) {
+        // Not extracting, no result, not failed? changing file...
+        panNotExtracted = true;
+      }
+    }
 
     const isInvalid = emptyInvalid || formatInvalid || panMismatch || panNotExtracted;
     setShowError(isInvalid);
@@ -334,7 +425,9 @@ const CandidateDetails = ({ token, onComplete }) => {
       } else if (panNotExtracted) {
         setData(prev => ({
           ...prev,
-          panFileError: "Could not verify PAN card. Please upload a clear image of your PAN card."
+          panFileError: data.extractionFailed
+            ? "Automatic verification failed. Please check the confirmation box to proceed manually."
+            : "Could not verify PAN card. Please upload a clear image of your PAN card."
         }));
       } else if (!snapshot || !data.snapshotValid) {
         // Error message will be shown in the error text area
@@ -352,7 +445,7 @@ const CandidateDetails = ({ token, onComplete }) => {
       formData.append('phone', data.phone);
       formData.append('pan_number', data.pan);
       formData.append('snapshot', snapshot);
-      
+
       // Add PAN file if available
       if (data.panFile) {
         formData.append('pan_file', data.panFile);
@@ -360,36 +453,36 @@ const CandidateDetails = ({ token, onComplete }) => {
 
       // Send to backend API
       const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
-      
+
       axios.post(`${API_BASE_URL}/candidate-details/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
-      .then((response) => {
-        if (response.data.success) {
-          // Store success in localStorage for quick check
-          localStorage.setItem(`candidate_details_${token}`, JSON.stringify({
-            ...data,
-            snapshot,
-            token,
-            saved: true,
-            id: response.data.id,
-          }));
-          
-          // Call onComplete callback to proceed to exam
-          if (onComplete) {
-            onComplete({ ...data, snapshot, token, id: response.data.id });
+        .then((response) => {
+          if (response.data.success) {
+            // Store success in localStorage for quick check
+            localStorage.setItem(`candidate_details_${token}`, JSON.stringify({
+              ...data,
+              snapshot,
+              token,
+              saved: true,
+              id: response.data.id,
+            }));
+
+            // Call onComplete callback to proceed to exam
+            if (onComplete) {
+              onComplete({ ...data, snapshot, token, id: response.data.id });
+            }
+          } else {
+            alert('Failed to save candidate details: ' + (response.data.error || 'Unknown error'));
           }
-        } else {
-          alert('Failed to save candidate details: ' + (response.data.error || 'Unknown error'));
-        }
-      })
-      .catch((error) => {
-        console.error('Error saving candidate details:', error);
-        const errorMessage = error?.response?.data?.error || error?.message || 'Failed to save candidate details';
-        alert('Error: ' + errorMessage);
-      });
+        })
+        .catch((error) => {
+          console.error('Error saving candidate details:', error);
+          const errorMessage = error?.response?.data?.error || error?.message || 'Failed to save candidate details';
+          alert('Error: ' + errorMessage);
+        });
     }
   };
 
@@ -403,37 +496,37 @@ const CandidateDetails = ({ token, onComplete }) => {
           <section className="candidate-card">
             <div className="candidate-section-title">General Information</div>
             <div className="candidate-row">
-              <FloatingInput 
-                label="First Name" 
-                field="firstName" 
-                value={data.firstName} 
-                errorEmpty={submitted && !data.firstName} 
-                onChange={(v) => setData({ ...data, firstName: v })} 
+              <FloatingInput
+                label="First Name"
+                field="firstName"
+                value={data.firstName}
+                errorEmpty={submitted && !data.firstName}
+                onChange={(v) => setData({ ...data, firstName: v })}
               />
-              <FloatingInput 
-                label="Last Name" 
-                field="lastName" 
-                value={data.lastName} 
-                errorEmpty={submitted && !data.lastName} 
-                onChange={(v) => setData({ ...data, lastName: v })} 
+              <FloatingInput
+                label="Last Name"
+                field="lastName"
+                value={data.lastName}
+                errorEmpty={submitted && !data.lastName}
+                onChange={(v) => setData({ ...data, lastName: v })}
               />
             </div>
             <div className="candidate-row">
-              <FloatingInput 
-                label="Email" 
-                type="email" 
-                field="email" 
-                value={data.email} 
-                errorEmpty={submitted && !data.email} 
-                onChange={(v) => setData({ ...data, email: v })} 
+              <FloatingInput
+                label="Email"
+                type="email"
+                field="email"
+                value={data.email}
+                errorEmpty={submitted && !data.email}
+                onChange={(v) => setData({ ...data, email: v })}
               />
-              <FloatingInput 
-                label="Phone Number" 
-                type="tel" 
-                field="phone" 
-                value={data.phone} 
-                errorEmpty={submitted && !data.phone} 
-                onChange={(v) => setData({ ...data, phone: v })} 
+              <FloatingInput
+                label="Phone Number"
+                type="tel"
+                field="phone"
+                value={data.phone}
+                errorEmpty={submitted && !data.phone}
+                onChange={(v) => setData({ ...data, phone: v })}
               />
             </div>
           </section>
@@ -442,20 +535,19 @@ const CandidateDetails = ({ token, onComplete }) => {
           <section className="candidate-card">
             <div className="candidate-section-title">KYC</div>
             <div className="candidate-row">
-              <FloatingInput 
-                label="PAN Card Number" 
-                field="pan" 
-                value={data.pan} 
-                errorEmpty={submitted && !data.pan} 
-                onChange={(v) => setData({ ...data, pan: v })} 
+              <FloatingInput
+                label="PAN Card Number"
+                field="pan"
+                value={data.pan}
+                errorEmpty={submitted && !data.pan}
+                onChange={(v) => setData({ ...data, pan: v })}
               />
               <div className="candidate-input-group">
-                <label className="candidate-label candidate-label-float" style={{ color: "#000" }}>Upload PAN Card</label>
+                <label className="candidate-static-label">Upload PAN Card</label>
                 <input
                   type="file"
                   accept=".png,.jpg,.jpeg,.pdf"
                   className={`candidate-input ${submitted && !data.panFile ? 'candidate-input-error' : ''}`}
-                  style={{ color: "#000" }}
                   onChange={(e) => {
                     const file = e.target.files?.[0] || null;
                     if (file) {
@@ -463,20 +555,20 @@ const CandidateDetails = ({ token, onComplete }) => {
                       const fileName = file.name.toLowerCase();
                       const validExtensions = ['.png', '.jpg', '.jpeg', '.pdf'];
                       const hasValidExtension = validExtensions.some(ext => fileName.endsWith(ext));
-                      
+
                       // Check MIME type
                       const validMimeTypes = [
-                        "image/png", 
-                        "image/jpeg", 
+                        "image/png",
+                        "image/jpeg",
                         "image/jpg",  // Some browsers use jpg instead of jpeg
                         "application/pdf"
                       ];
                       const isValidMimeType = validMimeTypes.includes(file.type);
-                      
+
                       // Accept if either MIME type or extension is valid
                       const isValidType = isValidMimeType || hasValidExtension;
                       const isValidSize = file.size <= 5 * 1024 * 1024; // 5MB (increased from 2MB for PAN card images)
-                      
+
                       // Debug logging
                       console.log('File validation:', {
                         name: file.name,
@@ -490,52 +582,119 @@ const CandidateDetails = ({ token, onComplete }) => {
                       if (isValidType && isValidSize) {
                         // Check if it's an image (not PDF) for OCR extraction
                         const isImage = file.type.startsWith('image/');
-                        
+
                         // ✅ Accept valid PAN card file and extract PAN number
-                        setData(prev => ({ 
-                          ...prev, 
-                          panFile: file, 
-                          panFileValid: true, 
+                        setData(prev => ({
+                          ...prev,
+                          panFile: file,
+                          panFileValid: true,
                           panFileError: null,
                           isExtractingPan: isImage, // Only extract from images
                           extractedPan: null,
-                          panMatch: null
+                          panMatch: null,
+                          extractionFailed: false,
+                          extractionStatus: '',
+                          manualConfirmation: false,
                         }));
-                        
+
                         // Extract PAN from image using OCR (only for images, not PDFs)
                         if (isImage) {
+                          // Update UI to show we are verifying
+                          setData(prev => ({ ...prev, extractionStatus: 'Verifying...' }));
+
                           extractPanFromImage(file).then((extractedPan) => {
-                            setData(prev => {
-                              if (extractedPan) {
-                                const enteredPan = (prev.pan || '').toUpperCase().trim();
-                                const panMatches = enteredPan === extractedPan;
-                                
-                                return {
-                                  ...prev,
-                                  extractedPan,
-                                  panMatch: panMatches,
-                                  isExtractingPan: false,
-                                  panFileError: panMatches ? null : "PAN number in image doesn't match entered PAN number"
-                                };
-                              } else {
-                                return {
+                            const enteredPan = (data.pan || '').toUpperCase().trim();
+
+                            // 1. Frontend Success & Match
+                            if (extractedPan && enteredPan === extractedPan) {
+                              setData(prev => ({
+                                ...prev,
+                                extractedPan,
+                                panMatch: true,
+                                isExtractingPan: false,
+                                extractionFailed: false,
+                                extractionStatus: 'Verified',
+                                panFileError: null
+                              }));
+                              return;
+                            }
+
+                            // 2. Frontend Failed or Mismatch -> Call Backend
+                            setData(prev => ({ ...prev, extractionStatus: 'Verifying with server...' }));
+
+                            const formData = new FormData();
+                            formData.append('pan_number', enteredPan);
+                            formData.append('pan_file', file);
+
+                            const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+                            axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData, {
+                              headers: { 'Content-Type': 'multipart/form-data' }
+                            })
+                              .then(response => {
+                                if (response.data.verified) {
+                                  // Backend Verified
+                                  setData(prev => ({
+                                    ...prev,
+                                    extractedPan: response.data.extracted_pan || enteredPan, // Use confirmed PAN
+                                    panMatch: true,
+                                    isExtractingPan: false,
+                                    extractionFailed: false,
+                                    extractionStatus: 'Verified',
+                                    panFileError: null
+                                  }));
+                                } else {
+                                  // Backend Failed
+                                  throw new Error('Backend verification failed');
+                                }
+                              })
+                              .catch(err => {
+                                console.warn("Backend verification failed:", err);
+                                // All attempts failed
+                                setData(prev => ({
                                   ...prev,
                                   extractedPan: null,
                                   panMatch: false,
                                   isExtractingPan: false,
-                                  panFileError: "Could not extract PAN number from image. Please ensure the image is clear and readable."
-                                };
-                              }
-                            });
+                                  extractionFailed: true,
+                                  extractionStatus: 'Failed',
+                                  panFileError: null // Show checkbox
+                                }));
+                              });
+
                           }).catch((error) => {
-                            console.error('OCR extraction failed:', error);
-                            setData(prev => ({
-                              ...prev,
-                              extractedPan: null,
-                              panMatch: false,
-                              isExtractingPan: false,
-                              panFileError: "Failed to process image. Please try uploading a clearer image."
-                            }));
+                            console.error('OCR logic error:', error);
+                            // Fallback to backend even if local logic errored (rare)
+                            const enteredPan = (data.pan || '').toUpperCase().trim();
+
+                            const formData = new FormData();
+                            formData.append('pan_number', enteredPan);
+                            formData.append('pan_file', file);
+                            const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+
+                            axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData)
+                              .then(response => {
+                                if (response.data.verified) {
+                                  setData(prev => ({
+                                    ...prev,
+                                    extractedPan: response.data.extracted_pan || enteredPan,
+                                    panMatch: true,
+                                    isExtractingPan: false,
+                                    extractionFailed: false,
+                                    extractionStatus: 'Verified',
+                                    panFileError: null
+                                  }));
+                                } else { throw new Error('Backend failed'); }
+                              })
+                              .catch(() => {
+                                setData(prev => ({
+                                  ...prev,
+                                  extractedPan: null,
+                                  panMatch: false,
+                                  isExtractingPan: false,
+                                  extractionFailed: true,
+                                  extractionStatus: 'Failed'
+                                }));
+                              });
                           });
                         } else {
                           // For PDFs, we can't extract automatically, so require manual verification
@@ -565,7 +724,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 {/* Show feedback */}
                 {data.isExtractingPan && (
                   <div className="candidate-info-text">
-                    🔍 Extracting PAN number from image...
+                    🔍 {data.extractionStatus || 'Initializing extraction...'}
                   </div>
                 )}
                 {!data.isExtractingPan && data.panFileValid === true && data.panFile && data.panFile.type === 'application/pdf' && (
@@ -583,9 +742,21 @@ const CandidateDetails = ({ token, onComplete }) => {
                     ❌ PAN Mismatch: Entered PAN ({data.pan.toUpperCase()})
                   </div>
                 )}
-                {!data.isExtractingPan && data.panFileValid === true && !data.extractedPan && data.panFile && data.panFile.type.startsWith('image/') && (
-                  <div className="candidate-error-text">
-                    ⚠️ Could not extract PAN from image. Please ensure image is clear and readable.
+                {!data.isExtractingPan && data.panFileValid === true && !data.extractedPan && data.extractionFailed && (
+                  <div className="candidate-warning-box">
+                    <div className="candidate-error-text">
+                      ⚠️ Automatic validaton failed. We could not read the PAN number from the image.
+                    </div>
+                    <div style={{ marginTop: '10px' }}>
+                      <label className="candidate-checkbox-label">
+                        <input
+                          type="checkbox"
+                          checked={data.manualConfirmation}
+                          onChange={(e) => setData({ ...data, manualConfirmation: e.target.checked, panFileError: null })}
+                        />
+                        <span>I confirm the uploaded document is my valid PAN card and the details entered above are correct.</span>
+                      </label>
+                    </div>
                   </div>
                 )}
                 {data.panFileValid === false && data.panFileError && (
@@ -631,44 +802,44 @@ const CandidateDetails = ({ token, onComplete }) => {
                       className={`candidate-button-small ${faceDetected && !isBlurry && !isDetecting ? 'candidate-button-ready' : 'candidate-button-disabled'}`}
                       onClick={async () => {
                         if (!webcamRef.current) return;
-                        
+
                         // Check if face is detected and image is not blurry
                         if (!faceDetected) {
                           alert('⚠️ No face detected. Please position yourself in front of the camera.');
                           return;
                         }
-                        
+
                         if (isBlurry) {
                           alert('⚠️ Image is blurry. Please hold still and ensure good lighting.');
                           return;
                         }
-                        
+
                         // Capture snapshot
                         const imageSrc = webcamRef.current.getScreenshot();
                         if (!imageSrc) return;
-                        
+
                         // Validate captured image
                         setIsDetecting(true);
                         const hasFace = await detectFace(imageSrc);
                         const notBlurry = await detectBlur(imageSrc);
-                        
+
                         if (!hasFace) {
                           alert('❌ No face detected in captured image. Please try again.');
                           setIsDetecting(false);
                           return;
                         }
-                        
+
                         if (!notBlurry) {
                           alert('❌ Captured image is blurry. Please try again with better lighting.');
                           setIsDetecting(false);
                           return;
                         }
-                        
+
                         // Image is valid
                         setSnapshot(imageSrc);
                         setData(prev => ({ ...prev, snapshotValid: true }));
                         setIsDetecting(false);
-                        
+
                         // Clear detection interval
                         if (detectionIntervalRef.current) {
                           clearInterval(detectionIntervalRef.current);

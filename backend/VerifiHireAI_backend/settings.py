@@ -17,9 +17,7 @@ def _env_list(key: str, default: list[str]) -> list[str]:
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load environment variables from .env file
-import dotenv
-dotenv.load_dotenv(BASE_DIR / '.env')
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -33,10 +31,14 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = _env_list("DJANGO_ALLOWED_HOSTS", ["*"])
 
+FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifyhire.duckdns.org")
+
+
 
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,8 +47,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'channels',
     'api',
+
 ]
+
+# Trust Nginx to handle SSL and Host headers
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -78,6 +87,16 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'VerifiHireAI_backend.wsgi.application'
+ASGI_APPLICATION = 'VerifiHireAI_backend.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 
 # Database
@@ -96,7 +115,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('DB_NAME', 'react_user1'),
         'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
+        'PASSWORD': os.environ.get('DB_PASSWORD', '1234'),
         # IMPORTANT: In Docker this should be "db"; locally it can be "localhost"
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432'),
@@ -176,6 +195,7 @@ default_cors_origins = [
     "http://localhost:3001",
     "http://127.0.0.1:3001",
     "http://192.168.1.22:3001",
+    "https://verifyhire.duckdns.org",
 ]
 
 CORS_ALLOWED_ORIGINS = _env_list("CORS_ALLOWED_ORIGINS", default_cors_origins)

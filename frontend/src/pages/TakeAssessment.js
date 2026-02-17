@@ -257,6 +257,7 @@ export default function TakeAssessment() {
   const [candidateDetailsCompleted, setCandidateDetailsCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [scheduleInfo, setScheduleInfo] = useState(null);
   const [assessment, setAssessment] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [codingQuestions, setCodingQuestions] = useState([]);
@@ -737,6 +738,7 @@ export default function TakeAssessment() {
           navigate(`/result/${token}`, { replace: true });
           return;
         }
+        setScheduleInfo(e?.response?.data?.schedule || null);
         setError(message);
       } finally {
         setLoading(false);
@@ -926,20 +928,106 @@ export default function TakeAssessment() {
 
   if (error) {
     const msg = String(error || '');
+    const isNotStarted = msg.toLowerCase().includes('not started');
+    const isExpired = msg.toLowerCase().includes('start window') || msg.toLowerCase().includes('expired');
+
+    // Detailed "Assessment is Scheduled" page
+    if (isNotStarted) {
+      return (
+        <div className="take-page">
+          <div className="take-shell">
+            <div className="take-card" style={{ maxWidth: 600, margin: '60px auto', padding: '40px 36px', borderRadius: 16, background: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+              <div style={{ textAlign: 'center', marginBottom: 28 }}>
+                <span style={{ fontSize: 48 }}>⏳</span>
+                <h2 style={{ margin: '16px 0 8px', fontSize: 22, color: '#1e293b' }}>Your Assessment Is Scheduled</h2>
+                <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>Thank you for your interest in this opportunity.</p>
+              </div>
+              <p style={{ color: '#334155', fontSize: 15, lineHeight: 1.6 }}>
+                The assessment is not yet active and will be available at the scheduled time below:
+              </p>
+              {scheduleInfo && (
+                <div style={{ background: '#f0f9ff', border: '1px solid #bae6fd', borderRadius: 12, padding: '20px 24px', margin: '20px 0' }}>
+                  <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+                    <tbody>
+                      {scheduleInfo.start_date && (
+                        <tr>
+                          <td style={{ padding: '8px 12px 8px 0', fontWeight: 600, color: '#0369a1', whiteSpace: 'nowrap' }}>📅 Date</td>
+                          <td style={{ padding: '8px 0', color: '#1e293b' }}>{scheduleInfo.start_date}</td>
+                        </tr>
+                      )}
+                      {scheduleInfo.start_time_display && (
+                        <tr>
+                          <td style={{ padding: '8px 12px 8px 0', fontWeight: 600, color: '#0369a1', whiteSpace: 'nowrap' }}>🕒 Time</td>
+                          <td style={{ padding: '8px 0', color: '#1e293b' }}>{scheduleInfo.start_time_display}{scheduleInfo.time_zone ? ` (${scheduleInfo.time_zone})` : ''}</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              <div style={{ margin: '24px 0' }}>
+                <p style={{ fontWeight: 600, color: '#334155', marginBottom: 10 }}>Please ensure:</p>
+                <ul style={{ margin: 0, paddingLeft: 20, color: '#475569', lineHeight: 2 }}>
+                  <li>You have a stable internet connection</li>
+                  <li>You are using a supported browser</li>
+                  <li>You log in a few minutes before the start time</li>
+                </ul>
+              </div>
+              <p style={{ color: '#64748b', fontSize: 14 }}>
+                Once the exam window opens, this page will automatically allow you to begin.
+              </p>
+              <p style={{ color: '#94a3b8', fontSize: 13, marginTop: 20 }}>
+                If you need assistance, please contact our support team.
+              </p>
+              <p style={{ textAlign: 'center', fontSize: 16, marginTop: 24, color: '#334155' }}>
+                We wish you the best of luck! 🚀
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Expired / other error pages
     const title = (() => {
-      if (msg.toLowerCase().includes('not started')) return 'Exam not started yet';
-      if (msg.toLowerCase().includes('start window')) return 'Start window expired';
+      if (msg.toLowerCase().includes('start window')) return 'Start Window Expired';
       if (msg.toLowerCase().includes('completed')) return 'Exam already completed';
-      if (msg.toLowerCase().includes('expired')) return 'Link expired';
+      if (msg.toLowerCase().includes('expired')) return 'Link Expired';
       if (msg.toLowerCase().includes('time is over')) return 'Time is over';
       return 'Invalid or expired link';
     })();
     return (
       <div className="take-page">
         <div className="take-shell">
-          <div className="take-card error">
-            <div className="take-title">{title}</div>
-            <div className="take-sub">{error}</div>
+          <div className="take-card error" style={{ maxWidth: 560, margin: '60px auto', padding: '36px 32px', borderRadius: 16 }}>
+            <div style={{ textAlign: 'center', marginBottom: 16 }}>
+              <span style={{ fontSize: 44 }}>{isExpired ? '⏰' : '❌'}</span>
+            </div>
+            <div className="take-title" style={{ textAlign: 'center' }}>{title}</div>
+            <div className="take-sub" style={{ textAlign: 'center', marginTop: 8 }}>{error}</div>
+            {scheduleInfo && (scheduleInfo.start_date || scheduleInfo.start_time_display) && (
+              <div style={{ background: '#fef2f2', border: '1px solid #fecaca', borderRadius: 10, padding: '16px 20px', margin: '20px 0' }}>
+                <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+                  <tbody>
+                    {scheduleInfo.start_date && (
+                      <tr>
+                        <td style={{ padding: '6px 12px 6px 0', fontWeight: 600, color: '#dc2626' }}>📅 Scheduled Date</td>
+                        <td style={{ padding: '6px 0', color: '#1e293b' }}>{scheduleInfo.start_date}</td>
+                      </tr>
+                    )}
+                    {scheduleInfo.start_time_display && (
+                      <tr>
+                        <td style={{ padding: '6px 12px 6px 0', fontWeight: 600, color: '#dc2626' }}>🕒 Scheduled Time</td>
+                        <td style={{ padding: '6px 0', color: '#1e293b' }}>{scheduleInfo.start_time_display}{scheduleInfo.time_zone ? ` (${scheduleInfo.time_zone})` : ''}</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            )}
+            <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: 13, marginTop: 16 }}>
+              If you believe this is an error, please contact the assessment administrator.
+            </p>
           </div>
         </div>
       </div>
