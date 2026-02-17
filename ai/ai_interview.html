@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .interview-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .interview-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+
+        .interview-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .interview-hero p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-icon i {
+            font-size: 2.5rem;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2.5rem;
+            border: 1px solid rgba(102, 126, 234, 0.1);
+        }
+
+        .form-card h2 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .form-card h2 i {
+            color: #667eea;
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            font-size: 1rem;
+        }
+
+        .enhanced-upload-zone {
+            border: 3px dashed #d1d5db;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #f8f9ff 0%, #f0f4ff 100%);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .enhanced-upload-zone:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #f0f4ff 0%, #e8edff 100%);
+            transform: translateY(-2px);
+        }
+
+        .upload-icon-large {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .upload-text-main {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-text-sub {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .upload-text-sub .browse-link {
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .upload-text-sub .browse-link:hover {
+            color: #764ba2;
+        }
+
+        .file-selected {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem 1.5rem;
+            background: white;
+            border-radius: 12px;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .file-selected.active {
+            display: flex;
+        }
+
+        .file-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+        }
+
+        .file-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .file-name-display {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .file-size-display {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .enhanced-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .enhanced-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .enhanced-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .info-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2.5rem;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            border-color: rgba(102, 126, 234, 0.2);
+        }
+
+        .info-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .info-card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .info-card:nth-child(1) .info-card-icon {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .info-card:nth-child(2) .info-card-icon {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .info-card:nth-child(3) .info-card-icon {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .info-card:nth-child(4) .info-card-icon {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .info-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .info-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-page">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="logo">VeriFiHireAI</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="ai_adventure.html"><i class="fa-solid fa-robot"></i> AI Adventure</a></li>
+                <li><a href="candidates.html"><i class="fa-solid fa-users"></i> Candidates</a></li>
+                <li><a href="assessments.html"><i class="fa-solid fa-clipboard-list"></i> Assessments</a></li>
+                <li class="active"><a href="#"><i class="fa-solid fa-microphone"></i> AI Interview</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1 style="font-size: 2rem; margin: 0;">AI Interview Studio</h1>
+                    <p style="margin: 0.5rem 0 0 0;">Transform your hiring with intelligent AI-powered interviews</p>
+                </div>
+                <div class="user-profile">
+                    <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="avatar">HR</div>
+                </div>
+            </header>
+
+            <div class="dashboard-container">
+                <!-- Hero Section -->
+                <div class="interview-hero">
+                    <div class="hero-icon">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+                    <h1>AI-Powered Interview</h1>
+                    <p>Experience next-generation candidate assessment with AI that analyzes resumes, generates tailored
+                        questions, and provides intelligent insights in real-time.</p>
+                </div>
+
+                <!-- Interview Setup Form -->
+                <div class="form-card">
+                    <h2><i class="fa-solid fa-user-plus"></i> Candidate Information</h2>
+                    <p class="form-subtitle">Enter candidate details to begin the AI interview session</p>
+
+                    <form id="aiInterviewForm">
+                        <!-- Name Field -->
+                        <div class="auth-input-icon-wrapper">
+                            <div class="auth-input-icon"><i class="fa-regular fa-user"></i></div>
+                            <input type="text" id="candidateName" name="candidateName" class="auth-input-with-icon"
+                                placeholder=" " required>
+                            <label for="candidateName" class="auth-floating-label">Full Name</label>
+                        </div>
+
+                        <!-- Email Field -->
+                        <div class="auth-input-icon-wrapper">
+                            <div class="auth-input-icon"><i class="fa-regular fa-envelope"></i></div>
+                            <input type="email" id="candidateEmail" name="candidateEmail" class="auth-input-with-icon"
+                                placeholder=" " required>
+                            <label for="candidateEmail" class="auth-floating-label">Email Address</label>
+                        </div>
+
+                        <!-- Job Description & Resume Section -->
+                        <div class="input-grid"
+                            style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem;">
+                            <!-- Job Description Field -->
+                            <div>
+                                <label for="jobDescription" class="file-upload-label"
+                                    style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; display: block;">
+                                    <i class="fa-solid fa-briefcase" style="margin-right: 0.5rem; color: #667eea;"></i>
+                                    Job Description
+                                </label>
+                                <textarea id="jobDescription" name="jobDescription"
+                                    style="width: 100%; height: 250px; padding: 1rem; border: 2px solid #e2e8f0; border-radius: 16px; resize: vertical; font-family: inherit; font-size: 0.95rem; line-height: 1.5; color: var(--text-primary); background: #f8f9fa; transition: all 0.3s ease;"
+                                    placeholder="Paste the job description here to help the AI tailor questions..."></textarea>
+                            </div>
+
+                            <!-- Enhanced Resume Upload -->
+                            <div>
+                                <label class="file-upload-label"
+                                    style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1rem; display: block;">
+                                    <i class="fa-solid fa-file-pdf" style="margin-right: 0.5rem; color: #667eea;"></i>
+                                    Resume / CV
+                                </label>
+                                <div class="enhanced-upload-zone" id="resumeDropZone"
+                                    style="height: 250px; display: flex; flex-direction: column; justify-content: center;">
+                                    <input type="file" id="candidateResume" name="candidateResume" class="file-input"
+                                        accept=".pdf,.doc,.docx" required hidden>
+                                    <div class="upload-content-wrapper">
+                                        <div class="upload-icon-large"
+                                            style="width: 60px; height: 60px; font-size: 2rem; margin-bottom: 1rem;">
+                                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                                        </div>
+                                        <p class="upload-text-main" style="font-size: 1.1rem;">Drop resume here</p>
+                                        <p class="upload-text-sub">or <span class="browse-link">browse</span></p>
+                                    </div>
+
+                                    <div class="file-selected" id="fileSelected">
+                                        <div class="file-icon" style="width: 40px; height: 40px; font-size: 1.1rem;">
+                                            <i class="fa-solid fa-file-pdf"></i>
+                                        </div>
+                                        <div class="file-info">
+                                            <div class="file-name-display" id="resumeFileName"
+                                                style="font-size: 0.9rem;"></div>
+                                        </div>
+                                        <button type="button" onclick="removeFile()"
+                                            style="background: none; border: none; color: #ef4444; cursor: pointer; font-size: 1.1rem;">
+                                            <i class="fa-solid fa-xmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Start Interview Button -->
+                        <div style="margin-top: 2.5rem;">
+                            <button type="submit" class="enhanced-btn">
+                                <i class="fa-regular fa-paper-plane"></i>
+                                <span>Send Interview Invite to Candidate</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- How It Works Section -->
+                <section>
+                    <h2 class="section-heading" style="font-size: 1.8rem; margin-bottom: 1.5rem;">
+                        <i class="fa-solid fa-lightbulb" style="color: #667eea; margin-right: 0.75rem;"></i>
+                        How AI Interview Works
+                    </h2>
+                    <div class="info-cards-grid">
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fa-solid fa-upload"></i>
+                            </div>
+                            <h3><span class="step-number">1</span>Upload Resume</h3>
+                            <p>Submit candidate details and resume for instant AI analysis and processing.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                            <h3><span class="step-number">2</span>AI Analysis</h3>
+                            <p>Advanced AI reviews skills, experience, and generates personalized interview questions.
+                            </p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fa-solid fa-comments"></i>
+                            </div>
+                            <h3><span class="step-number">3</span>Live Interview</h3>
+                            <p>Conduct structured interviews with real-time AI assistance and guidance.</p>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card-icon">
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+                            <h3><span class="step-number">4</span>Get Insights</h3>
+                            <p>Receive comprehensive evaluation reports with actionable hiring recommendations.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add responsive styles for the grid -->
+    <style>
+        @media (max-width: 768px) {
+            .input-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        #jobDescription:focus {
+            outline: none;
+            border-color: #667eea !important;
+            background: white !important;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+    </style>
+
+    <script>
+        const dropZone = document.getElementById('resumeDropZone');
+        const fileInput = document.getElementById('candidateResume');
+        const fileNameDisplay = document.getElementById('resumeFileName');
+        const fileSizeDisplay = document.getElementById('resumeFileSize');
+        const fileSelectedDiv = document.getElementById('fileSelected');
+        const browseLink = document.querySelector('.browse-link');
+        const uploadContentWrapper = document.querySelector('.upload-content-wrapper');
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function displayFile(file) {
+            fileNameDisplay.textContent = file.name;
+            // fileSizeDisplay.textContent = formatFileSize(file.size); // Removed for space in grid
+            fileSelectedDiv.classList.add('active');
+            uploadContentWrapper.style.display = 'none'; // Hide upload text when file selected to save space
+        }
+
+        function removeFile() {
+            fileInput.value = '';
+            fileSelectedDiv.classList.remove('active');
+            uploadContentWrapper.style.display = 'block'; // Show upload text again
+        }
+
+        browseLink.addEventListener('click', (e) => {
+            e.stopPropagation();
+            fileInput.click();
+        });
+
+        dropZone.addEventListener('click', (e) => {
+            if (!e.target.closest('button') && !fileSelectedDiv.classList.contains('active')) {
+                fileInput.click();
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) displayFile(file);
+        });
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#667eea';
+            dropZone.style.background = 'linear-gradient(135deg, #e8edff 0%, #d8e1ff 100%)';
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.style.borderColor = '';
+            dropZone.style.background = '';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '';
+            dropZone.style.background = '';
+
+            const file = e.dataTransfer.files[0];
+            if (file && (file.type === 'application/pdf' ||
+                file.type === 'application/msword' ||
+                file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
+                fileInput.files = e.dataTransfer.files;
+                displayFile(file);
+            } else {
+                alert('Please upload a PDF, DOC, or DOCX file.');
+            }
+        });
+
+        document.getElementById('aiInterviewForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('candidateName').value;
+            const email = document.getElementById('candidateEmail').value;
+            const resume = document.getElementById('candidateResume').files[0];
+            const jobDescription = document.getElementById('jobDescription').value;
+
+            if (!resume) {
+                alert('Please upload a resume.');
+                return;
+            }
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i><span>Sending Invite...</span>';
+            submitBtn.disabled = true;
+
+            try {
+                // 1. Prepare Interview Data
+                const interviewData = {
+                    name: name,
+                    email: email,
+                    resumeName: resume.name,
+                    resumeSize: resume.size,
+                    jobDescription: jobDescription,
+                    status: 'invited',
+                    invitedAt: new Date().toISOString()
+                };
+
+                // 2. Generate Link (Frontend based for now to ensure correct host/port)
+                // Assuming ai_interview.html and ai_interview_start.html are in the same dir
+                const interviewLink = window.location.href.replace('ai_interview.html', 'ai_interview_start.html');
+
+                // 3. Store locally for simulation/fallback
+                localStorage.setItem('pendingInterview', JSON.stringify(interviewData));
+
+                // 4. Send Invite via Backend API
+                try {
+                    const response = await fetch('http://127.0.0.1:8000/api/candidates/invite/', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            name: name,
+                            email: email,
+                            link: interviewLink,
+                            job_description: jobDescription
+                        })
+                    });
+
+                    if (!response.ok) {
+                        const err = await response.json();
+                        throw new Error(err.error || 'Failed to send email via backend');
+                    }
+                    console.log('Backend email sent successfully');
+                } catch (backendError) {
+                    console.warn('Backend email failed, falling back to local simulation:', backendError);
+                    alert('⚠️ Note: Backend email service unavailable. Using local simulation only.');
+                }
+
+                // Simulate network delay for UX
+                await new Promise(resolve => setTimeout(resolve, 1000));
+
+                // Show Success Message & "Email Link"
+                const formCard = document.querySelector('.form-card');
+                formCard.innerHTML = `
+                    <div style="text-align: center; padding: 2rem;">
+                        <div style="width: 80px; height: 80px; background: #d1fae5; color: #10b981; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1.5rem;">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h2 style="justify-content: center; margin-bottom: 1rem; color: #065f46;">Invite Sent Successfully!</h2>
+                        <p style="color: #4b5563; margin-bottom: 2rem; font-size: 1.1rem;">
+                            An email has been sent to <strong>${email}</strong> with the interview link.
+                        </p>
+                        
+                        <div style="background: #f3f4f6; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; border: 1px dashed #9ca3af;">
+                            <p style="margin-bottom: 0.5rem; font-size: 0.9rem; color: #6b7280; font-weight: 600; text-transform: uppercase;">Simulation: Candidate Link</p>
+                            <a href="${interviewLink}" target="_blank" style="color: #667eea; font-weight: 600; font-size: 1.1rem; word-break: break-all;">
+                                ${interviewLink}
+                            </a>
+                            <p style="margin-top: 0.5rem; font-size: 0.85rem; color: #9ca3af;">(Click to simulate candidate experience)</p>
+                        </div>
+
+                        <button onclick="location.reload()" class="enhanced-btn" style="width: auto;">
+                            <i class="fa-solid fa-plus"></i> Send Another Invite
+                        </button>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert('❌ Error sending invite. Please try again.');
+                submitBtn.innerHTML = originalHTML;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+
+</html>

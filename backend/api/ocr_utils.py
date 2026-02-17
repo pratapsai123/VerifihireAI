@@ -1,13 +1,12 @@
-import easyocr
-from PIL import Image
-import io
-import re
-import numpy as np
-
-# Initialize reader globally to avoid reloading model on every request
-# 'en' for English. gpu=False by default to be safe, or True if available.
-# We'll set gpu=False for compatibility unless we know otherwise.
-reader = easyocr.Reader(['en'], gpu=False)
+try:
+    import easyocr
+    # Initialize reader globally to avoid reloading model on every request
+    # 'en' for English. gpu=False by default to be safe, or True if available.
+    # We'll set gpu=False for compatibility unless we know otherwise.
+    reader = easyocr.Reader(['en'], gpu=False)
+except (ImportError, OSError):
+    print("WARNING: EasyOCR/Torch not installed or compatible. OCR features will be disabled.")
+    reader = None
 
 def extract_text_from_image(image_file, strategies=['Standard'], rotations=[0, 90, 180, 270]):
     """
@@ -37,8 +36,11 @@ def extract_text_from_image(image_file, strategies=['Standard'], rotations=[0, 9
                 
                 # Extract text
                 # detail=0 returns just the list of strings
-                results = reader.readtext(image_np, detail=0) 
-                text = " ".join(results)
+                if reader:
+                    results = reader.readtext(image_np, detail=0) 
+                    text = " ".join(results)
+                else:
+                    text = "OCR_DISABLED"
                 
                 extracted_text_log += f"\n--- Rotation {rotation} ---\n{text}"
                 

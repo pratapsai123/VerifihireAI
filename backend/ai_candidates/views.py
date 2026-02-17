@@ -45,6 +45,24 @@ class ResumeMatchView(APIView):
                 except Exception as e:
                      return Response({"error": f"Error reading candidate resume: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+            # Create Candidate record if new upload
+            candidate_obj = None
+            if resume_file:
+                # Basic creation - could be enhanced with parsing
+                candidate_obj = Candidate.objects.create(
+                    full_name=resume_file.name.replace('.pdf', ''), # Placeholder name
+                    email="pending@example.com", # Placeholder
+                    job_title="Applicant", # Placeholder
+                    resume=resume_file,
+                    status='New'
+                )
+                candidate_id = candidate_obj.id
+            elif candidate_id:
+                try:
+                    candidate_obj = Candidate.objects.get(id=candidate_id)
+                except Candidate.DoesNotExist:
+                    pass
+
             # 2. Call Gemini
             model = genai.GenerativeModel('gemini-flash-latest')
             
@@ -69,6 +87,9 @@ class ResumeMatchView(APIView):
             response = model.generate_content(prompt)
             clean_response = response.text.replace("```json", "").replace("```", "").strip()
             result = json.loads(clean_response)
+            
+            # Add candidate_id to response
+            result['candidate_id'] = candidate_id
 
             return Response(result, status=status.HTTP_200_OK)
 
@@ -82,3 +103,17 @@ class CandidateListCreateView(generics.ListCreateAPIView):
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
+
+class CandidateStatusUpdateView(APIView):
+    def patch(self, request, pk):
+        try:
+            candidate = Candidate.objects.get(pk=pk)
+            new_status = request.data.get('status')
+            if new_status in dict(Candidate.STATUS_CHOICES):
+                candidate.status = new_status
+                candidate.save()
+                return Response({'status': 'success', 'new_status': candidate.status})
+            else:
+                return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)
+        except Candidate.DoesNotExist:
+            return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)

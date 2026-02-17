@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview Session | VeriFiHireAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Full Screen Overrides */
+        .dashboard-page {
+            display: block;
+            /* Remove grid/flex used for sidebar layout */
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .sidebar,
+        .top-bar {
+            display: none !important;
+            /* Hide navigation */
+        }
+
+        .main-content {
+            margin-left: 0 !important;
+            width: 100% !important;
+            height: 100vh !important;
+            padding: 0 !important;
+            background: #f4f6f8;
+        }
+
+        /* Updated Layout for Full Body Avatar */
+        .session-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 1rem;
+            height: 100vh;
+            display: flex;
+            gap: 2rem;
+            flex-direction: row;
+            align-items: stretch;
+        }
+
+        /* Left Sidebar with Full Body Avatar */
+        .ai-sidebar {
+            width: 400px;
+            /* Wider for full body */
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            /* Align avatar to bottom */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #fff;
+        }
+
+        .ai-full-body {
+            width: 100%;
+            height: 85%;
+            background-image: url('https://img.freepik.com/free-vector/cute-artificial-intelligence-robot-isometric-icon_1284-63045.jpg?t=st=1740000000~exp=1740003600~hmac=placeholder');
+            /* Placeholder - using CSS shapes/icon for now if image fails */
+            background: url('https://cdn-icons-png.flaticon.com/512/4712/4712109.png');
+            /* 3D Robot Icon */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center bottom;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .ai-full-body.speaking {
+            animation: gentle-bounce 2s infinite ease-in-out;
+        }
+
+        .ai-sidebar-header {
+            position: absolute;
+            top: 2rem;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .ai-status-badge {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #4a5568;
+        }
+
+        /* Right Content Area */
+        .main-interview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            gap: 1.5rem;
+        }
+
+        /* Prominent Question Card */
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.1);
+            border-left: 5px solid #667eea;
+            animation: slideDown 0.5s ease;
+            position: relative;
+        }
+
+        .question-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .current-question-text {
+            font-size: 1.4rem;
+            color: #2d3748;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        /* Minimized History */
+        .chat-container {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.5);
+            /* Transparent background */
+            border-radius: 20px;
+            padding: 1.5rem;
+            overflow-y: auto;
+            box-shadow: none;
+            /* Removed shadow */
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid transparent;
+        }
+
+        .message {
+            opacity: 0.8;
+            /* Slightly faded history */
+            transition: opacity 0.3s;
+        }
+
+        .message:hover {
+            opacity: 1;
+        }
+
+        .message.ai {
+            display: none;
+            /* Hide AI messages in chat since we have the big card? maybe keep for history but style diff */
+        }
+
+        .message.ai.history {
+            display: flex;
+            /* Only show past AI messages */
+        }
+
+        @keyframes gentle-bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ... existing styles ... */
+
+        /* Mobile Responsive */
+        @media (max-width: 900px) {
+            .session-container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .ai-sidebar {
+                width: 100%;
+                height: 200px;
+            }
+
+            .ai-full-body {
+                background-position: center;
+                height: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-page">
+        <nav class="sidebar">
+            <div class="logo">VeriFiHireAI</div>
+            <ul class="nav-links">
+                <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+                <li><a href="ai_adventure.html"><i class="fa-solid fa-robot"></i> AI Adventure</a></li>
+                <li><a href="candidates.html"><i class="fa-solid fa-users"></i> Candidates</a></li>
+                <li><a href="assessments.html"><i class="fa-solid fa-clipboard-list"></i> Assessments</a></li>
+                <li class="active"><a href="ai_interview.html"><i class="fa-solid fa-microphone"></i> AI Interview</a>
+                </li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="page-title">
+                    <h1 style="font-size: 2rem; margin: 0;">Live Interview Session</h1>
+                    <p style="margin: 0.5rem 0 0 0;">AI-powered candidate assessment in progress</p>
+                </div>
+                <div class="user-profile">
+                    <div class="notification-icon"><i class="fa-regular fa-bell"></i></div>
+                    <div class="avatar">HR</div>
+                </div>
+            </header>
+
+            <div class="session-container">
+                <!-- Left AI Sidebar with Full Body Avatar -->
+                <div class="ai-sidebar">
+                    <div class="ai-sidebar-header">
+                        <div class="ai-status-badge">
+                            <span class="speaking-indicator"></span>
+                            <span id="aiStatusText">AI Interviewer Online</span>
+                        </div>
+                    </div>
+                    <div class="ai-full-body" id="aiAvatar"></div>
+                </div>
+
+                <!-- Right Main Content -->
+                <div class="main-interview-area">
+                    <div class="session-header">
+                        <div class="header-content">
+                            <div class="session-info">
+                                <i class="fa-solid fa-user-tie" style="color: #667eea;"></i>
+                                <span style="font-weight: 500;" id="candidateName">Candidate</span>
+                            </div>
+                            <div class="progress-container">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                                </div>
+                            </div>
+                            <a href="ai_interview.html" class="exit-btn">
+                                <i class="fa-solid fa-xmark"></i> Exit
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Prominent Question Display -->
+                    <div id="activeQuestionCard" class="question-card" style="display:none;">
+                        <span class="question-label">Current Question</span>
+                        <div id="activeQuestionText" class="current-question-text">
+                            <!-- Question text goes here -->
+                        </div>
+                    </div>
+
+                    <div class="chat-container" id="chatContainer">
+                        <div style="text-align: center; color: #a0aec0; margin-top: 2rem; font-style: italic;"
+                            id="chatPlaceholder">
+                            Conversation history will appear here...
+                        </div>
+                        <!-- Messages will be added here dynamically -->
+                    </div>
+
+                    <div class="input-container" id="inputContainer">
+                        <div class="input-controls"
+                            style="width: 100%; display: flex; flex-direction: column; gap: 1rem;">
+
+                            <!-- Audio Interaction Mode -->
+                            <div id="audioControls"
+                                style="display: flex; gap: 1rem; align-items: center; justify-content: center; padding: 1rem;">
+                                <button id="micBtn" class="mic-btn" onclick="toggleRecording()">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </button>
+                                <div class="recording-status" id="recordingStatus">Tap mic to speak</div>
+                            </div>
+
+                            <!-- Text Input Mode -->
+                            <div id="textControls"
+                                style="display: none; width: 100%; gap: 1rem; align-items: flex-end;">
+                                <div class="input-wrapper">
+                                    <textarea id="responseInput" class="response-input"
+                                        placeholder="Type your answer (or paste code) here..." rows="2"></textarea>
+                                </div>
+                                <button class="submit-btn" id="submitBtn" onclick="submitResponse()">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    <span>Send</span>
+                                </button>
+                            </div>
+
+                            <div style="text-align: center;">
+                                <button id="modeToggleBtn" class="mode-toggle-btn" onclick="toggleInputMode()">
+                                    <i class="fa-solid fa-keyboard"></i> Switch to Text Input
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Styles for Mic and buttons remain same -->
+    <style>
+        .mic-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mic-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.5);
+        }
+
+        .mic-btn.listening {
+            background: #e11d48;
+            animation: pulse-red 1.5s infinite;
+        }
+
+        .recording-status {
+            color: #718096;
+            font-weight: 500;
+        }
+
+        .mode-toggle-btn {
+            background: none;
+            border: none;
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .mode-toggle-btn:hover {
+            background: #f0f4ff;
+        }
+
+        @keyframes pulse-red {
+            0% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(225, 29, 72, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(225, 29, 72, 0);
+            }
+        }
+    </style>
+
+    <script>
+        // Interview state and voice config
+        let candidateData = null;
+        let currentQuestionIndex = 0;
+        let questions = [];
+        let responses = [];
+        let isProcessing = false;
+        let isRecording = false;
+        let recognition = null;
+        let userInputMode = 'audio';
+        const synth = window.speechSynthesis;
+        let voice = null;
+
+        // ... (loadVoices, initSpeechRecognition, toggleInputMode functions)
+        // Re-implementing simplified versions for this block
+
+        if ('webkitSpeechRecognition' in window) {
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+            recognition.onstart = function () { isRecording = true; updateMicUI(true); };
+            recognition.onend = function () { isRecording = false; updateMicUI(false); };
+            recognition.onresult = function (event) {
+                document.getElementById('responseInput').value = event.results[0][0].transcript;
+                submitResponse();
+            };
+        }
+
+        function toggleRecording() {
+            if (isRecording) recognition.stop();
+            else recognition.start();
+        }
+
+        function updateMicUI(listening) {
+            const btn = document.getElementById('micBtn');
+            const status = document.getElementById('recordingStatus');
+            if (listening) {
+                btn.classList.add('listening');
+                btn.innerHTML = '<i class="fa-solid fa-stop"></i>';
+                status.innerText = "Listening...";
+                document.getElementById('aiStatusText').innerText = "Simulating Active Listening...";
+            } else {
+                btn.classList.remove('listening');
+                btn.innerHTML = '<i class="fa-solid fa-microphone"></i>';
+                status.innerText = "Tap mic to speak";
+                document.getElementById('aiStatusText').innerText = "AI Interviewer Online";
+            }
+        }
+
+        function toggleInputMode() {
+            const audioControls = document.getElementById('audioControls');
+            const textControls = document.getElementById('textControls');
+            const toggleBtn = document.getElementById('modeToggleBtn');
+            if (userInputMode === 'audio') {
+                userInputMode = 'text';
+                audioControls.style.display = 'none';
+                textControls.style.display = 'flex';
+                toggleBtn.innerHTML = '<i class="fa-solid fa-microphone"></i> Switch to Voice Input';
+                setTimeout(() => document.getElementById('responseInput').focus(), 100);
+            } else {
+                userInputMode = 'audio';
+                audioControls.style.display = 'flex';
+                textControls.style.display = 'none';
+                toggleBtn.innerHTML = '<i class="fa-solid fa-keyboard"></i> Switch to Text Input';
+            }
+        }
+
+        // Voice Logic
+        function loadVoices() {
+            const voices = synth.getVoices();
+            voice = voices.find(v => v.name.includes('Google US English')) || voices[0];
+        }
+        if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = loadVoices;
+
+        function speak(text) {
+            if (synth.speaking) synth.cancel();
+            if (text !== "") {
+                const utterThis = new SpeechSynthesisUtterance(text);
+                if (voice) utterThis.voice = voice;
+
+                // Avatar Animation
+                const avatar = document.getElementById('aiAvatar');
+                const statusText = document.getElementById('aiStatusText');
+
+                utterThis.onstart = () => {
+                    avatar.classList.add('speaking');
+                    statusText.innerText = "Speaking...";
+                };
+                utterThis.onend = () => {
+                    avatar.classList.remove('speaking');
+                    statusText.innerText = "AI Interviewer Online";
+                };
+
+                synth.speak(utterThis);
+            }
+        }
+
+        // Logic Updates for New Layout
+        function updateActiveQuestion(text) {
+            const card = document.getElementById('activeQuestionCard');
+            const questionText = document.getElementById('activeQuestionText');
+
+            questionText.textContent = text;
+            card.style.display = 'block';
+
+            // Remove animation class and re-add to trigger it again
+            card.style.animation = 'none';
+            card.offsetHeight;
+            /* trigger reflow */
+            card.style.animation = 'slideDown 0.5s ease';
+        }
+
+        function addMessage(type, content) {
+            const chatContainer = document.getElementById('chatContainer');
+            document.getElementById('chatPlaceholder').style.display = 'none';
+
+            // Only add user messages or "History" AI messages to chat
+            // Current AI question is shown in the big card, not chat history immediately?
+            // Actually, let's add EVERYTHING to chat history but style it differently
+
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            if (type === 'ai') messageDiv.classList.add('history'); // Mark AI messages as history
+
+            const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <div class="message-bubble">${content}</div>
+                </div>
+            `;
+            // Simplified chat bubbles (no avatars in history since we have big avatar)
+
+            if (type === 'user') {
+                // User message logic
+                messageDiv.innerHTML = `
+                <div class="message-content" style="display:flex; justify-content:flex-end;">
+                     <div class="message-bubble" style="background: #667eea; color: white;">${content}</div>
+                </div>
+                `;
+            } else {
+                // AI History message
+                messageDiv.innerHTML = `
+                <div class="message-content">
+                     <div class="message-bubble" style="background: #f1f5f9; color: #64748b; font-size: 0.9rem;">${content}</div>
+                </div>
+                `;
+            }
+
+            chatContainer.appendChild(messageDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // ... existing logic for initSession, submitResponse etc ...
+        // Re-binding necessary functions
+
+        const questionTemplates = [
+            "Can you walk me through your experience with {skill}?",
+            "Tell me about a challenging project with {skill}.",
+            "How do you stay updated in {field}?",
+            "Describe a team collaboration experience.",
+            "What are your career goals?"
+        ];
+
+        // ... (acknowledgements arrays remain same)
+        const acknowledgements = ["Thank you.", "Great example.", "Interesting.", "Good to know."];
+        const negativeResponses = ["No problem.", "Let's move on."];
+
+        function initSession() {
+            const storedData = sessionStorage.getItem('interviewData');
+            if (!storedData) { window.location.href = 'ai_interview.html'; return; }
+            candidateData = JSON.parse(storedData);
+            document.getElementById('candidateName').textContent = candidateData.name;
+
+            generateQuestions();
+            setTimeout(() => {
+                loadVoices();
+                const welcome = `Hello ${candidateData.name}! I'm your AI interviewer. Let's begin!`;
+                speak(welcome);
+                updateActiveQuestion("Introduction");
+                addMessage('ai', welcome);
+                setTimeout(() => askNextQuestion(), 3000);
+            }, 500);
+        }
+
+        function generateQuestions() {
+            questions = [
+                "Can you walk me through your experience with JavaScript?",
+                "Tell me about a challenging project you've worked on."
+            ];
+
+            if (candidateData && candidateData.jobDescription && candidateData.jobDescription.trim().length > 0) {
+                // simple simulated question based on JD
+                questions.push("Based on the job description you provided, why do you think you're a good fit for this specific role?");
+            } else {
+                questions.push("What motivates you to apply for this position?");
+            }
+
+            questions.push("How do you handle tight deadlines?");
+            questions.push("Do you have any questions for us?");
+        }
+
+        function askNextQuestion() {
+            if (currentQuestionIndex >= questions.length) { completeInterview(); return; }
+
+            const question = questions[currentQuestionIndex];
+            updateActiveQuestion(question);
+            speak(question);
+            // addMessage('ai', question); // Don't add to history yet? Or add as grayed out
+
+            document.getElementById('progressFill').style.width = ((currentQuestionIndex) / questions.length) * 100 + '%';
+
+            // Re-enable inputs
+            document.getElementById('responseInput').disabled = false;
+            document.getElementById('submitBtn').disabled = false;
+        }
+
+        function submitResponse() {
+            const input = document.getElementById('responseInput');
+            const response = input.value.trim();
+            if (!response) return;
+
+            // Stop speaking if interrupted
+            if (synth.speaking) synth.cancel();
+
+            // Add last question to history now that it's answered
+            if (currentQuestionIndex < questions.length) {
+                addMessage('ai', questions[currentQuestionIndex]);
+            }
+
+            addMessage('user', response);
+            input.value = '';
+
+            // Simulate processing
+            setTimeout(() => {
+                const ack = acknowledgements[Math.floor(Math.random() * acknowledgements.length)];
+                speak(ack);
+                // move next
+                currentQuestionIndex++;
+                setTimeout(() => askNextQuestion(), 1500);
+            }, 500);
+        }
+
+        function completeInterview() {
+            updateActiveQuestion("Interview Complete");
+            speak("Thank you for your time. Goodbye!");
+            document.getElementById('inputContainer').style.display = 'none';
+            document.getElementById('chatContainer').innerHTML = "<div style='text-align:center; padding:2rem;'><h3>All Done!</h3></div>";
+        }
+
+        document.addEventListener('DOMContentLoaded', initSession);
+        document.getElementById('responseInput').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitResponse(); }
+        });
+    </script>
+</body>
+
+</html>

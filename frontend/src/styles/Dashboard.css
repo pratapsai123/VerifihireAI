@@ -149,6 +149,13 @@
   /* pink-600 */
 }
 
+.indigo-glow {
+  background-color: #EEF2FF;
+  /* indigo-50 */
+  color: #4F46E5;
+  /* indigo-600 */
+}
+
 .module-card:hover .module-icon-wrapper {
   transform: scale(1.05);
   /* Subtle scale */
