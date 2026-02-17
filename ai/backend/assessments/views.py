@@ -77,3 +77,20 @@ class GenerateAssessmentView(APIView):
                 "error": str(e), 
                 "message": "Failed to generate AI content. Please check API key."
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class AssessmentListView(APIView):
+    def get(self, request):
+        assessments = Assessment.objects.all().order_by('-created_at')
+        data = []
+        for assessment in assessments:
+            data.append({
+                "id": assessment.id,
+                "job_description": assessment.job_description,
+                "required_skills": assessment.required_skills,
+                "mcq_count": assessment.mcq_count,
+                "coding_count": assessment.coding_count,
+                "duration_minutes": assessment.duration_minutes,
+                "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
+                "generated_content": assessment.generated_content
+            })
+        return Response(data, status=status.HTTP_200_OK)

@@ -61,100 +61,63 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="candidate-info">
-                                            <div class="candidate-avatar">MJ</div>
-                                            <span>Michael Jordan</span>
-                                        </div>
-                                    </td>
-                                    <td>Frontend React Skill Test</td>
-                                    <td>
-                                        <div
-                                            style="width: 100px; height: 6px; background: #E0E7FF; border-radius: 3px; position: relative;">
-                                            <div
-                                                style="width: 45%; height: 100%; background: var(--blue-accent); border-radius: 3px;">
-                                            </div>
-                                        </div>
-                                        <span
-                                            style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; display: block;">45%</span>
-                                    </td>
-                                    <td>15m 30s</td>
-                                    <td><button class="action-btn">Monitor</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="candidate-info">
-                                            <div class="candidate-avatar">SJ</div>
-                                            <span>Sarah Jones</span>
-                                        </div>
-                                    </td>
-                                    <td>Python Data Structures</td>
-                                    <td>
-                                        <div
-                                            style="width: 100px; height: 6px; background: #E0E7FF; border-radius: 3px; position: relative;">
-                                            <div
-                                                style="width: 70%; height: 100%; background: var(--blue-accent); border-radius: 3px;">
-                                            </div>
-                                        </div>
-                                        <span
-                                            style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px; display: block;">70%</span>
-                                    </td>
-                                    <td>05m 12s</td>
-                                    <td><button class="action-btn">Monitor</button></td>
-                                </tr>
+                            <tbody id="assessmentsTableBody">
+                                <!-- Data will be populated by JS -->
                             </tbody>
                         </table>
                     </div>
                 </section>
 
-                <!-- Scheduled Assessments Section -->
-                <section class="recent-section">
-                    <h2 class="section-heading">Scheduled</h2>
-                    <div class="table-container">
-                        <table class="data-table">
-                            <thead>
-                                <tr>
-                                    <th>Candidate</th>
-                                    <th>Assessment Type</th>
-                                    <th>Scheduled Date</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>
-                                        <div class="candidate-info">
-                                            <div class="candidate-avatar">DK</div>
-                                            <span>David Kim</span>
-                                        </div>
-                                    </td>
-                                    <td>Full Stack System Design</td>
-                                    <td>Oct 26, 2023, 10:00 AM</td>
-                                    <td><span class="status-badge status-new">Scheduled</span></td>
-                                    <td><button class="action-btn">Reschedule</button></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="candidate-info">
-                                            <div class="candidate-avatar">EP</div>
-                                            <span>Emily Parker</span>
-                                        </div>
-                                    </td>
-                                    <td>General Aptitude</td>
-                                    <td>Oct 28, 2023, 02:00 PM</td>
-                                    <td><span class="status-badge status-new">Scheduled</span></td>
-                                    <td><button class="action-btn">Reschedule</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+                <!-- Scheduled Assessments Section (Hidden for now as we focus on AI Generated) -->
+                <!-- <section class="recent-section"> ... </section> -->
             </div>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const tableBody = document.getElementById('assessmentsTableBody');
+
+            try {
+                const response = await fetch('/api/assessments/');
+                if (!response.ok) throw new Error('Failed to fetch assessments');
+
+                const assessments = await response.json();
+
+                if (assessments.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center;">No assessments generated yet.</td></tr>';
+                    return;
+                }
+
+                tableBody.innerHTML = assessments.map(assessment => `
+                    <tr>
+                        <td>
+                            <div class="candidate-info">
+                                <div class="candidate-avatar">AI</div>
+                                <span>${assessment.job_description.substring(0, 30)}...</span>
+                            </div>
+                        </td>
+                        <td>${assessment.required_skills}</td>
+                        <td>
+                            <span class="status-badge status-new">Generated</span>
+                        </td>
+                        <td>${assessment.duration_minutes} mins</td>
+                        <td>
+                            <button class="action-btn" onclick="viewAssessment(${assessment.id})">View Details</button>
+                        </td>
+                    </tr>
+                `).join('');
+
+            } catch (error) {
+                console.error('Error:', error);
+                tableBody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:red;">Error loading assessments.</td></tr>';
+            }
+        });
+
+        function viewAssessment(id) {
+            alert("View details feature coming soon for ID: " + id);
+        }
+    </script>
 </body>
 
 </html>
