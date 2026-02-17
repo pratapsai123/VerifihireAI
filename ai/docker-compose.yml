@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  ai_db:
+    image: postgres:15-alpine
+    container_name: ai_db
+    restart: always
+    environment:
+      POSTGRES_DB: ai_db
+      POSTGRES_USER: ai_user
+      POSTGRES_PASSWORD: ai_password
+    ports:
+      - "5433:5432" # Changed port to 5433 to avoid conflict
+    volumes:
+      - ai_pg_data:/var/lib/postgresql/data
+
+  ai_backend:
+    build:
+      context: ./backend
+    container_name: ai_backend
+    restart: always
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8001:8000" # Changed host port to 8001
+    environment:
+      - DB_HOST=ai_db
+      - DB_NAME=ai_db
+      - DB_USER=ai_user
+      - DB_PASSWORD=ai_password
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,ai_backend
+      - CORS_ALLOWED_ORIGINS=http://localhost:3000,http://127.0.0.1:3000,null
+    depends_on:
+      - ai_db
+
+volumes:
+  ai_pg_data:
