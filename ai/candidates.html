@@ -110,7 +110,14 @@
                             <td>${candidate.job_title}</td>
                             <td>${candidate.email}</td>
                             <td>${dateStr}</td>
-                            <td><span style="color: var(--blue-accent);"><i class="fa-solid fa-paperclip"></i> ${candidate.resume_name}</span></td>
+                            <td>
+                                ${candidate.resume ?
+                                `<a href="${candidate.resume}" target="_blank" style="color: var(--blue-accent); text-decoration: none;">
+                                        <i class="fa-solid fa-paperclip"></i> View Resume
+                                    </a>` :
+                                '<span style="color: grey;">No Resume</span>'
+                            }
+                            </td>
                             <td>
                                 <a href="resume_matcher.html?id=${candidate.id}" class="action-btn" style="text-decoration: none; display: inline-block;">
                                     Analyze

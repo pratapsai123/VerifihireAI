@@ -40,24 +40,23 @@ document.addEventListener('DOMContentLoaded', () => {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        // Construct API payload matching Django model fields
-        const apiData = {
-            full_name: data.fullName,
-            email: data.email,
-            phone: data.phone,
-            job_title: data.jobTitle,
-            linkedin_url: data.linkedin || '',
-            resume_name: fileInput.files[0] ? fileInput.files[0].name : 'No file uploaded',
-            cover_letter: data.coverLetter || ''
-        };
+        // Construct FormData for file upload
+        const apiData = new FormData();
+        apiData.append('full_name', data.fullName);
+        apiData.append('email', data.email);
+        apiData.append('phone', data.phone);
+        apiData.append('job_title', data.jobTitle);
+        apiData.append('linkedin_url', data.linkedin || '');
+        apiData.append('cover_letter', data.coverLetter || '');
+
+        if (fileInput.files[0]) {
+            apiData.append('resume', fileInput.files[0]);
+        }
 
         // Create Candidate via API
         fetch('http://localhost:8001/api/candidates/', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(apiData)
+            body: apiData // Send FormData directly
         })
             .then(response => {
                 if (response.ok) {

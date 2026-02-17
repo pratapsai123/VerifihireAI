@@ -14,7 +14,7 @@ class Candidate(models.Model):
     phone = models.CharField(max_length=50)
     job_title = models.CharField(max_length=255)
     linkedin_url = models.URLField(blank=True, null=True)
-    resume_name = models.CharField(max_length=255)
+    resume = models.FileField(upload_to='resumes/', blank=True, null=True)
     cover_letter = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='New')
     submission_date = models.DateField(auto_now_add=True)
