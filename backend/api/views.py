@@ -1025,7 +1025,7 @@ def resend_invite_view(request, token):
         inv.expires_at = timezone.now() + timedelta(hours=48)
         inv.save(update_fields=['temp_password_hash', 'expires_at'])
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
         activation_link = f"{frontend_base.rstrip('/')}/accept-invite?token={inv.token}"
 
         subject = f"{inv.company.name} - Account Invitation (Resent)"
@@ -3063,7 +3063,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
 
         results = []
         sent_count = 0
@@ -4674,7 +4674,7 @@ def create_interview_invitations_and_send_email_view(request):
             description=f'Interview created on {timezone.now().strftime("%Y-%m-%d %H:%M:%S")}',
         )
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
 
         results = []
         sent_count = 0

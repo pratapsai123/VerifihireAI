@@ -31,8 +31,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = _env_list("DJANGO_ALLOWED_HOSTS", ["*"])
 
-FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "http://localhost:3000")
-
+FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifyhire.duckdns.org")
 
 
 # Application definition
@@ -195,7 +194,7 @@ default_cors_origins = [
     "http://localhost:3001",
     "http://127.0.0.1:3001",
     "http://192.168.1.22:3001",
-    # "https://verifyhire.duckdns.org",
+    "https://verifyhire.duckdns.org",
 ]
 
 CORS_ALLOWED_ORIGINS = _env_list("CORS_ALLOWED_ORIGINS", default_cors_origins)
