@@ -1060,3 +1060,31 @@ class CodingInviteQuestion(models.Model):
 
     def __str__(self):
         return f"CodingInviteQuestion #{self.id} (Invite {self.invite_id}, Q {self.question_id})"
+
+
+class LiveInterviewFeedback(models.Model):
+    """
+    Stores feedback for live interviews from both interviewer and candidate.
+    """
+    invitation = models.OneToOneField(
+        'InterviewInvitation',
+        on_delete=models.CASCADE,
+        related_name='feedback',
+    )
+    
+    interviewer_feedback = models.TextField(blank=True, null=True)
+    candidate_feedback = models.TextField(blank=True, null=True)
+    
+    interviewer_rating = models.IntegerField(blank=True, null=True, help_text="Rating given by interviewer (1-5)")
+    candidate_rating = models.IntegerField(blank=True, null=True, help_text="Rating given by candidate (1-5)")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'live_interview_feedback'
+        verbose_name = "Live Interview Feedback"
+        verbose_name_plural = "Live Interview Feedbacks"
+
+    def __str__(self):
+        return f"Feedback for Invitation #{self.invitation_id}"

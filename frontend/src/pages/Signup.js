@@ -83,6 +83,7 @@ function Signup() {
     try {
       const response = await axios.post(`${API_BASE_URL}/send-otp/`, {
         email: businessEmail,
+        context: 'register',
       });
 
       setOtpSent(true);
@@ -269,7 +270,7 @@ function Signup() {
               <p style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--gray-600)', fontSize: '0.9rem', lineHeight: '1.4' }}>
                 Sign up to manage assessments, view reports, and monitor candidate sessions.
               </p>
-              <h3 className="auth-column-title" style={{ textAlign: 'center', marginBottom: '0.5rem' }}>Sign up</h3>
+              <h3 className="auth-column-title" style={{ textAlign: 'center', marginBottom: '1rem' }}>Sign up</h3>
               <form className="auth-form" onSubmit={handleSignup}>
                 {signupError && (
                   <div className="auth-error-message">{signupError}</div>

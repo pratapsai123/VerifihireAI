@@ -28,6 +28,10 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 200;
 }
 
 /* ===========================
@@ -102,15 +106,15 @@
 .remote-video {
   width: 100%;
   height: 100%;
-  object-fit: contain;
   /* Identify Letterboxing */
+  object-fit: cover;
 }
 
 /* Local Video (Floating PiP) */
 /* Draggable container style */
 .self-video-container {
   position: absolute;
-  bottom: 20px;
+  top: 20px;
   right: 20px;
   width: 240px;
   height: 135px;
@@ -120,8 +124,12 @@
   border: 2px solid rgba(255, 255, 255, 0.2);
   z-index: 50;
   cursor: grab;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, right 0.3s ease;
   background: #2a2a2a;
+}
+
+.live-interview-interviewer.chat-active .self-video-container {
+  right: 340px !important;
 }
 
 .self-video-container:active {
@@ -291,19 +299,24 @@
    CHAT SIDEBAR
    =========================== */
 .chat-sidebar {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
   width: 320px;
   background: var(--bg-panel);
   border-left: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   flex-direction: column;
-  transition: margin-right 0.3s ease;
-  z-index: 90;
+  transition: transform 0.3s ease;
+  z-index: 300;
+  height: 100vh;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .chat-sidebar.closed {
-  margin-right: -320px;
-  display: none;
-  /* or use transform */
+  transform: translateX(100%);
+  display: flex;
 }
 
 .chat-header {
@@ -334,6 +347,16 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  min-height: 0;
+  scroll-behavior: smooth;
+
+  /* Hide scrollbar */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.chat-messages::-webkit-scrollbar {
+  display: none;
 }
 
 .chat-msg {
@@ -479,4 +502,44 @@
     bottom: 0;
     width: 100%;
   }
+}
+
+/* ===========================
+   NOTIFICATIONS / POPUPS
+   =========================== */
+.proxy-notification-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  /* Moved to left as requested */
+  right: auto;
+  width: 300px;
+  z-index: 9999;
+  transition: left 0.3s ease;
+}
+
+/* No need to shift notification container when chat opens since it's on the left now */
+
+.proxy-violation-notification {
+  background: #2a2a2a;
+  border-left: 4px solid var(--danger-color);
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.3s ease;
+}
+
+.violation-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  font-weight: 600;
+  color: var(--danger-color);
+}
+
+.violation-details {
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.4;
 }

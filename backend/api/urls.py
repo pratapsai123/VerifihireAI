@@ -62,5 +62,6 @@ urlpatterns = [
     path('coding/invites/<uuid:token>/select-language/', coding_views.coding_invite_select_language_view, name='coding_invite_select_language'),
     path('coding/invites/<uuid:token>/run/', coding_views.coding_invite_run_view, name='coding_invite_run'),
     path('coding/invites/<uuid:token>/submit/', coding_views.coding_invite_submit_view, name='coding_invite_submit'),
+    path('submit-interview-feedback/', views.submit_interview_feedback, name='submit_interview_feedback'),
 ]
 

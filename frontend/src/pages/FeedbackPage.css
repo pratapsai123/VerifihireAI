@@ -1,0 +1,121 @@
+.feedback-page {
+    min-height: 100vh;
+    background: #1a1a1a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.feedback-container {
+    background: #2a2a2a;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.feedback-header {
+    margin-bottom: 30px;
+}
+
+.feedback-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.feedback-subtitle {
+    color: #9ca3af;
+    font-size: 16px;
+}
+
+.rating-section-simple {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.stars-large {
+    display: flex;
+    gap: 15px;
+}
+
+.star-large {
+    font-size: 40px;
+    color: #4b5563;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.star-large:hover {
+    transform: scale(1.1);
+    color: #fbbf24;
+}
+
+.star-large.active {
+    color: #fbbf24;
+}
+
+.rating-text {
+    font-size: 18px;
+    color: #e5e7eb;
+    font-weight: 500;
+}
+
+.feedback-input-section {
+    margin-bottom: 30px;
+}
+
+.feedback-textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 16px;
+    color: white;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    transition: border-color 0.2s;
+}
+
+.feedback-textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: #3b82f6;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-submit:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}
+
+.btn-submit:disabled {
+    background: #4b5563;
+    cursor: not-allowed;
+    transform: none;
+}

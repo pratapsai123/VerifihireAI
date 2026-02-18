@@ -7,7 +7,7 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:800
 function LiveInterview() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const sessionId = searchParams.get('token') || 'default-session';
+  const sessionId = searchParams.get('token') || searchParams.get('session') || searchParams.get('sessionId') || 'default-session';
 
   // State management
   const [candidateName, setCandidateName] = useState('Candidate');
@@ -53,9 +53,9 @@ function LiveInterview() {
   const remoteStreamRef = useRef(null);
   const screenShareStreamRef = useRef(null);
   const remoteIceQueueRef = useRef([]);
+  const pendingOfferRef = useRef(null);
   const thumbnailVideoRef = useRef(null);
   const remoteVideoRef = useRef(null);
-  const remoteVideoBackupRef = useRef(null);
   const screenShareVideoRef = useRef(null);
   const chatMessagesRef = useRef(null);
   const chatInputRef = useRef(null);
@@ -221,8 +221,13 @@ function LiveInterview() {
           break;
 
         case 'video_offer':
-          if (data.sender !== candidateName && peerConnectionRef.current) {
-            handleVideoOffer(data.offer);
+          if (data.sender !== candidateName) {
+            if (peerConnectionRef.current) {
+              handleVideoOffer(data.offer);
+            } else {
+              console.log('⏳ PC not ready (Candidate), queuing video offer');
+              pendingOfferRef.current = data.offer;
+            }
           }
           break;
 
@@ -261,6 +266,11 @@ function LiveInterview() {
               showSessionPopup(`${data.sender || 'Interviewer'} started screen sharing`);
             } else {
               showSessionPopup(`${data.sender || 'Interviewer'} stopped screen sharing`);
+            }
+
+            // Adjust video fit
+            if (remoteVideoRef.current) {
+              remoteVideoRef.current.style.objectFit = data.active ? 'contain' : 'cover';
             }
           }
           break;
@@ -382,8 +392,8 @@ function LiveInterview() {
       console.log('🎯 Interviewer joined, creating video offer...');
       createVideoOffer();
       setBothPartiesConnected(true);
-      // Do NOT setSessionExpired(true) here, as it triggers useEffect cleanup and closes the socket!
-      localStorage.setItem(sessionKey, 'true');
+      // Session remains active until explicitly ended
+      // localStorage.setItem(sessionKey, 'true');
     }
   }, [candidateName, interviewerName, sessionKey, createVideoOffer]);
 
@@ -526,12 +536,10 @@ function LiveInterview() {
             setConnectionStatusText('Connected');
           }).catch(e => {
             console.warn('Primary video play failed:', e);
-            if (remoteVideoBackupRef.current) {
-              remoteVideoBackupRef.current.srcObject = remoteStream;
-              remoteVideoBackupRef.current.style.display = 'block';
-              remoteVideoBackupRef.current.muted = false;
-              remoteVideoBackupRef.current.play();
-            }
+            // Retry play after a short delay
+            setTimeout(() => {
+              if (remoteVideoRef.current) remoteVideoRef.current.play().catch(err => console.error('Retry failed:', err));
+            }, 1000);
           });
         }
       };
@@ -545,6 +553,13 @@ function LiveInterview() {
           }));
         }
       };
+
+      // Process pending offer if exists
+      if (pendingOfferRef.current) {
+        console.log('🔄 Processing queued video offer (Candidate side)...');
+        await handleVideoOffer(pendingOfferRef.current);
+        pendingOfferRef.current = null;
+      }
 
     } catch (error) {
       console.error('❌ Error initializing WebRTC:', error);
@@ -1021,8 +1036,12 @@ function LiveInterview() {
     }
 
     const candidateToken = sessionId;
+    const API_BASE_URL = 'http://localhost:8001/api'; // Or use process.env.REACT_APP_API_BASE_URL if available
+
+    console.log('Submitting candidate feedback with token:', candidateToken);
+
     if (candidateToken) {
-      fetch('/submit-interview-feedback/', {
+      fetch(`${API_BASE_URL}/submit-interview-feedback/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -1030,11 +1049,13 @@ function LiveInterview() {
         },
         body: JSON.stringify({
           token: candidateToken,
-          feedback: feedbackText
+          feedback: feedbackText,
+          role: 'candidate'
         })
       })
         .then(response => response.json())
         .then(data => {
+          console.log('Feedback submission response:', data);
           if (data.success) {
             setShowThankYou(false);
             setShowFinalThankYou(true);
@@ -1046,13 +1067,16 @@ function LiveInterview() {
               navigate(`/thank-you?${thankYouParams.toString()}`);
             }, 3000);
           } else {
-            alert('Failed to submit feedback. Please try again.');
+            console.error('Failed to submit feedback:', data);
+            alert(`Failed to submit feedback: ${data.error || 'Unknown error'}`);
           }
         })
         .catch(error => {
           console.error('Error submitting feedback:', error);
-          alert('Error submitting feedback. Please try again.');
+          alert('Error submitting feedback. Please check console for details.');
         });
+    } else {
+      alert('Session token is missing. Cannot submit feedback.');
     }
   }, [feedback, sessionId, navigate]);
 
@@ -1134,25 +1158,14 @@ function LiveInterview() {
   }, [showSessionPopup]);
 
   const showSessionExpiredMessage = useCallback(() => {
-    const popup = document.createElement('div');
-    popup.className = 'session-expired-modal';
-    popup.innerHTML = `
-      <div class="session-expired-content">
-        <div class="session-expired-icon">
-          <i class="fas fa-clock" aria-hidden="true"></i>
-        </div>
-        <h3 class="session-expired-title">Session Completed</h3>
-        <p class="session-expired-message">This interview session has already been completed. You cannot rejoin the interview.</p>
-        <button onclick="window.close()" class="btn-close-window">Close</button>
-      </div>
-    `;
-    document.body.appendChild(popup);
+    // Rely on React state (sessionExpired) to render the modal instead of appending to body
+    // This prevents the modal from blocking the Thank You screen if both trigger
   }, []);
 
   const redirectToThankYou = useCallback(() => {
-    const token = sessionId;
-    navigate(`/thank-you?token=${encodeURIComponent(token)}`);
-  }, [sessionId, navigate]);
+    setShowThankYou(true);
+    if (peerConnectionRef.current) peerConnectionRef.current.close();
+  }, []);
 
   const redirectToTerminationPage = useCallback((vCount, vLimit, reason) => {
     const token = sessionId;
@@ -1319,9 +1332,9 @@ function LiveInterview() {
   }
 
   return (
-    <div className="live-interview">
+    <div className={`live-interview ${chatPanelVisible ? 'chat-active' : ''}`}>
       {/* Header */}
-      <header className="header">
+      <header className="live-interview-header">
         <div className="header-left">
           <h1>Live Interview</h1>
         </div>
@@ -1337,27 +1350,13 @@ function LiveInterview() {
           {/* Main Remote Video (Interviewer) */}
           <video
             ref={remoteVideoRef}
-            className="remote-video"
+            className="remote-video full"
             autoPlay
             playsInline
+            muted={false}
             onContextMenu={e => e.preventDefault()}
           />
-          {/* Backup Remote Video */}
-          <video
-            ref={remoteVideoBackupRef}
-            className="remote-video"
-            autoPlay
-            playsInline
-            style={{ display: 'none' }}
-            onContextMenu={e => e.preventDefault()}
-          />
-          {/* Screen Share Video */}
-          <video
-            ref={screenShareVideoRef}
-            className="remote-video"
-            autoPlay
-            style={{ display: 'none' }}
-          />
+
 
           {/* Connection Status Overlay */}
           {connectionStatus !== 'Connected' && (
@@ -1377,7 +1376,7 @@ function LiveInterview() {
 
           {/* Local Video (Self View) - Draggable */}
           <div
-            className="self-video-container"
+            className="self-video-container floating"
             ref={selfVideoContainerRef}
             onMouseDown={handleDragStart}
           >
@@ -1483,11 +1482,11 @@ function LiveInterview() {
             </div>
             <span className="control-label">Chat</span>
           </button>
-        </div>
 
-        <button className="btn-end" onClick={handleEndInterview}>
-          Leave
-        </button>
+          <button className="btn-end" onClick={handleEndInterview} style={{ marginLeft: '10px' }}>
+            Leave
+          </button>
+        </div>
       </div>
 
       {/* Proxy Notifications */}
@@ -1495,7 +1494,7 @@ function LiveInterview() {
         {/* Popups are appended here by showPopup logic */}
       </div>
 
-    </div>
+    </div >
   );
 }
 

@@ -30,6 +30,7 @@ from .models import (
     CodingTestCase,
     Interview,
     InterviewInvitation,
+    LiveInterviewFeedback,
 )
 
 from django.conf import settings
@@ -177,6 +178,7 @@ def send_otp_view(request):
     """
     try:
         email = request.data.get('email', '').strip().lower()
+        context = request.data.get('context', '').strip().lower()
         
         if not email:
             return Response(
@@ -191,6 +193,14 @@ def send_otp_view(request):
                 {'error': 'Invalid email format.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+        
+        # Check if user already exists (only for registration flow)
+        if context == 'register':
+            if UserProfile.objects.filter(email=email).exists():
+                return Response(
+                    {'error': 'Account with this email already exists. Please login.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
         
         # Generate OTP
         otp = EmailOTP.generate_otp()
@@ -523,9 +533,9 @@ def register_view(request):
             company.domain = domain
             company.save(update_fields=['domain'])
 
-        if UserProfile.objects.filter(company=company).exists():
+        if UserProfile.objects.filter(company=company).count() >= 5:
             return Response(
-                {'error': 'This organization is already registered. Please request an invitation from your Company Admin.'},
+                {'error': 'This organization already has 5 registered admins. Please request an invitation from your Company Admin.'},
                 status=status.HTTP_403_FORBIDDEN
             )
 
@@ -5422,3 +5432,75 @@ def download_candidate_report_view(request, submission_id: int):
             {'error': f'Failed to generate report: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def submit_interview_feedback(request):
+    """
+    Submit feedback after a live interview.
+    Handles both candidate and interviewer feedback.
+    payload: {
+        "token": "uuid",
+        "feedback": "text",
+        "rating": int (1-5),
+        "role": "interviewer" | "candidate" (optional, default candidate)
+    }
+    """
+    import uuid
+    print(f"DEBUG: submit_interview_feedback called. Data: {request.data}")
+    
+    token = request.data.get('token')
+    feedback_text = request.data.get('feedback')
+    rating = request.data.get('rating')
+    role = request.data.get('role', 'candidate')
+
+    if not token or not feedback_text:
+        return Response({'error': 'Token and feedback are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        # Validate UUID
+        try:
+            uuid_token = uuid.UUID(str(token))
+        except ValueError:
+             print(f"DEBUG: Invalid token format: {token}")
+             return Response({'error': 'Invalid token format.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Try finding invitation by token
+        invitation = InterviewInvitation.objects.filter(token=uuid_token).first()
+        
+        if not invitation:
+            print(f"DEBUG: No invitation found for token: {token}")
+            return Response({'error': 'Invalid token.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Check if feedback object exists
+        from .models import LiveInterviewFeedback
+        feedback_obj, created = LiveInterviewFeedback.objects.get_or_create(invitation=invitation)
+        print(f"DEBUG: Feedback object {'created' if created else 'found'}: {feedback_obj}")
+
+        if role == 'interviewer':
+            feedback_obj.interviewer_feedback = feedback_text
+            if rating:
+                try:
+                    feedback_obj.interviewer_rating = int(rating)
+                except ValueError:
+                    pass
+        else:
+            # Default to candidate
+            feedback_obj.candidate_feedback = feedback_text
+            if rating:
+                try:
+                    feedback_obj.candidate_rating = int(rating)
+                except ValueError:
+                    pass
+        
+        feedback_obj.save()
+        print(f"DEBUG: Feedback saved successfully for role: {role}")
+
+        return Response({'success': True, 'message': 'Feedback submitted successfully.'}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        import traceback
+        print(f"Error submitting feedback: {e}")
+        print(traceback.format_exc())
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

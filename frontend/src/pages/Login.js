@@ -231,16 +231,14 @@ function Login() {
               <p style={{ textAlign: 'center', marginBottom: '0.5rem', color: 'var(--gray-600)', fontSize: '0.9rem', lineHeight: '1.4' }}>
                 Login to manage assessments, view reports, and monitor candidate sessions.
               </p>
-              <h3 className="auth-column-title" style={{ textAlign: 'center', marginBottom: '0rem' }}>
+              <h3 className="auth-column-title" style={{ textAlign: 'center', marginBottom: '1rem' }}>
                 {showOtpStep ? 'Verify OTP' : 'Login'}
               </h3>
 
               {!showOtpStep ? (
                 // Step 1: Email and Password
                 <form className="auth-form" onSubmit={handleLogin}>
-                  {loginError && (
-                    <div className="auth-error-message">{loginError}</div>
-                  )}
+
 
                   <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
                     <i className="fas fa-envelope auth-input-icon"></i>
@@ -299,14 +297,7 @@ function Login() {
                       <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
                     </button>
                   </div>
-                  <div style={{ textAlign: 'right', marginBottom: '0.5rem' }}>
-                    <Link
-                      to="/forgot-password"
-                      style={{ color: '#7c3aed', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}
-                    >
-                      Forgot password?
-                    </Link>
-                  </div>
+
                   <button
                     type="submit"
                     className="auth-primary-btn"
@@ -315,21 +306,37 @@ function Login() {
                     {loginLoading ? 'Verifying...' : 'Login'}
                   </button>
 
-                  <div style={{ marginTop: '0rem', textAlign: 'center' }}>
-                    <p style={{ color: '#666', fontSize: '14px' }}>
-                      Don't have an account?{' '}
-                      <Link
-                        to="/signup"
-                        style={{
-                          color: '#7c3aed',
-                          textDecoration: 'none',
-                          fontWeight: '600',
-                          cursor: 'pointer'
-                        }}
-                      >
-                        Sign up here
-                      </Link>
-                    </p>
+                  {loginError && (
+                    <div className="auth-error-message" style={{ marginTop: '0.75rem', marginBottom: '0.5rem', textAlign: 'center' }}>{loginError}</div>
+                  )}
+
+                  <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      {loginError && (
+                        <Link
+                          to="/forgot-password"
+                          style={{ color: '#7c3aed', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}
+                        >
+                          Forgot password?
+                        </Link>
+                      )}
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <p style={{ color: '#666', fontSize: '14px', margin: 0 }}>
+                        Don't have an account?{' '}
+                        <Link
+                          to="/signup"
+                          style={{
+                            color: '#7c3aed',
+                            textDecoration: 'none',
+                            fontWeight: '600',
+                            cursor: 'pointer'
+                          }}
+                        >
+                          Sign up here
+                        </Link>
+                      </p>
+                    </div>
                   </div>
                 </form>
               ) : (

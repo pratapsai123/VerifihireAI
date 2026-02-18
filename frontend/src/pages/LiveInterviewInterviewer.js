@@ -73,8 +73,9 @@ function LiveInterviewInterviewer() {
   const remoteStreamRef = useRef(null);
   const screenShareStreamRef = useRef(null);
   const remoteIceQueueRef = useRef([]);
+  const pendingOfferRef = useRef(null);
   const remoteVideoRef = useRef(null);
-  const remoteVideoBackupRef = useRef(null);
+
   const selfVideoRef = useRef(null);
   const selfVideoContainerRef = useRef(null);
   const chatMessagesRef = useRef(null);
@@ -144,7 +145,17 @@ function LiveInterviewInterviewer() {
     return () => {
       if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
     };
+    return () => {
+      if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+    };
   }, []);
+
+  // Auto-scroll chat to bottom
+  useEffect(() => {
+    if (chatMessagesRef.current) {
+      chatMessagesRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [chatMessages, chatPanelVisible]);
 
   // Utility functions
   const showNotification = useCallback((message, type = 'info') => {
@@ -442,8 +453,8 @@ function LiveInterviewInterviewer() {
             // Initiate offer because Candidate joined AFTER us
             createVideoOffer();
             setBothPartiesConnected(true);
-            // Do NOT setSessionExpired(true) here, as it triggers useEffect cleanup and closes the socket!
-            localStorage.setItem(sessionKey, 'true');
+            // Session remains active until explicitly ended
+            // localStorage.setItem(sessionKey, 'true');
             console.log('🔒 Session marked as expired in storage - both parties have connected');
           }
           break;
@@ -480,7 +491,12 @@ function LiveInterviewInterviewer() {
           }
           break;
         case 'video_offer':
-          if (peerConnectionRef.current) await handleVideoOffer(data.offer);
+          if (peerConnectionRef.current) {
+            await handleVideoOffer(data.offer);
+          } else {
+            console.log('⏳ PC not ready, queuing video offer');
+            pendingOfferRef.current = data.offer;
+          }
           break;
         case 'video_answer':
           if (peerConnectionRef.current) await handleVideoAnswer(data.answer);
@@ -552,10 +568,7 @@ function LiveInterviewInterviewer() {
               remoteVideoRef.current.style.objectFit = targetFit;
               remoteVideoRef.current.style.objectPosition = 'center center';
             }
-            if (remoteVideoBackupRef.current) {
-              remoteVideoBackupRef.current.style.objectFit = targetFit;
-              remoteVideoBackupRef.current.style.objectPosition = 'center center';
-            }
+
           } catch (e) { }
           break;
         case 'screen_share_lock':
@@ -701,13 +714,10 @@ function LiveInterviewInterviewer() {
                 videoConnectedNotifiedRef.current = true;
               }
             }).catch(e => {
-              console.warn('Primary video play failed:', e);
-              if (remoteVideoBackupRef.current) {
-                remoteVideoBackupRef.current.srcObject = remoteStream;
-                remoteVideoBackupRef.current.style.display = 'block';
-                remoteVideoBackupRef.current.muted = false;
-                remoteVideoBackupRef.current.play();
-              }
+              // Retry play after a short delay
+              setTimeout(() => {
+                if (remoteVideoRef.current) remoteVideoRef.current.play().catch(err => console.error('Retry failed:', err));
+              }, 1000);
             });
           }
         }
@@ -726,6 +736,13 @@ function LiveInterviewInterviewer() {
       };
 
       console.log('✅ WebRTC initialized successfully');
+
+      // Process pending offer if exists
+      if (pendingOfferRef.current) {
+        console.log('🔄 Processing queued video offer...');
+        await handleVideoOffer(pendingOfferRef.current);
+        pendingOfferRef.current = null;
+      }
 
       // Remove auto-trigger to avoid glare if Candidate is also offering
       // setTimeout(() => {
@@ -1439,22 +1456,9 @@ function LiveInterviewInterviewer() {
   }
   // Render
   return (
-    <div className="live-interview-interviewer">
+    <div className={`live-interview-interviewer ${chatPanelVisible ? 'chat-active' : ''}`}>
       {/* Header */}
-      <header className="header">
-        <div className="header-left">
-          <h1>Live Interview</h1>
-        </div>
-        <div className="header-controls">
-          <div className="timer">{timer}</div>
-          <button
-            className="btn-report"
-            onClick={() => setShowInterviewReport(true)}
-          >
-            📋 Report
-          </button>
-        </div>
-      </header>
+
 
       {/* Main Content */}
       <div className="main-wrapper">
@@ -1468,15 +1472,7 @@ function LiveInterviewInterviewer() {
             playsInline
             onContextMenu={e => e.preventDefault()}
           />
-          {/* Backup/Secondary Remote Video */}
-          <video
-            ref={remoteVideoBackupRef}
-            className="remote-video"
-            autoPlay
-            playsInline
-            style={{ display: 'none' }}
-            onContextMenu={e => e.preventDefault()}
-          />
+
 
           {/* Connection Status Overlay */}
           {connectionStatus !== 'Connected' && (
@@ -1528,12 +1524,12 @@ function LiveInterviewInterviewer() {
             {chatMessages.map((msg, index) => (
               <div
                 key={index}
-                className={`chat-msg ${msg.isOwn ? 'sent' : 'received'}`}
+                className={`chat-msg ${msg.isMyMessage ? 'sent' : 'received'}`}
               >
                 <span className="msg-meta">
                   {msg.sender} • {msg.time}
                 </span>
-                {msg.text}
+                {msg.message}
               </div>
             ))}
             <div ref={chatMessagesRef} />
@@ -1606,23 +1602,8 @@ function LiveInterviewInterviewer() {
             </div>
             <span className="control-label">Chat</span>
           </button>
-        </div>
 
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <button
-            className="btn-secondary"
-            onClick={() => {
-              console.log('🔄 Manual video retry triggered');
-              createVideoOffer({ iceRestart: true });
-              showNotification('Retrying video connection...', 'info');
-            }}
-            style={{ padding: '0 15px', height: '44px', borderRadius: '22px', border: '1px solid rgba(255,255,255,0.2)', background: 'rgba(0,0,0,0.3)', color: 'white', cursor: 'pointer' }}
-          >
-            <i className="fas fa-sync-alt" style={{ marginRight: '8px' }}></i>
-            Retry Video
-          </button>
-
-          <button className="btn-end" onClick={handleEndInterview}>
+          <button className="btn-end" onClick={handleEndInterview} style={{ marginLeft: '10px' }}>
             End Call
           </button>
         </div>
