@@ -969,49 +969,72 @@
             const params = new URLSearchParams(window.location.search);
             const token = params.get('token');
 
-            if (!token) {
-                const name = "Interviewee";
-                document.getElementById('overlayGreeting').textContent = `Ready, ${name}?`;
-                document.getElementById('startOverlay').style.display = 'flex';
+            // 1. Check Session Storage (Fast Path from Start Page)
+            const sessionData = sessionStorage.getItem('interviewData');
+            if (sessionData) {
+                try {
+                    const data = JSON.parse(sessionData);
+                    console.log("Loaded context from session storage");
 
-                document.getElementById('startSessionBtn').addEventListener('click', () => {
-                    document.getElementById('startOverlay').style.display = 'none';
-                    questions = [
-                        "Could you please introduce yourself and provide a brief overview of your professional background?",
-                        "What are your core technical strengths?",
-                        "Describe a challenging project you've worked on recently.",
-                        "How do you handle conflict in a team environment?",
-                        "Where do you see yourself in five years?"
-                    ];
-                    startInterview();
-                });
+                    candidateData = {
+                        id: data.candidateId,
+                        full_name: data.candidateName,
+                        // Add other fields if needed or fetch partial
+                    };
+
+                    document.getElementById('candidateName').textContent = data.candidateName;
+                    questions = data.questions || [];
+
+                    if (questions.length > 0) {
+                        startInterview();
+                        return;
+                    }
+                } catch (e) {
+                    console.error("Error parsing session data", e);
+                }
+            }
+
+            // 2. Direct Link Access (Slow Path - Fetch from Backend)
+            if (!token) {
+                // Formatting for no token case
+                const name = "Interviewee";
+                questions = [
+                    "Could you please introduce yourself?",
+                    "What are your core technical strengths?",
+                    "Describe a challenging project you've worked on.",
+                    "Where do you see yourself in five years?"
+                ];
+                // Simulate candidate data
+                candidateData = { full_name: "Guest User" };
+                startInterview();
                 return;
             }
 
             try {
+                // Fetch Candidate Details
                 const response = await fetch(`http://localhost:8001/api/ai-candidates/${token}/`);
+                if (!response.ok) throw new Error("Candidate not found");
+
                 candidateData = await response.json();
-                const name = candidateData.full_name || "Interviewee";
-                document.getElementById('candidateName').textContent = name;
-                document.getElementById('overlayGreeting').textContent = `Ready, ${name.split(' ')[0]}?`;
-                document.getElementById('startOverlay').style.display = 'flex';
+                document.getElementById('candidateName').textContent = candidateData.full_name;
 
-                document.getElementById('startSessionBtn').addEventListener('click', async () => {
-                    document.getElementById('startOverlay').style.display = 'none';
-
-                    // Trigger resume matching to get specific questions
-                    const matchResponse = await fetch('http://localhost:8001/api/ai-candidates/match/', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            candidate_id: token,
-                            job_description: candidateData.job_description
-                        })
-                    });
-                    const matchData = await matchResponse.json();
-                    questions = matchData.interview_questions || [];
-                    startInterview();
+                // Auto-fetch questions based on resume/job (Re-matching/Retrieving)
+                console.log("Fetching questions from backend...");
+                const matchResponse = await fetch('http://localhost:8001/api/ai-candidates/match/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        candidate_id: token,
+                        job_description: candidateData.job_description
+                    })
                 });
+
+                const matchData = await matchResponse.json();
+                questions = matchData.interview_questions || [];
+
+                // Auto-start without overlay
+                startInterview();
+
             } catch (err) {
                 console.error("Failed to load interview:", err);
                 alert("Error loading interview data. Please try again.");
@@ -1022,15 +1045,36 @@
             currentQuestionIndex = 0;
             updateProgress();
 
+            document.getElementById('startOverlay').style.display = 'none';
+
             // Start Camera
             startCamera();
 
-            setTimeout(() => {
+            // Check for voices
+            if (speechSynthesis.getVoices().length === 0) {
+                speechSynthesis.onvoiceschanged = () => {
+                    loadVoices();
+                    beginConversation();
+                };
+            } else {
                 loadVoices();
-                const welcome = `Hello ${candidateData.full_name || 'there'}! I'm your AI interviewer. Let's begin the session!`;
-                speak(welcome);
-                setTimeout(() => askCurrentQuestion(), 4000);
-            }, 1000);
+                beginConversation();
+            }
+        }
+
+        function beginConversation() {
+            // Removed initial 1s delay for instant start
+            const name = candidateData && candidateData.full_name ? candidateData.full_name.split(' ')[0] : 'there';
+            const welcome = `Hello ${name}! I'm your AI interviewer. Let's begin the session!`;
+
+            updateActiveQuestion("Introduction");
+            addMessage('ai', welcome);
+
+            // Speak immediately
+            speak(welcome).then(() => {
+                // Reduced gap between welcome and first question from 1000ms to 300ms
+                setTimeout(() => askCurrentQuestion(), 300);
+            });
         }
 
         function askCurrentQuestion() {
@@ -1072,6 +1116,16 @@
                     fullResponse += " " + data.follow_up_question;
                 }
 
+                // Dynamic Question Update:
+                // If the AI rewrote the next question, update our local list
+                if (data.refined_next_question && !data.follow_up_question) {
+                    // CAREFUL: Only update if there IS a next question
+                    if (currentQuestionIndex + 1 < questions.length) {
+                        console.log("Rewriting next question:", questions[currentQuestionIndex + 1], "->", data.refined_next_question);
+                        questions[currentQuestionIndex + 1] = data.refined_next_question;
+                    }
+                }
+
                 // 1. Display and Speak Full Response (Feedback + any Follow-up/Transition)
                 if (fullResponse) {
                     addMessage('ai', fullResponse);
@@ -1094,7 +1148,13 @@
                         const questionText = document.getElementById('activeQuestionText');
                         if (questionText) questionText.textContent = nextQ;
 
-                        // Removed redundant speak(nextQ) as it's already in the conversational bridge
+                        // Add to chat history so user can see it
+                        addMessage('ai', nextQ);
+                        chatHistory.push({ role: 'ai', content: nextQ });
+
+                        // Speak query (await ensures seamless flow)
+                        await speak(nextQ);
+
                         isProcessing = false;
                     } else {
                         completeInterview();
@@ -1119,7 +1179,8 @@
             updateProgress();
 
             if (currentQuestionIndex < questions.length) {
-                setTimeout(() => askCurrentQuestion(), 2000);
+                // Reduced delay from 2000ms to 500ms
+                setTimeout(() => askCurrentQuestion(), 500);
                 isProcessing = false;
             } else {
                 completeInterview();
