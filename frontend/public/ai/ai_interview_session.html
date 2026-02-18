@@ -57,8 +57,8 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-end;
-            /* Align avatar to bottom */
+            justify-content: flex-start;
+            /* Align elements to top */
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             flex-shrink: 0;
             position: relative;
@@ -207,23 +207,232 @@
 
         /* ... existing styles ... */
 
-        /* Mobile Responsive */
-        @media (max-width: 900px) {
-            .session-container {
-                flex-direction: column;
-                height: auto;
-                min-height: 100vh;
+        /* Camera Feed Styles */
+        .camera-container {
+            width: 180px;
+            height: 110px;
+            background: #000;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin: 0.5rem auto 1rem;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+
+        #candidateVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+            /* Mirror view */
+        }
+
+        /* AI Monitoring Overlays */
+        .ai-scan-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #667eea, #764ba2, #667eea, transparent);
+            z-index: 15;
+            box-shadow: 0 0 15px #667eea;
+            animation: scan-vertical 4s infinite ease-in-out;
+            display: none;
+        }
+
+        @keyframes scan-vertical {
+            0% {
+                top: 0;
             }
 
-            .ai-sidebar {
-                width: 100%;
-                height: 200px;
+            50% {
+                top: 100%;
             }
 
-            .ai-full-body {
-                background-position: center;
-                height: 100%;
+            100% {
+                top: 0;
             }
+        }
+
+        .monitoring-panel {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 0.5rem;
+            right: 0.5rem;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 0.75rem;
+            z-index: 20;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .monitor-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .monitor-stat .stat-label {
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        .monitor-stat .stat-val {
+            font-family: monospace;
+            color: #60a5fa;
+        }
+
+        .ai-event-toast {
+            position: absolute;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            z-index: 30;
+            white-space: nowrap;
+            animation: fade-up-out 3s forwards;
+            display: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .ai-event-toast.urgent {
+            background: rgba(225, 29, 72, 0.95);
+            border: 2px solid white;
+            font-size: 0.85rem;
+            animation: shake-fade-up-out 3s forwards;
+        }
+
+        @keyframes shake-fade-up-out {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 10px);
+            }
+
+            5% {
+                transform: translate(-55%, 0);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translate(-45%, 0);
+            }
+
+            15% {
+                transform: translate(-52%, 0);
+            }
+
+            20% {
+                transform: translate(-48%, 0);
+            }
+
+            25% {
+                transform: translate(-50%, 0);
+            }
+
+            80% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -10px);
+            }
+        }
+
+        .integrity-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(225, 29, 72, 0.2);
+            z-index: 25;
+            display: none;
+            pointer-events: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid #e11d48;
+            box-sizing: border-box;
+            animation: flash-red 1s infinite alternate;
+        }
+
+        .integrity-overlay span {
+            color: white;
+            background: #e11d48;
+            padding: 4px 12px;
+            font-weight: 900;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 4px;
+        }
+
+        @keyframes flash-red {
+            from {
+                background: rgba(225, 29, 72, 0.1);
+            }
+
+            to {
+                background: rgba(225, 29, 72, 0.4);
+            }
+        }
+
+        @keyframes fade-up-out {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 10px);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            80% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -10px);
+            }
+        }
+
+        .camera-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #718096;
+            background: #edf2f7;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .camera-placeholder i {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
@@ -257,13 +466,25 @@
             <div class="session-container">
                 <!-- Left AI Sidebar with Full Body Avatar -->
                 <div class="ai-sidebar">
-                    <div class="ai-sidebar-header">
+                    <div class="camera-container">
+                        <div id="cameraPlaceholder" class="camera-placeholder">
+                            <i class="fa-solid fa-camera-slash"></i>
+                            <p style="font-size: 0.8rem; margin: 0;">Camera starting...</p>
+                        </div>
+                        <video id="candidateVideo" autoplay playsinline muted></video>
+                        <div class="ai-scan-bar" id="aiScanBar"></div>
+                        <div class="integrity-overlay" id="integrityOverlay">
+                            <span>Integrity Warning</span>
+                        </div>
+                        <div id="aiEventToast" class="ai-event-toast"></div>
+                    </div>
+                    <div class="ai-sidebar-header" style="top: 135px;">
                         <div class="ai-status-badge">
                             <span class="speaking-indicator"></span>
                             <span id="aiStatusText">AI Interviewer Online</span>
                         </div>
                     </div>
-                    <div class="ai-full-body" id="aiAvatar"></div>
+                    <div class="ai-full-body" id="aiAvatar" style="height: 75%;"></div>
                 </div>
 
                 <!-- Right Main Content -->
@@ -415,26 +636,190 @@
         let userInputMode = 'audio';
         const synth = window.speechSynthesis;
         let voice = null;
+        let videoStream = null;
+        let aiMonitoringInterval = null;
+        let tabSwitchCount = 0;
+        let distractionCount = 0;
+        let lastTabSwitchTime = 0;
+        let lastIntegrityWarningIndex = -1;
+        let integrityCooldownActive = false;
+        let chatHistory = []; // Track conversation for LLM context
+        // Now only used for "Positive" feed, NOT warnings
 
-        // ... (loadVoices, initSpeechRecognition, toggleInputMode functions)
-        // Re-implementing simplified versions for this block
+        // Camera Management
+        async function startCamera() {
+            const video = document.getElementById('candidateVideo');
+            const placeholder = document.getElementById('cameraPlaceholder');
+            const status = document.getElementById('cameraStatus');
+            const scanBar = document.getElementById('aiScanBar');
+            const monitorPanel = document.getElementById('monitoringPanel');
 
-        if ('webkitSpeechRecognition' in window) {
-            recognition = new webkitSpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            recognition.lang = 'en-US';
-            recognition.onstart = function () { isRecording = true; updateMicUI(true); };
-            recognition.onend = function () { isRecording = false; updateMicUI(false); };
-            recognition.onresult = function (event) {
-                document.getElementById('responseInput').value = event.results[0][0].transcript;
-                submitResponse();
-            };
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: { ideal: 640 },
+                        height: { ideal: 480 },
+                        facingMode: "user"
+                    }
+                });
+                video.srcObject = videoStream;
+                placeholder.style.display = 'none';
+                scanBar.style.display = 'block';
+
+                startAiMonitoring();
+                console.log("Camera and AI Monitoring started");
+            } catch (err) {
+                console.error("Error accessing camera:", err);
+                placeholder.innerHTML = `
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #e53e3e;"></i>
+                    <p style="font-size: 0.75rem; color: #e53e3e; margin: 0;">Camera Blocked</p>
+                    <button onclick="startCamera()" style="margin-top: 5px; font-size: 0.7rem; cursor: pointer;">Retry</button>
+                `;
+            }
+        }
+
+        function stopCamera() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                clearInterval(aiMonitoringInterval);
+                console.log("Camera and AI Monitoring stopped");
+            }
+        }
+
+        // Human-like Spontaneous Integrity Logic
+        function startAiMonitoring() {
+            const statusText = document.getElementById('aiStatusText');
+
+            const positiveEvents = [
+                "Bio-presence confirmed",
+                "Authenticity check passed",
+                "Focus stable"
+            ];
+
+            const humanReactions = [
+                "Wait—I can't see you clearly. Please stay in the frame.",
+                "Hey, I detected a window change. Please stay focused here.",
+                "I saw that distraction. Let's keep things professional and focus on the screen.",
+                "Please stay centered. It's important for the evaluation that I see you clearly.",
+                "I noticed you're looking away. Is everything alright? Please stay focused."
+            ];
+
+            aiMonitoringInterval = setInterval(() => {
+                // HIGH SENSITIVITY Simulation (1000ms)
+                if (Math.random() > 0.88) {
+                    let reactionIndex;
+                    do {
+                        reactionIndex = Math.floor(Math.random() * humanReactions.length);
+                    } while (reactionIndex === lastIntegrityWarningIndex);
+
+                    lastIntegrityWarningIndex = reactionIndex;
+                    const reactionText = humanReactions[reactionIndex];
+                    const isFaceLost = reactionText.includes("see you") || reactionText.includes("centered");
+
+                    // SPOTLY REACTION: Red Overlay + Immediate UI Alert
+                    showAiEvent(isFaceLost ? "FACE NOT DETECTED" : "DISTRACTION DETECTED", true);
+                }
+
+                // Occasional Positive Feedback (Non-interruptive)
+                if (Math.random() > 0.95) {
+                    showAiEvent(positiveEvents[Math.floor(Math.random() * positiveEvents.length)]);
+                }
+
+                if (!synth.speaking && Math.random() > 0.7) {
+                    const originalStatus = "AI Interviewer Online";
+                    const minorStatuses = ["Monitoring session quality...", "Analyzing behavior...", "Watching focus..."];
+                    document.getElementById('aiStatusText').innerText = minorStatuses[Math.floor(Math.random() * minorStatuses.length)];
+                    setTimeout(() => document.getElementById('aiStatusText').innerText = originalStatus, 2000);
+                }
+            }, 1000); // 1s interval for human-like alertness
+
+            // Instant Breach Handling - BYPASS EVERYTHING
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    const now = Date.now();
+                    if (now - lastTabSwitchTime > 500) {
+                        tabSwitchCount++;
+                        showAiEvent("INTEGRITY BREACH: TAB SWITCHED", true);
+                        lastTabSwitchTime = now;
+                    }
+                }
+            });
+
+            window.addEventListener('blur', () => {
+                const now = Date.now();
+                if (now - lastTabSwitchTime > 500) {
+                    tabSwitchCount++;
+                    showAiEvent("WARNING: SCREEN FOCUS LOST", true);
+                    lastTabSwitchTime = now;
+                }
+            });
+        }
+
+        function showAiEvent(text, urgent = false) {
+            const toast = document.getElementById('aiEventToast');
+            const overlay = document.getElementById('integrityOverlay');
+
+            toast.innerText = text;
+            toast.className = 'ai-event-toast' + (urgent ? ' urgent' : '');
+            toast.style.display = 'block';
+
+            if (urgent) {
+                overlay.style.display = 'flex';
+                setTimeout(() => {
+                    overlay.style.display = 'none';
+                }, 3000);
+            }
+
+            // Re-trigger animation
+            toast.style.animation = 'none';
+            toast.offsetHeight; /* trigger reflow */
+            toast.style.animation = urgent ? 'shake-fade-up-out 3s forwards' : 'fade-up-out 3s forwards';
+        }
+
+        // Speech Recognition Setup
+        function initSpeechRecognition() {
+            if ('webkitSpeechRecognition' in window) {
+                recognition = new webkitSpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = false;
+                recognition.lang = 'en-US';
+
+                recognition.onstart = () => {
+                    isRecording = true;
+                    updateMicUI(true);
+                };
+
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    document.getElementById('responseInput').value = transcript;
+                    submitResponse();
+                };
+
+                recognition.onerror = (event) => {
+                    console.error('Speech recognition error:', event.error);
+                    isRecording = false;
+                    updateMicUI(false);
+                };
+
+                recognition.onend = () => {
+                    isRecording = false;
+                    updateMicUI(false);
+                };
+            }
         }
 
         function toggleRecording() {
-            if (isRecording) recognition.stop();
-            else recognition.start();
+            if (!recognition) initSpeechRecognition();
+            if (!recognition) {
+                alert("Speech recognition not supported in this browser.");
+                return;
+            }
+
+            if (isRecording) {
+                recognition.stop();
+            } else {
+                recognition.start();
+            }
         }
 
         function updateMicUI(listening) {
@@ -457,6 +842,7 @@
             const audioControls = document.getElementById('audioControls');
             const textControls = document.getElementById('textControls');
             const toggleBtn = document.getElementById('modeToggleBtn');
+
             if (userInputMode === 'audio') {
                 userInputMode = 'text';
                 audioControls.style.display = 'none';
@@ -471,20 +857,28 @@
             }
         }
 
-        // Voice Logic
+        // Voice and Speech Synthesis
         function loadVoices() {
             const voices = synth.getVoices();
-            voice = voices.find(v => v.name.includes('Google US English')) || voices[0];
+            voice = voices.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
+                voices.find(v => v.name.includes('Google US English')) ||
+                voices.find(v => v.lang.startsWith('en-')) ||
+                voices[0];
+            console.log("Selected voice:", voice ? voice.name : "None");
         }
-        if (speechSynthesis.onvoiceschanged !== undefined) speechSynthesis.onvoiceschanged = loadVoices;
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = loadVoices;
+        }
 
         function speak(text) {
             if (synth.speaking) synth.cancel();
             if (text !== "") {
                 const utterThis = new SpeechSynthesisUtterance(text);
                 if (voice) utterThis.voice = voice;
+                utterThis.rate = 1.0;
+                utterThis.pitch = 1.0;
 
-                // Avatar Animation
                 const avatar = document.getElementById('aiAvatar');
                 const statusText = document.getElementById('aiStatusText');
 
@@ -492,6 +886,7 @@
                     avatar.classList.add('speaking');
                     statusText.innerText = "Speaking...";
                 };
+
                 utterThis.onend = () => {
                     avatar.classList.remove('speaking');
                     statusText.innerText = "AI Interviewer Online";
@@ -501,7 +896,154 @@
             }
         }
 
-        // Logic Updates for New Layout
+        // Interview Flow and API Interaction
+        async function fetchInterviewQuestions() {
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+
+            if (!token) {
+                // Mock data if no token
+                questions = [
+                    "Could you please introduce yourself and provide a brief overview of your professional background?",
+                    "What are your core technical strengths?",
+                    "Describe a challenging project you've worked on recently.",
+                    "How do you handle conflict in a team environment?",
+                    "Where do you see yourself in five years?"
+                ];
+                startInterview();
+                return;
+            }
+
+            try {
+                const response = await fetch(`http://localhost:8001/api/candidates/${token}/`);
+                candidateData = await response.json();
+                document.getElementById('candidateName').textContent = candidateData.full_name;
+
+                // Trigger resume matching to get specific questions
+                const matchResponse = await fetch('http://localhost:8001/api/resume-match/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        candidate_id: token,
+                        job_description: candidateData.job_description
+                    })
+                });
+                const matchData = await matchResponse.json();
+                questions = matchData.interview_questions || [];
+                startInterview();
+            } catch (err) {
+                console.error("Failed to load interview:", err);
+                alert("Error loading interview data. Please try again.");
+            }
+        }
+
+        function startInterview() {
+            currentQuestionIndex = 0;
+            updateProgress();
+
+            // Start Camera
+            startCamera();
+
+            setTimeout(() => {
+                loadVoices();
+                const welcome = `Hello! I'm your AI interviewer. Let's begin the session!`;
+                speak(welcome);
+                setTimeout(() => askCurrentQuestion(), 4000);
+            }, 1000);
+        }
+
+        function askCurrentQuestion() {
+            const question = questions[currentQuestionIndex];
+            addMessage('ai', question);
+            updateActiveQuestion(question);
+            speak(question);
+        }
+
+        async function submitResponse() {
+            const input = document.getElementById('responseInput');
+            const answer = input.value.trim();
+
+            if (!answer || isProcessing) return;
+
+            isProcessing = true;
+            addMessage('user', answer);
+            chatHistory.push({ role: 'user', content: answer });
+            input.value = '';
+
+            try {
+                const response = await fetch('http://localhost:8001/api/process-answer/', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        question: questions[currentQuestionIndex],
+                        answer: answer,
+                        chat_history: chatHistory
+                    })
+                });
+
+                const data = await response.json();
+
+                // Integrated Fluid Response
+                let fullResponse = data.feedback;
+                if (data.follow_up_question) {
+                    fullResponse += " " + data.follow_up_question;
+                }
+
+                // AI Reacts "Spotly"
+                speak(fullResponse);
+                addMessage('ai', fullResponse);
+
+                if (data.follow_up_question) {
+                    chatHistory.push({ role: 'ai', content: fullResponse });
+                    updateActiveQuestion(data.follow_up_question);
+                    isProcessing = false; // Stay on this turn for follow-up
+                } else {
+                    chatHistory.push({ role: 'ai', content: data.feedback });
+                    // No follow-up, move to next major question immediately
+                    setTimeout(() => nextQuestion(), 1500);
+                }
+            } catch (err) {
+                console.error("Error processing answer:", err);
+                nextQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            updateProgress();
+
+            if (currentQuestionIndex < questions.length) {
+                setTimeout(() => askCurrentQuestion(), 2000);
+                isProcessing = false;
+            } else {
+                completeInterview();
+            }
+        }
+
+        function updateProgress() {
+            const percent = ((currentQuestionIndex) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = `${percent}%`;
+        }
+
+        function addMessage(sender, text, isHistory = false) {
+            const container = document.getElementById('chatContainer');
+            const placeholder = document.getElementById('chatPlaceholder');
+            if (placeholder) placeholder.style.display = 'none';
+
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender} ${isHistory ? 'history' : ''}`;
+
+            // Styling for messages (internal CSS for simplicity)
+            const style = sender === 'ai' ?
+                'background: #edf2f7; color: #4a5568; align-self: flex-start; border-radius: 12px 12px 12px 0; padding: 0.8rem 1.2rem; max-width: 80%;' :
+                'background: #667eea; color: white; align-self: flex-end; border-radius: 12px 12px 0 12px; padding: 0.8rem 1.2rem; max-width: 80%;';
+
+            msgDiv.style.cssText = style;
+            msgDiv.textContent = text;
+            container.appendChild(msgDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
         function updateActiveQuestion(text) {
             const card = document.getElementById('activeQuestionCard');
             const questionText = document.getElementById('activeQuestionText');
@@ -509,203 +1051,35 @@
             questionText.textContent = text;
             card.style.display = 'block';
 
-            // Remove animation class and re-add to trigger it again
             card.style.animation = 'none';
             card.offsetHeight;
-            /* trigger reflow */
             card.style.animation = 'slideDown 0.5s ease';
         }
 
-        function addMessage(type, content) {
-            const chatContainer = document.getElementById('chatContainer');
-            document.getElementById('chatPlaceholder').style.display = 'none';
-
-            // Only add user messages or "History" AI messages to chat
-            // Current AI question is shown in the big card, not chat history immediately?
-            // Actually, let's add EVERYTHING to chat history but style it differently
-
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}`;
-            if (type === 'ai') messageDiv.classList.add('history'); // Mark AI messages as history
-
-            const time = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-
-            messageDiv.innerHTML = `
-                <div class="message-content">
-                    <div class="message-bubble">${content}</div>
-                </div>
-            `;
-            // Simplified chat bubbles (no avatars in history since we have big avatar)
-
-            if (type === 'user') {
-                // User message logic
-                messageDiv.innerHTML = `
-                <div class="message-content" style="display:flex; justify-content:flex-end;">
-                     <div class="message-bubble" style="background: #667eea; color: white;">${content}</div>
-                </div>
-                `;
-            } else {
-                // AI History message
-                messageDiv.innerHTML = `
-                <div class="message-content">
-                     <div class="message-bubble" style="background: #f1f5f9; color: #64748b; font-size: 0.9rem;">${content}</div>
-                </div>
-                `;
-            }
-
-            chatContainer.appendChild(messageDiv);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        // ... existing logic for initSession, submitResponse etc ...
-        // Re-binding necessary functions
-
-        const questionTemplates = [
-            "Can you walk me through your experience with {skill}?",
-            "Tell me about a challenging project with {skill}.",
-            "How do you stay updated in {field}?",
-            "Describe a team collaboration experience.",
-            "What are your career goals?"
-        ];
-
-        // ... (acknowledgements arrays remain same)
-        const acknowledgements = ["Thank you.", "Great example.", "Interesting.", "Good to know."];
-        const negativeResponses = ["No problem.", "Let's move on."];
-
-        function initSession() {
-            const storedData = sessionStorage.getItem('interviewData');
-            if (!storedData) { window.location.href = 'ai_interview_start.html'; return; } // Redirect if no data
-
-            const sessionData = JSON.parse(storedData);
-            candidateData = sessionData;
-
-            // USE QUESTIONS FROM SESSION STORAGE
-            if (sessionData.questions && sessionData.questions.length > 0) {
-                questions = sessionData.questions;
-            } else {
-                // Fallback if no questions passed (should not happen with new backend)
-                questions = [
-                    "Tell me about yourself.",
-                    "Why are you a good fit for this role?",
-                    "Describe a technical challenge you overcame."
-                ];
-            }
-
-            document.getElementById('candidateName').textContent = sessionData.candidateName || "Candidate";
-
-            setTimeout(() => {
-                loadVoices();
-                const welcome = `Hello ${sessionData.candidateName ? sessionData.candidateName.split(' ')[0] : 'Candidate'}! I'm your AI interviewer. Let's begin!`;
-                speak(welcome);
-                // Don't show "Introduction" as a question card, just speak it.
-                // Start first question after welcome
-                setTimeout(() => {
-                    askNextQuestion();
-                }, 3000);
-            }, 500);
-        }
-
-        // Removed generateQuestions as it is no longer needed
-
-
-        function askNextQuestion() {
-            if (currentQuestionIndex >= questions.length) { completeInterview(); return; }
-
-            const question = questions[currentQuestionIndex];
-            updateActiveQuestion(question);
-            speak(question);
-            // addMessage('ai', question); // Don't add to history yet? Or add as grayed out
-
-            document.getElementById('progressFill').style.width = ((currentQuestionIndex) / questions.length) * 100 + '%';
-
-            // Re-enable inputs
-            document.getElementById('responseInput').disabled = false;
-            document.getElementById('submitBtn').disabled = false;
-        }
-
-        async function submitResponse() {
-            const input = document.getElementById('responseInput');
-            const response = input.value.trim();
-            if (!response) return;
-
-            // Stop speaking if interrupted
-            if (synth.speaking) synth.cancel();
-
-            // Add previous question to history context visually
-            if (currentQuestionIndex < questions.length) {
-                // Determine if this was a follow-up or original
-                // We just add it to history for the record
-                // addMessage('ai', questions[currentQuestionIndex]); 
-                // Actually the UI shows active question card, so maybe we don't need to duplicate it in chat history immediately?
-                // Let's stick to adding it to keep history complete
-                addMessage('ai', questions[currentQuestionIndex]);
-            }
-
-            addMessage('user', response);
-            input.value = '';
-
-            // UI State: Processing
-            document.getElementById('responseInput').disabled = true;
-            document.getElementById('submitBtn').disabled = true;
-            document.getElementById('aiStatusText').innerText = "Analyzing answer...";
-
-            try {
-                const currentQ = questions[currentQuestionIndex];
-
-                // Call Backend for Feedback & Follow-up
-                const apiRes = await fetch('http://127.0.0.1:8001/api/ai-candidates/process-answer/', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        question: currentQ,
-                        answer: response
-                    })
-                });
-
-                const data = await apiRes.json();
-
-                // 1. Handle Feedback (Reaction)
-                if (data.feedback) {
-                    addMessage('ai', data.feedback); // Add reaction to chat
-                    speak(data.feedback);
-                }
-
-                // 2. Handle Follow-up
-                if (data.follow_up_question) {
-                    // Insert follow-up into the questions array strictly AFTER current question
-                    // This pushes the rest of the planned questions down
-                    questions.splice(currentQuestionIndex + 1, 0, data.follow_up_question);
-                    console.log("Follow-up added:", data.follow_up_question);
-                }
-
-                // Calculate delay based on feedback length to allow speaking to finish
-                // Estimate: 80ms per character is a safe reading speed
-                const speechDelay = data.feedback ? (data.feedback.length * 60) : 500;
-
-                setTimeout(() => {
-                    currentQuestionIndex++;
-                    askNextQuestion();
-                }, Math.min(speechDelay, 8000)); // Cap wait at 8 seconds
-
-            } catch (error) {
-                console.error("AI Interaction Error:", error);
-                // Fallback behavior: just move to next question
-                currentQuestionIndex++;
-                setTimeout(() => askNextQuestion(), 1000);
-            }
-        }
-
         function completeInterview() {
+            stopCamera();
             updateActiveQuestion("Interview Complete");
-            speak("Thank you for your time. Goodbye!");
+            speak("Thank you for your time. Your assessment has been completed successfully. Goodbye!");
             document.getElementById('inputContainer').style.display = 'none';
-            document.getElementById('chatContainer').innerHTML = "<div style='text-align:center; padding:2rem;'><h3>All Done!</h3></div>";
+
+            // Mark candidate as completed if possible
+            const params = new URLSearchParams(window.location.search);
+            const token = params.get('token');
+            if (token) {
+                fetch(`http://localhost:8001/api/candidates/${token}/update-status/`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: 'Completed' })
+                });
+            }
         }
 
-        document.addEventListener('DOMContentLoaded', initSession);
-        document.getElementById('responseInput').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submitResponse(); }
-        });
+        // Initialize
+        window.onload = () => {
+            fetchInterviewQuestions();
+            loadVoices();
+        };
+
     </script>
 </body>
 

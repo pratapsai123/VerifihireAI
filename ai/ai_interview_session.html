@@ -207,23 +207,189 @@
 
         /* ... existing styles ... */
 
-        /* Mobile Responsive */
-        @media (max-width: 900px) {
-            .session-container {
-                flex-direction: column;
-                height: auto;
-                min-height: 100vh;
+        /* Camera Feed Styles */
+        .camera-container {
+            width: 100%;
+            height: 220px;
+            background: #000;
+            border-radius: 20px 20px 0 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #candidateVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scaleX(-1);
+            /* Mirror view */
+        }
+
+        .camera-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(225, 29, 72, 0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 20;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* AI Monitoring Overlays */
+        .ai-scan-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #667eea, #764ba2, #667eea, transparent);
+            z-index: 15;
+            box-shadow: 0 0 15px #667eea;
+            animation: scan-vertical 4s infinite ease-in-out;
+            display: none;
+        }
+
+        @keyframes scan-vertical {
+            0% {
+                top: 0;
             }
 
-            .ai-sidebar {
-                width: 100%;
-                height: 200px;
+            50% {
+                top: 100%;
             }
 
-            .ai-full-body {
-                background-position: center;
-                height: 100%;
+            100% {
+                top: 0;
             }
+        }
+
+        .monitoring-panel {
+            position: absolute;
+            bottom: 0.5rem;
+            left: 0.5rem;
+            right: 0.5rem;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 0.75rem;
+            z-index: 20;
+            display: none;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .monitor-stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .monitor-stat .stat-label {
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        .monitor-stat .stat-val {
+            font-family: monospace;
+            color: #60a5fa;
+        }
+
+        .ai-event-toast {
+            position: absolute;
+            bottom: 4rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            z-index: 21;
+            white-space: nowrap;
+            animation: fade-up-out 3s forwards;
+            display: none;
+        }
+
+        @keyframes fade-up-out {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, 10px);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            80% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -10px);
+            }
+        }
+
+
+        .camera-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            animation: pulse-recording 1.2s infinite;
+        }
+
+        @keyframes pulse-recording {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .camera-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #718096;
+            background: #edf2f7;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .camera-placeholder i {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
         }
     </style>
 </head>
@@ -257,13 +423,41 @@
             <div class="session-container">
                 <!-- Left AI Sidebar with Full Body Avatar -->
                 <div class="ai-sidebar">
-                    <div class="ai-sidebar-header">
+                    <div class="camera-container">
+                        <div id="cameraPlaceholder" class="camera-placeholder">
+                            <i class="fa-solid fa-camera-slash"></i>
+                            <p style="font-size: 0.8rem; margin: 0;">Camera starting...</p>
+                        </div>
+                        <video id="candidateVideo" autoplay playsinline muted></video>
+                        <div class="ai-scan-bar" id="aiScanBar"></div>
+                        <div class="camera-status" id="cameraStatus" style="display: none;">Live</div>
+                        <div class="monitoring-panel" id="monitoringPanel">
+                            <div class="monitor-stat">
+                                <span class="stat-label">IDENTITY</span>
+                                <span class="stat-val" id="monitorIdentity">VERIFIED</span>
+                            </div>
+                            <div class="monitor-stat">
+                                <span class="stat-label">EYE CONTACT</span>
+                                <span class="stat-val" id="monitorEyeContact">STABLE</span>
+                            </div>
+                            <div class="monitor-stat">
+                                <span class="stat-label">PRESENCE</span>
+                                <span class="stat-val" id="monitorPresence">DETECTED</span>
+                            </div>
+                            <div class="monitor-stat">
+                                <span class="stat-label">CONFIDENCE</span>
+                                <span class="stat-val" id="monitorConfidence">92%</span>
+                            </div>
+                        </div>
+                        <div id="aiEventToast" class="ai-event-toast"></div>
+                    </div>
+                    <div class="ai-sidebar-header" style="top: 235px;">
                         <div class="ai-status-badge">
                             <span class="speaking-indicator"></span>
                             <span id="aiStatusText">AI Interviewer Online</span>
                         </div>
                     </div>
-                    <div class="ai-full-body" id="aiAvatar"></div>
+                    <div class="ai-full-body" id="aiAvatar" style="height: 60%;"></div>
                 </div>
 
                 <!-- Right Main Content -->
@@ -412,9 +606,101 @@
         let isProcessing = false;
         let isRecording = false;
         let recognition = null;
-        let userInputMode = 'audio';
         const synth = window.speechSynthesis;
         let voice = null;
+        let videoStream = null;
+        let aiMonitoringInterval = null;
+
+        // Camera Management
+        async function startCamera() {
+            const video = document.getElementById('candidateVideo');
+            const placeholder = document.getElementById('cameraPlaceholder');
+            const status = document.getElementById('cameraStatus');
+            const scanBar = document.getElementById('aiScanBar');
+            const monitorPanel = document.getElementById('monitoringPanel');
+
+            try {
+                videoStream = await navigator.mediaDevices.getUserMedia({
+                    video: {
+                        width: { ideal: 640 },
+                        height: { ideal: 480 },
+                        facingMode: "user"
+                    }
+                });
+                video.srcObject = videoStream;
+                placeholder.style.display = 'none';
+                status.style.display = 'flex';
+                scanBar.style.display = 'block';
+                monitorPanel.style.display = 'flex';
+
+                startAiMonitoring();
+                console.log("Camera and AI Monitoring started");
+            } catch (err) {
+                console.error("Error accessing camera:", err);
+                placeholder.innerHTML = `
+                    <i class="fa-solid fa-triangle-exclamation" style="color: #e53e3e;"></i>
+                    <p style="font-size: 0.75rem; color: #e53e3e; margin: 0;">Camera Blocked</p>
+                    <button onclick="startCamera()" style="margin-top: 5px; font-size: 0.7rem; cursor: pointer;">Retry</button>
+                `;
+            }
+        }
+
+        function stopCamera() {
+            if (videoStream) {
+                videoStream.getTracks().forEach(track => track.stop());
+                clearInterval(aiMonitoringInterval);
+                console.log("Camera and AI Monitoring stopped");
+            }
+        }
+
+        // AI Monitoring Simulation
+        function startAiMonitoring() {
+            const confidenceEl = document.getElementById('monitorConfidence');
+            const eyeContactEl = document.getElementById('monitorEyeContact');
+            const presenceEl = document.getElementById('monitorPresence');
+            const statusText = document.getElementById('aiStatusText');
+
+            const events = [
+                "Eye alignment verified",
+                "Bio-presence confirmed",
+                "Authenticity check passed",
+                "Focus stable",
+                "Environment scanned"
+            ];
+
+            aiMonitoringInterval = setInterval(() => {
+                // Update mock stats
+                const confidence = 85 + Math.floor(Math.random() * 12);
+                confidenceEl.innerText = `${confidence}%`;
+
+                const eyeStates = ["STABLE", "GOOD", "OPTIMAL", "TRACKING"];
+                eyeContactEl.innerText = eyeStates[Math.floor(Math.random() * eyeStates.length)];
+
+                // Occasional "Event"
+                if (Math.random() > 0.7) {
+                    showAiEvent(events[Math.floor(Math.random() * events.length)]);
+                }
+
+                // Random subtle status update if AI is not speaking
+                if (!synth.speaking && Math.random() > 0.8) {
+                    const originalStatus = "AI Interviewer Online";
+                    const minorStatuses = ["AI monitoring focus...", "Analyzing visual cues...", "Presence confirmed"];
+                    statusText.innerText = minorStatuses[Math.floor(Math.random() * minorStatuses.length)];
+                    setTimeout(() => statusText.innerText = originalStatus, 2000);
+                }
+            }, 3000);
+        }
+
+        function showAiEvent(text) {
+            const toast = document.getElementById('aiEventToast');
+            toast.innerText = text;
+            toast.style.display = 'block';
+
+            // Re-trigger animation
+            toast.style.animation = 'none';
+            toast.offsetHeight; /* trigger reflow */
+            toast.style.animation = 'fade-up-out 3s forwards';
+        }
 
         // ... (loadVoices, initSpeechRecognition, toggleInputMode functions)
         // Re-implementing simplified versions for this block
@@ -593,6 +879,9 @@
 
             document.getElementById('candidateName').textContent = sessionData.candidateName || "Candidate";
 
+            // Start Camera
+            startCamera();
+
             setTimeout(() => {
                 loadVoices();
                 const welcome = `Hello ${sessionData.candidateName ? sessionData.candidateName.split(' ')[0] : 'Candidate'}! I'm your AI interviewer. Let's begin!`;
@@ -696,6 +985,7 @@
         }
 
         function completeInterview() {
+            stopCamera();
             updateActiveQuestion("Interview Complete");
             speak("Thank you for your time. Goodbye!");
             document.getElementById('inputContainer').style.display = 'none';

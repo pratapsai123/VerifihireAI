@@ -223,33 +223,47 @@ class ProcessAnswerView(APIView):
     def post(self, request):
         current_question = request.data.get('question')
         answer = request.data.get('answer')
+        chat_history = request.data.get('chat_history', []) # Optional history for context
         
         if not current_question or not answer:
              return Response({'error': 'Missing question or answer'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
             model = genai.GenerativeModel('gemini-flash-latest')
-            prompt = f"""
-            Act as an experienced technical interviewer conducting a live video interview.
             
-            Current Question: "{current_question}"
+            # Format history for the prompt
+            history_context = ""
+            if chat_history:
+                history_context = "CONVERSATION HISTORY:\n" + "\n".join([f"{h['role'].upper()}: {h['content']}" for h in chat_history[-4:]]) + "\n"
+
+            prompt = f"""
+            Act as an elite technical interviewer conducting a high-stakes, fluid, and "human-like" video interview.
+            
+            {history_context}
+            CURRENT TURN:
+            Question Asked: "{current_question}"
             Candidate's Answer: "{answer}"
             
-            Your Task:
-            1. Analyze the candidate's answer.
-            2. Generate a natural, conversational response ("feedback"). 
-               - If the answer is good, acknowledge a specific detail they mentioned.
-               - If the candidate says "I don't know" or is unsure, be encouraging (e.g., "That's perfectly fine, it's a specific topic."). Do NOT ask a follow-up question.
-               - If the answer is vague but they seem to know something, ask for clarification.
-            3. Decide if a follow-up question is needed immediately.
-               - RETURN NULL for follow_up_question if the candidate said "I don't know".
+            YOUR TASK:
+            1. **Active Listening**: Analyze the answer deeply. If the candidate mentions a specific technology or project, refer back to it in your feedback.
+            2. **Generative Feedback**: Provide a natural, encouraging reaction (2-3 sentences max). Acknowledge specific points.
+            3. **Decision & Follow-up**:
+               - If the answer is vague or intriguing, ask a SHARP, targeted follow-up question.
+               - If the candidate mentioned something particularly interesting, dig deeper.
+               - If the candidate says "I don't know", acknowledge gracefully and return NULL for follow_up_question (we will move to the next list item).
+            4. **Fluidity**: Make the feedback transition smoothly into the follow-up question.
             
-            Output strictly valid JSON:
+            OUTPUT RULES:
+            - Output strictly valid JSON.
+            - "feedback": Your conversational reaction.
+            - "follow_up_question": The targeted follow-up, or null if you want to proceed to the next major topic.
+            - No markdown, no extra text.
+            
+            JSON FORMAT:
             {{
-                "feedback": "Your conversational reaction here.",
-                "follow_up_question": "The follow-up question if needed, otherwise null"
+                "feedback": "...",
+                "follow_up_question": "..."
             }}
-            Do not include Markdown formatting.
             """
             
             response = model.generate_content(prompt)
@@ -259,8 +273,8 @@ class ProcessAnswerView(APIView):
             return Response(data, status=status.HTTP_200_OK)
             
         except Exception as e:
-            # Fallback if AI fails
+            print(f"Gemini Error: {str(e)}")
             return Response({
-                "feedback": "Thank you for that answer.",
+                "feedback": "I see, thank you for clarifying that.",
                 "follow_up_question": None
             }, status=status.HTTP_200_OK)
