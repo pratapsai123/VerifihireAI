@@ -10,6 +10,7 @@ class Candidate(models.Model):
         ('Hired', 'Hired'),
         ('Resume Passed', 'Resume Passed'),
         ('Resume Failed', 'Resume Failed'),
+        ('Completed', 'Completed'),
     ]
 
     full_name = models.CharField(max_length=255)
@@ -18,6 +19,7 @@ class Candidate(models.Model):
     job_title = models.CharField(max_length=255, blank=True, null=True)
     linkedin_url = models.URLField(blank=True, null=True)
     resume = models.FileField(upload_to='resumes/', blank=True, null=True)
+    resume_text = models.TextField(blank=True, null=True, help_text="Cached text content of the resume to avoid re-parsing")
     cover_letter = models.TextField(blank=True, null=True)
     job_description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='New')

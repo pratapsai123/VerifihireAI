@@ -474,6 +474,12 @@
 </head>
 
 <body>
+    <!-- Quota Warning Banner -->
+    <div id="quota-warning"
+        style="display:none; background-color: #ff4444; color: white; text-align: center; padding: 15px; position: fixed; top: 0; left: 0; width: 100%; z-index: 9999; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+        ⚠️ AI Service Limit Reached. The interview cannot continue at this time. Please contact support or try again
+        later.
+    </div>
     <div class="dashboard-page">
         <nav class="sidebar">
             <div class="logo">VeriFiHireAI</div>
@@ -1108,6 +1114,15 @@
                     })
                 });
 
+                if (response.status === 429) {
+                    document.getElementById('quota-warning').style.display = 'block';
+                    document.getElementById('userInput').disabled = true;
+                    //document.getElementById('sendBtn').disabled = true;
+                    addMessage("System", "Service limit reached. Interview paused.");
+                    isProcessing = false;
+                    return;
+                }
+
                 const data = await response.json();
 
                 // Integrated Fluid Response
@@ -1233,11 +1248,13 @@
             const params = new URLSearchParams(window.location.search);
             const token = params.get('token');
             if (token) {
-                fetch(`http://localhost:8001/api/candidates/${token}/update-status/`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ status: 'Completed' })
-                });
+                if (token) {
+                    fetch(`http://localhost:8001/api/ai-candidates/${token}/status/`, {
+                        method: 'PATCH',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ status: 'Completed' })
+                    });
+                }
             }
         }
 

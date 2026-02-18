@@ -10,6 +10,24 @@ from rest_framework import generics
 from .models import Candidate
 from .serializers import CandidateSerializer
 import traceback
+import time
+import re
+import logging
+from google.api_core.exceptions import ResourceExhausted
+
+# Setup Logger
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='performance.log', level=logging.INFO, format='%(asctime)s - %(message)s')
+
+def extract_json(text):
+    try:
+        # Try to find JSON block
+        match = re.search(r"\{.*\}", text, re.DOTALL)
+        if match:
+            return json.loads(match.group(0))
+        return json.loads(text)
+    except:
+        return None
 
 # Configure Gemini
 from django.conf import settings
@@ -127,12 +145,15 @@ class ResumeMatchView(APIView):
             # Case 1: Uploading Resume for Existing Candidate (New Flow)
             if resume_file and candidate:
                 candidate.resume = resume_file
-                candidate.save()
-                # Read from upload directly
+                
+                # Extract text immediately
                 resume_file.seek(0)
                 pdf_reader = PyPDF2.PdfReader(io.BytesIO(resume_file.read()))
                 for page in pdf_reader.pages:
                     resume_text += page.extract_text()
+                
+                candidate.resume_text = resume_text
+                candidate.save()
 
             # Case 2: New Candidate Upload (Old Flow)
             elif resume_file and not candidate:
@@ -147,6 +168,7 @@ class ResumeMatchView(APIView):
                     email="pending@example.com",
                     job_title="Applicant",
                     resume=resume_file,
+                    resume_text=resume_text,
                     status='New',
                     job_description=job_description
                 )
@@ -156,10 +178,19 @@ class ResumeMatchView(APIView):
             elif candidate and not resume_file:
                 if not candidate.resume:
                     return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
-                with candidate.resume.open('rb') as f:
-                    pdf_reader = PyPDF2.PdfReader(f)
-                    for page in pdf_reader.pages:
-                        resume_text += page.extract_text()
+                
+                # Use cached text if available
+                if candidate.resume_text:
+                     resume_text = candidate.resume_text
+                else:
+                    # Fallback to parsing and cache it
+                    with candidate.resume.open('rb') as f:
+                        pdf_reader = PyPDF2.PdfReader(f)
+                        for page in pdf_reader.pages:
+                            resume_text += page.extract_text()
+                    
+                    candidate.resume_text = resume_text
+                    candidate.save()
 
             # 2. Call Gemini
             model = genai.GenerativeModel('gemini-flash-latest')
@@ -214,6 +245,11 @@ class CandidateStatusUpdateView(APIView):
             new_status = request.data.get('status')
             if new_status in dict(Candidate.STATUS_CHOICES):
                 candidate.status = new_status
+                
+                # Auto-cleanup cached text to save space
+                if new_status in ['Completed', 'Hired', 'Rejected', 'Resume Failed']:
+                    candidate.resume_text = None
+                    
                 candidate.save()
                 return Response({'status': 'success', 'new_status': candidate.status})
             else:
@@ -233,6 +269,7 @@ class ProcessAnswerView(APIView):
              return Response({'error': 'Missing question or answer'}, status=status.HTTP_400_BAD_REQUEST)
 
         # 1. Fetch Candidate Context if ID is provided
+        start_time = time.time()
         resume_context = "No resume available."
         jd_context = "No job description available."
         candidate_name = "Candidate"
@@ -246,7 +283,9 @@ class ProcessAnswerView(APIView):
                 candidate_email = candidate.email or candidate_email
                 jd_context = candidate.job_description or jd_context
                 
-                if candidate.resume:
+                if candidate.resume_text:
+                     resume_context = candidate.resume_text
+                elif candidate.resume:
                     try:
                         import PyPDF2
                         with candidate.resume.open('rb') as f:
@@ -254,14 +293,24 @@ class ProcessAnswerView(APIView):
                             resume_text = ""
                             for page in pdf_reader.pages:
                                 resume_text += page.extract_text()
-                            resume_context = resume_text if resume_text.strip() else resume_context
+                            
+                            # Cache it for next time
+                            if resume_text.strip():
+                                candidate.resume_text = resume_text
+                                candidate.save()
+                                resume_context = resume_text
                     except Exception as e:
                         print(f"Resume Parse Error: {e}")
             except Candidate.DoesNotExist:
                 print(f"Candidate {candidate_id} not found.")
 
+        context_time = time.time() - start_time
+        logging.info(f"Context Loading Time: {context_time:.4f}s")
+        print(f"Context Loading Time: {context_time:.4f}s")
+        
         try:
-            model = genai.GenerativeModel('gemini-flash-latest')
+            gemini_start = time.time()
+            model = genai.GenerativeModel('models/gemini-flash-latest')
             
             # Format history for the prompt
             history_context = ""
@@ -269,63 +318,100 @@ class ProcessAnswerView(APIView):
                 history_context = "CONVERSATION HISTORY:\n" + "\n".join([f"{h['role'].upper()}: {h['content']}" for h in chat_history[-4:]]) + "\n"
 
             prompt = f"""
-            Act as an elite technical interviewer named "HireAI". 
-            You are interviewing {candidate_name} (Email: {candidate_email}).
-            You are professional, friendly, and encouraging. 
+            Role: "HireAI", an adaptive, empathetic technical interviewer for {candidate_name}.
             
-            CANDIDATE CONTEXT:
-            Resume: {resume_context[:2000]} # Truncated for token limits
-            Job Description: {jd_context[:1000]}
+            RULES:
+            1. **DISTRESS**: If candidate is EMOTIONALLY distressed ("sad", "depressed", "scared"), STOP. Offer a break. Set "refined_next_question" to null.
+            2. **KNOWLEDGE GAP**: If candidate says "I don't know" or "Not sure":
+               - DO NOT offer a break.
+               - RESPOND: "That's completely fine. It's a specific topic. Let's move on." 
+               - Ask the next question immediately.
+            3. **ANSWER**: If asked a question, answer briefly, then pivot back.
+            3. **PROBE**: If answer is vague, ask clarification.
+            4. **NATURAL**: No robotic transitions ("Let's move on"). Bridge topics naturally.
+            
+            CONTEXT:
+            Resume: {resume_context[:1000]} 
+            Job: {jd_context[:500]}
             
             {history_context}
-            CURRENT TURN:
-            Question Asked: "{current_question}"
-            Candidate's Answer: "{answer}"
-            Next Planned Topic/Question: "{next_question if next_question else "Wrap up the interview"}"
+            TURN:
+            Q: "{current_question}"
+            A: "{answer}"
+            Next: "{next_question if next_question else "End"}"
             
-            YOUR TASK:
-            1. **Analyze & React**: 
-               - SHORT ANSWERS ARE VALID (e.g., "I am Suman" or "I use Python"). Accept them professionally.
-               - Do NOT treat concise answers as "unclear" or as a sign of pressure.
-               - Give a BRIEF acknowledgement (e.g., "Thanks for that overview.", "That makes sense.").
-               - Only if they explicitly say "I don't know", be supportive and transition.
-            
-            2. **Topic Control**:
-               - SEAMLESSLY TRANSITION to the 'Next Planned Topic/Question' but...
-               - **DO NOT ASK THE QUESTION ITSELF**. The system will ask it automatically after you speak.
-               - Just bridge the old topic to the new one naturally.
-               - **CRITICAL**: You must REWRITE the 'Next Planned Question' to connect it to the candidate's previous answer.
-                 - If they just talked about "Data Science", and the next topic is "Python", rewrite "What is Python?" to "Since you mentioned Data Science, how do you utilize Python for your analysis?"
-            
-            3. **Brevity**: Strictly 1-2 concise sentences total. No paragraphs.
-            
-            OUTPUT RULES:
-            - Output strictly valid JSON.
-            - "feedback": Your conversational response (Reaction + Bridge).
-            - "refined_next_question": The REWRITTEN version of the 'Next Planned Question' that connects to the context. 
-            - "follow_up_question": A BRIEF follow-up only if strictly necessary (e.g. for clarification), otherwise NULL.
-            - No markdown, no extra text.
-            
-            JSON FORMAT:
+            OUTPUT (JSON Only):
             {{
-                "feedback": "...",
-                "refined_next_question": "...",
-                "follow_up_question": null
+                "feedback": "Reaction + Bridge (or Empathy)",
+                "refined_next_question": "Rewritten Next Q (or null if distressed)",
+                "follow_up_question": "Clarification if needed (else null)"
             }}
             """
             
-            response = model.generate_content(prompt)
-            clean_response = response.text.replace("```json", "").replace("```", "").strip()
-            data = json.loads(clean_response)
+            # Safety Settings to allow professional/emotional context
+            safety_settings = [
+                {
+                    "category": "HARM_CATEGORY_HARASSMENT",
+                    "threshold": "BLOCK_ONLY_HIGH"
+                },
+                {
+                    "category": "HARM_CATEGORY_HATE_SPEECH",
+                    "threshold": "BLOCK_ONLY_HIGH"
+                },
+                {
+                    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                    "threshold": "BLOCK_ONLY_HIGH"
+                },
+                {
+                    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+                    "threshold": "BLOCK_ONLY_HIGH"
+                },
+            ]
+
+            response = model.generate_content(prompt, safety_settings=safety_settings)
+            
+            gemini_time = time.time() - gemini_start
+            logging.info(f"Gemini API Time: {gemini_time:.4f}s")
+            print(f"Gemini API Time: {gemini_time:.4f}s")
+            
+            # Robust Parsing
+            data = extract_json(response.text)
+            
+            if not data:
+                # If JSON fails, treat the whole text as feedback if it's not empty
+                print(f"JSON Parse Failed. Raw response: {response.text}")
+                if response.text.strip():
+                     data = {
+                        "feedback": response.text.strip(),
+                        "refined_next_question": next_question, # Keep original question
+                        "follow_up_question": None
+                     }
+                else:
+                    raise Exception("Empty response from Gemini")
             
             return Response(data, status=status.HTTP_200_OK)
             
+        except ResourceExhausted:
+             logger.error("Gemini Quota Exceeded")
+             return Response({"error": "AI Service Limit Reached", "quota_exhausted": True}, status=status.HTTP_429_TOO_MANY_REQUESTS)
+
         except Exception as e:
+            logger.error(f"CRITICAL Gemini Error: {str(e)}")
+            logger.error(traceback.format_exc())
             print(f"CRITICAL Gemini Error: {str(e)}")
             traceback.print_exc()
             # fallback
-            fallback_feedback = "Thank you. Let's move on to the next topic."
+            # Smart Fallback
+            answer_lower = answer.lower()
+            if any(w in answer_lower for w in ['sad', 'depressed', 'stop', 'quit', 'don\'t want', 'no more', 'kill']):
+                 fallback_feedback = "I hear that you're going through a tough time. We can pause the interview right here. Would you like to reschedule or take a break?"
+                 next_q = None
+            else:
+                 fallback_feedback = "I apologize, I missed that last part. Could you please rephrase or elaborate?"
+                 next_q = next_question
+
             return Response({
                 "feedback": fallback_feedback,
-                "follow_up_question": None
+                "follow_up_question": None,
+                "refined_next_question": next_q
             }, status=status.HTTP_200_OK)
