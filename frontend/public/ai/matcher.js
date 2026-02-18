@@ -5,58 +5,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const jobDescInput = document.getElementById('jobDesc');
     const matchBtn = document.getElementById('matchBtn');
 
-    // State
-    let selectedCandidateId = null;
+    // Threshold Slider Logic
+    const thresholdRange = document.getElementById('thresholdRange');
+    const thresholdValue = document.getElementById('thresholdValue');
 
-    // Check for Candidate ID in URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-
-    if (id) {
-        fetchCandidate(id);
-    }
-
-    async function fetchCandidate(id) {
-        try {
-            const response = await fetch(`http://localhost:8001/api/candidates/${id}/`);
-            if (response.ok) {
-                const candidate = await response.json();
-                selectedCandidateId = candidate.id;
-
-                // Update UI to show candidate selected
-                fileNameDisplay.textContent = `Selected: ${candidate.full_name}'s Resume (On File)`;
-                fileNameDisplay.style.color = '#4318FF';
-                fileNameDisplay.style.fontWeight = '500';
-
-                // Optional: Disable file input visual or just indicate preference
-                dropZone.style.borderColor = '#4318FF';
-                dropZone.style.backgroundColor = '#f5f3ff';
-            }
-        } catch (error) {
-            console.error('Error fetching candidate:', error);
-        }
+    if (thresholdRange && thresholdValue) {
+        thresholdRange.addEventListener('input', (e) => {
+            thresholdValue.textContent = `${e.target.value}%`;
+        });
     }
 
     // Result Elements
     const inputSection = document.getElementById('inputSection');
     const actionSection = document.getElementById('actionSection');
     const resultSection = document.getElementById('resultSection');
-    const scoreValue = document.getElementById('scoreValue');
-    const eligibilityBadge = document.getElementById('eligibilityBadge');
-    const matchSummary = document.getElementById('matchSummary');
-    const progressCircle = document.querySelector('.circular-progress');
 
     // Drag and Drop
     dropZone.addEventListener('click', () => resumeInput.click());
 
     resumeInput.addEventListener('change', () => {
-        if (resumeInput.files.length > 0) {
-            fileNameDisplay.textContent = `Selected: ${resumeInput.files[0].name}`;
-            selectedCandidateId = null; // Reset if new file selected
-            fileNameDisplay.style.color = '';
-            dropZone.style.borderColor = '';
-            dropZone.style.backgroundColor = '';
-        }
+        handleFiles(resumeInput.files);
     });
 
     dropZone.addEventListener('dragover', (e) => {
@@ -73,168 +41,137 @@ document.addEventListener('DOMContentLoaded', () => {
         dropZone.classList.remove('dragover');
         if (e.dataTransfer.files.length > 0) {
             resumeInput.files = e.dataTransfer.files;
-            fileNameDisplay.textContent = `Selected: ${resumeInput.files[0].name}`;
-            selectedCandidateId = null; // Reset
+            handleFiles(resumeInput.files);
         }
     });
 
+    function handleFiles(files) {
+        if (files.length > 0) {
+            if (files.length === 1) {
+                fileNameDisplay.textContent = `Selected: ${files[0].name}`;
+            } else {
+                fileNameDisplay.textContent = `Selected: ${files.length} resumes`;
+            }
+            fileNameDisplay.style.display = 'block';
+            // Visual feedback
+            dropZone.style.borderColor = '#4318FF';
+            dropZone.style.background = '#F0F2F9';
+        }
+    }
+
     // Match Analysis
     matchBtn.addEventListener('click', async () => {
-        const resumeFile = resumeInput.files[0];
+        const files = resumeInput.files;
         const jobDescription = jobDescInput.value.trim();
-        const minScore = document.getElementById('minScore').value;
+        const threshold = thresholdRange ? thresholdRange.value : 70;
 
-        // Validation: Need (File OR CandidateID) AND JobDescription
-        if ((!resumeFile && !selectedCandidateId) || !jobDescription) {
-            alert('Please provide a job description and either upload a resume or select a candidate.');
+        if (files.length === 0 || !jobDescription) {
+            alert('Please provide at least one resume and a job description.');
             return;
         }
 
         // UI Feedback: Loading
         matchBtn.disabled = true;
-        matchBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analyzing...';
+        matchBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analyzing ' + files.length + ' resume(s)...';
 
         const formData = new FormData();
-        formData.append('job_description', jobDescription);
-        // formData.append('min_score', minScore); // Send this to API if supported
-
-        if (selectedCandidateId) {
-            formData.append('candidate_id', selectedCandidateId);
-        } else {
-            formData.append('resume', resumeFile);
+        for (let i = 0; i < files.length; i++) {
+            formData.append('resume', files[i]);
         }
+        formData.append('job_description', jobDescription);
+        formData.append('threshold', threshold);
 
         try {
+            // Using port 8001 (VerifiHireAI Backend)
             const response = await fetch('http://localhost:8001/api/ai-candidates/match/', {
                 method: 'POST',
                 body: formData
             });
 
             if (!response.ok) {
-                throw new Error('Analysis failed. Please check the backend.');
+                const errData = await response.json().catch(() => ({}));
+                throw new Error(errData.detail || 'Analysis failed. Please check backend.');
             }
 
             const data = await response.json();
-
-            // Store candidate ID for decision
-            if (data.candidate_id) {
-                selectedCandidateId = data.candidate_id;
-            }
-
-            // Mocking list update for demo since API returns single result
-            // updateResultsList(data, resumeFile ? resumeFile.name : 'Candidate Resume', minScore);
-
             showResults(data);
 
         } catch (error) {
             console.error('Error:', error);
-            alert('Failed to analyze resume. Ensure the backend is running with a valid Gemini API key.');
+            alert(`Failed to analyze: ${error.message}`);
         } finally {
             matchBtn.disabled = false;
             matchBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Analyze Match';
         }
     });
 
-    // Decision Handlers
-    document.getElementById('approveBtn').addEventListener('click', () => updateStatus('Resume Passed'));
-    document.getElementById('rejectBtn').addEventListener('click', () => updateStatus('Resume Failed'));
-
-    async function updateStatus(status) {
-        if (!selectedCandidateId) return;
-
-        const decisionMsg = document.getElementById('decisionMessage');
-        const btns = document.querySelector('.decision-actions');
-
-        try {
-            const response = await fetch(`http://localhost:8001/api/ai-candidates/${selectedCandidateId}/status/`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ status: status })
-            });
-
-            if (response.ok) {
-                btns.style.display = 'none';
-                decisionMsg.style.display = 'block';
-                decisionMsg.innerHTML = `
-                    <p style="color: ${status === 'Resume Passed' ? 'var(--status-success)' : 'var(--status-error)'}">
-                        <i class="fa-solid ${status === 'Resume Passed' ? 'fa-circle-check' : 'fa-circle-xmark'}"></i> 
-                        Candidate marked as <strong>${status}</strong>.
-                    </p>
-                    <a href="candidates.html" class="browse-link">View in Candidates List</a>
-                `;
-            } else {
-                alert('Failed to update status.');
-            }
-        } catch (error) {
-            console.error('Error updating status:', error);
-            alert('Error updating status.');
-        }
-    }
-
-    function showResults(data) {
+    function showResults(results) {
         // Hide inputs, show results
         inputSection.style.display = 'none';
         actionSection.style.display = 'none';
         resultSection.style.display = 'block';
 
-        // Set score and circle
-        const percentage = data.match_percentage;
-        scoreValue.textContent = `${percentage}%`;
-
-        // Update circle gradient
-        scoreValue.parentElement.style.background = `conic-gradient(#4318FF ${percentage * 3.6}deg, #eef2ff 0deg)`;
-
-        // Set badge
-        if (data.is_eligible) {
-            eligibilityBadge.textContent = 'Eligible';
-            eligibilityBadge.className = 'status-badge status-new'; // Reusing green style
-        } else {
-            eligibilityBadge.textContent = 'Not Eligible';
-            eligibilityBadge.className = 'status-badge status-review'; // Reusing orange style
-        }
-
-        // Set summary
-        document.getElementById('matchSummary').textContent = data.summary;
-    }
-
-    function updateResultsList(data, candidateName, minScore) {
-        const score = data.match_percentage;
-        const isPassed = score >= minScore;
-
-        const listId = isPassed ? 'passedList' : 'failedList';
-        const container = document.getElementById(listId);
-        const badge = document.querySelector(`.tab-btn[data-tab="${isPassed ? 'passed' : 'failed'}"] .badge`);
-
-        // Create result item
-        const item = document.createElement('div');
-        item.className = 'feature-card matcher-card';
-        item.style.marginBottom = '1rem';
-        item.style.minHeight = 'auto'; // Override default
-        item.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                <div>
-                    <h4 style="margin: 0; color: var(--navy-secondary); font-size: 1.1rem;">${candidateName}</h4>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.9rem;">Match: <strong>${score}%</strong></p>
-                </div>
-                <div class="status-badge ${isPassed ? 'status-new' : 'status-review'}">
-                    ${isPassed ? 'Passed' : 'Failed'}
-                </div>
+        // Clear previous results
+        resultSection.innerHTML = `
+            <div class="result-header" style="text-align: center; margin-bottom: 2rem;">
+                <h2 style="font-size: 2rem; background: linear-gradient(135deg, var(--navy-secondary), var(--blue-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Analysis Results</h2>
+                <button class="auth-primary-btn" onclick="location.reload()" style="margin: 1.5rem auto; padding: 0.75rem 2rem; font-size: 1rem;">
+                    <i class="fa-solid fa-rotate-right"></i> Analyze More
+                </button>
+            </div>
+            <div class="results-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                <!-- Results injected here -->
             </div>
         `;
 
-        // Remove empty state if present
-        const emptyState = container.querySelector('.empty-state');
-        if (emptyState) emptyState.remove();
+        const grid = resultSection.querySelector('.results-grid');
 
-        container.appendChild(item);
+        // Handle single object response (backward compatibility) or array
+        const resultsArray = Array.isArray(results) ? results : [results];
 
-        // Update badge count
-        let count = parseInt(badge.textContent) || 0;
-        badge.textContent = count + 1;
+        resultsArray.forEach(data => {
+            const card = document.createElement('div');
+            card.className = 'matcher-card result-card-item';
 
-        // Auto-switch tab to relevant result
-        document.querySelector(`.tab-btn[data-tab="${isPassed ? 'passed' : 'failed'}"]`).click();
+            // Ensure we handle data structure safely
+            const isEligible = data.is_eligible;
+            const badgeClass = isEligible ? 'status-badge status-new' : 'status-badge status-review';
+            const badgeText = isEligible ? 'Eligible' : 'Not Eligible';
+            const percentage = data.match_percentage || 0;
+            const filename = data.filename || 'Candidate Resume';
+            const summary = data.summary || 'No summary provided.';
+
+            // Generate distinct color for progress based on score
+            const progressColor = percentage >= 70 ? '#05CD99' : (percentage >= 40 ? '#FFB547' : '#EE5D50');
+
+            card.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                    <h4 style="margin: 0; font-size: 1.1rem; color: var(--navy-secondary); display: flex; align-items: center; gap: 0.5rem; max-width: 65%;">
+                        <i class="fa-solid fa-file-pdf" style="color: var(--blue-accent);"></i> 
+                        <span style="text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">${filename}</span>
+                    </h4>
+                    <span class="${badgeClass}">${badgeText}</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; align-items: center; margin: 2rem 0;">
+                    <div style="position: relative; width: 140px; height: 140px; border-radius: 50%; background: conic-gradient(${progressColor} ${percentage}%, #F0F2F9 ${percentage}%); display: flex; align-items: center; justify-content: center; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);">
+                        <div style="position: absolute; width: 115px; height: 115px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                            <span style="font-size: 2rem; font-weight: 800; color: var(--navy-secondary);">${percentage}%</span>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1rem; color: var(--text-secondary); font-size: 0.9rem;">Match Score</p>
+                </div>
+
+                <div style="background: #F8F9FF; padding: 1.5rem; border-radius: 16px; min-height: 120px;">
+                    <h5 style="margin: 0 0 0.5rem 0; color: var(--navy-secondary); font-size: 0.95rem;">AI Summary</h5>
+                    <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;">${summary}</p>
+                </div>
+                
+                <button class="action-btn" style="width: 100%; margin-top: 1.5rem; justify-content: center; display: flex;" onclick="alert('Detailed report feature coming soon!')">
+                    View Full Report
+                </button>
+            `;
+            grid.appendChild(card);
+        });
     }
 });
