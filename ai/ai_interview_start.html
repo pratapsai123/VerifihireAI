@@ -157,7 +157,7 @@
             if (token) {
                 // FETCH CANDIDATE FROM BACKEND
                 try {
-                    const response = await fetch(`http://127.0.0.1:8001/api/ai-candidates/${token}/`);
+                    const response = await fetch(`http://localhost:8001/api/ai-candidates/${token}/`);
                     if (!response.ok) throw new Error('Candidate not found');
 
                     const candidate = await response.json();
@@ -185,12 +185,14 @@
                 const rawData = localStorage.getItem('pendingInterview');
                 if (rawData) {
                     const data = JSON.parse(rawData);
-                    document.getElementById('greeting').textContent = `Welcome, ${data.name.split(' ')[0]}!`;
-                    document.getElementById('subtext').textContent = "Simulated Session";
+                    const name = data.name || data.full_name || "Candidate";
+                    document.getElementById('greeting').textContent = `Welcome, ${name.split(' ')[0]}!`;
+                    document.getElementById('candidateNameDisplay').textContent = name;
+                    document.getElementById('subtext').textContent = "Simulated Session Prep";
                     startBtn.disabled = false;
                     startBtn.style.display = 'block';
                     loader.style.display = 'none';
-                    candidateId = 'simulate'; // Marker
+                    candidateId = 'simulate';
                 } else {
                     loader.style.display = 'none';
                     document.getElementById('errorMessage').textContent = 'No interview session found.';
@@ -266,7 +268,7 @@
                 formData.append('candidate_id', candidateId);
                 // We don't need to append job_description as backend fetches it from candidate
 
-                const response = await fetch('http://127.0.0.1:8001/api/ai-candidates/match/', {
+                const response = await fetch('http://localhost:8001/api/ai-candidates/match/', {
                     method: 'POST',
                     body: formData
                 });

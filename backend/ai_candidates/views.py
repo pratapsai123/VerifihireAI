@@ -9,12 +9,13 @@ from rest_framework import status
 from rest_framework import generics
 from .models import Candidate
 from .serializers import CandidateSerializer
+import traceback
 
 # Configure Gemini
 from django.conf import settings
 from django.core.mail import send_mail
 import pandas as pd
-genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
+genai.configure(api_key=settings.GEMINI_API_KEY)
 
 class BulkInviteView(APIView):
     def post(self, request):
@@ -162,9 +163,10 @@ class ResumeMatchView(APIView):
 
             # 2. Call Gemini
             model = genai.GenerativeModel('gemini-flash-latest')
+            candidate_name = candidate.full_name if candidate else "the candidate"
             
             prompt = f"""
-            Act as an expert technical recruiter. Analyze the match between the following resume and job description.
+            Act as an expert technical recruiter. Analyze the match between the following resume and job description for {candidate_name}.
             
             Resume Content:
             {resume_text}
@@ -221,12 +223,42 @@ class CandidateStatusUpdateView(APIView):
 
 class ProcessAnswerView(APIView):
     def post(self, request):
+        candidate_id = request.data.get('candidate_id')
         current_question = request.data.get('question')
         answer = request.data.get('answer')
-        chat_history = request.data.get('chat_history', []) # Optional history for context
+        next_question = request.data.get('next_question')
+        chat_history = request.data.get('chat_history', []) 
         
         if not current_question or not answer:
              return Response({'error': 'Missing question or answer'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 1. Fetch Candidate Context if ID is provided
+        resume_context = "No resume available."
+        jd_context = "No job description available."
+        candidate_name = "Candidate"
+        
+        candidate_email = "No email provided"
+        
+        if candidate_id:
+            try:
+                candidate = Candidate.objects.get(pk=candidate_id)
+                candidate_name = candidate.full_name
+                candidate_email = candidate.email or candidate_email
+                jd_context = candidate.job_description or jd_context
+                
+                if candidate.resume:
+                    try:
+                        import PyPDF2
+                        with candidate.resume.open('rb') as f:
+                            pdf_reader = PyPDF2.PdfReader(f)
+                            resume_text = ""
+                            for page in pdf_reader.pages:
+                                resume_text += page.extract_text()
+                            resume_context = resume_text if resume_text.strip() else resume_context
+                    except Exception as e:
+                        print(f"Resume Parse Error: {e}")
+            except Candidate.DoesNotExist:
+                print(f"Candidate {candidate_id} not found.")
 
         try:
             model = genai.GenerativeModel('gemini-flash-latest')
@@ -237,26 +269,36 @@ class ProcessAnswerView(APIView):
                 history_context = "CONVERSATION HISTORY:\n" + "\n".join([f"{h['role'].upper()}: {h['content']}" for h in chat_history[-4:]]) + "\n"
 
             prompt = f"""
-            Act as an elite technical interviewer conducting a high-stakes, fluid, and "human-like" video interview.
+            Act as an elite technical interviewer named "HireAI". 
+            You are interviewing {candidate_name} (Email: {candidate_email}).
+            You are profoundly empathetic, "human-like", and sweet. 
+            Your goal is to make {candidate_name} feel valued and supported.
+            
+            CANDIDATE CONTEXT:
+            Resume: {resume_context[:2000]} # Truncated for token limits
+            Job Description: {jd_context[:1000]}
             
             {history_context}
             CURRENT TURN:
             Question Asked: "{current_question}"
             Candidate's Answer: "{answer}"
+            Next Planned Topic/Question: "{next_question if next_question else "Wrap up the interview"}"
             
             YOUR TASK:
-            1. **Active Listening**: Analyze the answer deeply. If the candidate mentions a specific technology or project, refer back to it in your feedback.
-            2. **Generative Feedback**: Provide a natural, encouraging reaction (2-3 sentences max). Acknowledge specific points.
-            3. **Decision & Follow-up**:
-               - If the answer is vague or intriguing, ask a SHARP, targeted follow-up question.
-               - If the candidate mentioned something particularly interesting, dig deeper.
-               - If the candidate says "I don't know", acknowledge gracefully and return NULL for follow_up_question (we will move to the next list item).
-            4. **Fluidity**: Make the feedback transition smoothly into the follow-up question.
+            1. **Personalized Reaction**: 
+               - Give a SWEET AND SIMPLE reaction to their answer (Strictly 1 sentence).
+               - Use their resume context to acknowledge specific skills or experiences if relevant (e.g., "That's a great point about your work with Python!").
+               - If they say "I don't know", be exceptionally sweet and encouraging.
+            2. **Topic Control & Flow**:
+               - You must NOT stay on the same topic for more than one follow-up.
+               - If the candidate's answer is complete or they just finished a follow-up, SEAMLESSLY TRANSITION to the 'Next Planned Topic/Question'.
+               - Your bridge should be warm and bridge the old topic to the new one.
+            3. **Brevity**: Strictly 1-2 concise sentences total for your entire response. No paragraphs. No robotic filler.
             
             OUTPUT RULES:
             - Output strictly valid JSON.
-            - "feedback": Your conversational reaction.
-            - "follow_up_question": The targeted follow-up, or null if you want to proceed to the next major topic.
+            - "feedback": Your conversational response (Sweet Reaction + Seamless Bridge/Question).
+            - "follow_up_question": A BRIEF follow-up only if they left a "deep dive" hook, otherwise NULL to proceed to the next planned topic.
             - No markdown, no extra text.
             
             JSON FORMAT:
@@ -273,8 +315,11 @@ class ProcessAnswerView(APIView):
             return Response(data, status=status.HTTP_200_OK)
             
         except Exception as e:
-            print(f"Gemini Error: {str(e)}")
+            print(f"CRITICAL Gemini Error: {str(e)}")
+            traceback.print_exc()
+            # Even if API fails, we want empathetic fallback
+            fallback_feedback = "I hear you. It's perfectly fine if that's a bit unclear for now—interviews can be high-pressure! Let's just pivot to a different topic. Here's the next one for you:"
             return Response({
-                "feedback": "I see, thank you for clarifying that.",
+                "feedback": fallback_feedback,
                 "follow_up_question": None
             }, status=status.HTTP_200_OK)

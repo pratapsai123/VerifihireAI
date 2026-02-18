@@ -236,5 +236,5 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
 # AI Configuration
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyDaC2BoqMqY5UPF-cD4PipA_au-Z3aX6YY')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyBGmSvpQbUyEeD6o9JGDjip6lkEpMmCr4s')
 
