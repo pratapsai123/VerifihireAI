@@ -1,45 +1,10 @@
-version: '3.8'
-
 services:
-  nginx:
-    image: nginx:1.25-alpine
-    container_name: verifyhire_nginx
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-      - verifihireai_media:/app/media
-      # - ./backend/staticfiles:/app/staticfiles # Optional: map if collecting static locally
-    depends_on:
-      - redis
-    # Reload nginx every 6h to pick up new certs
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-    restart: unless-stopped
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
-  certbot:
-    image: certbot/certbot
-    container_name: verifyhire_certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt
-      - ./certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
-
-  redis:
-    image: redis:7-alpine
-    container_name: verifyhire_redis
-    ports:
-      - "6379:6379" # Exposed for local backend
-    restart: unless-stopped
 
   executor:
     build:
       context: ./executor
-    container_name: verifyhire_executor
+    container_name: VrrifiHire_executor
     restart: unless-stopped
     environment:
       EXECUTOR_PORT: "4000"
@@ -54,14 +19,13 @@ services:
 
   dind:
     image: public.ecr.aws/docker/library/docker:24-dind
-    container_name: verifyhire_dind
+    container_name: VrrifiHire_dind
     privileged: true
     restart: unless-stopped
+
     environment:
       DOCKER_TLS_CERTDIR: ""
-    volumes:
-      - dind_data:/var/lib/docker
+    # command: ["--host=tcp://0.0.0.0:2375", "--tls=false"]
 
 volumes:
   verifihireai_media:
-  dind_data:

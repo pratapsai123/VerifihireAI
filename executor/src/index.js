@@ -68,7 +68,6 @@ function normalizeSqlOutput(s) {
     .filter(l => l); // Remove empty lines
 
   // Filter out table separator lines. 
-  // Filter out table separator lines. 
   // Matches lines containing only -, +, |, and whitespace
   const separatorRegex = /^[\s\-\+\|]+$/;
   // Filter "(N rows)" or "(N row)" footer from Postgres
@@ -79,6 +78,11 @@ function normalizeSqlOutput(s) {
     if (rowCountRegex.test(l)) return false;
     return true;
   });
+
+  // Remove the header row so column aliases don't affect the result
+  if (dataLines.length > 0) {
+    dataLines.shift();
+  }
 
   // Normalize internal whitespace: 
   // 1. Replace | with space (for MySQL/Postgres borders)

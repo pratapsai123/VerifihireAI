@@ -175,6 +175,9 @@
 
 .candidate-button-ready {
   background: #10b981 !important;
+  transform: scale(1.05);
+  /* Enhance / Translate */
+  box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.5);
 }
 
 .candidate-button-disabled {
@@ -187,6 +190,36 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Face Overlay Styles */
+.candidate-face-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  /* Adjust based on expected face size relative to 320px width */
+  height: 180px;
+  border-radius: 50%;
+  /* Oval shape */
+  border: 3px solid rgba(255, 255, 255, 0.7);
+  /* box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5); Removed dimming effect */
+  pointer-events: none;
+  /* Let clicks pass through */
+  transition: border-color 0.3s ease;
+  z-index: 10;
+}
+
+.candidate-face-aligned {
+  border-color: #10b981;
+  /* Green */
+  /* box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.3); Removed dimming effect */
+}
+
+.candidate-face-not-aligned {
+  border-color: #ef4444;
+  /* Red */
 }
 
 /* Responsive design */

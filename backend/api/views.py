@@ -5385,11 +5385,23 @@ def verify_pan_backend_view(request):
         # Clean extracted text for comparison
         clean_extracted = re.sub(r'[^A-Z0-9]', '', extracted_text.upper())
 
-        if success or pan_number in clean_extracted:
+        if success:
+             # Strict check: Extracted PAN must match Input PAN
+             extracted_clean = extracted_text.replace(" ", "").upper()
+             if pan_number == extracted_clean:
+                 return Response({
+                    'success': True, 
+                    'verified': True, 
+                    'message': 'PAN verification successful',
+                    'extracted_pan': extracted_text
+                }, status=status.HTTP_200_OK)
+
+        # Fallback: Check if input PAN exists anywhere in the full extracted text (fuzzy match)
+        if pan_number in clean_extracted:
              return Response({
                 'success': True, 
                 'verified': True, 
-                'message': 'PAN verification successful',
+                'message': 'PAN verified (fuzzy match)',
                 'extracted_pan': pan_number
             }, status=status.HTTP_200_OK)
 
