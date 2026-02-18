@@ -28,7 +28,7 @@ class SubmitAssessmentView(APIView):
             generated_content = assessment.generated_content or {}
             mcqs = generated_content.get('mcqs', [])
             
-            # Grading: Answers are expected as { "mcq_0": "A", "mcq_1": "B" ... }
+            # Grading
             for i, mcq in enumerate(mcqs):
                 correct_ans = mcq.get('answer', '').strip().upper()
                 candidate_ans = answers.get(f'mcq_{i}', '').strip().upper()
@@ -38,9 +38,14 @@ class SubmitAssessmentView(APIView):
             total_q = len(mcqs)
             percentage = (score / total_q * 100) if total_q > 0 else 0
             
-            # Determine status
-            # Threshold 60%
-            pass_status = 'selected' if percentage >= 60 else 'rejected'
+            # Monitoring Data
+            integrity_score = data.get('integrity_score', 100.0)
+            tab_switches = data.get('tab_switches', 0)
+            face_warnings = data.get('face_warnings', 0)
+            phone_warnings = data.get('phone_warnings', 0)
+            
+            # Determine status (Threshold 60% AND Integrity > 80%)
+            pass_status = 'selected' if percentage >= 60 and integrity_score >= 80 else 'rejected'
 
             submission = AIAssessmentSubmission.objects.create(
                 assessment=assessment,
@@ -50,7 +55,11 @@ class SubmitAssessmentView(APIView):
                 score=score,
                 total_questions=total_q,
                 percentage=percentage,
-                status=pass_status
+                status=pass_status,
+                integrity_score=integrity_score,
+                tab_switches=tab_switches,
+                face_warnings=face_warnings,
+                phone_warnings=phone_warnings
             )
 
             return Response({

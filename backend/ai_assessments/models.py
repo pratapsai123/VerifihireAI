@@ -35,6 +35,14 @@ class AIAssessmentSubmission(models.Model):
     total_questions = models.IntegerField(default=0)
     percentage = models.FloatField(default=0.0)
     status = models.CharField(max_length=20, default='rejected')  # 'selected' or 'rejected'
+    
+    # Monitoring Data
+    integrity_score = models.FloatField(default=100.0)
+    tab_switches = models.IntegerField(default=0)
+    face_warnings = models.IntegerField(default=0)
+    phone_warnings = models.IntegerField(default=0)
+    monitoring_logs = models.JSONField(default=list, blank=True)
+
     submitted_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
