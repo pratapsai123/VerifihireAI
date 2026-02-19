@@ -181,84 +181,133 @@ const AiInterviewSession = () => {
         });
     };
 
-    const addMessage = (sender, text) => {
+    const addMessage = useCallback((sender, text) => {
         const displayText = typeof text === 'object' ? (text.question || JSON.stringify(text)) : text;
         setChatMessages(prev => [...prev, { sender, text: displayText }]);
         chatHistoryRef.current.push({ role: sender === 'ai' ? 'assistant' : 'user', content: displayText });
-    };
-
-    const askCurrentQuestion = useCallback((index, qs) => {
-        const question = qs[index];
-        if (!question) return;
-        addMessage('ai', question);
-        speak(question);
     }, []);
 
-    const handleAnswerSubmission = async (answer) => {
-        if (!answer.trim() || isProcessing) return;
+    const completeInterview = useCallback(async () => {
+        stopCamera();
+        const finishMessage = "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
+        addMessage('ai', finishMessage);
+        await speak(finishMessage);
+        axios.patch(`http://localhost:8001/api/ai-candidates/${token}/status/`, { status: 'Completed' }).catch(console.error);
+        setIsProcessing(true);
+        setAiStatus("Session Finished");
+    }, [token, speak, addMessage]);
+
+    const startListening = useCallback(() => {
+        if (userInputMode !== 'audio' || !recognitionRef.current || isRecording) return;
+
+        let attempts = 0;
+        const maxAttempts = 10;
+
+        const tryStart = () => {
+            // Check if AI is occupied
+            if (isProcessing || isSpeaking) {
+                if (attempts < maxAttempts) {
+                    attempts++;
+                    setTimeout(tryStart, 300); // Retry every 300ms
+                }
+                return;
+            }
+
+            try {
+                recognitionRef.current.start();
+                console.log("Auto-mic activated successfully");
+            } catch (e) {
+                if (e.name === 'InvalidStateError') {
+                    // Already started, ignore
+                } else {
+                    console.warn("Auto-start mic error:", e);
+                }
+            }
+        };
+
+        tryStart();
+    }, [userInputMode, isRecording, isProcessing, isSpeaking]);
+
+    const handleAnswerSubmission = useCallback(async (answer) => {
+        if (!answer || !answer.trim() || isProcessing) return;
+
         setIsProcessing(true);
         addMessage('user', answer);
         setResponseInput('');
+        setAiStatus("AI is thinking...");
 
         try {
+            const currentQ = questions[currentQuestionIndex] || "Introduction and Background";
             const response = await axios.post('http://localhost:8001/api/ai-candidates/process-answer/', {
                 candidate_id: token,
-                question: questions[currentQuestionIndex],
+                question: typeof currentQ === 'object' ? currentQ.question : currentQ,
                 answer: answer,
-                next_question: questions[currentQuestionIndex + 1] || null,
+                remaining_questions: questions.slice(currentQuestionIndex + 1),
                 chat_history: chatHistoryRef.current
             });
 
             const data = response.data;
-            let fullFeedback = data.feedback;
-            if (data.follow_up_question) fullFeedback += " " + data.follow_up_question;
+            let fullFeedback = data.feedback || "";
+            const nextIdx = currentQuestionIndex + 1;
 
-            if (data.refined_next_question && !data.follow_up_question) {
-                const nextIdx = currentQuestionIndex + 1;
-                if (nextIdx < questions.length) {
-                    setQuestions(prev => {
-                        const newQs = [...prev];
-                        newQs[nextIdx] = data.refined_next_question;
-                        return newQs;
-                    });
-                }
-            }
+            // Extract the question string from potential object or string
+            const extractQ = (q) => {
+                if (!q) return null;
+                if (typeof q === 'object') return q.question || JSON.stringify(q);
+                return q;
+            };
 
-            if (fullFeedback) {
+            const followUpQ = extractQ(data.follow_up_question);
+            const refinedNextQ = extractQ(data.refined_next_question);
+
+            // Bundle feedback for display and voice
+            let fullVoiceOutput = "";
+            if (fullFeedback.trim()) {
                 addMessage('ai', fullFeedback);
-                await speak(fullFeedback);
+                fullVoiceOutput += fullFeedback + " ";
             }
 
-            if (data.follow_up_question) {
+            if (followUpQ) {
+                // If AI wants a quick follow-up before moving to next main question
+                addMessage('ai', followUpQ);
+                fullVoiceOutput += followUpQ;
+                await speak(fullVoiceOutput);
                 setIsProcessing(false);
+                setAiStatus("Listening...");
+                startListening();
+            } else if (refinedNextQ === null && nextIdx >= questions.length) {
+                // End of interview
+                if (fullVoiceOutput) await speak(fullVoiceOutput);
+                completeInterview();
             } else {
-                const nextIdx = currentQuestionIndex + 1;
+                // Moving to next main question
+                const nextQ = refinedNextQ || questions[nextIdx] || "Could you tell me more about your experience?";
                 setCurrentQuestionIndex(nextIdx);
-                setProgress((nextIdx / questions.length) * 100);
+                setProgress((nextIdx / (questions.length || 1)) * 100);
 
-                if (nextIdx < questions.length) {
-                    const nextQ = questions[nextIdx];
-                    addMessage('ai', nextQ);
-                    await speak(nextQ);
-                    setIsProcessing(false);
-                } else {
-                    completeInterview();
-                }
+                setQuestions(prev => {
+                    const newQs = [...prev];
+                    if (nextIdx < newQs.length) newQs[nextIdx] = nextQ;
+                    else newQs.push(nextQ);
+                    return newQs;
+                });
+
+                addMessage('ai', nextQ);
+                fullVoiceOutput += nextQ;
+
+                if (fullVoiceOutput) await speak(fullVoiceOutput);
+
+                setIsProcessing(false);
+                setAiStatus("AI Interviewer Online");
+                startListening();
             }
         } catch (err) {
             console.error("Submission error:", err);
             if (err.response?.status === 429) setShowQuotaWarning(true);
             setIsProcessing(false);
+            setAiStatus("Error - Try again");
         }
-    };
-
-    const completeInterview = () => {
-        stopCamera();
-        const finishMessage = "Thank you for your time. Your assessment has been completed successfully. Goodbye!";
-        addMessage('ai', finishMessage);
-        speak(finishMessage);
-        axios.patch(`http://localhost:8001/api/ai-candidates/${token}/status/`, { status: 'Completed' }).catch(console.error);
-    };
+    }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening]);
 
     // 4. Lifecycle
     useEffect(() => {
@@ -292,44 +341,157 @@ const AiInterviewSession = () => {
             await startCamera();
             const firstName = name.split(' ')[0];
             const welcome = `Hello ${firstName}! I'm your AI interviewer for VerifiHireAI. Let's begin the session!`;
-            addMessage('ai', welcome);
-            await speak(welcome);
 
             const introQ = "Could you please introduce yourself and provide a brief overview of your professional background?";
-
-            // Ensure introQ is the first question
             let finalQs = [...qs];
             if (finalQs[0] !== introQ) {
                 finalQs = [introQ, ...finalQs];
                 setQuestions(finalQs);
             }
 
-            setTimeout(() => askCurrentQuestion(0, finalQs), 1000);
+            // Bundle welcome and intro question for smooth voice output
+            addMessage('ai', welcome);
+            addMessage('ai', introQ);
+            await speak(`${welcome} ${introQ}`);
+            startListening();
         };
 
         initSession();
         return () => stopCamera();
-    }, [token, askCurrentQuestion]);
+    }, [token, addMessage, startListening]);
 
-    // Speech Recognition
+    const silenceTimerRef = useRef(null);
+    const transcriptRef = useRef("");
+
+    const submitHandlerRef = useRef(handleAnswerSubmission);
     useEffect(() => {
-        if ('webkitSpeechRecognition' in window) {
-            const recognition = new window.webkitSpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            recognition.lang = 'en-US';
-            recognition.onstart = () => setIsRecording(true);
-            recognition.onresult = (event) => handleAnswerSubmission(event.results[0][0].transcript);
-            recognition.onerror = () => setIsRecording(false);
-            recognition.onend = () => setIsRecording(false);
-            recognitionRef.current = recognition;
+        submitHandlerRef.current = handleAnswerSubmission;
+    }, [handleAnswerSubmission]);
+
+    // stable Speech Recognition Setup
+    useEffect(() => {
+        if (!('webkitSpeechRecognition' in window)) return;
+
+        const recognition = new window.webkitSpeechRecognition();
+        recognition.continuous = true;
+        recognition.interimResults = true;
+        recognition.lang = 'en-US';
+
+        recognition.onstart = () => {
+            setIsRecording(true);
+            setAiStatus("Listening...");
+            transcriptRef.current = "";
+        };
+
+        recognition.onresult = (event) => {
+            let interimTranscript = "";
+            let finalTranscript = "";
+
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                if (event.results[i].isFinal) {
+                    finalTranscript += event.results[i][0].transcript;
+                } else {
+                    interimTranscript += event.results[i][0].transcript;
+                }
+            }
+
+            if (finalTranscript) {
+                transcriptRef.current += finalTranscript;
+            }
+
+            const currentTotal = (transcriptRef.current + interimTranscript).trim();
+            if (currentTotal) {
+                setAiStatus(`Heard: "${currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal}"`);
+            }
+
+            // Reset silence timer every time user speaks
+            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+
+            if (currentTotal.length > 2) {
+                silenceTimerRef.current = setTimeout(() => {
+                    const finalSubmission = transcriptRef.current + interimTranscript;
+                    if (finalSubmission.trim().length > 3) {
+                        console.log("5.0s silence detected. Processing final submission.");
+                        setIsProcessing(true);
+                        setAiStatus("Processing answer...");
+                        try { recognition.stop(); } catch (e) { }
+                        if (submitHandlerRef.current) submitHandlerRef.current(finalSubmission);
+                    }
+                }, 5000); // Increased to 5 seconds for massive patience
+            }
+        };
+
+        recognition.onerror = (event) => {
+            if (event.error === 'no-speech') return; // Ignore harmless noise errors
+            console.error("Recognition Error:", event.error);
+            setIsRecording(false);
+            setAiStatus("Mic error: " + event.error);
+        };
+
+        recognition.onend = () => {
+            setIsRecording(false);
+            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+            console.log("Recognition session ended.");
+        };
+
+        recognitionRef.current = recognition;
+
+        return () => {
+            if (recognitionRef.current) {
+                try { recognitionRef.current.stop(); } catch (e) { }
+            }
+            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+        };
+    }, []);
+
+    // Unified Reactive Microphone Trigger
+    useEffect(() => {
+        // Only attempt to start if we are in audio mode AND the AI is not busy
+        const shouldBeListening = userInputMode === 'audio' && !isProcessing && !isSpeaking;
+
+        if (shouldBeListening && !isRecording && recognitionRef.current) {
+            const timer = setTimeout(() => {
+                // Double check states before starting
+                if (userInputMode === 'audio' && !isProcessing && !isSpeaking && !isRecording) {
+                    try {
+                        recognitionRef.current.start();
+                        console.log("Mic auto-started via state sync");
+                    } catch (e) {
+                        if (e.name !== 'InvalidStateError') {
+                            console.warn("Auto-start mic skipped:", e.message);
+                        }
+                    }
+                }
+            }, 600); // 600ms buffer to allow states to settle
+            return () => clearTimeout(timer);
         }
-    }, [currentQuestionIndex, questions]);
+    }, [isRecording, isProcessing, isSpeaking, userInputMode]);
 
     const toggleRecording = () => {
         if (!recognitionRef.current) return alert("Speech recognition not supported");
-        if (isRecording) recognitionRef.current.stop();
-        else recognitionRef.current.start();
+
+        if (isRecording) {
+            try { recognitionRef.current.stop(); } catch (e) { }
+            setIsRecording(false);
+        } else {
+            // Cancel any AI speech if user wants to speak
+            if (synthRef.current.speaking) {
+                synthRef.current.cancel();
+                setIsSpeaking(false);
+            }
+
+            try {
+                recognitionRef.current.start();
+            } catch (e) {
+                if (e.name === 'InvalidStateError') {
+                    // Already starting/running
+                    console.log("Recognition already active");
+                } else {
+                    console.error("Manual mic start error:", e);
+                    setAiStatus("Mic Error - Refresh");
+                }
+            }
+        }
     };
 
     useEffect(() => {
@@ -337,7 +499,7 @@ const AiInterviewSession = () => {
     }, [chatMessages]);
 
     return (
-        <div className="dashboard-page" style={{ height: '100vh', overflow: 'hidden' }}>
+        <div className="ai-session-page">
             {showQuotaWarning && (
                 <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#ff4444', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold' }}>
                     ⚠️ AI Service Limit Reached. The interview cannot continue at this time.
@@ -358,47 +520,67 @@ const AiInterviewSession = () => {
                     <div className={`ai-full-body ${isSpeaking ? 'speaking' : ''}`}></div>
                 </div>
 
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1.5rem', height: '100%' }}>
-                    <div style={{ background: 'white', padding: '1rem 2rem', borderRadius: '20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            <i className="fa-solid fa-user-tie" style={{ color: '#667eea' }}></i>
-                            <span style={{ fontWeight: 600 }}>{candidateName}</span>
+                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
+                    <div style={{ background: 'white', padding: '0.75rem 1.5rem', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
+                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
                         </div>
                         <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%` }}></div></div>
-                        <button onClick={() => navigate('/ai-interview')} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px' }}><i className="fa-solid fa-xmark"></i> Exit</button>
+                        <button onClick={() => navigate('/ai-interview')} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}><i className="fa-solid fa-xmark"></i> Exit</button>
                     </div>
 
-                    <div className="question-card">
-                        <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: '#667eea', fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>Current Question</span>
-                        <div style={{ fontSize: '1.3rem', fontWeight: 600, color: '#2d3748' }}>
-                            {questions[currentQuestionIndex] ? (
-                                typeof questions[currentQuestionIndex] === 'object'
-                                    ? (questions[currentQuestionIndex].question || JSON.stringify(questions[currentQuestionIndex]))
-                                    : questions[currentQuestionIndex]
-                            ) : 'Starting interview...'}
+                    <div className="question-card" style={{ padding: '0.5rem 1rem', borderLeftWidth: '4px' }}>
+                        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: '#667eea', fontWeight: '900', letterSpacing: '0.5px' }}>Question:</span>
+                            <div style={{ fontSize: '1rem', fontWeight: 600, color: '#1a202c', flex: 1 }}>
+                                {questions[currentQuestionIndex] ? (
+                                    typeof questions[currentQuestionIndex] === 'object'
+                                        ? (questions[currentQuestionIndex].question || JSON.stringify(questions[currentQuestionIndex]))
+                                        : questions[currentQuestionIndex]
+                                ) : 'Initializing...'}
+                            </div>
                         </div>
                     </div>
 
                     <div ref={chatContainerRef} className="chat-container">
-                        {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: '#a0aec0', marginTop: '3rem', fontStyle: 'italic' }}>Conversation history will appear here...</div>}
+                        {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: '#a0aec0', marginTop: '1.5rem', fontStyle: 'italic', fontSize: '0.85rem' }}>History will appear here...</div>}
                         {chatMessages.map((msg, i) => <div key={i} className={`message ${msg.sender}`}>{msg.text}</div>)}
                     </div>
 
-                    <div style={{ background: 'white', padding: '1.5rem', borderRadius: '24px', boxShadow: '0 -4px 20px rgba(0,0,0,0.05)' }}>
+                    <div style={{ background: 'white', padding: '0.6rem 1rem', borderRadius: '12px', boxShadow: '0 -2px 10px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         {userInputMode === 'audio' ? (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-                                <button onClick={toggleRecording} className={`mic-btn ${isRecording ? 'listening' : ''}`}><i className={isRecording ? "fa-solid fa-stop" : "fa-solid fa-microphone"}></i></button>
-                                <span style={{ color: '#718096', fontWeight: 500 }}>{isRecording ? "Listening..." : "Tap mic to speak"}</span>
+                            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                                <button
+                                    onClick={toggleRecording}
+                                    disabled={isProcessing}
+                                    className={`mic-btn ${isRecording ? 'listening' : ''}`}
+                                    style={{ width: '40px', height: '40px', fontSize: '1rem', cursor: isProcessing ? 'not-allowed' : 'pointer', opacity: isProcessing ? 0.6 : 1 }}
+                                >
+                                    <i className={isRecording ? "fa-solid fa-stop" : "fa-solid fa-microphone"}></i>
+                                </button>
+                                <span style={{ color: '#4a5568', fontWeight: 600, fontSize: '0.8rem' }}>{isRecording ? "Listening..." : "Click to Speak"}</span>
                             </div>
                         ) : (
-                            <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
-                                <textarea className="response-input" value={responseInput} onChange={(e) => setResponseInput(e.target.value)} placeholder="Type your answer here..." style={{ flex: 1, border: '2px solid #e2e8f0', borderRadius: '16px', padding: '12px', resize: 'none', height: '60px', fontFamily: 'inherit' }} />
-                                <button onClick={() => handleAnswerSubmission(responseInput)} disabled={isProcessing} style={{ background: '#667eea', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }}><i className="fa-solid fa-paper-plane"></i></button>
+                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                                <input
+                                    className="response-input"
+                                    style={{ flex: 1, border: '1px solid #cbd5e0', borderRadius: '8px', padding: '6px 12px', fontSize: '0.85rem', outline: 'none' }}
+                                    value={responseInput}
+                                    onChange={(e) => setResponseInput(e.target.value)}
+                                    onKeyPress={(e) => e.key === 'Enter' && handleAnswerSubmission(responseInput)}
+                                    placeholder="Type answer..."
+                                />
+                                <button onClick={() => handleAnswerSubmission(responseInput)} disabled={isProcessing} style={{ background: '#667eea', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', cursor: 'pointer' }}><i className="fa-solid fa-paper-plane"></i></button>
                             </div>
                         )}
-                        <div style={{ textAlign: 'center', marginTop: '15px' }}>
-                            <button onClick={() => setUserInputMode(userInputMode === 'audio' ? 'text' : 'audio')} style={{ background: 'none', border: 'none', color: '#667eea', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem' }}><i className={userInputMode === 'audio' ? "fa-solid fa-keyboard" : "fa-solid fa-microphone"}></i>{userInputMode === 'audio' ? " Switch to Text Input" : " Switch to Voice Input"}</button>
-                        </div>
+                        <button
+                            onClick={() => setUserInputMode(userInputMode === 'audio' ? 'text' : 'audio')}
+                            style={{ background: '#edf2f7', border: 'none', color: '#4a5568', padding: '6px 10px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}
+                        >
+                            <i className={userInputMode === 'audio' ? "fa-solid fa-keyboard" : "fa-solid fa-microphone"}></i>
+                            {userInputMode === 'audio' ? "Keys" : "Voice"}
+                        </button>
                     </div>
                 </div>
             </div>

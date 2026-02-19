@@ -62,7 +62,7 @@ function App() {
     <BrowserRouter>
       <div className="app-container">
         {!isCandidatePage && <Header />}
-        <div className="app-scroll">
+        <div className={isCandidatePage ? "" : "app-scroll"}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

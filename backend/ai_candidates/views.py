@@ -295,11 +295,22 @@ class ProcessAnswerView(APIView):
         candidate_id = request.data.get('candidate_id')
         current_question = request.data.get('question')
         answer = request.data.get('answer')
-        next_question = request.data.get('next_question')
+        remaining_questions = request.data.get('remaining_questions', [])
         chat_history = request.data.get('chat_history', []) 
         
-        if not current_question or not answer:
-             return Response({'error': 'Missing question or answer'}, status=status.HTTP_400_BAD_REQUEST)
+        # Fallback if question is missing due to frontend race condition
+        if not current_question and chat_history:
+            # Try to get the last AI message from history
+            for msg in reversed(chat_history):
+                if msg.get('role') == 'assistant':
+                    current_question = msg.get('content')
+                    break
+        
+        if not current_question:
+            current_question = "Please introduce yourself and your background."
+
+        if not answer:
+             return Response({'error': 'Missing answer'}, status=status.HTTP_400_BAD_REQUEST)
 
         candidate_name = "Candidate"
         resume_context = "No resume available."
@@ -307,50 +318,61 @@ class ProcessAnswerView(APIView):
         
         if candidate_id:
             try:
-                candidate = Candidate.objects.get(pk=candidate_id)
-                candidate_name = candidate.full_name
-                jd_context = candidate.job_description or jd_context
-                if candidate.resume_text:
-                     resume_context = candidate.resume_text
-            except Candidate.DoesNotExist:
+                # Handle potential string-ID tokens
+                if isinstance(candidate_id, str) and not candidate_id.isdigit():
+                    # If token is not an ID, this might need a different lookup, 
+                    # but for now we catch the error to prevent 500
+                    pass
+                else:
+                    candidate = Candidate.objects.get(pk=candidate_id)
+                    candidate_name = candidate.full_name
+                    jd_context = candidate.job_description or jd_context
+                    if candidate.resume_text:
+                         resume_context = candidate.resume_text
+            except (Candidate.DoesNotExist, ValueError, TypeError):
                 pass
 
         try:
+            # Construct Chat History context
             history_context = ""
             if chat_history:
-                history_context = "CONVERSATION HISTORY:\n" + "\n".join([f"{h['role'].upper()}: {h['content']}" for h in chat_history[-4:]]) + "\n"
+                history_context = "CONVERSATION HISTORY (Last 4 turns):\n" + "\n".join([f"{h['role'].upper()}: {h['content']}" for h in chat_history[-4:]]) + "\n"
 
             prompt = f"""
-            Role: "HireAI", a professional, elite technical interviewer for {candidate_name}.
+            Role: "Senior Talent Partner". 
+            You are a warm, highly intelligent human interviewer. You do NOT sound like a machine.
             
-            RULES:
-            1. **ADAPTIVE**: Respond naturally to the candidate's answer. If they are vague, ask for details.
-            2. **PERSONA**: Professional, encouraging but serious. Do not be overly chatty.
-            3. **SELF-CORRECTION**: If the candidate asks a question, answer briefly and pivot back to the interview.
-            4. **CONCISE**: Your feedback should be 1-2 sentences max.
+            UNCOMPROMISING HUMAN RULES:
+            1. **NEVER ECHO**: Do not repeat what the candidate just said. Never say "Professional overview provided" or "Acknowledge your name." This sounds like a robot.
+            2. **NATURAL TRANSFERS**: Use warm, human transitions. (e.g., "Thanks for that, [Candidate Name]. I noticed on your resume you worked on [Project]...")
+            3. **ALWAYS ASK A QUESTION**: The `refined_next_question` field MUST contain a specific question ending with a "?". It must never be a statement.
+            4. **RESUME DIVE**: For your very first question after the intro, find a specific project or tech stack on the candidate's Resume ({resume_context[:200]}) and ask a technical "How" or "Why" question about it.
+            5. **NO GENERIC JD NAGGING**: Do not ask "Tell me about your Python experience." Instead, ask "How did you implement [Specific Resume Feature] using Python?"
+            6. **STAY IN CHARACTER**: You are an expert recruiter who is genuinely interested in the candidate's technical journey.
             
             CONTEXT:
-            Resume: {resume_context[:1000]} 
-            Job Description: {jd_context[:500]}
+            Candidate: {candidate_name}
+            Resume (YOUR BIBLE): {resume_context[:1000]}
+            Job Description: {jd_context[:400]}
             {history_context}
             
             CURRENT TURN:
-            Question Asked: "{current_question}"
+            Last Question: "{current_question}"
             Candidate Answer: "{answer}"
-            Planned Next Question: "{next_question or 'End of Interview'}"
             
-            OUTPUT (JSON Only):
+            OUTPUT (JSON):
             {{
-                "feedback": "Short reaction + transition to next part",
-                "refined_next_question": "Adjusted next question if needed, otherwise matches Planned Next Question",
-                "follow_up_question": "Immediate clarification if the answer was incomplete (else null)"
+                "feedback": "A warm, 1-sentence human acknowledgment that bridges directly to the next question. MAX 15 words. NO ROBOTIC SUMMARIES.",
+                "refined_next_question": "A specific technical question about a project on their RESUME. Must end with ?.",
+                "follow_up_question": "null"
             }}
             """
 
-            logger.info("Using Groq for Process Answer")
+            logger.info(f"Using Human-Sourced AI for {candidate_id}")
             response = groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
+                temperature=0.8, # Higher for more organic human-like variation
                 response_format={"type": "json_object"}
             )
             raw_text = response.choices[0].message.content
@@ -360,9 +382,14 @@ class ProcessAnswerView(APIView):
 
             data = extract_json(raw_text)
             if not data:
-                data = {"feedback": raw_text.strip(), "refined_next_question": next_question, "follow_up_question": None}
+                data = {"feedback": "Got it.", "refined_next_question": remaining_questions[0] if remaining_questions else None, "follow_up_question": None}
             
-            # Safeguard: Flatten next question if it's an object
+            # --- Robustness Checks ---
+            if data.get('refined_next_question') is None and remaining_questions:
+                # AI tried to end early but we have questions left
+                data['refined_next_question'] = remaining_questions[0]
+
+            # Flatten next question if it's an object
             if data and 'refined_next_question' in data:
                 q = data['refined_next_question']
                 if isinstance(q, dict):
@@ -371,8 +398,9 @@ class ProcessAnswerView(APIView):
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:
             logger.error(f"Error in ProcessAnswerView: {str(e)}")
+            fallback_q = remaining_questions[0] if remaining_questions else "Could you tell me more about your professional background?"
             return Response({
-                "feedback": "Understood. Moving to the next question.",
+                "feedback": "I see. Let's move to the next part of our discussion.",
                 "follow_up_question": None,
-                "refined_next_question": next_question
+                "refined_next_question": fallback_q
             }, status=status.HTTP_200_OK)
