@@ -32,20 +32,36 @@ const AiInterview = () => {
         setFile(null);
     };
 
+    const [interviewTime, setInterviewTime] = useState('');
+
+    const formatTimeAMPM = (timeStr) => {
+        if (!timeStr) return '';
+        let [hours, minutes] = timeStr.split(':');
+        hours = parseInt(hours);
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        return `${hours}:${minutes} ${ampm}`;
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!file) {
-            alert('Please upload a candidate list.');
+        setError('');
+
+        if (!file || !jobDescription) {
+            setError('Please provide both a Candidate List and Job Description.');
             return;
         }
 
         setIsUploading(true);
-        setError('');
         setResult(null);
 
         const formData = new FormData();
         formData.append('file', file);
         formData.append('job_description', jobDescription);
+        if (interviewTime) {
+            formData.append('interview_time', formatTimeAMPM(interviewTime));
+        }
 
         try {
             const response = await axios.post('http://localhost:8001/api/ai-candidates/bulk-invite/', formData, {
@@ -274,6 +290,24 @@ const AiInterview = () => {
                                         <i className="fa-solid fa-triangle-exclamation" style={{ fontSize: '1.2rem' }}></i> {error}
                                     </div>
                                 )}
+
+                                {/* Time Selection Input */}
+                                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                    <label style={{ fontSize: '0.9rem', fontWeight: '700', color: '#475569' }}>Select Interview Start Time (AM/PM)</label>
+                                    <input
+                                        type="time"
+                                        value={interviewTime}
+                                        onChange={(e) => setInterviewTime(e.target.value)}
+                                        style={{
+                                            padding: '1rem',
+                                            borderRadius: '16px',
+                                            border: '1px solid #E2E8F0',
+                                            fontSize: '1rem',
+                                            background: '#F8FAFC',
+                                            color: '#1E293B'
+                                        }}
+                                    />
+                                </div>
 
                                 <button type="submit" className="primary-link-btn" disabled={isUploading} style={{
                                     width: '100%', padding: '1.25rem', fontSize: '1.2rem', borderRadius: '24px', background: '#4F46E5',

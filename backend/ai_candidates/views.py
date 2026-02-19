@@ -46,43 +46,51 @@ class BulkInviteView(APIView):
     def post(self, request):
         file = request.FILES.get('file')
         job_description = request.data.get('job_description')
+        batch_interview_time = request.data.get('interview_time') # Get batch time from request
         
         if not file or not job_description:
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
             
         try:
-            if file.name.endswith('.csv'):
+            logger.info(f"Processing bulk invite file: {file.name}, Batch Time: {batch_interview_time}")
+            if file.name.lower().endswith('.csv'):
                 df = pd.read_csv(file)
-            elif file.name.endswith(('.xls', '.xlsx')):
+            elif file.name.lower().endswith(('.xls', '.xlsx')):
                 df = pd.read_excel(file)
             else:
                 return Response({"error": "Unsupported file format. Use CSV or Excel."}, status=status.HTTP_400_BAD_REQUEST)
             
             df.columns = df.columns.str.lower().str.strip()
+            logger.info(f"File columns: {list(df.columns)}")
+            
             required_cols = ['name', 'email']
             if not all(col in df.columns for col in required_cols):
-                return Response({"error": f"File must contain columns: {', '.join(required_cols)}"}, status=status.HTTP_400_BAD_REQUEST)
+                return Response({"error": f"File must contain columns: {', '.join(required_cols)}. Found: {', '.join(df.columns)}"}, status=status.HTTP_400_BAD_REQUEST)
                 
             invited_candidates = []
             
             for _, row in df.iterrows():
-                name = row['name']
-                email = row['email']
+                name = str(row['name']).strip()
+                email = str(row['email']).strip()
+                
                 candidate = Candidate.objects.create(
                     full_name=name,
                     email=email,
+                    interview_time=batch_interview_time,
                     job_description=job_description,
                     status='Invited'
                 )
                 link = f"http://localhost:3000/interview-start/{candidate.id}"
                 invited_candidates.append({
-                    "id": candidate.id, "name": name, "email": email, "link": link
+                    "id": candidate.id, "name": name, "email": email, "link": link, "time": batch_interview_time
                 })
                 
                 try:
                     subject = "Invite to VerifiHireAI Interview Session"
-                    message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.\n\nPlease click the link below to verify your details and start your session:\n{link}"
+                    time_info = f"\n\nYour interview is scheduled to start at {batch_interview_time}." if batch_interview_time else ""
+                    message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.{time_info}\n\nPlease click the link below to verify your details and start your session:\n{link}"
                     send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+                    logger.info(f"Email sent to {email}")
                 except Exception as mail_error:
                     logger.error(f"Failed to send email to {email}: {str(mail_error)}")
                 
@@ -91,6 +99,7 @@ class BulkInviteView(APIView):
                 "candidates": invited_candidates
             }, status=status.HTTP_201_CREATED)
         except Exception as e:
+            logger.error(f"Error in BulkInviteView: {str(e)}", exc_info=True)
             return Response({"error": f"Error processing file: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
