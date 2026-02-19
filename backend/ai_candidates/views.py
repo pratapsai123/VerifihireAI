@@ -109,6 +109,12 @@ class ResumeMatchView(APIView):
             except Candidate.DoesNotExist:
                  return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
 
+        threshold = request.data.get('threshold', 70)
+        try:
+            threshold = int(threshold)
+        except:
+            threshold = 70
+
         if (not resume_file and not candidate) or not job_description:
             return Response({"error": "Job description and either resume or candidate_id are required"}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -162,7 +168,7 @@ class ResumeMatchView(APIView):
             
             Please provide:
             1. A match percentage (0-100).
-            2. Eligibility status (True if match percentage > 70, otherwise False).
+            2. Eligibility status (True if match percentage >= {threshold}, otherwise False).
             3. A brief 2-3 sentence summary of the fit.
             4. A list of 5 interview questions. 
                - The FIRST question MUST be EXACTLY: "Could you please introduce yourself and provide a brief overview of your professional background?"
@@ -196,6 +202,15 @@ class ResumeMatchView(APIView):
                     else:
                         sanitized_qs.append(str(q))
                 match_result['interview_questions'] = sanitized_qs
+            # -----------------------------------------------------------
+
+            # --- Safeguard: Ensure is_eligible matches threshold ---
+            percentage = match_result.get('match_percentage', 0)
+            try:
+                percentage = int(percentage)
+            except:
+                percentage = 0
+            match_result['is_eligible'] = percentage >= threshold
             # -----------------------------------------------------------
             
             match_result['candidate_id'] = candidate_id

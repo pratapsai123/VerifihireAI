@@ -32,7 +32,6 @@ const CreateAssessment = () => {
         setIsGenerating(true);
 
         try {
-            // Using localhost:8001 as per original html
             const response = await axios.post('http://localhost:8001/api/ai/generate/', formData, {
                 headers: {
                     'Content-Type': 'application/json'
@@ -53,180 +52,209 @@ const CreateAssessment = () => {
         }
     };
 
-    return (
-        <div className="dashboard-container" style={{ paddingTop: '2rem', display: 'flex', justifyContent: 'center' }}>
-            <div className="card" style={{
-                background: 'rgba(255, 255, 255, 0.9)',
-                backdropFilter: 'blur(10px)',
-                borderRadius: '30px',
-                padding: '3.5rem',
-                boxShadow: '0 20px 50px rgba(0, 0, 0, 0.05)',
-                border: '1px solid rgba(255, 255, 255, 0.3)',
-                width: '100%',
-                maxWidth: '700px'
-            }}>
-                <div className="header" style={{ marginBottom: '3rem' }}>
-                    <h1 style={{ fontFamily: "'Poppins', sans-serif", fontSize: '2.2rem', fontWeight: '700', margin: '0 0 0.5rem', color: '#1B254B' }}>Create Smart Assessment</h1>
-                    <p style={{ color: '#A3AED0', fontSize: '1.1rem', margin: '0' }}>Define the role and let AI craft the perfect test.</p>
+    const SectionHeader = ({ iconClass, title, subtitle, colorClass }) => (
+        <div style={{ marginBottom: '1.25rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.4rem' }}>
+                <div className={`module-icon-wrapper ${colorClass}`} style={{ width: '32px', height: '32px', borderRadius: '8px' }}>
+                    <i className={`${iconClass}`} style={{ fontSize: '0.9rem' }}></i>
                 </div>
+                <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: '#111827', margin: 0, letterSpacing: '-0.01em' }}>{title}</h3>
+            </div>
+            <p style={{ fontSize: '0.85rem', color: '#6B7280', margin: 0 }}>{subtitle}</p>
+        </div>
+    );
 
-                <form onSubmit={handleSubmit}>
-                    {/* Job Description */}
-                    <div className="form-group" style={{ position: 'relative', marginBottom: '2rem' }}>
-                        <textarea
-                            id="jobDescription"
-                            className="form-control"
-                            required
-                            placeholder=" "
-                            value={formData.job_description}
-                            onChange={handleChange}
-                            style={{
-                                width: '100%', padding: '1.1rem 1rem 1.1rem 3.5rem', border: '2px solid #E0E5F2',
-                                borderRadius: '18px', fontSize: '1rem', fontWeight: '500', background: '#F4F7FE',
-                                color: '#1B254B', transition: 'all 0.3s', fontFamily: 'inherit', minHeight: '120px', resize: 'vertical'
-                            }}
-                        ></textarea>
-                        <i className="fa-solid fa-file-lines" style={{
-                            position: 'absolute', left: '1.2rem', top: '1.4rem', color: '#A3AED0', fontSize: '1.1rem', pointerEvents: 'none'
-                        }}></i>
-                        <label htmlFor="jobDescription" className="form-label" style={{
-                            position: 'absolute', left: formData.job_description ? '1.2rem' : '3.5rem',
-                            top: formData.job_description ? '-0.8rem' : '1.1rem',
-                            color: formData.job_description ? '#4318FF' : '#A3AED0',
-                            fontSize: formData.job_description ? '0.85rem' : '1rem',
-                            fontWeight: formData.job_description ? '700' : 'normal',
-                            background: formData.job_description ? 'white' : 'transparent',
-                            padding: formData.job_description ? '0 0.5rem' : '0',
-                            borderRadius: '4px', pointerEvents: 'none', transition: 'all 0.3s'
-                        }}>Job Description / Role Requirements</label>
+    return (
+        <div className="dashboard-container">
+            <div className="dashboard-main" style={{ maxWidth: '850px', paddingTop: '1.5rem' }}>
+
+                {/* Header Section */}
+                <header style={{
+                    position: 'relative',
+                    padding: '2.5rem 2rem',
+                    background: 'white',
+                    borderRadius: '24px',
+                    marginBottom: '2rem',
+                    boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                    border: '1px solid #E5E7EB',
+                    overflow: 'hidden'
+                }}>
+                    <div style={{
+                        position: 'absolute', top: '-40px', right: '-40px', width: '180px', height: '180px',
+                        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)', borderRadius: '50%'
+                    }}></div>
+
+                    <div style={{ position: 'relative', zIndex: 1 }}>
+                        <div style={{
+                            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                            background: '#EEF2FF', color: '#4F46E5',
+                            padding: '0.4rem 0.8rem', borderRadius: '10px', fontSize: '0.75rem',
+                            fontWeight: '700', marginBottom: '1rem', border: '1px solid rgba(79, 70, 229, 0.1)'
+                        }}>
+                            <i className="fa-solid fa-wand-magic-sparkles"></i> AI GENERATOR
+                        </div>
+                        <h1 style={{ fontSize: '2.4rem', fontWeight: '900', color: '#111827', margin: '0 0 0.5rem', letterSpacing: '-0.03em' }}>
+                            Create <span style={{ color: '#6366F1' }}>Smart</span> Assessment
+                        </h1>
+                        <p style={{ color: '#6B7280', fontSize: '1rem', maxWidth: '500px' }}>
+                            Define the role and skills. Our AI will craft a comprehensive technical assessment.
+                        </p>
                     </div>
+                </header>
 
-                    {/* Skills */}
-                    <div className="form-group" style={{ position: 'relative', marginBottom: '2rem' }}>
-                        <input
-                            type="text"
-                            id="requiredSkills"
-                            className="form-control"
-                            required
-                            placeholder=" "
-                            value={formData.required_skills}
-                            onChange={handleChange}
-                            style={{
-                                width: '100%', padding: '1.1rem 1rem 1.1rem 3.5rem', border: '2px solid #E0E5F2',
-                                borderRadius: '18px', fontSize: '1rem', fontWeight: '500', background: '#F4F7FE',
-                                color: '#1B254B', transition: 'all 0.3s', fontFamily: 'inherit'
-                            }}
+                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+
+                    {/* Role & Requirements Card */}
+                    <div className="module-card" style={{ padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
+                        <SectionHeader
+                            iconClass="fa-solid fa-briefcase"
+                            title="Role Context"
+                            subtitle="AI will analyze this to determine the appropriate depth of questions."
+                            colorClass="indigo-glow"
                         />
-                        <i className="fa-solid fa-tags" style={{
-                            position: 'absolute', left: '1.2rem', top: '1.1rem', color: '#A3AED0', fontSize: '1.1rem', pointerEvents: 'none'
-                        }}></i>
-                        <label htmlFor="requiredSkills" className="form-label" style={{
-                            position: 'absolute', left: formData.required_skills ? '1.2rem' : '3.5rem',
-                            top: formData.required_skills ? '-0.8rem' : '1.1rem',
-                            color: formData.required_skills ? '#4318FF' : '#A3AED0',
-                            fontSize: formData.required_skills ? '0.85rem' : '1rem',
-                            fontWeight: formData.required_skills ? '700' : 'normal',
-                            background: formData.required_skills ? 'white' : 'transparent',
-                            padding: formData.required_skills ? '0 0.5rem' : '0',
-                            borderRadius: '4px', pointerEvents: 'none', transition: 'all 0.3s'
-                        }}>Required Skills (e.g., Python, React, AWS)</label>
-                    </div>
-
-                    {/* Configuration Grid */}
-                    <div className="config-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
-                        {/* MCQ Count */}
-                        <div className="form-group" style={{ position: 'relative' }}>
-                            <input
-                                type="number" id="mcqCount" className="form-control" min="1" max="20" required placeholder=" "
-                                value={formData.mcq_count} onChange={handleChange}
-                                style={{
-                                    width: '100%', padding: '1.1rem 1rem 1.1rem 3.5rem', border: '2px solid #E0E5F2',
-                                    borderRadius: '18px', fontSize: '1rem', fontWeight: '500', background: '#F4F7FE',
-                                    color: '#1B254B', transition: 'all 0.3s', fontFamily: 'inherit'
-                                }}
-                            />
-                            <i className="fa-solid fa-list-check" style={{ position: 'absolute', left: '1.2rem', top: '1.1rem', color: '#A3AED0', fontSize: '1.1rem', pointerEvents: 'none' }}></i>
-                            <label htmlFor="mcqCount" className="form-label" style={{
-                                position: 'absolute', left: '1.2rem', top: '-0.8rem', color: '#4318FF', fontSize: '0.85rem', fontWeight: '700', background: 'white', padding: '0 0.5rem', borderRadius: '4px'
-                            }}>MCQs</label>
-                        </div>
-
-                        {/* Coding Count */}
-                        <div className="form-group" style={{ position: 'relative' }}>
-                            <input
-                                type="number" id="codingCount" className="form-control" min="0" max="5" required placeholder=" "
-                                value={formData.coding_count} onChange={handleChange}
-                                style={{
-                                    width: '100%', padding: '1.1rem 1rem 1.1rem 3.5rem', border: '2px solid #E0E5F2',
-                                    borderRadius: '18px', fontSize: '1rem', fontWeight: '500', background: '#F4F7FE',
-                                    color: '#1B254B', transition: 'all 0.3s', fontFamily: 'inherit'
-                                }}
-                            />
-                            <i className="fa-solid fa-code" style={{ position: 'absolute', left: '1.2rem', top: '1.1rem', color: '#A3AED0', fontSize: '1.1rem', pointerEvents: 'none' }}></i>
-                            <label htmlFor="codingCount" className="form-label" style={{
-                                position: 'absolute', left: '1.2rem', top: '-0.8rem', color: '#4318FF', fontSize: '0.85rem', fontWeight: '700', background: 'white', padding: '0 0.5rem', borderRadius: '4px'
-                            }}>Coding</label>
-                        </div>
-
-                        {/* Duration */}
-                        <div className="form-group" style={{ position: 'relative' }}>
-                            <input
-                                type="number" id="duration" className="form-control" min="15" max="180" required placeholder=" "
-                                value={formData.duration} onChange={handleChange}
-                                style={{
-                                    width: '100%', padding: '1.1rem 1rem 1.1rem 3.5rem', border: '2px solid #E0E5F2',
-                                    borderRadius: '18px', fontSize: '1rem', fontWeight: '500', background: '#F4F7FE',
-                                    color: '#1B254B', transition: 'all 0.3s', fontFamily: 'inherit'
-                                }}
-                            />
-                            <i className="fa-regular fa-clock" style={{ position: 'absolute', left: '1.2rem', top: '1.1rem', color: '#A3AED0', fontSize: '1.1rem', pointerEvents: 'none' }}></i>
-                            <label htmlFor="duration" className="form-label" style={{
-                                position: 'absolute', left: '1.2rem', top: '-0.8rem', color: '#4318FF', fontSize: '0.85rem', fontWeight: '700', background: 'white', padding: '0 0.5rem', borderRadius: '4px'
-                            }}>Duration</label>
-                        </div>
-
-                        {/* Difficulty Level */}
-                        <div className="form-group" style={{ position: 'relative' }}>
-                            <select
-                                id="difficulty" className="form-control" required
-                                value={formData.difficulty} onChange={handleChange}
-                                style={{
-                                    width: '100%', padding: '1.1rem 1rem 1.1rem 3.5rem', border: '2px solid #E0E5F2',
-                                    borderRadius: '18px', fontSize: '1rem', fontWeight: '500', background: '#F4F7FE',
-                                    color: '#1B254B', transition: 'all 0.3s', fontFamily: 'inherit', appearance: 'none'
-                                }}
-                            >
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
-                            </select>
-                            <i className="fa-solid fa-gauge-high" style={{ position: 'absolute', left: '1.2rem', top: '1.1rem', color: '#A3AED0', fontSize: '1.1rem', pointerEvents: 'none' }}></i>
-                            <label htmlFor="difficulty" className="form-label" style={{
-                                position: 'absolute', left: '1.2rem', top: '-0.8rem', color: '#4318FF', fontSize: '0.85rem', fontWeight: '700', background: 'white', padding: '0 0.5rem', borderRadius: '4px'
-                            }}>Difficulty</label>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                            <div>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Job Description</label>
+                                <textarea
+                                    id="jobDescription"
+                                    value={formData.job_description}
+                                    onChange={handleChange}
+                                    placeholder="Paste the role requirements or mission statement..."
+                                    style={{
+                                        width: '100%', height: '150px', padding: '1rem', border: '1px solid #E2E8F0',
+                                        borderRadius: '14px', resize: 'vertical', fontSize: '0.95rem', lineHeight: '1.6',
+                                        color: '#1F2937', background: '#F8FAFC', outline: 'none'
+                                    }}
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Core Skills</label>
+                                <input
+                                    type="text"
+                                    id="requiredSkills"
+                                    value={formData.required_skills}
+                                    onChange={handleChange}
+                                    placeholder="e.g. React, Node.js, System Design"
+                                    style={{
+                                        width: '100%', padding: '0.85rem 1rem', border: '1px solid #E2E8F0',
+                                        borderRadius: '14px', fontSize: '0.95rem', color: '#1F2937', background: '#F8FAFC', outline: 'none'
+                                    }}
+                                    required
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    {/* Submit Button */}
-                    <button type="submit" className="btn-generate" disabled={isGenerating} style={{
-                        width: '100%', background: 'linear-gradient(135deg, #4318FF 0%, #7551FF 100%)', color: 'white',
-                        border: 'none', padding: '1.2rem', borderRadius: '18px', fontSize: '1.1rem', fontWeight: '700',
-                        cursor: isGenerating ? 'not-allowed' : 'pointer', boxShadow: '0 15px 30px rgba(67, 24, 255, 0.2)',
-                        transition: 'all 0.3s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.8rem',
-                        opacity: isGenerating ? 0.7 : 1
-                    }}>
-                        {isGenerating ? (
-                            <>
-                                <i className="fa-solid fa-circle-notch fa-spin"></i>
-                                <span>Generating...</span>
-                            </>
-                        ) : (
-                            <>
-                                <i className="fa-solid fa-wand-magic-sparkles"></i>
-                                <span>Generate Assessment</span>
-                            </>
-                        )}
-                    </button>
+                    {/* Assessment Parameters Card */}
+                    <div className="module-card" style={{ padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
+                        <SectionHeader
+                            iconClass="fa-solid fa-sliders"
+                            title="Structure & Difficulty"
+                            subtitle="Configure the scope and intensity of the generated test."
+                            colorClass="blue-glow"
+                        />
+
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1.25rem' }}>
+                            <div>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>MCQ Questions</label>
+                                <input
+                                    type="number" id="mcqCount" min="1" max="50"
+                                    value={formData.mcq_count} onChange={handleChange}
+                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC' }}
+                                />
+                            </div>
+                            <div>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Coding Tasks</label>
+                                <input
+                                    type="number" id="codingCount" min="0" max="10"
+                                    value={formData.coding_count} onChange={handleChange}
+                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC' }}
+                                />
+                            </div>
+                            <div>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Duration (mins)</label>
+                                <input
+                                    type="number" id="duration" min="5" max="300"
+                                    value={formData.duration} onChange={handleChange}
+                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC' }}
+                                />
+                            </div>
+                            <div>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Complexity</label>
+                                <select
+                                    id="difficulty"
+                                    value={formData.difficulty} onChange={handleChange}
+                                    style={{
+                                        width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px',
+                                        outline: 'none', background: '#F8FAFC', appearance: 'none', cursor: 'pointer'
+                                    }}
+                                >
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Final Action Section */}
+                    <div style={{ marginTop: '0.5rem', textAlign: 'center' }}>
+                        <button
+                            type="submit"
+                            disabled={isGenerating}
+                            style={{
+                                width: '100%',
+                                background: 'linear-gradient(135deg, #4F46E5 0%, #6366F1 100%)',
+                                color: 'white',
+                                border: 'none',
+                                padding: '1.25rem',
+                                borderRadius: '20px',
+                                fontSize: '1.1rem',
+                                fontWeight: '700',
+                                cursor: isGenerating ? 'not-allowed' : 'pointer',
+                                boxShadow: '0 10px 20px -5px rgba(79, 70, 229, 0.4)',
+                                transition: 'all 0.2s',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                gap: '0.75rem'
+                            }}
+                        >
+                            {isGenerating ? (
+                                <>
+                                    <i className="fa-solid fa-spinner fa-spin"></i>
+                                    <span>AI Architecture in Progress...</span>
+                                </>
+                            ) : (
+                                <>
+                                    <i className="fa-solid fa-wand-sparkles"></i>
+                                    <span>Generate Technical Assessment</span>
+                                </>
+                            )}
+                        </button>
+
+                        <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center', gap: '3rem' }}>
+                            <div style={{ textAlign: 'center' }}>
+                                <div style={{ color: '#6366F1', fontSize: '1.2rem', marginBottom: '0.4rem' }}>
+                                    <i className="fa-solid fa-microchip"></i>
+                                </div>
+                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#1E293B', textTransform: 'uppercase' }}>Gemini Pro</div>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                                <div style={{ color: '#6366F1', fontSize: '1.2rem', marginBottom: '0.4rem' }}>
+                                    <i className="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#1E293B', textTransform: 'uppercase' }}>Anti-Cheat</div>
+                            </div>
+                            <div style={{ textAlign: 'center' }}>
+                                <div style={{ color: '#6366F1', fontSize: '1.2rem', marginBottom: '0.4rem' }}>
+                                    <i className="fa-solid fa-code-merge"></i>
+                                </div>
+                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#1E293B', textTransform: 'uppercase' }}>Auto-Grade</div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>

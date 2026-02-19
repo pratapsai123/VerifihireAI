@@ -359,7 +359,7 @@ function Signup() {
                         style={{
                           width: '100%',
                           padding: '10px',
-                          backgroundColor: '#7c3aed',
+                          backgroundColor: '#4F46E5',
                           color: 'white',
                           border: 'none',
                           borderRadius: '6px',
@@ -406,7 +406,7 @@ function Signup() {
                             style={{
                               flex: 1,
                               padding: '10px',
-                              backgroundColor: '#7c3aed',
+                              backgroundColor: '#4F46E5',
                               color: 'white',
                               border: 'none',
                               borderRadius: '6px',
@@ -650,7 +650,7 @@ function Signup() {
                     <Link
                       to="/login"
                       style={{
-                        color: '#7c3aed',
+                        color: '#4F46E5',
                         textDecoration: 'none',
                         fontWeight: '600',
                         cursor: 'pointer'

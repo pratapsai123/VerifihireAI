@@ -302,7 +302,7 @@ function Login() {
                   <div style={{ textAlign: 'right', marginBottom: '0.5rem' }}>
                     <Link
                       to="/forgot-password"
-                      style={{ color: '#7c3aed', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}
+                      style={{ color: '#4F46E5', textDecoration: 'none', fontWeight: '600', fontSize: '14px' }}
                     >
                       Forgot password?
                     </Link>
@@ -321,7 +321,7 @@ function Login() {
                       <Link
                         to="/signup"
                         style={{
-                          color: '#7c3aed',
+                          color: '#4F46E5',
                           textDecoration: 'none',
                           fontWeight: '600',
                           cursor: 'pointer'
