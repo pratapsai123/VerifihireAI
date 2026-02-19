@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="VeriFiHireAI - Secure Online Assessments. Our platform ensures integrity in online assessments, helping you recruit genuine talent with confidence."
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    
-    <!-- Google Fonts: Poppins + Inter (dashboard uses Inter) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome for dashboard icons -->
-    <!-- Font Awesome for dashboard icons (integrity removed to avoid blocking) -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description"
+    content="VeriFiHireAI - Secure Online Assessments. Our platform ensures integrity in online assessments, helping you recruit genuine talent with confidence." />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <!-- AOS (Animate On Scroll) Library for animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts: Poppins + Inter (dashboard uses Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
-    <title>VeriFiHireAI - Secure Online Assessments</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    
-    <!-- Particle.js for hero animation -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <!-- AOS (Animate On Scroll) Library -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  </body>
+  <!-- Font Awesome for dashboard icons -->
+  <!-- Font Awesome for dashboard icons (integrity removed to avoid blocking) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- AOS (Animate On Scroll) Library for animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  <title>VeriFiHireAI - Secure Online Assessments</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div id="root"></div>
+
+  <!-- AI Monitoring Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/face_detection"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+
+  <!-- Particle.js for hero animation -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <!-- AOS (Animate On Scroll) Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+</body>
+
 </html>

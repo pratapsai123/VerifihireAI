@@ -6,7 +6,8 @@
   width: 100%;
   box-sizing: border-box;
   height: var(--vh-header-height);
-  z-index: 1000;
+  z-index: 9999;
+  /* Force top */
   /* Thicker Glassmorphism header */
   background-color: rgba(255, 255, 255, 0.85);
   /* Increased opacity */

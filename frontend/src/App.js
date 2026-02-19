@@ -27,28 +27,41 @@ import LiveInterview from './pages/LiveInterview';
 import LiveInterviewInterviewer from './pages/LiveInterviewInterviewer';
 import LiveInterviewList from './pages/LiveInterviewList';
 import InterviewInvite from './pages/InterviewInvite';
+import AiInterview from './pages/AiInterview';
+import AiAssessments from './pages/AiAssessments';
+import CreateAssessment from './pages/CreateAssessment';
+import ResumeMatcher from './pages/ResumeMatcher';
+import InterviewStart from './pages/InterviewStart';
+import AiTakeAssessment from './pages/AiTakeAssessment';
+import AiInterviewSession from './pages/AiInterviewSession';
 import './App.css';
+
+import Header from './components/Header'; // Import Header
 
 function App() {
   const [showCookieBanner, setShowCookieBanner] = useState(false);
 
   useEffect(() => {
-    // Cookie consent
-    if (!localStorage.getItem('cookie_consent')) {
-      setTimeout(() => {
-        setShowCookieBanner(true);
-      }, 2000);
+    const consent = localStorage.getItem('cookieConsent');
+    if (!consent) {
+      setShowCookieBanner(true);
     }
   }, []);
 
-  const handleCookieConsent = (consent) => {
-    localStorage.setItem('cookie_consent', consent);
+  const handleAcceptCookies = () => {
+    localStorage.setItem('cookieConsent', 'true');
     setShowCookieBanner(false);
   };
 
+  // Check if we should show the header
+  const isCandidatePage =
+    window.location.pathname.startsWith('/interview-start/') ||
+    window.location.pathname.startsWith('/take-assessment/');
+
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="app-container">
+        {!isCandidatePage && <Header />}
         <div className="app-scroll">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -86,6 +99,13 @@ function App() {
             <Route path="/accept-invite" element={<AcceptInvite />} />
             <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
             <Route path="/live-interview" element={<LiveInterview />} />
+            <Route path="/ai-interview" element={<AiInterview />} />
+            <Route path="/ai-assessments" element={<AiAssessments />} />
+            <Route path="/create-assessment" element={<CreateAssessment />} />
+            <Route path="/resume-matcher" element={<ResumeMatcher />} />
+            <Route path="/interview-start/:token" element={<InterviewStart />} />
+            <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
+            <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
           </Routes>
 
           {/* Cookie Consent Banner */}
@@ -102,13 +122,13 @@ function App() {
               </p>
               <div className="cookie-buttons">
                 <button
-                  onClick={() => handleCookieConsent('accepted')}
+                  onClick={() => handleAcceptCookies()}
                   className="cookie-btn cookie-accept-btn"
                 >
                   Accept
                 </button>
                 <button
-                  onClick={() => handleCookieConsent('declined')}
+                  onClick={() => setShowCookieBanner(false)}
                   className="cookie-btn cookie-decline-btn"
                 >
                   Decline

@@ -48,7 +48,8 @@ body {
 
 .app-scroll {
     position: fixed;
-    top: var(--vh-header-height);
+    top: 60px;
+    /* Force space for header */
     left: 0;
     right: 0;
     bottom: 0;

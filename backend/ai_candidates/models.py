@@ -28,3 +28,15 @@ class Candidate(models.Model):
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"
+
+class InterviewIntegrity(models.Model):
+    candidate = models.OneToOneField(Candidate, on_delete=models.CASCADE, related_name='integrity')
+    tab_switches = models.IntegerField(default=0)
+    phone_detections = models.IntegerField(default=0)
+    multiface_detections = models.IntegerField(default=0)
+    no_face_detections = models.IntegerField(default=0)
+    integrity_score = models.FloatField(default=100.0)
+    last_updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Integrity: {self.candidate.full_name} ({self.integrity_score}%)"

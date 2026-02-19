@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from '../components/Header';
+// import Header from '../components/Header'; // Removed
 import '../styles/Dashboard.css';
 
 // Dashboard component for VerifiHireAI
@@ -8,9 +8,11 @@ function Dashboard() {
   const navigate = useNavigate();
 
 
+  // Header removed (now global)
+
   return (
     <div className="dashboard-container">
-      <Header />
+      {/* Header is now in App.js */}
 
       <main className="dashboard-main">
 
@@ -26,11 +28,11 @@ function Dashboard() {
               <h3>AI-Powered Assessment</h3>
             </div>
             <div className="module-actions">
-              <button className="action-btn" onClick={() => window.location.href = '/ai/assessments.html'}>
+              <button className="action-btn" onClick={() => navigate('/ai-assessments')}>
                 <span>Assessments</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
-              <button className="action-btn" onClick={() => window.location.href = '/ai/create_assessment.html'} style={{ marginTop: '8px' }}>
+              <button className="action-btn" onClick={() => navigate('/create-assessment')} style={{ marginTop: '8px' }}>
                 <span>Create Assessment</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
@@ -66,7 +68,7 @@ function Dashboard() {
               <h3>Resume Screening</h3>
             </div>
             <div className="module-actions">
-              <button className="action-btn" onClick={() => window.location.href = '/ai/resume_matcher.html'}>
+              <button className="action-btn" onClick={() => navigate('/resume-matcher')}>
                 <span>Analyze Resumes</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
@@ -82,7 +84,7 @@ function Dashboard() {
               <h3>AI Interview</h3>
             </div>
             <div className="module-actions">
-              <button className="action-btn" onClick={() => window.location.href = '/ai/ai_interview.html'}>
+              <button className="action-btn" onClick={() => navigate('/ai-interview')}>
                 <span>Start Session</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>

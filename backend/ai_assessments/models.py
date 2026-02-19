@@ -13,6 +13,7 @@ class Assessment(models.Model):
     mcq_count = models.IntegerField(default=10)
     coding_count = models.IntegerField(default=2)
     duration_minutes = models.IntegerField(default=60)
+    difficulty_level = models.CharField(max_length=20, default='Medium', choices=[('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard')])
     generated_content = models.JSONField(blank=True, null=True)  # Store the AI response here
     created_at = models.DateTimeField(auto_now_add=True)
 
