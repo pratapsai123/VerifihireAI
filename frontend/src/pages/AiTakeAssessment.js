@@ -81,7 +81,11 @@ const AiTakeAssessment = () => {
             const stream = await navigator.mediaDevices.getUserMedia({
                 video: { width: 640, height: 480 }
             });
-            if (videoRef.current) videoRef.current.srcObject = stream;
+            if (videoRef.current) {
+                videoRef.current.srcObject = stream;
+                // Explicitly call play to handle stricter browser policies
+                videoRef.current.play().catch(e => console.warn("Camera play blocked:", e));
+            }
             streamRef.current = stream;
         } catch (err) {
             console.error("Camera error:", err);

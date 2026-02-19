@@ -54,6 +54,8 @@ const AiInterviewSession = () => {
             });
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
+                // Force play to ensure visibility across all browsers
+                videoRef.current.play().catch(e => console.warn("Auto-play prevented:", e));
             }
             streamRef.current = stream;
         } catch (err) {
@@ -229,12 +231,24 @@ const AiInterviewSession = () => {
     }, [userInputMode, isRecording, isProcessing, isSpeaking]);
 
     const handleAnswerSubmission = useCallback(async (answer) => {
-        if (!answer || !answer.trim() || isProcessing) return;
+        if (!answer || !answer.trim() || isProcessing) {
+            console.log("Submission skipped: answer empty or already processing");
+            return;
+        }
 
+        // 1. Immediate UI Lock
         setIsProcessing(true);
+        setAiStatus("AI is thinking...");
+
+        // 2. Force Microphone Stop
+        if (recognitionRef.current) {
+            try { recognitionRef.current.stop(); } catch (e) { }
+        }
+        if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+
         addMessage('user', answer);
         setResponseInput('');
-        setAiStatus("AI is thinking...");
+        console.log("Submitting answer turn...");
 
         try {
             const currentQ = questions[currentQuestionIndex] || "Introduction and Background";
@@ -244,7 +258,7 @@ const AiInterviewSession = () => {
                 answer: answer,
                 remaining_questions: questions.slice(currentQuestionIndex + 1),
                 chat_history: chatHistoryRef.current
-            });
+            }, { timeout: 35000 }); // 35s for more complex reasoning
 
             const data = response.data;
             let fullFeedback = data.feedback || "";
@@ -302,10 +316,36 @@ const AiInterviewSession = () => {
                 startListening();
             }
         } catch (err) {
-            console.error("Submission error:", err);
+            console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (35s)" : err.message);
             if (err.response?.status === 429) setShowQuotaWarning(true);
+
+            // AUTOMATIC RECOVERY: If the AI engine times out or fails (e.g. Groq is slow), 
+            // don't get stuck. Just move to the next question manually.
+            const nextIdx = currentQuestionIndex + 1;
+            const fallbacks = [
+                "Understood. Moving along, let's explore another area.",
+                "I see where you're coming from. Let's pivot slightly.",
+                "Thanks for that input. Let's touch upon a different technical topic.",
+                "Got it. Switching gears, I have a question about your project work."
+            ];
+            const fallbackMsg = fallbacks[Math.floor(Math.random() * fallbacks.length)];
+            const fallbackNextQ = questions[nextIdx] || "Could you tell me more about your overall professional journey?";
+
+            addMessage('ai', fallbackMsg);
+
+            if (nextIdx < questions.length || (typeof fallbackNextQ === 'string' && fallbackNextQ.length > 5)) {
+                addMessage('ai', fallbackNextQ);
+                await speak(fallbackMsg + " " + fallbackNextQ);
+                setCurrentQuestionIndex(nextIdx);
+                setProgress((nextIdx / (questions.length || 1)) * 100);
+            } else {
+                await speak(fallbackMsg);
+                completeInterview();
+            }
+
             setIsProcessing(false);
-            setAiStatus("Error - Try again");
+            setAiStatus("AI Interviewer Online");
+            startListening();
         }
     }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening]);
 
@@ -358,7 +398,7 @@ const AiInterviewSession = () => {
 
         initSession();
         return () => stopCamera();
-    }, [token, addMessage, startListening]);
+    }, [token]); // Only re-init if token changes, perfectly stable camera feed
 
     const silenceTimerRef = useRef(null);
     const transcriptRef = useRef("");
@@ -378,6 +418,7 @@ const AiInterviewSession = () => {
         recognition.lang = 'en-US';
 
         recognition.onstart = () => {
+            console.log("INFINITE MIC: Speech recognition is now active and stay on.");
             setIsRecording(true);
             setAiStatus("Listening...");
             transcriptRef.current = "";
@@ -385,47 +426,53 @@ const AiInterviewSession = () => {
 
         recognition.onresult = (event) => {
             let interimTranscript = "";
-            let finalTranscript = "";
+            let newFinals = "";
 
             for (let i = event.resultIndex; i < event.results.length; ++i) {
                 if (event.results[i].isFinal) {
-                    finalTranscript += event.results[i][0].transcript;
+                    newFinals += event.results[i][0].transcript;
                 } else {
                     interimTranscript += event.results[i][0].transcript;
                 }
             }
 
-            if (finalTranscript) {
-                transcriptRef.current += finalTranscript;
+            if (newFinals) {
+                transcriptRef.current += newFinals;
             }
 
             const currentTotal = (transcriptRef.current + interimTranscript).trim();
             if (currentTotal) {
-                setAiStatus(`Heard: "${currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal}"`);
+                const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
+                setAiStatus(`Heard: "${display}"`);
             }
 
-            // Reset silence timer every time user speaks
+            // PATIENT SILENCE: Reset timer every time we hear ANY sound/speech
             if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
 
-            if (currentTotal.length > 2) {
+            // Only submit if we have a significant answer length
+            if (currentTotal.length > 3) {
                 silenceTimerRef.current = setTimeout(() => {
                     const finalSubmission = transcriptRef.current + interimTranscript;
-                    if (finalSubmission.trim().length > 3) {
-                        console.log("5.0s silence detected. Processing final submission.");
+                    if (finalSubmission.trim().length > 4) {
+                        console.log("Planned pause detected. Processing answer...");
                         setIsProcessing(true);
                         setAiStatus("Processing answer...");
                         try { recognition.stop(); } catch (e) { }
                         if (submitHandlerRef.current) submitHandlerRef.current(finalSubmission);
                     }
-                }, 5000); // Increased to 5 seconds for massive patience
+                }, 3500); // 3.5 seconds - perfect balance of patience and speed
             }
         };
 
         recognition.onerror = (event) => {
-            if (event.error === 'no-speech') return; // Ignore harmless noise errors
-            console.error("Recognition Error:", event.error);
+            // Ignore no-speech and stay active
+            if (event.error === 'no-speech' || event.error === 'aborted') {
+                console.log("Mic background silence...");
+                return;
+            }
+            console.warn("Recognition Error:", event.error);
             setIsRecording(false);
-            setAiStatus("Mic error: " + event.error);
+            setAiStatus(`Mic ready`);
         };
 
         recognition.onend = () => {
