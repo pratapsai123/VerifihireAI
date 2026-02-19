@@ -160,6 +160,9 @@ const AiTakeAssessment = () => {
         };
     }, [isStarted, submissionId]);
 
+    // Timer & Pagination State
+    const [currentQuestionIdx, setCurrentQuestionIdx] = useState(0);
+
     // Timer Loop
     useEffect(() => {
         if (isStarted && timeLeft > 0) {
@@ -172,6 +175,16 @@ const AiTakeAssessment = () => {
         }
         return () => clearInterval(timerRef.current);
     }, [isStarted, timeLeft]);
+
+    const handleNext = () => {
+        const mcqs = assessment?.generated_content?.mcqs || [];
+        const coding = assessment?.generated_content?.coding_challenges || [];
+        const totalQs = mcqs.length + coding.length;
+        if (currentQuestionIdx < totalQs - 1) {
+            setCurrentQuestionIdx(prev => prev + 1);
+            window.scrollTo(0, 0); // Scroll to top for new question
+        }
+    };
 
     const handleSubmit = async (e) => {
         if (e) e.preventDefault();
@@ -230,37 +243,6 @@ const AiTakeAssessment = () => {
         return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
     };
 
-    if (loading) return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins' }}>
-            <div style={{ textAlign: 'center' }}>
-                <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2rem', color: '#4318FF', marginBottom: '1rem' }}></i>
-                <p>Loading assessment...</p>
-            </div>
-        </div>
-    );
-
-    if (error) return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins' }}>
-            <div style={{ textAlign: 'center', maxWidth: '400px', padding: '2rem', background: 'white', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}>
-                <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '3rem', color: '#ee5d50', marginBottom: '1rem' }}></i>
-                <h2>Link Error</h2>
-                <p style={{ color: '#A3AED0' }}>{error}</p>
-            </div>
-        </div>
-    );
-
-    if (submitted) return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins' }}>
-            <div style={{ textAlign: 'center', maxWidth: '500px', padding: '3rem', background: 'white', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}>
-                <div style={{ width: '80px', height: '80px', background: '#E6FBF5', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#05CD99', fontSize: '2.5rem', margin: '0 auto 1.5rem' }}>
-                    <i className="fa-solid fa-check"></i>
-                </div>
-                <h1 style={{ color: '#1B254B', marginBottom: '1rem' }}>Assessment Submitted!</h1>
-                <p style={{ color: '#A3AED0', fontSize: '1.1rem' }}>Thank you for completing the test. The recruiter has been notified of your submission.</p>
-            </div>
-        </div>
-    );
-
     if (!isStarted) return (
         <div style={{ background: '#F4F7FE', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'Poppins', padding: '20px' }}>
             <div className="card" style={{ maxWidth: '600px', width: '100%', padding: '3rem', background: 'white', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.05)' }}>
@@ -310,93 +292,199 @@ const AiTakeAssessment = () => {
 
     const mcqs = assessment?.generated_content?.mcqs || [];
     const coding = assessment?.generated_content?.coding_challenges || [];
+    const assessmentQuestions = [...mcqs.map((q, i) => ({ ...q, type: 'mcq', id: i })), ...coding.map((c, i) => ({ ...c, type: 'coding', id: i }))];
+    const currentQ = assessmentQuestions[currentQuestionIdx];
+    const isLastQ = assessmentQuestions.length > 0 && currentQuestionIdx === assessmentQuestions.length - 1;
 
     return (
-        <div style={{ background: '#F4F7FE', minHeight: '100vh', padding: '40px 20px', fontFamily: 'Poppins' }}>
-            <div style={{ maxWidth: '1000px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 300px', gap: '2rem' }}>
+        <div style={{ background: '#F4F7FE', height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', fontFamily: 'Poppins' }}>
+            {/* Optimized Sticky Header */}
+            <div style={{
+                flexShrink: 0,
+                padding: '8px 40px',
+                background: 'white',
+                borderBottom: '1px solid #E0E5F2',
+                boxShadow: '0 2px 10px rgba(0,0,0,0.03)',
+                zIndex: 1000
+            }}>
+                <div style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: '80px 1fr 180px', gap: '1.5rem', alignItems: 'center' }}>
 
-                {/* Left Side: Questions */}
-                <div style={{ minWidth: 0 }}>
-                    <div className="card" style={{ padding: '2rem', marginBottom: '2rem', background: 'white', borderRadius: '25px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <div>
-                                <h1 style={{ color: '#1B254B', margin: '0 0 0.5rem', fontSize: '1.6rem' }}>Technical Assessment</h1>
-                                <p style={{ color: '#707EAE', margin: 0 }}>Skills: <span style={{ color: '#4318FF', fontWeight: '600' }}>{assessment.required_skills}</span></p>
+                    {/* Camera (Mini) */}
+                    <div style={{ position: 'relative', width: '80px', aspectRatio: '4/3', background: '#000', borderRadius: '6px', overflow: 'hidden' }}>
+                        <video ref={videoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                    </div>
+
+                    {/* Progress & Title */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+                            <h1 style={{ color: '#1B254B', margin: 0, fontSize: '1.2rem', fontWeight: '800' }}>
+                                Technical Assessment <span style={{ color: '#707EAE', fontSize: '0.85rem', fontWeight: '400', marginLeft: '8px' }}>({assessment.required_skills})</span>
+                            </h1>
+                            <div style={{ fontSize: '0.85rem', fontWeight: '700', color: '#4318FF', background: '#F0F3FF', padding: '2px 10px', borderRadius: '5px' }}>
+                                Q{currentQuestionIdx + 1}/{assessmentQuestions.length}
                             </div>
-                            <div style={{ background: timeLeft < 300 ? '#FFF5F5' : '#F4F7FE', padding: '0.8rem 1.5rem', borderRadius: '15px', border: '1px solid', borderColor: timeLeft < 300 ? '#FEB2B2' : '#E0E5F2', textAlign: 'center' }}>
-                                <div style={{ fontSize: '0.7rem', color: timeLeft < 300 ? '#E53E3E' : '#707EAE', fontWeight: '700', textTransform: 'uppercase' }}>Time Remaining</div>
-                                <div style={{ fontSize: '1.5rem', fontWeight: '800', color: timeLeft < 300 ? '#E53E3E' : '#1B254B' }}>{formatTime(timeLeft)}</div>
-                            </div>
+                        </div>
+                        <div style={{ width: '100%', height: '5px', background: '#E0E5F2', borderRadius: '10px', overflow: 'hidden' }}>
+                            <div style={{ width: `${(assessmentQuestions.length > 0 ? ((currentQuestionIdx + 1) / assessmentQuestions.length) : 0) * 100}%`, height: '100%', background: '#4318FF', transition: 'width 0.3s ease' }}></div>
                         </div>
                     </div>
 
-                    {/* Questions loop... */}
-                    {mcqs.length > 0 && (
-                        <div style={{ marginBottom: '2rem' }}>
-                            <h2 style={{ color: '#1B254B', marginBottom: '1.5rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                                <i className="fa-solid fa-list-check" style={{ color: '#4318FF' }}></i> Multiple Choice
-                            </h2>
-                            {mcqs.map((q, idx) => (
-                                <div key={idx} className="card" style={{ padding: '2rem', marginBottom: '1.5rem', background: 'white', borderRadius: '20px' }}>
-                                    <p style={{ fontWeight: '600', color: '#2B3674', fontSize: '1.05rem', marginBottom: '1.2rem' }}>{idx + 1}. {q.question}</p>
-                                    <div style={{ display: 'grid', gap: '0.8rem' }}>
-                                        {q.options.map((opt, optIdx) => (
-                                            <label key={optIdx} style={{ display: 'flex', alignItems: 'center', padding: '1rem', background: answers[`mcq_${idx}`] === opt ? '#F0F3FF' : '#F8F9FF', borderRadius: '12px', cursor: 'pointer', border: '2px solid', borderColor: answers[`mcq_${idx}`] === opt ? '#4318FF' : 'transparent', transition: 'all 0.2s' }}>
-                                                <input type="radio" name={`q-${idx}`} checked={answers[`mcq_${idx}`] === opt} onChange={() => handleAnswerChange(`mcq_${idx}`, opt)} style={{ marginRight: '15px', accentColor: '#4318FF' }} />
-                                                <span style={{ color: '#1B254B', fontWeight: '500' }}>{opt}</span>
+                    {/* Timer & Status */}
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '15px' }}>
+                        <div style={{ textAlign: 'right' }}>
+                            <div style={{ fontSize: '0.6rem', color: timeLeft < 300 ? '#E53E3E' : '#707EAE', fontWeight: '700', textTransform: 'uppercase' }}>Timer</div>
+                            <div style={{ fontSize: '1.2rem', fontWeight: '800', color: timeLeft < 300 ? '#E53E3E' : '#1B254B' }}>{formatTime(timeLeft)}</div>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '4px', color: '#05CD99', fontSize: '0.65rem', fontWeight: '700' }}>
+                            <span style={{ width: '6px', height: '6px', background: '#05CD99', borderRadius: '50%' }}></span>
+                            LIVE
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Main Content Area - Balanced for vertical fit */}
+            <div style={{ flex: 1, padding: '15px 30px', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', justifyContent: 'center' }}>
+                <div style={{ maxWidth: '950px', width: '100%', maxHeight: '100%', display: 'flex', flexDirection: 'column' }}>
+
+                    {/* Question Card */}
+                    <div className="card" style={{
+                        flexShrink: 1,
+                        background: 'white',
+                        borderRadius: '25px',
+                        boxShadow: '0 10px 30px rgba(0,0,0,0.04)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        overflow: 'hidden',
+                        border: '1px solid #E0E5F2'
+                    }}>
+
+                        {/* Question Content - Further Optimized */}
+                        <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem 2.5rem' }}>
+                            {currentQ.type === 'mcq' ? (
+                                <div>
+                                    <h2 style={{ color: '#1B254B', marginBottom: '1.2rem', fontSize: '1.2rem', fontWeight: '700', lineHeight: '1.4' }}>
+                                        {currentQ.question}
+                                    </h2>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+                                        {currentQ.options.map((opt, optIdx) => (
+                                            <label key={optIdx} style={{
+                                                display: 'flex',
+                                                alignItems: 'center',
+                                                padding: '0.9rem 1.5rem',
+                                                background: answers[`mcq_${currentQ.id}`] === opt ? '#F0F3FF' : '#F8F9FF',
+                                                borderRadius: '12px',
+                                                cursor: 'pointer',
+                                                border: '2px solid',
+                                                borderColor: answers[`mcq_${currentQ.id}`] === opt ? '#4318FF' : 'transparent',
+                                                transition: 'all 0.15s'
+                                            }}>
+                                                <input type="radio" checked={answers[`mcq_${currentQ.id}`] === opt} onChange={() => handleAnswerChange(`mcq_${currentQ.id}`, opt)} style={{ width: '18px', height: '18px', marginRight: '12px', accentColor: '#4318FF' }} />
+                                                <span style={{ color: '#1B254B', fontWeight: '600', fontSize: '0.95rem' }}>{opt}</span>
                                             </label>
                                         ))}
                                     </div>
                                 </div>
-                            ))}
-                        </div>
-                    )}
-
-                    {coding.length > 0 && (
-                        <div style={{ marginBottom: '3rem' }}>
-                            <h2 style={{ color: '#1B254B', marginBottom: '1.5rem', fontSize: '1.2rem', display: 'flex', alignItems: 'center', gap: '0.8rem' }}>
-                                <i className="fa-solid fa-code" style={{ color: '#4318FF' }}></i> Coding Challenges
-                            </h2>
-                            {coding.map((c, idx) => (
-                                <div key={idx} className="card" style={{ padding: '2rem', marginBottom: '1.5rem', background: 'white', borderRadius: '20px' }}>
-                                    <h3 style={{ color: '#1B254B', fontSize: '1.1rem', marginBottom: '0.8rem' }}>{c.title}</h3>
-                                    <p style={{ color: '#707EAE', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.2rem' }}>{c.problem_statement}</p>
+                            ) : (
+                                <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                                    <h2 style={{ color: '#1B254B', marginBottom: '0.6rem', fontSize: '1.2rem', fontWeight: '700' }}>{currentQ.title}</h2>
+                                    <p style={{ color: '#707EAE', fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '1rem' }}>{currentQ.problem_statement}</p>
                                     <textarea
                                         placeholder="Write your solution code here..."
-                                        style={{ width: '100%', height: '240px', padding: '1.2rem', borderRadius: '12px', border: '1px solid #E0E5F2', fontFamily: 'Monaco, monospace', fontSize: '0.9rem', outline: 'none', background: '#F8F9FF' }}
-                                        onChange={(e) => handleAnswerChange(`coding_${idx}`, e.target.value)}
+                                        style={{
+                                            flex: 1,
+                                            width: '100%',
+                                            minHeight: '200px',
+                                            padding: '1rem',
+                                            borderRadius: '12px',
+                                            border: '2px solid #E0E5F2',
+                                            fontFamily: 'Fira Code, Monaco, monospace',
+                                            fontSize: '0.9rem',
+                                            outline: 'none',
+                                            background: '#F8F9FF',
+                                            transition: 'border-color 0.2s',
+                                            resize: 'none'
+                                        }}
+                                        value={answers[`coding_${currentQ.id}`] || ''}
+                                        onChange={(e) => handleAnswerChange(`coding_${currentQ.id}`, e.target.value)}
+                                        onFocus={(e) => e.target.style.borderColor = '#4318FF'}
+                                        onBlur={(e) => e.target.style.borderColor = '#E0E5F2'}
                                     ></textarea>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-
-                    <button
-                        onClick={handleSubmit} disabled={isSubmitting}
-                        style={{ width: '100%', padding: '1.2rem', background: '#4318FF', color: 'white', border: 'none', borderRadius: '15px', fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer', boxShadow: '0 10px 20px rgba(67, 24, 255, 0.2)', opacity: isSubmitting ? 0.7 : 1 }}
-                    >
-                        {isSubmitting ? 'Submitting...' : 'Complete Assessment'}
-                    </button>
-                </div>
-
-                {/* Right Side: Monitoring Sidebar */}
-                <div style={{ position: 'sticky', top: '20px', height: 'fit-content' }}>
-                    <div className="card" style={{ padding: '1.5rem', background: 'white', borderRadius: '25px', boxShadow: '0 10px 30px rgba(0,0,0,0.05)', textAlign: 'center' }}>
-                        <div style={{ position: 'relative', width: '100%', aspectRatio: '4/3', background: '#000', borderRadius: '15px', overflow: 'hidden', marginBottom: '1.5rem' }}>
-                            <video ref={videoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
-                            {aiToast.active && (
-                                <div style={{ position: 'absolute', bottom: '10px', left: '50%', transform: 'translateX(-50%)', background: aiToast.urgent ? '#e11d48' : '#4318FF', color: 'white', padding: '5px 10px', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '700', whiteSpace: 'nowrap', animation: 'shake 0.5s' }}>
-                                    {aiToast.text}
                                 </div>
                             )}
                         </div>
-                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: '#05CD99', fontSize: '0.85rem', fontWeight: '600' }}>
-                            <span style={{ width: '8px', height: '8px', background: '#05CD99', borderRadius: '50%', display: 'inline-block' }}></span>
-                            AI Monitoring Active
+
+                        {/* Navigation Footer - Compact & Balanced */}
+                        <div style={{
+                            flexShrink: 0,
+                            padding: '1.2rem 3rem',
+                            background: '#F8F9FF',
+                            borderTop: '1px solid #E0E5F2',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
+                        }}>
+                            {/* Previous Button */}
+                            <button
+                                onClick={() => setCurrentQuestionIdx(prev => Math.max(0, prev - 1))}
+                                disabled={currentQuestionIdx === 0}
+                                style={{
+                                    padding: '0.8rem 2rem',
+                                    background: 'white',
+                                    color: currentQuestionIdx === 0 ? '#A0AEC0' : '#4318FF',
+                                    border: '2px solid',
+                                    borderColor: currentQuestionIdx === 0 ? '#E2E8F0' : '#4318FF',
+                                    borderRadius: '12px',
+                                    fontSize: '1rem',
+                                    fontWeight: '700',
+                                    cursor: currentQuestionIdx === 0 ? 'not-allowed' : 'pointer',
+                                    transition: 'all 0.2s',
+                                    visibility: currentQuestionIdx === 0 ? 'hidden' : 'visible'
+                                }}
+                            >
+                                <i className="fa-solid fa-arrow-left" style={{ marginRight: '10px' }}></i> Previous
+                            </button>
+
+                            {/* Next / Submit Button */}
+                            {!isLastQ ? (
+                                <button
+                                    onClick={handleNext}
+                                    style={{
+                                        padding: '0.8rem 2.8rem',
+                                        background: 'linear-gradient(135deg, #4318FF 0%, #7551FF 100%)',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '12px',
+                                        fontSize: '1.1rem',
+                                        fontWeight: '700',
+                                        cursor: 'pointer',
+                                        boxShadow: '0 8px 20px rgba(67, 24, 255, 0.2)'
+                                    }}
+                                >
+                                    Next <i className="fa-solid fa-arrow-right" style={{ marginLeft: '10px' }}></i>
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleSubmit} disabled={isSubmitting}
+                                    style={{
+                                        padding: '0.8rem 3.5rem',
+                                        background: '#05CD99',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '12px',
+                                        fontSize: '1.1rem',
+                                        fontWeight: '700',
+                                        cursor: 'pointer',
+                                        boxShadow: '0 8px 20px rgba(5, 205, 153, 0.2)',
+                                        opacity: isSubmitting ? 0.7 : 1
+                                    }}
+                                >
+                                    {isSubmitting ? 'Submitting...' : 'Submit'} <i className="fa-solid fa-paper-plane" style={{ marginLeft: '10px' }}></i>
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     );

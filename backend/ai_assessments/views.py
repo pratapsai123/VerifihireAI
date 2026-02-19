@@ -35,18 +35,19 @@ class SubmitAssessmentView(APIView):
             assessment = Assessment.objects.get(share_token=token)
             
             # Find the existing ongoing submission from intake
-            try:
-                submission = AIAssessmentSubmission.objects.get(
-                    assessment=assessment,
-                    candidate_email=email,
-                    status='ONGOING'
-                )
-            except AIAssessmentSubmission.DoesNotExist:
+            submission = AIAssessmentSubmission.objects.filter(
+                assessment=assessment,
+                candidate_email=email,
+                status='ONGOING'
+            ).order_by('-id').first()
+
+            if not submission:
                 # Fallback in case intake failed but we have data
                 submission = AIAssessmentSubmission.objects.create(
                     assessment=assessment,
                     candidate_name=name,
-                    candidate_email=email
+                    candidate_email=email,
+                    status='ONGOING'
                 )
 
             # Simple grading logic for MCQs
@@ -55,9 +56,9 @@ class SubmitAssessmentView(APIView):
             mcqs = generated_content.get('mcqs', [])
             
             for i, mcq in enumerate(mcqs):
-                correct_ans = mcq.get('answer', '').strip().upper()
-                candidate_ans = answers.get(f'mcq_{i}', '').strip().upper()
-                if candidate_ans == correct_ans:
+                correct_ans = str(mcq.get('answer') or '').strip().upper()
+                candidate_ans = str(answers.get(f'mcq_{i}') or '').strip().upper()
+                if correct_ans and candidate_ans == correct_ans:
                     score += 1
 
             total_q = len(mcqs)
@@ -85,6 +86,7 @@ class SubmitAssessmentView(APIView):
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
+            logger.error(f"SUMBISSION ERROR: {str(e)}\n{traceback.format_exc()}")
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
@@ -244,6 +246,23 @@ class AssessmentDetailView(APIView):
     def get(self, request, pk):
         try:
             assessment = Assessment.objects.get(pk=pk)
+            submissions = AIAssessmentSubmission.objects.filter(assessment=assessment).order_by('-submitted_at')
+            
+            submission_data = []
+            for sub in submissions:
+                submission_data.append({
+                    "id": sub.id,
+                    "candidate_name": sub.candidate_name,
+                    "candidate_email": sub.candidate_email,
+                    "score": sub.score,
+                    "total_questions": sub.total_questions,
+                    "percentage": sub.percentage,
+                    "status": sub.status,
+                    "integrity_score": sub.integrity_score,
+                    "answers": sub.answers,
+                    "submitted_at": sub.submitted_at.strftime("%Y-%m-%d %H:%M")
+                })
+
             data = {
                 "id": assessment.id,
                 "job_description": assessment.job_description,
@@ -254,7 +273,8 @@ class AssessmentDetailView(APIView):
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content,
                 "status": assessment.status,
-                "share_token": str(assessment.share_token)
+                "share_token": str(assessment.share_token),
+                "submissions": submission_data
             }
             return Response(data, status=status.HTTP_200_OK)
         except Assessment.DoesNotExist:

@@ -154,7 +154,7 @@ const AiAssessments = () => {
                                                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                                                     <button
                                                         className="action-btn"
-                                                        onClick={() => navigate(`/assessments/${assessment.id}`)}
+                                                        onClick={() => navigate(`/ai-assessments/${assessment.id}`)}
                                                         style={{ background: '#F4F7FE', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', color: '#4318FF', cursor: 'pointer' }}
                                                     >View</button>
                                                     <button

@@ -34,6 +34,7 @@ import ResumeMatcher from './pages/ResumeMatcher';
 import InterviewStart from './pages/InterviewStart';
 import AiTakeAssessment from './pages/AiTakeAssessment';
 import AiInterviewSession from './pages/AiInterviewSession';
+import AiAssessmentDetail from './pages/AiAssessmentDetail';
 import './App.css';
 
 import Header from './components/Header'; // Import Header
@@ -106,6 +107,7 @@ function App() {
             <Route path="/interview-start/:token" element={<InterviewStart />} />
             <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
             <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
+            <Route path="/ai-assessments/:id" element={<AiAssessmentDetail />} />
           </Routes>
 
           {/* Cookie Consent Banner */}
