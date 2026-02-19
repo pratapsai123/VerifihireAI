@@ -324,11 +324,12 @@ class ProcessAnswerView(APIView):
             1. **DISTRESS**: If candidate is EMOTIONALLY distressed ("sad", "depressed", "scared"), STOP. Offer a break. Set "refined_next_question" to null.
             2. **KNOWLEDGE GAP**: If candidate says "I don't know" or "Not sure":
                - DO NOT offer a break.
-               - RESPOND: "That's completely fine. It's a specific topic. Let's move on." 
+               - RESPOND briefly and naturally (e.g., "No problem," "Understood," "That happens"). 
+               - **VARY your phrasing**. Do not say "Let's move on" every time.
                - Ask the next question immediately.
-            3. **ANSWER**: If asked a question, answer briefly, then pivot back.
-            3. **PROBE**: If answer is vague, ask clarification.
-            4. **NATURAL**: No robotic transitions ("Let's move on"). Bridge topics naturally.
+            3. **ANSWER**: If asked a question, answer briefly (1 sentence), then pivot back.
+            4. **PROBE**: If answer is vague, ask clarification.
+            5. **CONCISE**: KEEP FEEDBACK SHORT. Max 2 sentences. Avoid lengthy preambles, lecturing, or restating the candidate's answer.
             
             CONTEXT:
             Resume: {resume_context[:1000]} 
@@ -342,7 +343,7 @@ class ProcessAnswerView(APIView):
             
             OUTPUT (JSON Only):
             {{
-                "feedback": "Reaction + Bridge (or Empathy)",
+                "feedback": "Concise Reaction (Max 2 sentences) + Bridge",
                 "refined_next_question": "Rewritten Next Q (or null if distressed)",
                 "follow_up_question": "Clarification if needed (else null)"
             }}

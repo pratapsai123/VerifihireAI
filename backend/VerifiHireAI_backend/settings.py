@@ -113,8 +113,13 @@ if DB_SSLMODE:
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', 'verifihire_db'),
+        'USER': os.environ.get('POSTGRES_USER', 'verifihire_user'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'verifihire_password'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        'OPTIONS': db_options,
     }
 }
 
@@ -236,5 +241,5 @@ EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
 # AI Configuration
-GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyB1f0jDgvo_OC8KFbZ6-krg01C_1wnwyS8')
+GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY', 'AIzaSyDuV1A6ppetzwAHRpoz98v_4km-9lVPTHs')
 

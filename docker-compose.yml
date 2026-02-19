@@ -36,6 +36,19 @@ services:
       - "6379:6379" # Exposed for local backend
     restart: unless-stopped
 
+  db:
+    image: postgres:15-alpine
+    container_name: verifyhire_db
+    environment:
+      POSTGRES_DB: verifihire_db
+      POSTGRES_USER: verifihire_user
+      POSTGRES_PASSWORD: verifihire_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
   executor:
     build:
       context: ./executor
@@ -65,3 +78,4 @@ services:
 volumes:
   verifihireai_media:
   dind_data:
+  postgres_data:
