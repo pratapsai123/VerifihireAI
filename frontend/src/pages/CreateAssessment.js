@@ -12,8 +12,10 @@ const CreateAssessment = () => {
         coding_count: 2,
         duration: 60,
         difficulty: 'Medium',
-        available_from: '',
-        available_until: ''
+        from_date: '',
+        from_time: '',
+        until_date: '',
+        until_time: ''
     });
     const [isGenerating, setIsGenerating] = useState(false);
 
@@ -26,8 +28,10 @@ const CreateAssessment = () => {
             codingCount: 'coding_count',
             duration: 'duration',
             difficulty: 'difficulty',
-            availableFrom: 'available_from',
-            availableUntil: 'available_until'
+            fromDate: 'from_date',
+            fromTime: 'from_time',
+            untilDate: 'until_date',
+            untilTime: 'until_time'
         };
         setFormData(prev => ({
             ...prev,
@@ -39,8 +43,14 @@ const CreateAssessment = () => {
         e.preventDefault();
         setIsGenerating(true);
 
+        const combinedData = {
+            ...formData,
+            available_from: (formData.from_date && formData.from_time) ? `${formData.from_date}T${formData.from_time}` : '',
+            available_until: (formData.until_date && formData.until_time) ? `${formData.until_date}T${formData.until_time}` : ''
+        };
+
         try {
-            const response = await axios.post('http://localhost:8001/api/ai/generate/', formData, {
+            const response = await axios.post('http://localhost:8001/api/ai/generate/', combinedData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -205,29 +215,42 @@ const CreateAssessment = () => {
                             </div>
                         </div>
 
-                        {/* Availability Row */}
-                        <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', paddingTop: '1.5rem', borderTop: '1px dashed #E2E8F0' }}>
-                            <div>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>
+                        <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem', paddingTop: '1.5rem', borderTop: '1px dashed #E2E8F0' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.5rem', display: 'block' }}>
                                     <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
                                     Available From
                                 </label>
-                                <input
-                                    type="datetime-local" id="availableFrom"
-                                    value={formData.available_from} onChange={handleChange}
-                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
-                                />
+                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <input
+                                        type="date" id="fromDate"
+                                        value={formData.from_date} onChange={handleChange}
+                                        style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                    />
+                                    <input
+                                        type="time" id="fromTime"
+                                        value={formData.from_time} onChange={handleChange}
+                                        style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.5rem', display: 'block' }}>
                                     <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
                                     Available Until
                                 </label>
-                                <input
-                                    type="datetime-local" id="availableUntil"
-                                    value={formData.available_until} onChange={handleChange}
-                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
-                                />
+                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <input
+                                        type="date" id="untilDate"
+                                        value={formData.until_date} onChange={handleChange}
+                                        style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                    />
+                                    <input
+                                        type="time" id="untilTime"
+                                        value={formData.until_time} onChange={handleChange}
+                                        style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                    />
+                                </div>
                             </div>
                         </div>
                     </div>
