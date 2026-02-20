@@ -90,11 +90,68 @@ const AiTakeAssessment = () => {
         }
     };
 
-    const runCode = async (qId) => {
-        const code = answers[`coding_${qId}`] || "";
-        if (!code.trim()) return;
-
+    const runCode = async (qId, isTestRun = false) => {
         setIsExecuting(true);
+        setExecutionResult(null); // Clear previous execution results
+
+        const code = answers[`coding_${qId}`];
+        if (!code) {
+            alert("Please write some code first!");
+            setIsExecuting(false);
+            return;
+        }
+
+        const currentQ = assessment?.generated_content?.coding_challenges?.find(q => q.id === qId);
+
+        // If "Submit", run against hidden test cases
+        if (isTestRun && currentQ && currentQ.test_cases && currentQ.test_cases.length > 0) {
+            const results = [];
+            let passedCount = 0;
+
+            for (const testCase of currentQ.test_cases) {
+                try {
+                    const langData = supportedLanguages.find(l => l.id === selectedLanguage);
+                    // Use test case input instead of custom input
+                    const response = await axios.post('http://localhost:8001/api/ai/execute/', {
+                        language: selectedLanguage === 'cpp' ? 'cpp' : selectedLanguage,
+                        version: langData.version,
+                        files: [{ content: code }],
+                        stdin: testCase.input
+                    });
+
+                    const output = response.data.run.stdout.trim();
+                    const expected = testCase.output.trim();
+                    const passed = output === expected;
+                    if (passed) passedCount++;
+
+                    results.push({
+                        input: testCase.input,
+                        expected: expected,
+                        actual: output,
+                        passed: passed
+                    });
+
+                } catch (err) {
+                    results.push({
+                        input: testCase.input,
+                        expected: testCase.output,
+                        actual: "Error",
+                        passed: false
+                    });
+                }
+            }
+
+            setExecutionResult({
+                type: 'test_cases',
+                results: results,
+                score: passedCount,
+                total: currentQ.test_cases.length
+            });
+            setIsExecuting(false);
+            return;
+        }
+
+        // Original logic for "Run Code" (with custom input)
         setCodeOutput([{ type: 'info', content: `Compiling & running ${selectedLanguage}...` }]);
 
         try {
@@ -459,34 +516,59 @@ const AiTakeAssessment = () => {
                                 </div>
                             ) : (
                                 <div style={{ height: '100%', display: 'flex', gap: '2rem' }}>
+                                    {/* Left Panel: Problem Statement & Custom Input */}
+                                    <div style={{ flex: '0 0 40%', display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%', overflow: 'hidden' }}>
+                                        <div style={{
+                                            background: '#FFFFFF',
+                                            borderRadius: '16px',
+                                            padding: '1.5rem',
+                                            boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
+                                            border: '1px solid #f1f5f9',
+                                            flex: 1,
+                                            overflowY: 'auto'
+                                        }}>
+                                            <h3 style={{ fontSize: '1.2rem', fontWeight: '800', color: '#1B254B', marginTop: 0, marginBottom: '0.5rem', lineHeight: '1.4' }}>
+                                                {formatText(currentQ.title || `Coding Challenge ${currentQuestionIdx + 1}`)}
+                                            </h3>
 
-                                    {/* Left Panel: Problem Statement */}
-                                    <div style={{ flex: '0 0 350px', display: 'flex', flexDirection: 'column', gap: '1rem', borderRight: '1px solid #E0E5F2', paddingRight: '1.5rem', overflowY: 'auto' }}>
-                                        <div>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
-                                                <span style={{ padding: '4px 10px', background: '#F0F3FF', color: '#4318FF', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '800', textTransform: 'uppercase' }}>Challenge</span>
-                                                <h2 style={{ color: '#1B254B', margin: 0, fontSize: '1.1rem', fontWeight: '800', lineHeight: '1.3' }}>{currentQ.title}</h2>
+                                            {/* Problem Content */}
+                                            <div style={{ color: '#4A5568', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
+                                                {currentQ.problem_statement ? (
+                                                    <div dangerouslySetInnerHTML={{ __html: formatText(currentQ.problem_statement) }} />
+                                                ) : (
+                                                    <p>{formatText(currentQ.description || "No description provided.")}</p>
+                                                )}
                                             </div>
 
-                                            <div style={{ color: '#707EAE', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
-                                                {currentQ.problem_statement}
-                                            </div>
-
-                                            {/* Input/Output Format */}
-                                            {currentQ.input_format && (
-                                                <div style={{ marginBottom: '1rem' }}>
-                                                    <h4 style={{ fontSize: '0.8rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Input Format</h4>
-                                                    <p style={{ fontSize: '0.85rem', color: '#707EAE', background: '#F8F9FF', padding: '10px', borderRadius: '8px', border: '1px solid #E0E5F2' }}>{currentQ.input_format}</p>
+                                            {/* IO Format */}
+                                            {(currentQ.input_format || currentQ.output_format) && (
+                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1.5rem' }}>
+                                                    {currentQ.input_format && (
+                                                        <div style={{ background: '#F8F9FF', padding: '10px', borderRadius: '8px', border: '1px solid #E0E5F2' }}>
+                                                            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#4318FF', marginBottom: '4px' }}>Input Format</div>
+                                                            <div style={{ fontSize: '0.8rem', color: '#2B3674' }}>{currentQ.input_format}</div>
+                                                        </div>
+                                                    )}
+                                                    {currentQ.output_format && (
+                                                        <div style={{ background: '#F8F9FF', padding: '10px', borderRadius: '8px', border: '1px solid #E0E5F2' }}>
+                                                            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#05CD99', marginBottom: '4px' }}>Output Format</div>
+                                                            <div style={{ fontSize: '0.8rem', color: '#2B3674' }}>{currentQ.output_format}</div>
+                                                        </div>
+                                                    )}
                                                 </div>
                                             )}
-                                            {currentQ.output_format && (
+
+                                            {/* Constraints */}
+                                            {currentQ.constraints && currentQ.constraints.length > 0 && (
                                                 <div style={{ marginBottom: '1.5rem' }}>
-                                                    <h4 style={{ fontSize: '0.8rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Output Format</h4>
-                                                    <p style={{ fontSize: '0.85rem', color: '#707EAE', background: '#F8F9FF', padding: '10px', borderRadius: '8px', border: '1px solid #E0E5F2' }}>{currentQ.output_format}</p>
+                                                    <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.6rem' }}>Constraints</div>
+                                                    <ul style={{ margin: 0, paddingLeft: '1.2rem', color: '#707EAE', fontSize: '0.85rem' }}>
+                                                        {currentQ.constraints.map((c, i) => <li key={i}>{c}</li>)}
+                                                    </ul>
                                                 </div>
                                             )}
 
-                                            {/* Detailed Example */}
+                                            {/* Examples */}
                                             {(currentQ.example_input || (currentQ.examples && currentQ.examples.length > 0)) && (
                                                 <div style={{ marginTop: '1rem' }}>
                                                     <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.8rem' }}>Sample Case 0</div>
@@ -510,25 +592,25 @@ const AiTakeAssessment = () => {
                                             )}
                                         </div>
 
-                                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-                                            <div style={{ fontSize: '0.7rem', fontWeight: '700', color: '#707EAE', textTransform: 'uppercase', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                                                <i className="fa-solid fa-keyboard" style={{ color: '#4318FF' }}></i> Custom Input (STDIN)
+                                        {/* Custom Input Area moved to bottom of Left Panel */}
+                                        <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', border: '1px solid #E0E5F2' }}>
+                                            <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#1B254B', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <i className="fa-solid fa-keyboard" style={{ color: '#4318FF' }}></i> Custom Input
                                             </div>
                                             <textarea
                                                 style={{
-                                                    flex: 1,
                                                     width: '100%',
                                                     padding: '0.8rem',
-                                                    borderRadius: '12px',
+                                                    borderRadius: '8px',
                                                     border: '1px solid #E0E5F2',
-                                                    background: '#F4F7FE',
+                                                    background: '#F8F9FF',
                                                     fontFamily: 'monospace',
-                                                    fontSize: '0.8rem',
+                                                    fontSize: '0.85rem',
                                                     outline: 'none',
                                                     resize: 'none',
-                                                    maxHeight: '120px'
+                                                    minHeight: '80px'
                                                 }}
-                                                placeholder="Custom input..."
+                                                placeholder="Enter custom input here..."
                                                 value={customInput}
                                                 onChange={(e) => setCustomInput(e.target.value)}
                                             />
@@ -536,7 +618,7 @@ const AiTakeAssessment = () => {
                                     </div>
 
                                     {/* Right Panel: Editor & Console */}
-                                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <div style={{ flex: '0 0 60%', display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%' }}>
 
                                         {/* Editor Header: Language Switcher Dropdown */}
                                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#F8F9FF', padding: '0.5rem 1rem', borderRadius: '10px', border: '1px solid #E0E5F2' }}>
@@ -610,130 +692,177 @@ const AiTakeAssessment = () => {
                                                 <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}>
                                                     <i className="fa-solid fa-square-poll-horizontal" style={{ color: '#4318FF' }}></i> Results
                                                 </div>
-                                                <button
-                                                    onClick={() => runCode(currentQ.id)}
-                                                    disabled={isExecuting}
-                                                    style={{
-                                                        padding: '0.6rem 1.5rem',
-                                                        background: '#4318FF',
-                                                        color: 'white',
-                                                        border: 'none',
-                                                        borderRadius: '8px',
-                                                        fontSize: '0.85rem',
-                                                        fontWeight: '800',
-                                                        cursor: 'pointer',
-                                                        display: 'flex',
-                                                        alignItems: 'center',
-                                                        gap: '8px',
-                                                        boxShadow: '0 4px 15px rgba(67, 24, 255, 0.2)',
-                                                        transition: 'all 0.2s'
-                                                    }}
-                                                >
-                                                    {isExecuting ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-play"></i>}
-                                                    {isExecuting ? 'Running...' : 'Run & Test'}
-                                                </button>
-                                            </div>
-
-                                            <div style={{
-                                                padding: '0.5rem 0',
-                                                maxHeight: '120px',
-                                                overflowY: 'auto',
-                                                fontFamily: "'Fira Code', 'Courier New', monospace",
-                                                fontSize: '0.85rem'
-                                            }}>
-                                                {codeOutput.length === 0 ? (
-                                                    <div style={{ color: '#A3AED0', fontStyle: 'italic' }}>Output will be displayed here...</div>
-                                                ) : (
-                                                    codeOutput.map((log, i) => (
-                                                        <div key={i} style={{
-                                                            color: log.type === 'error' ? '#E53E3E' : log.type === 'success' ? '#05CD99' : log.type === 'info' ? '#4318FF' : '#1B254B',
-                                                            marginBottom: '4px',
+                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                    <button
+                                                        onClick={() => runCode(currentQ.id, false)}
+                                                        disabled={isExecuting}
+                                                        style={{
+                                                            padding: '0.6rem 1.2rem',
+                                                            background: 'white',
+                                                            color: '#4318FF',
+                                                            border: '1px solid #4318FF',
+                                                            borderRadius: '8px',
+                                                            fontSize: '0.85rem',
+                                                            fontWeight: '700',
+                                                            cursor: 'pointer',
                                                             display: 'flex',
-                                                            gap: '10px',
-                                                            lineHeight: '1.4',
-                                                            background: log.type === 'error' ? '#FFF5F5' : 'transparent',
-                                                            padding: log.type === 'error' ? '4px 8px' : '0',
-                                                            borderRadius: '4px'
-                                                        }}>
-                                                            <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{log.content}</pre>
+                                                            alignItems: 'center',
+                                                            gap: '0.5rem',
+                                                            opacity: isExecuting ? 0.7 : 1
+                                                        }}
+                                                    >
+                                                        {isExecuting ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-play"></i>}
+                                                        Run Code
+                                                    </button>
+                                                    <button
+                                                        onClick={() => runCode(currentQ.id, true)}
+                                                        disabled={isExecuting}
+                                                        style={{
+                                                            padding: '0.6rem 1.2rem',
+                                                            background: '#05CD99',
+                                                            color: 'white',
+                                                            border: 'none',
+                                                            borderRadius: '8px',
+                                                            fontSize: '0.85rem',
+                                                            fontWeight: '700',
+                                                            cursor: 'pointer',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: '0.5rem',
+                                                            opacity: isExecuting ? 0.7 : 1
+                                                        }}
+                                                    >
+                                                        {isExecuting ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-check"></i>}
+                                                        Submit
+                                                    </button>
+                                                </div>
+
+                                                {/* Test Case Results or Console Output */}
+                                                <div style={{
+                                                    padding: '0.5rem 0',
+                                                    maxHeight: '200px',
+                                                    overflowY: 'auto',
+                                                    fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                    fontSize: '0.85rem'
+                                                }}>
+                                                    {executionResult && executionResult.type === 'test_cases' ? (
+                                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                                                            <div style={{ fontSize: '0.9rem', fontWeight: '800', color: executionResult.score === executionResult.total ? '#05CD99' : '#EE5D50', marginBottom: '8px' }}>
+                                                                Test Cases: {executionResult.score}/{executionResult.total} Passed
+                                                            </div>
+                                                            {executionResult.results.map((res, idx) => (
+                                                                <div key={idx} style={{ background: res.passed ? '#E6FBF5' : '#FFF5F5', padding: '10px', borderRadius: '8px', border: res.passed ? '1px solid #05CD99' : '1px solid #EE5D50' }}>
+                                                                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
+                                                                        <span style={{ fontWeight: '700', color: '#1B254B' }}>Test Case {idx + 1}</span>
+                                                                        <span style={{ fontWeight: '700', color: res.passed ? '#05CD99' : '#EE5D50' }}>{res.passed ? 'PASSED' : 'FAILED'}</span>
+                                                                    </div>
+                                                                    <div style={{ fontSize: '0.75rem', color: '#707EAE' }}>Input: {res.input.substring(0, 50)}...</div>
+                                                                    {!res.passed && (
+                                                                        <>
+                                                                            <div style={{ fontSize: '0.75rem', color: '#EE5D50' }}>Expected: {res.expected.substring(0, 50)}...</div>
+                                                                            <div style={{ fontSize: '0.75rem', color: '#EE5D50' }}>Actual: {res.actual.substring(0, 50)}...</div>
+                                                                        </>
+                                                                    )}
+                                                                </div>
+                                                            ))}
                                                         </div>
-                                                    ))
-                                                )}
+                                                    ) : (
+                                                        <div style={{ maxHeight: '120px', overflowY: 'auto' }}>
+                                                            {codeOutput.length === 0 ? (
+                                                                <div style={{ color: '#A3AED0', fontStyle: 'italic' }}>Output will be displayed here...</div>
+                                                            ) : (
+                                                                codeOutput.map((log, i) => (
+                                                                    <div key={i} style={{
+                                                                        color: log.type === 'error' ? '#E53E3E' : log.type === 'success' ? '#05CD99' : log.type === 'info' ? '#4318FF' : '#1B254B',
+                                                                        marginBottom: '4px',
+                                                                        display: 'flex',
+                                                                        gap: '10px',
+                                                                        lineHeight: '1.4',
+                                                                        background: log.type === 'error' ? '#FFF5F5' : 'transparent',
+                                                                        padding: log.type === 'error' ? '4px 8px' : '0',
+                                                                        borderRadius: '4px'
+                                                                    }}>
+                                                                        <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{log.content}</pre>
+                                                                    </div>
+                                                                ))
+                                                            )}
+                                                        </div>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    {/* Navigation Footer - Slimmer & Clean */}
+                                    <div style={{
+                                        flexShrink: 0,
+                                        padding: '0.6rem 2rem',
+                                        background: '#F8F9FF',
+                                        borderTop: '1px solid #E0E5F2',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center'
+                                    }}>
+                                        {/* Previous Button */}
+                                        <button
+                                            onClick={() => setCurrentQuestionIdx(prev => Math.max(0, prev - 1))}
+                                            disabled={currentQuestionIdx === 0}
+                                            style={{
+                                                padding: '0.5rem 1.5rem',
+                                                background: 'white',
+                                                color: currentQuestionIdx === 0 ? '#A0AEC0' : '#4318FF',
+                                                border: '1px solid',
+                                                borderColor: currentQuestionIdx === 0 ? '#E2E8F0' : '#4318FF',
+                                                borderRadius: '8px',
+                                                fontSize: '0.85rem',
+                                                fontWeight: '700',
+                                                cursor: currentQuestionIdx === 0 ? 'not-allowed' : 'pointer',
+                                                transition: 'all 0.2s',
+                                                visibility: currentQuestionIdx === 0 ? 'hidden' : 'visible'
+                                            }}
+                                        >
+                                            <i className="fa-solid fa-arrow-left" style={{ marginRight: '8px' }}></i> Previous
+                                        </button>
+
+                                        {/* Next / Submit Button */}
+                                        {!isLastQ ? (
+                                            <button
+                                                onClick={handleNext}
+                                                style={{
+                                                    padding: '0.5rem 2rem',
+                                                    background: 'linear-gradient(135deg, #4318FF 0%, #7551FF 100%)',
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '8px',
+                                                    fontSize: '0.9rem',
+                                                    fontWeight: '700',
+                                                    cursor: 'pointer',
+                                                    boxShadow: '0 4px 10px rgba(67, 24, 255, 0.15)'
+                                                }}
+                                            >
+                                                Next <i className="fa-solid fa-arrow-right" style={{ marginLeft: '8px' }}></i>
+                                            </button>
+                                        ) : (
+                                            <button
+                                                onClick={handleSubmit} disabled={isSubmitting}
+                                                style={{
+                                                    padding: '0.5rem 2.5rem',
+                                                    background: '#05CD99',
+                                                    color: 'white',
+                                                    border: 'none',
+                                                    borderRadius: '8px',
+                                                    fontSize: '0.9rem',
+                                                    fontWeight: '700',
+                                                    cursor: 'pointer',
+                                                    boxShadow: '0 4px 10px rgba(5, 205, 153, 0.15)',
+                                                    opacity: isSubmitting ? 0.7 : 1
+                                                }}
+                                            >
+                                                {isSubmitting ? 'Submitting...' : 'Submit'} <i className="fa-solid fa-paper-plane" style={{ marginLeft: '8px' }}></i>
+                                            </button>
+                                        )}
+                                    </div>
                                 </div>
-                            )}
-                        </div>
-
-                        {/* Navigation Footer - Slimmer & Clean */}
-                        <div style={{
-                            flexShrink: 0,
-                            padding: '0.6rem 2rem',
-                            background: '#F8F9FF',
-                            borderTop: '1px solid #E0E5F2',
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center'
-                        }}>
-                            {/* Previous Button */}
-                            <button
-                                onClick={() => setCurrentQuestionIdx(prev => Math.max(0, prev - 1))}
-                                disabled={currentQuestionIdx === 0}
-                                style={{
-                                    padding: '0.5rem 1.5rem',
-                                    background: 'white',
-                                    color: currentQuestionIdx === 0 ? '#A0AEC0' : '#4318FF',
-                                    border: '1px solid',
-                                    borderColor: currentQuestionIdx === 0 ? '#E2E8F0' : '#4318FF',
-                                    borderRadius: '8px',
-                                    fontSize: '0.85rem',
-                                    fontWeight: '700',
-                                    cursor: currentQuestionIdx === 0 ? 'not-allowed' : 'pointer',
-                                    transition: 'all 0.2s',
-                                    visibility: currentQuestionIdx === 0 ? 'hidden' : 'visible'
-                                }}
-                            >
-                                <i className="fa-solid fa-arrow-left" style={{ marginRight: '8px' }}></i> Previous
-                            </button>
-
-                            {/* Next / Submit Button */}
-                            {!isLastQ ? (
-                                <button
-                                    onClick={handleNext}
-                                    style={{
-                                        padding: '0.5rem 2rem',
-                                        background: 'linear-gradient(135deg, #4318FF 0%, #7551FF 100%)',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '8px',
-                                        fontSize: '0.9rem',
-                                        fontWeight: '700',
-                                        cursor: 'pointer',
-                                        boxShadow: '0 4px 10px rgba(67, 24, 255, 0.15)'
-                                    }}
-                                >
-                                    Next <i className="fa-solid fa-arrow-right" style={{ marginLeft: '8px' }}></i>
-                                </button>
-                            ) : (
-                                <button
-                                    onClick={handleSubmit} disabled={isSubmitting}
-                                    style={{
-                                        padding: '0.5rem 2.5rem',
-                                        background: '#05CD99',
-                                        color: 'white',
-                                        border: 'none',
-                                        borderRadius: '8px',
-                                        fontSize: '0.9rem',
-                                        fontWeight: '700',
-                                        cursor: 'pointer',
-                                        boxShadow: '0 4px 10px rgba(5, 205, 153, 0.15)',
-                                        opacity: isSubmitting ? 0.7 : 1
-                                    }}
-                                >
-                                    {isSubmitting ? 'Submitting...' : 'Submit'} <i className="fa-solid fa-paper-plane" style={{ marginLeft: '8px' }}></i>
-                                </button>
-                            )}
                         </div>
                     </div>
                 </div>
