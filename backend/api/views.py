@@ -1785,7 +1785,12 @@ def get_manual_questions_view(request):
         )
         q_list = _db_call_with_retry(lambda: list(qs), retries=1)
 
+        # Also fetch CodingQuestions for this custom_assessment_id
+        coding_qs = CodingQuestion.objects.filter(custom_assessment_id=caid).order_by('created_at')
+        coding_list = _db_call_with_retry(lambda: list(coding_qs), retries=1)
+
         results = []
+        # Add regular questions
         for q in q_list:
             results.append(
                 {
@@ -1806,6 +1811,34 @@ def get_manual_questions_view(request):
                     'created_at': q.created_at.isoformat() if q.created_at else None,
                 }
             )
+
+        # Add coding questions
+        for cq in coding_list:
+            results.append(
+                {
+                    'id': cq.id,
+                    'company_name': cq.organization_name_snapshot,
+                    'assessment': 'Coding Challenge',
+                    'topic': 'Coding', # This ensures it groups under "Coding" or similar if needed
+                    'question_type': 'CODING',
+                    'difficulty': cq.difficulty,
+                    'question': cq.title, # Title is the main identifier
+                    'title': cq.title,
+                    'description': cq.description,
+                    'language': cq.language,
+                    'languages': cq.languages,
+                    'mode': cq.mode,
+                    'starter_code': cq.starter_code,
+                    'schema_sql': cq.schema_sql,
+                    'database_engine': cq.database_engine,
+                    'time_limit_ms': cq.time_limit_ms,
+                    'memory_limit_mb': cq.memory_limit_mb,
+                    'created_at': cq.created_at.isoformat() if cq.created_at else None,
+                }
+            )
+
+        # Sort combined results by created_at
+        results.sort(key=lambda x: x.get('created_at') or '', reverse=False)
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
 
@@ -2726,6 +2759,18 @@ def create_assessment_view(request):
         calculated_total_time = _seconds_to_hhmmss(total_time_seconds)
         print(f"[DEBUG] create_assessment: received_total_time={received_total_time}, calculated_total_time={calculated_total_time}, coding_total_seconds={coding_total_seconds}")
 
+        # New fields for split assessment
+        # Use request.data and ensure defaults if None is passed
+        objective_time_limit = request.data.get('objective_time_limit')
+        coding_time_limit = request.data.get('coding_time_limit')
+        
+        has_objective_cutoff_val = request.data.get('has_objective_cutoff')
+        has_objective_cutoff = bool(has_objective_cutoff_val) if has_objective_cutoff_val is not None else False
+        
+        min_objective_pass_percentage = float(request.data.get('min_objective_pass_percentage') or 0.0)
+        weightage_objective = int(request.data.get('weightage_objective') or 0)
+        weightage_coding = int(request.data.get('weightage_coding') or 100)
+
         # Create Assessment
         assessment = Assessment.objects.create(
             user_profile=custom_assessment.user_profile if custom_assessment else None,
@@ -2737,6 +2782,15 @@ def create_assessment_view(request):
             coding_total_time=_seconds_to_hhmmss(coding_total_seconds) if coding_total_seconds else None,
             coding_question_count=len(ordered_coding_ids),
             min_pass_percentage=float(request.data.get('min_pass_percentage') or 60.0),
+            
+            # Save new fields
+            objective_time_limit=objective_time_limit,
+            coding_time_limit=coding_time_limit,
+            has_objective_cutoff=has_objective_cutoff,
+            min_objective_pass_percentage=min_objective_pass_percentage,
+            weightage_objective=weightage_objective,
+            weightage_coding=weightage_coding,
+
             total_points=int(request.data.get('total_points') or 0),
             status='draft',
         )
@@ -3567,6 +3621,12 @@ def get_invitation_public_view(request, token):
                     'total_time': assessment.total_time,
                     'coding_total_time': assessment.coding_total_time,
                     'coding_question_count': assessment.coding_question_count,
+                    'objective_time_limit': assessment.objective_time_limit,
+                    'coding_time_limit': assessment.coding_time_limit,
+                    'has_objective_cutoff': assessment.has_objective_cutoff,
+                    'min_objective_pass_percentage': assessment.min_objective_pass_percentage,
+                    'weightage_objective': assessment.weightage_objective,
+                    'weightage_coding': assessment.weightage_coding,
                 },
                 'questions': questions,
                 'coding_questions': coding_questions,
@@ -3689,45 +3749,95 @@ def submit_invitation_answers_view(request, token):
                 if submitted_choice and correct_choice and submitted_choice == correct_choice:
                     score += 1
 
+        # Calculate Objective Score
         percentage = (float(score) / float(total) * 100.0) if total > 0 else 0.0
-        result = 'selected' if percentage >= PASS_PERCENT else 'rejected'
+        
+        # We need to fetch existing coding scores if any (for combined result)
+        # But since this is a fresh get_or_create or update, we should check existing fields
+        # However, `submission` object is created/fetched below. Let's do it after get_or_create.
 
         submission, created = CandidateSubmission.objects.get_or_create(
             invitation=inv,
-            defaults={
-                'answers': cleaned,
-                'score': score,
-                'total': total,
-                'percentage': percentage,
-                'final_percentage': percentage, # For MCQ, these are the same
-                'is_qualified': percentage >= (inv.assessment.min_pass_percentage or 60.0),
-                'result': 'selected' if percentage >= (inv.assessment.min_pass_percentage or 60.0) else 'rejected',
-            }
         )
-        if not created:
-            # allow re-submit overwrite
-            submission.answers = cleaned
-            submission.score = score
-            submission.total = total
-            submission.percentage = percentage
-            submission.final_percentage = percentage
-            submission.is_qualified = percentage >= (inv.assessment.min_pass_percentage or 60.0)
-            submission.result = 'selected' if percentage >= (inv.assessment.min_pass_percentage or 60.0) else 'rejected'
-            submission.save(update_fields=['answers', 'score', 'total', 'percentage', 'final_percentage', 'is_qualified', 'result'])
+        
+        # Store Objective Scores
+        submission.objective_score = score
+        submission.objective_total = total
+        submission.objective_percentage = percentage
+        submission.answers = cleaned
 
+        # Combine with Coding Scores (preserve existing coding score if present)
+        # coding_score defaults to 0 if not set
+        
+        # Weighted Scoring Logic
+        # FIX: Check for None explicitly because 0 is a valid weight!
+        w_obj = assessment.weightage_objective if assessment.weightage_objective is not None else 50
+        w_cod = assessment.weightage_coding if assessment.weightage_coding is not None else 50
+        
+        # Normalize weights to ensure they sum to 100 (just in case)
+        if w_obj + w_cod == 0:
+            w_obj = 50
+            w_cod = 50
+            
+        # Determine if we should use weights or simple average/sum
+        # If it's a mixed assessment (both obj and coding exist), use weights.
+        # If only objective, weight is effectively 100% objective.
+        # If only coding, weight is effectively 100% coding.
+        
+        has_coding = assessment.coding_question_count > 0
+        has_objective = assessment.total_questions > assessment.coding_question_count # Approximation
+        
+        # If strict "mixed" type isn't explicitly stored, infer from counts
+        # (Note: total_questions includes objective questions only in some legacy logic, but usually total = obj + cod)
+        # Let's trust the weights provided by the creator.
+        
+        obj_term = (submission.objective_percentage * w_obj)
+        cod_term = (submission.coding_percentage * w_cod)
+        
+        # Special case: if one section doesn't exist, we might want to normalize to 100% based on the other?
+        # BUT the requirement says "mixed, object-only, coding-only formulas".
+        # Mixed: (obj * w_obj + cod * w_cod) / 100.
+        # If obj-only: w_obj=100, w_cod=0.
+        # If cod-only: w_obj=0, w_cod=100.
+        # So the formula (obj% * w_obj + cod% * w_cod) / 100 works for all if weights are set correctly.
+        
+        final_percent = (obj_term + cod_term) / 100.0
+            
+        submission.score = submission.objective_score + submission.coding_score
+        submission.total = submission.objective_total + submission.coding_total
+        submission.percentage = round(final_percent)
+        submission.final_percentage = final_percent
+        
+        min_pass = (inv.assessment.min_pass_percentage or 60.0)
+        submission.is_qualified = submission.percentage >= min_pass
+        submission.result = 'selected' if submission.is_qualified else 'rejected'
+        
+        submission.save(update_fields=[
+            'answers', 
+            'objective_score', 'objective_total', 'objective_percentage',
+            'score', 'total', 'percentage', 'final_percentage', 
+            'is_qualified', 'result'
+        ])
+        
         # Update assessment counters (best-effort)
         try:
             if created:
                 assessment.submitted = int(getattr(assessment, 'submitted', 0) or 0) + 1
                 assessment.evaluated = int(getattr(assessment, 'evaluated', 0) or 0) + 1
-                if result == 'selected':
+                if submission.result == 'selected':
                     assessment.shortlisted = int(getattr(assessment, 'shortlisted', 0) or 0) + 1
                 assessment.save(update_fields=['submitted', 'evaluated', 'shortlisted'])
         except Exception:
             pass
 
-        inv.status = 'submitted'
-        inv.save(update_fields=['status'])
+        # Only mark as submitted if there are no coding questions
+        # If coding questions exist, the frontend will call /coding/finalize/ next, which handles the final status.
+        from api.models import AssessmentCodingQuestion
+        has_coding = AssessmentCodingQuestion.objects.filter(assessment=assessment).exists()
+        
+        if not has_coding:
+            inv.status = 'submitted'
+            inv.save(update_fields=['status'])
 
         return Response(
             {
@@ -3788,15 +3898,39 @@ def _update_submission_scoring_logic(submission):
                 candidate_total_points += weighted_score
 
     # 3. Final Percentage
-    final_percentage = 0.0
     if total_possible_points > 0:
-        final_percentage = (candidate_total_points / total_possible_points) * 100
+        coding_percentage = (candidate_total_points / total_possible_points) * 100
+    else:
+        coding_percentage = 0.0
     
+    # 4. Update coding fields
+    submission.coding_score = int(candidate_total_points)
+    submission.coding_total = int(total_possible_points)
+    submission.coding_percentage = coding_percentage
+
+    # 5. Combine with Objective (if any)
+    # Objective score is already stored in fields (or 0 if none)
+    assessment = inv.assessment
+    
+    # Weighted Scoring Logic
+    w_obj = assessment.weightage_objective if assessment.weightage_objective is not None else 50
+    w_cod = assessment.weightage_coding if assessment.weightage_coding is not None else 50
+    
+    if w_obj + w_cod == 0:
+        w_obj = 50
+        w_cod = 50
+
+    # Calculate final percentage using weights
+    obj_term = (submission.objective_percentage * w_obj)
+    cod_term = (submission.coding_percentage * w_cod)
+    
+    final_percentage = (obj_term + cod_term) / 100.0
+
     final_percentage_rounded = round(final_percentage)
     
-    # 4. Update fields
-    submission.score = int(candidate_total_points)
-    submission.total = int(total_possible_points)
+    # 6. Update aggregate fields
+    submission.score = submission.objective_score + submission.coding_score
+    submission.total = submission.objective_total + submission.coding_total
     submission.percentage = final_percentage_rounded
     submission.final_percentage = final_percentage
     
@@ -4109,8 +4243,14 @@ def invitation_coding_finalize_view(request, token):
                  return Response({'ok': True, 'submission_id': submission.id}, status=status.HTTP_200_OK)
 
         # Ensure assessment has zero non-coding questions; otherwise enforce normal submit
+        # Ensure assessment has zero non-coding questions; otherwise enforce normal submit
+        # FIX: Allow mixed assessments (which have both). Only block if it's purely MCQ and somehow hit this endpoint?
+        # Actually, if it has coding questions, we MUST allow this endpoint.
+        # So we only block if has_mcq AND NOT has_coding.
         has_mcq = AssessmentQuestion.objects.filter(assessment=inv.assessment).exists()
-        if has_mcq:
+        has_coding = AssessmentCodingQuestion.objects.filter(assessment=inv.assessment).exists()
+        
+        if has_mcq and not has_coding:
             return Response({'error': 'This assessment requires question answers submission.'}, status=status.HTTP_400_BAD_REQUEST)
 
         now = timezone.now()
@@ -4159,19 +4299,24 @@ def invitation_coding_finalize_view(request, token):
                         
                         # Only evaluate if code is not empty/placeholder
                         if code.strip() and not code.strip().startswith('// Your code here'):
+                            print(f"[DEBUG] Evaluating ACQ {acq.id} (Lang: {lang})")
                             res = _evaluate_coding_question(acq, code, lang)
-                            if res.get('ok'):
-                                submission_answers[ans_key] = {
-                                    "acq_id": acq.id,
-                                    "question_id": acq.coding_question_id,
-                                    "submitted_code": code,
-                                    "language": lang or (acq.allowed_languages[0] if acq.allowed_languages else 'python3'),
-                                    "passed_count": res.get("passed_count", 0),
-                                    "total_tests": res.get("total_tests", 0),
-                                    "difficulty": acq.difficulty or 'medium', 
-                                    "submitted_at": timezone.now().isoformat(),
-                                }
-                                changed = True
+                            print(f"[DEBUG] Result for ACQ {acq.id}: {res}")
+
+                            
+                            # Always save the submission attempt, even if evaluation failed
+                            submission_answers[ans_key] = {
+                                "acq_id": acq.id,
+                                "question_id": acq.coding_question_id,
+                                "submitted_code": code,
+                                "language": lang or (acq.allowed_languages[0] if acq.allowed_languages else 'python3'),
+                                "passed_count": res.get("passed_count", 0) if res.get('ok') else 0,
+                                "total_tests": res.get("total_tests", 0) if res.get('ok') else 0,
+                                "difficulty": acq.difficulty or 'medium', 
+                                "submitted_at": timezone.now().isoformat(),
+                                "execution_error": res.get("error") if not res.get('ok') else None
+                            }
+                            changed = True
                     except Exception as e:
                         print(f"Error auto-evaluating {acq_id_str}: {str(e)}")
             
@@ -4246,6 +4391,18 @@ def get_invitation_result_view(request, token):
                     'total': submission.total,
                     'percentage': submission.percentage,
                     'final_percentage': submission.final_percentage,
+                    
+                    'objective_score': submission.objective_score,
+                    'objective_total': submission.objective_total,
+                    'objective_percentage': submission.objective_percentage,
+                    
+                    'coding_score': submission.coding_score,
+                    'coding_total': submission.coding_total,
+                    'coding_percentage': submission.coding_percentage,
+                    
+                    'weightage_objective': a.weightage_objective,
+                    'weightage_coding': a.weightage_coding,
+
                     'status': submission.result,
                     'is_qualified': submission.is_qualified,
                     'submitted_at': submission.submitted_at.isoformat() if submission.submitted_at else None,
@@ -4300,10 +4457,21 @@ def results_overview_view(request):
                         'id': a.id,
                         'display_name': a.display_name,
                         'name': a.name,
+                        'weightage_objective': a.weightage_objective,
+                        'weightage_coding': a.weightage_coding,
                     },
                     'score': s.score,
                     'total': s.total,
                     'percentage': s.final_percentage if s.final_percentage is not None else s.percentage,
+                    
+                    'objective_score': s.objective_score,
+                    'objective_total': s.objective_total,
+                    'objective_percentage': s.objective_percentage,
+                    
+                    'coding_score': s.coding_score,
+                    'coding_total': s.coding_total,
+                    'coding_percentage': s.coding_percentage,
+
                     'status': s.result,
                 }
             )
@@ -4492,6 +4660,115 @@ def backfill_assessment_questions_view(request):
             {'error': f'An error occurred while backfilling: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def submit_objective_section(request, token):
+    """
+    Submits and grades ONLY the objective section.
+    Used for split assessments where objective performance gates the coding section.
+    Does NOT mark the invitation as 'submitted' unless it fails the cutoff.
+    """
+    try:
+        try:
+            inv = CandidateInvitation.objects.select_related('assessment').get(token=token)
+        except CandidateInvitation.DoesNotExist:
+            return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        if inv.status == 'submitted':
+            return Response({'error': 'Assessment already submitted.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Get answers: { "question_id": "A" ... }
+        answers = request.data.get('answers', {})
+        
+        # Calculate Objective Score
+        assessment = inv.assessment
+        
+        aq_qs = AssessmentQuestion.objects.filter(assessment=assessment)
+        total_obj_questions = 0
+        score = 0
+        
+        def _norm(v): return str(v).strip().upper() if v else ''
+        
+        for aq in aq_qs:
+            qid_str = str(aq.id)
+            if qid_str not in answers:
+                total_obj_questions += 1
+                continue
+            
+            total_obj_questions += 1
+            user_val = answers[qid_str]
+            
+            # De-shuffle
+            mapping = (inv.option_map or {}).get(qid_str)
+            if mapping:
+                if isinstance(user_val, list):
+                   user_val = [mapping.get(x, x) for x in user_val]
+                else:
+                   user_val = mapping.get(user_val, user_val)
+            
+            # Grade
+            qtype = (aq.question_type or '').strip().upper()
+            if qtype == 'MSQ':
+                u_list = sorted([_norm(x) for x in (user_val if isinstance(user_val, list) else [])])
+                c_list = sorted([_norm(x) for x in (aq.correct_answers or [])])
+                if u_list == c_list:
+                    score += 1
+            else:
+                if _norm(user_val) == _norm(aq.correct_answer):
+                    score += 1
+                    
+        percentage = (score / total_obj_questions * 100.0) if total_obj_questions > 0 else 0.0
+        
+        # Save to Submission
+        submission, created = CandidateSubmission.objects.get_or_create(invitation=inv)
+        submission.objective_score = score
+        submission.objective_total = total_obj_questions
+        submission.objective_percentage = round(percentage, 2)
+        submission.answers = answers # Store current state
+        submission.save()
+        
+        # Check Cutoff
+        passed = True
+        next_stage = 'coding'
+        message = "Objective section completed."
+        
+        if assessment.has_objective_cutoff:
+            cutoff = assessment.min_objective_pass_percentage
+            if percentage < cutoff:
+                passed = False
+                message = f"You scored {percentage:.1f}%, which is below the cutoff of {cutoff}%."
+                next_stage = 'finish'
+                # Mark as submitted/failed immediately
+                inv.status = 'submitted'
+                inv.save()
+                
+                # Update final result
+                submission.result = 'rejected'
+                submission.is_qualified = False
+                submission.save()
+            else:
+                passed = True
+                message = "Objective cutoff passed. Proceeding to coding section."
+                next_stage = 'coding'
+        
+        return Response({
+            'success': True,
+            'passed': passed,
+            'score': score,
+            'total': total_obj_questions,
+            'percentage': percentage,
+            'next_stage': next_stage,
+            'message': message
+        })
+
+    except Exception as e:
+        import traceback
+        print(f"Error in submit_objective_section: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @api_view(['POST'])
@@ -5008,44 +5285,7 @@ def get_interview_invitation_by_token_view(request, token):
         print(traceback.format_exc())
         return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def results_overview_view(request):
-    """
-    Recruiter overview: list recent results (submissions).
-    """
-    try:
-        qs = CandidateSubmission.objects.select_related('invitation', 'invitation__assessment').order_by('-submitted_at')[:200]
-        results = []
-        for s in qs:
-            inv = s.invitation
-            a = inv.assessment
-            results.append(
-                {
-                    'submission_id': s.id,
-                    'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
-                    'candidate': {
-                        'name': inv.name,
-                        'email': inv.email,
-                    },
-                    'assessment': {
-                        'id': a.id,
-                        'display_name': a.display_name,
-                        'name': a.name,
-                    },
-                    'score': s.score,
-                    'total': s.total,
-                    'percentage': s.percentage,
-                    'status': s.result,
-                }
-            )
 
-        return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
-    except Exception as e:
-        import traceback
-        print(f"Error in results_overview_view: {str(e)}")
-        print(traceback.format_exc())
-        return Response({'error': f'An error occurred while fetching results: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @csrf_exempt

@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/ReviewPage.css';
+import CodingQuestionSelector from '../components/CodingQuestionSelector';
 
 // Django API base URL
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
@@ -23,6 +24,15 @@ function ReviewPage() {
   const [minPassPercentage, setMinPassPercentage] = useState(60);
   const [timeLimit, setTimeLimit] = useState('00:00:00');
   const [isTimeEdited, setIsTimeEdited] = useState(false);
+  const [showCodingModal, setShowCodingModal] = useState(false);
+
+  // Split Assessment State
+  const [objectiveTime, setObjectiveTime] = useState('00:00:00');
+  const [codingTime, setCodingTime] = useState('00:00:00');
+  const [hasObjectiveCutoff, setHasObjectiveCutoff] = useState(false);
+  const [objPassPercentage, setObjPassPercentage] = useState(60);
+  const [objWeight, setObjWeight] = useState(0);
+  const [codingWeight, setCodingWeight] = useState(100);
 
   // NOTE: `analyzeAndFetchQuestions` is intentionally omitted from deps to avoid
   // rerunning on every render; `location`/navigation changes are the trigger.
@@ -414,6 +424,14 @@ function ReviewPage() {
       payload.min_pass_percentage = Number(minPassPercentage) || 60;
       payload.total_time = timeLimit || formatHHMMSS(getTotalTimeSeconds());
 
+      // Split Assessment Fields
+      payload.objective_time_limit = objectiveTime;
+      payload.coding_time_limit = codingTime;
+      payload.has_objective_cutoff = hasObjectiveCutoff;
+      payload.min_objective_pass_percentage = Number(objPassPercentage) || 0;
+      payload.weightage_objective = Number(objWeight);
+      payload.weightage_coding = Number(codingWeight);
+
       const response = await axios.post(`${API_BASE_URL}/assessments/`, payload);
 
       if (response.data && response.data.assessment_id) {
@@ -445,9 +463,6 @@ function ReviewPage() {
 
 
 
-  const getTotalQuestions = () => {
-    return Object.values(questions).reduce((sum, qList) => sum + qList.length, 0);
-  };
 
 
 
@@ -477,10 +492,37 @@ function ReviewPage() {
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   };
 
+  const parseSeconds = (timeStr) => {
+    if (!timeStr) return 0;
+    const parts = timeStr.split(':').map(Number);
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+    return Number(timeStr) || 0;
+  };
+
   useEffect(() => {
     if (!isTimeEdited && !loading) {
-      const seconds = getTotalTimeSeconds();
-      setTimeLimit(formatHHMMSS(seconds));
+      let objSec = 0;
+      let codSec = 0;
+
+      Object.values(questions).forEach(qList => {
+        (qList || []).forEach(q => {
+          const s = getQuestionSeconds(q);
+          // Check if coding
+          const isCoding =
+            q.time_limit_ms != null ||
+            q.languages != null ||
+            q.mode != null ||
+            q.starter_code != null;
+
+          if (isCoding) codSec += s;
+          else objSec += s;
+        });
+      });
+
+      setObjectiveTime(formatHHMMSS(objSec));
+      setCodingTime(formatHHMMSS(codSec));
+      setTimeLimit(formatHHMMSS(objSec + codSec));
     }
   }, [questions, isTimeEdited, loading]);
 
@@ -575,9 +617,18 @@ function ReviewPage() {
                 </span>
               </div>
               <div className="summary-item">
-                <span className="summary-label">Total Questions:</span>
+                <span className="summary-label">Obj Questions:</span>
                 <span className="summary-value">
-                  {loading ? assessmentData.numberOfQuestions : getTotalQuestions()}
+                  {Object.entries(questions).reduce((sum, [topic, list]) => {
+                    if (topic === 'Coding') return sum;
+                    return sum + (list || []).length;
+                  }, 0)}
+                </span>
+              </div>
+              <div className="summary-item">
+                <span className="summary-label">Coding Questions:</span>
+                <span className="summary-value">
+                  {(questions['Coding'] || []).length}
                 </span>
               </div>
               <div className="summary-item">
@@ -587,23 +638,9 @@ function ReviewPage() {
                   type="text"
                   className="summary-input"
                   value={loading ? assessmentData.time : timeLimit}
-                  onChange={(e) => {
-                    // Auto-format logic from CodingReview
-                    let val = e.target.value.replace(/\D/g, '');
-                    if (val.length > 6) val = val.slice(0, 6);
-
-                    let formatted = val;
-                    if (val.length >= 5) {
-                      formatted = `${val.slice(0, 2)}:${val.slice(2, 4)}:${val.slice(4)}`;
-                    } else if (val.length >= 3) {
-                      formatted = `${val.slice(0, 2)}:${val.slice(2)}`;
-                    }
-
-                    setTimeLimit(formatted);
-                    setIsTimeEdited(true);
-                  }}
-                  placeholder="00:00:00"
-                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                  readOnly
+                  title="Total time is calculated automatically based on questions"
+                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px', backgroundColor: '#f3f4f6', color: '#6b7280', cursor: 'not-allowed' }}
                 />
               </div>
               <div className="summary-item">
@@ -627,6 +664,88 @@ function ReviewPage() {
                   min="0" max="100"
                   style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
                 />
+              </div>
+
+              <div className="summary-item">
+                <span className="summary-label">Obj Time (HH:MM:SS):</span>
+                <input
+                  type="text"
+                  className="summary-input"
+                  value={objectiveTime}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setObjectiveTime(val);
+                    setIsTimeEdited(true);
+                    // Update Total Time
+                    const objS = parseSeconds(val);
+                    const codS = parseSeconds(codingTime);
+                    setTimeLimit(formatHHMMSS(objS + codS));
+                  }}
+                  placeholder="00:00:00"
+                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                />
+              </div>
+
+              <div className="summary-item">
+                <span className="summary-label">Coding Time (HH:MM:SS):</span>
+                <input
+                  type="text"
+                  className="summary-input"
+                  value={codingTime}
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setCodingTime(val);
+                    setIsTimeEdited(true);
+                    // Update Total Time
+                    const objS = parseSeconds(objectiveTime);
+                    const codS = parseSeconds(val);
+                    setTimeLimit(formatHHMMSS(objS + codS));
+                  }}
+                  placeholder="00:00:00"
+                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                />
+              </div>
+
+              <div className="summary-item config-row" style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px', padding: '10px', background: '#f8f9fa', borderRadius: '8px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      checked={hasObjectiveCutoff}
+                      onChange={(e) => setHasObjectiveCutoff(e.target.checked)}
+                    />
+                    <strong>Enforce Objective Cutoff?</strong>
+                  </label>
+                  {hasObjectiveCutoff && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span>Min Obj Pass %:</span>
+                      <input
+                        type="number"
+                        value={objPassPercentage}
+                        onChange={(e) => setObjPassPercentage(e.target.value)}
+                        style={{ width: '60px', padding: '4px' }}
+                      />
+                    </div>
+                  )}
+                </div>
+
+                <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%' }}>
+                  <strong style={{ minWidth: '70px' }}>Weights:</strong>
+                  <span style={{ fontSize: '0.9rem' }}>Objective: {objWeight}%</span>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={objWeight}
+                    onChange={(e) => {
+                      const val = Number(e.target.value);
+                      setObjWeight(val);
+                      setCodingWeight(100 - val);
+                    }}
+                    style={{ flex: 1, cursor: 'pointer' }}
+                  />
+                  <span style={{ fontSize: '0.9rem' }}>Coding: {codingWeight}%</span>
+                </div>
               </div>
             </div>
           </div>
@@ -658,7 +777,7 @@ function ReviewPage() {
                       const enrichedQ = { ...q, _topic: topic };
                       if (topic === MANUAL_TOPIC_LABEL) {
                         manualQuestions.push(enrichedQ);
-                      } else {
+                      } else if (topic !== 'Coding') {
                         dbQuestions.push({ ...enrichedQ, skill: topic }); // Skill is topic for DB items
                       }
                     });
@@ -676,11 +795,14 @@ function ReviewPage() {
 
                   const hasDbQuestions = dbQuestions.length > 0;
                   const hasManualQuestions = manualQuestions.length > 0;
+                  // Check if we have any coding questions (from the 'Coding' topic)
+                  const codingQs = questions['Coding'] || [];
+                  const hasCodingQuestions = codingQs.length > 0;
 
-                  if (!hasDbQuestions && !hasManualQuestions) {
+                  if (!hasDbQuestions && !hasManualQuestions && !hasCodingQuestions) {
                     return (
                       <div className="no-questions">
-                        <p>No questions available. Please ensure questions are generated in the database.</p>
+                        <p>No questions available. Please ensure questions are generated in the database or add them manually.</p>
                       </div>
                     );
                   }
@@ -693,14 +815,14 @@ function ReviewPage() {
                       const newQuestions = { ...prev };
 
                       if (groupType === 'database') {
-                        // Remove all topics that are NOT MANUAL_TOPIC_LABEL
+                        // Remove all topics that are NOT MANUAL_TOPIC_LABEL AND NOT 'Coding'
                         Object.keys(newQuestions).forEach((t) => {
-                          if (t !== MANUAL_TOPIC_LABEL) {
+                          if (t !== MANUAL_TOPIC_LABEL && t !== 'Coding') {
                             delete newQuestions[t];
                           }
                         });
                         // Update topics list
-                        setTopics((prevTopics) => prevTopics.filter((t) => t === MANUAL_TOPIC_LABEL));
+                        setTopics((prevTopics) => prevTopics.filter((t) => t === MANUAL_TOPIC_LABEL || t === 'Coding'));
                       } else if (groupType === 'manual') {
                         // Remove questions from MANUAL_TOPIC_LABEL that match the assessment name
                         const currentManuals = newQuestions[MANUAL_TOPIC_LABEL] || [];
@@ -712,13 +834,16 @@ function ReviewPage() {
                         } else {
                           newQuestions[MANUAL_TOPIC_LABEL] = keptManuals;
                         }
+                      } else if (groupType === 'coding') {
+                        delete newQuestions['Coding'];
+                        setTopics((prevTopics) => prevTopics.filter((t) => t !== 'Coding'));
                       }
                       return newQuestions;
                     });
                   };
 
                   // Render Function for a list of questions
-                  const renderQuestionList = (list, startIndex = 0) => {
+                  const renderQuestionList = (list, startIndex = 0, isCoding = false) => {
                     return (
                       <div className="questions-list">
                         {list.map((question, idx) => {
@@ -747,9 +872,41 @@ function ReviewPage() {
                                   alignItems: 'flex-start',
                                 }}
                               >
-                                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'baseline' }}>
+                                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'baseline', flex: 1 }}>
                                   <span className="question-number">Q{globalIndex + 1}</span>
-                                  <span className="question-title">{question.title || question.question}</span>
+                                  <div style={{ flex: 1 }}>
+                                    <span className="question-title">{question.title || question.question}</span>
+                                    {/* Difficulty Editor for Coding Questions */}
+                                    {isCoding && (
+                                      <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>Difficulty:</span>
+                                        <select
+                                          value={question.difficulty || 'medium'}
+                                          onChange={(e) => {
+                                            const newDifficulty = e.target.value;
+                                            setQuestions(prev => {
+                                              const codingList = prev['Coding'] || [];
+                                              const updatedList = codingList.map(q =>
+                                                q.id === question.id ? { ...q, difficulty: newDifficulty } : q
+                                              );
+                                              return { ...prev, 'Coding': updatedList };
+                                            });
+                                          }}
+                                          style={{
+                                            padding: '2px 6px',
+                                            fontSize: '0.85rem',
+                                            borderRadius: '4px',
+                                            borderColor: '#d1d5db',
+                                            cursor: 'pointer'
+                                          }}
+                                        >
+                                          <option value="easy">Easy</option>
+                                          <option value="medium">Medium</option>
+                                          <option value="hard">Hard</option>
+                                        </select>
+                                      </div>
+                                    )}
+                                  </div>
                                 </div>
                                 <button
                                   className="btn-remove-question"
@@ -772,7 +929,16 @@ function ReviewPage() {
                               </div>
                               {(() => {
                                 const optionList = buildOptions(question);
-                                if (optionList.length === 0) return null;
+                                if (optionList.length === 0) {
+                                  if (isCoding && question.description) {
+                                    return (
+                                      <div className="question-options" style={{ color: '#4b5563', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                                        {question.description.slice(0, 150)}{question.description.length > 150 ? '...' : ''}
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                }
 
                                 return (
                                   <div className="question-options">
@@ -806,6 +972,37 @@ function ReviewPage() {
 
                   return (
                     <>
+                      {/* Coding Questions Section */}
+                      {hasCodingQuestions && (
+                        <div className="question-group-section" style={{ marginBottom: '2rem' }}>
+                          <div
+                            className="group-header"
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              marginBottom: '1rem',
+                              borderBottom: '2px solid #e9ecef',
+                              paddingBottom: '0.5rem',
+                            }}
+                          >
+                            <h4 style={{ margin: 0, color: '#495057' }}>Coding Questions</h4>
+                            <button
+                              className="btn btn-outline-danger btn-sm"
+                              onClick={() => handleRemoveAll('coding', 'Coding Questions')}
+                            >
+                              Remove All
+                            </button>
+                          </div>
+                          {renderQuestionList(codingQs.map(q => ({ ...q, _topic: 'Coding' })), runningIndex, true)}
+                        </div>
+                      )}
+
+                      {(() => {
+                        if (hasCodingQuestions) runningIndex += codingQs.length;
+                        return null;
+                      })()}
+
                       {/* Database Questions Section */}
                       {hasDbQuestions && (
                         <div className="question-group-section" style={{ marginBottom: '2rem' }}>
@@ -835,7 +1032,7 @@ function ReviewPage() {
                       {/* Manual/PDF Groups */}
 
                       {(() => {
-                        let currentIndex = hasDbQuestions ? dbQuestions.length : 0;
+                        let currentIndex = runningIndex + (hasDbQuestions ? dbQuestions.length : 0);
                         return Object.entries(manualGroups).map(([groupName, groupList]) => {
                           const element = (
                             <div key={groupName} className="question-group-section" style={{ marginBottom: '2rem' }}>
@@ -887,7 +1084,16 @@ function ReviewPage() {
       </div>
 
       {/* Sticky Bottom Button - Create Custom Questions */}
-      <div className="sticky-bottom-button-container">
+      {/* Sticky Bottom Button Container */}
+      <div className="sticky-bottom-button-container" style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+        <button
+          type="button"
+          className="btn-create-custom-questions"
+          onClick={() => setShowCodingModal(true)}
+          style={{ backgroundColor: '#4f46e5' }} // Distinct color
+        >
+          + Add Coding Question
+        </button>
         <button
           type="button"
           className="btn-create-custom-questions"
@@ -896,6 +1102,31 @@ function ReviewPage() {
           Create Custom Questions
         </button>
       </div>
+
+      {/* Coding Question Modal */}
+      {showCodingModal && (
+        <CodingQuestionSelector
+          onClose={() => setShowCodingModal(false)}
+          onAdd={(selectedQuestions) => {
+            setQuestions(prev => {
+              const existing = prev['Coding'] || [];
+              // Avoid duplicates
+              const existingIds = new Set(existing.map(q => q.id));
+              const newUnique = selectedQuestions.filter(q => !existingIds.has(q.id));
+              return {
+                ...prev,
+                'Coding': [...existing, ...newUnique]
+              };
+            });
+            setTopics(prev => {
+              if (!prev.includes('Coding')) return [...prev, 'Coding'];
+              return prev;
+            });
+            setShowCodingModal(false);
+          }}
+          alreadySelectedIds={(questions['Coding'] || []).map(q => q.id)}
+        />
+      )}
     </div>
   );
 }

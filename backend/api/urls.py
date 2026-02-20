@@ -36,6 +36,7 @@ urlpatterns = [
 
     path('invitations/public/<uuid:token>/', views.get_invitation_public_view, name='get_invitation_public'),
     path('invitations/public/<uuid:token>/submit/', views.submit_invitation_answers_view, name='submit_invitation_answers'),
+    path('invitations/public/<uuid:token>/submit-objective/', views.submit_objective_section, name='submit_objective_section'),
     path('invitations/public/<uuid:token>/result/', views.get_invitation_result_view, name='get_invitation_result'),
     path('invitations/public/<uuid:token>/rating/', views.submit_rating_view, name='submit_rating'),
     path('candidate-details/', views.save_candidate_details_view, name='save_candidate_details'),

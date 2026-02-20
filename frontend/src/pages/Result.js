@@ -288,10 +288,11 @@ export default function Result() {
                             <thead>
                                 <tr>
                                     <th>Candidate</th>
-                                    <th>Assessment</th>
-                                    <th>Date</th>
-                                    <th>Score</th>
-                                    <th>Percentage</th>
+                                    <th>Details</th>
+                                    <th>Submitted</th>
+                                    <th>Objective</th>
+                                    <th>Coding</th>
+                                    <th>Final Score</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -307,8 +308,24 @@ export default function Result() {
                                             <div className="cell-title">{r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '-'}</div>
                                             <div className="cell-sub">{r.submitted_at ? new Date(r.submitted_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : ''}</div>
                                         </td>
-                                        <td>{r.score} / {r.total}</td>
-                                        <td>{fmtPercent(r.percentage)}</td>
+                                        <td>
+                                            <div className="cell-title">{r.objective_score} / {r.objective_total}</div>
+                                            <div className="cell-sub">{fmtPercent(r.objective_percentage)}</div>
+                                            {(r.assessment?.weightage_objective ?? 50) !== 50 && (
+                                                <div className="cell-sub" style={{ fontSize: '0.75em', color: '#6b7280' }}>Weight: {r.assessment.weightage_objective}%</div>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <div className="cell-title">{r.coding_score} / {r.coding_total}</div>
+                                            <div className="cell-sub">{fmtPercent(r.coding_percentage)}</div>
+                                            {(r.assessment?.weightage_coding ?? 50) !== 50 && (
+                                                <div className="cell-sub" style={{ fontSize: '0.75em', color: '#6b7280' }}>Weight: {r.assessment.weightage_coding}%</div>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <div className="cell-title" style={{ fontWeight: 'bold' }}>{fmtPercent(r.percentage)}</div>
+                                            <div className="cell-sub">Weighted</div>
+                                        </td>
                                         <td>
                                             <span className={`pill ${r.status === 'selected' ? 'ok' : 'bad'}`}>
                                                 {r.status === 'selected' ? 'Qualified' : 'Not Qualified'}

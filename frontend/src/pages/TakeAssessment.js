@@ -285,6 +285,12 @@ export default function TakeAssessment() {
   const [resultHeightPct, setResultHeightPct] = useState(30);
   const [isResultDragging, setIsResultDragging] = useState(false);
 
+  // Split Assessment State
+  const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
+  const [objectiveSeconds, setObjectiveSeconds] = useState(null);
+  const [codingSeconds, setCodingSeconds] = useState(null);
+  const [objResult, setObjResult] = useState(null); // { passed, score, percentage, message }
+
   // New State for Exam Mode
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
   const [markedReviewIds, setMarkedReviewIds] = useState({});
@@ -711,29 +717,82 @@ export default function TakeAssessment() {
       setError('');
       try {
         const resp = await axios.get(`${API_BASE_URL}/invitations/public/${token}/`);
-        setAssessment(resp.data?.assessment || null);
-        setQuestions(resp.data?.questions || []);
-        setCodingQuestions(resp.data?.coding_questions || []);
-        setRemainingSeconds(typeof resp.data?.remaining_seconds === 'number' ? resp.data.remaining_seconds : null);
+        const data = resp.data;
+        const assess = data.assessment || {};
+        setAssessment(assess);
+        setQuestions(data.questions || []);
+        const cQuestions = data.coding_questions || [];
+        setCodingQuestions(cQuestions);
+
+        // Determine Stage & Timers
+        // Check if objective already submitted?
+        // We can infer from `data.invitation.status` or `data.submitted_coding_ids`.
+        // Ideally backend should tell us if objective is done.
+        // For now, check if we have objective score in submission? 
+        // We don't have full submission object here, but we can check `data.coding_answers` existence logic.
+
+        // BETTER: Assume if `data.questions` exist and not submitted, we are in objective.
+        // If `data.questions` empty or we have evidence of objective done?
+
+        // Let's use local storage or infer from time remaining?
+        // Actually, `remaining_seconds` from backend is `expires_at - now`.
+        // With split times, `expires_at` might be the FINAL deadline.
+        // We need to manage stage-based timers client-side if backend doesn't explicitly track "current stage" in DB.
+        // But we added `submit_objective_section`.
+
+        const hasObjective = (data.questions || []).length > 0;
+        // const hasCoding = (cQuestions || []).length > 0; // Unused
+
+        // Parse time limits
+        const objTimeLimit = parseTotalSeconds(assess.objective_time_limit || assess.total_time); // Fallback to total if split not set
+        const codTimeLimit = parseTotalSeconds(assess.coding_time_limit || assess.coding_total_time);
+
+        // Initial State Logic
+        let initialStage = 'objective';
+        if (!hasObjective) initialStage = 'coding';
+
+        // If we have coding answers or submitted ids, we are likely in coding or done
+        if ((data.submitted_coding_ids && data.submitted_coding_ids.length > 0) ||
+          (data.coding_answers && Object.keys(data.coding_answers).length > 0)) {
+          initialStage = 'coding';
+        }
+
+        // If assessment has `has_objective_cutoff` and we are in coding, it means we passed.
+
+        setAssessmentStage(initialStage);
+        setObjectiveSeconds(objTimeLimit);
+        setCodingSeconds(codTimeLimit);
+
+        // Initialize timer based on remaining_seconds from backend (Total expiry)
+        // If we are strict, we should respect the backend `expires_at`.
+        // If `remaining_seconds` is small, we might clamp our local timers.
+        if (typeof data.remaining_seconds === 'number') {
+          const totalRem = data.remaining_seconds;
+          if (initialStage === 'objective') {
+            // If implied objective time is > total remaining, clamp it
+            if (objTimeLimit > totalRem) setObjectiveSeconds(totalRem);
+          } else if (initialStage === 'coding') {
+            if (codTimeLimit > totalRem) setCodingSeconds(totalRem);
+          }
+        }
 
         // Restore partial coding state
-        if (resp.data?.submitted_coding_ids || resp.data?.coding_answers) {
+        if (data.submitted_coding_ids || data.coding_answers) {
           setCodingState(prev => {
             const submittedIds = { ...prev.submittedIds };
-            (resp.data.submitted_coding_ids || []).forEach(id => {
+            (data.submitted_coding_ids || []).forEach(id => {
               submittedIds[String(id)] = true;
             });
             return {
               ...prev,
               submittedIds,
-              existingAnswers: resp.data.coding_answers || {}
+              existingAnswers: data.coding_answers || {}
             };
           });
         }
       } catch (e) {
         const status = e?.response?.status;
         const message = e?.response?.data?.error || e?.message || 'Failed to load assessment';
-        // If already completed, send to thank-you page
         if (status === 409 && token) {
           navigate(`/result/${token}`, { replace: true });
           return;
@@ -770,18 +829,59 @@ export default function TakeAssessment() {
   // Countdown timer (starts when candidate opens the link)
   useEffect(() => {
     if (submitted) return;
-    if (remainingSeconds === null) return;
-    if (remainingSeconds <= 0) {
-      // auto-submit when time ends
-      submit(true);
-      return;
-    }
+
+    // We don't want to reset the interval every second, so we DON'T include remainingSeconds in deps.
     const t = setInterval(() => {
-      setRemainingSeconds((s) => (s === null ? s : Math.max(0, s - 1)));
+      setRemainingSeconds((s) => {
+        if (s === null) return null;
+        if (s <= 0) return 0;
+        return s - 1;
+      });
+
+      // Stage-specific timers
+      if (assessmentStage === 'objective') {
+        setObjectiveSeconds(prev => {
+          if (prev === null) return null;
+          if (prev <= 0) return 0;
+          return prev - 1;
+        });
+      } else if (assessmentStage === 'coding') {
+        setCodingSeconds(prev => {
+          if (prev === null) return null;
+          if (prev <= 0) return 0;
+          return prev - 1;
+        });
+      }
     }, 1000);
+
     return () => clearInterval(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submitted, assessmentStage]);
+
+  // Global timeout check
+  useEffect(() => {
+    if (remainingSeconds !== null && remainingSeconds <= 0 && !submitted) {
+      submit(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remainingSeconds, submitted]);
+
+  // Effect to handle stage timeouts
+  useEffect(() => {
+    if (assessmentStage === 'objective' && objectiveSeconds !== null && objectiveSeconds <= 0) {
+      // Auto submit objective
+      if (!submitting) {
+        submitObjective(true);
+      }
+    }
+    if (assessmentStage === 'coding' && codingSeconds !== null && codingSeconds <= 0) {
+      // Auto submit coding / finish exam
+      if (!submitted) {
+        submit(true);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [assessmentStage, objectiveSeconds, codingSeconds]);
 
   const activeCode = activeCoding ? codingState.codeById[String(activeCoding.id)] || '' : '';
   const activeLanguage = activeCoding ? (codingState.languageById[String(activeCoding.id)] || activeCodingLanguages[0] || '') : '';
@@ -854,7 +954,7 @@ export default function TakeAssessment() {
       });
       setCodingState((prev) => ({
         ...prev,
-        runResultById: { ...prev.runResultById, [key]: resp.data },
+        runResultById: { ...prev.runResultById, [key]: normalizeRunResult(resp.data) },
         running: false,
         submittedIds: { ...prev.submittedIds, [String(activeCoding.id)]: true },
       }));
@@ -866,6 +966,35 @@ export default function TakeAssessment() {
       }
     } catch (e) {
       setCodingState((prev) => ({ ...prev, running: false, runError: e?.response?.data?.error || e?.message || 'Submit failed' }));
+    }
+  };
+
+  const startCoding = () => {
+    setAssessmentStage('coding');
+    window.scrollTo(0, 0);
+  };
+
+  const submitObjective = async (isAutoSubmit = false) => {
+    const auto = isAutoSubmit === true;
+    setSubmitError('');
+    if (!auto && firstUnansweredId) {
+      setSubmitError('Please answer all questions before submitting.');
+      const el = document.getElementById(`q-${firstUnansweredId}`);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const resp = await axios.post(`${API_BASE_URL}/invitations/public/${token}/submit-objective/`, {
+        answers: answersById,
+      });
+      setObjResult(resp.data);
+      setAssessmentStage('transition');
+    } catch (e) {
+      setSubmitError(e?.response?.data?.error || e?.message || 'Failed to submit objective section');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -1061,10 +1190,17 @@ export default function TakeAssessment() {
         ) : null}
 
         {/* Floating Timer (Restored for ALL modes) */}
-        {typeof remainingSeconds === 'number' && !submitted ? (
-          <div className={`timer-box ${getTimerStage(remainingSeconds)}`}>
+        {/* Floating Timer (Stage Based) */}
+        {!submitted && assessmentStage !== 'loading' && assessmentStage !== 'transition' && assessmentStage !== 'completed' && (objectiveSeconds !== null || codingSeconds !== null) ? (
+          <div className={`timer-box ${getTimerStage(assessmentStage === 'objective' ? objectiveSeconds : codingSeconds)}`}>
             <div className="timer-value">
-              {formatCompactTime(remainingSeconds, parseTotalSeconds(assessment?.total_time))}
+              {formatCompactTime(
+                assessmentStage === 'objective' ? objectiveSeconds : codingSeconds,
+                assessmentStage === 'objective' ? parseTotalSeconds(assessment?.objective_time_limit || assessment?.total_time) : parseTotalSeconds(assessment?.coding_time_limit || assessment?.coding_total_time)
+              )}
+            </div>
+            <div className="timer-label" style={{ fontSize: '0.75rem', textAlign: 'center', opacity: 0.9 }}>
+              {assessmentStage === 'objective' ? 'Objective Section' : 'Coding Section'}
             </div>
           </div>
         ) : null}
@@ -1088,8 +1224,34 @@ export default function TakeAssessment() {
               </div>
             ) : null}
 
-            {/* Coding Section (Keep as is, above the exam grid) */}
-            {codingQuestionsOrdered.length > 0 ? (
+            {/* Transition Stage */}
+            {assessmentStage === 'transition' && (
+              <div className="take-card" style={{ textAlign: 'center', padding: '60px 20px' }}>
+                <h2 style={{ fontSize: '2rem', marginBottom: '20px' }}>Objective Section Completed</h2>
+                {objResult && (
+                  <div style={{ margin: '20px auto', padding: '20px', maxWidth: '500px', background: objResult.passed ? '#f0fdf4' : '#fef2f2', borderRadius: '12px', border: objResult.passed ? '1px solid #bbf7d0' : '1px solid #fecaca' }}>
+                    <h3 style={{ color: objResult.passed ? '#15803d' : '#b91c1c', margin: '0 0 10px 0' }}>
+                      {objResult.passed ? 'PASSED' : 'NOT PASSED'}
+                    </h3>
+                    <p style={{ margin: 0, color: '#374151' }}>{objResult.message}</p>
+                  </div>
+                )}
+                {objResult?.passed && (
+                  <div style={{ marginTop: '40px' }}>
+                    <p style={{ fontSize: '1.1rem', marginBottom: '20px', color: '#4b5563' }}>
+                      You are about to start the coding section.<br />
+                      <strong>Coding Time Limit: {assessment?.coding_time_limit || 'As per total time'}</strong>
+                    </p>
+                    <button className="btn btn-primary" onClick={startCoding} style={{ fontSize: '1.2rem', padding: '12px 36px', borderRadius: '8px' }}>
+                      Start Coding Section
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Coding Section */}
+            {assessmentStage === 'coding' && codingQuestionsOrdered.length > 0 ? (
               <div className="take-card coding-overview-card">
                 <div className="coding-header-row" style={{ marginBottom: 10 }}>
                   <div>
@@ -1119,7 +1281,7 @@ export default function TakeAssessment() {
               </div>
             ) : null}
 
-            {codingQuestionsOrdered.length > 0 && activeCoding ? (
+            {assessmentStage === 'coding' && codingQuestionsOrdered.length > 0 && activeCoding ? (
               <div className="coding-attempt-shell take-coding-shell" ref={codingShellRef} style={{ marginBottom: '2rem' }}>
                 <div
                   className={`coding-pane coding-pane-left ${isLeftCollapsed ? 'is-collapsed' : ''}`}
@@ -1319,8 +1481,8 @@ export default function TakeAssessment() {
               </div>
             ) : null}
 
-            {/* Finish Assessment button for coding-only assessments */}
-            {codingQuestionsOrdered.length > 0 && questions.length === 0 && !submitted ? (
+            {/* Finish Assessment button for coding stage if needed (e.g. coding only or end of test) */}
+            {assessmentStage === 'coding' && !submitted ? (
               <div className="take-footer">
                 <button className="submit-btn" type="button" onClick={() => submit(false)} disabled={submitting}>
                   {submitting ? 'Submitting…' : 'Finish Assessment'}
@@ -1329,7 +1491,7 @@ export default function TakeAssessment() {
             ) : null}
 
             {/* Objective Questions Exam Mode Layout */}
-            {questions.length > 0 && currentQuestion ? (
+            {assessmentStage === 'objective' && questions.length > 0 && currentQuestion ? (
               <div className="take-exam-layout">
                 {/* Main Question Area */}
                 <div className="take-exam-main">
@@ -1385,8 +1547,8 @@ export default function TakeAssessment() {
                     </button>
                     {activeQuestionIndex === questions.length - 1 ? (
                       <div style={{ flex: 1, textAlign: 'right' }}>
-                        <button className="submit-btn" type="button" onClick={submit} disabled={submitting}>
-                          {submitting ? 'Submitting…' : 'Submit Exam'}
+                        <button className="submit-btn" type="button" onClick={() => submitObjective(false)} disabled={submitting}>
+                          {submitting ? 'Submitting…' : 'Submit Objective Section'}
                         </button>
                       </div>
                     ) : (

@@ -432,6 +432,16 @@ class Assessment(models.Model):
     min_pass_percentage = models.FloatField(default=60.0)
     total_points = models.IntegerField(default=0, help_text="Total possible points for this assessment")
 
+    # Split Assessment Configuration
+    objective_time_limit = models.CharField(max_length=20, blank=True, null=True, help_text="HH:MM:SS for objective section")
+    coding_time_limit = models.CharField(max_length=20, blank=True, null=True, help_text="HH:MM:SS for coding section")
+    
+    has_objective_cutoff = models.BooleanField(default=False, help_text="If true, candidate must pass objective to unlock coding")
+    min_objective_pass_percentage = models.FloatField(default=0.0, help_text="Cutoff percentage for objective section if enabled")
+    
+    weightage_objective = models.IntegerField(default=50, help_text="Weightage for objective section (0-100)")
+    weightage_coding = models.IntegerField(default=50, help_text="Weightage for coding section (0-100)")
+
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -610,6 +620,15 @@ class CandidateSubmission(models.Model):
     rating = models.IntegerField(blank=True, null=True)  # 1-5 stars
     feedback = models.TextField(blank=True, null=True)
     submitted_at = models.DateTimeField(auto_now_add=True)
+
+    # Detailed score breakdown
+    objective_score = models.IntegerField(default=0)
+    objective_total = models.IntegerField(default=0)
+    objective_percentage = models.FloatField(default=0.0)
+
+    coding_score = models.IntegerField(default=0)
+    coding_total = models.IntegerField(default=0)
+    coding_percentage = models.FloatField(default=0.0)
 
     class Meta:
         verbose_name = "Candidate Submission"
