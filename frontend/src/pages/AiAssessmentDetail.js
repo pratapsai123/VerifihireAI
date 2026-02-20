@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
 
 const AiAssessmentDetail = () => {
     const { id } = useParams();
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     const [assessment, setAssessment] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [activeTab, setActiveTab] = useState('questions'); // 'questions' or 'submissions'
+    // Default to 'questions' if no tab param or invalid param
+    const initialTab = searchParams.get('tab') === 'submissions' ? 'submissions' : 'questions';
+    const [activeTab, setActiveTab] = useState(initialTab);
     const [selectedSubmission, setSelectedSubmission] = useState(null);
 
     useEffect(() => {
@@ -70,21 +73,26 @@ const AiAssessmentDetail = () => {
                     </div>
                 </div>
 
-                {/* Main Tabs */}
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '2px solid #E0E5F2' }}>
-                    <button
-                        onClick={() => { setActiveTab('questions'); setSelectedSubmission(null); }}
-                        style={{ padding: '1rem 2rem', background: 'none', border: 'none', borderBottom: activeTab === 'questions' ? '4px solid #4318FF' : 'none', color: activeTab === 'questions' ? '#1B254B' : '#A3AED0', fontWeight: '700', fontSize: '1.1rem', cursor: 'pointer' }}
-                    >
-                        Question Paper
-                    </button>
-                    <button
-                        onClick={() => setActiveTab('submissions')}
-                        style={{ padding: '1rem 2rem', background: 'none', border: 'none', borderBottom: activeTab === 'submissions' ? '4px solid #4318FF' : 'none', color: activeTab === 'submissions' ? '#1B254B' : '#A3AED0', fontWeight: '700', fontSize: '1.1rem', cursor: 'pointer' }}
-                    >
-                        Candidate Submissions
-                    </button>
-                </div>
+                {/* Main Tabs - Only show if NO specific tab requested in URL (optional, or just hide always if strict) 
+                    But user asked for "when I click view... only question paper", implying strict separation.
+                    Let's hide tabs if 'tab' param is present.
+                */}
+                {!searchParams.get('tab') && (
+                    <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', borderBottom: '2px solid #E0E5F2' }}>
+                        <button
+                            onClick={() => { setActiveTab('questions'); setSelectedSubmission(null); }}
+                            style={{ padding: '1rem 2rem', background: 'none', border: 'none', borderBottom: activeTab === 'questions' ? '4px solid #4318FF' : 'none', color: activeTab === 'questions' ? '#1B254B' : '#A3AED0', fontWeight: '700', fontSize: '1.1rem', cursor: 'pointer' }}
+                        >
+                            Question Paper
+                        </button>
+                        <button
+                            onClick={() => setActiveTab('submissions')}
+                            style={{ padding: '1rem 2rem', background: 'none', border: 'none', borderBottom: activeTab === 'submissions' ? '4px solid #4318FF' : 'none', color: activeTab === 'submissions' ? '#1B254B' : '#A3AED0', fontWeight: '700', fontSize: '1.1rem', cursor: 'pointer' }}
+                        >
+                            Candidate Submissions
+                        </button>
+                    </div>
+                )}
 
                 {/* Content Area */}
                 <div className="card" style={{ background: 'white', borderRadius: '30px', padding: '2.5rem', boxShadow: '0 20px 50px rgba(0,0,0,0.03)' }}>

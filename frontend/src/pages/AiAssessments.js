@@ -224,7 +224,11 @@ const AiAssessments = () => {
                                                 </div>
                                             </td>
                                             <td style={{ padding: '1rem 1.2rem', fontWeight: '500', color: '#1B254B' }}>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                <div
+                                                    onClick={() => navigate(`/ai-assessments/${assessment.id}?tab=submissions`)}
+                                                    style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+                                                    title="View Submissions"
+                                                >
                                                     <div style={{
                                                         minWidth: '35px', padding: '2px 8px', borderRadius: '15px',
                                                         background: assessment.candidate_count > 0 ? '#E6FBF5' : '#F4F7FE',
@@ -233,14 +237,14 @@ const AiAssessments = () => {
                                                     }}>
                                                         {assessment.candidate_count}
                                                     </div>
-                                                    <span style={{ fontSize: '0.75rem', color: '#707EAE' }}>Attempts</span>
+                                                    <span style={{ fontSize: '0.75rem', color: '#4318FF', textDecoration: 'underline' }}>Attempts</span>
                                                 </div>
                                             </td>
                                             <td style={{ padding: '1rem 1.2rem', fontWeight: '500', color: '#1B254B' }}>
                                                 <div style={{ display: 'flex', gap: '0.5rem' }}>
                                                     <button
                                                         className="action-btn"
-                                                        onClick={() => navigate(`/ai-assessments/${assessment.id}`)}
+                                                        onClick={() => navigate(`/ai-assessments/${assessment.id}?tab=questions`)}
                                                         style={{ background: '#F4F7FE', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', color: '#4318FF', cursor: 'pointer' }}
                                                     >View</button>
                                                     <button

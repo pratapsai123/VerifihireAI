@@ -4323,6 +4323,7 @@ def results_overview_view(request):
                 'total': s.total_questions,
                 'percentage': s.percentage,
                 'status': s.status,
+                'integrity': s.integrity_score,
             })
 
         # --- Module 3b: AI Interview Candidates ---
@@ -4346,6 +4347,7 @@ def results_overview_view(request):
                 'total': total_possible,
                 'percentage': round(perc, 1),
                 'status': 'selected' if perc >= 60 else 'rejected',
+                'integrity': s.integrity.integrity_score if hasattr(s, 'integrity') else None,
             })
         # ------------------------------------------
 

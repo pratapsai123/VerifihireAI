@@ -356,6 +356,7 @@ export default function Result() {
                                     <th>Date</th>
                                     <th>Score</th>
                                     <th>Percentage</th>
+                                    <th>Integrity</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -374,6 +375,21 @@ export default function Result() {
                                         </td>
                                         <td>{r.score} / {r.total}</td>
                                         <td>{fmtPercent(r.percentage)}</td>
+                                        <td>
+                                            {r.integrity !== undefined && r.integrity !== null ? (
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                    <div style={{
+                                                        width: '8px', height: '8px', borderRadius: '50%',
+                                                        backgroundColor: r.integrity >= 70 ? '#10b981' : '#ef4444'
+                                                    }} />
+                                                    <span style={{ fontWeight: '600', color: r.integrity >= 70 ? '#10b981' : '#ef4444' }}>
+                                                        {r.integrity}%
+                                                    </span>
+                                                </div>
+                                            ) : (
+                                                <span style={{ color: '#9ca3af', fontSize: '0.85rem' }}>-</span>
+                                            )}
+                                        </td>
                                         <td>
                                             <span className={`pill ${r.status === 'selected' ? 'ok' : 'bad'}`}>
                                                 {r.status === 'selected' ? 'Qualified' : 'Not Qualified'}
