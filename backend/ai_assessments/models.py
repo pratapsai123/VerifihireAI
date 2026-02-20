@@ -1,5 +1,6 @@
 import uuid
 from django.db import models
+from django.utils import timezone
 
 class Assessment(models.Model):
     STATUS_CHOICES = [
@@ -47,7 +48,8 @@ class AIAssessmentSubmission(models.Model):
     phone_warnings = models.IntegerField(default=0)
     monitoring_logs = models.JSONField(default=list, blank=True)
 
-    submitted_at = models.DateTimeField(auto_now_add=True)
+    started_at = models.DateTimeField(default=timezone.now)
+    submitted_at = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f"AI Submission - {self.candidate_name} ({self.candidate_email})"

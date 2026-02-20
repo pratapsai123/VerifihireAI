@@ -61,9 +61,15 @@ const AiAssessmentDetail = () => {
                             <h1 style={{ color: '#1B254B', fontSize: '2.2rem', fontWeight: '800', margin: 0 }}>
                                 {assessment.required_skills} <span style={{ color: '#707EAE', fontWeight: '400', fontSize: '1.2rem' }}>Assessment Results</span>
                             </h1>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#A3AED0', marginTop: '0.5rem', fontSize: '0.9rem' }}>
-                                <i className="fa-regular fa-calendar-check"></i>
-                                <span>Created on: <span style={{ fontWeight: '600', color: '#707EAE' }}>{assessment.created_at}</span></span>
+                            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', color: '#A3AED0', marginTop: '0.8rem', fontSize: '0.85rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <i className="fa-regular fa-calendar-plus" style={{ color: '#4318FF' }}></i>
+                                    <span>Available From: <span style={{ fontWeight: '700', color: '#1B254B' }}>{assessment.available_from ? new Date(assessment.available_from).toLocaleString() : new Date(assessment.created_at).toLocaleString()}</span></span>
+                                </div>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                    <i className="fa-regular fa-calendar-xmark" style={{ color: '#EE5D50' }}></i>
+                                    <span>Available Until: <span style={{ fontWeight: '700', color: '#1B254B' }}>{assessment.available_until ? new Date(assessment.available_until).toLocaleString() : 'No Limit'}</span></span>
+                                </div>
                             </div>
                         </div>
                         <div style={{ background: 'white', padding: '1rem 1.5rem', borderRadius: '20px', boxShadow: '0 10px 30px rgba(0,0,0,0.03)', textAlign: 'center' }}>

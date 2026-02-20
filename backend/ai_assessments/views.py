@@ -73,6 +73,7 @@ class SubmitAssessmentView(APIView):
             submission.total_questions = total_q
             submission.percentage = percentage
             submission.status = pass_status
+            submission.submitted_at = timezone.now()
             submission.save()
 
             return Response({
@@ -248,8 +249,12 @@ class AssessmentListView(APIView):
         data = []
         for assessment in assessments:
             count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
-            from datetime import timedelta
-            expiry_date = assessment.created_at + timedelta(days=7)
+            # Use available_until as expiry if present, else fallback to 7 days
+            if assessment.available_until:
+                expiry_at = assessment.available_until
+            else:
+                expiry_at = assessment.created_at + timedelta(days=7)
+
             data.append({
                 "id": assessment.id,
                 "job_description": assessment.job_description,
@@ -258,7 +263,7 @@ class AssessmentListView(APIView):
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
-                "expiry_at": expiry_date.strftime("%Y-%m-%d %H:%M"),
+                "expiry_at": expiry_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content,
                 "status": assessment.status,
                 "share_token": str(assessment.share_token),
