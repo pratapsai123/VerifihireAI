@@ -359,11 +359,12 @@ class ProcessAnswerView(APIView):
             Candidate Answer: "{answer}"
             
             OUTPUT (JSON):
-            {{
+            {
                 "feedback": "A warm, natural 1-sentence response. MAX 12 words. Vary your tone.",
                 "refined_next_question": "Your next question. If they failed the last one, pivot to a new tech area. If they succeeded, drill deeper. End with ?",
-                "follow_up_question": "null"
-            }}
+                "follow_up_question": "null",
+                "score": "A numeric integer from 0 to 10 evaluating the quality, accuracy and technical depth of the candidate's last answer."
+            }
             """
 
             logger.info(f"Using Human-Sourced AI for {candidate_id}")
@@ -392,6 +393,26 @@ class ProcessAnswerView(APIView):
                 q = data['refined_next_question']
                 if isinstance(q, dict):
                     data['refined_next_question'] = q.get('question', str(q))
+
+            # --- Persistent Scoring Update ---
+            if candidate_id and data:
+                 try:
+                    score_val = data.get('score', 0)
+                    try:
+                        score_val = int(score_val)
+                    except:
+                        score_val = 0
+                    
+                    # Update candidate score and question count
+                    if not isinstance(candidate_id, str) or candidate_id.isdigit():
+                        candidate = Candidate.objects.get(pk=candidate_id)
+                        candidate.score += score_val
+                        candidate.total_questions += 1
+                        candidate.save(update_fields=['score', 'total_questions'])
+                        logger.info(f"Updated Candidate {candidate_id} score: {candidate.score}/{candidate.total_questions*10}")
+                 except Exception as score_err:
+                     logger.error(f"Error updating score for candidate {candidate_id}: {score_err}")
+            # ---------------------------------
 
             return Response(data, status=status.HTTP_200_OK)
         except Exception as e:

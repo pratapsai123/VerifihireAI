@@ -4325,6 +4325,30 @@ def results_overview_view(request):
                 'status': s.status,
             })
 
+        # --- Module 3b: AI Interview Candidates ---
+        interview_qs = Candidate.objects.filter(status='Completed').order_by('-created_at')
+        for s in interview_qs[:100]:
+            total_possible = s.total_questions * 10
+            perc = (float(s.score) / float(total_possible) * 100.0) if total_possible > 0 else 0.0
+            results.append({
+                'submission_id': f"interview_{s.id}",
+                'submitted_at': s.created_at.isoformat() if s.created_at else None,
+                'candidate': {
+                    'name': s.full_name,
+                    'email': s.email,
+                },
+                'assessment': {
+                    'id': f"int_{s.id}",
+                    'display_name': f"AI Interview: {s.job_title or 'Interview'}",
+                    'name': "AI Interview",
+                },
+                'score': s.score,
+                'total': total_possible,
+                'percentage': round(perc, 1),
+                'status': 'selected' if perc >= 60 else 'rejected',
+            })
+        # ------------------------------------------
+
         # Re-sort combined results by submitted_at
         results.sort(key=lambda x: x['submitted_at'] or '', reverse=True)
 

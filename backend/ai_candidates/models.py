@@ -24,6 +24,8 @@ class Candidate(models.Model):
     interview_time = models.CharField(max_length=100, blank=True, null=True, help_text="Scheduled time for the interview (e.g., 10 am - 11 am)")
     job_description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='New')
+    score = models.IntegerField(default=0)
+    total_questions = models.IntegerField(default=0)
     submission_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

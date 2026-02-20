@@ -37,6 +37,7 @@ export default function Result() {
     const [statusFilter, setStatusFilter] = useState('');
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
+    const [activeTab, setActiveTab] = useState('assessment'); // 'assessment' or 'interview'
 
     useEffect(() => {
         if (isOverview) return;
@@ -70,8 +71,17 @@ export default function Result() {
             list = list.filter((r) => r.status === statusFilter);
         }
 
+        // Category (Tab) Filter
+        list = list.filter((r) => {
+            if (activeTab === 'interview') {
+                return r.submission_id && r.submission_id.startsWith('interview_');
+            } else {
+                return r.submission_id && !r.submission_id.startsWith('interview_');
+            }
+        });
+
         return list;
-    }, [overview, search, statusFilter]);
+    }, [overview, search, statusFilter, activeTab]);
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -235,6 +245,41 @@ export default function Result() {
                         <button className="btn-secondary" type="button" onClick={load}>Refresh</button>
                         <button className="btn-secondary" type="button" onClick={() => navigate('/assessments')}>Back to Assessments</button>
                     </div>
+                </div>
+
+                <div className="tab-switcher" style={{ display: 'flex', gap: '20px', marginBottom: '20px', borderBottom: '2px solid #edf2f7', paddingBottom: '10px' }}>
+                    <button
+                        onClick={() => setActiveTab('assessment')}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            fontSize: '1.1rem',
+                            fontWeight: activeTab === 'assessment' ? 'bold' : 'normal',
+                            color: activeTab === 'assessment' ? '#667eea' : '#718096',
+                            borderBottom: activeTab === 'assessment' ? '2px solid #667eea' : 'none',
+                            padding: '5px 15px',
+                            cursor: 'pointer',
+                            marginBottom: '-12px'
+                        }}
+                    >
+                        AI Assessments
+                    </button>
+                    <button
+                        onClick={() => setActiveTab('interview')}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            fontSize: '1.1rem',
+                            fontWeight: activeTab === 'interview' ? 'bold' : 'normal',
+                            color: activeTab === 'interview' ? '#667eea' : '#718096',
+                            borderBottom: activeTab === 'interview' ? '2px solid #667eea' : 'none',
+                            padding: '5px 15px',
+                            cursor: 'pointer',
+                            marginBottom: '-12px'
+                        }}
+                    >
+                        AI Interview
+                    </button>
                 </div>
 
                 <div className="toolbar">
