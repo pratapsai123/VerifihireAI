@@ -461,26 +461,51 @@ const AiTakeAssessment = () => {
                                 <div style={{ height: '100%', display: 'flex', gap: '2rem' }}>
 
                                     {/* Left Panel: Problem Statement */}
-                                    <div style={{ flex: '0 0 320px', display: 'flex', flexDirection: 'column', gap: '1rem', borderRight: '1px solid #E0E5F2', paddingRight: '1.5rem' }}>
+                                    <div style={{ flex: '0 0 350px', display: 'flex', flexDirection: 'column', gap: '1rem', borderRight: '1px solid #E0E5F2', paddingRight: '1.5rem', overflowY: 'auto' }}>
                                         <div>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.8rem' }}>
-                                                <span style={{ padding: '2px 8px', background: '#F0F3FF', color: '#4318FF', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase' }}>Challenge</span>
-                                                <h2 style={{ color: '#1B254B', margin: 0, fontSize: '1.1rem', fontWeight: '800' }}>{currentQ.title}</h2>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
+                                                <span style={{ padding: '4px 10px', background: '#F0F3FF', color: '#4318FF', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '800', textTransform: 'uppercase' }}>Challenge</span>
+                                                <h2 style={{ color: '#1B254B', margin: 0, fontSize: '1.1rem', fontWeight: '800', lineHeight: '1.3' }}>{currentQ.title}</h2>
                                             </div>
-                                            <div style={{ color: '#707EAE', fontSize: '0.85rem', lineHeight: '1.5', background: '#F8F9FF', padding: '1rem', borderRadius: '12px', border: '1px solid #E0E5F2' }}>
+
+                                            <div style={{ color: '#707EAE', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.5rem' }}>
                                                 {currentQ.problem_statement}
                                             </div>
 
-                                            {/* Sample Testcases */}
-                                            {currentQ.examples && currentQ.examples.length > 0 && (
+                                            {/* Input/Output Format */}
+                                            {currentQ.input_format && (
+                                                <div style={{ marginBottom: '1rem' }}>
+                                                    <h4 style={{ fontSize: '0.8rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Input Format</h4>
+                                                    <p style={{ fontSize: '0.85rem', color: '#707EAE', background: '#F8F9FF', padding: '10px', borderRadius: '8px', border: '1px solid #E0E5F2' }}>{currentQ.input_format}</p>
+                                                </div>
+                                            )}
+                                            {currentQ.output_format && (
+                                                <div style={{ marginBottom: '1.5rem' }}>
+                                                    <h4 style={{ fontSize: '0.8rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Output Format</h4>
+                                                    <p style={{ fontSize: '0.85rem', color: '#707EAE', background: '#F8F9FF', padding: '10px', borderRadius: '8px', border: '1px solid #E0E5F2' }}>{currentQ.output_format}</p>
+                                                </div>
+                                            )}
+
+                                            {/* Detailed Example */}
+                                            {(currentQ.example_input || (currentQ.examples && currentQ.examples.length > 0)) && (
                                                 <div style={{ marginTop: '1rem' }}>
-                                                    <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Examples</div>
-                                                    {currentQ.examples.map((ex, i) => (
-                                                        <div key={i} style={{ background: '#F0F3FF', padding: '8px', borderRadius: '8px', marginBottom: '8px', border: '1px solid #E0E5F2' }}>
-                                                            <div style={{ fontSize: '0.75rem', color: '#4318FF', fontWeight: '700' }}>Input: <span style={{ color: '#1B254B', fontWeight: '500' }}>{ex.input}</span></div>
-                                                            <div style={{ fontSize: '0.75rem', color: '#05CD99', fontWeight: '700' }}>Output: <span style={{ color: '#1B254B', fontWeight: '500' }}>{ex.output}</span></div>
+                                                    <div style={{ fontSize: '0.8rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.8rem' }}>Sample Case 0</div>
+                                                    <div style={{ background: '#F4F7FE', padding: '12px', borderRadius: '10px', border: '1px solid #E0E5F2' }}>
+                                                        <div style={{ marginBottom: '8px' }}>
+                                                            <div style={{ fontSize: '0.75rem', color: '#4318FF', fontWeight: '700', marginBottom: '4px' }}>Input:</div>
+                                                            <pre style={{ margin: 0, fontSize: '0.8rem', color: '#1B254B', whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{currentQ.example_input || currentQ.examples[0].input}</pre>
                                                         </div>
-                                                    ))}
+                                                        <div style={{ marginBottom: '8px' }}>
+                                                            <div style={{ fontSize: '0.75rem', color: '#05CD99', fontWeight: '700', marginBottom: '4px' }}>Output:</div>
+                                                            <pre style={{ margin: 0, fontSize: '0.8rem', color: '#1B254B', whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>{currentQ.example_output || currentQ.examples[0].output}</pre>
+                                                        </div>
+                                                        {(currentQ.explanation || currentQ.examples[0].explanation) && (
+                                                            <div style={{ marginTop: '8px', borderTop: '1px solid #E0E5F2', paddingTop: '8px' }}>
+                                                                <div style={{ fontSize: '0.75rem', color: '#A3AED0', fontWeight: '700', marginBottom: '4px' }}>Explanation:</div>
+                                                                <p style={{ margin: 0, fontSize: '0.8rem', color: '#707EAE', lineHeight: '1.4' }}>{currentQ.explanation || currentQ.examples[0].explanation}</p>
+                                                            </div>
+                                                        )}
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>

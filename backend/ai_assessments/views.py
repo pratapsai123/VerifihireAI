@@ -132,10 +132,14 @@ class GenerateAssessmentView(APIView):
                - "answer": string (must match one of the options exactly)
             2. {coding_count} Coding Challenges. Each challenge must have:
                - "title": string
-               - "problem_statement": string
+               - "problem_statement": string (DETAILED description, at least 2 paragraphs, explaining the scenario, edge cases, and requirements clearly like LeetCode/HackerRank)
+               - "input_format": string (e.g., "The first line contains an integer N...")
+               - "output_format": string (e.g., "Return a list of integers...")
                - "constraints": list of strings (e.g., "1 <= N <= 10^5")
-               - "examples": list of objects with specific/edge cases: {{ "input": "...", "output": "...", "explanation": "..." }}
-               - "starter_code_java": string (MUST be a complete class structure, e.g., "import java.util.*;\nclass Solution {{\n    public static int solve(int[] arr) {{\n        // Write logic here\n        return 0;\n    }}\n}}")
+               - "example_input": string (e.g., "5\n1 2 3 4 5")
+               - "example_output": string (e.g., "15")
+               - "explanation": string (Step-by-step logic for the example)
+               - "starter_code_java": string (MUST be a complete class structure with imports, e.g., "import java.util.*;\nclass Solution {{\n    public static int solve(int[] arr) {{\n        // Write logic here\n        return 0;\n    }}\n}}")
                - "starter_code_python": string (MUST be a function definition, e.g., "def solve(arr):\n    # Write logic here\n    pass")
                - "test_cases": list of objects for hidden evaluation: {{ "input": "...", "output": "..." }}
             
