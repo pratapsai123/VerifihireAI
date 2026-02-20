@@ -558,7 +558,7 @@ const AiTakeAssessment = () => {
                                                 height="100%"
                                                 language={selectedLanguage}
                                                 theme="vs-dark"
-                                                value={answers[`coding_${currentQ.id}`] || currentQ.starter_code || (selectedLanguage === 'python' ? "# Write your python code here..." : "// Write your code here...")}
+                                                value={answers[`coding_${currentQ.id}`] || currentQ[`starter_code_${selectedLanguage}`] || currentQ.starter_code || (selectedLanguage === 'python' ? "# Write your python code here..." : "// Write your code here...")}
                                                 onChange={(val) => handleAnswerChange(`coding_${currentQ.id}`, val)}
                                                 options={{
                                                     fontSize: 14,

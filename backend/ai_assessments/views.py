@@ -133,11 +133,13 @@ class GenerateAssessmentView(APIView):
             2. {coding_count} Coding Challenges. Each challenge must have:
                - "title": string
                - "problem_statement": string
-               - "constraints": list of strings
-               - "starter_code": string
-               - "examples": list of objects with "input" and "output" keys (e.g., [{{ "input": "5", "output": "120" }}])
+               - "constraints": list of strings (e.g., "1 <= N <= 10^5")
+               - "examples": list of objects with specific/edge cases: {{ "input": "...", "output": "...", "explanation": "..." }}
+               - "starter_code_java": string (MUST be a complete class structure, e.g., "import java.util.*;\nclass Solution {{\n    public static int solve(int[] arr) {{\n        // Write logic here\n        return 0;\n    }}\n}}")
+               - "starter_code_python": string (MUST be a function definition, e.g., "def solve(arr):\n    # Write logic here\n    pass")
+               - "test_cases": list of objects for hidden evaluation: {{ "input": "...", "output": "..." }}
             
-            Format the output strictly as a raw JSON object with these keys: "mcqs", "coding_challenges".
+            Format the output strictly as a raw JSON object with these keys: "mcqs", "coding_challenges".Ensure Java code is wrapped in a 'Solution' or 'Main' class.
             """
 
             logger.info(f"Using Groq for {difficulty} Assessment Generation")
