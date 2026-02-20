@@ -382,3 +382,19 @@ class InviteAssessmentCandidatesView(APIView):
             "message": f"Successfully invited {len(invited_candidates)} candidates",
             "count": len(invited_candidates)
         }, status=status.HTTP_200_OK)
+import requests
+
+class ProxyCodeExecuteView(APIView):
+    def post(self, request):
+        try:
+            # Piston API endpoint
+            piston_url = 'https://emkc.org/api/v2/piston/execute'
+            
+            # Forward the request data to Piston
+            response = requests.post(piston_url, json=request.data, timeout=10)
+            
+            # Return Piston's response back to the frontend
+            return Response(response.json(), status=response.status_code)
+        except Exception as e:
+            logger.error(f"Code Execution Proxy Error: {str(e)}")
+            return Response({"error": "Failed to reach execution engine"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

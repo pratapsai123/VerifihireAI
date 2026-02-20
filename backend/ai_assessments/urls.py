@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import GenerateAssessmentView, AssessmentListView, AssessmentDetailView, PublicAssessmentView, SubmitAssessmentView, CreateSubmissionView, UpdateAssessmentIntegrityView, InviteAssessmentCandidatesView
+from .views import GenerateAssessmentView, AssessmentListView, AssessmentDetailView, PublicAssessmentView, SubmitAssessmentView, CreateSubmissionView, UpdateAssessmentIntegrityView, InviteAssessmentCandidatesView, ProxyCodeExecuteView
 
 urlpatterns = [
     path('generate/', GenerateAssessmentView.as_view(), name='generate-assessment'),
@@ -10,4 +10,5 @@ urlpatterns = [
     path('submit/', SubmitAssessmentView.as_view(), name='submit-assessment'),
     path('submit/create/', CreateSubmissionView.as_view(), name='create-submission'),
     path('submission/<int:pk>/integrity/', UpdateAssessmentIntegrityView.as_view(), name='update-integrity'),
+    path('execute/', ProxyCodeExecuteView.as_view(), name='proxy-execute'),
 ]

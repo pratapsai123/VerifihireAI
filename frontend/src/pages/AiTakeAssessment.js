@@ -99,7 +99,7 @@ const AiTakeAssessment = () => {
 
         try {
             const langData = supportedLanguages.find(l => l.id === selectedLanguage);
-            const response = await axios.post('https://emkc.org/api/v2/piston/execute', {
+            const response = await axios.post('http://localhost:8001/api/ai/execute/', {
                 language: selectedLanguage === 'cpp' ? 'cpp' : selectedLanguage,
                 version: langData.version,
                 files: [{ content: code }],
