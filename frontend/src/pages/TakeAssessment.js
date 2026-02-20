@@ -990,7 +990,12 @@ export default function TakeAssessment() {
         answers: answersById,
       });
       setObjResult(resp.data);
-      setAssessmentStage('transition');
+      if (resp.data.passed === false) {
+        // Redirect to feedback on fail
+        navigate(`/result/${token}`, { replace: true });
+      } else {
+        setAssessmentStage('transition');
+      }
     } catch (e) {
       setSubmitError(e?.response?.data?.error || e?.message || 'Failed to submit objective section');
     } finally {
@@ -1228,14 +1233,11 @@ export default function TakeAssessment() {
             {assessmentStage === 'transition' && (
               <div className="take-card" style={{ textAlign: 'center', padding: '60px 20px' }}>
                 <h2 style={{ fontSize: '2rem', marginBottom: '20px' }}>Objective Section Completed</h2>
-                {objResult && (
-                  <div style={{ margin: '20px auto', padding: '20px', maxWidth: '500px', background: objResult.passed ? '#f0fdf4' : '#fef2f2', borderRadius: '12px', border: objResult.passed ? '1px solid #bbf7d0' : '1px solid #fecaca' }}>
-                    <h3 style={{ color: objResult.passed ? '#15803d' : '#b91c1c', margin: '0 0 10px 0' }}>
-                      {objResult.passed ? 'PASSED' : 'NOT PASSED'}
-                    </h3>
-                    <p style={{ margin: 0, color: '#374151' }}>{objResult.message}</p>
-                  </div>
-                )}
+                <div style={{ margin: '30px auto', padding: '20px', maxWidth: '500px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                  <p style={{ margin: 0, color: '#475569', fontSize: '1.1rem', fontWeight: '500' }}>
+                    You have successfully completed the objective section of the assessment.
+                  </p>
+                </div>
                 {objResult?.passed && (
                   <div style={{ marginTop: '40px' }}>
                     <p style={{ fontSize: '1.1rem', marginBottom: '20px', color: '#4b5563' }}>

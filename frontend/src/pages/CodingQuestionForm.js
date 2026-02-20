@@ -245,8 +245,6 @@ export default function CodingQuestionForm() {
   const [tcExpected, setTcExpected] = useState('');
   const [tcHidden, setTcHidden] = useState(false);
   const [tcSaving, setTcSaving] = useState(false);
-  const [templateWarning, setTemplateWarning] = useState('');
-  const [prevLanguage, setPrevLanguage] = useState(emptyForm.language);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const langDropdownRef = useRef(null);
   const [timeInput, setTimeInput] = useState('');
@@ -285,8 +283,8 @@ export default function CodingQuestionForm() {
         language: langs[0] || resp.data?.language || DEFAULT_LANGS[0],
       });
       setTimeInput(resp.data?.time_limit_ms != null ? msToHHMMSS(resp.data.time_limit_ms) : '');
+      setTimeInput(resp.data?.time_limit_ms != null ? msToHHMMSS(resp.data.time_limit_ms) : '');
       setTimeError('');
-      setPrevLanguage(resp.data?.language || langs[0] || DEFAULT_LANGS[0]);
       const tcs = await axios.get(`${API_BASE_URL}/coding/questions/${id}/testcases/`);
       setTestcases(tcs.data?.results || []);
     } catch (e) {
@@ -478,6 +476,9 @@ export default function CodingQuestionForm() {
 
       if (redirectTo) {
         navigate(redirectTo, { state: { codingQuestions: questionPayload ? [questionPayload] : [] } });
+      } else if (navAssessment) {
+        // Return to Review Assessment with refresh flag if we came from there
+        navigate('/review-assessment', { state: { ...navAssessment, refreshManual: true } });
       } else if (editing) {
         await load();
       }
@@ -536,7 +537,13 @@ export default function CodingQuestionForm() {
             </p>
           </div>
           <div className="coding-header-actions">
-            <button type="button" className="btn btn-secondary" onClick={() => navigate('/coding')}>
+            <button type="button" className="btn btn-secondary" onClick={() => {
+              if (navAssessment) {
+                navigate('/review-assessment', { state: { ...navAssessment, refreshManual: true } });
+              } else {
+                navigate('/coding');
+              }
+            }}>
               Back
             </button>
             {editing && (

@@ -241,7 +241,7 @@ function PdfUploadQuestion() {
           ? `Saved ${created} questions. Some failed to save:\n\n${errors.slice(0, 20).join('\n')}${errors.length > 20 ? '\n...more' : ''}`
           : `Saved ${created} questions successfully.`
       );
-      navigate('/review-assessment', { state: assessmentContext });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Save error:', error);

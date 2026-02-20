@@ -402,7 +402,8 @@ def generate_candidate_report(submission_id):
 
     # ── 3a. Objective Exam ──
     if objective_keys:
-        story.append(Paragraph('Objective Exam Answers', styles['SectionHeader']))
+        count = len(objective_keys)
+        story.append(Paragraph(f'Objective Exam Answers ({count} Questions)', styles['SectionHeader']))
 
         aq_map = {}
         try:
@@ -476,7 +477,8 @@ def generate_candidate_report(submission_id):
     # ── 3b. Coding Exam ──
     if coding_keys:
         story.append(PageBreak())
-        story.append(Paragraph('Coding Exam Answers', styles['SectionHeader']))
+        count = len(coding_keys)
+        story.append(Paragraph(f'Coding Exam Answers ({count} Questions)', styles['SectionHeader']))
 
         # Build ACQ map for titles and coding_question reference
         acq_map = {}
@@ -717,8 +719,19 @@ def generate_candidate_report(submission_id):
     status_text = 'Qualified' if submission.is_qualified else 'Not Qualified'
 
     pct = submission.final_percentage if submission.final_percentage is not None else submission.percentage
+    
+    # Custom score display: show split scores if both are available
+    if submission.objective_total > 0 and submission.coding_total > 0:
+        score_display = f"Objective: {submission.objective_score}/{submission.objective_total}, Coding: {submission.coding_score}/{submission.coding_total}"
+    elif submission.objective_total > 0:
+        score_display = f"{submission.objective_score} / {submission.objective_total}"
+    elif submission.coding_total > 0:
+        score_display = f"{submission.coding_score} / {submission.coding_total}"
+    else:
+        score_display = f"{submission.score} / {submission.total}"
+
     results_data = [
-        _info_row('Score', f"{submission.score} / {submission.total}", styles),
+        _info_row('Score', score_display, styles),
         _info_row('Percentage', f"{pct:.1f}%", styles),
         [Paragraph('Status', styles['InfoLabel']), Paragraph(status_text, status_style)],
         _info_row('Result', submission.result or '-', styles),

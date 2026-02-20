@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
@@ -11,6 +11,12 @@ const MANUAL_TOPIC_LABEL = 'Custom Questions';
 const REVIEW_STATE_STORAGE_KEY = 'reviewAssessmentState';
 const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';
 const CUSTOM_ASSESSMENT_STORAGE_KEY = 'customAssessmentFormData';
+
+const DIFFICULTY_WEIGHTS = {
+  easy: 1,
+  medium: 2,
+  hard: 3,
+};
 
 function ReviewPage() {
   const navigate = useNavigate();
@@ -33,6 +39,15 @@ function ReviewPage() {
   const [objPassPercentage, setObjPassPercentage] = useState(60);
   const [objWeight, setObjWeight] = useState(0);
   const [codingWeight, setCodingWeight] = useState(100);
+
+  const totalCodingPoints = useMemo(() => {
+    const list = questions['Coding'] || [];
+    return list.reduce((sum, q) => {
+      const diff = String(q.difficulty || 'medium').toLowerCase();
+      const w = DIFFICULTY_WEIGHTS[diff] || 2;
+      return sum + (w * 100);
+    }, 0);
+  }, [questions]);
 
   // NOTE: `analyzeAndFetchQuestions` is intentionally omitted from deps to avoid
   // rerunning on every render; `location`/navigation changes are the trigger.
@@ -63,7 +78,124 @@ function ReviewPage() {
     }
 
     if (state) {
-      // If coding questions were passed directly, show them immediately
+      // Check if this state has full assessment data (returned from ManualQuestions or self)
+      // If it has 'questions' or 'topics' populated, we restore that instead of re-fetching.
+      if (state.questions && state.topics) {
+        setAssessmentData(state);
+        setQuestions(state.questions);
+        setTopics(state.topics);
+        if (state.assessmentName) setAssessmentName(state.assessmentName);
+        if (state.minPassPercentage) setMinPassPercentage(state.minPassPercentage);
+        if (state.timeLimit) setTimeLimit(state.timeLimit);
+        if (state.objectiveTime) setObjectiveTime(state.objectiveTime);
+        if (state.codingTime) setCodingTime(state.codingTime);
+        if (state.hasObjectiveCutoff !== undefined) setHasObjectiveCutoff(state.hasObjectiveCutoff);
+        if (state.objPassPercentage) setObjPassPercentage(state.objPassPercentage);
+        if (state.objWeight !== undefined) setObjWeight(state.objWeight);
+        if (state.codingWeight !== undefined) setCodingWeight(state.codingWeight);
+
+        // Check if we need to refresh manual questions
+        const shouldRefreshManual = state.refreshManual;
+
+        if (!shouldRefreshManual) {
+          setLoading(false);
+          return;
+        }
+
+        // IMPROVED LOGIC: If refreshing manual questions, we need to fetch them and merge with existing non-manual questions
+        // 1. Restore non-manual questions from state
+        const restoredQuestions = { ...state.questions };
+        const restoredTopics = [...(state.topics || [])];
+
+        const fetchLatestManual = async () => {
+          try {
+            // We need customAssessmentId to fetch manual questions
+            let cid = state.customAssessmentId;
+            if (!cid) {
+              const draft = localStorage.getItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+              if (draft) cid = Number(draft);
+            }
+
+            if (cid) {
+              const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
+                params: { custom_assessment_id: cid }
+              });
+              const manualList = manualResp.data?.results || [];
+
+              if (manualList.length > 0) {
+                manualList.sort((a, b) => {
+                  const ta = new Date(a.created_at || 0).getTime();
+                  const tb = new Date(b.created_at || 0).getTime();
+                  return ta - tb;
+                });
+
+                // IMPROVED LOGIC: Split questions into Coding vs Standard (Manual)
+                const codingQs = [];
+                const standardQs = [];
+
+                manualList.forEach(q => {
+                  if (q.question_type === 'CODING' || q.topic === 'Coding') {
+                    codingQs.push(q);
+                  } else {
+                    standardQs.push(q);
+                  }
+                });
+
+                // 1. Update 'Coding' topic
+                if (codingQs.length > 0) {
+                  // Merge with existing coding questions from state/library
+                  const existingCoding = restoredQuestions['Coding'] || [];
+                  const existingIds = new Set(existingCoding.map(q => q.id));
+
+                  const newCoding = [...existingCoding];
+                  codingQs.forEach(q => {
+                    // Prevent duplicates if ID matches
+                    if (!existingIds.has(q.id)) {
+                      newCoding.push(q);
+                    }
+                  });
+
+                  restoredQuestions['Coding'] = newCoding;
+                  if (!restoredTopics.includes('Coding')) {
+                    restoredTopics.push('Coding');
+                  }
+                }
+
+                // 2. Update 'Custom Questions' topic (Standard)
+                if (standardQs.length > 0) {
+                  restoredQuestions[MANUAL_TOPIC_LABEL] = standardQs;
+                  if (!restoredTopics.includes(MANUAL_TOPIC_LABEL)) {
+                    restoredTopics.push(MANUAL_TOPIC_LABEL);
+                  }
+                } else {
+                  // If no standard questions, remove that specific topic
+                  delete restoredQuestions[MANUAL_TOPIC_LABEL];
+                  const idx = restoredTopics.indexOf(MANUAL_TOPIC_LABEL);
+                  if (idx > -1) restoredTopics.splice(idx, 1);
+                }
+
+              } else {
+                // If no manual questions found at all
+                delete restoredQuestions[MANUAL_TOPIC_LABEL];
+                const idx = restoredTopics.indexOf(MANUAL_TOPIC_LABEL);
+                if (idx > -1) restoredTopics.splice(idx, 1);
+              }
+            }
+          } catch (e) {
+            console.error('Failed to refresh manual questions:', e);
+            // Fallback to state's manual questions if fetch fails
+          } finally {
+            setQuestions(restoredQuestions);
+            setTopics(restoredTopics);
+            setLoading(false);
+          }
+        };
+
+        fetchLatestManual();
+        return;
+      }
+
+      // If coding questions were passed directly (e.g. from valid initial setup), show them immediately
       if (Array.isArray(state.codingQuestions) && state.codingQuestions.length > 0) {
         const codingList = state.codingQuestions;
         setAssessmentData(state);
@@ -118,6 +250,22 @@ function ReviewPage() {
 
 
 
+
+  const formatInputTime = (value) => {
+    // Remove non-digits
+    let val = value.replace(/\D/g, '');
+    // Limit to 6 digits (HHMMSS)
+    if (val.length > 6) val = val.slice(0, 6);
+
+    if (val.length >= 5) {
+      // HH:MM:SS
+      return `${val.slice(0, 2)}:${val.slice(2, 4)}:${val.slice(4)}`;
+    } else if (val.length >= 3) {
+      // HH:MM
+      return `${val.slice(0, 2)}:${val.slice(2)}`;
+    }
+    return val;
+  };
 
   // Analyze skills and fetch questions
   const analyzeAndFetchQuestions = async (data) => {
@@ -287,8 +435,26 @@ function ReviewPage() {
 
 
 
+  // Helper to get current state for navigation
+  const getCurrentState = () => {
+    return {
+      ...assessmentData,
+      questions,
+      topics,
+      assessmentName,
+      minPassPercentage,
+      timeLimit,
+      objectiveTime,
+      codingTime,
+      hasObjectiveCutoff,
+      objPassPercentage,
+      objWeight,
+      codingWeight,
+    };
+  };
+
   const handleBack = () => {
-    navigate('/custom-assessment', { state: assessmentData });
+    navigate('/custom-assessment', { state: getCurrentState() });
   };
 
 
@@ -352,9 +518,9 @@ function ReviewPage() {
           const newId = response.data.assessment_id;
           alert('Assessment created successfully!');
           try {
-            localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
-            localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
-            localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
+            // localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+            // localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+            // localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
           } catch {
             // ignore
           }
@@ -395,7 +561,12 @@ function ReviewPage() {
           q.template_code != null;
 
         if (isCodingQuestion) {
-          codingQuestionIds.push(Number(id));
+          // Send object with overrides instead of just ID
+          codingQuestionIds.push({
+            id: Number(id),
+            difficulty: q.difficulty,
+            time_limit_ms: q.time_limit_ms
+          });
         } else {
           regularQuestionIds.push(Number(id));
         }
@@ -439,10 +610,9 @@ function ReviewPage() {
         alert('Assessment created successfully!');
         // Once assessment is created, clear draft state so a new flow starts fresh
         try {
-          localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
-          localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
-          // Also clear CustomAssessment saved form data so the Custom Assessment page opens empty next time
-          localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
+          // localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+          // localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+          // localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
         } catch {
           // ignore
         }
@@ -634,14 +804,20 @@ function ReviewPage() {
               <div className="summary-item">
                 <span className="summary-label">Time Limit (HH:MM:SS):</span>
 
-                <input
-                  type="text"
-                  className="summary-input"
-                  value={loading ? assessmentData.time : timeLimit}
-                  readOnly
+                <div
+                  className="summary-value"
+                  style={{
+                    fontSize: '1.2rem',
+                    color: '#16a34a',
+                    fontWeight: '900',
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: '36px'
+                  }}
                   title="Total time is calculated automatically based on questions"
-                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px', backgroundColor: '#f3f4f6', color: '#6b7280', cursor: 'not-allowed' }}
-                />
+                >
+                  {loading ? assessmentData.time : timeLimit}
+                </div>
               </div>
               <div className="summary-item">
                 <span className="summary-label">Min Pass %:</span>
@@ -674,14 +850,16 @@ function ReviewPage() {
                   value={objectiveTime}
                   onChange={(e) => {
                     const val = e.target.value;
-                    setObjectiveTime(val);
+                    const formatted = formatInputTime(val);
+                    setObjectiveTime(formatted);
                     setIsTimeEdited(true);
                     // Update Total Time
-                    const objS = parseSeconds(val);
+                    const objS = parseSeconds(formatted);
                     const codS = parseSeconds(codingTime);
                     setTimeLimit(formatHHMMSS(objS + codS));
                   }}
                   placeholder="00:00:00"
+                  maxLength={8}
                   style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
                 />
               </div>
@@ -694,14 +872,16 @@ function ReviewPage() {
                   value={codingTime}
                   onChange={(e) => {
                     const val = e.target.value;
-                    setCodingTime(val);
+                    const formatted = formatInputTime(val);
+                    setCodingTime(formatted);
                     setIsTimeEdited(true);
                     // Update Total Time
                     const objS = parseSeconds(objectiveTime);
-                    const codS = parseSeconds(val);
+                    const codS = parseSeconds(formatted);
                     setTimeLimit(formatHHMMSS(objS + codS));
                   }}
                   placeholder="00:00:00"
+                  maxLength={8}
                   style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
                 />
               </div>
@@ -722,11 +902,22 @@ function ReviewPage() {
                       <input
                         type="number"
                         value={objPassPercentage}
-                        onChange={(e) => setObjPassPercentage(e.target.value)}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          const num = Number(val);
+                          if (num > 100) setObjPassPercentage(100);
+                          else if (num < 0) setObjPassPercentage(0);
+                          else setObjPassPercentage(val);
+                        }}
                         style={{ width: '60px', padding: '4px' }}
                       />
                     </div>
                   )}
+
+                  <div style={{ marginLeft: '40px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 'bold' }}>Coding Possible Points:</span>
+                    <span style={{ fontSize: '1.1rem', fontWeight: '900', color: '#007bff' }}>{totalCodingPoints}</span>
+                  </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%' }}>
@@ -998,10 +1189,12 @@ function ReviewPage() {
                         </div>
                       )}
 
+
                       {(() => {
-                        if (hasCodingQuestions) runningIndex += codingQs.length;
+                        // if (hasCodingQuestions) runningIndex += codingQs.length;
                         return null;
                       })()}
+
 
                       {/* Database Questions Section */}
                       {hasDbQuestions && (
@@ -1097,7 +1290,7 @@ function ReviewPage() {
         <button
           type="button"
           className="btn-create-custom-questions"
-          onClick={() => navigate('/manual-questions', { state: assessmentData })}
+          onClick={() => navigate('/manual-questions', { state: getCurrentState() })}
         >
           Create Custom Questions
         </button>

@@ -253,9 +253,9 @@ function MultipleChoiceQuestion() {
       setIsSaving(true);
       await axios.post(`${API_BASE_URL}/questions/create/`, payload);
       // go back to Review page so the saved question appears there
-      navigate('/review-assessment', { state: assessmentContext });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true } });
     } catch (error) {
-    // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console
       console.error('Error saving MCQ:', error);
       const message =
         error.response?.data?.error ||
@@ -338,9 +338,8 @@ function MultipleChoiceQuestion() {
                         style={{ display: 'none' }}
                       />
                       <span
-                        className={`mcq-answer-label${
-                          answer.isCorrect ? ' mcq-answer-label--selected' : ''
-                        }`}
+                        className={`mcq-answer-label${answer.isCorrect ? ' mcq-answer-label--selected' : ''
+                          }`}
                       >
                         {answer.label}
                       </span>
@@ -366,13 +365,13 @@ function MultipleChoiceQuestion() {
                 ))}
               </div>
               {answers.length < 4 && (
-              <button
-                type="button"
-                className="mcq-add-choice"
-                onClick={handleAddChoice}
-              >
-                + Add new answer choice
-              </button>
+                <button
+                  type="button"
+                  className="mcq-add-choice"
+                  onClick={handleAddChoice}
+                >
+                  + Add new answer choice
+                </button>
               )}
             </div>
 

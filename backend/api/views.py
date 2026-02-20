@@ -4739,7 +4739,7 @@ def submit_objective_section(request, token):
             cutoff = assessment.min_objective_pass_percentage
             if percentage < cutoff:
                 passed = False
-                message = f"You scored {percentage:.1f}%, which is below the cutoff of {cutoff}%."
+                message = "You did not meet the minimum requirement for the objective section."
                 next_stage = 'finish'
                 # Mark as submitted/failed immediately
                 inv.status = 'submitted'
@@ -4748,18 +4748,32 @@ def submit_objective_section(request, token):
                 # Update final result
                 submission.result = 'rejected'
                 submission.is_qualified = False
+                
+                # Recalculate final percentage using existing logic
+                _update_submission_scoring_logic(submission)
                 submission.save()
             else:
                 passed = True
                 message = "Objective cutoff passed. Proceeding to coding section."
                 next_stage = 'coding'
+                # Even if passed, update scoring so partial results are correct
+                _update_submission_scoring_logic(submission)
+                submission.save()
+        else:
+            # If no cutoff, still update scoring for partial results
+            _update_submission_scoring_logic(submission)
+            submission.save()
         
+        # Reload to get updated fields from _update_submission_scoring_logic
+        submission.refresh_from_db()
+
         return Response({
             'success': True,
             'passed': passed,
             'score': score,
             'total': total_obj_questions,
             'percentage': percentage,
+            'final_percentage': submission.final_percentage,
             'next_stage': next_stage,
             'message': message
         })
