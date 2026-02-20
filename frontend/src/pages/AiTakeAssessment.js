@@ -203,6 +203,17 @@ const AiTakeAssessment = () => {
 
     useEffect(() => { setCodeOutput([]); setExecutionResult(null); }, [currentQuestionIdx]);
 
+    // Lock page scroll while assessment is running
+    useEffect(() => {
+        document.body.style.margin = '0';
+        document.body.style.overflow = 'hidden';
+        document.documentElement.style.overflow = 'hidden';
+        return () => {
+            document.body.style.overflow = '';
+            document.documentElement.style.overflow = '';
+        };
+    }, []);
+
     const goToQuestion = (idx) => {
         setCurrentQuestionIdx(idx);
         setVisitedQs(prev => new Set([...prev, idx]));
@@ -351,7 +362,7 @@ const AiTakeAssessment = () => {
     };
 
     return (
-        <div style={{ background: '#f0fdf4', height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', fontFamily: 'Poppins' }}>
+        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: '#f0fdf4', display: 'flex', flexDirection: 'column', overflow: 'hidden', fontFamily: 'Poppins' }}>
 
             {aiToast.active && (
                 <div style={{ position: 'fixed', top: 100, left: '50%', transform: 'translateX(-50%)', zIndex: 99999, background: aiToast.urgent ? '#dc2626' : '#1d4ed8', color: 'white', padding: '10px 24px', borderRadius: 25, fontWeight: 700, fontSize: '0.82rem', boxShadow: '0 6px 24px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: 8, letterSpacing: 0.5 }}>
