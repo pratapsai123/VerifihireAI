@@ -205,10 +205,10 @@ const AiAssessments = () => {
                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                                                     <div style={{ fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                         <i className="fa-regular fa-clock" style={{ fontSize: '0.7rem' }}></i>
-                                                        {(assessment.available_from || assessment.created_at)?.split(' ')[1] || (assessment.available_from ? new Date(assessment.available_from).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '')}
+                                                        {new Date(assessment.available_from || assessment.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                     </div>
                                                     <div style={{ fontSize: '0.65rem', color: '#A3AED0', fontWeight: '500' }}>
-                                                        {(assessment.available_from || assessment.created_at)?.split(' ')[0] || (assessment.available_from ? new Date(assessment.available_from).toLocaleDateString() : '')}
+                                                        {new Date(assessment.available_from || assessment.created_at).toLocaleDateString()}
                                                     </div>
                                                 </div>
                                             </td>
@@ -216,10 +216,10 @@ const AiAssessments = () => {
                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
                                                     <div style={{ fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
                                                         <i className="fa-regular fa-calendar-xmark" style={{ fontSize: '0.7rem' }}></i>
-                                                        {assessment.expiry_at?.split(' ')[1] || (assessment.available_until ? new Date(assessment.available_until).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'N/A')}
+                                                        {assessment.available_until ? new Date(assessment.available_until).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'N/A'}
                                                     </div>
                                                     <div style={{ fontSize: '0.65rem', color: '#A3AED0', fontWeight: '500' }}>
-                                                        {assessment.expiry_at?.split(' ')[0] || (assessment.available_until ? new Date(assessment.available_until).toLocaleDateString() : 'No Limit')}
+                                                        {assessment.available_until ? new Date(assessment.available_until).toLocaleDateString() : 'No Limit'}
                                                     </div>
                                                 </div>
                                             </td>

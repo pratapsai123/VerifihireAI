@@ -45,8 +45,8 @@ const CreateAssessment = () => {
 
         const combinedData = {
             ...formData,
-            available_from: (formData.from_date && formData.from_time) ? `${formData.from_date}T${formData.from_time}` : '',
-            available_until: (formData.until_date && formData.until_time) ? `${formData.until_date}T${formData.until_time}` : ''
+            available_from: (formData.from_date && formData.from_time) ? new Date(`${formData.from_date}T${formData.from_time}`).toISOString() : '',
+            available_until: (formData.until_date && formData.until_time) ? new Date(`${formData.until_date}T${formData.until_time}`).toISOString() : ''
         };
 
         try {
