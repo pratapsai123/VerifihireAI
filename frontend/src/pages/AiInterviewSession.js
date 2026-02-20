@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import HumanAvatar from '../components/HumanAvatar';
+import Professional3DAvatar from '../components/Professional3DAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
 
@@ -373,9 +373,9 @@ const AiInterviewSession = () => {
         const startInterview = async (name, qs) => {
             await startCamera();
             const firstName = name.split(' ')[0];
-            const welcome = `Hello ${firstName}! I'm your AI interviewer for VerifiHireAI. Let's begin the session!`;
+            const welcome = `Hello ${firstName}! Let's start your interview.`;
 
-            const introQ = "Could you please introduce yourself and provide a brief overview of your professional background?";
+            const introQ = "Please introduce yourself and your professional background.";
             let finalQs = [...qs];
             if (finalQs[0] !== introQ) {
                 finalQs = [introQ, ...finalQs];
@@ -535,7 +535,7 @@ const AiInterviewSession = () => {
                         <div className="ai-status-badge"><span className="speaking-indicator"></span>{aiStatus}</div>
                     </div>
                     <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '0.5rem' }}>
-                        <HumanAvatar isSpeaking={isSpeaking} width={260} height={300} />
+                        <Professional3DAvatar isSpeaking={isSpeaking} />
                     </div>
                 </div>
 

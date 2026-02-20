@@ -387,15 +387,15 @@ class ProcessAnswerView(APIView):
             Job Context: {jd_context[:200]}
             
             GOAL:
-            Provide a balanced, medium-length response. Not a one-liner, but not a paragraph. Aim for 30-50 words total.
+            Be extremely concise. Aim for 15-25 words total.
             
             STRUCTURE:
-            1. Feedback (1-2 sentences): Acknowledge their specific point humanly.
-            2. Bridge & Question (1-2 sentences): Transition naturally to the next tech/behavioral topic.
+            1. Response (1 sentence): Brief, human acknowledgment.
+            2. Question (1 sentence): One clear technical or behavioral question.
             
             RULES:
-            - NO FILLERS: Avoid "That's a helpful perspective."
-            - PIVOT: If they don't know the answer, supportively switch to a skill from their resume ({resume_context[:300]}).
+            - NO FILLERS: Be direct.
+            - PIVOT: If they don't know, quickly switch to a skill from their resume.
             
             CONTEXT:
             Resume: {resume_context[:1000]}
