@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password, check_password
@@ -4332,7 +4332,7 @@ def results_overview_view(request):
             perc = (float(s.score) / float(total_possible) * 100.0) if total_possible > 0 else 0.0
             results.append({
                 'submission_id': f"interview_{s.id}",
-                'submitted_at': s.created_at.isoformat() if s.created_at else None,
+                'submitted_at': (s.completed_at or s.created_at).isoformat() if (s.completed_at or s.created_at) else None,
                 'candidate': {
                     'name': s.full_name,
                     'email': s.email,
@@ -4358,6 +4358,11 @@ def results_overview_view(request):
         print(f"Error in results_overview_view: {str(e)}")
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while fetching results: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CandidateSubmissionDeleteView(generics.DestroyAPIView):
+    queryset = CandidateSubmission.objects.all()
+    # serializer_class not strictly required for DestroyAPIView
+    permission_classes = [AllowAny] # Or IsAuthenticated depending on requirements, kept open for now matching results view
 
 
 @csrf_exempt

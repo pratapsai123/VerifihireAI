@@ -4,6 +4,7 @@ from groq import Groq
 import os
 import json
 from datetime import datetime, timedelta
+from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -275,6 +276,8 @@ class CandidateStatusUpdateView(APIView):
                 candidate.status = new_status
                 if new_status in ['Completed', 'Hired', 'Rejected', 'Resume Failed']:
                     candidate.resume_text = None
+                if new_status == 'Completed':
+                    candidate.completed_at = timezone.now()
                 candidate.save()
                 return Response({'status': 'success', 'new_status': candidate.status})
             return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)

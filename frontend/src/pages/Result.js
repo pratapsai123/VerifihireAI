@@ -118,6 +118,25 @@ export default function Result() {
         load();
     }, [load]);
 
+    const handleDelete = async (submissionId) => {
+        if (!window.confirm("Are you sure you want to delete this interview record? This action cannot be undone.")) {
+            return;
+        }
+
+        try {
+            setLoading(true);
+            // Extract ID from "interview_123"
+            const dbId = submissionId.replace('interview_', '');
+            await axios.delete(`${API_BASE_URL}/ai-candidates/${dbId}/`);
+            // Refresh list
+            await load();
+        } catch (e) {
+            console.error("Delete failed", e);
+            setError(e?.response?.data?.error || "Failed to delete record");
+            setLoading(false); // Only stop loading on error, success will reload
+        }
+    };
+
     if (!isOverview) {
         return (
             <div className="result-page">
@@ -338,6 +357,7 @@ export default function Result() {
                                     <th>Score</th>
                                     <th>Percentage</th>
                                     <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -358,6 +378,23 @@ export default function Result() {
                                             <span className={`pill ${r.status === 'selected' ? 'ok' : 'bad'}`}>
                                                 {r.status === 'selected' ? 'Qualified' : 'Not Qualified'}
                                             </span>
+                                        </td>
+                                        <td>
+                                            {r.submission_id && r.submission_id.startsWith('interview_') && (
+                                                <button
+                                                    className="btn-icon delete"
+                                                    title="Delete Record"
+                                                    onClick={(e) => { e.stopPropagation(); handleDelete(r.submission_id); }}
+                                                    style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#e53e3e' }}
+                                                >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                    </svg>
+                                                </button>
+                                            )}
                                         </td>
                                     </tr>
                                 ))}
