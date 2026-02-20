@@ -371,8 +371,13 @@ class InviteAssessmentCandidatesView(APIView):
             # Send Email
             try:
                 subject = "Invite to AI Technical Assessment"
+                
+                # Format availability dates
+                start_time = assessment.available_from.strftime('%B %d, %Y at %I:%M %p') if assessment.available_from else "Immediately"
+                end_time = assessment.available_until.strftime('%B %d, %Y at %I:%M %p') if assessment.available_until else "No fixed deadline"
+                
                 jd_preview = (assessment.job_description or '')[:200]
-                message = f"Dear {name},\n\nYou have been invited to attempt an AI technical assessment for the role described below:\n\n{jd_preview}...\n\nDuration: {assessment.duration_minutes} minutes\n\nPlease click the link below to start your assessment:\n{link}\n\nBest of luck!"
+                message = f"Dear {name},\n\nYou have been invited to attempt an AI technical assessment for the role described below:\n\n{jd_preview}...\n\nTiming Details:\n- Available From: {start_time}\n- Available Until: {end_time}\n- Duration: {assessment.duration_minutes} minutes\n\nPlease click the link below to start your assessment during the availability window:\n{link}\n\nBest of luck!"
                 send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email], fail_silently=False)
                 logger.info(f"Individual invite sent to {email}")
             except Exception as e:
@@ -404,7 +409,11 @@ class InviteAssessmentCandidatesView(APIView):
                     
                     try:
                         subject = "Invite to AI Technical Assessment"
-                        message = f"Dear {name},\n\nYou have been invited to attempt an AI technical assessment.\n\nLink: {link}\n\nGood luck!"
+                        
+                        start_time = assessment.available_from.strftime('%B %d, %Y at %I:%M %p') if assessment.available_from else "Immediately"
+                        end_time = assessment.available_until.strftime('%B %d, %Y at %I:%M %p') if assessment.available_until else "No fixed deadline"
+
+                        message = f"Dear {name},\n\nYou have been invited to attempt an AI technical assessment.\n\nTiming Details:\n- Available From: {start_time}\n- Available Until: {end_time}\n- Duration: {assessment.duration_minutes} minutes\n\nLink: {link}\n\nGood luck!"
                         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email], fail_silently=False)
                         logger.info(f"Bulk invite sent to {email}")
                     except Exception as mail_err:
