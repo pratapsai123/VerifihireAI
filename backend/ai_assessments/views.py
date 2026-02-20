@@ -297,6 +297,14 @@ class AssessmentDetailView(APIView):
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
 
+    def delete(self, request, pk):
+        try:
+            assessment = Assessment.objects.get(pk=pk)
+            assessment.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except Assessment.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
 class PublicAssessmentView(APIView):
     def get(self, request, token):
         try:

@@ -44,6 +44,18 @@ const AiAssessments = () => {
         setShowInviteModal(true);
     };
 
+    const deleteAssessment = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this assessment? This action cannot be undone.')) return;
+
+        try {
+            await axios.delete(`http://localhost:8001/api/ai/${id}/`);
+            setAssessments(prev => prev.filter(a => a.id !== id));
+        } catch (err) {
+            console.error('Delete Error:', err);
+            alert('Failed to delete assessment.');
+        }
+    };
+
     const handleInvite = async (e) => {
         e.preventDefault();
         if (!selectedAssessment) return;
@@ -237,6 +249,13 @@ const AiAssessments = () => {
                                                         style={{ background: '#10b981', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
                                                     >
                                                         <i className="fa-solid fa-link"></i> Share
+                                                    </button>
+                                                    <button
+                                                        className="action-btn"
+                                                        onClick={() => deleteAssessment(assessment.id)}
+                                                        style={{ background: '#FFF5F5', color: '#EE5D50', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                                                    >
+                                                        <i className="fa-solid fa-trash"></i>
                                                     </button>
                                                 </div>
                                             </td>
