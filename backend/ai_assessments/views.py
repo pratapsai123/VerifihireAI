@@ -117,7 +117,9 @@ class GenerateAssessmentView(APIView):
                 mcq_count=mcq_count,
                 coding_count=coding_count,
                 duration_minutes=duration,
-                difficulty_level=difficulty
+                difficulty_level=difficulty,
+                available_from=data.get('available_from'),
+                available_until=data.get('available_until')
             )
 
             # Cap overly ambitious coding counts to prevent AI hallucinations/timeouts
@@ -260,7 +262,9 @@ class AssessmentListView(APIView):
                 "generated_content": assessment.generated_content,
                 "status": assessment.status,
                 "share_token": str(assessment.share_token),
-                "candidate_count": count
+                "candidate_count": count,
+                "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
+                "available_until": assessment.available_until.isoformat() if assessment.available_until else None
             })
         return Response(data, status=status.HTTP_200_OK)
 
@@ -296,6 +300,8 @@ class AssessmentDetailView(APIView):
                 "generated_content": assessment.generated_content,
                 "status": assessment.status,
                 "share_token": str(assessment.share_token),
+                "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
+                "available_until": assessment.available_until.isoformat() if assessment.available_until else None,
                 "submissions": submission_data
             }
             return Response(data, status=status.HTTP_200_OK)
@@ -323,7 +329,9 @@ class PublicAssessmentView(APIView):
                 "duration_minutes": assessment.duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content,
-                "status": assessment.status
+                "status": assessment.status,
+                "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
+                "available_until": assessment.available_until.isoformat() if assessment.available_until else None
             }
             return Response(data, status=status.HTTP_200_OK)
         except Assessment.DoesNotExist:

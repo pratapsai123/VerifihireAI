@@ -11,19 +11,27 @@ const CreateAssessment = () => {
         mcq_count: 10,
         coding_count: 2,
         duration: 60,
-        difficulty: 'Medium'
+        difficulty: 'Medium',
+        available_from: '',
+        available_until: ''
     });
     const [isGenerating, setIsGenerating] = useState(false);
 
     const handleChange = (e) => {
         const { id, value } = e.target;
+        const fieldMapping = {
+            jobDescription: 'job_description',
+            requiredSkills: 'required_skills',
+            mcqCount: 'mcq_count',
+            codingCount: 'coding_count',
+            duration: 'duration',
+            difficulty: 'difficulty',
+            availableFrom: 'available_from',
+            availableUntil: 'available_until'
+        };
         setFormData(prev => ({
             ...prev,
-            [id === 'jobDescription' ? 'job_description' :
-                id === 'requiredSkills' ? 'required_skills' :
-                    id === 'mcqCount' ? 'mcq_count' :
-                        id === 'codingCount' ? 'coding_count' :
-                            id === 'duration' ? 'duration' : 'difficulty']: value
+            [fieldMapping[id] || id]: value
         }));
     };
 
@@ -194,6 +202,32 @@ const CreateAssessment = () => {
                                     <option value="Medium">Medium</option>
                                     <option value="Hard">Hard</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        {/* Availability Row */}
+                        <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', paddingTop: '1.5rem', borderTop: '1px dashed #E2E8F0' }}>
+                            <div>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>
+                                    <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
+                                    Available From
+                                </label>
+                                <input
+                                    type="datetime-local" id="availableFrom"
+                                    value={formData.available_from} onChange={handleChange}
+                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                />
+                            </div>
+                            <div>
+                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>
+                                    <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
+                                    Available Until
+                                </label>
+                                <input
+                                    type="datetime-local" id="availableUntil"
+                                    value={formData.available_until} onChange={handleChange}
+                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                />
                             </div>
                         </div>
                     </div>

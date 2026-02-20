@@ -21,6 +21,8 @@ class Assessment(models.Model):
     # New Fields
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='SCHEDULED')
     share_token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    available_from = models.DateTimeField(blank=True, null=True)
+    available_until = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f"Assessment for {self.required_skills} - {self.created_at.strftime('%Y-%m-%d')}"

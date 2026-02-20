@@ -59,7 +59,20 @@ const AiTakeAssessment = () => {
         const fetchAssessment = async () => {
             try {
                 const response = await axios.get(`http://localhost:8001/api/ai/public/${token}/`);
-                setAssessment(response.data);
+                const data = response.data;
+                setAssessment(data);
+
+                // Availability Window Check
+                const now = new Date();
+                const from = data.available_from ? new Date(data.available_from) : null;
+                const until = data.available_until ? new Date(data.available_until) : null;
+
+                if (from && now < from) {
+                    setError(`This assessment will be available starting ${from.toLocaleString()}.`);
+                } else if (until && now > until) {
+                    setError(`This assessment link has expired. It was available until ${until.toLocaleString()}.`);
+                }
+
                 setLoading(false);
             } catch (err) {
                 setError('Invalid or expired assessment link.');
