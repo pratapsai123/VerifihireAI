@@ -57,12 +57,14 @@ function App() {
   // Check if we should show the header
   const isCandidatePage =
     window.location.pathname.startsWith('/interview-start/') ||
-    window.location.pathname.startsWith('/take-assessment/');
+    window.location.pathname.startsWith('/take-assessment/') ||
+    window.location.pathname.startsWith('/take-ai-assessment/') ||
+    window.location.pathname.startsWith('/ai-interview-session/');
 
   return (
     <BrowserRouter>
       <div className="app-container">
-        <Header />
+        {!isCandidatePage && <Header />}
         <div className="app-scroll">
           <Routes>
             <Route path="/" element={<Home />} />
