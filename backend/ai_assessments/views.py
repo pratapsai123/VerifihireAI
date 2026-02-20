@@ -397,6 +397,24 @@ class ProxyCodeExecuteView(APIView):
             stdin = request.data.get('stdin', '')
             code = files[0]['content'] if files else ''
 
+            # Specific Auto-fix for Java unnamed class error (preview feature)
+            if language == 'java':
+                # Automatically add util imports
+                if "import java.util" not in code:
+                    code = "import java.util.*;\nimport java.io.*;\n" + code
+
+                # If no class declaration exists but methods are present
+                if "class " not in code:
+                    # Check for main method, if not present, try to add a dummy runner
+                    runner = ""
+                    if "public static void main" not in code:
+                       # Try to find a method to call - naive approach
+                       # better approach: just wrap it and let user define main or use JShell mode if supported (Wandbox doesn't support JShell easily)
+                       # For now, we wrap the code in a class. The user MUST have a main method or we add one that does nothing to at least compile.
+                       runner = "\n    public static void main(String[] args) { \n        // Test your method here \n    }"
+                    
+                    code = f"public class Main {{\n{code}\n{runner}\n}}"
+            
             # Map to Wandbox compilers
             compiler = 'gcc-head' # Default
             if language == 'python':
