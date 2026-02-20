@@ -384,17 +384,71 @@ class InviteAssessmentCandidatesView(APIView):
         }, status=status.HTTP_200_OK)
 import requests
 
+from rest_framework.permissions import AllowAny
+
 class ProxyCodeExecuteView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = []
+    
     def post(self, request):
         try:
-            # Piston API endpoint
-            piston_url = 'https://emkc.org/api/v2/piston/execute'
+            language = request.data.get('language')
+            files = request.data.get('files', [])
+            stdin = request.data.get('stdin', '')
+            code = files[0]['content'] if files else ''
+
+            # Map to Wandbox compilers
+            compiler = 'gcc-head' # Default
+            if language == 'python':
+                compiler = 'cpython-3.10.15'
+            elif language == 'java':
+                compiler = 'openjdk-jdk-21+35'
+            elif language == 'javascript':
+                compiler = 'nodejs-20.17.0'
+            elif language in ['cpp', 'c++']:
+                compiler = 'gcc-10.5.0'
+
+            payload = {
+                "compiler": compiler,
+                "code": code,
+                "stdin": stdin,
+                "save": False
+            }
+
+            # Wandbox API
+            wb_url = 'https://wandbox.org/api/compile.json'
+            response = requests.post(wb_url, json=payload, timeout=15)
+            wb_data = response.json()
             
-            # Forward the request data to Piston
-            response = requests.post(piston_url, json=request.data, timeout=10)
+            # Map Wandbox response to Piston format for frontend compatibility
+            # Wandbox returns: status (str), program_message (stdout), program_error (stderr), compiler_error
             
-            # Return Piston's response back to the frontend
-            return Response(response.json(), status=response.status_code)
+            stdout = wb_data.get('program_message', '') or wb_data.get('program_output', '')
+            stderr = wb_data.get('program_error', '') or wb_data.get('compiler_error', '')
+            status_code = wb_data.get('status', '1')
+            
+            try:
+                exit_code = int(status_code)
+            except:
+                exit_code = 1
+
+            piston_response = {
+                "run": {
+                    "stdout": stdout,
+                    "stderr": stderr,
+                    "code": exit_code,
+                    "output": stdout + stderr
+                }
+            }
+
+            return Response(piston_response, status=status.HTTP_200_OK)
+
         except Exception as e:
             logger.error(f"Code Execution Proxy Error: {str(e)}")
-            return Response({"error": "Failed to reach execution engine"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({
+                "run": {
+                    "stdout": "",
+                    "stderr": f"Execution Error: {str(e)}",
+                    "code": 1
+                }
+            }, status=status.HTTP_200_OK) # Return 200 so frontend parses the error in 'run'
