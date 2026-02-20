@@ -30,6 +30,8 @@ const AiTakeAssessment = () => {
     const [isExecuting, setIsExecuting] = useState(false);
     const [selectedLanguage, setSelectedLanguage] = useState('javascript');
     const [customInput, setCustomInput] = useState('');
+    const [executionResult, setExecutionResult] = useState(null);
+
 
     const supportedLanguages = [
         { id: 'javascript', name: 'JavaScript', version: '18.15.0', icon: 'fa-brands fa-js', color: '#F7DF1E' },
@@ -37,6 +39,12 @@ const AiTakeAssessment = () => {
         { id: 'cpp', name: 'C++', version: '10.2.0', icon: 'fa-solid fa-code', color: '#00599C' },
         { id: 'java', name: 'Java', version: '15.0.2', icon: 'fa-brands fa-java', color: '#007396' }
     ];
+
+    // Helper to format problem statement text (newlines → <br>)
+    const formatText = (text) => {
+        if (!text) return '';
+        return text.replace(/\n/g, '<br />');
+    };
 
     // Refs
     const videoRef = useRef(null);
