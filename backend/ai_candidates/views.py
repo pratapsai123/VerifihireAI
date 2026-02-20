@@ -3,6 +3,7 @@ import PyPDF2
 from groq import Groq
 import os
 import json
+from datetime import datetime, timedelta
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -126,6 +127,35 @@ class ResumeMatchView(APIView):
 
         if (not resume_file and not candidate) or not job_description:
             return Response({"error": "Job description and either resume or candidate_id are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # --- Interview Time Lock Check ---
+        if candidate and candidate.interview_time:
+            try:
+                scheduled_str = candidate.interview_time.strip()
+                scheduled_dt = None
+                for fmt in (['%I:%M %p', '%I %p', '%H:%M']):
+                    try:
+                        scheduled_dt = datetime.strptime(scheduled_str, fmt)
+                        break
+                    except ValueError:
+                        continue
+                if scheduled_dt:
+                    now = datetime.now()
+                    scheduled_today = now.replace(
+                        hour=scheduled_dt.hour,
+                        minute=scheduled_dt.minute,
+                        second=0, microsecond=0
+                    )
+                    window_end = scheduled_today + timedelta(minutes=30)
+                    if now < scheduled_today or now > window_end:
+                        return Response({
+                            "error": f"Interview not available. Your session is scheduled at {candidate.interview_time}. Please return at that time.",
+                            "scheduled_time": candidate.interview_time,
+                            "time_locked": True
+                        }, status=status.HTTP_403_FORBIDDEN)
+            except Exception as time_err:
+                logger.warning(f"Could not enforce time lock for candidate {candidate_id}: {time_err}")
+        # ----------------------------------
 
         try:
             resume_text = ""
