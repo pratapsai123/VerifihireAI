@@ -146,7 +146,7 @@ class GenerateAssessmentView(APIView):
             - "explanation": string (Step-by-step logic for the example)
                - "starter_code_java": string (MUST be a complete class structure with imports, e.g., "import java.util.*;\nclass Solution {{\n    public static int solve(int[] arr) {{\n        // Write logic here\n        return 0;\n    }}\n}}")
                - "starter_code_python": string (MUST be a function definition, e.g., "def solve(arr):\n    # Write logic here\n    pass")
-               - "test_cases": list of objects for hidden evaluation: {{ "input": "...", "output": "..." }}
+               - "test_cases": list of at least 5 objects for hidden evaluation: {{ "input": "...", "output": "..." }}
             
             Format the output strictly as a raw JSON object with these keys: "mcqs", "coding_challenges".Ensure Java code is wrapped in a 'Solution' or 'Main' class.
             """

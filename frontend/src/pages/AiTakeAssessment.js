@@ -94,7 +94,8 @@ const AiTakeAssessment = () => {
         setExecutionResult(null);
         const code = answers[`coding_${qId}`];
         if (!code) { alert('Please write some code first!'); setIsExecuting(false); return; }
-        const currentQ = assessment?.generated_content?.coding_challenges?.find(q => q.id === qId);
+        // qId is the per-type index (0,1,...) — AI generated challenges have no .id field, use index directly
+        const currentQ = assessment?.generated_content?.coding_challenges?.[qId];
         const langData = supportedLanguages.find(l => l.id === selectedLanguage);
 
         if (isTestRun && currentQ?.test_cases?.length > 0) {
@@ -118,6 +119,11 @@ const AiTakeAssessment = () => {
             return;
         }
 
+        // If Submit Code but NO test cases available — show message and fall through to plain run
+        if (isTestRun && (!currentQ?.test_cases || currentQ.test_cases.length === 0)) {
+            setCodeOutput([{ type: 'info', content: '⚠️ No hidden test cases found for this question. Running your code with custom input instead...' }]);
+        }
+
         setCodeOutput([{ type: 'info', content: `Running ${selectedLanguage}...` }]);
         try {
             const r = await axios.post('http://localhost:8001/api/ai/execute/', {
@@ -137,7 +143,7 @@ const AiTakeAssessment = () => {
     const startCamera = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
-            if (videoRef.current) { videoRef.current.srcObject = stream; videoRef.current.play().catch(() => {}); }
+            if (videoRef.current) { videoRef.current.srcObject = stream; videoRef.current.play().catch(() => { }); }
             streamRef.current = stream;
         } catch { setAiToast({ active: true, text: 'Camera Denied', urgent: true }); }
     };
@@ -148,7 +154,7 @@ const AiTakeAssessment = () => {
 
     const reportViolation = async (eventType) => {
         if (!submissionId) return;
-        try { await axios.post(`http://localhost:8001/api/ai/submission/${submissionId}/integrity/`, { event_type: eventType }); } catch {}
+        try { await axios.post(`http://localhost:8001/api/ai/submission/${submissionId}/integrity/`, { event_type: eventType }); } catch { }
     };
 
     const showAiEvent = (text, urgent = false, eventType = null) => {
@@ -237,10 +243,10 @@ const AiTakeAssessment = () => {
     const handleClearResponse = () => {
         const mcqs = assessment?.generated_content?.mcqs || [];
         const coding = assessment?.generated_content?.coding_challenges || [];
-        const allQs = [...mcqs.map((q,i)=>({...q,type:'mcq',id:i})),...coding.map((c,i)=>({...c,type:'coding',id:i}))];
+        const allQs = [...mcqs.map((q, i) => ({ ...q, type: 'mcq', id: i })), ...coding.map((c, i) => ({ ...c, type: 'coding', id: i }))];
         const cQ = allQs[currentQuestionIdx];
         const key = cQ.type === 'mcq' ? `mcq_${cQ.id}` : `coding_${cQ.id}`;
-        setAnswers(prev => { const n = {...prev}; delete n[key]; return n; });
+        setAnswers(prev => { const n = { ...prev }; delete n[key]; return n; });
         setAnsweredQs(prev => { const n = new Set(prev); n.delete(currentQuestionIdx); return n; });
     };
 
@@ -263,16 +269,16 @@ const AiTakeAssessment = () => {
     };
 
     if (loading) return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#f0fdf4' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#F4F7FE' }}>
             <div style={{ textAlign: 'center' }}>
-                <p style={{ color: '#16a34a', fontWeight: 600 }}>Loading assessment...</p>
+                <p style={{ color: '#4318FF', fontWeight: 600 }}>Loading assessment...</p>
             </div>
         </div>
     );
 
     if (error) return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#f0fdf4' }}>
-            <div style={{ textAlign: 'center', padding: '3rem', background: 'white', borderRadius: '20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#F4F7FE' }}>
+            <div style={{ textAlign: 'center', padding: '3rem', background: 'white', borderRadius: '20px', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
                 <h2 style={{ color: '#1B254B' }}>Link Error</h2>
                 <p style={{ color: '#A3AED0' }}>{error}</p>
             </div>
@@ -280,8 +286,8 @@ const AiTakeAssessment = () => {
     );
 
     if (submitted) return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#f0fdf4' }}>
-            <div style={{ textAlign: 'center', padding: '3rem', background: 'white', borderRadius: '24px', maxWidth: 480 }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#F4F7FE' }}>
+            <div style={{ textAlign: 'center', padding: '3rem', background: 'white', borderRadius: '24px', maxWidth: 480, boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
                 <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>✅</div>
                 <h1 style={{ color: '#1B254B', marginBottom: '1rem' }}>Assessment Submitted!</h1>
                 <p style={{ color: '#A3AED0' }}>Thank you, {candidateName}. The recruiter has been notified.</p>
@@ -290,11 +296,11 @@ const AiTakeAssessment = () => {
     );
 
     if (!isStarted) return (
-        <div style={{ background: '#f0fdf4', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'Poppins', padding: 20 }}>
-            <div style={{ maxWidth: 580, width: '100%', background: 'white', borderRadius: 24, boxShadow: '0 20px 60px rgba(0,0,0,0.06)', overflow: 'hidden' }}>
-                <div style={{ background: '#1a5276', padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ background: '#F4F7FE', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: 'Poppins', padding: 20 }}>
+            <div style={{ maxWidth: 580, width: '100%', background: 'white', borderRadius: 24, boxShadow: '0 4px 20px rgba(67,24,255,0.08)', overflow: 'hidden', border: '1px solid #f1f5f9' }}>
+                <div style={{ background: '#4318FF', padding: '1.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
-                        <div style={{ color: '#86efac', fontSize: '0.75rem', fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }}>AI Technical Assessment</div>
+                        <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: '0.75rem', fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase' }}>AI Technical Assessment</div>
                         <div style={{ color: 'white', fontSize: '1.4rem', fontWeight: 800, marginTop: 2 }}>{assessment?.title || 'Technical Test'}</div>
                     </div>
                     <div style={{ textAlign: 'right', color: 'rgba(255,255,255,0.7)', fontSize: '0.82rem' }}>
@@ -303,24 +309,24 @@ const AiTakeAssessment = () => {
                     </div>
                 </div>
                 <div style={{ padding: '2rem' }}>
-                    <p style={{ color: '#374151', marginBottom: '1.5rem', lineHeight: 1.6 }}>Please enter your details to start. The exam will begin immediately after you click <strong>Start Test</strong>.</p>
+                    <p style={{ color: '#A3AED0', marginBottom: '1.5rem', lineHeight: 1.6 }}>Please enter your details to start. The exam will begin immediately after you click <strong style={{ color: '#1B254B' }}>Start Test</strong>.</p>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginBottom: '1.5rem' }}>
                         <div>
-                            <label style={{ display: 'block', fontWeight: 600, color: '#374151', marginBottom: 6, fontSize: '0.9rem' }}>Full Name *</label>
+                            <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>Full Name *</label>
                             <input type="text" value={candidateName} onChange={e => setCandidateName(e.target.value)} placeholder="Enter your full name"
-                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 10, border: '1.5px solid #e5e7eb', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box' }} />
+                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box', color: '#1B254B' }} />
                         </div>
                         <div>
-                            <label style={{ display: 'block', fontWeight: 600, color: '#374151', marginBottom: 6, fontSize: '0.9rem' }}>Email Address *</label>
+                            <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>Email Address *</label>
                             <input type="email" value={candidateEmail} onChange={e => setCandidateEmail(e.target.value)} placeholder="Enter your email"
-                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 10, border: '1.5px solid #e5e7eb', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box' }} />
+                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box', color: '#1B254B' }} />
                         </div>
                     </div>
-                    <div style={{ background: '#fef9c3', border: '1px solid #fde047', borderRadius: 10, padding: '0.9rem 1rem', marginBottom: '1.5rem', fontSize: '0.82rem', color: '#713f12' }}>
-                        <strong>Warning:</strong> This test uses AI video monitoring. Switching tabs or leaving the window will be flagged as malpractice.
+                    <div style={{ background: '#FFF8E6', border: '1px solid #FFA800', borderRadius: 12, padding: '0.9rem 1rem', marginBottom: '1.5rem', fontSize: '0.82rem', color: '#1B254B' }}>
+                        <strong>⚠️ Warning:</strong> This test uses AI video monitoring. Switching tabs or leaving the window will be flagged as malpractice.
                     </div>
                     <button onClick={startAssessment}
-                        style={{ width: '100%', padding: '0.9rem', background: '#1a5276', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'Poppins' }}>
+                        style={{ width: '100%', padding: '0.9rem', background: '#4318FF', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: 'pointer', fontFamily: 'Poppins', boxShadow: '0 10px 20px rgba(67,24,255,0.2)', transition: 'all 0.2s' }}>
                         Start Test
                     </button>
                 </div>
@@ -352,12 +358,12 @@ const AiTakeAssessment = () => {
 
     const statusStyle = (status) => {
         switch (status) {
-            case 'current':         return { background: '#3b82f6', color: 'white', border: '2px solid #1d4ed8' };
-            case 'answered':        return { background: '#22c55e', color: 'white', border: '2px solid #16a34a' };
-            case 'not-answered':    return { background: '#ef4444', color: 'white', border: '2px solid #dc2626' };
-            case 'marked':          return { background: '#a855f7', color: 'white', border: '2px solid #7c3aed' };
+            case 'current': return { background: '#3b82f6', color: 'white', border: '2px solid #1d4ed8' };
+            case 'answered': return { background: '#22c55e', color: 'white', border: '2px solid #16a34a' };
+            case 'not-answered': return { background: '#ef4444', color: 'white', border: '2px solid #dc2626' };
+            case 'marked': return { background: '#a855f7', color: 'white', border: '2px solid #7c3aed' };
             case 'answered-marked': return { background: '#a855f7', color: 'white', border: '2px solid #7c3aed' };
-            default:                return { background: 'white', color: '#374151', border: '2px solid #d1d5db' };
+            default: return { background: 'white', color: '#374151', border: '2px solid #d1d5db' };
         }
     };
 
@@ -427,7 +433,6 @@ const AiTakeAssessment = () => {
                         </span>
                         <span style={{ fontSize: '0.75rem', color: '#6b7280', fontWeight: 600 }}>
                             Marks for Correct Answer <span style={{ color: '#16a34a', fontWeight: 700 }}>1.00</span>
-                            <span style={{ color: '#dc2626', fontWeight: 700 }}> | Negative Marks 0.33</span>
                         </span>
                     </div>
 
@@ -548,7 +553,13 @@ const AiTakeAssessment = () => {
                                     </div>
                                     <div style={{ flex: 1, overflow: 'hidden' }}>
                                         <Editor height="100%" language={selectedLanguage} theme="vs-dark"
-                                            value={answers[currentAnswerKey] || currentQ[`starter_code_${selectedLanguage}`] || currentQ.starter_code || (selectedLanguage === 'python' ? '# Write your code here\n' : '// Write your code here\n')}
+                                            value={answers[currentAnswerKey] || currentQ[`starter_code_${selectedLanguage}`] || (() => {
+                                                const defaultComments = { python: '# Write your code here\n', java: '// Write your code here\n', cpp: '// Write your code here\n', javascript: '// Write your code here\n' };
+                                                const raw = currentQ.starter_code;
+                                                // If backend starter code is just a JS-style placeholder comment, replace with language-correct one
+                                                if (!raw || raw.trim() === '// Write your code here') return defaultComments[selectedLanguage] || '# Write your code here\n';
+                                                return raw;
+                                            })()}
                                             onChange={val => handleAnswerChange(currentAnswerKey, val)}
                                             options={{ fontSize: 13, minimap: { enabled: false }, scrollBeyondLastLine: false, automaticLayout: true, padding: { top: 10 }, lineNumbers: 'on' }} />
                                     </div>
