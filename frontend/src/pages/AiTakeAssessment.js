@@ -799,77 +799,77 @@ const AiTakeAssessment = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        {/* Navigation Footer - Slimmer & Clean */}
-                                        <div style={{
-                                            flexShrink: 0,
-                                            padding: '0.6rem 2rem',
-                                            background: '#F8F9FF',
-                                            borderTop: '1px solid #E0E5F2',
-                                            display: 'flex',
-                                            justifyContent: 'space-between',
-                                            alignItems: 'center'
-                                        }}>
-                                            {/* Previous Button */}
-                                            <button
-                                                onClick={() => setCurrentQuestionIdx(prev => Math.max(0, prev - 1))}
-                                                disabled={currentQuestionIdx === 0}
-                                                style={{
-                                                    padding: '0.5rem 1.5rem',
-                                                    background: 'white',
-                                                    color: currentQuestionIdx === 0 ? '#A0AEC0' : '#4318FF',
-                                                    border: '1px solid',
-                                                    borderColor: currentQuestionIdx === 0 ? '#E2E8F0' : '#4318FF',
-                                                    borderRadius: '8px',
-                                                    fontSize: '0.85rem',
-                                                    fontWeight: '700',
-                                                    cursor: currentQuestionIdx === 0 ? 'not-allowed' : 'pointer',
-                                                    transition: 'all 0.2s',
-                                                    visibility: currentQuestionIdx === 0 ? 'hidden' : 'visible'
-                                                }}
-                                            >
-                                                <i className="fa-solid fa-arrow-left" style={{ marginRight: '8px' }}></i> Previous
-                                            </button>
-
-                                            {/* Next / Submit Button */}
-                                            {!isLastQ ? (
-                                                <button
-                                                    onClick={handleNext}
-                                                    style={{
-                                                        padding: '0.5rem 2rem',
-                                                        background: 'linear-gradient(135deg, #4318FF 0%, #7551FF 100%)',
-                                                        color: 'white',
-                                                        border: 'none',
-                                                        borderRadius: '8px',
-                                                        fontSize: '0.9rem',
-                                                        fontWeight: '700',
-                                                        cursor: 'pointer',
-                                                        boxShadow: '0 4px 10px rgba(67, 24, 255, 0.15)'
-                                                    }}
-                                                >
-                                                    Next <i className="fa-solid fa-arrow-right" style={{ marginLeft: '8px' }}></i>
-                                                </button>
-                                            ) : (
-                                                <button
-                                                    onClick={handleSubmit} disabled={isSubmitting}
-                                                    style={{
-                                                        padding: '0.5rem 2.5rem',
-                                                        background: '#05CD99',
-                                                        color: 'white',
-                                                        border: 'none',
-                                                        borderRadius: '8px',
-                                                        fontSize: '0.9rem',
-                                                        fontWeight: '700',
-                                                        cursor: 'pointer',
-                                                        boxShadow: '0 4px 10px rgba(5, 205, 153, 0.15)',
-                                                        opacity: isSubmitting ? 0.7 : 1
-                                                    }}
-                                                >
-                                                    {isSubmitting ? 'Submitting...' : 'Submit'} <i className="fa-solid fa-paper-plane" style={{ marginLeft: '8px' }}></i>
-                                                </button>
-                                            )}
-                                        </div>
                                     </div>
                                 </div>
+                            )}
+                        </div>
+                        {/* Navigation Footer - visible for ALL question types */}
+                        <div style={{
+                            flexShrink: 0,
+                            padding: '0.6rem 2rem',
+                            background: '#F8F9FF',
+                            borderTop: '1px solid #E0E5F2',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
+                        }}>
+                            {/* Previous Button */}
+                            <button
+                                onClick={() => setCurrentQuestionIdx(prev => Math.max(0, prev - 1))}
+                                disabled={currentQuestionIdx === 0}
+                                style={{
+                                    padding: '0.5rem 1.5rem',
+                                    background: 'white',
+                                    color: currentQuestionIdx === 0 ? '#A0AEC0' : '#4318FF',
+                                    border: '1px solid',
+                                    borderColor: currentQuestionIdx === 0 ? '#E2E8F0' : '#4318FF',
+                                    borderRadius: '8px',
+                                    fontSize: '0.85rem',
+                                    fontWeight: '700',
+                                    cursor: currentQuestionIdx === 0 ? 'not-allowed' : 'pointer',
+                                    transition: 'all 0.2s',
+                                    visibility: currentQuestionIdx === 0 ? 'hidden' : 'visible'
+                                }}
+                            >
+                                <i className="fa-solid fa-arrow-left" style={{ marginRight: '8px' }}></i> Previous
+                            </button>
+
+                            {/* Next / Submit Button */}
+                            {!isLastQ ? (
+                                <button
+                                    onClick={handleNext}
+                                    style={{
+                                        padding: '0.5rem 2rem',
+                                        background: 'linear-gradient(135deg, #4318FF 0%, #7551FF 100%)',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        fontSize: '0.9rem',
+                                        fontWeight: '700',
+                                        cursor: 'pointer',
+                                        boxShadow: '0 4px 10px rgba(67, 24, 255, 0.15)'
+                                    }}
+                                >
+                                    Next <i className="fa-solid fa-arrow-right" style={{ marginLeft: '8px' }}></i>
+                                </button>
+                            ) : (
+                                <button
+                                    onClick={handleSubmit} disabled={isSubmitting}
+                                    style={{
+                                        padding: '0.5rem 2.5rem',
+                                        background: '#05CD99',
+                                        color: 'white',
+                                        border: 'none',
+                                        borderRadius: '8px',
+                                        fontSize: '0.9rem',
+                                        fontWeight: '700',
+                                        cursor: 'pointer',
+                                        boxShadow: '0 4px 10px rgba(5, 205, 153, 0.15)',
+                                        opacity: isSubmitting ? 0.7 : 1
+                                    }}
+                                >
+                                    {isSubmitting ? 'Submitting...' : 'Submit Assessment'} <i className="fa-solid fa-paper-plane" style={{ marginLeft: '8px' }}></i>
+                                </button>
                             )}
                         </div>
                     </div>
