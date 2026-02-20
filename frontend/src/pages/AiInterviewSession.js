@@ -287,8 +287,7 @@ const AiInterviewSession = () => {
                 fullVoiceOutput += followUpQ;
                 await speak(fullVoiceOutput);
                 setIsProcessing(false);
-                setAiStatus("Listening...");
-                startListening();
+                setAiStatus("AI Interviewer Online");
             } else if (refinedNextQ === null && nextIdx >= questions.length) {
                 // End of interview
                 if (fullVoiceOutput) await speak(fullVoiceOutput);
@@ -313,7 +312,6 @@ const AiInterviewSession = () => {
 
                 setIsProcessing(false);
                 setAiStatus("AI Interviewer Online");
-                startListening();
             }
         } catch (err) {
             console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (35s)" : err.message);
@@ -345,7 +343,6 @@ const AiInterviewSession = () => {
 
             setIsProcessing(false);
             setAiStatus("AI Interviewer Online");
-            startListening();
         }
     }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening]);
 
@@ -393,7 +390,6 @@ const AiInterviewSession = () => {
             addMessage('ai', welcome);
             addMessage('ai', introQ);
             await speak(`${welcome} ${introQ}`);
-            startListening();
         };
 
         initSession();
@@ -491,28 +487,6 @@ const AiInterviewSession = () => {
         };
     }, []);
 
-    // Unified Reactive Microphone Trigger
-    useEffect(() => {
-        // Only attempt to start if we are in audio mode AND the AI is not busy
-        const shouldBeListening = userInputMode === 'audio' && !isProcessing && !isSpeaking;
-
-        if (shouldBeListening && !isRecording && recognitionRef.current) {
-            const timer = setTimeout(() => {
-                // Double check states before starting
-                if (userInputMode === 'audio' && !isProcessing && !isSpeaking && !isRecording) {
-                    try {
-                        recognitionRef.current.start();
-                        console.log("Mic auto-started via state sync");
-                    } catch (e) {
-                        if (e.name !== 'InvalidStateError') {
-                            console.warn("Auto-start mic skipped:", e.message);
-                        }
-                    }
-                }
-            }, 600); // 600ms buffer to allow states to settle
-            return () => clearTimeout(timer);
-        }
-    }, [isRecording, isProcessing, isSpeaking, userInputMode]);
 
     const toggleRecording = () => {
         if (!recognitionRef.current) return alert("Speech recognition not supported");

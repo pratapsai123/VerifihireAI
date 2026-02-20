@@ -4,11 +4,12 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 import uuid
-import traceback
 from .models import Assessment, AIAssessmentSubmission
 from ai_candidates.views import extract_json
+import traceback
 
 from django.conf import settings
+from django.core.mail import send_mail
 import logging
 
 # Setup Logger
@@ -134,6 +135,7 @@ class GenerateAssessmentView(APIView):
                - "problem_statement": string
                - "constraints": list of strings
                - "starter_code": string
+               - "examples": list of objects with "input" and "output" keys (e.g., [{{ "input": "5", "output": "120" }}])
             
             Format the output strictly as a raw JSON object with these keys: "mcqs", "coding_challenges".
             """
@@ -145,13 +147,15 @@ class GenerateAssessmentView(APIView):
                 response_format={"type": "json_object"}
             )
             raw_text = response.choices[0].message.content
+            logger.info(f"GROQ RAW RESPONSE: {raw_text}")
 
             if not raw_text:
-                 raise Exception("Groq returned an empty response.")
+                raise Exception("Empty response from AI engine")
 
             generated_data = extract_json(raw_text)
             if not generated_data:
-                 raise Exception(f"Failed to parse AI response as JSON.")
+                logger.error(f"Failed JSON extraction from: {raw_text}")
+                raise Exception("The AI generated a response but the structure was invalid. Please try again.")
 
             assessment.generated_content = generated_data
             assessment.status = 'SCHEDULED'
@@ -164,7 +168,9 @@ class GenerateAssessmentView(APIView):
             }, status=status.HTTP_201_CREATED)
 
         except Exception as e:
-            logger.error(f"ERROR in GenerateAssessmentView: {str(e)}")
+            tb = traceback.format_exc()
+            raw_resp = locals().get('raw_text', 'No response received')
+            logger.error(f"ERROR in GenerateAssessmentView: {str(e)}\n{tb}\nRAW: {raw_resp}")
             if 'assessment' in locals() and assessment:
                 assessment.status = 'FAILED'
                 assessment.save()
@@ -228,6 +234,9 @@ class AssessmentListView(APIView):
         assessments = Assessment.objects.all().order_by('-created_at')
         data = []
         for assessment in assessments:
+            count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
+            from datetime import timedelta
+            expiry_date = assessment.created_at + timedelta(days=7)
             data.append({
                 "id": assessment.id,
                 "job_description": assessment.job_description,
@@ -236,9 +245,11 @@ class AssessmentListView(APIView):
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
+                "expiry_at": expiry_date.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content,
                 "status": assessment.status,
-                "share_token": str(assessment.share_token)
+                "share_token": str(assessment.share_token),
+                "candidate_count": count
             })
         return Response(data, status=status.HTTP_200_OK)
 
@@ -300,3 +311,74 @@ class PublicAssessmentView(APIView):
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception:
              return Response({"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+class InviteAssessmentCandidatesView(APIView):
+    def post(self, request):
+        assessment_id = request.data.get('assessment_id')
+        try:
+            assessment = Assessment.objects.get(pk=assessment_id)
+        except Assessment.DoesNotExist:
+            return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        invite_type = request.data.get('type')  # 'individual' or 'bulk'
+        invited_candidates = []
+        
+        # Use frontend base URL from settings
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
+
+        if invite_type == 'individual':
+            name = request.data.get('name')
+            email = request.data.get('email')
+            if not name or not email:
+                return Response({"error": "Name and Email are required"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            invited_candidates.append({"name": name, "email": email, "link": link})
+            
+            # Send Email
+            try:
+                subject = "Invite to AI Technical Assessment"
+                jd_preview = (assessment.job_description or '')[:200]
+                message = f"Dear {name},\n\nYou have been invited to attempt an AI technical assessment for the role described below:\n\n{jd_preview}...\n\nDuration: {assessment.duration_minutes} minutes\n\nPlease click the link below to start your assessment:\n{link}\n\nBest of luck!"
+                send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email], fail_silently=False)
+                logger.info(f"Individual invite sent to {email}")
+            except Exception as e:
+                import traceback
+                logger.error(f"Email error for {email}: {str(e)}")
+                logger.error(traceback.format_exc())
+                return Response({"error": f"Failed to send email: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+
+        elif invite_type == 'bulk':
+            file = request.FILES.get('file')
+            if not file:
+                return Response({"error": "File is required"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            try:
+                import pandas as pd
+                if file.name.lower().endswith('.csv'):
+                    df = pd.read_csv(file)
+                else:
+                    df = pd.read_excel(file)
+                
+                df.columns = df.columns.str.lower().str.strip()
+                if 'name' not in df.columns or 'email' not in df.columns:
+                    return Response({"error": "File must have 'name' and 'email' columns"}, status=status.HTTP_400_BAD_REQUEST)
+
+                for _, row in df.iterrows():
+                    name = str(row['name']).strip()
+                    email = str(row['email']).strip()
+                    invited_candidates.append({"name": name, "email": email, "link": link})
+                    
+                    try:
+                        subject = "Invite to AI Technical Assessment"
+                        message = f"Dear {name},\n\nYou have been invited to attempt an AI technical assessment.\n\nLink: {link}\n\nGood luck!"
+                        send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [email], fail_silently=False)
+                        logger.info(f"Bulk invite sent to {email}")
+                    except Exception as mail_err:
+                        logger.error(f"Bulk email error for {email}: {mail_err}")
+            except Exception as e:
+                return Response({"error": f"Error parsing file: {str(e)}"}, status=status.HTTP_400_BAD_REQUEST)
+
+        return Response({
+            "message": f"Successfully invited {len(invited_candidates)} candidates",
+            "count": len(invited_candidates)
+        }, status=status.HTTP_200_OK)

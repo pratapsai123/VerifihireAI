@@ -390,10 +390,10 @@ class ProcessAnswerView(APIView):
             
             OUTPUT (JSON):
             {
-                "feedback": "A warm, natural 1-sentence response. MAX 12 words. Vary your tone.",
-                "refined_next_question": "Your next question. If they failed the last one, pivot to a new tech area. If they succeeded, drill deeper. End with ?",
+                "feedback": "A professional, medium-sized technical acknowledgment (2-3 sentences). Acknowledge specific points from their answer to show active listening. No generic fillers.",
+                "refined_next_question": "Your next technical question. Use 'Adaptive Learning'—if they mentioned a specific tool or methodology, follow up on that. If they struggled, pivot professionally. End with ?",
                 "follow_up_question": "null",
-                "score": "A numeric integer from 0 to 10 evaluating the quality, accuracy and technical depth of the candidate's last answer."
+                "score": "A numeric integer from 0 to 10 based on technical accuracy and depth."
             }
             """
 
@@ -449,7 +449,7 @@ class ProcessAnswerView(APIView):
             logger.error(f"Error in ProcessAnswerView: {str(e)}")
             fallback_q = remaining_questions[0] if remaining_questions else "Could you tell me more about your professional background?"
             return Response({
-                "feedback": "I see. Let's move to the next part of our discussion.",
+                "feedback": "That's a helpful perspective. Building on that, I'd like to dive into another area.",
                 "follow_up_question": None,
                 "refined_next_question": fallback_q
             }, status=status.HTTP_200_OK)

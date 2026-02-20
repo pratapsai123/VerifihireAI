@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Editor from "@monaco-editor/react";
 import '../styles/Dashboard.css';
 
 const AiTakeAssessment = () => {
@@ -23,6 +24,19 @@ const AiTakeAssessment = () => {
     // Monitoring State
     const [aiStatus, setAiStatus] = useState('Monitoring Stopped');
     const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
+
+    // IDE State
+    const [codeOutput, setCodeOutput] = useState([]);
+    const [isExecuting, setIsExecuting] = useState(false);
+    const [selectedLanguage, setSelectedLanguage] = useState('javascript');
+    const [customInput, setCustomInput] = useState('');
+
+    const supportedLanguages = [
+        { id: 'javascript', name: 'JavaScript', version: '18.15.0', icon: 'fa-brands fa-js', color: '#F7DF1E' },
+        { id: 'python', name: 'Python', version: '3.10.0', icon: 'fa-brands fa-python', color: '#3776AB' },
+        { id: 'cpp', name: 'C++', version: '10.2.0', icon: 'fa-solid fa-code', color: '#00599C' },
+        { id: 'java', name: 'Java', version: '15.0.2', icon: 'fa-brands fa-java', color: '#007396' }
+    ];
 
     // Refs
     const videoRef = useRef(null);
@@ -73,6 +87,47 @@ const AiTakeAssessment = () => {
         } catch (err) {
             console.error('Intake error:', err);
             alert('Failed to start assessment. Please check your connection.');
+        }
+    };
+
+    const runCode = async (qId) => {
+        const code = answers[`coding_${qId}`] || "";
+        if (!code.trim()) return;
+
+        setIsExecuting(true);
+        setCodeOutput([{ type: 'info', content: `Compiling & running ${selectedLanguage}...` }]);
+
+        try {
+            const langData = supportedLanguages.find(l => l.id === selectedLanguage);
+            const response = await axios.post('https://emkc.org/api/v2/piston/execute', {
+                language: selectedLanguage === 'cpp' ? 'cpp' : selectedLanguage,
+                version: langData.version,
+                files: [{ content: code }],
+                stdin: customInput
+            });
+
+            const { run } = response.data;
+            const logs = [];
+
+            if (run.stdout) {
+                logs.push({ type: 'log', content: run.stdout });
+            }
+            if (run.stderr) {
+                logs.push({ type: 'error', content: run.stderr });
+            }
+
+            if (run.code === 0 && !run.stderr) {
+                logs.push({ type: 'success', content: `Execution successful (Exit Code 0).` });
+            } else {
+                logs.push({ type: 'error', content: `Exited with code ${run.code}.` });
+            }
+
+            setCodeOutput(logs);
+        } catch (err) {
+            setCodeOutput([{ type: 'error', content: `Connection Error: Failed to reach execution engine.` }]);
+            console.error(err);
+        } finally {
+            setIsExecuting(false);
         }
     };
 
@@ -176,6 +231,11 @@ const AiTakeAssessment = () => {
         return () => clearInterval(timerRef.current);
     }, [isStarted, timeLeft]);
 
+    // Clear console when switching questions
+    useEffect(() => {
+        setCodeOutput([]);
+    }, [currentQuestionIdx]);
+
     const handleNext = () => {
         const mcqs = assessment?.generated_content?.mcqs || [];
         const coding = assessment?.generated_content?.coding_challenges || [];
@@ -250,7 +310,11 @@ const AiTakeAssessment = () => {
                     <div style={{ width: '70px', height: '70px', background: '#F4F7FE', borderRadius: '20px', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem', color: '#4318FF', fontSize: '1.8rem' }}>
                         <i className="fa-solid fa-user-pen"></i>
                     </div>
-                    <h1 style={{ color: '#1B254B', fontSize: '2rem', fontWeight: '700', marginBottom: '0.5rem' }}>Candidate Intake</h1>
+                    <h1 style={{ color: '#1B254B', fontSize: '2rem', fontWeight: '700', marginBottom: '0.2rem' }}>Candidate Intake</h1>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: '#707EAE', fontSize: '0.85rem', marginBottom: '1.5rem' }}>
+                        <i className="fa-regular fa-clock"></i>
+                        <span>Generated on: <strong>{assessment.created_at}</strong></span>
+                    </div>
                     <p style={{ color: '#A3AED0' }}>Please fill in your details to begin the technical assessment.</p>
                 </div>
 
@@ -343,9 +407,17 @@ const AiTakeAssessment = () => {
                 </div>
             </div>
 
-            {/* Main Content Area - Balanced for vertical fit */}
-            <div style={{ flex: 1, padding: '15px 30px', display: 'flex', flexDirection: 'column', alignItems: 'center', overflow: 'hidden', justifyContent: 'center' }}>
-                <div style={{ maxWidth: '950px', width: '100%', maxHeight: '100%', display: 'flex', flexDirection: 'column' }}>
+            {/* Main Content Area - Responsive Split */}
+            <div style={{ flex: 1, padding: '10px 20px', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+                <div style={{
+                    maxWidth: currentQ.type === 'mcq' ? '950px' : '100%',
+                    width: '100%',
+                    margin: '0 auto',
+                    maxHeight: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flex: 1
+                }}>
 
                     {/* Question Card */}
                     <div className="card" style={{
@@ -360,7 +432,7 @@ const AiTakeAssessment = () => {
                     }}>
 
                         {/* Question Content - Further Optimized */}
-                        <div style={{ flex: 1, overflowY: 'auto', padding: '1.8rem 2.5rem' }}>
+                        <div style={{ flex: 1, overflowY: 'auto', padding: '1rem 1.5rem' }}>
                             {currentQ.type === 'mcq' ? (
                                 <div>
                                     <h2 style={{ color: '#1B254B', marginBottom: '1.2rem', fontSize: '1.2rem', fontWeight: '700', lineHeight: '1.4' }}>
@@ -386,38 +458,193 @@ const AiTakeAssessment = () => {
                                     </div>
                                 </div>
                             ) : (
-                                <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                                    <h2 style={{ color: '#1B254B', marginBottom: '0.6rem', fontSize: '1.2rem', fontWeight: '700' }}>{currentQ.title}</h2>
-                                    <p style={{ color: '#707EAE', fontSize: '0.95rem', lineHeight: '1.5', marginBottom: '1rem' }}>{currentQ.problem_statement}</p>
-                                    <textarea
-                                        placeholder="Write your solution code here..."
-                                        style={{
-                                            flex: 1,
-                                            width: '100%',
-                                            minHeight: '200px',
-                                            padding: '1rem',
+                                <div style={{ height: '100%', display: 'flex', gap: '2rem' }}>
+
+                                    {/* Left Panel: Problem Statement */}
+                                    <div style={{ flex: '0 0 320px', display: 'flex', flexDirection: 'column', gap: '1rem', borderRight: '1px solid #E0E5F2', paddingRight: '1.5rem' }}>
+                                        <div>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.8rem' }}>
+                                                <span style={{ padding: '2px 8px', background: '#F0F3FF', color: '#4318FF', borderRadius: '4px', fontSize: '0.65rem', fontWeight: '800', textTransform: 'uppercase' }}>Challenge</span>
+                                                <h2 style={{ color: '#1B254B', margin: 0, fontSize: '1.1rem', fontWeight: '800' }}>{currentQ.title}</h2>
+                                            </div>
+                                            <div style={{ color: '#707EAE', fontSize: '0.85rem', lineHeight: '1.5', background: '#F8F9FF', padding: '1rem', borderRadius: '12px', border: '1px solid #E0E5F2' }}>
+                                                {currentQ.problem_statement}
+                                            </div>
+
+                                            {/* Sample Testcases */}
+                                            {currentQ.examples && currentQ.examples.length > 0 && (
+                                                <div style={{ marginTop: '1rem' }}>
+                                                    <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Examples</div>
+                                                    {currentQ.examples.map((ex, i) => (
+                                                        <div key={i} style={{ background: '#F0F3FF', padding: '8px', borderRadius: '8px', marginBottom: '8px', border: '1px solid #E0E5F2' }}>
+                                                            <div style={{ fontSize: '0.75rem', color: '#4318FF', fontWeight: '700' }}>Input: <span style={{ color: '#1B254B', fontWeight: '500' }}>{ex.input}</span></div>
+                                                            <div style={{ fontSize: '0.75rem', color: '#05CD99', fontWeight: '700' }}>Output: <span style={{ color: '#1B254B', fontWeight: '500' }}>{ex.output}</span></div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+                                            <div style={{ fontSize: '0.7rem', fontWeight: '700', color: '#707EAE', textTransform: 'uppercase', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                <i className="fa-solid fa-keyboard" style={{ color: '#4318FF' }}></i> Custom Input (STDIN)
+                                            </div>
+                                            <textarea
+                                                style={{
+                                                    flex: 1,
+                                                    width: '100%',
+                                                    padding: '0.8rem',
+                                                    borderRadius: '12px',
+                                                    border: '1px solid #E0E5F2',
+                                                    background: '#F4F7FE',
+                                                    fontFamily: 'monospace',
+                                                    fontSize: '0.8rem',
+                                                    outline: 'none',
+                                                    resize: 'none',
+                                                    maxHeight: '120px'
+                                                }}
+                                                placeholder="Custom input..."
+                                                value={customInput}
+                                                onChange={(e) => setCustomInput(e.target.value)}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    {/* Right Panel: Editor & Console */}
+                                    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+
+                                        {/* Editor Header: Language Switcher Dropdown */}
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#F8F9FF', padding: '0.5rem 1rem', borderRadius: '10px', border: '1px solid #E0E5F2' }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                                <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#707EAE' }}>LANGUAGE:</span>
+                                                <select
+                                                    value={selectedLanguage}
+                                                    onChange={(e) => setSelectedLanguage(e.target.value)}
+                                                    style={{
+                                                        padding: '6px 15px',
+                                                        borderRadius: '8px',
+                                                        border: '1px solid #E0E5F2',
+                                                        fontSize: '0.8rem',
+                                                        fontWeight: '700',
+                                                        color: '#4318FF',
+                                                        background: 'white',
+                                                        outline: 'none',
+                                                        cursor: 'pointer'
+                                                    }}
+                                                >
+                                                    {supportedLanguages.map(lang => (
+                                                        <option key={lang.id} value={lang.id}>
+                                                            {lang.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
+                                            <div style={{ fontSize: '0.7rem', color: '#A3AED0', fontWeight: '500' }}>
+                                                Theme: <span style={{ color: '#1B254B', fontWeight: '700' }}>VS Dark</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Monaco Editor Container - Expanded */}
+                                        <div style={{
+                                            flex: '1 1 500px', // Allow it to grow and set a healthy base height
+                                            minHeight: '400px',
+                                            border: '1px solid #E0E5F2',
+                                            borderRadius: '16px',
+                                            overflow: 'hidden',
+                                            background: '#1e1e1e',
+                                            boxShadow: '0 4px 15px rgba(0,0,0,0.05)'
+                                        }}>
+                                            <Editor
+                                                height="100%"
+                                                language={selectedLanguage}
+                                                theme="vs-dark"
+                                                value={answers[`coding_${currentQ.id}`] || currentQ.starter_code || (selectedLanguage === 'python' ? "# Write your python code here..." : "// Write your code here...")}
+                                                onChange={(val) => handleAnswerChange(`coding_${currentQ.id}`, val)}
+                                                options={{
+                                                    fontSize: 14,
+                                                    minimap: { enabled: false },
+                                                    scrollbar: { vertical: 'hidden', horizontal: 'hidden' },
+                                                    lineNumbers: 'on',
+                                                    roundedSelection: true,
+                                                    scrollBeyondLastLine: false,
+                                                    automaticLayout: true,
+                                                    padding: { top: 20 }
+                                                }}
+                                            />
+                                        </div>
+
+                                        {/* Compiler Controls & Simplified Output Area */}
+                                        <div style={{
+                                            flexShrink: 0,
+                                            background: '#FFFFFF',
                                             borderRadius: '12px',
-                                            border: '2px solid #E0E5F2',
-                                            fontFamily: 'Fira Code, Monaco, monospace',
-                                            fontSize: '0.9rem',
-                                            outline: 'none',
-                                            background: '#F8F9FF',
-                                            transition: 'border-color 0.2s',
-                                            resize: 'none'
-                                        }}
-                                        value={answers[`coding_${currentQ.id}`] || ''}
-                                        onChange={(e) => handleAnswerChange(`coding_${currentQ.id}`, e.target.value)}
-                                        onFocus={(e) => e.target.style.borderColor = '#4318FF'}
-                                        onBlur={(e) => e.target.style.borderColor = '#E0E5F2'}
-                                    ></textarea>
+                                            padding: '1rem',
+                                            border: '1px solid #E0E5F2'
+                                        }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.8rem' }}>
+                                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#1B254B', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                    <i className="fa-solid fa-square-poll-horizontal" style={{ color: '#4318FF' }}></i> Results
+                                                </div>
+                                                <button
+                                                    onClick={() => runCode(currentQ.id)}
+                                                    disabled={isExecuting}
+                                                    style={{
+                                                        padding: '0.6rem 1.5rem',
+                                                        background: '#4318FF',
+                                                        color: 'white',
+                                                        border: 'none',
+                                                        borderRadius: '8px',
+                                                        fontSize: '0.85rem',
+                                                        fontWeight: '800',
+                                                        cursor: 'pointer',
+                                                        display: 'flex',
+                                                        alignItems: 'center',
+                                                        gap: '8px',
+                                                        boxShadow: '0 4px 15px rgba(67, 24, 255, 0.2)',
+                                                        transition: 'all 0.2s'
+                                                    }}
+                                                >
+                                                    {isExecuting ? <i className="fa-solid fa-spinner fa-spin"></i> : <i className="fa-solid fa-play"></i>}
+                                                    {isExecuting ? 'Running...' : 'Run & Test'}
+                                                </button>
+                                            </div>
+
+                                            <div style={{
+                                                padding: '0.5rem 0',
+                                                maxHeight: '120px',
+                                                overflowY: 'auto',
+                                                fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                fontSize: '0.85rem'
+                                            }}>
+                                                {codeOutput.length === 0 ? (
+                                                    <div style={{ color: '#A3AED0', fontStyle: 'italic' }}>Output will be displayed here...</div>
+                                                ) : (
+                                                    codeOutput.map((log, i) => (
+                                                        <div key={i} style={{
+                                                            color: log.type === 'error' ? '#E53E3E' : log.type === 'success' ? '#05CD99' : log.type === 'info' ? '#4318FF' : '#1B254B',
+                                                            marginBottom: '4px',
+                                                            display: 'flex',
+                                                            gap: '10px',
+                                                            lineHeight: '1.4',
+                                                            background: log.type === 'error' ? '#FFF5F5' : 'transparent',
+                                                            padding: log.type === 'error' ? '4px 8px' : '0',
+                                                            borderRadius: '4px'
+                                                        }}>
+                                                            <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-all' }}>{log.content}</pre>
+                                                        </div>
+                                                    ))
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             )}
                         </div>
 
-                        {/* Navigation Footer - Compact & Balanced */}
+                        {/* Navigation Footer - Slimmer & Clean */}
                         <div style={{
                             flexShrink: 0,
-                            padding: '1.2rem 3rem',
+                            padding: '0.6rem 2rem',
                             background: '#F8F9FF',
                             borderTop: '1px solid #E0E5F2',
                             display: 'flex',
@@ -429,20 +656,20 @@ const AiTakeAssessment = () => {
                                 onClick={() => setCurrentQuestionIdx(prev => Math.max(0, prev - 1))}
                                 disabled={currentQuestionIdx === 0}
                                 style={{
-                                    padding: '0.8rem 2rem',
+                                    padding: '0.5rem 1.5rem',
                                     background: 'white',
                                     color: currentQuestionIdx === 0 ? '#A0AEC0' : '#4318FF',
-                                    border: '2px solid',
+                                    border: '1px solid',
                                     borderColor: currentQuestionIdx === 0 ? '#E2E8F0' : '#4318FF',
-                                    borderRadius: '12px',
-                                    fontSize: '1rem',
+                                    borderRadius: '8px',
+                                    fontSize: '0.85rem',
                                     fontWeight: '700',
                                     cursor: currentQuestionIdx === 0 ? 'not-allowed' : 'pointer',
                                     transition: 'all 0.2s',
                                     visibility: currentQuestionIdx === 0 ? 'hidden' : 'visible'
                                 }}
                             >
-                                <i className="fa-solid fa-arrow-left" style={{ marginRight: '10px' }}></i> Previous
+                                <i className="fa-solid fa-arrow-left" style={{ marginRight: '8px' }}></i> Previous
                             </button>
 
                             {/* Next / Submit Button */}
@@ -450,36 +677,36 @@ const AiTakeAssessment = () => {
                                 <button
                                     onClick={handleNext}
                                     style={{
-                                        padding: '0.8rem 2.8rem',
+                                        padding: '0.5rem 2rem',
                                         background: 'linear-gradient(135deg, #4318FF 0%, #7551FF 100%)',
                                         color: 'white',
                                         border: 'none',
-                                        borderRadius: '12px',
-                                        fontSize: '1.1rem',
+                                        borderRadius: '8px',
+                                        fontSize: '0.9rem',
                                         fontWeight: '700',
                                         cursor: 'pointer',
-                                        boxShadow: '0 8px 20px rgba(67, 24, 255, 0.2)'
+                                        boxShadow: '0 4px 10px rgba(67, 24, 255, 0.15)'
                                     }}
                                 >
-                                    Next <i className="fa-solid fa-arrow-right" style={{ marginLeft: '10px' }}></i>
+                                    Next <i className="fa-solid fa-arrow-right" style={{ marginLeft: '8px' }}></i>
                                 </button>
                             ) : (
                                 <button
                                     onClick={handleSubmit} disabled={isSubmitting}
                                     style={{
-                                        padding: '0.8rem 3.5rem',
+                                        padding: '0.5rem 2.5rem',
                                         background: '#05CD99',
                                         color: 'white',
                                         border: 'none',
-                                        borderRadius: '12px',
-                                        fontSize: '1.1rem',
+                                        borderRadius: '8px',
+                                        fontSize: '0.9rem',
                                         fontWeight: '700',
                                         cursor: 'pointer',
-                                        boxShadow: '0 8px 20px rgba(5, 205, 153, 0.2)',
+                                        boxShadow: '0 4px 10px rgba(5, 205, 153, 0.15)',
                                         opacity: isSubmitting ? 0.7 : 1
                                     }}
                                 >
-                                    {isSubmitting ? 'Submitting...' : 'Submit'} <i className="fa-solid fa-paper-plane" style={{ marginLeft: '10px' }}></i>
+                                    {isSubmitting ? 'Submitting...' : 'Submit'} <i className="fa-solid fa-paper-plane" style={{ marginLeft: '8px' }}></i>
                                 </button>
                             )}
                         </div>

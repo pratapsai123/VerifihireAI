@@ -6,6 +6,7 @@ class Assessment(models.Model):
         ('SCHEDULED', 'Scheduled'),
         ('ONGOING', 'Ongoing'),
         ('COMPLETED', 'Completed'),
+        ('FAILED', 'Failed'),
     ]
 
     job_description = models.TextField()
