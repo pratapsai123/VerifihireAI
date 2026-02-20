@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import HumanAvatar from '../components/HumanAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
 
@@ -533,7 +534,9 @@ const AiInterviewSession = () => {
                     <div style={{ marginTop: '20px', textAlign: 'center', width: '100%' }}>
                         <div className="ai-status-badge"><span className="speaking-indicator"></span>{aiStatus}</div>
                     </div>
-                    <div className={`ai-full-body ${isSpeaking ? 'speaking' : ''}`}></div>
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '0.5rem' }}>
+                        <HumanAvatar isSpeaking={isSpeaking} width={260} height={300} />
+                    </div>
                 </div>
 
                 <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
