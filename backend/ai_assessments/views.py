@@ -120,25 +120,30 @@ class GenerateAssessmentView(APIView):
                 difficulty_level=difficulty
             )
 
+            # Cap overly ambitious coding counts to prevent AI hallucinations/timeouts
+            safe_coding_count = min(coding_count, 3)
+
             prompt = f"""
-            Act as an expert technical recruiter. Create a {difficulty} difficulty technical assessment for a candidate based on the following:
+            Act as an expert technical recruiter. Create a {difficulty} difficulty technical assessment.
             Job Description: {job_description}
             Required Skills: {required_skills}
             
-            Generate:
-            1. {mcq_count} Multiple Choice Questions (MCQs). Each MCQ must have:
-               - "question": string
-               - "options": list of 4 strings
-               - "answer": string (must match one of the options exactly)
-            2. {coding_count} Coding Challenges. Each challenge must have:
-               - "title": string
-               - "problem_statement": string (DETAILED description, at least 2 paragraphs, explaining the scenario, edge cases, and requirements clearly like LeetCode/HackerRank)
-               - "input_format": string (e.g., "The first line contains an integer N...")
-               - "output_format": string (e.g., "Return a list of integers...")
-               - "constraints": list of strings (e.g., "1 <= N <= 10^5")
-               - "example_input": string (e.g., "5\n1 2 3 4 5")
-               - "example_output": string (e.g., "15")
-               - "explanation": string (Step-by-step logic for the example)
+            TASK 1: Generate {mcq_count} Multiple Choice Questions (MCQs).
+            Each MCQ object must have:
+            - "question": string
+            - "options": list of 4 strings
+            - "answer": string (must match one of the options exactly)
+
+            TASK 2: Generate {safe_coding_count} Coding Challenges.
+            Each challenge object must have:
+            - "title": string
+            - "problem_statement": string (DETAILED description, at least 2 paragraphs, explaining the scenario, edge cases, and requirements clearly like LeetCode/HackerRank)
+            - "input_format": string (e.g., "The first line contains an integer N...")
+            - "output_format": string (e.g., "Return a list of integers...")
+            - "constraints": list of strings (e.g., "1 <= N <= 10^5")
+            - "example_input": string (e.g., "5\\n1 2 3 4 5")
+            - "example_output": string (e.g., "15")
+            - "explanation": string (Step-by-step logic for the example)
                - "starter_code_java": string (MUST be a complete class structure with imports, e.g., "import java.util.*;\nclass Solution {{\n    public static int solve(int[] arr) {{\n        // Write logic here\n        return 0;\n    }}\n}}")
                - "starter_code_python": string (MUST be a function definition, e.g., "def solve(arr):\n    # Write logic here\n    pass")
                - "test_cases": list of objects for hidden evaluation: {{ "input": "...", "output": "..." }}
