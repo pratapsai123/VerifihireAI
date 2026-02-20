@@ -32,7 +32,10 @@ const AiInterview = () => {
         setFile(null);
     };
 
-    const [interviewTime, setInterviewTime] = useState('');
+    const [fromDate, setFromDate] = useState('');
+    const [fromTime, setFromTime] = useState('');
+    const [untilDate, setUntilDate] = useState('');
+    const [untilTime, setUntilTime] = useState('');
 
     const formatTimeAMPM = (timeStr) => {
         if (!timeStr) return '';
@@ -59,8 +62,16 @@ const AiInterview = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('job_description', jobDescription);
-        if (interviewTime) {
-            formData.append('interview_time', formatTimeAMPM(interviewTime));
+
+        // Convert local datetime to UTC ISO string
+        if (fromDate && fromTime) {
+            const fromUtc = new Date(`${fromDate}T${fromTime}`).toISOString();
+            formData.append('available_from', fromUtc);
+            formData.append('interview_time', formatTimeAMPM(fromTime)); // Legacy display field
+        }
+        if (untilDate && untilTime) {
+            const untilUtc = new Date(`${untilDate}T${untilTime}`).toISOString();
+            formData.append('available_until', untilUtc);
         }
 
         try {
@@ -291,22 +302,35 @@ const AiInterview = () => {
                                     </div>
                                 )}
 
-                                {/* Time Selection Input */}
-                                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                    <label style={{ fontSize: '0.9rem', fontWeight: '700', color: '#475569' }}>Select Interview Start Time (AM/PM)</label>
-                                    <input
-                                        type="time"
-                                        value={interviewTime}
-                                        onChange={(e) => setInterviewTime(e.target.value)}
-                                        style={{
-                                            padding: '1rem',
-                                            borderRadius: '16px',
-                                            border: '1px solid #E2E8F0',
-                                            fontSize: '1rem',
-                                            background: '#F8FAFC',
-                                            color: '#1E293B'
-                                        }}
-                                    />
+                                {/* Availability Selection */}
+                                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1.5rem', background: '#F8FAFC', padding: '1.5rem', borderRadius: '24px', border: '1px solid #E2E8F0' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
+                                        <div style={{ width: '32px', height: '32px', background: '#EEF2FF', color: '#4F46E5', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem' }}>
+                                            <i className="fa-solid fa-calendar-days"></i>
+                                        </div>
+                                        <h4 style={{ fontSize: '1rem', fontWeight: '800', color: '#1E293B', margin: 0 }}>Availability Window</h4>
+                                    </div>
+
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                            <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B' }}>Available From</label>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} style={{ flex: 2, padding: '0.75rem', borderRadius: '12px', border: '1px solid #E2E8F0' }} />
+                                                <input type="time" value={fromTime} onChange={(e) => setFromTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', borderRadius: '12px', border: '1px solid #E2E8F0' }} />
+                                            </div>
+                                        </div>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                            <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748B' }}>Available Until</label>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <input type="date" value={untilDate} onChange={(e) => setUntilDate(e.target.value)} style={{ flex: 2, padding: '0.75rem', borderRadius: '12px', border: '1px solid #E2E8F0' }} />
+                                                <input type="time" value={untilTime} onChange={(e) => setUntilTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', borderRadius: '12px', border: '1px solid #E2E8F0' }} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p style={{ margin: 0, fontSize: '0.75rem', color: '#94A3B8' }}>
+                                        <i className="fa-solid fa-circle-info" style={{ marginRight: '4px' }}></i>
+                                        Candidates will only be able to start their interview during this period.
+                                    </p>
                                 </div>
 
                                 <button type="submit" className="primary-link-btn" disabled={isUploading} style={{

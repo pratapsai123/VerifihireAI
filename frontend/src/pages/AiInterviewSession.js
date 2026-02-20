@@ -534,8 +534,8 @@ const AiInterviewSession = () => {
                     <div style={{ marginTop: '20px', textAlign: 'center', width: '100%' }}>
                         <div className="ai-status-badge"><span className="speaking-indicator"></span>{aiStatus}</div>
                     </div>
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '0.5rem' }}>
-                        <HumanAvatar isSpeaking={isSpeaking} width={260} height={300} />
+                    <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', paddingBottom: '1rem' }}>
+                        <HumanAvatar isSpeaking={isSpeaking} width={320} height={360} />
                     </div>
                 </div>
 

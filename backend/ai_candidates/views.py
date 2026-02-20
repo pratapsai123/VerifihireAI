@@ -48,7 +48,9 @@ class BulkInviteView(APIView):
     def post(self, request):
         file = request.FILES.get('file')
         job_description = request.data.get('job_description')
-        batch_interview_time = request.data.get('interview_time') # Get batch time from request
+        available_from = request.data.get('available_from')
+        available_until = request.data.get('available_until')
+        batch_interview_time = request.data.get('interview_time') # Get batch time from request (legacy/fallback)
         
         if not file or not job_description:
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
@@ -79,18 +81,42 @@ class BulkInviteView(APIView):
                     full_name=name,
                     email=email,
                     interview_time=batch_interview_time,
+                    available_from=available_from if available_from else None,
+                    available_until=available_until if available_until else None,
                     job_description=job_description,
                     status='Invited'
                 )
                 link = f"http://localhost:3000/interview-start/{candidate.id}"
+                
+                # Format time info for email
+                time_range_info = ""
+                if candidate.available_from and candidate.available_until:
+                    try:
+                        # Ensure we convert to local time safely even if naive (though should be aware)
+                        start_dt = candidate.available_from
+                        end_dt = candidate.available_until
+                        
+                        if timezone.is_naive(start_dt):
+                            start_dt = timezone.make_aware(start_dt)
+                        if timezone.is_naive(end_dt):
+                            end_dt = timezone.make_aware(end_dt)
+                            
+                        from_local = start_dt.astimezone(timezone.get_current_timezone())
+                        until_local = end_dt.astimezone(timezone.get_current_timezone())
+                        time_range_info = f"\n\nYour interview window is from {from_local.strftime('%d %b %Y, %I:%M %p')} to {until_local.strftime('%d %b %Y, %I:%M %p')}."
+                    except Exception as tz_err:
+                        logger.warning(f"Timezone conversion failed for candidate {candidate.id}: {tz_err}")
+                        time_range_info = f"\n\nYour interview is scheduled for {batch_interview_time}." if batch_interview_time else ""
+                elif batch_interview_time:
+                    time_range_info = f"\n\nYour interview is scheduled for {batch_interview_time}."
+
                 invited_candidates.append({
                     "id": candidate.id, "name": name, "email": email, "link": link, "time": batch_interview_time
                 })
                 
                 try:
                     subject = "Invite to VerifiHireAI Interview Session"
-                    time_info = f"\n\nYour interview is scheduled to start at {batch_interview_time}." if batch_interview_time else ""
-                    message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.{time_info}\n\nPlease click the link below to verify your details and start your session:\n{link}"
+                    message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.{time_range_info}\n\nPlease click the link below to verify your details and start your session:\n{link}"
                     send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
                     logger.info(f"Email sent to {email}")
                 except Exception as mail_error:
@@ -130,32 +156,57 @@ class ResumeMatchView(APIView):
             return Response({"error": "Job description and either resume or candidate_id are required"}, status=status.HTTP_400_BAD_REQUEST)
 
         # --- Interview Time Lock Check ---
-        if candidate and candidate.interview_time:
-            try:
-                scheduled_str = candidate.interview_time.strip()
-                scheduled_dt = None
-                for fmt in (['%I:%M %p', '%I %p', '%H:%M']):
-                    try:
-                        scheduled_dt = datetime.strptime(scheduled_str, fmt)
-                        break
-                    except ValueError:
-                        continue
-                if scheduled_dt:
-                    now = datetime.now()
-                    scheduled_today = now.replace(
-                        hour=scheduled_dt.hour,
-                        minute=scheduled_dt.minute,
-                        second=0, microsecond=0
-                    )
-                    window_end = scheduled_today + timedelta(minutes=30)
-                    if now < scheduled_today or now > window_end:
-                        return Response({
-                            "error": f"Interview not available. Your session is scheduled at {candidate.interview_time}. Please return at that time.",
-                            "scheduled_time": candidate.interview_time,
-                            "time_locked": True
-                        }, status=status.HTTP_403_FORBIDDEN)
-            except Exception as time_err:
-                logger.warning(f"Could not enforce time lock for candidate {candidate_id}: {time_err}")
+        now = timezone.now()
+        if candidate:
+            if candidate.available_from and now < candidate.available_from:
+                try:
+                    start_dt = candidate.available_from
+                    if timezone.is_naive(start_dt):
+                        start_dt = timezone.make_aware(start_dt)
+                    from_local = start_dt.astimezone(timezone.get_current_timezone())
+                    return Response({
+                        "error": f"Interview not yet available. It starts at {from_local.strftime('%I:%M %p')} on {from_local.strftime('%d %b %Y')}.",
+                        "time_locked": True
+                    }, status=status.HTTP_403_FORBIDDEN)
+                except Exception:
+                    return Response({
+                        "error": "Interview not yet available. Please return at the scheduled time.",
+                        "time_locked": True
+                    }, status=status.HTTP_403_FORBIDDEN)
+            
+            if candidate.available_until and now > candidate.available_until:
+                return Response({
+                    "error": "This interview window has closed. Please contact HR.",
+                    "time_locked": True
+                }, status=status.HTTP_403_FORBIDDEN)
+
+            # Legacy fallback for interview_time (string-based)
+            if not candidate.available_from and candidate.interview_time:
+                try:
+                    scheduled_str = candidate.interview_time.strip()
+                    scheduled_dt = None
+                    for fmt in (['%I:%M %p', '%I %p', '%H:%M']):
+                        try:
+                            scheduled_dt = datetime.strptime(scheduled_str, fmt)
+                            break
+                        except ValueError:
+                            continue
+                    if scheduled_dt:
+                        now_local = datetime.now() # naive for legacy logic
+                        scheduled_today = now_local.replace(
+                            hour=scheduled_dt.hour,
+                            minute=scheduled_dt.minute,
+                            second=0, microsecond=0
+                        )
+                        window_end = scheduled_today + timedelta(minutes=30)
+                        if now_local < scheduled_today or now_local > window_end:
+                            return Response({
+                                "error": f"Interview not available. Your session is scheduled at {candidate.interview_time}. Please return at that time.",
+                                "scheduled_time": candidate.interview_time,
+                                "time_locked": True
+                            }, status=status.HTTP_403_FORBIDDEN)
+                except Exception as time_err:
+                    logger.warning(f"Could not enforce legacy time lock for candidate {candidate_id}: {time_err}")
         # ----------------------------------
 
         try:

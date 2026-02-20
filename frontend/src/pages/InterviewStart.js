@@ -97,7 +97,36 @@ const InterviewStart = () => {
     }, [token]);
 
     const checkWindow = useCallback(() => {
-        if (!candidate?.interview_time) {
+        if (!candidate) return;
+
+        const now = new Date();
+
+        // Priority: available_from/until (ISO)
+        if (candidate.available_from) {
+            const start = new Date(candidate.available_from);
+            const end = candidate.available_until ? new Date(candidate.available_until) : null;
+
+            if (now < start) {
+                setTimeAllowed(false);
+                setCountdown(Math.ceil((start - now) / 1000));
+                setPastWindow(false);
+                return;
+            }
+            if (end && now > end) {
+                setTimeAllowed(false);
+                setCountdown(0);
+                setPastWindow(true);
+                return;
+            }
+            // Within window
+            setTimeAllowed(true);
+            setCountdown(0);
+            setPastWindow(false);
+            return;
+        }
+
+        // Legacy fallback: interview_time (string)
+        if (!candidate.interview_time) {
             setTimeAllowed(true);
             return;
         }
@@ -189,7 +218,12 @@ const InterviewStart = () => {
                     <p style={{ margin: '0.5rem 0 0 0', color: '#718096', fontSize: '0.9rem', display: 'flex', alignItems: 'center' }}>
                         <i className="fa-regular fa-envelope" style={{ marginRight: '10px', color: '#667eea' }}></i> {candidate?.email}
                     </p>
-                    {candidate?.interview_time && (
+                    {candidate?.available_from ? (
+                        <p style={{ margin: '0.5rem 0 0 0', color: '#667eea', fontWeight: '600', fontSize: '0.9rem', display: 'flex', alignItems: 'center' }}>
+                            <i className="fa-regular fa-clock" style={{ marginRight: '10px' }}></i>
+                            Window: {new Date(candidate.available_from).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })} - {candidate.available_until ? new Date(candidate.available_until).toLocaleTimeString([], { timeStyle: 'short' }) : '∞'}
+                        </p>
+                    ) : candidate?.interview_time && (
                         <p style={{ margin: '0.5rem 0 0 0', color: '#667eea', fontWeight: '600', fontSize: '0.9rem', display: 'flex', alignItems: 'center' }}>
                             <i className="fa-regular fa-clock" style={{ marginRight: '10px' }}></i>
                             Scheduled: {candidate.interview_time}
@@ -210,14 +244,14 @@ const InterviewStart = () => {
                             <>
                                 <p style={{ margin: '0.5rem 0 0', fontWeight: '700', color: '#c53030' }}>Interview Window Closed</p>
                                 <p style={{ margin: '0.25rem 0 0', color: '#718096', fontSize: '0.85rem' }}>
-                                    The 30-minute window for your {candidate.interview_time} interview has passed. Please contact HR.
+                                    The availability window for this interview has passed. Please contact HR.
                                 </p>
                             </>
                         ) : (
                             <>
                                 <p style={{ margin: '0.5rem 0 0', fontWeight: '700', color: '#b7791f' }}>Interview Not Yet Available</p>
                                 <p style={{ margin: '0.25rem 0 0', color: '#718096', fontSize: '0.85rem' }}>
-                                    Your interview starts at <strong>{candidate.interview_time}</strong>. Come back then!
+                                    Your interview starts at <strong>{candidate.available_from ? new Date(candidate.available_from).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : candidate.interview_time}</strong>. Come back then!
                                 </p>
                                 <p style={{ margin: '0.5rem 0 0', fontSize: '1.4rem', fontWeight: '800', color: '#d69e2e', letterSpacing: '0.05em' }}>
                                     {formatCountdown(countdown)}
@@ -265,7 +299,7 @@ const InterviewStart = () => {
                     }}
                 >
                     {isStarting ? <><i className="fa-solid fa-spinner fa-spin"></i> Processing...</> :
-                        !timeAllowed ? (pastWindow ? '⛔ Window Closed' : `⏳ Opens at ${candidate?.interview_time}`) :
+                        !timeAllowed ? (pastWindow ? '⛔ Window Closed' : `⏳ Opens at ${candidate.available_from ? new Date(candidate.available_from).toLocaleTimeString([], { timeStyle: 'short' }) : candidate.interview_time}`) :
                             'Start Interview Now'}
                 </button>
             </div>

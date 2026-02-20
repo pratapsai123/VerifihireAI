@@ -31,250 +31,198 @@ const HumanAvatar = ({ isSpeaking = false, width = 280, height = 320 }) => {
     const blinkRef = useRef(0);            // 0=open eye, 1=closed
     const blinkTimerRef = useRef(0);
     const blinkStateRef = useRef(0);       // 0=open, 1=closing, 2=closed, 3=opening
+    const breatheRef = useRef(0);          // subtle breathing animation
 
     const draw = useCallback((ctx, w, h) => {
         const cx = w / 2;
+        const breathe = breatheRef.current * 2.5;
         ctx.clearRect(0, 0, w, h);
 
-        // ── Background gradient ──
-        const bg = ctx.createLinearGradient(0, 0, 0, h);
-        bg.addColorStop(0, '#e8f0fe');
-        bg.addColorStop(1, '#c7d7fc');
+        // ── Configuration ──
+        const skinBase = '#f3d2c1';
+        const skinShadow = '#e0b0a0';
+        const hairColor = '#0f172a';
+        const suitColor = '#1e293b';
+
+        const headW = 100;
+        const headH = 140;
+        const headTopY = h / 2 - 80 + breathe;
+        const headCenterY = headTopY + headH / 2;
+
+        // ── 1. Background ──
+        const bg = ctx.createLinearGradient(0, 0, w, h);
+        bg.addColorStop(0, '#ffffff');
+        bg.addColorStop(1, '#f1f5f9');
         ctx.fillStyle = bg;
         ctx.fillRect(0, 0, w, h);
 
-        // ── Shoulders ──
-        ctx.fillStyle = '#1a3a6b';
+        // ── 2. Back Hair (Behind the head) ──
+        ctx.fillStyle = hairColor;
         ctx.beginPath();
-        ctx.moveTo(cx - 90, h);
-        ctx.bezierCurveTo(cx - 90, h - 60, cx - 50, h - 80, cx, h - 85);
-        ctx.bezierCurveTo(cx + 50, h - 80, cx + 90, h - 60, cx + 90, h);
+        ctx.ellipse(cx, headCenterY - 10, headW / 2 + 8, headH / 2 + 10, 0, 0, Math.PI * 2);
+        ctx.fill();
+
+        // ── 3. Shoulders & Suit ──
+        const shoulderY = headCenterY + headH / 2 + 10;
+        ctx.fillStyle = suitColor;
+        ctx.beginPath();
+        ctx.moveTo(cx - 130, h);
+        ctx.bezierCurveTo(cx - 110, shoulderY + 20, cx - 70, shoulderY - 5, cx, shoulderY + 5);
+        ctx.bezierCurveTo(cx + 70, shoulderY - 5, cx + 110, shoulderY + 20, cx + 130, h);
         ctx.closePath();
         ctx.fill();
 
-        // Shirt collar white
+        // Lapels
+        ctx.fillStyle = '#334155';
+        ctx.beginPath();
+        ctx.moveTo(cx - 40, shoulderY + 10);
+        ctx.lineTo(cx, shoulderY + 50);
+        ctx.lineTo(cx + 40, shoulderY + 10);
+        ctx.lineTo(cx, shoulderY + 20);
+        ctx.closePath();
+        ctx.fill();
+
+        // Shirt
         ctx.fillStyle = '#ffffff';
         ctx.beginPath();
-        ctx.moveTo(cx - 18, h - 82);
-        ctx.lineTo(cx, h - 60);
-        ctx.lineTo(cx + 18, h - 82);
+        ctx.moveTo(cx - 15, shoulderY + 10);
+        ctx.lineTo(cx, shoulderY + 35);
+        ctx.lineTo(cx + 15, shoulderY + 10);
         ctx.closePath();
         ctx.fill();
 
         // Tie
-        ctx.fillStyle = '#1a5276';
+        ctx.fillStyle = '#4f46e5';
         ctx.beginPath();
-        ctx.moveTo(cx - 8, h - 82);
-        ctx.lineTo(cx, h - 60);
-        ctx.lineTo(cx + 8, h - 82);
-        ctx.lineTo(cx + 5, h - 88);
-        ctx.lineTo(cx - 5, h - 88);
+        ctx.moveTo(cx - 5, shoulderY + 10);
+        ctx.lineTo(cx, shoulderY + 25);
+        ctx.lineTo(cx + 5, shoulderY + 10);
+        ctx.lineTo(cx + 3, shoulderY + 45);
+        ctx.lineTo(cx - 3, shoulderY + 45);
         ctx.closePath();
         ctx.fill();
 
-        // ── Neck ──
-        const skinLight = '#f0c27f';
-        const skinMid = '#e8a96e';
-        const skinDark = '#c68642';
-
-        ctx.fillStyle = skinMid;
+        // ── 4. Neck ──
+        ctx.fillStyle = skinShadow;
         ctx.beginPath();
-        ctx.roundRect(cx - 18, h - 130, 36, 50, 8);
+        ctx.roundRect(cx - 22, headCenterY + headH / 2 - 20, 44, 45, 5);
         ctx.fill();
 
-        // ── Head ──
-        const headY = h - 270;
-        const headH = 155;
-        const headW = 110;
-        ctx.fillStyle = skinLight;
+        // ── 5. Head Face (Skin) ──
+        ctx.fillStyle = skinBase;
         ctx.beginPath();
-        ctx.ellipse(cx, headY + headH / 2, headW / 2, headH / 2, 0, 0, Math.PI * 2);
+        ctx.ellipse(cx, headCenterY, headW / 2, headH / 2, 0, 0, Math.PI * 2);
         ctx.fill();
 
-        // Head shadow / depth
-        const headGrad = ctx.createRadialGradient(cx - 15, headY + 40, 10, cx, headY + headH / 2, headW / 2);
-        headGrad.addColorStop(0, 'rgba(255,255,255,0.18)');
-        headGrad.addColorStop(1, 'rgba(180,100,40,0.12)');
-        ctx.fillStyle = headGrad;
-        ctx.beginPath();
-        ctx.ellipse(cx, headY + headH / 2, headW / 2, headH / 2, 0, 0, Math.PI * 2);
+        // Face Shadow/Shading
+        const faceGrad = ctx.createRadialGradient(cx - 10, headCenterY - 30, 10, cx, headCenterY, headW / 2);
+        faceGrad.addColorStop(0, 'rgba(255,255,255,0.25)');
+        faceGrad.addColorStop(1, 'rgba(0,0,0,0.05)');
+        ctx.fillStyle = faceGrad;
         ctx.fill();
 
-        // ── Hair ──
-        ctx.fillStyle = '#2c1810';
+        // ── 6. Front Hair (Sitting on the forehead) ──
+        ctx.fillStyle = hairColor;
+        // Top cap (overlaps the top edge of head)
         ctx.beginPath();
-        ctx.ellipse(cx, headY + 5, headW / 2, 38, 0, Math.PI, Math.PI * 2);
+        ctx.ellipse(cx, headTopY + 20, headW / 2 + 6, 40, 0, Math.PI, Math.PI * 2);
         ctx.fill();
-        // Side hair left
+        // Fringe
         ctx.beginPath();
-        ctx.ellipse(cx - headW / 2 + 10, headY + 55, 14, 30, -0.3, 0, Math.PI * 2);
-        ctx.fill();
-        // Side hair right
-        ctx.beginPath();
-        ctx.ellipse(cx + headW / 2 - 10, headY + 55, 14, 30, 0.3, 0, Math.PI * 2);
-        ctx.fill();
-
-        // ── Ears ──
-        ctx.fillStyle = skinMid;
-        ctx.beginPath();
-        ctx.ellipse(cx - headW / 2 + 2, headY + 80, 10, 15, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.ellipse(cx + headW / 2 - 2, headY + 80, 10, 15, 0, 0, Math.PI * 2);
+        ctx.moveTo(cx - headW / 2, headTopY + 20);
+        ctx.quadraticCurveTo(cx, headTopY + 35, cx + headW / 2, headTopY + 20);
+        ctx.quadraticCurveTo(cx, headTopY + 5, cx - headW / 2, headTopY + 20);
         ctx.fill();
 
-        // ── Eyebrows ──
-        const eyeY = headY + 65;
-        ctx.strokeStyle = '#3d1f0a';
-        ctx.lineWidth = 3;
+        // ── 7. Facial Features ──
+        const eyeY = headCenterY - 15;
+
+        // Brows
+        ctx.strokeStyle = '#2c1810';
+        ctx.lineWidth = 3.5;
         ctx.lineCap = 'round';
-        // Left brow
-        ctx.beginPath();
-        ctx.moveTo(cx - 38, eyeY - 20);
-        ctx.quadraticCurveTo(cx - 22, eyeY - 26, cx - 8, eyeY - 20);
-        ctx.stroke();
-        // Right brow
-        ctx.beginPath();
-        ctx.moveTo(cx + 8, eyeY - 20);
-        ctx.quadraticCurveTo(cx + 22, eyeY - 26, cx + 38, eyeY - 20);
-        ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx - 38, eyeY - 20); ctx.quadraticCurveTo(cx - 24, eyeY - 26, cx - 10, eyeY - 20); ctx.stroke();
+        ctx.beginPath(); ctx.moveTo(cx + 10, eyeY - 20); ctx.quadraticCurveTo(cx + 24, eyeY - 26, cx + 38, eyeY - 20); ctx.stroke();
 
-        // ── Eyes ──
+        // Eyes
         const blink = blinkRef.current;
-        const eyeOpenH = 11;
-        const eyeH = eyeOpenH * (1 - blink);
-
-        // Eye whites
+        const eyeH = 12 * (1 - blink);
         [-1, 1].forEach(side => {
-            const ex = cx + side * 23;
-            ctx.fillStyle = '#ffffff';
-            ctx.beginPath();
-            ctx.ellipse(ex, eyeY, 14, eyeH, 0, 0, Math.PI * 2);
-            ctx.fill();
-            // Iris
-            if (eyeH > 3) {
-                ctx.fillStyle = '#3d5a80';
-                ctx.beginPath();
-                ctx.ellipse(ex, eyeY, 8, Math.min(8, eyeH), 0, 0, Math.PI * 2);
-                ctx.fill();
+            const ex = cx + side * 24;
+            ctx.fillStyle = 'white';
+            ctx.beginPath(); ctx.ellipse(ex, eyeY, 14, eyeH, 0, 0, Math.PI * 2); ctx.fill();
+            if (eyeH > 2) {
+                // Iris
+                ctx.fillStyle = '#1e40af';
+                ctx.beginPath(); ctx.arc(ex, eyeY, 7.5, 0, Math.PI * 2); ctx.fill();
                 // Pupil
-                ctx.fillStyle = '#111';
-                ctx.beginPath();
-                ctx.ellipse(ex, eyeY, 4, Math.min(4, eyeH - 2), 0, 0, Math.PI * 2);
-                ctx.fill();
-                // Highlight
-                ctx.fillStyle = 'rgba(255,255,255,0.7)';
-                ctx.beginPath();
-                ctx.ellipse(ex + 2, eyeY - 2, 2, 2, 0, 0, Math.PI * 2);
-                ctx.fill();
+                ctx.fillStyle = '#000000';
+                ctx.beginPath(); ctx.arc(ex, eyeY, 3.5, 0, Math.PI * 2); ctx.fill();
+                // Sparkle
+                ctx.fillStyle = 'white';
+                ctx.beginPath(); ctx.arc(ex + 2, eyeY - 2, 2, 0, Math.PI * 2); ctx.fill();
             }
-            // Eyelid (upper)
-            ctx.strokeStyle = skinDark;
-            ctx.lineWidth = 1.5;
-            ctx.beginPath();
-            ctx.ellipse(ex, eyeY, 14, eyeH, 0, Math.PI, Math.PI * 2);
-            ctx.stroke();
+            // Lid line
+            ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+            ctx.lineWidth = 1;
+            ctx.beginPath(); ctx.ellipse(ex, eyeY, 14, eyeH, 0, Math.PI, Math.PI * 2); ctx.stroke();
         });
 
-        // ── Nose ──
-        const noseY = headY + 95;
-        ctx.strokeStyle = skinDark;
-        ctx.lineWidth = 1.5;
+        // Nose
+        const noseY = headCenterY + 15;
+        ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+        ctx.lineWidth = 2.5;
         ctx.beginPath();
         ctx.moveTo(cx, noseY);
-        ctx.quadraticCurveTo(cx + 8, noseY + 22, cx, noseY + 26);
+        ctx.quadraticCurveTo(cx + 6, noseY + 18, cx, noseY + 22);
         ctx.stroke();
-        // Nostrils
-        ctx.fillStyle = 'rgba(140,80,30,0.3)';
-        ctx.beginPath();
-        ctx.ellipse(cx - 9, noseY + 26, 6, 4, -0.4, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.ellipse(cx + 9, noseY + 26, 6, 4, 0.4, 0, Math.PI * 2);
-        ctx.fill();
 
-        // ── Mouth / Lip-sync ──
-        const mouthY = headY + 120;
-        const mouthOpen = mouthOpenRef.current;       // 0..1
-        const mouthOpenPx = mouthOpen * 16;           // max gap = 16px
+        // Mouth
+        const mouthY = headCenterY + 50;
+        const mouthOpen = mouthOpenRef.current;
+        const mouthOpenPx = mouthOpen * 16;
+        const lipW = 28;
 
-        const lipW = 26;
-
-        // Lower lip / chin background first
-        ctx.fillStyle = skinMid;
-        ctx.fillRect(cx - lipW - 4, mouthY, (lipW + 4) * 2, mouthOpenPx + 8);
-
-        // Teeth (only when open)
-        if (mouthOpen > 0.1) {
-            ctx.fillStyle = '#f8f8f8';
+        if (mouthOpen > 0.05) {
+            ctx.fillStyle = '#4c0519';
             ctx.beginPath();
-            ctx.roundRect(cx - lipW + 2, mouthY + 2, (lipW - 2) * 2, mouthOpenPx * 0.55, 3);
-            ctx.fill();
-            // Lower teeth
-            ctx.fillStyle = '#eeeeee';
-            ctx.beginPath();
-            ctx.roundRect(cx - lipW + 4, mouthY + mouthOpenPx * 0.55 - 2, (lipW - 4) * 2, mouthOpenPx * 0.4, 3);
-            ctx.fill();
-            // Inside mouth (dark)
-            ctx.fillStyle = 'rgba(80,20,10,0.6)';
-            ctx.beginPath();
-            ctx.roundRect(cx - lipW + 2, mouthY + 2, (lipW - 2) * 2, mouthOpenPx - 2, 3);
+            ctx.roundRect(cx - lipW + 2, mouthY, (lipW - 2) * 2, mouthOpenPx, 4);
             ctx.fill();
         }
 
-        // Upper lip
-        ctx.fillStyle = '#c0705a';
+        // Lips
+        ctx.fillStyle = '#d67161';
         ctx.beginPath();
-        ctx.moveTo(cx - lipW, mouthY + 2);
-        ctx.bezierCurveTo(cx - lipW / 2, mouthY - 6, cx, mouthY - 4, cx, mouthY);
-        ctx.bezierCurveTo(cx, mouthY - 4, cx + lipW / 2, mouthY - 6, cx + lipW, mouthY + 2);
-        ctx.quadraticCurveTo(cx, mouthY + 3, cx - lipW, mouthY + 2);
+        ctx.moveTo(cx - lipW, mouthY);
+        ctx.bezierCurveTo(cx - lipW / 2, mouthY - 4, cx, mouthY - 4, cx, mouthY);
+        ctx.bezierCurveTo(cx, mouthY - 4, cx + lipW / 2, mouthY - 4, cx + lipW, mouthY);
+        ctx.quadraticCurveTo(cx, mouthY + 2, cx - lipW, mouthY);
         ctx.fill();
 
-        // Lower lip
-        ctx.fillStyle = '#b86050';
+        ctx.fillStyle = '#ab3d33';
         ctx.beginPath();
         ctx.moveTo(cx - lipW, mouthY + mouthOpenPx);
-        ctx.quadraticCurveTo(cx, mouthY + mouthOpenPx + 10, cx + lipW, mouthY + mouthOpenPx);
-        ctx.quadraticCurveTo(cx, mouthY + mouthOpenPx + 4, cx - lipW, mouthY + mouthOpenPx);
+        ctx.quadraticCurveTo(cx, mouthY + mouthOpenPx + 8, cx + lipW, mouthY + mouthOpenPx);
+        ctx.quadraticCurveTo(cx, mouthY + mouthOpenPx + 2, cx - lipW, mouthY + mouthOpenPx);
         ctx.fill();
 
-        // Lip line crease
-        ctx.strokeStyle = 'rgba(120,40,30,0.5)';
-        ctx.lineWidth = 1;
-        ctx.beginPath();
-        ctx.moveTo(cx - lipW, mouthY + 2);
-        ctx.quadraticCurveTo(cx, mouthY + mouthOpenPx / 2 + 2 + mouthOpen * 2, cx + lipW, mouthY + 2);
-        ctx.stroke();
-
-        // Subtle cheek
-        ctx.fillStyle = 'rgba(230,140,100,0.12)';
-        ctx.beginPath();
-        ctx.ellipse(cx - 35, headY + 100, 18, 12, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.ellipse(cx + 35, headY + 100, 18, 12, 0, 0, Math.PI * 2);
-        ctx.fill();
-
-        // ── Speaking indicator ring ──
+        // ── 8. Ring & Badge ──
         if (isSpeaking) {
-            const pulse = 0.5 + 0.5 * Math.sin(timeRef.current * 0.08);
-            ctx.strokeStyle = `rgba(102,126,234,${0.5 + pulse * 0.4})`;
-            ctx.lineWidth = 3 + pulse * 2;
+            const pulse = 0.5 + 0.5 * Math.sin(timeRef.current * 0.1);
+            ctx.strokeStyle = `rgba(79, 70, 229, ${0.4 + pulse * 0.4})`;
+            ctx.lineWidth = 4;
             ctx.beginPath();
-            ctx.ellipse(cx, headY + headH / 2, headW / 2 + 10 + pulse * 5, headH / 2 + 6 + pulse * 3, 0, 0, Math.PI * 2);
+            ctx.ellipse(cx, headCenterY, headW / 2 + 15 + pulse * 5, headH / 2 + 10 + pulse * 3, 0, 0, Math.PI * 2);
             ctx.stroke();
         }
 
-        // Name badge at bottom
-        ctx.fillStyle = 'rgba(26,58,107,0.85)';
-        ctx.beginPath();
-        ctx.roundRect(cx - 60, h - 30, 120, 22, 8);
-        ctx.fill();
+        const bW = 140; const bH = 30; const bY = h - 45;
+        ctx.fillStyle = '#4f46e5';
+        ctx.beginPath(); ctx.roundRect(cx - bW / 2, bY, bW, bH, 10); ctx.fill();
         ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 11px Poppins, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('AI Interviewer', cx, h - 14);
+        ctx.font = 'bold 12px Inter, sans-serif';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText('AI INTERVIEWER', cx, bY + bH / 2);
     }, [isSpeaking]);
 
     useEffect(() => {
@@ -286,6 +234,9 @@ const HumanAvatar = ({ isSpeaking = false, width = 280, height = 320 }) => {
         const loop = () => {
             frame++;
             timeRef.current = frame;
+
+            // ── Breathing ──
+            breatheRef.current = Math.sin(frame * 0.05);
 
             // ── Lip animation ──
             if (isSpeaking) {

@@ -22,6 +22,8 @@ class Candidate(models.Model):
     resume_text = models.TextField(blank=True, null=True, help_text="Cached text content of the resume to avoid re-parsing")
     cover_letter = models.TextField(blank=True, null=True)
     interview_time = models.CharField(max_length=100, blank=True, null=True, help_text="Scheduled time for the interview (e.g., 10 am - 11 am)")
+    available_from = models.DateTimeField(blank=True, null=True)
+    available_until = models.DateTimeField(blank=True, null=True)
     job_description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='New')
     score = models.IntegerField(default=0)
