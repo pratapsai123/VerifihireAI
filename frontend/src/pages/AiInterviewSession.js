@@ -274,26 +274,22 @@ const AiInterviewSession = () => {
             const followUpQ = extractQ(data.follow_up_question);
             const refinedNextQ = extractQ(data.refined_next_question);
 
-            // Bundle feedback for display and voice
-            let fullVoiceOutput = "";
-            if (fullFeedback.trim()) {
-                addMessage('ai', fullFeedback);
-                fullVoiceOutput += fullFeedback + " ";
-            }
+            // --- MERGED CONVERSATIONAL FLOW ---
+            // Combine feedback and next question into ONE bubble for a human feel
+            let fullTurnText = "";
+            if (fullFeedback.trim()) fullTurnText += fullFeedback.trim() + " ";
 
             if (followUpQ) {
-                // If AI wants a quick follow-up before moving to next main question
-                addMessage('ai', followUpQ);
-                fullVoiceOutput += followUpQ;
-                await speak(fullVoiceOutput);
+                fullTurnText += followUpQ;
+                addMessage('ai', fullTurnText);
+                await speak(fullTurnText);
                 setIsProcessing(false);
                 setAiStatus("AI Interviewer Online");
             } else if (refinedNextQ === null && nextIdx >= questions.length) {
-                // End of interview
-                if (fullVoiceOutput) await speak(fullVoiceOutput);
+                if (fullTurnText) addMessage('ai', fullTurnText);
+                if (fullTurnText) await speak(fullTurnText);
                 completeInterview();
             } else {
-                // Moving to next main question
                 const nextQ = refinedNextQ || questions[nextIdx] || "Could you tell me more about your experience?";
                 setCurrentQuestionIndex(nextIdx);
                 setProgress((nextIdx / (questions.length || 1)) * 100);
@@ -305,10 +301,9 @@ const AiInterviewSession = () => {
                     return newQs;
                 });
 
-                addMessage('ai', nextQ);
-                fullVoiceOutput += nextQ;
-
-                if (fullVoiceOutput) await speak(fullVoiceOutput);
+                fullTurnText += nextQ;
+                addMessage('ai', fullTurnText);
+                await speak(fullTurnText);
 
                 setIsProcessing(false);
                 setAiStatus("AI Interviewer Online");
@@ -386,10 +381,10 @@ const AiInterviewSession = () => {
                 setQuestions(finalQs);
             }
 
-            // Bundle welcome and intro question for smooth voice output
-            addMessage('ai', welcome);
-            addMessage('ai', introQ);
-            await speak(`${welcome} ${introQ}`);
+            // Combine welcome and intro question for a smooth start
+            const combinedStart = `${welcome} ${introQ}`;
+            addMessage('ai', combinedStart);
+            await speak(combinedStart);
         };
 
         initSession();

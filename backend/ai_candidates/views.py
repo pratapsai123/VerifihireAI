@@ -328,12 +328,19 @@ class ProcessAnswerView(APIView):
         remaining_questions = request.data.get('remaining_questions', [])
         chat_history = request.data.get('chat_history', []) 
         
+        # DEBUG LOGGING
+        with open('debug_ai.log', 'a') as f:
+            f.write(f"\n--- New Request {datetime.now()} ---\n")
+            f.write(f"Candidate ID: {candidate_id}\n")
+            f.write(f"Question: {current_question}\n")
+            f.write(f"Answer: {answer}\n")
+        
         # Fallback if question is missing due to frontend race condition
         if not current_question and chat_history:
-            # Try to get the last AI message from history
             for msg in reversed(chat_history):
-                if msg.get('role') == 'assistant':
-                    current_question = msg.get('content')
+                role = msg.get('role') or msg.get('sender')
+                if role in ['assistant', 'ai']:
+                    current_question = msg.get('content') or msg.get('text')
                     break
         
         if not current_question:
@@ -348,10 +355,7 @@ class ProcessAnswerView(APIView):
         
         if candidate_id:
             try:
-                # Handle potential string-ID tokens
                 if isinstance(candidate_id, str) and not candidate_id.isdigit():
-                    # If token is not an ID, this might need a different lookup, 
-                    # but for now we catch the error to prevent 500
                     pass
                 else:
                     candidate = Candidate.objects.get(pk=candidate_id)
@@ -359,97 +363,85 @@ class ProcessAnswerView(APIView):
                     jd_context = candidate.job_description or jd_context
                     if candidate.resume_text:
                          resume_context = candidate.resume_text
-            except (Candidate.DoesNotExist, ValueError, TypeError):
-                pass
+            except Exception as e:
+                with open('debug_ai.log', 'a') as f:
+                    f.write(f"Lookup Error: {str(e)}\n")
 
         try:
-            # Construct Chat History context
+            # Construct Chat History context with safety
             history_context = ""
             if chat_history:
-                history_context = "CONVERSATION HISTORY (Last 4 turns):\n" + "\n".join([f"{h['role'].upper()}: {h['content']}" for h in chat_history[-4:]]) + "\n"
+                turns = []
+                for h in chat_history[-6:]: # Increased history
+                    role = h.get('role') or h.get('sender', 'unknown')
+                    content = h.get('content') or h.get('text', '')
+                    turns.append(f"{role.upper()}: {content}")
+                history_context = "CONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
 
             prompt = f"""
-            Role: "Senior Talent Partner". 
-            You are a warm, highly intelligent human interviewer. You are assessing {candidate_name} for a role matching this JD: {jd_context[:200]}.
+            Role: "Expert Human Interviewer". 
+            Candidate: {candidate_name}
+            Job Context: {jd_context[:200]}
             
-            UNCOMPROMISING HUMAN RULES:
-            1. **NEVER ECHO**: Do not repeat what the candidate said.
-            2. **ADAPTIVE PIVOTING**: If the candidate says "I don't know", "No idea", or gives a very short/evasive answer, do NOT just say "Got it". Instead, briefly acknowledge it (e.g., "No problem at all, we all have different specialties.") and then pivot to a DIFFERENT strength shown on their resume ({resume_context[:300]}).
-            3. **CONVERSATIONAL FEEDBACK**: Your `feedback` should be a bridge. Never use generic phrases like "Thank you for that explanation" or "Summarizing your point." Talk like a real person who just heard an answer.
-            4. **DRILL DOWN**: If they gave a good answer, ask a "How" or "Why" follow-up about a specific detail they mentioned.
-            5. **RECURSIVE LEARNING**: Use the `CONVERSATION HISTORY` to avoid repetitive questions.
+            GOAL:
+            Provide a balanced, medium-length response. Not a one-liner, but not a paragraph. Aim for 30-50 words total.
+            
+            STRUCTURE:
+            1. Feedback (1-2 sentences): Acknowledge their specific point humanly.
+            2. Bridge & Question (1-2 sentences): Transition naturally to the next tech/behavioral topic.
+            
+            RULES:
+            - NO FILLERS: Avoid "That's a helpful perspective."
+            - PIVOT: If they don't know the answer, supportively switch to a skill from their resume ({resume_context[:300]}).
             
             CONTEXT:
-            Resume: {resume_context[:800]}
-            Job Description: {jd_context[:300]}
+            Resume: {resume_context[:1000]}
             {history_context}
             
             CURRENT TURN:
-            Last Question You Asked: "{current_question}"
+            Last Question: "{current_question}"
             Candidate Answer: "{answer}"
             
             OUTPUT (JSON):
-            {
-                "feedback": "A professional, medium-sized technical acknowledgment (2-3 sentences). Acknowledge specific points from their answer to show active listening. No generic fillers.",
-                "refined_next_question": "Your next technical question. Use 'Adaptive Learning'—if they mentioned a specific tool or methodology, follow up on that. If they struggled, pivot professionally. End with ?",
-                "follow_up_question": "null",
-                "score": "A numeric integer from 0 to 10 based on technical accuracy and depth."
-            }
+            {{
+                "feedback": "1-2 sentences of specific, thoughtful acknowledgment.",
+                "refined_next_question": "One clear technical or behavioral question. End with ?",
+                "score": "Integer 0-10"
+            }}
             """
 
-            logger.info(f"Using Human-Sourced AI for {candidate_id}")
             response = groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
-                temperature=0.8, # Higher for more organic human-like variation
+                temperature=0.7,
                 response_format={"type": "json_object"}
             )
             raw_text = response.choices[0].message.content
-
-            if not raw_text:
-                raise Exception("Empty response from Groq")
-
             data = extract_json(raw_text)
-            if not data:
-                data = {"feedback": "Got it.", "refined_next_question": remaining_questions[0] if remaining_questions else None, "follow_up_question": None}
             
-            # --- Robustness Checks ---
-            if data.get('refined_next_question') is None and remaining_questions:
-                # AI tried to end early but we have questions left
-                data['refined_next_question'] = remaining_questions[0]
+            if not data:
+                raise ValueError("AI returned invalid JSON structure")
 
-            # Flatten next question if it's an object
-            if data and 'refined_next_question' in data:
-                q = data['refined_next_question']
-                if isinstance(q, dict):
-                    data['refined_next_question'] = q.get('question', str(q))
-
-            # --- Persistent Scoring Update ---
-            if candidate_id and data:
+            # Scoring Update (Silent)
+            if candidate_id and data.get('score'):
                  try:
-                    score_val = data.get('score', 0)
-                    try:
-                        score_val = int(score_val)
-                    except:
-                        score_val = 0
-                    
-                    # Update candidate score and question count
                     if not isinstance(candidate_id, str) or candidate_id.isdigit():
                         candidate = Candidate.objects.get(pk=candidate_id)
-                        candidate.score += score_val
+                        candidate.score += int(data.get('score', 0))
                         candidate.total_questions += 1
-                        candidate.save(update_fields=['score', 'total_questions'])
-                        logger.info(f"Updated Candidate {candidate_id} score: {candidate.score}/{candidate.total_questions*10}")
-                 except Exception as score_err:
-                     logger.error(f"Error updating score for candidate {candidate_id}: {score_err}")
-            # ---------------------------------
+                        candidate.save()
+                 except: pass
 
             return Response(data, status=status.HTTP_200_OK)
+
         except Exception as e:
-            logger.error(f"Error in ProcessAnswerView: {str(e)}")
-            fallback_q = remaining_questions[0] if remaining_questions else "Could you tell me more about your professional background?"
+            with open('debug_ai.log', 'a') as f:
+                f.write(f"PROCESS ERROR: {str(e)}\n")
+                f.write(traceback.format_exc())
+            
+            fallback_q = remaining_questions[0] if remaining_questions else "Tell me more about your technical background."
             return Response({
-                "feedback": "That's a helpful perspective. Building on that, I'd like to dive into another area.",
-                "follow_up_question": None,
-                "refined_next_question": fallback_q
+                "feedback": "I appreciate you sharing that. It gives me a better sense of your approach.",
+                "refined_next_question": fallback_q,
+                "score": 0
             }, status=status.HTTP_200_OK)
