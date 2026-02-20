@@ -203,6 +203,14 @@ class CreateSubmissionView(APIView):
 
         try:
             assessment = Assessment.objects.get(share_token=token)
+            
+            # Availability Guard
+            now = timezone.now()
+            if assessment.available_from and now < assessment.available_from:
+                return Response({"error": "This assessment is not yet available."}, status=status.HTTP_400_BAD_REQUEST)
+            if assessment.available_until and now > assessment.available_until:
+                return Response({"error": "This assessment has expired."}, status=status.HTTP_400_BAD_REQUEST)
+
             submission = AIAssessmentSubmission.objects.create(
                 assessment=assessment,
                 candidate_name=name,

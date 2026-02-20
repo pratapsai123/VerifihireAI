@@ -98,7 +98,8 @@ const AiTakeAssessment = () => {
             setTimeLeft(assessment.duration_minutes * 60);
             await startCamera();
         } catch (err) {
-            alert('Failed to start assessment.');
+            const msg = err.response?.data?.error || 'Failed to start assessment.';
+            alert(msg);
         }
     };
 
@@ -319,6 +320,16 @@ const AiTakeAssessment = () => {
                     <div style={{ textAlign: 'right', color: 'rgba(255,255,255,0.7)', fontSize: '0.82rem' }}>
                         <div>Duration</div>
                         <div style={{ color: 'white', fontWeight: 800, fontSize: '1.1rem' }}>{assessment?.duration_minutes} min</div>
+                    </div>
+                </div>
+                <div style={{ padding: '0.8rem 2rem', background: '#F8F9FF', borderBottom: '1px solid #E0E5F2', display: 'flex', gap: '1.5rem', fontSize: '0.78rem', color: '#707EAE' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <i className="fa-regular fa-calendar-check" style={{ color: '#4318FF' }}></i>
+                        <span>Starts: <strong style={{ color: '#1B254B' }}>{assessment.available_from ? new Date(assessment.available_from).toLocaleString() : 'Now'}</strong></span>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                        <i className="fa-regular fa-calendar-xmark" style={{ color: '#EE5D50' }}></i>
+                        <span>Ends: <strong style={{ color: '#1B254B' }}>{assessment.available_until ? new Date(assessment.available_until).toLocaleString() : 'No Limit'}</strong></span>
                     </div>
                 </div>
                 <div style={{ padding: '2rem' }}>
