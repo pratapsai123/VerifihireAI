@@ -4356,6 +4356,7 @@ def results_overview_view(request):
                     'percentage': round(perc, 1),
                     'status': 'selected' if perc >= 60 else 'rejected',
                     'integrity': getattr(s, 'integrity', None).integrity_score if getattr(s, 'integrity', None) else None,
+                    'interview_summary': s.interview_summary or []
                 })
             except Exception as e:
                 print(f"Error processing interview candidate {s.id}: {e}")

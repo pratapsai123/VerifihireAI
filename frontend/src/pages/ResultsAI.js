@@ -21,6 +21,7 @@ const ResultsAI = () => {
     const [resumeResults, setResumeResults] = useState([]);
     const [aiAssessments, setAiAssessments] = useState([]);
     const [aiInterviews, setAiInterviews] = useState([]);
+    const [summaryModal, setSummaryModal] = useState(null); // Candidate object
 
     const showToast = (type, message) => {
         setToast({ type, message });
@@ -232,6 +233,113 @@ const ResultsAI = () => {
                             </button>
                             <button onClick={confirmAndDelete} style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '10px', background: '#EF4444', color: 'white', cursor: 'pointer', fontWeight: '700' }}>
                                 Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* AI Interview Summary Modal */}
+            {summaryModal && (
+                <div style={{
+                    position: 'fixed', inset: 0, zIndex: 10000,
+                    background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(6px)',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    padding: '2rem',
+                }}>
+                    <div style={{
+                        background: 'white', borderRadius: '24px',
+                        width: '100%', maxWidth: '800px', maxHeight: '85vh',
+                        display: 'flex', flexDirection: 'column',
+                        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+                        overflow: 'hidden',
+                    }}>
+                        <div style={{
+                            padding: '1.5rem 2rem',
+                            borderBottom: '1px solid #F3F4F6',
+                            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                            background: 'linear-gradient(to right, #F9FAFB, #FFFFFF)',
+                        }}>
+                            <div>
+                                <h2 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>
+                                    Interview Justification
+                                </h2>
+                                <p style={{ fontSize: '0.85rem', color: '#6B7280', margin: '0.2rem 0 0' }}>
+                                    AI Evaluation for <strong>{summaryModal.full_name}</strong>
+                                </p>
+                            </div>
+                            <button
+                                onClick={() => setSummaryModal(null)}
+                                style={{
+                                    width: '36px', height: '36px', borderRadius: '50%',
+                                    border: 'none', background: '#F3F4F6', color: '#4B5563',
+                                    cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                }}
+                            >
+                                <i className="fa-solid fa-xmark" />
+                            </button>
+                        </div>
+
+                        <div style={{ padding: '2rem', overflowY: 'auto', flex: 1 }}>
+                            {(!summaryModal.interview_summary || summaryModal.interview_summary.length === 0) ? (
+                                <div style={{ textAlign: 'center', padding: '3rem', color: '#9CA3AF' }}>
+                                    <i className="fa-solid fa-comment-slash" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem', opacity: 0.5 }} />
+                                    <p>No detailed feedback available for this candidate.</p>
+                                </div>
+                            ) : (
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                                    {summaryModal.interview_summary.map((item, idx) => (
+                                        <div key={idx} style={{
+                                            border: '1px solid #E5E7EB',
+                                            borderRadius: '16px',
+                                            overflow: 'hidden',
+                                        }}>
+                                            <div style={{
+                                                padding: '1rem 1.5rem',
+                                                background: '#F9FAFB',
+                                                borderBottom: '1px solid #E5E7EB',
+                                                display: 'flex', justifyContent: 'space-between', alignItems: 'center'
+                                            }}>
+                                                <span style={{ fontWeight: '800', fontSize: '0.75rem', color: '#4F46E5', textTransform: 'uppercase' }}>
+                                                    Question {idx + 1}
+                                                </span>
+                                                <div style={{
+                                                    background: item.score >= 7 ? '#DCFCE7' : item.score >= 4 ? '#FEF9C3' : '#FEE2E2',
+                                                    color: item.score >= 7 ? '#166534' : item.score >= 4 ? '#854D0E' : '#991B1B',
+                                                    padding: '0.25rem 0.75rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800'
+                                                }}>
+                                                    Score: {item.score}/10
+                                                </div>
+                                            </div>
+                                            <div style={{ padding: '1.25rem 1.5rem' }}>
+                                                <p style={{ fontWeight: '700', color: '#111827', fontSize: '0.95rem', marginBottom: '0.75rem' }}>
+                                                    {item.question}
+                                                </p>
+                                                <div style={{ background: '#F3F4F6', padding: '0.8rem 1rem', borderRadius: '10px', fontSize: '0.9rem', color: '#4B5563', fontStyle: 'italic', marginBottom: '1rem' }}>
+                                                    "{item.answer}"
+                                                </div>
+                                                <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                                    <i className="fa-solid fa-robot" style={{ color: '#4F46E5', marginTop: '0.2rem' }} />
+                                                    <div style={{ fontSize: '0.9rem', color: '#374151', lineHeight: '1.6' }}>
+                                                        <strong style={{ color: '#4F46E5' }}>AI Justification:</strong> {item.feedback}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        <div style={{ padding: '1.25rem 2rem', borderTop: '1px solid #F3F4F6', textAlign: 'right', background: '#F9FAFB' }}>
+                            <button
+                                onClick={() => setSummaryModal(null)}
+                                style={{
+                                    padding: '0.6rem 1.5rem', background: '#4F46E5', color: 'white', border: 'none', borderRadius: '10px',
+                                    fontWeight: '700', fontSize: '0.9rem', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.4)'
+                                }}
+                            >
+                                Close Summary
                             </button>
                         </div>
                     </div>
@@ -489,7 +597,19 @@ const ResultsAI = () => {
                                                 <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>{getStatusLabel(r.status)}</span>
                                             </td>
                                             <td style={{ ...tdStyle, textAlign: 'center' }}>
-                                                <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
+                                                <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+                                                    <button
+                                                        onClick={() => setSummaryModal(r)}
+                                                        style={{
+                                                            padding: '0.4rem 0.8rem', borderRadius: '8px',
+                                                            border: '1px solid #E5E7EB', background: 'white',
+                                                            cursor: 'pointer', fontSize: '0.8rem', fontWeight: '700', color: '#374151'
+                                                        }}
+                                                    >
+                                                        Details
+                                                    </button>
+                                                    <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
+                                                </div>
                                             </td>
                                         </tr>
                                     );

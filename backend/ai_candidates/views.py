@@ -479,8 +479,23 @@ class ProcessAnswerView(APIView):
                  try:
                     if not isinstance(candidate_id, str) or candidate_id.isdigit():
                         candidate = Candidate.objects.get(pk=candidate_id)
-                        candidate.score += int(data.get('score', 0))
+                        
+                        # Update score
+                        q_score = int(data.get('score', 0))
+                        candidate.score += q_score
                         candidate.total_questions += 1
+                        
+                        # Store per-question summary for "Details" button
+                        if not isinstance(candidate.interview_summary, list):
+                            candidate.interview_summary = []
+                        
+                        candidate.interview_summary.append({
+                            "question": current_question,
+                            "answer": answer,
+                            "feedback": data.get('feedback', ''),
+                            "score": q_score
+                        })
+                        
                         candidate.save()
                  except: pass
 
