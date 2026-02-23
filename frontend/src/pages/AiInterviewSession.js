@@ -16,7 +16,7 @@ const AiInterviewSession = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [userInputMode, setUserInputMode] = useState('audio'); // 'audio' or 'text'
-    const [aiStatus, setAiStatus] = useState('AI Interviewer Online');
+    const [aiStatus, setAiStatus] = useState('Indu is Online');
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [progress, setProgress] = useState(0);
     const [showQuotaWarning, setShowQuotaWarning] = useState(false);
@@ -173,7 +173,13 @@ const AiInterviewSession = () => {
             if (!text) return resolve();
             synthRef.current.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
-            const voice = voicesRef.current.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
+            const voice =
+                // Prioritize Indian English Female voices (authentic Indu)
+                voicesRef.current.find(v => (v.lang === 'en-IN' || v.name.includes('India')) && v.name.includes('Female')) ||
+                // Fallback to any Indian English voice
+                voicesRef.current.find(v => (v.lang === 'en-IN' || v.name.includes('India'))) ||
+                // Legacy US Fallbacks
+                voicesRef.current.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
                 voicesRef.current.find(v => v.name.includes('US English')) ||
                 voicesRef.current[0];
 
@@ -388,9 +394,9 @@ const AiInterviewSession = () => {
         const startInterview = async (name, qs) => {
             await startCamera();
             const firstName = name.split(' ')[0];
-            const welcome = `Hello ${firstName}! Let's start your interview.`;
+            const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
 
-            const introQ = "Please introduce yourself and your professional background.";
+            const introQ = "To get started, please introduce yourself and your professional background.";
             let finalQs = [...qs];
             if (finalQs[0] !== introQ) {
                 finalQs = [introQ, ...finalQs];
