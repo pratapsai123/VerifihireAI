@@ -584,3 +584,8 @@ class ProxyCodeExecuteView(APIView):
                     "code": 1
                 }
             }, status=status.HTTP_200_OK) # Return 200 so frontend parses the error in 'run'
+
+class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
+    queryset = AIAssessmentSubmission.objects.all()
+    # serializer_class = ... # Not strictly needed for simple delete, but good practice
+    permission_classes = [AllowAny]
