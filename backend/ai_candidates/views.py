@@ -319,9 +319,32 @@ class CandidateListCreateView(generics.ListCreateAPIView):
     queryset = Candidate.objects.all().order_by('-created_at')
     serializer_class = CandidateSerializer
 
+INTERVIEW_LINK_TTL_MINUTES = 60
+
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
+
+    def get(self, request, *args, **kwargs):
+        candidate = self.get_object()
+        now = timezone.now()
+
+        # First access — stamp the time
+        if not candidate.link_opened_at:
+            candidate.link_opened_at = now
+            candidate.save(update_fields=['link_opened_at'])
+        else:
+            # Check if link has expired
+            elapsed = now - candidate.link_opened_at
+            if elapsed.total_seconds() > INTERVIEW_LINK_TTL_MINUTES * 60:
+                from rest_framework.response import Response as DRFResponse
+                return DRFResponse(
+                    {'error': 'Interview link has expired.', 'link_expired': True},
+                    status=403
+                )
+
+        return super().get(request, *args, **kwargs)
+
 
 class CandidateStatusUpdateView(APIView):
     def patch(self, request, pk):

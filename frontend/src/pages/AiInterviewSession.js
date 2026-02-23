@@ -9,6 +9,7 @@ const AiInterviewSession = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [candidateName, setCandidateName] = useState('Candidate');
+    const MAX_QUESTIONS = 10;
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState([]);
     const [chatMessages, setChatMessages] = useState([]);
@@ -264,6 +265,18 @@ const AiInterviewSession = () => {
             const data = response.data;
             let fullFeedback = data.feedback || "";
             const nextIdx = currentQuestionIndex + 1;
+            const totalAnswered = nextIdx; // questions answered so far
+
+            // --- HARD STOP: end after MAX_QUESTIONS ---
+            if (totalAnswered >= MAX_QUESTIONS) {
+                if (fullFeedback.trim()) {
+                    addMessage('ai', fullFeedback.trim());
+                    await speak(fullFeedback.trim());
+                }
+                completeInterview();
+                return;
+            }
+            // ------------------------------------------
 
             // Extract the question string from potential object or string
             const extractQ = (q) => {
@@ -293,7 +306,7 @@ const AiInterviewSession = () => {
             } else {
                 const nextQ = refinedNextQ || questions[nextIdx] || "Could you tell me more about your experience?";
                 setCurrentQuestionIndex(nextIdx);
-                setProgress((nextIdx / (questions.length || 1)) * 100);
+                setProgress((nextIdx / MAX_QUESTIONS) * 100);
 
                 setQuestions(prev => {
                     const newQs = [...prev];
@@ -331,7 +344,7 @@ const AiInterviewSession = () => {
                 addMessage('ai', fallbackNextQ);
                 await speak(fallbackMsg + " " + fallbackNextQ);
                 setCurrentQuestionIndex(nextIdx);
-                setProgress((nextIdx / (questions.length || 1)) * 100);
+                setProgress((nextIdx / MAX_QUESTIONS) * 100);
             } else {
                 await speak(fallbackMsg);
                 completeInterview();

@@ -32,6 +32,7 @@ class Candidate(models.Model):
     available_from = models.DateTimeField(blank=True, null=True)
     available_until = models.DateTimeField(blank=True, null=True)
     completed_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview was completed")
+    link_opened_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview link was first opened")
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"
