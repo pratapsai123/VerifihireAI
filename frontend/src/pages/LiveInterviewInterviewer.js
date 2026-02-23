@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/LiveInterviewInterviewer.css';
+import VideoPlaceholder from '../components/VideoPlaceholder';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
@@ -20,6 +21,7 @@ function LiveInterviewInterviewer() {
   // Media states
   const [isMuted, setIsMuted] = useState(false);
   const [isCameraOn, setIsCameraOn] = useState(true);
+  const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
   const [screenShareLocked, setScreenShareLocked] = useState(false);
   const [screenShareHolder, setScreenShareHolder] = useState(null);
@@ -207,12 +209,25 @@ function LiveInterviewInterviewer() {
         </div>
         <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: #1f2937;">Session Completed</h3>
         <p style="color: #6b7280; margin-bottom: 1.5rem;">This interview session has already been completed. You cannot rejoin the interview.</p>
-        <button onclick="window.close()" style="width: 100%; background: #6b7280; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; cursor: pointer;">
+        <button id="close-session-button" style="width: 100%; background: #6b7280; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; cursor: pointer;">
           Close
         </button>
       </div>
     `;
     document.body.appendChild(popup);
+
+    // Attach event listener after the element is in the DOM
+    const closeButton = document.getElementById('close-session-button');
+    if (closeButton) {
+      closeButton.onclick = () => {
+        // Assuming 'navigate' is available in the component's scope
+        // and this function is called within that component.
+        // If not, 'navigate' would need to be passed as an argument.
+        // For now, we'll use window.location for simplicity as navigate is not in scope here.
+        window.location.href = '/live-interview-list';
+        window.location.reload();
+      };
+    }
   };
 
   const showConfirmation = useCallback((message) => {
@@ -311,7 +326,10 @@ function LiveInterviewInterviewer() {
   }, []);
 
   const connectWebSocket = useCallback(() => {
-    if (interviewEndedRef.current || sessionExpired) return;
+    if (interviewEndedRef.current || sessionExpired || localStorage.getItem(sessionKey) === 'true') {
+      console.log('Session is expired, seemingly blocked connection attempt.');
+      return;
+    }
 
     const candidates = buildWsCandidates(sessionId);
     console.log('🔎 WebSocket URL candidates:', candidates);
@@ -505,6 +523,11 @@ function LiveInterviewInterviewer() {
           if (String(data.sender).toLowerCase() !== 'candidate') break;
           const who = candidateName;
           const what = data.media === 'mic' ? (data.enabled ? 'unmuted mic' : 'muted mic') : (data.enabled ? 'turned on camera' : 'turned off camera');
+
+          if (data.media === 'camera') {
+            setIsRemoteCameraOn(data.enabled);
+          }
+
           const variant = (data.media === 'camera' && !data.enabled) ? 'error' : 'info';
           showNotification(`${who} ${what}`, variant);
           break;
@@ -1184,8 +1207,10 @@ function LiveInterviewInterviewer() {
 
   // Initialize WebSocket on mount
   useEffect(() => {
-    if (!sessionExpired) {
+    if (!sessionExpired && localStorage.getItem(sessionKey) !== 'true') {
       connectWebSocket();
+    } else {
+      setSessionExpired(true);
     }
 
     return () => {
@@ -1437,7 +1462,10 @@ function LiveInterviewInterviewer() {
             This interview session has already been completed. You cannot rejoin the interview.
           </p>
           <button
-            onClick={() => window.close()}
+            onClick={() => {
+              navigate('/live-interview-list');
+              window.location.reload(); // Ensure a fresh state for sockets
+            }}
             style={{
               width: '100%',
               background: '#6b7280',
@@ -1471,7 +1499,14 @@ function LiveInterviewInterviewer() {
             autoPlay
             playsInline
             onContextMenu={e => e.preventDefault()}
+            style={{ display: isRemoteCameraOn ? 'block' : 'none' }}
           />
+
+          {!isRemoteCameraOn && bothPartiesConnected && (
+            <div className="remote-video-placeholder" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+              <VideoPlaceholder name={candidateName} />
+            </div>
+          )}
 
 
           {/* Connection Status Overlay */}
@@ -1502,8 +1537,13 @@ function LiveInterviewInterviewer() {
               className="self-video"
               autoPlay
               muted
-              playsInline
+              style={{ display: isCameraOn ? 'block' : 'none' }}
             />
+            {!isCameraOn && (
+              <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
+                <VideoPlaceholder name="You" width="100%" height="100%" />
+              </div>
+            )}
             <div className="video-label">
               <span>{interviewerName} (You)</span>
             </div>

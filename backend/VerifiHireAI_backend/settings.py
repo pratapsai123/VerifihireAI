@@ -112,7 +112,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'pratap'),
+        'NAME': os.environ.get('DB_NAME', 'react_user1'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
         # IMPORTANT: In Docker this should be "db"; locally it can be "localhost"
