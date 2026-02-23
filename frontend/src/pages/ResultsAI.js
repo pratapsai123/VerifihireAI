@@ -9,6 +9,7 @@ const ResultsAI = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
     const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'resume');
+    const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail'
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -58,6 +59,7 @@ const ResultsAI = () => {
         setActiveTab(tab);
         setSearchParams({ tab });
         setSelected(new Set());
+        setStatusFilter('all'); // Reset filter when switching tabs
     };
 
     const getStatusStyle = (rawStatus) => {
@@ -83,12 +85,27 @@ const ResultsAI = () => {
         return map[rawStatus] || rawStatus;
     };
 
+    /* ---- Helpers to determine pass/fail for filtering ---- */
+    const isPass = (r, type) => {
+        if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
+        if (type === 'assessment') return r.status === 'selected' || (r.percentage != null && r.percentage >= 50);
+        if (type === 'interview') return r.status === 'Completed' || (r.score != null && r.total_questions > 0 && (r.score / (r.total_questions * 10)) >= 0.5);
+        return false;
+    };
+
     /* ---- Selection ---- */
-    const currentRows = activeTab === 'resume'
+    const allRows = activeTab === 'resume'
         ? resumeResults.map(r => ({ ...r, _type: 'candidate', _deleteKey: `resume-${r.id}` }))
         : activeTab === 'assessment'
             ? aiAssessments.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }))
             : aiInterviews.map(r => ({ ...r, _type: 'candidate', _deleteKey: `interview-${r.id}` }));
+
+    const currentRows = statusFilter === 'all'
+        ? allRows
+        : allRows.filter(r => {
+            const pass = isPass(r, activeTab);
+            return statusFilter === 'pass' ? pass : !pass;
+        });
 
     const allKeys = currentRows.map(r => r._deleteKey);
     const allSelected = allKeys.length > 0 && allKeys.every(k => selected.has(k));
@@ -250,6 +267,27 @@ const ResultsAI = () => {
                             {tab.label}
                         </button>
                     ))}
+                </div>
+
+                {/* Filter Chips */}
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', alignItems: 'center' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#9CA3AF', textTransform: 'uppercase', marginRight: '0.25rem' }}>Filter:</span>
+                    {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass ✓' }, { key: 'fail', label: 'Fail ✗' }].map(f => (
+                        <button key={f.key} onClick={() => setStatusFilter(f.key)} style={{
+                            padding: '0.35rem 0.9rem', borderRadius: '20px', border: '1px solid',
+                            fontSize: '0.78rem', fontWeight: '700', cursor: 'pointer', transition: 'all 0.15s',
+                            borderColor: statusFilter === f.key
+                                ? (f.key === 'pass' ? '#05CD99' : f.key === 'fail' ? '#EE5D50' : '#4F46E5')
+                                : '#E5E7EB',
+                            background: statusFilter === f.key
+                                ? (f.key === 'pass' ? '#E6FBF5' : f.key === 'fail' ? '#FFF5F5' : '#EEF2FF')
+                                : 'white',
+                            color: statusFilter === f.key
+                                ? (f.key === 'pass' ? '#05CD99' : f.key === 'fail' ? '#EE5D50' : '#4F46E5')
+                                : '#6B7280',
+                        }}>{f.label}</button>
+                    ))}
+                    <span style={{ marginLeft: 'auto', fontSize: '0.8rem', color: '#9CA3AF' }}>{currentRows.length} result{currentRows.length !== 1 ? 's' : ''}</span>
                 </div>
 
                 {/* Bulk Action Toolbar */}
