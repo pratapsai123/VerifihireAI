@@ -297,6 +297,7 @@ const AiInterviewSession = () => {
                 fullTurnText += followUpQ;
                 addMessage('ai', fullTurnText);
                 await speak(fullTurnText);
+                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
                 setIsProcessing(false);
                 setAiStatus("AI Interviewer Online");
             } else if (refinedNextQ === null && nextIdx >= questions.length) {
@@ -319,6 +320,7 @@ const AiInterviewSession = () => {
                 addMessage('ai', fullTurnText);
                 await speak(fullTurnText);
 
+                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
                 setIsProcessing(false);
                 setAiStatus("AI Interviewer Online");
             }
@@ -399,6 +401,7 @@ const AiInterviewSession = () => {
             const combinedStart = `${welcome} ${introQ}`;
             addMessage('ai', combinedStart);
             await speak(combinedStart);
+            if (userInputMode === 'audio') startListening();
         };
 
         initSession();
