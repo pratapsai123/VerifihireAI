@@ -312,26 +312,6 @@ const CreateAssessment = () => {
                             )}
                         </button>
 
-                        <div style={{ marginTop: '2rem', display: 'flex', justifyContent: 'center', gap: '3rem' }}>
-                            <div style={{ textAlign: 'center' }}>
-                                <div style={{ color: '#6366F1', fontSize: '1.2rem', marginBottom: '0.4rem' }}>
-                                    <i className="fa-solid fa-microchip"></i>
-                                </div>
-                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#1E293B', textTransform: 'uppercase' }}>Gemini Pro</div>
-                            </div>
-                            <div style={{ textAlign: 'center' }}>
-                                <div style={{ color: '#6366F1', fontSize: '1.2rem', marginBottom: '0.4rem' }}>
-                                    <i className="fa-solid fa-shield-halved"></i>
-                                </div>
-                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#1E293B', textTransform: 'uppercase' }}>Anti-Cheat</div>
-                            </div>
-                            <div style={{ textAlign: 'center' }}>
-                                <div style={{ color: '#6366F1', fontSize: '1.2rem', marginBottom: '0.4rem' }}>
-                                    <i className="fa-solid fa-code-merge"></i>
-                                </div>
-                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#1E293B', textTransform: 'uppercase' }}>Auto-Grade</div>
-                            </div>
-                        </div>
                     </div>
                 </form>
             </div>
