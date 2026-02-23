@@ -49,19 +49,68 @@ function ReviewPage() {
     }, 0);
   }, [questions]);
 
-  // NOTE: `analyzeAndFetchQuestions` is intentionally omitted from deps to avoid
-  // rerunning on every render; `location`/navigation changes are the trigger.
+  // State Persistence Effect
   useEffect(() => {
-    // Get assessment data from navigation state; if missing (e.g. user refreshed or navigated away),
-    // restore from localStorage so manual questions still appear until assessment is created.
-    let state = location.state || null;
-    if (!state) {
+    if (!loading && assessmentData) {
+      const stateToSave = {
+        ...assessmentData,
+        questions,
+        topics,
+        assessmentName,
+        minPassPercentage,
+        timeLimit,
+        objectiveTime,
+        codingTime,
+        hasObjectiveCutoff,
+        objPassPercentage,
+        objWeight,
+        codingWeight,
+      };
       try {
-        const saved = localStorage.getItem(REVIEW_STATE_STORAGE_KEY);
-        if (saved) state = JSON.parse(saved);
-      } catch {
-        // ignore parse errors
+        localStorage.setItem(REVIEW_STATE_STORAGE_KEY, JSON.stringify(stateToSave));
+      } catch (e) {
+        console.error('Failed to save state to localStorage:', e);
       }
+    }
+  }, [
+    loading,
+    assessmentData,
+    questions,
+    topics,
+    assessmentName,
+    minPassPercentage,
+    timeLimit,
+    objectiveTime,
+    codingTime,
+    hasObjectiveCutoff,
+    objPassPercentage,
+    objWeight,
+    codingWeight
+  ]);
+
+  // Initial Data Loading & Restoration
+  useEffect(() => {
+    let state = location.state || null;
+
+    // Always try to restore from localStorage if navigation state is missing or partial
+    // This handles page refreshes.
+    try {
+      const saved = localStorage.getItem(REVIEW_STATE_STORAGE_KEY);
+      if (saved) {
+        const parsedSaved = JSON.parse(saved);
+        // If we have saved state and either no location state OR location state is from a fresh navigation
+        // (like coming from CustomAssessment without questions yet populated),
+        // we might want to prioritize location state's customAssessmentId but keep our local modifications.
+        if (!state) {
+          state = parsedSaved;
+        } else if (state.customAssessmentId === parsedSaved.customAssessmentId) {
+          // Merge: location state often has the source data, but parsedSaved has user edits (removed questions, settings)
+          // If the assessment ID matches, the saved state is likely our modified version of this specific assessment.
+          state = { ...state, ...parsedSaved };
+        }
+      }
+    } catch {
+      // ignore parse errors
     }
 
     // If state exists but customAssessmentId is missing, fall back to draft ID
@@ -78,38 +127,33 @@ function ReviewPage() {
     }
 
     if (state) {
-      // Check if this state has full assessment data (returned from ManualQuestions or self)
-      // If it has 'questions' or 'topics' populated, we restore that instead of re-fetching.
-      if (state.questions && state.topics) {
-        setAssessmentData(state);
+      // Restore all state fields
+      setAssessmentData(state);
+      if (state.assessmentName) setAssessmentName(state.assessmentName);
+      if (state.minPassPercentage !== undefined) setMinPassPercentage(state.minPassPercentage);
+      if (state.timeLimit) setTimeLimit(state.timeLimit);
+      if (state.objectiveTime) setObjectiveTime(state.objectiveTime);
+      if (state.codingTime) setCodingTime(state.codingTime);
+      if (state.hasObjectiveCutoff !== undefined) setHasObjectiveCutoff(state.hasObjectiveCutoff);
+      if (state.objPassPercentage !== undefined) setObjPassPercentage(state.objPassPercentage);
+      if (state.objWeight !== undefined) setObjWeight(state.objWeight);
+      if (state.codingWeight !== undefined) setCodingWeight(state.codingWeight);
+
+      // Restore questions if they exist in state
+      if (state.questions && state.topics && !state.refreshManual) {
         setQuestions(state.questions);
         setTopics(state.topics);
-        if (state.assessmentName) setAssessmentName(state.assessmentName);
-        if (state.minPassPercentage) setMinPassPercentage(state.minPassPercentage);
-        if (state.timeLimit) setTimeLimit(state.timeLimit);
-        if (state.objectiveTime) setObjectiveTime(state.objectiveTime);
-        if (state.codingTime) setCodingTime(state.codingTime);
-        if (state.hasObjectiveCutoff !== undefined) setHasObjectiveCutoff(state.hasObjectiveCutoff);
-        if (state.objPassPercentage) setObjPassPercentage(state.objPassPercentage);
-        if (state.objWeight !== undefined) setObjWeight(state.objWeight);
-        if (state.codingWeight !== undefined) setCodingWeight(state.codingWeight);
+        setLoading(false);
+        return;
+      }
 
-        // Check if we need to refresh manual questions
-        const shouldRefreshManual = state.refreshManual;
-
-        if (!shouldRefreshManual) {
-          setLoading(false);
-          return;
-        }
-
-        // IMPROVED LOGIC: If refreshing manual questions, we need to fetch them and merge with existing non-manual questions
-        // 1. Restore non-manual questions from state
-        const restoredQuestions = { ...state.questions };
+      // If we need to refresh manual questions (e.g. just came back from ManualQuestions page)
+      if (state.refreshManual) {
+        const restoredQuestions = { ...(state.questions || {}) };
         const restoredTopics = [...(state.topics || [])];
 
         const fetchLatestManual = async () => {
           try {
-            // We need customAssessmentId to fetch manual questions
             let cid = state.customAssessmentId;
             if (!cid) {
               const draft = localStorage.getItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
@@ -129,7 +173,6 @@ function ReviewPage() {
                   return ta - tb;
                 });
 
-                // IMPROVED LOGIC: Split questions into Coding vs Standard (Manual)
                 const codingQs = [];
                 const standardQs = [];
 
@@ -141,49 +184,29 @@ function ReviewPage() {
                   }
                 });
 
-                // 1. Update 'Coding' topic
                 if (codingQs.length > 0) {
-                  // Merge with existing coding questions from state/library
                   const existingCoding = restoredQuestions['Coding'] || [];
                   const existingIds = new Set(existingCoding.map(q => q.id));
-
                   const newCoding = [...existingCoding];
                   codingQs.forEach(q => {
-                    // Prevent duplicates if ID matches
-                    if (!existingIds.has(q.id)) {
-                      newCoding.push(q);
-                    }
+                    if (!existingIds.has(q.id)) newCoding.push(q);
                   });
-
                   restoredQuestions['Coding'] = newCoding;
-                  if (!restoredTopics.includes('Coding')) {
-                    restoredTopics.push('Coding');
-                  }
+                  if (!restoredTopics.includes('Coding')) restoredTopics.push('Coding');
                 }
 
-                // 2. Update 'Custom Questions' topic (Standard)
                 if (standardQs.length > 0) {
                   restoredQuestions[MANUAL_TOPIC_LABEL] = standardQs;
-                  if (!restoredTopics.includes(MANUAL_TOPIC_LABEL)) {
-                    restoredTopics.push(MANUAL_TOPIC_LABEL);
-                  }
+                  if (!restoredTopics.includes(MANUAL_TOPIC_LABEL)) restoredTopics.push(MANUAL_TOPIC_LABEL);
                 } else {
-                  // If no standard questions, remove that specific topic
                   delete restoredQuestions[MANUAL_TOPIC_LABEL];
                   const idx = restoredTopics.indexOf(MANUAL_TOPIC_LABEL);
                   if (idx > -1) restoredTopics.splice(idx, 1);
                 }
-
-              } else {
-                // If no manual questions found at all
-                delete restoredQuestions[MANUAL_TOPIC_LABEL];
-                const idx = restoredTopics.indexOf(MANUAL_TOPIC_LABEL);
-                if (idx > -1) restoredTopics.splice(idx, 1);
               }
             }
           } catch (e) {
             console.error('Failed to refresh manual questions:', e);
-            // Fallback to state's manual questions if fetch fails
           } finally {
             setQuestions(restoredQuestions);
             setTopics(restoredTopics);
@@ -195,41 +218,20 @@ function ReviewPage() {
         return;
       }
 
-      // If coding questions were passed directly (e.g. from valid initial setup), show them immediately
+      // If coding questions were passed directly
       if (Array.isArray(state.codingQuestions) && state.codingQuestions.length > 0) {
         const codingList = state.codingQuestions;
-        setAssessmentData(state);
         setTopics(['Coding']);
         setQuestions({ Coding: codingList });
-        const defaultName =
-          state.assessmentName ||
-          state.role ||
-          (codingList.length === 1 ? codingList[0]?.title : 'Coding Assessment');
+        const defaultName = state.assessmentName || state.role || (codingList.length === 1 ? codingList[0]?.title : 'Coding Assessment');
         setAssessmentName(defaultName || 'Coding Assessment');
         setLoading(false);
-        try {
-          localStorage.setItem(REVIEW_STATE_STORAGE_KEY, JSON.stringify(state));
-        } catch {
-          // ignore
-        }
         return;
       }
 
-      setAssessmentData(state);
-      setAssessmentName(
-        state.assessmentName ||
-        state.displayName ||
-        state.role ||
-        'Assessment'
-      );
-      try {
-        localStorage.setItem(REVIEW_STATE_STORAGE_KEY, JSON.stringify(state));
-      } catch {
-        // ignore storage errors
-      }
+      // Default: analyze and fetch from scratch
       analyzeAndFetchQuestions(state);
     } else {
-      // If no state, redirect back to custom assessment
       navigate('/custom-assessment');
     }
   }, [location, navigate]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -305,8 +307,28 @@ function ReviewPage() {
                 const tb = new Date(b.created_at || 0).getTime();
                 return ta - tb;
               });
-              questionsByTopic[MANUAL_TOPIC_LABEL] = manualList;
-              setTopics([MANUAL_TOPIC_LABEL]);
+
+              // Split coding vs standard
+              const codingQs = [];
+              const standardQs = [];
+              manualList.forEach(q => {
+                if (q.question_type === 'CODING' || q.topic === 'Coding') {
+                  codingQs.push(q);
+                } else {
+                  standardQs.push(q);
+                }
+              });
+
+              const newTopics = [];
+              if (codingQs.length > 0) {
+                questionsByTopic['Coding'] = codingQs;
+                newTopics.push('Coding');
+              }
+              if (standardQs.length > 0) {
+                questionsByTopic[MANUAL_TOPIC_LABEL] = standardQs;
+                newTopics.push(MANUAL_TOPIC_LABEL);
+              }
+              setTopics(newTopics);
               setQuestions(questionsByTopic);
             } else {
               setTopics([]);
@@ -399,8 +421,37 @@ function ReviewPage() {
                   const tb = new Date(b.created_at || 0).getTime();
                   return ta - tb;
                 });
-                questionsByTopic[MANUAL_TOPIC_LABEL] = manualList;
-                setTopics([...allSkills, MANUAL_TOPIC_LABEL]);
+
+                // Split coding vs standard
+                const codingQs = [];
+                const standardQs = [];
+                manualList.forEach(q => {
+                  if (q.question_type === 'CODING' || q.topic === 'Coding') {
+                    codingQs.push(q);
+                  } else {
+                    standardQs.push(q);
+                  }
+                });
+
+                const updatedTopics = [...allSkills];
+                if (codingQs.length > 0) {
+                  // Merge with existing if any (unlikely here but safe)
+                  const existingCoding = questionsByTopic['Coding'] || [];
+                  const existingIds = new Set(existingCoding.map(q => q.id));
+                  const mergedCoding = [...existingCoding];
+                  codingQs.forEach(q => {
+                    if (!existingIds.has(q.id)) mergedCoding.push(q);
+                  });
+                  questionsByTopic['Coding'] = mergedCoding;
+                  if (!updatedTopics.includes('Coding')) updatedTopics.push('Coding');
+                }
+
+                if (standardQs.length > 0) {
+                  questionsByTopic[MANUAL_TOPIC_LABEL] = standardQs;
+                  if (!updatedTopics.includes(MANUAL_TOPIC_LABEL)) updatedTopics.push(MANUAL_TOPIC_LABEL);
+                }
+
+                setTopics(updatedTopics);
               } else {
                 setTopics(allSkills);
               }
