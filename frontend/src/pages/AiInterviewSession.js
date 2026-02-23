@@ -35,6 +35,9 @@ const AiInterviewSession = () => {
     const streamRef = useRef(null);
     const chatHistoryRef = useRef([]);
     const isInitializedRef = useRef(false);
+    const isProcessingRef = useRef(false);
+    const isSpeakingRef = useRef(false);
+    const isRecordingRef = useRef(false);
 
     // 1. Load Voices
     useEffect(() => {
@@ -184,9 +187,23 @@ const AiInterviewSession = () => {
                 voicesRef.current[0];
 
             if (voice) utterance.voice = voice;
-            utterance.onstart = () => { setIsSpeaking(true); setAiStatus("Speaking..."); };
-            utterance.onend = () => { setIsSpeaking(false); setAiStatus("AI Interviewer Online"); resolve(); };
-            utterance.onerror = () => { setIsSpeaking(false); setAiStatus("AI Interviewer Online"); resolve(); };
+            utterance.onstart = () => {
+                setIsSpeaking(true);
+                isSpeakingRef.current = true;
+                setAiStatus("Speaking...");
+            };
+            utterance.onend = () => {
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                setAiStatus("Indu is Online");
+                resolve();
+            };
+            utterance.onerror = () => {
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                setAiStatus("Indu is Online");
+                resolve();
+            };
             synthRef.current.speak(utterance);
         });
     };
@@ -208,17 +225,17 @@ const AiInterviewSession = () => {
     }, [token, speak, addMessage]);
 
     const startListening = useCallback(() => {
-        if (userInputMode !== 'audio' || !recognitionRef.current || isRecording) return;
+        if (userInputMode !== 'audio' || !recognitionRef.current || isRecordingRef.current) return;
 
         let attempts = 0;
         const maxAttempts = 10;
 
         const tryStart = () => {
-            // Check if AI is occupied
-            if (isProcessing || isSpeaking) {
+            // Check if AI is occupied - Use REFS to avoid stale closures
+            if (isProcessingRef.current || isSpeakingRef.current) {
                 if (attempts < maxAttempts) {
                     attempts++;
-                    setTimeout(tryStart, 300); // Retry every 300ms
+                    setTimeout(tryStart, 350); // Retry 
                 }
                 return;
             }
@@ -246,6 +263,7 @@ const AiInterviewSession = () => {
 
         // 1. Immediate UI Lock
         setIsProcessing(true);
+        isProcessingRef.current = true;
         setAiStatus("AI is thinking...");
 
         // 2. Force Microphone Stop
@@ -303,9 +321,9 @@ const AiInterviewSession = () => {
                 fullTurnText += followUpQ;
                 addMessage('ai', fullTurnText);
                 await speak(fullTurnText);
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
                 setIsProcessing(false);
-                setAiStatus("AI Interviewer Online");
+                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
+                setAiStatus("Indu is Online");
             } else if (refinedNextQ === null && nextIdx >= questions.length) {
                 if (fullTurnText) addMessage('ai', fullTurnText);
                 if (fullTurnText) await speak(fullTurnText);
@@ -326,9 +344,10 @@ const AiInterviewSession = () => {
                 addMessage('ai', fullTurnText);
                 await speak(fullTurnText);
 
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
                 setIsProcessing(false);
-                setAiStatus("AI Interviewer Online");
+                isProcessingRef.current = false;
+                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
+                setAiStatus("Indu is Online");
             }
         } catch (err) {
             console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (35s)" : err.message);
@@ -434,6 +453,7 @@ const AiInterviewSession = () => {
         recognition.onstart = () => {
             console.log("INFINITE MIC: Speech recognition is now active and stay on.");
             setIsRecording(true);
+            isRecordingRef.current = true;
             setAiStatus("Listening...");
             transcriptRef.current = "";
         };
@@ -491,6 +511,7 @@ const AiInterviewSession = () => {
 
         recognition.onend = () => {
             setIsRecording(false);
+            isRecordingRef.current = false;
             if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
             console.log("Recognition session ended.");
         };
