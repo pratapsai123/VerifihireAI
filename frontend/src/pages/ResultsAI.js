@@ -145,7 +145,7 @@ const ResultsAI = () => {
                     successCount++;
                 } else if (item._type === 'ai_assessment') {
                     const subId = item.submission_id.replace('ai_', '');
-                    await axios.delete(`${API_BASE_URL}/ai-assessments/submission/${subId}/`);
+                    await axios.delete(`http://localhost:8001/api/ai/submission/${subId}/`);
                     successCount++;
                 }
             } catch (err) {
