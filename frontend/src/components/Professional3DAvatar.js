@@ -80,50 +80,52 @@ const Professional3DAvatar = ({ isSpeaking = false }) => {
                 <g style={{ transform: `translateY(${pxHead}px)`, transition: 'transform 0.1s linear' }}>
                     <defs>
                         <linearGradient id="induSkin" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" stopColor="#efc1a0" />
-                            <stop offset="100%" stopColor="#cd895e" />
+                            <stop offset="0%" stopColor="#f2cbb2" />
+                            <stop offset="100%" stopColor="#d59771" />
                         </linearGradient>
                         <filter id="beautyBloom">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="0.5" />
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="0.6" />
                         </filter>
+                        <radialGradient id="eyeShadow">
+                            <stop offset="0%" stopColor="rgba(0,0,0,0.15)" />
+                            <stop offset="100%" stopColor="transparent" />
+                        </radialGradient>
                     </defs>
-                    {/* Tapered Elegant Face Shape */}
-                    <path d="M48 100C48 60 70 36 100 36C130 36 152 60 152 100C152 145 125 180 100 180C75 180 48 145 48 100Z" fill="url(#induSkin)" filter="url(#beautyBloom)" />
+                    {/* Softer, more aesthetic Oval Face Shape */}
+                    <path d="M50 100C50 64 72 40 100 40C128 40 150 64 150 100C150 142 124 176 100 176C76 176 50 142 50 100Z" fill="url(#induSkin)" filter="url(#beautyBloom)" />
 
-                    {/* ── Eyes (Almond Shape) ── */}
+                    {/* ── Eyes (Almond Shape - Reduced Intensity) ── */}
                     <g style={{ transform: `translateY(${pxEyes - pxHead}px)` }}>
                         {!blink ? (
                             <g>
-                                <path d="M64 104C67 97 87 97 90 104C87 111 67 111 64 104Z" fill="white" />
-                                <circle cx="77" cy="104" r="5.5" fill="#2d1a10" />
-                                <circle cx="79.5" cy="102" r="1.8" fill="white" opacity="0.9" />
+                                {/* Shadow under brow for depth */}
+                                <ellipse cx="77" cy="100" rx="14" ry="6" fill="url(#eyeShadow)" opacity="0.3" />
+                                <ellipse cx="123" cy="100" rx="14" ry="6" fill="url(#eyeShadow)" opacity="0.3" />
 
-                                <path d="M110 104C113 97 133 97 136 104C133 111 113 111 110 104Z" fill="white" />
-                                <circle cx="123" cy="104" r="5.5" fill="#2d1a10" />
-                                <circle cx="125.5" cy="102" r="1.8" fill="white" opacity="0.9" />
+                                <path d="M64 104C67 100 87 100 90 104C87 109 67 109 64 104Z" fill="white" />
+                                <circle cx="77" cy="104" r="5" fill="#311c10" />
+                                <circle cx="79" cy="102.5" r="1.5" fill="white" opacity="0.8" />
+
+                                <path d="M110 104C113 100 133 100 136 104C133 109 113 109 110 104Z" fill="white" />
+                                <circle cx="123" cy="104" r="5" fill="#311c10" />
+                                <circle cx="125" cy="102.5" r="1.5" fill="white" opacity="0.8" />
                             </g>
                         ) : (
                             <g>
-                                <path d="M64 104L90 104" stroke="#4a2c1a" strokeWidth="1.5" strokeLinecap="round" />
-                                <path d="M110 104L136 104" stroke="#4a2c1a" strokeWidth="1.5" strokeLinecap="round" />
+                                <path d="M64 104L90 104" stroke="#4a2c1a" strokeWidth="1.2" strokeLinecap="round" />
+                                <path d="M110 104L136 104" stroke="#4a2c1a" strokeWidth="1.2" strokeLinecap="round" />
                             </g>
                         )}
                     </g>
 
-                    {/* Feature Detail: Lashes & Brows */}
-                    {!blink && (
-                        <g opacity="0.6">
-                            <path d="M62 103L58 100M65 101L62 98M87 101L90 98" stroke="#000" strokeWidth="0.8" />
-                            <path d="M110 101L107 98M136 103L140 100M133 101L136 98" stroke="#000" strokeWidth="0.8" />
-                        </g>
-                    )}
-                    <path d="M66 90C70 86 82 86 88 89" stroke="#1c0d06" strokeWidth="2.2" strokeLinecap="round" fill="none" opacity="0.8" />
-                    <path d="M112 89C118 86 130 86 134 90" stroke="#1c0d06" strokeWidth="2.2" strokeLinecap="round" fill="none" opacity="0.8" />
+                    {/* Feature Detail: Fine Brows */}
+                    <path d="M66 94C70 90 82 90 88 93" stroke="#1c0d06" strokeWidth="1.8" strokeLinecap="round" fill="none" opacity="0.6" />
+                    <path d="M112 93C118 90 130 90 134 94" stroke="#1c0d06" strokeWidth="1.8" strokeLinecap="round" fill="none" opacity="0.6" />
 
-                    {/* Nose & Blush */}
-                    <path d="M99 128C101 124 103 124 103 140" stroke="#b07050" strokeWidth="1" strokeLinecap="round" opacity="0.4" />
-                    <circle cx="72" cy="135" r="10" fill="#f87171" opacity="0.08" />
-                    <circle cx="128" cy="135" r="10" fill="#f87171" opacity="0.08" />
+                    {/* Soft Nose & Blush */}
+                    <path d="M100 128C101 125 102 125 102 136" stroke="#b07050" strokeWidth="1" strokeLinecap="round" opacity="0.3" />
+                    <circle cx="72" cy="138" r="10" fill="#f87171" opacity="0.06" />
+                    <circle cx="128" cy="138" r="10" fill="#f87171" opacity="0.06" />
 
                     {/* ── Mouth ── */}
                     <g>
