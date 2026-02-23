@@ -36,6 +36,10 @@ function Dashboard() {
                 <span>Create Assessment</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
+              <button className="action-btn" onClick={() => navigate('/results-ai?tab=assessment')} style={{ marginTop: '8px' }}>
+                <span>Result</span>
+                <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
             </div>
           </div>
 
@@ -72,6 +76,10 @@ function Dashboard() {
                 <span>Analyze Resumes</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
+              <button className="action-btn" onClick={() => navigate('/results-ai?tab=resume')} style={{ marginTop: '8px' }}>
+                <span>Result</span>
+                <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
             </div>
           </div>
 
@@ -86,6 +94,10 @@ function Dashboard() {
             <div className="module-actions">
               <button className="action-btn" onClick={() => navigate('/ai-interview')}>
                 <span>Start Session</span>
+                <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
+              <button className="action-btn" onClick={() => navigate('/results-ai?tab=interview')} style={{ marginTop: '8px' }}>
+                <span>Result</span>
                 <svg className="arrow-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
               </button>
             </div>

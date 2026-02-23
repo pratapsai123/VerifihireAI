@@ -35,6 +35,7 @@ import InterviewStart from './pages/InterviewStart';
 import AiTakeAssessment from './pages/AiTakeAssessment';
 import AiInterviewSession from './pages/AiInterviewSession';
 import AiAssessmentDetail from './pages/AiAssessmentDetail';
+import ResultsAI from './pages/ResultsAI';
 import './App.css';
 
 import Header from './components/Header'; // Import Header
@@ -110,6 +111,7 @@ function App() {
             <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
             <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
             <Route path="/ai-assessments/:id" element={<AiAssessmentDetail />} />
+            <Route path="/results-ai" element={<ResultsAI />} />
           </Routes>
 
           {/* Cookie Consent Banner */}
