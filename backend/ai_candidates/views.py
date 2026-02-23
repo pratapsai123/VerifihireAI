@@ -320,6 +320,7 @@ class UpdateIntegrityView(APIView):
             candidate = Candidate.objects.get(pk=pk)
             integrity, created = InterviewIntegrity.objects.get_or_create(candidate=candidate)
             
+            # Grace Warning System Phase 1: Record counts
             event_type = request.data.get('event_type')
             if event_type == 'tab_switch':
                 integrity.tab_switches += 1
@@ -330,14 +331,32 @@ class UpdateIntegrityView(APIView):
             elif event_type == 'no_face_detection':
                 integrity.no_face_detections += 1
             
+            # Grace Warning System Phase 2: Handle First 3 as Warnings
+            # We track the types of the first 3 events that should be "free"
+            if len(integrity.warning_logs) < 3:
+                integrity.warning_logs.append(event_type)
+            
+            # Define weights
+            weights = {
+                'tab_switch': 10,
+                'phone_detection': 30,
+                'multiface_detection': 15,
+                'no_face_detection': 5,
+                'face_detection_lost': 5  # alias for no_face
+            }
+
             # Simple penalty system
-            total_violations = (
-                integrity.tab_switches * 10 + 
-                integrity.phone_detections * 30 + 
-                integrity.multiface_detections * 15 + 
-                integrity.no_face_detections * 5
+            total_raw_penalty = (
+                integrity.tab_switches * weights['tab_switch'] + 
+                integrity.phone_detections * weights['phone_detection'] + 
+                integrity.multiface_detections * weights['multiface_detection'] + 
+                integrity.no_face_detections * weights['no_face_detection']
             )
-            integrity.integrity_score = max(0, 100 - total_violations)
+
+            # Subtract the "free" penalty from the first 3 warnings
+            free_penalty = sum(weights.get(w, 0) for w in integrity.warning_logs)
+            
+            integrity.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
             integrity.save()
             
             return Response({

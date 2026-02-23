@@ -238,13 +238,27 @@ class UpdateAssessmentIntegrityView(APIView):
             elif event_type == 'face_detection_lost':
                 submission.face_warnings += 1
             
+            # Grace Warning System Phase 2: Handle First 3 as Warnings
+            if len(submission.warning_logs) < 3:
+                submission.warning_logs.append(event_type)
+
+            weights = {
+                'tab_switch': 10,
+                'phone_detection': 30,
+                'face_detection_lost': 5
+            }
+
             # Simple penalty system
-            total_violations = (
-                submission.tab_switches * 10 + 
-                submission.phone_warnings * 30 + 
-                submission.face_warnings * 5
+            total_raw_penalty = (
+                submission.tab_switches * weights['tab_switch'] + 
+                submission.phone_warnings * weights['phone_detection'] + 
+                submission.face_warnings * weights['face_detection_lost']
             )
-            submission.integrity_score = max(0, 100 - total_violations)
+
+            # Subtract the "free" penalty from the first 3 warnings
+            free_penalty = sum(weights.get(w, 0) for w in submission.warning_logs)
+
+            submission.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
             submission.save()
             
             return Response({

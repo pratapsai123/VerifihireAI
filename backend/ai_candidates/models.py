@@ -42,6 +42,7 @@ class InterviewIntegrity(models.Model):
     multiface_detections = models.IntegerField(default=0)
     no_face_detections = models.IntegerField(default=0)
     integrity_score = models.FloatField(default=100.0)
+    warning_logs = models.JSONField(default=list, blank=True, help_text="Stores the first 3 violations as grace warnings")
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
