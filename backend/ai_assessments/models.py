@@ -18,6 +18,7 @@ class Assessment(models.Model):
     difficulty_level = models.CharField(max_length=20, default='Medium', choices=[('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard')])
     generated_content = models.JSONField(blank=True, null=True)  # Store the AI response here
     created_at = models.DateTimeField(auto_now_add=True)
+    pass_threshold = models.IntegerField(default=60)
 
     # New Fields
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='SCHEDULED')

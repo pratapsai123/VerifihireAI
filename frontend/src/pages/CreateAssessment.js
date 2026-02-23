@@ -15,7 +15,8 @@ const CreateAssessment = () => {
         from_date: '',
         from_time: '',
         until_date: '',
-        until_time: ''
+        until_time: '',
+        pass_threshold: 60
     });
     const [isGenerating, setIsGenerating] = useState(false);
 
@@ -31,7 +32,8 @@ const CreateAssessment = () => {
             fromDate: 'from_date',
             fromTime: 'from_time',
             untilDate: 'until_date',
-            untilTime: 'until_time'
+            untilTime: 'until_time',
+            passThreshold: 'pass_threshold'
         };
         setFormData(prev => ({
             ...prev,
@@ -160,6 +162,25 @@ const CreateAssessment = () => {
                                     }}
                                     required
                                 />
+                            </div>
+                            <div style={{ padding: '1rem', background: '#F0F9FF', borderRadius: '16px', border: '1px dashed #BAE6FD', marginTop: '1rem' }}>
+                                <label style={{ fontSize: '0.82rem', fontWeight: '700', color: '#0369A1', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                    <i className="fa-solid fa-bullseye" style={{ fontSize: '0.8rem' }}></i> Pass Threshold (%)
+                                </label>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+                                    <input
+                                        type="number"
+                                        id="passThreshold"
+                                        value={formData.pass_threshold}
+                                        onChange={handleChange}
+                                        min="1" max="100"
+                                        style={{
+                                            width: '80px', padding: '0.6rem 0.8rem', border: '1px solid #BAE6FD',
+                                            borderRadius: '10px', fontSize: '0.9rem', fontWeight: '700', color: '#0369A1', background: 'white', outline: 'none'
+                                        }}
+                                    />
+                                    <span style={{ fontSize: '0.78rem', color: '#0EA5E9', fontWeight: '500' }}>Minimum percentage required to pass.</span>
+                                </div>
                             </div>
                         </div>
                     </div>

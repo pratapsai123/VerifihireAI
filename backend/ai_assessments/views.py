@@ -31,6 +31,7 @@ class SubmitAssessmentView(APIView):
         name = data.get('name')
         email = data.get('email')
         answers = data.get('answers', {})
+        coding_results = data.get('codingResults', {}) # Captured test case results
 
         if not token or not name or not email:
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -38,7 +39,6 @@ class SubmitAssessmentView(APIView):
         try:
             assessment = Assessment.objects.get(share_token=token)
             
-            # Find the existing ongoing submission from intake
             submission = AIAssessmentSubmission.objects.filter(
                 assessment=assessment,
                 candidate_email=email,
@@ -46,7 +46,6 @@ class SubmitAssessmentView(APIView):
             ).order_by('-id').first()
 
             if not submission:
-                # Fallback in case intake failed but we have data
                 submission = AIAssessmentSubmission.objects.create(
                     assessment=assessment,
                     candidate_name=name,
@@ -54,7 +53,6 @@ class SubmitAssessmentView(APIView):
                     status='ONGOING'
                 )
 
-            # Grading Logic based on Difficulty Weights
             points_per_q = {
                 'Easy': 100,
                 'Medium': 200,
@@ -63,31 +61,41 @@ class SubmitAssessmentView(APIView):
             
             generated_content = assessment.generated_content or {}
             mcqs = generated_content.get('mcqs', [])
-            total_q = len(mcqs)
+            coding_challenges = generated_content.get('coding_challenges', [])
             
-            # Total possible points = number of questions * weight
+            total_mcqs = len(mcqs)
+            total_coding = len(coding_challenges)
+            total_q = total_mcqs + total_coding
+            
             total_possible_points = total_q * points_per_q
             candidate_total_points = 0
-            correct_count = 0
             
+            # 1. MCQ Scoring
             for i, mcq in enumerate(mcqs):
                 correct_ans = str(mcq.get('answer') or '').strip().upper()
                 candidate_ans = str(answers.get(f'mcq_{i}') or '').strip().upper()
                 if correct_ans and candidate_ans == correct_ans:
                     candidate_total_points += points_per_q
-                    correct_count += 1
+
+            # 2. Coding Challenge Scoring (based on pass rate)
+            for i, challenge in enumerate(coding_challenges):
+                res = coding_results.get(str(i))
+                if res:
+                    passed = res.get('passed', 0)
+                    total_tc = res.get('total', 1)
+                    if total_tc > 0:
+                        score_fraction = passed / total_tc
+                        candidate_total_points += (score_fraction * points_per_q)
 
             if total_possible_points > 0:
                 percentage = round((candidate_total_points / total_possible_points) * 100)
             else:
                 percentage = 0
             
-            # Final integrity & score check
-            pass_status = 'selected' if percentage >= 60 and submission.integrity_score >= 70 else 'rejected'
+            pass_status = 'selected' if percentage >= assessment.pass_threshold and submission.integrity_score >= 70 else 'rejected'
 
             submission.answers = answers
-            # Store the weighted points in 'score'
-            submission.score = candidate_total_points
+            submission.score = round(candidate_total_points)
             submission.total_questions = total_q
             submission.percentage = percentage
             submission.status = pass_status
@@ -97,7 +105,7 @@ class SubmitAssessmentView(APIView):
             return Response({
                 "message": "Assessment submitted successfully",
                 "submission_id": submission.id,
-                "score": candidate_total_points,
+                "score": submission.score,
                 "total_possible_points": total_possible_points,
                 "total": total_q,
                 "percentage": percentage,
@@ -139,7 +147,8 @@ class GenerateAssessmentView(APIView):
                 duration_minutes=duration,
                 difficulty_level=difficulty,
                 available_from=data.get('available_from'),
-                available_until=data.get('available_until')
+                available_until=data.get('available_until'),
+                pass_threshold=data.get('pass_threshold', 60)
             )
 
             # Cap overly ambitious coding counts to prevent AI hallucinations/timeouts
@@ -318,7 +327,7 @@ class AssessmentDetailView(APIView):
                     "status": sub.status,
                     "integrity_score": sub.integrity_score,
                     "answers": sub.answers,
-                    "submitted_at": sub.submitted_at.strftime("%Y-%m-%d %H:%M")
+                    "submitted_at": sub.submitted_at.strftime("%Y-%m-%d %H:%M") if sub.submitted_at else "In Progress"
                 })
 
             data = {
