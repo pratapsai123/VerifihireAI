@@ -431,42 +431,44 @@ class ProcessAnswerView(APIView):
                 history_context = "CONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
 
             prompt = f"""
-            Role: "Expert Human Interviewer". 
-            Candidate: {candidate_name}
-            Job Context: {jd_context[:200]}
-            
-            GOAL:
-            Be extremely concise. Aim for 15-25 words total.
-            
-            STRUCTURE:
-            1. Response (1 sentence): Brief, human acknowledgment.
-            2. Question (1 sentence): One clear technical or behavioral question.
-            
-            RULES:
-            - NO FILLERS: Be direct.
-            - PIVOT: If they don't know, quickly switch to a skill from their resume.
-            
-            CONTEXT:
-            Resume: {resume_context[:1000]}
-            {history_context}
-            
-            CURRENT TURN:
-            Last Question: "{current_question}"
-            Candidate Answer: "{answer}"
-            
-            OUTPUT (JSON):
-            {{
-                "feedback": "1-2 sentences of specific, thoughtful acknowledgment.",
-                "refined_next_question": "One clear technical or behavioral question. End with ?",
-                "score": "Integer 0-10"
-            }}
-            """
+        Role: "Rigorous Technical Auditor & Expert Interviewer". 
+        Candidate: {candidate_name}
+        Job Context: {jd_context[:200]}
+        
+        GOAL:
+        Evaluate the candidate's technical competence with zero bias towards politeness. Be extremely concise (15-25 words).
+        
+        SCORING RULES (CRITICAL):
+        - Score 0-1: If the answer is "no", "I don't know", "I'm not sure", or completely avoids the technical core of the question. NO PITY POINTS FOR HONESTY.
+        - Score 2-4: If the answer is vague, shows very shallow understanding, or contains major technical inaccuracies.
+        - Score 5-7: If the answer is generally correct but lacks depth, specific details, or best practices.
+        - Score 8-10: Only for precise, technically sound answers that demonstrate real-world experience and mastery.
+        
+        BEHAVIOR:
+        1. Response (1 sentence): Direct technical feedback. If they failed the question, politely but firmly acknowledge the lack of knowledge.
+        2. Question (1 sentence): One clear technical or behavioral question. If they failed, move to a different sub-topic to test breadth.
+        
+        CONTEXT:
+        Resume: {resume_context[:1000]}
+        {history_context}
+        
+        CURRENT TURN:
+        Last Question: "{current_question}"
+        Candidate Answer: "{answer}"
+        
+        OUTPUT (JSON):
+        {{
+            "feedback": "Strict technical critique. Mention what was missing or incorrect.",
+            "refined_next_question": "Next technical challenge or follow-up. End with ?",
+            "score": "Integer 0-10 based on the SCORING RULES above."
+        }}
+        """
 
             response = groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,
-                response_format={"type": "json_object"}
+            response_format={"type": "json_object"}
             )
             raw_text = response.choices[0].message.content
             data = extract_json(raw_text)
