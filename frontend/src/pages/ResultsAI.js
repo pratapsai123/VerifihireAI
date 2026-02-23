@@ -362,7 +362,15 @@ const ResultsAI = () => {
                                                 {r.created_at ? new Date(r.created_at).toLocaleDateString() : '—'}
                                             </td>
                                             <td style={tdStyle}>
-                                                <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>{getStatusLabel(r.status)}</span>
+                                                <span style={{
+                                                    padding: '0.3rem 0.75rem', borderRadius: '8px',
+                                                    fontSize: '0.7rem', fontWeight: '800',
+                                                    ...(r.resume_score >= 70
+                                                        ? { background: '#E6FBF5', color: '#05CD99' }
+                                                        : { background: '#FFF5F5', color: '#EE5D50' })
+                                                }}>
+                                                    {r.resume_score >= 70 ? 'Pass ✓' : 'Fail ✗'}
+                                                </span>
                                             </td>
                                             <td style={{ ...tdStyle, textAlign: 'center' }}>
                                                 <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
