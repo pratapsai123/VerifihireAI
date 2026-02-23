@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Professional3DAvatar from '../components/Professional3DAvatar';
+import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
 
@@ -578,7 +578,7 @@ const AiInterviewSession = () => {
                         <div className="ai-status-badge"><span className="speaking-indicator"></span>{aiStatus}</div>
                     </div>
                     <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '0.5rem' }}>
-                        <Professional3DAvatar isSpeaking={isSpeaking} />
+                        <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
                     </div>
                 </div>
 
