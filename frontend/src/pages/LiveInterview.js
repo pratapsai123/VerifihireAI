@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import '../styles/LiveInterview.css';
+import VideoPlaceholder from '../components/VideoPlaceholder';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
@@ -19,6 +20,7 @@ function LiveInterview() {
   // Media states
   const [isMuted, setIsMuted] = useState(false);
   const [isCameraOn, setIsCameraOn] = useState(true);
+  const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
   const [screenShareLocked, setScreenShareLocked] = useState(false);
   const [screenShareHolder, setScreenShareHolder] = useState(null);
@@ -249,6 +251,11 @@ function LiveInterview() {
           const what = data.media === 'mic'
             ? (data.enabled ? 'unmuted mic' : 'muted mic')
             : (data.enabled ? 'turned on camera' : 'turned off camera');
+
+          if (data.media === 'camera') {
+            setIsRemoteCameraOn(data.enabled);
+          }
+
           const severity = (data.media === 'camera' && !data.enabled) ? 'error' : 'info';
           showSessionPopup(`${who} ${what}`, severity);
           break;
@@ -811,7 +818,8 @@ function LiveInterview() {
     localStreamRef.current.getVideoTracks().forEach(track => (track.enabled = newCameraOn));
 
     if (thumbnailVideoRef.current) {
-      thumbnailVideoRef.current.style.visibility = newCameraOn ? 'visible' : 'hidden';
+      // thumbnailVideoRef.current.style.visibility = newCameraOn ? 'visible' : 'hidden';
+      // We control visibility via react state and conditional rendering now
     }
 
     if (newCameraOn && cameraReady) {
@@ -1287,7 +1295,10 @@ function LiveInterview() {
           <p className="session-expired-message">
             This interview session has already been completed. You cannot rejoin the interview.
           </p>
-          <button onClick={() => window.close()} className="btn-close-window">Close</button>
+          <button onClick={() => {
+            navigate('/');
+            window.location.reload();
+          }} className="btn-close-window">Close</button>
         </div>
       </div>
     );
@@ -1355,7 +1366,14 @@ function LiveInterview() {
             playsInline
             muted={false}
             onContextMenu={e => e.preventDefault()}
+            style={{ display: isRemoteCameraOn ? 'block' : 'none' }}
           />
+
+          {!isRemoteCameraOn && bothPartiesConnected && (
+            <div className="remote-video-placeholder" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+              <VideoPlaceholder name={interviewerName} />
+            </div>
+          )}
 
 
           {/* Connection Status Overlay */}
@@ -1386,7 +1404,13 @@ function LiveInterview() {
               autoPlay
               muted
               playsInline
+              style={{ display: isCameraOn ? 'block' : 'none' }}
             />
+            {!isCameraOn && (
+              <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
+                <VideoPlaceholder name="You" width="100%" height="100%" />
+              </div>
+            )}
             <div className="video-label">
               <span>{candidateName} (You)</span>
             </div>
