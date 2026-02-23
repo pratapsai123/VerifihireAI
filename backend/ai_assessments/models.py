@@ -47,6 +47,7 @@ class AIAssessmentSubmission(models.Model):
     tab_switches = models.IntegerField(default=0)
     face_warnings = models.IntegerField(default=0)
     phone_warnings = models.IntegerField(default=0)
+    warning_logs = models.JSONField(default=list, blank=True, help_text="Stores the first 3 violations as grace warnings")
     monitoring_logs = models.JSONField(default=list, blank=True)
 
     started_at = models.DateTimeField(default=timezone.now)

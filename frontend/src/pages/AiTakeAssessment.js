@@ -55,6 +55,7 @@ const AiTakeAssessment = () => {
     const detectorRef = useRef(null);
     const lastDetectionTimeRef = useRef(0);
     const timerRef = useRef(null);
+    const handleSubmitRef = useRef(null); // always points to latest handleSubmit
 
     useEffect(() => {
         const fetchAssessment = async () => {
@@ -216,9 +217,10 @@ const AiTakeAssessment = () => {
     useEffect(() => {
         if (isStarted && timeLeft > 0) {
             timerRef.current = setInterval(() => setTimeLeft(p => p - 1), 1000);
-        } else if (timeLeft === 0) {
+        } else if (timeLeft === 0 && isStarted) {
             clearInterval(timerRef.current);
-            handleSubmit();
+            // Use ref to avoid stale closure — always submits with current answers
+            if (handleSubmitRef.current) handleSubmitRef.current();
         }
         return () => clearInterval(timerRef.current);
     }, [isStarted, timeLeft]);
@@ -298,6 +300,9 @@ const AiTakeAssessment = () => {
         } catch { alert('Failed to submit.'); }
         finally { setIsSubmitting(false); }
     };
+
+    // Keep ref in sync so timer always calls the latest version
+    handleSubmitRef.current = handleSubmit;
 
     const formatTime = (seconds) => {
         if (!seconds && seconds !== 0) return '--:--';

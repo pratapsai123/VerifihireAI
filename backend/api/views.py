@@ -4274,8 +4274,8 @@ def results_overview_view(request):
         if end_date:
             qs = qs.filter(submitted_at__date__lte=end_date)
         
-        # Similar logic for AI assessments
-        ai_qs = AIAssessmentSubmission.objects.select_related('assessment').order_by('-submitted_at')
+        # Similar logic for AI assessments — exclude ONGOING (not yet submitted)
+        ai_qs = AIAssessmentSubmission.objects.select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         
         if start_date:
             ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
@@ -4356,6 +4356,7 @@ def results_overview_view(request):
                     'percentage': round(perc, 1),
                     'status': 'selected' if perc >= 60 else 'rejected',
                     'integrity': getattr(s, 'integrity', None).integrity_score if getattr(s, 'integrity', None) else None,
+                    'interview_summary': s.interview_summary or []
                 })
             except Exception as e:
                 print(f"Error processing interview candidate {s.id}: {e}")

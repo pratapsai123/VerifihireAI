@@ -369,6 +369,7 @@ class UpdateIntegrityView(APIView):
             candidate = Candidate.objects.get(pk=pk)
             integrity, created = InterviewIntegrity.objects.get_or_create(candidate=candidate)
             
+            # Grace Warning System Phase 1: Record counts
             event_type = request.data.get('event_type')
             if event_type == 'tab_switch':
                 integrity.tab_switches += 1
@@ -379,14 +380,32 @@ class UpdateIntegrityView(APIView):
             elif event_type == 'no_face_detection':
                 integrity.no_face_detections += 1
             
+            # Grace Warning System Phase 2: Handle First 3 as Warnings
+            # We track the types of the first 3 events that should be "free"
+            if len(integrity.warning_logs) < 3:
+                integrity.warning_logs.append(event_type)
+            
+            # Define weights
+            weights = {
+                'tab_switch': 10,
+                'phone_detection': 30,
+                'multiface_detection': 15,
+                'no_face_detection': 5,
+                'face_detection_lost': 5  # alias for no_face
+            }
+
             # Simple penalty system
-            total_violations = (
-                integrity.tab_switches * 10 + 
-                integrity.phone_detections * 30 + 
-                integrity.multiface_detections * 15 + 
-                integrity.no_face_detections * 5
+            total_raw_penalty = (
+                integrity.tab_switches * weights['tab_switch'] + 
+                integrity.phone_detections * weights['phone_detection'] + 
+                integrity.multiface_detections * weights['multiface_detection'] + 
+                integrity.no_face_detections * weights['no_face_detection']
             )
-            integrity.integrity_score = max(0, 100 - total_violations)
+
+            # Subtract the "free" penalty from the first 3 warnings
+            free_penalty = sum(weights.get(w, 0) for w in integrity.warning_logs)
+            
+            integrity.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
             integrity.save()
             
             return Response({
@@ -461,42 +480,44 @@ class ProcessAnswerView(APIView):
                 history_context = "CONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
 
             prompt = f"""
-            Role: "Expert Human Interviewer". 
-            Candidate: {candidate_name}
-            Job Context: {jd_context[:200]}
-            
-            GOAL:
-            Be extremely concise. Aim for 15-25 words total.
-            
-            STRUCTURE:
-            1. Response (1 sentence): Brief, human acknowledgment.
-            2. Question (1 sentence): One clear technical or behavioral question.
-            
-            RULES:
-            - NO FILLERS: Be direct.
-            - PIVOT: If they don't know, quickly switch to a skill from their resume.
-            
-            CONTEXT:
-            Resume: {resume_context[:1000]}
-            {history_context}
-            
-            CURRENT TURN:
-            Last Question: "{current_question}"
-            Candidate Answer: "{answer}"
-            
-            OUTPUT (JSON):
-            {{
-                "feedback": "1-2 sentences of specific, thoughtful acknowledgment.",
-                "refined_next_question": "One clear technical or behavioral question. End with ?",
-                "score": "Integer 0-10"
-            }}
-            """
+        Role: "Rigorous Technical Auditor & Expert Interviewer". 
+        Candidate: {candidate_name}
+        Job Context: {jd_context[:200]}
+        
+        GOAL:
+        Evaluate the candidate's technical competence with zero bias towards politeness. Be extremely concise (15-25 words).
+        
+        SCORING RULES (CRITICAL):
+        - Score 0-1: If the answer is "no", "I don't know", "I'm not sure", or completely avoids the technical core of the question. NO PITY POINTS FOR HONESTY.
+        - Score 2-4: If the answer is vague, shows very shallow understanding, or contains major technical inaccuracies.
+        - Score 5-7: If the answer is generally correct but lacks depth, specific details, or best practices.
+        - Score 8-10: Only for precise, technically sound answers that demonstrate real-world experience and mastery.
+        
+        BEHAVIOR:
+        1. Response (1 sentence): Direct technical feedback. If they failed the question, politely but firmly acknowledge the lack of knowledge.
+        2. Question (1 sentence): One clear technical or behavioral question. If they failed, move to a different sub-topic to test breadth.
+        
+        CONTEXT:
+        Resume: {resume_context[:1000]}
+        {history_context}
+        
+        CURRENT TURN:
+        Last Question: "{current_question}"
+        Candidate Answer: "{answer}"
+        
+        OUTPUT (JSON):
+        {{
+            "feedback": "Strict technical critique. Mention what was missing or incorrect.",
+            "refined_next_question": "Next technical challenge or follow-up. End with ?",
+            "score": "Integer 0-10 based on the SCORING RULES above."
+        }}
+        """
 
             response = groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,
-                response_format={"type": "json_object"}
+            response_format={"type": "json_object"}
             )
             raw_text = response.choices[0].message.content
             data = extract_json(raw_text)
@@ -509,8 +530,23 @@ class ProcessAnswerView(APIView):
                  try:
                     if not isinstance(candidate_id, str) or candidate_id.isdigit():
                         candidate = Candidate.objects.get(pk=candidate_id)
-                        candidate.score += int(data.get('score', 0))
+                        
+                        # Update score
+                        q_score = int(data.get('score', 0))
+                        candidate.score += q_score
                         candidate.total_questions += 1
+                        
+                        # Store per-question summary for "Details" button
+                        if not isinstance(candidate.interview_summary, list):
+                            candidate.interview_summary = []
+                        
+                        candidate.interview_summary.append({
+                            "question": current_question,
+                            "answer": answer,
+                            "feedback": data.get('feedback', ''),
+                            "score": q_score
+                        })
+                        
                         candidate.save()
                  except: pass
 
