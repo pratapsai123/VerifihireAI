@@ -362,16 +362,27 @@ const ResultsAI = () => {
                                                 {r.created_at ? new Date(r.created_at).toLocaleDateString() : '—'}
                                             </td>
                                             <td style={tdStyle}>
-                                                <span style={{
-                                                    padding: '0.3rem 0.75rem', borderRadius: '8px',
-                                                    fontSize: '0.7rem', fontWeight: '800',
-                                                    ...(r.resume_score >= 70
-                                                        ? { background: '#E6FBF5', color: '#05CD99' }
-                                                        : { background: '#FFF5F5', color: '#EE5D50' })
-                                                }}>
-                                                    {r.resume_score >= 70 ? 'Pass ✓' : 'Fail ✗'}
-                                                </span>
+                                                {(() => {
+                                                    const isPassed = r.status === 'Resume Passed'
+                                                        || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
+                                                    const isScored = r.status === 'Resume Passed' || r.status === 'Resume Failed' || r.resume_score > 0;
+                                                    if (!isScored) return (
+                                                        <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', background: '#F4F7FE', color: '#A3AED0' }}>
+                                                            Not Screened
+                                                        </span>
+                                                    );
+                                                    return (
+                                                        <span style={{
+                                                            padding: '0.3rem 0.75rem', borderRadius: '8px',
+                                                            fontSize: '0.7rem', fontWeight: '800',
+                                                            ...(isPassed ? { background: '#E6FBF5', color: '#05CD99' } : { background: '#FFF5F5', color: '#EE5D50' })
+                                                        }}>
+                                                            {isPassed ? 'Pass ✓' : 'Fail ✗'}
+                                                        </span>
+                                                    );
+                                                })()}
                                             </td>
+
                                             <td style={{ ...tdStyle, textAlign: 'center' }}>
                                                 <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
                                             </td>
