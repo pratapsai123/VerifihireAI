@@ -54,25 +54,40 @@ class SubmitAssessmentView(APIView):
                     status='ONGOING'
                 )
 
-            # Simple grading logic for MCQs
-            score = 0
+            # Grading Logic based on Difficulty Weights
+            points_per_q = {
+                'Easy': 100,
+                'Medium': 200,
+                'Hard': 300
+            }.get(assessment.difficulty_level, 100)
+            
             generated_content = assessment.generated_content or {}
             mcqs = generated_content.get('mcqs', [])
+            total_q = len(mcqs)
+            
+            # Total possible points = number of questions * weight
+            total_possible_points = total_q * points_per_q
+            candidate_total_points = 0
+            correct_count = 0
             
             for i, mcq in enumerate(mcqs):
                 correct_ans = str(mcq.get('answer') or '').strip().upper()
                 candidate_ans = str(answers.get(f'mcq_{i}') or '').strip().upper()
                 if correct_ans and candidate_ans == correct_ans:
-                    score += 1
+                    candidate_total_points += points_per_q
+                    correct_count += 1
 
-            total_q = len(mcqs)
-            percentage = (score / total_q * 100) if total_q > 0 else 0
+            if total_possible_points > 0:
+                percentage = round((candidate_total_points / total_possible_points) * 100)
+            else:
+                percentage = 0
             
-            # Final integrity check
+            # Final integrity & score check
             pass_status = 'selected' if percentage >= 60 and submission.integrity_score >= 70 else 'rejected'
 
             submission.answers = answers
-            submission.score = score
+            # Store the weighted points in 'score'
+            submission.score = candidate_total_points
             submission.total_questions = total_q
             submission.percentage = percentage
             submission.status = pass_status
@@ -82,7 +97,8 @@ class SubmitAssessmentView(APIView):
             return Response({
                 "message": "Assessment submitted successfully",
                 "submission_id": submission.id,
-                "score": score,
+                "score": candidate_total_points,
+                "total_possible_points": total_possible_points,
                 "total": total_q,
                 "percentage": percentage,
                 "status": pass_status
@@ -312,6 +328,7 @@ class AssessmentDetailView(APIView):
                 "mcq_count": assessment.mcq_count,
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
+                "difficulty_level": assessment.difficulty_level,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content,
                 "status": assessment.status,

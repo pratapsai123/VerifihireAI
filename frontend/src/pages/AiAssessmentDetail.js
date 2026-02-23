@@ -38,6 +38,15 @@ const AiAssessmentDetail = () => {
     const coding = assessment.generated_content?.coding_challenges || [];
     const submissions = assessment.submissions || [];
 
+    // Calculate points based on difficulty mapping
+    const pointsMap = {
+        'Easy': 100,
+        'Medium': 200,
+        'Hard': 300
+    };
+    const pointPerQ = pointsMap[assessment.difficulty_level] || 100;
+    const totalPoints = mcqs.length * pointPerQ;
+
     const getStatusStyle = (status) => {
         return status === 'selected'
             ? { background: '#E6FBF5', color: '#05CD99' }
@@ -145,6 +154,31 @@ const AiAssessmentDetail = () => {
                                     </div>
                                 </div>
                             )}
+
+                            {/* Scoring Footer */}
+                            <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '2px solid #E0E5F2', display: 'flex', gap: '2rem', justifyContent: 'flex-start' }}>
+                                <div style={{ background: '#F4F7FE', padding: '1.5rem', borderRadius: '20px', minWidth: '200px' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Total Points</div>
+                                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+                                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>{totalPoints}</div>
+                                        <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>pts</div>
+                                    </div>
+                                    <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
+                                        ({mcqs.length} Qs × {pointPerQ} pts • {assessment.difficulty_level || 'Custom'})
+                                    </div>
+                                </div>
+
+                                <div style={{ background: '#F4F7FE', padding: '1.5rem', borderRadius: '20px', minWidth: '200px' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Time</div>
+                                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+                                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>{assessment.duration_minutes}</div>
+                                        <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>mins</div>
+                                    </div>
+                                    <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
+                                        Total allocated assessment duration
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     )}
 
