@@ -11,6 +11,8 @@ from rest_framework import status
 from rest_framework import generics
 from .models import Candidate, InterviewIntegrity
 from .serializers import CandidateSerializer
+from django.utils.dateparse import parse_datetime
+from django.utils import timezone
 import traceback
 import time
 import re
@@ -48,7 +50,16 @@ class BulkInviteView(APIView):
     def post(self, request):
         file = request.FILES.get('file')
         job_description = request.data.get('job_description')
-        batch_interview_time = request.data.get('interview_time') # Get batch time from request
+        available_from = request.data.get('available_from')
+        available_until = request.data.get('available_until')
+        
+        # Parse ISO strings into datetime objects
+        if isinstance(available_from, str) and available_from:
+            available_from = parse_datetime(available_from)
+        if isinstance(available_until, str) and available_until:
+            available_until = parse_datetime(available_until)
+            
+        batch_interview_time = request.data.get('interview_time') # Keep for legacy/compat
         
         if not file or not job_description:
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
@@ -78,6 +89,8 @@ class BulkInviteView(APIView):
                 candidate = Candidate.objects.create(
                     full_name=name,
                     email=email,
+                    available_from=available_from,
+                    available_until=available_until,
                     interview_time=batch_interview_time,
                     job_description=job_description,
                     status='Invited'
@@ -89,12 +102,58 @@ class BulkInviteView(APIView):
                 
                 try:
                     subject = "Invite to VerifiHireAI Interview Session"
+                    
+                    # Format availability dates for email (converted to local time)
+                    from_str = "Immediately"
+                    if candidate.available_from:
+                        local_from = timezone.localtime(candidate.available_from)
+                        from_str = local_from.strftime('%B %d, %Y at %I:%M %p')
+                        
+                    until_str = "No fixed deadline"
+                    if candidate.available_until:
+                        local_until = timezone.localtime(candidate.available_until)
+                        until_str = local_until.strftime('%B %d, %Y at %I:%M %p')
+                    
                     time_info = f"\n\nYour interview is scheduled to start at {batch_interview_time}." if batch_interview_time else ""
-                    message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.{time_info}\n\nPlease click the link below to verify your details and start your session:\n{link}"
-                    send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+                    message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.{time_info}\n\nTiming Details:\n- Available From: {from_str}\n- Available Until: {until_str}\n\nPlease click the link below to verify your details and start your session:\n{link}"
+                    
+                    html_message = f"""
+                    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+                        <div style="background-color: #6366F1; padding: 24px; text-align: center;">
+                            <h1 style="color: white; margin: 0; font-size: 24px;">Interview Invitation</h1>
+                        </div>
+                        <div style="padding: 32px; background-color: white;">
+                            <p style="font-size: 16px; margin-bottom: 24px;">Dear <strong>{name}</strong>,</p>
+                            <p style="line-height: 1.6; margin-bottom: 24px;">You have been invited to attempt an AI-powered video interview session.</p>
+                            
+                            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+                                <h3 style="margin-top: 0; color: #6366F1; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Timing Details</h3>
+                                <p style="margin: 8px 0; font-size: 14px;"><strong>📅 Available From:</strong> {from_str}</p>
+                                <p style="margin: 8px 0; font-size: 14px;"><strong>⌛ Available Until:</strong> {until_str}</p>
+                                {f'<p style="margin: 8px 0; font-size: 14px;"><strong>⏱️ Scheduled Time:</strong> {batch_interview_time}</p>' if batch_interview_time else ''}
+                            </div>
+                            
+                            <div style="text-align: center; margin: 32px 0;">
+                                <a href="{link}" style="background-color: #6366F1; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);">Start Interview Session</a>
+                            </div>
+                            
+                            <p style="font-size: 13px; color: #64748b; margin-top: 32px; border-top: 1px solid #f1f5f9; padding-top: 16px;">If the button above doesn't work, copy and paste this link into your browser:<br/>
+                            <a href="{link}" style="color: #6366F1;">{link}</a></p>
+                        </div>
+                        <div style="background-color: #f1f5f9; padding: 16px; text-align: center; font-size: 12px; color: #94a3b8;">
+                            &copy; 2026 VerifiHireAI. All rights reserved.
+                        </div>
+                    </div>
+                    """
+                    
+                    send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=html_message)
                     logger.info(f"Email sent to {email}")
                 except Exception as mail_error:
-                    logger.error(f"Failed to send email to {email}: {str(mail_error)}")
+                    error_msg = f"Failed to send email to {email}: {str(mail_error)}"
+                    logger.error(error_msg)
+                    # Temporary file logging for debugging
+                    with open('email_errors.log', 'a') as f:
+                        f.write(f"{timezone.now()} - {error_msg}\n")
                 
             return Response({
                 "message": f"Successfully invited {len(invited_candidates)} candidates.",
@@ -130,32 +189,22 @@ class ResumeMatchView(APIView):
             return Response({"error": "Job description and either resume or candidate_id are required"}, status=status.HTTP_400_BAD_REQUEST)
 
         # --- Interview Time Lock Check ---
-        if candidate and candidate.interview_time:
-            try:
-                scheduled_str = candidate.interview_time.strip()
-                scheduled_dt = None
-                for fmt in (['%I:%M %p', '%I %p', '%H:%M']):
-                    try:
-                        scheduled_dt = datetime.strptime(scheduled_str, fmt)
-                        break
-                    except ValueError:
-                        continue
-                if scheduled_dt:
-                    now = datetime.now()
-                    scheduled_today = now.replace(
-                        hour=scheduled_dt.hour,
-                        minute=scheduled_dt.minute,
-                        second=0, microsecond=0
-                    )
-                    window_end = scheduled_today + timedelta(minutes=30)
-                    if now < scheduled_today or now > window_end:
-                        return Response({
-                            "error": f"Interview not available. Your session is scheduled at {candidate.interview_time}. Please return at that time.",
-                            "scheduled_time": candidate.interview_time,
-                            "time_locked": True
-                        }, status=status.HTTP_403_FORBIDDEN)
-            except Exception as time_err:
-                logger.warning(f"Could not enforce time lock for candidate {candidate_id}: {time_err}")
+        if candidate:
+            now = timezone.now()
+            if candidate.available_from and now < candidate.available_from:
+                formatted_time = candidate.available_from.strftime('%B %d, %Y %I:%M %p')
+                return Response({
+                    "error": f"Interview not available. Your session is scheduled to start at {formatted_time}. Please return at that time.",
+                    "available_from": candidate.available_from,
+                    "time_locked": True
+                }, status=status.HTTP_403_FORBIDDEN)
+            
+            if candidate.available_until and now > candidate.available_until:
+                return Response({
+                    "error": "This interview session has expired. Please contact your recruiter.",
+                    "available_until": candidate.available_until,
+                    "time_locked": True
+                }, status=status.HTTP_403_FORBIDDEN)
         # ----------------------------------
 
         try:

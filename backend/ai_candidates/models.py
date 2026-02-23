@@ -29,6 +29,8 @@ class Candidate(models.Model):
     total_questions = models.IntegerField(default=0)
     submission_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    available_from = models.DateTimeField(blank=True, null=True)
+    available_until = models.DateTimeField(blank=True, null=True)
     completed_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview was completed")
 
     def __str__(self):

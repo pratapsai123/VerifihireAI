@@ -8,6 +8,10 @@ const AiInterview = () => {
     const [isUploading, setIsUploading] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
+    const [fromDate, setFromDate] = useState('');
+    const [fromTime, setFromTime] = useState('');
+    const [untilDate, setUntilDate] = useState('');
+    const [untilTime, setUntilTime] = useState('');
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -32,18 +36,6 @@ const AiInterview = () => {
         setFile(null);
     };
 
-    const [interviewTime, setInterviewTime] = useState('');
-
-    const formatTimeAMPM = (timeStr) => {
-        if (!timeStr) return '';
-        let [hours, minutes] = timeStr.split(':');
-        hours = parseInt(hours);
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        return `${hours}:${minutes} ${ampm}`;
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
@@ -59,8 +51,12 @@ const AiInterview = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('job_description', jobDescription);
-        if (interviewTime) {
-            formData.append('interview_time', formatTimeAMPM(interviewTime));
+        
+        if (fromDate && fromTime) {
+            formData.append('available_from', new Date(`${fromDate}T${fromTime}`).toISOString());
+        }
+        if (untilDate && untilTime) {
+            formData.append('available_until', new Date(`${untilDate}T${untilTime}`).toISOString());
         }
 
         try {
@@ -291,22 +287,50 @@ const AiInterview = () => {
                                     </div>
                                 )}
 
-                                {/* Time Selection Input */}
-                                <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                    <label style={{ fontSize: '0.9rem', fontWeight: '700', color: '#475569' }}>Select Interview Start Time (AM/PM)</label>
-                                    <input
-                                        type="time"
-                                        value={interviewTime}
-                                        onChange={(e) => setInterviewTime(e.target.value)}
-                                        style={{
-                                            padding: '1rem',
-                                            borderRadius: '16px',
-                                            border: '1px solid #E2E8F0',
-                                            fontSize: '1rem',
-                                            background: '#F8FAFC',
-                                            color: '#1E293B'
-                                        }}
-                                    />
+                                {/* Date & Time Selection Range */}
+                                <div className="module-card" style={{ width: '100%', padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                            <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.3rem', display: 'block' }}>
+                                                <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
+                                                Available From
+                                            </label>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <input
+                                                    type="date"
+                                                    value={fromDate}
+                                                    onChange={(e) => setFromDate(e.target.value)}
+                                                    style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                                />
+                                                <input
+                                                    type="time"
+                                                    value={fromTime}
+                                                    onChange={(e) => setFromTime(e.target.value)}
+                                                    style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                            <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.3rem', display: 'block' }}>
+                                                <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
+                                                Available Until
+                                            </label>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <input
+                                                    type="date"
+                                                    value={untilDate}
+                                                    onChange={(e) => setUntilDate(e.target.value)}
+                                                    style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                                />
+                                                <input
+                                                    type="time"
+                                                    value={untilTime}
+                                                    onChange={(e) => setUntilTime(e.target.value)}
+                                                    style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <button type="submit" className="primary-link-btn" disabled={isUploading} style={{
