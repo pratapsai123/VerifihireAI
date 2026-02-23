@@ -4285,74 +4285,84 @@ def results_overview_view(request):
         # Combine and limit
         results = []
         for s in qs[:400]:
-            inv = s.invitation
-            a = inv.assessment
-            results.append({
-                'submission_id': f"std_{s.id}",
-                'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
-                'candidate': {
-                    'name': inv.name,
-                    'email': inv.email,
-                },
-                'assessment': {
-                    'id': a.id,
-                    'display_name': a.display_name or a.name,
-                    'name': a.name,
-                },
-                'score': s.score,
-                'total': s.total,
-                'percentage': s.final_percentage if s.final_percentage is not None else s.percentage,
-                'status': s.result,
-            })
+            try:
+                inv = s.invitation
+                a = inv.assessment
+                results.append({
+                    'submission_id': f"std_{s.id}",
+                    'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
+                    'candidate': {
+                        'name': inv.name,
+                        'email': inv.email,
+                    },
+                    'assessment': {
+                        'id': a.id,
+                        'display_name': a.display_name or a.name,
+                        'name': a.name,
+                    },
+                    'score': s.score or 0,
+                    'total': s.total or 0,
+                    'percentage': (s.final_percentage if s.final_percentage is not None else s.percentage) or 0.0,
+                    'status': s.result,
+                })
+            except Exception as e:
+                print(f"Error processing standard submission {s.id}: {e}")
 
         for s in ai_qs[:100]:
-            a = s.assessment
-            results.append({
-                'submission_id': f"ai_{s.id}",
-                'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
-                'candidate': {
-                    'name': s.candidate_name,
-                    'email': s.candidate_email,
-                },
-                'assessment': {
-                    'id': a.id,
-                    'display_name': f"AI: {a.required_skills}",
-                    'name': "AI Assessment",
-                },
-                'score': s.score,
-                'total': s.total_questions,
-                'percentage': s.percentage,
-                'status': s.status,
-                'integrity': s.integrity_score,
-            })
+            try:
+                a = s.assessment
+                results.append({
+                    'submission_id': f"ai_{s.id}",
+                    'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
+                    'candidate': {
+                        'name': s.candidate_name,
+                        'email': s.candidate_email,
+                    },
+                    'assessment': {
+                        'id': a.id,
+                        'display_name': f"AI: {a.required_skills}",
+                        'name': "AI Assessment",
+                    },
+                    'score': s.score or 0,
+                    'total': s.total_questions or 0,
+                    'percentage': s.percentage or 0.0,
+                    'status': s.status,
+                    'integrity': s.integrity_score,
+                })
+            except Exception as e:
+                print(f"Error processing AI submission {s.id}: {e}")
 
         # --- Module 3b: AI Interview Candidates ---
         interview_qs = Candidate.objects.filter(status='Completed').order_by('-created_at')
         for s in interview_qs[:100]:
-            total_possible = s.total_questions * 10
-            perc = (float(s.score) / float(total_possible) * 100.0) if total_possible > 0 else 0.0
-            results.append({
-                'submission_id': f"interview_{s.id}",
-                'submitted_at': (s.completed_at or s.created_at).isoformat() if (s.completed_at or s.created_at) else None,
-                'candidate': {
-                    'name': s.full_name,
-                    'email': s.email,
-                },
-                'assessment': {
-                    'id': f"int_{s.id}",
-                    'display_name': f"AI Interview: {s.job_title or 'Interview'}",
-                    'name': "AI Interview",
-                },
-                'score': s.score,
-                'total': total_possible,
-                'percentage': round(perc, 1),
-                'status': 'selected' if perc >= 60 else 'rejected',
-                'integrity': s.integrity.integrity_score if hasattr(s, 'integrity') else None,
-            })
+            try:
+                total_possible = (s.total_questions or 0) * 10
+                score_val = s.score or 0
+                perc = (float(score_val) / float(total_possible) * 100.0) if total_possible > 0 else 0.0
+                results.append({
+                    'submission_id': f"interview_{s.id}",
+                    'submitted_at': (s.completed_at or s.created_at).isoformat() if (s.completed_at or s.created_at) else None,
+                    'candidate': {
+                        'name': s.full_name,
+                        'email': s.email,
+                    },
+                    'assessment': {
+                        'id': f"int_{s.id}",
+                        'display_name': f"AI Interview: {s.job_title or 'Interview'}",
+                        'name': "AI Interview",
+                    },
+                    'score': score_val,
+                    'total': total_possible,
+                    'percentage': round(perc, 1),
+                    'status': 'selected' if perc >= 60 else 'rejected',
+                    'integrity': getattr(s, 'integrity', None).integrity_score if getattr(s, 'integrity', None) else None,
+                })
+            except Exception as e:
+                print(f"Error processing interview candidate {s.id}: {e}")
         # ------------------------------------------
 
         # Re-sort combined results by submitted_at
-        results.sort(key=lambda x: x['submitted_at'] or '', reverse=True)
+        results.sort(key=lambda x: str(x['submitted_at'] or ''), reverse=True)
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
     except Exception as e:
