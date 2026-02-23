@@ -380,9 +380,9 @@ class InviteAssessmentCandidatesView(APIView):
             try:
                 subject = f"Invite to AI Technical Assessment: {assessment.required_skills}"
                 
-                # Format availability dates
-                start_time = assessment.available_from.strftime('%B %d, %Y at %I:%M %p') if assessment.available_from else "Immediately"
-                end_time = assessment.available_until.strftime('%B %d, %Y at %I:%M %p') if assessment.available_until else "No fixed deadline"
+                # Format availability dates in local time
+                start_time = timezone.localtime(assessment.available_from).strftime('%B %d, %Y at %I:%M %p') if assessment.available_from else "Immediately"
+                end_time = timezone.localtime(assessment.available_until).strftime('%B %d, %Y at %I:%M %p') if assessment.available_until else "No fixed deadline"
                 
                 jd_preview = (assessment.job_description or '')[:200]
                 
@@ -451,8 +451,8 @@ class InviteAssessmentCandidatesView(APIView):
                     try:
                         subject = f"Invite to AI Technical Assessment: {assessment.required_skills}"
                         
-                        start_time = assessment.available_from.strftime('%B %d, %Y at %I:%M %p') if assessment.available_from else "Immediately"
-                        end_time = assessment.available_until.strftime('%B %d, %Y at %I:%M %p') if assessment.available_until else "No fixed deadline"
+                        start_time = timezone.localtime(assessment.available_from).strftime('%B %d, %Y at %I:%M %p') if assessment.available_from else "Immediately"
+                        end_time = timezone.localtime(assessment.available_until).strftime('%B %d, %Y at %I:%M %p') if assessment.available_until else "No fixed deadline"
 
                         message = f"Dear {name},\n\nYou have been invited to attempt an AI technical assessment for the role: {assessment.required_skills}.\n\nTiming Details:\n- Available From: {start_time}\n- Available Until: {end_time}\n- Duration: {assessment.duration_minutes} minutes\n\nLink: {link}\n\nGood luck!"
                         
