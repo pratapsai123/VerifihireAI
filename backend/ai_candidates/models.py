@@ -25,6 +25,7 @@ class Candidate(models.Model):
     job_description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='New')
     score = models.IntegerField(default=0)
+    resume_score = models.IntegerField(default=0, help_text="Resume match percentage from AI screening")
     total_questions = models.IntegerField(default=0)
     submission_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)

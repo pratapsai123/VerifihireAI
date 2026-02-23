@@ -252,6 +252,13 @@ class ResumeMatchView(APIView):
                 percentage = 0
             match_result['is_eligible'] = percentage >= threshold
             # -----------------------------------------------------------
+
+            # --- Save resume score and status to Candidate ---
+            if candidate:
+                candidate.resume_score = percentage
+                candidate.status = 'Resume Passed' if percentage >= threshold else 'Resume Failed'
+                candidate.save()
+            # ---------------------------------------------------
             
             match_result['candidate_id'] = candidate_id
             return Response(match_result, status=status.HTTP_200_OK)

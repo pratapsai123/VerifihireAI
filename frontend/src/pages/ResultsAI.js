@@ -60,13 +60,27 @@ const ResultsAI = () => {
         setSelected(new Set());
     };
 
-    const getStatusStyle = (status) => {
-        const s = status?.toLowerCase();
-        if (s === 'selected' || s === 'completed' || s === 'resume passed')
-            return { background: '#E6FBF5', color: '#05CD99' };
-        if (s === 'rejected' || s === 'resume failed')
-            return { background: '#FFF5F5', color: '#EE5D50' };
+    const getStatusStyle = (rawStatus) => {
+        const s = rawStatus?.toLowerCase();
+        if (s === 'selected' || s === 'resume passed') return { background: '#E6FBF5', color: '#05CD99' };
+        if (s === 'rejected' || s === 'resume failed') return { background: '#FFF5F5', color: '#EE5D50' };
+        if (s === 'completed' || s === 'hired') return { background: '#E6FBF5', color: '#05CD99' };
         return { background: '#F4F7FE', color: '#A3AED0' };
+    };
+
+    const getStatusLabel = (rawStatus) => {
+        const map = {
+            'Resume Passed': 'Pass ✓',
+            'Resume Failed': 'Fail ✗',
+            'selected': 'Qualified ✓',
+            'rejected': 'Not Qualified',
+            'Completed': 'Completed',
+            'Hired': 'Hired',
+            'New': 'Pending',
+            'Invited': 'Invited',
+            'Interview': 'Interviewing',
+        };
+        return map[rawStatus] || rawStatus;
     };
 
     /* ---- Selection ---- */
@@ -341,14 +355,14 @@ const ResultsAI = () => {
                                             </td>
                                             <td style={tdStyle}>
                                                 <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5', fontWeight: '800', fontSize: '0.78rem' }}>
-                                                    {r.score || 0}%
+                                                    {r.resume_score || 0}%
                                                 </div>
                                             </td>
                                             <td style={{ ...tdStyle, color: '#6B7280', fontSize: '0.85rem' }}>
                                                 {r.created_at ? new Date(r.created_at).toLocaleDateString() : '—'}
                                             </td>
                                             <td style={tdStyle}>
-                                                <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>{r.status}</span>
+                                                <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>{getStatusLabel(r.status)}</span>
                                             </td>
                                             <td style={{ ...tdStyle, textAlign: 'center' }}>
                                                 <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
@@ -415,7 +429,7 @@ const ResultsAI = () => {
                                                 {r.completed_at ? new Date(r.completed_at).toLocaleDateString() : 'In Progress'}
                                             </td>
                                             <td style={tdStyle}>
-                                                <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>{r.status}</span>
+                                                <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>{getStatusLabel(r.status)}</span>
                                             </td>
                                             <td style={{ ...tdStyle, textAlign: 'center' }}>
                                                 <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
