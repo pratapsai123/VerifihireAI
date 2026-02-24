@@ -45,7 +45,7 @@ function AvatarModel({ isSpeaking }) {
     });
 
     return (
-        <group ref={group} scale={1.8} position={[0, -2.8, 0]}>
+        <group ref={group} scale={3.5} position={[0, -5.2, 0]}>
             <primitive object={scene} />
         </group>
     );
@@ -90,8 +90,8 @@ const ReadyPlayerMeAvatar = ({ isSpeaking }) => {
         <ModelErrorBoundary fallback={<Professional3DAvatar isSpeaking={isSpeaking} />}>
             <div style={{ width: '100%', height: '320px', position: 'relative', overflow: 'hidden' }}>
                 <Suspense fallback={<LoadingSpinner />}>
-                    <Canvas shadows camera={{ position: [0, 0.2, 1.4], fov: 45 }}>
-                        <ambientLight intensity={0.6} />
+                    <Canvas shadows camera={{ position: [0, 0.4, 0.8], fov: 35 }}>
+                        <ambientLight intensity={0.7} />
                         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                         <pointLight position={[-10, -10, -10]} intensity={0.5} />
 
@@ -103,7 +103,7 @@ const ReadyPlayerMeAvatar = ({ isSpeaking }) => {
                             enableZoom={false}
                             enablePan={false}
                             enableRotate={false}
-                            target={[0, 0.2, 0]}
+                            target={[0, 0.4, 0]}
                         />
                     </Canvas>
                 </Suspense>
