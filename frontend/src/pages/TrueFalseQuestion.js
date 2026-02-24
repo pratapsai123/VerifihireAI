@@ -120,7 +120,8 @@ function TrueFalseQuestion() {
   };
 
   const handleSave = async () => {
-    if (!assessmentContext?.customAssessmentId) {
+    const caid = assessmentContext?.customAssessmentId || assessmentContext?.id;
+    if (!caid) {
       // eslint-disable-next-line no-alert
       alert('Custom assessment ID not found. Please go back to Review page and try again.');
       return;
@@ -178,7 +179,7 @@ function TrueFalseQuestion() {
     }
 
     const payload = {
-      custom_assessment_id: assessmentContext.customAssessmentId,
+      custom_assessment_id: caid,
       assessment,
       topic,
       question_type: 'TF',

@@ -39,6 +39,7 @@ function ReviewPage() {
   const [objPassPercentage, setObjPassPercentage] = useState(60);
   const [objWeight, setObjWeight] = useState(0);
   const [codingWeight, setCodingWeight] = useState(100);
+  const [removedQuestionIds, setRemovedQuestionIds] = useState(new Set());
 
   const totalCodingPoints = useMemo(() => {
     const list = questions['Coding'] || [];
@@ -63,6 +64,7 @@ function ReviewPage() {
         codingTime,
         hasObjectiveCutoff,
         objPassPercentage,
+        removedQuestionIds: Array.from(removedQuestionIds),
         objWeight,
         codingWeight,
       };
@@ -85,7 +87,8 @@ function ReviewPage() {
     hasObjectiveCutoff,
     objPassPercentage,
     objWeight,
-    codingWeight
+    codingWeight,
+    removedQuestionIds
   ]);
 
   // Initial Data Loading & Restoration
@@ -105,8 +108,10 @@ function ReviewPage() {
           state = parsedSaved;
         } else if (state.customAssessmentId === parsedSaved.customAssessmentId) {
           // Merge: location state often has the source data, but parsedSaved has user edits (removed questions, settings)
-          // If the assessment ID matches, the saved state is likely our modified version of this specific assessment.
+          // Ensure we preserve incoming navigation flags like refreshManual
+          const incomingRefresh = state.refreshManual;
           state = { ...state, ...parsedSaved };
+          if (incomingRefresh) state.refreshManual = incomingRefresh;
         }
       }
     } catch {
@@ -138,6 +143,7 @@ function ReviewPage() {
       if (state.objPassPercentage !== undefined) setObjPassPercentage(state.objPassPercentage);
       if (state.objWeight !== undefined) setObjWeight(state.objWeight);
       if (state.codingWeight !== undefined) setCodingWeight(state.codingWeight);
+      if (state.removedQuestionIds) setRemovedQuestionIds(new Set(state.removedQuestionIds));
 
       // Restore questions if they exist in state
       if (state.questions && state.topics && !state.refreshManual) {
@@ -149,22 +155,31 @@ function ReviewPage() {
 
       // If we need to refresh manual questions (e.g. just came back from ManualQuestions page)
       if (state.refreshManual) {
+        console.log("ReviewPage: refreshManual is true, preparing to fetch latest manual questions.");
         const restoredQuestions = { ...(state.questions || {}) };
         const restoredTopics = [...(state.topics || [])];
+        console.log("Initial questions groups:", Object.keys(restoredQuestions));
 
-        const fetchLatestManual = async () => {
+        const fetchLatestManual = async (forcedRemovedIds) => {
+          const removedSet = forcedRemovedIds || removedQuestionIds;
           try {
             let cid = state.customAssessmentId;
             if (!cid) {
               const draft = localStorage.getItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
               if (draft) cid = Number(draft);
             }
+            console.log("ReviewPage fetchLatestManual: cid =", cid);
 
             if (cid) {
               const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
                 params: { custom_assessment_id: cid }
               });
-              const manualList = manualResp.data?.results || [];
+              let manualList = manualResp.data?.results || [];
+              console.log(`ReviewPage fetchLatestManual: Fetched ${manualList.length} questions before filtering.`);
+
+              // Filter out removed questions
+              manualList = manualList.filter(q => !removedSet.has(q.id));
+              console.log(`ReviewPage fetchLatestManual: ${manualList.length} questions after filtering.`);
 
               if (manualList.length > 0) {
                 manualList.sort((a, b) => {
@@ -196,12 +211,15 @@ function ReviewPage() {
                 }
 
                 if (standardQs.length > 0) {
-                  restoredQuestions[MANUAL_TOPIC_LABEL] = standardQs;
+                  // Use a Set to avoid duplicates if standardQs contains questions already in restoredQuestions
+                  const existingStandard = restoredQuestions[MANUAL_TOPIC_LABEL] || [];
+                  const existingIds = new Set(existingStandard.map(q => q.id));
+                  const newStandard = [...existingStandard];
+                  standardQs.forEach(q => {
+                    if (!existingIds.has(q.id)) newStandard.push(q);
+                  });
+                  restoredQuestions[MANUAL_TOPIC_LABEL] = newStandard;
                   if (!restoredTopics.includes(MANUAL_TOPIC_LABEL)) restoredTopics.push(MANUAL_TOPIC_LABEL);
-                } else {
-                  delete restoredQuestions[MANUAL_TOPIC_LABEL];
-                  const idx = restoredTopics.indexOf(MANUAL_TOPIC_LABEL);
-                  if (idx > -1) restoredTopics.splice(idx, 1);
                 }
               }
             }
@@ -214,7 +232,8 @@ function ReviewPage() {
           }
         };
 
-        fetchLatestManual();
+        const initialRemovedSet = new Set(state.removedQuestionIds || []);
+        fetchLatestManual(initialRemovedSet);
         return;
       }
 
@@ -300,7 +319,12 @@ function ReviewPage() {
             const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
               params: { custom_assessment_id: customAssessmentId }
             });
-            const manualList = manualResp.data?.results || [];
+            let manualList = manualResp.data?.results || [];
+
+            // Filter out removed questions
+            const removedSet = new Set(data.removedQuestionIds || []);
+            manualList = manualList.filter(q => !removedSet.has(q.id));
+
             if (manualList.length > 0) {
               manualList.sort((a, b) => {
                 const ta = new Date(a.created_at || 0).getTime();
@@ -389,7 +413,13 @@ function ReviewPage() {
 
           // Process the response and limit questions per skill based on distribution
           allSkills.forEach(skill => {
-            const skillQuestions = response.data.questions_by_topic[skill] || [];
+            let skillQuestions = response.data.questions_by_topic[skill];
+            // Handle cases where backend returns {results: []} instead of a raw array.
+            if (skillQuestions && typeof skillQuestions === 'object' && !Array.isArray(skillQuestions)) {
+              skillQuestions = skillQuestions.results || [];
+            } else if (!Array.isArray(skillQuestions)) {
+              skillQuestions = [];
+            }
             const requiredCount = data.questionDistribution[skill] || 0;
 
             console.log(`Skill: ${skill}, Required: ${requiredCount}, Found: ${skillQuestions.length}`);
@@ -412,7 +442,11 @@ function ReviewPage() {
               const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
                 params: { custom_assessment_id: customAssessmentId }
               });
-              const manualList = manualResp.data?.results || [];
+              let manualList = manualResp.data?.results || [];
+
+              // Filter out removed questions
+              const removedSet = new Set(data.removedQuestionIds || []);
+              manualList = manualList.filter(q => !removedSet.has(q.id));
 
               if (manualList.length > 0) {
                 // Sort so newest appears last
@@ -490,6 +524,7 @@ function ReviewPage() {
   const getCurrentState = () => {
     return {
       ...assessmentData,
+      customAssessmentId: assessmentData.id || assessmentData.customAssessmentId, // Explicitly pass the ID
       questions,
       topics,
       assessmentName,
@@ -749,6 +784,10 @@ function ReviewPage() {
 
   const handleRemoveQuestion = (topic, questionId) => {
     if (!window.confirm('Are you sure you want to remove this question?')) return;
+
+    // Track removed IDs
+    setRemovedQuestionIds(prev => new Set([...prev, questionId]));
+
     setQuestions(prev => {
       const list = prev[topic] || [];
       const newList = list.filter(q => q.id !== questionId);
@@ -1076,7 +1115,15 @@ function ReviewPage() {
                         } else {
                           newQuestions[MANUAL_TOPIC_LABEL] = keptManuals;
                         }
+
+                        // Track removed IDs
+                        const removedIds = currentManuals
+                          .filter(q => (q.assessment || 'Unknown Source') === groupKey)
+                          .map(q => q.id);
+                        setRemovedQuestionIds(prev => new Set([...prev, ...removedIds]));
                       } else if (groupType === 'coding') {
+                        const removedIds = (newQuestions['Coding'] || []).map(q => q.id);
+                        setRemovedQuestionIds(prev => new Set([...prev, ...removedIds]));
                         delete newQuestions['Coding'];
                         setTopics((prevTopics) => prevTopics.filter((t) => t !== 'Coding'));
                       }

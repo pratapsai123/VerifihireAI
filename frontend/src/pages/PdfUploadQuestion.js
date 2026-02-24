@@ -69,7 +69,8 @@ function PdfUploadQuestion() {
   const [isParsing, setIsParsing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  const canParse = Boolean(file) && Boolean(assessmentContext?.customAssessmentId);
+  const caid = assessmentContext?.customAssessmentId || assessmentContext?.id;
+  const canParse = Boolean(file) && Boolean(caid);
 
   const stats = useMemo(() => {
     const counts = { MCQ: 0, MSQ: 0, TF: 0, UNKNOWN: 0 };
@@ -131,7 +132,7 @@ function PdfUploadQuestion() {
   };
 
   const handleParse = async () => {
-    if (!assessmentContext?.customAssessmentId) {
+    if (!caid) {
       // eslint-disable-next-line no-alert
       alert('Custom assessment ID not found. Please go back to Review page and try again.');
       return;
@@ -183,7 +184,7 @@ function PdfUploadQuestion() {
   };
 
   const handleSave = async () => {
-    if (!assessmentContext?.customAssessmentId) {
+    if (!caid) {
       // eslint-disable-next-line no-alert
       alert('Custom assessment ID not found. Please go back to Review page and try again.');
       return;
@@ -210,13 +211,13 @@ function PdfUploadQuestion() {
     }
 
     const payload = {
-      custom_assessment_id: assessmentContext.customAssessmentId,
+      custom_assessment_id: caid,
       user_email: userEmail,
       organization_name: organizationName,
       questions: parsedQuestions.map((q) => ({
         assessment: q.assessment || assessmentName,
         // Topic is required by backend for saving; if missing in the document, fallback safely.
-        topic: q.topic || topicSkill || assessmentName || 'Custom Questions',
+        topic: (q.topic || topicSkill || assessmentName || 'Custom Questions').trim() || 'General',
         question_type: q.question_type,
         experience_level: experienceLevel,
         question: q.question,

@@ -11,6 +11,8 @@ urlpatterns = [
     path('', views.api_root, name='api-root'),
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('api/ai/', include('ai_assessments.urls')),
+    path('api/ai-candidates/', include('ai_candidates.urls')),
 ]
 
 # Serve media files in development

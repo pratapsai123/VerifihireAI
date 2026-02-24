@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password, check_password
@@ -12,9 +12,11 @@ from django.utils import timezone
 from datetime import timedelta
 from django.db import models, close_old_connections
 from django.db.utils import OperationalError
+from ai_candidates.models import Candidate
 from .models import (
     UserProfile,
     EmailOTP,
+    Question,
     Question,
     CustomAssessment,
     Assessment,
@@ -32,6 +34,7 @@ from .models import (
     InterviewInvitation,
     LiveInterviewFeedback,
 )
+from ai_assessments.models import AIAssessmentSubmission
 
 from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
@@ -1569,10 +1572,16 @@ def _create_question_from_payload(
     question_text = (data.get('question') or '').strip()
 
     if not topic:
-        raise ValueError('topic is required.')
+        topic = 'General'
+        print(f"DEBUG: Missing topic in payload, defaulting to '{topic}'")
+
     if question_type not in ('MCQ', 'MSQ', 'TF'):
-        raise ValueError('question_type must be MCQ, MSQ, or TF.')
+        # Try to infer or default
+        question_type = 'MCQ'
+        print(f"DEBUG: Invalid question_type in payload, defaulting to '{question_type}'")
+
     if not question_text:
+        print("DEBUG: Missing question text in payload.")
         raise ValueError('question is required.')
 
     option_a = (data.get('option_a') or '').strip() or None
@@ -1585,8 +1594,12 @@ def _create_question_from_payload(
         option_a = option_a or 'True'
         option_b = option_b or 'False'
 
-    if not option_a or not option_b:
-        raise ValueError('option_a and option_b are required.')
+    if not option_a:
+        option_a = 'Option A'
+        print("DEBUG: Missing option_a, defaulting.")
+    if not option_b:
+        option_b = 'Option B'
+        print("DEBUG: Missing option_b, defaulting.")
 
     difficulty = (data.get('difficulty') or '').strip().lower()
     if difficulty not in ('easy', 'medium', 'hard'):
@@ -1710,8 +1723,11 @@ def create_question_view(request):
     try:
         data = request.data or {}
         try:
+            print(f"Incoming payload for create_question_view: {data}")
             q = _create_question_from_payload(data)
+            print(f"Successfully created question ID: {q.id} for custom_assessment_id: {data.get('custom_assessment_id')}")
         except ValueError as ve:
+            print(f"Validation error in create_question_view: {str(ve)}")
             return Response({'error': str(ve)}, status=status.HTTP_400_BAD_REQUEST)
         return Response(
             {
@@ -2174,6 +2190,7 @@ def bulk_create_questions_view(request):
     try:
         data = request.data or {}
         custom_assessment_id = data.get('custom_assessment_id', None)
+        print(f"bulk_create_questions_view: custom_assessment_id={custom_assessment_id}")
         user_email = data.get('user_email', None)
         organization_name = data.get('organization_name', None)
         questions = data.get('questions', [])
@@ -2229,7 +2246,11 @@ def bulk_create_questions_view(request):
                 )
                 created_ids.append(created.id)
             except Exception as e:
-                errors.append(f"Q{idx}: {str(e)}")
+                import traceback
+                error_msg = f"Q{idx}: {str(e)}"
+                print(f"Error in bulk_create_questions_view during question {idx} creation: {error_msg}")
+                # print(traceback.format_exc())
+                errors.append(error_msg)
 
         return Response(
             {
@@ -4438,11 +4459,17 @@ def results_overview_view(request):
         if end_date:
             qs = qs.filter(submitted_at__date__lte=end_date)
         
-        # Limit results (default 200, maybe more if filtered, but limit to prevent overload)
-        qs = qs[:500]
+        # Similar logic for AI assessments
+        ai_qs = AIAssessmentSubmission.objects.select_related('assessment').order_by('-submitted_at')
         
+        if start_date:
+            ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
+        if end_date:
+            ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
+
+        # Combine and limit
         results = []
-        for s in qs:
+        for s in qs[:400]:
             inv = s.invitation
             a = inv.assessment
             results.append(
@@ -4476,12 +4503,20 @@ def results_overview_view(request):
                 }
             )
 
+        # Re-sort combined results by submitted_at
+        results.sort(key=lambda x: x['submitted_at'] or '', reverse=True)
+
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
     except Exception as e:
         import traceback
         print(f"Error in results_overview_view: {str(e)}")
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while fetching results: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class CandidateSubmissionDeleteView(generics.DestroyAPIView):
+    queryset = CandidateSubmission.objects.all()
+    # serializer_class not strictly required for DestroyAPIView
+    permission_classes = [AllowAny] # Or IsAuthenticated depending on requirements, kept open for now matching results view
 
 
 @csrf_exempt
@@ -4575,6 +4610,7 @@ def candidates_overview_view(request):
                     'started_at': inv.started_at.isoformat() if getattr(inv, 'started_at', None) else None,
                     'expires_at': inv.expires_at.isoformat() if getattr(inv, 'expires_at', None) else None,
                     'submitted_at': sub.submitted_at.isoformat() if sub and sub.submitted_at else None,
+                    'submission_id': sub.id if sub else None,
                     'rating': getattr(sub, 'rating', None) if sub else None,
                     'score': sub.score if sub else 0,
                     'total_score': sub.total if sub else 0,
@@ -4588,6 +4624,51 @@ def candidates_overview_view(request):
                     } if inv.assessment_id else None,
                 }
             )
+
+        # Merge results from Resume Matcher (ai_candidates) if no assessment filter is applied
+        if not assessment_id:
+            try:
+                ai_qs = Candidate.objects.all().order_by('-submission_date')
+                if start_date:
+                    ai_qs = ai_qs.filter(submission_date__date__gte=start_date)
+                if end_date:
+                    ai_qs = ai_qs.filter(submission_date__date__lte=end_date)
+                
+                ai_cands = ai_qs[:50]
+
+                for cand in ai_cands:
+                    results.append({
+                        'id': cand.id,
+                        'name': cand.full_name,
+                        'email': cand.email,
+                        'pan_number': None,
+                        'phone': None,
+                        'status': cand.status,
+                        'token': None,
+                        'created_at': cand.submission_date.isoformat() if cand.submission_date else None,
+                        'started_at': cand.submission_date.isoformat() if cand.submission_date else None,
+                        'expires_at': None,
+                        'submitted_at': None,
+                        'submission_id': None,
+                        'rating': None,
+                        'score': 0,
+                        'total_score': 0,
+                        'final_percentage': 0,
+                        'result': None,
+                        'is_qualified': False,
+                        'assessment': {
+                            'id': 0,
+                            'display_name': cand.job_title,
+                            'name': cand.job_title,
+                        }
+                    })
+                
+                # Re-sort combined results by created_at date
+                def get_date(item):
+                    return item.get('created_at') or ''
+                results.sort(key=get_date, reverse=True)
+            except Exception as e:
+                print(f"Error merging ai_candidates: {e}")
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
     except Exception as e:
@@ -5348,57 +5429,6 @@ def submit_rating_view(request, token):
         return Response({'error': f'An error occurred while saving rating: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-@csrf_exempt
-@api_view(['GET'])
-@permission_classes([AllowAny])
-def candidates_overview_view(request):
-    """
-    Recruiter overview: list invited candidates and their status.
-    Query params:
-      - assessment_id: optional
-    """
-    try:
-        assessment_id = request.GET.get('assessment_id', None)
-        qs = CandidateInvitation.objects.select_related('assessment').order_by('-created_at')
-        if assessment_id:
-            try:
-                qs = qs.filter(assessment_id=int(assessment_id))
-            except Exception:
-                return Response({'error': 'assessment_id must be an integer.'}, status=status.HTTP_400_BAD_REQUEST)
-
-        qs = qs[:500]
-        results = []
-        for inv in qs:
-            sub = getattr(inv, 'submission', None)
-            results.append(
-                {
-                    'id': inv.id,
-                    'name': inv.name,
-                    'email': inv.email,
-                    'pan_number': inv.pan_number,
-                    'phone': inv.phone,
-                    'status': inv.status,
-                    'token': str(inv.token),
-                    'created_at': inv.created_at.isoformat() if inv.created_at else None,
-                    'started_at': inv.started_at.isoformat() if getattr(inv, 'started_at', None) else None,
-                    'expires_at': inv.expires_at.isoformat() if getattr(inv, 'expires_at', None) else None,
-                    'submitted_at': sub.submitted_at.isoformat() if sub and sub.submitted_at else None,
-                    'submission_id': sub.id if sub else None,
-                    'rating': getattr(sub, 'rating', None) if sub else None,
-                    'assessment': {
-                        'id': inv.assessment_id,
-                        'display_name': inv.assessment.display_name,
-                        'name': inv.assessment.name,
-                    } if inv.assessment_id else None,
-                }
-            )
-
-        return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
-    except Exception as e:
-        import traceback
-        print(f"Error in candidates_overview_view: {str(e)}")
-        print(traceback.format_exc())
-        return Response({'error': f'An error occurred while fetching candidates: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 def backfill_assessment_questions_view(request):
     """

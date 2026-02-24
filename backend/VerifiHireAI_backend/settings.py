@@ -31,7 +31,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = _env_list("DJANGO_ALLOWED_HOSTS", ["*"])
 
-FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifyhire.duckdns.org")
+FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "http://localhost:3000")
 
 
 # Application definition
@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'channels',
     'api',
-
+    'ai_assessments',
+    'ai_candidates',
 ]
 
 # Trust Nginx to handle SSL and Host headers
@@ -147,7 +148,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -239,5 +240,8 @@ EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
 EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
+# AI Configuration
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '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')
 
+  
