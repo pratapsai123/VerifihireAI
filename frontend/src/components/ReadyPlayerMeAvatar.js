@@ -21,7 +21,8 @@ function AvatarModel({ isSpeaking }) {
         if (!group.current) return;
         const t = state.clock.getElapsedTime();
 
-        // 1. Idle Micro-movements (Removed vertical hovering)
+        // 1. Stable Identity (Fix position at camera height)
+        group.current.position.y = 0;
         group.current.rotation.z = Math.sin(t * 0.8) * 0.005;
         group.current.rotation.x = Math.sin(t * 1.2) * 0.01;
 
@@ -79,7 +80,7 @@ function AvatarModel({ isSpeaking }) {
     });
 
     return (
-        <group ref={group} scale={4} position={[0, -6.5, 0]}>
+        <group ref={group} scale={4} position={[0, 0, 0]}>
             <primitive object={scene} />
         </group>
     );
