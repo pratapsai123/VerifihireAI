@@ -38,86 +38,86 @@ const ReadyPlayerMeAvatar = ({ isSpeaking = false }) => {
         }}>
             <svg width="220" height="220" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-                        <feGaussianBlur stdDeviation="3.5" result="blur" />
+                    <filter id="neonGlowBlue" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="3" result="blur" />
                         <feComposite in="SourceGraphic" in2="blur" operator="over" />
                     </filter>
-                    <radialGradient id="neonCoreGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-                        <stop offset="0%" stopColor="#ff00ff" />
-                        <stop offset="100%" stopColor="#9d00ff" />
+                    <radialGradient id="neonCoreBlue" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" stopColor="#00f2ff" />
+                        <stop offset="100%" stopColor="#0066ff" />
                     </radialGradient>
                 </defs>
 
-                {/* Outer Neon Ring 3 */}
+                {/* Outer Neon Ring 3 (Deep Blue) */}
                 <circle cx="50" cy="50" r="45"
-                    stroke="rgba(255, 0, 255, 0.15)"
+                    stroke="rgba(0, 102, 255, 0.15)"
                     strokeWidth="0.5"
                     fill="transparent"
                 />
 
-                {/* Outer Rotating Neon Ring 2 */}
+                {/* Outer Rotating Neon Ring 2 (Azure) */}
                 <circle cx="50" cy="50" r="35"
-                    stroke="rgba(0, 255, 239, 0.4)"
+                    stroke="rgba(0, 153, 255, 0.4)"
                     strokeWidth="1.2"
                     fill="transparent"
                     className="rotating-ring-1"
-                    filter="url(#neonGlow)"
+                    filter="url(#neonGlowBlue)"
                 />
 
-                {/* Outer Rotating Neon Ring 1 */}
+                {/* Outer Rotating Neon Ring 1 (Cyan) */}
                 <circle cx="50" cy="50" r="28"
-                    stroke="rgba(255, 0, 255, 0.5)"
+                    stroke="rgba(0, 242, 255, 0.5)"
                     strokeWidth="1.8"
                     className="rotating-ring-2"
-                    filter="url(#neonGlow)"
+                    filter="url(#neonGlowBlue)"
                 />
 
-                {/* Speech Pulse Waves - Neon Green/Cyan */}
+                {/* Speech Pulse Waves - Shades of Blue/Cyan */}
                 {isSpeaking && (
                     <>
                         <circle cx="50" cy="50" r="20" stroke="#00f2ff" strokeWidth="0.8" opacity="0.8">
                             <animate attributeName="r" from="20" to="48" dur="1s" repeatCount="indefinite" />
                             <animate attributeName="opacity" from="0.8" to="0" dur="1s" repeatCount="indefinite" />
                         </circle>
-                        <circle cx="50" cy="50" r="20" stroke="#ff00ff" strokeWidth="0.8" opacity="0.6">
+                        <circle cx="50" cy="50" r="20" stroke="#0077ff" strokeWidth="0.8" opacity="0.6">
                             <animate attributeName="r" from="20" to="42" dur="0.8s" begin="0.4s" repeatCount="indefinite" />
                             <animate attributeName="opacity" from="0.6" to="0" dur="0.8s" begin="0.4s" repeatCount="indefinite" />
                         </circle>
                     </>
                 )}
 
-                {/* Central Neon Core */}
+                {/* Central Neon Blue Core */}
                 <g style={{ transform: `scale(${isSpeaking ? pulse : 1})`, transformOrigin: 'center', transition: 'transform 0.1s ease-out' }}>
-                    <circle cx="50" cy="50" r="14" fill="url(#neonCoreGradient)" filter="url(#neonGlow)" />
-                    {/* Inner Core Pulse */}
-                    <circle cx="50" cy="50" r="5" fill="white" opacity="0.9" filter="url(#neonGlow)" />
+                    <circle cx="50" cy="50" r="14" fill="url(#neonCoreBlue)" filter="url(#neonGlowBlue)" />
+                    {/* Inner Core Shine */}
+                    <circle cx="50" cy="50" r="5" fill="white" opacity="0.9" filter="url(#neonGlowBlue)" />
                 </g>
 
-                {/* Scanning Laser Line */}
-                <line x1="10" y1="50" x2="90" y2="50" stroke="#ff00ff" strokeWidth="0.4" className="scanner-line" filter="url(#neonGlow)" />
+                {/* Scanning Laser Line (Cyan) */}
+                <line x1="10" y1="50" x2="90" y2="50" stroke="#00f2ff" strokeWidth="0.4" className="scanner-line" filter="url(#neonGlowBlue)" />
             </svg>
 
-            {/* Neon Title Tag */}
+            {/* Neon Blue Title Tag */}
             <div style={{
                 position: 'absolute', bottom: 20, left: '50%',
                 transform: 'translateX(-50%)',
-                background: 'rgba(20, 0, 30, 0.8)',
+                background: 'rgba(10, 25, 47, 0.85)',
                 backdropFilter: 'blur(12px)',
                 padding: '6px 22px', borderRadius: '100px',
-                border: '1px solid #ff00ff',
-                color: '#ff00ff', fontSize: '10px', fontWeight: 900,
+                border: '1px solid #00f2ff',
+                color: '#00f2ff', fontSize: '10px', fontWeight: 900,
                 letterSpacing: '2.5px', whiteSpace: 'nowrap',
                 display: 'flex', alignItems: 'center', gap: '8px',
-                boxShadow: '0 0 15px rgba(255, 0, 255, 0.5)', pointerEvents: 'none',
-                textShadow: '0 0 8px #ff00ff'
+                boxShadow: '0 0 15px rgba(0, 242, 255, 0.4)', pointerEvents: 'none',
+                textShadow: '0 0 8px #00f2ff'
             }}>
                 <div style={{
                     width: 6, height: 6, borderRadius: '50%',
-                    background: isSpeaking ? '#00f2ff' : '#475569',
-                    boxShadow: isSpeaking ? '0 0 12px #00f2ff' : 'none',
+                    background: isSpeaking ? '#00ffff' : '#475569',
+                    boxShadow: isSpeaking ? '0 0 12px #00ffff' : 'none',
                     animation: isSpeaking ? 'pulse-core 0.5s infinite alternate' : 'none'
                 }} />
-                INDU • NEON AI
+                INDU • NEON BLUE AI
             </div>
 
             <style>{`
