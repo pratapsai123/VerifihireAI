@@ -1,40 +1,33 @@
-import React, { Suspense, useRef, useState, useEffect } from 'react';
+import React, { Suspense, useRef } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { useGLTF, Environment, OrbitControls, ContactShadows } from '@react-three/drei';
+import * as THREE from 'three';
 import Professional3DAvatar from './Professional3DAvatar';
 
 /**
- * ReadyPlayerMeAvatar - 3D Avatar Loader with SVG Fallback
- * 
- * HOW TO ACTIVATE TRUE 3D:
- * 1. Go to https://readyplayer.me and create a free avatar
- * 2. Copy the GLB URL (format: https://models.readyplayer.me/YOUR_ID.glb)
- * 3. Set AVATAR_URL below to your copied URL
- * 4. The component will automatically load the 3D model
- * 
- * Until a valid URL is set, the premium SVG avatar is used.
+ * ReadyPlayerMeAvatar - True 3D Avatar for Indu
+ * Uses a self-hosted GLB model in /public/models/
+ * Falls back to SVG avatar if 3D fails to load.
  */
 
-// ── SET YOUR READY PLAYER ME URL HERE ──
-// Leave as null to use the SVG avatar, or paste your RPM URL
-const AVATAR_URL = null; // e.g. 'https://models.readyplayer.me/YOUR_ID.glb'
+// Self-hosted model (downloaded and stored locally for reliability)
+const AVATAR_URL = '/models/indu-avatar.glb';
 
-// Lazy-loaded 3D Canvas (only imported when AVATAR_URL is set)
-let Canvas, useFrame, useGLTF, Environment, OrbitControls, ContactShadows, THREE;
-
-function AvatarModel({ isSpeaking, onError }) {
-    const { scene, nodes } = useGLTF(AVATAR_URL, true, true, (error) => {
-        console.error('GLB Load Error:', error);
-        onError?.();
-    });
+function AvatarModel({ isSpeaking }) {
+    const { scene, nodes } = useGLTF(AVATAR_URL);
     const group = useRef();
 
     useFrame((state) => {
         if (!group.current) return;
         const t = state.clock.getElapsedTime();
+
+        // Idle Breathing
         group.current.position.y = Math.sin(t * 1.5) * 0.015;
+        // Subtle Head Tilt
         group.current.rotation.z = Math.sin(t * 0.8) * 0.008;
         group.current.rotation.x = Math.sin(t * 1.2) * 0.015;
 
-        // Lip-Sync via morph targets
+        // Lip-Sync via morph targets (Wolf3D_Head is standard for RPM models)
         if (nodes?.Wolf3D_Head?.morphTargetInfluences && nodes?.Wolf3D_Head?.morphTargetDictionary) {
             const mouthIdx = nodes.Wolf3D_Head.morphTargetDictionary['mouthOpen'];
             if (mouthIdx !== undefined) {
@@ -43,6 +36,11 @@ function AvatarModel({ isSpeaking, onError }) {
                     nodes.Wolf3D_Head.morphTargetInfluences[mouthIdx], target, 0.2
                 );
             }
+        }
+
+        // Also try jaw bone animation for non-RPM models  
+        if (nodes?.Head) {
+            // Generic head bone breathing
         }
     });
 
@@ -53,6 +51,7 @@ function AvatarModel({ isSpeaking, onError }) {
     );
 }
 
+// Error boundary for 3D loading failures
 class ModelErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
@@ -67,60 +66,44 @@ class ModelErrorBoundary extends React.Component {
     }
 }
 
-const ThreeCanvas = ({ isSpeaking, onError }) => (
-    <Canvas shadows camera={{ position: [0, 0, 5], fov: 35 }}>
-        <ambientLight intensity={0.6} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
-        <Suspense fallback={null}>
-            <AvatarModel isSpeaking={isSpeaking} onError={onError} />
-            <Environment preset="city" />
-            <ContactShadows opacity={0.4} scale={10} blur={2.4} far={4.5} />
-        </Suspense>
-        <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
-    </Canvas>
+// Loading spinner
+const LoadingSpinner = () => (
+    <div style={{
+        width: '100%', height: '100%',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        flexDirection: 'column', gap: '10px'
+    }}>
+        <div style={{
+            width: 36, height: 36,
+            border: '3px solid rgba(139, 92, 246, 0.2)',
+            borderTop: '3px solid #a855f7',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite'
+        }} />
+        <span style={{ color: '#94a3b8', fontSize: '11px', fontWeight: 600 }}>Loading 3D Avatar...</span>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); }}`}</style>
+    </div>
 );
 
 const ReadyPlayerMeAvatar = ({ isSpeaking }) => {
-    const [use3D, setUse3D] = useState(false);
-    const [threeLoaded, setThreeLoaded] = useState(false);
-
-    // Only attempt 3D if AVATAR_URL is set
-    useEffect(() => {
-        if (!AVATAR_URL) return;
-
-        // Dynamically import Three.js only when needed
-        Promise.all([
-            import('@react-three/fiber'),
-            import('@react-three/drei'),
-            import('three')
-        ]).then(([fiber, drei, three]) => {
-            Canvas = fiber.Canvas;
-            useFrame = fiber.useFrame;
-            useGLTF = drei.useGLTF;
-            Environment = drei.Environment;
-            OrbitControls = drei.OrbitControls;
-            ContactShadows = drei.ContactShadows;
-            THREE = three;
-            setThreeLoaded(true);
-            setUse3D(true);
-        }).catch(err => {
-            console.warn('Three.js import failed:', err);
-            setUse3D(false);
-        });
-    }, []);
-
-    // Default: use the premium SVG avatar
-    if (!use3D || !threeLoaded) {
-        return <Professional3DAvatar isSpeaking={isSpeaking} />;
-    }
-
     return (
         <ModelErrorBoundary fallback={<Professional3DAvatar isSpeaking={isSpeaking} />}>
             <div style={{ width: '100%', height: '320px', position: 'relative', overflow: 'hidden' }}>
-                <ThreeCanvas isSpeaking={isSpeaking} onError={() => setUse3D(false)} />
+                <Suspense fallback={<LoadingSpinner />}>
+                    <Canvas shadows camera={{ position: [0, 0, 5], fov: 35 }}>
+                        <ambientLight intensity={0.6} />
+                        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+                        <pointLight position={[-10, -10, -10]} intensity={0.5} />
 
-                {/* Name Tag */}
+                        <AvatarModel isSpeaking={isSpeaking} />
+                        <Environment preset="city" />
+                        <ContactShadows opacity={0.4} scale={10} blur={2.4} far={4.5} />
+
+                        <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />
+                    </Canvas>
+                </Suspense>
+
+                {/* Glassmorphism Name Tag */}
                 <div style={{
                     position: 'absolute', bottom: 15, left: '50%',
                     transform: 'translateX(-50%)',
