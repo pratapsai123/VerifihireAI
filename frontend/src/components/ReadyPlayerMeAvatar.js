@@ -1,162 +1,164 @@
-import React, { Suspense, useRef } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment, OrbitControls, ContactShadows, Float, MeshDistortMaterial } from '@react-three/drei';
-import * as THREE from 'three';
-import Professional3DAvatar from './Professional3DAvatar';
+import React, { useEffect, useState } from 'react';
 
 /**
- * ProfessionalAIBot - Procedural 3D Bot Avatar
+ * Professional2DBot - Ultra Premium Digital Edition
  * 
- * Replaces the GLB model with a sleek, digital entity.
- * Uses Three.js primitives for instant loading and technical aesthetic.
+ * Replaces the 3D model with a high-end, animated 2D AI Core.
+ * Features:
+ * 1. Glassmorphism: Layered SVG rings with blur and transparency.
+ * 2. Speech Reactivity: Dynamic pulse soundwaves and core intensity updates.
+ * 3. Minimalist Aesthetic: Charcoal, slate, and glowing cyan color palette.
  */
 
-function BotModel({ isSpeaking }) {
-    const headRef = useRef();
-    const visorRef = useRef();
-    const coreRef = useRef();
+const Professional2DBot = ({ isSpeaking = false }) => {
+    const [pulse, setPulse] = useState(1);
 
-    useFrame((state) => {
-        const t = state.clock.getElapsedTime();
-
-        // 1. Subtle Scanning Micro-movements
-        if (headRef.current) {
-            headRef.current.rotation.y = Math.sin(t * 0.5) * 0.15;
-            headRef.current.rotation.x = Math.cos(t * 0.3) * 0.05;
+    useEffect(() => {
+        if (isSpeaking) {
+            const interval = setInterval(() => {
+                setPulse(0.8 + Math.random() * 0.4);
+            }, 80);
+            return () => clearInterval(interval);
+        } else {
+            setPulse(1);
         }
-
-        // 2. Speech Reactivity: Pulsing Visor and Core
-        if (visorRef.current && coreRef.current) {
-            const pulse = isSpeaking ? (0.8 + Math.sin(t * 30) * 0.5) : 0.5;
-            visorRef.current.material.emissiveIntensity = pulse * 2;
-            coreRef.current.material.emissiveIntensity = pulse * 1.5;
-
-            // Subtle "Scale pulse" when speaking
-            const scalePulse = isSpeaking ? (1 + Math.sin(t * 15) * 0.02) : 1;
-            visorRef.current.scale.set(scalePulse, scalePulse, scalePulse);
-        }
-    });
+    }, [isSpeaking]);
 
     return (
-        <group position={[0, 0, 0]}>
-            {/* Main Head Structure */}
-            <mesh ref={headRef} position={[0, 0, 0]}>
-                <sphereGeometry args={[1, 32, 32]} />
-                <meshStandardMaterial
-                    color="#2c3e50"
-                    roughness={0.1}
-                    metalness={0.9}
-                    envMapIntensity={1}
-                />
-
-                {/* Futuristic Visor */}
-                <mesh ref={visorRef} position={[0, 0.1, 0.85]}>
-                    <boxGeometry args={[1.2, 0.15, 0.2]} />
-                    <meshStandardMaterial
-                        emissive="#00f2ff"
-                        emissiveIntensity={2}
-                        color="#00f2ff"
-                    />
-                </mesh>
-
-                {/* Inner Core (Visible through gaps or design) */}
-                <mesh ref={coreRef} position={[0, -0.4, 0.7]}>
-                    <sphereGeometry args={[0.2, 16, 16]} />
-                    <meshStandardMaterial
-                        emissive="#00f2ff"
-                        emissiveIntensity={1}
-                        color="#00f2ff"
-                    />
-                </mesh>
-            </mesh>
-
-            {/* Torso / Base Unit */}
-            <mesh position={[0, -1.8, 0]}>
-                <capsuleGeometry args={[0.8, 1.2, 4, 16]} />
-                <meshStandardMaterial
-                    color="#1a202c"
-                    roughness={0.2}
-                    metalness={0.8}
-                />
-            </mesh>
-
-            {/* Glowing Accent Rings */}
-            <mesh position={[0, -1, 0]} rotation={[Math.PI / 2, 0, 0]}>
-                <torusGeometry args={[0.85, 0.02, 16, 100]} />
-                <meshStandardMaterial emissive="#00f2ff" emissiveIntensity={0.5} />
-            </mesh>
-        </group>
-    );
-}
-
-const LoadingSpinner = () => (
-    <div style={{
-        width: '100%', height: '100%',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        flexDirection: 'column', gap: '10px'
-    }}>
         <div style={{
-            width: 36, height: 36,
-            border: '3px solid rgba(0, 242, 255, 0.2)',
-            borderTop: '3px solid #00f2ff',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite'
-        }} />
-        <span style={{ color: '#00f2ff', fontSize: '11px', fontWeight: 600 }}>Booting AI Bot...</span>
-        <style>{`@keyframes spin { to { transform: rotate(360deg); }}`}</style>
-    </div>
-);
-
-const ReadyPlayerMeAvatar = ({ isSpeaking }) => {
-    return (
-        <div style={{
-            width: '100%', height: '320px', position: 'relative', overflow: 'hidden',
-            background: 'radial-gradient(circle at center, #1a202c 0%, #0f172a 100%)'
+            width: '100%',
+            height: '320px',
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: 'radial-gradient(circle at center, #1a202c 0%, #0f172a 100%)',
+            overflow: 'hidden',
+            borderRadius: '12px'
         }}>
-            <Suspense fallback={<LoadingSpinner />}>
-                <Canvas shadows camera={{ position: [0, 0, 5], fov: 35 }}>
-                    <ambientLight intensity={0.5} />
-                    <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-                    <pointLight position={[-10, -10, -10]} intensity={0.5} />
-
-                    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-                        <BotModel isSpeaking={isSpeaking} />
-                    </Float>
-
-                    <Environment preset="city" />
-                    <ContactShadows position={[0, -3, 0]} opacity={0.4} scale={10} blur={2.4} far={4.5} />
-
-                    <OrbitControls
-                        enableZoom={false}
-                        enablePan={false}
-                        enableRotate={false}
-                        target={[0, -0.5, 0]}
-                    />
-                </Canvas>
-            </Suspense>
-
-            {/* Glassmorphism Name Tag */}
+            {/* Background Ambient Glow */}
             <div style={{
-                position: 'absolute', bottom: 15, left: '50%',
+                position: 'absolute',
+                width: '150%',
+                height: '150%',
+                background: 'radial-gradient(circle at center, rgba(0, 242, 255, 0.03) 0%, transparent 60%)',
+                animation: 'pulse-bg 4s infinite alternate'
+            }} />
+
+            <svg width="220" height="220" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                        <feGaussianBlur stdDeviation="2.5" result="blur" />
+                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                    </filter>
+                    <radialGradient id="coreGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                        <stop offset="0%" stopColor="#00f2ff" />
+                        <stop offset="100%" stopColor="#0ea5e9" />
+                    </radialGradient>
+                </defs>
+
+                {/* Outer Glass Ring 3 */}
+                <circle cx="50" cy="50" r="45"
+                    stroke="rgba(255, 255, 255, 0.05)"
+                    strokeWidth="0.5"
+                    fill="rgba(255, 255, 255, 0.01)"
+                />
+
+                {/* Outer Glass Ring 2 */}
+                <circle cx="50" cy="50" r="35"
+                    stroke="rgba(0, 242, 255, 0.1)"
+                    strokeWidth="1"
+                    fill="rgba(0, 242, 255, 0.02)"
+                    className="rotating-ring-1"
+                />
+
+                {/* Outer Glass Ring 1 */}
+                <circle cx="50" cy="50" r="28"
+                    stroke="rgba(255, 255, 255, 0.08)"
+                    strokeWidth="1.5"
+                    className="rotating-ring-2"
+                />
+
+                {/* Speech Pulse Waves */}
+                {isSpeaking && (
+                    <>
+                        <circle cx="50" cy="50" r="20" stroke="#00f2ff" strokeWidth="0.5" opacity="0.6">
+                            <animate attributeName="r" from="20" to="48" dur="1.5s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" from="0.6" to="0" dur="1.5s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="50" cy="50" r="20" stroke="#00f2ff" strokeWidth="0.5" opacity="0.4">
+                            <animate attributeName="r" from="20" to="40" dur="1s" begin="0.5s" repeatCount="indefinite" />
+                            <animate attributeName="opacity" from="0.4" to="0" dur="1s" begin="0.5s" repeatCount="indefinite" />
+                        </circle>
+                    </>
+                )}
+
+                {/* Central AI Core */}
+                <g style={{ transform: `scale(${pulse})`, transformOrigin: 'center', transition: 'transform 0.1s ease-out' }}>
+                    <circle cx="50" cy="50" r="14" fill="url(#coreGradient)" filter="url(#glow)" />
+                    {/* Inner Core Detail */}
+                    <circle cx="50" cy="50" r="6" fill="#0f172a" opacity="0.4" />
+                    <circle cx="50" cy="50" r="3" fill="white" opacity="0.8" />
+                </g>
+
+                {/* Scanning Lines */}
+                <line x1="10" y1="50" x2="90" y2="50" stroke="rgba(0, 242, 255, 0.15)" strokeWidth="0.2" className="scanner-line" />
+            </svg>
+
+            {/* Glassmorphism Title Tag */}
+            <div style={{
+                position: 'absolute', bottom: 20, left: '50%',
                 transform: 'translateX(-50%)',
-                background: 'rgba(15, 23, 42, 0.6)',
+                background: 'rgba(15, 23, 42, 0.7)',
                 backdropFilter: 'blur(10px)',
-                padding: '6px 20px', borderRadius: '100px',
-                border: '1px solid rgba(0, 242, 255, 0.4)',
-                color: '#e2e8f0', fontSize: '11px', fontWeight: 800,
-                letterSpacing: '1.5px', whiteSpace: 'nowrap',
+                padding: '6px 22px', borderRadius: '100px',
+                border: '1px solid rgba(0, 242, 255, 0.3)',
+                color: '#e2e8f0', fontSize: '10px', fontWeight: 900,
+                letterSpacing: '2px', whiteSpace: 'nowrap',
                 display: 'flex', alignItems: 'center', gap: '8px',
-                boxShadow: '0 8px 32px rgba(0,0,0,0.3)', pointerEvents: 'none'
+                boxShadow: '0 8px 32px rgba(0,0,0,0.4)', pointerEvents: 'none'
             }}>
                 <div style={{
-                    width: 8, height: 8, borderRadius: '50%',
-                    background: isSpeaking ? '#00f2ff' : '#64748b',
-                    boxShadow: isSpeaking ? '0 0 12px #00f2ff' : 'none'
+                    width: 6, height: 6, borderRadius: '50%',
+                    background: isSpeaking ? '#00f2ff' : '#475569',
+                    boxShadow: isSpeaking ? '0 0 12px #00f2ff' : 'none',
+                    animation: isSpeaking ? 'pulse-core 0.8s infinite alternate' : 'none'
                 }} />
-                INDU • PROFESSIONAL AI BOT
+                INDU • PROFESSIONAL AI
             </div>
+
+            <style>{`
+                .rotating-ring-1 {
+                    transform-origin: center;
+                    animation: rotate 20s linear infinite;
+                    stroke-dasharray: 40 10;
+                }
+                .rotating-ring-2 {
+                    transform-origin: center;
+                    animation: rotate-reverse 15s linear infinite;
+                    stroke-dasharray: 5 15;
+                }
+                .scanner-line {
+                    animation: scan 4s ease-in-out infinite;
+                }
+                @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+                @keyframes rotate-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+                @keyframes scan { 
+                    0% { transform: translateY(-30px); opacity: 0; }
+                    50% { opacity: 1; }
+                    100% { transform: translateY(30px); opacity: 0; }
+                }
+                @keyframes pulse-bg {
+                    from { opacity: 0.3; transform: scale(0.95); }
+                    to { opacity: 0.7; transform: scale(1.05); }
+                }
+                @keyframes pulse-core {
+                    from { transform: scale(0.9); opacity: 0.6; }
+                    to { transform: scale(1.1); opacity: 1; }
+                }
+            `}</style>
         </div>
     );
 };
 
-export default ReadyPlayerMeAvatar;
+export default Professional2DBot;
