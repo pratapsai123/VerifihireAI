@@ -45,7 +45,7 @@ function AvatarModel({ isSpeaking }) {
     });
 
     return (
-        <group ref={group} scale={5} position={[0, -8.5, 0]}>
+        <group ref={group} scale={5} position={[0, -13.5, 0]}>
             <primitive object={scene} />
         </group>
     );
