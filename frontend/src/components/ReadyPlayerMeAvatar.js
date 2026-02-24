@@ -103,6 +103,40 @@ const Professional2DBot = ({ isSpeaking = false }) => {
 
                 {/* Scanning Lines */}
                 <line x1="10" y1="50" x2="90" y2="50" stroke="rgba(0, 242, 255, 0.15)" strokeWidth="0.2" className="scanner-line" />
+
+                {/* Audio Spectrum Visualizer (Bottom-centered) */}
+                <g className="spectrum-group" transform="translate(30, 75)">
+                    {[...Array(12)].map((_, i) => (
+                        <rect
+                            key={i}
+                            x={i * 3.5}
+                            y="0"
+                            width="2"
+                            height="4"
+                            rx="1"
+                            fill="#00f2ff"
+                            opacity={isSpeaking ? 0.8 : 0.2}
+                            className={`spectrum-bar spectrum-bar-${i}`}
+                        >
+                            {isSpeaking && (
+                                <animate
+                                    attributeName="height"
+                                    values={`${4 + Math.random() * 2};${10 + Math.random() * 15};${4 + Math.random() * 2}`}
+                                    dur={`${0.4 + Math.random() * 0.4}s`}
+                                    repeatCount="indefinite"
+                                />
+                            )}
+                            {isSpeaking && (
+                                <animate
+                                    attributeName="y"
+                                    values="0;-5;0"
+                                    dur={`${0.4 + Math.random() * 0.4}s`}
+                                    repeatCount="indefinite"
+                                />
+                            )}
+                        </rect>
+                    ))}
+                </g>
             </svg>
 
             {/* Glassmorphism Title Tag */}
@@ -124,7 +158,7 @@ const Professional2DBot = ({ isSpeaking = false }) => {
                     boxShadow: isSpeaking ? '0 0 12px #00f2ff' : 'none',
                     animation: isSpeaking ? 'pulse-core 0.8s infinite alternate' : 'none'
                 }} />
-                INDU • PROFESSIONAL AI
+                INDU • AI RECRUITER
             </div>
 
             <style>{`
@@ -140,6 +174,9 @@ const Professional2DBot = ({ isSpeaking = false }) => {
                 }
                 .scanner-line {
                     animation: scan 4s ease-in-out infinite;
+                }
+                .spectrum-bar {
+                    transition: height 0.2s, y 0.2s, opacity 0.5s;
                 }
                 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
                 @keyframes rotate-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
