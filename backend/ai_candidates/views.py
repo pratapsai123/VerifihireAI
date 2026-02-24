@@ -493,11 +493,13 @@ class ProcessAnswerView(APIView):
         
         (B) ACTUAL ANSWER - Trigger for:
         - Greetings, introductions, or any info regarding their background/tech skills.
-        - EVEN if the transcript is slightly messy (e.g., "miskins" instead of "skills"), use your logic to extract the meaning.
+        - EVEN if the transcript is slightly messy, use your logic to extract the meaning.
         
-        STT AWARENESS (CRITICAL):
-        - Microphones can be messy. If you see "BTech an mlrit" or "Computer Science Engineering", you know what it means. DO NOT ask the candidate to "rephrase clearly" unless it is total gibberish.
-        - NEVER loop more than once on the same question. If they tried to answer, MOVE ON.
+        STT & CONTEXT AWARENESS (CRITICAL):
+        - Microphones can be messy. "BTech an mlrit" = "B.Tech and MLRIT".
+        - "Java" is a PROGRAMMING LANGUAGE. If a candidate says "I am a Java developer", they are sharing their background, NOT talking about the island of Java.
+        - NEVER loop more than once on the same question. If they tried to answer (even with just one sentence), MOVE ON.
+        - DO NOT be a robot. If they said "graduated in 2015", that counts as an educational background. MOVE TO THE NEXT TOPIC.
 
         IF (A) CLARIFICATION REQUEST:
         1. Set "is_clarification": true.
@@ -507,12 +509,15 @@ class ProcessAnswerView(APIView):
 
         IF (B) ACTUAL ANSWER:
         1. Set "is_clarification": false.
-        2. "feedback": A brief acknowledgement (e.g., "Great, thanks for sharing that."). BE KINDER DURING INTRODUCTIONS.
-        3. "refined_next_question": MOVE FORWARD. If this was the introduction, ask a specific technical question based on their resume or the job description. DO NOT ask them to repeat their intro.
+        2. "feedback": A brief acknowledgement. BE KINDER AND MORE CONVERSATIONAL.
+        3. "refined_next_question": MUST BE A NEW, DIFFERENT QUESTION. 
+           - If this was the introduction, ask about a specific technical skill from the JD or Resume. 
+           - DO NOT start the question with "You were asked to..." or "Let's focus on...". 
+           - Just ask the next logical interview question.
         4. SCORING: 
            - 0-1: "no" or "don't know".
            - 2-4: vague.
-           - 5-10: correct technical content. (Intro is always 5+ if they try).
+           - 5-10: correct content. (Intro is always 5+ if they try).
 
         CONTEXT:
         Resume: {resume_context[:1000]}
@@ -535,7 +540,7 @@ class ProcessAnswerView(APIView):
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,
-            response_format={"type": "json_object"}
+                response_format={"type": "json_object"}
             )
             raw_text = response.choices[0].message.content
             data = extract_json(raw_text)

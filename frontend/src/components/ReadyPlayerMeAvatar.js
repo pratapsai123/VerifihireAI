@@ -117,7 +117,7 @@ const ReadyPlayerMeAvatar = ({ isSpeaking = false }) => {
                     boxShadow: isSpeaking ? '0 0 12px #00ffff' : 'none',
                     animation: isSpeaking ? 'pulse-core 0.5s infinite alternate' : 'none'
                 }} />
-                INDU • NEON BLUE AI
+                INDU • AI INTERVIEWER
             </div>
 
             <style>{`
