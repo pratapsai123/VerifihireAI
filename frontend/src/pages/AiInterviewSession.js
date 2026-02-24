@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Professional3DAvatar from '../components/Professional3DAvatar';
+import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
 
@@ -16,7 +16,7 @@ const AiInterviewSession = () => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [userInputMode, setUserInputMode] = useState('audio'); // 'audio' or 'text'
-    const [aiStatus, setAiStatus] = useState('AI Interviewer Online');
+    const [aiStatus, setAiStatus] = useState('Indu is Online');
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [progress, setProgress] = useState(0);
     const [showQuotaWarning, setShowQuotaWarning] = useState(false);
@@ -35,6 +35,9 @@ const AiInterviewSession = () => {
     const streamRef = useRef(null);
     const chatHistoryRef = useRef([]);
     const isInitializedRef = useRef(false);
+    const isProcessingRef = useRef(false);
+    const isSpeakingRef = useRef(false);
+    const isRecordingRef = useRef(false);
 
     // 1. Load Voices
     useEffect(() => {
@@ -171,16 +174,56 @@ const AiInterviewSession = () => {
         const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
         return new Promise((resolve) => {
             if (!text) return resolve();
+
+            // Safety Watchdog: If speech fails to end, resolve anyway after a timeout
+            // 200ms per character + 3s buffer is extremely safe
+            const timeoutMs = Math.max(3000, (text.length * 200) + 3000);
+            const watchdog = setTimeout(() => {
+                console.warn("📢 Speak Watchdog triggered (Possible browser speech hang)");
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                resolve();
+            }, timeoutMs);
+
             synthRef.current.cancel();
+            // Force resume (Chrome bug fix)
+            if (synthRef.current.paused) synthRef.current.resume();
+
             const utterance = new SpeechSynthesisUtterance(text);
-            const voice = voicesRef.current.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
+            const voice = voicesRef.current.find(v => v.lang.includes('IN') && (v.name.includes('Heera') || v.name.includes('Ravi'))) ||
+                voicesRef.current.find(v => v.lang.includes('IN')) ||
+                voicesRef.current.find(v => v.name.toLowerCase().includes('india')) ||
+                voicesRef.current.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
                 voicesRef.current.find(v => v.name.includes('US English')) ||
                 voicesRef.current[0];
 
-            if (voice) utterance.voice = voice;
-            utterance.onstart = () => { setIsSpeaking(true); setAiStatus("Speaking..."); };
-            utterance.onend = () => { setIsSpeaking(false); setAiStatus("AI Interviewer Online"); resolve(); };
-            utterance.onerror = () => { setIsSpeaking(false); setAiStatus("AI Interviewer Online"); resolve(); };
+            if (voice) {
+                utterance.voice = voice;
+            }
+
+            utterance.onstart = () => {
+                setIsSpeaking(true);
+                isSpeakingRef.current = true;
+                setAiStatus("Speaking...");
+            };
+
+            utterance.onend = () => {
+                clearTimeout(watchdog);
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                setAiStatus("Indu is Online");
+                resolve();
+            };
+
+            utterance.onerror = (event) => {
+                console.error("SpeechSynthesis error:", event);
+                clearTimeout(watchdog);
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                setAiStatus("Indu is Online");
+                resolve();
+            };
+
             synthRef.current.speak(utterance);
         });
     };
@@ -202,17 +245,17 @@ const AiInterviewSession = () => {
     }, [token, speak, addMessage]);
 
     const startListening = useCallback(() => {
-        if (userInputMode !== 'audio' || !recognitionRef.current || isRecording) return;
+        if (userInputMode !== 'audio' || !recognitionRef.current || isRecordingRef.current) return;
 
         let attempts = 0;
         const maxAttempts = 10;
 
         const tryStart = () => {
-            // Check if AI is occupied
-            if (isProcessing || isSpeaking) {
+            // Check if AI is occupied - Use REFS to avoid stale closures
+            if (isProcessingRef.current || isSpeakingRef.current) {
                 if (attempts < maxAttempts) {
                     attempts++;
-                    setTimeout(tryStart, 300); // Retry every 300ms
+                    setTimeout(tryStart, 350); // Retry 
                 }
                 return;
             }
@@ -238,9 +281,12 @@ const AiInterviewSession = () => {
             return;
         }
 
-        // 1. Immediate UI Lock
+        // 1. Immediate UI Lock & Reset Nudge
         setIsProcessing(true);
+        isProcessingRef.current = true;
         setAiStatus("AI is thinking...");
+        nudgeCountRef.current = 0; // Reset nudge for the new question turn
+        if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
 
         // 2. Force Microphone Stop
         if (recognitionRef.current) {
@@ -263,7 +309,25 @@ const AiInterviewSession = () => {
             }, { timeout: 35000 }); // 35s for more complex reasoning
 
             const data = response.data;
+            const isClarification = data.is_clarification === true;
             let fullFeedback = data.feedback || "";
+
+            if (isClarification) {
+                // Scenario A: Candidate asked for help/clarification
+                addMessage('ai', fullFeedback);
+                try {
+                    await speak(fullFeedback);
+                } catch (e) {
+                    console.error("Clarification speak error:", e);
+                }
+
+                setIsProcessing(false);
+                isProcessingRef.current = false;
+                setAiStatus("Indu is Online");
+                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
+                return; // STOP HERE: Don't move to next question
+            }
+
             const nextIdx = currentQuestionIndex + 1;
             const totalAnswered = nextIdx; // questions answered so far
 
@@ -294,11 +358,16 @@ const AiInterviewSession = () => {
             if (fullFeedback.trim()) fullTurnText += fullFeedback.trim() + " ";
 
             if (followUpQ) {
-                fullTurnText += followUpQ;
-                addMessage('ai', fullTurnText);
-                await speak(fullTurnText);
+                // De-duplicate if feedback and follow-up are identical
+                const followUpText = (fullFeedback.trim() === followUpQ.trim())
+                    ? followUpQ
+                    : (fullFeedback.trim() + " " + followUpQ);
+
+                addMessage('ai', followUpText);
+                await speak(followUpText);
                 setIsProcessing(false);
-                setAiStatus("AI Interviewer Online");
+                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
+                setAiStatus("Indu is Online");
             } else if (refinedNextQ === null && nextIdx >= questions.length) {
                 if (fullTurnText) addMessage('ai', fullTurnText);
                 if (fullTurnText) await speak(fullTurnText);
@@ -315,12 +384,18 @@ const AiInterviewSession = () => {
                     return newQs;
                 });
 
-                fullTurnText += nextQ;
-                addMessage('ai', fullTurnText);
-                await speak(fullTurnText);
+                // De-duplicate if feedback and next question are identical
+                const finalTurnText = (fullFeedback.trim() === nextQ.trim())
+                    ? nextQ
+                    : (fullFeedback.trim() + " " + nextQ);
+
+                addMessage('ai', finalTurnText);
+                await speak(finalTurnText);
 
                 setIsProcessing(false);
-                setAiStatus("AI Interviewer Online");
+                isProcessingRef.current = false;
+                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
+                setAiStatus("Indu is Online");
             }
         } catch (err) {
             console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (35s)" : err.message);
@@ -386,9 +461,9 @@ const AiInterviewSession = () => {
         const startInterview = async (name, qs) => {
             await startCamera();
             const firstName = name.split(' ')[0];
-            const welcome = `Hello ${firstName}! Let's start your interview.`;
+            const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
 
-            const introQ = "Please introduce yourself and your professional background.";
+            const introQ = "To get started, please introduce yourself and your professional background.";
             let finalQs = [...qs];
             if (finalQs[0] !== introQ) {
                 finalQs = [introQ, ...finalQs];
@@ -399,6 +474,7 @@ const AiInterviewSession = () => {
             const combinedStart = `${welcome} ${introQ}`;
             addMessage('ai', combinedStart);
             await speak(combinedStart);
+            if (userInputMode === 'audio') startListening();
         };
 
         initSession();
@@ -406,6 +482,8 @@ const AiInterviewSession = () => {
     }, [token]); // Only re-init if token changes, perfectly stable camera feed
 
     const silenceTimerRef = useRef(null);
+    const globalSilenceTimerRef = useRef(null);
+    const nudgeCountRef = useRef(0);
     const transcriptRef = useRef("");
 
     const submitHandlerRef = useRef(handleAnswerSubmission);
@@ -420,13 +498,17 @@ const AiInterviewSession = () => {
         const recognition = new window.webkitSpeechRecognition();
         recognition.continuous = true;
         recognition.interimResults = true;
-        recognition.lang = 'en-US';
+        recognition.lang = 'en-IN';
 
         recognition.onstart = () => {
             console.log("INFINITE MIC: Speech recognition is now active and stay on.");
             setIsRecording(true);
+            isRecordingRef.current = true;
             setAiStatus("Listening...");
             transcriptRef.current = "";
+
+            // Start Global Silence Watchdog (15s for first nudge)
+            startSilenceWatchdog(15000);
         };
 
         recognition.onresult = (event) => {
@@ -453,6 +535,10 @@ const AiInterviewSession = () => {
 
             // PATIENT SILENCE: Reset timer every time we hear ANY sound/speech
             if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+            if (globalSilenceTimerRef.current) {
+                clearTimeout(globalSilenceTimerRef.current);
+                globalSilenceTimerRef.current = null;
+            }
 
             // Only submit if we have a significant answer length
             if (currentTotal.length > 3) {
@@ -482,7 +568,9 @@ const AiInterviewSession = () => {
 
         recognition.onend = () => {
             setIsRecording(false);
+            isRecordingRef.current = false;
             if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+            if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current); // Clear global timer on recognition end
             console.log("Recognition session ended.");
         };
 
@@ -493,8 +581,38 @@ const AiInterviewSession = () => {
                 try { recognitionRef.current.stop(); } catch (e) { }
             }
             if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+            if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
         };
     }, []);
+
+    const startSilenceWatchdog = (delay) => {
+        if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
+        globalSilenceTimerRef.current = setTimeout(async () => {
+            if (!isRecordingRef.current || isProcessingRef.current || isSpeakingRef.current) return;
+
+            if (nudgeCountRef.current === 0) {
+                // First nudge
+                nudgeCountRef.current = 1;
+                const nudgeText = "I didn't quite catch that. Could you please share your answer when you're ready?";
+                addMessage('ai', nudgeText);
+                try {
+                    if (recognitionRef.current) recognitionRef.current.stop();
+                    await speak(nudgeText);
+                    startListening(); // Restart with a fresh 15s timer
+                } catch (e) { }
+            } else {
+                // Second nudge = AUTO SKIP
+                const skipText = "It seems you're having some trouble. Let's move to the next question for now.";
+                addMessage('ai', skipText);
+                try {
+                    if (recognitionRef.current) recognitionRef.current.stop();
+                    await speak(skipText);
+                    // Force submission with a "skipped" tag
+                    if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
+                } catch (e) { }
+            }
+        }, delay);
+    };
 
 
     const toggleRecording = () => {
@@ -548,7 +666,7 @@ const AiInterviewSession = () => {
                         <div className="ai-status-badge"><span className="speaking-indicator"></span>{aiStatus}</div>
                     </div>
                     <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '0.5rem' }}>
-                        <Professional3DAvatar isSpeaking={isSpeaking} />
+                        <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
                     </div>
                 </div>
 
@@ -579,6 +697,14 @@ const AiInterviewSession = () => {
                         {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: '#a0aec0', marginTop: '1.5rem', fontStyle: 'italic', fontSize: '0.85rem' }}>History will appear here...</div>}
                         {chatMessages.map((msg, i) => <div key={i} className={`message ${msg.sender}`}>{msg.text}</div>)}
                     </div>
+
+                    {/* Live Transcript Display */}
+                    {(isRecording && aiStatus.startsWith('Heard:')) && (
+                        <div className="live-transcript-bubble">
+                            <i className="fa-solid fa-ear-listen" style={{ color: '#667eea', marginRight: '8px' }}></i>
+                            {aiStatus.replace('Heard: ', '').replace(/"/g, '')}
+                        </div>
+                    )}
 
                     <div style={{ background: 'white', padding: '0.6rem 1rem', borderRadius: '12px', boxShadow: '0 -2px 10px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                         {userInputMode === 'audio' ? (
