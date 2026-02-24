@@ -60,13 +60,14 @@ function App() {
     window.location.pathname.startsWith('/interview-start/') ||
     window.location.pathname.startsWith('/take-assessment/') ||
     window.location.pathname.startsWith('/take-ai-assessment/') ||
-    window.location.pathname.startsWith('/ai-interview-session/');
+    window.location.pathname.startsWith('/ai-interview-session/') ||
+    window.location.pathname === '/ai-interview';
 
   return (
     <BrowserRouter>
       <div className="app-container">
         {!isCandidatePage && <Header />}
-        <div className="app-scroll">
+        <div className={`app-scroll ${isCandidatePage ? 'no-header' : ''}`}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

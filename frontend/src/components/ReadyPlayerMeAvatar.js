@@ -6,11 +6,11 @@ import Professional3DAvatar from './Professional3DAvatar';
 
 /**
  * ReadyPlayerMeAvatar - True 3D Avatar for Indu
- * Uses a self-hosted GLB model in /public/models/
- * Falls back to SVG avatar if 3D fails to load.
+ * 
+ * Optimized for models with limited morph targets.
+ * Uses a "Syllabic Jitter" system to simulate speech realism.
  */
 
-// Self-hosted model (downloaded and stored locally for reliability)
 const AVATAR_URL = '/models/indu-avatar.glb';
 
 function AvatarModel({ isSpeaking }) {
@@ -21,52 +21,82 @@ function AvatarModel({ isSpeaking }) {
         if (!group.current) return;
         const t = state.clock.getElapsedTime();
 
-        // Idle Breathing
+        // 1. Idle Breathing & Micro-movements
         group.current.position.y = Math.sin(t * 1.5) * 0.015;
-        // Subtle Head Tilt
         group.current.rotation.z = Math.sin(t * 0.8) * 0.008;
         group.current.rotation.x = Math.sin(t * 1.2) * 0.015;
 
-        // Lip-Sync via morph targets (Wolf3D_Head is standard for RPM models)
-        if (nodes?.Wolf3D_Head?.morphTargetInfluences && nodes?.Wolf3D_Head?.morphTargetDictionary) {
-            const mouthIdx = nodes.Wolf3D_Head.morphTargetDictionary['mouthOpen'];
+        // 2. Specialized Lip-Sync for Limited Morph Targets
+        const head = nodes?.Wolf3D_Head;
+        const teeth = nodes?.Wolf3D_Teeth;
+
+        if (head?.morphTargetInfluences && head?.morphTargetDictionary) {
+            const headDict = head.morphTargetDictionary;
+            const headInfluences = head.morphTargetInfluences;
+            const teethDict = teeth?.morphTargetDictionary;
+            const teethInfluences = teeth?.morphTargetInfluences;
+
+            // Find the best available 'opening' target (RPM usually has mouthOpen)
+            const mouthIdx = headDict['mouthOpen'] ?? headDict['MouthOpen'] ?? headDict['jawOpen'];
+
             if (mouthIdx !== undefined) {
-                const target = isSpeaking ? 0.3 + Math.sin(t * 15) * 0.2 : 0;
-                nodes.Wolf3D_Head.morphTargetInfluences[mouthIdx] = THREE.MathUtils.lerp(
-                    nodes.Wolf3D_Head.morphTargetInfluences[mouthIdx], target, 0.2
-                );
+                let targetValue = 0;
+                if (isSpeaking) {
+                    // PHONETIC SIMULATOR: Combines fast jitter + mid-freq syllables + constant opening
+                    const jitter = Math.sin(t * 26) * 0.12;
+                    const syllable = Math.sin(t * 14) * 0.35;
+                    const base = 0.35;
+                    targetValue = Math.max(0, Math.min(0.9, base + syllable + jitter));
+                }
+
+                // Smoothly blend using higher lerp for snappier speech
+                headInfluences[mouthIdx] = THREE.MathUtils.lerp(headInfluences[mouthIdx], targetValue, 0.45);
+
+                // Keep teeth perfectly in sync
+                if (teethInfluences && teethDict) {
+                    const tMouthIdx = teethDict['mouthOpen'] ?? teethDict['MouthOpen'] ?? teethDict['jawOpen'];
+                    if (tMouthIdx !== undefined) {
+                        teethInfluences[tMouthIdx] = headInfluences[mouthIdx];
+                    }
+                }
             }
         }
 
-        // Also try jaw bone animation for non-RPM models  
-        if (nodes?.Head) {
-            // Generic head bone breathing
+        // 3. Subtle Eye Blinking
+        const eyes = nodes?.Wolf3D_Head;
+        if (eyes?.morphTargetDictionary && eyes?.morphTargetInfluences) {
+            const blinkIdx = eyes.morphTargetDictionary['eyeBlinkLeft'] ?? eyes.morphTargetDictionary['eyesBlink'];
+            if (blinkIdx !== undefined) {
+                // Blink every 3-5 seconds
+                const blink = Math.sin(t * 0.5) > 0.98 ? 1 : 0;
+                eyes.morphTargetInfluences[blinkIdx] = THREE.MathUtils.lerp(eyes.morphTargetInfluences[blinkIdx], blink, 0.5);
+
+                const blinkRIdx = eyes.morphTargetDictionary['eyeBlinkRight'];
+                if (blinkRIdx !== undefined) {
+                    eyes.morphTargetInfluences[blinkRIdx] = eyes.morphTargetInfluences[blinkIdx];
+                }
+            }
         }
     });
 
     return (
-        <group ref={group} scale={5} position={[0, -13.5, 0]}>
+        <group ref={group} scale={4} position={[0, -6.5, 0]}>
             <primitive object={scene} />
         </group>
     );
 }
 
-// Error boundary for 3D loading failures
 class ModelErrorBoundary extends React.Component {
     constructor(props) {
         super(props);
         this.state = { hasError: false };
     }
     static getDerivedStateFromError() { return { hasError: true }; }
-    componentDidCatch(error) {
-        console.warn('3D model failed, using SVG fallback:', error.message);
-    }
     render() {
         return this.state.hasError ? this.props.fallback : this.props.children;
     }
 }
 
-// Loading spinner
 const LoadingSpinner = () => (
     <div style={{
         width: '100%', height: '100%',
@@ -80,7 +110,7 @@ const LoadingSpinner = () => (
             borderRadius: '50%',
             animation: 'spin 1s linear infinite'
         }} />
-        <span style={{ color: '#94a3b8', fontSize: '11px', fontWeight: 600 }}>Loading 3D Avatar...</span>
+        <span style={{ color: '#94a3b8', fontSize: '11px', fontWeight: 600 }}>Syncing Indu...</span>
         <style>{`@keyframes spin { to { transform: rotate(360deg); }}`}</style>
     </div>
 );
@@ -88,23 +118,20 @@ const LoadingSpinner = () => (
 const ReadyPlayerMeAvatar = ({ isSpeaking }) => {
     return (
         <ModelErrorBoundary fallback={<Professional3DAvatar isSpeaking={isSpeaking} />}>
-            <div style={{ width: '100%', height: '400px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ width: '100%', height: '320px', position: 'relative', overflow: 'hidden' }}>
                 <Suspense fallback={<LoadingSpinner />}>
-                    <Canvas shadows camera={{ position: [0, 0, 1.5], fov: 40 }}>
+                    <Canvas shadows camera={{ position: [0.15, 6.37, 2.71], fov: 35 }}>
                         <ambientLight intensity={0.8} />
                         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                         <pointLight position={[-10, -10, -10]} intensity={0.5} />
-
                         <AvatarModel isSpeaking={isSpeaking} />
                         <Environment preset="city" />
-
                         <ContactShadows opacity={0.4} scale={10} blur={2.4} far={4.5} />
-
                         <OrbitControls
-                            enableZoom={true}
-                            enablePan={true}
-                            enableRotate={true}
-                            target={[0, -1.5, 0]}
+                            enableZoom={false}
+                            enablePan={false}
+                            enableRotate={false}
+                            target={[-0.11, 6.13, -1.58]}
                         />
                     </Canvas>
                 </Suspense>

@@ -485,18 +485,35 @@ class ProcessAnswerView(APIView):
         Job Context: {jd_context[:200]}
         
         GOAL:
-        Evaluate the candidate's technical competence with zero bias towards politeness. Be extremely concise (15-25 words).
+        Determine if the Candidate Answer is (A) A clear, explicit Clarification Request or (B) An Actual Answer.
+
+        (A) CLARIFICATION REQUEST - ONLY trigger if:
+        - The candidate explicitly asks to repeat: "repeat that", "pardon", "what?".
+        - The candidate explicitly asks for help because they are LOST or don't understand the question.
         
-        SCORING RULES (CRITICAL):
-        - Score 0-1: If the answer is "no", "I don't know", "I'm not sure", or completely avoids the technical core of the question. NO PITY POINTS FOR HONESTY.
-        - Score 2-4: If the answer is vague, shows very shallow understanding, or contains major technical inaccuracies.
-        - Score 5-7: If the answer is generally correct but lacks depth, specific details, or best practices.
-        - Score 8-10: Only for precise, technically sound answers that demonstrate real-world experience and mastery.
+        (B) ACTUAL ANSWER - Trigger for:
+        - Greetings, introductions, or any info regarding their background/tech skills.
+        - EVEN if the transcript is slightly messy (e.g., "miskins" instead of "skills"), use your logic to extract the meaning.
         
-        BEHAVIOR:
-        1. Response (1 sentence): Direct technical feedback. If they failed the question, politely but firmly acknowledge the lack of knowledge.
-        2. Question (1 sentence): One clear technical or behavioral question. If they failed, move to a different sub-topic to test breadth.
-        
+        STT AWARENESS (CRITICAL):
+        - Microphones can be messy. If you see "BTech an mlrit" or "Computer Science Engineering", you know what it means. DO NOT ask the candidate to "rephrase clearly" unless it is total gibberish.
+        - NEVER loop more than once on the same question. If they tried to answer, MOVE ON.
+
+        IF (A) CLARIFICATION REQUEST:
+        1. Set "is_clarification": true.
+        2. Set "feedback": A helpful rephrasing of the Last Question.
+        3. Set "score": 0.
+        4. Set "refined_next_question": current_question.
+
+        IF (B) ACTUAL ANSWER:
+        1. Set "is_clarification": false.
+        2. "feedback": A brief acknowledgement (e.g., "Great, thanks for sharing that."). BE KINDER DURING INTRODUCTIONS.
+        3. "refined_next_question": MOVE FORWARD. If this was the introduction, ask a specific technical question based on their resume or the job description. DO NOT ask them to repeat their intro.
+        4. SCORING: 
+           - 0-1: "no" or "don't know".
+           - 2-4: vague.
+           - 5-10: correct technical content. (Intro is always 5+ if they try).
+
         CONTEXT:
         Resume: {resume_context[:1000]}
         {history_context}
@@ -507,9 +524,10 @@ class ProcessAnswerView(APIView):
         
         OUTPUT (JSON):
         {{
-            "feedback": "Strict technical critique. Mention what was missing or incorrect.",
-            "refined_next_question": "Next technical challenge or follow-up. End with ?",
-            "score": "Integer 0-10 based on the SCORING RULES above."
+            "is_clarification": boolean,
+            "feedback": "...",
+            "refined_next_question": "...",
+            "score": integer
         }}
         """
 
@@ -526,7 +544,7 @@ class ProcessAnswerView(APIView):
                 raise ValueError("AI returned invalid JSON structure")
 
             # Scoring Update (Silent)
-            if candidate_id and data.get('score'):
+            if candidate_id and data.get('score') is not None and not data.get('is_clarification'):
                  try:
                     if not isinstance(candidate_id, str) or candidate_id.isdigit():
                         candidate = Candidate.objects.get(pk=candidate_id)
