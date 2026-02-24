@@ -1,322 +1,231 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import '../styles/Dashboard.css';
+import '../styles/CreateAssessment.css';
 
 const CreateAssessment = () => {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         job_description: '',
-        required_skills: '',
-        mcq_count: 10,
-        coding_count: 2,
-        duration: 60,
+        skills: '',
+        num_mcqs: 10,
+        num_coding: 2,
         difficulty: 'Medium',
-        from_date: '',
-        from_time: '',
-        until_date: '',
-        until_time: '',
+        start_date: '',
+        start_time: '',
+        end_date: '',
+        end_time: '',
         pass_threshold: 60
     });
-    const [isGenerating, setIsGenerating] = useState(false);
 
-    const handleChange = (e) => {
-        const { id, value } = e.target;
-        const fieldMapping = {
-            jobDescription: 'job_description',
-            requiredSkills: 'required_skills',
-            mcqCount: 'mcq_count',
-            codingCount: 'coding_count',
-            duration: 'duration',
-            difficulty: 'difficulty',
-            fromDate: 'from_date',
-            fromTime: 'from_time',
-            untilDate: 'until_date',
-            untilTime: 'until_time',
-            passThreshold: 'pass_threshold'
-        };
+    const handleChange = (id, value) => {
         setFormData(prev => ({
             ...prev,
-            [fieldMapping[id] || id]: value
+            [id]: value
         }));
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsGenerating(true);
+        if (e) e.preventDefault();
+        setLoading(true);
 
         const combinedData = {
-            ...formData,
-            available_from: (formData.from_date && formData.from_time) ? new Date(`${formData.from_date}T${formData.from_time}`).toISOString() : '',
-            available_until: (formData.until_date && formData.until_time) ? new Date(`${formData.until_date}T${formData.until_time}`).toISOString() : ''
+            job_description: formData.job_description,
+            required_skills: formData.skills,
+            mcq_count: formData.num_mcqs,
+            coding_count: formData.num_coding,
+            difficulty: formData.difficulty,
+            pass_threshold: formData.pass_threshold,
+            available_from: (formData.start_date && formData.start_time) ? new Date(`${formData.start_date}T${formData.start_time}`).toISOString() : null,
+            available_until: (formData.end_date && formData.end_time) ? new Date(`${formData.end_date}T${formData.end_time}`).toISOString() : null
         };
 
         try {
             const response = await axios.post('http://localhost:8001/api/ai/generate/', combinedData, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: { 'Content-Type': 'application/json' }
             });
 
             if (response.status === 200 || response.status === 201) {
-                alert('Assessment Generated Successfully! Redirecting to assessments list...');
+                alert('Assessment Generated Successfully!');
                 navigate('/ai-assessments');
-            } else {
-                alert('Failed to generate assessment. Please try again.');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Is the backend running?');
+            alert('Generation failed. Ensure the backend is running at port 8001.');
         } finally {
-            setIsGenerating(false);
+            setLoading(false);
         }
     };
 
-    const SectionHeader = ({ iconClass, title, subtitle, colorClass }) => (
-        <div style={{ marginBottom: '1.25rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.4rem' }}>
-                <div className={`module-icon-wrapper ${colorClass}`} style={{ width: '32px', height: '32px', borderRadius: '8px' }}>
-                    <i className={`${iconClass}`} style={{ fontSize: '0.9rem' }}></i>
-                </div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: '#111827', margin: 0, letterSpacing: '-0.01em' }}>{title}</h3>
-            </div>
-            <p style={{ fontSize: '0.85rem', color: '#6B7280', margin: 0 }}>{subtitle}</p>
-        </div>
-    );
-
     return (
-        <div className="dashboard-container">
-            <div className="dashboard-main" style={{ maxWidth: '850px', paddingTop: '1.5rem' }}>
+        <div className="create-assessment-page">
+            <div className="bg-shape shape-1"></div>
+            <div className="bg-shape shape-2"></div>
+            <div className="bg-shape shape-3"></div>
 
-                {/* Header Section */}
-                <header style={{
-                    position: 'relative',
-                    padding: '2.5rem 2rem',
-                    background: 'white',
-                    borderRadius: '24px',
-                    marginBottom: '2rem',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
-                    border: '1px solid #E5E7EB',
-                    overflow: 'hidden'
-                }}>
-                    <div style={{
-                        position: 'absolute', top: '-40px', right: '-40px', width: '180px', height: '180px',
-                        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)', borderRadius: '50%'
-                    }}></div>
-
-                    <div style={{ position: 'relative', zIndex: 1 }}>
-                        <div style={{
-                            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                            background: '#EEF2FF', color: '#4F46E5',
-                            padding: '0.4rem 0.8rem', borderRadius: '10px', fontSize: '0.75rem',
-                            fontWeight: '700', marginBottom: '1rem', border: '1px solid rgba(79, 70, 229, 0.1)'
-                        }}>
-                            <i className="fa-solid fa-wand-magic-sparkles"></i> AI GENERATOR
-                        </div>
-                        <h1 style={{ fontSize: '2.4rem', fontWeight: '900', color: '#111827', margin: '0 0 0.5rem', letterSpacing: '-0.03em' }}>
-                            Create <span style={{ color: '#6366F1' }}>Smart</span> Assessment
-                        </h1>
-                        <p style={{ color: '#6B7280', fontSize: '1rem', maxWidth: '500px' }}>
-                            Define the role and skills. Our AI will craft a comprehensive technical assessment.
-                        </p>
-                    </div>
+            <div className="assessment-container">
+                <header className="assessment-header">
+                    <h1>Create <span>Smart</span> Assessment</h1>
+                    <p>Our intelligent AI transforms your requirements into a precision-engineered technical evaluation.</p>
                 </header>
 
-                <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-
-                    {/* Role & Requirements Card */}
-                    <div className="module-card" style={{ padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
-                        <SectionHeader
-                            iconClass="fa-solid fa-briefcase"
-                            title="Role Context"
-                            subtitle="AI will analyze this to determine the appropriate depth of questions."
-                            colorClass="indigo-glow"
+                <div className="glass-card">
+                    <SectionHeader icon="📝" title="Role Context" />
+                    <div className="form-group">
+                        <label>Job Requirements</label>
+                        <textarea
+                            placeholder="Describe the role, key responsibilities, and ideal candidate profile..."
+                            value={formData.job_description}
+                            onChange={(e) => handleChange('job_description', e.target.value)}
                         />
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                            <div>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Job Description</label>
-                                <textarea
-                                    id="jobDescription"
-                                    value={formData.job_description}
-                                    onChange={handleChange}
-                                    placeholder="Paste the role requirements or mission statement..."
-                                    style={{
-                                        width: '100%', height: '150px', padding: '1rem', border: '1px solid #E2E8F0',
-                                        borderRadius: '14px', resize: 'vertical', fontSize: '0.95rem', lineHeight: '1.6',
-                                        color: '#1F2937', background: '#F8FAFC', outline: 'none'
-                                    }}
-                                    required
-                                />
-                            </div>
-                            <div>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Core Skills</label>
-                                <input
-                                    type="text"
-                                    id="requiredSkills"
-                                    value={formData.required_skills}
-                                    onChange={handleChange}
-                                    placeholder="e.g. React, Node.js, System Design"
-                                    style={{
-                                        width: '100%', padding: '0.85rem 1rem', border: '1px solid #E2E8F0',
-                                        borderRadius: '14px', fontSize: '0.95rem', color: '#1F2937', background: '#F8FAFC', outline: 'none'
-                                    }}
-                                    required
-                                />
-                            </div>
-                            <div style={{ padding: '1rem', background: '#F0F9FF', borderRadius: '16px', border: '1px dashed #BAE6FD', marginTop: '1rem' }}>
-                                <label style={{ fontSize: '0.82rem', fontWeight: '700', color: '#0369A1', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                    <i className="fa-solid fa-bullseye" style={{ fontSize: '0.8rem' }}></i> Pass Threshold (%)
-                                </label>
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-                                    <input
-                                        type="number"
-                                        id="passThreshold"
-                                        value={formData.pass_threshold}
-                                        onChange={handleChange}
-                                        min="1" max="100"
-                                        style={{
-                                            width: '80px', padding: '0.6rem 0.8rem', border: '1px solid #BAE6FD',
-                                            borderRadius: '10px', fontSize: '0.9rem', fontWeight: '700', color: '#0369A1', background: 'white', outline: 'none'
-                                        }}
-                                    />
-                                    <span style={{ fontSize: '0.78rem', color: '#0EA5E9', fontWeight: '500' }}>Minimum percentage required to pass.</span>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-
-                    {/* Assessment Parameters Card */}
-                    <div className="module-card" style={{ padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
-                        <SectionHeader
-                            iconClass="fa-solid fa-sliders"
-                            title="Structure & Difficulty"
-                            subtitle="Configure the scope and intensity of the generated test."
-                            colorClass="blue-glow"
+                    <div className="form-group">
+                        <label>Target Skills</label>
+                        <input
+                            type="text"
+                            placeholder="e.g. React, Node.js, Python, System Design..."
+                            value={formData.skills}
+                            onChange={(e) => handleChange('skills', e.target.value)}
                         />
+                    </div>
+                </div>
 
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '1.25rem' }}>
-                            <div>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>MCQ Questions</label>
+                <div className="glass-card">
+                    <SectionHeader icon="⚙️" title="Structure & Difficulty" />
+                    <div className="parameters-grid">
+                        <div className="form-group">
+                            <label>MCQ Questions</label>
+                            <div className="input-with-marker">
                                 <input
-                                    type="number" id="mcqCount" min="1" max="50"
-                                    value={formData.mcq_count} onChange={handleChange}
-                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC' }}
+                                    type="number"
+                                    min="1"
+                                    max="50"
+                                    value={formData.num_mcqs}
+                                    onChange={(e) => handleChange('num_mcqs', e.target.value === '' ? '' : parseInt(e.target.value))}
                                 />
-                            </div>
-                            <div>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Coding Tasks</label>
-                                <input
-                                    type="number" id="codingCount" min="0" max="10"
-                                    value={formData.coding_count} onChange={handleChange}
-                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC' }}
-                                />
-                            </div>
-                            <div>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Duration (mins)</label>
-                                <input
-                                    type="number" id="duration" min="5" max="300"
-                                    value={formData.duration} onChange={handleChange}
-                                    style={{ width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC' }}
-                                />
-                            </div>
-                            <div>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '0.5rem', display: 'block' }}>Complexity</label>
-                                <select
-                                    id="difficulty"
-                                    value={formData.difficulty} onChange={handleChange}
-                                    style={{
-                                        width: '100%', padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px',
-                                        outline: 'none', background: '#F8FAFC', appearance: 'none', cursor: 'pointer'
-                                    }}
-                                >
-                                    <option value="Easy">Easy</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Hard">Hard</option>
-                                </select>
+                                <span className="marker">{formData.num_mcqs}</span>
                             </div>
                         </div>
 
-                        <div style={{ marginTop: '1.5rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.25rem', paddingTop: '1.5rem', borderTop: '1px dashed #E2E8F0' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.5rem', display: 'block' }}>
-                                    <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
-                                    Available From
-                                </label>
-                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <div className="form-group">
+                            <label>Coding Tasks</label>
+                            <div className="input-with-marker">
+                                <input
+                                    type="number"
+                                    min="0"
+                                    max="5"
+                                    value={formData.num_coding}
+                                    onChange={(e) => handleChange('num_coding', e.target.value === '' ? '' : parseInt(e.target.value))}
+                                />
+                                <span className="marker">{formData.num_coding}</span>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
+                            <label>Complexity</label>
+                            <select
+                                value={formData.difficulty}
+                                onChange={(e) => handleChange('difficulty', e.target.value)}
+                            >
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="threshold-section">
+                        <div className="threshold-info">
+                            <h3>Pass Threshold (%)</h3>
+                            <div className="circle-progress">
+                                <svg viewBox="0 0 100 100">
+                                    <defs>
+                                        <linearGradient id="threshold-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stopColor="#4f46e5" />
+                                            <stop offset="100%" stopColor="#9333ea" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle className="bg" cx="50" cy="50" r="45" />
+                                    <circle
+                                        className="progress"
+                                        cx="50" cy="50" r="45"
+                                        style={{ strokeDashoffset: 283 - (283 * formData.pass_threshold) / 100 }}
+                                    />
+                                </svg>
+                                <span className="percentage">{formData.pass_threshold}%</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value={formData.pass_threshold}
+                                onChange={(e) => handleChange('pass_threshold', parseInt(e.target.value))}
+                            />
+                            <p className="hint">Minimum score required for candidate success</p>
+                        </div>
+
+                        <div className="availability-grid">
+                            <div className="form-group">
+                                <label><span>📅</span> Available From</label>
+                                <div className="datetime-row">
                                     <input
-                                        type="date" id="fromDate"
-                                        value={formData.from_date} onChange={handleChange}
-                                        style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                        type="date"
+                                        value={formData.start_date}
+                                        onChange={(e) => handleChange('start_date', e.target.value)}
                                     />
                                     <input
-                                        type="time" id="fromTime"
-                                        value={formData.from_time} onChange={handleChange}
-                                        style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                        type="time"
+                                        value={formData.start_time}
+                                        onChange={(e) => handleChange('start_time', e.target.value)}
                                     />
                                 </div>
                             </div>
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                                <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.5rem', display: 'block' }}>
-                                    <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
-                                    Available Until
-                                </label>
-                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <div className="form-group">
+                                <label><span>⌛</span> Available Until</label>
+                                <div className="datetime-row">
                                     <input
-                                        type="date" id="untilDate"
-                                        value={formData.until_date} onChange={handleChange}
-                                        style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                        type="date"
+                                        value={formData.end_date}
+                                        onChange={(e) => handleChange('end_date', e.target.value)}
                                     />
                                     <input
-                                        type="time" id="untilTime"
-                                        value={formData.until_time} onChange={handleChange}
-                                        style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
+                                        type="time"
+                                        value={formData.end_time}
+                                        onChange={(e) => handleChange('end_time', e.target.value)}
                                     />
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    {/* Final Action Section */}
-                    <div style={{ marginTop: '0.5rem', textAlign: 'center' }}>
-                        <button
-                            type="submit"
-                            disabled={isGenerating}
-                            style={{
-                                width: '100%',
-                                background: 'linear-gradient(135deg, #4F46E5 0%, #6366F1 100%)',
-                                color: 'white',
-                                border: 'none',
-                                padding: '1.25rem',
-                                borderRadius: '20px',
-                                fontSize: '1.1rem',
-                                fontWeight: '700',
-                                cursor: isGenerating ? 'not-allowed' : 'pointer',
-                                boxShadow: '0 10px 20px -5px rgba(79, 70, 229, 0.4)',
-                                transition: 'all 0.2s',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                gap: '0.75rem'
-                            }}
-                        >
-                            {isGenerating ? (
-                                <>
-                                    <i className="fa-solid fa-spinner fa-spin"></i>
-                                    <span>AI Architecture in Progress...</span>
-                                </>
-                            ) : (
-                                <>
-                                    <i className="fa-solid fa-wand-sparkles"></i>
-                                    <span>Generate Technical Assessment</span>
-                                </>
-                            )}
-                        </button>
-
-                    </div>
-                </form>
+                <button
+                    className={`generate-btn ${loading ? 'loading' : ''}`}
+                    onClick={handleSubmit}
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <>
+                            <span className="spinner"></span>
+                            Generating Assessment...
+                        </>
+                    ) : (
+                        <>
+                            🚀 Generate Assessment
+                        </>
+                    )}
+                </button>
             </div>
         </div>
     );
 };
+
+const SectionHeader = ({ icon, title }) => (
+    <div className="section-header">
+        <span className="icon-box">{icon}</span>
+        <h2>{title}</h2>
+    </div>
+);
 
 export default CreateAssessment;
