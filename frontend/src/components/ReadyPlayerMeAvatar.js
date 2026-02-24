@@ -21,10 +21,10 @@ function AvatarModel({ isSpeaking }) {
         if (!group.current) return;
         const t = state.clock.getElapsedTime();
 
-        // 1. Stable Identity (Fix position at camera height)
+        // 1. Stable Identity (Zero idle movement)
         group.current.position.y = 0;
-        group.current.rotation.z = Math.sin(t * 0.8) * 0.005;
-        group.current.rotation.x = Math.sin(t * 1.2) * 0.01;
+        group.current.rotation.x = 0;
+        group.current.rotation.z = 0;
 
         // 2. Specialized Lip-Sync for Limited Morph Targets
         const head = nodes?.Wolf3D_Head;
