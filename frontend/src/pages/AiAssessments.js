@@ -104,7 +104,7 @@ const AiAssessments = () => {
     };
 
     return (
-        <div className="dashboard-container">
+        <div className="dashboard-container" style={{ paddingTop: 0 }}>
             <div className="dashboard-main" style={{ paddingTop: '1rem' }}>
                 <div style={{
                     background: 'white',

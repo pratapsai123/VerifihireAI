@@ -132,7 +132,6 @@ export default function LiveInterviewList() {
 
   return (
     <div className="live-interview-list-page">
-      <Header />
       <div className="live-interview-list-shell">
         <div className="live-interview-list-top">
           <div>

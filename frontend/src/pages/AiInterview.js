@@ -51,7 +51,7 @@ const AiInterview = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('job_description', jobDescription);
-        
+
         if (fromDate && fromTime) {
             formData.append('available_from', new Date(`${fromDate}T${fromTime}`).toISOString());
         }
@@ -75,38 +75,31 @@ const AiInterview = () => {
     };
 
     return (
-        <div className="dashboard-container">
-            <div className="dashboard-main" style={{ maxWidth: '900px', paddingTop: '2rem' }}>
+        <div className="dashboard-container" style={{ paddingTop: 0 }}>
+            <div className="dashboard-main" style={{ width: '100%', maxWidth: '100%', padding: '0', margin: '0' }}>
 
                 {/* 1. Header with Background Glow */}
                 <header style={{
                     position: 'relative',
-                    padding: '3rem 2rem',
-                    background: 'white',
-                    borderRadius: '30px',
-                    marginBottom: '2rem',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
-                    overflow: 'hidden',
-                    border: '1px solid #E5E7EB'
+                    padding: '0 2rem',
+                    background: 'transparent',
+                    marginBottom: '0',
+                    overflow: 'hidden'
                 }}>
-                    <div style={{
-                        position: 'absolute', top: '-50px', right: '-50px', width: '200px', height: '200px',
-                        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)', borderRadius: '50%'
-                    }}></div>
 
                     <div style={{ position: 'relative', zIndex: 1 }}>
                         <div style={{
                             display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                            background: '#EEF2FF', color: '#4F46E5',
-                            padding: '0.5rem 1rem', borderRadius: '12px', fontSize: '0.8rem',
-                            fontWeight: '700', marginBottom: '1.5rem', border: '1px solid rgba(79, 70, 229, 0.1)'
+                            color: '#4F46E5',
+                            padding: '0', fontSize: '0.8rem',
+                            fontWeight: '700', marginBottom: '0.2rem'
                         }}>
                             <i className="fa-solid fa-bolt-lightning"></i> AI AUTOMATION HUB
                         </div>
-                        <h1 style={{ fontSize: '2.8rem', fontWeight: '900', color: '#111827', margin: '0 0 1rem', letterSpacing: '-0.04em', lineHeight: 1 }}>
+                        <h1 style={{ fontSize: '2.8rem', fontWeight: '900', color: '#111827', margin: '0', letterSpacing: '-0.04em', lineHeight: 1 }}>
                             AI <span style={{ color: '#6366F1' }}>Interview</span> Creation
                         </h1>
-                        <p style={{ color: '#6B7280', fontSize: '1.1rem', maxWidth: '600px', lineHeight: '1.6' }}>
+                        <p style={{ color: '#6B7280', fontSize: '1.1rem', maxWidth: '600px', lineHeight: '1.6', marginTop: '0.5rem' }}>
                             Design high-fidelity AI interview experiences by providing job context and candidate lists for automated deployment.
                         </p>
                     </div>
@@ -115,7 +108,7 @@ const AiInterview = () => {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
                     {result ? (
-                        <div className="module-card" style={{ padding: '4rem 2rem', textAlign: 'center', background: 'white', borderRadius: '30px' }}>
+                        <div className="module-card" style={{ padding: '4rem 2rem', textAlign: 'center', background: 'white', borderRadius: '0', borderLeft: 'none', borderRight: 'none' }}>
                             <div className="module-icon-wrapper teal-glow" style={{ margin: '0 auto 2rem', width: '80px', height: '80px', borderRadius: '24px' }}>
                                 <i className="fa-solid fa-check-double" style={{ fontSize: '2rem' }}></i>
                             </div>
@@ -168,7 +161,7 @@ const AiInterview = () => {
                         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
 
                             {/* Card 1: JD Section with Rich Visuals */}
-                            <div className="module-card" style={{ padding: '2.5rem', background: 'white', borderRadius: '30px', border: '1px solid #E5E7EB' }}>
+                            <div className="module-card" style={{ padding: '2.5rem 2rem', background: 'transparent', borderRadius: '0', border: 'none', borderTop: '1px solid #E5E7EB' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                         <div className="module-icon-wrapper indigo-glow" style={{ width: '45px', height: '45px', borderRadius: '14px' }}>
@@ -178,9 +171,6 @@ const AiInterview = () => {
                                             <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Job Requirements</h3>
                                             <p style={{ color: '#6B7280', fontSize: '0.9rem', margin: '0.2rem 0 0' }}>Provide the context for the AI interviewer.</p>
                                         </div>
-                                    </div>
-                                    <div style={{ color: '#94A3B8', fontSize: '0.85rem' }}>
-                                        <i className="fa-solid fa-circle-check"></i> JSON Intelligence Active
                                     </div>
                                 </div>
 
@@ -207,7 +197,7 @@ const AiInterview = () => {
                             </div>
 
                             {/* Card 2: Batch Upload with Preview Illustration */}
-                            <div className="module-card" style={{ padding: '2.5rem', background: 'white', borderRadius: '30px', border: '1px solid #E5E7EB' }}>
+                            <div className="module-card" style={{ padding: '2.5rem 2rem', background: 'transparent', borderRadius: '0', border: 'none', borderTop: '1px solid #E5E7EB' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                         <div className="module-icon-wrapper indigo-glow" style={{ width: '45px', height: '45px', borderRadius: '14px' }}>
@@ -288,7 +278,7 @@ const AiInterview = () => {
                                 )}
 
                                 {/* Date & Time Selection Range */}
-                                <div className="module-card" style={{ width: '100%', padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
+                                <div className="module-card" style={{ width: '100%', padding: '2.5rem 2rem', background: 'transparent', borderRadius: '0', border: 'none', borderTop: '1px solid #E5E7EB' }}>
                                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
                                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                                             <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.3rem', display: 'block' }}>

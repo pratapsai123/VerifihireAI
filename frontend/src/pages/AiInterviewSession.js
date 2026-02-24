@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
 
@@ -9,14 +8,13 @@ const AiInterviewSession = () => {
     const { token } = useParams();
     const navigate = useNavigate();
     const [candidateName, setCandidateName] = useState('Candidate');
-    const MAX_QUESTIONS = 10;
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setQuestions] = useState([]);
     const [chatMessages, setChatMessages] = useState([]);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
     const [userInputMode, setUserInputMode] = useState('audio'); // 'audio' or 'text'
-    const [aiStatus, setAiStatus] = useState('Indu is Online');
+    const [aiStatus, setAiStatus] = useState('AI Interviewer Online');
     const [isSpeaking, setIsSpeaking] = useState(false);
     const [progress, setProgress] = useState(0);
     const [showQuotaWarning, setShowQuotaWarning] = useState(false);
@@ -35,9 +33,6 @@ const AiInterviewSession = () => {
     const streamRef = useRef(null);
     const chatHistoryRef = useRef([]);
     const isInitializedRef = useRef(false);
-    const isProcessingRef = useRef(false);
-    const isSpeakingRef = useRef(false);
-    const isRecordingRef = useRef(false);
 
     // 1. Load Voices
     useEffect(() => {
@@ -59,8 +54,6 @@ const AiInterviewSession = () => {
             });
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
-                // Force play to ensure visibility across all browsers
-                videoRef.current.play().catch(e => console.warn("Auto-play prevented:", e));
             }
             streamRef.current = stream;
         } catch (err) {
@@ -176,211 +169,96 @@ const AiInterviewSession = () => {
             if (!text) return resolve();
             synthRef.current.cancel();
             const utterance = new SpeechSynthesisUtterance(text);
-            const voice =
-                // Prioritize Indian English Female voices (authentic Indu)
-                voicesRef.current.find(v => (v.lang === 'en-IN' || v.name.includes('India')) && v.name.includes('Female')) ||
-                // Fallback to any Indian English voice
-                voicesRef.current.find(v => (v.lang === 'en-IN' || v.name.includes('India'))) ||
-                // Legacy US Fallbacks
-                voicesRef.current.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
+            const voice = voicesRef.current.find(v => v.name.includes('Google US English') && v.name.includes('Female')) ||
                 voicesRef.current.find(v => v.name.includes('US English')) ||
                 voicesRef.current[0];
 
             if (voice) utterance.voice = voice;
-            utterance.onstart = () => {
-                setIsSpeaking(true);
-                isSpeakingRef.current = true;
-                setAiStatus("Speaking...");
-            };
-            utterance.onend = () => {
-                setIsSpeaking(false);
-                isSpeakingRef.current = false;
-                setAiStatus("Indu is Online");
-                resolve();
-            };
-            utterance.onerror = () => {
-                setIsSpeaking(false);
-                isSpeakingRef.current = false;
-                setAiStatus("Indu is Online");
-                resolve();
-            };
+            utterance.onstart = () => { setIsSpeaking(true); setAiStatus("Speaking..."); };
+            utterance.onend = () => { setIsSpeaking(false); setAiStatus("AI Interviewer Online"); resolve(); };
+            utterance.onerror = () => { setIsSpeaking(false); setAiStatus("AI Interviewer Online"); resolve(); };
             synthRef.current.speak(utterance);
         });
     };
 
-    const addMessage = useCallback((sender, text) => {
+    const addMessage = (sender, text) => {
         const displayText = typeof text === 'object' ? (text.question || JSON.stringify(text)) : text;
         setChatMessages(prev => [...prev, { sender, text: displayText }]);
         chatHistoryRef.current.push({ role: sender === 'ai' ? 'assistant' : 'user', content: displayText });
+    };
+
+    const askCurrentQuestion = useCallback((index, qs) => {
+        const question = qs[index];
+        if (!question) return;
+        addMessage('ai', question);
+        speak(question);
     }, []);
 
-    const completeInterview = useCallback(async () => {
-        stopCamera();
-        const finishMessage = "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
-        addMessage('ai', finishMessage);
-        await speak(finishMessage);
-        axios.patch(`http://localhost:8001/api/ai-candidates/${token}/status/`, { status: 'Completed' }).catch(console.error);
+    const handleAnswerSubmission = async (answer) => {
+        if (!answer.trim() || isProcessing) return;
         setIsProcessing(true);
-        setAiStatus("Session Finished");
-    }, [token, speak, addMessage]);
-
-    const startListening = useCallback(() => {
-        if (userInputMode !== 'audio' || !recognitionRef.current || isRecordingRef.current) return;
-
-        let attempts = 0;
-        const maxAttempts = 10;
-
-        const tryStart = () => {
-            // Check if AI is occupied - Use REFS to avoid stale closures
-            if (isProcessingRef.current || isSpeakingRef.current) {
-                if (attempts < maxAttempts) {
-                    attempts++;
-                    setTimeout(tryStart, 350); // Retry 
-                }
-                return;
-            }
-
-            try {
-                recognitionRef.current.start();
-                console.log("Auto-mic activated successfully");
-            } catch (e) {
-                if (e.name === 'InvalidStateError') {
-                    // Already started, ignore
-                } else {
-                    console.warn("Auto-start mic error:", e);
-                }
-            }
-        };
-
-        tryStart();
-    }, [userInputMode, isRecording, isProcessing, isSpeaking]);
-
-    const handleAnswerSubmission = useCallback(async (answer) => {
-        if (!answer || !answer.trim() || isProcessing) {
-            console.log("Submission skipped: answer empty or already processing");
-            return;
-        }
-
-        // 1. Immediate UI Lock
-        setIsProcessing(true);
-        isProcessingRef.current = true;
-        setAiStatus("AI is thinking...");
-
-        // 2. Force Microphone Stop
-        if (recognitionRef.current) {
-            try { recognitionRef.current.stop(); } catch (e) { }
-        }
-        if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-
         addMessage('user', answer);
         setResponseInput('');
-        console.log("Submitting answer turn...");
 
         try {
-            const currentQ = questions[currentQuestionIndex] || "Introduction and Background";
             const response = await axios.post('http://localhost:8001/api/ai-candidates/process-answer/', {
                 candidate_id: token,
-                question: typeof currentQ === 'object' ? currentQ.question : currentQ,
+                question: questions[currentQuestionIndex],
                 answer: answer,
-                remaining_questions: questions.slice(currentQuestionIndex + 1),
+                next_question: questions[currentQuestionIndex + 1] || null,
                 chat_history: chatHistoryRef.current
-            }, { timeout: 35000 }); // 35s for more complex reasoning
+            });
 
             const data = response.data;
-            let fullFeedback = data.feedback || "";
-            const nextIdx = currentQuestionIndex + 1;
-            const totalAnswered = nextIdx; // questions answered so far
+            let fullFeedback = data.feedback;
+            if (data.follow_up_question) fullFeedback += " " + data.follow_up_question;
 
-            // --- HARD STOP: end after MAX_QUESTIONS ---
-            if (totalAnswered >= MAX_QUESTIONS) {
-                if (fullFeedback.trim()) {
-                    addMessage('ai', fullFeedback.trim());
-                    await speak(fullFeedback.trim());
+            if (data.refined_next_question && !data.follow_up_question) {
+                const nextIdx = currentQuestionIndex + 1;
+                if (nextIdx < questions.length) {
+                    setQuestions(prev => {
+                        const newQs = [...prev];
+                        newQs[nextIdx] = data.refined_next_question;
+                        return newQs;
+                    });
                 }
-                completeInterview();
-                return;
             }
-            // ------------------------------------------
 
-            // Extract the question string from potential object or string
-            const extractQ = (q) => {
-                if (!q) return null;
-                if (typeof q === 'object') return q.question || JSON.stringify(q);
-                return q;
-            };
+            if (fullFeedback) {
+                addMessage('ai', fullFeedback);
+                await speak(fullFeedback);
+            }
 
-            const followUpQ = extractQ(data.follow_up_question);
-            const refinedNextQ = extractQ(data.refined_next_question);
-
-            // --- MERGED CONVERSATIONAL FLOW ---
-            // Combine feedback and next question into ONE bubble for a human feel
-            let fullTurnText = "";
-            if (fullFeedback.trim()) fullTurnText += fullFeedback.trim() + " ";
-
-            if (followUpQ) {
-                fullTurnText += followUpQ;
-                addMessage('ai', fullTurnText);
-                await speak(fullTurnText);
+            if (data.follow_up_question) {
                 setIsProcessing(false);
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
-                setAiStatus("Indu is Online");
-            } else if (refinedNextQ === null && nextIdx >= questions.length) {
-                if (fullTurnText) addMessage('ai', fullTurnText);
-                if (fullTurnText) await speak(fullTurnText);
-                completeInterview();
             } else {
-                const nextQ = refinedNextQ || questions[nextIdx] || "Could you tell me more about your experience?";
+                const nextIdx = currentQuestionIndex + 1;
                 setCurrentQuestionIndex(nextIdx);
-                setProgress((nextIdx / MAX_QUESTIONS) * 100);
+                setProgress((nextIdx / questions.length) * 100);
 
-                setQuestions(prev => {
-                    const newQs = [...prev];
-                    if (nextIdx < newQs.length) newQs[nextIdx] = nextQ;
-                    else newQs.push(nextQ);
-                    return newQs;
-                });
-
-                fullTurnText += nextQ;
-                addMessage('ai', fullTurnText);
-                await speak(fullTurnText);
-
-                setIsProcessing(false);
-                isProcessingRef.current = false;
-                if (userInputMode === 'audio' && !showQuotaWarning) startListening();
-                setAiStatus("Indu is Online");
+                if (nextIdx < questions.length) {
+                    const nextQ = questions[nextIdx];
+                    addMessage('ai', nextQ);
+                    await speak(nextQ);
+                    setIsProcessing(false);
+                } else {
+                    completeInterview();
+                }
             }
         } catch (err) {
-            console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (35s)" : err.message);
+            console.error("Submission error:", err);
             if (err.response?.status === 429) setShowQuotaWarning(true);
-
-            // AUTOMATIC RECOVERY: If the AI engine times out or fails (e.g. Groq is slow), 
-            // don't get stuck. Just move to the next question manually.
-            const nextIdx = currentQuestionIndex + 1;
-            const fallbacks = [
-                "Understood. Moving along, let's explore another area.",
-                "I see where you're coming from. Let's pivot slightly.",
-                "Thanks for that input. Let's touch upon a different technical topic.",
-                "Got it. Switching gears, I have a question about your project work."
-            ];
-            const fallbackMsg = fallbacks[Math.floor(Math.random() * fallbacks.length)];
-            const fallbackNextQ = questions[nextIdx] || "Could you tell me more about your overall professional journey?";
-
-            addMessage('ai', fallbackMsg);
-
-            if (nextIdx < questions.length || (typeof fallbackNextQ === 'string' && fallbackNextQ.length > 5)) {
-                addMessage('ai', fallbackNextQ);
-                await speak(fallbackMsg + " " + fallbackNextQ);
-                setCurrentQuestionIndex(nextIdx);
-                setProgress((nextIdx / MAX_QUESTIONS) * 100);
-            } else {
-                await speak(fallbackMsg);
-                completeInterview();
-            }
-
             setIsProcessing(false);
-            setAiStatus("AI Interviewer Online");
         }
-    }, [token, questions, currentQuestionIndex, isProcessing, addMessage, speak, completeInterview, startListening]);
+    };
+
+    const completeInterview = () => {
+        stopCamera();
+        const finishMessage = "Thank you for your time. Your assessment has been completed successfully. Goodbye!";
+        addMessage('ai', finishMessage);
+        speak(finishMessage);
+        axios.patch(`http://localhost:8001/api/ai-candidates/${token}/status/`, { status: 'Completed' }).catch(console.error);
+    };
 
     // 4. Lifecycle
     useEffect(() => {
@@ -413,145 +291,45 @@ const AiInterviewSession = () => {
         const startInterview = async (name, qs) => {
             await startCamera();
             const firstName = name.split(' ')[0];
-            const welcome = `Hi ${firstName}! This is Indu. Hope you're doing well, I'll be your interviewer today.`;
+            const welcome = `Hello ${firstName}! I'm your AI interviewer for VerifiHireAI. Let's begin the session!`;
+            addMessage('ai', welcome);
+            await speak(welcome);
 
-            const introQ = "To get started, please introduce yourself and your professional background.";
+            const introQ = "Could you please introduce yourself and provide a brief overview of your professional background?";
+
+            // Ensure introQ is the first question
             let finalQs = [...qs];
             if (finalQs[0] !== introQ) {
                 finalQs = [introQ, ...finalQs];
                 setQuestions(finalQs);
             }
 
-            // Combine welcome and intro question for a smooth start
-            const combinedStart = `${welcome} ${introQ}`;
-            addMessage('ai', combinedStart);
-            await speak(combinedStart);
-            if (userInputMode === 'audio') startListening();
+            setTimeout(() => askCurrentQuestion(0, finalQs), 1000);
         };
 
         initSession();
         return () => stopCamera();
-    }, [token]); // Only re-init if token changes, perfectly stable camera feed
+    }, [token, askCurrentQuestion]);
 
-    const silenceTimerRef = useRef(null);
-    const transcriptRef = useRef("");
-
-    const submitHandlerRef = useRef(handleAnswerSubmission);
+    // Speech Recognition
     useEffect(() => {
-        submitHandlerRef.current = handleAnswerSubmission;
-    }, [handleAnswerSubmission]);
-
-    // stable Speech Recognition Setup
-    useEffect(() => {
-        if (!('webkitSpeechRecognition' in window)) return;
-
-        const recognition = new window.webkitSpeechRecognition();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.lang = 'en-US';
-
-        recognition.onstart = () => {
-            console.log("INFINITE MIC: Speech recognition is now active and stay on.");
-            setIsRecording(true);
-            isRecordingRef.current = true;
-            setAiStatus("Listening...");
-            transcriptRef.current = "";
-        };
-
-        recognition.onresult = (event) => {
-            let interimTranscript = "";
-            let newFinals = "";
-
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    newFinals += event.results[i][0].transcript;
-                } else {
-                    interimTranscript += event.results[i][0].transcript;
-                }
-            }
-
-            if (newFinals) {
-                transcriptRef.current += newFinals;
-            }
-
-            const currentTotal = (transcriptRef.current + interimTranscript).trim();
-            if (currentTotal) {
-                const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
-                setAiStatus(`Heard: "${display}"`);
-            }
-
-            // PATIENT SILENCE: Reset timer every time we hear ANY sound/speech
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-
-            // Only submit if we have a significant answer length
-            if (currentTotal.length > 3) {
-                silenceTimerRef.current = setTimeout(() => {
-                    const finalSubmission = transcriptRef.current + interimTranscript;
-                    if (finalSubmission.trim().length > 4) {
-                        console.log("Planned pause detected. Processing answer...");
-                        setIsProcessing(true);
-                        setAiStatus("Processing answer...");
-                        try { recognition.stop(); } catch (e) { }
-                        if (submitHandlerRef.current) submitHandlerRef.current(finalSubmission);
-                    }
-                }, 3500); // 3.5 seconds - perfect balance of patience and speed
-            }
-        };
-
-        recognition.onerror = (event) => {
-            // Ignore no-speech and stay active
-            if (event.error === 'no-speech' || event.error === 'aborted') {
-                console.log("Mic background silence...");
-                return;
-            }
-            console.warn("Recognition Error:", event.error);
-            setIsRecording(false);
-            setAiStatus(`Mic ready`);
-        };
-
-        recognition.onend = () => {
-            setIsRecording(false);
-            isRecordingRef.current = false;
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-            console.log("Recognition session ended.");
-        };
-
-        recognitionRef.current = recognition;
-
-        return () => {
-            if (recognitionRef.current) {
-                try { recognitionRef.current.stop(); } catch (e) { }
-            }
-            if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
-        };
-    }, []);
-
+        if ('webkitSpeechRecognition' in window) {
+            const recognition = new window.webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.lang = 'en-US';
+            recognition.onstart = () => setIsRecording(true);
+            recognition.onresult = (event) => handleAnswerSubmission(event.results[0][0].transcript);
+            recognition.onerror = () => setIsRecording(false);
+            recognition.onend = () => setIsRecording(false);
+            recognitionRef.current = recognition;
+        }
+    }, [currentQuestionIndex, questions]);
 
     const toggleRecording = () => {
         if (!recognitionRef.current) return alert("Speech recognition not supported");
-
-        if (isRecording) {
-            try { recognitionRef.current.stop(); } catch (e) { }
-            setIsRecording(false);
-        } else {
-            // Cancel any AI speech if user wants to speak
-            if (synthRef.current.speaking) {
-                synthRef.current.cancel();
-                setIsSpeaking(false);
-            }
-
-            try {
-                recognitionRef.current.start();
-            } catch (e) {
-                if (e.name === 'InvalidStateError') {
-                    // Already starting/running
-                    console.log("Recognition already active");
-                } else {
-                    console.error("Manual mic start error:", e);
-                    setAiStatus("Mic Error - Refresh");
-                }
-            }
-        }
+        if (isRecording) recognitionRef.current.stop();
+        else recognitionRef.current.start();
     };
 
     useEffect(() => {
@@ -559,7 +337,7 @@ const AiInterviewSession = () => {
     }, [chatMessages]);
 
     return (
-        <div className="ai-session-page">
+        <div className="dashboard-page" style={{ height: '100vh', overflow: 'hidden' }}>
             {showQuotaWarning && (
                 <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', padding: '15px', background: '#ff4444', color: 'white', textAlign: 'center', zIndex: 10000, fontWeight: 'bold' }}>
                     ⚠️ AI Service Limit Reached. The interview cannot continue at this time.
@@ -577,72 +355,53 @@ const AiInterviewSession = () => {
                     <div style={{ marginTop: '20px', textAlign: 'center', width: '100%' }}>
                         <div className="ai-status-badge"><span className="speaking-indicator"></span>{aiStatus}</div>
                     </div>
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '0.5rem' }}>
-                        <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
-                    </div>
+                    <div className={`ai-full-body ${isSpeaking ? 'speaking' : ''}`}></div>
                 </div>
 
-                <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem', height: '100%' }}>
-                    <div style={{ background: 'white', padding: '0.75rem 1.5rem', borderRadius: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 4px 15px rgba(0,0,0,0.05)' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <i className="fa-solid fa-user-tie" style={{ color: '#667eea', fontSize: '0.9rem' }}></i>
-                            <span style={{ fontWeight: 600, fontSize: '0.9rem' }}>{candidateName}</span>
+                <div className="ai-main-content" style={{ padding: '0' }}>
+                    <div style={{ background: 'white', padding: '1.25rem 2rem', borderBottom: '1px solid #e2e8f0', display: 'flex', justifyContent: 'space-between', alignItems: 'center', boxShadow: '0 2px 10px rgba(0,0,0,0.02)' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                            <i className="fa-solid fa-user-tie" style={{ color: '#667eea' }}></i>
+                            <span style={{ fontWeight: 600 }}>{candidateName}</span>
                         </div>
                         <div className="progress-bar"><div className="progress-fill" style={{ width: `${progress}%` }}></div></div>
-                        <button onClick={() => navigate('/ai-interview')} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', fontSize: '0.85rem' }}><i className="fa-solid fa-xmark"></i> Exit</button>
+                        <button onClick={() => navigate('/ai-interview')} style={{ background: 'none', border: 'none', color: '#718096', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px' }}><i className="fa-solid fa-xmark"></i> Exit</button>
                     </div>
 
-                    <div className="question-card" style={{ padding: '0.5rem 1rem', borderLeftWidth: '4px' }}>
-                        <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
-                            <span style={{ fontSize: '0.6rem', textTransform: 'uppercase', color: '#667eea', fontWeight: '900', letterSpacing: '0.5px' }}>Question:</span>
-                            <div style={{ fontSize: '1rem', fontWeight: 600, color: '#1a202c', flex: 1 }}>
+                    <div style={{ padding: '0 2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem', flex: 1, overflowY: 'auto' }}>
+
+                        <div className="question-card">
+                            <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: '#667eea', fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>Current Question</span>
+                            <div style={{ fontSize: '1.3rem', fontWeight: 600, color: '#2d3748' }}>
                                 {questions[currentQuestionIndex] ? (
                                     typeof questions[currentQuestionIndex] === 'object'
                                         ? (questions[currentQuestionIndex].question || JSON.stringify(questions[currentQuestionIndex]))
                                         : questions[currentQuestionIndex]
-                                ) : 'Initializing...'}
+                                ) : 'Starting interview...'}
                             </div>
                         </div>
-                    </div>
 
-                    <div ref={chatContainerRef} className="chat-container">
-                        {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: '#a0aec0', marginTop: '1.5rem', fontStyle: 'italic', fontSize: '0.85rem' }}>History will appear here...</div>}
-                        {chatMessages.map((msg, i) => <div key={i} className={`message ${msg.sender}`}>{msg.text}</div>)}
-                    </div>
+                        <div ref={chatContainerRef} className="chat-container">
+                            {chatMessages.length === 0 && <div style={{ textAlign: 'center', color: '#a0aec0', marginTop: '3rem', fontStyle: 'italic' }}>Conversation history will appear here...</div>}
+                            {chatMessages.map((msg, i) => <div key={i} className={`message ${msg.sender}`}>{msg.text}</div>)}
+                        </div>
 
-                    <div style={{ background: 'white', padding: '0.6rem 1rem', borderRadius: '12px', boxShadow: '0 -2px 10px rgba(0,0,0,0.03)', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        {userInputMode === 'audio' ? (
-                            <div style={{ flex: 1, display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <button
-                                    onClick={toggleRecording}
-                                    disabled={isProcessing}
-                                    className={`mic-btn ${isRecording ? 'listening' : ''}`}
-                                    style={{ width: '40px', height: '40px', fontSize: '1rem', cursor: isProcessing ? 'not-allowed' : 'pointer', opacity: isProcessing ? 0.6 : 1 }}
-                                >
-                                    <i className={isRecording ? "fa-solid fa-stop" : "fa-solid fa-microphone"}></i>
-                                </button>
-                                <span style={{ color: '#4a5568', fontWeight: 600, fontSize: '0.8rem' }}>{isRecording ? "Listening..." : "Click to Speak"}</span>
+                        <div style={{ background: 'white', padding: '1.5rem', borderRadius: '24px', boxShadow: '0 -4px 20px rgba(0,0,0,0.05)' }}>
+                            {userInputMode === 'audio' ? (
+                                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                                    <button onClick={toggleRecording} className={`mic-btn ${isRecording ? 'listening' : ''}`}><i className={isRecording ? "fa-solid fa-stop" : "fa-solid fa-microphone"}></i></button>
+                                    <span style={{ color: '#718096', fontWeight: 500 }}>{isRecording ? "Listening..." : "Tap mic to speak"}</span>
+                                </div>
+                            ) : (
+                                <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>
+                                    <textarea className="response-input" value={responseInput} onChange={(e) => setResponseInput(e.target.value)} placeholder="Type your answer here..." style={{ flex: 1, border: '2px solid #e2e8f0', borderRadius: '16px', padding: '12px', resize: 'none', height: '60px', fontFamily: 'inherit' }} />
+                                    <button onClick={() => handleAnswerSubmission(responseInput)} disabled={isProcessing} style={{ background: '#667eea', color: 'white', border: 'none', padding: '12px 24px', borderRadius: '12px', fontWeight: 'bold', cursor: 'pointer' }}><i className="fa-solid fa-paper-plane"></i></button>
+                                </div>
+                            )}
+                            <div style={{ textAlign: 'center', marginTop: '15px' }}>
+                                <button onClick={() => setUserInputMode(userInputMode === 'audio' ? 'text' : 'audio')} style={{ background: 'none', border: 'none', color: '#667eea', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem' }}><i className={userInputMode === 'audio' ? "fa-solid fa-keyboard" : "fa-solid fa-microphone"}></i>{userInputMode === 'audio' ? " Switch to Text Input" : " Switch to Voice Input"}</button>
                             </div>
-                        ) : (
-                            <div style={{ flex: 1, display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-                                <input
-                                    className="response-input"
-                                    style={{ flex: 1, border: '1px solid #cbd5e0', borderRadius: '8px', padding: '6px 12px', fontSize: '0.85rem', outline: 'none' }}
-                                    value={responseInput}
-                                    onChange={(e) => setResponseInput(e.target.value)}
-                                    onKeyPress={(e) => e.key === 'Enter' && handleAnswerSubmission(responseInput)}
-                                    placeholder="Type answer..."
-                                />
-                                <button onClick={() => handleAnswerSubmission(responseInput)} disabled={isProcessing} style={{ background: '#667eea', color: 'white', border: 'none', padding: '6px 12px', borderRadius: '6px', fontSize: '0.9rem', cursor: 'pointer' }}><i className="fa-solid fa-paper-plane"></i></button>
-                            </div>
-                        )}
-                        <button
-                            onClick={() => setUserInputMode(userInputMode === 'audio' ? 'text' : 'audio')}
-                            style={{ background: '#edf2f7', border: 'none', color: '#4a5568', padding: '6px 10px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}
-                        >
-                            <i className={userInputMode === 'audio' ? "fa-solid fa-keyboard" : "fa-solid fa-microphone"}></i>
-                            {userInputMode === 'audio' ? "Keys" : "Voice"}
-                        </button>
+                        </div>
                     </div>
                 </div>
             </div>

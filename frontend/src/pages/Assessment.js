@@ -114,7 +114,6 @@ export default function Assessment() {
 
   return (
     <div className="assessments-page">
-      <Header />
 
       <div className="assessments-shell">
         <div className="assessments-header">

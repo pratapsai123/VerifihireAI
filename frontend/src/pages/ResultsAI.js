@@ -189,7 +189,7 @@ const ResultsAI = () => {
     const checkboxStyle = { width: '16px', height: '16px', cursor: 'pointer', accentColor: '#4F46E5' };
 
     return (
-        <div className="dashboard-container">
+        <div className="dashboard-container" style={{ paddingTop: 0 }}>
             {/* Toast */}
             {toast && (
                 <div style={{
@@ -346,8 +346,12 @@ const ResultsAI = () => {
                 </div>
             )}
 
-            <div className="dashboard-main" style={{ maxWidth: '1200px' }}>
-                <header style={{ marginBottom: '2rem' }}>
+            <div className="dashboard-main" style={{ width: '100%', maxWidth: '100%', padding: '0', margin: '0' }}>
+                <header style={{
+                    padding: '0 2rem',
+                    background: 'transparent',
+                    marginBottom: '0'
+                }}>
                     <h1 style={{ fontSize: '2.4rem', fontWeight: '900', color: '#111827', margin: 0, letterSpacing: '-0.03em' }}>
                         AI <span style={{ color: '#4F46E5' }}>Results</span>
                     </h1>
@@ -357,28 +361,30 @@ const ResultsAI = () => {
                 </header>
 
                 {/* Tabs */}
-                <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', background: '#F4F7FE', padding: '0.4rem', borderRadius: '12px', width: 'fit-content' }}>
-                    {[
-                        { id: 'resume', label: 'Resume Screening', icon: 'fa-file-magnifying-glass' },
-                        { id: 'assessment', label: 'AI Assessments', icon: 'fa-brain' },
-                        { id: 'interview', label: 'AI Interviews', icon: 'fa-microphone-lines' }
-                    ].map(tab => (
-                        <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
-                            background: activeTab === tab.id ? 'white' : 'transparent',
-                            border: 'none', padding: '0.65rem 1.3rem', borderRadius: '10px',
-                            fontWeight: '700', color: activeTab === tab.id ? '#4F46E5' : '#718096',
-                            cursor: 'pointer', transition: 'all 0.2s',
-                            display: 'flex', alignItems: 'center', gap: '0.5rem',
-                            boxShadow: activeTab === tab.id ? '0 4px 10px rgba(0,0,0,0.05)' : 'none',
-                        }}>
-                            <i className={`fa-solid ${tab.icon}`} />
-                            {tab.label}
-                        </button>
-                    ))}
+                <div style={{ padding: '0 2rem', marginBottom: '1.5rem' }}>
+                    <div style={{ display: 'flex', gap: '1rem', background: '#F4F7FE', padding: '0.4rem', borderRadius: '12px', width: 'fit-content' }}>
+                        {[
+                            { id: 'resume', label: 'Resume Screening', icon: 'fa-file-magnifying-glass' },
+                            { id: 'assessment', label: 'AI Assessments', icon: 'fa-brain' },
+                            { id: 'interview', label: 'AI Interviews', icon: 'fa-microphone-lines' }
+                        ].map(tab => (
+                            <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
+                                background: activeTab === tab.id ? 'white' : 'transparent',
+                                border: 'none', padding: '0.65rem 1.3rem', borderRadius: '10px',
+                                fontWeight: '700', color: activeTab === tab.id ? '#4F46E5' : '#718096',
+                                cursor: 'pointer', transition: 'all 0.2s',
+                                display: 'flex', alignItems: 'center', gap: '0.5rem',
+                                boxShadow: activeTab === tab.id ? '0 4px 10px rgba(0,0,0,0.05)' : 'none',
+                            }}>
+                                <i className={`fa-solid ${tab.icon}`} />
+                                {tab.label}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Filter Chips */}
-                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', alignItems: 'center', padding: '0 2rem' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#9CA3AF', textTransform: 'uppercase', marginRight: '0.25rem' }}>Filter:</span>
                     {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass ✓' }, { key: 'fail', label: 'Fail ✗' }].map(f => (
                         <button key={f.key} onClick={() => setStatusFilter(f.key)} style={{
@@ -440,7 +446,7 @@ const ResultsAI = () => {
                     )}
                 </div>
 
-                <div className="module-card" style={{ padding: '0', overflow: 'hidden', border: '1px solid #E5E7EB' }}>
+                <div className="module-card" style={{ padding: '0', overflow: 'hidden', border: '1px solid #E5E7EB', borderRadius: '0', borderLeft: 'none', borderRight: 'none' }}>
                     {loading ? (
                         <div style={{ padding: '4rem', textAlign: 'center', color: '#6B7280' }}>
                             <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }} />

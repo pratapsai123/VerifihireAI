@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Header from '../components/Header';
 import '../styles/CustomAssessment.css';
 
 // Django API base URL - Update this to match your Django backend
@@ -1346,8 +1345,6 @@ function CustomAssessment() {
 
   return (
     <div className="custom-assessment-container">
-      {/* Header */}
-      <Header />
 
       {/* Main Content */}
       <div className="page-container">

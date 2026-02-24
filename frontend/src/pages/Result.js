@@ -92,7 +92,9 @@ export default function Result() {
                 if (fromDate) params.start_date = fromDate;
                 if (toDate) params.end_date = toDate;
                 const resp = await axios.get(`${API_BASE_URL}/results/`, { params });
-                setOverview(resp.data?.results || []);
+                const allResults = resp.data?.results || [];
+                // Filter out AI assessments (they have their own results page)
+                setOverview(allResults.filter(r => !r.submission_id?.startsWith('ai_')));
             } else {
                 // Candidate view: validate submission exists but do NOT show score/selected/rejected.
                 const resp = await axios.get(`${API_BASE_URL}/invitations/public/${token}/result/`);
@@ -253,7 +255,6 @@ export default function Result() {
     // Recruiter overview
     return (
         <div className="result-page">
-            <Header />
             <div className="result-shell">
                 <div className="top">
                     <div>
