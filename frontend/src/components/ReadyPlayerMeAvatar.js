@@ -21,10 +21,9 @@ function AvatarModel({ isSpeaking }) {
         if (!group.current) return;
         const t = state.clock.getElapsedTime();
 
-        // 1. Idle Breathing & Micro-movements
-        group.current.position.y = Math.sin(t * 1.5) * 0.015;
-        group.current.rotation.z = Math.sin(t * 0.8) * 0.008;
-        group.current.rotation.x = Math.sin(t * 1.2) * 0.015;
+        // 1. Idle Micro-movements (Removed vertical hovering)
+        group.current.rotation.z = Math.sin(t * 0.8) * 0.005;
+        group.current.rotation.x = Math.sin(t * 1.2) * 0.01;
 
         // 2. Specialized Lip-Sync for Limited Morph Targets
         const head = nodes?.Wolf3D_Head;
