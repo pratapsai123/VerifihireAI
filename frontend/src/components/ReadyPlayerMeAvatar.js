@@ -45,7 +45,7 @@ function AvatarModel({ isSpeaking }) {
     });
 
     return (
-        <group ref={group} scale={1} position={[0, 0, 0]}>
+        <group ref={group} scale={1} position={[0, -1.6, 0]}>
             <primitive object={scene} />
         </group>
     );
@@ -88,24 +88,23 @@ const LoadingSpinner = () => (
 const ReadyPlayerMeAvatar = ({ isSpeaking }) => {
     return (
         <ModelErrorBoundary fallback={<Professional3DAvatar isSpeaking={isSpeaking} />}>
-            <div style={{ width: '100%', height: '380px', position: 'relative', overflow: 'hidden' }}>
+            <div style={{ width: '100%', height: '320px', position: 'relative', overflow: 'hidden' }}>
                 <Suspense fallback={<LoadingSpinner />}>
-                    <Canvas shadows camera={{ position: [0, 1.2, 3.5], fov: 45 }}>
-                        <ambientLight intensity={0.7} />
+                    <Canvas shadows camera={{ position: [0, 0, 0.6], fov: 45 }}>
+                        <ambientLight intensity={0.8} />
                         <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
                         <pointLight position={[-10, -10, -10]} intensity={0.5} />
 
                         <AvatarModel isSpeaking={isSpeaking} />
                         <Environment preset="city" />
 
-                        {/* Diagnostic Helpers */}
-                        <gridHelper args={[10, 10]} position={[0, 0, 0]} />
                         <ContactShadows opacity={0.4} scale={10} blur={2.4} far={4.5} />
 
                         <OrbitControls
-                            enableZoom={true}
-                            enablePan={true}
-                            enableRotate={true}
+                            enableZoom={false}
+                            enablePan={false}
+                            enableRotate={false}
+                            target={[0, 0, 0]}
                         />
                     </Canvas>
                 </Suspense>
