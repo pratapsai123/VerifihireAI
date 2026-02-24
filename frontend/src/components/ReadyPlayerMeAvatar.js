@@ -148,4 +148,4 @@ const ReadyPlayerMeAvatar = ({ isSpeaking = false }) => {
     );
 };
 
-export default Professional2DBot;
+export default ReadyPlayerMeAvatar;
