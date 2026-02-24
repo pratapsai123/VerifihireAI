@@ -10,7 +10,7 @@ import React, { useEffect, useState } from 'react';
  * 3. Minimalist Aesthetic: Charcoal, slate, and glowing cyan color palette.
  */
 
-const Professional2DBot = ({ isSpeaking = false }) => {
+const ReadyPlayerMeAvatar = ({ isSpeaking = false }) => {
     const [pulse, setPulse] = useState(1);
 
     useEffect(() => {
@@ -32,19 +32,10 @@ const Professional2DBot = ({ isSpeaking = false }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'radial-gradient(circle at center, #1a202c 0%, #0f172a 100%)',
             overflow: 'hidden',
-            borderRadius: '12px'
+            borderRadius: '12px',
+            background: 'transparent'
         }}>
-            {/* Background Ambient Glow */}
-            <div style={{
-                position: 'absolute',
-                width: '150%',
-                height: '150%',
-                background: 'radial-gradient(circle at center, rgba(0, 242, 255, 0.03) 0%, transparent 60%)',
-                animation: 'pulse-bg 4s infinite alternate'
-            }} />
-
             <svg width="220" height="220" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
@@ -59,22 +50,22 @@ const Professional2DBot = ({ isSpeaking = false }) => {
 
                 {/* Outer Glass Ring 3 */}
                 <circle cx="50" cy="50" r="45"
-                    stroke="rgba(255, 255, 255, 0.05)"
+                    stroke="rgba(0, 242, 255, 0.05)"
                     strokeWidth="0.5"
-                    fill="rgba(255, 255, 255, 0.01)"
+                    fill="transparent"
                 />
 
                 {/* Outer Glass Ring 2 */}
                 <circle cx="50" cy="50" r="35"
                     stroke="rgba(0, 242, 255, 0.1)"
                     strokeWidth="1"
-                    fill="rgba(0, 242, 255, 0.02)"
+                    fill="transparent"
                     className="rotating-ring-1"
                 />
 
                 {/* Outer Glass Ring 1 */}
                 <circle cx="50" cy="50" r="28"
-                    stroke="rgba(255, 255, 255, 0.08)"
+                    stroke="rgba(0, 242, 255, 0.08)"
                     strokeWidth="1.5"
                     className="rotating-ring-2"
                 />
@@ -103,40 +94,6 @@ const Professional2DBot = ({ isSpeaking = false }) => {
 
                 {/* Scanning Lines */}
                 <line x1="10" y1="50" x2="90" y2="50" stroke="rgba(0, 242, 255, 0.15)" strokeWidth="0.2" className="scanner-line" />
-
-                {/* Audio Spectrum Visualizer (Bottom-centered) */}
-                <g className="spectrum-group" transform="translate(30, 75)">
-                    {[...Array(12)].map((_, i) => (
-                        <rect
-                            key={i}
-                            x={i * 3.5}
-                            y="0"
-                            width="2"
-                            height="4"
-                            rx="1"
-                            fill="#00f2ff"
-                            opacity={isSpeaking ? 0.8 : 0.2}
-                            className={`spectrum-bar spectrum-bar-${i}`}
-                        >
-                            {isSpeaking && (
-                                <animate
-                                    attributeName="height"
-                                    values={`${4 + Math.random() * 2};${10 + Math.random() * 15};${4 + Math.random() * 2}`}
-                                    dur={`${0.4 + Math.random() * 0.4}s`}
-                                    repeatCount="indefinite"
-                                />
-                            )}
-                            {isSpeaking && (
-                                <animate
-                                    attributeName="y"
-                                    values="0;-5;0"
-                                    dur={`${0.4 + Math.random() * 0.4}s`}
-                                    repeatCount="indefinite"
-                                />
-                            )}
-                        </rect>
-                    ))}
-                </g>
             </svg>
 
             {/* Glassmorphism Title Tag */}
@@ -174,9 +131,6 @@ const Professional2DBot = ({ isSpeaking = false }) => {
                 }
                 .scanner-line {
                     animation: scan 4s ease-in-out infinite;
-                }
-                .spectrum-bar {
-                    transition: height 0.2s, y 0.2s, opacity 0.5s;
                 }
                 @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
                 @keyframes rotate-reverse { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
