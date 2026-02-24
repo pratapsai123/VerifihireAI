@@ -139,10 +139,6 @@ const ReadyPlayerMeAvatar = ({ isSpeaking = false }) => {
                     50% { opacity: 1; }
                     100% { transform: translateY(30px); opacity: 0; }
                 }
-                @keyframes pulse-bg {
-                    from { opacity: 0.3; transform: scale(0.95); }
-                    to { opacity: 0.7; transform: scale(1.05); }
-                }
                 @keyframes pulse-core {
                     from { transform: scale(0.9); opacity: 0.6; }
                     to { transform: scale(1.1); opacity: 1; }
