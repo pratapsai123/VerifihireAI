@@ -5,61 +5,40 @@ import '../styles/CreateAssessment.css';
 
 const CreateAssessment = () => {
     const navigate = useNavigate();
-    const [currentStep, setCurrentStep] = useState(1);
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         job_description: '',
-        required_skills: '',
-        mcq_count: 10,
-        coding_count: 2,
-        duration: 60,
+        skills: '',
+        num_mcqs: 10,
+        num_coding: 2,
         difficulty: 'Medium',
-        from_date: '',
-        from_time: '',
-        until_date: '',
-        until_time: '',
+        start_date: '',
+        start_time: '',
+        end_date: '',
+        end_time: '',
         pass_threshold: 60
     });
-    const [isGenerating, setIsGenerating] = useState(false);
 
-    const handleChange = (e) => {
-        const { id, value } = e.target;
-        const fieldMapping = {
-            jobDescription: 'job_description',
-            requiredSkills: 'required_skills',
-            mcqCount: 'mcq_count',
-            codingCount: 'coding_count',
-            duration: 'duration',
-            difficulty: 'difficulty',
-            fromDate: 'from_date',
-            fromTime: 'from_time',
-            untilDate: 'until_date',
-            untilTime: 'until_time',
-            passThreshold: 'pass_threshold'
-        };
+    const handleChange = (id, value) => {
         setFormData(prev => ({
             ...prev,
-            [fieldMapping[id] || id]: value
+            [id]: value
         }));
     };
 
-    const nextStep = (e) => {
-        if (e) e.preventDefault();
-        setCurrentStep(prev => Math.min(prev + 1, 3));
-    };
-
-    const prevStep = (e) => {
-        if (e) e.preventDefault();
-        setCurrentStep(prev => Math.max(prev - 1, 1));
-    };
-
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        setIsGenerating(true);
+        if (e) e.preventDefault();
+        setLoading(true);
 
         const combinedData = {
-            ...formData,
-            available_from: (formData.from_date && formData.from_time) ? new Date(`${formData.from_date}T${formData.from_time}`).toISOString() : '',
-            available_until: (formData.until_date && formData.until_time) ? new Date(`${formData.until_date}T${formData.until_time}`).toISOString() : ''
+            job_description: formData.job_description,
+            required_skills: formData.skills,
+            mcq_count: formData.num_mcqs,
+            coding_count: formData.num_coding,
+            difficulty: formData.difficulty,
+            pass_threshold: formData.pass_threshold,
+            available_from: (formData.start_date && formData.start_time) ? new Date(`${formData.start_date}T${formData.start_time}`).toISOString() : null,
+            available_until: (formData.end_date && formData.end_time) ? new Date(`${formData.end_date}T${formData.end_time}`).toISOString() : null
         };
 
         try {
@@ -70,175 +49,183 @@ const CreateAssessment = () => {
             if (response.status === 200 || response.status === 201) {
                 alert('Assessment Generated Successfully!');
                 navigate('/ai-assessments');
-            } else {
-                alert('Failed to generate assessment.');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('An error occurred. Check if the backend is running.');
+            alert('Generation failed. Ensure the backend is running at port 8001.');
         } finally {
-            setIsGenerating(false);
+            setLoading(false);
         }
     };
 
-    const renderStepIndicators = () => (
-        <div className="stepper-ui">
-            <div className={`step-item ${currentStep === 1 ? 'active' : ''} ${currentStep > 1 ? 'completed' : ''}`}>
-                <div className="step-circle">{currentStep > 1 ? <i className="fa-solid fa-check"></i> : '1'}</div>
-                <div className="step-label">Role</div>
-            </div>
-            <div className="step-line"></div>
-            <div className={`step-item ${currentStep === 2 ? 'active' : ''} ${currentStep > 2 ? 'completed' : ''}`}>
-                <div className="step-circle">{currentStep > 2 ? <i className="fa-solid fa-check"></i> : '2'}</div>
-                <div className="step-label">Config</div>
-            </div>
-            <div className="step-line"></div>
-            <div className={`step-item ${currentStep === 3 ? 'active' : ''}`}>
-                <div className="step-circle">3</div>
-                <div className="step-label">Finalize</div>
-            </div>
-        </div>
-    );
-
     return (
-        <div className="assessment-page">
+        <div className="create-assessment-page">
+            <div className="bg-shape shape-1"></div>
+            <div className="bg-shape shape-2"></div>
+            <div className="bg-shape shape-3"></div>
+
             <div className="assessment-container">
                 <header className="assessment-header">
-                    <div className="header-title-group">
-                        <div className="ai-badge">
-                            <i className="fa-solid fa-wand-magic-sparkles"></i>
-                            Powered by NeuralAI
-                        </div>
-                        <h1>Create <span>Smart</span> Assessment</h1>
-                    </div>
+                    <h1>Create <span>Smart</span> Assessment</h1>
+                    <p>Our intelligent AI transforms your requirements into a precision-engineered technical evaluation.</p>
                 </header>
 
-                {renderStepIndicators()}
+                <div className="glass-card">
+                    <SectionHeader icon="📝" title="Role Context" />
+                    <div className="form-group">
+                        <label>Job Requirements</label>
+                        <textarea
+                            placeholder="Describe the role, key responsibilities, and ideal candidate profile..."
+                            value={formData.job_description}
+                            onChange={(e) => handleChange('job_description', e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Target Skills</label>
+                        <input
+                            type="text"
+                            placeholder="e.g. React, Node.js, Python, System Design..."
+                            value={formData.skills}
+                            onChange={(e) => handleChange('skills', e.target.value)}
+                        />
+                    </div>
+                </div>
 
-                <form onSubmit={handleSubmit} className="step-form">
-                    {currentStep === 1 && (
-                        <div className="glass-panel">
-                            <div className="section-title-group">
-                                <div className="icon-box"><i className="fa-solid fa-briefcase"></i></div>
-                                <h2>Professional Context</h2>
-                            </div>
-                            <div className="form-group">
-                                <label>Job Description</label>
-                                <textarea
-                                    id="jobDescription"
-                                    value={formData.job_description}
-                                    onChange={handleChange}
-                                    placeholder="Paste technical requirements here..."
-                                    className="glass-textarea"
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label>Core Skills</label>
+                <div className="glass-card">
+                    <SectionHeader icon="⚙️" title="Structure & Difficulty" />
+                    <div className="parameters-grid">
+                        <div className="form-group">
+                            <label>MCQ Questions</label>
+                            <div className="input-with-marker">
                                 <input
-                                    type="text"
-                                    id="requiredSkills"
-                                    value={formData.required_skills}
-                                    onChange={handleChange}
-                                    placeholder="React, Node.js, AWS..."
-                                    className="glass-input"
-                                    required
+                                    type="number"
+                                    min="1"
+                                    max="50"
+                                    value={formData.num_mcqs}
+                                    onChange={(e) => handleChange('num_mcqs', e.target.value === '' ? '' : parseInt(e.target.value))}
                                 />
-                            </div>
-                            <div className="step-actions">
-                                <div style={{ flex: 1 }}></div>
-                                <button className="btn-primary" onClick={nextStep}>
-                                    Next Configuration <i className="fa-solid fa-arrow-right"></i>
-                                </button>
+                                <span className="marker">{formData.num_mcqs}</span>
                             </div>
                         </div>
-                    )}
 
-                    {currentStep === 2 && (
-                        <div className="glass-panel">
-                            <div className="section-title-group">
-                                <div className="icon-box" style={{ background: 'linear-gradient(135deg, #3b82f6, #2dd4bf)' }}>
-                                    <i className="fa-solid fa-sliders"></i>
-                                </div>
-                                <h2>Assessment Config</h2>
+                        <div className="form-group">
+                            <label>Coding Tasks</label>
+                            <div className="input-with-marker">
+                                <input
+                                    type="number"
+                                    min="0"
+                                    max="5"
+                                    value={formData.num_coding}
+                                    onChange={(e) => handleChange('num_coding', e.target.value === '' ? '' : parseInt(e.target.value))}
+                                />
+                                <span className="marker">{formData.num_coding}</span>
                             </div>
-                            <div className="param-grid">
-                                <div className="form-group">
-                                    <label>MCQ Count</label>
-                                    <input type="number" id="mcqCount" value={formData.mcq_count} onChange={handleChange} className="glass-input" min="1" />
-                                </div>
-                                <div className="form-group">
-                                    <label>Coding tasks</label>
-                                    <input type="number" id="codingCount" value={formData.coding_count} onChange={handleChange} className="glass-input" min="0" />
+                        </div>
+
+                        <div className="form-group">
+                            <label>Complexity</label>
+                            <select
+                                value={formData.difficulty}
+                                onChange={(e) => handleChange('difficulty', e.target.value)}
+                            >
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div className="threshold-section">
+                        <div className="threshold-info">
+                            <h3>Pass Threshold (%)</h3>
+                            <div className="circle-progress">
+                                <svg viewBox="0 0 100 100">
+                                    <defs>
+                                        <linearGradient id="threshold-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stopColor="#4f46e5" />
+                                            <stop offset="100%" stopColor="#9333ea" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle className="bg" cx="50" cy="50" r="45" />
+                                    <circle
+                                        className="progress"
+                                        cx="50" cy="50" r="45"
+                                        style={{ strokeDashoffset: 283 - (283 * formData.pass_threshold) / 100 }}
+                                    />
+                                </svg>
+                                <span className="percentage">{formData.pass_threshold}%</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="0"
+                                max="100"
+                                value={formData.pass_threshold}
+                                onChange={(e) => handleChange('pass_threshold', parseInt(e.target.value))}
+                            />
+                            <p className="hint">Minimum score required for candidate success</p>
+                        </div>
+
+                        <div className="availability-grid">
+                            <div className="form-group">
+                                <label><span>📅</span> Available From</label>
+                                <div className="datetime-row">
+                                    <input
+                                        type="date"
+                                        value={formData.start_date}
+                                        onChange={(e) => handleChange('start_date', e.target.value)}
+                                    />
+                                    <input
+                                        type="time"
+                                        value={formData.start_time}
+                                        onChange={(e) => handleChange('start_time', e.target.value)}
+                                    />
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label>Duration (Minutes)</label>
-                                <input type="number" id="duration" value={formData.duration} onChange={handleChange} className="glass-input" min="1" />
-                            </div>
-                            <div className="form-group">
-                                <label>Complexity</label>
-                                <select id="difficulty" value={formData.difficulty} onChange={handleChange} className="glass-select">
-                                    <option value="Easy">Standard</option>
-                                    <option value="Medium">Advanced</option>
-                                    <option value="Hard">Expert</option>
-                                </select>
-                            </div>
-                            <div className="step-actions">
-                                <button className="btn-secondary" onClick={prevStep}>Back</button>
-                                <button className="btn-primary" onClick={nextStep}>
-                                    Next Schedule <i className="fa-solid fa-arrow-right"></i>
-                                </button>
+                                <label><span>⌛</span> Available Until</label>
+                                <div className="datetime-row">
+                                    <input
+                                        type="date"
+                                        value={formData.end_date}
+                                        onChange={(e) => handleChange('end_date', e.target.value)}
+                                    />
+                                    <input
+                                        type="time"
+                                        value={formData.end_time}
+                                        onChange={(e) => handleChange('end_time', e.target.value)}
+                                    />
+                                </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <button
+                    className={`generate-btn ${loading ? 'loading' : ''}`}
+                    onClick={handleSubmit}
+                    disabled={loading}
+                >
+                    {loading ? (
+                        <>
+                            <span className="spinner"></span>
+                            Generating Assessment...
+                        </>
+                    ) : (
+                        <>
+                            🚀 Generate Assessment
+                        </>
                     )}
-
-                    {currentStep === 3 && (
-                        <div className="glass-panel">
-                            <div className="section-title-group">
-                                <div className="icon-box" style={{ background: 'linear-gradient(135deg, #10b981, #3b82f6)' }}>
-                                    <i className="fa-solid fa-calendar-check"></i>
-                                </div>
-                                <h2>Threshold & Schedule</h2>
-                            </div>
-
-                            <div className="threshold-card">
-                                <div className="threshold-header">Minimum Pass Threshold (%)</div>
-                                <input type="number" id="passThreshold" value={formData.pass_threshold} onChange={handleChange} min="1" max="100" className="glass-input" />
-                            </div>
-
-                            <div className="form-group" style={{ marginTop: '1.5rem' }}>
-                                <label>Available From</label>
-                                <div className="date-time-group">
-                                    <input type="date" id="fromDate" value={formData.from_date} onChange={handleChange} className="glass-input" />
-                                    <input type="time" id="fromTime" value={formData.from_time} onChange={handleChange} className="glass-input" />
-                                </div>
-                            </div>
-
-                            <div className="form-group">
-                                <label>Expiry Date</label>
-                                <div className="date-time-group">
-                                    <input type="date" id="untilDate" value={formData.until_date} onChange={handleChange} className="glass-input" />
-                                    <input type="time" id="untilTime" value={formData.until_time} onChange={handleChange} className="glass-input" />
-                                </div>
-                            </div>
-
-                            <div className="step-actions">
-                                <button className="btn-secondary" onClick={prevStep}>Back</button>
-                                <button type="submit" disabled={isGenerating} className="generate-btn">
-                                    {isGenerating ? (
-                                        <><i className="fa-solid fa-atom fa-spin"></i> Architecting...</>
-                                    ) : (
-                                        <><i className="fa-solid fa-wand-magic-sparkles"></i> Generate Assessment</>
-                                    )}
-                                </button>
-                            </div>
-                        </div>
-                    )}
-                </form>
+                </button>
             </div>
         </div>
     );
 };
+
+const SectionHeader = ({ icon, title }) => (
+    <div className="section-header">
+        <span className="icon-box">{icon}</span>
+        <h2>{title}</h2>
+    </div>
+);
 
 export default CreateAssessment;

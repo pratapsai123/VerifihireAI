@@ -72,13 +72,13 @@ const ResumeMatcher = () => {
     };
 
     return (
-        <div className="resume-matcher-page" style={{ paddingTop: 0 }}>
+        <div className="resume-matcher-page">
             <div className="mesh-bg"></div>
             <div className="bg-shape" style={{ width: '600px', height: '600px', background: 'rgba(99, 102, 241, 0.15)', top: '-10%', right: '-5%' }}></div>
             <div className="bg-shape" style={{ width: '500px', height: '500px', background: 'rgba(168, 85, 247, 0.15)', bottom: '-10%', left: '-5%', animationDelay: '-5s' }}></div>
 
             <div className="matcher-container">
-                <header className="page-header" style={{ textAlign: 'left', padding: '0 2rem', marginBottom: '1rem', background: 'transparent', boxShadow: 'none', border: 'none' }}>
+                <header className="glass-card page-header">
                     <div className="badge">
                         <i className="fa-solid fa-magnifying-glass-chart"></i> RESUME ANALYTICS
                     </div>
@@ -218,17 +218,7 @@ const ResumeMatcher = () => {
                                     )}
                                 </button>
 
-                                <div style={{ display: 'flex', gap: '4rem' }}>
-                                    {[
-                                        { icon: 'fa-brain', text: 'AI Feature Extraction' },
-                                        { icon: 'fa-check-double', text: 'Bias-Free Screening' },
-                                        { icon: 'fa-table-columns', text: 'Multi-Resumes Support' }
-                                    ].map((feat, i) => (
-                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', color: '#94A3B8', fontSize: '0.85rem', fontWeight: '700' }}>
-                                            <i className={`fa-solid ${feat.icon}`} style={{ color: '#6366F1' }}></i> {feat.text}
-                                        </div>
-                                    ))}
-                                </div>
+
                             </div>
                         </>
                     ) : (

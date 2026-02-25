@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
+import '../styles/ResultsAI.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
@@ -184,12 +185,15 @@ const ResultsAI = () => {
     const selectedCount = selectedItems.length;
 
     /* ---- Styles ---- */
-    const thStyle = { padding: '1rem 1.2rem', textAlign: 'left', color: '#6B7280', fontWeight: '700', fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.04em', background: '#F9FAFB', borderBottom: '1px solid #E5E7EB' };
-    const tdStyle = { padding: '0.9rem 1.2rem', borderBottom: '1px solid #F3F4F6' };
     const checkboxStyle = { width: '16px', height: '16px', cursor: 'pointer', accentColor: '#4F46E5' };
 
     return (
-        <div className="dashboard-container" style={{ paddingTop: 0 }}>
+        <div className="results-page">
+            {/* Decorative Background Elements */}
+            <div className="bg-shape shape-1"></div>
+            <div className="bg-shape shape-2"></div>
+            <div className="bg-shape shape-3"></div>
+
             {/* Toast */}
             {toast && (
                 <div style={{
@@ -208,30 +212,24 @@ const ResultsAI = () => {
 
             {/* Confirm Modal */}
             {confirmDelete && (
-                <div style={{
-                    position: 'fixed', inset: 0, zIndex: 9999,
-                    background: 'rgba(0,0,0,0.45)', backdropFilter: 'blur(4px)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
-                    <div style={{
-                        background: 'white', borderRadius: '16px',
-                        padding: '2rem 2.5rem', maxWidth: '420px', width: '90%',
-                        boxShadow: '0 20px 60px rgba(0,0,0,0.15)', textAlign: 'center',
+                <div className="glass-modal-overlay">
+                    <div className="glass-modal-content" style={{
+                        padding: '2.5rem', maxWidth: '420px', width: '90%', textAlign: 'center',
                     }}>
                         <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🗑️</div>
-                        <h2 style={{ fontSize: '1.3rem', fontWeight: '800', color: '#111827', marginBottom: '0.5rem' }}>
+                        <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
                             Delete {confirmDelete.items.length > 1 ? `${confirmDelete.items.length} Results` : 'Result'}?
                         </h2>
-                        <p style={{ color: '#6B7280', marginBottom: '1.5rem', lineHeight: '1.6' }}>
+                        <p style={{ color: '#475569', marginBottom: '1.75rem', lineHeight: '1.6', fontSize: '0.95rem' }}>
                             {confirmDelete.items.length === 1
                                 ? <>This will permanently delete the result for <strong>{confirmDelete.items[0].full_name || confirmDelete.items[0].candidate?.name || 'this candidate'}</strong>.</>
                                 : <>This will permanently delete <strong>{confirmDelete.items.length} selected results</strong>. This action cannot be undone.</>}
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                            <button onClick={cancelDelete} style={{ padding: '0.7rem 1.5rem', border: '1px solid #E5E7EB', borderRadius: '10px', background: 'white', cursor: 'pointer', fontWeight: '700', color: '#374151' }}>
+                            <button onClick={cancelDelete} style={{ padding: '0.7rem 1.5rem', border: '1px solid #cbd5e1', borderRadius: '12px', background: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontWeight: '700', color: '#334155' }}>
                                 Cancel
                             </button>
-                            <button onClick={confirmAndDelete} style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '10px', background: '#EF4444', color: 'white', cursor: 'pointer', fontWeight: '700' }}>
+                            <button onClick={confirmAndDelete} style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '12px', background: '#EF4444', color: 'white', cursor: 'pointer', fontWeight: '700', boxShadow: '0 4px 12px rgba(239, 68, 68, 0.25)' }}>
                                 Delete
                             </button>
                         </div>
@@ -241,18 +239,10 @@ const ResultsAI = () => {
 
             {/* AI Interview Summary Modal */}
             {summaryModal && (
-                <div style={{
-                    position: 'fixed', inset: 0, zIndex: 10000,
-                    background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(6px)',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    padding: '2rem',
-                }}>
-                    <div style={{
-                        background: 'white', borderRadius: '24px',
+                <div className="glass-modal-overlay">
+                    <div className="glass-modal-content" style={{
                         width: '100%', maxWidth: '800px', maxHeight: '85vh',
                         display: 'flex', flexDirection: 'column',
-                        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
-                        overflow: 'hidden',
                     }}>
                         <div style={{
                             padding: '1.5rem 2rem',
@@ -346,23 +336,16 @@ const ResultsAI = () => {
                 </div>
             )}
 
-            <div className="dashboard-main" style={{ width: '100%', maxWidth: '100%', padding: '0', margin: '0' }}>
-                <header style={{
-                    padding: '0 2rem',
-                    background: 'transparent',
-                    marginBottom: '0'
-                }}>
-                    <h1 style={{ fontSize: '2.4rem', fontWeight: '900', color: '#111827', margin: 0, letterSpacing: '-0.03em' }}>
+            <div className="dashboard-main" style={{ maxWidth: 'none', width: '100%', padding: '0 2rem 3rem' }}>
+                <header style={{ marginBottom: '0.25rem', textAlign: 'center', paddingTop: '0' }}>
+                    <h1 style={{ fontSize: '3.2rem', fontWeight: '900', color: '#111827', margin: 0, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
                         AI <span style={{ color: '#4F46E5' }}>Results</span>
                     </h1>
-                    <p style={{ color: '#6B7280', fontSize: '1rem', marginTop: '0.4rem', marginBottom: 0 }}>
-                        Centralized analytics for all AI-powered selection processes.
-                    </p>
                 </header>
 
                 {/* Tabs */}
-                <div style={{ padding: '0 2rem', marginBottom: '1.5rem' }}>
-                    <div style={{ display: 'flex', gap: '1rem', background: '#F4F7FE', padding: '0.4rem', borderRadius: '12px', width: 'fit-content' }}>
+                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', background: '#F4F7FE', padding: '0.35rem', borderRadius: '12px', width: 'fit-content' }}>
                         {[
                             { id: 'resume', label: 'Resume Screening', icon: 'fa-file-magnifying-glass' },
                             { id: 'assessment', label: 'AI Assessments', icon: 'fa-brain' },
@@ -384,7 +367,7 @@ const ResultsAI = () => {
                 </div>
 
                 {/* Filter Chips */}
-                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem', alignItems: 'center', padding: '0 2rem' }}>
+                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#9CA3AF', textTransform: 'uppercase', marginRight: '0.25rem' }}>Filter:</span>
                     {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass ✓' }, { key: 'fail', label: 'Fail ✗' }].map(f => (
                         <button key={f.key} onClick={() => setStatusFilter(f.key)} style={{
@@ -446,182 +429,193 @@ const ResultsAI = () => {
                     )}
                 </div>
 
-                <div className="module-card" style={{ padding: '0', overflow: 'hidden', border: '1px solid #E5E7EB', borderRadius: '0', borderLeft: 'none', borderRight: 'none' }}>
+                <div className="glass-table-card">
                     {loading ? (
-                        <div style={{ padding: '4rem', textAlign: 'center', color: '#6B7280' }}>
-                            <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2rem', display: 'block', marginBottom: '1rem' }} />
-                            <p>Analyzing data...</p>
+                        <div style={{ padding: '6rem 2rem', textAlign: 'center', color: '#64748b' }}>
+                            <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '1.5rem', color: '#4f46e5' }} />
+                            <p style={{ fontSize: '1.2rem', fontWeight: '600' }}>Gathering intel...</p>
                         </div>
                     ) : error ? (
-                        <div style={{ padding: '4rem', textAlign: 'center', color: '#EF4444' }}>
-                            <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '1rem' }} />
-                            <p>{error}</p>
-                            <button onClick={fetchData} style={{ marginTop: '1rem', padding: '0.5rem 1.5rem', background: '#4F46E5', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: '700' }}>
-                                Retry
+                        <div style={{ padding: '5rem 2rem', textAlign: 'center', color: '#ef4444' }}>
+                            <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '3rem', display: 'block', marginBottom: '1.5rem' }} />
+                            <p style={{ fontSize: '1.1rem', fontWeight: '500' }}>{error}</p>
+                            <button onClick={fetchData} style={{ marginTop: '1.5rem', padding: '0.75rem 2rem', background: '#4F46E5', color: 'white', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: '800', fontSize: '1rem', boxShadow: '0 4px 15px rgba(79, 70, 229, 0.3)' }}>
+                                Retry Fetching
                             </button>
                         </div>
                     ) : (
-                        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-                            <thead>
-                                <tr>
-                                    {/* Select All checkbox */}
-                                    <th style={{ ...thStyle, width: '48px', textAlign: 'center' }}>
-                                        <input
-                                            type="checkbox"
-                                            style={checkboxStyle}
-                                            checked={allSelected}
-                                            ref={el => { if (el) el.indeterminate = someSelected && !allSelected; }}
-                                            onChange={toggleSelectAll}
-                                        />
-                                    </th>
-                                    <th style={thStyle}>Candidate</th>
-                                    {activeTab === 'resume' && <th style={thStyle}>Match %</th>}
-                                    {activeTab === 'assessment' && <th style={thStyle}>Assessment</th>}
-                                    {activeTab === 'interview' && <th style={thStyle}>AI Score</th>}
-                                    <th style={thStyle}>Date</th>
-                                    <th style={thStyle}>Status</th>
-                                    <th style={{ ...thStyle, textAlign: 'center' }}>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {currentRows.length === 0 && (
+                        <div style={{ overflowX: 'auto' }}>
+                            <table className="results-table">
+                                <thead>
                                     <tr>
-                                        <td colSpan="6" style={{ padding: '3rem', textAlign: 'center', color: '#9CA3AF' }}>
-                                            No results found for this tab.
-                                        </td>
+                                        {/* Select All checkbox */}
+                                        <th style={{ width: '60px', textAlign: 'center' }}>
+                                            <input
+                                                type="checkbox"
+                                                style={checkboxStyle}
+                                                checked={allSelected}
+                                                ref={el => { if (el) el.indeterminate = someSelected && !allSelected; }}
+                                                onChange={toggleSelectAll}
+                                            />
+                                        </th>
+                                        <th>Candidate Info</th>
+                                        {activeTab === 'resume' && <th>Match Score</th>}
+                                        {activeTab === 'assessment' && <th>Assessment Data</th>}
+                                        {activeTab === 'interview' && <th>Interview Score</th>}
+                                        <th>Date</th>
+                                        <th>AI Status</th>
+                                        <th style={{ textAlign: 'center' }}>Action Matrix</th>
                                     </tr>
-                                )}
+                                </thead>
+                                <tbody>
+                                    {currentRows.length === 0 && (
+                                        <tr>
+                                            <td colSpan="8" style={{ padding: '6rem 2rem', textAlign: 'center', color: '#64748b' }}>
+                                                <i className="fa-solid fa-folder-open" style={{ fontSize: '3.5rem', display: 'block', marginBottom: '1.25rem', opacity: 0.3 }} />
+                                                <span style={{ fontSize: '1.2rem', fontWeight: '600' }}>No candidates found in this category.</span>
+                                            </td>
+                                        </tr>
+                                    )}
 
-                                {/* RESUME TAB */}
-                                {activeTab === 'resume' && currentRows.map((r) => {
-                                    const isSelected = selected.has(r._deleteKey);
-                                    const isDeleting = deletingIds.has(r._deleteKey);
-                                    return (
-                                        <tr key={r.id} style={{ background: isSelected ? '#F5F3FF' : 'white', transition: 'background 0.15s' }}>
-                                            <td style={{ ...tdStyle, textAlign: 'center' }}>
-                                                <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
-                                            </td>
-                                            <td style={tdStyle}>
-                                                <div style={{ fontWeight: '700', color: '#111827' }}>{r.full_name}</div>
-                                                <div style={{ fontSize: '0.8rem', color: '#6B7280' }}>{r.email}</div>
-                                            </td>
-                                            <td style={tdStyle}>
-                                                <div style={{ width: '44px', height: '44px', borderRadius: '50%', background: '#EEF2FF', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5', fontWeight: '800', fontSize: '0.78rem' }}>
-                                                    {r.resume_score || 0}%
-                                                </div>
-                                            </td>
-                                            <td style={{ ...tdStyle, color: '#6B7280', fontSize: '0.85rem' }}>
-                                                {r.created_at ? new Date(r.created_at).toLocaleDateString() : '—'}
-                                            </td>
-                                            <td style={tdStyle}>
-                                                {(() => {
-                                                    const isPassed = r.status === 'Resume Passed'
-                                                        || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
-                                                    const isScored = r.status === 'Resume Passed' || r.status === 'Resume Failed' || r.resume_score > 0;
-                                                    if (!isScored) return (
-                                                        <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', background: '#F4F7FE', color: '#A3AED0' }}>
-                                                            Not Screened
-                                                        </span>
-                                                    );
-                                                    return (
-                                                        <span style={{
-                                                            padding: '0.3rem 0.75rem', borderRadius: '8px',
-                                                            fontSize: '0.7rem', fontWeight: '800',
-                                                            ...(isPassed ? { background: '#E6FBF5', color: '#05CD99' } : { background: '#FFF5F5', color: '#EE5D50' })
+                                    {/* RESUME TAB */}
+                                    {activeTab === 'resume' && currentRows.map((r) => {
+                                        const isSelected = selected.has(r._deleteKey);
+                                        const isDeleting = deletingIds.has(r._deleteKey);
+                                        return (
+                                            <tr className={`results-row ${isSelected ? 'selected' : ''}`} key={r.id}>
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
+                                                </td>
+                                                <td>
+                                                    <div style={{ fontWeight: '800', color: '#0f172a', fontSize: '1rem' }}>{r.full_name}</div>
+                                                    <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>{r.email}</div>
+                                                </td>
+                                                <td>
+                                                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(238, 242, 255, 0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4f46e5', fontWeight: '900', fontSize: '0.85rem', boxShadow: 'inset 0 0 0 1px rgba(79, 70, 229, 0.1)' }}>
+                                                        {r.resume_score || 0}%
+                                                    </div>
+                                                </td>
+                                                <td style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '500' }}>
+                                                    {r.created_at ? new Date(r.created_at).toLocaleDateString() : '—'}
+                                                </td>
+                                                <td>
+                                                    {(() => {
+                                                        const isPassed = r.status === 'Resume Passed'
+                                                            || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
+                                                        const isScored = r.status === 'Resume Passed' || r.status === 'Resume Failed' || r.resume_score > 0;
+                                                        if (!isScored) return (
+                                                            <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', background: '#F4F7FE', color: '#A3AED0' }}>
+                                                                Not Screened
+                                                            </span>
+                                                        );
+                                                        return (
+                                                            <span style={{
+                                                                padding: '0.3rem 0.75rem', borderRadius: '8px',
+                                                                fontSize: '0.7rem', fontWeight: '800',
+                                                                ...(isPassed ? { background: '#E6FBF5', color: '#05CD99' } : { background: '#FFF5F5', color: '#EE5D50' })
+                                                            }}>
+                                                                {isPassed ? 'Pass ✓' : 'Fail ✗'}
+                                                            </span>
+                                                        );
+                                                    })()}
+                                                </td>
+
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+
+                                    {/* ASSESSMENT TAB */}
+                                    {activeTab === 'assessment' && currentRows.map((r) => {
+                                        const isSelected = selected.has(r._deleteKey);
+                                        const isDeleting = deletingIds.has(r._deleteKey);
+                                        return (
+                                            <tr className={`results-row ${isSelected ? 'selected' : ''}`} key={r.submission_id}>
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
+                                                </td>
+                                                <td>
+                                                    <div style={{ fontWeight: '800', color: '#0f172a', fontSize: '1rem' }}>{r.candidate?.name || 'Candidate'}</div>
+                                                    <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>{r.candidate?.email}</div>
+                                                </td>
+                                                <td>
+                                                    <div style={{ fontWeight: '800', color: '#334155', fontSize: '0.95rem', letterSpacing: '-0.01em' }}>{r.assessment?.display_name || r.assessment?.name}</div>
+                                                    <div style={{ fontSize: '0.8rem', color: '#4f46e5', fontWeight: '700' }}>Score: {r.score}/{r.total}</div>
+                                                </td>
+                                                <td style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '500' }}>
+                                                    {r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '—'}
+                                                </td>
+                                                <td>
+                                                    <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
+                                                        {r.status === 'selected' ? 'QUALIFIED' : 'NOT QUALIFIED'}
+                                                    </span>
+                                                </td>
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center' }}>
+                                                        <button onClick={() => navigate(`/ai-assessments/${r.assessment?.id}?tab=submissions`)} style={{
+                                                            padding: '0.45rem 0.9rem', borderRadius: '10px',
+                                                            border: '1px solid rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.6)',
+                                                            cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700', color: '#334155',
+                                                            boxShadow: '0 2px 5px rgba(0,0,0,0.02)', backdropFilter: 'blur(5px)'
                                                         }}>
-                                                            {isPassed ? 'Pass ✓' : 'Fail ✗'}
-                                                        </span>
-                                                    );
-                                                })()}
-                                            </td>
+                                                            Review
+                                                        </button>
+                                                        <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
 
-                                            <td style={{ ...tdStyle, textAlign: 'center' }}>
-                                                <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-
-                                {/* ASSESSMENT TAB */}
-                                {activeTab === 'assessment' && currentRows.map((r) => {
-                                    const isSelected = selected.has(r._deleteKey);
-                                    const isDeleting = deletingIds.has(r._deleteKey);
-                                    return (
-                                        <tr key={r.submission_id} style={{ background: isSelected ? '#F5F3FF' : 'white', transition: 'background 0.15s' }}>
-                                            <td style={{ ...tdStyle, textAlign: 'center' }}>
-                                                <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
-                                            </td>
-                                            <td style={tdStyle}>
-                                                <div style={{ fontWeight: '700', color: '#111827' }}>{r.candidate?.name || 'Candidate'}</div>
-                                                <div style={{ fontSize: '0.8rem', color: '#6B7280' }}>{r.candidate?.email}</div>
-                                            </td>
-                                            <td style={tdStyle}>
-                                                <div style={{ fontWeight: '600', color: '#374151', fontSize: '0.9rem' }}>{r.assessment?.display_name || r.assessment?.name}</div>
-                                                <div style={{ fontSize: '0.78rem', color: '#6B7280' }}>Score: {r.score}/{r.total}</div>
-                                            </td>
-                                            <td style={{ ...tdStyle, color: '#6B7280', fontSize: '0.85rem' }}>
-                                                {r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '—'}
-                                            </td>
-                                            <td style={tdStyle}>
-                                                <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
-                                                    {r.status === 'selected' ? 'QUALIFIED' : 'NOT QUALIFIED'}
-                                                </span>
-                                            </td>
-                                            <td style={{ ...tdStyle, textAlign: 'center' }}>
-                                                <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                                                    <button onClick={() => navigate(`/ai-assessments/${r.assessment?.id}?tab=submissions`)} style={{ padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E5E7EB', background: 'white', cursor: 'pointer', fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
-                                                        Details
-                                                    </button>
-                                                    <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-
-                                {/* INTERVIEW TAB */}
-                                {activeTab === 'interview' && currentRows.map((r) => {
-                                    const isSelected = selected.has(r._deleteKey);
-                                    const isDeleting = deletingIds.has(r._deleteKey);
-                                    return (
-                                        <tr key={r.id} style={{ background: isSelected ? '#F5F3FF' : 'white', transition: 'background 0.15s' }}>
-                                            <td style={{ ...tdStyle, textAlign: 'center' }}>
-                                                <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
-                                            </td>
-                                            <td style={tdStyle}>
-                                                <div style={{ fontWeight: '700', color: '#111827' }}>{r.full_name}</div>
-                                                <div style={{ fontSize: '0.8rem', color: '#6B7280' }}>{r.email}</div>
-                                            </td>
-                                            <td style={tdStyle}>
-                                                <div style={{ fontSize: '1.2rem', fontWeight: '900', color: '#4F46E5' }}>{r.score}</div>
-                                                <div style={{ fontSize: '0.7rem', color: '#A3AED0', fontWeight: '700' }}>{r.total_questions} Questions</div>
-                                            </td>
-                                            <td style={{ ...tdStyle, color: '#6B7280', fontSize: '0.85rem' }}>
-                                                {r.completed_at ? new Date(r.completed_at).toLocaleDateString() : 'In Progress'}
-                                            </td>
-                                            <td style={tdStyle}>
-                                                <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>{getStatusLabel(r.status)}</span>
-                                            </td>
-                                            <td style={{ ...tdStyle, textAlign: 'center' }}>
-                                                <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                                                    <button
-                                                        onClick={() => setSummaryModal(r)}
-                                                        style={{
-                                                            padding: '0.4rem 0.8rem', borderRadius: '8px',
-                                                            border: '1px solid #E5E7EB', background: 'white',
-                                                            cursor: 'pointer', fontSize: '0.8rem', fontWeight: '700', color: '#374151'
-                                                        }}
-                                                    >
-                                                        Details
-                                                    </button>
-                                                    <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
-                            </tbody>
-                        </table>
+                                    {/* INTERVIEW TAB */}
+                                    {activeTab === 'interview' && currentRows.map((r) => {
+                                        const isSelected = selected.has(r._deleteKey);
+                                        const isDeleting = deletingIds.has(r._deleteKey);
+                                        return (
+                                            <tr className={`results-row ${isSelected ? 'selected' : ''}`} key={r.id}>
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
+                                                </td>
+                                                <td>
+                                                    <div style={{ fontWeight: '800', color: '#0f172a', fontSize: '1rem' }}>{r.full_name}</div>
+                                                    <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>{r.email}</div>
+                                                </td>
+                                                <td>
+                                                    <div style={{ fontSize: '1.3rem', fontWeight: '900', color: '#4F46E5', letterSpacing: '-0.02em' }}>{r.score}</div>
+                                                    <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>{r.total_questions} Qs</div>
+                                                </td>
+                                                <td style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '500' }}>
+                                                    {r.completed_at ? new Date(r.completed_at).toLocaleDateString() : 'In Progress'}
+                                                </td>
+                                                <td>
+                                                    <span style={{ padding: '0.35rem 0.8rem', borderRadius: '10px', fontSize: '0.75rem', fontWeight: '800', ...getStatusStyle(r.status), border: `1px solid ${getStatusStyle(r.status).color}30` }}>
+                                                        {getStatusLabel(r.status)}
+                                                    </span>
+                                                </td>
+                                                <td style={{ textAlign: 'center' }}>
+                                                    <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center' }}>
+                                                        <button
+                                                            onClick={() => setSummaryModal(r)}
+                                                            style={{
+                                                                padding: '0.45rem 0.9rem', borderRadius: '10px',
+                                                                border: '1px solid rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.6)',
+                                                                cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700', color: '#334155',
+                                                                boxShadow: '0 2px 5px rgba(0,0,0,0.02)', backdropFilter: 'blur(5px)'
+                                                            }}
+                                                        >
+                                                            Review
+                                                        </button>
+                                                        <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        );
+                                    })}
+                                </tbody>
+                            </table>
+                        </div>
                     )}
                 </div>
             </div>
@@ -632,17 +626,24 @@ const ResultsAI = () => {
 /* Small inline delete button per row */
 const RowDeleteBtn = ({ item, isDeleting, onDelete }) => (
     <button
+        className="delete-btn-glass"
         onClick={onDelete}
         disabled={isDeleting}
-        title="Delete"
+        title="Delete Record"
         style={{
-            background: isDeleting ? '#FEE2E2' : '#FFF5F5',
-            border: '1px solid #FECACA', color: '#EF4444',
-            borderRadius: '8px', padding: '0.4rem 0.8rem',
+            background: isDeleting ? '#FEE2E2' : 'rgba(254, 226, 226, 0.6)',
+            border: '1px solid rgba(252, 165, 165, 0.8)',
+            color: '#ef4444',
+            borderRadius: '10px',
+            padding: '0.45rem 0.9rem',
             cursor: isDeleting ? 'not-allowed' : 'pointer',
-            fontSize: '0.8rem', fontWeight: '700',
-            display: 'inline-flex', alignItems: 'center', gap: '0.35rem',
+            fontSize: '0.85rem',
+            fontWeight: '700',
+            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
             whiteSpace: 'nowrap',
+            backdropFilter: 'blur(5px)',
+            transition: 'all 0.2s cubic-bezier(0.19, 1, 0.22, 1)',
+            boxShadow: '0 2px 5px rgba(239, 68, 68, 0.05)'
         }}
     >
         <i className={isDeleting ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-trash-can'} />

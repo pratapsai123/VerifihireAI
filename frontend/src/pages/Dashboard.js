@@ -6,24 +6,17 @@ import {
   FileText,
   Users,
   MessageSquare,
-  PlusCircle,
   Brain,
   Sparkles,
   SearchCode,
   Video,
   BarChart3,
-  ArrowUpRight,
-  ArrowDownRight,
-  TrendingUp,
-  Award,
   Clock,
   ChevronRight,
   ChevronDown,
   ChevronUp
 } from 'lucide-react';
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -32,10 +25,7 @@ import {
   AreaChart,
   Area,
   BarChart,
-  Bar,
-  Cell,
-  PieChart,
-  Pie
+  Bar
 } from 'recharts';
 import ProfileDropdown from '../components/ProfileDropdown';
 import '../styles/DashboardNew.css';

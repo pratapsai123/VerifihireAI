@@ -94,14 +94,6 @@ const AiAssessments = () => {
         }
     };
 
-    const getStatusStyle = (status) => {
-        switch (status) {
-            case 'SCHEDULED': return { background: '#E6FBF5', color: '#05CD99' };
-            case 'ONGOING': return { background: '#FFF8E6', color: '#FFA800' };
-            case 'COMPLETED': return { background: '#EBF3FF', color: '#4318FF' };
-            default: return { background: '#F4F7FE', color: '#A3AED0' };
-        }
-    };
 
     return (
         <div className="dashboard-container" style={{ paddingTop: 0 }}>
