@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import OtpCountdown from '../components/OtpCountdown';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 function ForgotPassword() {
   const navigate = useNavigate();

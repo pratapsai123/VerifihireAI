@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewCreation.css';
+import { API_BASE_URL } from '../apiConfig';
 
 const AiInterview = () => {
     const [jobDescription, setJobDescription] = useState('');
@@ -64,7 +65,7 @@ const AiInterview = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8001/api/ai-candidates/bulk-invite/', formData, {
+            const response = await axios.post(`${API_BASE_URL}/ai-candidates/bulk-invite/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

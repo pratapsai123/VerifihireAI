@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../apiConfig';
 import '../styles/CreateAssessment.css';
 
 const CreateAssessment = () => {
@@ -42,7 +43,7 @@ const CreateAssessment = () => {
         };
 
         try {
-            const response = await axios.post('http://localhost:8001/api/ai/generate/', combinedData, {
+            const response = await axios.post(`${API_BASE_URL}/ai/generate/`, combinedData, {
                 headers: { 'Content-Type': 'application/json' }
             });
 

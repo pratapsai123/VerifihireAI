@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../components/Header';
+import { API_BASE_URL } from '../apiConfig';
 import '../styles/CustomAssessment.css';
-
-// Django API base URL - Update this to match your Django backend
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
 // LocalStorage key for custom assessment form data
 const CUSTOM_ASSESSMENT_STORAGE_KEY = 'customAssessmentFormData';
@@ -748,7 +747,7 @@ function CustomAssessment() {
       formData.append('resume', file);
 
       // Call API to extract skills
-      const response = await axios.post(`${API_BASE_URL}/extract-skills/`, formData, {
+      const response = await axios.post(`${API_BASE_URL} /extract-skills/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -940,7 +939,7 @@ function CustomAssessment() {
         hours = '23';
       }
 
-      setFormData({ ...formData, time: `${hours}:${minutes}:${seconds}` });
+      setFormData({ ...formData, time: `${hours}:${minutes}:${seconds} ` });
     } else {
       // Too many colons, keep only first 3 parts
       setFormData({ ...formData, time: parts.slice(0, 3).join(':') });
@@ -954,7 +953,7 @@ function CustomAssessment() {
     const mins = Math.floor((totalSeconds % 3600) / 60);
     const secs = totalSeconds % 60;
     const pad = (n) => n.toString().padStart(2, '0');
-    return `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+    return `${pad(hrs)}:${pad(mins)}:${pad(secs)} `;
   };
 
   const validateTimeFormat = (timeString) => {
@@ -1015,7 +1014,7 @@ function CustomAssessment() {
     const totalQuestions = parseInt(formData.numberOfQuestions) || 0;
     const allocated = Object.values(questionDistribution).reduce((sum, c) => sum + (c || 0), 0);
     if (totalQuestions > 0 && allocated !== totalQuestions) {
-      newErrors.distribution = `Please allocate exactly ${totalQuestions} questions (currently ${allocated}).`;
+      newErrors.distribution = `Please allocate exactly ${totalQuestions} questions(currently ${allocated}).`;
       missingFields.push('Question Distribution');
     }
 
@@ -1055,7 +1054,7 @@ function CustomAssessment() {
         apiParams.difficulty = difficulty;
       }
 
-      const response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
+      const response = await axios.get(`${API_BASE_URL} /questions/by - skills / `, {
         params: apiParams
       });
 
@@ -1138,7 +1137,7 @@ function CustomAssessment() {
     // If we have a draft id, verify it actually exists in the backend DB before reusing it.
     if (draftId) {
       try {
-        await axios.get(`${API_BASE_URL}/custom-assessments/${draftId}/`);
+        await axios.get(`${API_BASE_URL} /custom-assessments/${draftId}/`);
         return draftId;
       } catch (err) {
         // Stale/invalid draft id or backend unavailable — don't trust it.

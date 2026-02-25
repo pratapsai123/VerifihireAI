@@ -4,9 +4,7 @@ import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/ReviewPage.css';
 import CodingQuestionSelector from '../components/CodingQuestionSelector';
-
-// Django API base URL
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 const MANUAL_TOPIC_LABEL = 'Custom Questions';
 const REVIEW_STATE_STORAGE_KEY = 'reviewAssessmentState';
 const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';

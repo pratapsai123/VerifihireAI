@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../apiConfig';
 import '../styles/Dashboard.css';
 import '../styles/ResultsAI.css';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
 const ResultsAI = () => {
     const navigate = useNavigate();
@@ -147,7 +146,7 @@ const ResultsAI = () => {
                     successCount++;
                 } else if (item._type === 'ai_assessment') {
                     const subId = item.submission_id.replace('ai_', '');
-                    await axios.delete(`http://localhost:8001/api/ai/submission/${subId}/`);
+                    await axios.delete(`${API_BASE_URL}/ai/submission/${subId}/`);
                     successCount++;
                 }
             } catch (err) {

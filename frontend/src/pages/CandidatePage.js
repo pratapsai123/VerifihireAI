@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import axios from 'axios';
 import '../styles/CandidatePage.css';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 function fmtDate(iso) {
     if (!iso) return '-';

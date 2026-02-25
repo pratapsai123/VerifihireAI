@@ -5,8 +5,7 @@ import axios from 'axios';
 import CandidateDetails from './CandidateDetails';
 import '../styles/CodingAttempt.css';
 import '../styles/TakeAssessment.css';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 const DEFAULT_LANGS = [
   'cpp',

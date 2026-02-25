@@ -3,10 +3,7 @@ import { flushSync } from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
-import '../styles/TrueFalseQuestion.css';
-
-// Django API base URL
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 function TrueFalseQuestion() {
   const navigate = useNavigate();

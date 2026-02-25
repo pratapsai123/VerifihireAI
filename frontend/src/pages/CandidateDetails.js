@@ -4,6 +4,7 @@ import Tesseract from 'tesseract.js';
 import { FaceDetection } from '@mediapipe/face_detection';
 import axios from 'axios';
 import '../styles/CandidateDetails.css';
+import { API_BASE_URL } from '../apiConfig';
 
 // Validation rules
 const validateField = (field, value) => {
@@ -578,8 +579,6 @@ const CandidateDetails = ({ token, onComplete }) => {
       }
 
       // Send to backend API
-      const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
-
       axios.post(`${API_BASE_URL}/candidate-details/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -752,7 +751,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                             formData.append('pan_number', enteredPan);
                             formData.append('pan_file', file);
 
-                            const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+                            // Using centralized API_BASE_URL
                             axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData, {
                               headers: { 'Content-Type': 'multipart/form-data' }
                             })
@@ -795,7 +794,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                             const formData = new FormData();
                             formData.append('pan_number', enteredPan);
                             formData.append('pan_file', file);
-                            const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+                            // Using centralized API_BASE_URL
 
                             axios.post(`${API_BASE_URL}/candidate-details/verify-pan/`, formData)
                               .then(response => {

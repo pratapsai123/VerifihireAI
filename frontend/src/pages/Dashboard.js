@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../apiConfig';
 import {
   LayoutDashboard,
   FileText,
@@ -59,11 +60,11 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const [resultsRes, candidatesRes, interviewsRes, aiAssessmentsRes, customAssessmentsRes] = await Promise.all([
-          axios.get('http://localhost:8001/api/results/'),
-          axios.get('http://localhost:8001/api/candidates/'),
-          axios.get('http://localhost:8001/api/interviews/invitations/'),
-          axios.get('http://localhost:8001/api/ai/'),
-          axios.get('http://localhost:8001/api/assessments/')
+          axios.get(`${API_BASE_URL}/results/`),
+          axios.get(`${API_BASE_URL}/candidates/`),
+          axios.get(`${API_BASE_URL}/interviews/invitations/`),
+          axios.get(`${API_BASE_URL}/ai/`),
+          axios.get(`${API_BASE_URL}/assessments/`)
         ]);
 
         const results = resultsRes.data.results || [];

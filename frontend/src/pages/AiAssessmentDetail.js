@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
+import { API_BASE_URL } from '../apiConfig';
 
 const AiAssessmentDetail = () => {
     const { id } = useParams();
@@ -18,7 +19,7 @@ const AiAssessmentDetail = () => {
     useEffect(() => {
         const fetchDetail = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/api/ai/${id}/`);
+                const response = await axios.get(`${API_BASE_URL}/ai/${id}/`);
                 setAssessment(response.data);
                 setLoading(false);
             } catch (err) {

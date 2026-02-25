@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+// import '../styles/InterviewStart.css';
+import { API_BASE_URL } from '../apiConfig';
 
 // Parse time string like "10:00 AM", "10 AM", "14:30" into a Date object (today)
 function parseScheduledTime(timeStr) {
@@ -85,7 +87,7 @@ const InterviewStart = () => {
                 return;
             }
             try {
-                const response = await axios.get(`http://localhost:8001/api/ai-candidates/${token}/`);
+                const response = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/`);
                 setCandidate(response.data);
                 setLoading(false);
             } catch (err) {
@@ -164,7 +166,7 @@ const InterviewStart = () => {
         formData.append('candidate_id', candidate.id);
 
         try {
-            const response = await axios.post('http://localhost:8001/api/ai-candidates/match/', formData, {
+            const response = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             if (!response.data.interview_questions) throw new Error('No questions generated');

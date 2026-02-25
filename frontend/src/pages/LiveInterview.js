@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import '../styles/LiveInterview.css';
 import VideoPlaceholder from '../components/VideoPlaceholder';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL, WS_BASE_URL } from '../apiConfig';
 
 function LiveInterview() {
   const navigate = useNavigate();
@@ -107,27 +106,13 @@ function LiveInterview() {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const isProduction = window.location.hostname.includes('duckdns.org') || API_BASE_URL.includes('duckdns.org');
 
+    // Simplified WebSocket URL candidates using centralized WS_BASE_URL
     const candidates = [];
+    candidates.push(`${WS_BASE_URL}/interview/${sessionId}/candidate/`);
 
-    // 1. Explicit Production URL (Highest Priority for external access)
-    if (isProduction) {
-      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/candidate/`);
-    }
-
-    // 2. API_BASE_URL derived
-    if (apiUrl && apiUrl !== 'localhost' && !candidates.some(c => c.includes(apiUrl))) {
-      candidates.push(`${protocol}//${apiUrl}/ws/interview/${sessionId}/candidate/`);
-    }
-
-    // 3. Current Host (Fallback)
-    const currentHost = window.location.host;
-    if (!candidates.some(c => c.includes(currentHost))) {
-      candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/candidate/`);
-    }
-
-    // 4. Localhost Fallback (for mixed environments)
-    if (window.location.hostname === 'localhost') {
-      candidates.push(`ws://localhost:8000/ws/interview/${sessionId}/candidate/`);
+    // Add variations only if they are significantly different
+    if (!candidates.includes(`ws://localhost:8001/ws/interview/${sessionId}/candidate/`)) {
+      candidates.push(`ws://localhost:8001/ws/interview/${sessionId}/candidate/`);
     }
 
     let socket;
@@ -1044,7 +1029,7 @@ function LiveInterview() {
     }
 
     const candidateToken = sessionId;
-    const API_BASE_URL = 'http://localhost:8001/api'; // Or use process.env.REACT_APP_API_BASE_URL if available
+    // Using centralized API_BASE_URL
 
     console.log('Submitting candidate feedback with token:', candidateToken);
 

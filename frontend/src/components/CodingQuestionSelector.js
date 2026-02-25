@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
 import axios from 'axios';
 import '../styles/Coding.css'; // Reusing existing styles for consistency
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 export default function CodingQuestionSelector({ onClose, onAdd, alreadySelectedIds = [] }) {
     const [loading, setLoading] = useState(true);

@@ -93,6 +93,7 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
+            # Since Redis is in Docker but exposed to 6379, 127.0.0.1 works for local backend
             "hosts": [('127.0.0.1', 6379)],
         },
     },
@@ -116,7 +117,7 @@ DATABASES = {
         'NAME': os.environ.get('DB_NAME', 'react_user1'),
         'USER': os.environ.get('DB_USER', 'postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
-        # IMPORTANT: In Docker this should be "db"; locally it can be "localhost"
+        # Local PostgreSQL since the user is running it locally
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432'),
         **({'OPTIONS': db_options} if db_options else {}),

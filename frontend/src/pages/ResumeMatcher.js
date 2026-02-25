@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../apiConfig';
 import '../styles/Dashboard.css';
 import '../styles/ResumeMatcher.css';
 
@@ -50,7 +52,7 @@ const ResumeMatcher = () => {
         formData.append('threshold', threshold);
 
         try {
-            const response = await axios.post('http://localhost:8001/api/ai-candidates/match/', formData, {
+            const response = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

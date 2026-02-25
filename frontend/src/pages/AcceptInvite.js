@@ -4,7 +4,7 @@ import axios from 'axios';
 // import MainHeader from '../components/MainHeader';
 // import Footer from '../components/Footer';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 export default function AcceptInvite() {
   const navigate = useNavigate();

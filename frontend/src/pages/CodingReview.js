@@ -2,9 +2,8 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
+import { API_BASE_URL } from '../apiConfig';
 import '../styles/ReviewPage.css';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
 const DIFFICULTY_WEIGHTS = {
   easy: 1,

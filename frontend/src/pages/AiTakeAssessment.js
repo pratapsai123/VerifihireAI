@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Editor from "@monaco-editor/react";
 import '../styles/Dashboard.css';
+import { API_BASE_URL } from '../apiConfig';
 
 const AiTakeAssessment = () => {
     const { token } = useParams();
@@ -60,7 +61,7 @@ const AiTakeAssessment = () => {
     useEffect(() => {
         const fetchAssessment = async () => {
             try {
-                const response = await axios.get(`http://localhost:8001/api/ai/public/${token}/`);
+                const response = await axios.get(`${API_BASE_URL}/ai/public/${token}/`);
                 const data = response.data;
                 setAssessment(data);
 
@@ -92,7 +93,7 @@ const AiTakeAssessment = () => {
     const startAssessment = async () => {
         if (!candidateName || !candidateEmail) { alert('Please provide your name and email.'); return; }
         try {
-            const res = await axios.post('http://localhost:8001/api/ai/submit/create/', {
+            const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, {
                 share_token: token, candidate_name: candidateName, candidate_email: candidateEmail
             });
             setSubmissionId(res.data.submission_id);
@@ -119,7 +120,7 @@ const AiTakeAssessment = () => {
             let passedCount = 0;
             for (const tc of currentQ.test_cases) {
                 try {
-                    const r = await axios.post('http://localhost:8001/api/ai/execute/', {
+                    const r = await axios.post(`${API_BASE_URL}/ai/execute/`, {
                         language: selectedLanguage, version: langData.version,
                         files: [{ content: code }], stdin: tc.input
                     });
@@ -143,7 +144,7 @@ const AiTakeAssessment = () => {
 
         setCodeOutput([{ type: 'info', content: `Running ${selectedLanguage}...` }]);
         try {
-            const r = await axios.post('http://localhost:8001/api/ai/execute/', {
+            const r = await axios.post(`${API_BASE_URL}/api/ai/execute/`, {
                 language: selectedLanguage, version: langData.version,
                 files: [{ content: code }], stdin: customInput
             });
@@ -171,7 +172,7 @@ const AiTakeAssessment = () => {
 
     const reportViolation = async (eventType) => {
         if (!submissionId) return;
-        try { await axios.post(`http://localhost:8001/api/ai/submission/${submissionId}/integrity/`, { event_type: eventType }); } catch { }
+        try { await axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/integrity/`, { event_type: eventType }); } catch { }
     };
 
     const showAiEvent = (text, urgent = false, eventType = null) => {
@@ -288,7 +289,7 @@ const AiTakeAssessment = () => {
         if (e) e.preventDefault();
         setIsSubmitting(true);
         try {
-            await axios.post('http://localhost:8001/api/ai/submit/', {
+            await axios.post(`${API_BASE_URL}/ai/submit/`, {
                 token,
                 name: candidateName,
                 email: candidateEmail,

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
+import { API_BASE_URL } from '../apiConfig';
 
 const AiAssessments = () => {
     const navigate = useNavigate();
@@ -21,8 +22,8 @@ const AiAssessments = () => {
     useEffect(() => {
         const fetchAssessments = async () => {
             try {
-                // Using localhost:8001 as per original html
-                const response = await axios.get('http://localhost:8001/api/ai/');
+                // Using API_BASE_URL from config
+                const response = await axios.get(`${API_BASE_URL}/ai/`);
                 setAssessments(response.data);
                 setLoading(false);
             } catch (err) {
@@ -48,7 +49,7 @@ const AiAssessments = () => {
         if (!window.confirm('Are you sure you want to delete this assessment? This action cannot be undone.')) return;
 
         try {
-            await axios.delete(`http://localhost:8001/api/ai/${id}/`);
+            await axios.delete(`${API_BASE_URL}/ai/${id}/`);
             setAssessments(prev => prev.filter(a => a.id !== id));
         } catch (err) {
             console.error('Delete Error:', err);
@@ -78,7 +79,7 @@ const AiAssessments = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8001/api/ai/invite/', formData, {
+            const response = await axios.post(`${API_BASE_URL}/ai/invite/`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             alert(`✅ ${response.data.message}`);

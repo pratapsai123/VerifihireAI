@@ -4,6 +4,7 @@ import axios from 'axios';
 import ReadyPlayerMeAvatar from '../components/ReadyPlayerMeAvatar';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewSession.css';
+import { API_BASE_URL } from '../apiConfig';
 
 const AiInterviewSession = () => {
     const { token } = useParams();
@@ -78,7 +79,7 @@ const AiInterviewSession = () => {
 
     const reportViolation = useCallback(async (eventType) => {
         try {
-            await axios.post(`http://localhost:8001/api/ai-candidates/${token}/integrity/`, {
+            await axios.post(`${API_BASE_URL}/ai-candidates/${token}/integrity/`, {
                 event_type: eventType
             });
         } catch (err) {
@@ -241,7 +242,7 @@ const AiInterviewSession = () => {
         const finishMessage = "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
         addMessage('ai', finishMessage);
         await speak(finishMessage);
-        axios.patch(`http://localhost:8001/api/ai-candidates/${token}/status/`, { status: 'Completed' }).catch(console.error);
+        axios.patch(`${API_BASE_URL}/ai-candidates/${token}/status/`, { status: 'Completed' }).catch(console.error);
         setIsProcessing(true);
         setAiStatus("Session Finished");
     }, [token, speak, addMessage]);
@@ -302,7 +303,7 @@ const AiInterviewSession = () => {
 
         try {
             const currentQ = questions[currentQuestionIndex] || "Introduction and Background";
-            const response = await axios.post('http://localhost:8001/api/ai-candidates/process-answer/', {
+            const response = await axios.post(`${API_BASE_URL}/ai-candidates/process-answer/`, {
                 candidate_id: token,
                 question: typeof currentQ === 'object' ? currentQ.question : currentQ,
                 answer: answer,
@@ -446,9 +447,9 @@ const AiInterviewSession = () => {
                 startInterview(data.candidateName, data.questions);
             } else {
                 try {
-                    const res = await axios.get(`http://localhost:8001/api/ai-candidates/${token}/`);
+                    const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/`);
                     setCandidateName(res.data.full_name);
-                    const matchRes = await axios.post('http://localhost:8001/api/ai-candidates/match/', {
+                    const matchRes = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, {
                         candidate_id: token,
                         job_description: res.data.job_description
                     });

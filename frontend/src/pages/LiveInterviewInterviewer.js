@@ -3,8 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/LiveInterviewInterviewer.css';
 import VideoPlaceholder from '../components/VideoPlaceholder';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL, WS_BASE_URL } from '../apiConfig';
 
 function LiveInterviewInterviewer() {
   const navigate = useNavigate();
@@ -298,28 +297,13 @@ function LiveInterviewInterviewer() {
   const buildWsCandidates = useCallback((sessionId) => {
     // Get backend URL from API_BASE_URL
     const apiUrl = API_BASE_URL.replace('/api', '').replace('http://', '').replace('https://', '').split(':')[0];
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const isProduction = window.location.hostname.includes('duckdns.org') || API_BASE_URL.includes('duckdns.org');
-
+    // Simplified WebSocket URL candidates using centralized WS_BASE_URL
     const candidates = [];
+    candidates.push(`${WS_BASE_URL}/interview/${sessionId}/interviewer/`);
 
-    // 1. Explicit Production URL
-    if (isProduction) {
-      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/interviewer/`);
-    }
-
-    // 2. API_BASE_URL derived
-    if (apiUrl && apiUrl !== 'localhost') {
-      candidates.push(`${protocol}//${apiUrl}/ws/interview/${sessionId}/interviewer/`);
-    }
-
-    // 3. Current Host
-    const currentHost = window.location.host;
-    candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/interviewer/`);
-
-    // 4. Localhost Fallback
-    if (window.location.hostname === 'localhost') {
-      candidates.push(`ws://localhost:8000/ws/interview/${sessionId}/interviewer/`);
+    // Fallback for local
+    if (!candidates.includes(`ws://localhost:8001/ws/interview/${sessionId}/interviewer/`)) {
+      candidates.push(`ws://localhost:8001/ws/interview/${sessionId}/interviewer/`);
     }
 
     return candidates;
