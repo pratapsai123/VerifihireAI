@@ -37,6 +37,7 @@ import AiTakeAssessment from './pages/AiTakeAssessment';
 import AiInterviewSession from './pages/AiInterviewSession';
 import AiAssessmentDetail from './pages/AiAssessmentDetail';
 import ResultsAI from './pages/ResultsAI';
+import FeedbackPage from './pages/FeedbackPage';
 import './App.css';
 
 import Header from './components/Header';
@@ -60,12 +61,21 @@ function AppContent() {
 
   // List of routes that should have the global header hidden for a full-screen experience
   const fullScreenRoutes = [
+    '/',
+    '/login',
+    '/signup',
+    '/forgot-password',
     '/dashboard',
     '/create-assessment',
     '/manual-questions',
     '/coding/questions/new',
     '/live-interview',
     '/live-interview-interviewer',
+    '/accept-invite',
+    '/results-ai',
+    '/feedback-page',
+    '/ai-interview',
+    '/ai-assessments',
   ];
 
   const isFullScreenPage =
@@ -126,6 +136,7 @@ function AppContent() {
           <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
           <Route path="/ai-assessments/:id" element={<AiAssessmentDetail />} />
           <Route path="/results-ai" element={<ResultsAI />} />
+          <Route path="/feedback-page" element={<FeedbackPage />} />
         </Routes>
 
         {/* Cookie Consent Banner */}

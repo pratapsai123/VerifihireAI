@@ -124,8 +124,8 @@ const AiTakeAssessment = () => {
                         language: selectedLanguage, version: langData.version,
                         files: [{ content: code }], stdin: tc.input
                     });
-                    const out = (r.data.run.stdout || r.data.run.stderr || '').trim();
-                    const exp = (tc.output || '').trim();
+                    const out = String(r.data.run.stdout || r.data.run.stderr || '').trim();
+                    const exp = String(tc.output || '').trim();
                     const passed = out === exp;
                     if (passed) passedCount++;
                     results.push({ input: tc.input, expected: exp, actual: out, passed });
@@ -238,7 +238,7 @@ const AiTakeAssessment = () => {
 
         if (cQ?.type === 'coding') {
             const sampleInput = cQ.example_input || cQ.examples?.[0]?.input || '';
-            setCustomInput(sampleInput.trim());
+            setCustomInput(String(sampleInput).trim());
         } else {
             setCustomInput('');
         }
@@ -611,7 +611,7 @@ const AiTakeAssessment = () => {
                                                 const defaultComments = { python: '# Write your code here\n', java: '// Write your code here\n', cpp: '// Write your code here\n', javascript: '// Write your code here\n' };
                                                 const raw = currentQ.starter_code;
                                                 // If backend starter code is just a JS-style placeholder comment, replace with language-correct one
-                                                if (!raw || raw.trim() === '// Write your code here') return defaultComments[selectedLanguage] || '# Write your code here\n';
+                                                if (!raw || String(raw).trim() === '// Write your code here') return defaultComments[selectedLanguage] || '# Write your code here\n';
                                                 return raw;
                                             })()}
                                             onChange={val => handleAnswerChange(currentAnswerKey, val)}

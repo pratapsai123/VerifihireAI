@@ -36,6 +36,26 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [expandedItem, setExpandedItem] = useState(null);
   const [expandedSubItem, setExpandedSubItem] = useState(null);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [activeFloatingMenu, setActiveFloatingMenu] = useState(null);
+
+  useEffect(() => {
+    if (isSidebarCollapsed) {
+      setExpandedItem(null);
+      setExpandedSubItem(null);
+    } else {
+      setActiveFloatingMenu(null);
+    }
+  }, [isSidebarCollapsed]);
+
+  // Click away for floating menu
+  useEffect(() => {
+    const handleClickAway = () => setActiveFloatingMenu(null);
+    if (activeFloatingMenu) {
+      window.addEventListener('click', handleClickAway);
+    }
+    return () => window.removeEventListener('click', handleClickAway);
+  }, [activeFloatingMenu]);
 
   const [data, setData] = useState({
     recentCandidates: [],
@@ -75,14 +95,14 @@ const Dashboard = () => {
 
         // Calculate Stats
         const today = new Date().toISOString().split('T')[0];
-        const resumesTodayCount = results.filter(r => r.submitted_at?.startsWith(today)).length;
+        const resumesTodayCount = results.filter(r => r.submitted_at && String(r.submitted_at).startsWith(today)).length;
 
         const totalCandidates = candidates.length + (results.length - candidates.filter(c => results.some(r => r.candidate?.email === c.email)).length);
         const hiredCount = results.filter(r => r.status === 'selected' || r.result === 'selected').length;
         const pipelineCount = candidates.filter(c => c.status !== 'Submitted' && c.status !== 'Completed').length;
 
-        const resultsAi = results.filter(r => r.submission_id?.startsWith('ai_'));
-        const resultsCustom = results.filter(r => !r.submission_id?.startsWith('ai_'));
+        const resultsAi = results.filter(r => String(r.submission_id || '').startsWith('ai_'));
+        const resultsCustom = results.filter(r => !String(r.submission_id || '').startsWith('ai_'));
 
         const scoresAi = resultsAi.map(r => r.percentage || 0).filter(s => s > 0);
         const avgScoreAi = scoresAi.length > 0 ? (scoresAi.reduce((a, b) => a + b, 0) / scoresAi.length).toFixed(1) : 0;
@@ -97,7 +117,7 @@ const Dashboard = () => {
         const trendsAi = months.map((m, i) => {
           const count = resultsAi.filter(r => {
             const d = new Date(r.submitted_at);
-            return d.getMonth() === i && d.getFullYear() === currentYear;
+            return !isNaN(d.getTime()) && d.getMonth() === i && d.getFullYear() === currentYear;
           }).length;
           return { name: m, value: count };
         });
@@ -113,7 +133,7 @@ const Dashboard = () => {
         const successData = months.map((m, i) => {
           const monthResults = results.filter(r => {
             const d = new Date(r.submitted_at);
-            return d.getMonth() === i && d.getFullYear() === currentYear;
+            return !isNaN(d.getTime()) && d.getMonth() === i && d.getFullYear() === currentYear;
           });
           const hired = monthResults.filter(r => r.status === 'selected' || r.result === 'selected').length;
           const total = monthResults.length;
@@ -160,6 +180,7 @@ const Dashboard = () => {
       label: 'Assessments',
       path: '#',
       subItems: [
+        { label: 'Assessments List', path: '/assessments' },
         { label: 'AI Assessments', path: '/ai-assessments' },
         { label: 'Custom Assessments', path: '/custom-assessment' }
       ]
@@ -174,7 +195,8 @@ const Dashboard = () => {
           path: '#',
           nestedItems: [
             { label: 'Send Invite', path: '/send-invite' },
-            { label: 'Join Room', path: '/live-interview-list' }
+            { label: 'Join Room', path: '/live-interview-list' },
+            { label: 'Interview List', path: '/live-interview-list' }
           ]
         },
         {
@@ -201,21 +223,30 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="new-dashboard-container">
+    <div className={`new-dashboard-container ${isSidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
       {/* Sidebar */}
       <aside className="dashboard-sidebar">
-        <div className="sidebar-logo">VerifiHire<span style={{ color: '#6366f1' }}>AI</span></div>
+        <div className="sidebar-logo">
+          {isSidebarCollapsed ? 'VH' : <>VerifiHire<span style={{ color: '#6366f1' }}>AI</span></>}
+        </div>
         <nav className="sidebar-nav">
           {navItems.map((item, i) => (
-            <div key={i} className="nav-group">
+            <div key={i} className="nav-group" style={{ position: 'relative' }}>
               <div
                 className={`nav-item ${item.active ? 'active' : ''} ${expandedItem === item.label ? 'expanded' : ''}`}
-                onClick={() => {
+                onClick={(e) => {
                   if (item.subItems) {
-                    setExpandedItem(expandedItem === item.label ? null : item.label);
-                    setExpandedSubItem(null);
+                    if (isSidebarCollapsed) {
+                      e.stopPropagation();
+                      console.log("Toggling floating menu for:", item.label);
+                      setActiveFloatingMenu(activeFloatingMenu === item.label ? null : item.label);
+                    } else {
+                      setExpandedItem(expandedItem === item.label ? null : item.label);
+                      setExpandedSubItem(null);
+                    }
                   } else {
                     navigate(item.path);
+                    if (isSidebarCollapsed) setActiveFloatingMenu(null);
                   }
                 }}
               >
@@ -223,10 +254,51 @@ const Dashboard = () => {
                   <item.icon size={20} />
                   <span>{item.label}</span>
                 </div>
-                {item.subItems && (
+                {item.subItems && !isSidebarCollapsed && (
                   expandedItem === item.label ? <ChevronUp size={16} /> : <ChevronDown size={16} />
                 )}
               </div>
+
+              {/* Floating Menu for Collapsed Sidebar */}
+              {isSidebarCollapsed && activeFloatingMenu === item.label && item.subItems && (
+                <div
+                  className="floating-sub-menu"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="floating-menu-header">{item.label}</div>
+                  {item.subItems.map((sub, j) => (
+                    sub.nestedItems ? (
+                      // Sub-item with nested children: show group label + each child
+                      <div key={j}>
+                        <div className="floating-menu-group-label">{sub.label}</div>
+                        {sub.nestedItems.map((nested, k) => (
+                          <div
+                            key={k}
+                            className="floating-menu-item floating-menu-nested"
+                            onClick={() => {
+                              navigate(nested.path);
+                              setActiveFloatingMenu(null);
+                            }}
+                          >
+                            {nested.label}
+                          </div>
+                        ))}
+                      </div>
+                    ) : (
+                      <div
+                        key={j}
+                        className="floating-menu-item"
+                        onClick={() => {
+                          navigate(sub.path);
+                          setActiveFloatingMenu(null);
+                        }}
+                      >
+                        {sub.label}
+                      </div>
+                    )
+                  ))}
+                </div>
+              )}
 
               {item.subItems && expandedItem === item.label && (
                 <div className="sub-nav">
@@ -286,6 +358,13 @@ const Dashboard = () => {
       <main className="dashboard-content">
         <header className="dashboard-topbar">
           <div className="topbar-left">
+            <button
+              className="icon-btn sidebar-toggle"
+              onClick={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
+              style={{ marginRight: '1rem' }}
+            >
+              <LayoutDashboard size={20} />
+            </button>
             <h2>Dashboard</h2>
           </div>
           <div className="topbar-right">
@@ -311,16 +390,15 @@ const Dashboard = () => {
               </div>
               <div className="card-stat-row">
                 <div className="stat-item">
-                  <span className="stat-label">Average Score</span>
-                  <span className="stat-value">{data.stats.avgScoreAi}%</span>
+                  <span className="stat-label">Active Assessments</span>
+                  <span className="stat-value">{data.stats.activeTestsAi}</span>
                 </div>
               </div>
-              <div className="card-visual">
-                <ResponsiveContainer width="100%" height={80}>
-                  <BarChart data={data.trendsAi}>
-                    <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
+              <div className="card-visual" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+                <div className="progress-item" style={{ width: '100%' }}>
+                  <div className="progress-label-row"><span>Active Assessments</span><span>{data.stats.activeTestsAi}</span></div>
+                  <div className="progress-bar-bg"><div className="progress-bar-fill" style={{ width: `${Math.min(data.stats.activeTestsAi * 10, 100)}%`, background: '#6366f1' }}></div></div>
+                </div>
               </div>
               <div className="card-actions three-cols">
                 <button className="btn-premium btn-fill" onClick={() => navigate('/ai-assessments')}>Assessments</button>

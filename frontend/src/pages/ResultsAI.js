@@ -33,14 +33,51 @@ const ResultsAI = () => {
         setError(null);
         setSelected(new Set());
         try {
+            // Fetch resume/interview candidates
             const candidatesResp = await axios.get(`${API_BASE_URL}/ai-candidates/`);
             const allCandidates = candidatesResp.data || [];
             setAiInterviews(allCandidates.filter(c => c.total_questions > 0));
             setResumeResults(allCandidates);
 
-            const resultsResp = await axios.get(`${API_BASE_URL}/results/`);
-            const allResults = resultsResp.data?.results || [];
-            setAiAssessments(allResults.filter(r => r.submission_id?.startsWith('ai_')));
+            // Fetch AI assessments and their submissions from the correct endpoint
+            const aiAssessmentsResp = await axios.get(`${API_BASE_URL}/ai/`);
+            const assessmentList = aiAssessmentsResp.data || [];
+
+            // Fetch detail for each assessment to get its submissions, then flatten
+            const detailPromises = assessmentList.map(a =>
+                axios.get(`${API_BASE_URL}/ai/${a.id}/`).then(r => r.data).catch(() => ({ ...a, submissions: [] }))
+            );
+            const detailResults = await Promise.all(detailPromises);
+
+            const allSubmissions = [];
+            detailResults.forEach(assessment => {
+                (assessment.submissions || []).forEach(sub => {
+                    allSubmissions.push({
+                        ...sub,
+                        submission_id: `ai_${sub.id}`,
+                        assessment: {
+                            id: assessment.id,
+                            name: assessment.required_skills,
+                            display_name: assessment.required_skills,
+                        },
+                        candidate: {
+                            name: sub.candidate_name,
+                            email: sub.candidate_email,
+                        },
+                        score: sub.score,
+                        total: assessment.mcq_count + assessment.coding_count,
+                        percentage: sub.percentage,
+                        status: sub.status,
+                        submitted_at: sub.submitted_at,
+                    });
+                });
+            });
+
+            // Show only completed submissions, sorted newest first
+            const sorted = allSubmissions
+                .filter(s => s.submitted_at && s.status !== 'ONGOING')
+                .sort((a, b) => new Date(b.submitted_at) - new Date(a.submitted_at));
+            setAiAssessments(sorted);
         } catch (err) {
             console.error('Error fetching AI results:', err);
             setError('Failed to load results. Please ensure the backend is running.');

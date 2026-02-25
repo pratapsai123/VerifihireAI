@@ -141,7 +141,7 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                 return
             
             # Forward signaling messages to the other peer
-            if message_type in ['video_offer', 'video_answer', 'ice_candidate']:
+            if message_type in ['video_offer', 'video_answer', 'ice_candidate', 'request_offer']:
                 await self.channel_layer.group_send(
                     self.room_group_name,
                     {

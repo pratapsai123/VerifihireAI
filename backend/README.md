@@ -95,8 +95,8 @@ The API will be available at: `http://127.0.0.1:8000`
 ## CORS Configuration
 
 The backend is configured to allow requests from:
-- `http://localhost:3000`
-- `http://127.0.0.1:3000`
+- `https://verifyhire.duckdns.org`
+- `https://verifyhire.duckdns.org`
 
 This is configured in `VerifiHireAI_backend/settings.py`.
 

@@ -406,7 +406,7 @@ class InviteAssessmentCandidatesView(APIView):
         invited_candidates = []
         
         # Use frontend base URL from settings
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifyhire.duckdns.org')
         link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':

@@ -1094,7 +1094,12 @@ class LiveInterviewFeedback(models.Model):
     interviewer_feedback = models.TextField(blank=True, null=True)
     candidate_feedback = models.TextField(blank=True, null=True)
     
-    interviewer_rating = models.IntegerField(blank=True, null=True, help_text="Rating given by interviewer (1-5)")
+    interviewer_rating = models.IntegerField(blank=True, null=True, help_text="Legacy overall rating (1-5)")
+    interviewer_technical_rating = models.IntegerField(blank=True, null=True, help_text="Technical rating (1-5)")
+    interviewer_communication_rating = models.IntegerField(blank=True, null=True, help_text="Communication rating (1-5)")
+    interviewer_team_fit_rating = models.IntegerField(blank=True, null=True, help_text="Team fit rating (1-5)")
+    interviewer_average_rating = models.FloatField(blank=True, null=True, help_text="Calculated average (1-5)")
+    
     candidate_rating = models.IntegerField(blank=True, null=True, help_text="Rating given by candidate (1-5)")
     
     created_at = models.DateTimeField(auto_now_add=True)

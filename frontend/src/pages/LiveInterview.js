@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import '../styles/LiveInterview.css';
 import VideoPlaceholder from '../components/VideoPlaceholder';
-import { API_BASE_URL, WS_BASE_URL } from '../apiConfig';
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
 function LiveInterview() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function LiveInterview() {
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
+  const [isRemoteScreenSharing, setIsRemoteScreenSharing] = useState(false);
   const [screenShareLocked, setScreenShareLocked] = useState(false);
   const [screenShareHolder, setScreenShareHolder] = useState(null);
 
@@ -106,13 +108,27 @@ function LiveInterview() {
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const isProduction = window.location.hostname.includes('duckdns.org') || API_BASE_URL.includes('duckdns.org');
 
-    // Simplified WebSocket URL candidates using centralized WS_BASE_URL
     const candidates = [];
-    candidates.push(`${WS_BASE_URL}/interview/${sessionId}/candidate/`);
 
-    // Add variations only if they are significantly different
-    if (!candidates.includes(`ws://localhost:8001/ws/interview/${sessionId}/candidate/`)) {
-      candidates.push(`ws://localhost:8001/ws/interview/${sessionId}/candidate/`);
+    // 1. Explicit Production URL (Highest Priority for external access)
+    if (isProduction) {
+      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/candidate/`);
+    }
+
+    // 2. API_BASE_URL derived
+    if (apiUrl && apiUrl !== 'localhost' && !candidates.some(c => c.includes(apiUrl))) {
+      candidates.push(`${protocol}//${apiUrl}/ws/interview/${sessionId}/candidate/`);
+    }
+
+    // 3. Current Host (Fallback)
+    const currentHost = window.location.host;
+    if (!candidates.some(c => c.includes(currentHost))) {
+      candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/candidate/`);
+    }
+
+    // 4. Localhost Fallback (for mixed environments)
+    if (window.location.hostname === 'localhost') {
+      candidates.push(`ws://localhost:8000/ws/interview/${sessionId}/candidate/`);
     }
 
     let socket;
@@ -179,6 +195,73 @@ function LiveInterview() {
       if (heartbeatInterval) clearInterval(heartbeatInterval);
     };
   }, [sessionId, sessionExpired]);
+
+  // Utility functions
+  const showSessionPopup = useCallback((message, severity = 'info') => {
+    const popup = document.createElement('div');
+    popup.className = `session-popup ${severity}`;
+    popup.textContent = message;
+    document.body.appendChild(popup);
+    setTimeout(() => popup.remove(), 3000);
+  }, []);
+
+  const showPopup = useCallback((message) => {
+    const popupContainer = document.getElementById('popupContainer');
+    if (!popupContainer) return;
+
+    const popup = document.createElement('div');
+    popup.className = 'popup-message';
+    popup.textContent = message;
+    popupContainer.appendChild(popup);
+    setTimeout(() => popup.remove(), 6000);
+  }, []);
+
+  const showNotification = useCallback((message, type) => {
+    showSessionPopup(message, type);
+  }, [showSessionPopup]);
+
+  const redirectToThankYou = useCallback(() => {
+    setShowThankYou(true);
+    if (peerConnectionRef.current) peerConnectionRef.current.close();
+  }, []);
+
+  const redirectToTerminationPage = useCallback((vCount, vLimit, reason) => {
+    const token = sessionId;
+    const params = new URLSearchParams({
+      session_id: token || 'N/A',
+      interview_type: 'Live Interview',
+      violation_count: String(vCount || ''),
+      violation_limit: String(vLimit || ''),
+      reason: reason || 'Policy violation'
+    });
+    navigate(`/interview-terminated?${params.toString()}`);
+  }, [sessionId, navigate]);
+
+  const showSessionExpiredMessage = useCallback(() => {
+    const popup = document.createElement('div');
+    popup.style.cssText = 'position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 50;';
+    popup.innerHTML = `
+      <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; max-width: 28rem; margin: 0 1rem; text-align: center;">
+        <div style="margin-bottom: 1rem;">
+          <i class="fas fa-clock" style="font-size: 3rem; color: #9ca3af;"></i>
+        </div>
+        <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: #1f2937;">Session Completed</h3>
+        <p style="color: #6b7280; margin-bottom: 1.5rem;">This interview session has already been completed. You cannot rejoin the interview.</p>
+        <button id="close-session-button" style="width: 100%; background: #6b7280; color: white; padding: 0.5rem 1rem; border-radius: 0.375rem; border: none; cursor: pointer;">
+          Close
+        </button>
+      </div>
+    `;
+    document.body.appendChild(popup);
+
+    const closeButton = popup.querySelector('#close-session-button');
+    if (closeButton) {
+      closeButton.onclick = () => {
+        popup.remove();
+        navigate('/thank-you');
+      };
+    }
+  }, [navigate]);
 
   // WebSocket message handler
   const handleWebSocketMessage = useCallback((event) => {
@@ -253,6 +336,7 @@ function LiveInterview() {
         case 'screen_share_state':
           // Handle when someone starts/stops screen sharing
           if (data.sender && String(data.sender).toLowerCase() !== 'candidate') {
+            setIsRemoteScreenSharing(!!data.active);
             // Someone else is sharing
             if (data.active) {
               showSessionPopup(`${data.sender || 'Interviewer'} started screen sharing`);
@@ -378,16 +462,24 @@ function LiveInterview() {
     const joinedUserName = data.user === 'Interviewer' ? interviewerName : data.user;
     showSessionPopup(`${joinedUserName} joined the session`);
 
-    if (String(data.user).toLowerCase() === 'interviewer' &&
-      String(candidateName).toLowerCase() === candidateName.toLowerCase() &&
-      peerConnectionRef.current) {
-      console.log('🎯 Interviewer joined, creating video offer...');
-      createVideoOffer();
+    if (String(data.user).toLowerCase() === 'interviewer' && peerConnectionRef.current) {
+      console.log('🎯 Interviewer joined — waiting for their video offer...');
       setBothPartiesConnected(true);
-      // Session remains active until explicitly ended
-      // localStorage.setItem(sessionKey, 'true');
+
+      // Fallback: if interviewer doesn't send an offer within 5s, ask them to re-offer
+      setTimeout(() => {
+        if (
+          peerConnectionRef.current &&
+          peerConnectionRef.current.connectionState !== 'connected' &&
+          peerConnectionRef.current.connectionState !== 'connecting' &&
+          socketRef.current?.readyState === WebSocket.OPEN
+        ) {
+          console.log('⏱️ No offer received from interviewer, requesting one...');
+          socketRef.current.send(JSON.stringify({ type: 'request_offer' }));
+        }
+      }, 5000);
     }
-  }, [candidateName, interviewerName, sessionKey, createVideoOffer]);
+  }, [interviewerName, showSessionPopup]);
 
   // Initialize WebRTC
   const initializeWebRTC = useCallback(async () => {
@@ -441,12 +533,13 @@ function LiveInterview() {
       // Create peer connection
       const configuration = {
         iceServers: [
+          // STUN servers
           { urls: 'stun:stun.l.google.com:19302' },
           { urls: 'stun:stun1.l.google.com:19302' },
           { urls: 'stun:stun2.l.google.com:19302' },
-          { urls: 'stun:stun.stunprotocol.org:3478' },
-          { urls: 'stun:stun.voiparound.com' },
-          { urls: 'stun:stun.voipbuster.com' },
+          { urls: 'stun:stun3.l.google.com:19302' },
+          { urls: 'stun:stun4.l.google.com:19302' },
+          // TURN UDP (fast but blocked by some firewalls)
           {
             urls: 'turn:openrelay.metered.ca:80',
             username: 'openrelayproject',
@@ -456,6 +549,23 @@ function LiveInterview() {
             urls: 'turn:openrelay.metered.ca:443',
             username: 'openrelayproject',
             credential: 'openrelayproject'
+          },
+          // TURN TCP (penetrates most firewalls and strict NATs)
+          {
+            urls: 'turn:openrelay.metered.ca:443?transport=tcp',
+            username: 'openrelayproject',
+            credential: 'openrelayproject'
+          },
+          {
+            urls: 'turn:openrelay.metered.ca:80?transport=tcp',
+            username: 'openrelayproject',
+            credential: 'openrelayproject'
+          },
+          // Additional public TURN fallbacks
+          {
+            urls: 'turn:relay1.expressturn.com:3478',
+            username: 'efKBBHHGTBSOHDUE',
+            credential: 'vMjLVPCetTbVQGTz'
           }
         ],
         iceCandidatePoolSize: 10,
@@ -478,12 +588,19 @@ function LiveInterview() {
           }
           setConnectionStatusText('Connected');
         } else if (peerConnection.connectionState === 'failed') {
-          showSessionPopup('Connection failed. Waiting for interviewer...');
+          showSessionPopup('Connection failed. Reconnecting...', 'error');
+          setConnectionStatusText('Connection failed');
+          // Ask interviewer to resend offer — don't create a new PC (that breaks sync)
           setTimeout(() => {
-            if (peerConnectionRef.current && peerConnectionRef.current.connectionState === 'failed') {
-              initializeWebRTC();
+            if (
+              peerConnectionRef.current &&
+              peerConnectionRef.current.connectionState === 'failed' &&
+              socketRef.current?.readyState === WebSocket.OPEN
+            ) {
+              console.log('🔄 Requesting new offer from interviewer (connection failed)...');
+              socketRef.current.send(JSON.stringify({ type: 'request_offer' }));
             }
-          }, 3000);
+          }, 2000);
         }
       };
 
@@ -493,18 +610,29 @@ function LiveInterview() {
           setConnectionStatusText('Connected');
         } else if (peerConnection.iceConnectionState === 'failed') {
           setConnectionStatusText('Connection failed - retrying...');
+          // Ask interviewer for ICE restart offer — keeps the same PCs in sync
           setTimeout(() => {
-            if (peerConnectionRef.current && peerConnectionRef.current.iceConnectionState === 'failed') {
-              initializeWebRTC();
+            if (
+              peerConnectionRef.current &&
+              peerConnectionRef.current.iceConnectionState === 'failed' &&
+              socketRef.current?.readyState === WebSocket.OPEN
+            ) {
+              console.log('🔄 Requesting ICE restart from interviewer...');
+              socketRef.current.send(JSON.stringify({ type: 'request_offer' }));
             }
-          }, 5000);
+          }, 2000);
         } else if (peerConnection.iceConnectionState === 'checking') {
           setConnectionStatusText('Connecting...');
         } else if (peerConnection.iceConnectionState === 'disconnected') {
           setConnectionStatusText('Reconnecting...');
           setTimeout(() => {
-            if (peerConnectionRef.current && peerConnectionRef.current.iceConnectionState === 'disconnected') {
-              initializeWebRTC();
+            if (
+              peerConnectionRef.current &&
+              peerConnectionRef.current.iceConnectionState === 'disconnected' &&
+              socketRef.current?.readyState === WebSocket.OPEN
+            ) {
+              console.log('🔄 ICE disconnected — requesting new offer from interviewer...');
+              socketRef.current.send(JSON.stringify({ type: 'request_offer' }));
             }
           }, 3000);
         }
@@ -863,11 +991,24 @@ function LiveInterview() {
 
         if (peerConnectionRef.current) {
           const videoTrack = screenShareStream.getVideoTracks()[0];
-          const sender = peerConnectionRef.current.getSenders().find(s =>
-            s.track && s.track.kind === 'video'
-          );
-          if (sender) {
-            await sender.replaceTrack(videoTrack);
+          console.log('🖥️ Candidate replacing track with screen share...');
+
+          const senders = peerConnectionRef.current.getSenders();
+          const videoSender = senders.find(s => s.track && s.track.kind === 'video');
+
+          if (videoSender) {
+            await videoSender.replaceTrack(videoTrack).then(() => {
+              console.log('✅ Candidate screen track successfully replaced');
+            }).catch(e => {
+              console.error('❌ replaceTrack failed:', e);
+            });
+          } else {
+            console.warn('⚠️ No video sender found to replace track. Adding new track...');
+            peerConnectionRef.current.addTrack(videoTrack, screenShareStream);
+            // Re-negotiate
+            const offer = await peerConnectionRef.current.createOffer();
+            await peerConnectionRef.current.setLocalDescription(offer);
+            socketRef.current?.send(JSON.stringify({ type: 'video_offer', offer }));
           }
         }
 
@@ -1029,7 +1170,7 @@ function LiveInterview() {
     }
 
     const candidateToken = sessionId;
-    // Using centralized API_BASE_URL
+    const API_BASE_URL = 'http://localhost:8001/api'; // Or use process.env.REACT_APP_API_BASE_URL if available
 
     console.log('Submitting candidate feedback with token:', candidateToken);
 
@@ -1126,51 +1267,6 @@ function LiveInterview() {
     };
   }, [isDragging, dragOffset]);
 
-  // Utility functions
-  const showSessionPopup = useCallback((message, severity = 'info') => {
-    const popup = document.createElement('div');
-    popup.className = `session-popup ${severity}`;
-    popup.textContent = message;
-    document.body.appendChild(popup);
-    setTimeout(() => popup.remove(), 3000);
-  }, []);
-
-  const showPopup = useCallback((message) => {
-    const popupContainer = document.getElementById('popupContainer');
-    if (!popupContainer) return;
-
-    const popup = document.createElement('div');
-    popup.className = 'popup-message';
-    popup.textContent = message;
-    popupContainer.appendChild(popup);
-    setTimeout(() => popup.remove(), 6000);
-  }, []);
-
-  const showNotification = useCallback((message, type) => {
-    showSessionPopup(message, type);
-  }, [showSessionPopup]);
-
-  const showSessionExpiredMessage = useCallback(() => {
-    // Rely on React state (sessionExpired) to render the modal instead of appending to body
-    // This prevents the modal from blocking the Thank You screen if both trigger
-  }, []);
-
-  const redirectToThankYou = useCallback(() => {
-    setShowThankYou(true);
-    if (peerConnectionRef.current) peerConnectionRef.current.close();
-  }, []);
-
-  const redirectToTerminationPage = useCallback((vCount, vLimit, reason) => {
-    const token = sessionId;
-    const params = new URLSearchParams({
-      session_id: token || 'N/A',
-      interview_type: 'Live Interview',
-      violation_count: String(vCount || ''),
-      violation_limit: String(vLimit || ''),
-      reason: reason || 'Policy violation'
-    });
-    navigate(`/interview-terminated?${params.toString()}`);
-  }, [sessionId, navigate]);
 
   const getCookie = (name) => {
     let cookieValue = null;
@@ -1351,7 +1447,7 @@ function LiveInterview() {
             playsInline
             muted={false}
             onContextMenu={e => e.preventDefault()}
-            style={{ display: isRemoteCameraOn ? 'block' : 'none' }}
+            style={{ display: (isRemoteCameraOn || isRemoteScreenSharing) ? 'block' : 'none' }}
           />
 
           {!isRemoteCameraOn && bothPartiesConnected && (

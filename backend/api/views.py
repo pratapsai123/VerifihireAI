@@ -898,7 +898,7 @@ def invite_user_view(request):
             # request.build_absolute_uri('/') gives http(s)://host/; trim trailing slash
             frontend_base = request.build_absolute_uri('/').rstrip('/')
         if not frontend_base:
-            frontend_base = 'http://localhost:3000'
+            frontend_base = 'https://verifyhire.duckdns.org'
         activation_link = f"{frontend_base.rstrip('/')}/accept-invite?token={invitation.token}"
 
         subject = f"{company.name} - Account Invitation"
@@ -5311,6 +5311,7 @@ def interview_invitations_overview_view(request):
         qs = qs[:500]
         results = []
         for inv in qs:
+            feedback = getattr(inv, 'feedback', None)
             results.append(
                 {
                     'id': inv.id,
@@ -5331,6 +5332,17 @@ def interview_invitations_overview_view(request):
                         'name': inv.interview.name if inv.interview else None,
                         'description': inv.interview.description if inv.interview else None,
                     } if inv.interview_id else None,
+                    'feedback': {
+                        'interviewer_feedback': feedback.interviewer_feedback,
+                        'interviewer_rating': feedback.interviewer_rating,
+                        'interviewer_technical_rating': feedback.interviewer_technical_rating,
+                        'interviewer_communication_rating': feedback.interviewer_communication_rating,
+                        'interviewer_team_fit_rating': feedback.interviewer_team_fit_rating,
+                        'interviewer_average_rating': feedback.interviewer_average_rating,
+                        'candidate_feedback': feedback.candidate_feedback,
+                        'candidate_rating': feedback.candidate_rating,
+                        'updated_at': feedback.updated_at.isoformat() if feedback.updated_at else None,
+                    } if feedback else None
                 }
             )
 
@@ -5748,7 +5760,10 @@ def submit_interview_feedback(request):
     
     token = request.data.get('token')
     feedback_text = request.data.get('feedback')
-    rating = request.data.get('rating')
+    rating = request.data.get('rating')  # Legacy/Overall
+    tech_rating = request.data.get('technical_rating')
+    comm_rating = request.data.get('communication_rating')
+    fit_rating = request.data.get('team_fit_rating')
     role = request.data.get('role', 'candidate')
 
     if not token or not feedback_text:
@@ -5776,11 +5791,24 @@ def submit_interview_feedback(request):
 
         if role == 'interviewer':
             feedback_obj.interviewer_feedback = feedback_text
-            if rating:
-                try:
-                    feedback_obj.interviewer_rating = int(rating)
-                except ValueError:
-                    pass
+            
+            # Save individual ratings
+            try:
+                if rating: feedback_obj.interviewer_rating = int(rating)
+                if tech_rating: feedback_obj.interviewer_technical_rating = int(tech_rating)
+                if comm_rating: feedback_obj.interviewer_communication_rating = int(comm_rating)
+                if fit_rating: feedback_obj.interviewer_team_fit_rating = int(fit_rating)
+                
+                # Calculate average if all three are present
+                ratings_list = []
+                if tech_rating: ratings_list.append(int(tech_rating))
+                if comm_rating: ratings_list.append(int(comm_rating))
+                if fit_rating: ratings_list.append(int(fit_rating))
+                
+                if ratings_list:
+                    feedback_obj.interviewer_average_rating = sum(ratings_list) / len(ratings_list)
+            except (ValueError, TypeError):
+                pass
         else:
             # Default to candidate
             feedback_obj.candidate_feedback = feedback_text
@@ -5792,6 +5820,12 @@ def submit_interview_feedback(request):
         
         feedback_obj.save()
         print(f"DEBUG: Feedback saved successfully for role: {role}")
+
+        # Mark the invitation as completed when the interviewer submits feedback
+        if role == 'interviewer':
+            invitation.status = 'completed'
+            invitation.save(update_fields=['status', 'updated_at'])
+            print(f"DEBUG: Invitation {invitation.id} status updated to 'completed'")
 
         return Response({'success': True, 'message': 'Feedback submitted successfully.'}, status=status.HTTP_200_OK)
 

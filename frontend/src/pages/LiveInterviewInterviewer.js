@@ -3,7 +3,8 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/LiveInterviewInterviewer.css';
 import VideoPlaceholder from '../components/VideoPlaceholder';
-import { API_BASE_URL, WS_BASE_URL } from '../apiConfig';
+
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
 function LiveInterviewInterviewer() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ function LiveInterviewInterviewer() {
   const [isCameraOn, setIsCameraOn] = useState(true);
   const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(true);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
+  const [isRemoteScreenSharing, setIsRemoteScreenSharing] = useState(false);
   const [screenShareLocked, setScreenShareLocked] = useState(false);
   const [screenShareHolder, setScreenShareHolder] = useState(null);
 
@@ -182,7 +184,7 @@ function LiveInterviewInterviewer() {
       transform: translateX(100%);
       margin-bottom: 0.75rem;
       position: fixed;
-      top: 5rem;
+      bottom: 7rem;
       right: 1.5rem;
       z-index: 50;
       max-width: 350px;
@@ -297,13 +299,28 @@ function LiveInterviewInterviewer() {
   const buildWsCandidates = useCallback((sessionId) => {
     // Get backend URL from API_BASE_URL
     const apiUrl = API_BASE_URL.replace('/api', '').replace('http://', '').replace('https://', '').split(':')[0];
-    // Simplified WebSocket URL candidates using centralized WS_BASE_URL
-    const candidates = [];
-    candidates.push(`${WS_BASE_URL}/interview/${sessionId}/interviewer/`);
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const isProduction = window.location.hostname.includes('duckdns.org') || API_BASE_URL.includes('duckdns.org');
 
-    // Fallback for local
-    if (!candidates.includes(`ws://localhost:8001/ws/interview/${sessionId}/interviewer/`)) {
-      candidates.push(`ws://localhost:8001/ws/interview/${sessionId}/interviewer/`);
+    const candidates = [];
+
+    // 1. Explicit Production URL
+    if (isProduction) {
+      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/interviewer/`);
+    }
+
+    // 2. API_BASE_URL derived
+    if (apiUrl && apiUrl !== 'localhost') {
+      candidates.push(`${protocol}//${apiUrl}/ws/interview/${sessionId}/interviewer/`);
+    }
+
+    // 3. Current Host
+    const currentHost = window.location.host;
+    candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/interviewer/`);
+
+    // 4. Localhost Fallback
+    if (window.location.hostname === 'localhost') {
+      candidates.push(`ws://localhost:8000/ws/interview/${sessionId}/interviewer/`);
     }
 
     return candidates;
@@ -433,6 +450,104 @@ function LiveInterviewInterviewer() {
     socket.onmessage = (event) => handleSocketMessage(event.data);
   }, [sessionExpired, showNotification, connectWebSocket]);
 
+  // Proxy violation notification
+  const showProxyViolationNotification = useCallback((violationType, violationCount, violationLimit) => {
+    const violation = {
+      id: Date.now(),
+      type: violationType,
+      count: violationCount,
+      limit: violationLimit
+    };
+
+    setProxyViolations(prev => [...prev, violation]);
+
+    setTimeout(() => {
+      setProxyViolations(prev => prev.filter(v => v.id !== violation.id));
+    }, 8000);
+
+    if (violationCount >= violationLimit) {
+      setTimeout(() => {
+        showNotification(`🚨 ${candidateName} exceeded violation limit - interview may be terminated`, 'error');
+      }, 1000);
+    }
+  }, [candidateName, showNotification]);
+
+  // End interview
+  const handleEndInterview = useCallback(async (shouldSend = true) => {
+    if (interviewEndedRef.current) return;
+
+    if (shouldSend) {
+      const confirmed = await showConfirmation('Are you sure you want to end the interview for everyone?');
+      if (!confirmed) return;
+    }
+
+    if (bothPartiesConnected) {
+      setSessionExpired(true);
+      localStorage.setItem(sessionKey, 'true');
+      console.log('✅ Session marked as expired - both parties connected once');
+    }
+
+    interviewEndedRef.current = true;
+    if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
+
+    showNotification('Interview ended. Redirecting...', 'info');
+
+    try {
+      if (shouldSend && socketRef.current?.readyState === WebSocket.OPEN) {
+        try {
+          socketRef.current.send(JSON.stringify({ type: 'screen_share_state', active: false }));
+          socketRef.current.send(JSON.stringify({ type: 'screen_share_release' }));
+        } catch (e) { }
+        socketRef.current.send(JSON.stringify({ type: 'end_interview' }));
+      }
+    } catch (e) {
+      console.warn('end_interview send failed', e);
+    }
+
+    if (socketRef.current) socketRef.current.close();
+    localStreamRef.current?.getTracks().forEach(track => track.stop());
+    screenShareStreamRef.current?.getTracks().forEach(track => track.stop());
+
+    try {
+      if (peerConnectionRef.current) {
+        peerConnectionRef.current.close();
+        peerConnectionRef.current = null;
+      }
+    } catch (e) { }
+
+    // Persist interview duration
+    try {
+      const totalTime = timer;
+      const payload = {
+        token: sessionId,
+        isInterviewer: true,
+        totalTime: totalTime,
+        sessionId: sessionId,
+        isDraft: true
+      };
+      fetch('/submit-interview-feedback/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload)
+      }).catch(() => { });
+    } catch (e) {
+      console.warn('Failed to persist total time on end:', e);
+    }
+
+    // Redirect to feedback page
+    setTimeout(() => {
+      const feedbackParams = new URLSearchParams({
+        candidate: candidateName,
+        interviewer: interviewerName,
+        time: timer,
+        status: candidateHasJoinedRef.current ? 'joined' : 'not_joined',
+        token: sessionId
+      });
+      navigate(`/feedback-page?${feedbackParams.toString()}`);
+    }, 800);
+  }, [bothPartiesConnected, sessionKey, showNotification, showConfirmation, timer, sessionId, candidateName, interviewerName, navigate]);
+
   const handleSocketMessage = useCallback(async (rawMessage) => {
     try {
       const data = JSON.parse(rawMessage);
@@ -449,15 +564,17 @@ function LiveInterviewInterviewer() {
         case 'user_joined':
           const joinedUserName = data.user === 'Candidate' ? candidateName : data.user;
           showNotification(`${joinedUserName} joined the session.`);
-          if (data.user === 'Candidate' && peerConnectionRef.current) {
-            console.log('🎯 Candidate joined, creating video offer...');
+          if (data.user === 'Candidate') {
+            // Always mark candidate as joined — even if our WebRTC isn't ready yet.
+            // initializeWebRTC() checks this ref when it finishes and auto-offers.
             candidateHasJoinedRef.current = true;
-            // Initiate offer because Candidate joined AFTER us
-            createVideoOffer();
             setBothPartiesConnected(true);
-            // Session remains active until explicitly ended
-            // localStorage.setItem(sessionKey, 'true');
-            console.log('🔒 Session marked as expired in storage - both parties have connected');
+            if (peerConnectionRef.current) {
+              console.log('🎯 Candidate joined & PC ready — creating video offer...');
+              createVideoOffer();
+            } else {
+              console.log('⏳ Candidate joined but PC still initializing — will offer after init.');
+            }
           }
           break;
         case 'chat':
@@ -537,6 +654,13 @@ function LiveInterviewInterviewer() {
             showNotification('Candidate left the session', 'warning');
           }
           break;
+        case 'request_offer':
+          // Candidate didn't receive our offer or needs reconnect — resend with ICE restart
+          console.log('🔄 Candidate requested a new offer (ICE restart), creating...');
+          if (peerConnectionRef.current) {
+            createVideoOffer({ iceRestart: true });
+          }
+          break;
         case 'proxy_violation':
           if (String(data.sender).toLowerCase() === 'candidate') {
             showProxyViolationNotification(data.violation_type, data.violation_count, data.violation_limit);
@@ -568,15 +692,16 @@ function LiveInterviewInterviewer() {
           showSessionExpiredMessage();
           break;
         case 'screen_share_state':
-          try {
-            const isShare = !!data.active;
-            const targetFit = isShare ? 'contain' : 'cover';
-            if (remoteVideoRef.current) {
-              remoteVideoRef.current.style.objectFit = targetFit;
-              remoteVideoRef.current.style.objectPosition = 'center center';
-            }
+          // Correctly identify candidate's sharing state
+          if (data.sender && String(data.sender).toLowerCase() === 'candidate') {
+            const isActive = !!data.active;
+            setIsRemoteScreenSharing(isActive);
+            console.log('🖥️ Candidate screen share state:', isActive);
 
-          } catch (e) { }
+            if (remoteVideoRef.current) {
+              remoteVideoRef.current.style.objectFit = isActive ? 'contain' : 'cover';
+            }
+          }
           break;
         case 'screen_share_lock':
           setScreenShareLocked(!!data.active);
@@ -638,12 +763,13 @@ function LiveInterviewInterviewer() {
 
       const configuration = {
         iceServers: [
+          // STUN servers
           { urls: 'stun:stun.l.google.com:19302' },
           { urls: 'stun:stun1.l.google.com:19302' },
           { urls: 'stun:stun2.l.google.com:19302' },
-          { urls: 'stun:stun.stunprotocol.org:3478' },
-          { urls: 'stun:stun.voiparound.com' },
-          { urls: 'stun:stun.voipbuster.com' },
+          { urls: 'stun:stun3.l.google.com:19302' },
+          { urls: 'stun:stun4.l.google.com:19302' },
+          // TURN UDP (fast but blocked by some firewalls)
           {
             urls: 'turn:openrelay.metered.ca:80',
             username: 'openrelayproject',
@@ -653,6 +779,23 @@ function LiveInterviewInterviewer() {
             urls: 'turn:openrelay.metered.ca:443',
             username: 'openrelayproject',
             credential: 'openrelayproject'
+          },
+          // TURN TCP (penetrates most firewalls and strict NATs)
+          {
+            urls: 'turn:openrelay.metered.ca:443?transport=tcp',
+            username: 'openrelayproject',
+            credential: 'openrelayproject'
+          },
+          {
+            urls: 'turn:openrelay.metered.ca:80?transport=tcp',
+            username: 'openrelayproject',
+            credential: 'openrelayproject'
+          },
+          // Additional public TURN fallbacks
+          {
+            urls: 'turn:relay1.expressturn.com:3478',
+            username: 'efKBBHHGTBSOHDUE',
+            credential: 'vMjLVPCetTbVQGTz'
           }
         ],
         iceCandidatePoolSize: 10,
@@ -744,20 +887,18 @@ function LiveInterviewInterviewer() {
 
       console.log('✅ WebRTC initialized successfully');
 
-      // Process pending offer if exists
+      // Process pending offer if exists (candidate offered before our PC was ready)
       if (pendingOfferRef.current) {
         console.log('🔄 Processing queued video offer...');
         await handleVideoOffer(pendingOfferRef.current);
         pendingOfferRef.current = null;
       }
 
-      // Remove auto-trigger to avoid glare if Candidate is also offering
-      // setTimeout(() => {
-      //   if (peerConnection && peerConnection.connectionState !== 'connected') {
-      //     console.log('🔄 Auto-triggering video connection...');
-      //     createVideoOffer();
-      //   }
-      // }, 3000);
+      // If the candidate joined while we were initializing WebRTC, create the offer now
+      if (candidateHasJoinedRef.current && !pendingOfferRef.current) {
+        console.log('🎯 Candidate was already waiting — creating video offer now (post-init)...');
+        createVideoOffer();
+      }
 
     } catch (error) {
       console.error('❌ Error initializing WebRTC:', error);
@@ -1023,12 +1164,23 @@ function LiveInterviewInterviewer() {
 
         if (peerConnectionRef.current) {
           const videoTrack = screenShareStream.getVideoTracks()[0];
-          const sender = peerConnectionRef.current.getSenders().find(s =>
-            s.track && s.track.kind === 'video'
-          );
-          if (sender) {
-            await sender.replaceTrack(videoTrack);
-            console.log('✅ Screen share track replaced in peer connection');
+          console.log('🖥️ Interviewer replacing track with screen share...');
+
+          const senders = peerConnectionRef.current.getSenders();
+          const videoSender = senders.find(s => s.track && s.track.kind === 'video');
+
+          if (videoSender) {
+            await videoSender.replaceTrack(videoTrack).then(() => {
+              console.log('✅ Interviewer screen track successfully replaced');
+            }).catch(e => {
+              console.error('❌ Interviewer replaceTrack failed:', e);
+            });
+          } else {
+            console.warn('⚠️ No video sender found for interviewer. Adding new track...');
+            peerConnectionRef.current.addTrack(videoTrack, screenShareStream);
+            const offer = await peerConnectionRef.current.createOffer();
+            await peerConnectionRef.current.setLocalDescription(offer);
+            socketRef.current?.send(JSON.stringify({ type: 'video_offer', offer }));
           }
         }
 
@@ -1091,103 +1243,6 @@ function LiveInterviewInterviewer() {
     }
   }, [showNotification]);
 
-  // Proxy violation notification
-  const showProxyViolationNotification = useCallback((violationType, violationCount, violationLimit) => {
-    const violation = {
-      id: Date.now(),
-      type: violationType,
-      count: violationCount,
-      limit: violationLimit
-    };
-
-    setProxyViolations(prev => [...prev, violation]);
-
-    setTimeout(() => {
-      setProxyViolations(prev => prev.filter(v => v.id !== violation.id));
-    }, 8000);
-
-    if (violationCount >= violationLimit) {
-      setTimeout(() => {
-        showNotification(`🚨 ${candidateName} exceeded violation limit - interview may be terminated`, 'error');
-      }, 1000);
-    }
-  }, [candidateName, showNotification]);
-
-  // End interview
-  const handleEndInterview = useCallback(async (shouldSend = true) => {
-    if (interviewEndedRef.current) return;
-
-    if (shouldSend) {
-      const confirmed = await showConfirmation('Are you sure you want to end the interview for everyone?');
-      if (!confirmed) return;
-    }
-
-    if (bothPartiesConnected) {
-      setSessionExpired(true);
-      localStorage.setItem(sessionKey, 'true');
-      console.log('✅ Session marked as expired - both parties connected once');
-    }
-
-    interviewEndedRef.current = true;
-    if (timerIntervalRef.current) clearInterval(timerIntervalRef.current);
-
-    showNotification('Interview ended. Redirecting...', 'info');
-
-    try {
-      if (shouldSend && socketRef.current?.readyState === WebSocket.OPEN) {
-        try {
-          socketRef.current.send(JSON.stringify({ type: 'screen_share_state', active: false }));
-          socketRef.current.send(JSON.stringify({ type: 'screen_share_release' }));
-        } catch (e) { }
-        socketRef.current.send(JSON.stringify({ type: 'end_interview' }));
-      }
-    } catch (e) {
-      console.warn('end_interview send failed', e);
-    }
-
-    if (socketRef.current) socketRef.current.close();
-    localStreamRef.current?.getTracks().forEach(track => track.stop());
-    screenShareStreamRef.current?.getTracks().forEach(track => track.stop());
-
-    try {
-      if (peerConnectionRef.current) {
-        peerConnectionRef.current.close();
-        peerConnectionRef.current = null;
-      }
-    } catch (e) { }
-
-    // Persist interview duration
-    try {
-      const totalTime = timer;
-      const payload = {
-        token: sessionId,
-        isInterviewer: true,
-        totalTime: totalTime,
-        sessionId: sessionId,
-        isDraft: true
-      };
-      fetch('/submit-interview-feedback/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify(payload)
-      }).catch(() => { });
-    } catch (e) {
-      console.warn('Failed to persist total time on end:', e);
-    }
-
-    // Redirect to feedback page
-    setTimeout(() => {
-      const feedbackParams = new URLSearchParams({
-        candidate: candidateName,
-        interviewer: interviewerName,
-        time: timer,
-        status: candidateHasJoinedRef.current ? 'joined' : 'not_joined',
-        session: sessionId
-      });
-      navigate(`/feedback-page/?${feedbackParams.toString()}`);
-    }, 800);
-  }, [bothPartiesConnected, sessionKey, showNotification, showConfirmation, timer, sessionId, candidateName, interviewerName, navigate]);
 
   // Initialize WebSocket on mount
   useEffect(() => {
@@ -1483,7 +1538,7 @@ function LiveInterviewInterviewer() {
             autoPlay
             playsInline
             onContextMenu={e => e.preventDefault()}
-            style={{ display: isRemoteCameraOn ? 'block' : 'none' }}
+            style={{ display: (isRemoteCameraOn || isRemoteScreenSharing) ? 'block' : 'none' }}
           />
 
           {!isRemoteCameraOn && bothPartiesConnected && (

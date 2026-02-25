@@ -39,6 +39,11 @@ const AiInterviewSession = () => {
     const isProcessingRef = useRef(false);
     const isSpeakingRef = useRef(false);
     const isRecordingRef = useRef(false);
+    const silenceTimerRef = useRef(null);
+    const globalSilenceTimerRef = useRef(null);
+    const nudgeCountRef = useRef(0);
+    const transcriptRef = useRef("");
+    const submitHandlerRef = useRef(null);
 
     // 1. Load Voices
     useEffect(() => {
@@ -484,12 +489,35 @@ const AiInterviewSession = () => {
         return () => stopCamera();
     }, [token, addMessage, speak, startListening, userInputMode]); // Only re-init if token changes, perfectly stable camera feed
 
-    const silenceTimerRef = useRef(null);
-    const globalSilenceTimerRef = useRef(null);
-    const nudgeCountRef = useRef(0);
-    const transcriptRef = useRef("");
+    const startSilenceWatchdog = useCallback((delay) => {
+        if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
+        globalSilenceTimerRef.current = setTimeout(async () => {
+            if (!isRecordingRef.current || isProcessingRef.current || isSpeakingRef.current) return;
 
-    const submitHandlerRef = useRef(handleAnswerSubmission);
+            if (nudgeCountRef.current === 0) {
+                // First nudge
+                nudgeCountRef.current = 1;
+                const nudgeText = "I didn't quite catch that. Could you please share your answer when you're ready?";
+                addMessage('ai', nudgeText);
+                try {
+                    if (recognitionRef.current) recognitionRef.current.stop();
+                    await speak(nudgeText);
+                    startListening(); // Restart with a fresh 15s timer
+                } catch (e) { }
+            } else {
+                // Second nudge = AUTO SKIP
+                const skipText = "It seems you're having some trouble. Let's move to the next question for now.";
+                addMessage('ai', skipText);
+                try {
+                    if (recognitionRef.current) recognitionRef.current.stop();
+                    await speak(skipText);
+                    // Force submission with a "skipped" tag
+                    if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
+                } catch (e) { }
+            }
+        }, delay);
+    }, [addMessage, speak, startListening]);
+
     useEffect(() => {
         submitHandlerRef.current = handleAnswerSubmission;
     }, [handleAnswerSubmission]);
@@ -588,34 +616,6 @@ const AiInterviewSession = () => {
         };
     }, [startSilenceWatchdog]);
 
-    const startSilenceWatchdog = useCallback((delay) => {
-        if (globalSilenceTimerRef.current) clearTimeout(globalSilenceTimerRef.current);
-        globalSilenceTimerRef.current = setTimeout(async () => {
-            if (!isRecordingRef.current || isProcessingRef.current || isSpeakingRef.current) return;
-
-            if (nudgeCountRef.current === 0) {
-                // First nudge
-                nudgeCountRef.current = 1;
-                const nudgeText = "I didn't quite catch that. Could you please share your answer when you're ready?";
-                addMessage('ai', nudgeText);
-                try {
-                    if (recognitionRef.current) recognitionRef.current.stop();
-                    await speak(nudgeText);
-                    startListening(); // Restart with a fresh 15s timer
-                } catch (e) { }
-            } else {
-                // Second nudge = AUTO SKIP
-                const skipText = "It seems you're having some trouble. Let's move to the next question for now.";
-                addMessage('ai', skipText);
-                try {
-                    if (recognitionRef.current) recognitionRef.current.stop();
-                    await speak(skipText);
-                    // Force submission with a "skipped" tag
-                    if (submitHandlerRef.current) submitHandlerRef.current("[Candidate remained silent/skipped]");
-                } catch (e) { }
-            }
-        }, delay);
-    }, [addMessage, speak, startListening]);
 
 
     const toggleRecording = () => {

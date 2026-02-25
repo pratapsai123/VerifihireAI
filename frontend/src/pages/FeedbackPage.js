@@ -11,17 +11,28 @@ const FeedbackPage = () => {
     const candidateName = searchParams.get('candidate') || 'Candidate';
     const token = searchParams.get('token') || searchParams.get('session') || searchParams.get('sessionId');
 
-    const [rating, setRating] = useState(0);
+    const [techRating, setTechRating] = useState(0);
+    const [commRating, setCommRating] = useState(0);
+    const [fitRating, setFitRating] = useState(0);
     const [feedback, setFeedback] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+
+    const calculateAverage = () => {
+        const ratings = [techRating, commRating, fitRating].filter(r => r > 0);
+        if (ratings.length === 0) return 0;
+        const sum = ratings.reduce((acc, curr) => acc + curr, 0);
+        return (sum / ratings.length).toFixed(1);
+    };
+
+    const averageRating = calculateAverage();
 
     const handleSubmit = async () => {
         if (!token) {
             alert('Missing interview token.');
             return;
         }
-        if (rating === 0) {
-            alert('Please select a rating.');
+        if (techRating === 0 || commRating === 0 || fitRating === 0) {
+            alert('Please provide ratings for all categories.');
             return;
         }
 
@@ -35,7 +46,10 @@ const FeedbackPage = () => {
                 },
                 body: JSON.stringify({
                     token: token,
-                    rating: rating,
+                    technical_rating: techRating,
+                    communication_rating: commRating,
+                    team_fit_rating: fitRating,
+                    rating: Math.round(averageRating), // Map to legacy field as fallback
                     feedback: feedback,
                     role: 'interviewer'
                 })
@@ -58,36 +72,48 @@ const FeedbackPage = () => {
         }
     };
 
+    const renderStars = (currentRating, setter, label) => (
+        <div className="rating-category">
+            <label className="category-label">{label}</label>
+            <div className="stars-wrapper">
+                {[1, 2, 3, 4, 5].map((star) => (
+                    <i
+                        key={star}
+                        className={`fas fa-star star-item ${star <= currentRating ? 'active' : ''}`}
+                        onClick={() => setter(star)}
+                    ></i>
+                ))}
+            </div>
+        </div>
+    );
+
     return (
         <div className="feedback-page">
             <div className="feedback-container">
                 <div className="feedback-header">
-                    <h1 className="feedback-title">Interview Completed</h1>
-                    <p className="feedback-subtitle">Please rate {candidateName}'s performance</p>
+                    <h1 className="feedback-title">Interview Feedback</h1>
+                    <p className="feedback-subtitle">Candidate: <span className="highlight">{candidateName}</span></p>
                 </div>
 
-                <div className="rating-section-simple">
-                    <div className="stars-large">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                            <i
-                                key={star}
-                                className={`fas fa-star star-large ${star <= rating ? 'active' : ''}`}
-                                onClick={() => setRating(star)}
-                            ></i>
-                        ))}
+                <div className="multi-rating-section">
+                    {renderStars(techRating, setTechRating, 'Technical Performance')}
+                    {renderStars(commRating, setCommRating, 'Communication Skills')}
+                    {renderStars(fitRating, setFitRating, 'Team Fit & Cultural Match')}
+
+                    <div className="average-rating-display">
+                        <span className="avg-label">Average Rating:</span>
+                        <span className="avg-value">{averageRating} / 5.0</span>
                     </div>
-                    <p className="rating-text">
-                        {rating === 0 ? 'Select a rating' : `${rating} out of 5 stars`}
-                    </p>
                 </div>
 
                 <div className="feedback-input-section">
+                    <label className="textarea-label">Detailed Notes</label>
                     <textarea
                         className="feedback-textarea"
-                        placeholder="Write your detailed feedback here..."
+                        placeholder="Provide specific feedback about the candidate..."
                         value={feedback}
                         onChange={(e) => setFeedback(e.target.value)}
-                        rows="6"
+                        rows="4"
                     />
                 </div>
 
@@ -96,7 +122,7 @@ const FeedbackPage = () => {
                     onClick={handleSubmit}
                     disabled={isSubmitting}
                 >
-                    {isSubmitting ? 'Submitting...' : 'Submit Feedback'}
+                    {isSubmitting ? 'Submitting...' : 'Complete Interview Feedback'}
                 </button>
             </div>
         </div>

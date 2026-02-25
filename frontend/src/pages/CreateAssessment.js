@@ -29,6 +29,17 @@ const CreateAssessment = () => {
 
     const handleSubmit = async (e) => {
         if (e) e.preventDefault();
+
+        // Frontend validation
+        if (!formData.job_description.trim()) {
+            alert('Please enter a Job Description before generating.');
+            return;
+        }
+        if (!formData.skills.trim()) {
+            alert('Please enter Target Skills before generating.');
+            return;
+        }
+
         setLoading(true);
 
         const combinedData = {
@@ -53,7 +64,8 @@ const CreateAssessment = () => {
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Generation failed. Ensure the backend is running at port 8001.');
+            const errMsg = error?.response?.data?.error || error?.response?.data?.message || error?.message || 'Generation failed. Please try again.';
+            alert(`Generation failed: ${errMsg}`);
         } finally {
             setLoading(false);
         }

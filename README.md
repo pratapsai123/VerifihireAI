@@ -16,7 +16,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-- Frontend: http://localhost:3000  
+- Frontend: https://verifyhire.duckdns.org  
 - Backend API: http://localhost:8000/api  
 - Postgres: exposed only inside the Compose network.
 

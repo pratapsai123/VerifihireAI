@@ -100,6 +100,8 @@ export default function LiveInterviewList() {
         return 'ok';
       case 'completed':
         return 'ok';
+      case 'submitted':
+        return 'ok';
       case 'failed':
         return 'bad';
       default:
@@ -117,11 +119,31 @@ export default function LiveInterviewList() {
         return 'Accepted';
       case 'completed':
         return 'Completed';
+      case 'submitted':
+        return 'Submitted';
       case 'failed':
         return 'Failed';
       default:
         return status || 'Pending';
     }
+  };
+
+  const renderStars = (rating) => {
+    const r = parseFloat(rating || 0);
+    return (
+      <div className="list-rating-stars">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <i
+            key={star}
+            className={`${star <= Math.round(r) ? 'fas' : 'far'} fa-star`}
+            style={{ color: star <= Math.round(r) ? '#f59e0b' : '#cbd5e1', fontSize: '12px', marginRight: '2px' }}
+          ></i>
+        ))}
+        <span style={{ marginLeft: '4px', fontSize: '12px', fontWeight: 600, color: '#475569' }}>
+          {r > 0 ? r.toFixed(1) : '-'}
+        </span>
+      </div>
+    );
   };
 
   const handleStartInterview = (token) => {
@@ -172,6 +194,7 @@ export default function LiveInterviewList() {
                   <th>Candidate</th>
                   <th>Interview</th>
                   <th>Status</th>
+                  <th>Rating</th>
                   <th>Scheduled Start</th>
                   <th>Scheduled End</th>
                   <th>Created</th>
@@ -191,6 +214,20 @@ export default function LiveInterviewList() {
                       <span className={`pill ${getStatusClass(inv.status)}`}>
                         {getStatusLabel(inv.status)}
                       </span>
+                    </td>
+                    <td>
+                      {inv.feedback ? (
+                        <div title={inv.feedback.interviewer_feedback}>
+                          {renderStars(inv.feedback.interviewer_average_rating)}
+                          {inv.feedback.interviewer_feedback && (
+                            <div className="cell-sub" style={{ maxWidth: '150px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                              {inv.feedback.interviewer_feedback}
+                            </div>
+                          )}
+                        </div>
+                      ) : (
+                        <span style={{ color: '#94a3b8' }}>-</span>
+                      )}
                     </td>
                     <td>
                       {inv.start_time ? (
@@ -215,12 +252,12 @@ export default function LiveInterviewList() {
                     <td>{fmtDate(inv.created_at)}</td>
                     <td style={{ textAlign: 'right' }}>
                       <button
-                        className="btn-primary"
+                        className={inv.status === 'completed' || inv.status === 'submitted' ? 'btn-secondary' : 'btn-primary'}
                         type="button"
                         onClick={() => handleStartInterview(inv.token)}
-                        disabled={inv.status === 'failed'}
+                        disabled={inv.status === 'failed' || inv.status === 'completed' || inv.status === 'submitted'}
                       >
-                        Start Interview
+                        {inv.status === 'completed' || inv.status === 'submitted' ? 'Completed' : 'Start Interview'}
                       </button>
                     </td>
                   </tr>
