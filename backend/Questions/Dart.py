@@ -1,0 +1,2458 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+  {
+    "question": "Which keyword is used to declare a variable that can be assigned only once and is initialized at runtime?",
+    "options": {
+      "A": "const",
+      "B": "final",
+      "C": "var",
+      "D": "static"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sound Null Safety' in Dart?",
+    "options": {
+      "A": "A way to prevent code from running",
+      "B": "A compiler feature that ensures variables cannot contain null unless explicitly allowed",
+      "C": "A method for encrypting data",
+      "D": "A tool for audio processing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you declare a nullable integer in Dart?",
+    "options": {
+      "A": "int n = null;",
+      "B": "int? n;",
+      "C": "Nullable<int> n;",
+      "D": "Optional int n;"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to call a method only if the object is not null?",
+    "options": {
+      "A": "!!",
+      "B": "?.",
+      "C": "??",
+      "D": "??"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the '??=' operator do?",
+    "options": {
+      "A": "Checks for equality",
+      "B": "Assigns a value to a variable only if that variable is currently null",
+      "C": "Converts a string to null",
+      "D": "Clears a variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to declare a compile-time constant?",
+    "options": {
+      "A": "final",
+      "B": "const",
+      "C": "stable",
+      "D": "immutable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the base class for all Dart objects?",
+    "options": {
+      "A": "Root",
+      "B": "Object",
+      "C": "Base",
+      "D": "Entity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which collection type in Dart represents an unordered collection of unique items?",
+    "options": {
+      "A": "List",
+      "B": "Set",
+      "C": "Map",
+      "D": "Queue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a function that does not return any value?",
+    "options": {
+      "A": "null functionName()",
+      "B": "void functionName()",
+      "C": "empty functionName()",
+      "D": "functionName() -> void"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'late' keyword?",
+    "options": {
+      "A": "To delay the execution of a function",
+      "B": "To declare a non-nullable variable that is initialized after its declaration",
+      "C": "To mark a function as slow",
+      "D": "To handle network timeouts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is the 'if-null' operator, returning the right-hand value if the left is null?",
+    "options": {
+      "A": "?:",
+      "B": "??",
+      "C": "?.",
+      "D": "!!"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Dart, what is a 'Mixin'?",
+    "options": {
+      "A": "A way to mix two data types",
+      "B": "A way of reusing a class's code in multiple class hierarchies",
+      "C": "A mathematical function",
+      "D": "A type of constructor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to use a Mixin in a class?",
+    "options": {
+      "A": "extends",
+      "B": "with",
+      "C": "implements",
+      "D": "include"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'implements' and 'extends'?",
+    "options": {
+      "A": "Extends is for interfaces, implements is for classes",
+      "B": "Extends shares behavior/logic; Implements only shares the signature (interface)",
+      "C": "They are identical",
+      "D": "Implements is faster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Async' function in Dart always required to return?",
+    "options": {
+      "A": "void",
+      "B": "Future",
+      "C": "Stream",
+      "D": "Dynamic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to add an element to a List?",
+    "options": {
+      "A": ".put()",
+      "B": ".add()",
+      "C": ".insertLast()",
+      "D": ".push()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Dart feature allows you to use 'dot' notation to access properties of a class while avoiding repeated code (cascade notation)?",
+    "options": {
+      "A": "..",
+      "B": "...",
+      "C": "?.",
+      "D": "::"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Spread Operator' in Dart?",
+    "options": {
+      "A": "..",
+      "B": "...",
+      "C": "!!",
+      "D": "=>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to create a factory constructor?",
+    "options": {
+      "A": "construct",
+      "B": "factory",
+      "C": "new",
+      "D": "static"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'String Interpolation' in Dart?",
+    "options": {
+      "A": "Adding strings together",
+      "B": "Inserting the value of an expression into a string using $ or ${}",
+      "C": "Splitting a string",
+      "D": "Translating strings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data type is used to represent a 64-bit integer in Dart?",
+    "options": {
+      "A": "Integer",
+      "B": "int",
+      "C": "long",
+      "D": "num"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 5 / 2 in Dart (returning a double)?",
+    "options": {
+      "A": "2",
+      "B": "2.5",
+      "C": "2.0",
+      "D": "3"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used for integer division (returning the quotient without the remainder)?",
+    "options": {
+      "A": "/",
+      "B": "~/",
+      "C": "%",
+      "D": "//"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a private variable or method in Dart?",
+    "options": {
+      "A": "private int x;",
+      "B": "int _x;",
+      "C": "int #x;",
+      "D": "int x (private);"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'super' in a constructor?",
+    "options": {
+      "A": "To make the constructor faster",
+      "B": "To call the constructor of the parent class",
+      "C": "To initialize local variables",
+      "D": "To return a value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to handle exceptions in Dart?",
+    "options": {
+      "A": "catch",
+      "B": "on",
+      "C": "try",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'extension methods' in Dart?",
+    "options": {
+      "A": "A way to add methods to existing libraries/classes without subclassing",
+      "B": "A way to extend the computer's memory",
+      "C": "A type of network request",
+      "D": "A file extension"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which class is used to work with key-value pairs in Dart?",
+    "options": {
+      "A": "List",
+      "B": "Map",
+      "C": "Set",
+      "D": "Collection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'static' keyword mean for a class member?",
+    "options": {
+      "A": "The member is unchangeable",
+      "B": "The member belongs to the class itself rather than any instance of the class",
+      "C": "The member is private",
+      "D": "The member is global"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loop is best used to iterate through all items in a List?",
+    "options": {
+      "A": "while",
+      "B": "for-in",
+      "C": "switch",
+      "D": "repeat"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fat Arrow' (=>) notation used for?",
+    "options": {
+      "A": "A type of pointer",
+      "B": "A shorthand for functions that contain a single expression",
+      "C": "To indicate a large value",
+      "D": "To import a library"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to import a library in Dart?",
+    "options": {
+      "A": "include",
+      "B": "import",
+      "C": "using",
+      "D": "require"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'final' vs 'const' in Dart?",
+    "options": {
+      "A": "Final is for strings, const is for numbers",
+      "B": "Final is initialized at runtime; Const is initialized at compile-time",
+      "C": "Const is for private variables",
+      "D": "There is no difference"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called to execute a Dart program?",
+    "options": {
+      "A": "start()",
+      "B": "main()",
+      "C": "execute()",
+      "D": "init()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you handle multiple types in a single List in Dart?",
+    "options": {
+      "A": "List<dynamic>",
+      "B": "List<Object>",
+      "C": "List<Multi>",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'dynamic' in Dart?",
+    "options": {
+      "A": "A type that is checked at compile-time",
+      "B": "A type that disables static type checking, allowing it to hold any value",
+      "C": "A type for animations",
+      "D": "A database field"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to define an interface in Dart?",
+    "options": {
+      "A": "interface",
+      "B": "protocol",
+      "C": "abstract class (or any class)",
+      "D": "contract"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'assert()'?",
+    "options": {
+      "A": "To print logs",
+      "B": "To stop execution in debug mode if a condition is false",
+      "C": "To handle errors in production",
+      "D": "To save data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to create a new instance of a class?",
+    "options": {
+      "A": "new (optional in Dart 2+)",
+      "B": "create",
+      "C": "instance",
+      "D": "build"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Isolate' in Dart?",
+    "options": {
+      "A": "A private variable",
+      "B": "A separate execution thread with its own memory heap to achieve true parallelism",
+      "C": "A way to hide code",
+      "D": "A type of network request"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to cast an object to a specific type?",
+    "options": {
+      "A": "to",
+      "B": "as",
+      "C": "is",
+      "D": "cast"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'is' operator used for?",
+    "options": {
+      "A": "To assign a value",
+      "B": "To check if an object is of a specific type",
+      "C": "To create a loop",
+      "D": "To delete an object"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to convert a JSON string into a Dart Map?",
+    "options": {
+      "A": "jsonDecode()",
+      "B": "json.parse()",
+      "C": "toMap()",
+      "D": "convertJson()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Stream' in Dart?",
+    "options": {
+      "A": "A type of list",
+      "B": "A sequence of asynchronous events",
+      "C": "A network connection",
+      "D": "A way to draw UI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to provide a value from a Synchronous Generator function?",
+    "options": {
+      "A": "return",
+      "B": "yield",
+      "C": "provide",
+      "D": "emit"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'abc' == 'abc' in Dart?",
+    "options": {
+      "A": "true",
+      "B": "false",
+      "C": "Error",
+      "D": "null"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which library is required for asynchronous programming (Future, Stream)?",
+    "options": {
+      "A": "dart:io",
+      "B": "dart:async",
+      "C": "dart:math",
+      "D": "dart:core"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you concatenate two strings 'a' and 'b'?",
+    "options": {
+      "A": "a + b",
+      "B": "'$a$b'",
+      "C": "a.concat(b)",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which constructor is used to create a constant instance of a class?",
+    "options": {
+      "A": "factory constructor",
+      "B": "const constructor",
+      "C": "static constructor",
+      "D": "named constructor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Named Parameters' in a function?",
+    "options": {
+      "A": "Parameters that are optional",
+      "B": "Parameters passed inside {} that require the name when calling",
+      "C": "Parameters for names",
+      "D": "Parameters without types"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to pause execution of an asynchronous function until a Future completes?",
+    "options": {
+      "A": "wait",
+      "B": "await",
+      "C": "yield",
+      "D": "pause"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Future' and a 'Stream' in Dart?",
+    "options": {
+      "A": "Futures are for UI, Streams are for data",
+      "B": "A Future returns a single value; a Stream returns a sequence of values over time",
+      "C": "Streams are synchronous, while Futures are asynchronous",
+      "D": "Futures cannot handle errors, but Streams can"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to declare a class that can be used as a Mixin?",
+    "options": {
+      "A": "include",
+      "B": "mixin",
+      "C": "extend",
+      "D": "implement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Dart, how many classes can a single class 'extend'?",
+    "options": {
+      "A": "As many as needed",
+      "B": "Exactly one",
+      "C": "Two",
+      "D": "Zero"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Broadcast Stream' in Dart?",
+    "options": {
+      "A": "A stream that only sends data to the server",
+      "B": "A stream that allows multiple listeners at the same time",
+      "C": "A stream used for radio apps",
+      "D": "A stream that never closes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to create a new Stream from an existing one by transforming its values?",
+    "options": {
+      "A": ".change()",
+      "B": ".map()",
+      "C": ".convert()",
+      "D": ".listen()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'abstract' keyword for a class?",
+    "options": {
+      "A": "To make the class private",
+      "B": "To prevent the class from being instantiated directly",
+      "C": "To speed up compilation",
+      "D": "To declare a class that only has static methods"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which block is used to run code regardless of whether an exception was thrown or caught?",
+    "options": {
+      "A": "always",
+      "B": "finally",
+      "C": "complete",
+      "D": "finish"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'yield' keyword do in a generator function?",
+    "options": {
+      "A": "Exits the function completely",
+      "B": "Delivers a value to the consumer of the iterator/stream but stays in the function",
+      "C": "Wait for 1 second",
+      "D": "Throws an error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function modifier is used to define an asynchronous generator (returning a Stream)?",
+    "options": {
+      "A": "async",
+      "B": "async*",
+      "C": "sync*",
+      "D": "stream"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Event Loop' in Dart?",
+    "options": {
+      "A": "A physical loop in the CPU",
+      "B": "The mechanism that handles the execution of multiple chunks of your program over time",
+      "C": "A type of for-loop",
+      "D": "A UI animation tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which constructor is used to return an existing instance or a different subtype rather than a new instance of the class?",
+    "options": {
+      "A": "Static constructor",
+      "B": "Factory constructor",
+      "C": "Redirecting constructor",
+      "D": "Const constructor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'rethrow' keyword?",
+    "options": {
+      "A": "To throw a new error",
+      "B": "To preserve the original stack trace while passing a caught exception back up",
+      "C": "To restart a function",
+      "D": "To delete an error log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check if a variable 'x' is NOT null and cast it to 'String' in one step (using null-safe promotion)?",
+    "options": {
+      "A": "if (x is String)",
+      "B": "x as String?",
+      "C": "String.from(x)",
+      "D": "x!!"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which class is used to manually complete or fail a Future?",
+    "options": {
+      "A": "FutureBuilder",
+      "B": "Completer",
+      "C": "Resolver",
+      "D": "FutureManager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Partial Application' in Dart functions?",
+    "options": {
+      "A": "A function that only runs half-way",
+      "B": "Creating a new function by fixing some arguments of an existing function",
+      "C": "A bug in the compiler",
+      "D": "An optional parameter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to define a synchronous generator (returning an Iterable)?",
+    "options": {
+      "A": "async",
+      "B": "sync*",
+      "C": "sync",
+      "D": "yield*"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'tear-off' feature in Dart?",
+    "options": {
+      "A": "Deleting a method",
+      "B": "Using a method name as a function object without calling it explicitly",
+      "C": "Separating a class into two",
+      "D": "Closing a stream"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to spread elements of a collection into another collection only if it is not null?",
+    "options": {
+      "A": "...",
+      "B": "...?",
+      "C": "?. ...",
+      "D": "!! ..."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'covariant' keyword in method parameters?",
+    "options": {
+      "A": "To make the parameter private",
+      "B": "To allow a parameter to be overridden with a more specific type in a subclass",
+      "C": "To handle network data",
+      "D": "To make a variable constant"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called on a Stream to start receiving events?",
+    "options": {
+      "A": ".start()",
+      "B": ".listen()",
+      "C": ".subscribe()",
+      "D": ".onData()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'Future.value(5)'?",
+    "options": {
+      "A": "An integer 5",
+      "B": "A Future that completes immediately with the value 5",
+      "C": "A Stream of 5s",
+      "D": "An error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword allows a class to implement the interface of another class without extending it?",
+    "options": {
+      "A": "extends",
+      "B": "implements",
+      "C": "with",
+      "D": "include"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'external' keyword?",
+    "options": {
+      "A": "To import external files",
+      "B": "To declare a function whose body is provided elsewhere (like native code)",
+      "C": "To make a class public",
+      "D": "To use a global variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method on an Iterable returns the first element that satisfies a condition?",
+    "options": {
+      "A": ".find()",
+      "B": ".firstWhere()",
+      "C": ".search()",
+      "D": ".get()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Callable Class' in Dart?",
+    "options": {
+      "A": "A class that can make phone calls",
+      "B": "A class that implements the 'call()' method, allowing instances to be called as functions",
+      "C": "A class with only static methods",
+      "D": "A class that uses the internet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to represent an error that occurs during program execution?",
+    "options": {
+      "A": "Problem",
+      "B": "Exception",
+      "C": "Error",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'dart:math' library?",
+    "options": {
+      "A": "To handle dates",
+      "B": "To provide common mathematical constants and functions (sin, cos, Random)",
+      "C": "To manage app memory",
+      "D": "To perform string operations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to wait for multiple Futures to complete simultaneously?",
+    "options": {
+      "A": "Future.all()",
+      "B": "Future.wait()",
+      "C": "Future.join()",
+      "D": "Future.group()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Getter' in Dart?",
+    "options": {
+      "A": "A function that sets a value",
+      "B": "A special method that provides read access to an object's properties",
+      "C": "A way to download data",
+      "D": "A type of loop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to access the parent class's version of a property or method?",
+    "options": {
+      "A": "this",
+      "B": "super",
+      "C": "parent",
+      "D": "base"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Typedef' in Dart?",
+    "options": {
+      "A": "A way to define a new type name for a function signature",
+      "B": "A database field",
+      "C": "A type of list",
+      "D": "A compiler setting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which collection method returns true if at least one element satisfies a condition?",
+    "options": {
+      "A": ".every()",
+      "B": ".any()",
+      "C": ".contains()",
+      "D": ".some()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'dart:convert' library?",
+    "options": {
+      "A": "To convert currency",
+      "B": "To encode and decode data, including JSON and UTF-8",
+      "C": "To translate languages",
+      "D": "To convert images"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you handle an error inside an 'async' function?",
+    "options": {
+      "A": "Using a try-catch block",
+      "B": "Using the .catchError() method on the Future",
+      "C": "Both A and B",
+      "D": "Errors cannot be handled in async functions"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Microtask' in the context of the Event Loop?",
+    "options": {
+      "A": "A very small app",
+      "B": "A task that is scheduled to run before the next event in the Event Loop",
+      "C": "A task for the hardware",
+      "D": "A type of list"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to declare a constant that is local to a function?",
+    "options": {
+      "A": "const",
+      "B": "final",
+      "C": "static",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Shadowing' in Dart?",
+    "options": {
+      "A": "Hiding a view",
+      "B": "When a local variable has the same name as a variable in an outer scope, hiding the outer one",
+      "C": "A visual effect",
+      "D": "A type of backup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to combine all elements of a collection into a single value?",
+    "options": {
+      "A": ".combine()",
+      "B": ".reduce()",
+      "C": ".join()",
+      "D": ".sum()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'Map.fromIterables(['a'], [1])'?",
+    "options": {
+      "A": "['a', 1]",
+      "B": "{'a': 1}",
+      "C": "An error",
+      "D": "{1: 'a'}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to conditionally check a type and then access a property?",
+    "options": {
+      "A": "is",
+      "B": "as",
+      "C": "if (x is Type) x.property",
+      "D": "x?.Type.property"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Function Currying'?",
+    "options": {
+      "A": "Cooking a function",
+      "B": "Breaking down a function that takes multiple arguments into a series of functions that take one argument each",
+      "C": "A type of loop",
+      "D": "A network protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to define a constant constructor?",
+    "options": {
+      "A": "final",
+      "B": "const",
+      "C": "static",
+      "D": "immutable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Uri' class in Dart?",
+    "options": {
+      "A": "To handle user input",
+      "B": "To parse and build Uniform Resource Identifiers (URLs)",
+      "C": "To manage project IDs",
+      "D": "To store strings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to remove an item from a specific index in a List?",
+    "options": {
+      "A": ".delete()",
+      "B": ".removeAt()",
+      "C": ".pop()",
+      "D": ".clear()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata' (Annotations) in Dart?",
+    "options": {
+      "A": "App descriptions",
+      "B": "Extra information about code, starting with @ (like @override or @deprecated)",
+      "C": "Database records",
+      "D": "File sizes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used in a switch statement to allow execution to continue to the next case?",
+    "options": {
+      "A": "continue",
+      "B": "fallthrough (not natively supported without labels)",
+      "C": "next",
+      "D": "goto"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'dart:developer' library used for?",
+    "options": {
+      "A": "To hire developers",
+      "B": "To provide tools for debugging and inspecting Dart code (like logging and timelines)",
+      "C": "To write code faster",
+      "D": "To manage app versions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to create a range of numbers in a loop (conceptually)?",
+    "options": {
+      "A": "..",
+      "B": "Iterable.generate()",
+      "C": "::",
+      "D": "=>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'Error' and 'Exception' in Dart?",
+    "options": {
+      "A": "There is no difference",
+      "B": "Errors are for programmatic failures (should not be caught); Exceptions are for expected failures (should be caught)",
+      "C": "Errors are faster",
+      "D": "Exceptions are for UI only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Dart 3.0 feature allows you to return multiple values from a function without creating a custom class?",
+    "options": {
+      "A": "Tuples",
+      "B": "Records",
+      "C": "Lists",
+      "D": "Multi-returns"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a Record with named fields in Dart?",
+    "options": {
+      "A": "{int x, int y} record;",
+      "B": "({int x, int y}) record;",
+      "C": "Record(x: 1, y: 2);",
+      "D": "Map<String, int> record;"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to restrict a class so it can only be extended within its own library (Dart 3.0)?",
+    "options": {
+      "A": "private",
+      "B": "base",
+      "C": "sealed",
+      "D": "final"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of a 'sealed' class in Dart 3.0?",
+    "options": {
+      "A": "It makes the class immutable",
+      "B": "It allows for exhaustive switch cases, ensuring all subtypes are handled",
+      "C": "It prevents the class from having any methods",
+      "D": "It automatically creates a constructor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Patterns' in Dart 3.0 primarily used for?",
+    "options": {
+      "A": "Designing the UI theme",
+      "B": "Destructuring data and matching values against specific structures",
+      "C": "Creating repeating loops",
+      "D": "Managing network requests"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to 'destructure' a List into individual variables in a pattern match?",
+    "options": {
+      "A": "var [a, b] = list;",
+      "B": "var {a, b} = list;",
+      "C": "list.split([a, b]);",
+      "D": "var (a, b) = list;"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of an 'Isolate' in Dart compared to a standard Thread?",
+    "options": {
+      "A": "Isolates share memory with the main thread",
+      "B": "Isolates have their own private memory heap and do not share data, avoiding locks",
+      "C": "Isolates are used only for UI rendering",
+      "D": "Isolates are slower than threads"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to spawn a new Isolate?",
+    "options": {
+      "A": "Isolate.create()",
+      "B": "Isolate.spawn()",
+      "C": "Isolate.run()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'SendPort' used for in Dart Isolates?",
+    "options": {
+      "A": "To connect to a server",
+      "B": "To send messages from one isolate to another",
+      "C": "To export a file",
+      "D": "To manage app permissions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Dart, what is 'Garbage Collection'?",
+    "options": {
+      "A": "Deleting unused code files",
+      "B": "The automated process of reclaiming memory occupied by objects that are no longer in use",
+      "C": "Emptying the local cache",
+      "D": "A way to handle null variables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Dart feature allows you to run a piece of code once a Future completes, regardless of success or failure?",
+    "options": {
+      "A": ".then()",
+      "B": ".whenComplete()",
+      "C": ".catchError()",
+      "D": ".finally()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'interface' class modifier do in Dart 3.0?",
+    "options": {
+      "A": "Allows other libraries to implement the class but not extend it",
+      "B": "Allows other libraries to extend the class but not implement it",
+      "C": "Prevents any use of the class outside the library",
+      "D": "Marks the class as abstract"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Logical AND' pattern in Dart 3.0?",
+    "options": {
+      "A": "&& operator in an if statement",
+      "B": "Matching a value against multiple patterns simultaneously using the '&&' operator",
+      "C": "A way to merge two lists",
+      "D": "A network security protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to define a class that can be neither extended nor implemented outside its library?",
+    "options": {
+      "A": "base",
+      "B": "final",
+      "C": "sealed",
+      "D": "interface"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'Isolate.spawn' and 'Isolate.run'?",
+    "options": {
+      "A": "There is no difference",
+      "B": "Isolate.run is a shorthand for short-lived tasks that returns a result to the caller",
+      "C": "Isolate.spawn is faster",
+      "D": "Isolate.run is for UI only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Extension Types' (introduced in Dart 3.3)?",
+    "options": {
+      "A": "A way to add methods to a class",
+      "B": "Zero-cost wrappers around existing types that provide a different interface",
+      "C": "A type of network request",
+      "D": "A replacement for Mixins"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property of a Future allows you to check if it has completed successfully?",
+    "options": {
+      "A": ".isCompleted",
+      "B": "Futures do not expose completion status; you must await or use .then()",
+      "C": ".status",
+      "D": ".hasValue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tree Shaking' in the Dart compiler?",
+    "options": {
+      "A": "Deleting empty folders",
+      "B": "The process of removing unused code from the final compiled binary to reduce size",
+      "C": "Organizing files hierarchically",
+      "D": "A tool to find bugs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access a specific field in an unnamed Record? (e.g., var r = (1, 2);)",
+    "options": {
+      "A": "r[0]",
+      "B": "r.$1",
+      "C": "r.field1",
+      "D": "r.first"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'mixin' class modifier (used together) signify in Dart 3.0?",
+    "options": {
+      "A": "The class can be used as both a mixin and a regular class",
+      "B": "The class is private",
+      "C": "The class cannot be extended",
+      "D": "The class is an interface"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'JIT' (Just-In-Time) compilation in Dart?",
+    "options": {
+      "A": "Compiling only during deployment",
+      "B": "Compiling code during execution, allowing for fast development cycles like Hot Reload",
+      "C": "Compiling to machine code before execution",
+      "D": "A database tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AOT' (Ahead-Of-Time) compilation in Dart?",
+    "options": {
+      "A": "Compiling code into machine code before the app is run for faster startup in production",
+      "B": "Compiling code while the user is typing",
+      "C": "A way to slow down builds",
+      "D": "An animation framework"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which library is used for low-level interaction with C/C++ libraries in Dart?",
+    "options": {
+      "A": "dart:io",
+      "B": "dart:ffi",
+      "C": "dart:html",
+      "D": "dart:convert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Object Lifecycle' in Dart?",
+    "options": {
+      "A": "Created -> Used -> Garbage Collected",
+      "B": "Init -> Build -> Dispose",
+      "C": "Active -> Inactive -> Terminated",
+      "D": "None of the above"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Guard' in a Dart 3.0 switch expression?",
+    "options": {
+      "A": "A security setting",
+      "B": "A 'when' clause that adds an extra boolean condition to a pattern match",
+      "C": "A try-catch block",
+      "D": "A default case"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Dart feature is used to achieve 'Object Equality' by comparing field values rather than memory references?",
+    "options": {
+      "A": "The == operator (requires manual override)",
+      "B": "Equatables (external package or custom logic)",
+      "C": "Records (natively compare by value)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the result of a comparison between two identical Records? (e.g., (1, 2) == (1, 2))",
+    "options": {
+      "A": "false",
+      "B": "true",
+      "C": "Error",
+      "D": "null"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to define a constant that can be used as a key in a constant Map?",
+    "options": {
+      "A": "final",
+      "B": "const",
+      "C": "static",
+      "D": "stable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Expando' in Dart?",
+    "options": {
+      "A": "To expand the app window",
+      "B": "To attach metadata to an object without modifying the object's class",
+      "C": "To increase the size of a list",
+      "D": "To handle large integers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class modifier ensures that a class can only be instantiated within its own library (effectively making the constructor private)?",
+    "options": {
+      "A": "base",
+      "B": "sealed",
+      "C": "abstract",
+      "D": "None; you must use a private constructor _()"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'root' library that is automatically imported into every Dart script?",
+    "options": {
+      "A": "dart:io",
+      "B": "dart:core",
+      "C": "dart:async",
+      "D": "dart:math"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Dart command is used to check for common code issues and potential bugs?",
+    "options": {
+      "A": "dart run",
+      "B": "dart analyze",
+      "C": "dart fix",
+      "D": "dart compile"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Canonicalization' of constants in Dart?",
+    "options": {
+      "A": "Renaming constants",
+      "B": "Ensuring that multiple identical 'const' declarations point to the same memory instance",
+      "C": "Deleting unused constants",
+      "D": "Encrypting constants"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a Record with an optional field?",
+    "options": {
+      "A": "({int? x}) record;",
+      "B": "Records do not support optional fields directly; use nullable types within the record",
+      "C": "({int x?}) record;",
+      "D": "record = (x: 1, y: null);"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Method Overriding'?",
+    "options": {
+      "A": "Changing the name of a method",
+      "B": "Providing a new implementation for a method inherited from a superclass",
+      "C": "Creating two methods with the same name",
+      "D": "Deleting a method"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to signal that an overridden method is being intentionally replaced?",
+    "options": {
+      "A": "@override (annotation)",
+      "B": "replace",
+      "C": "new",
+      "D": "super"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'No-Such-Method' error in Dart?",
+    "options": {
+      "A": "A network error",
+      "B": "A runtime error when calling a method that doesn't exist on an object (common with 'dynamic')",
+      "C": "A compiler error",
+      "D": "A database error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to determine if two objects are NOT the same instance in memory?",
+    "options": {
+      "A": "!=",
+      "B": "identical(a, b) == false",
+      "C": "a !== b",
+      "D": "not(a == b)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zone' in Dart's asynchronous programming?",
+    "options": {
+      "A": "A physical area for servers",
+      "B": "An execution context that provides hooks for handling errors and tracking asynchronous tasks",
+      "C": "A type of stream",
+      "D": "A UI container"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to provide a default value for a parameter if none is passed?",
+    "options": {
+      "A": "default",
+      "B": "Assignment operator (=) in the parameter list",
+      "C": "set",
+      "D": "value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Covariance' vs 'Contravariance'?",
+    "options": {
+      "A": "They are different types of lists",
+      "B": "Principles governing how types can be substituted in hierarchies (Dart generally uses covariance for parameters)",
+      "C": "Network protocol terms",
+      "D": "A way to animate views"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DartDoc'?",
+    "options": {
+      "A": "A tool to hire Dart developers",
+      "B": "The documentation generator that turns '///' comments into HTML documentation",
+      "C": "A code editor",
+      "D": "An app store"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you perform 'Type Promotion' in Dart?",
+    "options": {
+      "A": "By paying for a premium version",
+      "B": "By checking a variable's type (e.g., using 'is') within a control flow block",
+      "C": "By using the 'as' keyword",
+      "D": "By restarting the app"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which library provides the 'Process' class to run external system commands?",
+    "options": {
+      "A": "dart:core",
+      "B": "dart:io",
+      "C": "dart:async",
+      "D": "dart:convert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JSON Serialization'?",
+    "options": {
+      "A": "Translating JSON into other languages",
+      "B": "The process of converting a Dart object into a JSON-formatted string",
+      "C": "Decoding a JSON file",
+      "D": "A network security tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Map.unmodifiable()' constructor used for?",
+    "options": {
+      "A": "To create a map that cannot be changed after creation",
+      "B": "To create a constant map",
+      "C": "To create a private map",
+      "D": "To speed up a map"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used to 'Spread' a map into another map?",
+    "options": {
+      "A": "...",
+      "B": "...",
+      "C": "!!",
+      "D": "=>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'StackTrace' object in a catch block?",
+    "options": {
+      "A": "To see the user's name",
+      "B": "To see the sequence of function calls that led to the error",
+      "C": "To clear the cache",
+      "D": "To restart the function"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool allows you to automatically fix minor code issues and migration tasks?",
+    "options": {
+      "A": "dart run",
+      "B": "dart fix",
+      "C": "dart analyze",
+      "D": "dart build"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Soundness' in the Dart type system?",
+    "options": {
+      "A": "A feature for audio processing",
+      "B": "A guarantee that an expression never evaluates to a value that doesn't match its static type",
+      "C": "A network security feature",
+      "D": "A way to write code faster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Dart library is required to use C-style pointers and call functions in native C/C++ libraries?",
+    "options": {
+      "A": "dart:io",
+      "B": "dart:ffi",
+      "C": "dart:native",
+      "D": "dart:convert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Finalizer' class used for in Dart?",
+    "options": {
+      "A": "To mark a class as final",
+      "B": "To run a callback when an object is garbage collected, often to clean up native memory",
+      "C": "To end a network connection",
+      "D": "To stop a stream"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Dart 3.0, which pattern is used to check if a value matches a specific structure and bind its values to variables simultaneously?",
+    "options": {
+      "A": "Destructuring pattern",
+      "B": "Matching pattern",
+      "C": "Logical pattern",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does the 'base' class modifier do in Dart 3.0?",
+    "options": {
+      "A": "Allows the class to be implemented but not extended",
+      "B": "Enforces that all subclasses must also be marked as base, final, or sealed",
+      "C": "Makes the class a singleton",
+      "D": "Prevents any inheritance"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature in Dart 3.x provides a 'zero-cost' way to add a new interface to an existing type?",
+    "options": {
+      "A": "Mixins",
+      "B": "Extension types",
+      "C": "Wrappers",
+      "D": "Typedefs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JIT' (Just-In-Time) compilation primarily used for in Dart development?",
+    "options": {
+      "A": "Optimizing the app for the App Store",
+      "B": "Enabling features like Hot Reload during development",
+      "C": "Reducing the battery consumption of the app",
+      "D": "Encrypting the source code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AOT' (Ahead-Of-Time) compilation used for?",
+    "options": {
+      "A": "Speeding up the development cycle",
+      "B": "Compiling Dart code into native machine code for high performance in production",
+      "C": "Debugging the app",
+      "D": "Translating Dart to Javascript"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to determine if two Dart constant objects are identical in memory?",
+    "options": {
+      "A": "identical(a, b)",
+      "B": "a == b",
+      "C": "a === b",
+      "D": "a.isSame(b)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'External' keyword in a function declaration?",
+    "options": {
+      "A": "To make the function public",
+      "B": "To indicate the function body is implemented in another file or natively",
+      "C": "To call a function from another app",
+      "D": "To use a global variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Dart 3.0 feature allows you to use 'when' to add extra conditions to a switch case?",
+    "options": {
+      "A": "Switch guards",
+      "B": "Logic switch",
+      "C": "Case filters",
+      "D": "Pattern matching"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you access the second element of a Record named 'myRecord' defined as (int, String)?",
+    "options": {
+      "A": "myRecord[1]",
+      "B": "myRecord.$2",
+      "C": "myRecord.field2",
+      "D": "myRecord.second"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tree Shaking' in the Dart compiler?",
+    "options": {
+      "A": "Removing empty folders",
+      "B": "Dead-code elimination that removes unused functions and classes from the final binary",
+      "C": "A way to organize project files",
+      "D": "A performance test for the CPU"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Soundness' in the context of Dart’s type system?",
+    "options": {
+      "A": "The quality of the audio engine",
+      "B": "The guarantee that a variable’s value always matches its static type",
+      "C": "The ability to run on multiple platforms",
+      "D": "A way to write code faster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is used to profile memory leaks and CPU usage in a Dart application?",
+    "options": {
+      "A": "Logcat",
+      "B": "Dart DevTools",
+      "C": "Android Studio Profiler",
+      "D": "Terminal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Canonicalization' of constants in Dart?",
+    "options": {
+      "A": "Converting variables to constants",
+      "B": "Ensuring that multiple identical 'const' instances share the same memory address",
+      "C": "Deleting unused constants",
+      "D": "Naming constants correctly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property wrapper (introduced in Dart 3) allows for returning values that are exhaustive in a switch?",
+    "options": {
+      "A": "final",
+      "B": "sealed",
+      "C": "base",
+      "D": "abstract"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Zone' class in Dart?",
+    "options": {
+      "A": "To handle time zones",
+      "B": "To create an execution context that can handle errors and track async tasks",
+      "C": "To define a UI area",
+      "D": "To manage app permissions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Record, what is the syntax for a named field?",
+    "options": {
+      "A": "(label: value)",
+      "B": "(label = value)",
+      "C": "(label -> value)",
+      "D": "(label => value)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Isolate.run()' used for?",
+    "options": {
+      "A": "To run the app",
+      "B": "A shorthand to run a function in a separate isolate and return the result",
+      "C": "To start a timer",
+      "D": "To clear the cache"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator allows you to access a property of an object only if the object is NOT null?",
+    "options": {
+      "A": "?.",
+      "B": "??",
+      "C": "!!",
+      "D": "=>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of a comparison between two different records with the same values? (e.g., (1, 2) == (1, 2))",
+    "options": {
+      "A": "false",
+      "B": "true",
+      "C": "Error",
+      "D": "null"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is the root of the exception hierarchy that should NOT be caught by standard app logic?",
+    "options": {
+      "A": "Exception",
+      "B": "Error",
+      "C": "Problem",
+      "D": "Failure"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Method Tear-off'?",
+    "options": {
+      "A": "Deleting a method",
+      "B": "Assigning a method to a variable without calling it",
+      "C": "Separating a class into files",
+      "D": "Closing a stream"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to declare a variable that is constant for its whole lifecycle but is NOT a compile-time constant?",
+    "options": {
+      "A": "const",
+      "B": "final",
+      "C": "var",
+      "D": "static"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Symbol' type used for in Dart?",
+    "options": {
+      "A": "To draw icons",
+      "B": "To refer to identifiers in the source code during reflection (dart:mirrors)",
+      "C": "To encrypt data",
+      "D": "To define math characters"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which collection type is best for ensuring no duplicate elements are stored?",
+    "options": {
+      "A": "List",
+      "B": "Set",
+      "C": "Map",
+      "D": "Queue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'late' keyword in null-safe Dart?",
+    "options": {
+      "A": "To make a function run later",
+      "B": "To declare a non-nullable variable that will be initialized after its declaration",
+      "C": "To handle network latency",
+      "D": "To mark a function as deprecated"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to provide values from a Stream-generating function (async*)?",
+    "options": {
+      "A": "return",
+      "B": "yield",
+      "C": "emit",
+      "D": "provide"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shadowing' in Dart?",
+    "options": {
+      "A": "A visual shadow effect",
+      "B": "When a local variable has the same name as a variable in an outer scope, making the outer one inaccessible",
+      "C": "A database backup",
+      "D": "A way to hide private code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is the logical AND in Dart?",
+    "options": {
+      "A": "&",
+      "B": "&&",
+      "C": "and",
+      "D": "||"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the base class for all data types that can be sent between Isolates?",
+    "options": {
+      "A": "Object",
+      "B": "Sendable (conceptually, most primitive types and SendPorts)",
+      "C": "IsolateData",
+      "D": "Dynamic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'dart:mirrors'?",
+    "options": {
+      "A": "To create UI themes",
+      "B": "To provide runtime reflection (not available in Flutter)",
+      "C": "To optimize images",
+      "D": "To manage app mirrors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to convert an object into its string representation?",
+    "options": {
+      "A": ".asString()",
+      "B": ".toString()",
+      "C": ".text()",
+      "D": ".print()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'covariant' keyword?",
+    "options": {
+      "A": "To make a variable constant",
+      "B": "To allow a method parameter to be narrowed to a more specific type in a subclass",
+      "C": "To handle network traffic",
+      "D": "To make code thread-safe"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to check if an object is of a certain type?",
+    "options": {
+      "A": "as",
+      "B": "is",
+      "C": "typeOf",
+      "D": "instanceOf"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Spread' operator used for in Dart collections?",
+    "options": {
+      "A": "To split a list",
+      "B": "To insert all elements of another collection into the current one",
+      "C": "To count elements",
+      "D": "To reverse a list"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to allow a class to be used as a mixin in other classes?",
+    "options": {
+      "A": "mixin",
+      "B": "with",
+      "C": "include",
+      "D": "base"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you define a function that takes a variable number of arguments in Dart?",
+    "options": {
+      "A": "func(...args)",
+      "B": "Dart doesn't support varargs directly; use a List as a parameter",
+      "C": "func(args[])",
+      "D": "func(*args)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'null ?? 10' in Dart?",
+    "options": {
+      "A": "null",
+      "B": "10",
+      "C": "Error",
+      "D": "0"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is used to automatically format Dart code according to official guidelines?",
+    "options": {
+      "A": "dart fix",
+      "B": "dart format",
+      "C": "dart analyze",
+      "D": "dart compile"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to initialize a new Git repository in an existing directory?",
+    "options": {
+      "A": "git start",
+      "B": "git init",
+      "C": "git create",
+      "D": "git new"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Staging Area' in Git?",
+    "options": {
+      "A": "A place where deleted files are stored",
+      "B": "An intermediate area where changes are gathered before being committed",
+      "C": "The remote server where code is hosted",
+      "D": "A backup of the main branch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command moves changes from the working directory to the staging area?",
+    "options": {
+      "A": "git commit",
+      "B": "git add",
+      "C": "git push",
+      "D": "git save"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the command 'git commit -m \"message\"' do?",
+    "options": {
+      "A": "Uploads code to GitHub",
+      "B": "Records the staged changes as a new snapshot in the local repository history",
+      "C": "Creates a new branch",
+      "D": "Deletes local changes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to view the commit history of a repository?",
+    "options": {
+      "A": "git status",
+      "B": "git log",
+      "C": "git history",
+      "D": "git diff"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Merge Conflict'?",
+    "options": {
+      "A": "When the internet connection fails during a push",
+      "B": "When Git cannot automatically resolve differences in code between two merging branches",
+      "C": "When a developer deletes the .git folder",
+      "D": "When the local and remote repositories have the same name"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to create a new branch named 'feature'?",
+    "options": {
+      "A": "git branch -n feature",
+      "B": "git checkout -b feature",
+      "C": "git new-branch feature",
+      "D": "git switch -create feature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'git fetch' and 'git pull'?",
+    "options": {
+      "A": "Pull is faster than fetch",
+      "B": "Fetch gets data from remote without merging; Pull gets data and merges it into the local branch",
+      "C": "Fetch is for images, Pull is for code",
+      "D": "They are identical commands"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to upload local repository content to a remote repository?",
+    "options": {
+      "A": "git upload",
+      "B": "git push",
+      "C": "git sync",
+      "D": "git export"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'HEAD' represent in Git?",
+    "options": {
+      "A": "The very first commit in the repository",
+      "B": "A pointer to the latest commit in the currently checked-out branch",
+      "C": "The top-level directory of the project",
+      "D": "The administrator of the GitHub organization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to temporarily shelve (save) changes to work on something else without committing?",
+    "options": {
+      "A": "git pause",
+      "B": "git stash",
+      "C": "git hide",
+      "D": "git freeze"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a '.gitignore' file?",
+    "options": {
+      "A": "To list the names of the developers",
+      "B": "To specify intentionally untracked files (like build artifacts or secrets) that Git should ignore",
+      "C": "To delete files from the local computer",
+      "D": "To hide the repository from the public"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to download an existing repository from a remote URL to your local machine?",
+    "options": {
+      "A": "git copy",
+      "B": "git clone",
+      "C": "git download",
+      "D": "git fork"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'git remote -v' do?",
+    "options": {
+      "A": "Displays the version of Git",
+      "B": "Lists the URLs of the remote repositories linked to the local project",
+      "C": "Verifies the project's security",
+      "D": "Changes the remote server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the command to undo the most recent commit while keeping the changes in the staging area?",
+    "options": {
+      "A": "git reset --hard HEAD~1",
+      "B": "git reset --soft HEAD~1",
+      "C": "git undo",
+      "D": "git revert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to integrate changes from one branch (e.g., feature) into another (e.g., main)?",
+    "options": {
+      "A": "git combine",
+      "B": "git merge",
+      "C": "git join",
+      "D": "git link"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Rebasing' in Git?",
+    "options": {
+      "A": "Deleting the base of the project",
+      "B": "Moving or combining a sequence of commits to a new base commit to maintain a linear history",
+      "C": "Changing the repository's name",
+      "D": "Restarting the commit count"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command shows the differences between the working directory and the staging area?",
+    "options": {
+      "A": "git status",
+      "B": "git diff",
+      "C": "git compare",
+      "D": "git show"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Fork' in platforms like GitHub/GitLab?",
+    "options": {
+      "A": "A merge conflict",
+      "B": "A personal copy of another user's repository that lives in your account",
+      "C": "A way to delete code",
+      "D": "A branch within the same repository"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to pick a specific commit from one branch and apply it to another?",
+    "options": {
+      "A": "git copy-commit",
+      "B": "git cherry-pick",
+      "C": "git grab",
+      "D": "git select"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'git status' display?",
+    "options": {
+      "A": "The internet speed",
+      "B": "The state of the working directory and the staging area (untracked vs tracked files)",
+      "C": "The names of all branches",
+      "D": "The total size of the repository"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'git revert'?",
+    "options": {
+      "A": "To delete the history",
+      "B": "To create a new commit that undoes the changes of a previous commit without altering history",
+      "C": "To go back to a previous version and stay there",
+      "D": "To refresh the remote server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to delete a local branch named 'old-feature'?",
+    "options": {
+      "A": "git delete old-feature",
+      "B": "git branch -d old-feature",
+      "C": "git remove-branch old-feature",
+      "D": "git branch -x old-feature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pull Request' (PR)?",
+    "options": {
+      "A": "A request to download code",
+      "B": "A proposed set of changes to a repository, submitted by a user and reviewed by collaborators",
+      "C": "An error message from the server",
+      "D": "A way to force code into the main branch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'git checkout .' do?",
+    "options": {
+      "A": "Commits all changes",
+      "B": "Discards all local changes in the working directory and reverts to the last committed state",
+      "C": "Checks out all branches",
+      "D": "Creates a new repository"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to add a remote named 'origin' with a specific URL?",
+    "options": {
+      "A": "git remote add origin <url>",
+      "B": "git add remote origin <url>",
+      "C": "git link <url>",
+      "D": "git remote connect origin <url>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fast-forward' merge?",
+    "options": {
+      "A": "A merge that skips the testing phase",
+      "B": "A merge where Git simply moves the branch pointer forward because no new commits exist on the target branch",
+      "C": "A merge that happens instantly",
+      "D": "A way to skip the staging area"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to view a brief, one-line version of the commit log?",
+    "options": {
+      "A": "git log --short",
+      "B": "git log --oneline",
+      "C": "git status --summary",
+      "D": "git log --brief"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Git Tag' used for?",
+    "options": {
+      "A": "To organize the code folders",
+      "B": "To mark specific points in history as important, typically used for version releases (e.g., v1.0)",
+      "C": "To search for text in the project",
+      "D": "To assign tasks to developers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to switch from the current branch to a branch named 'develop'?",
+    "options": {
+      "A": "git change develop",
+      "B": "git checkout develop (or git switch develop)",
+      "C": "git go develop",
+      "D": "git branch develop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'git blame'?",
+    "options": {
+      "A": "To find bugs automatically",
+      "B": "To see who made changes to each line of a file and in which commit",
+      "C": "To report a developer to HR",
+      "D": "To check for performance issues"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to rename the current branch?",
+    "options": {
+      "A": "git branch -m <new_name>",
+      "B": "git rename <new_name>",
+      "C": "git branch -n <new_name>",
+      "D": "git checkout -m <new_name>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'GitFlow'?",
+    "options": {
+      "A": "A tool to visualize Git history",
+      "B": "A popular branching model/workflow for managing large projects and releases",
+      "C": "A command to speed up Git",
+      "D": "A cloud hosting service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command shows the metadata and content changes of a specific commit?",
+    "options": {
+      "A": "git log",
+      "B": "git show <commit_id>",
+      "C": "git view <commit_id>",
+      "D": "git inspect <commit_id>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'git reflog' do?",
+    "options": {
+      "A": "Shows a log of all text changes",
+      "B": "Keeps a log of every change to the local HEAD, useful for recovering 'lost' commits",
+      "C": "Refactors the code automatically",
+      "D": "Logs the network activity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Submodule' in Git?",
+    "options": {
+      "A": "A private branch",
+      "B": "A Git repository embedded inside another Git repository",
+      "C": "A type of merge conflict",
+      "D": "A small part of a file"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to combine multiple commits into one during an interactive rebase?",
+    "options": {
+      "A": "squash",
+      "B": "merge",
+      "C": "join",
+      "D": "compress"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Detached HEAD' state?",
+    "options": {
+      "A": "When the project is missing the main file",
+      "B": "When you have checked out a specific commit rather than a branch",
+      "C": "When the remote server is down",
+      "D": "When the local repository is corrupted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command removes untracked files from the working directory?",
+    "options": {
+      "A": "git remove",
+      "B": "git clean",
+      "C": "git delete",
+      "D": "git clear"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SSH' used for in Git?",
+    "options": {
+      "A": "To compress code",
+      "B": "To securely communicate with remote repositories using public/private key pairs",
+      "C": "To write code on the server",
+      "D": "To manage app versions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command lists all the local branches in the current repository?",
+    "options": {
+      "A": "git branch",
+      "B": "git list",
+      "C": "git show-branches",
+      "D": "git remote"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of 'git log -p'?",
+    "options": {
+      "A": "Shows only the names of files changed",
+      "B": "Shows the commit log along with the full diff (patches) for each commit",
+      "C": "Shows the history of a specific person",
+      "D": "Shows the log in a PDF format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to abort a merge that resulted in conflicts?",
+    "options": {
+      "A": "git merge --stop",
+      "B": "git merge --abort",
+      "C": "git reset --merge",
+      "D": "git cancel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Upstream' in Git?",
+    "options": {
+      "A": "The latest commit",
+      "B": "The default remote branch that your local branch is tracking",
+      "C": "The main developer of the project",
+      "D": "A higher version of Git"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to see what has changed in the staging area relative to the last commit?",
+    "options": {
+      "A": "git diff",
+      "B": "git diff --staged (or --cached)",
+      "C": "git show staging",
+      "D": "git status --diff"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'git config --global user.name \"Name\"' do?",
+    "options": {
+      "A": "Creates a new user account on GitHub",
+      "B": "Sets the identity for every commit made by the user on that machine",
+      "C": "Changes the name of the repository",
+      "D": "Renames the current branch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Blob' in Git's internal storage?",
+    "options": {
+      "A": "A large binary file",
+      "B": "The object type used to store the content of a single file",
+      "C": "An error in the database",
+      "D": "A type of branch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to apply stashed changes back to the working directory and remove them from the stash list?",
+    "options": {
+      "A": "git stash apply",
+      "B": "git stash pop",
+      "C": "git stash restore",
+      "D": "git stash use"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Three-way merge'?",
+    "options": {
+      "A": "Merging three branches at once",
+      "B": "A merge strategy that uses a common ancestor and the two branch tips to create a new merge commit",
+      "C": "A merge involving three developers",
+      "D": "A way to resolve a conflict manually"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'git checkout HEAD~2' do?",
+    "options": {
+      "A": "Deletes the last two commits",
+      "B": "Moves the working directory state to two commits before the current one",
+      "C": "Creates two new branches",
+      "D": "Pushes the last two commits to the server"
+    },
+    "answer": "B"
+  }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "Dart"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

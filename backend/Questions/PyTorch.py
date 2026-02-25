@@ -1,0 +1,2058 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+    {
+        "question": "What is the primary data structure in PyTorch?",
+        "options": {
+            "A": "List",
+            "B": "DataFrame",
+            "C": "Tensor",
+            "D": "Matrix"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which library is PyTorch's tensor API most similar to?",
+        "options": {
+            "A": "Pandas",
+            "B": "NumPy",
+            "C": "Scikit-learn",
+            "D": "Matplotlib"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you create a tensor from a Python list?",
+        "options": {
+            "A": "torch.list_to_tensor(data)",
+            "B": "torch.tensor(data)",
+            "C": "torch.new(data)",
+            "D": "torch.from_list(data)"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which attribute is used to check the shape of a tensor?",
+        "options": {
+            "A": ".size()",
+            "B": ".shape",
+            "C": "Both A and B",
+            "D": ".dim()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does 'torch.cuda.is_available()' return?",
+        "options": {
+            "A": "The number of GPUs",
+            "B": "A boolean indicating if a GPU is accessible",
+            "C": "The CUDA version",
+            "D": "The GPU memory limit"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you move a tensor to a GPU?",
+        "options": {
+            "A": "tensor.cuda()",
+            "B": "tensor.to('cuda')",
+            "C": "Both A and B",
+            "D": "tensor.move('gpu')"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the 'autograd' package in PyTorch?",
+        "options": {
+            "A": "Automatic data loading",
+            "B": "Automatic differentiation for gradient-based optimization",
+            "C": "Automatic model architecture search",
+            "D": "Automatic GPU memory management"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which flag should be set to True on a tensor to track operations for gradient calculation?",
+        "options": {
+            "A": "requires_grad",
+            "B": "track_grad",
+            "C": "trainable",
+            "D": "enable_autograd"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "How do you compute the gradients of a loss with respect to tensors?",
+        "options": {
+            "A": "loss.backward()",
+            "B": "torch.gradient(loss)",
+            "C": "autograd.compute(loss)",
+            "D": "loss.calculate_grads()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does 'torch.no_grad()' do?",
+        "options": {
+            "A": "Deletes the gradients",
+            "B": "Disables gradient calculation to save memory during inference",
+            "C": "Initializes gradients to zero",
+            "D": "Stops the training loop"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method is used to resize or reshape a tensor in PyTorch?",
+        "options": {
+            "A": ".reshape()",
+            "B": ".view()",
+            "C": "Both A and B",
+            "D": ".resize_tensor()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the result of 'torch.matmul(A, B)'?",
+        "options": {
+            "A": "Element-wise multiplication",
+            "B": "Matrix multiplication",
+            "C": "Addition of two matrices",
+            "D": "Dot product of vectors only"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you zero out the gradients of an optimizer?",
+        "options": {
+            "A": "optimizer.zero_grad()",
+            "B": "torch.clear_grads()",
+            "C": "optimizer.reset()",
+            "D": "loss.zero()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the base class for all neural network modules in PyTorch?",
+        "options": {
+            "A": "torch.Layer",
+            "B": "torch.nn.Module",
+            "C": "torch.Net",
+            "D": "torch.nn.Base"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is typically used as an activation function in PyTorch?",
+        "options": {
+            "A": "torch.nn.ReLU()",
+            "B": "torch.nn.Sigmoid()",
+            "C": "torch.nn.Tanh()",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the difference between 'tensor.view()' and 'tensor.reshape()'?",
+        "options": {
+            "A": "view() only works on contiguous tensors; reshape() handles both",
+            "B": "reshape() is faster than view()",
+            "C": "view() creates a copy; reshape() creates a view",
+            "D": "There is no difference"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which method performs an in-place addition in PyTorch?",
+        "options": {
+            "A": "tensor.add(other)",
+            "B": "tensor.add_(other)",
+            "C": "tensor.plus(other)",
+            "D": "tensor.sum(other)"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'torch.ones(2, 3)' create?",
+        "options": {
+            "A": "A tensor of shape (2, 3) filled with zeros",
+            "B": "A tensor of shape (2, 3) filled with ones",
+            "C": "A tensor of shape (3, 2) filled with ones",
+            "D": "A identity matrix of size 2x3"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you convert a PyTorch tensor to a NumPy array?",
+        "options": {
+            "A": "tensor.to_numpy()",
+            "B": "tensor.numpy()",
+            "C": "np.array(tensor)",
+            "D": "torch.as_numpy(tensor)"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'computational graph' in PyTorch?",
+        "options": {
+            "A": "A visualization of the network",
+            "B": "A directed acyclic graph representing the operations performed on tensors to compute gradients",
+            "C": "A plot of the loss function",
+            "D": "The hardware layout of the GPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function creates a tensor with values drawn from a normal distribution?",
+        "options": {
+            "A": "torch.randn()",
+            "B": "torch.rand()",
+            "C": "torch.normal()",
+            "D": "Both A and C"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the purpose of 'torch.utils.data.DataLoader'?",
+        "options": {
+            "A": "To download datasets from the internet",
+            "B": "To provide iterable access to a dataset with support for batching and shuffling",
+            "C": "To compress data for storage",
+            "D": "To visualize image data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you specify the device (CPU or GPU) at the start of a script?",
+        "options": {
+            "A": "device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')",
+            "B": "torch.set_device('gpu')",
+            "C": "import cuda",
+            "D": "device = 'gpu'"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does the 'item()' method do?",
+        "options": {
+            "A": "Returns a list of tensor values",
+            "B": "Returns the value of a single-element tensor as a standard Python number",
+            "C": "Deletes the tensor",
+            "D": "Returns the first row of a tensor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which PyTorch module contains common loss functions?",
+        "options": {
+            "A": "torch.optim",
+            "B": "torch.nn",
+            "C": "torch.losses",
+            "D": "torch.autograd"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'broadcasting' in PyTorch?",
+        "options": {
+            "A": "Sending data to multiple GPUs",
+            "B": "Automatically expanding tensor dimensions for element-wise operations between tensors of different shapes",
+            "C": "Printing tensor values to the console",
+            "D": "Updating weights across all layers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you concatenate two tensors along a specific dimension?",
+        "options": {
+            "A": "torch.merge(t1, t2)",
+            "B": "torch.cat((t1, t2), dim=0)",
+            "C": "torch.join(t1, t2)",
+            "D": "t1.add(t2)"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'torch.squeeze()'?",
+        "options": {
+            "A": "To compress the tensor memory",
+            "B": "To remove all dimensions of size 1 from a tensor",
+            "C": "To flatten the tensor into 1D",
+            "D": "To normalize the values"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'state_dict' in PyTorch?",
+        "options": {
+            "A": "A dictionary mapping each layer to its trainable parameters (weights and biases)",
+            "B": "A summary of the model's accuracy",
+            "C": "The source code of the model",
+            "D": "A list of training hyperparameters"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "How do you save a model's weights to a file?",
+        "options": {
+            "A": "torch.save(model.state_dict(), 'path.pth')",
+            "B": "model.store('path.pth')",
+            "C": "torch.export(model)",
+            "D": "pickle.dump(model)"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Dropout' used for in PyTorch neural networks?",
+        "options": {
+            "A": "To speed up training",
+            "B": "To prevent overfitting by randomly zeroing some channels during training",
+            "C": "To remove unused layers",
+            "D": "To normalize the input data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which optimizer implementation is widely used for deep learning in PyTorch?",
+        "options": {
+            "A": "torch.optim.SGD",
+            "B": "torch.optim.Adam",
+            "C": "Both A and B",
+            "D": "torch.optim.GradientDescent"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does 'model.train()' do?",
+        "options": {
+            "A": "Starts the training loop",
+            "B": "Sets the module in training mode (affects layers like Dropout and BatchNorm)",
+            "C": "Computes the gradients",
+            "D": "Updates the weights"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'model.eval()' do?",
+        "options": {
+            "A": "Evaluates the model's accuracy",
+            "B": "Sets the module in evaluation mode (disables Dropout and changes BatchNorm behavior)",
+            "C": "Calculates the loss function",
+            "D": "Freezes all parameters"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mean Squared Error' (MSE) loss typically used for?",
+        "options": {
+            "A": "Classification tasks",
+            "B": "Regression tasks",
+            "C": "Clustering",
+            "D": "Generative models"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'torch.nn.Linear'?",
+        "options": {
+            "A": "To create a 1D tensor",
+            "B": "To apply a linear transformation ($y = xA^T + b$) to incoming data",
+            "C": "To draw a straight line graph",
+            "D": "To normalize data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the function of the 'forward' method in a PyTorch nn.Module?",
+        "options": {
+            "A": "To define the backward pass",
+            "B": "To define the computation performed at every call (input to output logic)",
+            "C": "To move the model to the next epoch",
+            "D": "To save the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tensor operation adds a new dimension of size 1 at a specific position?",
+        "options": {
+            "A": "torch.unsqueeze()",
+            "B": "torch.expand()",
+            "C": "torch.view()",
+            "D": "torch.resize()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does 'torch.empty(2, 2)' create?",
+        "options": {
+            "A": "A tensor filled with zeros",
+            "B": "A tensor with uninitialized data (whatever was in memory)",
+            "C": "A null tensor",
+            "D": "An error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stochastic Gradient Descent' (SGD)?",
+        "options": {
+            "A": "A loss function",
+            "B": "An optimization algorithm that updates weights using a small batch of data",
+            "C": "A type of layer",
+            "D": "A data augmentation technique"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'learning rate' in an optimizer?",
+        "options": {
+            "A": "The speed at which the CPU processes data",
+            "B": "A hyperparameter that controls how much to change the model in response to the estimated error",
+            "C": "The number of epochs",
+            "D": "The accuracy of the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which PyTorch sub-library is specifically for computer vision?",
+        "options": {
+            "A": "torchvision",
+            "B": "torchaudio",
+            "C": "torchtext",
+            "D": "torchvideo"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Batch Normalization'?",
+        "options": {
+            "A": "Normalizing the data before it enters the network",
+            "B": "A technique to improve training speed and stability by normalizing layer inputs for each batch",
+            "C": "Sorting data into batches",
+            "D": "A way to reduce the batch size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'torch.device' represent?",
+        "options": {
+            "A": "A physical GPU",
+            "B": "An abstraction representing the location (CPU or specific GPU) where a tensor is allocated",
+            "C": "A network connection",
+            "D": "A storage drive"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you prevent specific layers from being updated during training (Freezing)?",
+        "options": {
+            "A": "layer.requires_grad = False",
+            "B": "layer.freeze()",
+            "C": "layer.eval()",
+            "D": "torch.stop_grad(layer)"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Transfer Learning' in PyTorch?",
+        "options": {
+            "A": "Transferring a model to a different server",
+            "B": "Using a pre-trained model on a new, similar task",
+            "C": "Converting a model to NumPy",
+            "D": "Learning two languages at once"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'optimizer.step()'?",
+        "options": {
+            "A": "Increments the epoch counter",
+            "B": "Updates the model parameters based on the computed gradients",
+            "C": "Calculates the loss",
+            "D": "Shuffles the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function computes the sum of all elements in a tensor?",
+        "options": {
+            "A": "tensor.sum()",
+            "B": "torch.total(tensor)",
+            "C": "tensor.add_all()",
+            "D": "torch.aggregate(tensor)"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "How do you calculate the element-wise exponential of a tensor?",
+        "options": {
+            "A": "torch.exp(tensor)",
+            "B": "tensor.exponential()",
+            "C": "math.exp(tensor)",
+            "D": "tensor**e"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Final question of Batch 1: PyTorch tensors are ______ by default when created on a CPU.",
+        "options": {
+            "A": "Float32",
+            "B": "Int64",
+            "C": "Double",
+            "D": "Boolean"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which layer is used to perform a 2D convolution in PyTorch?",
+        "options": {
+            "A": "torch.nn.Conv2d",
+            "B": "torch.nn.Linear",
+            "C": "torch.nn.MaxPool2d",
+            "D": "torch.nn.Flatten"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of 'torch.nn.MaxPool2d'?",
+        "options": {
+            "A": "To add more features to the image",
+            "B": "To reduce the spatial dimensions (height and width) of the input volume",
+            "C": "To normalize the pixel values",
+            "D": "To increase the number of channels"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a CNN, what does the 'stride' parameter control?",
+        "options": {
+            "A": "The size of the filter",
+            "B": "The amount the filter moves (steps) across the input image",
+            "C": "The amount of zero-padding",
+            "D": "The number of output channels"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'padding' in a convolutional layer used for?",
+        "options": {
+            "A": "To make the image look better",
+            "B": "To control the spatial size of the output, often to keep it the same as the input",
+            "C": "To add random noise",
+            "D": "To speed up calculation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which layer is typically used to convert a multi-dimensional tensor into a 1D tensor before a Fully Connected layer?",
+        "options": {
+            "A": "torch.nn.Flatten",
+            "B": "torch.nn.Dropout",
+            "C": "torch.nn.ReLU",
+            "D": "torch.nn.Softmax"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which class would you use to build a Recurrent Neural Network (RNN) cell?",
+        "options": {
+            "A": "torch.nn.RNN",
+            "B": "torch.nn.LSTM",
+            "C": "torch.nn.GRU",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What does 'LSTM' stand for?",
+        "options": {
+            "A": "Long Short-Term Memory",
+            "B": "Linear Sequential Tensor Model",
+            "C": "Large Scale Training Module",
+            "D": "Layered Soft Thresholding Mechanism"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the primary advantage of GRU or LSTM over a standard RNN?",
+        "options": {
+            "A": "They are faster to compute",
+            "B": "They effectively mitigate the vanishing gradient problem in long sequences",
+            "C": "They require less memory",
+            "D": "They don't use weights"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which loss function is most commonly used for multi-class classification tasks?",
+        "options": {
+            "A": "torch.nn.MSELoss",
+            "B": "torch.nn.CrossEntropyLoss",
+            "C": "torch.nn.L1Loss",
+            "D": "torch.nn.BCELoss"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between 'torch.nn.BCELoss' and 'torch.nn.BCEWithLogitsLoss'?",
+        "options": {
+            "A": "BCELoss includes a Sigmoid layer; BCEWithLogitsLoss does not",
+            "B": "BCEWithLogitsLoss includes a Sigmoid layer internally for better numerical stability",
+            "C": "BCELoss is for multi-class tasks",
+            "D": "There is no difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does the 'out_features' parameter in torch.nn.Linear represent?",
+        "options": {
+            "A": "The batch size",
+            "B": "The number of neurons in the current layer (output size)",
+            "C": "The size of the input data",
+            "D": "The learning rate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In PyTorch, a CNN input tensor typically follows which format?",
+        "options": {
+            "A": "(Channels, Height, Width, Batch)",
+            "B": "(Batch, Channels, Height, Width)",
+            "C": "(Height, Width, Channels, Batch)",
+            "D": "(Batch, Height, Width, Channels)"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'torch.nn.Sequential'?",
+        "options": {
+            "A": "To run models in a specific time order",
+            "B": "To wrap multiple layers into a single module where data flows through them in order",
+            "C": "To sort the training data",
+            "D": "To prevent parallel execution"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which activation function is defined by $f(x) = \max(0, x)$?",
+        "options": {
+            "A": "Sigmoid",
+            "B": "ReLU",
+            "C": "Tanh",
+            "D": "Leaky ReLU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Softmax' at the end of a classification network?",
+        "options": {
+            "A": "To make the weights smaller",
+            "B": "To convert raw output scores (logits) into a probability distribution",
+            "C": "To speed up the training",
+            "D": "To calculate the final loss"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'kernel_size' in a Conv2d layer?",
+        "options": {
+            "A": "The number of layers in the GPU",
+            "B": "The spatial dimensions (height and width) of the sliding window/filter",
+            "C": "The number of images in a batch",
+            "D": "The total size of the weights"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which layer applies 'Dropout' to the input?",
+        "options": {
+            "A": "torch.nn.Dropout2d",
+            "B": "torch.nn.Dropout",
+            "C": "Both A and B",
+            "D": "torch.nn.ZeroLayer"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the default behavior of 'CrossEntropyLoss' in PyTorch regarding Softmax?",
+        "options": {
+            "A": "You must apply Softmax manually before passing it to the loss",
+            "B": "It expects raw logits because it combines LogSoftmax and NLLLoss in one class",
+            "C": "It does not use Softmax at all",
+            "D": "It only works on probabilities between 0 and 1"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'dilation' in a convolutional layer?",
+        "options": {
+            "A": "Adding zeros to the edge of an image",
+            "B": "Spacing between kernel elements to increase the receptive field without adding parameters",
+            "C": "Rotating the image",
+            "D": "Changing the batch size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which normalization technique is used for accelerating deep network training by reducing internal covariate shift?",
+        "options": {
+            "A": "torch.nn.BatchNorm2d",
+            "B": "torch.nn.LayerNorm",
+            "C": "torch.nn.InstanceNorm2d",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the output shape of 'torch.nn.Linear(10, 5)' if the input is of shape (32, 10)?",
+        "options": {
+            "A": "(32, 10)",
+            "B": "(32, 5)",
+            "C": "(10, 5)",
+            "D": "(5, 32)"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In an LSTM, what is the 'Hidden State'?",
+        "options": {
+            "A": "The weights that are not visible",
+            "B": "The short-term memory that is passed to the next time step and used for prediction",
+            "C": "The input data",
+            "D": "The layer that calculates the loss"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In an LSTM, what is the 'Cell State'?",
+        "options": {
+            "A": "The long-term memory that flows through the sequence with minor linear interactions",
+            "B": "A temporary storage for gradients",
+            "C": "The bias of the network",
+            "D": "The number of cells in the GPU"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which function allows you to view a model’s parameters and their names?",
+        "options": {
+            "A": "model.parameters()",
+            "B": "model.named_parameters()",
+            "C": "model.dict()",
+            "D": "model.list_weights()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'torch.nn.Identity'?",
+        "options": {
+            "A": "To identify the user",
+            "B": "A placeholder layer that returns the input as is (useful for modular architectures)",
+            "C": "To create a unique ID for the model",
+            "D": "To reset the weights to 1"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which loss function is typically used for Binary Classification?",
+        "options": {
+            "A": "BCELoss",
+            "B": "BCEWithLogitsLoss",
+            "C": "Both A and B",
+            "D": "CrossEntropyLoss"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does the 'groups' parameter in nn.Conv2d allow you to implement?",
+        "options": {
+            "A": "Grouped convolutions (like in AlexNet or ResNeXt)",
+            "B": "Sorting images into groups",
+            "C": "Grouping users by ID",
+            "D": "Parallel training on CPUs"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Global Average Pooling'?",
+        "options": {
+            "A": "A pool shared across the whole internet",
+            "B": "Taking the average of each feature map across all spatial dimensions to get a single value per channel",
+            "C": "A way to average the loss",
+            "D": "A type of data augmentation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method should you use to apply a custom initialization to the weights of a model?",
+        "options": {
+            "A": "model.init()",
+            "B": "model.apply(fn)",
+            "C": "torch.init(model)",
+            "D": "model.set_weights(data)"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'torch.nn.functional' (often imported as F)?",
+        "options": {
+            "A": "To define complex objects",
+            "B": "To provide stateless versions of layers (like F.relu) that don't hold internal parameters",
+            "C": "To store mathematical constants",
+            "D": "To manage file I/O"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Weight Decay' in an optimizer?",
+        "options": {
+            "A": "The weights getting old",
+            "B": "A form of L2 regularization added to the loss function to prevent weights from becoming too large",
+            "C": "Deleting unused weights",
+            "D": "Reducing the learning rate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which layer is used to implement an Embedding for NLP tasks in PyTorch?",
+        "options": {
+            "A": "torch.nn.Embedding",
+            "B": "torch.nn.Linear",
+            "C": "torch.nn.Lookup",
+            "D": "torch.nn.Word2Vec"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'residual connection' (Skip connection)?",
+        "options": {
+            "A": "A connection that skips a day of training",
+            "B": "An architecture where the input is added to the output of a layer (Identity + F(x))",
+            "C": "A shortcut to the database",
+            "D": "A way to skip the loss calculation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which submodule provides pre-trained models like ResNet or VGG?",
+        "options": {
+            "A": "torchvision.models",
+            "B": "torch.layers",
+            "C": "torchvision.zoo",
+            "D": "torch.hub"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of 'torch.nn.init.kaiming_normal_'?",
+        "options": {
+            "A": "To normalize the data",
+            "B": "To initialize weights specifically for layers followed by a ReLU activation",
+            "C": "To create a normal distribution",
+            "D": "To reset the optimizer"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'bidirectional=True' in torch.nn.LSTM do?",
+        "options": {
+            "A": "Processes the sequence twice in the same direction",
+            "B": "Processes the sequence in both forward and backward directions and concatenates the results",
+            "C": "Allows the model to talk back",
+            "D": "Doubles the batch size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Gradient Clipping' used for?",
+        "options": {
+            "A": "To make the gradients look shorter",
+            "B": "To prevent exploding gradients by limiting the maximum norm of the gradients during backpropagation",
+            "C": "To cut the training time",
+            "D": "To remove small gradients"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module allows you to implement a custom dataset by overriding __len__ and __getitem__?",
+        "options": {
+            "A": "torch.utils.data.Dataset",
+            "B": "torch.data.Manager",
+            "C": "torch.utils.data.DataLoader",
+            "D": "torch.DatasetBase"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Transfer Learning' frozen-feature-extraction?",
+        "options": {
+            "A": "Deleting the features",
+            "B": "Using a pre-trained model as a fixed feature extractor and only training the new classification head",
+            "C": "Converting a model to cold storage",
+            "D": "A type of data compression"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Teacher Forcing' in RNN training?",
+        "options": {
+            "A": "The teacher writing the code",
+            "B": "Using the actual target output from the previous time step as input for the current step instead of the model's prediction",
+            "C": "Forcing the model to learn faster",
+            "D": "A type of sharding"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which layer implements 'Layer Normalization'?",
+        "options": {
+            "A": "torch.nn.LayerNorm",
+            "B": "torch.nn.BatchNorm1d",
+            "C": "torch.nn.GroupNorm",
+            "D": "torch.nn.GlobalNorm"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Fine-tuning' in PyTorch?",
+        "options": {
+            "A": "Adjusting the volume of the computer",
+            "B": "Unfreezing parts of a pre-trained model and training it with a very low learning rate on a new dataset",
+            "C": "Removing bugs from the model",
+            "D": "Optimizing the GPU speed"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'torch.nn.AdaptiveAvgPool2d'?",
+        "options": {
+            "A": "To pool data based on the current weather",
+            "B": "To produce an output of a fixed spatial size (e.g., 7x7) regardless of the input size",
+            "C": "To average the weights of multiple models",
+            "D": "To speed up the network"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which submodule provides utilities for image transformation like resizing and cropping?",
+        "options": {
+            "A": "torchvision.transforms",
+            "B": "torch.images",
+            "C": "torchvision.utils",
+            "D": "torchvision.processing"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'Vanishing Gradient'?",
+        "options": {
+            "A": "Gradients that are too large",
+            "B": "Gradients that become extremely small during backpropagation, causing earlier layers to stop learning",
+            "C": "Gradients that disappear from memory",
+            "D": "A bug in the optimizer"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Attention Mechanism' used for in PyTorch?",
+        "options": {
+            "A": "To make sure the developer is paying attention",
+            "B": "To allow the model to focus on specific parts of the input sequence when producing an output",
+            "C": "To highlight important layers",
+            "D": "To visualize the neural network"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which class is the modern standard for Multi-Head Attention in PyTorch?",
+        "options": {
+            "A": "torch.nn.MultiheadAttention",
+            "B": "torch.nn.Transformer",
+            "C": "Both A and B",
+            "D": "torch.nn.AttentionLayer"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'One-Hot Encoding'?",
+        "options": {
+            "A": "A very fast type of encoding",
+            "B": "Representing categorical data as binary vectors where only one element is high (1)",
+            "C": "A type of sharding",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which loss function is best for Regression with outliers?",
+        "options": {
+            "A": "MSELoss",
+            "B": "L1Loss (Mean Absolute Error)",
+            "C": "HuberLoss",
+            "D": "Both B and C"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "Final question of Batch 2: What is the 'Log-Sum-Exp' trick used for?",
+        "options": {
+            "A": "To speed up logging",
+            "B": "To prevent numerical overflow/underflow when computing Softmax and CrossEntropy",
+            "C": "To visualize data",
+            "D": "To manage database storage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'TorchScript' in PyTorch?",
+        "options": {
+            "A": "A new programming language for AI",
+            "B": "A way to create serializable and optimizable models from PyTorch code to run in high-performance environments like C++",
+            "C": "A database for storing tensors",
+            "D": "A tool for writing documentation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method is used to convert a dynamic PyTorch model into TorchScript by running a sample input through it?",
+        "options": {
+            "A": "torch.jit.trace()",
+            "B": "torch.jit.script()",
+            "C": "torch.convert()",
+            "D": "torch.optimize()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the difference between 'tracing' and 'scripting' in TorchScript?",
+        "options": {
+            "A": "Tracing captures data-dependent control flow (like if-statements); Scripting does not",
+            "B": "Scripting captures data-dependent control flow by parsing the source code; Tracing only records operations performed",
+            "C": "Tracing is only for GPUs",
+            "D": "There is no difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Data Parallelism' (torch.nn.DataParallel) used for?",
+        "options": {
+            "A": "To copy data across multiple folders",
+            "B": "To split a batch of data across multiple GPUs on a single machine to speed up training",
+            "C": "To run two different models at once",
+            "D": "A type of sharding"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Why is 'DistributedDataParallel' (DDP) generally preferred over 'DataParallel'?",
+        "options": {
+            "A": "It is easier to code",
+            "B": "It uses multi-processing to avoid Python's Global Interpreter Lock (GIL) and supports multi-node training",
+            "C": "It only works on CPUs",
+            "D": "It is a legacy feature"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mixed Precision Training' (torch.cuda.amp)?",
+        "options": {
+            "A": "Training with both CPU and GPU",
+            "B": "Using both Float32 and Float16 data types to speed up training and reduce memory usage without losing accuracy",
+            "C": "Using different learning rates for different layers",
+            "D": "Training on different datasets simultaneously"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the role of 'GradScaler' in Mixed Precision training?",
+        "options": {
+            "A": "To make the gradients larger",
+            "B": "To prevent 'underflow' by scaling the loss before backpropagation when using Float16",
+            "C": "To normalize the data",
+            "D": "To speed up the CPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Model Quantization' in PyTorch?",
+        "options": {
+            "A": "Counting the number of parameters",
+            "B": "Converting model weights and activations from floating point to lower-bit integers (e.g., INT8) for faster inference",
+            "C": "Dividing the model into multiple pieces",
+            "D": "A type of data augmentation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module provides the 'Hook' functionality to inspect gradients or activations during execution?",
+        "options": {
+            "A": "register_forward_hook()",
+            "B": "register_backward_hook()",
+            "C": "Both A and B",
+            "D": "torch.inspect()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of 'torch.hub'?",
+        "options": {
+            "A": "A central server for all PyTorch users",
+            "B": "A repository of pre-trained models that can be easily loaded with one line of code",
+            "C": "A social network for developers",
+            "D": "A hardware component"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Learning Rate Scheduling'?",
+        "options": {
+            "A": "Setting the time for training",
+            "B": "Automatically adjusting the learning rate during the training process (e.g., StepLR, CosineAnnealingLR)",
+            "C": "Measuring how fast the model learns",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to compute the 'Kullback-Leibler (KL) Divergence' loss?",
+        "options": {
+            "A": "torch.nn.KLDivLoss",
+            "B": "torch.nn.MSELoss",
+            "C": "torch.nn.CrossEntropyLoss",
+            "D": "torch.nn.L1Loss"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does 'torch.backends.cudnn.benchmark = True' do?",
+        "options": {
+            "A": "Benchmarks the CPU speed",
+            "B": "Enables the cuDNN auto-tuner to find the best algorithm for your hardware configuration (improves performance)",
+            "C": "Checks for bugs in CUDA",
+            "D": "Ranks the model against others"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pruning' in the context of PyTorch models?",
+        "options": {
+            "A": "Deleting the entire model",
+            "B": "Reducing the size of a model by removing 'unimportant' weights (e.g., those close to zero)",
+            "C": "Removing images from the dataset",
+            "D": "Shortening the training time"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which PyTorch utility is used to combine multiple datasets into one?",
+        "options": {
+            "A": "ConcatDataset",
+            "B": "MergeDataset",
+            "C": "JoinDataset",
+            "D": "MultiDataset"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of 'torch.func' (formerly Functorch)?",
+        "options": {
+            "A": "To write fun code",
+            "B": "To provide JAX-like composable function transforms (vmap, grad, etc.) for PyTorch",
+            "C": "To manage functional layers",
+            "D": "To visualize graphs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'vmap' (Vectorized Map)?",
+        "options": {
+            "A": "A map of vectors",
+            "B": "A transform that automatically vectorizes a function over a batch dimension",
+            "C": "A type of sharding",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Checkpointing' (torch.utils.checkpoint)?",
+        "options": {
+            "A": "Checking the model for errors",
+            "B": "Trading compute for memory by recomputing segments of the model during backward pass instead of storing activations",
+            "C": "Saving the model every hour",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is used for visualizing PyTorch training progress (loss/accuracy curves)?",
+        "options": {
+            "A": "TensorBoard",
+            "B": "Weights & Biases (W&B)",
+            "C": "Both A and B",
+            "D": "Photoshop"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'DistributedSampler'?",
+        "options": {
+            "A": "A person who distributes samples",
+            "B": "Ensures that each GPU in a distributed training setup receives a unique subset of the data",
+            "C": "A type of load balancer",
+            "D": "A data augmentation tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Warmup' in learning rate scheduling?",
+        "options": {
+            "A": "Heating up the GPU",
+            "B": "Starting with a very low learning rate and gradually increasing it to avoid early instability",
+            "C": "A quick training session",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to load a saved model's weights into a model instance?",
+        "options": {
+            "A": "model.load_state_dict(torch.load('file.pth'))",
+            "B": "model.load('file.pth')",
+            "C": "torch.read(model, 'file.pth')",
+            "D": "model.update_weights()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Knowledge Distillation'?",
+        "options": {
+            "A": "A type of sharding",
+            "B": "Training a small 'student' model to mimic the behavior/outputs of a large 'teacher' model",
+            "C": "Extracting information from a database",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the 'ONNX' export in PyTorch?",
+        "options": {
+            "A": "To make the model run only on Linux",
+            "B": "To provide a common format for exchanging models between different AI frameworks (PyTorch, Caffe2, TensorFlow, etc.)",
+            "C": "To compress the model",
+            "D": "To visualize the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'torch.multiprocessing' allow you to do?",
+        "options": {
+            "A": "Run multiple programs at once",
+            "B": "Launch multiple independent Python processes that share PyTorch tensors across memory",
+            "C": "A type of sharding",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Early Stopping'?",
+        "options": {
+            "A": "Stopping the training before it gets too hot",
+            "B": "Ending training when the validation loss stops improving to prevent overfitting",
+            "C": "Stopping the computer",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Label Smoothing'?",
+        "options": {
+            "A": "Making the labels look pretty",
+            "B": "A regularization technique that softens target probabilities (e.g., 0.9 instead of 1.0) to prevent the model from becoming too confident",
+            "C": "A type of data augmentation",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which submodule provides advanced audio processing capabilities?",
+        "options": {
+            "A": "torchaudio",
+            "B": "torch.sound",
+            "C": "torchvision.audio",
+            "D": "torch.wav"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'TorchDynamo'?",
+        "options": {
+            "A": "A new optimizer",
+            "B": "A Python-level JIT compiler that powers PyTorch 2.0's torch.compile",
+            "C": "A type of sharding",
+            "D": "A visualization tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'torch.compile(model)' do in PyTorch 2.0+?",
+        "options": {
+            "A": "Compiles the code into C++",
+            "B": "Automatically optimizes your PyTorch model for faster execution on both CPU and GPU",
+            "C": "Checks for syntax errors",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Inductor' in PyTorch 2.0?",
+        "options": {
+            "A": "A hardware component",
+            "B": "The default deep learning compiler backend for torch.compile",
+            "C": "A type of loss function",
+            "D": "A data augmentation tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Lazy Loading' of datasets?",
+        "options": {
+            "A": "When the developer is too lazy to load data",
+            "B": "Loading data from disk into RAM only when it is needed for the current batch",
+            "C": "A performance metric",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Buffer' in an nn.Module?",
+        "options": {
+            "A": "A temporary storage for data",
+            "B": "Persistent states that are not parameters (don't require gradients) but are part of the state_dict (e.g., BatchNorm running mean)",
+            "C": "A type of sharding",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Gradient Accumulation'?",
+        "options": {
+            "A": "Making the gradients smaller",
+            "B": "Summing gradients over multiple small batches before performing a weight update (simulates a larger batch size)",
+            "C": "A performance test",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Overfitting'?",
+        "options": {
+            "A": "When the model is too small",
+            "B": "When the model learns the noise in the training data too well and performs poorly on new data",
+            "C": "When the model takes too long to train",
+            "D": "A security vulnerability"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Underfitting'?",
+        "options": {
+            "A": "When the model cannot even capture the underlying pattern of the training data",
+            "B": "When the model is too big",
+            "C": "When the training data is too clean",
+            "D": "A type of unit test"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which optimizer is specifically designed to handle large-scale distributed training by adjusting learning rates per layer?",
+        "options": {
+            "A": "LARS (Layer-wise Adaptive Rate Scaling)",
+            "B": "LAMB",
+            "C": "Both A and B",
+            "D": "SGD"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'Profiler' (torch.profiler) used for?",
+        "options": {
+            "A": "To create a user profile",
+            "B": "To analyze the performance (time and memory) of each operation in your PyTorch model",
+            "C": "To check the accuracy",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Triton' in the context of PyTorch 2.0?",
+        "options": {
+            "A": "A moon of Neptune",
+            "B": "An open-source language and compiler for writing highly efficient GPU kernels, used by Inductor",
+            "C": "A type of sharding",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Distributed RPC' (Remote Procedure Call) used for?",
+        "options": {
+            "A": "To call a user",
+            "B": "To execute functions on remote workers across a distributed cluster",
+            "C": "A performance test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function computes the 'Hinge Loss' often used for Support Vector Machines?",
+        "options": {
+            "A": "torch.nn.HingeEmbeddingLoss",
+            "B": "torch.nn.MSELoss",
+            "C": "torch.nn.BCELoss",
+            "D": "torch.nn.SmoothL1Loss"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Stochastic Weight Averaging' (SWA)?",
+        "options": {
+            "A": "Averaging the weight of the computer",
+            "B": "A technique that averages the weights of a model at different training points to improve generalization",
+            "C": "A type of sharding",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Autoprobe' in PyTorch Distributed?",
+        "options": {
+            "A": "Automatically probing for GPUs",
+            "B": "Automatically discovering the best network interface for distributed communication",
+            "C": "A type of unit test",
+            "D": "A security report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'torch.device('meta')' represent?",
+        "options": {
+            "A": "Facebook's cloud",
+            "B": "A device for tensors that have a shape and dtype but no actual data (useful for dry-running architectures)",
+            "C": "A type of sharding",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool allows you to serve PyTorch models via a production-ready REST API?",
+        "options": {
+            "A": "TorchServe",
+            "B": "Flask",
+            "C": "FastAPI",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is 'Vertical Scaling' in a PyTorch training context?",
+        "options": {
+            "A": "Adding more GPUs to a single machine",
+            "B": "Adding more servers to a cluster",
+            "C": "Stacking models",
+            "D": "A type of unit test"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Horizontal Scaling' in a PyTorch training context?",
+        "options": {
+            "A": "Laying the model on its side",
+            "B": "Increasing the number of nodes (machines) in a cluster",
+            "C": "Adding more parameters",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'In-place' operation risk?",
+        "options": {
+            "A": "It can save memory but might break the computational graph needed for gradient calculation",
+            "B": "It is too slow",
+            "C": "It only works on CPUs",
+            "D": "It deletes the model"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which submodule provides pre-trained models for Natural Language Processing (NLP)?",
+        "options": {
+            "A": "torchtext",
+            "B": "torchvision",
+            "C": "torchnlp",
+            "D": "torchword"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Final question of Batch 3: What is the main benefit of the PyTorch 2.0 'torch.compile' feature?",
+        "options": {
+            "A": "It writes the code for you",
+            "B": "It provides out-of-the-box speedups by generating optimized kernels for your model",
+            "C": "It makes the model more accurate",
+            "D": "It replaces the need for a GPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which architecture, introduced by Google and supported natively in PyTorch, is based entirely on Attention mechanisms?",
+        "options": {
+            "A": "CNN",
+            "B": "RNN",
+            "C": "Transformer",
+            "D": "Perceptron"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the role of the 'Discriminator' in a GAN (Generative Adversarial Network)?",
+        "options": {
+            "A": "To create new images",
+            "B": "To distinguish between real images and fake images generated by the Generator",
+            "C": "To normalize the data",
+            "D": "To increase the batch size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the role of the 'Generator' in a GAN?",
+        "options": {
+            "A": "To classify images",
+            "B": "To create fake data that is convincing enough to fool the Discriminator",
+            "C": "To calculate the loss",
+            "D": "To store the weights"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Reinforcement Learning with PyTorch, what does the 'Agent' do?",
+        "options": {
+            "A": "Calculates the gradient",
+            "B": "Interacts with an environment and takes actions to maximize a reward",
+            "C": "Labels the data",
+            "D": "Saves the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Q-Learning' in the context of PyTorch?",
+        "options": {
+            "A": "A type of loss function",
+            "B": "A model-free reinforcement learning algorithm to learn the value of an action in a particular state",
+            "C": "A data augmentation technique",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which layer is used to implement 'Self-Attention' in a Transformer model?",
+        "options": {
+            "A": "torch.nn.MultiheadAttention",
+            "B": "torch.nn.Linear",
+            "C": "torch.nn.Conv1d",
+            "D": "torch.nn.LSTM"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Position Encoding' in Transformers?",
+        "options": {
+            "A": "A way to sort the layers",
+            "B": "Adding information to the input about the relative or absolute position of tokens in a sequence",
+            "C": "A performance metric",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mode Collapse' in GAN training?",
+        "options": {
+            "A": "When the computer crashes",
+            "B": "When the Generator starts producing a very limited variety of outputs (or just one type) that fool the Discriminator",
+            "C": "When the loss reaches zero",
+            "D": "A type of data pruning"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which PyTorch-based library is commonly used for Reinforcement Learning research?",
+        "options": {
+            "A": "TorchRL",
+            "B": "Stable Baselines3",
+            "C": "Ray Rllib",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the 'Experience Replay' buffer used for in Reinforcement Learning?",
+        "options": {
+            "A": "To watch the training again",
+            "B": "To store previous transitions (state, action, reward) to sample and learn from them later, breaking correlation",
+            "C": "To save the model state",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Policy Gradient'?",
+        "options": {
+            "A": "A rule for the company",
+            "B": "A class of RL algorithms that optimize the policy directly by gradient ascent on expected reward",
+            "C": "A type of loss function",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to compute the 'Earth Mover's Distance' (Wasserstein Loss) in WGANs?",
+        "options": {
+            "A": "torch.mean(D_real) - torch.mean(D_fake)",
+            "B": "torch.nn.MSELoss()",
+            "C": "torch.nn.BCELoss()",
+            "D": "torch.abs(real - fake)"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Gradient Penalty' (WGAN-GP) used for?",
+        "options": {
+            "A": "To punish the developer",
+            "B": "To enforce the Lipschitz constraint in Wasserstein GANs for more stable training",
+            "C": "To reduce the learning rate",
+            "D": "A performance test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Attention Masking'?",
+        "options": {
+            "A": "Hiding the model from users",
+            "B": "Preventing the model from 'looking' at future tokens during training (causal mask) or padding tokens",
+            "C": "A security certificate",
+            "D": "A type of data compression"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'BERT' architecture primarily made of?",
+        "options": {
+            "A": "Transformer Encoders",
+            "B": "Transformer Decoders",
+            "C": "LSTMs",
+            "D": "CNNs"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'GPT' architecture primarily made of?",
+        "options": {
+            "A": "Transformer Encoders",
+            "B": "Transformer Decoders",
+            "C": "RNNs",
+            "D": "ResNets"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cross-Attention' in a Transformer?",
+        "options": {
+            "A": "When the model gets confused",
+            "B": "A mechanism where the Decoder attends to the output of the Encoder",
+            "C": "A type of sharding",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'torch.nn.TransformerEncoderLayer'?",
+        "options": {
+            "A": "To encode data into XML",
+            "B": "A single layer of a Transformer encoder consisting of self-attention and feed-forward networks",
+            "C": "A data augmentation tool",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stochastic Policy'?",
+        "options": {
+            "A": "A policy that never changes",
+            "B": "A policy that outputs a probability distribution over actions rather than a single deterministic action",
+            "C": "A type of loss function",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Actor-Critic' architecture?",
+        "options": {
+            "A": "A movie review system",
+            "B": "An RL method where an 'Actor' learns the policy and a 'Critic' learns to evaluate the action taken",
+            "C": "A type of sharding",
+            "D": "A performance test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which activation function is often used in the final layer of a Generator to output values between -1 and 1?",
+        "options": {
+            "A": "Sigmoid",
+            "B": "Tanh",
+            "C": "ReLU",
+            "D": "Leaky ReLU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'DQN' (Deep Q-Network)?",
+        "options": {
+            "A": "A neural network that approximates the Q-value function",
+            "B": "A high-quality network",
+            "C": "A type of dataset",
+            "D": "A security scanner"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the 'Bellman Equation' used for in RL?",
+        "options": {
+            "A": "To calculate the reward",
+            "B": "To recursively define the value of a state or state-action pair",
+            "C": "To update the weights",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Image-to-Image' translation (e.g., Pix2Pix) implemented with?",
+        "options": {
+            "A": "Conditional GANs (cGANs)",
+            "B": "Standard CNNs",
+            "C": "RNNs",
+            "D": "Linear Regression"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'CycleGAN' used for?",
+        "options": {
+            "A": "To recycle old models",
+            "B": "Unpaired image-to-image translation (e.g., turning a photo into a painting without direct pairs)",
+            "C": "To speed up the training cycle",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'U-Net' architecture often used for in PyTorch?",
+        "options": {
+            "A": "Classification",
+            "B": "Image Segmentation",
+            "C": "Text Generation",
+            "D": "Clustering"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function computes the 'Smooth L1 Loss' (Huber Loss)?",
+        "options": {
+            "A": "torch.nn.SmoothL1Loss",
+            "B": "torch.nn.L1Loss",
+            "C": "torch.nn.MSELoss",
+            "D": "torch.nn.CrossEntropyLoss"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Perceptual Loss' in GANs?",
+        "options": {
+            "A": "Loss calculated based on how much the developer likes the image",
+            "B": "Loss calculated using high-level features from a pre-trained network (like VGG) instead of pixel-wise differences",
+            "C": "A type of unit test",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Target Network' in DQN?",
+        "options": {
+            "A": "The network we want to beat",
+            "B": "A periodically updated copy of the main Q-network used to stabilize training by providing static targets",
+            "C": "A performance report",
+            "D": "A type of sharding"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'PPO' (Proximal Policy Optimization)?",
+        "options": {
+            "A": "A popular and stable RL algorithm used by OpenAI for training complex agents",
+            "B": "A type of data compression",
+            "C": "A security scanner",
+            "D": "A hardware protocol"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does 'Exploration vs. Exploitation' mean in RL?",
+        "options": {
+            "A": "Exploring the code vs using it",
+            "B": "Trying new actions to find better rewards vs. using known actions that yield high rewards",
+            "C": "A security scan",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Epsilon-Greedy' strategy?",
+        "options": {
+            "A": "A very greedy developer",
+            "B": "A strategy where the agent chooses a random action with probability epsilon and the best action with probability 1-epsilon",
+            "C": "A type of loss function",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Reward Signal'?",
+        "options": {
+            "A": "A congratulatory email",
+            "B": "A scalar value sent by the environment to the agent indicating the success of an action",
+            "C": "A performance metric",
+            "D": "A database entry"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Discount Factor' ($\gamma$) in RL?",
+        "options": {
+            "A": "A discount on the GPU price",
+            "B": "A value between 0 and 1 that determines the importance of future rewards compared to immediate rewards",
+            "C": "The percentage of data to skip",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Markov Decision Process' (MDP)?",
+        "options": {
+            "A": "A mathematical framework for modeling decision making in situations where outcomes are partly random",
+            "B": "A type of neural network",
+            "C": "A security protocol",
+            "D": "A data augmentation tool"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Self-Supervised Learning'?",
+        "options": {
+            "A": "The model teaching itself",
+            "B": "A form of unsupervised learning where the data provides the supervision (e.g., predicting the next word in a sentence)",
+            "C": "A performance test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Contrastive Learning' (e.g., SimCLR)?",
+        "options": {
+            "A": "A type of sharding",
+            "B": "A technique that learns representations by contrasting similar pairs against dissimilar pairs",
+            "C": "A performance test",
+            "D": "A security scanner"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which PyTorch tool allows for model 'Profiling' on mobile devices?",
+        "options": {
+            "A": "PyTorch Mobile Profiler",
+            "B": "Android Studio",
+            "C": "Xcode",
+            "D": "Chrome DevTools"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'TorchVision' 'Models' subpackage?",
+        "options": {
+            "A": "A place for fashion models",
+            "B": "A collection of pre-trained state-of-the-art architectures for computer vision",
+            "C": "A type of sharding",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Data Augmentation' in Computer Vision?",
+        "options": {
+            "A": "Adding more cameras",
+            "B": "Artificially increasing the size of a dataset by creating modified versions of images (rotations, flips, color shifts)",
+            "C": "A performance report",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Triplet Loss'?",
+        "options": {
+            "A": "A loss for three models",
+            "B": "A loss function that minimizes the distance between an anchor and a positive sample while maximizing the distance to a negative sample",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'CLIP' (Contrastive Language-Image Pre-training) by OpenAI?",
+        "options": {
+            "A": "A video editor",
+            "B": "A model that learns visual concepts from natural language supervision",
+            "C": "A type of sharding",
+            "D": "A performance metric"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Zero-Shot' Learning?",
+        "options": {
+            "A": "A model that never fires",
+            "B": "The ability of a model to perform a task it was not explicitly trained to do (e.g., identifying a category never seen in training)",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Few-Shot' Learning?",
+        "options": {
+            "A": "A model trained on very few examples (e.g., 1-5 images per class)",
+            "B": "A model that fails often",
+            "C": "A type of sharding",
+            "D": "A performance report"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which submodule provides pre-built Transformer components like 'TransformerEncoder'?",
+        "options": {
+            "A": "torch.nn",
+            "B": "torch.transformers",
+            "C": "torch.layers",
+            "D": "torch.nlp"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Autoregressive' model?",
+        "options": {
+            "A": "A model that drives itself",
+            "B": "A model that uses its own previous outputs as inputs for the next step (common in text generation)",
+            "C": "A performance test",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Beam Search'?",
+        "options": {
+            "A": "Searching with a laser",
+            "B": "A heuristic search algorithm that explores multiple high-probability paths in sequence generation, rather than just the single best (greedy)",
+            "C": "A type of sharding",
+            "D": "A security scanner"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cross-Entropy' loss measuring?",
+        "options": {
+            "A": "The physical distance between images",
+            "B": "The difference between two probability distributions",
+            "C": "The accuracy of the model",
+            "D": "The GPU memory usage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Label' in Supervised Learning?",
+        "options": {
+            "A": "The brand of the computer",
+            "B": "The ground-truth output or category associated with a specific input",
+            "C": "A tag in the code",
+            "D": "A security scanner"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question: PyTorch's flexibility is largely due to its ______ computational graph.",
+        "options": {
+            "A": "Static",
+            "B": "Dynamic (Define-by-Run)",
+            "C": "Binary",
+            "D": "Manual"
+        },
+        "answer": "B"
+    }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "PyTorch"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

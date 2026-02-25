@@ -1,0 +1,2127 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+  {
+    "question": "In Linear Regression, what is the 'Ordinary Least Squares' (OLS) method designed to minimize?",
+    "options": {
+      "A": "The sum of the absolute differences between observed and predicted values.",
+      "B": "The sum of the squared differences (residuals) between observed and predicted values.",
+      "C": "The product of the error terms.",
+      "D": "The number of outliers in the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between L1 (Lasso) and L2 (Ridge) regularization?",
+    "options": {
+      "A": "L1 adds the square of the weights; L2 adds the absolute value.",
+      "B": "L1 can shrink some coefficients to exactly zero, performing feature selection; L2 only shrinks them towards zero.",
+      "C": "L1 is used for classification; L2 is used for regression.",
+      "D": "L2 regularization is much faster to compute on large datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is most appropriate for evaluating a classification model with highly imbalanced classes (e.g., fraud detection)?",
+    "options": {
+      "A": "Accuracy",
+      "B": "F1-Score",
+      "C": "Mean Absolute Error",
+      "D": "R-Squared"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Decision Tree, 'Entropy' is a measure of impurity or randomness in the data split.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following algorithms is an example of an 'Ensemble Learning' method?",
+    "options": {
+      "A": "Logistic Regression",
+      "B": "Support Vector Machines",
+      "C": "Random Forest",
+      "D": "K-Nearest Neighbors"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Kernel Trick' in Support Vector Machines (SVM)?",
+    "options": {
+      "A": "A way to speed up the training of linear models.",
+      "B": "Mapping input data into a higher-dimensional space to make it linearly separable without explicitly calculating the coordinates.",
+      "C": "A method for handling missing data in the training set.",
+      "D": "An optimization for the gradient descent algorithm."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In K-Means clustering, how is the 'K' usually determined?",
+    "options": {
+      "A": "By the number of features in the dataset.",
+      "B": "Using the 'Elbow Method' to find the point where adding another cluster doesn't significantly improve the within-cluster sum of squares.",
+      "C": "By the number of classes in the target variable.",
+      "D": "It is always set to 5 by default."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Bias-Variance Tradeoff' refer to?",
+    "options": {
+      "A": "The balance between the speed of the model and its accuracy.",
+      "B": "The conflict between the model's ability to generalize (low variance) and its ability to capture the underlying pattern (low bias).",
+      "C": "The ratio of training data to testing data.",
+      "D": "The trade-off between the number of parameters and the memory required."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main advantage of 'Naive Bayes'?",
+    "options": {
+      "A": "It can capture complex relationships between features.",
+      "B": "It is computationally efficient and performs well on high-dimensional data like text, despite its simplicity.",
+      "C": "It does not require any labeled data for training.",
+      "D": "It is immune to the 'Curse of Dimensionality'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Lazy Learner' algorithm?",
+    "options": {
+      "A": "Neural Networks",
+      "B": "K-Nearest Neighbors (KNN)",
+      "C": "Random Forest",
+      "D": "XGBoost"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Principle Component Analysis (PCA) is a Supervised Learning technique used for classification.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Logistic Regression, the 'Sigmoid' function is used to transform the output into a range of:",
+    "options": {
+      "A": "-1 to 1",
+      "B": "0 to 1",
+      "C": "0 to Infinity",
+      "D": "-Infinity to Infinity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pruning' in the context of Decision Trees?",
+    "options": {
+      "A": "Adding more branches to capture deeper relationships.",
+      "B": "Removing sections of the tree that provide little power to classify instances, reducing overfitting.",
+      "C": "Deleting features that have no impact on the target.",
+      "D": "Increasing the learning rate of the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common distance metrics used in KNN:",
+    "options": {
+      "A": "Euclidean Distance",
+      "B": "Manhattan Distance",
+      "C": "Standard Deviation",
+      "D": "Coefficient of Variation"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Stochastic Gradient Descent' (SGD)?",
+    "options": {
+      "A": "Updating the model parameters using the entire dataset at once.",
+      "B": "Updating the model parameters using one random training example (or a small batch) at a time.",
+      "C": "A method for selecting the best hyperparameters.",
+      "D": "An algorithm for generating synthetic data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'Bagging' and 'Boosting'?",
+    "options": {
+      "A": "Bagging uses weak learners in series; Boosting uses them in parallel.",
+      "B": "Bagging builds independent models in parallel to reduce variance; Boosting builds models sequentially to reduce bias.",
+      "C": "Bagging is only for regression; Boosting is only for classification.",
+      "D": "Bagging requires more data than Boosting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Principal Component Analysis (PCA), what do the 'Eigenvectors' represent?",
+    "options": {
+      "A": "The labels of the target variable.",
+      "B": "The directions of the axes where there is the most variance in the data.",
+      "C": "The error rate of the dimensionality reduction.",
+      "D": "The number of clusters in the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Curse of Dimensionality'?",
+    "options": {
+      "A": "Adding more features always increases model accuracy.",
+      "B": "As the number of features increases, the amount of data needed to generalize accurately grows exponentially, and data points become sparse.",
+      "C": "A mathematical error that occurs when a matrix has a dimension of zero.",
+      "D": "The tendency for models to become faster as more dimensions are added."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Cross-Validation' (e.g., K-Fold)?",
+    "options": {
+      "A": "To verify the data by asking a second developer to check the code.",
+      "B": "To assess how the results of a statistical analysis will generalize to an independent data set and reduce over-fitting.",
+      "C": "To combine multiple datasets into one large file.",
+      "D": "To encrypt the training data for security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an SVM, what is a 'Support Vector'?",
+    "options": {
+      "A": "Any data point that is correctly classified.",
+      "B": "The data points that lie closest to the decision boundary (hyperplane) and influence its position and orientation.",
+      "C": "A vector that stores the entire training dataset.",
+      "D": "The average value of all input features."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loss function is commonly used for Binary Classification problems?",
+    "options": {
+      "A": "Mean Squared Error (MSE)",
+      "B": "Binary Cross-Entropy (Log Loss)",
+      "C": "Hinge Loss",
+      "D": "Huber Loss."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'One-Hot Encoding' used for?",
+    "options": {
+      "A": "Compressing numerical data into integers.",
+      "B": "Converting categorical variables into a binary vector representation that a machine learning model can understand.",
+      "C": "Scaling features to have a mean of zero.",
+      "D": "Encrypted communication between servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Random Forest is less prone to overfitting than a single Decision Tree.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Silhouette Score' used for in Unsupervised Learning?",
+    "options": {
+      "A": "Measuring the accuracy of a regression model.",
+      "B": "Evaluating the quality of a clustering result by measuring how similar an object is to its own cluster compared to others.",
+      "C": "Predicting the next value in a time series.",
+      "D": "Determining the weight of a neuron in a neural network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Neural Network, what is the role of the 'Activation Function'?",
+    "options": {
+      "A": "To save the model weights to the disk.",
+      "B": "To introduce non-linearity into the output of a neuron, allowing the network to learn complex patterns.",
+      "C": "To normalize the input data to a range of -1 to 1.",
+      "D": "To count the number of layers in the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Data Augmentation' involve?",
+    "options": {
+      "A": "Deleting duplicate rows in a database.",
+      "B": "Increasing the size of a training set by creating modified versions of existing data (e.g., flipping or rotating images).",
+      "C": "Manually labeling unlabeled data points.",
+      "D": "Merging data from two different API sources."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common types of Gradient Descent optimizers:",
+    "options": {
+      "A": "Adam",
+      "B": "RMSprop",
+      "C": "Lasso",
+      "D": "Gini"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: In a 'Soft Margin' SVM, we allow some misclassifications to achieve better generalization on new data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Early Stopping' used for during model training?",
+    "options": {
+      "A": "To prevent the computer from overheating.",
+      "B": "To halt the training process once the performance on a validation set stops improving, preventing overfitting.",
+      "C": "To skip the preprocessing phase if the data is already clean.",
+      "D": "To finish the project before the deadline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which algorithm is based on the concept of 'Maximum Margin'?",
+    "options": {
+      "A": "K-Means",
+      "B": "Support Vector Machines (SVM)",
+      "C": "Decision Trees",
+      "D": "Naive Bayes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of machine learning uses labeled data?",
+    "options": {
+      "A": "Unsupervised learning",
+      "B": "Supervised learning",
+      "C": "Reinforcement learning",
+      "D": "Semi-supervised learning"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Linear Regression is a supervised learning algorithm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which algorithm is best suited for binary classification?",
+    "options": {
+      "A": "Linear Regression",
+      "B": "Logistic Regression",
+      "C": "K-Means",
+      "D": "Apriori"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO algorithms are instance-based learners?",
+    "options": {
+      "A": "K-Nearest Neighbors",
+      "B": "Decision Tree",
+      "C": "Support Vector Machine",
+      "D": "Linear Regression"
+    },
+    "answer": ["A", "C"]
+  },
+
+  {
+    "question": "What is the main goal of a Decision Tree?",
+    "options": {
+      "A": "Maximize variance",
+      "B": "Minimize entropy or impurity",
+      "C": "Reduce dimensionality",
+      "D": "Increase bias"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Decision Trees are prone to overfitting.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which metric is commonly used to split nodes in classification trees?",
+    "options": {
+      "A": "Mean Squared Error",
+      "B": "Gini Index",
+      "C": "Euclidean Distance",
+      "D": "R-squared"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO ensemble methods reduce variance?",
+    "options": {
+      "A": "Bagging",
+      "B": "Random Forest",
+      "C": "Boosting",
+      "D": "Linear Regression"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "What is Random Forest?",
+    "options": {
+      "A": "A single decision tree",
+      "B": "An ensemble of decision trees",
+      "C": "A clustering algorithm",
+      "D": "A dimensionality reduction technique"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: Random Forest uses bootstrap sampling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm minimizes hinge loss?",
+    "options": {
+      "A": "Logistic Regression",
+      "B": "SVM",
+      "C": "Naive Bayes",
+      "D": "KNN"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "What does the kernel trick do in SVM?",
+    "options": {
+      "A": "Reduces training data",
+      "B": "Transforms data to higher dimensions",
+      "C": "Removes noise",
+      "D": "Standardizes features"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO kernels are commonly used in SVM?",
+    "options": {
+      "A": "Linear",
+      "B": "Polynomial",
+      "C": "Sigmoid",
+      "D": "Softmax"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: KNN is a lazy learning algorithm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What happens when K is very large in KNN?",
+    "options": {
+      "A": "Model overfits",
+      "B": "Model underfits",
+      "C": "Training error increases",
+      "D": "Variance increases"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which distance metric is commonly used in KNN?",
+    "options": {
+      "A": "Manhattan Distance",
+      "B": "Euclidean Distance",
+      "C": "Cosine Similarity",
+      "D": "Hamming Distance"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO assumptions are made by Naive Bayes?",
+    "options": {
+      "A": "Feature independence",
+      "B": "Normal distribution",
+      "C": "Equal variance",
+      "D": "Linearity"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Naive Bayes works well for text classification.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm is used for clustering?",
+    "options": {
+      "A": "K-Means",
+      "B": "Logistic Regression",
+      "C": "SVM",
+      "D": "Random Forest"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What is the objective of K-Means?",
+    "options": {
+      "A": "Maximize inter-cluster variance",
+      "B": "Minimize intra-cluster variance",
+      "C": "Maximize accuracy",
+      "D": "Minimize loss"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: K-Means always converges to a global optimum.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO are disadvantages of K-Means?",
+    "options": {
+      "A": "Sensitive to initial centroids",
+      "B": "Requires K beforehand",
+      "C": "Handles categorical data well",
+      "D": "Robust to outliers"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "Which algorithm is used for dimensionality reduction?",
+    "options": {
+      "A": "PCA",
+      "B": "KNN",
+      "C": "Naive Bayes",
+      "D": "Decision Tree"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: PCA is an unsupervised learning algorithm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO algorithms are boosting algorithms?",
+    "options": {
+      "A": "AdaBoost",
+      "B": "Gradient Boosting",
+      "C": "Bagging",
+      "D": "K-Means"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "What does Gradient Boosting primarily reduce?",
+    "options": {
+      "A": "Bias",
+      "B": "Variance",
+      "C": "Noise",
+      "D": "Dimensionality"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Boosting trains models sequentially.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Convolutional Neural Network (CNN), what is the primary purpose of a 'Pooling' layer?",
+    "options": {
+      "A": "To increase the number of parameters to learn more features.",
+      "B": "To reduce the spatial dimensions (width/height) of the input, lowering computation and controlling overfitting.",
+      "C": "To act as the final classifier for the network.",
+      "D": "To normalize the pixel values to a range of 0 to 1."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Vanishing Gradient Problem' commonly associated with?",
+    "options": {
+      "A": "Linear Regression with too few features.",
+      "B": "Deep Neural Networks, particularly RNNs, where gradients become extremely small during backpropagation, preventing weights from updating.",
+      "C": "K-Means clustering when K is set too high.",
+      "D": "Decision Trees that are not pruned."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'DBSCAN' clustering differ from 'K-Means'?",
+    "options": {
+      "A": "DBSCAN requires the number of clusters to be specified beforehand.",
+      "B": "DBSCAN identifies clusters based on density and can discover clusters of arbitrary shapes, while also identifying outliers.",
+      "C": "K-Means is better at finding clusters of different densities.",
+      "D": "There is no difference; they are both centroid-based."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of Gradient Boosting, what does 'Shrinkage' (Learning Rate) control?",
+    "options": {
+      "A": "The number of trees in the ensemble.",
+      "B": "The contribution of each individual tree to the final prediction, helping to prevent overfitting.",
+      "C": "The depth of each decision tree.",
+      "D": "The amount of memory the model uses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: t-SNE is primarily used for high-dimensional data visualization rather than as a preprocessing step for clustering or classification.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Softmax' function typically used for in Neural Networks?",
+    "options": {
+      "A": "To squash values between 0 and 1 in binary classification.",
+      "B": "To convert the raw output scores (logits) of the final layer into a probability distribution over multiple classes.",
+      "C": "To initialize the weights of the hidden layers.",
+      "D": "To perform dimensionality reduction."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of an LSTM (Long Short-Term Memory) network is responsible for deciding what information to discard from the cell state?",
+    "options": {
+      "A": "Input Gate",
+      "B": "Forget Gate",
+      "C": "Output Gate",
+      "D": "Update Gate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'XGBoost'?",
+    "options": {
+      "A": "A linear regression library for big data.",
+      "B": "An optimized distributed gradient boosting library designed to be highly efficient, flexible, and portable.",
+      "C": "A type of unsupervised clustering algorithm.",
+      "D": "A hardware accelerator for machine learning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dropout' is a regularization technique where randomly selected neurons are ignored during training to prevent co-adaptation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In an Autoencoder, what is the 'Bottleneck' (Latent Space)?",
+    "options": {
+      "A": "The layer with the highest number of neurons.",
+      "B": "A compressed representation of the input data that captures the most essential features.",
+      "C": "An error that occurs when training is too slow.",
+      "D": "The final output layer of the decoder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common types of RNN architectures used for sequence modeling:",
+    "options": {
+      "A": "LSTM",
+      "B": "GRU (Gated Recurrent Unit)",
+      "C": "PCA",
+      "D": "SVM"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Transfer Learning'?",
+    "options": {
+      "A": "Moving data from a SQL database to a NoSQL database.",
+      "B": "Taking a pre-trained model on a large dataset and fine-tuning it for a different but related task.",
+      "C": "Sharing the weights of a model between two different companies.",
+      "D": "The process of converting a model from Python to C++."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Word2Vec' algorithm produce?",
+    "options": {
+      "A": "A dictionary of words and their frequencies.",
+      "B": "Dense vector representations of words (embeddings) that capture semantic relationships based on context.",
+      "C": "An automated summary of a long text document.",
+      "D": "A translation of text from one language to another."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Reinforcement Learning, what is the 'Exploration-Exploitation' trade-off?",
+    "options": {
+      "A": "The choice between using a local CPU or a cloud GPU.",
+      "B": "The balance between trying new actions to find better rewards (exploration) and using known actions that yield high rewards (exploitation).",
+      "C": "The ratio of training time to inference time.",
+      "D": "The trade-off between the complexity of the agent and the size of the environment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric evaluates the quality of a binary classifier at various threshold settings by plotting True Positive Rate vs. False Positive Rate?",
+    "options": {
+      "A": "Precision-Recall Curve",
+      "B": "ROC Curve (Receiver Operating Characteristic)",
+      "C": "Log Loss",
+      "D": "Accuracy Score"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What problem does regularization primarily address in machine learning?",
+    "options": {
+      "A": "Underfitting",
+      "B": "Overfitting",
+      "C": "Class imbalance",
+      "D": "Missing data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: L2 regularization can drive coefficients exactly to zero.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO effects does L1 regularization have?",
+    "options": {
+      "A": "Feature selection",
+      "B": "Sparse solutions",
+      "C": "Coefficient shrinkage only",
+      "D": "Variance increase"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "Which algorithm assumes a linear relationship between features and log-odds?",
+    "options": {
+      "A": "Linear Regression",
+      "B": "Logistic Regression",
+      "C": "Naive Bayes",
+      "D": "SVM"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: Logistic Regression outputs probabilities using the sigmoid function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which metric is optimized during training of Logistic Regression?",
+    "options": {
+      "A": "Mean Squared Error",
+      "B": "Log Loss",
+      "C": "Hinge Loss",
+      "D": "Accuracy"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO conditions can cause Gradient Descent to fail to converge?",
+    "options": {
+      "A": "Learning rate too high",
+      "B": "Learning rate too low",
+      "C": "Convex loss",
+      "D": "Normalized features"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Feature scaling is critical for Gradient Descent convergence speed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which optimization algorithm adapts learning rates per parameter?",
+    "options": {
+      "A": "Batch Gradient Descent",
+      "B": "Momentum",
+      "C": "Adam",
+      "D": "Newton’s Method"
+    },
+    "answer": "C"
+  },
+
+  {
+    "question": "Which TWO algorithms are sensitive to feature scaling?",
+    "options": {
+      "A": "KNN",
+      "B": "SVM",
+      "C": "Decision Tree",
+      "D": "Random Forest"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Decision Trees require feature scaling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "What does pruning in Decision Trees do?",
+    "options": {
+      "A": "Increases tree depth",
+      "B": "Reduces overfitting",
+      "C": "Increases bias",
+      "D": "Adds more features"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO pruning techniques exist?",
+    "options": {
+      "A": "Pre-pruning",
+      "B": "Post-pruning",
+      "C": "Bagging",
+      "D": "Boosting"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Boosting focuses more on misclassified samples.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which loss function is used in AdaBoost?",
+    "options": {
+      "A": "Log loss",
+      "B": "Exponential loss",
+      "C": "Hinge loss",
+      "D": "Squared loss"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO boosting methods are gradient-based?",
+    "options": {
+      "A": "Gradient Boosting",
+      "B": "XGBoost",
+      "C": "Bagging",
+      "D": "Random Forest"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: XGBoost includes built-in regularization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What is the bias-variance tradeoff?",
+    "options": {
+      "A": "Bias + Variance = Error",
+      "B": "Balancing underfitting and overfitting",
+      "C": "Variance equals noise",
+      "D": "Bias reduces error always"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO models typically have high variance?",
+    "options": {
+      "A": "Decision Trees",
+      "B": "KNN with small K",
+      "C": "Linear Regression",
+      "D": "Naive Bayes"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Increasing model complexity generally reduces bias.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm uses eigenvalues and eigenvectors?",
+    "options": {
+      "A": "PCA",
+      "B": "K-Means",
+      "C": "SVM",
+      "D": "KNN"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO assumptions are required for PCA?",
+    "options": {
+      "A": "Linearity",
+      "B": "Large variance is informative",
+      "C": "Normal distribution",
+      "D": "Feature independence"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: PCA preserves class labels.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "What is the curse of dimensionality?",
+    "options": {
+      "A": "Model underfitting",
+      "B": "Data sparsity in high dimensions",
+      "C": "High bias",
+      "D": "Over-regularization"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO algorithms suffer from curse of dimensionality?",
+    "options": {
+      "A": "KNN",
+      "B": "K-Means",
+      "C": "Naive Bayes",
+      "D": "Linear Regression"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Increasing dimensions reduces distance contrast.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+   {
+    "question": "What does the Hessian matrix represent in second-order optimization methods?",
+    "options": {
+      "A": "First-order gradients",
+      "B": "Second-order partial derivatives",
+      "C": "Learning rate",
+      "D": "Loss values"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Newton’s Method uses the Hessian matrix.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO problems arise when Hessian is not positive definite?",
+    "options": {
+      "A": "Non-convex optimization",
+      "B": "Saddle points",
+      "C": "Guaranteed convergence",
+      "D": "Unique global minimum"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "What does convexity of a loss function guarantee?",
+    "options": {
+      "A": "Multiple global minima",
+      "B": "Unique global minimum",
+      "C": "Fast training",
+      "D": "Zero variance"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: Linear Regression with MSE loss is a convex optimization problem.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO algorithms rely on convex optimization?",
+    "options": {
+      "A": "Linear Regression",
+      "B": "Logistic Regression",
+      "C": "K-Means",
+      "D": "Neural Networks"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "Why is K-Means considered non-convex?",
+    "options": {
+      "A": "Distance metric is non-linear",
+      "B": "Centroid initialization affects solution",
+      "C": "Uses gradients",
+      "D": "Uses regularization"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: K-Means++ improves centroid initialization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO conditions make Naive Bayes optimal?",
+    "options": {
+      "A": "Conditional independence",
+      "B": "Correct class-conditional distributions",
+      "C": "Balanced classes",
+      "D": "Large feature correlation"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "What happens to Naive Bayes when features are highly correlated?",
+    "options": {
+      "A": "Performance improves",
+      "B": "Probability estimates become unreliable",
+      "C": "Model becomes unbiased",
+      "D": "No effect"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: Naive Bayes is a generative model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm maximizes the margin?",
+    "options": {
+      "A": "Logistic Regression",
+      "B": "SVM",
+      "C": "Perceptron",
+      "D": "KNN"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO factors control SVM margin?",
+    "options": {
+      "A": "Regularization parameter C",
+      "B": "Kernel choice",
+      "C": "Learning rate",
+      "D": "Batch size"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Increasing C in SVM reduces regularization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What does the dual form of SVM optimization enable?",
+    "options": {
+      "A": "Faster gradient descent",
+      "B": "Kernel trick",
+      "C": "Feature scaling",
+      "D": "Bagging"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO kernels make SVM non-linear?",
+    "options": {
+      "A": "RBF",
+      "B": "Polynomial",
+      "C": "Linear",
+      "D": "Identity"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Support vectors are the only points affecting the decision boundary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What is shrinkage in Gradient Boosting?",
+    "options": {
+      "A": "Reducing tree depth",
+      "B": "Learning rate scaling",
+      "C": "Feature selection",
+      "D": "Bagging"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO techniques help prevent overfitting in Gradient Boosting?",
+    "options": {
+      "A": "Subsampling",
+      "B": "Shrinkage",
+      "C": "Increasing depth",
+      "D": "Removing regularization"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Gradient Boosting fits trees on residuals.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm minimizes empirical risk directly?",
+    "options": {
+      "A": "SVM",
+      "B": "KNN",
+      "C": "Decision Tree",
+      "D": "Naive Bayes"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO properties make KNN computationally expensive?",
+    "options": {
+      "A": "High dimensionality",
+      "B": "Large dataset size",
+      "C": "Model training",
+      "D": "Convex loss"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Approximate nearest neighbor methods reduce KNN inference cost.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What does VC dimension measure?",
+    "options": {
+      "A": "Model accuracy",
+      "B": "Model capacity",
+      "C": "Training time",
+      "D": "Loss curvature"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO models typically have high VC dimension?",
+    "options": {
+      "A": "Neural Networks",
+      "B": "Decision Trees",
+      "C": "Naive Bayes",
+      "D": "Linear Regression"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Higher VC dimension increases risk of overfitting.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between 'Random Search' and 'Grid Search' for hyperparameter tuning?",
+    "options": {
+      "A": "Random Search is always slower than Grid Search.",
+      "B": "Grid Search exhaustively tries every combination in a specified range; Random Search samples combinations randomly, often finding better parameters faster in high-dimensional spaces.",
+      "C": "Random Search only works for Neural Networks.",
+      "D": "Grid Search is a non-parametric approach."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Generative Adversarial Networks (GANs), what are the two competing components?",
+    "options": {
+      "A": "The Encoder and the Decoder.",
+      "B": "The Generator and the Discriminator.",
+      "C": "The Actor and the Critic.",
+      "D": "The Regressor and the Classifier."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Self-Attention' in a Transformer model allow the network to do?",
+    "options": {
+      "A": "It allows the model to ignore all stop words automatically.",
+      "B": "It enables the model to weigh the importance of different words in a sequence relative to a specific word, regardless of their distance.",
+      "C": "It reduces the training time to zero.",
+      "D": "It converts text directly into image pixels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a common technique for 'Anomaly Detection' in high-dimensional data?",
+    "options": {
+      "A": "Linear Regression.",
+      "B": "Isolation Forest.",
+      "C": "K-Means with K=1.",
+      "D": "Naive Bayes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'F1-Score' a harmonic mean of?",
+    "options": {
+      "A": "Bias and Variance.",
+      "B": "Precision and Recall.",
+      "C": "Sensitivity and Specificity.",
+      "D": "Accuracy and Log Loss."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Normalization' is used to stabilize and accelerate the training of deep neural networks by normalizing the inputs to each layer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of NLP, what is 'TF-IDF' used for?",
+    "options": {
+      "A": "To translate text between languages.",
+      "B": "To evaluate the importance of a word in a document relative to a collection of documents (corpus).",
+      "C": "To correct spelling errors.",
+      "D": "To generate new sentences."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SMOTE' (Synthetic Minority Over-sampling Technique) used for?",
+    "options": {
+      "A": "To reduce the size of the dataset.",
+      "B": "To address class imbalance by creating synthetic examples of the minority class rather than just duplicating existing ones.",
+      "C": "To encrypt sensitive features.",
+      "D": "To perform dimensionality reduction."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common kernels used in Support Vector Machines (SVM):",
+    "options": {
+      "A": "RBF (Radial Basis Function)",
+      "B": "Polynomial",
+      "C": "Sigmoid Optimizer",
+      "D": "Gradient Kernel"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Weight Decay' in the context of training Neural Networks?",
+    "options": {
+      "A": "The physical breakdown of hardware over time.",
+      "B": "A form of L2 regularization that penalizes large weights to prevent overfitting.",
+      "C": "Reducing the learning rate as training progresses.",
+      "D": "The loss of data during transmission."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 't-SNE' stand for?",
+    "options": {
+      "A": "Total Symmetric Network Expansion.",
+      "B": "t-distributed Stochastic Neighbor Embedding.",
+      "C": "Time-Series Neural Evolution.",
+      "D": "Typical Scaled Node Estimation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Epoch' in machine learning refers to one complete pass of the entire training dataset through the algorithm.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which optimization algorithm uses both 'Momentum' and 'Adaptive Learning Rates' for each parameter?",
+    "options": {
+      "A": "Stochastic Gradient Descent (Standard).",
+      "B": "Adam (Adaptive Moment Estimation).",
+      "C": "Nesterov Momentum.",
+      "D": "Adagrad."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Elbow Method' used to evaluate?",
+    "options": {
+      "A": "The depth of a Decision Tree.",
+      "B": "The optimal number of clusters (K) in K-Means clustering.",
+      "C": "The learning rate of a Neural Network.",
+      "D": "The number of hidden layers in a CNN."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Computer Vision, what is 'IOU' (Intersection over Union) used to measure?",
+    "options": {
+      "A": "The speed of the camera.",
+      "B": "The accuracy of an object detection model's predicted bounding box compared to the ground truth.",
+      "C": "The brightness of the pixels.",
+      "D": "The distance between two images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary objective of Maximum Likelihood Estimation (MLE)?",
+    "options": {
+      "A": "Minimize squared error",
+      "B": "Maximize probability of observed data",
+      "C": "Minimize variance",
+      "D": "Maximize margin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Logistic Regression parameters are typically estimated using MLE.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO distributions are commonly assumed in Generalized Linear Models?",
+    "options": {
+      "A": "Gaussian",
+      "B": "Binomial",
+      "C": "Uniform",
+      "D": "Poisson"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "What role does the link function play in GLMs?",
+    "options": {
+      "A": "Maps linear predictor to mean of response",
+      "B": "Computes gradients",
+      "C": "Regularizes coefficients",
+      "D": "Normalizes data"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: The sigmoid function is the canonical link for logistic regression.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm directly optimizes conditional probability P(y|x)?",
+    "options": {
+      "A": "Naive Bayes",
+      "B": "Logistic Regression",
+      "C": "K-Means",
+      "D": "PCA"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO models are discriminative models?",
+    "options": {
+      "A": "Logistic Regression",
+      "B": "SVM",
+      "C": "Naive Bayes",
+      "D": "Gaussian Mixture Model"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Generative models learn joint probability P(x, y).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What does Expectation-Maximization (EM) algorithm handle?",
+    "options": {
+      "A": "Convex optimization",
+      "B": "Latent variables",
+      "C": "Feature scaling",
+      "D": "Regularization"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO steps are part of EM algorithm?",
+    "options": {
+      "A": "Expectation step",
+      "B": "Maximization step",
+      "C": "Gradient step",
+      "D": "Pruning step"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: EM guarantees convergence to a global optimum.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which algorithm commonly uses EM?",
+    "options": {
+      "A": "Gaussian Mixture Model",
+      "B": "KNN",
+      "C": "Decision Tree",
+      "D": "SVM"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What is the key difference between K-Means and GMM?",
+    "options": {
+      "A": "Hard vs soft clustering",
+      "B": "Distance metric",
+      "C": "Supervised vs unsupervised",
+      "D": "Feature scaling"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: GMM assigns probabilities to cluster membership.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO covariance structures can GMM use?",
+    "options": {
+      "A": "Full",
+      "B": "Diagonal",
+      "C": "Identity",
+      "D": "Sparse"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "What problem does multicollinearity cause in linear models?",
+    "options": {
+      "A": "High bias",
+      "B": "Unstable coefficient estimates",
+      "C": "Underfitting",
+      "D": "Reduced dimensionality"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: Ridge regression mitigates multicollinearity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO regularization techniques add penalty to loss?",
+    "options": {
+      "A": "Lasso",
+      "B": "Ridge",
+      "C": "Bagging",
+      "D": "Boosting"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "What does elastic net combine?",
+    "options": {
+      "A": "L1 and L2 penalties",
+      "B": "Bias and variance",
+      "C": "Bagging and boosting",
+      "D": "PCA and LDA"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Elastic Net is useful when features are highly correlated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which metric evaluates probabilistic predictions?",
+    "options": {
+      "A": "Accuracy",
+      "B": "Log Loss",
+      "C": "Recall",
+      "D": "F1-score"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO evaluation metrics are threshold-independent?",
+    "options": {
+      "A": "ROC-AUC",
+      "B": "Log Loss",
+      "C": "Accuracy",
+      "D": "Precision"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: ROC-AUC measures ranking quality of predictions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What happens when class imbalance exists?",
+    "options": {
+      "A": "Accuracy becomes misleading",
+      "B": "Variance decreases",
+      "C": "Bias decreases",
+      "D": "Loss becomes convex"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO techniques address class imbalance?",
+    "options": {
+      "A": "SMOTE",
+      "B": "Class weighting",
+      "C": "PCA",
+      "D": "Feature scaling"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: SMOTE creates synthetic minority samples.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Reinforcement Learning, what does the 'Bellman Equation' provide?",
+    "options": {
+      "A": "A way to calculate the gradient of a neural network.",
+      "B": "A recursive definition for the value function, breaking down the value of a state into immediate reward plus discounted future value.",
+      "C": "The probability of a random walk in a graph.",
+      "D": "A method for clustering states without rewards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary architectural difference between BERT and GPT?",
+    "options": {
+      "A": "BERT is a Transformer Decoder; GPT is an Encoder.",
+      "B": "BERT is an Encoder-only architecture designed for bi-directional context; GPT is a Decoder-only architecture designed for auto-regressive generation.",
+      "C": "BERT uses RNNs; GPT uses CNNs.",
+      "D": "There is no architectural difference; only the dataset differs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Concept Drift' in the context of model monitoring?",
+    "options": {
+      "A": "When the model's source code is updated on GitHub.",
+      "B": "When the statistical properties of the target variable change over time, rendering the model less accurate.",
+      "C": "When the training data is accidentally deleted.",
+      "D": "When the learning rate is too high for the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Gated Recurrent Unit (GRU), which gate controls how much of the previous memory to keep?",
+    "options": {
+      "A": "Forget Gate",
+      "B": "Update Gate",
+      "C": "Reset Gate",
+      "D": "Input Gate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'One-Shot Learning' is a technique where a model is trained to recognize a class from only one (or very few) training examples.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Cold Start Problem' in Recommender Systems?",
+    "options": {
+      "A": "The server takes too long to boot up in winter.",
+      "B": "The difficulty in making recommendations for new users or items with no previous interaction history.",
+      "C": "When the model weights are initialized to zero.",
+      "D": "A hardware failure due to low temperatures."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loss function is used for 'Triplet Loss' in Siamese Networks?",
+    "options": {
+      "A": "Mean Squared Error",
+      "B": "A function that minimizes distance between an anchor and a positive sample while maximizing distance to a negative sample.",
+      "C": "Binary Cross-Entropy",
+      "D": "Categorical Cross-Entropy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Distillation' in Deep Learning?",
+    "options": {
+      "A": "Extracting text from a PDF.",
+      "B": "Training a smaller, 'student' model to mimic the behavior and performance of a larger, 'teacher' model.",
+      "C": "Deleting unnecessary features from a dataset.",
+      "D": "Converting a neural network into a decision tree."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common techniques for 'Model Quantization':",
+    "options": {
+      "A": "Post-training quantization",
+      "B": "Quantization-aware training",
+      "C": "Hyperparameter quantization",
+      "D": "Data quantization"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'A/B Testing' for machine learning models?",
+    "options": {
+      "A": "Testing the model on two different GPUs.",
+      "B": "Comparing two versions of a model (A and B) in a live production environment to see which performs better on real-world data.",
+      "C": "A method for alphabetizing features.",
+      "D": "Training a model on two separate halves of a dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Negative Sampling' is a technique used in Word2Vec to improve training efficiency by only updating a small percentage of weights for each word.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Scree Plot' help visualize in Principal Component Analysis?",
+    "options": {
+      "A": "The number of outliers.",
+      "B": "The amount of variance explained by each principal component, helping to decide how many components to retain.",
+      "C": "The accuracy of the classifier.",
+      "D": "The correlation between features."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Reinforcement Learning method uses an 'Experience Replay' buffer?",
+    "options": {
+      "A": "Policy Gradient",
+      "B": "Deep Q-Learning (DQN)",
+      "C": "Monte Carlo Tree Search",
+      "D": "SARSA"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Attention Mask' used for in Transformer models?",
+    "options": {
+      "A": "To hide the identity of the user.",
+      "B": "To prevent the model from attending to specific tokens, such as padding or future tokens in auto-regressive tasks.",
+      "C": "To increase the brightness of specific pixels.",
+      "D": "To focus the model on the shortest words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stochastic Depth' in training very deep networks?",
+    "options": {
+      "A": "Changing the depth of the ocean in a simulation.",
+      "B": "A regularization technique that randomly drops entire layers during training, while keeping them for inference.",
+      "C": "Using a random number of neurons per layer.",
+      "D": "Calculating the gradient at a random depth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main assumption of Linear Regression?",
+    "options": {
+      "A": "Features are independent",
+      "B": "Linear relationship between features and target",
+      "C": "Target is categorical",
+      "D": "Data is normally distributed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Multivariate Linear Regression can handle multiple input features.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which metric is best suited for regression problems?",
+    "options": {
+      "A": "Accuracy",
+      "B": "Mean Squared Error",
+      "C": "Precision",
+      "D": "Recall"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO factors increase overfitting?",
+    "options": {
+      "A": "High model complexity",
+      "B": "Small training dataset",
+      "C": "Regularization",
+      "D": "Cross-validation"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Cross-validation helps estimate model generalization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm is sensitive to outliers?",
+    "options": {
+      "A": "Linear Regression",
+      "B": "Decision Tree",
+      "C": "Random Forest",
+      "D": "Naive Bayes"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO models are robust to outliers?",
+    "options": {
+      "A": "Decision Tree",
+      "B": "Random Forest",
+      "C": "Linear Regression",
+      "D": "KNN"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Random Forest reduces overfitting compared to a single tree.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What is the role of entropy in Decision Trees?",
+    "options": {
+      "A": "Measure randomness",
+      "B": "Measure impurity",
+      "C": "Measure variance",
+      "D": "Measure distance"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which TWO splitting criteria are used in Decision Trees?",
+    "options": {
+      "A": "Gini Index",
+      "B": "Entropy",
+      "C": "Euclidean Distance",
+      "D": "Cosine Similarity"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Increasing tree depth increases variance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "What is bagging mainly used for?",
+    "options": {
+      "A": "Reducing bias",
+      "B": "Reducing variance",
+      "C": "Increasing accuracy only",
+      "D": "Feature selection"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: Bagging trains models independently.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm uses majority voting?",
+    "options": {
+      "A": "KNN",
+      "B": "Linear Regression",
+      "C": "PCA",
+      "D": "Naive Bayes"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO distance metrics can be used in KNN?",
+    "options": {
+      "A": "Euclidean",
+      "B": "Manhattan",
+      "C": "Gini",
+      "D": "Entropy"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Larger K in KNN smooths the decision boundary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm is probabilistic?",
+    "options": {
+      "A": "Naive Bayes",
+      "B": "KNN",
+      "C": "SVM",
+      "D": "Decision Tree"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO variants of Naive Bayes exist?",
+    "options": {
+      "A": "Gaussian",
+      "B": "Multinomial",
+      "C": "Polynomial",
+      "D": "Logarithmic"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: Gaussian Naive Bayes assumes normal distribution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm finds a hyperplane for classification?",
+    "options": {
+      "A": "SVM",
+      "B": "K-Means",
+      "C": "PCA",
+      "D": "Apriori"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO hyperparameters control SVM?",
+    "options": {
+      "A": "C",
+      "B": "Kernel",
+      "C": "Learning rate",
+      "D": "Epochs"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: SVM works well in high-dimensional spaces.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which algorithm minimizes within-cluster variance?",
+    "options": {
+      "A": "K-Means",
+      "B": "Hierarchical Clustering",
+      "C": "DBSCAN",
+      "D": "Apriori"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO limitations apply to K-Means?",
+    "options": {
+      "A": "Requires predefined K",
+      "B": "Sensitive to outliers",
+      "C": "Works with categorical data",
+      "D": "Always finds global optimum"
+    },
+    "answer": ["A", "B"]
+  },
+
+  {
+    "question": "True or False: PCA reduces dimensionality by maximizing variance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which TWO benefits does PCA provide?",
+    "options": {
+      "A": "Noise reduction",
+      "B": "Visualization",
+      "C": "Label prediction",
+      "D": "Class balancing"
+    },
+    "answer": ["A", "B"]
+  }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "MLAlgorithm"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

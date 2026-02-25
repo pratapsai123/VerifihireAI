@@ -36,6 +36,7 @@ const AiTakeAssessment = () => {
     const [selectedLanguage, setSelectedLanguage] = useState('javascript');
     const [customInput, setCustomInput] = useState('');
     const [executionResult, setExecutionResult] = useState(null);
+    const [codingResults, setCodingResults] = useState({}); // { qId: { passed, total } }
 
     const supportedLanguages = [
         { id: 'javascript', name: 'JavaScript', version: '18.15.0' },
@@ -54,6 +55,7 @@ const AiTakeAssessment = () => {
     const detectorRef = useRef(null);
     const lastDetectionTimeRef = useRef(0);
     const timerRef = useRef(null);
+    const handleSubmitRef = useRef(null); // always points to latest handleSubmit
 
     useEffect(() => {
         const fetchAssessment = async () => {
@@ -121,14 +123,15 @@ const AiTakeAssessment = () => {
                         language: selectedLanguage, version: langData.version,
                         files: [{ content: code }], stdin: tc.input
                     });
-                    const out = r.data.run.stdout.trim();
-                    const exp = tc.output.trim();
+                    const out = (r.data.run.stdout || r.data.run.stderr || '').trim();
+                    const exp = (tc.output || '').trim();
                     const passed = out === exp;
                     if (passed) passedCount++;
                     results.push({ input: tc.input, expected: exp, actual: out, passed });
-                } catch { results.push({ input: tc.input, expected: tc.output, actual: 'Error', passed: false }); }
+                } catch { results.push({ input: tc.input, expected: tc.output || '', actual: 'Error', passed: false }); }
             }
             setExecutionResult({ type: 'test_cases', results, score: passedCount, total: currentQ.test_cases.length });
+            setCodingResults(prev => ({ ...prev, [qId]: { passed: passedCount, total: currentQ.test_cases.length } }));
             setIsExecuting(false);
             return;
         }
@@ -214,14 +217,31 @@ const AiTakeAssessment = () => {
     useEffect(() => {
         if (isStarted && timeLeft > 0) {
             timerRef.current = setInterval(() => setTimeLeft(p => p - 1), 1000);
-        } else if (timeLeft === 0) {
+        } else if (timeLeft === 0 && isStarted) {
             clearInterval(timerRef.current);
-            handleSubmit();
+            // Use ref to avoid stale closure — always submits with current answers
+            if (handleSubmitRef.current) handleSubmitRef.current();
         }
         return () => clearInterval(timerRef.current);
     }, [isStarted, timeLeft]);
 
-    useEffect(() => { setCodeOutput([]); setExecutionResult(null); }, [currentQuestionIdx]);
+    useEffect(() => {
+        setCodeOutput([]);
+        setExecutionResult(null);
+
+        // Auto-populate custom input with sample case for coding challenges
+        const mcqs = assessment?.generated_content?.mcqs || [];
+        const coding = assessment?.generated_content?.coding_challenges || [];
+        const allQs = [...mcqs.map((q, i) => ({ ...q, type: 'mcq', id: i })), ...coding.map((c, i) => ({ ...c, type: 'coding', id: i }))];
+        const cQ = allQs[currentQuestionIdx];
+
+        if (cQ?.type === 'coding') {
+            const sampleInput = cQ.example_input || cQ.examples?.[0]?.input || '';
+            setCustomInput(sampleInput.trim());
+        } else {
+            setCustomInput('');
+        }
+    }, [currentQuestionIdx, assessment]);
 
     // Lock page scroll while assessment is running
     useEffect(() => {
@@ -268,12 +288,21 @@ const AiTakeAssessment = () => {
         if (e) e.preventDefault();
         setIsSubmitting(true);
         try {
-            await axios.post('http://localhost:8001/api/ai/submit/', { token, name: candidateName, email: candidateEmail, answers });
+            await axios.post('http://localhost:8001/api/ai/submit/', {
+                token,
+                name: candidateName,
+                email: candidateEmail,
+                answers,
+                codingResults // Added to send test case results
+            });
             setSubmitted(true);
             stopCamera();
         } catch { alert('Failed to submit.'); }
         finally { setIsSubmitting(false); }
     };
+
+    // Keep ref in sync so timer always calls the latest version
+    handleSubmitRef.current = handleSubmit;
 
     const formatTime = (seconds) => {
         if (!seconds && seconds !== 0) return '--:--';
@@ -598,7 +627,7 @@ const AiTakeAssessment = () => {
                                                     {executionResult.results.map((r, i) => (
                                                         <div key={i} style={{ fontSize: '0.72rem', color: r.passed ? '#22c55e' : '#ef4444', marginBottom: 1 }}>
                                                             {r.passed ? 'PASS' : 'FAIL'} TC{i + 1}
-                                                            {!r.passed && <span style={{ color: '#888' }}> expected: {r.expected.substring(0, 20)} got: {r.actual.substring(0, 20)}</span>}
+                                                            {!r.passed && <span style={{ color: '#888' }}> expected: {String(r.expected || '').substring(0, 30)} got: {String(r.actual || '').substring(0, 30)}</span>}
                                                         </div>
                                                     ))}
                                                 </div>

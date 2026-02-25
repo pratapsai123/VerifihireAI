@@ -1,0 +1,1896 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+  {
+    "question": "What does API stand for?",
+    "options": {
+      "A": "Application Programming Interface",
+      "B": "Application Protocol Integration",
+      "C": "Automated Program Interaction",
+      "D": "Advanced Programming Interface"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An API acts as an intermediary that allows two applications to talk to each other.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are common types of API architectures?",
+    "options": {
+      "A": "REST",
+      "B": "SOAP",
+      "C": "HTML",
+      "D": "CSS"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: APIs can only be used for web-based communication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an \"Endpoint\" in a web API?",
+    "options": {
+      "A": "The physical server location.",
+      "B": "A specific URL path where the API can be accessed.",
+      "C": "The end of the code execution.",
+      "D": "The database table name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common data formats used by APIs:",
+    "options": {
+      "A": "JSON",
+      "B": "XML",
+      "C": "MP3",
+      "D": "PNG"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: RESTful APIs are stateless, meaning each request contains all the information needed to process it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of an API Key?",
+    "options": {
+      "A": "To encrypt the database.",
+      "B": "To identify and authenticate the calling program.",
+      "C": "To speed up the internet connection.",
+      "D": "To unlock the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO HTTP methods are considered \"Idempotent\"?",
+    "options": {
+      "A": "GET",
+      "B": "PUT",
+      "C": "POST",
+      "D": "PATCH"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A Private API is intended for use only within an organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is typically used to create a new resource?",
+    "options": {
+      "A": "GET",
+      "B": "POST",
+      "C": "PUT",
+      "D": "DELETE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The HTTP 404 status code means \"Internal Server Error.\"",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO status codes indicate a successful request?",
+    "options": {
+      "A": "200 OK",
+      "B": "201 Created",
+      "C": "401 Unauthorized",
+      "D": "500 Server Error"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: Using \"PUT\" replaces the entire resource, while \"PATCH\" applies partial updates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does \"HATEOAS\" stand for in REST?",
+    "options": {
+      "A": "Hypermedia as the Engine of Application State",
+      "B": "Hypertext API to Every Open Application System",
+      "C": "High Availability Transfer Environment for OS",
+      "D": "Hyperlink Access to Every Object and Script"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO components of an HTTP Request:",
+    "options": {
+      "A": "Headers",
+      "B": "Body (Payload)",
+      "C": "Physical RAM address",
+      "D": "Graphics Card Driver"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: REST APIs can use any protocol, but they almost always use HTTP.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard HTTP status code for \"Unauthorized\"?",
+    "options": {
+      "A": "400",
+      "B": "401",
+      "C": "403",
+      "D": "404"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are constraints of the REST architectural style?",
+    "options": {
+      "A": "Client-Server",
+      "B": "Cacheability",
+      "C": "Peer-to-Peer",
+      "D": "Hardware-specific"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: Resource naming in REST should generally use verbs (e.g., /getUsers).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does SOAP stand for?",
+    "options": {
+      "A": "Simple Object Access Protocol",
+      "B": "Standard Online Application Protocol",
+      "C": "Secure Object Automated Path",
+      "D": "Simple Open API Process"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SOAP exclusively uses XML for its message format.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are features of GraphQL?",
+    "options": {
+      "A": "Clients can request exactly the data they need.",
+      "B": "It uses a single endpoint.",
+      "C": "It is strictly stateless.",
+      "D": "It only supports XML."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: gRPC uses Protocol Buffers (protobuf) as its interface definition language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between REST and GraphQL?",
+    "options": {
+      "A": "REST is faster than GraphQL.",
+      "B": "GraphQL allows for more specific data fetching (no over-fetching).",
+      "C": "REST uses XML, and GraphQL uses JSON.",
+      "D": "GraphQL is only for mobile apps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO benefits of SOAP over REST:",
+    "options": {
+      "A": "Built-in WS-Security.",
+      "B": "ACID compliance.",
+      "C": "Simplicity of implementation.",
+      "D": "Smaller message size."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: Webhooks are \"Reverse APIs\" that push data to a client when an event occurs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In GraphQL, what is a \"Schema\"?",
+    "options": {
+      "A": "A database table design.",
+      "B": "A blueprint that defines the data types and relationships.",
+      "C": "The CSS file for the API.",
+      "D": "The server hardware configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO methods are commonly used in JSON-RPC?",
+    "options": {
+      "A": "Notification",
+      "B": "Request",
+      "C": "Broadcast",
+      "D": "Stream"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: gRPC is generally faster than traditional REST because it uses HTTP/2 and binary data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"Rate Limiting\" in an API?",
+    "options": {
+      "A": "Limiting the size of the API code.",
+      "B": "Controlling the number of requests a user can make in a timeframe.",
+      "C": "Slowing down the server response time.",
+      "D": "Limiting the number of database columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OAuth 2.0 is an authentication protocol, not an authorization framework.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are common ways to secure an API?",
+    "options": {
+      "A": "JWT (JSON Web Tokens)",
+      "B": "SSL/TLS encryption",
+      "C": "Plaintext passwords in headers",
+      "D": "Disabling the firewall"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: API Documentation tools like Swagger/OpenAPI help developers understand how to use an API.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does \"CORS\" stand for?",
+    "options": {
+      "A": "Cross-Origin Resource Sharing",
+      "B": "Central Object Remote System",
+      "C": "Core Online Request Service",
+      "D": "Client-Oriented Response Script"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO common API testing tools:",
+    "options": {
+      "A": "Postman",
+      "B": "Insomnia",
+      "C": "Microsoft Word",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A \"Payload\" refers to the data sent in the body of an HTTP request or response.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an \"Idempotent\" API request?",
+    "options": {
+      "A": "A request that always returns 404.",
+      "B": "A request that produces the same result regardless of how many times it is repeated.",
+      "C": "A request that changes the server's time.",
+      "D": "A request that is only for authenticated users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are types of API versions?",
+    "options": {
+      "A": "URL Versioning (e.g., /v1/users)",
+      "B": "Header Versioning",
+      "C": "Monitor Versioning",
+      "D": "Keyboard Versioning"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: API Gateways are used to manage, secure, and route traffic to various microservices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a \"Breaking Change\" in API versioning?",
+    "options": {
+      "A": "A change that fixes a small typo in documentation.",
+      "B": "A change that causes existing client integrations to fail.",
+      "C": "A change that increases the server RAM.",
+      "D": "A change that renames the company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: \"Under-fetching\" in APIs means the endpoint provides more data than the client needs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are parts of a JWT (JSON Web Token)?",
+    "options": {
+      "A": "Header",
+      "B": "Payload",
+      "C": "Footer",
+      "D": "Style"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Statelessness\" means the server does not store any session data about the client.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard HTTP status code for \"Bad Request\"?",
+    "options": {
+      "A": "400",
+      "B": "401",
+      "C": "404",
+      "D": "500"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO HTTP status codes in the 5xx range:",
+    "options": {
+      "A": "500 Internal Server Error",
+      "B": "503 Service Unavailable",
+      "C": "505 Found",
+      "D": "510 Unauthorized"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Long Polling\" is a technique where the server holds the request open until new data is available.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In API security, what is \"SQL Injection\"?",
+    "options": {
+      "A": "Injecting SQL code into an API request to manipulate the database.",
+      "B": "A way to speed up SQL queries.",
+      "C": "A type of server cooling system.",
+      "D": "A method for backing up data."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are parts of an API's SLA (Service Level Agreement)?",
+    "options": {
+      "A": "Uptime percentage",
+      "B": "Response time (Latency)",
+      "C": "Office address",
+      "D": "CEO's name"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: The Content-Type header tells the server/client the media type of the resource.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which architectural style uses a \"Schema-first\" approach and a single endpoint?",
+    "options": {
+      "A": "REST",
+      "B": "GraphQL",
+      "C": "SOAP",
+      "D": "Webhooks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Microservices architecture, APIs are the primary way services communicate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are used for real-time, bi-directional communication?",
+    "options": {
+      "A": "WebSockets",
+      "B": "gRPC Streams",
+      "C": "HTTP GET",
+      "D": "SOAP envelopes"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: An API Gateway acts as a single entry point for all client requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"Payload Optimization\"?",
+    "options": {
+      "A": "Increasing the size of the API code.",
+      "B": "Reducing the data size sent over the network (e.g., via compression or field selection).",
+      "C": "Deleting the API.",
+      "D": "Changing the server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO benefits of using an API Proxy:",
+    "options": {
+      "A": "Security (shielding the backend)",
+      "B": "Analytics and monitoring",
+      "C": "Direct database access for clients",
+      "D": "Faster CPU cycles"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Service Discovery\" helps APIs find the network locations of other services.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is used for \"Permanent Redirect\"?",
+    "options": {
+      "A": "301",
+      "B": "302",
+      "C": "307",
+      "D": "308"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are common API documentation formats?",
+    "options": {
+      "A": "OpenAPI (Swagger)",
+      "B": "RAML",
+      "C": ".EXE",
+      "D": ".MP4"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A \"Monolithic\" API is easier to scale than a \"Microservices\" API.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is \"API Chaining\"?",
+    "options": {
+      "A": "Deleting multiple APIs at once.",
+      "B": "Using the output of one API call as the input for the next.",
+      "C": "Using only one API for everything.",
+      "D": "Encrypting the API URL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: \"Orchestration\" involves coordinating multiple API calls to achieve a single business task.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO headers are used for Content Negotiation?",
+    "options": {
+      "A": "Accept",
+      "B": "Content-Type",
+      "C": "User-Agent",
+      "D": "Authorization"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Idempotency Keys\" are used in POST requests to prevent accidental duplicate processing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned when the user has sent too many requests (Rate Limiting)?",
+    "options": {
+      "A": "400",
+      "B": "401",
+      "C": "429",
+      "D": "503"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which HTTP status code is used when a request is successful and a new resource has been created?",
+    "options": {
+      "A": "200 OK",
+      "B": "201 Created",
+      "C": "202 Accepted",
+      "D": "204 No Content"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The GET method should never be used to send sensitive data like passwords because the data is visible in the URL.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are considered \"Safe\" HTTP methods (methods that do not modify resources)?",
+    "options": {
+      "A": "GET",
+      "B": "HEAD",
+      "C": "POST",
+      "D": "DELETE"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A 403 Forbidden status code means the server understands the request but refuses to authorize it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the User-Agent header in an API request?",
+    "options": {
+      "A": "To identify the software/browser making the request.",
+      "B": "To store the user's password.",
+      "C": "To encrypt the payload.",
+      "D": "To determine the server's location."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned when a service is temporarily overloaded or down for maintenance?",
+    "options": {
+      "A": "500 Internal Server Error",
+      "B": "502 Bad Gateway",
+      "C": "503 Service Unavailable",
+      "D": "504 Gateway Timeout"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: REST APIs must use JSON for all responses.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO parts make up the \"Resource URI\" in a typical REST call?",
+    "options": {
+      "A": "Base URL",
+      "B": "Endpoint Path",
+      "C": "Hardware MAC Address",
+      "D": "Local File Path"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: An \"Idempotent\" operation means that making the same call multiple times will yield the same result on the server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard HTTP status code for \"Method Not Allowed\"?",
+    "options": {
+      "A": "401",
+      "B": "404",
+      "C": "405",
+      "D": "415"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which TWO are common ways to pass parameters to a GET request?",
+    "options": {
+      "A": "Query Strings (e.g., ?id=10)",
+      "B": "Path Parameters (e.g., /users/10)",
+      "C": "Request Body",
+      "D": "Hidden Form Fields"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A PUT request is typically used to update a resource by replacing it entirely.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which header is used by the client to tell the server what format it wants to receive (e.g., application/json)?",
+    "options": {
+      "A": "Content-Type",
+      "B": "Accept",
+      "C": "Authorization",
+      "D": "Host"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 204 No Content status code is commonly used after a successful DELETE request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code indicates that the server, while acting as a gateway, did not receive a timely response from the upstream server?",
+    "options": {
+      "A": "500",
+      "B": "502",
+      "C": "503",
+      "D": "504"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Identify TWO properties of a stateless API:",
+    "options": {
+      "A": "No client context is stored on the server between requests.",
+      "B": "Each request must contain all necessary information.",
+      "C": "The server stores session cookies for the client.",
+      "D": "Requests are faster because the server remembers the user."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: JSON-P (JSON with Padding) was a workaround for Cross-Origin issues before CORS was widely supported.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 415 Unsupported Media Type status code indicate?",
+    "options": {
+      "A": "The client sent an image instead of text.",
+      "B": "The server does not support the format of the data sent in the request.",
+      "C": "The server is out of storage.",
+      "D": "The video codec is missing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Query parameters are separated from the URL path by a question mark (?).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are parts of an HTTP Response?",
+    "options": {
+      "A": "Status Line",
+      "B": "Response Body",
+      "C": "Client IP Address",
+      "D": "CPU Usage Info"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the purpose of the Location header in a 201 Created response?",
+    "options": {
+      "A": "To show where the server is located geographically.",
+      "B": "To provide the URL of the newly created resource.",
+      "C": "To show the user's IP address.",
+      "D": "To redirect to the login page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: PATCH is safer than PUT because it only updates the fields you specify.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is used for \"Conflict,\" such as when an edit conflicts with the current state of a resource?",
+    "options": {
+      "A": "400",
+      "B": "404",
+      "C": "409",
+      "D": "412"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Identify TWO common authentication headers:",
+    "options": {
+      "A": "Authorization: Basic <credentials>",
+      "B": "Authorization: Bearer <token>",
+      "C": "Authenticate-Me: Yes",
+      "D": "Security-Key: <key>"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A 400 Bad Request code usually implies that the error is on the server side.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is \"Media Type\" (formerly MIME type)?",
+    "options": {
+      "A": "A way to label the type of data (e.g., application/json).",
+      "B": "The size of the file.",
+      "C": "The speed of the connection.",
+      "D": "The name of the API."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: HEAD requests return the same headers as a GET request but without the body content.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO status codes are associated with \"Redirection\"?",
+    "options": {
+      "A": "301",
+      "B": "302",
+      "C": "401",
+      "D": "501"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A REST API can return different representations of the same resource (e.g., JSON or XML) based on the Accept header.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 422 Unprocessable Entity status code mean?",
+    "options": {
+      "A": "The server is dead.",
+      "B": "The server understands the content type but the data is semantically incorrect.",
+      "C": "The user is not logged in.",
+      "D": "The URL is too long."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are valid HTTP versions in use today?",
+    "options": {
+      "A": "HTTP/1.1",
+      "B": "HTTP/2",
+      "C": "HTTP/4.0",
+      "D": "HTTP/Basic"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: Query parameters are typically case-sensitive depending on the server implementation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to retrieve metadata about a resource without the resource itself?",
+    "options": {
+      "A": "GET",
+      "B": "OPTIONS",
+      "C": "HEAD",
+      "D": "TRACE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Identify TWO characteristics of a RESTful URI:",
+    "options": {
+      "A": "It should be intuitive and easy to read.",
+      "B": "It should use nouns instead of verbs.",
+      "C": "It must always end with .php or .json.",
+      "D": "It should contain the developer's name."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: The ETag header is used for web cache validation and conditional requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a \"JWT Claim\"?",
+    "options": {
+      "A": "A piece of information asserted about a subject (e.g., user ID).",
+      "B": "An error message.",
+      "C": "The API URL.",
+      "D": "A type of encryption key."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: OAuth 2.0 uses \"Access Tokens\" to grant access to resources.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO common OAuth 2.0 grant types:",
+    "options": {
+      "A": "Authorization Code",
+      "B": "Client Credentials",
+      "C": "Binary Stream",
+      "D": "SQL Inject"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Basic Authentication\" sends credentials in an unencrypted Base64 string.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"OpenID Connect\" (OIDC)?",
+    "options": {
+      "A": "An identity layer on top of OAuth 2.0.",
+      "B": "A new type of database.",
+      "C": "A CSS framework.",
+      "D": "A hardware protocol."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are ways to prevent Man-in-the-Middle (MITM) attacks on APIs?",
+    "options": {
+      "A": "Using HTTPS (TLS)",
+      "B": "Certificate Pinning",
+      "C": "Using shorter URLs",
+      "D": "Disabling JSON"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: An \"Expired Token\" should return a 401 Unauthorized status code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"Scoping\" in API security?",
+    "options": {
+      "A": "Limiting the size of the JSON.",
+      "B": "Limiting the permissions or access level granted by a token.",
+      "C": "Looking for bugs in the code.",
+      "D": "Naming the API endpoints."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are components of an OAuth 2.0 architecture?",
+    "options": {
+      "A": "Resource Owner",
+      "B": "Authorization Server",
+      "C": "Database Administrator",
+      "D": "Network Router"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: JWTs are typically signed to ensure data integrity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"API Throttling\"?",
+    "options": {
+      "A": "Speeding up the server.",
+      "B": "Intentionally slowing down or rejecting requests to maintain system stability.",
+      "C": "Deleting old data.",
+      "D": "Renaming endpoints."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: \"Mutual TLS\" (mTLS) requires both the client and server to provide certificates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are common API attacks?",
+    "options": {
+      "A": "Credential Stuffing",
+      "B": "Insecure Direct Object Reference (IDOR)",
+      "C": "RAM Overclocking",
+      "D": "Monitor Ghosting"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: API Keys should never be hardcoded in client-side code (like JavaScript).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a \"Cross-Site Request Forgery\" (CSRF) attack in the context of APIs?",
+    "options": {
+      "A": "Forcing a logged-in user to execute unwanted actions on an API.",
+      "B": "Stealing the server's hard drive.",
+      "C": "Crashing the browser.",
+      "D": "Changing the font of the API response."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"API Discovery\"?",
+    "options": {
+      "A": "Searching for new APIs on the internet.",
+      "B": "The process by which a client automatically finds available endpoints and documentation.",
+      "C": "Deleting an API after use.",
+      "D": "Installing an API on a local machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: \"Polling\" is a technique where the client repeatedly asks the server for new data at regular intervals.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are common challenges with \"Long Polling\"?",
+    "options": {
+      "A": "High server resource consumption.",
+      "B": "Difficulty in handling a high number of concurrent connections.",
+      "C": "Data is sent as binary only.",
+      "D": "It only works on Internet Explorer."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A \"JSON Web Signature\" (JWS) ensures that the contents of a JWT have not been tampered with.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is used in a \"CORS Preflight\" request?",
+    "options": {
+      "A": "GET",
+      "B": "POST",
+      "C": "OPTIONS",
+      "D": "HEAD"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is \"Field Filtering\" in an API?",
+    "options": {
+      "A": "Deleting fields from a database.",
+      "B": "Allowing the client to specify which fields should be returned (e.g., ?fields=name,email).",
+      "C": "Sorting the data by date.",
+      "D": "Encrypting the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: \"Binary Large Objects\" (BLOBs) are typically sent via APIs as Base64 encoded strings or through multipart/form-data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are used to represent a \"Collection\" in a RESTful URI?",
+    "options": {
+      "A": "/users",
+      "B": "/orders",
+      "C": "/user/10",
+      "D": "/get_all_data"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: The Retry-After header is only sent with 429 status codes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is \"Request Collapsing\"?",
+    "options": {
+      "A": "Combining multiple requests into one to save bandwidth.",
+      "B": "Crashing the server with too many requests.",
+      "C": "Deleting duplicate requests in a database.",
+      "D": "A type of network error."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are standard parts of a SOAP Message?",
+    "options": {
+      "A": "Envelope",
+      "B": "Body",
+      "C": "JavaScript Function",
+      "D": "CSS Stylesheet"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"GraphQL Mutations\" are used to modify data on the server, similar to POST, PUT, or DELETE in REST.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an \"API Wrapper\"?",
+    "options": {
+      "A": "A plastic cover for a server.",
+      "B": "A library that simplifies calls to a specific API.",
+      "C": "A type of firewall.",
+      "D": "An error message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A \"Self-Describing\" message in REST means the message contains all info needed to understand it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned when a client tries to access a resource that requires payment?",
+    "options": {
+      "A": "401",
+      "B": "402",
+      "C": "403",
+      "D": "404"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO properties of JSON Web Tokens (JWT):",
+    "options": {
+      "A": "They are self-contained.",
+      "B": "They can be passed in URLs, headers, or cookies.",
+      "C": "They are always encrypted.",
+      "D": "They require a database look-up for every validation."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: In gRPC, the client can call a method on a server on a different machine as if it were local.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"Canonicalization\" in APIs?",
+    "options": {
+      "A": "Deleting the API code.",
+      "B": "Converting data with more than one representation into a standard form.",
+      "C": "Translating the API into different languages.",
+      "D": "Creating a backup of the API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are advantages of using Webhooks over Polling?",
+    "options": {
+      "A": "Real-time updates.",
+      "B": "Reduced server load on the client side.",
+      "C": "Better security for the client.",
+      "D": "Guaranteed delivery of every message."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"API Bursting\" allows a user to temporarily exceed their rate limit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP header is used for cross-site requests to indicate which origin is allowed?",
+    "options": {
+      "A": "Access-Control-Allow-Origin",
+      "B": "Allow-Origin-Policy",
+      "C": "Cross-Origin-Allow",
+      "D": "Origin-Control"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An API \"Mashup\" is a web app that combines data from more than one source.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are common types of \"API Gateways\"?",
+    "options": {
+      "A": "Kong",
+      "B": "Apigee",
+      "C": "Google Chrome",
+      "D": "Microsoft Word"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A \"Persistent Connection\" (Keep-Alive) allows multiple requests over a single TCP connection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the \"N+1 Problem\" in APIs?",
+    "options": {
+      "A": "Adding one extra server.",
+      "B": "A performance issue where one request results in N additional database/API calls.",
+      "C": "A type of versioning error.",
+      "D": "Returning one more item than requested."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO HTTP status codes that represent a \"Client Error\":",
+    "options": {
+      "A": "410 Gone",
+      "B": "413 Payload Too Large",
+      "C": "500 Internal Error",
+      "D": "200 OK"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Content Negotiation\" allows a client to choose the language of the response.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is used when a resource has been permanently moved to a new URI?",
+    "options": {
+      "A": "301",
+      "B": "302",
+      "C": "307",
+      "D": "308"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SOAP messages can be sent over protocols other than HTTP, such as SMTP.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"Request Signing\"?",
+    "options": {
+      "A": "Typing your name.",
+      "B": "Creating a cryptographic signature of the request to ensure authenticity.",
+      "C": "Approving a request in a manager's portal.",
+      "D": "Encrypting the entire request body."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are common \"Grant Types\" in OAuth 2.0?",
+    "options": {
+      "A": "Implicit",
+      "B": "Password",
+      "C": "Remote",
+      "D": "Secure"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Idempotency\" is a requirement for the POST method in REST.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a \"Shadow API\"?",
+    "options": {
+      "A": "An API used only at night.",
+      "B": "An undocumented/unmanaged API active without IT's knowledge.",
+      "C": "A backup API.",
+      "D": "A dark-themed API documentation page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common components of an API \"Endpoint\":",
+    "options": {
+      "A": "Base URL",
+      "B": "Resource Path",
+      "C": "Local Folder Name",
+      "D": "Server Processor Type"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"WebSockets\" provide full-duplex communication over a single long-lived connection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"Latency\" in the context of an API?",
+    "options": {
+      "A": "The amount of data transferred per second.",
+      "B": "The time delay between a client request and a server response.",
+      "C": "The number of errors per minute.",
+      "D": "The physical distance between the client and server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: API Caching can significantly reduce server load by storing copies of frequent responses.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are valid HTTP headers used for caching?",
+    "options": {
+      "A": "Cache-Control",
+      "B": "ETag",
+      "C": "Content-Length",
+      "D": "User-Agent"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Pagination\" is used to limit the amount of data returned in a single response for large data sets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the acronym \"BFF\" stand for in API design?",
+    "options": {
+      "A": "Binary File Format",
+      "B": "Backend For Frontend",
+      "C": "Basic Functional Framework",
+      "D": "Best Filtered Flow"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common strategies for API versioning:",
+    "options": {
+      "A": "URI Path (e.g., /v1/users)",
+      "B": "Custom Request Headers",
+      "C": "Changing the Server IP Address",
+      "D": "Renaming the database tables"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A \"Circular Dependency\" occurs when two APIs require each other to function, creating a loop.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the goal of \"Contract Testing\"?",
+    "options": {
+      "A": "To test the server's maximum load capacity.",
+      "B": "To ensure the API meets the agreed-upon specification for inputs and outputs.",
+      "C": "To test the security of the firewall.",
+      "D": "To check the legal terms of the API usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are widely used API documentation tools?",
+    "options": {
+      "A": "Redoc",
+      "B": "Stoplight",
+      "C": "Microsoft Excel",
+      "D": "Notepad"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A \"Dry Run\" parameter allows a client to simulate a request without making permanent changes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is considered NOT idempotent?",
+    "options": {
+      "A": "GET",
+      "B": "PUT",
+      "C": "POST",
+      "D": "DELETE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: \"Soft Deletion\" means the record is flagged as deleted but remains in the database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO benefits of JSON over XML:",
+    "options": {
+      "A": "It is less verbose and smaller in size.",
+      "B": "It is natively supported by JavaScript.",
+      "C": "It has built-in support for document schemas.",
+      "D": "It supports complex comment structures."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Over-fetching\" occurs when a client receives more data than is necessary for its task.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"API Observability\"?",
+    "options": {
+      "A": "The ability to see the physical server.",
+      "B": "The use of logs, metrics, and traces to understand the API's internal state.",
+      "C": "Looking at the API code in a text editor.",
+      "D": "Recording the screen of the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Retry-After header tells the client exactly when they can try the request again.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are mandatory parts of a SOAP Message structure?",
+    "options": {
+      "A": "Envelope",
+      "B": "Body",
+      "C": "Stylesheet",
+      "D": "Script Tag"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: The HTTP status code 204 No Content indicates a failed request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an API \"Stub\" in the context of testing?",
+    "options": {
+      "A": "A real server used for production.",
+      "B": "A piece of code that provides a fixed, simulated response to a request.",
+      "C": "A bug that crashes the system.",
+      "D": "A type of error message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Most public APIs provide a \"Developer Portal\" for documentation and API key management.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is used for \"Payload Too Large\"?",
+    "options": {
+      "A": "400",
+      "B": "413",
+      "C": "415",
+      "D": "500"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: \"Statelessness\" helps in scaling APIs because any server can handle any request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO methods of API Authentication:",
+    "options": {
+      "A": "Bearer Tokens",
+      "B": "API Keys",
+      "C": "Local Storage",
+      "D": "Session Cookies (standard web only)"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: An \"API Orchestrator\" combines multiple microservices into a single unified API.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does \"Throttling\" prevent?",
+    "options": {
+      "A": "Data corruption.",
+      "B": "System overload by limiting request frequency.",
+      "C": "Changes to the API version.",
+      "D": "User login errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO characteristics of GraphQL:",
+    "options": {
+      "A": "Strongly typed schema.",
+      "B": "Single endpoint.",
+      "C": "Multiple endpoints for each resource.",
+      "D": "Exclusively uses XML."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: REST uses a \"Pull\" model while Webhooks use a \"Push\" model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard port used for HTTPS traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "8080",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are parts of an API Response Header?",
+    "options": {
+      "A": "Content-Type",
+      "B": "Server",
+      "C": "Payload",
+      "D": "Request-Method"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Sanitization\" is the process of cleaning user input to prevent SQL Injection or XSS via API.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned when a client tries to delete a resource that doesn't exist?",
+    "options": {
+      "A": "200",
+      "B": "404",
+      "C": "401",
+      "D": "500"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: PUT is idempotent, whereas PATCH is generally not.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO benefits of a well-documented API:",
+    "options": {
+      "A": "Lower developer support costs.",
+      "B": "Faster integration time for partners.",
+      "C": "Faster code execution.",
+      "D": "Reduced server bandwidth."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A \"Recursive API\" is one that calls itself to process complex data structures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an \"API Gateway\"?",
+    "options": {
+      "A": "A type of database.",
+      "B": "A management layer that sits between clients and backend services.",
+      "C": "A browser extension.",
+      "D": "A physical networking cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common formats for API Error Responses:",
+    "options": {
+      "A": "JSON",
+      "B": "XML",
+      "C": "Binary",
+      "D": "Plain Text (only)"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"Regression Testing\" ensures that new API changes don't break existing functionality.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is used to retrieve resource metadata without the body?",
+    "options": {
+      "A": "GET",
+      "B": "HEAD",
+      "C": "OPTIONS",
+      "D": "POST"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OAuth 2.0 can be used to protect both web and mobile APIs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is \"HATEOAS\" in REST architecture?",
+    "options": {
+      "A": "A way to secure data.",
+      "B": "Providing links in responses to navigate the API dynamically.",
+      "C": "A type of error handling.",
+      "D": "A compression algorithm."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code represents \"Internal Server Error\"?",
+    "options": {
+      "A": "404",
+      "B": "401",
+      "C": "500",
+      "D": "502"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: gRPC uses Protobuf for serialization, which is more compact than JSON.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO components of an API Request:",
+    "options": {
+      "A": "Endpoint URL",
+      "B": "HTTP Method",
+      "C": "Server CPU Model",
+      "D": "Local File System Path"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: JSON-RPC is a remote procedure call protocol encoded in JSON.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a \"Breaking Change\"?",
+    "options": {
+      "A": "A change that adds a new optional field.",
+      "B": "A change that requires existing clients to update their code (e.g., removing a field).",
+      "C": "A change that fixes a typo in the documentation.",
+      "D": "A change that reboots the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are types of API environments?",
+    "options": {
+      "A": "Sandbox/Staging",
+      "B": "Production",
+      "C": "Personal",
+      "D": "Hardware"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: \"API Monetization\" involves charging developers for access to API data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned for \"Gone\" (resource was once here but is now permanently deleted)?",
+    "options": {
+      "A": "404",
+      "B": "410",
+      "C": "403",
+      "D": "503"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: \"Idempotent\" means multiple identical requests have the same effect as a single request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are popular API mocking tools?",
+    "options": {
+      "A": "WireMock",
+      "B": "Mock/Prism",
+      "C": "Notepad++",
+      "D": "Windows Media Player"
+    },
+    "answer": ["A", "B"]
+  }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "API"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

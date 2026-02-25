@@ -1,0 +1,2060 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+  {
+    "question": "What is the primary purpose of React Hooks?",
+    "options": {
+      "A": "To allow the use of state and other React features in functional components",
+      "B": "To replace the need for JavaScript in HTML",
+      "C": "To create physical connections between components",
+      "D": "To manage server-side databases"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a 'Rule of Hooks'?",
+    "options": {
+      "A": "Hooks can be called inside loops",
+      "B": "Hooks must only be called at the top level of a React function",
+      "C": "Hooks can be called from regular JavaScript functions",
+      "D": "Hooks must be called inside 'if' statements"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to add local state to a functional component?",
+    "options": {
+      "A": "useEffect",
+      "B": "useState",
+      "C": "useContext",
+      "D": "useReducer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'useState' return?",
+    "options": {
+      "A": "The current state value only",
+      "B": "A function to update the state only",
+      "C": "An array with the current state and a function to update it",
+      "D": "A reference to the DOM element"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which hook is used to perform side effects (like data fetching or subscriptions)?",
+    "options": {
+      "A": "useMemo",
+      "B": "useEffect",
+      "C": "useCallback",
+      "D": "useRef"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When does 'useEffect' run if the dependency array is empty ([])?",
+    "options": {
+      "A": "On every re-render",
+      "B": "Only once, after the initial render",
+      "C": "Every time a variable changes",
+      "D": "Only when the component is unmounted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you perform a 'cleanup' action in 'useEffect' (e.g., unsubscribing from an API)?",
+    "options": {
+      "A": "By calling useEffect.stop()",
+      "B": "By returning a function from the useEffect callback",
+      "C": "By using a 'finally' block",
+      "D": "By deleting the component"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if you omit the dependency array in 'useEffect'?",
+    "options": {
+      "A": "The hook never runs",
+      "B": "The hook runs after every single render",
+      "C": "The hook runs only once",
+      "D": "The app crashes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Can you call Hooks inside a class component?",
+    "options": {
+      "A": "Yes, always",
+      "B": "No, Hooks are for functional components only",
+      "C": "Only if the class extends 'HookComponent'",
+      "D": "Only in development mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to access the context value of a 'Context.Provider'?",
+    "options": {
+      "A": "useState",
+      "B": "useContext",
+      "C": "useProvider",
+      "D": "useValue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'useReducer'?",
+    "options": {
+      "A": "To decrease the memory usage of a component",
+      "B": "To handle complex state logic that involves multiple sub-values or state transitions",
+      "C": "To remove unused code",
+      "D": "To sort an array"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook returns a mutable ref object whose '.current' property persists for the full lifetime of the component?",
+    "options": {
+      "A": "useState",
+      "B": "useRef",
+      "C": "useMemo",
+      "D": "usePersist"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary use case for 'useMemo'?",
+    "options": {
+      "A": "To save data to the browser's local storage",
+      "B": "To memoize expensive calculations so they are only re-computed when dependencies change",
+      "C": "To create a memo for other developers",
+      "D": "To manage network requests"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'useMemo' and 'useCallback'?",
+    "options": {
+      "A": "useMemo returns a memoized value; useCallback returns a memoized function",
+      "B": "useMemo is for mobile; useCallback is for web",
+      "C": "There is no difference",
+      "D": "useCallback is older"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'useState', if the new state is identical to the current state, what does React do?",
+    "options": {
+      "A": "Re-renders the component anyway",
+      "B": "Bails out (does not re-render the component or fire effects)",
+      "C": "Throws an error",
+      "D": "Deletes the state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to read and manipulate the layout from the DOM before the browser paints?",
+    "options": {
+      "A": "useEffect",
+      "B": "useLayoutEffect",
+      "C": "useDOMEffect",
+      "D": "usePaintEffect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create a 'Custom Hook' in React?",
+    "options": {
+      "A": "By calling a function 'createHook'",
+      "B": "By creating a JavaScript function whose name starts with 'use' and calls other hooks",
+      "C": "By extending the 'React.Hook' class",
+      "D": "Custom hooks are not supported"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the second argument of 'useState' usually named by convention?",
+    "options": {
+      "A": "updateState",
+      "B": "setState (or set[VariableName])",
+      "C": "changeValue",
+      "D": "modify"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Why is the dependency array in 'useEffect' important?",
+    "options": {
+      "A": "It defines the name of the effect",
+      "B": "It tells React which variables to watch to determine if the effect should run again",
+      "C": "It stores the history of the effect",
+      "D": "It makes the effect run faster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if you update state based on the previous state without using the functional update form (e.g., setCount(count + 1)) in a quick succession?",
+    "options": {
+      "A": "It works perfectly",
+      "B": "It might use a stale 'count' value due to closures, resulting in incorrect updates",
+      "C": "The app crashes",
+      "D": "React warns you with a popup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used for imperative handle customization when using 'forwardRef'?",
+    "options": {
+      "A": "useRef",
+      "B": "useImperativeHandle",
+      "C": "useHandle",
+      "D": "useCustomRef"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Stale Closure' problem in React Hooks?",
+    "options": {
+      "A": "When the component stops rendering",
+      "B": "When an effect or callback captures an old value from a previous render instead of the current one",
+      "C": "A network error",
+      "D": "A styling bug"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is a version of 'useMemo' specifically for state? (Hint: it's not a real hook but a concept)",
+    "options": {
+      "A": "useState",
+      "B": "useReducer",
+      "C": "useCallback",
+      "D": "useMemo"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lazy Initialization' in 'useState'?",
+    "options": {
+      "A": "Waiting for the user to click",
+      "B": "Passing a function to useState so the initial state is only calculated during the first render",
+      "C": "A slow app start",
+      "D": "Using 'var' instead of 'const'"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT a built-in React Hook?",
+    "options": {
+      "A": "useId",
+      "B": "useTransition",
+      "C": "useFetch",
+      "D": "useDeferredValue"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "When should you use 'useLayoutEffect' over 'useEffect'?",
+    "options": {
+      "A": "Always",
+      "B": "When you need to measure DOM elements and update the UI synchronously before the browser paints to prevent flickering",
+      "C": "Only for network calls",
+      "D": "Only in React Native"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary advantage of 'useCallback'?",
+    "options": {
+      "A": "It makes the code shorter",
+      "B": "It prevents child components that rely on referential equality (like those wrapped in React.memo) from re-rendering unnecessarily",
+      "C": "It allows calling APIs",
+      "D": "It manages CSS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'useRef' NOT do?",
+    "options": {
+      "A": "Store a reference to a DOM node",
+      "B": "Trigger a re-render when its value changes",
+      "C": "Persist values across renders",
+      "D": "Hold any mutable value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'useEffect', if the cleanup function is not provided, what does React do?",
+    "options": {
+      "A": "Throws an error",
+      "B": "Simply skips the cleanup phase",
+      "C": "Crashes the component on unmount",
+      "D": "Restarts the effect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Can you call a hook from inside a nested function within a component?",
+    "options": {
+      "A": "Yes, it is fine",
+      "B": "No, it violates the Rule of Hooks (must be at the top level)",
+      "C": "Only if the nested function is async",
+      "D": "Only if it is a 'setter' function"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the correct syntax for 'useContext'?",
+    "options": {
+      "A": "const value = useContext(MyContext)",
+      "B": "const value = useContext(<MyContext />)",
+      "C": "const value = useContext(MyContext.Consumer)",
+      "D": "const value = useContext(MyContext.Provider)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Dispatcher' in the context of Hooks?",
+    "options": {
+      "A": "A person who writes code",
+      "B": "The internal React mechanism that handles the execution and tracking of Hooks",
+      "C": "A type of network request",
+      "D": "A database tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How many 'useState' hooks can you have in a single component?",
+    "options": {
+      "A": "Only one",
+      "B": "As many as needed",
+      "C": "Exactly two",
+      "D": "Up to five"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the benefit of splitting state into multiple 'useState' calls instead of one large object?",
+    "options": {
+      "A": "It makes the app faster",
+      "B": "It allows for more granular updates and keeps related logic together",
+      "C": "It is required by React",
+      "D": "It uses less memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to generate a unique ID for accessibility attributes?",
+    "options": {
+      "A": "useUniqueId",
+      "B": "useId",
+      "C": "useAccess",
+      "D": "useGuid"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'useDeferredValue' do?",
+    "options": {
+      "A": "It deletes a value after a delay",
+      "B": "It lets you defer updating a non-urgent part of the UI to keep the more important parts responsive",
+      "C": "It waits for a network call",
+      "D": "It encrypts a value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useTransition' used for?",
+    "options": {
+      "A": "To animate CSS transitions",
+      "B": "To mark some state updates as 'transitions' that can be interrupted by more urgent updates",
+      "C": "To move between screens",
+      "D": "To manage app history"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is helpful for debugging and displays a label in React DevTools for custom hooks?",
+    "options": {
+      "A": "useLabel",
+      "B": "useDebugValue",
+      "C": "useDev",
+      "D": "useInfo"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If you use 'useEffect' to set up a 'setInterval', where should you call 'clearInterval'?",
+    "options": {
+      "A": "Outside the hook",
+      "B": "In the cleanup function returned by useEffect",
+      "C": "In another useEffect",
+      "D": "You don't need to clear it"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the risk of a 'Large Dependency Array' in 'useEffect'?",
+    "options": {
+      "A": "The app crashes",
+      "B": "The effect might run too frequently, potentially causing performance issues",
+      "C": "It makes the code harder to read only",
+      "D": "It consumes too much battery"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does React keep track of which state belongs to which 'useState' call?",
+    "options": {
+      "A": "By looking at the variable names",
+      "B": "By the order in which the hooks are called during render",
+      "C": "By the unique ID of the hook",
+      "D": "By the component's name"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a Hook is called conditionally (inside an 'if')?",
+    "options": {
+      "A": "It works normally",
+      "B": "It breaks the order of hooks, causing React to mismatch state between renders",
+      "C": "The conditional logic is ignored",
+      "D": "The component renders faster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook can be used to synchronize a state variable with an external store (like a browser API)?",
+    "options": {
+      "A": "useSyncExternalStore",
+      "B": "useExternal",
+      "C": "useStore",
+      "D": "useSync"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'useReducer', what is the 'dispatch' function?",
+    "options": {
+      "A": "A function to start a network call",
+      "B": "A function that sends an 'action' to the reducer to calculate the new state",
+      "C": "A tool to delete data",
+      "D": "A way to navigate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useInsertionEffect' used for?",
+    "options": {
+      "A": "To insert data into a database",
+      "B": "To insert styles into the DOM before layout effects fire (primarily for CSS-in-JS libraries)",
+      "C": "To insert new components",
+      "D": "To handle keyboard input"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does it mean that Hooks are 'composables'?",
+    "options": {
+      "A": "They can be used with music",
+      "B": "They can be combined to build more complex custom hooks and logic",
+      "C": "They are made of separate parts",
+      "D": "They are only for UI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Functional Update' syntax in 'useState'?",
+    "options": {
+      "A": "setState(value)",
+      "B": "setState(prevState => prevState + 1)",
+      "C": "setState.update(value)",
+      "D": "setState = value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook provides a way to get the scroll position of a window asynchronously?",
+    "options": {
+      "A": "useScroll",
+      "B": "None; you must use useEffect or useLayoutEffect with a custom listener",
+      "C": "useWindowScroll",
+      "D": "useLayout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'exhaustive-deps' lint rule?",
+    "options": {
+      "A": "A rule that requires every variable to be constant",
+      "B": "A rule that ensures all reactive values used inside a hook are included in the dependency array",
+      "C": "A rule to limit the number of hooks",
+      "D": "A rule to delete unused code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Concurrent React' and how does it affect Hooks?",
+    "options": {
+      "A": "It is a new language; it doesn't use hooks",
+      "B": "A set of features that allow React to be more interruptible and responsive; enabled by hooks like useTransition",
+      "C": "A type of database; it uses hooks for queries",
+      "D": "A way to run React on two servers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When should you use 'useCallback' instead of a regular function definition inside a component?",
+    "options": {
+      "A": "To make the function run faster",
+      "B": "To maintain referential identity of the function across re-renders, preventing unnecessary updates to child components wrapped in React.memo",
+      "C": "To allow the function to be used in the global scope",
+      "D": "To handle network requests automatically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if you provide a dependency to 'useMemo' that changes on every render (like an inline object)?",
+    "options": {
+      "A": "It will still memoize correctly",
+      "B": "It defeats the purpose of useMemo, as the calculation will run on every render",
+      "C": "React will throw a compiler error",
+      "D": "The app will use less memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of a 'Custom Hook'?",
+    "options": {
+      "A": "To create a new type of React component",
+      "B": "To extract and share stateful logic between different components",
+      "C": "To hide code from other developers",
+      "D": "To replace the Redux store"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Does a Custom Hook share state between the components that use it?",
+    "options": {
+      "A": "Yes, it acts as a global singleton",
+      "B": "No, each call to a custom hook creates a completely independent state for that component",
+      "C": "Only if the hook is defined in a separate file",
+      "D": "Only in React Native"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you use 'useRef' to store a value that doesn't trigger a re-render?",
+    "options": {
+      "A": "By updating ref.current directly",
+      "B": "By calling setRef(value)",
+      "C": "By using the useEffect hook",
+      "D": "It is not possible to avoid re-renders with useRef"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'useReducer's' third argument used for?",
+    "options": {
+      "A": "To set the dispatcher",
+      "B": "To lazily initialize the state via an 'init' function",
+      "C": "To define the middleware",
+      "D": "To log state changes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is best suited for managing a complex form with 10+ fields and interconnected validation logic?",
+    "options": {
+      "A": "useState",
+      "B": "useReducer",
+      "C": "useContext",
+      "D": "useRef"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Ref Object'?",
+    "options": {
+      "A": "A JavaScript object with a single 'current' property",
+      "B": "A function that returns a DOM node",
+      "C": "A type of state variable",
+      "D": "A network request handler"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Can you call a hook inside a 'useEffect' callback?",
+    "options": {
+      "A": "Yes, if it's a custom hook",
+      "B": "No, it violates the rule that hooks must be at the top level of the component function",
+      "C": "Only if the effect has a dependency array",
+      "D": "Only in development"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'useMemo(() => () => console.log('hi'), [])'?",
+    "options": {
+      "A": "A string 'hi'",
+      "B": "A memoized function that logs 'hi'",
+      "C": "The value 'undefined'",
+      "D": "A compiler error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'forwardRef', which hook allows you to expose only specific methods of a child component to the parent?",
+    "options": {
+      "A": "useRef",
+      "B": "useImperativeHandle",
+      "C": "useCallback",
+      "D": "useMemo"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'State Batching' in React 18+ hooks?",
+    "options": {
+      "A": "Updating state in batches of 10",
+      "B": "React automatically grouping multiple state updates into a single re-render, even inside promises or timeouts",
+      "C": "A way to delete state",
+      "D": "A database tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is useful for ensuring a heavy computation doesn't block user input (introduced in React 18)?",
+    "options": {
+      "A": "useDeferredValue",
+      "B": "useEffect",
+      "C": "useLayoutEffect",
+      "D": "useRef"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'useReducer', if you return the same 'state' object from the reducer function, what happens?",
+    "options": {
+      "A": "The component re-renders",
+      "B": "React bails out and does not re-render the component",
+      "C": "The app crashes",
+      "D": "The state is cleared"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access the previous value of a prop or state using hooks?",
+    "options": {
+      "A": "By using usePrevious() (built-in)",
+      "B": "By creating a custom hook with useRef and useEffect to store the value from the last render",
+      "C": "By calling getPrev()",
+      "D": "React does not allow access to previous values"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to subscribe to an external data source in a way that is compatible with Concurrent Rendering?",
+    "options": {
+      "A": "useEffect",
+      "B": "useSyncExternalStore",
+      "C": "useStore",
+      "D": "useExternal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Capture Value' property of Hooks?",
+    "options": {
+      "A": "The price of the hook",
+      "B": "The fact that every render has its own props, state, and event handlers (closures) that 'see' values at that specific time",
+      "C": "A way to catch errors",
+      "D": "A network setting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Hook Flow' sequence during an update?",
+    "options": {
+      "A": "Render -> useLayoutEffect -> useEffect",
+      "B": "useEffect -> Render -> useLayoutEffect",
+      "C": "useLayoutEffect -> useEffect -> Render",
+      "D": "Render -> useEffect -> useLayoutEffect"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Why shouldn't you use 'useMemo' for every single variable in a component?",
+    "options": {
+      "A": "It makes the variables invisible",
+      "B": "The overhead of memory and dependency checking can sometimes exceed the cost of re-calculating simple values",
+      "C": "It is only allowed for objects",
+      "D": "It breaks the UI theme"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hydration' in the context of Hooks?",
+    "options": {
+      "A": "Cleaning up memory",
+      "B": "The process where React on the client 'attaches' event listeners and state to the static HTML sent from the server",
+      "C": "Updating the UI theme",
+      "D": "A database sync"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is required if you want to perform a manual animation that needs to be perfectly synced with the browser's painting cycle?",
+    "options": {
+      "A": "useEffect",
+      "B": "useLayoutEffect",
+      "C": "useTransition",
+      "D": "useDeferredValue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you handle 'Race Conditions' in an API call inside 'useEffect'?",
+    "options": {
+      "A": "By using a boolean flag (e.g., 'ignore') in the cleanup function",
+      "B": "By restarting the server",
+      "C": "By using useMemo",
+      "D": "By using useRef to block the call"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'useId' return for multiple components?",
+    "options": {
+      "A": "The same ID",
+      "B": "A unique, stable ID that works with server-side rendering to avoid hydration mismatches",
+      "C": "A random number",
+      "D": "An incrementing integer starting from 1"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Action' type in useReducer conventionally?",
+    "options": {
+      "A": "A string",
+      "B": "An object with a 'type' property (and optional 'payload')",
+      "C": "A boolean",
+      "D": "A network request"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Primitive vs Reference' equality in hook dependencies?",
+    "options": {
+      "A": "Primitives (string, number) compare by value; References (object, array) compare by memory address",
+      "B": "They are the same",
+      "C": "References are always faster",
+      "D": "Primitives cannot be used in dependencies"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which hook is used to provide a way for users to 'opt-out' of a re-render for a component?",
+    "options": {
+      "A": "useState",
+      "B": "useMemo (via memoizing the component itself or using React.memo)",
+      "C": "useRef",
+      "D": "useEffect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pure' Custom Hook?",
+    "options": {
+      "A": "A hook that doesn't use state",
+      "B": "A hook that is deterministic and doesn't produce side effects (rare for hooks)",
+      "C": "A hook written in TypeScript",
+      "D": "A hook that only returns one value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is commonly used to track if a component is 'Mounted' or not?",
+    "options": {
+      "A": "useMounted",
+      "B": "useRef (updated inside useEffect)",
+      "C": "useState",
+      "D": "useContext"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to the values inside 'useRef' when a component re-renders?",
+    "options": {
+      "A": "They are reset to null",
+      "B": "They persist and remain unchanged unless manually modified",
+      "C": "They trigger a re-render themselves",
+      "D": "They are cleared from memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Component Composition' using Hooks?",
+    "options": {
+      "A": "Putting components inside each other",
+      "B": "Building complex UI features by mixing multiple small, reusable hooks within one component",
+      "C": "A way to style components",
+      "D": "A database tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'useTransition' for the user experience?",
+    "options": {
+      "A": "It makes the app run on 2 threads",
+      "B": "It prevents the UI from freezing during a large state update, keeping the app responsive to user interactions",
+      "C": "It adds a loading spinner automatically",
+      "D": "It speeds up network calls"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'useReducer', what is 'dispatching an action'?",
+    "options": {
+      "A": "Sending an email",
+      "B": "Calling the dispatch function with an object to tell the reducer how to update the state",
+      "C": "Deleting a variable",
+      "D": "Changing the URL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is best for creating a 'Timer' that needs to be shared across many components without re-renders?",
+    "options": {
+      "A": "useState",
+      "B": "useRef (to store the interval ID) and potentially a custom hook",
+      "C": "useMemo",
+      "D": "useEffect only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Linter' for React Hooks?",
+    "options": {
+      "A": "A physical tool",
+      "B": "eslint-plugin-react-hooks, which enforces the rules and checks dependency arrays",
+      "C": "A code editor",
+      "D": "A database rule"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook can handle the 'Initial Render' logic specifically?",
+    "options": {
+      "A": "useEffect with empty [] dependencies",
+      "B": "useMemo",
+      "C": "useInitial",
+      "D": "useRef"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the consequence of 'Circular Dependencies' in hook arrays?",
+    "options": {
+      "A": "The app works faster",
+      "B": "An infinite loop of re-renders",
+      "C": "The dependency is ignored",
+      "D": "A network error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useDeferredValue' vs 'Debouncing'?",
+    "options": {
+      "A": "They are the same",
+      "B": "Debouncing waits for a fixed time; useDeferredValue lets React decide the best time based on system load",
+      "C": "Debouncing is only for mobile",
+      "D": "useDeferredValue is older"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you 'Forward a Ref' to a functional component child?",
+    "options": {
+      "A": "By passing it as a regular prop",
+      "B": "By wrapping the child component in 'React.forwardRef()'",
+      "C": "By using the useRef hook in the parent",
+      "D": "It is not possible"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook can be used to read a value from the browser's 'Local Storage' reactively?",
+    "options": {
+      "A": "useLocalStorage",
+      "B": "None built-in; you must create a custom hook with useState and useEffect",
+      "C": "useStorage",
+      "D": "useSync"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Dependency Array' syntax for watching all variables?",
+    "options": {
+      "A": "[*]",
+      "B": "Omitting the array entirely",
+      "C": "[]",
+      "D": "[all]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook can be used to implement a 'Debounce' logic natively?",
+    "options": {
+      "A": "useDeferredValue",
+      "B": "useEffect (with a setTimeout in the effect and clearTimeout in the cleanup)",
+      "C": "useMemo",
+      "D": "useCallback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Ref Callback' pattern?",
+    "options": {
+      "A": "Passing a function to the 'ref' prop of a component to get access to the DOM node",
+      "B": "Calling a ref inside a function",
+      "C": "Using a ref as a state",
+      "D": "A network setting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global State' vs 'Hooks State'?",
+    "options": {
+      "A": "Global state is shared; Hooks state is component-local (unless combined with Context)",
+      "B": "They are the same",
+      "C": "Hooks state is for web only",
+      "D": "Global state is faster"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Reconciliation' and how do Hooks interact with it?",
+    "options": {
+      "A": "The process of React updating the DOM; Hooks tell React when to start this process by changing state",
+      "B": "A database sync",
+      "C": "A network protocol",
+      "D": "A styling tool"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'useInsertionEffect's' timing relative to 'useLayoutEffect'?",
+    "options": {
+      "A": "It runs after",
+      "B": "It runs before",
+      "C": "They run at the same time",
+      "D": "It depends on the browser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is helpful for handling 'Resize' events efficiently?",
+    "options": {
+      "A": "useEffect with a window listener and debouncing",
+      "B": "useResize",
+      "C": "useMemo",
+      "D": "useLayoutEffect only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Higher Order Components' (HOC) vs 'Hooks'?",
+    "options": {
+      "A": "HOCs are for state; Hooks are for UI",
+      "B": "Hooks are generally preferred for code reuse because they don't add extra nesting to the component tree",
+      "C": "HOCs are newer",
+      "D": "They are identical"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'State Persistence' of Hooks?",
+    "options": {
+      "A": "They are saved to the cloud",
+      "B": "They persist as long as the component remains in the UI tree",
+      "C": "They are lost every second",
+      "D": "They are saved in a text file"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to get the current window dimensions reactively?",
+    "options": {
+      "A": "useWindowSize",
+      "B": "None built-in; must use a custom hook",
+      "C": "useSize",
+      "D": "useDimensions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Final Rule' of Hooks?",
+    "options": {
+      "A": "Always use Redux",
+      "B": "Only call hooks from React functions (components or custom hooks)",
+      "C": "Never use state",
+      "D": "Always use TypeScript"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'useTransition' in React 18?",
+    "options": {
+      "A": "To create CSS animations between pages",
+      "B": "To mark state updates as non-urgent, allowing the UI to remain responsive to user input like typing",
+      "C": "To handle network transitions",
+      "D": "To move state from one component to another"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'isPending' boolean returned by 'useTransition' indicate?",
+    "options": {
+      "A": "The app has no internet",
+      "B": "Whether the transition update is currently being processed by React",
+      "C": "The user has paused the app",
+      "D": "A network request is loading"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When testing a component that uses Hooks, which utility from '@testing-library/react' is used to wrap state updates?",
+    "options": {
+      "A": "wrap()",
+      "B": "act()",
+      "C": "update()",
+      "D": "fireEvent()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is part of the 'Hooks for Libraries' category, designed specifically for synchronizing with non-React stores?",
+    "options": {
+      "A": "useEffect",
+      "B": "useSyncExternalStore",
+      "C": "useExternalData",
+      "D": "useStore"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'useSyncExternalStore', why is it important to provide a 'getServerSnapshot' function?",
+    "options": {
+      "A": "To speed up the client",
+      "B": "To provide an initial value during Server-Side Rendering (SSR) to avoid hydration mismatches",
+      "C": "To backup data to the cloud",
+      "D": "To check server status"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'useDeferredValue' when dealing with a slow list filtering operation?",
+    "options": {
+      "A": "It pauses the filter for 5 seconds",
+      "B": "It allows the input field to update immediately while the slow list 'defers' its update until the CPU is free",
+      "C": "It deletes the list",
+      "D": "It uses a web worker"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which library is the industry standard for testing Custom Hooks in isolation?",
+    "options": {
+      "A": "Jest",
+      "B": "@testing-library/react-hooks (now integrated into @testing-library/react)",
+      "C": "Mocha",
+      "D": "Cypress"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'renderHook' from the testing library return to let you access the hook's output?",
+    "options": {
+      "A": "The state directly",
+      "B": "A 'result' object containing a 'current' property with the hook's return value",
+      "C": "An array of values",
+      "D": "A DOM node"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Suspense' boundary's relationship with Hooks like 'useTransition'?",
+    "options": {
+      "A": "They are unrelated",
+      "B": "useTransition can prevent a Suspense fallback from showing by keeping the old UI visible while the new UI loads",
+      "C": "Suspense replaces all hooks",
+      "D": "Hooks cannot run inside Suspense"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you test a hook that performs an asynchronous update?",
+    "options": {
+      "A": "Using 'waitFor' or 'waitForNextUpdate' from the testing library",
+      "B": "By using a while loop",
+      "C": "By restarting the test",
+      "D": "Asynchronous hooks cannot be tested"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which hook is best used to integrate a legacy browser API (like window.ononline) into a reactive React state?",
+    "options": {
+      "A": "useState",
+      "B": "useSyncExternalStore",
+      "C": "useMemo",
+      "D": "useRef"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if you don't use 'act()' when updating state in a unit test?",
+    "options": {
+      "A": "The test passes but runs slow",
+      "B": "React will log a warning that the update was not wrapped in act(), and the state might not reflect correctly",
+      "C": "The app crashes",
+      "D": "The test is automatically deleted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tearing' in the context of Concurrent React and useSyncExternalStore?",
+    "options": {
+      "A": "The UI breaking apart visually",
+      "B": "A visual inconsistency where different components show different values for the same data during a single render",
+      "C": "A network error",
+      "D": "A file system error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'useSyncExternalStore', what is the 'subscribe' parameter?",
+    "options": {
+      "A": "A list of users",
+      "B": "A function that registers a callback which the store should call whenever it changes",
+      "C": "A database key",
+      "D": "A network protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Can 'useTransition' be used to wrap a state update that affects an input field's 'value' prop?",
+    "options": {
+      "A": "Yes, always",
+      "B": "No, user input like typing should always be 'urgent' to avoid lag/jitter; the input state should be separate",
+      "C": "Only in React Native",
+      "D": "Only for numeric inputs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of testing hooks with 'renderHook'?",
+    "options": {
+      "A": "It tests the UI layout",
+      "B": "It allows you to test the logic of a hook without having to create a dummy component manually",
+      "C": "It is faster than regular tests",
+      "D": "It mocks the browser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook allows you to get a unique identifier that is consistent across server and client?",
+    "options": {
+      "A": "useId",
+      "B": "useUnique",
+      "C": "useServerId",
+      "D": "useGuid"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Automatic Batching' impact on 'useEffect' dependencies?",
+    "options": {
+      "A": "It makes effects run more often",
+      "B": "It reduces the number of times an effect might run if multiple state updates are batched together",
+      "C": "It has no impact",
+      "D": "It deletes dependencies"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you 'Mock' a custom hook for a component test?",
+    "options": {
+      "A": "Using jest.mock() to override the module containing the hook",
+      "B": "By changing the hook's code",
+      "C": "By using useRef",
+      "D": "Hooks cannot be mocked"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'startTransition' (the standalone function) used for?",
+    "options": {
+      "A": "To start the app",
+      "B": "To wrap state updates as transitions when the useTransition hook is not available (like outside of components)",
+      "C": "To navigate",
+      "D": "To clear the cache"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to access the specific state of a 'useTransition' within a child component?",
+    "options": {
+      "A": "usePendingState",
+      "B": "None; 'isPending' must be passed down or shared via Context",
+      "C": "useTransitionStatus",
+      "D": "useIsPending"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time Slicing' in React 18?",
+    "options": {
+      "A": "A tool to edit videos",
+      "B": "The ability to split the rendering work into small chunks to avoid blocking the main thread",
+      "C": "A network protocol",
+      "D": "A way to measure CPU speed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'renderHook', what does the 'rerender()' function do?",
+    "options": {
+      "A": "It refreshes the browser",
+      "B": "It simulates the component being re-rendered, often with new props passed to the hook",
+      "C": "It clears the state",
+      "D": "It restarts the test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useDeferredValue's' default value during the first render?",
+    "options": {
+      "A": "null",
+      "B": "The current value provided to it",
+      "C": "undefined",
+      "D": "A placeholder"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Can 'useSyncExternalStore' handle asynchronous data fetching from a server?",
+    "options": {
+      "A": "Yes, natively",
+      "B": "No, it is intended for synchronous reading of a store that already has the data",
+      "C": "Only in React 19",
+      "D": "Only with Axios"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the consequence of not providing a stable function to the 'subscribe' argument of 'useSyncExternalStore'?",
+    "options": {
+      "A": "The app crashes",
+      "B": "React will re-subscribe to the store on every render, causing performance degradation",
+      "C": "The data is lost",
+      "D": "Nothing happens"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which testing library function is used to check if a component renders correctly based on a hook's state?",
+    "options": {
+      "A": "render()",
+      "B": "check()",
+      "C": "inspect()",
+      "D": "view()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a test, how do you simulate an unmount to check a hook's cleanup logic?",
+    "options": {
+      "A": "By calling 'unmount()' returned by 'renderHook'",
+      "B": "By closing the browser",
+      "C": "By deleting the test file",
+      "D": "By setting state to null"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Selective Hydration' in React 18?",
+    "options": {
+      "A": "Hydrating only the CSS",
+      "B": "The ability to start hydrating components based on user interaction (like clicking) before the whole page is ready",
+      "C": "A database feature",
+      "D": "A network tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Does 'useTransition' work with 'Class Components'?",
+    "options": {
+      "A": "Yes",
+      "B": "No, it is a Hook and only available in Functional Components",
+      "C": "Only with a wrapper",
+      "D": "Only in development"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snapshot Testing' of Hooks?",
+    "options": {
+      "A": "Taking a photo of the code",
+      "B": "Comparing the rendered output or state result of a hook against a stored 'golden' version",
+      "C": "A network security check",
+      "D": "A type of UI test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to implement 'Optimistic UI' transitions in React 18/19 specifically?",
+    "options": {
+      "A": "useOptimistic",
+      "B": "useEffect",
+      "C": "useTransition",
+      "D": "useSync"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'useSyncExternalStore', what happens if the store changes while React is rendering?",
+    "options": {
+      "A": "React ignores the change",
+      "B": "React will re-start the render to ensure the UI stays consistent with the store",
+      "C": "The app crashes",
+      "D": "The change is deferred"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you pass 'initialProps' to a hook being tested via 'renderHook'?",
+    "options": {
+      "A": "As the second argument object: { initialProps: { ... } }",
+      "B": "In the hook call directly",
+      "C": "Using a global variable",
+      "D": "You can't pass props to renderHook"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'useImperativeHandle's' return value?",
+    "options": {
+      "A": "Nothing; it mutates the ref",
+      "B": "An object with methods",
+      "C": "A state variable",
+      "D": "A DOM node"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Can 'useDeferredValue' trigger multiple re-renders?",
+    "options": {
+      "A": "No, only one",
+      "B": "Yes, one with the old value (immediately) and another with the new value (deferred)",
+      "C": "Only in React Native",
+      "D": "Only if using an array"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which testing strategy is better for hooks: 'Black box' or 'Implementation' testing?",
+    "options": {
+      "A": "Implementation (testing internal state)",
+      "B": "Black box (testing input and final output behavior)",
+      "C": "They are the same",
+      "D": "Hooks cannot be tested"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useSyncExternalStoreWithSelector'?",
+    "options": {
+      "A": "A hook to select a store",
+      "B": "An extension of the base hook that allows you to select and memoize a specific part of an external store",
+      "C": "A network tool",
+      "D": "A private React hook"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Idempotency' in the context of Hooks?",
+    "options": {
+      "A": "A hook that runs once",
+      "B": "The principle that a hook (especially a memoized one) should produce the same output if called multiple times with the same inputs",
+      "C": "A type of network error",
+      "D": "A security feature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you test a hook that uses 'useContext'?",
+    "options": {
+      "A": "By wrapping the 'renderHook' call in a 'wrapper' option that provides the Context Provider",
+      "B": "By mocking the context",
+      "C": "By using useRef",
+      "D": "Context cannot be tested"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'useInsertionEffect' used for in the context of CSS-in-JS libraries?",
+    "options": {
+      "A": "To animate components",
+      "B": "To inject <style> tags into the DOM before layout and effects, preventing style recalculations during render",
+      "C": "To change the theme",
+      "D": "To handle user input"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is helpful for handling 'History' or 'Undo/Redo' logic?",
+    "options": {
+      "A": "useState with an array",
+      "B": "useReducer with a history stack in the state",
+      "C": "useMemo",
+      "D": "useRef"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'React.memo' vs 'useMemo'?",
+    "options": {
+      "A": "React.memo is for components; useMemo is for values inside components",
+      "B": "They are the same",
+      "C": "React.memo is for mobile",
+      "D": "useMemo is for CSS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens to a 'useTransition' update if a new 'urgent' update comes in?",
+    "options": {
+      "A": "React pauses the transition and processes the urgent update first",
+      "B": "The urgent update is delayed",
+      "C": "The app crashes",
+      "D": "Both updates are cancelled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In testing, what is 'waitForNextUpdate' used for?",
+    "options": {
+      "A": "To wait for a network call",
+      "B": "To wait until the hook re-renders after an async state change",
+      "C": "To skip a test",
+      "D": "To restart the app"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Reference Stability' of Hooks?",
+    "options": {
+      "A": "The stability of the browser",
+      "B": "Ensuring functions or objects returned by hooks don't change unnecessarily to keep child components from re-rendering",
+      "C": "A network security check",
+      "D": "A type of variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Does 'useId' generate global GUIDs?",
+    "options": {
+      "A": "Yes",
+      "B": "No, they are scoped to the component tree and shouldn't be used as database keys",
+      "C": "Only in production",
+      "D": "Only for images"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to get the return value of a child component's function via a ref?",
+    "options": {
+      "A": "useImperativeHandle",
+      "B": "useRef",
+      "C": "useCallback",
+      "D": "useMemo"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'renderHook's' second argument used for?",
+    "options": {
+      "A": "Configuration options (like 'wrapper' or 'initialProps')",
+      "B": "The test name",
+      "C": "The state object",
+      "D": "The mock function"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Final Outcome' of mastering Hooks for VerifiHire AI candidates?",
+    "options": {
+      "A": "Writing shorter code",
+      "B": "Building highly performant, predictable, and maintainable functional UI components",
+      "C": "Using every library",
+      "D": "Avoiding JavaScript"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hook Composition' and why is it useful?",
+    "options": {
+      "A": "Writing music for components",
+      "B": "Combining multiple small hooks into a custom hook to create complex, reusable logic",
+      "C": "A way to delete code",
+      "D": "A database tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a custom hook returns a new object on every render without useMemo?",
+    "options": {
+      "A": "Nothing happens",
+      "B": "It causes unnecessary re-renders in components that use that object as a dependency",
+      "C": "The app crashes",
+      "D": "The object is automatically cached"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you prevent a 'Memory Leak' in a custom hook that uses a 'WebSocket'?",
+    "options": {
+      "A": "By closing the connection in the useEffect cleanup function",
+      "B": "By restarting the server",
+      "C": "By using more RAM",
+      "D": "React handles WebSocket cleanup automatically"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'useEvent' RFC (proposed hook) intended to solve?",
+    "options": {
+      "A": "Handling mouse clicks",
+      "B": "Defining a function that has a stable identity but can access the latest props/state without being in dependency arrays",
+      "C": "Moving state to the cloud",
+      "D": "A styling tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prop Drilling' compared to 'useContext'?",
+    "options": {
+      "A": "useContext solves prop drilling by making data available to the whole tree without passing it through every level",
+      "B": "They are the same thing",
+      "C": "Prop drilling is faster",
+      "D": "useContext is for mobile only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which hook is required to implement a 'Global Media Query' listener efficiently?",
+    "options": {
+      "A": "useSyncExternalStore",
+      "B": "useState",
+      "C": "useMemo",
+      "D": "useRef"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'useReducer', what is an 'Immutability Violation'?",
+    "options": {
+      "A": "Returning a new state",
+      "B": "Modifying the existing 'state' object directly instead of returning a new one",
+      "C": "Deleting an action",
+      "D": "Using a string as a type"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bailing Out' of a State Update?",
+    "options": {
+      "A": "When the user leaves the page",
+      "B": "When React compares the new state to the old state (Object.is) and skips the render if they are identical",
+      "C": "An error in the code",
+      "D": "A network timeout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which React DevTools feature allows you to see which Hook triggered a specific re-render?",
+    "options": {
+      "A": "Elements tab",
+      "B": "Profiler (specifically 'Why did this render?' info)",
+      "C": "Console",
+      "D": "Network tab"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the risk of using 'useLayoutEffect' for heavy computations?",
+    "options": {
+      "A": "It makes the variables invisible",
+      "B": "It blocks the browser from painting the screen, causing visible lag for the user",
+      "C": "It consumes too much battery",
+      "D": "It is not allowed by React"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ref Forwarding' used for in custom UI libraries?",
+    "options": {
+      "A": "To pass state to parents",
+      "B": "To let users of your component access the underlying DOM node (like a button or input)",
+      "C": "To delete files",
+      "D": "To manage app history"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Can 'useCallback' be used to optimize a component that doesn't use 'React.memo'?",
+    "options": {
+      "A": "Yes, it is still helpful",
+      "B": "No, it is largely useless because the child will re-render anyway, and you added the overhead of the hook",
+      "C": "Only in production",
+      "D": "Only for async functions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Selective Hydration' in the context of React 18 hooks?",
+    "options": {
+      "A": "Hydrating only the CSS",
+      "B": "Prioritizing the hydration of components the user is actively interacting with",
+      "C": "A database feature",
+      "D": "A network tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'State Persistence' of a hook inside a loop?",
+    "options": {
+      "A": "It persists per iteration",
+      "B": "Hooks cannot be used inside loops (Rule of Hooks)",
+      "C": "It is saved to a file",
+      "D": "It is reset every second"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useDeferredValue's' relationship with the 'Suspense' fallback?",
+    "options": {
+      "A": "It triggers the fallback",
+      "B": "It can be used to show the 'stale' UI while the new UI is loading in the background, avoiding the fallback",
+      "C": "It replaces Suspense",
+      "D": "They are unrelated"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you avoid an infinite loop when a 'useEffect' updates a state that is also in its dependency array?",
+    "options": {
+      "A": "By using a conditional check inside the effect to see if the state actually needs changing",
+      "B": "By removing the dependency (not recommended)",
+      "C": "By using useRef instead",
+      "D": "By restarting the app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which hook is helpful for creating a 'Portal' that needs to track its target DOM node?",
+    "options": {
+      "A": "useState",
+      "B": "useRef with useLayoutEffect",
+      "C": "useMemo",
+      "D": "useContext"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lazy State Initialization' syntax?",
+    "options": {
+      "A": "useState(computeValue())",
+      "B": "useState(() => computeValue())",
+      "C": "useState(lazy computeValue)",
+      "D": "useState.lazy(value)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thread Blocking' in React and how do Hooks mitigate it?",
+    "options": {
+      "A": "When the CPU is full; hooks like useTransition split the work to keep the UI responsive",
+      "B": "A network error",
+      "C": "A database lock",
+      "D": "A styling bug"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'State Slicing' in useReducer?",
+    "options": {
+      "A": "Cutting the state",
+      "B": "Using multiple useReducer calls for different parts of the state instead of one giant reducer",
+      "C": "Deleting data",
+      "D": "A type of UI layout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Ref Equality' check in 'useMemo'?",
+    "options": {
+      "A": "Checking if two values are equal",
+      "B": "Checking if the object reference in the dependency array has changed (shallow check)",
+      "C": "A network security check",
+      "D": "A type of database query"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useId's' primary benefit for Server-Side Rendering (SSR)?",
+    "options": {
+      "A": "It makes the server faster",
+      "B": "It prevents 'Hydration Mismatch' errors by ensuring the server-generated ID matches the client-generated ID",
+      "C": "It encrypts the HTML",
+      "D": "It manages user sessions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if you update a 'useRef' value during the render phase (outside of useEffect)?",
+    "options": {
+      "A": "It is perfectly safe",
+      "B": "It makes the component unpredictable and violates the principle of 'pure' renders; should be done in effects",
+      "C": "The app crashes",
+      "D": "The value is reset"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is part of the 'External Store' synchronization for library authors?",
+    "options": {
+      "A": "useEffect",
+      "B": "useSyncExternalStore",
+      "C": "useStore",
+      "D": "useExternal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Closure Staleness' in a 'useCallback'?",
+    "options": {
+      "A": "The function is too old",
+      "B": "When the function 'remembers' old variable values because they weren't included in its dependency array",
+      "C": "A network error",
+      "D": "A database crash"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useTransition's' priority compared to a 'useState' update?",
+    "options": {
+      "A": "Transition is higher",
+      "B": "Transition is lower (non-urgent)",
+      "C": "They are the same",
+      "D": "It depends on the battery"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memoizing' a Custom Hook's return value?",
+    "options": {
+      "A": "Using useMemo on the object returned by the hook to prevent downstream re-renders",
+      "B": "Naming the hook correctly",
+      "C": "Deleting the hook",
+      "D": "A network speed test"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'useImperativeHandle' dependency array used for?",
+    "options": {
+      "A": "To watch for changes that should update the exposed ref methods",
+      "B": "To name the ref",
+      "C": "To delete the ref",
+      "D": "To restart the component"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which hook is helpful for 'Theme' management (Light/Dark mode)?",
+    "options": {
+      "A": "useTheme",
+      "B": "useContext (with a ThemeContext)",
+      "C": "useMemo",
+      "D": "useRef"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Selective Re-rendering' in Hooks?",
+    "options": {
+      "A": "Choosing which user to render",
+      "B": "An optimization where only the components that depend on a specific piece of state are updated",
+      "C": "Deleting old renders",
+      "D": "A UI theme"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useDebugValue' second argument?",
+    "options": {
+      "A": "A formatting function that only runs when the DevTools are actually open (for performance)",
+      "B": "The project ID",
+      "C": "A database key",
+      "D": "The user's name"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hydration Mismatch' with 'useId'?",
+    "options": {
+      "A": "When the server and client IDs don't match (solved by using useId instead of Math.random())",
+      "B": "A network error",
+      "C": "A database crash",
+      "D": "A styling bug"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which hook is used to handle 'Focus' management imperatively?",
+    "options": {
+      "A": "useState",
+      "B": "useRef (calling .focus() on the ref.current)",
+      "C": "useMemo",
+      "D": "useEffect only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Effect Isolation'?",
+    "options": {
+      "A": "Keeping code in separate files",
+      "B": "The concept that each effect should be independent and handle one specific piece of synchronization logic",
+      "C": "A security feature",
+      "D": "A network protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'renderHook', how do you access the latest value after an update?",
+    "options": {
+      "A": "By checking result.current",
+      "B": "By checking the variable name",
+      "C": "By restarting the test",
+      "D": "By calling getVal()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'useDeferredValue's' impact on the network?",
+    "options": {
+      "A": "It speeds up the connection",
+      "B": "None; it only affects the timing of the UI render, not the network request itself",
+      "C": "It blocks the network",
+      "D": "It encrypts the data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Primitive Injection' in Custom Hooks?",
+    "options": {
+      "A": "Passing simple values to a hook",
+      "B": "Passing a value into a custom hook as a parameter to make its behavior dynamic",
+      "C": "Deleting a value",
+      "D": "A network speed test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is required for 'Global Key Listeners'?",
+    "options": {
+      "A": "useEffect (with a window.addEventListener call)",
+      "B": "useKey",
+      "C": "useRef",
+      "D": "useMemo"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Referential Identity' of 'setState' functions?",
+    "options": {
+      "A": "They change on every render",
+      "B": "React guarantees they are stable and will never change for the lifetime of the component",
+      "C": "They are random",
+      "D": "They are strings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Batching' in React 17 vs 18?",
+    "options": {
+      "A": "17 only batched React events; 18 batches everything (promises, timeouts, native events)",
+      "B": "They are the same",
+      "C": "18 doesn't use batching",
+      "D": "17 was faster"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hook State' during a component crash?",
+    "options": {
+      "A": "It is saved to the cloud",
+      "B": "It is lost unless handled by an Error Boundary (and even then, the specific component's state is reset)",
+      "C": "It is saved in a file",
+      "D": "It is sent to the server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook can be used to track 'Scroll Direction' (Up/Down)?",
+    "options": {
+      "A": "A custom hook using useEffect and a ref to store the previous scroll position",
+      "B": "useScrollDirection",
+      "C": "useMemo",
+      "D": "useLayoutEffect only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'useSyncExternalStore's' third argument?",
+    "options": {
+      "A": "The server snapshot function",
+      "B": "The user ID",
+      "C": "The API key",
+      "D": "The CSS theme"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hook Call Stack' in debugging?",
+    "options": {
+      "A": "A physical stack of papers",
+      "B": "The order of hook calls shown in the debugger that helps you find where state went wrong",
+      "C": "A network protocol",
+      "D": "A type of list"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'State Uplifting' vs 'Context'?",
+    "options": {
+      "A": "Uplifting is passing through props; Context is 'teleporting' data to many children",
+      "B": "They are the same",
+      "C": "Uplifting is for web; Context is for mobile",
+      "D": "Uplifting is faster"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Can you use 'useMemo' to store a 'JSX' element?",
+    "options": {
+      "A": "Yes, to prevent a whole sub-tree from re-rendering unless specific data changes",
+      "B": "No, only for numbers and strings",
+      "C": "Only in React Native",
+      "D": "Only for private components"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Final Outcome' of mastering React Hooks?",
+    "options": {
+      "A": "Writing shorter code",
+      "B": "Building clean, high-performance, and modular UI logic without the complexity of class hierarchies",
+      "C": "Using every library",
+      "D": "Avoiding JavaScript"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'useInsertionEffect's' restriction?",
+    "options": {
+      "A": "It cannot access state",
+      "B": "It cannot access Refs to DOM nodes because they haven't been created yet",
+      "C": "It only works on mobile",
+      "D": "It is very slow"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'React.use' (proposed in 19)?",
+    "options": {
+      "A": "A way to use more memory",
+      "B": "A new hook to read resources like Promises or Context conditionally and inside loops",
+      "C": "To use the app",
+      "D": "A styling tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Rule of Three' in custom hooks?",
+    "options": {
+      "A": "Only use 3 hooks",
+      "B": "A general suggestion to only extract a custom hook if you find the logic repeated across 3 different components",
+      "C": "Only have 3 parameters",
+      "D": "Wait 3 seconds"
+    },
+    "answer": "B"
+  }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            # Escape any unclosed HTML tags in value
+            safe_value = value.replace('<', '&lt;').replace('>', '&gt;')
+            elements.append(Paragraph(f"{key}) {safe_value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "Hooks"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

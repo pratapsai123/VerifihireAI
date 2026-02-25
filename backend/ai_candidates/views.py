@@ -11,6 +11,8 @@ from rest_framework import status
 from rest_framework import generics
 from .models import Candidate, InterviewIntegrity
 from .serializers import CandidateSerializer
+from django.utils.dateparse import parse_datetime
+from django.utils import timezone
 import traceback
 import time
 import re
@@ -50,7 +52,14 @@ class BulkInviteView(APIView):
         job_description = request.data.get('job_description')
         available_from = request.data.get('available_from')
         available_until = request.data.get('available_until')
-        batch_interview_time = request.data.get('interview_time') # Get batch time from request (legacy/fallback)
+        
+        # Parse ISO strings into datetime objects
+        if isinstance(available_from, str) and available_from:
+            available_from = parse_datetime(available_from)
+        if isinstance(available_until, str) and available_until:
+            available_until = parse_datetime(available_until)
+            
+        batch_interview_time = request.data.get('interview_time') # Keep for legacy/compat
         
         if not file or not job_description:
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
@@ -116,11 +125,58 @@ class BulkInviteView(APIView):
                 
                 try:
                     subject = "Invite to VerifiHireAI Interview Session"
-                    message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.{time_range_info}\n\nPlease click the link below to verify your details and start your session:\n{link}"
-                    send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False)
+                    
+                    # Format availability dates for email (converted to local time)
+                    from_str = "Immediately"
+                    if candidate.available_from:
+                        local_from = timezone.localtime(candidate.available_from)
+                        from_str = local_from.strftime('%B %d, %Y at %I:%M %p')
+                        
+                    until_str = "No fixed deadline"
+                    if candidate.available_until:
+                        local_until = timezone.localtime(candidate.available_until)
+                        until_str = local_until.strftime('%B %d, %Y at %I:%M %p')
+                    
+                    time_info = f"\n\nYour interview is scheduled to start at {batch_interview_time}." if batch_interview_time else ""
+                    message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.{time_info}\n\nTiming Details:\n- Available From: {from_str}\n- Available Until: {until_str}\n\nPlease click the link below to verify your details and start your session:\n{link}"
+                    
+                    html_message = f"""
+                    <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+                        <div style="background-color: #6366F1; padding: 24px; text-align: center;">
+                            <h1 style="color: white; margin: 0; font-size: 24px;">Interview Invitation</h1>
+                        </div>
+                        <div style="padding: 32px; background-color: white;">
+                            <p style="font-size: 16px; margin-bottom: 24px;">Dear <strong>{name}</strong>,</p>
+                            <p style="line-height: 1.6; margin-bottom: 24px;">You have been invited to attempt an AI-powered video interview session.</p>
+                            
+                            <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+                                <h3 style="margin-top: 0; color: #6366F1; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Timing Details</h3>
+                                <p style="margin: 8px 0; font-size: 14px;"><strong>📅 Available From:</strong> {from_str}</p>
+                                <p style="margin: 8px 0; font-size: 14px;"><strong>⌛ Available Until:</strong> {until_str}</p>
+                                {f'<p style="margin: 8px 0; font-size: 14px;"><strong>⏱️ Scheduled Time:</strong> {batch_interview_time}</p>' if batch_interview_time else ''}
+                            </div>
+                            
+                            <div style="text-align: center; margin: 32px 0;">
+                                <a href="{link}" style="background-color: #6366F1; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);">Start Interview Session</a>
+                            </div>
+                            
+                            <p style="font-size: 13px; color: #64748b; margin-top: 32px; border-top: 1px solid #f1f5f9; padding-top: 16px;">If the button above doesn't work, copy and paste this link into your browser:<br/>
+                            <a href="{link}" style="color: #6366F1;">{link}</a></p>
+                        </div>
+                        <div style="background-color: #f1f5f9; padding: 16px; text-align: center; font-size: 12px; color: #94a3b8;">
+                            &copy; 2026 VerifiHireAI. All rights reserved.
+                        </div>
+                    </div>
+                    """
+                    
+                    send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=html_message)
                     logger.info(f"Email sent to {email}")
                 except Exception as mail_error:
-                    logger.error(f"Failed to send email to {email}: {str(mail_error)}")
+                    error_msg = f"Failed to send email to {email}: {str(mail_error)}"
+                    logger.error(error_msg)
+                    # Temporary file logging for debugging
+                    with open('email_errors.log', 'a') as f:
+                        f.write(f"{timezone.now()} - {error_msg}\n")
                 
             return Response({
                 "message": f"Successfully invited {len(invited_candidates)} candidates.",
@@ -156,57 +212,22 @@ class ResumeMatchView(APIView):
             return Response({"error": "Job description and either resume or candidate_id are required"}, status=status.HTTP_400_BAD_REQUEST)
 
         # --- Interview Time Lock Check ---
-        now = timezone.now()
         if candidate:
+            now = timezone.now()
             if candidate.available_from and now < candidate.available_from:
-                try:
-                    start_dt = candidate.available_from
-                    if timezone.is_naive(start_dt):
-                        start_dt = timezone.make_aware(start_dt)
-                    from_local = start_dt.astimezone(timezone.get_current_timezone())
-                    return Response({
-                        "error": f"Interview not yet available. It starts at {from_local.strftime('%I:%M %p')} on {from_local.strftime('%d %b %Y')}.",
-                        "time_locked": True
-                    }, status=status.HTTP_403_FORBIDDEN)
-                except Exception:
-                    return Response({
-                        "error": "Interview not yet available. Please return at the scheduled time.",
-                        "time_locked": True
-                    }, status=status.HTTP_403_FORBIDDEN)
+                formatted_time = candidate.available_from.strftime('%B %d, %Y %I:%M %p')
+                return Response({
+                    "error": f"Interview not available. Your session is scheduled to start at {formatted_time}. Please return at that time.",
+                    "available_from": candidate.available_from,
+                    "time_locked": True
+                }, status=status.HTTP_403_FORBIDDEN)
             
             if candidate.available_until and now > candidate.available_until:
                 return Response({
-                    "error": "This interview window has closed. Please contact HR.",
+                    "error": "This interview session has expired. Please contact your recruiter.",
+                    "available_until": candidate.available_until,
                     "time_locked": True
                 }, status=status.HTTP_403_FORBIDDEN)
-
-            # Legacy fallback for interview_time (string-based)
-            if not candidate.available_from and candidate.interview_time:
-                try:
-                    scheduled_str = candidate.interview_time.strip()
-                    scheduled_dt = None
-                    for fmt in (['%I:%M %p', '%I %p', '%H:%M']):
-                        try:
-                            scheduled_dt = datetime.strptime(scheduled_str, fmt)
-                            break
-                        except ValueError:
-                            continue
-                    if scheduled_dt:
-                        now_local = datetime.now() # naive for legacy logic
-                        scheduled_today = now_local.replace(
-                            hour=scheduled_dt.hour,
-                            minute=scheduled_dt.minute,
-                            second=0, microsecond=0
-                        )
-                        window_end = scheduled_today + timedelta(minutes=30)
-                        if now_local < scheduled_today or now_local > window_end:
-                            return Response({
-                                "error": f"Interview not available. Your session is scheduled at {candidate.interview_time}. Please return at that time.",
-                                "scheduled_time": candidate.interview_time,
-                                "time_locked": True
-                            }, status=status.HTTP_403_FORBIDDEN)
-                except Exception as time_err:
-                    logger.warning(f"Could not enforce legacy time lock for candidate {candidate_id}: {time_err}")
         # ----------------------------------
 
         try:
@@ -303,6 +324,13 @@ class ResumeMatchView(APIView):
                 percentage = 0
             match_result['is_eligible'] = percentage >= threshold
             # -----------------------------------------------------------
+
+            # --- Save resume score and status to Candidate ---
+            if candidate:
+                candidate.resume_score = percentage
+                candidate.status = 'Resume Passed' if percentage >= threshold else 'Resume Failed'
+                candidate.save()
+            # ---------------------------------------------------
             
             match_result['candidate_id'] = candidate_id
             return Response(match_result, status=status.HTTP_200_OK)
@@ -314,9 +342,32 @@ class CandidateListCreateView(generics.ListCreateAPIView):
     queryset = Candidate.objects.all().order_by('-created_at')
     serializer_class = CandidateSerializer
 
+INTERVIEW_LINK_TTL_MINUTES = 60
+
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
+
+    def get(self, request, *args, **kwargs):
+        candidate = self.get_object()
+        now = timezone.now()
+
+        # First access — stamp the time
+        if not candidate.link_opened_at:
+            candidate.link_opened_at = now
+            candidate.save(update_fields=['link_opened_at'])
+        else:
+            # Check if link has expired
+            elapsed = now - candidate.link_opened_at
+            if elapsed.total_seconds() > INTERVIEW_LINK_TTL_MINUTES * 60:
+                from rest_framework.response import Response as DRFResponse
+                return DRFResponse(
+                    {'error': 'Interview link has expired.', 'link_expired': True},
+                    status=403
+                )
+
+        return super().get(request, *args, **kwargs)
+
 
 class CandidateStatusUpdateView(APIView):
     def patch(self, request, pk):
@@ -341,6 +392,7 @@ class UpdateIntegrityView(APIView):
             candidate = Candidate.objects.get(pk=pk)
             integrity, created = InterviewIntegrity.objects.get_or_create(candidate=candidate)
             
+            # Grace Warning System Phase 1: Record counts
             event_type = request.data.get('event_type')
             if event_type == 'tab_switch':
                 integrity.tab_switches += 1
@@ -351,14 +403,32 @@ class UpdateIntegrityView(APIView):
             elif event_type == 'no_face_detection':
                 integrity.no_face_detections += 1
             
+            # Grace Warning System Phase 2: Handle First 3 as Warnings
+            # We track the types of the first 3 events that should be "free"
+            if len(integrity.warning_logs) < 3:
+                integrity.warning_logs.append(event_type)
+            
+            # Define weights
+            weights = {
+                'tab_switch': 10,
+                'phone_detection': 30,
+                'multiface_detection': 15,
+                'no_face_detection': 5,
+                'face_detection_lost': 5  # alias for no_face
+            }
+
             # Simple penalty system
-            total_violations = (
-                integrity.tab_switches * 10 + 
-                integrity.phone_detections * 30 + 
-                integrity.multiface_detections * 15 + 
-                integrity.no_face_detections * 5
+            total_raw_penalty = (
+                integrity.tab_switches * weights['tab_switch'] + 
+                integrity.phone_detections * weights['phone_detection'] + 
+                integrity.multiface_detections * weights['multiface_detection'] + 
+                integrity.no_face_detections * weights['no_face_detection']
             )
-            integrity.integrity_score = max(0, 100 - total_violations)
+
+            # Subtract the "free" penalty from the first 3 warnings
+            free_penalty = sum(weights.get(w, 0) for w in integrity.warning_logs)
+            
+            integrity.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
             integrity.save()
             
             return Response({
@@ -433,36 +503,61 @@ class ProcessAnswerView(APIView):
                 history_context = "CONVERSATION HISTORY:\n" + "\n".join(turns) + "\n"
 
             prompt = f"""
-            Role: "Expert Human Interviewer". 
-            Candidate: {candidate_name}
-            Job Context: {jd_context[:200]}
-            
-            GOAL:
-            Provide a balanced, medium-length response. Not a one-liner, but not a paragraph. Aim for 30-50 words total.
-            
-            STRUCTURE:
-            1. Feedback (1-2 sentences): Acknowledge their specific point humanly.
-            2. Bridge & Question (1-2 sentences): Transition naturally to the next tech/behavioral topic.
-            
-            RULES:
-            - NO FILLERS: Avoid "That's a helpful perspective."
-            - PIVOT: If they don't know the answer, supportively switch to a skill from their resume ({resume_context[:300]}).
-            
-            CONTEXT:
-            Resume: {resume_context[:1000]}
-            {history_context}
-            
-            CURRENT TURN:
-            Last Question: "{current_question}"
-            Candidate Answer: "{answer}"
-            
-            OUTPUT (JSON):
-            {{
-                "feedback": "1-2 sentences of specific, thoughtful acknowledgment.",
-                "refined_next_question": "One clear technical or behavioral question. End with ?",
-                "score": "Integer 0-10"
-            }}
-            """
+        Role: "Rigorous Technical Auditor & Expert Interviewer". 
+        Candidate: {candidate_name}
+        Job Context: {jd_context[:200]}
+        
+        GOAL:
+        Determine if the Candidate Answer is (A) A clear, explicit Clarification Request or (B) An Actual Answer.
+
+        (A) CLARIFICATION REQUEST - ONLY trigger if:
+        - The candidate explicitly asks to repeat: "repeat that", "pardon", "what?".
+        - The candidate explicitly asks for help because they are LOST or don't understand the question.
+        
+        (B) ACTUAL ANSWER - Trigger for:
+        - Greetings, introductions, or any info regarding their background/tech skills.
+        - EVEN if the transcript is slightly messy, use your logic to extract the meaning.
+        
+        STT & CONTEXT AWARENESS (CRITICAL):
+        - Microphones can be messy. "BTech an mlrit" = "B.Tech and MLRIT".
+        - "Java" is a PROGRAMMING LANGUAGE. If a candidate says "I am a Java developer", they are sharing their background, NOT talking about the island of Java.
+        - NEVER loop more than once on the same question. If they tried to answer (even with just one sentence), MOVE ON.
+        - DO NOT be a robot. If they said "graduated in 2015", that counts as an educational background. MOVE TO THE NEXT TOPIC.
+
+        IF (A) CLARIFICATION REQUEST:
+        1. Set "is_clarification": true.
+        2. Set "feedback": A helpful rephrasing of the Last Question.
+        3. Set "score": 0.
+        4. Set "refined_next_question": current_question.
+
+        IF (B) ACTUAL ANSWER:
+        1. Set "is_clarification": false.
+        2. "feedback": A brief acknowledgement. BE KINDER AND MORE CONVERSATIONAL.
+        3. "refined_next_question": MUST BE A NEW, DIFFERENT QUESTION. 
+           - If this was the introduction, ask about a specific technical skill from the JD or Resume. 
+           - DO NOT start the question with "You were asked to..." or "Let's focus on...". 
+           - Just ask the next logical interview question.
+        4. SCORING: 
+           - 0-1: "no" or "don't know".
+           - 2-4: vague.
+           - 5-10: correct content. (Intro is always 5+ if they try).
+
+        CONTEXT:
+        Resume: {resume_context[:1000]}
+        {history_context}
+        
+        CURRENT TURN:
+        Last Question: "{current_question}"
+        Candidate Answer: "{answer}"
+        
+        OUTPUT (JSON):
+        {{
+            "is_clarification": boolean,
+            "feedback": "...",
+            "refined_next_question": "...",
+            "score": integer
+        }}
+        """
 
             response = groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
@@ -477,12 +572,27 @@ class ProcessAnswerView(APIView):
                 raise ValueError("AI returned invalid JSON structure")
 
             # Scoring Update (Silent)
-            if candidate_id and data.get('score'):
+            if candidate_id and data.get('score') is not None and not data.get('is_clarification'):
                  try:
                     if not isinstance(candidate_id, str) or candidate_id.isdigit():
                         candidate = Candidate.objects.get(pk=candidate_id)
-                        candidate.score += int(data.get('score', 0))
+                        
+                        # Update score
+                        q_score = int(data.get('score', 0))
+                        candidate.score += q_score
                         candidate.total_questions += 1
+                        
+                        # Store per-question summary for "Details" button
+                        if not isinstance(candidate.interview_summary, list):
+                            candidate.interview_summary = []
+                        
+                        candidate.interview_summary.append({
+                            "question": current_question,
+                            "answer": answer,
+                            "feedback": data.get('feedback', ''),
+                            "score": q_score
+                        })
+                        
                         candidate.save()
                  except: pass
 

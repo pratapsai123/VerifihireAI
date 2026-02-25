@@ -18,6 +18,7 @@ class Assessment(models.Model):
     difficulty_level = models.CharField(max_length=20, default='Medium', choices=[('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard')])
     generated_content = models.JSONField(blank=True, null=True)  # Store the AI response here
     created_at = models.DateTimeField(auto_now_add=True)
+    pass_threshold = models.IntegerField(default=60)
 
     # New Fields
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='SCHEDULED')
@@ -46,6 +47,7 @@ class AIAssessmentSubmission(models.Model):
     tab_switches = models.IntegerField(default=0)
     face_warnings = models.IntegerField(default=0)
     phone_warnings = models.IntegerField(default=0)
+    warning_logs = models.JSONField(default=list, blank=True, help_text="Stores the first 3 violations as grace warnings")
     monitoring_logs = models.JSONField(default=list, blank=True)
 
     started_at = models.DateTimeField(default=timezone.now)

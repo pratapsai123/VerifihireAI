@@ -2,7 +2,8 @@ import os
 from groq import Groq
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status, generics
+from rest_framework.permissions import AllowAny
 import uuid
 from .models import Assessment, AIAssessmentSubmission
 from ai_candidates.views import extract_json
@@ -30,6 +31,7 @@ class SubmitAssessmentView(APIView):
         name = data.get('name')
         email = data.get('email')
         answers = data.get('answers', {})
+        coding_results = data.get('codingResults', {}) # Captured test case results
 
         if not token or not name or not email:
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -37,7 +39,6 @@ class SubmitAssessmentView(APIView):
         try:
             assessment = Assessment.objects.get(share_token=token)
             
-            # Find the existing ongoing submission from intake
             submission = AIAssessmentSubmission.objects.filter(
                 assessment=assessment,
                 candidate_email=email,
@@ -45,7 +46,6 @@ class SubmitAssessmentView(APIView):
             ).order_by('-id').first()
 
             if not submission:
-                # Fallback in case intake failed but we have data
                 submission = AIAssessmentSubmission.objects.create(
                     assessment=assessment,
                     candidate_name=name,
@@ -53,25 +53,49 @@ class SubmitAssessmentView(APIView):
                     status='ONGOING'
                 )
 
-            # Simple grading logic for MCQs
-            score = 0
+            points_per_q = {
+                'Easy': 100,
+                'Medium': 200,
+                'Hard': 300
+            }.get(assessment.difficulty_level, 100)
+            
             generated_content = assessment.generated_content or {}
             mcqs = generated_content.get('mcqs', [])
+            coding_challenges = generated_content.get('coding_challenges', [])
             
+            total_mcqs = len(mcqs)
+            total_coding = len(coding_challenges)
+            total_q = total_mcqs + total_coding
+            
+            total_possible_points = total_q * points_per_q
+            candidate_total_points = 0
+            
+            # 1. MCQ Scoring
             for i, mcq in enumerate(mcqs):
                 correct_ans = str(mcq.get('answer') or '').strip().upper()
                 candidate_ans = str(answers.get(f'mcq_{i}') or '').strip().upper()
                 if correct_ans and candidate_ans == correct_ans:
-                    score += 1
+                    candidate_total_points += points_per_q
 
-            total_q = len(mcqs)
-            percentage = (score / total_q * 100) if total_q > 0 else 0
+            # 2. Coding Challenge Scoring (based on pass rate)
+            for i, challenge in enumerate(coding_challenges):
+                res = coding_results.get(str(i))
+                if res:
+                    passed = res.get('passed', 0)
+                    total_tc = res.get('total', 1)
+                    if total_tc > 0:
+                        score_fraction = passed / total_tc
+                        candidate_total_points += (score_fraction * points_per_q)
+
+            if total_possible_points > 0:
+                percentage = round((candidate_total_points / total_possible_points) * 100)
+            else:
+                percentage = 0
             
-            # Final integrity check
-            pass_status = 'selected' if percentage >= 60 and submission.integrity_score >= 70 else 'rejected'
+            pass_status = 'selected' if percentage >= assessment.pass_threshold and submission.integrity_score >= 70 else 'rejected'
 
             submission.answers = answers
-            submission.score = score
+            submission.score = round(candidate_total_points)
             submission.total_questions = total_q
             submission.percentage = percentage
             submission.status = pass_status
@@ -81,7 +105,8 @@ class SubmitAssessmentView(APIView):
             return Response({
                 "message": "Assessment submitted successfully",
                 "submission_id": submission.id,
-                "score": score,
+                "score": submission.score,
+                "total_possible_points": total_possible_points,
                 "total": total_q,
                 "percentage": percentage,
                 "status": pass_status
@@ -122,7 +147,8 @@ class GenerateAssessmentView(APIView):
                 duration_minutes=duration,
                 difficulty_level=difficulty,
                 available_from=data.get('available_from'),
-                available_until=data.get('available_until')
+                available_until=data.get('available_until'),
+                pass_threshold=data.get('pass_threshold', 60)
             )
 
             # Cap overly ambitious coding counts to prevent AI hallucinations/timeouts
@@ -237,13 +263,27 @@ class UpdateAssessmentIntegrityView(APIView):
             elif event_type == 'face_detection_lost':
                 submission.face_warnings += 1
             
+            # Grace Warning System Phase 2: Handle First 3 as Warnings
+            if len(submission.warning_logs) < 3:
+                submission.warning_logs.append(event_type)
+
+            weights = {
+                'tab_switch': 10,
+                'phone_detection': 30,
+                'face_detection_lost': 5
+            }
+
             # Simple penalty system
-            total_violations = (
-                submission.tab_switches * 10 + 
-                submission.phone_warnings * 30 + 
-                submission.face_warnings * 5
+            total_raw_penalty = (
+                submission.tab_switches * weights['tab_switch'] + 
+                submission.phone_warnings * weights['phone_detection'] + 
+                submission.face_warnings * weights['face_detection_lost']
             )
-            submission.integrity_score = max(0, 100 - total_violations)
+
+            # Subtract the "free" penalty from the first 3 warnings
+            free_penalty = sum(weights.get(w, 0) for w in submission.warning_logs)
+
+            submission.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
             submission.save()
             
             return Response({
@@ -301,7 +341,7 @@ class AssessmentDetailView(APIView):
                     "status": sub.status,
                     "integrity_score": sub.integrity_score,
                     "answers": sub.answers,
-                    "submitted_at": sub.submitted_at.strftime("%Y-%m-%d %H:%M")
+                    "submitted_at": sub.submitted_at.strftime("%Y-%m-%d %H:%M") if sub.submitted_at else "In Progress"
                 })
 
             data = {
@@ -311,6 +351,7 @@ class AssessmentDetailView(APIView):
                 "mcq_count": assessment.mcq_count,
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
+                "difficulty_level": assessment.difficulty_level,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content,
                 "status": assessment.status,
@@ -584,3 +625,8 @@ class ProxyCodeExecuteView(APIView):
                     "code": 1
                 }
             }, status=status.HTTP_200_OK) # Return 200 so frontend parses the error in 'run'
+
+class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
+    queryset = AIAssessmentSubmission.objects.all()
+    # serializer_class = ... # Not strictly needed for simple delete, but good practice
+    permission_classes = [AllowAny]

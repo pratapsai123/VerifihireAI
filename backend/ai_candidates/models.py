@@ -27,10 +27,15 @@ class Candidate(models.Model):
     job_description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='New')
     score = models.IntegerField(default=0)
+    resume_score = models.IntegerField(default=0, help_text="Resume match percentage from AI screening")
     total_questions = models.IntegerField(default=0)
     submission_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    available_from = models.DateTimeField(blank=True, null=True)
+    available_until = models.DateTimeField(blank=True, null=True)
     completed_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview was completed")
+    link_opened_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview link was first opened")
+    interview_summary = models.JSONField(default=list, blank=True, help_text="Stores per-question AI feedback and scores")
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"
@@ -42,6 +47,7 @@ class InterviewIntegrity(models.Model):
     multiface_detections = models.IntegerField(default=0)
     no_face_detections = models.IntegerField(default=0)
     integrity_score = models.FloatField(default=100.0)
+    warning_logs = models.JSONField(default=list, blank=True, help_text="Stores the first 3 violations as grace warnings")
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):

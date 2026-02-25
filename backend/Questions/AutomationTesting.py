@@ -1,0 +1,2058 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+    {
+        "question": "What is the primary goal of Automation Testing?",
+        "options": {
+            "A": "To replace manual testers entirely",
+            "B": "To reduce execution time and increase test coverage through repeatable scripts",
+            "C": "To find more bugs than manual testing",
+            "D": "To eliminate the need for bug tracking tools"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "According to the 'Test Pyramid', which type of tests should form the largest base of your automation suite?",
+        "options": {
+            "A": "UI Tests",
+            "B": "Unit Tests",
+            "C": "Integration Tests",
+            "D": "Manual Exploratory Tests"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Regression Testing'?",
+        "options": {
+            "A": "Testing only new features",
+            "B": "Re-running functional and non-functional tests to ensure that previously developed software still performs after a change",
+            "C": "Testing the software on older hardware",
+            "D": "The process of rolling back code to a previous version"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which design pattern is commonly used in Selenium to create an object repository for web elements?",
+        "options": {
+            "A": "Singleton Pattern",
+            "B": "Page Object Model (POM)",
+            "C": "Factory Pattern",
+            "D": "Observer Pattern"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the 'WebDriver' in Selenium?",
+        "options": {
+            "A": "To write the test scripts",
+            "B": "To act as an interface that communicates directly with the web browser",
+            "C": "To generate test reports",
+            "D": "To manage the test database"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Selenium locator is generally considered the fastest and most reliable?",
+        "options": {
+            "A": "XPath",
+            "B": "ID",
+            "C": "Class Name",
+            "D": "CSS Selector"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between 'Implicit Wait' and 'Explicit Wait' in Selenium?",
+        "options": {
+            "A": "Implicit wait is faster than explicit wait",
+            "B": "Implicit wait is set globally for the driver's life; Explicit wait is used for a specific element/condition",
+            "C": "Explicit wait only works on Chrome",
+            "D": "There is no functional difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Automation, what does 'Data-Driven Testing' refer to?",
+        "options": {
+            "A": "Testing the database connections",
+            "B": "Executing the same test script multiple times using different sets of input data from an external source",
+            "C": "Measuring the speed of data transfer",
+            "D": "Using AI to generate test data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Flaky Test'?",
+        "options": {
+            "A": "A test that always fails",
+            "B": "A test that non-deterministically passes or fails with the same code and environment",
+            "C": "A test that has too many assertions",
+            "D": "A test written in a dynamic language"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is commonly used for 'Behavior Driven Development' (BDD) testing?",
+        "options": {
+            "A": "TestNG",
+            "B": "Cucumber",
+            "C": "JUnit",
+            "D": "Postman"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Gherkin' language used for?",
+        "options": {
+            "A": "To write browser drivers",
+            "B": "To write human-readable test scenarios using Given-When-Then syntax",
+            "C": "To style the test reports",
+            "D": "To manage API keys"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of an 'Assertion' in an automated test script?",
+        "options": {
+            "A": "To document the test steps",
+            "B": "To verify if the actual result matches the expected result",
+            "C": "To restart the browser after a failure",
+            "D": "To ignore errors during execution"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used in Selenium to type text into a text field?",
+        "options": {
+            "A": "click()",
+            "B": "sendKeys()",
+            "C": "submit()",
+            "D": "clear()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Headless Testing'?",
+        "options": {
+            "A": "Testing without a plan",
+            "B": "Running browser UI tests without a visible GUI (browser window)",
+            "C": "Testing only the backend API",
+            "D": "A test that runs without a main method"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Selenium, what is the 'Actions' class used for?",
+        "options": {
+            "A": "To perform basic button clicks",
+            "B": "To handle complex user interactions like drag-and-drop or double-clicking",
+            "C": "To generate logs",
+            "D": "To manage browser cookies"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Integration Testing' in the context of automation?",
+        "options": {
+            "A": "Testing a single function in isolation",
+            "B": "Testing the interaction between two or more modules or services",
+            "C": "Testing the application's look and feel",
+            "D": "Testing the deployment pipeline"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which HTTP method is typically used to retrieve data from an API?",
+        "options": {
+            "A": "POST",
+            "B": "GET",
+            "C": "PUT",
+            "D": "DELETE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Smoke Testing'?",
+        "options": {
+            "A": "Testing the server room for fire safety",
+            "B": "A preliminary test to check if the most crucial functions of a program work",
+            "C": "High-stress performance testing",
+            "D": "Testing the app on mobile devices"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In test automation, what does 'TDD' stand for?",
+        "options": {
+            "A": "Total Data Delivery",
+            "B": "Test Driven Development",
+            "C": "Technical Design Document",
+            "D": "Time Delayed Deployment"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary benefit of using a 'Testing Framework' like TestNG or JUnit?",
+        "options": {
+            "A": "It writes the code for you",
+            "B": "It provides features like annotations, test grouping, and report generation",
+            "C": "It makes the internet faster",
+            "D": "It replaces the Selenium library"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Mock' object in unit testing?",
+        "options": {
+            "A": "A test that makes fun of the code",
+            "B": "A simulated object that mimics the behavior of a real object in controlled ways",
+            "C": "A backup of the database",
+            "D": "A physical server"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Selenium component is used to run tests on multiple machines and browsers simultaneously?",
+        "options": {
+            "A": "Selenium IDE",
+            "B": "Selenium Grid",
+            "C": "Selenium WebDriver",
+            "D": "Selenium Server"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'StaleElementReferenceException' in Selenium?",
+        "options": {
+            "A": "The element is not present in the DOM",
+            "B": "The element was present but is no longer attached to the DOM (usually after a page refresh)",
+            "C": "The element is hidden",
+            "D": "The element has an invalid ID"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'API Testing' primarily concerned with?",
+        "options": {
+            "A": "The look and feel of the website",
+            "B": "The business logic, data security, and communication between systems",
+            "C": "The speed of the mouse clicks",
+            "D": "The color of the UI buttons"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does a 404 Status Code represent in API testing?",
+        "options": {
+            "A": "Success",
+            "B": "Not Found",
+            "C": "Unauthorized",
+            "D": "Internal Server Error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Keyword Driven Testing'?",
+        "options": {
+            "A": "Searching for keywords in Google",
+            "B": "A framework where test cases are defined by action keywords in a spreadsheet or table",
+            "C": "Testing the search bar functionality",
+            "D": "Writing code using only reserved keywords"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is most famous for mobile automation testing (iOS and Android)?",
+        "options": {
+            "A": "Selenium",
+            "B": "Appium",
+            "C": "Postman",
+            "D": "JMeter"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Dynamic Loading' in web applications a challenge for automation?",
+        "options": {
+            "A": "It changes the color of the site",
+            "B": "Elements may not be immediately available in the DOM when the script tries to interact with them",
+            "C": "It requires more RAM",
+            "D": "It deletes the cookies"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Shift-Left Testing'?",
+        "options": {
+            "A": "Moving the computer to the left",
+            "B": "An approach where testing is performed earlier in the software development lifecycle",
+            "C": "Testing only on the left side of the screen",
+            "D": "A specific BDD syntax"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cross-Browser Testing'?",
+        "options": {
+            "A": "Testing two different apps",
+            "B": "Ensuring the application works consistently across different browsers like Chrome, Firefox, and Safari",
+            "C": "Testing the browser settings",
+            "D": "A type of security test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Selenium, how do you handle multiple browser windows or tabs?",
+        "options": {
+            "A": "By restarting the driver",
+            "B": "Using getWindowHandles() and switchTo().window()",
+            "C": "By closing the first tab manually",
+            "D": "Selenium cannot handle multiple tabs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the role of a 'Test Runner'?",
+        "options": {
+            "A": "A person who runs from the office",
+            "B": "A tool that executes the test suite and provides the results/reports",
+            "C": "The main server",
+            "D": "The browser executable"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Continuous Testing'?",
+        "options": {
+            "A": "Testing without sleeping",
+            "B": "The process of executing automated tests as part of the software delivery pipeline to obtain immediate feedback",
+            "C": "Manual testing that never ends",
+            "D": "A high-speed performance test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'White-Box Testing'?",
+        "options": {
+            "A": "Testing the UI design only",
+            "B": "Testing the internal structure or workings of an application, as opposed to its functionality",
+            "C": "Testing on a white background",
+            "D": "Exploratory testing"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Black-Box Testing'?",
+        "options": {
+            "A": "Testing the code directly",
+            "B": "Testing based on requirements and functionality without knowledge of the internal code",
+            "C": "Testing on a dark theme",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Sanity Testing'?",
+        "options": {
+            "A": "A test for the tester's mental health",
+            "B": "A subset of regression testing that focuses on a specific functional area after changes",
+            "C": "Testing at the end of a project",
+            "D": "Checking for syntax errors"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Test Suite'?",
+        "options": {
+            "A": "A luxury room for testers",
+            "B": "A collection of test cases grouped together for execution purposes",
+            "C": "A specific type of unit test",
+            "D": "A bug report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Environment Variables' in automation frameworks?",
+        "options": {
+            "A": "To save energy",
+            "B": "To store configuration data like URLs and credentials that change between environments",
+            "C": "To name the test cases",
+            "D": "To monitor the hardware"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which locator strategy is often used when an element doesn't have a stable ID or Class?",
+        "options": {
+            "A": "Tag Name",
+            "B": "XPath",
+            "C": "Link Text",
+            "D": "Partial Link Text"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Performance Testing'?",
+        "options": {
+            "A": "Testing how well the developer codes",
+            "B": "Testing the speed, scalability, and stability of an application under load",
+            "C": "Testing the UI animations",
+            "D": "Checking the hard drive speed"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Load Testing'?",
+        "options": {
+            "A": "Testing how fast the page loads",
+            "B": "Testing the system's behavior under expected peak user load",
+            "C": "Checking the battery life",
+            "D": "Uploading a large file"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stress Testing'?",
+        "options": {
+            "A": "Testing until the server breaks to find its upper limit",
+            "B": "Testing during a deadline",
+            "C": "Checking the CPU temperature",
+            "D": "Manual testing on a slow network"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "In CI/CD, what is the role of automation?",
+        "options": {
+            "A": "To replace the developer",
+            "B": "To provide fast and frequent feedback on code quality throughout the pipeline",
+            "C": "To buy cloud servers",
+            "D": "To design the logo"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'API Mocking' useful for?",
+        "options": {
+            "A": "Making fun of the API design",
+            "B": "Simulating an API response when the actual service is unavailable or in development",
+            "C": "Encrypting the API data",
+            "D": "Deleting the API"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is commonly used for performance and load testing?",
+        "options": {
+            "A": "Selenium",
+            "B": "JMeter",
+            "C": "Postman",
+            "D": "Cucumber"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Visual Testing'?",
+        "options": {
+            "A": "Watching the test run",
+            "B": "Verifying that the UI appears correctly to users (layout, font, colors) often using screenshots",
+            "C": "Testing for colorblind users",
+            "D": "Checking the video quality"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'End-to-End' (E2E) testing?",
+        "options": {
+            "A": "Testing from the start to the end of the day",
+            "B": "Testing the complete flow of an application from start to finish, including system integrations",
+            "C": "Testing the physical network cables",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Selenium, what is 'driver.quit()' versus 'driver.close()'?",
+        "options": {
+            "A": "They are identical",
+            "B": "quit() closes all windows and ends the session; close() only closes the current active window",
+            "C": "close() is faster",
+            "D": "quit() restarts the computer"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Exploratory Testing'?",
+        "options": {
+            "A": "A fully automated test suite",
+            "B": "Simultaneous learning, test design, and test execution where the tester uncovers bugs manually",
+            "C": "Testing on a map",
+            "D": "A type of performance test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question: What is the primary benefit of 'Open Source' automation tools like Selenium?",
+        "options": {
+            "A": "They are free of charge",
+            "B": "They are cost-effective, have large community support, and allow high customization",
+            "C": "They are more secure than paid tools",
+            "D": "They have a better UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which HTTP status code range represents a 'Client Error' in API testing?",
+        "options": {
+            "A": "2xx",
+            "B": "3xx",
+            "C": "4xx",
+            "D": "5xx"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "In Selenium, which interface is used to execute JavaScript commands directly in the browser?",
+        "options": {
+            "A": "WebDriver",
+            "B": "JavaScriptExecutor",
+            "C": "Wait",
+            "D": "Actions"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary purpose of a 'Scenario Outline' in Cucumber?",
+        "options": {
+            "A": "To provide a summary of the test case",
+            "B": "To run the same scenario multiple times with different values using an 'Examples' table",
+            "C": "To group multiple features into one file",
+            "D": "To skip certain test steps"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which component in the Appium architecture translates JSON Wire Protocol commands into vendor-specific framework commands?",
+        "options": {
+            "A": "Appium Desktop",
+            "B": "Appium Client Library",
+            "C": "Appium Server",
+            "D": "XCode"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the benefit of 'Parallel Execution' in a CI/CD pipeline?",
+        "options": {
+            "A": "It makes the code more secure",
+            "B": "It significantly reduces the total time required to run a large test suite",
+            "C": "It eliminates the need for a testing framework",
+            "D": "It prevents flaky tests from occurring"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In REST Assured, which method marks the start of the validation block for assertions?",
+        "options": {
+            "A": "given()",
+            "B": "when()",
+            "C": "then()",
+            "D": "request()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'Dockerization' primarily used for in Test Automation?",
+        "options": {
+            "A": "To store test documentation",
+            "B": "To ensure a consistent and isolated environment for test execution across different machines",
+            "C": "To write the test scripts in a specific language",
+            "D": "To increase internet speed"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Selenium command is used to move the focus to an 'iframe'?",
+        "options": {
+            "A": "driver.switchTo().frame()",
+            "B": "driver.findElement(By.id())",
+            "C": "driver.getWindowHandle()",
+            "D": "driver.navigate().to()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does 'JSON Path' allow an automation tester to do?",
+        "options": {
+            "A": "Navigate the file system",
+            "B": "Extract specific values or objects from a JSON response body",
+            "C": "Convert JSON to XML",
+            "D": "Encrypt JSON data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a Cucumber framework, what are 'Tags' (@Smoke, @Regression) used for?",
+        "options": {
+            "A": "To identify the code author",
+            "B": "To group and selectively execute specific scenarios or features",
+            "C": "To style the text in feature files",
+            "D": "To define data for outlines"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the 'Hook' (@Before, @After) in Cucumber?",
+        "options": {
+            "A": "To skip a test scenario",
+            "B": "To run blocks of code before or after each scenario (e.g., setup/teardown)",
+            "C": "To connect to a database",
+            "D": "To name the feature file"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Selenium method is used to retrieve the value of a specific CSS property of an element?",
+        "options": {
+            "A": "getAttribute()",
+            "B": "getCssValue()",
+            "C": "getText()",
+            "D": "getLocation()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In API testing, what is the 'Payload'?",
+        "options": {
+            "A": "The time taken for a response",
+            "B": "The actual data sent in the request or received in the response body",
+            "C": "The security token",
+            "D": "The URL endpoint"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mutation Testing'?",
+        "options": {
+            "A": "Testing on different OS versions",
+            "B": "Evaluating the quality of tests by making small changes to the code to see if tests fail",
+            "C": "A type of virus scan",
+            "D": "Testing UI animations"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'DesiredCapabilities' in Appium/Selenium used for?",
+        "options": {
+            "A": "To set the developer's goals",
+            "B": "To define the properties of the browser or device environment (e.g., version, platform)",
+            "C": "To measure network speed",
+            "D": "To name the test suite"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is commonly used to view and debug network traffic during API testing?",
+        "options": {
+            "A": "Charles Proxy or Fiddler",
+            "B": "Notepad++",
+            "C": "Docker Desktop",
+            "D": "Eclipse"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Self-Healing' in modern automation tools?",
+        "options": {
+            "A": "The code fixing its own syntax errors",
+            "B": "The ability of a tool to automatically update locators when the UI changes",
+            "C": "A manual bug fix",
+            "D": "A hardware self-test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Gherkin, which keyword is used to provide a description of the feature being tested?",
+        "options": {
+            "A": "Scenario",
+            "B": "Feature",
+            "C": "Background",
+            "D": "Given"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the role of 'Background' in a Cucumber feature file?",
+        "options": {
+            "A": "To set a background image for reports",
+            "B": "To define steps that are common to all scenarios in a feature file",
+            "C": "To hide certain tests",
+            "D": "To document the history"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Selenium wait is generally preferred to avoid 'thread.sleep' and optimize execution time?",
+        "options": {
+            "A": "Implicit Wait",
+            "B": "Explicit Wait / Fluent Wait",
+            "C": "Static Wait",
+            "D": "Manual Wait"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Schema Validation' in API Testing?",
+        "options": {
+            "A": "Checking the color of the response",
+            "B": "Verifying that the structure and data types of the JSON/XML response match the definition",
+            "C": "Validating the database table names",
+            "D": "Encrypting the schema"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In the context of automation, what is 'ROI'?",
+        "options": {
+            "A": "Run On Internet",
+            "B": "Return On Investment (the value gained from automation vs. the cost to build/maintain it)",
+            "C": "Real-time Object Identification",
+            "D": "Remote Operating Interface"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Component Testing'?",
+        "options": {
+            "A": "Testing the entire system",
+            "B": "Testing an individual software component in isolation",
+            "C": "Testing the hardware components",
+            "D": "A type of BDD test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method in Selenium is used to navigate back to the previous page in history?",
+        "options": {
+            "A": "driver.back()",
+            "B": "driver.navigate().back()",
+            "C": "driver.switchTo().back()",
+            "D": "driver.getPrevious()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between 'Soft Assertion' and 'Hard Assertion'?",
+        "options": {
+            "A": "Hard assertions are for difficult code",
+            "B": "Hard assertions stop execution upon failure; Soft assertions continue execution and report all failures at the end",
+            "C": "Soft assertions only work in Java",
+            "D": "Hard assertions are faster"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In TestNG, which annotation is used to provide data to a test method for data-driven testing?",
+        "options": {
+            "A": "@Test",
+            "B": "@DataProvider",
+            "C": "@Parameter",
+            "D": "@BeforeMethod"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Shadow DOM' and why is it tricky for automation?",
+        "options": {
+            "A": "A dark mode for websites",
+            "B": "An encapsulated DOM tree that is not accessible via standard Selenium locators like findElement",
+            "C": "A type of network bridge",
+            "D": "A broken HTML tag"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Contract Testing'?",
+        "options": {
+            "A": "Testing a legal contract",
+            "B": "Verifying that a service provider and a service consumer can communicate according to a shared agreement (contract)",
+            "C": "A type of unit test",
+            "D": "Testing a physical connection"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Selenium, what does 'getWindowHandle()' return?",
+        "options": {
+            "A": "The title of the window",
+            "B": "A unique alphanumeric ID of the current window/tab",
+            "C": "The URL of the window",
+            "D": "The size of the window"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Locust' or 'Gatling' used for?",
+        "options": {
+            "A": "Mobile automation",
+            "B": "Performance and Load testing",
+            "C": "UI design",
+            "D": "Security scanning"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Accessibility Testing' automation (e.g., using Axe)?",
+        "options": {
+            "A": "Testing the internet access",
+            "B": "Ensuring the web application is usable for people with disabilities (WCAG compliance)",
+            "C": "Testing the login access",
+            "D": "Checking server access logs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Selenium, how do you handle an Alert/Pop-up?",
+        "options": {
+            "A": "By clicking the close button",
+            "B": "Using driver.switchTo().alert() and methods like accept() or dismiss()",
+            "C": "By ignoring it",
+            "D": "By refreshing the page"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Log4j' or 'Extent Reports' used for in a framework?",
+        "options": {
+            "A": "To write the test scripts",
+            "B": "To provide detailed logging and visual test execution reports",
+            "C": "To manage the database",
+            "D": "To speed up the browser"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In API testing, what is 'Query Parameter' vs 'Path Parameter'?",
+        "options": {
+            "A": "They are the same",
+            "B": "Path parameters identify a specific resource; Query parameters are used to filter or sort that resource",
+            "C": "Query parameters are more secure",
+            "D": "Path parameters are for databases"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'SOAP' vs 'REST'?",
+        "options": {
+            "A": "SOAP is for cleaning; REST is for sleep",
+            "B": "SOAP is a strict protocol using XML; REST is an architectural style that supports multiple formats like JSON",
+            "C": "REST is older than SOAP",
+            "D": "SOAP is only for mobile"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Test Retries' logic?",
+        "options": {
+            "A": "Buying a new tool",
+            "B": "A framework feature that automatically re-runs a failed test to determine if the failure was a one-time fluke",
+            "C": "A manual restart of the server",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Appium, what is 'Appium Inspector' used for?",
+        "options": {
+            "A": "To install the app",
+            "B": "To identify and locate elements on a mobile application's screen",
+            "C": "To check for viruses",
+            "D": "To monitor battery usage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Parallelism' at the Suite level vs Thread level?",
+        "options": {
+            "A": "They are identical",
+            "B": "Suite level runs separate XML files; Thread level runs individual test methods in parallel",
+            "C": "Thread level is only for Java",
+            "D": "Suite level is slower"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Postman Collections' used for?",
+        "options": {
+            "A": "Collecting stamps",
+            "B": "Grouping and organizing related API requests for automated execution",
+            "C": "A type of unit test",
+            "D": "A security report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question: What is the primary purpose of 'Automation Framework Architecture'?",
+        "options": {
+            "A": "To make the code look pretty",
+            "B": "To ensure reusability, maintainability, and scalability of test scripts",
+            "C": "To reduce the number of testers",
+            "D": "To replace manual testing entirely"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In JMeter, what is the purpose of a 'Thread Group'?",
+        "options": {
+            "A": "To group developers together",
+            "B": "To define the number of virtual users and how often they should send requests",
+            "C": "To style the test reports",
+            "D": "To manage the server hardware"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Ramp-Up Period' in a performance test?",
+        "options": {
+            "A": "The time it takes to build the code",
+            "B": "The time taken to get all virtual users into the running state",
+            "C": "A break between test cases",
+            "D": "The time it takes for a page to load"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Appium locator strategy is unique to iOS and generally faster than XPath?",
+        "options": {
+            "A": "ID",
+            "B": "iOS Class Chain",
+            "C": "Accessibility ID",
+            "D": "Name"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'SauceLabs' or 'BrowserStack' used for in automation?",
+        "options": {
+            "A": "To write code",
+            "B": "To provide a cloud-based infrastructure for executing tests on thousands of real devices and browsers",
+            "C": "To store bug reports",
+            "D": "To manage project deadlines"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which JMeter component is used to add assertions to verify the response of a sampler?",
+        "options": {
+            "A": "Listener",
+            "B": "Response Assertion",
+            "C": "Config Element",
+            "D": "Timer"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Distributed Testing' in JMeter?",
+        "options": {
+            "A": "Testing from different rooms",
+            "B": "Using multiple machines (slaves) to generate a larger load on a target server",
+            "C": "Sharing the test results via email",
+            "D": "Testing different parts of the code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Appium, what does 'noReset: true' capability do?",
+        "options": {
+            "A": "It deletes the app data after every run",
+            "B": "It prevents the app data from being cleared and keeps the app installed between sessions",
+            "C": "It restarts the phone",
+            "D": "It resets the network settings"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Listener' in JMeter?",
+        "options": {
+            "A": "A person who listens to the developers",
+            "B": "A component that collects and displays the results of the test execution (e.g., View Results Tree)",
+            "C": "A tool to record audio",
+            "D": "A security monitor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Think Time' in performance testing?",
+        "options": {
+            "A": "The time a developer spends thinking about code",
+            "B": "The simulated delay between user actions to mimic real human behavior",
+            "C": "The time it takes to compile the test",
+            "D": "The server response time"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command-line tool is often used to run JMeter tests in non-GUI mode for better performance?",
+        "options": {
+            "A": "jmeter -n -t [testfile] -l [logfile]",
+            "B": "jmeter start",
+            "C": "run jmeter",
+            "D": "jmeter --gui=false"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Soak Testing' (Endurance Testing)?",
+        "options": {
+            "A": "Testing the app in water",
+            "B": "Testing a system under a significant load over a long period to check for memory leaks",
+            "C": "Testing only at night",
+            "D": "A quick sanity check"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Spike Testing'?",
+        "options": {
+            "A": "Testing the app with sharp images",
+            "B": "Suddenly increasing the load significantly to see how the system handles a burst of traffic",
+            "C": "Testing the code for bugs",
+            "D": "Checking the hardware ports"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Appium, what is the 'UIAutomator2' driver used for?",
+        "options": {
+            "A": "iOS automation",
+            "B": "Android automation",
+            "C": "Windows automation",
+            "D": "Web automation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which capability is required to launch a specific activity in an Android app using Appium?",
+        "options": {
+            "A": "appPackage and appActivity",
+            "B": "bundleId",
+            "C": "deviceName",
+            "D": "browserName"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Test Orchestration'?",
+        "options": {
+            "A": "Playing music during testing",
+            "B": "The automated coordination and management of test execution across environments and pipelines",
+            "C": "Writing new test cases",
+            "D": "Deleting old logs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Jenkins, what is a 'Pipeline'?",
+        "options": {
+            "A": "A physical water pipe",
+            "B": "A suite of plugins that supports implementing and integrating continuous delivery pipelines",
+            "C": "A list of developer names",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Blue-Green' deployment in the context of Continuous Testing?",
+        "options": {
+            "A": "Using different themes for the report",
+            "B": "Running tests in two identical environments to ensure the new version works before switching traffic",
+            "C": "Scaling the UI colors",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Artifacts' in a CI build?",
+        "options": {
+            "A": "Old versions of the software",
+            "B": "Files generated during the build or test process (e.g., test reports, binaries) that are saved for later use",
+            "C": "A museum of old code",
+            "D": "A type of security bug"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Test Parallelism' in TestNG?",
+        "options": {
+            "A": "Testing two apps at once",
+            "B": "Running multiple tests simultaneously in different threads to save time",
+            "C": "Testing the computer's parallel port",
+            "D": "A manual testing strategy"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In JMeter, what does the 'HTTP Cookie Manager' do?",
+        "options": {
+            "A": "Bakes cookies for the team",
+            "B": "Automatically stores and sends cookies like a real browser to maintain session state",
+            "C": "Deletes the browser history",
+            "D": "Encrypts the network traffic"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Scalability Testing'?",
+        "options": {
+            "A": "Testing the size of the screen",
+            "B": "Determining the system's ability to scale up or out in terms of user load",
+            "C": "Testing the zoom feature",
+            "D": "Checking the database size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is used to containerize an automation framework and its dependencies?",
+        "options": {
+            "A": "Eclipse",
+            "B": "Docker",
+            "C": "Jira",
+            "D": "Slack"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Infrastructure as Code' (IaC) useful for in automation?",
+        "options": {
+            "A": "To write test scripts",
+            "B": "To automatically provision and configure test environments using scripts (e.g., Terraform)",
+            "C": "To design the UI",
+            "D": "To monitor the hardware"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Appium, how do you handle a 'Mobile Gesture' like a long press or swipe?",
+        "options": {
+            "A": "Using the click() method",
+            "B": "Using the TouchAction class or W3C Actions API",
+            "C": "By shaking the device",
+            "D": "Gestures cannot be automated"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Visual Regression Testing'?",
+        "options": {
+            "A": "Testing the vision of the tester",
+            "B": "Comparing screenshots of the UI against baseline images to detect unintended visual changes",
+            "C": "Testing the video player",
+            "D": "A security scan of the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'correlation' in performance testing?",
+        "options": {
+            "A": "The relationship between two testers",
+            "B": "The process of capturing dynamic values from one response and passing them into a subsequent request",
+            "C": "Measuring the code complexity",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In JMeter, what is a 'Timer' used for?",
+        "options": {
+            "A": "To clock out at the end of the day",
+            "B": "To pause the execution of requests for a specific duration to simulate user delay",
+            "C": "To measure the total execution time",
+            "D": "To schedule a meeting"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Appium component allows you to view the XML hierarchy of a mobile app?",
+        "options": {
+            "A": "Appium Server",
+            "B": "Appium Inspector",
+            "C": "XCode",
+            "D": "Android Studio"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mobile Web' testing versus 'Native App' testing?",
+        "options": {
+            "A": "They are the same",
+            "B": "Mobile Web tests websites in a mobile browser; Native App tests applications built for a specific OS",
+            "C": "Native App is faster",
+            "D": "Mobile Web is only for iOS"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Hybrid App' testing?",
+        "options": {
+            "A": "Testing an app that runs on a car",
+            "B": "Testing apps that are a mix of native and web technologies (e.g., using WebViews)",
+            "C": "Testing two apps at once",
+            "D": "A type of performance test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'BrowserStack Local' or 'Sauce Connect'?",
+        "options": {
+            "A": "A physical cable",
+            "B": "A proxy/tunnel that allows cloud-based browsers to access applications running on a private/local network",
+            "C": "A backup for the code",
+            "D": "A security scanner"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In CI/CD, what does 'Fail Fast' mean?",
+        "options": {
+            "A": "Deleting the code quickly",
+            "B": "Designing the pipeline to fail as early as possible (e.g., at Unit Testing) to save time and resources",
+            "C": "Giving up on a project",
+            "D": "A performance metric"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Test Coverage'?",
+        "options": {
+            "A": "The number of testers on a team",
+            "B": "A measure of the amount of testing performed on a software product",
+            "C": "A type of insurance for bugs",
+            "D": "The size of the test report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Code Coverage'?",
+        "options": {
+            "A": "The number of lines of code",
+            "B": "A percentage of the source code executed during automated testing",
+            "C": "A style of coding",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is commonly used to generate visual HTML reports from TestNG/JUnit results?",
+        "options": {
+            "A": "Notepad",
+            "B": "Allure Reports",
+            "C": "Excel",
+            "D": "Photoshop"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Service Virtualization' in automation?",
+        "options": {
+            "A": "Creating a virtual server",
+            "B": "Simulating the behavior of dependencies (like APIs or databases) that are not available during testing",
+            "C": "A type of unit test",
+            "D": "Scaling the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Lighthouse' used for in web automation?",
+        "options": {
+            "A": "To light up the office",
+            "B": "An open-source tool for improving the quality of web pages (Performance, Accessibility, SEO)",
+            "C": "A security scanner",
+            "D": "A database tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mutation Testing' coverage?",
+        "options": {
+            "A": "Testing on different OS versions",
+            "B": "A measure of how many 'mutants' (code changes) are caught by your test suite",
+            "C": "A virus scan percentage",
+            "D": "Scaling the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Jenkins, what is a 'Trigger'?",
+        "options": {
+            "A": "A gun in a game",
+            "B": "A condition that starts a build automatically (e.g., a code commit or a timer)",
+            "C": "A security alert",
+            "D": "A way to delete code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pre-flight' testing?",
+        "options": {
+            "A": "Testing on an airplane",
+            "B": "Running a subset of tests before code is merged into the main branch",
+            "C": "A performance test",
+            "D": "A hardware check"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Docker Compose' useful for in automation?",
+        "options": {
+            "A": "To write code",
+            "B": "To define and run multi-container applications (e.g., a web app and a database) for testing",
+            "C": "To style the reports",
+            "D": "To monitor the CPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Zero Downtime' testing?",
+        "options": {
+            "A": "Testing at midnight",
+            "B": "Verifying that the application remains available during updates and deployments",
+            "C": "Testing without a break",
+            "D": "A high-speed network test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'JMeter Parameterization'?",
+        "options": {
+            "A": "Naming the variables",
+            "B": "Using data from an external file (like a CSV) to send different data in each request",
+            "C": "A security scan",
+            "D": "Scaling the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Post-Execution' script in an automation tool?",
+        "options": {
+            "A": "A script that runs after the test finishes to perform cleanup or send reports",
+            "B": "A script to delete the app",
+            "C": "A type of unit test",
+            "D": "A manual check"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which command in Appium is used to take a screenshot of the mobile screen?",
+        "options": {
+            "A": "driver.capture()",
+            "B": "driver.getScreenshotAs()",
+            "C": "driver.photo()",
+            "D": "driver.save()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Appium Doctor'?",
+        "options": {
+            "A": "A person who fixes phones",
+            "B": "A CLI tool that checks if all prerequisites for Appium are correctly installed and configured",
+            "C": "A security scanner",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Headless' browser execution?",
+        "options": {
+            "A": "Testing without a plan",
+            "B": "Running web tests without a visible UI to save resources and increase speed",
+            "C": "Testing only the backend",
+            "D": "A broken browser"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Log Aggregation' (e.g., ELK Stack) in automation?",
+        "options": {
+            "A": "Grouping logs together",
+            "B": "Collecting logs from multiple sources to analyze test failures and system behavior",
+            "C": "Deleting old logs",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Taint' in a CI/CD environment?",
+        "options": {
+            "A": "A hardware defect",
+            "B": "Marking an environment as unstable so that new builds are not deployed to it",
+            "C": "A security bug",
+            "D": "A network error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question: What is the primary purpose of 'Automation Governance'?",
+        "options": {
+            "A": "To make the code look better",
+            "B": "To ensure that automation is standardized, secure, and delivering value across the organization",
+            "C": "To reduce the number of tools",
+            "D": "To replace manual testing entirely"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which modern automation tool runs directly in the same run-loop as the application, offering faster execution and less flakiness compared to Selenium?",
+        "options": {
+            "A": "Appium",
+            "B": "Cypress",
+            "C": "JMeter",
+            "D": "UFT"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary advantage of 'Playwright' over traditional Selenium?",
+        "options": {
+            "A": "It only works on Windows",
+            "B": "It supports multi-browser execution with a single API, automatic waiting, and parallel execution by default",
+            "C": "It requires manual browser drivers",
+            "D": "It is written in COBOL"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Auto-waiting' in tools like Playwright and Cypress?",
+        "options": {
+            "A": "The script waits forever",
+            "B": "The tool automatically waits for elements to be actionable before performing an action, reducing the need for explicit waits",
+            "C": "It pauses the computer",
+            "D": "It waits for the developer to click a button"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In the context of AI-driven testing, what is 'Self-Healing'?",
+        "options": {
+            "A": "The developer taking a break",
+            "B": "The ability of an automation tool to use AI to detect UI changes and automatically update broken locators",
+            "C": "Fixing a broken physical server",
+            "D": "Automatically deleting failed tests"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'DAST' (Dynamic Application Security Testing) automation?",
+        "options": {
+            "A": "Testing the speed of the app",
+            "B": "Automated security testing that inspects the application while it is running to find vulnerabilities like SQL injection",
+            "C": "A manual code review",
+            "D": "Testing the physical locks of the office"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'SAST' (Static Application Security Testing)?",
+        "options": {
+            "A": "Testing the app in a static environment",
+            "B": "Automated analysis of the source code to find security vulnerabilities without executing the program",
+            "C": "A type of unit test",
+            "D": "Testing the UI colors"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is commonly used to automate 'Accessibility' (a11y) checks within a CI/CD pipeline?",
+        "options": {
+            "A": "Postman",
+            "B": "Axe-core",
+            "C": "Appium",
+            "D": "JUnit"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Visual AI' testing?",
+        "options": {
+            "A": "Testing with glasses on",
+            "B": "Using AI to compare the visual appearance of a page against a baseline, ignoring minor pixel shifts that cause traditional tools to fail",
+            "C": "Watching a video of the test",
+            "D": "Testing the monitor resolution"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Contract Testing' (e.g., Pact) primarily used for?",
+        "options": {
+            "A": "Testing a legal document",
+            "B": "Ensuring that microservices can communicate with each other based on a predefined 'contract' of requests and responses",
+            "C": "A type of UI testing",
+            "D": "Managing cloud subscriptions"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'Tox' or 'Pytest' usually handle in a Python automation environment?",
+        "options": {
+            "A": "Generating images",
+            "B": "Managing virtual environments and running test suites across different versions of Python",
+            "C": "Designing the database",
+            "D": "Sending emails"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mutation Testing' score a measure of?",
+        "options": {
+            "A": "Code complexity",
+            "B": "The effectiveness of your test suite in catching intentional code changes (mutants)",
+            "C": "The number of lines of code",
+            "D": "The number of users"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Playwright, what is a 'BrowserContext'?",
+        "options": {
+            "A": "A history of the browser",
+            "B": "An isolated session within a browser instance, similar to an incognito window, allowing for independent parallel testing",
+            "C": "A type of network bridge",
+            "D": "A storage limit"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Component Testing' in modern frameworks like React or Vue?",
+        "options": {
+            "A": "Testing the physical hardware",
+            "B": "Testing individual UI components in isolation without loading the entire application",
+            "C": "A type of manual testing",
+            "D": "Checking the CSS file size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Test Data Management' (TDM) automation?",
+        "options": {
+            "A": "Deleting data after a test",
+            "B": "The automated process of provisioning, masking, and managing the data needed for testing",
+            "C": "A spreadsheet for user names",
+            "D": "A type of security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'AAA' pattern in Unit Testing?",
+        "options": {
+            "A": "Always Ask Admin",
+            "B": "Arrange, Act, Assert",
+            "C": "Automation, Analysis, Action",
+            "D": "Access, Authenticate, Authorize"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Property-Based Testing'?",
+        "options": {
+            "A": "Testing real estate apps",
+            "B": "Testing that a property of the code holds true for a large range of randomly generated inputs",
+            "C": "Testing the CSS properties",
+            "D": "A type of manual testing"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is widely used for automated 'Container' security scanning in a DevSecOps pipeline?",
+        "options": {
+            "A": "Selenium",
+            "B": "Trivy or Clair",
+            "C": "Postman",
+            "D": "JMeter"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Shadow DOM' and why does it affect automation locators?",
+        "options": {
+            "A": "It is a dark version of the site",
+            "B": "It provides encapsulation for web components, making them invisible to standard global document queries",
+            "C": "It is a broken HTML tag",
+            "D": "It is a type of network error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Network Interception' in Playwright/Cypress?",
+        "options": {
+            "A": "Cutting the internet cable",
+            "B": "The ability to monitor, modify, or mock network requests and responses from the application",
+            "C": "A type of hacking",
+            "D": "A speed test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Test Observability'?",
+        "options": {
+            "A": "Watching the tests run on a screen",
+            "B": "The ability to understand the state and health of a test suite through deep metrics, traces, and logs",
+            "C": "A type of unit test",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Trace Viewer' in Playwright?",
+        "options": {
+            "A": "A tool to find people",
+            "B": "A GUI tool that allows you to record and replay test execution to see exactly what happened at each step",
+            "C": "A security scan",
+            "D": "A code editor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Data Masking' in the context of automated testing?",
+        "options": {
+            "A": "Hiding the data from the developer",
+            "B": "Replacing sensitive data with fictional but realistic data for testing purposes",
+            "C": "Deleting the database",
+            "D": "Encrypting the source code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Fuzz Testing'?",
+        "options": {
+            "A": "Testing with blurry images",
+            "B": "Providing invalid, unexpected, or random data as inputs to a computer program to find security loops and crashes",
+            "C": "A type of manual testing",
+            "D": "A hardware monitor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which framework is known for 'Snapshot Testing' where it compares the serializable value of a component's tree?",
+        "options": {
+            "A": "TestNG",
+            "B": "Jest",
+            "C": "Selenium",
+            "D": "Cucumber"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Flakiness Management'?",
+        "options": {
+            "A": "Ignoring failing tests",
+            "B": "Strategies like automatic retries, quarantine of unstable tests, and identifying root causes of non-deterministic failures",
+            "C": "A type of performance test",
+            "D": "A security policy"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cloud-Native' Testing?",
+        "options": {
+            "A": "Testing the weather",
+            "B": "Designing tests that leverage cloud features like scalability, ephemeral environments, and serverless execution",
+            "C": "Testing in a physical office",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'In-sprint Automation'?",
+        "options": {
+            "A": "Running really fast in the office",
+            "B": "Automating new features within the same agile sprint they are developed in",
+            "C": "Automating old features",
+            "D": "A type of performance test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Test Debt'?",
+        "options": {
+            "A": "Owing money to the QA team",
+            "B": "The accumulated cost of future rework caused by choosing an easy but limited testing solution now",
+            "C": "A type of bank loan",
+            "D": "A security bug"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool provides 'Time Travel' debugging for automated tests?",
+        "options": {
+            "A": "Selenium",
+            "B": "Cypress",
+            "C": "Postman",
+            "D": "JMeter"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'API Sandboxing'?",
+        "options": {
+            "A": "Testing an API in a park",
+            "B": "Providing a mock environment that mimics a production API for testing purposes without affecting real data",
+            "C": "A type of security threat",
+            "D": "Scaling the CPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Gherkin' Step Definition?",
+        "options": {
+            "A": "A list of vegetables",
+            "B": "The code that maps a Gherkin step (Given/When/Then) to an actual function in the automation script",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Parallelism' in CI/CD vs 'Concurrency'?",
+        "options": {
+            "A": "They are identical",
+            "B": "Parallelism is running tasks at the same time on different cores/machines; Concurrency is managing multiple tasks at once on a single core",
+            "C": "Concurrency is faster",
+            "D": "Parallelism is for images only"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mocking' vs 'Stubbing'?",
+        "options": {
+            "A": "They are the same",
+            "B": "Stubs provide canned answers to calls; Mocks also verify the behavior and expectations of the calls",
+            "C": "Mocking is only for Java",
+            "D": "Stubbing is for databases"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'TDD' (Test Driven Development) Cycle?",
+        "options": {
+            "A": "Wait, Code, Test",
+            "B": "Red (Fail), Green (Pass), Refactor",
+            "C": "Design, Build, Deploy",
+            "D": "Plan, Code, Log"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'ATDD' (Acceptance Test Driven Development)?",
+        "options": {
+            "A": "Accepting all bugs",
+            "B": "A collaborative process where the team defines acceptance criteria from the user's perspective before development begins",
+            "C": "A type of performance test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Chaos Engineering' in automated testing?",
+        "options": {
+            "A": "Writing messy code",
+            "B": "Intentionally introducing failures into a system to test its resilience and ability to recover",
+            "C": "A type of unit test",
+            "D": "Deleting the master node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Synthetic Monitoring'?",
+        "options": {
+            "A": "Monitoring with fake glasses",
+            "B": "Running automated scripts periodically against production endpoints to monitor availability and performance",
+            "C": "A manual check",
+            "D": "A type of security threat"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command in Cypress is used to visit a URL?",
+        "options": {
+            "A": "cy.go()",
+            "B": "cy.visit()",
+            "C": "cy.open()",
+            "D": "cy.get()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Artifacts' retention policy?",
+        "options": {
+            "A": "Keeping old furniture",
+            "B": "The rules defining how long build and test results should be stored in the CI/CD system",
+            "C": "A security policy",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Test Data Factory' pattern?",
+        "options": {
+            "A": "A building where data is made",
+            "B": "A design pattern where a centralized class is responsible for creating and providing test data objects",
+            "C": "A spreadsheet",
+            "D": "A hardware monitor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Browser-agnostic' testing?",
+        "options": {
+            "A": "Testing without a browser",
+            "B": "Writing test scripts that can run on any browser without modification",
+            "C": "Testing only on Chrome",
+            "D": "A type of security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Containerized Selenium Grid'?",
+        "options": {
+            "A": "A grid made of containers",
+            "B": "Using Docker to spin up a Selenium Hub and multiple browser nodes for parallel execution",
+            "C": "A type of unit test",
+            "D": "A security scanner"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'K6' used for?",
+        "options": {
+            "A": "Mobile automation",
+            "B": "A modern, developer-centric performance testing tool",
+            "C": "UI design",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Code Profiling' during automation?",
+        "options": {
+            "A": "Taking a photo of the code",
+            "B": "Analyzing the execution of a program to measure time and memory usage to optimize performance",
+            "C": "A type of unit test",
+            "D": "Scaling the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Headless Mode' default in CI pipelines?",
+        "options": {
+            "A": "It is not the default",
+            "B": "It is typically the default to ensure tests run in environments without a display (like Linux servers)",
+            "C": "It requires a monitor",
+            "D": "It is slower"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'API Throttling' and how do you test it?",
+        "options": {
+            "A": "Deleting the API",
+            "B": "Intentionally limiting the number of requests a user can make to an API; tested by sending more requests than allowed",
+            "C": "A type of unit test",
+            "D": "Scaling the CPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Service Mesh' mutual TLS testing?",
+        "options": {
+            "A": "Testing with two cables",
+            "B": "Verifying that communication between services is encrypted and authenticated using certificates",
+            "C": "A security scan for passwords",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'DevSecOps'?",
+        "options": {
+            "A": "A team of security guards",
+            "B": "Integrating security practices into the DevOps pipeline from the very beginning",
+            "C": "A type of unit test",
+            "D": "Scaling the hardware"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Compliance as Code'?",
+        "options": {
+            "A": "A legal contract written in Java",
+            "B": "The automated checking and enforcement of compliance standards through scripts and policies",
+            "C": "A type of unit test",
+            "D": "Scaling the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question: What is the primary focus of 'Modern Quality Engineering'?",
+        "options": {
+            "A": "To find as many bugs as possible",
+            "B": "To build quality into the product from the start through collaboration and high levels of automation",
+            "C": "To replace all manual testers",
+            "D": "To use the most expensive tools"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which design pattern in Playwright is used to share browser state (like cookies and local storage) across multiple tests to avoid repeated logins?",
+        "options": {
+            "A": "Singleton Pattern",
+            "B": "Storage State / Authentication Persistence",
+            "C": "Factory Pattern",
+            "D": "Observer Pattern"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Visual Diffing' in the context of Automated Visual Testing?",
+        "options": {
+            "A": "A difference in code style",
+            "B": "A pixel-by-pixel or AI-based comparison between a baseline image and a current screenshot to detect UI regressions",
+            "C": "A type of colorblindness test",
+            "D": "Checking the resolution of a video"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Cypress, what is the 'Command Log' used for?",
+        "options": {
+            "A": "Storing developer passwords",
+            "B": "An interactive list of every command executed during a test, allowing for 'time-travel' debugging by hovering over steps",
+            "C": "A database of terminal commands",
+            "D": "A list of bug reports"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Atomic Testing' in E2E automation?",
+        "options": {
+            "A": "Testing nuclear software",
+            "B": "Designing small, independent, and focused tests that verify a single specific piece of functionality rather than long, linear flows",
+            "C": "A type of unit test",
+            "D": "Testing only at the micro-level"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is used for 'Property-Based Testing' in JavaScript/TypeScript environments to find edge cases with random data?",
+        "options": {
+            "A": "Selenium",
+            "B": "fast-check",
+            "C": "Postman",
+            "D": "JMeter"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'API Virtualization'?",
+        "options": {
+            "A": "Upgrading an API to the cloud",
+            "B": "The process of simulating the behavior of a specific component (like a 3rd party API) to remove dependencies during testing",
+            "C": "A type of network bridge",
+            "D": "Scaling the API to multiple users"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Mobile Testing, what is 'Parallelism' via Appium Grid?",
+        "options": {
+            "A": "Testing two apps at once",
+            "B": "Running tests across multiple physical devices or emulators simultaneously using a central hub",
+            "C": "Testing the battery life",
+            "D": "A manual hardware check"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Flakiness Quotient'?",
+        "options": {
+            "A": "The price of the testing tool",
+            "B": "A metric used to identify the most unstable tests in a suite by tracking their pass/fail consistency over time",
+            "C": "The number of lines of code",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Cypress command allows you to 'stub' or 'mock' an XHR/Fetch request to control the response data?",
+        "options": {
+            "A": "cy.visit()",
+            "B": "cy.intercept()",
+            "C": "cy.get()",
+            "D": "cy.wait()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Quality Gates' in a CI/CD pipeline?",
+        "options": {
+            "A": "Physical gates at the office",
+            "B": "Automated checkpoints (using tools like SonarQube) that stop code from moving to the next stage if it doesn't meet specific criteria",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "AutomationTesting"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

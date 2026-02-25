@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/Dashboard.css';
+import '../styles/ResumeMatcher.css';
 
 const ResumeMatcher = () => {
     const [files, setFiles] = useState([]);
@@ -70,133 +71,93 @@ const ResumeMatcher = () => {
         return '#EF4444';
     };
 
-    // Premium UI Elements
-    const SectionHeader = ({ iconClass, title, subtitle, colorClass }) => (
-        <div style={{ marginBottom: '1.25rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.4rem' }}>
-                <div className={`module-icon-wrapper ${colorClass}`} style={{ width: '32px', height: '32px', borderRadius: '8px' }}>
-                    <i className={`${iconClass}`} style={{ fontSize: '0.9rem' }}></i>
-                </div>
-                <h3 style={{ fontSize: '1.1rem', fontWeight: '800', color: '#111827', margin: 0, letterSpacing: '-0.01em' }}>{title}</h3>
-            </div>
-            <p style={{ fontSize: '0.85rem', color: '#6B7280', margin: 0 }}>{subtitle}</p>
-        </div>
-    );
-
     return (
-        <div className="dashboard-container">
-            <div className="dashboard-main" style={{ maxWidth: '900px', paddingTop: '2rem' }}>
+        <div className="resume-matcher-page">
+            <div className="mesh-bg"></div>
+            <div className="bg-shape" style={{ width: '600px', height: '600px', background: 'rgba(99, 102, 241, 0.15)', top: '-10%', right: '-5%' }}></div>
+            <div className="bg-shape" style={{ width: '500px', height: '500px', background: 'rgba(168, 85, 247, 0.15)', bottom: '-10%', left: '-5%', animationDelay: '-5s' }}></div>
 
-                {/* Header Section */}
-                <header style={{
-                    position: 'relative',
-                    padding: '2.5rem 2rem',
-                    background: 'white',
-                    borderRadius: '24px',
-                    marginBottom: '2rem',
-                    boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
-                    border: '1px solid #E5E7EB',
-                    overflow: 'hidden'
-                }}>
-                    <div style={{
-                        position: 'absolute', top: '-40px', right: '-40px', width: '180px', height: '180px',
-                        background: 'radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, transparent 70%)', borderRadius: '50%'
-                    }}></div>
-
-                    <div style={{ position: 'relative', zIndex: 1 }}>
-                        <div style={{
-                            display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
-                            background: '#EEF2FF', color: '#4F46E5',
-                            padding: '0.4rem 0.8rem', borderRadius: '10px', fontSize: '0.75rem',
-                            fontWeight: '700', marginBottom: '1rem', border: '1px solid rgba(79, 70, 229, 0.1)'
-                        }}>
-                            <i className="fa-solid fa-magnifying-glass-chart"></i> RESUME ANALYTICS
-                        </div>
-                        <h1 style={{ fontSize: '2.4rem', fontWeight: '900', color: '#111827', margin: '0 0 0.5rem', letterSpacing: '-0.03em' }}>
-                            Resume <span style={{ color: '#4F46E5' }}>Matcher</span>
-                        </h1>
-                        <p style={{ color: '#6B7280', fontSize: '1rem', maxWidth: '500px' }}>
-                            AI-powered side-by-side analysis of candidate fit against specific role requirements.
-                        </p>
+            <div className="matcher-container">
+                <header className="glass-card page-header">
+                    <div className="badge">
+                        <i className="fa-solid fa-magnifying-glass-chart"></i> RESUME ANALYTICS
                     </div>
+                    <h1>Resume <span style={{ color: '#6366F1' }}>Matcher</span></h1>
+                    <p>
+                        AI-powered side-by-side analysis of candidate fit against specific role requirements.
+                    </p>
                 </header>
 
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-
+                <div className="form-stack">
                     {!results ? (
                         <>
-                            {/* Role Context Card */}
-                            <div className="module-card" style={{ padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
-                                <SectionHeader
-                                    iconClass="fa-solid fa-file-contract"
-                                    title="Job Description"
-                                    subtitle="Define the benchmark for comparison."
-                                    colorClass="indigo-glow"
-                                />
+                            <div className="glass-card">
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                        <i className="fa-solid fa-file-contract"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Job Description</h3>
+                                        <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Define the benchmark for comparison.</p>
+                                    </div>
+                                </div>
                                 <textarea
                                     value={jobDescription}
                                     onChange={(e) => setJobDescription(e.target.value)}
                                     placeholder="Paste the job requirements, responsibilities, and qualifications..."
-                                    style={{
-                                        width: '100%', height: '180px', padding: '1.25rem', border: '1px solid #E2E8F0',
-                                        borderRadius: '16px', resize: 'vertical', fontSize: '0.95rem', lineHeight: '1.6',
-                                        color: '#1F2937', background: '#F8FAFC', outline: 'none', transition: 'all 0.3s'
-                                    }}
+                                    className="modern-textarea"
                                 />
                             </div>
 
-                            {/* Resume Upload Card */}
-                            <div className="module-card" style={{ padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
-                                <SectionHeader
-                                    iconClass="fa-solid fa-file-pdf"
-                                    title="Candidate Resumes"
-                                    subtitle="Match multiple candidates at once."
-                                    colorClass="indigo-glow"
-                                />
+                            <div className="glass-card">
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                        <i className="fa-solid fa-file-pdf"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Candidate Resumes</h3>
+                                        <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Match multiple candidates at once.</p>
+                                    </div>
+                                </div>
 
                                 <div
                                     onDrop={handleDrop}
                                     onDragOver={handleDragOver}
                                     onClick={() => document.getElementById('resumeFile').click()}
-                                    style={{
-                                        minHeight: '180px', border: '2px dashed #CBD5E1', borderRadius: '24px',
-                                        background: '#F8FAFC', cursor: 'pointer', display: 'flex', flexDirection: 'column',
-                                        alignItems: 'center', justifyContent: 'center', padding: '2rem', transition: 'all 0.3s'
-                                    }}
-                                    onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#4F46E5'; e.currentTarget.style.background = '#EEF2FF'; }}
-                                    onMouseLeave={(e) => { e.currentTarget.style.borderColor = '#CBD5E1'; e.currentTarget.style.background = '#F8FAFC'; }}
+                                    className="upload-zone"
                                 >
                                     <input type="file" id="resumeFile" accept=".pdf" multiple style={{ display: 'none' }} onChange={handleFileChange} />
 
                                     {files.length === 0 ? (
                                         <>
                                             <div style={{
-                                                width: '56px', height: '56px', background: 'white', color: '#4F46E5',
+                                                width: '56px', height: '56px', background: 'white', color: '#6366F1',
                                                 borderRadius: '16px', display: 'flex', alignItems: 'center',
-                                                justifyContent: 'center', marginBottom: '1.25rem', fontSize: '1.5rem',
+                                                justifyContent: 'center', marginBottom: '1.5rem', fontSize: '1.5rem',
                                                 boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.05)'
                                             }}>
                                                 <i className="fa-solid fa-cloud-arrow-up"></i>
                                             </div>
-                                            <p style={{ fontSize: '1.1rem', fontWeight: '800', color: '#1E293B', marginBottom: '0.25rem' }}>Select Resumes</p>
+                                            <p style={{ fontSize: '1.1rem', fontWeight: '800', color: '#1E293B', marginBottom: '0.5rem' }}>Select Resumes</p>
                                             <p style={{ fontSize: '0.85rem', color: '#94A3B8' }}>Click or drag PDF files here</p>
                                         </>
                                     ) : (
-                                        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '1rem' }}>
+                                        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
                                             {files.map((file, idx) => (
                                                 <div key={idx} style={{
-                                                    background: 'white', padding: '0.75rem', borderRadius: '12px', border: '1px solid #E2E8F0',
+                                                    background: 'white', padding: '1rem', borderRadius: '16px', border: '1px solid #E2E8F0',
                                                     display: 'flex', alignItems: 'center', gap: '0.75rem', position: 'relative'
                                                 }}>
                                                     <i className="fa-solid fa-file-pdf" style={{ color: '#EF4444' }}></i>
-                                                    <span style={{ fontSize: '0.8rem', fontWeight: '600', color: '#1E293B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                    <span style={{ fontSize: '0.85rem', fontWeight: '600', color: '#1E293B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                                         {file.name}
                                                     </span>
                                                     <button
                                                         onClick={(e) => { e.stopPropagation(); removeFile(idx); }}
                                                         style={{
-                                                            position: 'absolute', top: '-8px', right: '-8px', background: '#EF4444', color: 'white',
-                                                            border: 'none', borderRadius: '50%', width: '18px', height: '18px', fontSize: '10px', cursor: 'pointer'
+                                                            position: 'absolute', top: '-10px', right: '-10px', background: '#EF4444', color: 'white',
+                                                            border: 'none', borderRadius: '50%', width: '22px', height: '22px', fontSize: '12px', cursor: 'pointer',
+                                                            display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(239, 68, 68, 0.3)'
                                                         }}
                                                     >
                                                         <i className="fa-solid fa-xmark"></i>
@@ -204,131 +165,102 @@ const ResumeMatcher = () => {
                                                 </div>
                                             ))}
                                             <div style={{
-                                                border: '1px dashed #4F46E5', borderRadius: '12px', padding: '0.75rem',
-                                                display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5', fontSize: '12px', fontWeight: '700'
+                                                border: '2px dashed #6366F1', borderRadius: '16px', padding: '1rem',
+                                                display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366F1', fontSize: '0.8rem', fontWeight: '700',
+                                                background: 'rgba(99, 102, 241, 0.05)'
                                             }}>
-                                                <i className="fa-solid fa-plus" style={{ marginRight: '4px' }}></i> Add More
+                                                <i className="fa-solid fa-plus" style={{ marginRight: '6px' }}></i> Add More
                                             </div>
                                         </div>
                                     )}
                                 </div>
                             </div>
 
-                            {/* Match Parameters Card */}
-                            <div className="module-card" style={{ padding: '2rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB' }}>
-                                <SectionHeader
-                                    iconClass="fa-solid fa-percent"
-                                    title="Sensitivity Settings"
-                                    subtitle="Set the minimum match score for qualification."
-                                    colorClass="indigo-glow"
-                                />
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+                            <div className="glass-card">
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                        <i className="fa-solid fa-percent"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Sensitivity Settings</h3>
+                                        <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Set the minimum match score for qualification.</p>
+                                    </div>
+                                </div>
+                                <div className="threshold-container">
                                     <div style={{ flex: 1 }}>
                                         <input
                                             type="range" min="0" max="100" value={threshold}
                                             onChange={(e) => setThreshold(e.target.value)}
-                                            style={{ width: '100%', accentColor: '#4F46E5', height: '6px', cursor: 'pointer' }}
+                                            style={{ width: '100%', accentColor: '#6366F1', height: '6px', cursor: 'pointer' }}
                                         />
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.75rem', color: '#94A3B8', fontSize: '0.75rem', fontWeight: '600' }}>
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', color: '#94A3B8', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>
                                             <span>LENIENT</span>
                                             <span>STRICT</span>
                                         </div>
                                     </div>
-                                    <div style={{
-                                        padding: '1rem 1.5rem', background: '#EEF2FF', borderRadius: '16px', border: '1px solid rgba(79, 70, 229, 0.1)',
-                                        textAlign: 'center', minWidth: '100px'
-                                    }}>
-                                        <div style={{ fontSize: '0.7rem', color: '#4F46E5', fontWeight: '800', textTransform: 'uppercase' }}>THRESHOLD</div>
-                                        <div style={{ fontSize: '1.5rem', fontWeight: '900', color: '#111827' }}>{threshold}%</div>
+                                    <div className="threshold-display">
+                                        <div style={{ fontSize: '0.65rem', color: '#6366F1', fontWeight: '800', textTransform: 'uppercase', marginBottom: '2px' }}>THRESHOLD</div>
+                                        <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#1E293B' }}>{threshold}%</div>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Action Area */}
-                            <div style={{ marginTop: '0.5rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
                                 <button
                                     onClick={handleMatch}
                                     disabled={isAnalyzing}
-                                    style={{
-                                        width: '100%', padding: '1.25rem', background: '#4F46E5', color: 'white',
-                                        border: 'none', borderRadius: '20px', fontSize: '1.1rem', fontWeight: '700',
-                                        cursor: isAnalyzing ? 'not-allowed' : 'pointer',
-                                        boxShadow: '0 10px 20px -5px rgba(79, 70, 229, 0.4)',
-                                        transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem'
-                                    }}
+                                    className="match-btn"
                                 >
                                     {isAnalyzing ? (
-                                        <><i className="fa-solid fa-spinner fa-spin"></i> Analyzing Candidate Profiles...</>
+                                        <><i className="fa-solid fa-atom fa-spin"></i> Analyzing Candidate Profiles...</>
                                     ) : (
                                         <><i className="fa-solid fa-wand-magic-sparkles"></i> Compare Resumes</>
                                     )}
                                 </button>
 
-                                <div style={{ marginTop: '2.5rem', display: 'flex', justifyContent: 'center', gap: '4rem' }}>
-                                    {[
-                                        { icon: 'fa-brain', text: 'AI Feature Extraction' },
-                                        { icon: 'fa-check-double', text: 'Bias-Free Screening' },
-                                        { icon: 'fa-table-columns', text: 'Multi-Resumes Support' }
-                                    ].map((feat, i) => (
-                                        <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', color: '#94A3B8', fontSize: '0.8rem', fontWeight: '700' }}>
-                                            <i className={`fa-solid ${feat.icon}`} style={{ color: '#4F46E5' }}></i> {feat.text}
-                                        </div>
-                                    ))}
-                                </div>
+
                             </div>
                         </>
                     ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                <h2 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#111827', letterSpacing: '-0.02em' }}>Match <span style={{ color: '#4F46E5' }}>Insights</span></h2>
-                                <button onClick={() => setResults(null)} style={{ padding: '0.6rem 1.25rem', background: 'white', border: '1px solid #E2E8F0', borderRadius: '12px', fontWeight: '700', color: '#64748B', cursor: 'pointer' }}>
+                                <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1e293b', letterSpacing: '-0.02em' }}>Match <span style={{ color: '#6366F1' }}>Insights</span></h2>
+                                <button onClick={() => setResults(null)} className="view-details-btn">
                                     <i className="fa-solid fa-chevron-left" style={{ marginRight: '0.5rem' }}></i> New Analysis
                                 </button>
                             </div>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                                 {results.map((data, index) => {
                                     const percentage = data.match_percentage || 0;
                                     const progressColor = getProgressColor(percentage);
                                     return (
-                                        <div key={index} className="module-card" style={{ padding: '1.5rem', background: 'white', borderRadius: '24px', border: '1px solid #E5E7EB', display: 'grid', gridTemplateColumns: '120px 1fr 200px', gap: '2rem', alignItems: 'center' }}>
-                                            {/* Score Circle */}
-                                            <div style={{ textAlign: 'center' }}>
-                                                <div style={{
-                                                    width: '80px', height: '80px', borderRadius: '50%',
-                                                    background: `conic-gradient(${progressColor} ${percentage * 3.6}deg, #F1F5F9 0deg)`,
-                                                    display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto', position: 'relative'
-                                                }}>
-                                                    <div style={{ width: '64px', height: '64px', background: 'white', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: '900', fontSize: '1.2rem', color: '#111827' }}>
-                                                        {percentage}%
-                                                    </div>
+                                        <div key={index} className="glass-card result-card">
+                                            <div className="score-circle" style={{ background: `conic-gradient(${progressColor} ${percentage * 3.6}deg, #f1f5f9 0deg)` }}>
+                                                <div className="score-inner">
+                                                    <span className="score-value" style={{ color: progressColor }}>{percentage}%</span>
+                                                    <span className="score-label">MATCH</span>
                                                 </div>
-                                                <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#94A3B8', marginTop: '0.5rem', textTransform: 'uppercase' }}>MATCH</div>
                                             </div>
 
-                                            {/* Content */}
                                             <div>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
-                                                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '800', color: '#111827' }}>{data.filename || 'Untitled Resume'}</h4>
-                                                    <span style={{
-                                                        padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800',
-                                                        background: data.is_eligible ? '#DCFCE7' : '#FEF2F2', color: data.is_eligible ? '#16A34A' : '#EF4444'
+                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
+                                                    <h4 style={{ margin: 0, fontSize: '1.25rem', fontWeight: '800', color: '#1e293b' }}>{data.filename || 'Untitled Resume'}</h4>
+                                                    <span className="status-tag" style={{
+                                                        background: data.is_eligible ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                                                        color: data.is_eligible ? '#059669' : '#dc2626'
                                                     }}>
                                                         {data.is_eligible ? 'ELIGIBLE' : 'GAP DETECTED'}
                                                     </span>
                                                 </div>
-                                                <p style={{ margin: 0, color: '#64748B', fontSize: '0.9rem', lineHeight: '1.5', display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                                                <p style={{ margin: 0, color: '#64748b', fontSize: '1rem', lineHeight: '1.6', display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                                                     {data.summary || 'AI has analyzed this profile against role expectations.'}
                                                 </p>
                                             </div>
 
-                                            {/* Action */}
                                             <div style={{ textAlign: 'right' }}>
-                                                <button style={{
-                                                    padding: '0.75rem 1.5rem', background: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '12px',
-                                                    fontWeight: '700', fontSize: '0.85rem', color: '#111827', cursor: 'pointer', transition: 'all 0.2s'
-                                                }} onMouseEnter={(e) => { e.target.style.background = '#F1F5F9'; }}>
-                                                    View Match Details
+                                                <button className="view-details-btn">
+                                                    View Details
                                                 </button>
                                             </div>
                                         </div>

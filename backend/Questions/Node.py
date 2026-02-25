@@ -1,0 +1,2058 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+    {
+        "question": "Which SQL function is used to return the current database name?",
+        "options": {
+            "A": "DB_NAME()",
+            "B": "CURRENT_DATABASE",
+            "C": "DATABASE()",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the purpose of the 'UPSERT' operation?",
+        "options": {
+            "A": "To delete and then insert data",
+            "B": "To update a record if it exists, otherwise insert it",
+            "C": "To sort data in an upward direction",
+            "D": "To upload a script"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In SQL, which data type is best suited for storing large binary objects like images?",
+        "options": {
+            "A": "VARCHAR",
+            "B": "TEXT",
+            "C": "BLOB",
+            "D": "CLOB"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL command is used to reclaim unused space from deleted rows in PostgreSQL?",
+        "options": {
+            "A": "CLEAN",
+            "B": "VACUUM",
+            "C": "PURGE",
+            "D": "REFRESH"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Phantom Read' in transaction isolation?",
+        "options": {
+            "A": "Reading data that was never there",
+            "B": "When new rows are added by another transaction during a range query",
+            "C": "A query that fails to return any results",
+            "D": "A deleted record that still appears in the index"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which system table/view is used to find information about all columns in a database?",
+        "options": {
+            "A": "sys.columns",
+            "B": "INFORMATION_SCHEMA.COLUMNS",
+            "C": "user_tab_cols",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the purpose of the 'LATERAL' keyword in a join?",
+        "options": {
+            "A": "To join tables from different servers",
+            "B": "To allow a subquery to reference columns from a preceding table",
+            "C": "To perform a cross join automatically",
+            "D": "To speed up simple inner joins"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function converts a JSON string into a tabular format?",
+        "options": {
+            "A": "JSON_VALUE",
+            "B": "JSON_TABLE",
+            "C": "JSON_PARSE",
+            "D": "JSON_TO_ROWS"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Database Partitioning'?",
+        "options": {
+            "A": "Backing up half of the database",
+            "B": "Dividing a large table into smaller pieces based on a range or list",
+            "C": "Merging two different databases",
+            "D": "Encrypting specific columns"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which aggregate function is used to concatenate values from multiple rows into a single string?",
+        "options": {
+            "A": "GROUP_CONCAT() / STRING_AGG()",
+            "B": "SUM_STR()",
+            "C": "CONCAT_ALL()",
+            "D": "COLLECT_LIST()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the result of 'SELECT 1 / 0' in most SQL environments?",
+        "options": {
+            "A": "0",
+            "B": "NULL",
+            "C": "Division by zero error",
+            "D": "Infinity"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which keyword is used to specify that a stored procedure should not return a result set?",
+        "options": {
+            "A": "VOID",
+            "B": "NORESULT",
+            "C": "SET NOCOUNT ON",
+            "D": "PRIVATE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is a 'Heap Table'?",
+        "options": {
+            "A": "A table with a clustered index",
+            "B": "A table without a clustered index where data is stored in no particular order",
+            "C": "A table stored entirely in RAM",
+            "D": "A table used for temporary calculations"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL statement is used to remove a foreign key constraint?",
+        "options": {
+            "A": "DELETE CONSTRAINT",
+            "B": "REMOVE FOREIGN KEY",
+            "C": "ALTER TABLE ... DROP CONSTRAINT",
+            "D": "DROP FOREIGN KEY"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the 'FILLFACTOR' setting in an index?",
+        "options": {
+            "A": "To determine how fast the query runs",
+            "B": "To leave empty space on index pages for future growth",
+            "C": "To limit the number of rows in the table",
+            "D": "To calculate the total size of the database"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL operator is used to check if a value is 'TRUE', 'FALSE', or 'UNKNOWN'?",
+        "options": {
+            "A": "IS",
+            "B": "WHERE",
+            "C": "LIKE",
+            "D": "MATCH"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'Deterministic Function' in SQL?",
+        "options": {
+            "A": "A function that always returns the same result for the same input",
+            "B": "A function that generates random numbers",
+            "C": "A function that updates the database",
+            "D": "A function used only in triggers"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which clause is used to filter results based on a window function's output?",
+        "options": {
+            "A": "WHERE",
+            "B": "HAVING",
+            "C": "QUALIFY (in some dialects) or a Subquery",
+            "D": "GROUP BY"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does 'ETL' stand for in data warehousing?",
+        "options": {
+            "A": "Electronic Transfer Logic",
+            "B": "Extract, Transform, Load",
+            "C": "External Table Link",
+            "D": "Efficient Transaction List"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to permanently delete a schema and all its objects?",
+        "options": {
+            "A": "DELETE SCHEMA",
+            "B": "DROP SCHEMA ... CASCADE",
+            "C": "REMOVE SCHEMA",
+            "D": "CLEAR SCHEMA"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Covering Index'?",
+        "options": {
+            "A": "An index that covers the entire database",
+            "B": "An index that contains all columns required by a query",
+            "C": "A hidden index",
+            "D": "An index that cannot be deleted"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function is used to extract a specific part of a date (e.g., Year, Month)?",
+        "options": {
+            "A": "DATEPART() / EXTRACT()",
+            "B": "SUBDATE()",
+            "C": "GET()",
+            "D": "TIME()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of a 'Savepoint' in a transaction?",
+        "options": {
+            "A": "To save the database to a file",
+            "B": "To set a point to which a transaction can be partially rolled back",
+            "C": "To end the transaction",
+            "D": "To prevent other users from reading data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In SQL, what is the 'Information Schema'?",
+        "options": {
+            "A": "A backup of the data",
+            "B": "A standard set of read-only views providing metadata about the database",
+            "C": "A tutorial for new users",
+            "D": "The primary data storage area"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which operator is used to combine two strings in SQL Server?",
+        "options": {
+            "A": "||",
+            "B": "+",
+            "C": "&&",
+            "D": "CONCAT_OP"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Database Cursor'?",
+        "options": {
+            "A": "The mouse pointer in a GUI",
+            "B": "A control structure that allows traversal over records in a result set",
+            "C": "A type of primary key",
+            "D": "An error log"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which isolation level provides the highest level of data consistency?",
+        "options": {
+            "A": "READ COMMITTED",
+            "B": "REPEATABLE READ",
+            "C": "SERIALIZABLE",
+            "D": "SNAPSHOT"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'Window Partitioning' used for?",
+        "options": {
+            "A": "To delete old windows",
+            "B": "To group rows for window functions without collapsing them",
+            "C": "To increase the monitor resolution",
+            "D": "To split a table into 4 parts"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which keyword is used to specify that a column value must match a value in a list of values returned by a subquery?",
+        "options": {
+            "A": "IN",
+            "B": "EXISTS",
+            "C": "ANY",
+            "D": "MATCH"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of the 'IIF()' function in SQL?",
+        "options": {
+            "A": "To create an index",
+            "B": "A shorthand way to write a CASE statement (If-Then-Else)",
+            "C": "To check if a table is empty",
+            "D": "To join two tables"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL command is used to add a new user and grant them a role simultaneously?",
+        "options": {
+            "A": "CREATE USER ... WITH ROLE",
+            "B": "GRANT ROLE TO USER",
+            "C": "ADD USER ... SET ROLE",
+            "D": "Varies by dialect (usually two separate commands)"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is a 'Wait Type' in SQL Server performance tuning?",
+        "options": {
+            "A": "The time a user spends typing",
+            "B": "An indicator of why a query thread is waiting (e.g., Disk I/O, Locks)",
+            "C": "A type of data that takes long to load",
+            "D": "The delay between two transactions"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to find the length of a string in bytes?",
+        "options": {
+            "A": "LEN()",
+            "B": "LENGTH()",
+            "C": "DATALENGTH() / OCTET_LENGTH()",
+            "D": "SIZE()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of 'Database Mirroring'?",
+        "options": {
+            "A": "To flip the data horizontally",
+            "B": "To maintain a redundant copy of a database for high availability",
+            "C": "To see the data from another table",
+            "D": "To copy only the schema"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL clause is used to handle data versioning and temporal queries?",
+        "options": {
+            "A": "AS OF SYSTEM TIME",
+            "B": "VERSION BY",
+            "C": "HISTORY",
+            "D": "OLD_DATA"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the 'Query Optimizer'?",
+        "options": {
+            "A": "A person who writes fast queries",
+            "B": "A database engine component that chooses the most efficient execution plan",
+            "C": "A tool for compressing the database",
+            "D": "A type of index"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which join returns only rows where the joined columns have the same name?",
+        "options": {
+            "A": "INNER JOIN",
+            "B": "NATURAL JOIN",
+            "C": "CROSS JOIN",
+            "D": "SELF JOIN"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Dirty Read'?",
+        "options": {
+            "A": "Reading data that contains errors",
+            "B": "Reading uncommitted data from another transaction",
+            "C": "Reading data from a deleted table",
+            "D": "A query that takes too much memory"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function is used to replace NULL values with a specified replacement?",
+        "options": {
+            "A": "NULLIF()",
+            "B": "ISNULL() / COALESCE()",
+            "C": "REPLACE_NULL()",
+            "D": "CLEAN()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'OLAP' stand for?",
+        "options": {
+            "A": "Online Analytical Processing",
+            "B": "Online Archive Procedure",
+            "C": "Output List and Processing",
+            "D": "Optimal Level Access Protocol"
+        },
+        "answer": "A"
+    },
+{
+        "question": "Which of the following is a core module in Node.js?",
+        "options": {
+            "A": "express",
+            "B": "crypto",
+            "C": "mongoose",
+            "D": "lodash"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the 'path' module?",
+        "options": {
+            "A": "To handle network paths",
+            "B": "To handle and transform file paths",
+            "C": "To create directory structures",
+            "D": "To monitor file changes"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method is used to resolve the current directory path?",
+        "options": {
+            "A": "path.resolve()",
+            "B": "path.join()",
+            "C": "path.directory()",
+            "D": "path.cwd()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "How can you access command-line arguments passed to a Node.js script?",
+        "options": {
+            "A": "process.args",
+            "B": "process.argv",
+            "C": "os.args",
+            "D": "console.args"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In process.argv, what is the value of the first element (index 0)?",
+        "options": {
+            "A": "The path to the JavaScript file",
+            "B": "The absolute path to the node executable",
+            "C": "The first argument passed by the user",
+            "D": "The current working directory"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which global object represents the current Node.js process?",
+        "options": {
+            "A": "window",
+            "B": "document",
+            "C": "process",
+            "D": "global"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which method is used to stop the current process in Node.js?",
+        "options": {
+            "A": "process.stop()",
+            "B": "process.end()",
+            "C": "process.exit()",
+            "D": "process.kill()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does the 'os' module provide?",
+        "options": {
+            "A": "Methods to manage file systems",
+            "B": "Operating system-related utility methods",
+            "C": "Methods to execute shell commands",
+            "D": "Methods to manage browser windows"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to create a new buffer in modern Node.js?",
+        "options": {
+            "A": "new Buffer()",
+            "B": "Buffer.alloc()",
+            "C": "Buffer.create()",
+            "D": "Buffer.new()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the default encoding of a Buffer in Node.js?",
+        "options": {
+            "A": "ascii",
+            "B": "base64",
+            "C": "utf8",
+            "D": "hex"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which core module is used for creating child processes?",
+        "options": {
+            "A": "os",
+            "B": "process",
+            "C": "child_process",
+            "D": "cluster"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which child_process method is best for executing a command and returning the output in a buffer?",
+        "options": {
+            "A": "spawn",
+            "B": "fork",
+            "C": "exec",
+            "D": "run"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which child_process method is designed specifically for running Node.js modules?",
+        "options": {
+            "A": "spawn",
+            "B": "fork",
+            "C": "exec",
+            "D": "pipe"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module allows you to easily share the same server port across multiple processes?",
+        "options": {
+            "A": "http",
+            "B": "net",
+            "C": "cluster",
+            "D": "os"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the primary benefit of using the 'cluster' module?",
+        "options": {
+            "A": "Data encryption",
+            "B": "To take advantage of multi-core systems",
+            "C": "To manage database connections",
+            "D": "To speed up file reading"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you install a package and save it as a development dependency?",
+        "options": {
+            "A": "npm install <name> --save",
+            "B": "npm install <name> --save-dev",
+            "C": "npm install <name> -g",
+            "D": "npm add <name>"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to remove a package via npm?",
+        "options": {
+            "A": "npm delete",
+            "B": "npm remove",
+            "C": "npm uninstall",
+            "D": "Both B and C"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What does 'npm audit' do?",
+        "options": {
+            "A": "Checks for security vulnerabilities in dependencies",
+            "B": "Optimizes code performance",
+            "C": "Checks if the code follows linting rules",
+            "D": "Calculates the file size of the project"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of the 'package-lock.json' file?",
+        "options": {
+            "A": "To prevent others from reading the code",
+            "B": "To lock the version of Node.js used",
+            "C": "To ensure exact, reproducible dependency trees",
+            "D": "To store environment secrets"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which event is emitted when a readable stream has no more data to read?",
+        "options": {
+            "A": "close",
+            "B": "finish",
+            "C": "end",
+            "D": "drain"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which event is emitted by a writable stream when it has finished writing all data?",
+        "options": {
+            "A": "end",
+            "B": "finish",
+            "C": "close",
+            "D": "done"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'piping' in Node.js streams?",
+        "options": {
+            "A": "Connecting the output of a readable stream to the input of a writable stream",
+            "B": "Encapsulating data into a pipe object",
+            "C": "A method to compress data during transfer",
+            "D": "Executing terminal commands through streams"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which method is used to attach a listener to an EventEmitter?",
+        "options": {
+            "A": "addListener()",
+            "B": "on()",
+            "C": "Both A and B",
+            "D": "emit()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which method is used to trigger an event in an EventEmitter?",
+        "options": {
+            "A": "trigger()",
+            "B": "call()",
+            "C": "emit()",
+            "D": "fire()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which method ensures a listener is called only once for a specific event?",
+        "options": {
+            "A": "on()",
+            "B": "once()",
+            "C": "single()",
+            "D": "first()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module provides cryptographic functionality in Node.js?",
+        "options": {
+            "A": "ssl",
+            "B": "hash",
+            "C": "crypto",
+            "D": "encrypt"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the default port for the HTTPS protocol?",
+        "options": {
+            "A": "80",
+            "B": "8080",
+            "C": "443",
+            "D": "3000"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which method is used to make an HTTP GET request in the 'http' module?",
+        "options": {
+            "A": "http.get()",
+            "B": "http.request()",
+            "C": "Both A and B",
+            "D": "http.fetch()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does the 'util.promisify()' function do?",
+        "options": {
+            "A": "Converts a Promise back to a callback",
+            "B": "Converts a callback-based function to return a Promise",
+            "C": "Speeds up Promise execution",
+            "D": "Checks if an object is a Promise"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is NOT a valid stream type in Node.js?",
+        "options": {
+            "A": "Readable",
+            "B": "Writable",
+            "C": "Bypass",
+            "D": "Duplex"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'REPL' an acronym for?",
+        "options": {
+            "A": "Run, Eval, Print, Loop",
+            "B": "Read, Eval, Print, Loop",
+            "C": "Read, Execute, Process, Loop",
+            "D": "Real-time, Eval, Print, Level"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you specify the encoding when reading a file using 'fs.readFile'?",
+        "options": {
+            "A": "As the first argument",
+            "B": "As the second optional argument",
+            "C": "It cannot be specified",
+            "D": "Inside the callback function"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What happens if an error is thrown inside a synchronous function in Node.js?",
+        "options": {
+            "A": "It is automatically caught by the event loop",
+            "B": "The process crashes unless caught by a try-catch block",
+            "C": "The error is logged to 'errors.log'",
+            "D": "The process pauses until fixed"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which core module is used for DNS lookups?",
+        "options": {
+            "A": "net",
+            "B": "url",
+            "C": "dns",
+            "D": "http"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which function is used to convert a JavaScript object into a JSON string?",
+        "options": {
+            "A": "JSON.parse()",
+            "B": "JSON.stringify()",
+            "C": "JSON.toString()",
+            "D": "JSON.convert()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'module.exports'?",
+        "options": {
+            "A": "To import a module",
+            "B": "To export a module for use in other files",
+            "C": "To declare a global variable",
+            "D": "To exit a module"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of the following can be used to monitor file changes in Node.js?",
+        "options": {
+            "A": "fs.watch()",
+            "B": "fs.monitor()",
+            "C": "fs.look()",
+            "D": "fs.see()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the 'global' object in Node.js similar to in the browser?",
+        "options": {
+            "A": "document",
+            "B": "window",
+            "C": "navigator",
+            "D": "history"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which variable contains the directory name of the current module?",
+        "options": {
+            "A": "__filename",
+            "B": "__dirname",
+            "C": "process.cwd()",
+            "D": "module.path"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which variable contains the file name of the current module?",
+        "options": {
+            "A": "__dirname",
+            "B": "__filename",
+            "C": "process.file",
+            "D": "module.name"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'npm' command to update a package to its latest version?",
+        "options": {
+            "A": "npm upgrade",
+            "B": "npm update",
+            "C": "npm refresh",
+            "D": "npm fix"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module provides utility for dealing with query strings in URLs?",
+        "options": {
+            "A": "url",
+            "B": "querystring",
+            "C": "path",
+            "D": "string"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the 'zlib' module?",
+        "options": {
+            "A": "Database management",
+            "B": "Data compression/decompression",
+            "C": "Graphic rendering",
+            "D": "Network security"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is used to execute a script every 5 seconds?",
+        "options": {
+            "A": "setTimeout()",
+            "B": "setImmediate()",
+            "C": "setInterval()",
+            "D": "process.nextTick()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the difference between setImmediate and process.nextTick?",
+        "options": {
+            "A": "setImmediate runs before nextTick",
+            "B": "nextTick runs immediately after the current operation, before the event loop continues",
+            "C": "There is no difference",
+            "D": "setImmediate only works in the browser"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command-line flag allows you to run a Node.js script and watch for changes?",
+        "options": {
+            "A": "--watch",
+            "B": "--monitor",
+            "C": "--dev",
+            "D": "--reload"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'nvm'?",
+        "options": {
+            "A": "Node Visual Manager",
+            "B": "Node Version Manager",
+            "C": "Node Variable Manager",
+            "D": "Node Virtual Machine"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which HTTP method is typically used to create new data on a server?",
+        "options": {
+            "A": "GET",
+            "B": "PUT",
+            "C": "POST",
+            "D": "DELETE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which HTTP method is typically used to update existing data on a server?",
+        "options": {
+            "A": "POST",
+            "B": "GET",
+            "C": "PUT",
+            "D": "DELETE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which command is used to run a script defined in the 'scripts' section of package.json?",
+        "options": {
+            "A": "npm run <script-name>",
+            "B": "npm execute <script-name>",
+            "C": "node run <script-name>",
+            "D": "npm start <script-name>"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which module provides a way to handle binary data from TCP streams?",
+        "options": {
+            "A": "http",
+            "B": "net",
+            "C": "fs",
+            "D": "dgram"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'require.cache' contain?",
+        "options": {
+            "A": "All downloaded npm packages",
+            "B": "The source code of the current project",
+            "C": "Cached versions of already required modules",
+            "D": "Browser cache data"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "How do you specify a custom port for a Node.js server using environment variables?",
+        "options": {
+            "A": "process.env.PORT",
+            "B": "process.port",
+            "C": "env.PORT",
+            "D": "config.port"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which of these is a way to handle asynchronous errors in Promises?",
+        "options": {
+            "A": "try...finally",
+            "B": ".catch()",
+            "C": ".error()",
+            "D": "if(err)"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Buffer.from()'?",
+        "options": {
+            "A": "To create a buffer from an existing string, array, or buffer",
+            "B": "To delete a buffer",
+            "C": "To convert a buffer to a string",
+            "D": "To read a file into a buffer"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which module provides a way of creating web servers and making HTTP requests?",
+        "options": {
+            "A": "net",
+            "B": "url",
+            "C": "http",
+            "D": "os"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which core module is used for handling file system operations synchronously?",
+        "options": {
+            "A": "fs.sync",
+            "B": "fs",
+            "C": "fssync",
+            "D": "os"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In the 'fs' module, what is the standard naming convention for synchronous methods?",
+        "options": {
+            "A": "methodS()",
+            "B": "methodSync()",
+            "C": "syncMethod()",
+            "D": "method_sync()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the use of 'path.join()'?",
+        "options": {
+            "A": "To merge two files",
+            "B": "To join path segments using the platform-specific separator",
+            "C": "To create a URL",
+            "D": "To find the extension of a file"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which event loop phase handles 'setTimeout' and 'setInterval' callbacks?",
+        "options": {
+            "A": "Poll",
+            "B": "Check",
+            "C": "Timers",
+            "D": "Close"
+        },
+        "answer": "C"
+    },
+{
+        "question": "Which phase of the event loop executes callbacks for setImmediate()?",
+        "options": {
+            "A": "Timers",
+            "B": "Poll",
+            "C": "Check",
+            "D": "Pending"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the 'cluster' module in Node.js?",
+        "options": {
+            "A": "To manage database clusters",
+            "B": "To spawn multiple instances of Node.js to handle load",
+            "C": "To group different modules together",
+            "D": "To encrypt multiple files at once"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of the following is used to handle 'unhandledRejection' in Promises?",
+        "options": {
+            "A": "process.on('unhandledRejection')",
+            "B": "process.catch()",
+            "C": "window.onerror",
+            "D": "global.onReject"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does the 'npm ci' command do?",
+        "options": {
+            "A": "Installs dependencies for development only",
+            "B": "Performs a clean install based on the package-lock.json file",
+            "C": "Checks for security issues in code",
+            "D": "Creates a new index file"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Express.js, what is 'middleware'?",
+        "options": {
+            "A": "A database driver",
+            "B": "A function that has access to request and response objects",
+            "C": "The core engine of Node.js",
+            "D": "A styling framework"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Express method is used to define middleware for all routes?",
+        "options": {
+            "A": "app.all()",
+            "B": "app.set()",
+            "C": "app.use()",
+            "D": "app.route()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "How do you access URL parameters in Express (e.g., /user/:id)?",
+        "options": {
+            "A": "req.body",
+            "B": "req.query",
+            "C": "req.params",
+            "D": "req.url"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which module is commonly used to parse environment variables from a .env file?",
+        "options": {
+            "A": "env-loader",
+            "B": "dotenv",
+            "C": "config-node",
+            "D": "process-env"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the 'morgan' package in an Express app?",
+        "options": {
+            "A": "Database ORM",
+            "B": "HTTP request logging",
+            "C": "Template engine",
+            "D": "Session management"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method is used to send a JSON response in Express?",
+        "options": {
+            "A": "res.send()",
+            "B": "res.write()",
+            "C": "res.json()",
+            "D": "res.object()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which of the following is a popular template engine for Node.js?",
+        "options": {
+            "A": "EJS",
+            "B": "Pug",
+            "C": "Handlebars",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the use of the 'helmet' package in Express?",
+        "options": {
+            "A": "To speed up the server",
+            "B": "To set various HTTP headers for security",
+            "C": "To handle image uploads",
+            "D": "To manage CSS files"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to convert a Buffer back to a string?",
+        "options": {
+            "A": "buffer.toString()",
+            "B": "buffer.parse()",
+            "C": "buffer.getString()",
+            "D": "buffer.decode()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "How do you catch errors in an async/await function?",
+        "options": {
+            "A": "Using .then().catch()",
+            "B": "Using try...catch blocks",
+            "C": "Using if(err) return",
+            "D": "Errors are caught automatically"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Thread Pool' in Node.js primarily used for?",
+        "options": {
+            "A": "Executing JavaScript code",
+            "B": "Handling heavy I/O operations (like fs or crypto)",
+            "C": "Rendering HTML",
+            "D": "Parsing JSON"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How many threads are in the default libuv thread pool?",
+        "options": {
+            "A": "1",
+            "B": "2",
+            "C": "4",
+            "D": "8"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which method of 'fs' module is used to check if a file exists?",
+        "options": {
+            "A": "fs.exists()",
+            "B": "fs.access()",
+            "C": "fs.stat()",
+            "D": "Both B and C"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the purpose of 'npm prune'?",
+        "options": {
+            "A": "To remove unused packages from node_modules",
+            "B": "To delete the package-lock file",
+            "C": "To minify the code",
+            "D": "To update all packages"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which method is used to specify a static folder in Express?",
+        "options": {
+            "A": "express.folder()",
+            "B": "express.static()",
+            "C": "express.public()",
+            "D": "express.assets()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'stubbing' mean in Node.js testing?",
+        "options": {
+            "A": "Deleting the database",
+            "B": "Replacing a function with a pre-coded response",
+            "C": "Restarting the server",
+            "D": "Writing long test cases"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which library is commonly used for testing in Node.js?",
+        "options": {
+            "A": "Mocha",
+            "B": "Jest",
+            "C": "Chai",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is 'Backpressure' in Node.js streams?",
+        "options": {
+            "A": "A security vulnerability",
+            "B": "When the writable stream cannot keep up with the readable stream",
+            "C": "A method to compress files",
+            "D": "A database error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method allows you to change the number of threads in libuv?",
+        "options": {
+            "A": "process.env.UV_THREADPOOL_SIZE",
+            "B": "os.setThreads()",
+            "C": "libuv.threads()",
+            "D": "node.config.threads"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does 'npm shrinkwrap' do?",
+        "options": {
+            "A": "Compresses the project folder",
+            "B": "Locks the versions of dependencies for publishing",
+            "C": "Deletes the devDependencies",
+            "D": "Hides the source code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which global object can be used to set a property accessible across all modules?",
+        "options": {
+            "A": "process",
+            "B": "module",
+            "C": "global",
+            "D": "context"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of 'require.resolve()'?",
+        "options": {
+            "A": "To load a module",
+            "B": "To get the absolute path of a module without loading it",
+            "C": "To fix module errors",
+            "D": "To delete a module from cache"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which HTTP header is used to prevent Clickjacking attacks?",
+        "options": {
+            "A": "X-Content-Type-Options",
+            "B": "X-Frame-Options",
+            "C": "Content-Security-Policy",
+            "D": "Both B and C"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "In Express, what is the correct order of parameters for an error-handling middleware?",
+        "options": {
+            "A": "(req, res, next)",
+            "B": "(err, req, res)",
+            "C": "(err, req, res, next)",
+            "D": "(req, res, err, next)"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of 'res.locals' in Express?",
+        "options": {
+            "A": "To store environment variables",
+            "B": "To pass information to templates during a request-response cycle",
+            "C": "To store sensitive user passwords",
+            "D": "To configure local database ports"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module can be used to validate user input in an Express app?",
+        "options": {
+            "A": "express-validator",
+            "B": "joi",
+            "C": "yup",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "Which event is emitted when the Node.js process is about to exit?",
+        "options": {
+            "A": "close",
+            "B": "end",
+            "C": "exit",
+            "D": "stop"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'Promisification'?",
+        "options": {
+            "A": "Removing Promises from code",
+            "B": "Converting a callback-based function to return a Promise",
+            "C": "A way to speed up the server",
+            "D": "Writing code without errors"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method is used to get the extension of a file in the 'path' module?",
+        "options": {
+            "A": "path.ext()",
+            "B": "path.extension()",
+            "C": "path.extname()",
+            "D": "path.getExt()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'Scoping' in Node.js modules?",
+        "options": {
+            "A": "Variables in a module are private unless exported",
+            "B": "All variables are global by default",
+            "C": "Variables are only available in the event loop",
+            "D": "Modules cannot have variables"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which of these is used to compress HTTP responses in Express?",
+        "options": {
+            "A": "morgan",
+            "B": "compression",
+            "C": "cors",
+            "D": "body-parser"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the use of 'npm link'?",
+        "options": {
+            "A": "To link two websites",
+            "B": "To create a symbolic link for a package during local development",
+            "C": "To share a project on social media",
+            "D": "To download a package from a URL"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which 'fs' method is used to rename a file?",
+        "options": {
+            "A": "fs.move()",
+            "B": "fs.rename()",
+            "C": "fs.changeName()",
+            "D": "fs.update()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'REPL' utility used for?",
+        "options": {
+            "A": "Testing database queries",
+            "B": "Executing JavaScript code interactively",
+            "C": "Debugging memory leaks",
+            "D": "Compiling C++ code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which HTTP status code represents 'Internal Server Error'?",
+        "options": {
+            "A": "404",
+            "B": "500",
+            "C": "200",
+            "D": "403"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which HTTP status code represents 'Not Found'?",
+        "options": {
+            "A": "401",
+            "B": "403",
+            "C": "404",
+            "D": "502"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of 'process.cwd()'?",
+        "options": {
+            "A": "Returns the directory of the script file",
+            "B": "Returns the current working directory of the process",
+            "C": "Changes the current directory",
+            "D": "Returns the Node.js installation path"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command-line argument allows you to pass a script to execute without a file?",
+        "options": {
+            "A": "-x",
+            "B": "-e",
+            "C": "-s",
+            "D": "-run"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of the following is used to encrypt passwords in Node.js?",
+        "options": {
+            "A": "bcrypt",
+            "B": "argon2",
+            "C": "crypto.pbkdf2",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "In Express, what does 'res.redirect()' do?",
+        "options": {
+            "A": "Reloads the current page",
+            "B": "Sends the user to a different URL",
+            "C": "Changes the database connection",
+            "D": "Clears the cache"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module handles the creation of secure HTTPS servers?",
+        "options": {
+            "A": "http",
+            "B": "https",
+            "C": "crypto",
+            "D": "ssl"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'require.main === module'?",
+        "options": {
+            "A": "To check if a module is the main entry point of the application",
+            "B": "To check if a module is imported correctly",
+            "C": "To check the version of the module",
+            "D": "To restart the module"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which function is used to convert an object into a query string?",
+        "options": {
+            "A": "querystring.parse()",
+            "B": "querystring.stringify()",
+            "C": "url.format()",
+            "D": "json.toString()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the default value of 'NODE_ENV'?",
+        "options": {
+            "A": "development",
+            "B": "production",
+            "C": "test",
+            "D": "undefined"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "Which command displays the location of global npm packages?",
+        "options": {
+            "A": "npm where",
+            "B": "npm root -g",
+            "C": "npm list",
+            "D": "npm path"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a way to execute code asynchronously?",
+        "options": {
+            "A": "Callbacks",
+            "B": "Promises",
+            "C": "Async/Await",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+{
+        "question": "Which internal library does Node.js use to handle the thread pool and asynchronous I/O?",
+        "options": {
+            "A": "V8",
+            "B": "Libuv",
+            "C": "OpenSSL",
+            "D": "Zlib"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the 'worker_threads' module?",
+        "options": {
+            "A": "To handle HTTP requests in parallel",
+            "B": "To execute CPU-intensive JavaScript tasks without blocking the main event loop",
+            "C": "To manage database connection pools",
+            "D": "To cluster multiple Node.js processes"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method is used to share memory between the main thread and a worker thread?",
+        "options": {
+            "A": "SharedArrayBuffer",
+            "B": "Buffer.allocShared()",
+            "C": "process.share()",
+            "D": "global.memory"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "In the event loop, where does 'process.nextTick()' callbacks execute?",
+        "options": {
+            "A": "In the Timers phase",
+            "B": "In the Poll phase",
+            "C": "Immediately after the current operation, before the next phase of the event loop",
+            "D": "After setImmediate()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which of the following is a symptom of 'Event Loop Blockage'?",
+        "options": {
+            "A": "High CPU usage",
+            "B": "Decreased throughput and increased latency for I/O tasks",
+            "C": "Memory leaks",
+            "D": "The process crashes immediately"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Heap' in Node.js memory management?",
+        "options": {
+            "A": "Where local variables are stored",
+            "B": "Where objects, strings, and closures are allocated",
+            "C": "The disk space used for caching",
+            "D": "The stack of function calls"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which flag is used to increase the maximum heap size in Node.js?",
+        "options": {
+            "A": "--max-memory",
+            "B": "--max-old-space-size",
+            "C": "--heap-limit",
+            "D": "--v8-memory"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Memory Leak' in Node.js?",
+        "options": {
+            "A": "When the hard drive runs out of space",
+            "B": "When objects are no longer needed but are still referenced, preventing garbage collection",
+            "C": "When the script file is too large",
+            "D": "When variables are deleted too quickly"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool can be used to profile and debug memory leaks in Node.js?",
+        "options": {
+            "A": "Chrome DevTools",
+            "B": "Node-inspect",
+            "C": "clinic.js",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the 'Buffer.allocUnsafe()' method used for?",
+        "options": {
+            "A": "To create a buffer with sensitive data",
+            "B": "To allocate memory quickly without initializing it (may contain old data)",
+            "C": "To bypass security checks",
+            "D": "To create a buffer that cannot be deleted"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between 'spawn' and 'exec' in child_process?",
+        "options": {
+            "A": "spawn handles large data via streams; exec buffers the entire output",
+            "B": "exec is faster than spawn",
+            "C": "spawn is for shell commands only",
+            "D": "There is no difference"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which module provides an API for creating TLS/SSL servers?",
+        "options": {
+            "A": "crypto",
+            "B": "https",
+            "C": "tls",
+            "D": "ssl"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of 'stream.pipeline()'?",
+        "options": {
+            "A": "To group multiple streams",
+            "B": "To pipe streams and handle errors/cleanup in one place",
+            "C": "To increase stream speed",
+            "D": "To convert readable streams to writable"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a way to achieve zero-downtime deployment in Node.js?",
+        "options": {
+            "A": "Using PM2 Cluster Mode",
+            "B": "Restarting the server manually",
+            "C": "Increasing the timeout",
+            "D": "Using setImmediate()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Garbage Collection' in the V8 engine?",
+        "options": {
+            "A": "Deleting the node_modules folder",
+            "B": "The automated process of reclaiming memory by deleting unreachable objects",
+            "C": "Cleaning up the console logs",
+            "D": "Removing unused npm packages"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of the following describes 'Event-Driven Programming'?",
+        "options": {
+            "A": "Code that runs in a strict linear order",
+            "B": "Flow of the program is determined by events such as user actions or messages",
+            "C": "Using only events for database queries",
+            "D": "Writing code without using functions"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'DNS' module's 'resolve' method used for?",
+        "options": {
+            "A": "To check internet speed",
+            "B": "To perform DNS queries for specific record types (A, MX, etc.)",
+            "C": "To create a domain name",
+            "D": "To parse URLs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which core module is used to handle 'Buffer' objects before they were global?",
+        "options": {
+            "A": "fs",
+            "B": "binary",
+            "C": "buffer",
+            "D": "util"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does the 'AsyncResource' class in the 'async_hooks' module do?",
+        "options": {
+            "A": "Speeds up async operations",
+            "B": "Allows tracking the lifetime of asynchronous resources",
+            "C": "Creates new Promises",
+            "D": "Deletes async callbacks"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'CORS' in the context of a Node.js web server?",
+        "options": {
+            "A": "Core Operating Resource System",
+            "B": "Cross-Origin Resource Sharing",
+            "C": "Client Object Response System",
+            "D": "Compressed Output Response Standard"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which method is used to create a hard link to a file in the 'fs' module?",
+        "options": {
+            "A": "fs.link()",
+            "B": "fs.symlink()",
+            "C": "fs.createLink()",
+            "D": "fs.hardlink()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of 'npm update'?",
+        "options": {
+            "A": "To update Node.js version",
+            "B": "To update packages to their latest version based on package.json ranges",
+            "C": "To update the operating system",
+            "D": "To fix bugs in the code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Transpiler' commonly used with Node.js?",
+        "options": {
+            "A": "A tool that converts one source code to another (e.g., TS to JS)",
+            "B": "A database engine",
+            "C": "A network protocol",
+            "D": "A memory manager"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which of these is a popular Object-Relational Mapper (ORM) for Node.js?",
+        "options": {
+            "A": "Sequelize",
+            "B": "TypeORM",
+            "C": "Prisma",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "Which method is used to get the character encoding of a file?",
+        "options": {
+            "A": "fs.getEncoding()",
+            "B": "Node.js does not have a built-in method for this; external libraries are used",
+            "C": "path.encoding()",
+            "D": "os.encoding()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Microservices Architecture' in the context of Node.js?",
+        "options": {
+            "A": "Using only small files",
+            "B": "Breaking a large application into small, independent services",
+            "C": "A tiny version of Node.js",
+            "D": "Using fewer npm packages"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'process.setuid()'?",
+        "options": {
+            "A": "To set the user ID of the process",
+            "B": "To set a unique ID for the server",
+            "C": "To identify the user in the browser",
+            "D": "To rename a user"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which module provides a way to interact with the terminal/shell?",
+        "options": {
+            "A": "readline",
+            "B": "console",
+            "C": "terminal",
+            "D": "shelljs"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Dependency Injection'?",
+        "options": {
+            "A": "Installing packages via npm",
+            "B": "A design pattern where objects receive other objects they depend on",
+            "C": "Injecting code into a database",
+            "D": "A security attack"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module is used to handle 'multipart/form-data' (file uploads) in Express?",
+        "options": {
+            "A": "body-parser",
+            "B": "multer",
+            "C": "fs",
+            "D": "upload-lib"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Object.freeze()' in JavaScript/Node.js?",
+        "options": {
+            "A": "To pause the code execution",
+            "B": "To make an object immutable (cannot change properties)",
+            "C": "To save an object to disk",
+            "D": "To delete an object"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'v8' module used for?",
+        "options": {
+            "A": "To parse JavaScript strings",
+            "B": "To access V8-specific events and memory statistics",
+            "C": "To update the V8 engine",
+            "D": "To run Node.js on a different engine"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Hydration' in the context of Server-Side Rendering (SSR)?",
+        "options": {
+            "A": "Cleaning the database",
+            "B": "The process of attaching event listeners to server-rendered HTML on the client",
+            "C": "Adding more RAM to the server",
+            "D": "Downloading dependencies"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to run a Node.js application in debug mode?",
+        "options": {
+            "A": "node --debug app.js",
+            "B": "node inspect app.js",
+            "C": "node --trace app.js",
+            "D": "node -d app.js"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Shared Policy' in NPM?",
+        "options": {
+            "A": "A way to share passwords",
+            "B": "Policies that define how dependencies are shared in a workspace",
+            "C": "A shared hosting plan",
+            "D": "Legal terms for using npm"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which HTTP method is 'Idempotent'?",
+        "options": {
+            "A": "POST",
+            "B": "GET",
+            "C": "PUT",
+            "D": "Both B and C"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the purpose of 'require.main'?",
+        "options": {
+            "A": "To import the main file",
+            "B": "To identify the script that was run directly from the terminal",
+            "C": "To find the entry point in package.json",
+            "D": "To restart the app"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which utility converts a function that follows the common error-first callback style to a version that returns a Promise?",
+        "options": {
+            "A": "util.promisify()",
+            "B": "util.callbackify()",
+            "C": "promise.from()",
+            "D": "async.wrap()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the 'vm' module used for in Node.js?",
+        "options": {
+            "A": "To create Virtual Machines",
+            "B": "To execute JavaScript code within V8 Virtual Machine contexts",
+            "C": "To manage server hardware",
+            "D": "To run Linux commands"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'LTS' stand for in Node.js releases?",
+        "options": {
+            "A": "Long Term Service",
+            "B": "Long Term Support",
+            "C": "Last Top System",
+            "D": "Linear Template Standard"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which component of Node.js facilitates communication between JavaScript and the C++ backend?",
+        "options": {
+            "A": "The Event Loop",
+            "B": "V8 Bindings",
+            "C": "npm",
+            "D": "The File System"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'process.hrtime()'?",
+        "options": {
+            "A": "To get the human-readable time",
+            "B": "To get high-resolution real time in nanoseconds for performance measurement",
+            "C": "To set the system clock",
+            "D": "To get the time zone"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which library is most common for real-time, bi-directional communication between web clients and servers?",
+        "options": {
+            "A": "Express",
+            "B": "Socket.io",
+            "C": "Axios",
+            "D": "Lodash"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the default behavior of Node.js when an 'error' event is emitted but no listener is attached?",
+        "options": {
+            "A": "It ignores the error",
+            "B": "It prints a warning and continues",
+            "C": "It prints the stack trace and crashes the process",
+            "D": "It sends the error to a log file"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the 'Module Wrapper' in Node.js?",
+        "options": {
+            "A": "A folder containing modules",
+            "B": "The function that wraps every Node.js module before execution to provide local variables like require and __dirname",
+            "C": "A tool to minify modules",
+            "D": "The node_modules folder"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is used for inter-process communication (IPC) in Node.js?",
+        "options": {
+            "A": "process.send()",
+            "B": "socket.emit()",
+            "C": "worker.postMessage()",
+            "D": "Both A and C"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is 'Tree Shaking'?",
+        "options": {
+            "A": "Deleting the project",
+            "B": "Removing dead or unused code during the bundling process",
+            "C": "Cleaning the database",
+            "D": "Organizing files in folders"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which module can be used to read and write data to the system clipboard?",
+        "options": {
+            "A": "os",
+            "B": "clipboard",
+            "C": "No core module exists for this; third-party packages are required",
+            "D": "fs"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the 'REPL' command to see all available global variables?",
+        "options": {
+            "A": ".help",
+            "B": ".globals",
+            "C": "global",
+            "D": ".editor"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which command-line tool is used to execute npm packages without installing them globally?",
+        "options": {
+            "A": "npm run",
+            "B": "npx",
+            "C": "node-exec",
+            "D": "npm-do"
+        },
+        "answer": "B"
+    }
+]
+   
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "Node.js"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

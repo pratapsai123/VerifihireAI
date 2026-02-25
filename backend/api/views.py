@@ -4459,8 +4459,8 @@ def results_overview_view(request):
         if end_date:
             qs = qs.filter(submitted_at__date__lte=end_date)
         
-        # Similar logic for AI assessments
-        ai_qs = AIAssessmentSubmission.objects.select_related('assessment').order_by('-submitted_at')
+        # Similar logic for AI assessments — exclude ONGOING (not yet submitted)
+        ai_qs = AIAssessmentSubmission.objects.select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         
         if start_date:
             ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
@@ -4504,7 +4504,7 @@ def results_overview_view(request):
             )
 
         # Re-sort combined results by submitted_at
-        results.sort(key=lambda x: x['submitted_at'] or '', reverse=True)
+        results.sort(key=lambda x: str(x['submitted_at'] or ''), reverse=True)
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
     except Exception as e:

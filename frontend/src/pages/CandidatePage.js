@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import axios from 'axios';
-import Header from '../components/Header';
 import '../styles/CandidatePage.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
@@ -96,7 +95,6 @@ export default function CandidatePage() {
 
     return (
         <div className="cand-page">
-            <Header />
             <div className="cand-shell">
                 <div className="cand-top">
                     <div>

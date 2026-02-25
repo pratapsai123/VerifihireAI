@@ -38,6 +38,15 @@ const AiAssessmentDetail = () => {
     const coding = assessment.generated_content?.coding_challenges || [];
     const submissions = assessment.submissions || [];
 
+    // Calculate points based on difficulty mapping
+    const pointsMap = {
+        'Easy': 100,
+        'Medium': 200,
+        'Hard': 300
+    };
+    const pointPerQ = pointsMap[assessment.difficulty_level] || 100;
+    const totalPossiblePoints = (mcqs.length + coding.length) * pointPerQ;
+
     const getStatusStyle = (status) => {
         return status === 'selected'
             ? { background: '#E6FBF5', color: '#05CD99' }
@@ -145,6 +154,31 @@ const AiAssessmentDetail = () => {
                                     </div>
                                 </div>
                             )}
+
+                            {/* Scoring Footer */}
+                            <div style={{ marginTop: '3rem', paddingTop: '2rem', borderTop: '2px solid #E0E5F2', display: 'flex', gap: '2rem', justifyContent: 'flex-start' }}>
+                                <div style={{ background: '#F4F7FE', padding: '1.5rem', borderRadius: '20px', minWidth: '200px' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Total Possible Points</div>
+                                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+                                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>{totalPossiblePoints}</div>
+                                        <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>pts</div>
+                                    </div>
+                                    <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
+                                        ({mcqs.length + coding.length} Qs × {pointPerQ} pts • {assessment.difficulty_level || 'Custom'})
+                                    </div>
+                                </div>
+
+                                <div style={{ background: '#F4F7FE', padding: '1.5rem', borderRadius: '20px', minWidth: '200px' }}>
+                                    <div style={{ fontSize: '0.8rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Time</div>
+                                    <div style={{ display: 'flex', alignItems: 'flex-end', gap: '8px' }}>
+                                        <div style={{ fontSize: '2rem', fontWeight: '800', color: '#1B254B', lineHeight: '1' }}>{assessment.duration_minutes}</div>
+                                        <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>mins</div>
+                                    </div>
+                                    <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
+                                        Total allocated assessment duration
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     )}
 
@@ -179,7 +213,7 @@ const AiAssessmentDetail = () => {
                                                     </td>
                                                     <td style={{ padding: '1rem' }}>
                                                         <div style={{ fontSize: '1.1rem', fontWeight: '800', color: sub.percentage >= 60 ? '#05CD99' : '#EE5D50' }}>{sub.percentage}%</div>
-                                                        <div style={{ fontSize: '0.75rem', color: '#A3AED0' }}>{sub.score}/{sub.total_questions} MCQs</div>
+                                                        <div style={{ fontSize: '0.75rem', color: '#A3AED0' }}>{sub.score} / {(sub.total_questions || (mcqs.length + coding.length)) * pointPerQ} pts</div>
                                                     </td>
                                                     <td style={{ padding: '1rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -245,25 +279,66 @@ const AiAssessmentDetail = () => {
                                     const candAns = selectedSubmission.answers[`mcq_${i}`];
                                     const isCorrect = candAns === q.answer;
                                     return (
-                                        <div key={i} style={{ padding: '1.5rem', borderRadius: '20px', border: '2px solid', borderColor: isCorrect ? '#05CD9922' : '#EE5D5022', background: isCorrect ? '#05CD9905' : '#EE5D5005' }}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '1rem' }}>
-                                                <p style={{ fontWeight: '700', color: '#1B254B', margin: 0 }}>Q{i + 1}: {q.question}</p>
-                                                {isCorrect ? (
-                                                    <span style={{ color: '#05CD99', fontWeight: '800', fontSize: '0.8rem' }}><i className="fa-solid fa-circle-check"></i> CORRECT</span>
-                                                ) : (
-                                                    <span style={{ color: '#EE5D50', fontWeight: '800', fontSize: '0.8rem' }}><i className="fa-solid fa-circle-xmark"></i> INCORRECT</span>
-                                                )}
-                                            </div>
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
-                                                <div style={{ padding: '1rem', background: 'white', borderRadius: '12px', border: '1px solid #E0E5F2' }}>
-                                                    <div style={{ fontSize: '0.7rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase' }}>Candidate's Answer</div>
-                                                    <div style={{ color: isCorrect ? '#05CD99' : '#EE5D50', fontWeight: '700', marginTop: '4px' }}>{candAns || '(Skipped)'}</div>
+                                        <div key={i} style={{ padding: '2rem', borderRadius: '24px', border: '1px solid', borderColor: isCorrect ? '#05CD9944' : '#EE5D5044', background: 'white', boxShadow: '0 10px 30px rgba(0,0,0,0.02)' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
+                                                <div style={{ flex: 1 }}>
+                                                    <span style={{ fontSize: '0.75rem', fontWeight: '800', color: '#707EAE', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Question {i + 1}</span>
+                                                    <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', margin: '0.5rem 0 0' }}>{q.question}</p>
                                                 </div>
-                                                <div style={{ padding: '1rem', background: 'white', borderRadius: '12px', border: '1px solid #E0E5F2' }}>
-                                                    <div style={{ fontSize: '0.7rem', color: '#A3AED0', fontWeight: '700', textTransform: 'uppercase' }}>Correct Answer</div>
-                                                    <div style={{ color: '#05CD99', fontWeight: '700', marginTop: '4px' }}>{q.answer}</div>
+                                                <div style={{ padding: '0.5rem 1rem', borderRadius: '12px', background: isCorrect ? '#E6FBF5' : '#FFF5F5', color: isCorrect ? '#05CD99' : '#EE5D50', fontWeight: '800', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                                                    <i className={`fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}`}></i>
+                                                    {isCorrect ? 'CORRECT' : 'INCORRECT'}
                                                 </div>
                                             </div>
+
+                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                                                {q.options.map((opt, oi) => {
+                                                    const isSelected = opt === candAns;
+                                                    const isAnswer = opt === q.answer;
+
+                                                    // Determine styles based on correctness
+                                                    let bg = 'white';
+                                                    let border = '1px solid #E0E5F2';
+                                                    let color = '#1B254B';
+                                                    let icon = null;
+
+                                                    if (isAnswer) {
+                                                        bg = '#E6FBF5';
+                                                        border = '2px solid #05CD99';
+                                                        color = '#05CD99';
+                                                        icon = <i className="fa-solid fa-check-circle" style={{ marginLeft: 'auto' }}></i>;
+                                                    } else if (isSelected && !isCorrect) {
+                                                        bg = '#FFF5F5';
+                                                        border = '2px solid #EE5D50';
+                                                        color = '#EE5D50';
+                                                        icon = <i className="fa-solid fa-circle-xmark" style={{ marginLeft: 'auto' }}></i>;
+                                                    }
+
+                                                    return (
+                                                        <div key={oi} style={{
+                                                            padding: '1rem 1.25rem',
+                                                            background: bg,
+                                                            borderRadius: '16px',
+                                                            border: border,
+                                                            color: color,
+                                                            fontWeight: (isAnswer || isSelected) ? '700' : '500',
+                                                            fontSize: '0.95rem',
+                                                            display: 'flex',
+                                                            alignItems: 'center'
+                                                        }}>
+                                                            <span style={{ marginRight: '10px', opacity: 0.5, fontSize: '0.8rem' }}>{String.fromCharCode(65 + oi)}.</span>
+                                                            {opt}
+                                                            {icon}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+
+                                            {!candAns && (
+                                                <div style={{ marginTop: '1rem', padding: '0.75rem', background: '#F4F7FE', borderRadius: '12px', color: '#707EAE', fontSize: '0.85rem', textAlign: 'center', fontWeight: '600' }}>
+                                                    <i className="fa-solid fa-circle-info" style={{ marginRight: '6px' }}></i> Candidate skipped this question.
+                                                </div>
+                                            )}
                                         </div>
                                     );
                                 })}
@@ -271,19 +346,51 @@ const AiAssessmentDetail = () => {
 
                             {/* Coding Submissions */}
                             {coding.length > 0 && (
-                                <div style={{ marginTop: '3rem' }}>
-                                    <h4 style={{ color: '#1B254B', marginBottom: '1.5rem' }}>Coding Challenge Responses</h4>
-                                    <div style={{ display: 'grid', gap: '2rem' }}>
+                                <div style={{ marginTop: '4rem' }}>
+                                    <h4 style={{ color: '#1B254B', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <i className="fa-solid fa-code" style={{ color: '#4318FF' }}></i> Coding Challenge Verification
+                                    </h4>
+                                    <div style={{ display: 'grid', gap: '3rem' }}>
                                         {coding.map((c, i) => (
-                                            <div key={i}>
-                                                <p style={{ fontWeight: '700', color: '#1B254B', marginBottom: '1rem' }}>Challenge: {c.title}</p>
+                                            <div key={i} style={{ background: '#F8F9FF', borderRadius: '30px', padding: '2rem', border: '1px solid #E0E5F2' }}>
+                                                <div style={{ marginBottom: '2rem' }}>
+                                                    <h5 style={{ color: '#1B254B', fontSize: '1.2rem', fontWeight: '800', margin: '0 0 0.5rem 0' }}>{c.title}</h5>
+                                                    <p style={{ color: '#707EAE', fontSize: '1rem', lineHeight: '1.6', margin: 0 }}>{c.problem_statement}</p>
+                                                </div>
+
                                                 <div style={{ position: 'relative' }}>
-                                                    <div style={{ position: 'absolute', top: '10px', right: '15px', color: '#707EAE', fontSize: '0.7rem', fontWeight: '700' }}>CANDIDATE CODE</div>
-                                                    <textarea
-                                                        readOnly
-                                                        value={selectedSubmission.answers[`coding_${i}`] || '// No response submitted'}
-                                                        style={{ width: '100%', minHeight: '300px', background: '#1B254B', color: '#05CD99', padding: '2rem 1.5rem 1.5rem', borderRadius: '20px', fontFamily: 'monospace', fontSize: '0.9rem', border: 'none', resize: 'none' }}
-                                                    />
+                                                    <div style={{
+                                                        position: 'absolute',
+                                                        top: '-12px',
+                                                        left: '20px',
+                                                        background: '#4318FF',
+                                                        color: 'white',
+                                                        padding: '4px 12px',
+                                                        borderRadius: '8px',
+                                                        fontSize: '0.7rem',
+                                                        fontWeight: '800',
+                                                        letterSpacing: '0.05em',
+                                                        zIndex: 1
+                                                    }}>CANDIDATE SUBMISSION</div>
+                                                    <div style={{
+                                                        background: '#1B254B',
+                                                        borderRadius: '20px',
+                                                        padding: '2.5rem 1.5rem 1.5rem',
+                                                        boxShadow: '0 15px 35px rgba(0,0,0,0.2)',
+                                                        overflow: 'hidden'
+                                                    }}>
+                                                        <pre style={{
+                                                            margin: 0,
+                                                            color: '#05CD99',
+                                                            fontFamily: "'Fira Code', 'Courier New', monospace",
+                                                            fontSize: '0.9rem',
+                                                            lineHeight: '1.5',
+                                                            whiteSpace: 'pre-wrap',
+                                                            wordBreak: 'break-all'
+                                                        }}>
+                                                            {selectedSubmission.answers[`coding_${i}`] || '// No response submitted'}
+                                                        </pre>
+                                                    </div>
                                                 </div>
                                             </div>
                                         ))}

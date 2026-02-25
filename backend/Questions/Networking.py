@@ -1,0 +1,2110 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+  {
+    "question": "Which layer of the OSI model is responsible for logical addressing (IP addresses) and routing?",
+    "options": {
+      "A": "Data Link Layer",
+      "B": "Network Layer",
+      "C": "Transport Layer",
+      "&D": "Physical Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between TCP and UDP?",
+    "options": {
+      "A": "TCP is faster but less reliable",
+      "B": "TCP is connection-oriented and reliable, while UDP is connectionless and faster",
+      "C": "UDP is only used for emails",
+      "D": "TCP works at the Network layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used to automatically assign IP addresses to devices on a network?",
+    "options": {
+      "A": "DNS",
+      "B": "DHCP",
+      "C": "HTTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the Address Resolution Protocol (ARP)?",
+    "options": {
+      "A": "To resolve a domain name to an IP address",
+      "B": "To resolve an IP address to a physical MAC address",
+      "C": "To route packets between different networks",
+      "D": "To encrypt data for secure transmission"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which network topology connects every node to every other node, providing high redundancy?",
+    "options": {
+      "A": "Star",
+      "B": "Bus",
+      "C": "Mesh",
+      "D": "Ring"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the bit-length of an IPv6 address?",
+    "options": {
+      "A": "32 bits",
+      "B": "64 bits",
+      "C": "128 bits",
+      "D": "256 bits"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "At which OSI layer does a 'Switch' primarily operate?",
+    "options": {
+      "A": "Layer 1 (Physical)",
+      "B": "Layer 2 (Data Link)",
+      "C": "Layer 3 (Network)",
+      "D": "Layer 4 (Transport)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port number is the default for secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "21",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of a Subnet Mask?",
+    "options": {
+      "A": "To hide the IP address from the internet",
+      "B": "To distinguish the network portion of an IP address from the host portion",
+      "C": "To speed up the internet connection",
+      "D": "To assign a MAC address to a computer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which device is used to connect two or more different networks and determines the best path for data?",
+    "options": {
+      "A": "Hub",
+      "B": "Repeater",
+      "C": "Router",
+      "D": "Bridge"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'ICMP' primarily used for?",
+    "options": {
+      "A": "File transfers",
+      "B": "Error reporting and network diagnostics (e.g., Ping)",
+      "C": "Web browsing",
+      "D": "Email encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of networking, what does 'Latency' refer to?",
+    "options": {
+      "A": "The maximum amount of data transmitted over a network",
+      "B": "The delay or time it takes for a data packet to travel from source to destination",
+      "C": "The strength of a wireless signal",
+      "D": "The number of users on a network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'MAC Address'?",
+    "options": {
+      "A": "An address assigned by the ISP",
+      "B": "A permanent, unique physical hardware address assigned to a Network Interface Card (NIC)",
+      "C": "The address of a website on the server",
+      "D": "An address used only for Apple computers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is responsible for translating human-friendly domain names (like google.com) into IP addresses?",
+    "options": {
+      "A": "FTP",
+      "B": "DNS",
+      "C": "SSH",
+      "D": "TELNET"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main advantage of using Fiber Optic cables over Copper cables?",
+    "options": {
+      "A": "Lower cost",
+      "B": "Higher bandwidth and immunity to electromagnetic interference",
+      "C": "Easier installation",
+      "D": "Compatibility with older hubs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of a Virtual LAN (VLAN)?",
+    "options": {
+      "A": "To increase the physical speed of the cable",
+      "B": "To logically segment a single physical switch into multiple broadcast domains",
+      "C": "To provide wireless access to a wired network",
+      "D": "To connect multiple routers together"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used to prevent switching loops in a network with redundant paths?",
+    "options": {
+      "A": "RIP",
+      "B": "Spanning Tree Protocol (STP)",
+      "C": "VTP",
+      "D": "BGP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Distance Vector' routing protocol?",
+    "options": {
+      "A": "OSPF",
+      "B": "RIP",
+      "C": "IS-IS",
+      "D": "BGP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Default Gateway' represent for a host computer?",
+    "options": {
+      "A": "The IP address of the DNS server",
+      "B": "The IP address of the router interface on the local subnet used to reach external networks",
+      "C": "The MAC address of the switch",
+      "D": "The security firewall's serial number"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Subnetting, if you have a /24 network, how many usable host IP addresses are available?",
+    "options": {
+      "A": "256",
+      "B": "254",
+      "C": "512",
+      "D": "128"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port-tagging standard is used to identify VLAN traffic as it crosses a trunk link between switches?",
+    "options": {
+      "A": "802.11",
+      "B": "802.1Q",
+      "C": "802.3",
+      "D": "802.1X"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Administrative Distance' (AD) in routing?",
+    "options": {
+      "A": "To measure the speed of a link",
+      "B": "To rate the trustworthiness of a routing information source",
+      "C": "To count the number of routers in a path",
+      "D": "To determine the physical distance of the cable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which dynamic routing protocol is commonly used to exchange routing information between different Autonomous Systems (AS) on the Internet?",
+    "options": {
+      "A": "OSPF",
+      "B": "BGP",
+      "C": "EIGRP",
+      "D": "RIP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'Trunk Port' on a switch?",
+    "options": {
+      "A": "To connect to a single end-user device",
+      "B": "To carry traffic for multiple VLANs over a single physical link",
+      "C": "To provide power over ethernet (PoE)",
+      "D": "To disable all security features"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command-line tool is used to see the path a packet takes to reach a destination host?",
+    "options": {
+      "A": "ipconfig",
+      "B": "tracert (Windows) / traceroute (Linux)",
+      "C": "netstat",
+      "D": "nslookup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NAT' (Network Address Translation) primarily used for?",
+    "options": {
+      "A": "To encrypt data packets",
+      "B": "To allow multiple devices on a private network to share a single public IP address",
+      "C": "To translate MAC addresses to IP addresses",
+      "D": "To increase the bandwidth of a local network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "At which layer of the OSI model does a 'Basic' Firewall typically operate when filtering based on IP and Port?",
+    "options": {
+      "A": "Layer 2",
+      "B": "Layers 3 and 4",
+      "C": "Layer 7",
+      "D": "Layer 1"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Collision Domain'?",
+    "options": {
+      "A": "A network where data packets never meet",
+      "B": "A network segment where data packets can collide with one another when sent simultaneously",
+      "C": "A group of routers connected together",
+      "D": "The physical area of a server room"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used by routers to 'ping' or report errors in packet delivery?",
+    "options": {
+      "A": "UDP",
+      "B": "ICMP",
+      "C": "TCP",
+      "D": "HTTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which IPv4 address class is reserved for 'Multicast'?",
+    "options": {
+      "A": "Class A",
+      "B": "Class D",
+      "C": "Class C",
+      "D": "Class B"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which wireless standard operates exclusively in the 5 GHz band and introduced support for MU-MIMO?",
+    "options": {
+      "A": "802.11g",
+      "B": "802.11n",
+      "C": "802.11ac",
+      "D": "802.11b"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary function of a VPN (Virtual Private Network)?",
+    "options": {
+      "A": "To increase the physical bandwidth of an ISP connection",
+      "B": "To create a secure, encrypted 'tunnel' for data to travel over a public network like the Internet",
+      "C": "To replace the need for a physical router",
+      "D": "To assign public IP addresses to internal devices"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Next-Generation Firewall (NGFW), what does 'Deep Packet Inspection' (DPI) refer to?",
+    "options": {
+      "A": "Checking only the source and destination IP addresses",
+      "B": "Analyzing the actual data payload of a packet to identify applications and threats",
+      "C": "Increasing the speed of packet routing",
+      "D": "Counting the number of packets sent per second"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Intrusion Prevention System' (IPS) compared to an 'Intrusion Detection System' (IDS)?",
+    "options": {
+      "A": "An IDS blocks traffic, while an IPS only logs it",
+      "B": "An IPS actively blocks detected threats in real-time, while an IDS only monitors and alerts",
+      "C": "IDS is hardware-based and IPS is software-based",
+      "D": "There is no difference between the two"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which WAN technology uses 'labels' instead of network addresses to guide data across a provider network?",
+    "options": {
+      "A": "Dial-up",
+      "B": "MPLS",
+      "C": "Frame Relay",
+      "D": "DSL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a primary advantage of SD-WAN (Software-Defined Wide Area Network)?",
+    "options": {
+      "A": "It requires expensive proprietary hardware at every location",
+      "B": "It allows for centralized control and intelligent path selection across multiple link types (MPLS, LTE, Broadband)",
+      "C": "It eliminates the need for any internet connection",
+      "D": "It only works with fiber optic cables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which encryption standard is currently considered the most secure for protecting Wi-Fi networks?",
+    "options": {
+      "A": "WEP",
+      "B": "WPA",
+      "C": "WPA2",
+      "D": "WPA3"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does a 'Proxy Server' do in a network environment?",
+    "options": {
+      "A": "It speeds up the CPU of the client machine",
+      "B": "It acts as a gateway between a local network and the internet, often used for caching and security filtering",
+      "C": "It assigns MAC addresses to new devices",
+      "D": "It connects two different fiber optic cables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In networking, what is 'PoE' (Power over Ethernet)?",
+    "options": {
+      "A": "A way to use a computer without a battery",
+      "B": "A technology that transmits both data and electrical power over a single twisted-pair Ethernet cable",
+      "C": "A protocol for high-speed file transfers",
+      "D": "An encryption method for electrical grids"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used by the 'Ping' utility to test reachability?",
+    "options": {
+      "A": "TCP",
+      "B": "UDP",
+      "C": "ICMP",
+      "D": "ARP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Cloud Networking, what is a 'VPC' (Virtual Private Cloud)?",
+    "options": {
+      "A": "A physical server located in a private office",
+      "B": "A private, isolated section of a public cloud provider's network where you can launch resources",
+      "C": "A type of fiber optic cable used for cloud connections",
+      "D": "A software that speeds up local Wi-Fi"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is the foundation of 'Network Automation' and allows for managing devices via structured data like JSON or XML?",
+    "options": {
+      "A": "Telnet",
+      "B": "NETCONF / RESTCONF",
+      "C": "FTP",
+      "D": "TFTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Traffic Shaping'?",
+    "options": {
+      "A": "Changing the physical layout of the server room",
+      "B": "A bandwidth management technique that delays some or all datagrams to bring them into compliance with a desired traffic profile",
+      "C": "Increasing the size of data packets to save time",
+      "D": "Naming the routers after different shapes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Load Balancer'?",
+    "options": {
+      "A": "To charge the batteries of network switches",
+      "B": "To distribute incoming network traffic across multiple servers to ensure no single server becomes overwhelmed",
+      "C": "To weigh the server racks",
+      "D": "To encrypt the user's password"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cybersecurity concept refers to the practice of 'deceiving' a network by mimicking a trusted host (e.g., IP Spoofing)?",
+    "options": {
+      "A": "Encryption",
+      "B": "Spoofing",
+      "C": "Hashing",
+      "D": "Salting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anycast' routing?",
+    "options": {
+      "A": "Sending data to every device on the internet",
+      "B": "A network addressing and routing method in which incoming requests can be routed to a variety of different nodes, typically the 'closest' one",
+      "C": "Broadcasting a video to a specific group",
+      "D": "Assigning one IP to one specific computer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Software-Defined Networking' (SDN), what is the 'Southbound Interface'?",
+    "options": {
+      "A": "The connection to the internet in the Southern Hemisphere",
+      "B": "The communication protocol between the SDN controller and the physical/virtual switches",
+      "C": "The user interface for the network administrator",
+      "D": "The backup power supply line"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'HoneyPot' in network security?",
+    "options": {
+      "A": "A server that stores high-value company secrets",
+      "B": "A decoy system designed to lure in attackers to detect, deflect, or study hacking attempts",
+      "C": "A tool used to clean the server fans",
+      "D": "A high-speed database for customer records"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Time to Live' (TTL) field in an IP header prevent?",
+    "options": {
+      "A": "Slow internet speeds",
+      "B": "Packets from circulating indefinitely in a network loop",
+      "C": "Data from being stolen by hackers",
+      "D": "The router from overheating"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used by network engineers to capture and analyze network packets in real-time?",
+    "options": {
+      "A": "Photoshop",
+      "B": "Wireshark",
+      "C": "Excel",
+      "D": "Visual Studio Code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Micro-segmentation' in a data center environment?",
+    "options": {
+      "A": "Using very small cables",
+      "B": "A security technique that enables fine-grained security policies to be assigned to individual workloads or VMs",
+      "C": "Splitting one large server into two",
+      "D": "Organizing the network by the size of the files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'BGP Peering'?",
+    "options": {
+      "A": "To watch what other users are doing on the network",
+      "B": "The process where two neighboring routers exchange routing information using the Border Gateway Protocol",
+      "C": "To check if a router is turned on",
+      "D": "To speed up a local file transfer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In IPv6, what is an 'Anycast' address?",
+    "options": {
+      "A": "An address for a single interface",
+      "B": "An address assigned to a group of interfaces; packets are delivered to the 'nearest' interface",
+      "C": "An address for every computer in the world",
+      "D": "A temporary address that expires in 1 hour"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero Trust Architecture' (ZTA)?",
+    "options": {
+      "A": "A network where nobody is allowed to log in",
+      "B": "A security model that requires strict identity verification for every person and device trying to access resources on a private network",
+      "C": "A database that doesn't store passwords",
+      "D": "A router that doesn't use a firewall"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quality of Service' (QoS) used for?",
+    "options": {
+      "A": "To ensure the server hardware is of high quality",
+      "B": "To prioritize specific types of network traffic (like Voice or Video) to ensure performance for critical applications",
+      "C": "To rate the performance of the IT staff",
+      "D": "To choose the cheapest internet provider"
+    },
+    "answer": "B"
+
+  },
+  {
+    "question": "What is 'VLSM' (Variable Length Subnet Masking) used for in network design?",
+    "options": {
+      "A": "To make all subnets the same size for easier management",
+      "B": "To allow for subnets of different sizes within the same network address space, reducing IP waste",
+      "C": "To encrypt the subnet mask so it cannot be read by hackers",
+      "D": "To increase the physical length of the Ethernet cables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is primarily used for managing and monitoring network devices like routers, switches, and printers?",
+    "options": {
+      "A": "HTTP",
+      "B": "SNMP (Simple Network Management Protocol)",
+      "C": "SMTP",
+      "D": "POP3"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an enterprise wireless environment, what is a 'Lightweight Access Point' (LWAP)?",
+    "options": {
+      "A": "An access point that weighs less than 1kg",
+      "B": "An AP that does not handle management functions locally and relies on a Wireless LAN Controller (WLC)",
+      "C": "An AP that only supports low-speed connections",
+      "D": "An AP that runs on solar power"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Management Information Base' (MIB) used for in SNMP?",
+    "options": {
+      "A": "A database that stores the serial numbers of all devices",
+      "B": "A hierarchical database used for managing entities in a communication network",
+      "C": "The login credentials for the network administrator",
+      "D": "A backup of the router configuration"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technology allows a single physical router to be partitioned into multiple independent logical routers?",
+    "options": {
+      "A": "VLAN",
+      "B": "VRF (Virtual Routing and Forwarding)",
+      "C": "STP",
+      "D": "NAT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Port Security' on a Cisco switch used to prevent?",
+    "options": {
+      "A": "Users from accessing the internet",
+      "B": "Unauthorized MAC addresses from connecting to a specific switch port",
+      "C": "The switch from overheating",
+      "D": "Spam emails from entering the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of VPN provides secure remote access via a standard web browser without requiring a dedicated client app?",
+    "options": {
+      "A": "IPsec VPN",
+      "B": "SSL/TLS VPN",
+      "C": "L2TP VPN",
+      "D": "PPTP VPN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Split Tunneling' in a VPN configuration?",
+    "options": {
+      "A": "Cutting a cable in half to share the connection",
+      "B": "An arrangement where only specific traffic goes through the VPN, while other traffic goes directly to the internet",
+      "C": "Using two different VPN providers at once",
+      "D": "A bug that causes the VPN to disconnect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of the OSI model, what is 'Encapsulation'?",
+    "options": {
+      "A": "The process of removing headers as data moves up the layers",
+      "B": "The process of adding headers and trailers to data as it moves down the layers",
+      "C": "Wrapping a cable in protective plastic",
+      "D": "Compressing a file to make it smaller"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of the 'Control Plane' in a router?",
+    "options": {
+      "A": "To forward data packets as fast as possible",
+      "B": "To handle routing logic and build the routing table",
+      "C": "To provide physical power to the router",
+      "D": "To display the status lights on the front panel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used to provide redundancy for a default gateway by allowing a group of routers to appear as a single virtual router?",
+    "options": {
+      "A": "OSPF",
+      "B": "HSRP (Hot Standby Router Protocol)",
+      "C": "BGP",
+      "D": "DHCP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Native VLAN' on an 802.1Q trunk port?",
+    "options": {
+      "A": "The VLAN used for voice traffic",
+      "B": "The VLAN that receives all untagged traffic crossing the trunk",
+      "C": "A VLAN that cannot be deleted",
+      "D": "The VLAN that has the highest priority"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which field in the TCP header is used for 'Flow Control' to prevent the sender from overwhelming the receiver?",
+    "options": {
+      "A": "Sequence Number",
+      "B": "Window Size",
+      "C": "Checksum",
+      "D": "Urgent Pointer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic Inspection' (DAI) on a switch designed to protect against?",
+    "options": {
+      "A": "Power outages",
+      "B": "ARP Spoofing/Man-in-the-Middle attacks",
+      "C": "Slow internet speeds",
+      "D": "Excessive broadcasting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SLA' (Service Level Agreement) measure in a network context?",
+    "options": {
+      "A": "The weight of the network equipment",
+      "B": "Performance metrics such as uptime, latency, and jitter guaranteed by a provider",
+      "C": "The number of employees in the IT department",
+      "D": "The cost of the electricity used"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'VXLAN' (Virtual Extensible LAN) in modern data centers?",
+    "options": {
+      "A": "To replace all Ethernet cables with fiber",
+      "B": "To provide Layer 2 connectivity over a Layer 3 network, overcoming the 4096 VLAN ID limitation",
+      "C": "To encrypt Wi-Fi passwords",
+      "D": "To increase the speed of a single router port"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which IPv6 transition mechanism encapsulates IPv6 packets inside IPv4 headers to carry them across an IPv4-only network?",
+    "options": {
+      "A": "Dual Stack",
+      "B": "6to4 Tunneling",
+      "C": "NAT64",
+      "D": "DNS64"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Software-Defined Networking (SDN), what is the 'Northbound Interface' used for?",
+    "options": {
+      "A": "To connect to switches in the Northern Hemisphere",
+      "B": "To allow the SDN controller to communicate with higher-level applications and orchestration tools",
+      "C": "To manage the power supply of the router",
+      "D": "To connect to the internet service provider"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anycast Gateway' in a VXLAN EVPN environment?",
+    "options": {
+      "A": "A gateway that only works for one user",
+      "B": "A feature where multiple leaf switches share the same IP/MAC address to provide a default gateway for VMs regardless of their location",
+      "C": "A backup router that stays off until needed",
+      "D": "A way to broadcast video to all users"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is the standard for 'Network Function Virtualization' (NFV) management and orchestration?",
+    "options": {
+      "A": "BGP",
+      "B": "MANO (Management and Orchestration)",
+      "C": "OSPF",
+      "D": "STP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Microsegmentation' in the context of Cisco ACI or VMware NSX?",
+    "options": {
+      "A": "Using very small routers",
+      "B": "The ability to apply security policies to individual virtual machines or workloads, regardless of their IP subnet",
+      "C": "Splitting a fiber cable into smaller threads",
+      "D": "Organizing the network by file size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'LISP' (Locator/ID Separation Protocol) in SD-Access?",
+    "options": {
+      "A": "To encrypt voice calls",
+      "B": "To separate a device's identity (EID) from its current location (RLOC) in the network to facilitate mobility",
+      "C": "To count the number of users on a switch",
+      "D": "To speed up the DNS resolution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CoPP' (Control Plane Policing) designed to prevent?",
+    "options": {
+      "A": "Employees from using social media",
+      "B": "DoS attacks targeting the router's CPU by rate-limiting traffic destined for the control plane",
+      "C": "Power surges in the server room",
+      "D": "Duplicate IP addresses"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In BGP, what is a 'Route Reflector' used for?",
+    "options": {
+      "A": "To make the router look shiny",
+      "B": "To reduce the need for a full-mesh iBGP configuration by allowing a router to re-advertise iBGP learned routes",
+      "C": "To block all incoming traffic",
+      "D": "To mirror the traffic for monitoring"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is '802.1X' commonly used for in enterprise networks?",
+    "options": {
+      "A": "High-speed file transfer",
+      "B": "Port-based Network Access Control (NAC) to authenticate devices before granting network access",
+      "C": "Managing wireless interference",
+      "D": "Setting the time on network devices"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'Control Plane' and 'Data Plane' in a switch?",
+    "options": {
+      "A": "There is no difference",
+      "B": "The Control Plane makes decisions (routing tables), while the Data Plane forwards actual packets based on those decisions",
+      "C": "The Control Plane is for power, and the Data Plane is for data",
+      "D": "The Control Plane is slower than the Data Plane"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to perform a 'Man-in-the-Middle' (MITM) analysis for security auditing?",
+    "options": {
+      "A": "Excel",
+      "B": "Ettercap or Bettercap",
+      "C": "PowerPoint",
+      "D": "Word"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DHCP Snooping'?",
+    "options": {
+      "A": "Watching what users search for on the web",
+      "B": "A security feature that prevents unauthorized (rogue) DHCP servers from providing IP addresses to clients",
+      "C": "A way to speed up IP assignment",
+      "D": "A method to track how long a user is online"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OSPF, what is an 'Area 0' (Backbone Area)?",
+    "options": {
+      "A": "The area where no traffic is allowed",
+      "B": "The central area to which all other OSPF areas must physically or logically connect",
+      "C": "The area for wireless devices only",
+      "D": "The area with the lowest security level"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MTU' (Maximum Transmission Unit)?",
+    "options": {
+      "A": "The maximum number of users on a network",
+      "B": "The size of the largest protocol data unit (packet) that can be communicated in a single network layer transaction",
+      "C": "The maximum temperature of a router",
+      "D": "The maximum length of a fiber cable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of 'DMVPN' (Dynamic Multipoint VPN)?",
+    "options": {
+      "A": "To encrypt individual files on a hard drive",
+      "B": "To allow for the dynamic creation of on-demand VPN tunnels between branch offices (spokes) without routing all traffic through the central hub",
+      "C": "To increase the speed of a home Wi-Fi connection",
+      "D": "To replace the need for an Internet Service Provider"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In BGP, which attribute is considered 'discretionary' and is used to prefer one exit point out of the local autonomous system over others?",
+    "options": {
+      "A": "AS_PATH",
+      "B": "Local Preference",
+      "C": "MED (Multi-Exit Discriminator)",
+      "D": "Origin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NetFlow' used for in network administration?",
+    "options": {
+      "A": "To charge users based on their download speed",
+      "B": "To collect and monitor IP network traffic as it enters or exits an interface, providing data for traffic analysis and security",
+      "C": "To physically clean the fiber optic cables",
+      "D": "To assign IP addresses automatically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Infrastructure as Code (IaC) tool uses 'Playbooks' written in YAML to automate the configuration of network devices?",
+    "options": {
+      "A": "Terraform",
+      "B": "Ansible",
+      "C": "Docker",
+      "D": "Kubernetes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Weight' attribute in BGP represent?",
+    "options": {
+      "A": "The physical weight of the router",
+      "B": "A Cisco-proprietary attribute used to select a path when a router has multiple exit points; it is local to the router and not advertised to peers",
+      "C": "The number of hops to the destination",
+      "D": "The priority of the customer's data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'IPsec' and at which OSI layer does it operate?",
+    "options": {
+      "A": "A protocol for emails at Layer 7",
+      "B": "A suite of protocols for securing IP communications by authenticating and encrypting each IP packet at Layer 3",
+      "C": "A method for naming computers at Layer 2",
+      "D": "A way to connect cables at Layer 1"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of 'Network Address Translation' (NAT) maps multiple private IP addresses to a single public IP address using different port numbers?",
+    "options": {
+      "A": "Static NAT",
+      "B": "PAT (Port Address Translation / NAT Overload)",
+      "C": "Dynamic NAT",
+      "D": "Policy NAT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stateful Inspection' in a firewall?",
+    "options": {
+      "A": "Checking the weight of each packet",
+      "B": "The ability of a firewall to track the state of active connections and determine which network packets to allow based on the context of the session",
+      "C": "Blocking traffic from specific countries (states)",
+      "D": "Restarting the firewall every hour"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Next-Hop Resolution Protocol' (NHRP) in a DMVPN environment?",
+    "options": {
+      "A": "To encrypt the data packets",
+      "B": "To allow spokes to find the public IP address of other spokes to build direct tunnels",
+      "C": "To count the number of routers in a network",
+      "D": "To resolve domain names to IP addresses"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SNMP version introduced 'User-based Security Model' (USM) for authentication and privacy (encryption)?",
+    "options": {
+      "A": "SNMPv1",
+      "B": "SNMPv3",
+      "C": "SNMPv2c",
+      "D": "SNMPv4"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'EIGRP's' primary advantage over RIP?",
+    "options": {
+      "A": "It is easier to configure",
+      "B": "It uses the DUAL algorithm for faster convergence and supports VLSM and classless routing",
+      "C": "It only works on wireless networks",
+      "D": "It uses more bandwidth to ensure accuracy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Root Guard' on a switch used to protect?",
+    "options": {
+      "A": "The server's root password",
+      "B": "The Spanning Tree topology by preventing unauthorized switches from becoming the Root Bridge",
+      "C": "The physical foundation of the server rack",
+      "D": "The main fiber connection to the building"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In networking, what is 'Jitter'?",
+    "options": {
+      "A": "The total amount of data sent",
+      "B": "The variation in the delay of received packets, which can cause issues in real-time applications like VoIP",
+      "C": "The shaking of a router during an earthquake",
+      "D": "The number of times a packet is dropped"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'VTP' (VLAN Trunking Protocol)?",
+    "options": {
+      "A": "To encrypt VLAN traffic",
+      "B": "To synchronize the VLAN database across multiple switches within a common domain",
+      "C": "To increase the number of VLANs allowed",
+      "D": "To connect a switch to a router"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Port Mirroring' (SPAN) used for?",
+    "options": {
+      "A": "To create a backup of a switch port",
+      "B": "To copy network traffic from one or more ports to another port for analysis by a packet sniffer or IDS",
+      "C": "To double the speed of a port",
+      "D": "To allow two users to share one cable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'REST APIs' in modern network management?",
+    "options": {
+      "A": "To allow the router to rest during low-traffic periods",
+      "B": "To provide a standardized way for software applications to communicate with and configure network devices using HTTP methods",
+      "C": "To encrypt the physical layer of the OSI model",
+      "D": "To replace the need for an IP address"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP attribute is the first criteria used in the path selection process on a Cisco router?",
+    "options": {
+      "A": "AS_PATH",
+      "B": "Weight",
+      "C": "Local Preference",
+      "D": "MED"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Cisco SD-Access, what is the 'Fabric Edge' node responsible for?",
+    "options": {
+      "A": "Connecting the fabric to the external internet",
+      "B": "Connecting end-user devices to the fabric and performing identity-based policy enforcement",
+      "C": "Storing the entire routing table of the internet",
+      "D": "Managing the power distribution of the data center"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SaltStack' in the context of network automation?",
+    "options": {
+      "A": "A tool for cleaning hardware contacts",
+      "B": "A Python-based open-source configuration management software used for automating network device setup",
+      "C": "A database for storing user passwords",
+      "D": "A type of firewall hardware"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'TARP' (Transparent ARP) used for in specialized networking?",
+    "options": {
+      "A": "To hide a computer's MAC address from everyone",
+      "B": "A protocol used in some older networks to resolve identifiers to network addresses without manual configuration",
+      "C": "To speed up the internet by 10x",
+      "D": "To block spam emails at the physical layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cloud connectivity option provides a dedicated, private physical connection from an on-premises data center to a public cloud provider like AWS or Azure?",
+    "options": {
+      "A": "Site-to-Site VPN",
+      "B": "Direct Connect / ExpressRoute",
+      "C": "Public Internet",
+      "D": "Dial-up"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'IDPS' (Intrusion Detection and Prevention System) use 'Signatures' for?",
+    "options": {
+      "A": "To verify the identity of the network administrator",
+      "B": "To match known patterns of malicious traffic or code to identify and block attacks",
+      "C": "To sign off on network changes",
+      "D": "To encrypt the login screen"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MTU Path Discovery' (PMTUD)?",
+    "options": {
+      "A": "A way to find the shortest physical cable path",
+      "B": "A technique for determining the maximum transmission unit size on the network path between two IP hosts to avoid IP fragmentation",
+      "C": "A tool to measure the weight of a router",
+      "D": "A method to find the MAC address of a gateway"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Python-based networking, what is 'Netmiko'?",
+    "options": {
+      "A": "A brand of network switches",
+      "B": "A multi-vendor library that simplifies SSH connections to network devices for automation scripts",
+      "C": "A type of fiber optic connector",
+      "D": "An operating system for routers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unicast Reverse Path Forwarding' (uRPF) used for?",
+    "options": {
+      "A": "To speed up routing lookups",
+      "B": "A security feature that helps mitigate IP address spoofing by verifying that the source IP of a packet is reachable via the interface it arrived on",
+      "C": "To allow a router to send data backwards",
+      "D": "To combine two IP addresses into one"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is primarily used for log message collection and management from various network devices to a central server?",
+    "options": {
+      "A": "SNMP",
+      "B": "Syslog",
+      "C": "FTP",
+      "D": "HTTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PBR' (Policy-Based Routing)?",
+    "options": {
+      "A": "Routing based on the political policies of a country",
+      "B": "A technique used to make routing decisions based on policies defined by the network administrator, such as source IP or application type",
+      "C": "A way to automatically delete old routes",
+      "D": "Routing only for public institutions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Golden Image' in network device management?",
+    "options": {
+      "A": "A router made of gold",
+      "B": "A validated and approved version of an Operating System (OS) used as a standard for all compatible devices in the network",
+      "C": "The first photo taken of the server room",
+      "D": "A high-resolution diagram of the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Flow Control' in Ethernet (802.3x)?",
+    "options": {
+      "A": "Controlling the flow of electricity to the switch",
+      "B": "A mechanism that allows a receiving node to signal the sender to temporarily stop data transmission to prevent buffer overflow",
+      "C": "A way to change the direction of data",
+      "D": "Managing the number of users on a port"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP feature is used to prevent a router from becoming overwhelmed by a peer that is constantly 'flapping' (advertising and withdrawing) routes?",
+    "options": {
+      "A": "Route Filtering",
+      "B": "Route Dampening",
+      "C": "Route Summation",
+      "D": "Route Mirroring"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shadow Properties' in Entity Framework Core?",
+    "options": {
+      "A": "Properties that are private to the class",
+      "B": "Properties that are defined in the EF Core model but do not exist in the actual .NET entity class",
+      "C": "Properties that are only used for UI rendering",
+      "D": "Duplicate properties created during a database migration"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SignalR 'Transport' provides the best performance by allowing full-duplex communication over a single TCP connection?",
+    "options": {
+      "A": "Long Polling",
+      "B": "Server-Sent Events",
+      "C": "WebSockets",
+      "D": "HTTP Post"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'AddHttpClient' extension method in IServiceCollection?",
+    "options": {
+      "A": "To download files to the server",
+      "B": "To configure and register IHttpClientFactory, which manages the lifetime of HttpMessageHandler to avoid socket exhaustion",
+      "C": "To create a new browser window for the user",
+      "D": "To increase the speed of the local network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In ASP.NET Core Middleware, what does the 'next()' delegate represent?",
+    "options": {
+      "A": "The next page in the application",
+      "B": "A reference to the next middleware component in the request processing pipeline",
+      "C": "The next user in the queue",
+      "D": "The command to restart the server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compiled Queries' in EF Core used for?",
+    "options": {
+      "A": "To write SQL code manually",
+      "B": "To improve performance by pre-compiling LINQ queries so they don't need to be translated to SQL every time they execute",
+      "C": "To check for syntax errors in the database",
+      "D": "To export data to a CSV file"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of 'MassTransit' or 'NServiceBus' in a .NET microservice architecture?",
+    "options": {
+      "A": "To design the user interface",
+      "B": "To act as a service bus abstraction for managing asynchronous messaging and distributed transactions",
+      "C": "To compress the application's source code",
+      "D": "To manage the server's hardware temperature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In C# 11+, what does a 'Required' member ensure?",
+    "options": {
+      "A": "The property must be a string",
+      "B": "The property must be initialized during object creation via an object initializer or constructor",
+      "C": "The property cannot be modified after creation",
+      "D": "The property is only visible to the Admin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Polly' in the .NET ecosystem?",
+    "options": {
+      "A": "A testing framework for UI",
+      "B": "A resilience and transient-fault-handling library that allows developers to express policies like Retry, Circuit Breaker, and Timeout",
+      "C": "An ORM alternative to EF Core",
+      "D": "A tool for generating documentation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Seeding' in Entity Framework Core?",
+    "options": {
+      "A": "Backing up the database",
+      "B": "The process of populating a database with an initial set of data (e.g., admin users, lookup codes) during migration",
+      "C": "Cleaning the database of old records",
+      "D": "Sharing data between two different databases"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which ASP.NET Core feature allows you to bundle and minify CSS and JS files automatically at runtime?",
+    "options": {
+      "A": "Dependency Injection",
+      "B": "Bundler & Minifier (or WebOptimizer in newer versions)",
+      "C": "Razor Pages",
+      "D": "Entity Framework"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'IAsyncEnumerable<T>' interface allow in .NET?",
+    "options": {
+      "A": "To run multiple threads at once",
+      "B": "To iterate over a data source asynchronously, allowing for streaming of results (e.g., from a database or API)",
+      "C": "To hide data from the client",
+      "D": "To convert a list into an array"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'Kestrel' in ASP.NET Core?",
+    "options": {
+      "A": "A database engine for mobile apps",
+      "B": "A cross-platform, high-performance web server for ASP.NET Core",
+      "C": "A tool for encrypting passwords",
+      "D": "A library for sending emails"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In EF Core, what is 'Eager Loading'?",
+    "options": {
+      "A": "Loading data as soon as the app starts",
+      "B": "Loading related data as part of the initial query using the .Include() method",
+      "C": "Loading data only when it is accessed for the first time",
+      "D": "Loading data in the background"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'gRPC' in the context of .NET communication?",
+    "options": {
+      "A": "A way to connect to a printer",
+      "B": "A high-performance Remote Procedure Call framework that uses HTTP/2 and Protocol Buffers (protobuf)",
+      "C": "A database management system",
+      "D": "A library for generating QR codes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Health Checks' in ASP.NET Core?",
+    "options": {
+      "A": "To monitor the physical health of the developer",
+      "B": "To expose an endpoint that reports the status of the application and its dependencies (DB, cache) for monitoring tools",
+      "C": "To check for viruses in the code",
+      "D": "To see if the server has enough RAM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of 'Segment Routing' (SR) in modern service provider networks?",
+    "options": {
+      "A": "To divide a physical cable into smaller segments",
+      "B": "To simplify MPLS by removing the need for LDP/RSVP and using source routing for traffic engineering",
+      "C": "To encrypt data at the application layer",
+      "D": "To assign a unique MAC address to every packet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Cisco SD-Access, what is the 'Control Plane' protocol based on?",
+    "options": {
+      "A": "OSPF",
+      "B": "LISP (Locator/ID Separation Protocol)",
+      "C": "BGP",
+      "D": "RIP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'BGP FlowSpec' allow network administrators to do?",
+    "options": {
+      "A": "Check the speed of a BGP connection",
+      "B": "Distribute traffic-filtering rules (ACLs) across a network to mitigate DDoS attacks in real-time",
+      "C": "Change the background color of the router CLI",
+      "D": "Monitor the temperature of the BGP neighbors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model-Driven Telemetry' compared to traditional SNMP?",
+    "options": {
+      "A": "A slower way to get data",
+      "B": "A 'push' model where devices stream data continuously at high speeds based on a structured model (YANG)",
+      "C": "A method of taking photos of the router",
+      "D": "A way to manage routers via social media"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Scalable Group Tag' (SGT) in Cisco TrustSec?",
+    "options": {
+      "A": "To label the physical weight of a switch",
+      "B": "To provide identity-based access control by tagging traffic with a role rather than an IP address",
+      "C": "To speed up the boot time of the device",
+      "D": "To identify the manufacturer of the packet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In VXLAN, what is a 'VTEP' (VXLAN Tunnel End Point)?",
+    "options": {
+      "A": "The physical port where the internet enters the building",
+      "B": "The device (switch or host) that performs the encapsulation and de-encapsulation of VXLAN traffic",
+      "C": "A tool for testing cable continuity",
+      "D": "A specific type of fiber optic connector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intent-Based Networking' (IBN)?",
+    "options": {
+      "A": "Networking based on what the user wants to search for",
+      "B": "A software-managed approach that translates business intent into network configurations and uses AI to maintain it",
+      "C": "A network that only works when you intend it to",
+      "D": "A database of common user intentions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is typically used as the 'Underlay' routing protocol for Cisco SD-Access?",
+    "options": {
+      "A": "IS-IS",
+      "B": "Telnet",
+      "C": "HTTP",
+      "D": "FTP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Assurance'?",
+    "options": {
+      "A": "An insurance policy for broken routers",
+      "B": "The use of mathematical models and telemetry to verify that the network is operating as intended",
+      "C": "A guarantee that the internet will never go down",
+      "D": "A physical check of all network cables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anycast RP' used for in Multicast networking?",
+    "options": {
+      "A": "To send video to any user",
+      "B": "To provide redundancy and load sharing for the Rendezvous Point (RP) in a PIM Sparse Mode network",
+      "C": "To assign an IP to any device",
+      "D": "To block all multicast traffic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'YANG' data modeling language used for?",
+    "options": {
+      "A": "Writing emails to developers",
+      "B": "Defining the structure of data sent via network management protocols like NETCONF and RESTCONF",
+      "C": "Designing the hardware components of a switch",
+      "D": "A programming language for building web browsers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MACsec' (802.1AE)?",
+    "options": {
+      "A": "A security feature for Apple computers only",
+      "B": "A Layer 2 hop-by-hop encryption standard that protects data integrity and confidentiality on wired networks",
+      "C": "A tool to hide the MAC address",
+      "D": "A way to speed up MAC address lookups"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In BGP, what does 'Prefix List' filtering provide over standard ACLs?",
+    "options": {
+      "A": "It is much slower but more accurate",
+      "B": "The ability to filter based on both the network prefix and the subnet mask length (ge/le)",
+      "C": "It only works for IPv6",
+      "D": "It renames the routes to make them easier to read"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'EVPN' (Ethernet VPN) often used for in data centers?",
+    "options": {
+      "A": "To provide a secure connection for home users",
+      "B": "As a control plane for VXLAN to handle MAC learning and loop prevention more efficiently",
+      "C": "To replace the need for BGP",
+      "D": "To increase the power efficiency of switches"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SD-WAN SASE' (Secure Access Service Edge)?",
+    "options": {
+      "A": "A type of physical lock for a server rack",
+      "B": "A framework that combines SD-WAN capabilities with cloud-native security services (like FWaaS and ZTNA)",
+      "C": "A network that only works in the cloud",
+      "D": "A way to connect cables using software"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Network Observability' and how does it differ from traditional monitoring?",
+    "options": {
+      "A": "Monitoring tells you if a system is up; Observability uses telemetry to explain why a system is behaving a certain way",
+      "B": "Monitoring is for hardware; Observability is for software",
+      "C": "Observability requires a physical telescope to check fiber lines",
+      "D": "Monitoring is done by AI; Observability is done by humans"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 5G networking, what is 'Network Slicing'?",
+    "options": {
+      "A": "Cutting a SIM card to fit a smaller slot",
+      "B": "Creating multiple virtual networks on a single physical 5G infrastructure to meet specific service requirements (e.g., low latency for IoT)",
+      "C": "Splitting a fiber optic cable into four threads",
+      "D": "Limiting the data usage of a single user"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Service Mesh' (like Istio) in a cloud-native network?",
+    "options": {
+      "A": "To provide physical cooling for server racks",
+      "B": "To manage service-to-service communication, providing security, observability, and traffic control without changing application code",
+      "C": "To act as a backup ISP for the cloud",
+      "D": "To encrypt data stored on hard drives"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NetDevOps'?",
+    "options": {
+      "A": "A new brand of routers",
+      "B": "The application of DevOps principles (CI/CD, version control, automation) to network operations and configuration",
+      "C": "A specialized department that only fixes cables",
+      "D": "A tool for designing website layouts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'PIM-SM' (Protocol Independent Multicast - Sparse Mode) use to coordinate multicast traffic?",
+    "options": {
+      "A": "A central database of all internet users",
+      "B": "A Rendezvous Point (RP) that acts as a meeting place for sources and receivers",
+      "C": "A physical switch located in the geographical center of the network",
+      "D": "A timer that resets every 60 seconds"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'gNMI' (gRPC Network Management Interface)?",
+    "options": {
+      "A": "A protocol for sending emails to routers",
+      "B": "A gRPC-based protocol used to manage and stream state information from network devices using YANG models",
+      "C": "A type of physical connector for high-speed data",
+      "D": "A graphics card driver for network simulations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Leaf-Spine' architecture, why is every Leaf switch connected to every Spine switch?",
+    "options": {
+      "A": "To use up all the available cables",
+      "B": "To ensure predictable, low-latency 'east-west' traffic flow and provide high redundancy",
+      "C": "To prevent the switches from falling over",
+      "D": "To make the network look more complex for security"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BGP Route Reflection' designed to solve in a large iBGP network?",
+    "options": {
+      "A": "The high cost of fiber optic cables",
+      "B": "The 'full-mesh' requirement where every iBGP router must connect to every other iBGP router",
+      "C": "The delay caused by slow DNS servers",
+      "D": "The need for physical cooling in the server room"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Chaos Engineering' in the context of network reliability?",
+    "options": {
+      "A": "Working in a disorganized office",
+      "B": "Intentionally introducing failures (like shutting down a switch) to test a network's resilience and recovery mechanisms",
+      "C": "A method of hacking into competitor networks",
+      "D": "Designing a network with no documentation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SD-WAN FEC' (Forward Error Correction)?",
+    "options": {
+      "A": "A way to fix typos in the router configuration",
+      "B": "A technique where the sender sends redundant data to allow the receiver to reconstruct lost packets without a retransmission",
+      "C": "A tool for measuring the distance of a WAN link",
+      "D": "An automatic billing system for internet service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Terraform' used for in Cloud Networking?",
+    "options": {
+      "A": "To design the 3D layout of a data center",
+      "B": "To define and provision network infrastructure (VPCs, Subnets, Gateways) using declarative configuration files",
+      "C": "To monitor the temperature of the cloud servers",
+      "D": "To manage the payroll of the IT team"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'M-LAG' (Multi-chassis Link Aggregation)?",
+    "options": {
+      "A": "Using two different types of fiber in one cable",
+      "B": "A technology that allows two separate switches to appear as a single logical switch to a downstream device for redundancy and bandwidth",
+      "C": "A way to connect a computer to two different internet providers",
+      "D": "A protocol for managing lag in online gaming"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'FRR' (Fast Reroute) in an MPLS network?",
+    "options": {
+      "A": "A faster way to type commands in the CLI",
+      "B": "A mechanism that provides high-speed local restoration of traffic when a link or node fails",
+      "C": "A tool for finding the cheapest routing path",
+      "D": "A method of restarting the router quickly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In IPv6, what is a 'Link-Local' address (FE80::/10) used for?",
+    "options": {
+      "A": "Connecting to websites on the global internet",
+      "B": "Communication between devices on the same local link (subnet), often used for neighbor discovery",
+      "C": "Assigning a permanent IP to a server",
+      "D": "Creating a private VPN tunnel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'WLC' (Wireless LAN Controller) in an enterprise?",
+    "options": {
+      "A": "To provide power to the lightbulbs in the office",
+      "B": "To centrally manage and configure multiple access points, handling roaming, security, and frequency mapping",
+      "C": "To act as a physical firewall for the wired network",
+      "D": "To record the internet history of all employees"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In BGP, what is the 'AS_PATH Prepending' technique used for?",
+    "options": {
+      "A": "To make a route more attractive to incoming traffic",
+      "B": "To influence inbound traffic by making a specific path appear longer and thus less desirable to external Autonomous Systems",
+      "C": "To encrypt the routing table",
+      "D": "To increase the speed of the BGP update process"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SR-TE' (Segment Routing Traffic Engineering)?",
+    "options": {
+      "A": "A way to measure the physical length of a fiber cable",
+      "B": "A steering mechanism that allows the network to direct traffic along a specific path that meets certain constraints (like latency or bandwidth) without using RSVP-TE",
+      "C": "A tool for naming segments of the network alphabetically",
+      "D": "A method for cooling high-density router racks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of 'NFV' (Network Function Virtualization)?",
+    "options": {
+      "A": "To replace all physical routers with wireless ones",
+      "B": "To decouple network functions (like firewalls, load balancers, or routers) from proprietary hardware and run them as software on standard servers",
+      "C": "To create a virtual 3D model of the data center",
+      "D": "To increase the power consumption of virtual machines"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP attribute is a non-transitive, optional attribute used to influence which entry point is preferred by an adjacent Autonomous System?",
+    "options": {
+      "A": "Local Preference",
+      "B": "MED (Multi-Exit Discriminator)",
+      "C": "AS_PATH",
+      "D": "Weight"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Perfect Forward Secrecy' (PFS) in a VPN connection?",
+    "options": {
+      "A": "A guarantee that the connection will never drop",
+      "B": "A feature that ensures that the compromise of one long-term key does not compromise the session keys used in the past",
+      "C": "A method for predicting future network traffic",
+      "D": "A way to hide the VPN's existence from an ISP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anycast DNS' and why is it used by CDNs?",
+    "options": {
+      "A": "To send DNS queries to every computer in the world",
+      "B": "To route a user's DNS query to the geographically closest available server to reduce latency",
+      "C": "To encrypt DNS queries at the physical layer",
+      "D": "To prevent users from visiting certain websites"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DHCP Option 82' primarily used for in service provider networks?",
+    "options": {
+      "A": "To increase the number of available IP addresses",
+      "B": "To provide additional information about the location of the client (like the switch port ID) to the DHCP server for security and policy enforcement",
+      "C": "To change the background color of the DHCP console",
+      "D": "To allow the user to choose their own IP address"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an MPLS network, what is a 'Penultimate Hop Popping' (PHP)?",
+    "options": {
+      "A": "A physical pop in the fiber optic line",
+      "B": "A process where the second-to-last router in an LSP removes the outer label to reduce the processing load on the final Egress LSR",
+      "C": "A way to increase the number of labels",
+      "D": "A bug that causes labels to disappear"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'EIGRP's feasibility condition'?",
+    "options": {
+      "A": "A check to see if the router is physically plugged in",
+      "B": "A mechanism to ensure a loop-free path by checking if a neighbor's advertised distance is less than the current router's feasible distance",
+      "C": "A rule that limits the number of EIGRP neighbors to 10",
+      "D": "A way to calculate the cost of electricity for the router"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SD-WAN Zero-Touch Provisioning' (ZTP)?",
+    "options": {
+      "A": "Designing a network without touching the keyboard",
+      "B": "A method to automatically configure and onboard a new branch router as soon as it is connected to the internet, without manual intervention",
+      "C": "A security feature that blocks all human access to the router",
+      "D": "A way to clean the router's ports automatically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used for the management of 'White Box' switches in an SDN environment?",
+    "options": {
+      "A": "Telnet",
+      "B": "OpenFlow or gNMI",
+      "C": "FTP",
+      "D": "TFTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bidirectional Forwarding Detection' (BFD)?",
+    "options": {
+      "A": "A way to see if a cable is connected at both ends",
+      "B": "A low-overhead, fast-failure-detection protocol used to quickly detect link failures between two adjacent routers",
+      "C": "A method for sending data in two directions at once",
+      "D": "A tool for detecting dual IP addresses"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CoPP' (Control Plane Policing) primarily protecting?",
+    "options": {
+      "A": "The user's personal data",
+      "B": "The router's CPU from being overwhelmed by management and protocol traffic",
+      "C": "The physical security of the server room",
+      "D": "The speed of the internet connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'IPv6 SLAAC' (Stateless Address Autoconfiguration)?",
+    "options": {
+      "A": "A manual way to assign IPv6 addresses",
+      "B": "A method that allows a device to configure its own IPv6 address and gateway without a DHCPv6 server",
+      "C": "A way to convert IPv4 to IPv6",
+      "D": "A security protocol for IPv6"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Traffic Policing' compared to 'Traffic Shaping'?",
+    "options": {
+      "A": "Policing drops traffic that exceeds a rate, while shaping buffers and delays it",
+      "B": "Policing is for wireless, shaping is for wired",
+      "C": "There is no difference",
+      "D": "Policing increases the speed of traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'BGP Peer Grouping' used for in large-scale configurations?",
+    "options": {
+      "A": "To group routers by their physical location",
+      "B": "To simplify configuration and reduce CPU overhead by allowing a group of neighbors to share the same outbound update policy",
+      "C": "To encrypt the connection between BGP neighbors",
+      "D": "To limit the number of routes a neighbor can send"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which security feature uses a 'Trusted Database' to verify the source of an IP packet and prevent IP Spoofing?",
+    "options": {
+      "A": "Port Security",
+      "B": "IP Source Guard",
+      "C": "VLAN Access Maps",
+      "D": "STP Root Guard"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of 'OTV' (Overlay Transport Virtualization) in Data Center Interconnects?",
+    "options": {
+      "A": "To increase the speed of fiber links",
+      "B": "To extend Layer 2 domains across a Layer 3 network between geographically dispersed data centers",
+      "C": "To monitor the temperature of servers in different cities",
+      "D": "To replace BGP as the main routing protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'VRF-Lite' refer to?",
+    "options": {
+      "A": "A smaller version of a router for home use",
+      "B": "The deployment of Virtual Routing and Forwarding without requiring MPLS in the network core",
+      "C": "A router that uses less power than standard models",
+      "D": "A way to compress routing tables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mechanism is used by 'TCP Selective Acknowledgment' (SACK) to improve performance?",
+    "options": {
+      "A": "It ignores all lost packets to maintain speed",
+      "B": "It allows the receiver to inform the sender about all segments that have been received successfully, so only the missing ones are retransmitted",
+      "C": "It encrypts the acknowledgement packets",
+      "D": "It doubles the window size automatically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unicast Reverse Path Forwarding' (uRPF) in 'Loose Mode'?",
+    "options": {
+      "A": "It checks if the source IP exists in the routing table, regardless of which interface it arrived on",
+      "B": "It only allows packets that arrive on the best return path interface",
+      "C": "It blocks all packets that don't have a MAC address",
+      "D": "It reverses the direction of the traffic flow"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a modern 'Spine-Leaf' fabric, what is the role of 'BGP-EVPN'?",
+    "options": {
+      "A": "To provide physical power to the spine switches",
+      "B": "To act as the control plane for distributing MAC and IP reachability information within the VXLAN overlay",
+      "C": "To count the number of cables connected to the leaf",
+      "D": "To manage the heating and cooling of the rack"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Administrative Distance' of a static route pointing to an exit interface (on a Cisco router)?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "5",
+      "D": "20"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NTP Stratum' level used to indicate?",
+    "options": {
+      "A": "The speed of the network connection",
+      "B": "The distance (number of hops) from an authoritative time source",
+      "C": "The security level of the time server",
+      "D": "The number of users currently synced"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP feature allows a router to maintain its forwarding state while its neighbor is restarting, preventing traffic loss?",
+    "options": {
+      "A": "Route Dampening",
+      "B": "Graceful Restart (GR)",
+      "C": "Atomic Aggregate",
+      "D": "Soft Reconfiguration"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of 'BGP FlowSpec' in a service provider network?",
+    "options": {
+      "A": "To automate the assignment of BGP Autonomous System numbers",
+      "B": "To propagate traffic filtering rules (ACLs) across BGP speakers to mitigate DDoS attacks at the edge",
+      "C": "To increase the maximum transmission unit (MTU) of BGP updates",
+      "D": "To mirror BGP traffic to a centralized analytics server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Cisco SD-Access, which node is responsible for mapping Endpoint Identifiers (EIDs) to Routing Locators (RLOCs)?",
+    "options": {
+      "A": "Fabric Edge Node",
+      "B": "Control Plane Node",
+      "C": "Intermediate Node",
+      "D": "Border Node"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Segment Routing over IPv6' (SRv6) primarily designed to eliminate in the data plane?",
+    "options": {
+      "A": "The need for BGP",
+      "B": "The need for MPLS labels by using the IPv6 Segment Routing Header (SRH)",
+      "C": "The use of MAC addresses",
+      "D": "IP fragmentation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mechanism is used in 'Ethernet VPN' (EVPN) to prevent a multi-homed device from receiving its own broadcast traffic (Split Horizon)?",
+    "options": {
+      "A": "Spanning Tree Protocol (STP)",
+      "B": "Ethernet Segment Identifier (ESI) Label",
+      "C": "Route Distinguishers",
+      "D": "VLAN ID"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'YANG' (Yet Another Next Generation) provide for network automation?",
+    "options": {
+      "A": "A transport protocol like SSH",
+      "B": "A data modeling language used to define the structure of configuration and state data",
+      "C": "A programming language similar to Python",
+      "D": "A hardware standard for switch ports"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Network Assurance', what is 'Formal Verification'?",
+    "options": {
+      "A": "Checking if the router is physically in the rack",
+      "B": "Using mathematical models to prove that the network configuration satisfies its security and intent policies",
+      "C": "Manually verifying every IP address in a spreadsheet",
+      "D": "Ping testing every device on the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP feature allows for the 'shadowing' of routes to verify convergence without impacting actual traffic flow?",
+    "options": {
+      "A": "Route Reflector",
+      "B": "BGP Monitoring Protocol (BMP)",
+      "C": "Route Dampening",
+      "D": "Next-Hop Self"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Scalable Group Access Control List' (SGACL) in Cisco TrustSec?",
+    "options": {
+      "A": "To filter traffic based on IP addresses and Port numbers",
+      "B": "To enforce policy based on source and destination Scalable Group Tags (SGTs) rather than IP addresses",
+      "C": "To increase the speed of the hardware switching engine",
+      "D": "To manage the power output of PoE ports"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'LISP Instance ID' provide in a multi-tenant SD-Access environment?",
+    "options": {
+      "A": "A way to identify the physical chassis of a router",
+      "B": "Virtual Routing and Forwarding (VRF) separation at the control plane level",
+      "C": "The speed limit for a specific user group",
+      "D": "The encryption key for the tunnel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model-Driven Telemetry' (MDT) as compared to traditional SNMP polling?",
+    "options": {
+      "A": "A method of taking pictures of the network gear",
+      "B": "A push-based mechanism that streams data from the device to a collector based on a defined data model",
+      "C": "A way to manually check the health of a switch",
+      "D": "A protocol for sending emails to the network admin"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "In React, what is the primary purpose of the 'Virtual DOM'?",
+    "options": {
+      "A": "To act as a complete replacement for the browser's DOM",
+      "B": "To improve performance by minimizing direct updates to the real DOM through a reconciliation process",
+      "C": "To store user data securely in the browser's memory",
+      "D": "To allow React components to be written in pure HTML"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which React hook is used to add and manage state in a functional component?",
+    "options": {
+      "A": "useEffect",
+      "B": "useState",
+      "C": "useContext",
+      "D": "useReducer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'JSX' stand for in the context of React?",
+    "options": {
+      "A": "Java Standard XML",
+      "B": "JavaScript XML",
+      "C": "JSON Syntax Extension",
+      "D": "JavaScript X-Platform"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Reconciliation' process in React?",
+    "options": {
+      "A": "The process of converting CSS into JavaScript",
+      "B": "The algorithm React uses to diff one tree with another to determine which parts need to be changed",
+      "C": "A method for debugging code errors",
+      "D": "The way React syncs data with a backend database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In React components, what are 'Props'?",
+    "options": {
+      "A": "Internal private state variables",
+      "B": "Read-only inputs passed from a parent component to a child component",
+      "C": "Functions used to delete components",
+      "D": "A type of global CSS style"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook would you use to perform a side effect, such as data fetching, when a component mounts?",
+    "options": {
+      "A": "useState",
+      "B": "useEffect",
+      "C": "useMemo",
+      "D": "useRef"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of the 'key' prop when rendering a list of elements in React?",
+    "options": {
+      "A": "It is used to set the font size of the list",
+      "B": "It helps React identify which items have changed, been added, or been removed for efficient re-rendering",
+      "C": "It is a password to access the list data",
+      "D": "It renames the HTML tags in the list"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pure Component' in React?",
+    "options": {
+      "A": "A component that has no CSS",
+      "B": "A component that only re-renders if its props or state have changed (performing a shallow comparison)",
+      "C": "A component written in TypeScript",
+      "D": "A component that doesn't use any hooks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hook is used to access the value of a 'Ref' (a direct reference to a DOM element)?",
+    "options": {
+      "A": "useState",
+      "B": "useRef",
+      "C": "useCallback",
+      "D": "useLayoutEffect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In React, what is 'Prop Drilling'?",
+    "options": {
+      "A": "A way to optimize component performance",
+      "B": "The process of passing data through multiple layers of components to reach a deeply nested child",
+      "C": "A security vulnerability in forms",
+      "D": "Installing new props using the terminal"
+    },
+    "answer": "B"
+  }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "Networking"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

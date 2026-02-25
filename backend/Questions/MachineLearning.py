@@ -1,0 +1,2758 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+    {
+        "question": "What is the primary difference between Supervised and Unsupervised learning?",
+        "options": {
+            "A": "Supervised learning is faster",
+            "B": "Supervised learning uses labeled data; Unsupervised uses unlabeled data",
+            "C": "Unsupervised learning requires a human teacher",
+            "D": "There is no difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a 'Regression' problem?",
+        "options": {
+            "A": "Classifying an image as a dog or cat",
+            "B": "Predicting the stock price for tomorrow",
+            "C": "Grouping customers by shopping habits",
+            "D": "Detecting a fraudulent transaction"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'Overfitting' mean in Machine Learning?",
+        "options": {
+            "A": "The model is too simple to learn the data",
+            "B": "The model learns the training data too well, including the noise, and fails to generalize to new data",
+            "C": "The model takes too long to train",
+            "D": "The dataset is too large for the computer"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which algorithm is based on Bayes' Theorem of probability?",
+        "options": {
+            "A": "K-Means",
+            "B": "Naive Bayes",
+            "C": "Linear Regression",
+            "D": "Decision Trees"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a 'Decision Tree', what do the leaf nodes represent?",
+        "options": {
+            "A": "A question about the data",
+            "B": "The final outcome or classification",
+            "C": "The starting point of the dataset",
+            "D": "A random variable"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of a 'Train/Test Split'?",
+        "options": {
+            "A": "To make the data smaller",
+            "B": "To evaluate the model on unseen data to check its real-world performance",
+            "C": "To speed up the training process",
+            "D": "To encrypt the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which metric is commonly used to evaluate a Regression model?",
+        "options": {
+            "A": "Accuracy",
+            "B": "Root Mean Squared Error (RMSE)",
+            "C": "Precision",
+            "D": "F1-Score"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'K' in K-Nearest Neighbors (KNN)?",
+        "options": {
+            "A": "The number of clusters",
+            "B": "The number of closest data points to consider for classification",
+            "C": "The number of layers in a neural network",
+            "D": "The size of the dataset"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which algorithm is an ensemble of many Decision Trees?",
+        "options": {
+            "A": "Logistic Regression",
+            "B": "Random Forest",
+            "C": "SVM",
+            "D": "K-Means"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Feature Scaling'?",
+        "options": {
+            "A": "Adding more features to the model",
+            "B": "Normalizing the range of independent variables so they contribute equally to the model",
+            "C": "Deleting unused columns",
+            "D": "Changing the names of the columns"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the goal of 'Clustering'?",
+        "options": {
+            "A": "To predict a numerical value",
+            "B": "To group similar data points together based on their features",
+            "C": "To find the shortest path in a graph",
+            "D": "To classify images"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In 'Reinforcement Learning', what does the agent receive after taking an action?",
+        "options": {
+            "A": "A new dataset",
+            "B": "A reward or penalty",
+            "C": "A manual update",
+            "D": "A system reboot"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of the following is an example of 'Unsupervised Learning'?",
+        "options": {
+            "A": "Predicting if an email is spam",
+            "B": "Market basket analysis to find products frequently bought together",
+            "C": "Predicting the weather",
+            "D": "Handwritten digit recognition"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Dimensionality Reduction' primarily used for?",
+        "options": {
+            "A": "Increasing the number of features",
+            "B": "Reducing the number of input variables to simplify the model and reduce noise",
+            "C": "Compressing the final model size",
+            "D": "Encrypting the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Confusion Matrix' used for?",
+        "options": {
+            "A": "To confuse the model during training",
+            "B": "To describe the performance of a classification model on a set of test data",
+            "C": "To calculate the average value of a column",
+            "D": "To visualize a decision tree"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Precision' in classification?",
+        "options": {
+            "A": "The total number of correct predictions",
+            "B": "The ratio of correctly predicted positive observations to the total predicted positives",
+            "C": "The speed of the model",
+            "D": "The number of rows in the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Recall' (Sensitivity)?",
+        "options": {
+            "A": "The ability of a model to find all the relevant cases within a dataset",
+            "B": "Deleting the training data after use",
+            "C": "The time it takes to restart the model",
+            "D": "The size of the memory used"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which 'V' of Big Data refers to the speed at which data is generated?",
+        "options": {
+            "A": "Volume",
+            "B": "Velocity",
+            "C": "Variety",
+            "D": "Veracity"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary role of 'Hyperparameters'?",
+        "options": {
+            "A": "They are the parameters the model learns from the data",
+            "B": "They are settings configured by the developer before training to control the learning process",
+            "C": "They are the final predictions",
+            "D": "They are the hardware settings"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a popular Python library for Machine Learning?",
+        "options": {
+            "A": "Flask",
+            "B": "Scikit-Learn",
+            "C": "Requests",
+            "D": "BeautifulSoup"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cross-Validation' primarily used for?",
+        "options": {
+            "A": "To speed up the training of the model",
+            "B": "To assess how the results of a statistical analysis will generalize to an independent data set",
+            "C": "To encrypt the training data",
+            "D": "To visualize the features in 3D"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In the context of 'Bias-Variance Tradeoff', what does high bias usually lead to?",
+        "options": {
+            "A": "Overfitting",
+            "B": "Underfitting",
+            "C": "Perfect accuracy",
+            "D": "Data corruption"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Regularization' (like L1 or L2) in machine learning?",
+        "options": {
+            "A": "To make the data linear",
+            "B": "To prevent overfitting by adding a penalty for larger weights",
+            "C": "To increase the learning rate",
+            "D": "To remove duplicate rows"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which metric is the harmonic mean of Precision and Recall?",
+        "options": {
+            "A": "Accuracy",
+            "B": "F1-Score",
+            "C": "R-Squared",
+            "D": "Mean Absolute Error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'One-Hot Encoding' used for?",
+        "options": {
+            "A": "Scaling numerical values between 0 and 1",
+            "B": "Converting categorical data into a binary vector format",
+            "C": "Encryption of passwords",
+            "D": "Compressing the dataset"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Elbow Method' used to determine in K-Means clustering?",
+        "options": {
+            "A": "The optimal number of features",
+            "B": "The optimal number of clusters (K)",
+            "C": "The speed of the algorithm",
+            "D": "The accuracy of classification"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does a 'P-value' indicate in statistical significance testing?",
+        "options": {
+            "A": "The power of the model",
+            "B": "The probability that the observed results occurred by random chance",
+            "C": "The number of parameters in the model",
+            "D": "The precision of the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Principal Component Analysis' (PCA) used for?",
+        "options": {
+            "A": "Supervised classification",
+            "B": "Dimensionality reduction while preserving as much variance as possible",
+            "C": "Increasing the number of features",
+            "D": "Handling missing data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a technique to handle 'Imbalanced Datasets'?",
+        "options": {
+            "A": "SMOTE (Synthetic Minority Over-sampling Technique)",
+            "B": "Standard Scaling",
+            "C": "Linear Regression",
+            "D": "One-Hot Encoding"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the 'Curse of Dimensionality'?",
+        "options": {
+            "A": "Having too little data",
+            "B": "The phenomenon where the volume of the space increases so fast that data becomes sparse as features increase",
+            "C": "Using 3D images",
+            "D": "A hardware failure"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Standardization' (Z-score normalization)?",
+        "options": {
+            "A": "Scaling data to range [0, 1]",
+            "B": "Scaling data to have a mean of 0 and a standard deviation of 1",
+            "C": "Rounding data to the nearest integer",
+            "D": "Deleting outliers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Gradient Descent'?",
+        "options": {
+            "A": "An algorithm for sorting data",
+            "B": "An optimization algorithm used to minimize a cost function by iteratively moving toward the local minimum",
+            "C": "A type of data visualization",
+            "D": "A clustering method"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Linear Regression, what does 'R-Squared' measure?",
+        "options": {
+            "A": "The speed of the training",
+            "B": "The proportion of variance in the dependent variable explained by the independent variables",
+            "C": "The number of errors",
+            "D": "The size of the coefficients"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stochastic Gradient Descent' (SGD)?",
+        "options": {
+            "A": "Updating the model once using the entire dataset",
+            "B": "Updating the model parameters using only one training example (or a small batch) at a time",
+            "C": "A random classification method",
+            "D": "A way to backup the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Label Encoding'?",
+        "options": {
+            "A": "Adding descriptions to charts",
+            "B": "Converting categorical labels into numerical integers",
+            "C": "Formatting a JSON file",
+            "D": "Naming the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Hyperplane' in Support Vector Machines (SVM)?",
+        "options": {
+            "A": "A fast computer",
+            "B": "The decision boundary that separates different classes",
+            "C": "A multi-dimensional image",
+            "D": "A type of kernel"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Bootstrapping' in the context of Random Forest?",
+        "options": {
+            "A": "Starting the computer",
+            "B": "Randomly sampling the data with replacement to create different training sets for each tree",
+            "C": "Tying the data together",
+            "D": "Cleaning the hardware"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between 'L1 (Lasso)' and 'L2 (Ridge)' regularization?",
+        "options": {
+            "A": "L1 can result in sparse models (zeroing out some weights); L2 reduces weights but keeps them non-zero",
+            "B": "L2 is only for classification",
+            "C": "L1 is faster than L2",
+            "D": "There is no functional difference"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is an 'Outlier'?",
+        "options": {
+            "A": "A data point that is missing",
+            "B": "A data point that differs significantly from other observations in the dataset",
+            "C": "A data point used for testing only",
+            "D": "The header of a CSV file"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mean Absolute Error' (MAE)?",
+        "options": {
+            "A": "The square of the average error",
+            "B": "The average of the absolute differences between the actual and predicted values",
+            "C": "The total number of wrong guesses",
+            "D": "The maximum error in the set"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pruning' in a Decision Tree?",
+        "options": {
+            "A": "Adding more branches",
+            "B": "Removing parts of the tree that provide little power to classify instances to reduce complexity",
+            "C": "Sorting the nodes",
+            "D": "Deleting the root node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Kernel Trick' in SVM?",
+        "options": {
+            "A": "A way to bypass security",
+            "B": "A method to project data into a higher-dimensional space to make it linearly separable",
+            "C": "A way to compress the model",
+            "D": "A hardware optimization"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Feature Importance'?",
+        "options": {
+            "A": "Naming the features alphabetically",
+            "B": "A technique that assigns scores to input features based on how useful they are at predicting a target variable",
+            "C": "The size of the data file",
+            "D": "The number of users who saw the feature"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Data Leakage'?",
+        "options": {
+            "A": "Sharing data with unauthorized users",
+            "B": "When information from outside the training dataset is used to create the model, leading to overly optimistic results",
+            "C": "Data lost due to disk failure",
+            "D": "Formatting a hard drive"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Manhattan Distance'?",
+        "options": {
+            "A": "The distance between two cities",
+            "B": "The distance between two points measured along axes at right angles (sum of absolute differences)",
+            "C": "The shortest line between two points",
+            "D": "The time it takes to travel"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Euclidean Distance'?",
+        "options": {
+            "A": "The straight-line distance between two points in Euclidean space",
+            "B": "The distance measured on a curve",
+            "C": "The number of steps to reach a point",
+            "D": "The size of a vector"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Ensemble Learning'?",
+        "options": {
+            "A": "Learning in a large group of people",
+            "B": "The process of combining multiple models to produce one superior predictive model",
+            "C": "A type of neural network",
+            "D": "Processing data in parallel"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Bagging' (Bootstrap Aggregating)?",
+        "options": {
+            "A": "Putting data into bags",
+            "B": "An ensemble technique that trains multiple versions of a model on different samples and averages the results",
+            "C": "Deleting duplicate data",
+            "D": "Increasing the learning rate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Boosting'?",
+        "options": {
+            "A": "Speeding up the CPU",
+            "B": "An ensemble technique that trains models sequentially, with each new model focusing on the errors of the previous one",
+            "C": "A way to promote a model",
+            "D": "Adding more memory to the server"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which algorithm is a popular implementation of Gradient Boosting?",
+        "options": {
+            "A": "XGBoost",
+            "B": "Linear Regression",
+            "C": "K-Means",
+            "D": "PCA"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Data Imputation'?",
+        "options": {
+            "A": "Deleting the entire dataset",
+            "B": "The process of replacing missing data with substituted values",
+            "C": "Changing the file format",
+            "D": "Encrypting the columns"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Log Transformation' used for in preprocessing?",
+        "options": {
+            "A": "To record system logs",
+            "B": "To handle skewed data and make it more normally distributed",
+            "C": "To encrypt data",
+            "D": "To sort the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Feature Selection'?",
+        "options": {
+            "A": "Choosing the best model",
+            "B": "Reducing the number of input variables by selecting only those most relevant to the target",
+            "C": "Renaming columns",
+            "D": "Creating new data points"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does a 'Correlation Coefficient' of +1 mean?",
+        "options": {
+            "A": "No relationship",
+            "B": "A perfect positive linear relationship between two variables",
+            "C": "A perfect negative relationship",
+            "D": "An error in calculation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'A/B Testing'?",
+        "options": {
+            "A": "Comparing two versions of a model or product to see which performs better",
+            "B": "Testing with only two rows of data",
+            "C": "An alphabetical sorting test",
+            "D": "Testing a model with grades"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'AUC-ROC'?",
+        "options": {
+            "A": "The name of a library",
+            "B": "A performance measurement for classification problems at various threshold settings",
+            "C": "A type of decision tree",
+            "D": "A hardware monitor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Entropy' in the context of Decision Trees?",
+        "options": {
+            "A": "The speed of the tree",
+            "B": "A measure of impurity or randomness in the dataset",
+            "C": "The number of leaf nodes",
+            "D": "The depth of the tree"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Information Gain'?",
+        "options": {
+            "A": "Getting more rows from a database",
+            "B": "The reduction in entropy achieved by partitioning data based on a feature",
+            "C": "A way to speed up the internet",
+            "D": "The total size of the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a distance-based algorithm?",
+        "options": {
+            "A": "Logistic Regression",
+            "B": "K-Nearest Neighbors (KNN)",
+            "C": "Naive Bayes",
+            "D": "XGBoost"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Min-Max Scaling'?",
+        "options": {
+            "A": "Setting the maximum number of rows",
+            "B": "Transforming features to a fixed range, usually [0, 1]",
+            "C": "Deleting the smallest values",
+            "D": "Calculating the average"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Hold-out Method'?",
+        "options": {
+            "A": "Keeping data secret",
+            "B": "Setting aside a portion of the data (test set) and never using it during training",
+            "C": "A way to pause training",
+            "D": "An error handling technique"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Parametric' vs 'Non-parametric' models?",
+        "options": {
+            "A": "Parametric models have a fixed number of parameters; Non-parametric models grow with the data",
+            "B": "Parametric models use only numbers",
+            "C": "Non-parametric models are faster",
+            "D": "There is no difference"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Gradient Vanishing'?",
+        "options": {
+            "A": "The algorithm finishes quickly",
+            "B": "When the gradient becomes so small during training that weights stop updating",
+            "C": "Deleting the gradients",
+            "D": "A type of data loss"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Learning Rate' in optimization?",
+        "options": {
+            "A": "How fast the developer learns",
+            "B": "A tuning parameter that determines the step size at each iteration toward a minimum",
+            "C": "The speed of the CPU",
+            "D": "The percentage of correct answers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Epoch' in training?",
+        "options": {
+            "A": "A historical time period",
+            "B": "One complete pass of the entire training dataset through the learning algorithm",
+            "C": "The name of the software",
+            "D": "The size of a batch"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Batch Size'?",
+        "options": {
+            "A": "The total size of the dataset",
+            "B": "The number of training examples used in one iteration of model training",
+            "C": "The size of the hard drive",
+            "D": "The number of users online"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Validation Set'?",
+        "options": {
+            "A": "The final test data",
+            "B": "A subset of data used to provide an unbiased evaluation of a model fit while tuning hyperparameters",
+            "C": "Data used for encryption",
+            "D": "The original source data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Sensitivity' another name for?",
+        "options": {
+            "A": "Precision",
+            "B": "Recall",
+            "C": "Accuracy",
+            "D": "Specificity"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Specificity'?",
+        "options": {
+            "A": "The ratio of actual negatives that are correctly identified",
+            "B": "How specific the model is",
+            "C": "The number of features",
+            "D": "The speed of classification"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Final question: Which of these is a common library for data manipulation in Python?",
+        "options": {
+            "A": "NumPy",
+            "B": "Pandas",
+            "C": "Matplotlib",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "Which component in a Neural Network introduces non-linearity to the model?",
+        "options": {
+            "A": "Weights",
+            "B": "Activation Function",
+            "C": "Bias",
+            "D": "Input Layer"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary function of a 'Convolutional Layer' in a CNN?",
+        "options": {
+            "A": "To flatten the data into a 1D vector",
+            "B": "To extract spatial features like edges and patterns using filters",
+            "C": "To act as a final classifier",
+            "D": "To reduce the learning rate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which architecture is best suited for sequential data like time-series or text?",
+        "options": {
+            "A": "CNN",
+            "B": "RNN (Recurrent Neural Network)",
+            "C": "K-Means",
+            "D": "Principal Component Analysis"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Dropout' in the context of training Neural Networks?",
+        "options": {
+            "A": "Deleting the entire model",
+            "B": "Randomly deactivating neurons during training to prevent overfitting",
+            "C": "Dropping the learning rate to zero",
+            "D": "Removing outliers from the dataset"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'Backpropagation' do in a Neural Network?",
+        "options": {
+            "A": "It moves data from the input to the output layer",
+            "B": "It calculates the gradient of the loss function and updates the weights",
+            "C": "It generates random images",
+            "D": "It cleans the hardware memory"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Transfer Learning'?",
+        "options": {
+            "A": "Transferring data between two databases",
+            "B": "Using a pre-trained model on a new, related task to save time and data",
+            "C": "The model teaching a human user",
+            "D": "Moving a model from Python to C++"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which activation function is most commonly used in the hidden layers of Deep Neural Networks?",
+        "options": {
+            "A": "Sigmoid",
+            "B": "ReLU (Rectified Linear Unit)",
+            "C": "Step Function",
+            "D": "Linear"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Vanishing Gradient Problem'?",
+        "options": {
+            "A": "The model finishes training too early",
+            "B": "Gradients become so small that weights in early layers stop updating",
+            "C": "The loss function becomes zero",
+            "D": "The GPU runs out of memory"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is an 'Autoencoder' used for?",
+        "options": {
+            "A": "Automatic data entry",
+            "B": "Unsupervised learning for data compression or feature extraction",
+            "C": "Self-driving cars only",
+            "D": "Encrypting emails"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'NLP' stand for?",
+        "options": {
+            "A": "Neural Logic Programming",
+            "B": "Natural Language Processing",
+            "C": "Network Layer Protocol",
+            "D": "Next Level Prediction"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Tokenization' in NLP?",
+        "options": {
+            "A": "Generating digital currency",
+            "B": "Breaking text into smaller units like words or characters",
+            "C": "Encrypting a sentence",
+            "D": "Translating a document"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stop Word Removal' in NLP?",
+        "options": {
+            "A": "Deleting common words like 'the' and 'is' that carry little semantic meaning",
+            "B": "Stopping the model from running",
+            "C": "Fixing grammar errors",
+            "D": "Removing numbers from text"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which technique converts words into dense vectors where similar words have similar values?",
+        "options": {
+            "A": "Label Encoding",
+            "B": "Word Embeddings (e.g., Word2Vec)",
+            "C": "TF-IDF",
+            "D": "One-Hot Encoding"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stemming' and 'Lemmatization'?",
+        "options": {
+            "A": "Techniques to reduce words to their base or root form",
+            "B": "Ways to count word frequency",
+            "C": "Classification algorithms",
+            "D": "Data encryption methods"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'Generative Adversarial Network' (GAN)?",
+        "options": {
+            "A": "A network that only deletes data",
+            "B": "A framework where two neural networks (Generator and Discriminator) compete to create realistic data",
+            "C": "A network used for sorting files",
+            "D": "A database management system"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a GAN, what is the role of the 'Generator'?",
+        "options": {
+            "A": "To detect fake data",
+            "B": "To create new data instances that mimic the training data",
+            "C": "To calculate the final loss",
+            "D": "To monitor GPU temperature"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Sentiment Analysis'?",
+        "options": {
+            "A": "Analyzing the speed of a model",
+            "B": "Determining the emotional tone (positive, negative, neutral) behind a piece of text",
+            "C": "Predicting the stock market",
+            "D": "Identifying the author of a book"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which loss function is best for multi-class classification?",
+        "options": {
+            "A": "Mean Squared Error",
+            "B": "Categorical Cross-Entropy",
+            "C": "Binary Cross-Entropy",
+            "D": "Hinge Loss"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Padding' in a CNN?",
+        "options": {
+            "A": "Adding extra space around the edges of an input image to preserve spatial dimensions",
+            "B": "Compressing an image",
+            "C": "Increasing the brightness of an image",
+            "D": "Deleting pixels"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Pooling' (e.g., Max Pooling) used for in CNNs?",
+        "options": {
+            "A": "To increase the number of features",
+            "B": "To reduce the spatial size of the representation and the number of parameters",
+            "C": "To add noise to the image",
+            "D": "To change the color of the image"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is an 'Epoch'?",
+        "options": {
+            "A": "One complete pass of the entire training dataset through the neural network",
+            "B": "A single update of the weights",
+            "C": "The time it takes to build a model",
+            "D": "A hardware unit"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Batch Size'?",
+        "options": {
+            "A": "The total size of the training data",
+            "B": "The number of training examples used in one iteration of weight updates",
+            "C": "The number of hidden layers",
+            "D": "The number of GPUs available"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Softmax' usually used for?",
+        "options": {
+            "A": "Input layer activation",
+            "B": "The output layer of a multi-class classifier to produce probabilities",
+            "C": "Data normalization",
+            "D": "Error detection"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'LSTM' (Long Short-Term Memory)?",
+        "options": {
+            "A": "A type of permanent storage",
+            "B": "A special kind of RNN capable of learning long-term dependencies",
+            "C": "A fast computer RAM",
+            "D": "A way to delete old data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Attention Mechanism' primarily used for in modern NLP?",
+        "options": {
+            "A": "To make the model run faster",
+            "B": "To allow the model to focus on specific parts of the input sequence when producing output",
+            "C": "To reduce the dataset size",
+            "D": "To check for plagiarism"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Transformer' model?",
+        "options": {
+            "A": "A physical device for electricity",
+            "B": "A neural network architecture that relies solely on attention mechanisms (e.g., BERT, GPT)",
+            "C": "A model that changes its own code",
+            "D": "A type of clustering algorithm"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Named Entity Recognition' (NER)?",
+        "options": {
+            "A": "Identifying and categorizing key entities like names, locations, and dates in text",
+            "B": "Giving a name to a model",
+            "C": "Recognizing faces in photos",
+            "D": "Counting the total number of words"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Data Augmentation' in computer vision?",
+        "options": {
+            "A": "Buying more images",
+            "B": "Creating new training samples by applying transformations like rotation or flipping to existing images",
+            "C": "Deleting blurred images",
+            "D": "Adding text to photos"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which optimizer is known for using an adaptive learning rate for each parameter?",
+        "options": {
+            "A": "SGD (Stochastic Gradient Descent)",
+            "B": "Adam",
+            "C": "Linear Optimizer",
+            "D": "Step Optimizer"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Early Stopping'?",
+        "options": {
+            "A": "Shutting down the computer",
+            "B": "Terminating training when the model's performance on a validation set starts to degrade",
+            "C": "Deleting a model before it finishes",
+            "D": "A hardware failure"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Fine-tuning' in the context of transfer learning?",
+        "options": {
+            "A": "Deleting the original model",
+            "B": "Taking a pre-trained model and training it slightly more on a specific dataset",
+            "C": "Cleaning the dataset",
+            "D": "Increasing the GPU speed"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which architecture is most commonly used for Object Detection?",
+        "options": {
+            "A": "YOLO (You Only Look Once)",
+            "B": "K-Means",
+            "C": "Naive Bayes",
+            "D": "Decision Trees"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Sequence-to-Sequence' (Seq2Seq) modeling used for?",
+        "options": {
+            "A": "Sorting numbers",
+            "B": "Tasks like machine translation where both input and output are sequences",
+            "C": "Image classification",
+            "D": "Data compression"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Softmax' function's output range?",
+        "options": {
+            "A": "Any real number",
+            "B": "Between 0 and 1, and the sum of all outputs is 1",
+            "C": "0 or 1 only",
+            "D": "-1 to 1"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Inference' in machine learning?",
+        "options": {
+            "A": "The process of training the model",
+            "B": "The process of using a trained model to make predictions on new data",
+            "C": "Collecting data from a database",
+            "D": "An error in the code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Hyperparameter Tuning'?",
+        "options": {
+            "A": "The model learning weights automatically",
+            "B": "The process of finding the best settings (like learning rate or batch size) for a model",
+            "C": "Scaling the CPU",
+            "D": "Renaming the features"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cross-Entropy Loss' measuring?",
+        "options": {
+            "A": "The distance between two points",
+            "B": "The difference between the predicted probability distribution and the actual distribution",
+            "C": "The time of the job",
+            "D": "The number of layers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Layer' in a Neural Network?",
+        "options": {
+            "A": "A shelf for hardware",
+            "B": "A collection of neurons that perform a specific mathematical transformation",
+            "C": "A backup file",
+            "D": "A user permission"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Flattening'?",
+        "options": {
+            "A": "Deleting data",
+            "B": "Converting a multi-dimensional tensor (like an image) into a 1D vector",
+            "C": "Removing outliers",
+            "D": "Merging two models"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Weights initialization'?",
+        "options": {
+            "A": "Setting the initial values of the model parameters before training begins",
+            "B": "Calculating the final score",
+            "C": "Weighing the computer hardware",
+            "D": "Setting the maximum data size"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which library is a popular open-source framework for Deep Learning developed by Google?",
+        "options": {
+            "A": "PyTorch",
+            "B": "TensorFlow",
+            "C": "Scikit-Learn",
+            "D": "Pandas"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which library is a popular Deep Learning framework developed by Meta (Facebook)?",
+        "options": {
+            "A": "TensorFlow",
+            "B": "PyTorch",
+            "C": "Keras",
+            "D": "NumPy"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Keras'?",
+        "options": {
+            "A": "A high-level neural networks API that runs on top of TensorFlow",
+            "B": "A hardware chip",
+            "C": "A type of database",
+            "D": "A programming language"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Model Drift'?",
+        "options": {
+            "A": "The model moving to a new server",
+            "B": "The degradation of model performance over time due to changes in real-world data",
+            "C": "A type of animation",
+            "D": "A network error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Batch Normalization'?",
+        "options": {
+            "A": "Deleting batches",
+            "B": "A technique to normalize the inputs of each layer to improve training speed and stability",
+            "C": "A way to count data",
+            "D": "Scaling the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'One-shot Learning'?",
+        "options": {
+            "A": "Training a model with only one row of data",
+            "B": "Learning to recognize objects from only one or very few training examples",
+            "C": "Running the model once",
+            "D": "Deleting the model after one use"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cold Start' in recommendation systems?",
+        "options": {
+            "A": "The server being cold",
+            "B": "The difficulty in recommending items to new users with no history",
+            "C": "Restarting the model",
+            "D": "A slow startup time"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'NLP Pipeline'?",
+        "options": {
+            "A": "A physical pipe",
+            "B": "The series of steps (cleaning, tokenization, etc.) used to process text data",
+            "C": "A type of database",
+            "D": "A way to backup text"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Image Segmentation'?",
+        "options": {
+            "A": "Dividing an image into different regions or objects at the pixel level",
+            "B": "Cutting a photo with scissors",
+            "C": "Compressing a photo",
+            "D": "Changing the file format"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Final question: What is the primary purpose of a 'Validation Set'?",
+        "options": {
+            "A": "To train the model",
+            "B": "To provide an unbiased evaluation while tuning hyperparameters",
+            "C": "To act as the final test before production",
+            "D": "To store the original data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cross-Validation' primarily used for?",
+        "options": {
+            "A": "To speed up the training of the model",
+            "B": "To assess how the results of a statistical analysis will generalize to an independent dataset",
+            "C": "To encrypt the training data",
+            "D": "To visualize the features in 3D"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In the context of 'Bias-Variance Tradeoff', what does high bias usually lead to?",
+        "options": {
+            "A": "Overfitting",
+            "B": "Underfitting",
+            "C": "Perfect accuracy",
+            "D": "Data corruption"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Regularization' (like L1 or L2) in machine learning?",
+        "options": {
+            "A": "To make the data linear",
+            "B": "To prevent overfitting by adding a penalty for larger weights",
+            "C": "To increase the learning rate",
+            "D": "To remove duplicate rows"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which metric is the harmonic mean of Precision and Recall?",
+        "options": {
+            "A": "Accuracy",
+            "B": "F1-Score",
+            "C": "R-Squared",
+            "D": "Mean Absolute Error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'One-Hot Encoding' used for?",
+        "options": {
+            "A": "Scaling numerical values between 0 and 1",
+            "B": "Converting categorical data into a binary vector format",
+            "C": "Encryption of passwords",
+            "D": "Compressing the dataset"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Elbow Method' used to determine in K-Means clustering?",
+        "options": {
+            "A": "The optimal number of features",
+            "B": "The optimal number of clusters (K)",
+            "C": "The speed of the algorithm",
+            "D": "The accuracy of classification"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does a 'P-value' indicate in statistical significance testing?",
+        "options": {
+            "A": "The power of the model",
+            "B": "The probability that the observed results occurred by random chance",
+            "C": "The number of parameters in the model",
+            "D": "The precision of the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Principal Component Analysis' (PCA) used for?",
+        "options": {
+            "A": "Supervised classification",
+            "B": "Dimensionality reduction while preserving as much variance as possible",
+            "C": "Increasing the number of features",
+            "D": "Handling missing data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a technique to handle 'Imbalanced Datasets'?",
+        "options": {
+            "A": "SMOTE (Synthetic Minority Over-sampling Technique)",
+            "B": "Standard Scaling",
+            "C": "Linear Regression",
+            "D": "One-Hot Encoding"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the 'Curse of Dimensionality'?",
+        "options": {
+            "A": "Having too little data",
+            "B": "The phenomenon where the volume of space increases so fast that data becomes sparse as features increase",
+            "C": "Using 3D images",
+            "D": "A hardware failure"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Standardization' (Z-score normalization)?",
+        "options": {
+            "A": "Scaling data to range [0, 1]",
+            "B": "Scaling data to have a mean of 0 and a standard deviation of 1",
+            "C": "Rounding data to the nearest integer",
+            "D": "Deleting outliers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Gradient Descent'?",
+        "options": {
+            "A": "An algorithm for sorting data",
+            "B": "An optimization algorithm used to minimize a cost function by iteratively moving toward a local minimum",
+            "C": "A type of data visualization",
+            "D": "A clustering method"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Linear Regression, what does 'R-Squared' measure?",
+        "options": {
+            "A": "The speed of the training",
+            "B": "The proportion of variance in the dependent variable explained by the independent variables",
+            "C": "The number of errors",
+            "D": "The size of the coefficients"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stochastic Gradient Descent' (SGD)?",
+        "options": {
+            "A": "Updating the model once using the entire dataset",
+            "B": "Updating the model parameters using only one training example (or a small batch) at a time",
+            "C": "A random classification method",
+            "D": "A way to backup the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Label Encoding'?",
+        "options": {
+            "A": "Adding descriptions to charts",
+            "B": "Converting categorical labels into numerical integers",
+            "C": "Formatting a JSON file",
+            "D": "Naming the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Hyperplane' in Support Vector Machines (SVM)?",
+        "options": {
+            "A": "A fast computer",
+            "B": "The decision boundary that separates different classes",
+            "C": "A multi-dimensional image",
+            "D": "A type of kernel"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Bootstrapping' in the context of Random Forest?",
+        "options": {
+            "A": "Starting the computer",
+            "B": "Randomly sampling the data with replacement to create different training sets for each tree",
+            "C": "Tying the data together",
+            "D": "Cleaning the hardware"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between 'L1 (Lasso)' and 'L2 (Ridge)' regularization?",
+        "options": {
+            "A": "L1 can result in sparse models (zeroing out weights); L2 reduces weights but keeps them non-zero",
+            "B": "L2 is only for classification",
+            "C": "L1 is faster than L2",
+            "D": "There is no functional difference"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is an 'Outlier'?",
+        "options": {
+            "A": "A data point that is missing",
+            "B": "A data point that differs significantly from other observations in the dataset",
+            "C": "A data point used for testing only",
+            "D": "The header of a CSV file"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mean Absolute Error' (MAE)?",
+        "options": {
+            "A": "The square of the average error",
+            "B": "The average of the absolute differences between the actual and predicted values",
+            "C": "The total number of wrong guesses",
+            "D": "The maximum error in the set"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pruning' in a Decision Tree?",
+        "options": {
+            "A": "Adding more branches",
+            "B": "Removing parts of the tree that provide little power to classify instances to reduce complexity",
+            "C": "Sorting the nodes",
+            "D": "Deleting the root node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Kernel Trick' in SVM?",
+        "options": {
+            "A": "A way to bypass security",
+            "B": "A method to project data into a higher-dimensional space to make it linearly separable",
+            "C": "A way to compress the model",
+            "D": "A hardware optimization"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Feature Importance'?",
+        "options": {
+            "A": "Naming the features alphabetically",
+            "B": "A technique that assigns scores to input features based on how useful they are at predicting a target",
+            "C": "The size of the data file",
+            "D": "The number of users who saw the feature"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Data Leakage'?",
+        "options": {
+            "A": "Sharing data with unauthorized users",
+            "B": "When information from outside the training dataset is used to create the model",
+            "C": "Data lost due to disk failure",
+            "D": "Formatting a hard drive"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Manhattan Distance'?",
+        "options": {
+            "A": "The distance between two cities",
+            "B": "The distance between two points measured along axes at right angles",
+            "C": "The shortest line between two points",
+            "D": "The time it takes to travel"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Euclidean Distance'?",
+        "options": {
+            "A": "The straight-line distance between two points in Euclidean space",
+            "B": "The distance measured on a curve",
+            "C": "The number of steps to reach a point",
+            "D": "The size of a vector"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Ensemble Learning'?",
+        "options": {
+            "A": "Learning in a large group of people",
+            "B": "The process of combining multiple models to produce one superior predictive model",
+            "C": "A type of neural network",
+            "D": "Processing data in parallel"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Bagging' (Bootstrap Aggregating)?",
+        "options": {
+            "A": "Putting data into bags",
+            "B": "An ensemble technique that trains multiple versions of a model on different samples and averages results",
+            "C": "Deleting duplicate data",
+            "D": "Increasing the learning rate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Boosting'?",
+        "options": {
+            "A": "Speeding up the CPU",
+            "B": "An ensemble technique that trains models sequentially, focusing on errors of the previous model",
+            "C": "A way to promote a model",
+            "D": "Adding more memory to the server"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which algorithm is a popular implementation of Gradient Boosting?",
+        "options": {
+            "A": "XGBoost",
+            "B": "Linear Regression",
+            "C": "K-Means",
+            "D": "PCA"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Data Imputation'?",
+        "options": {
+            "A": "Deleting the entire dataset",
+            "B": "The process of replacing missing data with substituted values",
+            "C": "Changing the file format",
+            "D": "Encrypting the columns"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Log Transformation' used for in preprocessing?",
+        "options": {
+            "A": "To record system logs",
+            "B": "To handle skewed data and make it more normally distributed",
+            "C": "To encrypt data",
+            "D": "To sort the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Feature Selection'?",
+        "options": {
+            "A": "Choosing the best model",
+            "B": "Reducing the number of input variables by selecting only those most relevant to the target",
+            "C": "Renaming columns",
+            "D": "Creating new data points"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does a 'Correlation Coefficient' of +1 mean?",
+        "options": {
+            "A": "No relationship",
+            "B": "A perfect positive linear relationship between two variables",
+            "C": "A perfect negative relationship",
+            "D": "An error in calculation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'A/B Testing'?",
+        "options": {
+            "A": "Comparing two versions of a model or product to see which performs better",
+            "B": "Testing with only two rows of data",
+            "C": "An alphabetical sorting test",
+            "D": "Testing a model with grades"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'AUC-ROC'?",
+        "options": {
+            "A": "The name of a library",
+            "B": "A performance measurement for classification problems at various threshold settings",
+            "C": "A type of decision tree",
+            "D": "A hardware monitor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Entropy' in the context of Decision Trees?",
+        "options": {
+            "A": "The speed of the tree",
+            "B": "A measure of impurity or randomness in the dataset",
+            "C": "The number of leaf nodes",
+            "D": "The depth of the tree"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Information Gain'?",
+        "options": {
+            "A": "Getting more rows from a database",
+            "B": "The reduction in entropy achieved by partitioning data based on a feature",
+            "C": "A way to speed up the internet",
+            "D": "The total size of the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a distance-based algorithm?",
+        "options": {
+            "A": "Logistic Regression",
+            "B": "K-Nearest Neighbors (KNN)",
+            "C": "Naive Bayes",
+            "D": "XGBoost"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Min-Max Scaling'?",
+        "options": {
+            "A": "Setting the maximum number of rows",
+            "B": "Transforming features to a fixed range, usually [0, 1]",
+            "C": "Deleting the smallest values",
+            "D": "Calculating the average"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Hold-out Method'?",
+        "options": {
+            "A": "Keeping data secret",
+            "B": "Setting aside a portion of the data (test set) and never using it during training",
+            "C": "A way to pause training",
+            "D": "An error handling technique"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Parametric' vs 'Non-parametric' models?",
+        "options": {
+            "A": "Parametric models have a fixed number of parameters; Non-parametric grow with data",
+            "B": "Parametric models use only numbers",
+            "C": "Non-parametric models are faster",
+            "D": "There is no difference"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Gradient Vanishing'?",
+        "options": {
+            "A": "The algorithm finishes quickly",
+            "B": "When the gradient becomes so small during training that weights stop updating",
+            "C": "Deleting the gradients",
+            "D": "A type of data loss"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Learning Rate' in optimization?",
+        "options": {
+            "A": "How fast the developer learns",
+            "B": "A tuning parameter that determines the step size at each iteration toward a minimum",
+            "C": "The speed of the CPU",
+            "D": "The percentage of correct answers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Epoch' in training?",
+        "options": {
+            "A": "A historical time period",
+            "B": "One complete pass of the entire training dataset through the learning algorithm",
+            "C": "The name of the software",
+            "D": "The size of a batch"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Batch Size'?",
+        "options": {
+            "A": "The total size of the dataset",
+            "B": "The number of training examples used in one iteration of model training",
+            "C": "The size of the hard drive",
+            "D": "The number of users online"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Validation Set'?",
+        "options": {
+            "A": "The final test data",
+            "B": "A subset of data used to provide evaluation of a model while tuning hyperparameters",
+            "C": "Data used for encryption",
+            "D": "The original source data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Sensitivity' another name for?",
+        "options": {
+            "A": "Precision",
+            "B": "Recall",
+            "C": "Accuracy",
+            "D": "Specificity"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Specificity'?",
+        "options": {
+            "A": "The ratio of actual negatives that are correctly identified",
+            "B": "How specific the model is",
+            "C": "The number of features",
+            "D": "The speed of classification"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Final question: Which of these is a common library for data manipulation in Python?",
+        "options": {
+            "A": "NumPy",
+            "B": "Pandas",
+            "C": "Matplotlib",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the primary function of an 'Activation Function' in a Neural Network?",
+        "options": {
+            "A": "To normalize the input data",
+            "B": "To introduce non-linearity into the network",
+            "C": "To calculate the final error",
+            "D": "To increase the number of neurons"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which architecture is most commonly used for image recognition tasks?",
+        "options": {
+            "A": "Recurrent Neural Networks (RNN)",
+            "B": "Convolutional Neural Networks (CNN)",
+            "C": "Generative Adversarial Networks (GAN)",
+            "D": "Linear Regression"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a Neural Network, what is 'Backpropagation'?",
+        "options": {
+            "A": "The process of feeding input data forward to the output layer",
+            "B": "The algorithm used to update weights by propagating the error backward",
+            "C": "A method to delete unnecessary layers",
+            "D": "A type of data augmentation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'ReLU' stand for?",
+        "options": {
+            "A": "Reduced Linear Unit",
+            "B": "Rectified Linear Unit",
+            "C": "Reverse Linear Utility",
+            "D": "Recursive Linear Update"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a common problem in deep networks where gradients become too small to update weights?",
+        "options": {
+            "A": "Exploding Gradient Problem",
+            "B": "Vanishing Gradient Problem",
+            "C": "Overfitting",
+            "D": "Data Leakage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Perceptron'?",
+        "options": {
+            "A": "A type of multi-core processor",
+            "B": "The simplest form of a neural network (a single layer binary classifier)",
+            "C": "A data visualization tool",
+            "D": "A database indexing method"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Dropout' in Deep Learning?",
+        "options": {
+            "A": "To speed up the training process",
+            "B": "To prevent overfitting by randomly setting a fraction of input units to 0",
+            "C": "To remove outliers from the dataset",
+            "D": "To increase the learning rate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which type of Neural Network is specifically designed to handle sequential data like text or speech?",
+        "options": {
+            "A": "CNN",
+            "B": "RNN",
+            "C": "Perceptron",
+            "D": "Autoencoder"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Transfer Learning'?",
+        "options": {
+            "A": "Moving data from a hard drive to the cloud",
+            "B": "Taking a pre-trained model and adapting it to a new, similar task",
+            "C": "Teaching a model multiple languages simultaneously",
+            "D": "Updating the model weights manually"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a CNN, what does the 'Pooling' layer do?",
+        "options": {
+            "A": "Increases the resolution of the image",
+            "B": "Reduces the spatial dimensions (width and height) of the data",
+            "C": "Changes the colors of the input image",
+            "D": "Acts as the final output layer"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Hidden Layer' in a Neural Network?",
+        "options": {
+            "A": "A layer that the developer cannot see",
+            "B": "A layer between the input and output layers where features are extracted",
+            "C": "A layer used for encrypted data",
+            "D": "The layer that stores the raw dataset"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which loss function is best suited for binary classification tasks?",
+        "options": {
+            "A": "Mean Squared Error",
+            "B": "Binary Cross-Entropy",
+            "C": "Categorical Cross-Entropy",
+            "D": "Hinge Loss"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Batch Normalization'?",
+        "options": {
+            "A": "A method to delete batch data",
+            "B": "A technique to normalize layer inputs to stabilize and speed up training",
+            "C": "Sorting data into alphabetical order",
+            "D": "A way to compress the final model file"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is an 'Optimizer' (like Adam or SGD) used for?",
+        "options": {
+            "A": "To find the best data to use for training",
+            "B": "To update weights and biases based on the loss function",
+            "C": "To visualize the neural network",
+            "D": "To encrypt the final predictions"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Softmax' usually used for?",
+        "options": {
+            "A": "In the input layer to scale pixels",
+            "B": "In the output layer for multi-class classification to provide probabilities",
+            "C": "To handle missing values",
+            "D": "To perform linear regression"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Word Embedding'?",
+        "options": {
+            "A": "Checking the spelling of words",
+            "B": "Representing words as dense vectors in a continuous vector space",
+            "C": "Translating words into different languages",
+            "D": "Counting the occurrence of a word"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which algorithm is commonly used for Dimensionality Reduction besides PCA?",
+        "options": {
+            "A": "t-SNE (t-Distributed Stochastic Neighbor Embedding)",
+            "B": "Logistic Regression",
+            "C": "Decision Trees",
+            "D": "Naive Bayes"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is an 'Autoencoder'?",
+        "options": {
+            "A": "A model that automatically encodes text into speech",
+            "B": "A neural network that learns to compress data and then reconstruct it",
+            "C": "A self-driving car algorithm",
+            "D": "A tool to generate random passwords"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'GAN' stand for in Machine Learning?",
+        "options": {
+            "A": "Genetic Algorithm Network",
+            "B": "Generative Adversarial Network",
+            "C": "General Analytics Node",
+            "D": "Gradient Activation Number"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a GAN, what is the 'Discriminator' trying to do?",
+        "options": {
+            "A": "Create new data",
+            "B": "Distinguish between real data and fake data generated by the Generator",
+            "C": "Calculate the average of the data",
+            "D": "Optimize the learning rate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'LSTMs' (Long Short-Term Memory)?",
+        "options": {
+            "A": "A type of permanent computer storage",
+            "B": "A specialized RNN architecture that can learn long-term dependencies",
+            "C": "A fast GPU memory type",
+            "D": "A way to delete old training data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which technique is used to increase the size of a training set by creating modified versions of images?",
+        "options": {
+            "A": "Data Imputation",
+            "B": "Data Augmentation",
+            "C": "Data Normalization",
+            "D": "Data Leakage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'XGBoost'?",
+        "options": {
+            "A": "A new version of the X-box console",
+            "B": "An optimized distributed gradient boosting library",
+            "C": "A deep learning framework by Google",
+            "D": "A data visualization library"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Hyperparameter Tuning'?",
+        "options": {
+            "A": "The model learning weights automatically",
+            "B": "The process of searching for the best pre-defined settings for a model",
+            "C": "Adjusting the hardware speed of the GPU",
+            "D": "Scaling the input data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Kernel' in the context of CNNs?",
+        "options": {
+            "A": "The main operating system",
+            "B": "A small matrix (filter) used for convolution operations to extract features",
+            "C": "The data entry point",
+            "D": "A type of hardware processor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'MLOps' refer to?",
+        "options": {
+            "A": "Multi-Layer Operations",
+            "B": "The practice of streamlining the process of taking ML models to production",
+            "C": "A specific programming language for ML",
+            "D": "Hardware maintenance for ML servers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Fine-tuning'?",
+        "options": {
+            "A": "Deleting the model",
+            "B": "Taking a pre-trained model and training it further on a smaller, specific dataset",
+            "C": "Cleaning the hardware components",
+            "D": "Naming the features of a model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a popular framework for Deep Learning?",
+        "options": {
+            "A": "Pandas",
+            "B": "PyTorch",
+            "C": "Matplotlib",
+            "D": "Seaborn"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Softmax' function's primary purpose?",
+        "options": {
+            "A": "To normalize the input",
+            "B": "To turn a vector of numbers into a vector of probabilities",
+            "C": "To handle outliers",
+            "D": "To encrypt the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Early Stopping' used for?",
+        "options": {
+            "A": "Shutting down the server",
+            "B": "Terminating training when validation performance stops improving to prevent overfitting",
+            "C": "Pausing the model for user input",
+            "D": "Deleting corrupted data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a CNN, what does 'Stride' refer to?",
+        "options": {
+            "A": "The size of the image",
+            "B": "The number of pixels by which the filter slides over the input matrix",
+            "C": "The speed of the training",
+            "D": "The number of hidden layers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Padding' in CNNs?",
+        "options": {
+            "A": "Adding extra space between servers",
+            "B": "Adding zero-value pixels around the input image border",
+            "C": "Deleting blurred pixels",
+            "D": "Compressing the image size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which algorithm is used in collaborative filtering for recommendation systems?",
+        "options": {
+            "A": "K-Means",
+            "B": "SVD (Singular Value Decomposition)",
+            "C": "Linear Regression",
+            "D": "Decision Trees"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Natural Language Processing' (NLP)?",
+        "options": {
+            "A": "A type of programming language",
+            "B": "The field of study focused on the interaction between computers and human language",
+            "C": "A way to process numbers faster",
+            "D": "Hardware optimization for text storage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Transformer' model?",
+        "options": {
+            "A": "A model that changes its own code",
+            "B": "A neural network architecture that relies on attention mechanisms",
+            "C": "A hardware device for power conversion",
+            "D": "A database tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which library is known for high-level Neural Network APIs running on top of TensorFlow?",
+        "options": {
+            "A": "Keras",
+            "B": "NumPy",
+            "C": "Requests",
+            "D": "BeautifulSoup"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Data Drift'?",
+        "options": {
+            "A": "Data moving across the network",
+            "B": "The change in model input data over time that leads to model degradation",
+            "C": "A type of data backup",
+            "D": "Data stored on a floating server"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Neuron' in an artificial neural network?",
+        "options": {
+            "A": "A physical wire",
+            "B": "A mathematical function that receives input and produces an output",
+            "C": "A type of memory chip",
+            "D": "A software bug"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Weights' in a neural network?",
+        "options": {
+            "A": "The physical mass of the server",
+            "B": "Values that control the strength of the connection between neurons",
+            "C": "The number of users connected",
+            "D": "The file size of the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Bias' in a neural network?",
+        "options": {
+            "A": "Prejudice in the data",
+            "B": "An additional parameter used to adjust the output along with the weighted sum of inputs",
+            "C": "An error in the code",
+            "D": "The learning speed"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'CNN' excel at?",
+        "options": {
+            "A": "Sorting text files",
+            "B": "Identifying patterns in spatial data like images",
+            "C": "Predicting stock prices",
+            "D": "Cleaning databases"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'One-shot learning'?",
+        "options": {
+            "A": "Training a model in one minute",
+            "B": "Learning to recognize objects from only one training example",
+            "C": "Running the model once",
+            "D": "Deleting the model after one use"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Object Detection'?",
+        "options": {
+            "A": "Finding a missing computer",
+            "B": "The task of identifying and localizing objects within an image",
+            "C": "Counting the number of files",
+            "D": "A type of security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which optimizer is an extension of SGD that uses 'momentum'?",
+        "options": {
+            "A": "Adam",
+            "B": "RMSprop",
+            "C": "Adagrad",
+            "D": "Nesterov Accelerated Gradient"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the 'Input Layer'?",
+        "options": {
+            "A": "The final stage of the model",
+            "B": "The layer that receives the raw data for the neural network",
+            "C": "The layer where decisions are made",
+            "D": "The backup storage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Output Layer'?",
+        "options": {
+            "A": "Where data is entered",
+            "B": "The final layer that produces the model's prediction",
+            "C": "A layer for encryption",
+            "D": "The layer that stores logs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Forward Propagation'?",
+        "options": {
+            "A": "Calculating the errors",
+            "B": "The process of passing inputs through the network to get an output",
+            "C": "Updating the weights",
+            "D": "Cleaning the data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Loss'?",
+        "options": {
+            "A": "Data lost during transmission",
+            "B": "The difference between the predicted value and the actual target value",
+            "C": "A hardware failure",
+            "D": "A security breach"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is often used to map any input value to a value between 0 and 1?",
+        "options": {
+            "A": "ReLU",
+            "B": "Sigmoid",
+            "C": "Tanh",
+            "D": "Step"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question: What is 'Deep Learning'?",
+        "options": {
+            "A": "Thinking very hard about data",
+            "B": "A subfield of machine learning based on artificial neural networks with multiple layers",
+            "C": "A way to search the deep web",
+            "D": "A mathematical theory from the 1800s"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Tokenization' in Natural Language Processing (NLP)?",
+        "options": {
+            "A": "Generating digital currency",
+            "B": "Breaking a stream of text into smaller units like words or phrases",
+            "C": "Encrypting a sentence",
+            "D": "Translating text to another language"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Lemmatization'?",
+        "options": {
+            "A": "Removing all punctuation from text",
+            "B": "Grouping together the inflected forms of a word so they can be analyzed as a single item (root word)",
+            "C": "Counting the number of letters in a word",
+            "D": "Deleting words with less than 3 characters"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which architecture introduced the 'Self-Attention' mechanism and revolutionized NLP?",
+        "options": {
+            "A": "RNN",
+            "  B": "Transformer",
+            "C": "CNN",
+            "D": "Perceptron"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Named Entity Recognition' (NER)?",
+        "options": {
+            "A": "Giving a name to your ML model",
+            "B": "Identifying and categorizing entities like names, organizations, and locations in text",
+            "C": "Recognizing faces in a video",
+            "D": "Sorting files by their name"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Sentiment Analysis'?",
+        "options": {
+            "A": "Analyzing the speed of the model",
+            "B": "Determining whether a piece of writing is positive, negative, or neutral",
+            "C": "Predicting the stock market",
+            "D": "Identifying the author's age"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Computer Vision, what is 'Object Detection' compared to 'Image Classification'?",
+        "options": {
+            "A": "They are the same",
+            "B": "Classification identifies 'what' is in the image; Detection identifies 'what' and 'where' (using bounding boxes)",
+            "C": "Detection is only for black and white images",
+            "D": "Classification is faster than detection"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Image Segmentation'?",
+        "options": {
+            "A": "Compressing an image file",
+            "B": "Partitioning a digital image into multiple segments (pixel-level classification)",
+            "C": "Cutting an image into two halves",
+            "D": "Changing the file format from JPG to PNG"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Transfer Learning'?",
+        "options": {
+            "A": "Transferring data between servers",
+            "B": "Reusing a pre-trained model on a new, related problem",
+            "C": "The model teaching the developer",
+            "D": "Moving a model from Python to Java"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Generative Adversarial Network' (GAN)?",
+        "options": {
+            "A": "A network that deletes data",
+            "B": "Two neural networks (Generator and Discriminator) competing to create realistic synthetic data",
+            "C": "A database system",
+            "D": "A tool for sorting numbers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'MLOps' stand for?",
+        "options": {
+            "A": "Multi-Layer Operations",
+            "B": "Machine Learning Operations (combining ML, DevOps, and Data Engineering)",
+            "C": "Main Logic Options",
+            "D": "Memory Level Optimization"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Model Drift'?",
+        "options": {
+            "A": "The model moving to a different cloud provider",
+            "B": "The decay of a model's predictive power due to changes in real-world environment and data",
+            "C": "A type of data backup",
+            "D": "An error in the code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Data Augmentation' in image processing?",
+        "options": {
+            "A": "Buying more images",
+            "B": "Creating new training data by transforming existing images (rotation, flipping, zooming)",
+            "C": "Deleting blurred images",
+            "D": "Increasing the image resolution"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of a 'Flask' or 'FastAPI' in Machine Learning?",
+        "options": {
+            "A": "To train models faster",
+            "B": "To create an API for deploying and serving ML models",
+            "C": "To clean the dataset",
+            "D": "To visualize decision trees"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'A/B Testing' in the context of model deployment?",
+        "options": {
+            "A": "Alphabetical testing",
+            "B": "Comparing two versions of a model in production to see which performs better with real users",
+            "C": "Testing with only two data points",
+            "D": "An encryption method"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Hyperparameter Tuning'?",
+        "options": {
+            "A": "Adjusting the weights of a model",
+            "B": "Choosing the optimal settings for the learning process (e.g., learning rate, batch size)",
+            "C": "Buying faster hardware",
+            "D": "Naming the model features"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'BERT' in NLP?",
+        "options": {
+            "A": "A type of database",
+            "B": "Bidirectional Encoder Representations from Transformers",
+            "C": "A text-to-speech engine",
+            "D": "A math constant"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'One-Shot Learning'?",
+        "options": {
+            "A": "Training a model once and never again",
+            "B": "Learning to recognize an object from only one training example",
+            "C": "A fast prediction mode",
+            "D": "Deleting the model after one use"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Explainable AI' (XAI)?",
+        "options": {
+            "A": "AI that can speak",
+            "B": "Methods and techniques that allow human users to understand and trust the results created by ML models",
+            "C": "AI that explains the news",
+            "D": "Documentation written by an AI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Recommender System'?",
+        "options": {
+            "A": "A system that recommends new employees",
+            "B": "A subclass of information filtering system that predicts the 'rating' or 'preference' a user would give to an item",
+            "C": "A database backup tool",
+            "D": "A way to sort files"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Collaborative Filtering'?",
+        "options": {
+            "A": "Filtering data with a group of people",
+            "B": "A method of making automatic predictions about the interests of a user by collecting preferences from many users",
+            "C": "A network security tool",
+            "D": "Sorting emails by size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stop Word' removal?",
+        "options": {
+            "A": "Stopping the model from running",
+            "B": "Removing common words like 'a', 'the', 'is' which do not add much meaning to the text",
+            "C": "Fixing grammar errors",
+            "D": "Removing illegal characters"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'TF-IDF'?",
+        "options": {
+            "A": "A security certificate",
+            "B": "Term Frequency-Inverse Document Frequency (used to evaluate word importance in a document)",
+            "C": "A new file format",
+            "D": "A type of neural network"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Softmax' function used for in the output layer?",
+        "options": {
+            "A": "To calculate the final sum",
+            "B": "To turn output scores into a probability distribution over multiple classes",
+            "C": "To encrypt the output",
+            "D": "To handle missing data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Autoencoder' primary use?",
+        "options": {
+            "A": "Automatic coding",
+            "B": "Dimensionality reduction and feature learning",
+            "C": "Generating random text",
+            "D": "Database management"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Zero-Shot Learning'?",
+        "options": {
+            "A": "A model that doesn't learn anything",
+            "B": "A model's ability to recognize things it has not explicitly seen during training",
+            "C": "Deleting all weights",
+            "D": "A model with zero layers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Docker' used for in ML?",
+        "options": {
+            "A": "To write code",
+            "B": "To containerize ML models for consistent deployment across different environments",
+            "C": "To train neural networks",
+            "D": "To store big data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Model Quantization'?",
+        "options": {
+            "A": "Counting the number of models",
+            "B": "Reducing the precision of the model's weights to make it smaller and faster",
+            "C": "Adding more layers",
+            "D": "Backing up the model"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Edge AI'?",
+        "options": {
+            "A": "AI built by Microsoft Edge",
+            "B": "Running AI algorithms locally on a hardware device (on the 'edge') rather than the cloud",
+            "C": "A very fast type of AI",
+            "D": "AI for playing games"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Hyperparameter' vs 'Parameter'?",
+        "options": {
+            "A": "They are the same",
+            "B": "Parameters are learned during training; Hyperparameters are set by the developer before training",
+            "C": "Parameters are for hardware; Hyperparameters are for software",
+            "D": "Hyperparameters are larger than parameters"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Learning Rate Annealing'?",
+        "options": {
+            "A": "Stopping the learning process",
+            "B": "Gradually reducing the learning rate as the training progresses to find the optimal weights",
+            "C": "Increasing the learning rate",
+            "D": "Deleting the learning history"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which evaluation metric is most sensitive to outliers in regression?",
+        "options": {
+            "A": "MAE (Mean Absolute Error)",
+            "B": "RMSE (Root Mean Squared Error)",
+            "C": "R-Squared",
+            "D": "Accuracy"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Bagging' in Random Forest?",
+        "options": {
+            "A": "Putting data in bags",
+            "B": "Bootstrap Aggregating (training multiple trees on random subsets of data)",
+            "C": "Deleting unused features",
+            "D": "Sorting the trees"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Ensemble' method?",
+        "options": {
+            "A": "A type of musical group",
+            "B": "Combining multiple individual models to improve the overall performance",
+            "C": "A single, very large neural network",
+            "D": "A way to collect data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Bag-of-Words' (BoW)?",
+        "options": {
+            "A": "A literal bag of words",
+            "B": "A simplified representation of text where it is represented as a multiset of its words",
+            "C": "A grammar checker",
+            "D": "A language translation tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Word2Vec'?",
+        "options": {
+            "A": "Converting words to vectors",
+            "B": "A group of models used to produce word embeddings",
+            "C": "A text editor",
+            "D": "A way to count words"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'RNN' bottleneck?",
+        "options": {
+            "A": "They are too fast",
+            "B": "Difficulty in parallelizing and handling very long sequences",
+            "C": "They use too little memory",
+            "D": "They cannot process numbers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Gated Recurrent Unit' (GRU)?",
+        "options": {
+            "A": "A security guard for the cluster",
+            "B": "A variation of RNN similar to LSTM but with fewer gates (simplified)",
+            "C": "A hardware chip",
+            "D": "A type of database"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Data Pipeline' in ML?",
+        "options": {
+            "A": "A physical pipe",
+            "B": "The end-to-end flow of data from ingestion to model prediction",
+            "C": "A tool to compress data",
+            "D": "A way to delete data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Model Registry'?",
+        "options": {
+            "A": "A list of models in a magazine",
+            "B": "A central repository for managing and versioning ML models",
+            "C": "A hardware component",
+            "D": "A tool for naming models"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Feature Store'?",
+        "options": {
+            "A": "A place to buy features",
+            "B": "A centralized repository that allows users to store and share features for ML models",
+            "C": "A backup for the model",
+            "D": "The main menu of the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cold Start' problem?",
+        "options": {
+            "A": "The computer being cold",
+            "B": "The difficulty in recommending items to new users who have no history",
+            "C": "Restarting the model",
+            "D": "A slow startup time"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Collaborative Filtering'?",
+        "options": {
+            "A": "Filtering with a group",
+            "B": "A technique used by recommendation systems to find similar users or items",
+            "C": "A network tool",
+            "D": "An encryption method"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Content-based Filtering'?",
+        "options": {
+            "A": "Filtering based on item descriptions rather than user behavior",
+            "B": "Filtering based on user names",
+            "C": "A type of firewall",
+            "D": "Deleting data based on size"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'ResNet' known for?",
+        "options": {
+            "A": "Being a small network",
+            "B": "Introducing 'Residual Blocks' (skip connections) to train very deep networks",
+            "C": "Only for text data",
+            "D": "A new cloud provider"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'YOLO' (You Only Look Once)?",
+        "options": {
+            "A": "A philosophy for life",
+            "B": "A popular, real-time object detection algorithm",
+            "C": "A way to delete models",
+            "D": "A backup script"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'IoU' (Intersection over Union)?",
+        "options": {
+            "A": "A banking term",
+            "B": "An evaluation metric used to measure the accuracy of an object detector on a particular dataset",
+            "C": "A way to join tables",
+            "D": "A type of network"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Bounding Box'?",
+        "options": {
+            "A": "A box for shipping hardware",
+            "B": "An imaginary rectangle that serves as a point of reference for object detection",
+            "C": "A UI element for buttons",
+            "D": "A security cage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Perplexity' in NLP?",
+        "options": {
+            "A": "How confused the user is",
+            "B": "A measurement of how well a probability model predicts a sample",
+            "C": "The size of the vocabulary",
+            "D": "The speed of translation"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Word Embedding'?",
+        "options": {
+            "A": "Sticking words together",
+            "B": "A learned representation for text where words with the same meaning have a similar representation",
+            "C": "Translating words",
+            "D": "A grammar checker"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question: What is 'Deep Learning'?",
+        "options": {
+            "A": "A very smart person",
+            "B": "A subfield of ML based on artificial neural networks with multiple layers",
+            "C": "A way to search the deep web",
+            "D": "A hardware upgrade"
+        },
+        "answer": "B"
+    }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "MachineLearning"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

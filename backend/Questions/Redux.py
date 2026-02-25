@@ -1,0 +1,2058 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+  {
+    "question": "What is the primary purpose of Redux?",
+    "options": {
+      "A": "To design the UI layout",
+      "B": "To manage and centralize application state in a predictable way",
+      "C": "To replace the database in a backend system",
+      "D": "To speed up internet connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Redux principle states that the entire state of your app is stored in an object tree within a single store?",
+    "options": {
+      "A": "Single Source of Truth",
+      "B": "State is Read-Only",
+      "C": "Changes are made with Pure Functions",
+      "D": "Unidirectional Data Flow"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Action' in Redux?",
+    "options": {
+      "A": "A function that changes the state directly",
+      "B": "A plain JavaScript object that describes 'what happened' in the application",
+      "C": "A physical movement of the device",
+      "D": "A network request"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Every Redux action must have which specific property?",
+    "options": {
+      "A": "payload",
+      "B": "type",
+      "C": "id",
+      "D": "status"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Reducer' in Redux?",
+    "options": {
+      "A": "A function that shrinks the app size",
+      "B": "A pure function that takes the previous state and an action, and returns the next state",
+      "C": "A tool to delete variables",
+      "D": "A component that renders the UI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux, why must state be immutable?",
+    "options": {
+      "A": "To prevent users from seeing the data",
+      "B": "To allow the store to detect changes efficiently through reference comparisons",
+      "C": "Because the browser requires it",
+      "D": "To save battery life"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to create a Redux store?",
+    "options": {
+      "A": "new Store()",
+      "B": "createStore() (or configureStore in RTK)",
+      "C": "initRedux()",
+      "D": "makeStore()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'dispatch' do in Redux?",
+    "options": {
+      "A": "It sends an action to the store to trigger a state update",
+      "B": "It navigates to a new page",
+      "C": "It deletes the state",
+      "D": "It logs the user out"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Pure Function' in the context of Redux reducers?",
+    "options": {
+      "A": "A function that is written in TypeScript",
+      "B": "A function that returns the same output for the same input and has no side effects",
+      "C": "A function that doesn't use variables",
+      "D": "A function that is only one line long"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Redux method allows you to listen for changes to the state?",
+    "options": {
+      "A": "listen()",
+      "B": "subscribe()",
+      "C": "observe()",
+      "D": "watch()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Action Creator'?",
+    "options": {
+      "A": "A button that creates an event",
+      "B": "A function that returns an action object",
+      "C": "A UI designer",
+      "D": "A database query"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a reducer is called with an action type it doesn't recognize?",
+    "options": {
+      "A": "It should return null",
+      "B": "It should return the current state unchanged",
+      "C": "It should throw an error",
+      "D": "It should clear the state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which utility is used to combine multiple reducers into a single root reducer?",
+    "options": {
+      "A": "mergeReducers()",
+      "B": "combineReducers()",
+      "C": "joinReducers()",
+      "D": "concatReducers()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unidirectional Data Flow' in Redux?",
+    "options": {
+      "A": "Data only flows from the server to the client",
+      "B": "A strict pattern where data moves from Action -> Reducer -> Store -> View",
+      "C": "Data that cannot be deleted",
+      "D": "A network connection without an upload"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Store' in Redux?",
+    "options": {
+      "A": "The Apple App Store",
+      "B": "The object that brings actions and reducers together and holds the state",
+      "C": "A folder for images",
+      "D": "A local SQLite database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Payload' in a Redux action?",
+    "options": {
+      "A": "The cost of the network request",
+      "B": "The optional data associated with an action (e.g., a user's ID or text)",
+      "C": "A type of error",
+      "D": "A security token"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which library is the modern, recommended way to write Redux logic with less boilerplate?",
+    "options": {
+      "A": "Redux-Saga",
+      "B": "Redux Toolkit (RTK)",
+      "C": "Redux-Thunk",
+      "D": "Redux-Classic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux, can you have multiple stores in a single application?",
+    "options": {
+      "A": "Yes, it is recommended",
+      "B": "No, Redux follows a 'Single Source of Truth' with only one store",
+      "C": "Only in mobile apps",
+      "D": "Only if they have different names"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'State' in Redux?",
+    "options": {
+      "A": "A country",
+      "B": "A snapshot of the data that drives the application at a given time",
+      "C": "A type of animation",
+      "D": "The location of the user"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does it mean for a reducer to be 'Pure'?",
+    "options": {
+      "A": "It contains no bugs",
+      "B": "It does not modify its arguments and performs no side effects (like API calls)",
+      "C": "It is written in JavaScript",
+      "D": "It is a private function"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Store Enhancement' in Redux?",
+    "options": {
+      "A": "Upgrading the phone hardware",
+      "B": "A way to add extra capabilities like logging or devtools to the store",
+      "C": "Making the state larger",
+      "D": "Adding more reducers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to get the current state from a Redux store?",
+    "options": {
+      "A": "state()",
+      "B": "getState()",
+      "C": "fetchState()",
+      "D": "readState()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Initial State'?",
+    "options": {
+      "A": "The state of the app after 1 hour",
+      "B": "The default values the store has when it is first created",
+      "C": "The first user who logged in",
+      "D": "A backup of the database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the risk of performing an API call directly inside a reducer?",
+    "options": {
+      "A": "The network will slow down",
+      "B": "It violates the 'Pure Function' rule and makes the state unpredictable",
+      "C": "The API will block the app",
+      "D": "It is not possible to write that code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Type' naming convention typically used in Redux?",
+    "options": {
+      "A": "camelCase strings",
+      "B": "UPPER_CASE_SNAKE_CASE strings",
+      "C": "Numbers only",
+      "D": "Random characters"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Middleware' in Redux?",
+    "options": {
+      "A": "The code between the frontend and backend",
+      "B": "A third-party extension point between dispatching an action and reaching the reducer",
+      "C": "A type of UI theme",
+      "D": "A database manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which problem does 'combineReducers' solve?",
+    "options": {
+      "A": "It makes the app run faster",
+      "B": "It allows the application to be modular by splitting state into separate domains managed by separate functions",
+      "C": "It removes the need for actions",
+      "D": "It encrypts the state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux, can an action be an empty object?",
+    "options": {
+      "A": "Yes, always",
+      "B": "No, it must have a 'type' property",
+      "C": "Only if it is a logout action",
+      "D": "Only in development mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'State Immutability' implementation in JS reducers?",
+    "options": {
+      "A": "Modifying the array with .push()",
+      "B": "Using the spread operator (...) to create copies of objects and arrays",
+      "C": "Setting variables to 'const'",
+      "D": "Deleting the old state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Selector' in Redux?",
+    "options": {
+      "A": "A dropdown menu in the UI",
+      "B": "A function that extracts a specific piece of state from the store",
+      "C": "A tool to select multiple actions",
+      "D": "A type of middleware"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Redux DevTools'?",
+    "options": {
+      "A": "To write code faster",
+      "B": "To debug state changes, inspect actions, and perform 'Time Travel' debugging",
+      "C": "To host the app online",
+      "D": "To design the app icon"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time Travel' debugging?",
+    "options": {
+      "A": "Predicting future data",
+      "B": "The ability to jump back to any previous action to see exactly what the state looked like then",
+      "C": "Resetting the browser history",
+      "D": "A way to speed up the app"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which principle is violated if you change the state directly without dispatching an action?",
+    "options": {
+      "A": "State is Read-Only",
+      "B": "Single Source of Truth",
+      "C": "Immutability",
+      "D": "Both A and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'View' in the Redux lifecycle?",
+    "options": {
+      "A": "The database",
+      "B": "The UI layer (like React components) that displays state and triggers actions",
+      "C": "The reducer",
+      "D": "The terminal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hot Reloading' in Redux?",
+    "options": {
+      "A": "Refreshing the browser",
+      "B": "Replacing the code while keeping the current state in the store",
+      "C": "Restarting the server",
+      "D": "A hardware feature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Flux' pattern?",
+    "options": {
+      "A": "The predecessor to Redux, which also uses unidirectional data flow",
+      "B": "A way to compress files",
+      "C": "A network protocol",
+      "D": "A type of animation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is NOT part of the Redux core?",
+    "options": {
+      "A": "Actions",
+      "B": "Reducers",
+      "C": "React Hooks",
+      "D": "Store"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Redux, actions represent...",
+    "options": {
+      "A": "The logic of the app",
+      "B": "The intent to change the state",
+      "C": "The current state",
+      "D": "The UI components"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Normalization' in a Redux state tree?",
+    "options": {
+      "A": "Making the app look normal",
+      "B": "Structuring state as a flat object (like a database) to avoid data duplication",
+      "C": "Reducing the font size",
+      "D": "Using standard variables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'dispatch(action)'?",
+    "options": {
+      "A": "To save state to the cloud",
+      "B": "To inform the store that an action has occurred so it can run the reducers",
+      "C": "To update the CSS",
+      "D": "To show an alert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Side Effect' in state management?",
+    "options": {
+      "A": "A bug in the UI",
+      "B": "Anything that happens outside the pure return value of a function (e.g., logging, network calls)",
+      "C": "A feature of the phone",
+      "D": "A type of state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux, a reducer is similar to...",
+    "options": {
+      "A": "A for-loop",
+      "B": "The .reduce() method in JavaScript arrays",
+      "C": "An if-else statement only",
+      "D": "A network request"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes Redux best?",
+    "options": {
+      "A": "A framework for building websites",
+      "B": "A library for predictable state management",
+      "C": "A type of database",
+      "D": "A style for CSS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'State Tree'?",
+    "options": {
+      "A": "A diagram of the company",
+      "B": "The hierarchical structure of the data inside the Redux store",
+      "C": "A folder structure on the computer",
+      "D": "A list of app versions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Can you put a function inside a Redux state object?",
+    "options": {
+      "A": "Yes, always",
+      "B": "No, state should be serializable (plain data) to enable debugging and persistence",
+      "C": "Only if it is a private function",
+      "D": "Only in development"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'referential equality' and why does Redux care?",
+    "options": {
+      "A": "Comparing two values",
+      "B": "Comparing if two objects point to the same location in memory; used to skip re-renders",
+      "C": "A network security check",
+      "D": "A way to name variables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'root reducer'?",
+    "options": {
+      "A": "The first reducer written in the project",
+      "B": "The top-level function that combines all domain-specific reducers into one",
+      "C": "The reducer that manages the user login",
+      "D": "A tool to delete all data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux logic, state + action = ?",
+    "options": {
+      "A": "UI",
+      "B": "New State",
+      "C": "Payload",
+      "D": "Effect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does Redux 'centralize'?",
+    "options": {
+      "A": "All developers on one team",
+      "B": "All of the application's data and the logic to change it",
+      "C": "All of the app's CSS",
+      "D": "All of the project's images"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Boilerplate' code in Redux?",
+    "options": {
+      "A": "Code that handles boiling water",
+      "B": "The repetitive, standard code required to set up actions, constants, and reducers",
+      "C": "Code that runs on the server",
+      "D": "High-performance code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of 'Redux Thunk' middleware?",
+    "options": {
+      "A": "To compress the state object",
+      "B": "To allow action creators to return a function instead of an action object, facilitating async logic",
+      "C": "To design the UI components",
+      "D": "To encrypt the Redux store"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which React-Redux hook is used to extract data from the Redux store state?",
+    "options": {
+      "A": "useDispatch",
+      "B": "useSelector",
+      "C": "useState",
+      "D": "useReducer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which React-Redux hook returns a reference to the dispatch function from the Redux store?",
+    "options": {
+      "A": "useDispatch",
+      "B": "useSelector",
+      "C": "useStore",
+      "D": "useAction"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Redux Saga, what are 'Sagas' implemented as?",
+    "options": {
+      "A": "Regular functions",
+      "B": "Generator functions (function*)",
+      "C": "Async/Await functions",
+      "D": "Class methods"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Effect' in the context of Redux Saga?",
+    "options": {
+      "A": "A visual animation",
+      "B": "A plain JavaScript object containing instructions to be executed by the saga middleware",
+      "C": "A change in the CSS",
+      "D": "A database trigger"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Saga effect is used to 'watch' for a specific action and start a new task every time it is dispatched?",
+    "options": {
+      "A": "takeLatest",
+      "B": "takeEvery",
+      "C": "call",
+      "D": "put"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'takeEvery' and 'takeLatest' in Redux Saga?",
+    "options": {
+      "A": "takeEvery is for mobile; takeLatest is for web",
+      "B": "takeEvery allows multiple instances of a task; takeLatest cancels any previous instance if a new one starts",
+      "C": "takeLatest is faster than takeEvery",
+      "D": "They are identical"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Saga effect is used to dispatch an action to the store?",
+    "options": {
+      "A": "call",
+      "B": "put",
+      "C": "select",
+      "D": "fork"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Saga effect is used to call an asynchronous function (like an API fetch)?",
+    "options": {
+      "A": "put",
+      "B": "call",
+      "C": "take",
+      "D": "all"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Middleware' signature in Redux (the curried function structure)?",
+    "options": {
+      "A": "store => next => action => { ... }",
+      "B": "action => store => { ... }",
+      "C": "reducer => action => { ... }",
+      "D": "dispatch => state => { ... }"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if you don't call 'next(action)' inside a custom Redux middleware?",
+    "options": {
+      "A": "The app crashes",
+      "B": "The action is swallowed and never reaches the reducer",
+      "C": "The action is sent twice",
+      "D": "The state is cleared"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Provider' component in React-Redux?",
+    "options": {
+      "A": "To provide internet connection",
+      "B": "To make the Redux store available to any nested components that need to access it",
+      "C": "To provide the app's version number",
+      "D": "To manage API endpoints"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memoization' in selectors, and why is it important for Redux performance?",
+    "options": {
+      "A": "It saves data to the cloud",
+      "B": "It prevents unnecessary re-renders by returning the same result if the state hasn't changed",
+      "C": "It renames the state variables",
+      "D": "It deletes old state objects"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which library is commonly used to create memoized selectors in Redux?",
+    "options": {
+      "A": "Axios",
+      "B": "Reselect",
+      "C": "Lodash",
+      "D": "Moment.js"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Connect' function in older React-Redux code?",
+    "options": {
+      "A": "A way to connect to a database",
+      "B": "A Higher-Order Component (HOC) used to link a component to the Redux store",
+      "C": "A network tool",
+      "D": "A tool to merge files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'mapStateToProps'?",
+    "options": {
+      "A": "Mapping a map to a property",
+      "B": "A function that selects the part of the data from the store that the connected component needs",
+      "C": "A way to show GPS data",
+      "D": "A database query"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'mapDispatchToProps'?",
+    "options": {
+      "A": "Mapping dispatch to a property",
+      "B": "A function used to provide action creators as props to a component",
+      "C": "A way to send emails",
+      "D": "A UI component"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Redux Logger'?",
+    "options": {
+      "A": "A developer who writes logs",
+      "B": "Middleware that logs every action and the resulting state change to the console",
+      "C": "A tool to hide logs",
+      "D": "A network monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux Toolkit, what is 'createAsyncThunk' used for?",
+    "options": {
+      "A": "To create a basic action",
+      "B": "To handle the standard lifecycle of an async request (pending, fulfilled, rejected)",
+      "C": "To create a reducer",
+      "D": "To manage local state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ExtraReducers' in Redux Toolkit's 'createSlice'?",
+    "options": {
+      "A": "Reducers that are not needed",
+      "B": "A way for a slice to respond to actions defined outside of itself (like async thunks)",
+      "C": "A type of middleware",
+      "D": "A UI theme"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Immer' inside Redux Toolkit?",
+    "options": {
+      "A": "To create 3D animations",
+      "B": "To allow writing 'mutating' logic in reducers that is safely converted to immutable updates",
+      "C": "To manage network requests",
+      "D": "To encrypt data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Store Listener'?",
+    "options": {
+      "A": "A person who listens to the store",
+      "B": "A callback function that runs every time the state changes",
+      "C": "A type of database query",
+      "D": "A network protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Dispatching' in a loop called?",
+    "options": {
+      "A": "Recursive Dispatch",
+      "B": "Batching (if optimized by the framework)",
+      "C": "Looping action",
+      "D": "State flooding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hydration' in Redux?",
+    "options": {
+      "A": "Adding water to the server",
+      "B": "The process of populating the store with initial data, often from a server or local storage",
+      "C": "Cleaning memory",
+      "D": "Updating the UI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which middleware is best suited for complex long-running background tasks or complicated async flows?",
+    "options": {
+      "A": "Redux Thunk",
+      "B": "Redux Saga",
+      "C": "Redux Promise",
+      "D": "Redux Logger"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Declarative' side effects in Redux Saga?",
+    "options": {
+      "A": "Writing effects in CSS",
+      "B": "Defining what should happen (as an object) rather than actually executing the action in the saga code",
+      "C": "Naming effects clearly",
+      "D": "A type of network call"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Root Saga'?",
+    "options": {
+      "A": "The first saga ever written",
+      "B": "The single entry point that starts all other sagas in the application",
+      "C": "A saga for the main menu",
+      "D": "A type of database root"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Redux Persist'?",
+    "options": {
+      "A": "Middleware that automatically saves and restores the Redux state to/from permanent storage",
+      "B": "A way to keep the app open",
+      "C": "A type of network retry",
+      "D": "A security setting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shallow Equality' check in `useSelector`?",
+    "options": {
+      "A": "Checking only top-level properties to decide if the component needs to re-render",
+      "B": "Checking every nested object",
+      "C": "Checking the internet speed",
+      "D": "Checking the user's name"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you handle multiple async operations in parallel with Redux Saga?",
+    "options": {
+      "A": "Using 'yield all([...])'",
+      "B": "Using a for-loop",
+      "C": "Using 'yield takeEvery'",
+      "D": "It is not possible"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Payload Action' in Redux Toolkit?",
+    "options": {
+      "A": "A type of reducer",
+      "B": "A TypeScript type that defines an action with a specific payload type",
+      "C": "A network packet",
+      "D": "A database key"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Normalized State' index?",
+    "options": {
+      "A": "The order of items in a list",
+      "B": "Using IDs as keys in an object (e.g., { [id]: data }) for O(1) lookup",
+      "C": "The font size",
+      "D": "A type of CSS index"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-serializable' data in Redux?",
+    "options": {
+      "A": "Data that cannot be turned into a string (like Classes, Functions, or Promises)",
+      "B": "Large images",
+      "C": "Encrypted data",
+      "D": "Numbers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Why should you avoid non-serializable data in Redux state?",
+    "options": {
+      "A": "It breaks time-travel debugging and state persistence",
+      "B": "It makes the app run too fast",
+      "C": "It is not allowed by JavaScript",
+      "D": "It changes the UI colors"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Store Middleware' application order?",
+    "options": {
+      "A": "Middlewares run in the order they are provided to the store",
+      "B": "Middlewares run alphabetically",
+      "C": "Middlewares run in random order",
+      "D": "Middlewares run only after the reducer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'RTK Query'?",
+    "options": {
+      "A": "A tool to ask Redux questions",
+      "B": "A powerful data fetching and caching tool built into Redux Toolkit",
+      "C": "A type of SQL query",
+      "D": "A CSS framework"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Invalidation' in RTK Query?",
+    "options": {
+      "A": "Deleting the database",
+      "B": "Clearing the cache for a specific piece of data when it is known to be out of date",
+      "C": "A security error",
+      "D": "Restarting the app"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'yield' in a Saga?",
+    "options": {
+      "A": "To return a value and finish the function",
+      "B": "To pause the saga and wait for the middleware to resolve an effect",
+      "C": "To throw an error",
+      "D": "To speed up the code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Filtering' in Redux DevTools?",
+    "options": {
+      "A": "Deleting actions with bugs",
+      "B": "Hiding specific action types from the devtools list to focus on others",
+      "C": "Filtering the user's name",
+      "D": "A network tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prop Drilling' compared to Redux?",
+    "options": {
+      "A": "Redux solves prop drilling by allowing components to access state directly via hooks",
+      "B": "They are the same thing",
+      "C": "Prop drilling is a feature of Redux",
+      "D": "Redux makes prop drilling worse"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'State Slicing' principle?",
+    "options": {
+      "A": "Cutting the computer",
+      "B": "Organizing the Redux store into independent chunks of data/logic",
+      "C": "A type of UI layout",
+      "D": "Deleting state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Proxying' the dispatch?",
+    "options": {
+      "A": "A network proxy",
+      "B": "Wrapping the dispatch function to perform extra logic (what middleware does)",
+      "C": "Hiding the dispatch",
+      "D": "A database connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Replay' for testing?",
+    "options": {
+      "A": "Running a list of actions against a reducer to ensure the final state is correct",
+      "B": "Watching a video of the app",
+      "C": "Restarting the user's session",
+      "D": "A type of network retry"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Redux Saga, what does 'yield fork' do?",
+    "options": {
+      "A": "Pauses the saga until the task is done",
+      "B": "Starts a non-blocking task (the saga continues immediately)",
+      "C": "Crashes the saga",
+      "D": "Returns a list of items"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Race' effect in Redux Saga?",
+    "options": {
+      "A": "A competition between sagas",
+      "B": "An effect that waits for multiple tasks but cancels all others once one finishes",
+      "C": "A fast animation",
+      "D": "A type of database lock"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thunk' action signature?",
+    "options": {
+      "A": "(dispatch, getState) => { ... }",
+      "B": "(state, action) => { ... }",
+      "C": "(store, next) => { ... }",
+      "D": "(action) => { ... }"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Duck Pattern' in Redux?",
+    "options": {
+      "A": "Code about ducks",
+      "B": "A proposal to bundle actions, reducers, and types into a single file for a feature",
+      "C": "A type of UI theme",
+      "D": "A network protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Batching' in modern React-Redux?",
+    "options": {
+      "A": "Grouping multiple state updates into a single render for better performance",
+      "B": "Writing code in batches",
+      "C": "Downloading multiple files",
+      "D": "Deleting multiple actions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Immutability' check middleware?",
+    "options": {
+      "A": "Middleware used in development to detect if you accidentally mutated the state",
+      "B": "Middleware that prevents state from changing",
+      "C": "A database security tool",
+      "D": "A type of CSS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux' final goal?",
+    "options": {
+      "A": "To make the UI consistent and predictable by controlling every state change",
+      "B": "To write more code",
+      "C": "To use every library available",
+      "D": "To build only for React"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Normalization' in a Redux store?",
+    "options": {
+      "A": "Translating the state into different languages",
+      "B": "Organizing data into an 'entities' object with IDs as keys to prevent duplication and simplify updates",
+      "C": "Reducing the number of actions in the project",
+      "D": "Making the UI look more standard"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which utility library is commonly used to normalize deeply nested API responses for Redux?",
+    "options": {
+      "A": "Axios",
+      "B": "Normalizr",
+      "C": "Lodash",
+      "D": "Express"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cascading Updates' in the context of a denormalized state?",
+    "options": {
+      "A": "A fast UI animation",
+      "B": "When changing one piece of data requires updating it in multiple different locations in the state tree",
+      "C": "A network error",
+      "D": "A type of database backup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Parameterized Selector'?",
+    "options": {
+      "A": "A selector that takes an argument (like an ID) to find a specific piece of state",
+      "B": "A selector that changes the UI color",
+      "C": "A selector used only for CSS",
+      "D": "A database query language"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does 'Reselect' handle selectors with multiple arguments?",
+    "options": {
+      "A": "It ignores them",
+      "B": "It uses memoization to return the same result if the state and arguments haven't changed",
+      "C": "It crashes the app",
+      "D": "It clears the cache"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'State Hydration'?",
+    "options": {
+      "A": "Adding more memory to the server",
+      "B": "The process of filling the Redux store with data from an external source (like a server or disk) on app startup",
+      "C": "Cleaning up unused variables",
+      "D": "A type of network call"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Redux Persistence strategy only saves specific slices of the state to disk?",
+    "options": {
+      "A": "Blacklisting / Whitelisting",
+      "B": "State Merging",
+      "C": "Hard Reset",
+      "D": "Deep Copy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Rehydration' in the context of Redux Persist?",
+    "options": {
+      "A": "Loading the saved state back from storage into the Redux store",
+      "B": "Refreshing the browser",
+      "C": "Deleting the cache",
+      "D": "Updating the Redux version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Optimistic UI Update' using Redux?",
+    "options": {
+      "A": "Designing a happy interface",
+      "B": "Updating the state immediately before the server responds, then rolling back if the request fails",
+      "C": "A fast network connection",
+      "D": "A type of user login"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Rollback Action'?",
+    "options": {
+      "A": "An action that undos a change after a failed network request",
+      "B": "An action that deletes the history",
+      "C": "A type of UI transition",
+      "D": "A security feature"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Redux Saga, what is 'Channel' used for?",
+    "options": {
+      "A": "Communicating between sagas or between external events and sagas",
+      "B": "Watching TV in the app",
+      "C": "Changing the dispatcher",
+      "D": "A database connection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Ducks' pattern in Redux file structure?",
+    "options": {
+      "A": "Creating folders named after animals",
+      "B": "Bundling actions, action creators, and reducers for a single feature into one file",
+      "C": "A type of code encryption",
+      "D": "A UI design principle"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Sanitization' in Redux DevTools for production?",
+    "options": {
+      "A": "Deleting actions with bugs",
+      "B": "Removing sensitive data (like passwords) from being visible in the DevTools logs",
+      "C": "Renaming the actions",
+      "D": "Cleaning the project code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which problem is 'Redux Toolkit Query' (RTK Query) designed to solve?",
+    "options": {
+      "A": "UI layout design",
+      "B": "The boilerplate and complexity of data fetching, caching, and state synchronization",
+      "C": "App security",
+      "D": "Local storage management"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tag Invalidation' in RTK Query?",
+    "options": {
+      "A": "Deleting HTML tags",
+      "B": "A mechanism to automatically re-fetch data when a mutation changes a resource that other queries depend on",
+      "C": "A security error",
+      "D": "A way to hide data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Manual Cache Update' in RTK Query?",
+    "options": {
+      "A": "Manually editing a JSON file",
+      "B": "Using 'onQueryStarted' to optimistically update the cache before a server response",
+      "C": "Clearing the browser history",
+      "D": "A type of database query"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Polling' in the context of Redux data fetching?",
+    "options": {
+      "A": "Asking users for their opinion",
+      "B": "Automatically re-fetching data from the server at a fixed time interval",
+      "C": "A type of network error",
+      "D": "A security check"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux, what is a 'Higher-Order Reducer'?",
+    "options": {
+      "A": "A reducer with a lot of code",
+      "B": "A function that takes a reducer as an argument and returns a new reducer (e.g., for undo/redo)",
+      "C": "A private reducer",
+      "D": "A reducer for the main menu"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'State Slicing' and why is it useful?",
+    "options": {
+      "A": "Cutting the state with a tool",
+      "B": "Dividing the global state into independent pieces to improve modularity and maintainability",
+      "C": "Deleting state data",
+      "D": "A type of UI layout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which concept is used to handle 'Undo' and 'Redo' functionality in Redux?",
+    "options": {
+      "A": "Keeping a history stack of previous state objects",
+      "B": "Deleting the state",
+      "C": "Restarting the app",
+      "D": "A network retry"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Middleware Chaining'?",
+    "options": {
+      "A": "Connecting two apps",
+      "B": "The process where an action passes through multiple middlewares in sequence",
+      "C": "A database tool",
+      "D": "A way to design buttons"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Thunk' argument in Redux Toolkit?",
+    "options": {
+      "A": "To name the action",
+      "B": "To allow the action creator to access 'dispatch' and 'getState'",
+      "C": "To change the UI theme",
+      "D": "To manage app permissions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Immutability' check middleware in Redux Toolkit?",
+    "options": {
+      "A": "A development tool that throws an error if you mutate state directly in a reducer",
+      "B": "A tool that prevents state from changing",
+      "C": "A database security tool",
+      "D": "A type of CSS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Serializable State' and why is it preferred?",
+    "options": {
+      "A": "Data that can be converted to JSON, enabling persistence and time-travel debugging",
+      "B": "State that is in a series",
+      "C": "Encrypted state",
+      "D": "Private state"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Reference Comparison' in Redux components?",
+    "options": {
+      "A": "Checking if two objects are the exact same instance in memory to skip re-renders",
+      "B": "Comparing values inside an object",
+      "C": "A network security check",
+      "D": "A type of database query"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deep Comparison' and why is it generally avoided in selectors?",
+    "options": {
+      "A": "It is too fast",
+      "B": "It is computationally expensive and can slow down the UI on every state change",
+      "C": "It is only for mobile",
+      "D": "It is a security risk"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux, what is 'Normalization' of an entities object?",
+    "options": {
+      "A": "Using 'byId' and 'allIds' to manage a collection of items",
+      "B": "Using a list",
+      "C": "A UI design style",
+      "D": "A type of CSS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Action Batching'?",
+    "options": {
+      "A": "Grouping multiple actions together to trigger only one UI update/re-render",
+      "B": "Writing actions in batches",
+      "C": "Deleting multiple actions",
+      "D": "A type of network call"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Zustand' compared to Redux?",
+    "options": {
+      "A": "A German city",
+      "B": "A smaller, simpler state management library that uses a similar store concept without the boilerplate",
+      "C": "A type of database",
+      "D": "A layout framework"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MobX' compared to Redux?",
+    "options": {
+      "A": "A state management library that uses mutable state and observables rather than immutable reducers",
+      "B": "A faster version of Redux",
+      "C": "A tool for CSS",
+      "D": "A network protocol"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Command Query Responsibility Segregation' (CQRS) in Redux?",
+    "options": {
+      "A": "Separating the logic for reading state (selectors) from the logic for writing state (reducers)",
+      "B": "Using different servers",
+      "C": "A way to design buttons",
+      "D": "A network tool"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Flux Standard Action' (FSA)?",
+    "options": {
+      "A": "A convention for defining actions with 'type', 'payload', 'error', and 'meta' properties",
+      "B": "A network protocol",
+      "C": "A UI design principle",
+      "D": "A type of database"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Async Flow' in Redux?",
+    "options": {
+      "A": "The sequence of events when a user action triggers a network call, then a success/error action",
+      "B": "A fast network connection",
+      "C": "A type of UI animation",
+      "D": "A database tool"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cross-Cutting Concerns' in Redux Middleware?",
+    "options": {
+      "A": "Logic like logging, crash reporting, or analytics that applies across the entire app",
+      "B": "A bug in the state",
+      "C": "A UI theme",
+      "D": "A network protocol"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'State Persistence' throttle?",
+    "options": {
+      "A": "Limiting how often the state is saved to disk to prevent performance lag",
+      "B": "A network speed limit",
+      "C": "A way to delete data",
+      "D": "A database backup"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Redux, why are 'Strings' typically used for action types instead of Symbols?",
+    "options": {
+      "A": "Symbols are faster",
+      "B": "Strings are serializable and visible in logs and devtools",
+      "C": "Strings are more secure",
+      "D": "Symbols are not allowed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Selector' recomputation?",
+    "options": {
+      "A": "When a selector runs again because its input state has changed",
+      "B": "Restarting the app",
+      "C": "A database query",
+      "D": "A UI animation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Action Interception'?",
+    "options": {
+      "A": "What middleware does by catching an action before it reaches the reducer",
+      "B": "Deleting an action",
+      "C": "Renaming an action",
+      "D": "A network tool"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Thunk Middleware' order?",
+    "options": {
+      "A": "It should typically be placed early in the middleware chain to handle async functions before other middlewares see them",
+      "B": "It should be last",
+      "C": "It doesn't matter",
+      "D": "It should be alphabetical"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux Store' observability?",
+    "options": {
+      "A": "The ability of components or tools to react to state changes automatically",
+      "B": "Looking at the code",
+      "C": "A network protocol",
+      "D": "A UI theme"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In RTK Query, what is 'BaseQuery'?",
+    "options": {
+      "A": "The fundamental function used to perform network requests (like fetch or axios)",
+      "B": "A SQL query",
+      "C": "A type of UI layout",
+      "D": "A security setting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'FetchArgs' in RTK Query?",
+    "options": {
+      "A": "Arguments passed to the fetch function (URL, method, body)",
+      "B": "A type of list",
+      "C": "A UI component",
+      "D": "A network error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Entity Adapter' in Redux Toolkit?",
+    "options": {
+      "A": "A standardized way to manage a normalized collection of data (CRUD operations)",
+      "B": "A tool for 3D models",
+      "C": "A network tool",
+      "D": "A database manager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Selector' granularity?",
+    "options": {
+      "A": "How specific a selector is; more granular selectors prevent unnecessary re-renders",
+      "B": "The size of the state",
+      "C": "The number of users",
+      "D": "A UI design principle"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'State Divergence'?",
+    "options": {
+      "A": "When different parts of the UI show conflicting data because state is not centralized",
+      "B": "A network error",
+      "C": "A database crash",
+      "D": "A UI animation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux-First' architecture?",
+    "options": {
+      "A": "Building the state and logic before the UI",
+      "B": "Using Redux on the first screen only",
+      "C": "A type of navigation",
+      "D": "A CSS framework"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Store Migration' for persisted state?",
+    "options": {
+      "A": "Updating the format of the saved state when the app version changes and state structure is different",
+      "B": "Moving the database to a new server",
+      "C": "Deleting the state",
+      "D": "Updating the Redux library"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'State Predicate' in Redux Logger?",
+    "options": {
+      "A": "A function that determines which state changes should be logged to the console",
+      "B": "A type of error",
+      "C": "A database query",
+      "D": "A UI theme"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Redux, what is the 'Listener Middleware' (introduced in RTK 1.8)?",
+    "options": {
+      "A": "A lightweight alternative to Sagas for triggering side effects when actions are dispatched",
+      "B": "A tool to listen to music",
+      "C": "A UI component",
+      "D": "A security feature"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux' final outcome?",
+    "options": {
+      "A": "A predictable application lifecycle where every change is traceable and reproducible",
+      "B": "A heavier app",
+      "C": "A confusing code structure",
+      "D": "A web-only app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When unit testing a Redux reducer, what is the standard pattern to follow?",
+    "options": {
+      "A": "Mocking the whole API",
+      "B": "Passing an initial state and an action to the reducer and asserting the output matches the expected new state",
+      "C": "Testing the UI rendering",
+      "D": "Checking the network logs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mock Store' used for in Redux testing?",
+    "options": {
+      "A": "To sell fake products",
+      "B": "A specialized tool (like redux-mock-store) to record dispatched actions for assertions in unit tests",
+      "C": "A backup of the database",
+      "D": "To simulate a slow server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In RTK Query, what is 'Prefetching'?",
+    "options": {
+      "A": "Downloading the app before the user buys it",
+      "B": "A mechanism to start loading data for a specific resource before the user actually navigates to that screen",
+      "C": "Deleting data early",
+      "D": "A database backup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Re-hydration' failure in Redux Persist?",
+    "options": {
+      "A": "When the server is too hot",
+      "B": "When the stored state is incompatible with the current code's initial state (e.g., after a breaking change)",
+      "C": "A network timeout",
+      "D": "A UI rendering bug"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Redux Saga's' 'yield join' used for?",
+    "options": {
+      "A": "To join two strings",
+      "B": "To wait for the result of a previously 'forked' non-blocking task",
+      "C": "To merge two reducers",
+      "D": "To start a new project"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool allows you to measure how long each Redux action takes to process through the reducers?",
+    "options": {
+      "A": "Redux Profiler (integrated in DevTools)",
+      "B": "Chrome Network tab",
+      "C": "Android Studio Profiler",
+      "D": "Logcat"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Action Propagation' delay?",
+    "options": {
+      "A": "The time it takes for an action to travel from dispatch to the final UI update",
+      "B": "A network lag",
+      "C": "The time it takes to write code",
+      "D": "A database locking issue"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'State Diffing' in Redux DevTools?",
+    "options": {
+      "A": "Comparing two different apps",
+      "B": "A visual representation of exactly which properties in the state changed after a specific action",
+      "C": "A way to hide data",
+      "D": "A type of encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snapshot Testing' for Redux actions?",
+    "options": {
+      "A": "Taking a screenshot of the app",
+      "B": "Storing the result of a dispatched action in a file to ensure future changes don't break the structure",
+      "C": "Testing the camera",
+      "D": "A database tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux Saga, what is 'yield cancel' used for?",
+    "options": {
+      "A": "To stop the app",
+      "B": "To manually terminate a running 'forked' task",
+      "C": "To delete a file",
+      "D": "To restart the saga"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Middleware Composition'?",
+    "options": {
+      "A": "Applying multiple middlewares to a store using 'applyMiddleware'",
+      "B": "Writing one giant middleware",
+      "C": "Deleting old middleware",
+      "D": "A type of UI theme"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Store Enhancer' vs 'Middleware'?",
+    "options": {
+      "A": "Middleware is a type of Enhancer; Enhancers can modify the store's actual methods",
+      "B": "They are the same",
+      "C": "Middleware is only for network; Enhancers are for UI",
+      "D": "Enhancers are older"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux-Undo'?",
+    "options": {
+      "A": "A popular library that provides a higher-order reducer to easily add undo/redo history to any slice",
+      "B": "A command to delete code",
+      "C": "A type of network retry",
+      "D": "A security feature"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In RTK Query, what is 'transformResponse'?",
+    "options": {
+      "A": "To change the UI color",
+      "B": "A function to modify or format the raw data returned from the API before it hits the Redux cache",
+      "C": "To delete a database",
+      "D": "To encrypt the payload"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Race Condition' in Thunks?",
+    "options": {
+      "A": "A fast network",
+      "B": "When two async thunks are dispatched, and the 'older' one finishes last, overwriting 'newer' data",
+      "C": "A type of loop",
+      "D": "A database error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Aborting' an action in RTK Query?",
+    "options": {
+      "A": "Stopping a network request that is no longer needed (e.g., user left the page)",
+      "B": "Deleting a project",
+      "C": "A security error",
+      "D": "A type of search"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Redux concept ensures that even if you dispatch the same action twice, the UI only updates once if the state is the same?",
+    "options": {
+      "A": "Immutability and Reference Equality",
+      "B": "Networking",
+      "C": "Compression",
+      "D": "Looping"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Selective Persistence'?",
+    "options": {
+      "A": "Saving only part of the state tree to local storage to save space and performance",
+      "B": "Saving data to a different server",
+      "C": "Deleting state after 1 hour",
+      "D": "A UI theme"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Redux testing, why is 'integration testing' of the store preferred over testing individual components?",
+    "options": {
+      "A": "It is faster",
+      "B": "It ensures that the interaction between actions, reducers, and selectors works correctly as a whole",
+      "C": "It is easier to write",
+      "D": "It uses less memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thunk' error handling best practice?",
+    "options": {
+      "A": "Ignoring errors",
+      "B": "Dispatching a 'rejected' action with the error payload to update the UI with an error message",
+      "C": "Restarting the app",
+      "D": "Deleting the state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Selector Isolation'?",
+    "options": {
+      "A": "Ensuring selectors don't depend on the internal structure of the state tree (using the 'encapsulation' principle)",
+      "B": "Hiding selectors from other developers",
+      "C": "A network tool",
+      "D": "A type of CSS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux-Saga-Test-Plan'?",
+    "options": {
+      "A": "A tool to plan the project",
+      "B": "A library to make testing complex saga generators easy and readable",
+      "C": "A type of UI layout",
+      "D": "A database manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'State Hydration' in Next.js with Redux?",
+    "options": {
+      "A": "Syncing the state from the server-rendered HTML into the client-side Redux store",
+      "B": "Deleting the state",
+      "C": "A network speed test",
+      "D": "A type of CSS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Selector Chaining'?",
+    "options": {
+      "A": "A selector that calls another selector",
+      "B": "A type of loop",
+      "C": "A network protocol",
+      "D": "A database join"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In RTK Query, what is 'QueryArg'?",
+    "options": {
+      "A": "The parameter passed to a query (e.g., a post ID)",
+      "B": "The size of the data",
+      "C": "A type of list",
+      "D": "A security token"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic Middleware' in Redux?",
+    "options": {
+      "A": "Middleware that changes color",
+      "B": "Middleware that can be added or removed from the store after it has been created",
+      "C": "A fast network connection",
+      "D": "A type of UI theme"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Payload' validation?",
+    "options": {
+      "A": "Using TypeScript or custom logic to ensure actions have the correct data structure",
+      "B": "Hiding the payload",
+      "C": "A network security check",
+      "D": "A database tool"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux State' depth limit recommendation?",
+    "options": {
+      "A": "Unlimited",
+      "B": "Generally recommended to keep state flat or no more than 2-3 levels deep for performance",
+      "C": "Exactly 1 level",
+      "D": "50 levels"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'RTK Query' automatic caching duration?",
+    "options": {
+      "A": "1 second",
+      "B": "By default, 60 seconds (but fully configurable)",
+      "C": "Forever",
+      "D": "Until the app closes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Redux Saga, what is 'yield select' used for?",
+    "options": {
+      "A": "To choose a theme",
+      "B": "To access the current state from within a saga",
+      "C": "To update the state",
+      "D": "To stop the saga"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Creator' pure function requirement?",
+    "options": {
+      "A": "They should only return data and not perform side effects like network calls (unless they are thunks)",
+      "B": "They must use a database",
+      "C": "They must be private",
+      "D": "There is no requirement"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux Toolkit' default middleware?",
+    "options": {
+      "A": "Thunk, Serializability check, and Immutability check",
+      "B": "Logger and Saga",
+      "C": "None",
+      "D": "Database connector"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'State Mutation' bug?",
+    "options": {
+      "A": "When the app icon changes",
+      "B": "When you accidentally change the state directly (e.g., state.x = 1), causing UI sync issues",
+      "C": "A network timeout",
+      "D": "A database error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Selector' memoization key?",
+    "options": {
+      "A": "The input state/arguments used to determine if the result needs to be re-calculated",
+      "B": "A password",
+      "C": "A database ID",
+      "D": "A type of UI theme"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux-First Router'?",
+    "options": {
+      "A": "A navigation library where the URL is just another piece of Redux state",
+      "B": "A type of network router",
+      "C": "A UI component",
+      "D": "A security setting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Redux Saga, what is 'yield throttle'?",
+    "options": {
+      "A": "Slowing down the internet",
+      "B": "Ignoring a series of actions for a period of time after the first one is processed",
+      "C": "Speeding up the app",
+      "D": "Deleting data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Interception' logic?",
+    "options": {
+      "A": "Logging, error handling, or modifying the action before it hits the store",
+      "B": "Deleting an action",
+      "C": "Renaming an action",
+      "D": "A network speed test"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Normalized State' relationship management?",
+    "options": {
+      "A": "Using ID references (like foreign keys) to link different entities in the state tree",
+      "B": "A UI layout principle",
+      "C": "A network protocol",
+      "D": "A database join"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Thunk' dispatching another Thunk?",
+    "options": {
+      "A": "A powerful pattern for composing complex asynchronous workflows",
+      "B": "A bug to avoid",
+      "C": "A type of loop",
+      "D": "A network security risk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux' observability pattern?",
+    "options": {
+      "A": "Allowing the system to trace every data change back to the specific action that caused it",
+      "B": "Looking at the user's screen",
+      "C": "A network protocol",
+      "D": "A UI theme"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'RTK Query' base API object?",
+    "options": {
+      "A": "The central definition of endpoints and configuration created by 'createApi'",
+      "B": "A type of list",
+      "C": "A UI component",
+      "D": "A network error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Redux Saga, what is 'yield putResolve'?",
+    "options": {
+      "A": "Dispatching an action and waiting for its result if it returns a promise",
+      "B": "A type of UI layout",
+      "C": "A database query",
+      "D": "A security setting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Entity State' in Redux Toolkit?",
+    "options": {
+      "A": "A standardized object with 'ids' and 'entities' properties for normalized data",
+      "B": "A type of user login",
+      "C": "A database table",
+      "D": "A network protocol"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Middleware' side-effect isolation?",
+    "options": {
+      "A": "Keeping network/API logic out of UI components and reducers for better testability",
+      "B": "Deleting data",
+      "C": "A type of UI theme",
+      "D": "A database backup"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Store Middleware' third-party examples?",
+    "options": {
+      "A": "Redux Logger, Redux Thunk, Redux Saga",
+      "B": "React, Angular, Vue",
+      "C": "Chrome, Safari, Firefox",
+      "D": "Android, iOS, Web"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux Persist' custom transform?",
+    "options": {
+      "A": "A way to modify the state specifically for storage (e.g., encrypting it)",
+      "B": "Changing the UI color",
+      "C": "Deleting the state",
+      "D": "A network speed test"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Action' serializability?",
+    "options": {
+      "A": "Ensuring actions are plain objects that can be turned into JSON",
+      "B": "Naming actions clearly",
+      "C": "Deleting actions",
+      "D": "A network protocol"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redux' predictable state principle?",
+    "options": {
+      "A": "The idea that given a starting state and an action, the final state is always identical and deterministic",
+      "B": "Predicting the user's future",
+      "C": "A type of navigation",
+      "D": "A UI layout"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'State Reset' in Redux?",
+    "options": {
+      "A": "An action that returns the root reducer's initial state, often used during logout",
+      "B": "Deleting the app",
+      "C": "A network speed test",
+      "D": "A database crash"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VerifiHire AI's' final Redux question?",
+    "options": {
+      "A": "This one!",
+      "B": "The first one",
+      "C": "There is no final question",
+      "D": "A network protocol"
+    },
+    "answer": "A"
+  }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "Redux"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

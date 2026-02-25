@@ -1,0 +1,3054 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+  {
+    "question": "What does the 'REST' in REST API stand for?",
+    "options": {
+      "A": "Remote Enterprise Standard Transfer",
+      "B": "REpresentational State Transfer",
+      "C": "Real-time Electronic Software Transmission",
+      "D": "Relational Enterprise Service Template"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: REST is a protocol, similar to HTTP or FTP.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are considered core components of an HTTP Request in a RESTful service?",
+    "options": {
+      "A": "HTTP Method (Verbs)",
+      "B": "Endpoint (URI)",
+      "C": "Graphics Driver Version",
+      "D": "Local File Path"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: A REST API can return data in formats other than JSON, such as XML or HTML.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which architectural constraint of REST ensures that the server does NOT store any information about the client session?",
+    "options": {
+      "A": "Cacheability",
+      "B": "Statelessness",
+      "C": "Layered System",
+      "D": "Uniform Interface"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO benefits of a Stateless API:",
+    "options": {
+      "A": "Improved scalability (any server can handle any request)",
+      "B": "Reduced server memory usage for session tracking",
+      "C": "Persistent connections that never time out",
+      "D": "Guaranteed delivery of every packet"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: In a RESTful system, the Client and Server must be written in the same programming language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Resource' in the context of REST?",
+    "options": {
+      "A": "The physical RAM of the server",
+      "B": "Any object or data accessible via a URI (e.g., a User or Order)",
+      "C": "The developer's computer",
+      "D": "An internet service provider"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are primary goals of the REST architectural style?",
+    "options": {
+      "A": "Performance and Scalability",
+      "B": "Modifiability and Simplicity",
+      "C": "High-resolution graphics rendering",
+      "D": "Automatic database backups"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: The 'Client-Server' constraint allows the UI and data storage to evolve independently.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which REST constraint allows for intermediaries like load balancers and proxies without the client knowing?",
+    "options": {
+      "A": "Layered System",
+      "B": "Statelessness",
+      "C": "Cacheability",
+      "D": "Uniform Interface"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is used to retrieve a representation of a resource?",
+    "options": {
+      "A": "GET",
+      "B": "POST",
+      "C": "PUT",
+      "D": "DELETE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A POST request is idempotent.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code is returned when a client exceeds its assigned request quota?",
+    "options": {
+      "A": "400",
+      "B": "401",
+      "C": "429 (Too Many Requests)",
+      "D": "503"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary role of an 'API Gateway'?",
+    "options": {
+      "A": "Storing the primary database",
+      "B": "Acting as a management and routing layer between clients and services",
+      "C": "Compiling the server-side code",
+      "D": "Providing the physical internet connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code represents 'Internal Server Error'?",
+    "options": {
+      "A": "404",
+      "B": "401",
+      "C": "500",
+      "D": "502"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: WebSockets provide full-duplex, real-time communication over a single long-lived TCP connection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' in the context of an API call?",
+    "options": {
+      "A": "The total data volume transferred",
+      "B": "The time elapsed between sending a request and receiving a response",
+      "C": "The number of lines of code in the endpoint",
+      "D": "The cost of hosting the API"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code indicates a resource is 'Gone' permanently?",
+    "options": {
+      "A": "404",
+      "B": "410",
+      "C": "403",
+      "D": "503"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' means that performing an operation once has the same effect as performing it many times.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which REST constraint allows a client to use a cached response, thus reducing network latency?",
+    "options": {
+      "A": "Statelessness",
+      "B": "Cacheability",
+      "C": "Layered System",
+      "D": "Code on Demand"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Layered System' constraint means a client cannot tell whether it is connected directly to the end server or an intermediary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are considered optional constraints in the REST architectural style?",
+    "options": {
+      "A": "Code on Demand",
+      "B": "Layered System",
+      "C": "Statelessness",
+      "D": "Cacheability"
+    },
+    "answer": ["A"]
+  },
+  {
+    "question": "What does the 'H' in HATEOAS stand for?",
+    "options": {
+      "A": "Hyperlink",
+      "B": "Hypermedia",
+      "C": "Hosting",
+      "D": "Hidden"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using RESTful principles, the server should store the client's session state in a local database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is typically used for partial updates to a resource?",
+    "options": {
+      "A": "PUT",
+      "B": "PATCH",
+      "C": "POST",
+      "D": "UPDATE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO HTTP methods that are considered 'Safe' (they do not change resource state):",
+    "options": {
+      "A": "GET",
+      "B": "HEAD",
+      "C": "POST",
+      "D": "DELETE"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the purpose of the 'OPTIONS' method in a RESTful API?",
+    "options": {
+      "A": "To delete optional parameters",
+      "B": "To describe the communication options for the target resource",
+      "C": "To update user preferences",
+      "D": "To create an optional resource"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code is returned when a client sends a request that is too large for the server to process?",
+    "options": {
+      "A": "400",
+      "B": "413 (Payload Too Large)",
+      "C": "415",
+      "D": "500"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 201 Created status code should ideally include a Location header.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Throttling'?",
+    "options": {
+      "A": "Increasing the server's processing speed",
+      "B": "Deliberately limiting request rates to maintain system stability",
+      "C": "Deleting outdated data from the cache",
+      "D": "Changing the name of an API version"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO industry-standard API documentation formats:",
+    "options": {
+      "A": "OpenAPI (formerly Swagger)",
+      "B": "RAML",
+      "C": ".EXE",
+      "D": ".MP4"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the 'N+1 Problem' in the context of API performance?",
+    "options": {
+      "A": "Adding one extra server to a cluster",
+      "B": "A performance bottleneck where one initial request triggers N additional database or API calls",
+      "C": "A versioning error where N is the version number",
+      "D": "When an API returns exactly one more item than requested"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'JWT Claim'?",
+    "options": {
+      "A": "A piece of information asserted about a subject (e.g., 'admin': true)",
+      "B": "An error report submitted by a developer",
+      "C": "The API's base URL",
+      "D": "An encryption key type"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Basic Authentication' sends user credentials in a Base64 encoded string and should always be used with HTTPS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code range represents Client Errors?",
+    "options": {
+      "A": "2xx",
+      "B": "3xx",
+      "C": "4xx",
+      "D": "5xx"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Payload Optimization' in API development?",
+    "options": {
+      "A": "Increasing the amount of metadata in a response",
+      "B": "Reducing the data size sent over the network (e.g., via compression or field selection)",
+      "C": "Deleting the API code",
+      "D": "Changing the server IP address"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header is used by the server to inform the client about the type of data being returned?",
+    "options": {
+      "A": "Accept",
+      "B": "Content-Type",
+      "C": "Server",
+      "D": "Location"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Representation' is the current state of a resource returned in a specific format.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is used for 'Partial Content', often used for pausing and resuming large downloads?",
+    "options": {
+      "A": "200 OK",
+      "B": "206 Partial Content",
+      "C": "204 No Content",
+      "D": "201 Created"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 403 Forbidden error indicates that the user is not authenticated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO headers are Sent by a client to describe its capabilities and preferred language to the server?",
+    "options": {
+      "A": "User-Agent",
+      "B": "Accept-Language",
+      "C": "Server",
+      "D": "ETag"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the primary purpose of the 'Host' header in an HTTP request?",
+    "options": {
+      "A": "To identify the client's operating system",
+      "B": "To specify the domain name of the server, allowing for shared hosting",
+      "C": "To measure the speed of the network host",
+      "D": "To encrypt the request payload"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In REST, which status code is returned when a resource has been permanently moved to a new URI?",
+    "options": {
+      "A": "301 Moved Permanently",
+      "B": "302 Found",
+      "C": "307 Temporary Redirect",
+      "D": "404 Not Found"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 204 No Content status code signifies a successful request but an intentionally empty response body.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is designed to be 'Idempotent' and replaces the target resource entirely?",
+    "options": {
+      "A": "POST",
+      "B": "PUT",
+      "C": "PATCH",
+      "D": "GET"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO headers involved in 'Conditional Requests' used for cache validation:",
+    "options": {
+      "A": "If-None-Match",
+      "B": "If-Modified-Since",
+      "C": "User-Agent",
+      "D": "Content-Length"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What does the 401 Unauthorized status code signify?",
+    "options": {
+      "A": "The user is banned from the server",
+      "B": "Authentication is required and has failed or not yet been provided",
+      "C": "The server is currently under maintenance",
+      "D": "The resource was deleted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 500 error represents a generic 'catch-all' for unexpected server conditions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code indicates that the server is currently a 'Bad Gateway' while acting as a proxy?",
+    "options": {
+      "A": "400",
+      "B": "500",
+      "C": "502",
+      "D": "504"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of the 'Retry-After' header in a 429 Too Many Requests response?",
+    "options": {
+      "A": "To tell the user to never come back",
+      "B": "To indicate how long the client should wait before making another request",
+      "C": "To reset the user's password",
+      "D": "To change the API version"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO status codes used for server-side timeout issues:",
+    "options": {
+      "A": "504 Gateway Timeout",
+      "B": "408 Request Timeout",
+      "C": "200 OK",
+      "D": "301 Moved"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: 410 Gone indicates that the resource is no longer available and no forwarding address is known.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the status code 202 Accepted imply in an asynchronous API flow?",
+    "options": {
+      "A": "The data has been saved to the database",
+      "B": "The request has been accepted for processing, but processing is not yet complete",
+      "C": "The user's login was successful",
+      "D": "The API key is invalid"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header allows a server to facilitate Cross-Origin Resource Sharing (CORS)?",
+    "options": {
+      "A": "Access-Control-Allow-Origin",
+      "B": "Authorization",
+      "C": "Cache-Control",
+      "D": "Content-Security-Policy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 409 Conflict status code is often used during an edit conflict (e.g. two users updating the same record).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned if the client provides a media type (like XML) that the server cannot process?",
+    "options": {
+      "A": "406 Not Acceptable",
+      "B": "415 Unsupported Media Type",
+      "C": "400 Bad Request",
+      "D": "501 Not Implemented"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Idempotency Key' used for in POST requests?",
+    "options": {
+      "A": "To encrypt the request body",
+      "B": "To ensure that duplicate requests do not result in duplicate transactions",
+      "C": "To identify the user's location",
+      "D": "To set the expiration date of a resource"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question: What does the 501 Not Implemented status code mean?",
+    "options": {
+      "A": "The database is empty",
+      "B": "The server does not support the functionality required to fulfill the request",
+      "C": "The developer forgot to write the code",
+      "D": "The API is in beta mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which architectural style uses a 'Schema-first' approach and a single endpoint for all data requests?",
+    "options": {
+      "A": "REST",
+      "B": "GraphQL",
+      "C": "SOAP",
+      "D": "Webhooks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Microservices architecture, APIs are the primary communication channel between independent services.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO technologies are primarily used for real-time, bi-directional API communication?",
+    "options": {
+      "A": "WebSockets",
+      "B": "gRPC Streams",
+      "C": "HTTP GET",
+      "D": "SOAP envelopes"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the role of an 'API Gateway' in a microservices environment?",
+    "options": {
+      "A": "To act as a single entry point for routing, security, and rate limiting",
+      "B": "To store the primary database for all services",
+      "C": "To write the frontend code for the application",
+      "D": "To increase the server's CPU clock speed"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Payload Optimization' in API development?",
+    "options": {
+      "A": "Increasing the amount of metadata in a response",
+      "B": "Reducing data size via techniques like compression, field selection, or binary formats",
+      "C": "Deleting the API source code",
+      "D": "Changing the server IP address"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'JWT' (JSON Web Token) is typically stateless because the server doesn't need to store a session record to verify the token.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO parts are included in a standard JWT structure?",
+    "options": {
+      "A": "Payload (Claims)",
+      "B": "Signature",
+      "C": "Database Connection String",
+      "D": "Local File Path"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Service Discovery' in an API ecosystem?",
+    "options": {
+      "A": "A mechanism that allows APIs to find the network locations of other services automatically",
+      "B": "Searching for APIs on Google",
+      "C": "The process of naming an API",
+      "D": "Deleting unused services"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In GraphQL, what are 'Mutations' used for?",
+    "options": {
+      "A": "To fetch data from the server",
+      "B": "To modify server-side data (Create, Update, Delete)",
+      "C": "To change the theme of the API docs",
+      "D": "To restart the server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SOAP messages are written in JSON format.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API Chaining'?",
+    "options": {
+      "A": "Using the output of one API call as the direct input for a subsequent call",
+      "B": "Deleting multiple APIs simultaneously",
+      "C": "Linking two physical servers with a cable",
+      "D": "Encrypting the API URL string"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which OAuth 2.0 component is responsible for granting 'Access Tokens' after verifying the user's identity?",
+    "options": {
+      "A": "Resource Server",
+      "B": "Authorization Server",
+      "C": "Client Application",
+      "D": "Network Router"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'N+1 Problem' in API performance?",
+    "options": {
+      "A": "When an API returns exactly one more item than requested",
+      "B": "A bottleneck where one request triggers N additional database or service calls",
+      "C": "A versioning error",
+      "D": "Adding one extra server to a cluster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'OpenID Connect' (OIDC) is an identity layer built on top of the OAuth 2.0 protocol.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO common API security vulnerabilities:",
+    "options": {
+      "A": "Insecure Direct Object Reference (IDOR)",
+      "B": "Broken Object Level Authorization (BOLA)",
+      "C": "Monitor Ghosting",
+      "D": "RAM Overclocking"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is an 'API Wrapper'?",
+    "options": {
+      "A": "A language-specific library that simplifies making calls to a complex API",
+      "B": "A protective case for server hardware",
+      "C": "A type of network firewall",
+      "D": "An error message format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Long Polling'?",
+    "options": {
+      "A": "The server holds the request open until data is available or a timeout occurs",
+      "B": "Polling the server every 1 second",
+      "C": "A type of binary compression",
+      "D": "Checking the server's temperature"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Rate Limiting' is used to protect an API from being overwhelmed by too many requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which header is used to facilitate 'Mutual TLS' (mTLS) authentication?",
+    "options": {
+      "A": "Authorization",
+      "B": "X-Client-Cert (in proxy environments)",
+      "C": "Content-Type",
+      "D": "User-Agent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question: What is the primary difference between 'Authentication' and 'Authorization'?",
+    "options": {
+      "A": "Authentication is who you are; Authorization is what you are allowed to do",
+      "B": "They are the same thing",
+      "C": "Authentication is for CSS; Authorization is for Ruby",
+      "D": "Authorization happens before the user lands on the site"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between a REST API and a Webhook?",
+    "options": {
+      "A": "REST is for XML; Webhooks are for JSON",
+      "B": "REST follows a 'Pull' model (client requests data); Webhooks follow a 'Push' model (server sends data when an event occurs)",
+      "C": "Webhooks only work over Bluetooth",
+      "D": "REST is faster than Webhooks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol does gRPC use for transport, enabling features like multiplexing and header compression?",
+    "options": {
+      "A": "HTTP/1.1",
+      "B": "HTTP/2",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cursor-based Pagination' is generally more performant than 'Offset-based Pagination' for large, frequently changing datasets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Observability'?",
+    "options": {
+      "A": "Watching a live stream of server hardware",
+      "B": "Using logs, metrics, and distributed tracing to understand the internal state and performance of an API",
+      "C": "Viewing the source code on GitHub",
+      "D": "Manually checking the website every hour"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are standard components of a gRPC service definition?",
+    "options": {
+      "A": "Protocol Buffers (Protobuf)",
+      "B": "Service Definitions (.proto files)",
+      "C": "HTML templates",
+      "D": "CSS style sheets"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the purpose of a 'Circuit Breaker' pattern in API design?",
+    "options": {
+      "A": "To turn off the server at night",
+      "B": "To prevent a failing service from causing a cascading failure across the entire system",
+      "C": "To increase the electricity flow to the CPU",
+      "D": "To encrypt the database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that making the same request multiple times has the same result as making it once.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'BFF' (Backend For Frontend) pattern involve?",
+    "options": {
+      "A": "Using only one backend for every application",
+      "B": "Creating separate backend services tailored to the specific needs of different frontends (e.g., Mobile vs. Web)",
+      "C": "A social network for developers",
+      "D": "A type of binary file format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common strategies for API Versioning:",
+    "options": {
+      "A": "URI Versioning (e.g., /v1/users)",
+      "B": "Header Versioning (e.g., Accept: application/vnd.v1+json)",
+      "C": "Renaming the server every month",
+      "D": "Changing the database password"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Distributed Tracing'?",
+    "options": {
+      "A": "Following a developer's movements",
+      "B": "Tracking a single request as it travels through multiple microservices to identify bottlenecks",
+      "C": "Mapping out all the physical cables in a data center",
+      "D": "A way to find lost files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Over-fetching' is a common issue in REST where the server returns more data than the client actually needs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Under-fetching'?",
+    "options": {
+      "A": "When the server doesn't return enough data, requiring the client to make multiple additional API calls",
+      "B": "Downloading files too slowly",
+      "C": "A database query that returns zero results",
+      "D": "A type of network timeout"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is most appropriate when a client sends a request that is 'idempotent' but already processed?",
+    "options": {
+      "A": "200 OK",
+      "B": "204 No Content (or 200 with cached result)",
+      "C": "404 Not Found",
+      "D": "500 Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO benefits of using Protocol Buffers (Protobuf) over JSON:",
+    "options": {
+      "A": "Smaller payload size (binary vs text)",
+      "B": "Faster serialization/deserialization",
+      "C": "Human-readable format without tools",
+      "D": "Native support in all web browsers"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is a 'Shadow API'?",
+    "options": {
+      "A": "An API that only works in Dark Mode",
+      "B": "An undocumented or unmanaged API that is active within an organization without IT oversight",
+      "C": "A backup API for disaster recovery",
+      "D": "A type of security encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Contract Test' ensures that an API's provider and consumer still agree on the structure of requests and responses.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Monetization'?",
+    "options": {
+      "A": "Generating revenue by charging users to access or use an API",
+      "B": "Printing money with the company logo on it",
+      "C": "Buying more servers",
+      "D": "A type of crypto-mining"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to 'Mock' an API during frontend development?",
+    "options": {
+      "A": "Prism (for OpenAPI)",
+      "B": "Postman Mock Servers",
+      "C": "Microsoft Word",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Sanitization' in the context of an API request?",
+    "options": {
+      "A": "Cleaning the server hardware",
+      "B": "Cleaning and validating user input to prevent security attacks like SQL Injection or XSS",
+      "C": "Deleting old user accounts",
+      "D": "Changing the API's font style"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question: What is the primary role of an 'API Portal'?",
+    "options": {
+      "A": "To provide a centralized place for developers to find documentation, manage keys, and test endpoints",
+      "B": "To host the actual API code",
+      "C": "To act as a physical door to the server room",
+      "D": "To store user credit card information"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between a REST API and a Webhook?",
+    "options": {
+      "A": "REST is only for XML; Webhooks are only for JSON",
+      "B": "REST follows a 'Pull' model (client requests); Webhooks follow a 'Push' model (server sends on event)",
+      "C": "Webhooks only work over Bluetooth",
+      "D": "REST is inherently faster than Webhooks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol does gRPC use for transport, enabling features like multiplexing and header compression?",
+    "options": {
+      "A": "HTTP/1.1",
+      "B": "HTTP/2",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cursor-based Pagination' is generally more performant than 'Offset-based Pagination' for large, frequently changing datasets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Observability'?",
+    "options": {
+      "A": "Watching a live stream of server hardware",
+      "B": "Using logs, metrics, and distributed tracing to understand internal states and performance",
+      "C": "Viewing the source code on GitHub",
+      "D": "Manually checking the website every hour"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are standard components of a gRPC service definition?",
+    "options": {
+      "A": "Protocol Buffers (Protobuf)",
+      "B": "Service Definitions (.proto files)",
+      "C": "HTML templates",
+      "D": "CSS style sheets"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the purpose of a 'Circuit Breaker' pattern in API design?",
+    "options": {
+      "A": "To turn off the server at night",
+      "B": "To prevent a failing service from causing a cascading failure across the system",
+      "C": "To increase the electricity flow to the CPU",
+      "D": "To encrypt the database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that making the same request multiple times has the same result as making it once.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'BFF' (Backend For Frontend) pattern involve?",
+    "options": {
+      "A": "Using only one backend for every application",
+      "B": "Creating separate backend services tailored to specific frontends (e.g., Mobile vs. Web)",
+      "C": "A social network for developers",
+      "D": "A type of binary file format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common strategies for API Versioning:",
+    "options": {
+      "A": "URI Versioning (e.g., /v1/users)",
+      "B": "Header Versioning (e.g., Accept: application/vnd.v1+json)",
+      "C": "Renaming the server every month",
+      "D": "Changing the database password"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Distributed Tracing'?",
+    "options": {
+      "A": "Following a developer's movements",
+      "B": "Tracking a single request as it travels through multiple microservices to identify bottlenecks",
+      "C": "Mapping out all the physical cables in a data center",
+      "D": "A way to find lost files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Over-fetching' is an issue in REST where the server returns more data than the client actually needs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Under-fetching'?",
+    "options": {
+      "A": "When the server doesn't return enough data, requiring the client to make multiple additional API calls",
+      "B": "Downloading files too slowly",
+      "C": "A database query that returns zero results",
+      "D": "A type of network timeout"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO benefits of using Protocol Buffers (Protobuf) over JSON:",
+    "options": {
+      "A": "Smaller payload size (binary vs text)",
+      "B": "Faster serialization/deserialization",
+      "C": "Human-readable format without tools",
+      "D": "Native support in all web browsers"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is a 'Shadow API'?",
+    "options": {
+      "A": "An API that only works in Dark Mode",
+      "B": "An undocumented or unmanaged API active within an organization without IT oversight",
+      "C": "A backup API for disaster recovery",
+      "D": "A type of security encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Contract Test' ensures that an API provider and consumer agree on the structure of messages.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to 'Mock' an API during frontend development?",
+    "options": {
+      "A": "Prism (for OpenAPI)",
+      "B": "Postman Mock Servers",
+      "C": "Microsoft Word",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Sanitization' in the context of an API request?",
+    "options": {
+      "A": "Cleaning the server hardware",
+      "B": "Validating user input to prevent attacks like SQL Injection or XSS",
+      "C": "Deleting old user accounts",
+      "D": "Changing the API's font style"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'API Portal'?",
+    "options": {
+      "A": "To provide a centralized place for documentation, key management, and testing",
+      "B": "To host the actual API code",
+      "C": "To act as a physical door to the server room",
+      "D": "To store user credit card information"
+    },
+  "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between a REST API and a Webhook?",
+    "options": {
+      "A": "REST uses XML; Webhooks use only plain text",
+      "B": "REST follows a 'Pull' model; Webhooks follow a 'Push' model (server-initiated events)",
+      "C": "Webhooks only work over local Bluetooth connections",
+      "D": "REST requires a subscription; Webhooks are always free"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol does gRPC use for transport to enable features like multiplexing and header compression?",
+    "options": {
+      "A": "HTTP/1.1",
+      "B": "HTTP/2",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cursor-based Pagination' is generally more performant than 'Offset-based Pagination' for large, frequently changing datasets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Observability'?",
+    "options": {
+      "A": "The practice of watching server hardware lights",
+      "B": "Using logs, metrics, and distributed tracing to understand internal states and performance",
+      "C": "Viewing the public source code of an API on GitHub",
+      "D": "Manually refreshing an endpoint every hour to check status"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are standard components of a gRPC service definition?",
+    "options": {
+      "A": "Protocol Buffers (Protobuf)",
+      "B": "Service Definitions (.proto files)",
+      "C": "HTML layout templates",
+      "D": "CSS style sheets"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the purpose of a 'Circuit Breaker' pattern in API design?",
+    "options": {
+      "A": "To turn off the server during low-traffic hours",
+      "B": "To prevent a failing service from causing a cascading failure across the entire system",
+      "C": "To increase the electricity flow to the CPU during peak load",
+      "D": "To encrypt the database storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that making the same request multiple times has the same result as making it once.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'BFF' (Backend For Frontend) pattern involve?",
+    "options": {
+      "A": "Using a single backend for every possible client application",
+      "B": "Creating separate backend services tailored to specific frontends (e.g., Mobile vs. Web)",
+      "C": "A social network for internal developers",
+      "D": "A type of binary file format for database backups"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common strategies for API Versioning:",
+    "options": {
+      "A": "URI Versioning (e.g., /v1/users)",
+      "B": "Header Versioning (e.g., Accept: application/vnd.v1+json)",
+      "C": "Renaming the server hardware every month",
+      "D": "Changing the database master password"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Distributed Tracing'?",
+    "options": {
+      "A": "Following a developer's physical movements in an office",
+      "B": "Tracking a single request as it travels through multiple microservices to identify bottlenecks",
+      "C": "Mapping out all the physical ethernet cables in a data center",
+      "D": "A system for finding lost files on a server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Over-fetching' is an issue where the server returns more data than the client actually needs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Under-fetching'?",
+    "options": {
+      "A": "When the server doesn't return enough data, requiring the client to make multiple additional API calls",
+      "B": "Downloading files too slowly over a low-bandwidth connection",
+      "C": "A database query that returns zero results for a valid ID",
+      "D": "A type of network timeout specifically for file uploads"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO benefits of using Protocol Buffers (Protobuf) over JSON:",
+    "options": {
+      "A": "Smaller payload size due to binary format",
+      "B": "Faster serialization and deserialization",
+      "C": "Human-readable format without specialized tools",
+      "D": "Native support in every standard web browser without libraries"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is a 'Shadow API'?",
+    "options": {
+      "A": "An API that only functions when the OS is in Dark Mode",
+      "B": "An undocumented or unmanaged API active within an organization without IT oversight",
+      "C": "A backup API used only during disaster recovery",
+      "D": "A security encryption layer used for top-secret data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Contract Test' ensures that an API provider and consumer agree on the structure of request and response messages.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to 'Mock' an API during frontend development?",
+    "options": {
+      "A": "Prism (for OpenAPI)",
+      "B": "Postman Mock Servers",
+      "C": "Microsoft Word",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Sanitization' in the context of an API request?",
+    "options": {
+      "A": "Cleaning the physical server hardware of dust",
+      "B": "Validating and cleaning user input to prevent attacks like SQL Injection or XSS",
+      "C": "Deleting user accounts that have been inactive for over a year",
+      "D": "Updating the API's CSS font style for better readability"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'API Portal'?",
+    "options": {
+      "A": "A centralized site for developers to find documentation, manage keys, and test endpoints",
+      "B": "The physical server that hosts the API binary",
+      "C": "A physical security door leading to the server room",
+      "D": "A database table that stores user credit card numbers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is used for 'Partial Content', often used for pausing and resuming large downloads?",
+    "options": {
+      "A": "200 OK",
+      "B": "206 Partial Content",
+      "C": "204 No Content",
+      "D": "201 Created"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 403 Forbidden error indicates that the user is not authenticated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO headers are sent by a client to describe its capabilities and preferred language to the server?",
+    "options": {
+      "A": "User-Agent",
+      "B": "Accept-Language",
+      "C": "Server",
+      "D": "ETag"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the primary purpose of the 'Host' header in an HTTP request?",
+    "options": {
+      "A": "To identify the client's operating system",
+      "B": "To specify the domain name of the server, allowing for shared hosting",
+      "C": "To measure the speed of the network host",
+      "D": "To encrypt the request payload"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In REST, which status code is returned when a resource has been permanently moved to a new URI?",
+    "options": {
+      "A": "301 Moved Permanently",
+      "B": "302 Found",
+      "C": "307 Temporary Redirect",
+      "D": "404 Not Found"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 204 No Content status code signifies a successful request but an intentionally empty response body.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is designed to be 'Idempotent' and replaces the target resource entirely?",
+    "options": {
+      "A": "POST",
+      "B": "PUT",
+      "C": "PATCH",
+      "D": "GET"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO headers involved in 'Conditional Requests' used for cache validation:",
+    "options": {
+      "A": "If-None-Match",
+      "B": "If-Modified-Since",
+      "C": "User-Agent",
+      "D": "Content-Length"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What does the 401 Unauthorized status code signify?",
+    "options": {
+      "A": "The user is banned from the server",
+      "B": "Authentication is required and has failed or not yet been provided",
+      "C": "The server is currently under maintenance",
+      "D": "The resource was deleted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 500 error represents a generic 'catch-all' for unexpected server conditions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code indicates that the server is currently a 'Bad Gateway' while acting as a proxy?",
+    "options": {
+      "A": "400",
+      "B": "500",
+      "C": "502",
+      "D": "504"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of the 'Retry-After' header in a 429 Too Many Requests response?",
+    "options": {
+      "A": "To tell the user to never come back",
+      "B": "To indicate how long the client should wait before making another request",
+      "C": "To reset the user's password",
+      "D": "To change the API version"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO status codes used for server-side timeout issues:",
+    "options": {
+      "A": "504 Gateway Timeout",
+      "B": "408 Request Timeout",
+      "C": "200 OK",
+      "D": "301 Moved"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: 410 Gone indicates that the resource is no longer available and no forwarding address is known.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the status code 202 Accepted imply in an asynchronous API flow?",
+    "options": {
+      "A": "The data has been saved to the database",
+      "B": "The request has been accepted for processing, but processing is not yet complete",
+      "C": "The user's login was successful",
+      "D": "The API key is invalid"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header allows a server to facilitate Cross-Origin Resource Sharing (CORS)?",
+    "options": {
+      "A": "Access-Control-Allow-Origin",
+      "B": "Authorization",
+      "C": "Cache-Control",
+      "D": "Content-Security-Policy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 409 Conflict status code is often used during an edit conflict (e.g., two users updating the same record).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned if the client provides a media type (like XML) that the server cannot process?",
+    "options": {
+      "A": "406 Not Acceptable",
+      "B": "415 Unsupported Media Type",
+      "C": "400 Bad Request",
+      "D": "501 Not Implemented"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Idempotency Key' used for in POST requests?",
+    "options": {
+      "A": "To encrypt the request body",
+      "B": "To ensure that duplicate requests do not result in duplicate transactions",
+      "C": "To identify the user's location",
+      "D": "To set the expiration date of a resource"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 501 Not Implemented status code mean?",
+    "options": {
+      "A": "The database is empty",
+      "B": "The server does not support the functionality required to fulfill the request",
+      "C": "The developer forgot to write the code",
+      "D": "The API is in beta mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a REST API and a Webhook?",
+    "options": {
+      "A": "REST is for XML; Webhooks are for JSON",
+      "B": "REST follows a 'Pull' model (client requests); Webhooks follow a 'Push' model (server sends on event)",
+      "C": "Webhooks only work over Bluetooth",
+      "D": "REST is inherently faster than Webhooks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol does gRPC use for transport, enabling features like multiplexing and header compression?",
+    "options": {
+      "A": "HTTP/1.1",
+      "B": "HTTP/2",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cursor-based Pagination' is generally more performant than 'Offset-based Pagination' for large, frequently changing datasets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Observability'?",
+    "options": {
+      "A": "Watching a live stream of server hardware",
+      "B": "Using logs, metrics, and distributed tracing to understand internal states and performance",
+      "C": "Viewing the source code on GitHub",
+      "D": "Manually checking the website every hour"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are standard components of a gRPC service definition?",
+    "options": {
+      "A": "Protocol Buffers (Protobuf)",
+      "B": "Service Definitions (.proto files)",
+      "C": "HTML templates",
+      "D": "CSS style sheets"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the purpose of a 'Circuit Breaker' pattern in API design?",
+    "options": {
+      "A": "To turn off the server at night",
+      "B": "To prevent a failing service from causing a cascading failure across the system",
+      "C": "To increase the electricity flow to the CPU",
+      "D": "To encrypt the database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that making the same request multiple times has the same result as making it once.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'BFF' (Backend For Frontend) pattern involve?",
+    "options": {
+      "A": "Using only one backend for every application",
+      "B": "Creating separate backend services tailored to specific frontends (e.g., Mobile vs. Web)",
+      "C": "A social network for developers",
+      "D": "A type of binary file format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common strategies for API Versioning:",
+    "options": {
+      "A": "URI Versioning (e.g., /v1/users)",
+      "B": "Header Versioning (e.g., Accept: application/vnd.v1+json)",
+      "C": "Renaming the server every month",
+      "D": "Changing the database password"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Distributed Tracing'?",
+    "options": {
+      "A": "Following a developer's movements",
+      "B": "Tracking a single request as it travels through multiple microservices to identify bottlenecks",
+      "C": "Mapping out all the physical cables in a data center",
+      "D": "A way to find lost files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Over-fetching' is an issue in REST where the server returns more data than the client actually needs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Under-fetching'?",
+    "options": {
+      "A": "When the server doesn't return enough data, requiring the client to make multiple additional API calls",
+      "B": "Downloading files too slowly",
+      "C": "A database query that returns zero results",
+      "D": "A type of network timeout"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO benefits of using Protocol Buffers (Protobuf) over JSON:",
+    "options": {
+      "A": "Smaller payload size (binary vs text)",
+      "B": "Faster serialization/deserialization",
+      "C": "Human-readable format without tools",
+      "D": "Native support in all web browsers"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is a 'Shadow API'?",
+    "options": {
+      "A": "An API that only works in Dark Mode",
+      "B": "An undocumented or unmanaged API active within an organization without IT oversight",
+      "C": "A backup API for disaster recovery",
+      "D": "A type of security encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Contract Test' ensures that an API provider and consumer agree on the structure of messages.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to 'Mock' an API during frontend development?",
+    "options": {
+      "A": "Prism (for OpenAPI)",
+      "B": "Postman Mock Servers",
+      "C": "Microsoft Word",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Sanitization' in the context of an API request?",
+    "options": {
+      "A": "Cleaning the server hardware",
+      "B": "Validating user input to prevent attacks like SQL Injection or XSS",
+      "C": "Deleting old user accounts",
+      "D": "Changing the API's font style"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'API Portal'?",
+    "options": {
+      "A": "To provide a centralized place for documentation, key management, and testing",
+      "B": "To host the actual API code",
+      "C": "To act as a physical door to the server room",
+      "D": "To store user credit card information"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'REST' in REST API stand for?",
+    "options": {
+      "A": "Remote Enterprise Standard Transfer",
+      "B": "REpresentational State Transfer",
+      "C": "Real-time Electronic Software Transmission",
+      "D": "Relational Enterprise Service Template"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "REST is considered a ________, not a protocol like SOAP.",
+    "options": {
+      "A": "Software library",
+      "B": "Architectural style",
+      "C": "Programming language",
+      "D": "Physical hardware layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which architectural constraint ensures that the client and server can evolve independently?",
+    "options": {
+      "A": "Statelessness",
+      "B": "Client-Server",
+      "C": "Layered System",
+      "D": "Cacheability"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a stateless architecture, where is the session state stored?",
+    "options": {
+      "A": "On the server's local memory",
+      "B": "Entirely on the client side",
+      "C": "In the server's database",
+      "D": "In a shared global cache"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is typically used to create a new resource when the server determines the URI?",
+    "options": {
+      "A": "GET",
+      "B": "POST",
+      "C": "PUT",
+      "D": "PATCH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Idempotency' mean in the context of HTTP methods?",
+    "options": {
+      "A": "The method is fast",
+      "B": "The side effects of making the same request multiple times are the same as a single request",
+      "C": "The method requires authentication",
+      "D": "The method returns JSON only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code should be returned when a resource is successfully deleted?",
+    "options": {
+      "A": "200 OK",
+      "B": "204 No Content",
+      "C": "201 Created",
+      "D": "404 Not Found"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which REST constraint allows for the use of intermediaries like load balancers and proxies?",
+    "options": {
+      "A": "Uniform Interface",
+      "B": "Layered System",
+      "C": "Statelessness",
+      "D": "Code on Demand"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of the 'Uniform Interface' constraint?",
+    "options": {
+      "A": "It makes the API faster",
+      "B": "It provides a standardized way of interacting with resources regardless of the implementation",
+      "C": "It encrypts all data automatically",
+      "D": "It forces the use of XML"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "HATEOAS stands for 'Hypermedia as the Engine of ________'.",
+    "options": {
+      "A": "Application State",
+      "B": "Access Storage",
+      "C": "Active Systems",
+      "D": "Authenticated Sessions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is considered 'Safe' because it does not modify the resource state?",
+    "options": {
+      "A": "POST",
+      "B": "GET",
+      "C": "DELETE",
+      "D": "PUT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between PUT and PATCH?",
+    "options": {
+      "A": "PUT is for reading; PATCH is for writing",
+      "B": "PUT replaces the whole resource; PATCH performs partial updates",
+      "C": "PATCH is idempotent; PUT is not",
+      "D": "PUT only works with XML"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header is used to facilitate Cross-Origin Resource Sharing (CORS)?",
+    "options": {
+      "A": "Authorization",
+      "B": "Access-Control-Allow-Origin",
+      "C": "Content-Type",
+      "D": "User-Agent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "A 401 Unauthorized status code means:",
+    "options": {
+      "A": "The user is banned",
+      "B": "Authentication is required or has failed",
+      "C": "The user lacks permission for the specific action",
+      "D": "The page does not exist"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code is used for 'Too Many Requests' (Rate Limiting)?",
+    "options": {
+      "A": "400",
+      "B": "429",
+      "C": "503",
+      "D": "403"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Circuit Breaker' in API architecture?",
+    "options": {
+      "A": "To cut off power to the server",
+      "B": "To prevent cascading failures when a service is down",
+      "C": "To encrypt passwords",
+      "D": "To speed up database queries"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "JWT (JSON Web Token) consists of which three parts?",
+    "options": {
+      "A": "Header, Payload, Signature",
+      "B": "Username, Password, Key",
+      "C": "URI, Method, Body",
+      "D": "ID, Secret, Scope"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is gRPC built upon?",
+    "options": {
+      "A": "HTTP/1.1",
+      "B": "HTTP/2",
+      "C": "UDP",
+      "D": "WebSockets"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 502 Bad Gateway error typically indicate?",
+    "options": {
+      "A": "The client sent a bad request",
+      "B": "The server acting as a proxy received an invalid response from the upstream server",
+      "C": "The user is not logged in",
+      "D": "The database is empty"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In REST, a 'Resource' is uniquely identified by a:",
+    "options": {
+      "A": "Method",
+      "B": "URI (Uniform Resource Identifier)",
+      "C": "JSON Key",
+      "D": "Status Code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes a 'Safe' HTTP method?",
+    "options": {
+      "A": "A method that cannot be intercepted by hackers",
+      "B": "A method that does not modify the resource state on the server",
+      "C": "A method that requires an SSL certificate",
+      "D": "A method that only returns encrypted JSON"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is used to retrieve the communication options available for a specific resource or server?",
+    "options": {
+      "A": "GET",
+      "B": "HEAD",
+      "C": "OPTIONS",
+      "D": "TRACE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary difference between a 401 and a 403 status code?",
+    "options": {
+      "A": "401 is for server errors; 403 is for client errors",
+      "B": "401 means 'Unauthenticated' (who are you?); 403 means 'Unauthorized' (I know who you are, but you can't do that)",
+      "C": "401 is for mobile apps; 403 is for web apps",
+      "D": "There is no functional difference"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'DELETE' method is required to be idempotent.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which header is used by the client to tell the server which media types (e.g., JSON, XML) it can process?",
+    "options": {
+      "A": "Content-Type",
+      "B": "Accept",
+      "C": "Authorization",
+      "D": "User-Agent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 202 Accepted status code indicate in an asynchronous API?",
+    "options": {
+      "A": "The request was invalid but accepted anyway",
+      "B": "The request has been received but the processing is not yet complete",
+      "C": "The user is successfully logged in",
+      "D": "The resource was successfully deleted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code should a server return if a client sends a request body that is too large?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "413 Payload Too Large",
+      "C": "404 Not Found",
+      "D": "507 Insufficient Storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Negotiation' in REST?",
+    "options": {
+      "A": "Bargaining with the client for a lower data price",
+      "B": "The mechanism where the client and server agree on the format of the data to be exchanged",
+      "C": "The process of encrypting the payload",
+      "D": "A legal contract between API providers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is used for 'Partial Updates' to a resource?",
+    "options": {
+      "A": "PUT",
+      "B": "POST",
+      "C": "PATCH",
+      "D": "UPDATE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'Location' header in a 201 Created response?",
+    "options": {
+      "A": "To show the GPS coordinates of the server",
+      "B": "To provide the URI of the newly created resource",
+      "C": "To redirect the user to a login page",
+      "D": "To show the user's IP address"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code indicates that a resource was found at a different URI and the client should use the new URI for future requests?",
+    "options": {
+      "A": "301 Moved Permanently",
+      "B": "302 Found",
+      "C": "304 Not Modified",
+      "D": "307 Temporary Redirect"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: POST is considered a 'Safe' method.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Cache-Control' header regulate?",
+    "options": {
+      "A": "The speed of the CPU",
+      "B": "How, and for how long, a response can be cached by the client or intermediaries",
+      "C": "The number of users allowed on the site",
+      "D": "The size of the database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code is returned when the client provides an ETag that doesn't match the server's version (Conditional Update)?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "412 Precondition Failed",
+      "C": "404 Not Found",
+      "D": "409 Conflict"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Request-Response' cycle?",
+    "options": {
+      "A": "A physical bike race for developers",
+      "B": "The basic communication pattern where a client sends a request and a server sends a back a response",
+      "C": "A type of database replication",
+      "D": "The method used to restart a server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is used to establish a tunnel to the server, often for SSL/TLS?",
+    "options": {
+      "A": "CONNECT",
+      "B": "TRACE",
+      "C": "LINK",
+      "D": "OPTIONS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "A 405 Method Not Allowed error must include which header to inform the client of supported methods?",
+    "options": {
+      "A": "Allow",
+      "B": "Methods",
+      "C": "Server",
+      "D": "Access-Control"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 504 Gateway Timeout status code usually mean?",
+    "options": {
+      "A": "The client's internet is too slow",
+      "B": "A server acting as a gateway or proxy did not receive a timely response from an upstream server",
+      "C": "The user's computer crashed",
+      "D": "The API key expired"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a RESTful API, how are collections typically represented in a URI?",
+    "options": {
+      "A": "/get_all_users",
+      "B": "/users",
+      "C": "/userList.php",
+      "D": "/api?type=users"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code represents 'Unsupported Media Type' (e.g., sending XML to a JSON-only API)?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "415 Unsupported Media Type",
+      "C": "406 Not Acceptable",
+      "D": "500 Internal Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OAuth 2.0 grant type is most secure for single-page applications (SPAs) and mobile apps?",
+    "options": {
+      "A": "Implicit Grant",
+      "B": "Authorization Code Flow with PKCE",
+      "C": "Resource Owner Password Credentials",
+      "D": "Client Credentials"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of an 'Access Token' in an API request?",
+    "options": {
+      "A": "To identify the user's computer",
+      "B": "To prove that the client has permission to access specific resources",
+      "C": "To encrypt the database",
+      "D": "To change the API version"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JWT (JSON Web Token) can be decoded by anyone who has the token.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code should be returned if an API key is missing from the request?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "401 Unauthorized",
+      "C": "403 Forbidden",
+      "D": "404 Not Found"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API Versioning' used for?",
+    "options": {
+      "A": "To make the API run faster",
+      "B": "To introduce changes without breaking existing client integrations",
+      "C": "To translate the API into different languages",
+      "D": "To delete old data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify a common way to version a REST API:",
+    "options": {
+      "A": "URI Path (e.g., /v1/users)",
+      "B": "Query Parameters (e.g., /users?v=1)",
+      "C": "Custom Headers (e.g., X-API-Version: 1)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which header is used by the server to send a unique identifier for a specific version of a resource, aiding in cache validation?",
+    "options": {
+      "A": "Cache-Control",
+      "B": "ETag",
+      "C": "Vary",
+      "D": "Expires"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 304 Not Modified status code imply?",
+    "options": {
+      "A": "The resource was deleted",
+      "B": "The client can use its cached version of the resource because it hasn't changed on the server",
+      "C": "The server is currently busy",
+      "D": "The user is not logged in"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an industry standard for describing and documenting RESTful APIs?",
+    "options": {
+      "A": "OpenAPI (formerly Swagger)",
+      "B": "HTML5",
+      "C": "Postman Collections only",
+      "D": "Markdown only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throttling' in the context of API management?",
+    "options": {
+      "A": "Speeding up the server's CPU",
+      "B": "The process of limiting the number of requests a user can make in a given timeframe",
+      "C": "Encrypting the request body",
+      "D": "Deleting duplicate data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Basic Authentication sends the username and password in plain text (encoded in Base64) in the header.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which header is used to specify the compression algorithm (e.g., gzip) used for the response body?",
+    "options": {
+      "A": "Accept-Encoding",
+      "B": "Content-Encoding",
+      "C": "Transfer-Encoding",
+      "D": "Vary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Webhook'?",
+    "options": {
+      "A": "A tool to catch fish in a digital lake",
+      "B": "A server-to-server communication where the server 'pushes' data to a client URL when an event occurs",
+      "C": "A type of database index",
+      "D": "A physical connector for servers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which architectural style is often considered a successor to REST for complex data requirements, allowing clients to request exactly what they need?",
+    "options": {
+      "A": "SOAP",
+      "B": "GraphQL",
+      "C": "gRPC",
+      "D": "Webhooks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Rate Limiting'?",
+    "options": {
+      "A": "A way to charge users for high-speed internet",
+      "B": "A security and performance measure that restricts the number of API calls within a specific period",
+      "C": "A database query optimizer",
+      "D": "A type of load balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JWT, which section contains the actual data being transferred (like user ID and roles)?",
+    "options": {
+      "A": "Header",
+      "B": "Payload (Claims)",
+      "C": "Signature",
+      "D": "Footer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is used to retrieve only the metadata of a resource?",
+    "options": {
+      "A": "GET",
+      "B": "HEAD",
+      "C": "OPTIONS",
+      "D": "POST"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pagination' in a REST API?",
+    "options": {
+      "A": "A way to print the API documentation",
+      "B": "The process of dividing a large result set into smaller, manageable chunks or pages",
+      "C": "The method of naming variables",
+      "D": "A security scan of the code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code is returned when a server cannot produce a response matching the list of acceptable values defined in the client's 'Accept' header?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "406 Not Acceptable",
+      "C": "415 Unsupported Media Type",
+      "D": "500 Internal Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Refresh Token' in OAuth 2.0?",
+    "options": {
+      "A": "To refresh the browser page",
+      "B": "To obtain a new access token after the current one expires without requiring the user to log in again",
+      "C": "To clear the cache",
+      "D": "To update the user's password"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code is most appropriate when a resource is permanently removed and no forwarding address is known?",
+    "options": {
+      "A": "404 Not Found",
+      "B": "410 Gone",
+      "C": "403 Forbidden",
+      "D": "301 Moved Permanently"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary transport protocol used by gRPC to enable full-duplex streaming?",
+    "options": {
+      "A": "HTTP/1.1",
+      "B": "HTTP/2",
+      "C": "UDP",
+      "D": "WebSockets"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Microservices architecture, what is 'API Composition'?",
+    "options": {
+      "A": "Writing code in a musical format",
+      "B": "A pattern where a specific service (or gateway) calls multiple downstream services to aggregate data for a single client request",
+      "C": "Creating a single database for all services",
+      "D": "Deleting unused API endpoints"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code should an API return if it is acting as a gateway and receives an invalid response from an upstream server?",
+    "options": {
+      "A": "500 Internal Server Error",
+      "B": "502 Bad Gateway",
+      "C": "503 Service Unavailable",
+      "D": "504 Gateway Timeout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Idempotency' in the context of a POST request?",
+    "options": {
+      "A": "POST is naturally idempotent",
+      "B": "Ensuring that resubmitting the same POST request (e.g., due to network retry) does not result in duplicate transactions, often using an Idempotency-Key",
+      "C": "A way to encrypt the post body",
+      "D": "A method to delete old posts automatically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header is used in CORS to indicate which HTTP methods are permitted when accessing a resource?",
+    "options": {
+      "A": "Access-Control-Allow-Origin",
+      "B": "Access-Control-Allow-Methods",
+      "C": "Allow-Headers",
+      "D": "Vary-Method"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Tracing' in API monitoring?",
+    "options": {
+      "A": "Tracing the physical location of the server",
+      "B": "A method to track a single request as it moves through multiple services to identify latency bottlenecks",
+      "C": "A way to draw the API architecture",
+      "D": "Monitoring the power usage of the data center"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the '206 Partial Content' status code?",
+    "options": {
+      "A": "The server only finished half of the code",
+      "B": "Used for range requests, where the server sends only a portion of the resource (useful for large file resumes)",
+      "C": "The user is only partially logged in",
+      "D": "The database is currently undergoing maintenance"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to 'Mock' a REST API so frontend developers can work before the backend is finished?",
+    "options": {
+      "A": "Postman / Prism",
+      "B": "Microsoft Excel",
+      "C": "Google Search",
+      "D": "Standard Browser Console"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a '503 Service Unavailable' code typically imply?",
+    "options": {
+      "A": "The URL is wrong",
+      "B": "The server is currently overloaded or down for maintenance",
+      "C": "The user password was incorrect",
+      "D": "The API version is no longer supported"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which part of the 'Uniform Interface' constraint involves using hypermedia links to guide the client?",
+    "options": {
+      "A": "Self-descriptive messages",
+      "B": "HATEOAS",
+      "C": "Identification of resources",
+      "D": "Manipulation through representations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Over-fetching' in RESTful APIs?",
+    "options": {
+      "A": "Downloading a file too many times",
+      "B": "When an endpoint returns more data than the client actually needs for a specific view",
+      "C": "A database query that takes too long",
+      "D": "A security attack where too much data is stolen"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of the 'Layered System' constraint?",
+    "options": {
+      "A": "It makes the code easier to read",
+      "B": "It allows for the insertion of proxies, load balancers, and security layers without client awareness",
+      "C": "It reduces the number of database tables",
+      "D": "It forces the use of a specific programming language"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In API security, what is 'Rate Limiting'?",
+    "options": {
+      "A": "Checking the speed of the user's internet",
+      "B": "Restricting the number of requests a client can make within a certain timeframe to prevent abuse",
+      "C": "Scaling the server based on traffic",
+      "D": "Calculating the cost per API call"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code represents 'Precondition Required' (e.g., the server requires a conditional request)?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "428 Precondition Required",
+      "C": "412 Precondition Failed",
+      "D": "403 Forbidden"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API Payload'?",
+    "options": {
+      "A": "The cost of the API subscription",
+      "B": "The actual data being sent or received in the body of an HTTP request/response",
+      "C": "The physical weight of the server",
+      "D": "The number of users currently online"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'API Keys'?",
+    "options": {
+      "A": "To unlock the server room door",
+      "B": "A simple way to identify the calling project and enforce basic usage limits/quotas",
+      "C": "To encrypt the user's password",
+      "D": "To name the individual functions in the code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code is returned if the client's URI is too long for the server to process?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "414 URI Too Long",
+      "C": "413 Payload Too Large",
+      "D": "500 Internal Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Soft Deletion' in an API?",
+    "options": {
+      "A": "Deleting the data very slowly",
+      "B": "Marking a record as 'deleted' in the database without actually removing the row",
+      "C": "Deleting only the images, not the text",
+      "D": "Allowing the user to undo a deletion within 5 seconds"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question: What is 'Content-Security-Policy' (CSP) in the context of an API?",
+    "options": {
+      "A": "A rule about what content users can post",
+      "B": "A security header that helps prevent Cross-Site Scripting (XSS) and data injection attacks",
+      "C": "A way to manage file uploads",
+      "D": "A database encryption setting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a REST API and a Webhook?",
+    "options": {
+      "A": "REST uses XML; Webhooks use only plain text",
+      "B": "REST follows a 'Pull' model; Webhooks follow a 'Push' model (server-initiated events)",
+      "C": "Webhooks only work over local Bluetooth connections",
+      "D": "REST requires a subscription; Webhooks are always free"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol does gRPC use for transport to enable features like multiplexing and header compression?",
+    "options": {
+      "A": "HTTP/1.1",
+      "B": "HTTP/2",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cursor-based Pagination' is generally more performant than 'Offset-based Pagination' for large, frequently changing datasets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Observability'?",
+    "options": {
+      "A": "The practice of watching server hardware lights",
+      "B": "Using logs, metrics, and distributed tracing to understand internal states and performance",
+      "C": "Viewing the public source code of an API on GitHub",
+      "D": "Manually refreshing an endpoint every hour to check status"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are standard components of a gRPC service definition?",
+    "options": {
+      "A": "Protocol Buffers (Protobuf)",
+      "B": "Service Definitions (.proto files)",
+      "C": "HTML layout templates",
+      "D": "CSS style sheets"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the purpose of a 'Circuit Breaker' pattern in API design?",
+    "options": {
+      "A": "To turn off the server during low-traffic hours",
+      "B": "To prevent a failing service from causing a cascading failure across the entire system",
+      "C": "To increase the electricity flow to the CPU during peak load",
+      "D": "To encrypt the database storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that making the same request multiple times has the same result as making it once.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'BFF' (Backend For Frontend) pattern involve?",
+    "options": {
+      "A": "Using a single backend for every possible client application",
+      "B": "Creating separate backend services tailored to specific frontends (e.g., Mobile vs. Web)",
+      "C": "A social network for internal developers",
+      "D": "A type of binary file format for database backups"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO common strategies for API Versioning:",
+    "options": {
+      "A": "URI Versioning (e.g., /v1/users)",
+      "B": "Header Versioning (e.g., Accept: application/vnd.v1+json)",
+      "C": "Renaming the server hardware every month",
+      "D": "Changing the database master password"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Distributed Tracing'?",
+    "options": {
+      "A": "Following a developer's physical movements in an office",
+      "B": "Tracking a single request as it travels through multiple microservices to identify bottlenecks",
+      "C": "Mapping out all the physical ethernet cables in a data center",
+      "D": "A system for finding lost files on a server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Over-fetching' is an issue where the server returns more data than the client actually needs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Under-fetching'?",
+    "options": {
+      "A": "When the server doesn't return enough data, requiring the client to make multiple additional API calls",
+      "B": "Downloading files too slowly over a low-bandwidth connection",
+      "C": "A database query that returns zero results for a valid ID",
+      "D": "A type of network timeout specifically for file uploads"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Identify TWO benefits of using Protocol Buffers (Protobuf) over JSON:",
+    "options": {
+      "A": "Smaller payload size due to binary format",
+      "B": "Faster serialization and deserialization",
+      "C": "Human-readable format without specialized tools",
+      "D": "Native support in every standard web browser without libraries"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is a 'Shadow API'?",
+    "options": {
+      "A": "An API that only functions when the OS is in Dark Mode",
+      "B": "An undocumented or unmanaged API active within an organization without IT oversight",
+      "C": "A backup API used only during disaster recovery",
+      "D": "A security encryption layer used for top-secret data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Contract Test' ensures that an API provider and consumer agree on the structure of request and response messages.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to 'Mock' an API during frontend development?",
+    "options": {
+      "A": "Prism (for OpenAPI)",
+      "B": "Postman Mock Servers",
+      "C": "Microsoft Word",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Sanitization' in the context of an API request?",
+    "options": {
+      "A": "Cleaning the physical server hardware of dust",
+      "B": "Validating and cleaning user input to prevent attacks like SQL Injection or XSS",
+      "C": "Deleting user accounts that have been inactive for over a year",
+      "D": "Updating the API's CSS font style for better readability"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'API Portal'?",
+    "options": {
+      "A": "A centralized site for developers to find documentation, manage keys, and test endpoints",
+      "B": "The physical server that hosts the API binary",
+      "C": "A physical security door leading to the server room",
+      "D": "A database table that stores user credit card numbers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is used for 'Partial Content', often used for pausing and resuming large downloads?",
+    "options": {
+      "A": "200 OK",
+      "B": "206 Partial Content",
+      "C": "204 No Content",
+      "D": "201 Created"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 403 Forbidden error indicates that the user is not authenticated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO headers are sent by a client to describe its capabilities and preferred language to the server?",
+    "options": {
+      "A": "User-Agent",
+      "B": "Accept-Language",
+      "C": "Server",
+      "D": "ETag"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the primary purpose of the 'Host' header in an HTTP request?",
+    "options": {
+      "A": "To identify the client's operating system",
+      "B": "To specify the domain name of the server, allowing for shared hosting",
+      "C": "To measure the speed of the network host",
+      "D": "To encrypt the request payload"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In REST, which status code is returned when a resource has been permanently moved to a new URI?",
+    "options": {
+      "A": "301 Moved Permanently",
+      "B": "302 Found",
+      "C": "307 Temporary Redirect",
+      "D": "404 Not Found"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 204 No Content status code signifies a successful request but an intentionally empty response body.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is designed to be 'Idempotent' and replaces the target resource entirely?",
+    "options": {
+      "A": "POST",
+      "B": "PUT",
+      "C": "PATCH",
+      "D": "GET"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO headers involved in 'Conditional Requests' used for cache validation:",
+    "options": {
+      "A": "If-None-Match",
+      "B": "If-Modified-Since",
+      "C": "User-Agent",
+      "D": "Content-Length"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What does the 401 Unauthorized status code signify?",
+    "options": {
+      "A": "The user is banned from the server",
+      "B": "Authentication is required and has failed or not yet been provided",
+      "C": "The server is currently under maintenance",
+      "D": "The resource was deleted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 500 error represents a generic 'catch-all' for unexpected server conditions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code indicates that the server is currently a 'Bad Gateway' while acting as a proxy?",
+    "options": {
+      "A": "400",
+      "B": "500",
+      "C": "502",
+      "D": "504"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of the 'Retry-After' header in a 429 Too Many Requests response?",
+    "options": {
+      "A": "To tell the user to never come back",
+      "B": "To indicate how long the client should wait before making another request",
+      "C": "To reset the user's password",
+      "D": "To change the API version"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO status codes used for server-side timeout issues:",
+    "options": {
+      "A": "504 Gateway Timeout",
+      "B": "408 Request Timeout",
+      "C": "200 OK",
+      "D": "301 Moved"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: 410 Gone indicates that the resource is no longer available and no forwarding address is known.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the status code 202 Accepted imply in an asynchronous API flow?",
+    "options": {
+      "A": "The data has been saved to the database",
+      "B": "The request has been accepted for processing, but processing is not yet complete",
+      "C": "The user's login was successful",
+      "D": "The API key is invalid"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header allows a server to facilitate Cross-Origin Resource Sharing (CORS)?",
+    "options": {
+      "A": "Access-Control-Allow-Origin",
+      "B": "Authorization",
+      "C": "Cache-Control",
+      "D": "Content-Security-Policy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 409 Conflict status code is often used during an edit conflict (e.g., two users updating the same record).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned if the client provides a media type (like XML) that the server cannot process?",
+    "options": {
+      "A": "406 Not Acceptable",
+      "B": "415 Unsupported Media Type",
+      "C": "400 Bad Request",
+      "D": "501 Not Implemented"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Idempotency Key' used for in POST requests?",
+    "options": {
+      "A": "To encrypt the request body",
+      "B": "To ensure that duplicate requests do not result in duplicate transactions",
+      "C": "To identify the user's location",
+      "D": "To set the expiration date of a resource"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 501 Not Implemented status code mean?",
+    "options": {
+      "A": "The database is empty",
+      "B": "The server does not support the functionality required to fulfill the request",
+      "C": "The developer forgot to write the code",
+      "D": "The API is in beta mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Payload Optimization' in API development?",
+    "options": {
+      "A": "Increasing the amount of metadata in a response",
+      "B": "Reducing the data size sent over the network via compression or field selection",
+      "C": "Deleting the API source code to save space",
+      "D": "Changing the server IP address"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Identify TWO core benefits of using an API Proxy:",
+    "options": {
+      "A": "Shielding the backend from direct client exposure",
+      "B": "Centralizing analytics and monitoring",
+      "C": "Providing direct client access to the raw database",
+      "D": "Increasing the server's CPU clock speed"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: 'Service Discovery' is a mechanism that allows APIs to find the network locations of other services automatically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO technologies are primarily used for real-time, bi-directional API communication?",
+    "options": {
+      "A": "WebSockets",
+      "B": "gRPC Streams",
+      "C": "HTTP GET",
+      "D": "SOAP envelopes"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'API Chaining'?",
+    "options": {
+      "A": "Deleting multiple APIs simultaneously",
+      "B": "Using the output of one API call as the direct input for a subsequent call",
+      "C": "Using only one API for an entire application",
+      "D": "Encrypting the API URL string"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Orchestration' involves coordinating multiple independent API calls to complete a single business process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code is returned when a client exceeds its assigned request quota?",
+    "options": {
+      "A": "400",
+      "B": "401",
+      "C": "429 (Too Many Requests)",
+      "D": "503"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is an 'API Wrapper'?",
+    "options": {
+      "A": "A language-specific library that simplifies making calls to a complex API",
+      "B": "A protective case for server hardware",
+      "C": "A type of network firewall",
+      "D": "An error message format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO describe 'Long Polling'?",
+    "options": {
+      "A": "The server holds the request open until data is available",
+      "B": "It is less efficient than WebSockets for high-frequency updates",
+      "C": "It is a type of binary compression",
+      "D": "It only works over UDP"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the 'N+1 Problem' in the context of API performance?",
+    "options": {
+      "A": "Adding one extra server to a cluster",
+      "B": "A bottleneck where one initial request triggers N additional database or API calls",
+      "C": "A versioning error where N is the version number",
+      "D": "When an API returns exactly one more item than requested"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code signifies 'Payload Too Large'?",
+    "options": {
+      "A": "400",
+      "B": "413",
+      "C": "415",
+      "D": "500"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Statelessness' improves scalability by allowing any server in a cluster to handle any request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code is most appropriate for a 'Permanent Redirect'?",
+    "options": {
+      "A": "301",
+      "B": "302",
+      "C": "307",
+      "D": "308"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'API Gateway'?",
+    "options": {
+      "A": "Storing the primary database",
+      "B": "Acting as a management and routing layer between clients and services",
+      "C": "Compiling the server-side code",
+      "D": "Providing the physical internet connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON-RPC is a protocol for remote procedure calls that uses JSON as the data carrier, differing from REST in its action-based approach.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What defines a 'Breaking Change' in an API's lifecycle?",
+    "options": {
+      "A": "A change that adds a new, optional field to a JSON response",
+      "B": "A change that requires existing clients to update their code, such as removing a field or changing a data type",
+      "C": "A change that fixes a minor spelling error in the documentation",
+      "D": "A change that simply restarts the production server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TWO are standard types of API deployment environments used to ensure code quality before reaching users?",
+    "options": {
+      "A": "Sandbox / Staging",
+      "B": "Production",
+      "C": "Personal Local Computer",
+      "D": "Primary Hardware BIOS"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: 'API Monetization' is the practice of generating revenue by charging developers or organizations for access to specific API endpoints.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code indicates a resource is 'Gone' permanently, implying that no forwarding address is expected?",
+    "options": {
+      "A": "404 Not Found",
+      "B": "410 Gone",
+      "C": "403 Forbidden",
+      "D": "503 Service Unavailable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a RESTful context, 'Idempotency' means that the effect on the server will be the same whether an operation is performed once or multiple times.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TWO are popular tools used specifically for mocking API responses during the development of frontend applications?",
+    "options": {
+      "A": "WireMock",
+      "B": "Prism (for OpenAPI)",
+      "C": "VLC Media Player",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B"]
+  }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "RestAPI"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

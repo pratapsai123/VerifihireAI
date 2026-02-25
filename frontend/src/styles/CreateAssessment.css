@@ -1,0 +1,447 @@
+/* CreateAssessment.css - Premium Intelligent Glassmorphism Design */
+
+@keyframes meshGradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes sparkle {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.create-assessment-page {
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #f0f4ff, #f8f0ff, #f0faff, #f5f0ff);
+    background-size: 400% 400%;
+    animation: meshGradient 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2.5rem 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #1e293b;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Decorative Background Elements */
+.bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.4;
+    animation: float 20s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 500px;
+    height: 500px;
+    background: rgba(79, 70, 229, 0.2);
+    top: -150px;
+    right: -100px;
+}
+
+.shape-2 {
+    width: 400px;
+    height: 400px;
+    background: rgba(147, 51, 234, 0.15);
+    bottom: 5%;
+    left: -100px;
+    animation-delay: -5s;
+}
+
+.shape-3 {
+    width: 300px;
+    height: 300px;
+    background: rgba(6, 182, 212, 0.15);
+    top: 35%;
+    right: 5%;
+    animation-delay: -10s;
+}
+
+.assessment-container {
+    width: 100%;
+    max-width: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+    padding: 0 6rem;
+}
+
+/* Glass Card Component */
+.glass-card {
+    background: rgba(255, 255, 255, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 28px;
+    padding: 2.5rem;
+    box-shadow:
+        0 8px 32px 0 rgba(31, 38, 135, 0.04),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.75);
+    box-shadow:
+        0 20px 60px 0 rgba(31, 38, 135, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+/* Header Styles */
+.assessment-header {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.ai-badge {
+    background: rgba(79, 70, 229, 0.1);
+    color: #4f46e5;
+    padding: 0.6rem 1.25rem;
+    border-radius: 99px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.1);
+}
+
+.sparkle {
+    animation: sparkle 2s ease-in-out infinite;
+    display: inline-block;
+}
+
+.assessment-header h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
+    color: #0f172a;
+}
+
+.assessment-header h1 span {
+    background: linear-gradient(90deg, #4f46e5, #9333ea);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.assessment-header p {
+    font-size: 1rem;
+    color: #64748b;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 500;
+}
+
+/* Section Styling */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+}
+
+.icon-box {
+    width: 52px;
+    height: 52px;
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.3);
+    color: white;
+}
+
+.section-header h2 {
+    font-size: 1.4rem;
+    font-weight: 850;
+    letter-spacing: -0.03em;
+    margin: 0;
+    color: #1e1b4b;
+}
+
+/* Form Controls */
+.form-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 750;
+    color: #475569;
+    margin-left: 0.25rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #1e293b;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    background: #ffffff;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1), 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    transform: translateY(-2px);
+}
+
+.form-group textarea {
+    min-height: 160px;
+    line-height: 1.6;
+}
+
+/* Grid Layouts */
+.parameters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.input-with-marker {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.marker {
+    position: absolute;
+    right: 1.25rem;
+    background: #4f46e5;
+    color: white;
+    padding: 0.3rem 0.75rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
+}
+
+/* Threshold & Availability Section */
+.threshold-section {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 3rem;
+    margin-top: 2rem;
+    align-items: start;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+}
+
+.threshold-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.threshold-info h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin: 0;
+}
+
+.circle-progress {
+    position: relative;
+    width: 160px;
+    height: 160px;
+}
+
+.circle-progress svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.circle-progress circle {
+    fill: none;
+    stroke-width: 8;
+    stroke-linecap: round;
+}
+
+.circle-progress .bg {
+    stroke: rgba(99, 102, 241, 0.1);
+}
+
+.circle-progress .progress {
+    stroke: url(#threshold-grad);
+    stroke-dasharray: 283;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.circle-progress .percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #0f172a;
+    letter-spacing: -0.05em;
+}
+
+.threshold-info input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+    accent-color: #4f46e5;
+}
+
+.hint {
+    font-size: 0.9rem;
+    color: #64748b;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* Availability Styles */
+.availability-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.datetime-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+/* Action Button */
+.generate-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #9333ea 100%);
+    background-size: 200% auto;
+    color: white;
+    border: none;
+    padding: 1.5rem;
+    border-radius: 20px;
+    font-size: 1.25rem;
+    font-weight: 900;
+    cursor: pointer;
+    margin-top: 1.25rem;
+    box-shadow: 0 15px 35px -5px rgba(79, 70, 229, 0.4);
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    letter-spacing: -0.02em;
+}
+
+.generate-btn:hover:not(:disabled) {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 25px 50px -10px rgba(79, 70, 229, 0.5);
+    background-position: right center;
+}
+
+.generate-btn:active:not(:disabled) {
+    transform: translateY(0) scale(0.98);
+}
+
+.generate-btn.loading {
+    background: #64748b;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Responsive Tweaks */
+@media (max-width: 1100px) {
+    .assessment-container {
+        padding: 0 2rem;
+    }
+
+    .threshold-section {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .parameters-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .assessment-header h1 {
+        font-size: 2.75rem;
+    }
+
+    .glass-card {
+        padding: 2rem;
+    }
+
+    .datetime-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

@@ -1,0 +1,2058 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+    {
+        "question": "What is the smallest deployable unit in Kubernetes that can contain one or more containers?",
+        "options": {
+            "A": "Container",
+            "B": "Pod",
+            "C": "Node",
+            "D": "Deployment"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which component acts as the 'brain' of the cluster by exposing the Kubernetes API?",
+        "options": {
+            "A": "kube-proxy",
+            "B": "kube-apiserver",
+            "C": "etcd",
+            "D": "kube-scheduler"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'etcd' in a Kubernetes cluster?",
+        "options": {
+            "A": "To route network traffic to pods",
+            "B": "To act as a consistent and highly-available key-value store for all cluster data",
+            "C": "To manage the lifecycle of containers on a node",
+            "D": "To schedule pods onto worker nodes"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which component runs on every node and ensures that containers described in PodSpecs are running and healthy?",
+        "options": {
+            "A": "kube-controller-manager",
+            "B": "kubelet",
+            "C": "kube-scheduler",
+            "D": "containerd"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary responsibility of the 'kube-scheduler'?",
+        "options": {
+            "A": "To restart failed containers",
+            "B": "To assign newly created Pods to the most suitable nodes in the cluster",
+            "C": "To manage cluster-level logging",
+            "D": "To provide a web UI for the cluster"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Node' in Kubernetes?",
+        "options": {
+            "A": "A single container image",
+            "B": "A worker machine (physical or virtual) that runs containerized applications",
+            "C": "A network rule for load balancing",
+            "D": "A storage volume"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Kubernetes object ensures that a specified number of pod replicas are running at any given time?",
+        "options": {
+            "A": "Service",
+            "B": "ReplicaSet",
+            "C": "Namespace",
+            "D": "ConfigMap"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary function of a 'Deployment'?",
+        "options": {
+            "A": "To physically move servers between racks",
+            "B": "To provide declarative updates for Pods and ReplicaSets",
+            "C": "To encrypt secret data at rest",
+            "D": "To manage persistent storage volumes"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command-line tool is the standard for interacting with Kubernetes clusters?",
+        "options": {
+            "A": "docker",
+            "B": "kubectl",
+            "C": "kubeadm",
+            "D": "helm"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a Kubernetes 'Service' used for?",
+        "options": {
+            "A": "To store configuration files",
+            "B": "To provide a stable network endpoint to access a logical set of Pods",
+            "C": "To monitor the health of the physical hardware",
+            "D": "To compile application code"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Namespace' in Kubernetes primarily used for?",
+        "options": {
+            "A": "To name the physical data center",
+            "B": "To logically isolate resources within a single physical cluster for different teams or projects",
+            "C": "To store the IP addresses of the nodes",
+            "D": "To define the DNS suffix for the website"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Service type exposes the Service on a static port on each Node's IP?",
+        "options": {
+            "A": "ClusterIP",
+            "B": "NodePort",
+            "C": "LoadBalancer",
+            "D": "ExternalName"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the default Service type that makes the service only reachable from within the cluster?",
+        "options": {
+            "A": "NodePort",
+            "B": "ClusterIP",
+            "C": "LoadBalancer",
+            "D": "Ingress"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is an 'Ingress' in Kubernetes?",
+        "options": {
+            "A": "A physical entrance to a server room",
+            "B": "An API object that manages external access (typically HTTP) to services in a cluster",
+            "C": "A type of database storage",
+            "D": "A tool to delete old logs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'ConfigMap' used for?",
+        "options": {
+            "A": "To store confidential passwords",
+            "B": "To store non-confidential configuration data in key-value pairs",
+            "C": "To generate a map of the network layout",
+            "D": "To manage hardware BIOS settings"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How does a 'Secret' object differ from a 'ConfigMap'?",
+        "options": {
+            "A": "Secrets are only for binary files",
+            "B": "Secrets are intended for sensitive data and are stored in a slightly more secure manner (Base64 encoded)",
+            "C": "ConfigMaps can only be used by developers",
+            "D": "There is no difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Volume' in Kubernetes?",
+        "options": {
+            "A": "The audio level of system alerts",
+            "B": "A directory containing data accessible to the containers in a Pod",
+            "C": "The total number of Pods in a cluster",
+            "D": "A measurement of network bandwidth"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'PersistentVolume' (PV)?",
+        "options": {
+            "A": "A temporary folder on the developer's laptop",
+            "B": "A piece of storage in the cluster that has been provisioned by an administrator",
+            "C": "A backup of the cluster's etcd data",
+            "D": "A virtual RAM disk"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'PersistentVolumeClaim' (PVC)?",
+        "options": {
+            "A": "A legal document for server ownership",
+            "B": "A request for storage by a user (Pod) that specifies size and access modes",
+            "C": "A command to delete a hard drive",
+            "D": "A way to scale CPU usage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Kubernetes object is best suited for deploying a database that requires unique, persistent identities?",
+        "options": {
+            "A": "Deployment",
+            "B": "StatefulSet",
+            "C": "ReplicaSet",
+            "D": "DaemonSet"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of a 'DaemonSet'?",
+        "options": {
+            "A": "To ensure that all (or some) Nodes run a copy of a specific Pod (e.g., for logging agents)",
+            "B": "To schedule a task to run once at a specific time",
+            "C": "To manage the master node components",
+            "D": "To act as a load balancer for external traffic"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'Job' in Kubernetes?",
+        "options": {
+            "A": "A full-time employment position for a developer",
+            "B": "A controller that creates one or more Pods and ensures a specified number of them successfully terminate",
+            "C": "A specific type of network firewall rule",
+            "D": "A tool to monitor container uptime"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does a 'CronJob' object do?",
+        "options": {
+            "A": "It manages system time synchronization",
+            "B": "It runs Jobs on a repeating, time-based schedule",
+            "C": "It monitors the cluster for late-running pods",
+            "D": "It deletes pods older than 24 hours"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What are 'Labels' in Kubernetes?",
+        "options": {
+            "A": "Physical asset tags on server hardware",
+            "B": "Key-value pairs attached to objects used to organize and select subsets of resources",
+            "C": "The names assigned to different namespaces",
+            "D": "The version numbers of the Kubernetes API"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How is a 'Label Selector' used?",
+        "options": {
+            "A": "To choose a new cluster name",
+            "B": "To identify and filter a specific group of resources based on their labels",
+            "C": "To assign a role to a developer",
+            "D": "To pick which cloud region to use"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the function of the 'Horizontal Pod Autoscaler' (HPA)?",
+        "options": {
+            "A": "To move pods to different nodes to balance weight",
+            "B": "To automatically scale the number of Pods in a resource based on observed CPU/memory utilization",
+            "C": "To upgrade the Kubernetes version of the nodes",
+            "D": "To increase the RAM of a single running container"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Minikube'?",
+        "options": {
+            "A": "A microscopic server for IoT devices",
+            "B": "A tool that allows you to run a single-node Kubernetes cluster locally on your laptop",
+            "C": "A lightweight container runtime",
+            "D": "A plugin for Docker Desktop"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'RBAC' (Role-Based Access Control) used for?",
+        "options": {
+            "A": "To decide who gets a promotion in the company",
+            "B": "To regulate access to the Kubernetes API based on the roles of individual users",
+            "C": "To assign pods to specific nodes based on hardware",
+            "D": "To label servers by their physical role"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Helm Chart'?",
+        "options": {
+            "A": "A navigation map for cloud regions",
+            "B": "A package of pre-configured Kubernetes resources that can be deployed as a single unit",
+            "C": "A diagram of the cluster networking",
+            "D": "A password management system"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-proxy' responsible for?",
+        "options": {
+            "A": "Providing security authentication for users",
+            "B": "Managing network rules on nodes to allow communication to Pods from inside or outside the cluster",
+            "C": "Scheduling pods onto specific nodes",
+            "D": "Updating the container images"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does the 'Control Plane' consist of?",
+        "options": {
+            "A": "The physical cables connecting the racks",
+            "B": "The components that manage the cluster state, such as the API server, scheduler, and controller manager",
+            "C": "The collection of all worker nodes",
+            "D": "The user interface on the developer's laptop"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the result of running 'kubectl get pods'?",
+        "options": {
+            "A": "It shuts down all running pods",
+            "B": "It lists all pods in the current namespace and their status",
+            "C": "It creates a new pod from a YAML file",
+            "D": "It restarts the kubelet on all nodes"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Taint' in Kubernetes?",
+        "options": {
+            "A": "A hardware defect in the server's CPU",
+            "B": "A property applied to a node that allows the node to repel certain pods",
+            "C": "A corrupted container image",
+            "D": "A security vulnerability in the API"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Toleration'?",
+        "options": {
+            "A": "The system's ability to ignore coding errors",
+            "B": "A property applied to a pod that allows it to be scheduled on a node with a matching taint",
+            "C": "A user's permission to delete resources",
+            "D": "A measurement of network latency"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Sidecar Container'?",
+        "options": {
+            "A": "A backup container running on a different server",
+            "B": "A second container in a Pod that works alongside the main container to provide auxiliary features",
+            "C": "A container used only for testing",
+            "D": "A container that runs the Kubernetes control plane"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of a 'Liveness Probe'?",
+        "options": {
+            "A": "To test the developer's knowledge",
+            "B": "To determine if a container is still running; if it fails, Kubernetes will restart the container",
+            "C": "To check the network speed",
+            "D": "To scan the container for viruses"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of a 'Readiness Probe'?",
+        "options": {
+            "A": "To check if the code is ready for production",
+            "B": "To determine if a container is ready to start accepting network traffic",
+            "C": "To measure the CPU temperature",
+            "D": "To check if the image has finished downloading"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Resource Quota'?",
+        "options": {
+            "A": "The number of employees allowed to use the cluster",
+            "B": "Limits on the total amount of resources (like CPU and memory) that can be used within a Namespace",
+            "C": "A discount provided by cloud vendors",
+            "D": "The storage limit for a single container image"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Kustomize' primarily used for?",
+        "options": {
+            "A": "Customizing the physical hardware of the servers",
+            "B": "Template-free customization of Kubernetes resource YAML files",
+            "C": "Changing the theme of the Kubernetes dashboard",
+            "D": "Writing custom plugins for kubectl"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Why is an 'etcd' backup important?",
+        "options": {
+            "A": "To keep a record of developer names",
+            "B": "To allow for cluster recovery in case of data loss or control plane failure",
+            "C": "To speed up the network connection",
+            "D": "To free up space on the hard drive"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'kube-controller-manager'?",
+        "options": {
+            "A": "A person who manages the DevOps team",
+            "B": "A component that runs various controller processes to maintain the desired state of the cluster",
+            "C": "A tool used for manual scaling",
+            "D": "A database for user credentials"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Cloud Controller Manager'?",
+        "options": {
+            "A": "A manager at AWS or Azure support",
+            "B": "A component that links the cluster to the cloud provider's API for managing cloud-specific resources",
+            "C": "A tool to monitor weather patterns in cloud regions",
+            "D": "A specific type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a Kubernetes 'Annotation'?",
+        "options": {
+            "A": "A comment written in the source code",
+            "B": "Non-identifying metadata used to store extra information for external tools or libraries",
+            "C": "The primary name of a Pod",
+            "D": "A type of network firewall rule"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pod Affinity'?",
+        "options": {
+            "A": "A measure of how much a developer likes using Pods",
+            "B": "Scheduling rules that encourage or require Pods to be placed on the same nodes as other specific Pods",
+            "C": "A type of network connection speed",
+            "D": "The process of deleting old pods"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pod Anti-Affinity'?",
+        "options": {
+            "A": "The act of deleting pods across the cluster",
+            "B": "Scheduling rules that prevent specific Pods from being placed on the same nodes as other Pods",
+            "C": "A security scan of the pod images",
+            "D": "A way to increase the cost of the cluster"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Service Mesh' (e.g., Istio or Linkerd)?",
+        "options": {
+            "A": "A physical mesh of network cables",
+            "B": "An infrastructure layer for managing complex service-to-service communication, security, and observability",
+            "C": "A tool to backup container images",
+            "D": "A type of malware"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Kubernetes Dashboard'?",
+        "options": {
+            "A": "A physical screen mounted in the office",
+            "B": "A web-based UI for managing and troubleshooting applications in the cluster",
+            "C": "A tool to draw network diagrams",
+            "D": "A log of all user activities"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Kubernetes, what does 'Stateless' mean?",
+        "options": {
+            "A": "The application has no history or memory",
+            "B": "The application does not store persistent data on the local node, making it easy to replace",
+            "C": "The application is currently broken",
+            "D": "The application is not part of a US state"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In Kubernetes, what does 'Stateful' mean?",
+        "options": {
+            "A": "The application is located in a specific US state",
+            "B": "The application requires persistent storage and a consistent identity (like a database)",
+            "C": "A type of unit test",
+            "D": "A tool to scale the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question of Batch 1: What is the official mascot of the Kubernetes project?",
+        "options": {
+            "A": "A whale",
+            "B": "Phippy the Giraffe",
+            "C": "A seven-spoked steering wheel (the logo)",
+            "D": "A blue elephant"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary role of a 'Network Policy' in Kubernetes?",
+        "options": {
+            "A": "To speed up the internet connection",
+            "B": "To control the flow of traffic between Pods and network endpoints",
+            "C": "To assign IP addresses to nodes",
+            "D": "To monitor the physical router"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which field in a Pod definition is used to specify a unique IP address is shared across all containers in the Pod?",
+        "options": {
+            "A": "hostNetwork",
+            "B": "podIP",
+            "C": "None (Pods share an IP by default)",
+            "D": "serviceIP"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'RBAC' an acronym for?",
+        "options": {
+            "A": "Routing-Based Access Control",
+            "B": "Role-Based Access Control",
+            "C": "Resource-Binary Access Code",
+            "D": "Role-Based API Connection"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which object is used to grant permissions to a user or service account within a specific namespace?",
+        "options": {
+            "A": "ClusterRole",
+            "B": "Role",
+            "C": "ServiceAccount",
+            "D": "PolicyMap"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How does a 'RoleBinding' differ from a 'ClusterRoleBinding'?",
+        "options": {
+            "A": "RoleBinding is for developers only",
+            "B": "RoleBinding grants permissions within a specific namespace; ClusterRoleBinding grants permissions cluster-wide",
+            "C": "ClusterRoleBinding is for hardware access",
+            "D": "There is no difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'ServiceAccount' used for in Kubernetes?",
+        "options": {
+            "A": "To pay for the cloud service",
+            "B": "To provide an identity for processes that run in a Pod",
+            "C": "To store the admin password",
+            "D": "To manage physical server accounts"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Mutual TLS' (mTLS) in the context of a Service Mesh?",
+        "options": {
+            "A": "A way to share passwords",
+            "B": "A security protocol where both the client and server verify each other's certificates",
+            "C": "A type of load balancer",
+            "D": "An encryption for the physical hard drive"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Kubernetes component ensures that the cluster network rules are followed on each node?",
+        "options": {
+            "A": "kube-apiserver",
+            "B": "kube-proxy",
+            "C": "kube-scheduler",
+            "D": "etcd"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is an 'Admission Controller'?",
+        "options": {
+            "A": "A person who admits users to the data center",
+            "B": "A piece of code that intercepts requests to the API server prior to persistence of the object",
+            "C": "A firewall for the cluster",
+            "D": "A tool to manage user logins"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'LimitRange' do in a namespace?",
+        "options": {
+            "A": "Limits the number of users",
+            "B": "Enforces minimum and maximum resource constraints for containers in a namespace",
+            "C": "Limits the speed of the internet",
+            "D": "Limits the number of namespaces"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Pod Security Admission' (PSA)?",
+        "options": {
+            "A": "A security guard at the server room",
+            "B": "A mechanism to enforce security standards on Pods at admission time",
+            "C": "A password for the pod",
+            "D": "A way to encrypt the pod image"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which 'Network Policy' type controls traffic coming into a Pod?",
+        "options": {
+            "A": "Egress",
+            "B": "Ingress",
+            "C": "Inbound",
+            "D": "Access"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which 'Network Policy' type controls traffic going out of a Pod?",
+        "options": {
+            "A": "Ingress",
+            "B": "Egress",
+            "C": "Outbound",
+            "D": "Exit"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'CoreDNS' in Kubernetes?",
+        "options": {
+            "A": "The core processor of the node",
+            "B": "A flexible, extensible DNS server that serves as the cluster DNS",
+            "C": "A database for storing IPs",
+            "D": "A security protocol"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'CNI' in Kubernetes?",
+        "options": {
+            "A": "Container Network Interface (a standard for configuring network interfaces in containers)",
+            "B": "Cloud Network Integration",
+            "C": "Container Node Information",
+            "D": "Cluster Network Identity"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Headless Service'?",
+        "options": {
+            "A": "A service without a name",
+            "B": "A service with no ClusterIP, used for direct Pod-to-Pod communication (e.g., in databases)",
+            "C": "A broken service",
+            "D": "A service only for the master node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Endpoint' object in Kubernetes?",
+        "options": {
+            "A": "The last line of code",
+            "B": "An object that tracks the IP addresses of the Pods that match a Service's selector",
+            "C": "The physical port on the node",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Taint-based Eviction'?",
+        "options": {
+            "A": "To delete all pods",
+            "B": "To automatically evict pods from nodes that experience problems (like network pressure)",
+            "C": "To move pods to a new cluster",
+            "D": "To restart the API server"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'PriorityClass'?",
+        "options": {
+            "A": "A luxury seating on an airplane",
+            "B": "An object that defines the importance of a Pod relative to other Pods for scheduling",
+            "C": "A way to sort developer names",
+            "D": "The version of the Kubernetes API"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Preemption' in Kubernetes?",
+        "options": {
+            "A": "Predicting the future of the cluster",
+            "B": "The process where a higher-priority Pod causes a lower-priority Pod to be evicted to make space",
+            "C": "A type of network error",
+            "D": "Deleting temporary files"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Resource Request'?",
+        "options": {
+            "A": "Asking for a new laptop",
+            "B": "The minimum amount of CPU/Memory a container is guaranteed to have",
+            "C": "A request for more vacation time",
+            "D": "The storage limit of a node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Resource Limit'?",
+        "options": {
+            "A": "The maximum amount of CPU/Memory a container is allowed to consume",
+            "B": "The total size of the cluster",
+            "C": "A limitation on the number of pods",
+            "D": "A hardware restriction"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What happens if a container exceeds its 'Memory Limit'?",
+        "options": {
+            "A": "It continues to run normally",
+            "B": "It is terminated by the kernel with an OOMKilled (Out Of Memory) error",
+            "C": "It gets more RAM automatically",
+            "D": "The physical server restarts"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What happens if a container exceeds its 'CPU Limit'?",
+        "options": {
+            "A": "It is killed immediately",
+            "B": "It is throttled (slowed down) but allowed to keep running",
+            "C": "It restarts automatically",
+            "D": "Nothing happens"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Eviction' in Kubernetes?",
+        "options": {
+            "A": "A legal process for servers",
+            "B": "The process of terminating one or more Pods on a Node, typically due to resource pressure",
+            "C": "Moving a pod to the cloud",
+            "D": "Renaming a pod"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pod Disruption Budget' (PDB)?",
+        "options": {
+            "A": "The cost of fixing a broken pod",
+            "B": "An object that limits the number of Pods of an application that are down simultaneously during maintenance",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'StorageClass' used for?",
+        "options": {
+            "A": "A classroom for learning K8s",
+            "B": "A way for administrators to describe the 'classes' of storage they offer (e.g., SSD vs HDD)",
+            "C": "To store code in a database",
+            "D": "To classify pods by their storage size"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Dynamic Provisioning' of storage?",
+        "options": {
+            "A": "Manually plugging in hard drives",
+            "B": "Automatically creating storage volumes when a PVC is created",
+            "C": "Buying storage in advance",
+            "D": "Deleting old volumes"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Container Storage Interface' (CSI)?",
+        "options": {
+            "A": "A TV show about containers",
+            "B": "A standard for exposing arbitrary block and file storage systems to containerized workloads",
+            "C": "A type of hard drive",
+            "D": "A security guard for storage"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Ephemeral Storage'?",
+        "options": {
+            "A": "Permanent long-term storage",
+            "B": "Temporary storage that is lost when a Pod is deleted (e.g., emptyDir)",
+            "C": "A cloud backup",
+            "D": "A hardware RAM disk"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'HostPath' volume type?",
+        "options": {
+            "A": "A path to a cloud storage",
+            "B": "Mounts a file or directory from the host node's filesystem into your Pod",
+            "C": "A path to the user's home folder",
+            "D": "A security risk that should never be used"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Secret' projection?",
+        "options": {
+            "A": "Displaying a secret on a screen",
+            "B": "Mounting a Secret as a volume inside a container",
+            "C": "A hidden folder",
+            "D": "A way to share secrets over Wi-Fi"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to view the logs of a container in a Pod?",
+        "options": {
+            "A": "kubectl show logs",
+            "B": "kubectl logs <pod-name>",
+            "C": "docker logs",
+            "D": "kubectl get logs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you execute a command inside a running Pod?",
+        "options": {
+            "A": "kubectl run",
+            "B": "kubectl exec -it <pod-name> -- <command>",
+            "C": "docker exec",
+            "D": "kubectl start"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Vertical Pod Autoscaler' (VPA)?",
+        "options": {
+            "A": "A tool to lift servers vertically",
+            "B": "A component that automatically sets resource requests and limits for your pods",
+            "C": "A way to scale the number of pods",
+            "D": "A tool to scale the master node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cluster Autoscaler'?",
+        "options": {
+            "A": "A tool to scale the physical size of the building",
+            "B": "A component that automatically adjusts the size of a Kubernetes cluster by adding or removing nodes",
+            "C": "A tool to scale the UI",
+            "D": "A way to scale the internet speed"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Garbage Collection' in Kubernetes?",
+        "options": {
+            "A": "Cleaning the office",
+            "B": "The process of cleaning up cluster resources like unused containers and images",
+            "C": "Deleting bad code",
+            "D": "A hardware update"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Finalizer' in a Kubernetes resource?",
+        "options": {
+            "A": "The person who finishes the project",
+            "B": "A mechanism that allows you to delay the deletion of a resource until certain conditions are met",
+            "C": "A type of unit test",
+            "D": "The end of the YAML file"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Node Affinity'?",
+        "options": {
+            "A": "How much the developer likes the node",
+            "B": "A set of rules used by the scheduler to determine where a Pod can be placed based on node labels",
+            "C": "A type of network bridge",
+            "D": "Scaling the CPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Anti-affinity' for nodes?",
+        "options": {
+            "A": "Not liking the node",
+            "B": "Rules used to ensure Pods are spread out across different nodes to ensure high availability",
+            "C": "Deleting nodes",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'TerminationGracePeriodSeconds'?",
+        "options": {
+            "A": "The time a developer has to fix a bug",
+            "B": "The amount of time Kubernetes waits for a Pod to shut down gracefully before forcing it to stop",
+            "C": "A holiday for the team",
+            "D": "The age of the pod"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'ImagePullPolicy: Always'?",
+        "options": {
+            "A": "Always download the image even if it exists locally",
+            "B": "Never download the image",
+            "C": "Only download if missing",
+            "D": "Always delete the image"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'ImagePullPolicy: IfNotPresent'?",
+        "options": {
+            "A": "Always download",
+            "B": "Only download the image if it is not already on the node",
+            "C": "Never download",
+            "D": "Delete if present"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Container Runtime' (e.g., Docker, containerd, CRI-O)?",
+        "options": {
+            "A": "The time the container runs",
+            "B": "The software responsible for actually running the containers",
+            "C": "A type of database",
+            "D": "A hardware driver"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Control Loop' in a Kubernetes controller?",
+        "options": {
+            "A": "A recurring loop in the code",
+            "B": "A non-terminating loop that regulates the state of the system to match the desired state",
+            "C": "A way to backup the API",
+            "D": "A hardware cable"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Self-healing' in a Deployment?",
+        "options": {
+            "A": "The code fixing its own bugs",
+            "B": "The deployment automatically restarting or replacing Pods that fail or are deleted",
+            "C": "A health check for the developer",
+            "D": "Updating the OS automatically"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Stateless' vs 'Stateful' scaling?",
+        "options": {
+            "A": "Stateless is for users; Stateful is for admins",
+            "B": "Stateless pods are identical and can be scaled easily; Stateful pods have unique IDs and storage",
+            "C": "Stateful is faster",
+            "D": "Stateless is for images only"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Kubeconfig' file?",
+        "options": {
+            "A": "A file to configure the physical computer",
+            "B": "A file used to configure access to Kubernetes clusters, containing cluster, user, and context info",
+            "C": "A list of developer names",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Default' namespace?",
+        "options": {
+            "A": "A namespace for everyone",
+            "B": "The namespace used when none is specified by the user",
+            "C": "The only namespace in the cluster",
+            "D": "A temporary namespace"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question of Batch 2: Which command is used to update the image of a container in a deployment?",
+        "options": {
+            "A": "kubectl change image",
+            "B": "kubectl set image deployment/<name> <container>=<new-image>",
+            "C": "kubectl update image",
+            "D": "docker push"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Custom Resource Definition' (CRD) in Kubernetes?",
+        "options": {
+            "A": "A way to rename existing resources",
+            "B": "A powerful feature that allows you to define your own custom objects to extend Kubernetes functionality",
+            "C": "A backup of the API server",
+            "D": "A specialized hardware driver"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Operator Pattern'?",
+        "options": {
+            "A": "A person manually typing commands",
+            "B": "A method of packaging, deploying, and managing a Kubernetes application using custom resources and controllers",
+            "C": "A type of network bridge",
+            "D": "A scheduling algorithm"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to drain a node for maintenance, safely evicting all pods?",
+        "options": {
+            "A": "kubectl stop node",
+            "B": "kubectl drain <node-name>",
+            "C": "kubectl delete node",
+            "D": "kubectl empty node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'kubectl cordon' do?",
+        "options": {
+            "A": "Restarts the node",
+            "B": "Marks a node as unschedulable to prevent new pods from being placed on it",
+            "C": "Deletes the pods on the node",
+            "D": "Increases the node's CPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'TPA' (Total Pod Autoscaling) or 'Vertical Pod Autoscaler' (VPA) primarily used for?",
+        "options": {
+            "A": "Scaling the number of nodes",
+            "B": "Automatically adjusting the CPU and memory reservations for your pods to match actual usage",
+            "C": "Scaling the number of replicas",
+            "D": "Managing cluster security"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Mutating Admission Webhook'?",
+        "options": {
+            "A": "A webhook that deletes pods",
+            "B": "A webhook that can modify the objects sent to the API server before they are stored",
+            "C": "A tool to monitor network speed",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Validating Admission Webhook'?",
+        "options": {
+            "A": "A webhook that changes the data",
+            "B": "A webhook that can only accept or reject requests to the API server based on custom rules",
+            "C": "A tool to backup the database",
+            "D": "A hardware check"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Horizontal Pod Autoscaler' (HPA) cooldown period?",
+        "options": {
+            "A": "The time the server takes to cool down physically",
+            "B": "The amount of time the HPA waits after a scale-up or scale-down before taking another action to prevent 'thrashing'",
+            "C": "A lunch break for developers",
+            "D": "The time between API calls"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which component is responsible for keeping the 'Desired State' and 'Current State' in sync?",
+        "options": {
+            "A": "Scheduler",
+            "B": "Controller Manager",
+            "C": "Kubelet",
+            "D": "etcd"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'etcdctl'?",
+        "options": {
+            "A": "A type of database",
+            "B": "The command-line tool used to interact directly with the etcd key-value store",
+            "C": "A network security tool",
+            "D": "A YAML validator"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Zero Downtime' deployment in Kubernetes?",
+        "options": {
+            "A": "Deploying at midnight",
+            "B": "A deployment strategy (like RollingUpdate) that ensures the application is always available during an update",
+            "C": "A server that never breaks",
+            "D": "A manual update process"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Canary Deployment' in Kubernetes?",
+        "options": {
+            "A": "Releasing code on a yellow server",
+            "B": "Deploying a new version to a small percentage of users to test stability before a full rollout",
+            "C": "A backup of the cluster",
+            "D": "A security audit"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Blue-Green Deployment' in Kubernetes?",
+        "options": {
+            "A": "Using different themes for the dashboard",
+            "B": "Maintaining two identical environments and switching traffic entirely from one to the other",
+            "C": "A type of network bridge",
+            "D": "Scaling the CPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which field in the PodSpec allows you to specify that a container must run with a specific Linux user ID?",
+        "options": {
+            "A": "userContext",
+            "B": "securityContext",
+            "C": "linuxOptions",
+            "D": "runAs"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'AppArmor' or 'SELinux' used for in Kubernetes?",
+        "options": {
+            "A": "Designing the UI",
+            "B": "Providing additional kernel-level security profiles to containers",
+            "C": "Speeding up the network",
+            "D": "Formatting the hard drive"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pod Security Policy' (PSP)?",
+        "options": {
+            "A": "A legacy feature (deprecated) for controlling security-sensitive aspects of pod specification",
+            "B": "A new tool for managing passwords",
+            "C": "A hardware firewall",
+            "D": "A network diagram"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the replacement for Pod Security Policies in modern Kubernetes?",
+        "options": {
+            "A": "RoleBinding",
+            "B": "Pod Security Admission (PSA)",
+            "C": "NetworkPolicy",
+            "D": "LimitRange"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-bench'?",
+        "options": {
+            "A": "A physical seat for developers",
+            "B": "A tool that checks whether Kubernetes is deployed securely by running checks against the CIS Kubernetes Benchmark",
+            "C": "A performance monitor",
+            "D": "A backup script"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-hunter'?",
+        "options": {
+            "A": "A person looking for nodes",
+            "B": "An open-source tool that hunts for security vulnerabilities in Kubernetes clusters",
+            "C": "A type of unit test",
+            "D": "A database tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'In-place pod vertical scaling'?",
+        "options": {
+            "A": "Lifting the server up",
+            "B": "The ability to update container resource requests/limits without restarting the pod (alpha feature)",
+            "C": "A way to scale replicas",
+            "D": "A manual hardware update"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Ephemeral Containers' used for?",
+        "options": {
+            "A": "Permanent storage",
+            "B": "Debugging running pods where you cannot easily add a container to the pod spec",
+            "C": "A cloud backup",
+            "D": "A temporary cache"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to see the resource usage of nodes?",
+        "options": {
+            "A": "kubectl get nodes",
+            "B": "kubectl top nodes",
+            "C": "kubectl show nodes",
+            "D": "kubectl monitor nodes"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'ImageVulnerabilityScan' in a CI/CD pipeline?",
+        "options": {
+            "A": "To fix hardware errors",
+            "B": "To ensure images contain no known security flaws before they are deployed to K8s",
+            "C": "To count the number of files",
+            "D": "To monitor user traffic"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'StatefulSet' Ordinal Index?",
+        "options": {
+            "A": "The age of the pod",
+            "B": "The unique, stable integer assigned to each pod in a StatefulSet (e.g., pod-0, pod-1)",
+            "C": "The price of the cloud service",
+            "D": "The version of the app"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Headless Service' used for in databases?",
+        "options": {
+            "A": "To hide the database",
+            "B": "To allow direct discovery of individual pod IPs for clustering logic",
+            "C": "To delete old data",
+            "D": "To encrypt the connection"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Local Persistent Volume'?",
+        "options": {
+            "A": "Storage on the developer's laptop",
+            "B": "A volume representing a local disk directly attached to a single node",
+            "C": "A cloud-based storage",
+            "D": "A temporary RAM disk"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Volume Binding Mode' in a StorageClass?",
+        "options": {
+            "A": "Deciding which cable to use",
+            "B": "Determining when volume binding and dynamic provisioning should occur (e.g., Immediate vs WaitForFirstConsumer)",
+            "C": "A security scan",
+            "D": "A storage limit"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'emptyDir' volume used for?",
+        "options": {
+            "A": "Permanent long-term storage",
+            "B": "Temporary storage that is created when a pod is assigned to a node and deleted when the pod is removed",
+            "C": "A cloud backup",
+            "D": "A hardware update"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Projected Volume'?",
+        "options": {
+            "A": "Displaying a volume on a wall",
+            "B": "A single volume that maps several existing volume sources into the same directory",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Downward API'?",
+        "options": {
+            "A": "A broken API",
+            "B": "A feature that allows containers to consume information about themselves or the cluster without using the K8s client",
+            "C": "A tool to monitor the physical hardware",
+            "D": "A way to delete pods"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-apiserver' request throttling?",
+        "options": {
+            "A": "The API server running out of memory",
+            "B": "A mechanism to prevent the API server from being overwhelmed by too many requests",
+            "C": "A network error",
+            "D": "A hardware restriction"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Service Topology'?",
+        "options": {
+            "A": "The shape of the cloud",
+            "B": "A feature that allows a service to route traffic based on the node topology (e.g., keeping traffic within the same zone)",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'ExternalName' Service type?",
+        "options": {
+            "A": "A service for users outside the office",
+            "B": "A service that maps to an external DNS name rather than a pod selector",
+            "C": "A broken service",
+            "D": "A service only for the master node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Finalizer' primarily used for in deletion?",
+        "options": {
+            "A": "To finish the code",
+            "B": "To ensure cleanup of external resources (like cloud load balancers) before the K8s object is deleted",
+            "C": "A type of unit test",
+            "D": "To speed up deletion"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Horizontal Pod Autoscaler' (HPA) algorithm?",
+        "options": {
+            "A": "A random number generator",
+            "B": "An algorithm that calculates desired replicas based on the ratio of current metric value to target metric value",
+            "C": "A manual scaling process",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kubelet' checkpointing?",
+        "options": {
+            "A": "Taking a photo of the server",
+            "B": "A feature that allows the kubelet to restart pods after a reboot even if the API server is unavailable",
+            "C": "Deleting logs",
+            "D": "A hardware update"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'CRI-O'?",
+        "options": {
+            "A": "A type of database",
+            "B": "A lightweight container runtime specifically for Kubernetes",
+            "C": "A security protocol",
+            "D": "A hardware driver"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pod Overhead'?",
+        "options": {
+            "A": "The height of the pod",
+            "B": "The extra resources consumed by the pod infrastructure (like the sandbox) on top of the container resources",
+            "C": "The price of the cloud service",
+            "D": "A network delay"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'RuntimeClass'?",
+        "options": {
+            "A": "A class for learning K8s",
+            "B": "A feature for selecting different container runtime configurations (e.g., gVisor vs runc) for different pods",
+            "C": "A security certificate",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Graceful Node Shutdown'?",
+        "options": {
+            "A": "The server room lights going off",
+            "B": "A feature that allows the kubelet to detect node shutdown and gracefully terminate pods",
+            "C": "A hardware failure",
+            "D": "A manual update"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-scheduler' filtering phase?",
+        "options": {
+            "A": "Cleaning the air in the data center",
+            "B": "The step where the scheduler identifies the set of nodes where it is possible to schedule the pod",
+            "C": "Scaling the CPU",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-scheduler' scoring phase?",
+        "options": {
+            "A": "Giving points to developers",
+            "B": "The step where the scheduler ranks the filtered nodes to choose the best one",
+            "C": "A manual update",
+            "D": "A network test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Cluster DNS'?",
+        "options": {
+            "A": "The IP of the master node",
+            "B": "A DNS server within the cluster that provides name resolution for services and pods",
+            "C": "A public DNS like Google",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Service Internal Traffic Policy'?",
+        "options": {
+            "A": "A law about office traffic",
+            "B": "A feature to control whether traffic is routed to node-local or cluster-wide endpoints",
+            "C": "A type of unit test",
+            "D": "A hardware lab"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Dual-stack networking' in Kubernetes?",
+        "options": {
+            "A": "Two physical racks",
+            "B": "The ability to assign both IPv4 and IPv6 addresses to pods and services",
+            "C": "A backup network",
+            "D": "Scaling the UI"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'IPVS' mode in kube-proxy?",
+        "options": {
+            "A": "A very slow mode",
+            "B": "A high-performance load balancing mode for kube-proxy based on the Linux Kernel's IP Virtual Server",
+            "C": "A security protocol",
+            "D": "A hardware driver"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Node Termination Handler'?",
+        "options": {
+            "A": "A person who shuts down nodes",
+            "B": "A tool that monitors for node termination events (like AWS spot instance interruptions) and drains the node",
+            "C": "A type of unit test",
+            "D": "A hardware failure"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'KEDA' (Kubernetes Event-driven Autoscaling)?",
+        "options": {
+            "A": "A fast car",
+            "B": "An application that allows you to scale containers based on external event sources (like Kafka or RabbitMQ)",
+            "C": "A security scan",
+            "D": "A type of unit test"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Argo CD' used for?",
+        "options": {
+            "A": "Building a ship",
+            "B": "A declarative GitOps continuous delivery tool for Kubernetes",
+            "C": "A social network for developers",
+            "D": "A browser plugin"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question of Batch 3: What is the primary benefit of the GitOps approach?",
+        "options": {
+            "A": "It makes the code look better",
+            "B": "It ensures that the cluster state always matches the configuration stored in Git, providing a clear audit trail",
+            "C": "It is faster than the CLI",
+            "D": "It deletes the master node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to display a detailed description of a specific Pod, including its events and current status?",
+        "options": {
+            "A": "kubectl get pod",
+            "B": "kubectl describe pod <pod-name>",
+            "C": "kubectl show pod",
+            "D": "kubectl inspect pod"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does the 'Pending' status of a Pod usually indicate?",
+        "options": {
+            "A": "The container has crashed",
+            "B": "The Pod has been accepted by the system but is waiting for a node to be assigned or resources to be available",
+            "C": "The Pod has successfully finished its task",
+            "D": "The network is disconnected"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'CrashLoopBackOff'?",
+        "options": {
+            "A": "A new dance move for developers",
+            "B": "A state where a container is repeatedly crashing and Kubernetes is waiting between restarts",
+            "C": "The pod is scaling horizontally",
+            "D": "The node is shutting down"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which component is responsible for maintaining the health of the Control Plane components on a master node?",
+        "options": {
+            "A": "kubelet",
+            "B": "kube-static-pods",
+            "C": "kube-apiserver",
+            "D": "containerd"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'OOMKilled' in a container status?",
+        "options": {
+            "A": "Out of Management",
+            "B": "The container was terminated because it exceeded its memory limit",
+            "C": "The pod was deleted by a user",
+            "D": "A network timeout occurred"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'ImagePullBackOff'?",
+        "options": {
+            "A": "The image is too large for the disk",
+            "B": "Kubernetes is unable to pull the container image from the registry (e.g., wrong name or no permission)",
+            "C": "The image is corrupted",
+            "D": "The registry is too fast"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-apiserver' auditing?",
+        "options": {
+            "A": "Calculating the cost of the cluster",
+            "B": "A security feature that provides a chronological set of records documenting the sequence of activities in the cluster",
+            "C": "Checking the developer's code for bugs",
+            "D": "Counting the number of pods"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command allows you to view the real-time resource consumption of all Nodes in the cluster?",
+        "options": {
+            "A": "kubectl get nodes",
+            "B": "kubectl top nodes",
+            "C": "kubectl stats nodes",
+            "D": "kubectl monitor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Leader Election' in the context of high-availability Control Planes?",
+        "options": {
+            "A": "Voting for a new CEO",
+            "B": "The process by which one instance of a controller (like scheduler) is chosen to be active while others remain standby",
+            "C": "Choosing a master node based on CPU speed",
+            "D": "Selecting a developer to be the admin"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Horizontal Pod Autoscaler' (HPA) metrics server?",
+        "options": {
+            "A": "A server that stores weather data",
+            "B": "A cluster-wide aggregator of resource usage data that HPA uses to make scaling decisions",
+            "C": "A tool to measure network latency",
+            "D": "A backup for the etcd database"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Pod Topology Spread Constraints'?",
+        "options": {
+            "A": "A physical limit on pod size",
+            "B": "Rules to control how Pods are spread across your cluster among failure-domains such as regions and zones",
+            "C": "A type of network bridge",
+            "D": "A storage limit"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which flag is used with 'kubectl delete' to bypass graceful shutdown and delete a resource immediately?",
+        "options": {
+            "A": "--force",
+            "B": "--now",
+            "C": "--grace-period=0 --force",
+            "D": "-f"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'kube-proxy' IPVS mode?",
+        "options": {
+            "A": "A slow legacy mode",
+            "B": "A high-performance load balancing mode based on the Linux Kernel's IP Virtual Server",
+            "C": "A security protocol",
+            "D": "A hardware driver"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary benefit of using 'Namespaces' for multi-tenancy?",
+        "options": {
+            "A": "It makes the cluster run faster",
+            "B": "It provides logical isolation and allows for different resource quotas and security policies per team",
+            "C": "It encrypts all data in the cluster",
+            "D": "It replaces the need for a master node"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'etcd' defragmentation?",
+        "options": {
+            "A": "Cleaning the physical server",
+            "B": "The process of reclaiming disk space in the etcd database to maintain performance",
+            "C": "Deleting unused containers",
+            "D": "Updating the Kubernetes version"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-controller-manager' Node Controller?",
+        "options": {
+            "A": "A person managing the nodes",
+            "B": "A component responsible for noticing and responding when nodes go down",
+            "C": "A tool for manual scaling",
+            "D": "A hardware monitor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Certificate Signing Request' (CSR) in Kubernetes?",
+        "options": {
+            "A": "A request for a promotion",
+            "B": "An API resource used to request that a certificate be signed by the cluster's Certificate Authority (CA)",
+            "C": "A password for the pod",
+            "D": "A legal contract"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kubeadm'?",
+        "options": {
+            "A": "A dashboard for the admin",
+            "B": "A tool used to easily initialize and join nodes into a Kubernetes cluster",
+            "C": "A cloud provider",
+            "D": "A security scanner"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which log file is the first place to look when a Node cannot join the cluster?",
+        "options": {
+            "A": "nginx.log",
+            "B": "kubelet logs (journalctl -u kubelet)",
+            "C": "etcd.log",
+            "D": "docker.log"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'StorageOS' or 'Rook'?",
+        "options": {
+            "A": "A new OS for laptops",
+            "B": "Cloud-native storage orchestrators that manage persistent storage volumes for Kubernetes",
+            "C": "A type of unit test",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'NetworkPolicy' default-deny?",
+        "options": {
+            "A": "The internet is blocked",
+            "B": "A security best practice of blocking all traffic by default and only allowing specific connections",
+            "C": "A hardware failure",
+            "D": "A manual update"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Taint' Effect 'NoSchedule'?",
+        "options": {
+            "A": "The pod is deleted immediately",
+            "B": "New pods that do not tolerate the taint will not be scheduled on the node",
+            "C": "The node is disconnected",
+            "D": "The API server is slow"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Taint' Effect 'NoExecute'?",
+        "options": {
+            "A": "The node cannot run code",
+            "B": "New pods are not scheduled, and existing pods that do not tolerate the taint are evicted immediately",
+            "C": "A security scan",
+            "D": "A hardware lock"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which Kubernetes resource is used to handle 'Graceful Shutdown' of a cluster for costs?",
+        "options": {
+            "A": "CronJob",
+            "B": "Descheduler",
+            "C": "None (handled at the infrastructure layer or via custom automation)",
+            "D": "ReplicaSet"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'API Aggregation'?",
+        "options": {
+            "A": "Merging two clusters",
+            "B": "A way to extend the Kubernetes API with additional APIs that are not part of the core",
+            "C": "Grouping users together",
+            "D": "A type of database join"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Service Mesh' Observability?",
+        "options": {
+            "A": "Watching the developer work",
+            "B": "The ability to gain deep insights into service performance and health through traces, metrics, and logs",
+            "C": "A type of network bridge",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Istio' Gateway?",
+        "options": {
+            "A": "A physical gate at the office",
+            "B": "A load balancer operating at the edge of the mesh receiving incoming or outgoing HTTP/TCP connections",
+            "C": "A type of database",
+            "D": "A backup tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Kiali'?",
+        "options": {
+            "A": "A Greek island",
+            "B": "A visualization tool for Istio service mesh that shows the topology and health of services",
+            "C": "A security scanner",
+            "D": "A programming language"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Prometheus' in the K8s ecosystem?",
+        "options": {
+            "A": "A Greek god",
+            "B": "The industry-standard monitoring and alerting toolkit for Kubernetes",
+            "C": "A type of storage driver",
+            "D": "A deployment strategy"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Grafana'?",
+        "options": {
+            "A": "A drawing app",
+            "B": "A visualization platform often used with Prometheus to create dashboards for K8s metrics",
+            "C": "A type of unit test",
+            "D": "A security log"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Horizontal Pod Autoscaler' (HPA) scale-down stabilization window?",
+        "options": {
+            "A": "The time a pod spends in a window",
+            "B": "The time the HPA waits to ensure a metric decrease is sustained before removing replicas",
+            "C": "A hardware cooling period",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Node Termination Grace Period'?",
+        "options": {
+            "A": "A holiday for the team",
+            "B": "The time allowed for pods on a node to gracefully terminate when the node is being shut down",
+            "C": "The age of the server",
+            "D": "A network delay"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'CloudProvider' integration?",
+        "options": {
+            "A": "Working at AWS",
+            "B": "The interface that allows Kubernetes to manage cloud-specific resources like LoadBalancers and PVs",
+            "C": "A tool to check the weather",
+            "D": "A security certificate"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'kube-scheduler' policy vs plugin?",
+        "options": {
+            "A": "Policies are for people; plugins are for code",
+            "B": "Policies are legacy configuration; Plugins are the modern way to extend the scheduling framework",
+            "C": "They are the same",
+            "D": "Plugins are faster"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Priority Admission Controller'?",
+        "options": {
+            "A": "A person deciding who goes first",
+            "B": "A controller that uses the 'priorityClassName' field to set the integer value of priority for a Pod",
+            "C": "A type of load balancer",
+            "D": "A security scanner"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Volume Expansion'?",
+        "options": {
+            "A": "Making the hard drive physically larger",
+            "B": "A feature that allows you to increase the size of an existing PersistentVolume (if supported by the driver)",
+            "C": "Deleting the volume",
+            "D": "Backing up the volume"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'StorageClass' ReclaimPolicy: Delete?",
+        "options": {
+            "A": "Deletes the code",
+            "B": "Automatically deletes the underlying physical storage volume when the PVC is deleted",
+            "C": "Deletes the user account",
+            "D": "A security bug"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'StorageClass' ReclaimPolicy: Retain?",
+        "options": {
+            "A": "Keeps the data but deletes the volume",
+            "B": "Keeps the underlying physical storage volume even after the PVC is deleted for manual cleanup",
+            "C": "A backup strategy",
+            "D": "Scaling the CPU"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Snapshot' in Kubernetes storage?",
+        "options": {
+            "A": "A photo of the node",
+            "B": "A point-in-time copy of a volume that can be used to provision a new volume or restore data",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'CSI Sidecar' containers?",
+        "options": {
+            "A": "Containers for motorcycles",
+            "B": "Helper containers provided by Kubernetes to simplify the implementation of CSI storage drivers",
+            "C": "A backup tool",
+            "D": "A network monitor"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Container Runtime Interface' (CRI)?",
+        "options": {
+            "A": "A type of database",
+            "B": "The plugin interface which enables kubelet to use a wide variety of container runtimes",
+            "C": "A security certificate",
+            "D": "A programming language"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Kubelet' Garbage Collection?",
+        "options": {
+            "A": "Cleaning the office",
+            "B": "The automated removal of unused images and containers from the local node",
+            "C": "Deleting old YAML files",
+            "D": "A hardware update"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to check the health of cluster components (Legacy)?",
+        "options": {
+            "A": "kubectl get componentstatuses",
+            "B": "kubectl check health",
+            "C": "kubectl status",
+            "D": "kubectl system check"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'ServiceAccount' Token Volume Projection?",
+        "options": {
+            "A": "Projecting a movie",
+            "B": "A security-enhanced way to provide service account tokens to Pods with automatic rotation",
+            "C": "A hidden folder",
+            "D": "A backup of passwords"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Node Isolation'?",
+        "options": {
+            "A": "A node in a desert",
+            "B": "The ability to prevent a compromised container from accessing the rest of the node or cluster",
+            "C": "A network error",
+            "D": "A hardware lock"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Kubernetes Hardening Guide' (NSA/CISA)?",
+        "options": {
+            "A": "A book on how to break K8s",
+            "B": "A set of official best-practice guidelines for securing a Kubernetes cluster",
+            "C": "A type of unit test",
+            "D": "A hardware lab"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'admission configuration'?",
+        "options": {
+            "A": "Configuring the office layout",
+            "B": "The settings that control which admission controllers are active in the cluster",
+            "C": "A type of unit test",
+            "D": "A security scan"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is used for 'Infrastructure as Code' to provision K8s clusters?",
+        "options": {
+            "A": "Photoshop",
+            "B": "Terraform",
+            "C": "Excel",
+            "D": "Word"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'GitOps' reconciliation loop?",
+        "options": {
+            "A": "A loop in the Git code",
+            "B": "The continuous process of ensuring the actual cluster state matches the state defined in Git",
+            "C": "A type of unit test",
+            "D": "A security log"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Final question: What is the primary purpose of 'Cloud-Native' design?",
+        "options": {
+            "A": "To make apps pretty",
+            "B": "To build and run scalable applications in modern, dynamic environments like public clouds",
+            "C": "To speed up the internet",
+            "D": "To store big data"
+        },
+        "answer": "B"
+    }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "kubernetes"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

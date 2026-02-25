@@ -1,0 +1,2057 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+    {
+        "question": "Which SQL keyword is used to retrieve unique values from a column?",
+        "options": {
+            "A": "UNIQUE",
+            "B": "DISTINCT",
+            "C": "DIFFERENT",
+            "D": "SINGLE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of the following is used to delete all data from a table without deleting the table structure?",
+        "options": {
+            "A": "DELETE",
+            "B": "DROP",
+            "C": "TRUNCATE",
+            "D": "REMOVE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL constraint ensures that all values in a column are different?",
+        "options": {
+            "A": "NOT NULL",
+            "B": "PRIMARY KEY",
+            "C": "UNIQUE",
+            "D": "CHECK"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "In SQL, which clause is used to filter the results of an aggregate function?",
+        "options": {
+            "A": "WHERE",
+            "B": "ORDER BY",
+            "C": "GROUP BY",
+            "D": "HAVING"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "Which join returns all records when there is a match in either left or right table?",
+        "options": {
+            "A": "INNER JOIN",
+            "B": "LEFT JOIN",
+            "C": "RIGHT JOIN",
+            "D": "FULL OUTER JOIN"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What does the 'AS' keyword do in a SELECT statement?",
+        "options": {
+            "A": "Filters rows",
+            "B": "Defines an alias for a column or table",
+            "C": "Joins two tables",
+            "D": "Sorts the output"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to add a new column to an existing table?",
+        "options": {
+            "A": "UPDATE TABLE",
+            "B": "INSERT INTO",
+            "C": "ALTER TABLE",
+            "D": "ADD COLUMN"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which character is the wildcard for 'any number of characters' in a LIKE clause?",
+        "options": {
+            "A": "_",
+            "B": "*",
+            "C": "%",
+            "D": "?"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the default sorting order for the ORDER BY clause?",
+        "options": {
+            "A": "Descending",
+            "B": "Ascending",
+            "C": "Alphabetical only",
+            "D": "Random"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to return the number of rows in a query?",
+        "options": {
+            "A": "SUM()",
+            "B": "TOTAL()",
+            "C": "COUNT()",
+            "D": "NUMBER()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which operator is used to check if a value falls within a specific range?",
+        "options": {
+            "A": "BETWEEN",
+            "B": "IN",
+            "C": "WITHIN",
+            "D": "RANGE"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which SQL statement is used to update data in a database?",
+        "options": {
+            "A": "SAVE",
+            "B": "MODIFY",
+            "C": "UPDATE",
+            "D": "ALTER"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of a PRIMARY KEY?",
+        "options": {
+            "A": "To link two tables together",
+            "B": "To uniquely identify each record in a table",
+            "C": "To allow null values in a column",
+            "D": "To sort the table data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL sub-language is used to define the database schema (e.g., CREATE, DROP)?",
+        "options": {
+            "A": "DML",
+            "B": "DCL",
+            "C": "DDL",
+            "D": "TCL"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which operator allows you to specify multiple values in a WHERE clause?",
+        "options": {
+            "A": "LIKE",
+            "B": "BETWEEN",
+            "C": "IN",
+            "D": "ANY"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which keyword is used to combine the results of two SELECT statements (removing duplicates)?",
+        "options": {
+            "A": "JOIN",
+            "B": "UNION",
+            "C": "MERGE",
+            "D": "COMBINE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function finds the highest value in a column?",
+        "options": {
+            "A": "HIGH()",
+            "B": "TOP()",
+            "C": "MAX()",
+            "D": "GREATEST()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is a FOREIGN KEY?",
+        "options": {
+            "A": "A key that must be unique in every table",
+            "B": "A field in one table that refers to the Primary Key in another table",
+            "C": "A key used to encrypt the database",
+            "D": "A key that cannot contain numbers"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which clause is used to group rows that have the same values into summary rows?",
+        "options": {
+            "A": "SUMMARIZE",
+            "B": "ORDER BY",
+            "C": "GROUP BY",
+            "D": "HAVING"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL command is used to create a new database?",
+        "options": {
+            "A": "NEW DATABASE",
+            "B": "BUILD DATABASE",
+            "C": "CREATE DATABASE",
+            "D": "ADD DATABASE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "How do you select all columns from a table named 'Users'?",
+        "options": {
+            "A": "SELECT [all] FROM Users",
+            "B": "SELECT Users",
+            "C": "SELECT * FROM Users",
+            "D": "GET * FROM Users"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which keyword is used to change the structure of a table?",
+        "options": {
+            "A": "CHANGE",
+            "B": "UPDATE",
+            "C": "ALTER",
+            "D": "MODIFY"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "To get the first 5 records in MySQL, which keyword do you use?",
+        "options": {
+            "A": "TOP",
+            "B": "LIMIT",
+            "C": "FIRST",
+            "D": "FETCH"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which statement is used to add new rows to a table?",
+        "options": {
+            "A": "ADD ROW",
+            "B": "INSERT INTO",
+            "C": "UPDATE",
+            "D": "APPEND"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does SQL stand for?",
+        "options": {
+            "A": "Strong Question Language",
+            "B": "Structured Query Language",
+            "C": "Simple Query Language",
+            "D": "System Query Language"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function returns the average value of a numeric column?",
+        "options": {
+            "A": "MEAN()",
+            "B": "AVG()",
+            "C": "AVERAGE()",
+            "D": "MEDIAN()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you check for NULL values in a WHERE clause?",
+        "options": {
+            "A": "column = NULL",
+            "B": "column IS NULL",
+            "C": "column NOT EXISTS",
+            "D": "column IS EMPTY"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which keyword is used to delete an entire table from the database?",
+        "options": {
+            "A": "DELETE",
+            "B": "REMOVE",
+            "C": "DROP",
+            "D": "ERASE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "In a LIKE clause, which wildcard represents exactly one character?",
+        "options": {
+            "A": "%",
+            "B": "*",
+            "C": "_",
+            "D": "#"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which DML command is used to remove specific rows from a table?",
+        "options": {
+            "A": "DROP",
+            "B": "REMOVE",
+            "C": "DELETE",
+            "D": "TRUNCATE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the result of a SELECT statement called?",
+        "options": {
+            "A": "Dataset",
+            "B": "Result-set",
+            "C": "Table-view",
+            "D": "Data-grid"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which join returns only the rows that have matching values in both tables?",
+        "options": {
+            "A": "OUTER JOIN",
+            "B": "INNER JOIN",
+            "C": "LEFT JOIN",
+            "D": "CROSS JOIN"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL command is used to create a virtual table based on a result-set?",
+        "options": {
+            "A": "CREATE VIEW",
+            "B": "CREATE VIRTUAL",
+            "C": "CREATE TABLE",
+            "D": "CREATE MASK"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which keyword is used to sort the result in descending order?",
+        "options": {
+            "A": "DOWN",
+            "B": "BACK",
+            "C": "DESC",
+            "D": "ASC"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which function is used to convert all characters in a string to lowercase?",
+        "options": {
+            "A": "LOWER()",
+            "B": "MIN()",
+            "C": "SMALL()",
+            "D": "DOWNCASE()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does DML stand for?",
+        "options": {
+            "A": "Data Migration Language",
+            "B": "Data Manipulation Language",
+            "C": "Database Management List",
+            "D": "Data Maintenance Logic"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which aggregate function returns the sum of all values in a column?",
+        "options": {
+            "A": "TOTAL()",
+            "B": "ADD()",
+            "C": "SUM()",
+            "D": "COUNT()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which command is used to give a user permission to a database object?",
+        "options": {
+            "A": "ALLOW",
+            "B": "PERMIT",
+            "C": "GRANT",
+            "D": "REVOKE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL statement is used to permanently save changes in a transaction?",
+        "options": {
+            "A": "SAVE",
+            "B": "ROLLBACK",
+            "C": "COMMIT",
+            "D": "FINISH"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the 'NOT' operator?",
+        "options": {
+            "A": "Combines two conditions",
+            "B": "Reverses the meaning of the logical operator it is used with",
+            "C": "Selects null values",
+            "D": "Deletes data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which join returns all records from the left table and matched records from the right table?",
+        "options": {
+            "A": "RIGHT JOIN",
+            "B": "FULL JOIN",
+            "C": "LEFT JOIN",
+            "D": "INNER JOIN"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which command is used to undo changes that have not yet been committed?",
+        "options": {
+            "A": "UNDO",
+            "B": "ROLLBACK",
+            "C": "RESET",
+            "D": "BACKUP"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which operator is used for pattern matching in SQL?",
+        "options": {
+            "A": "MATCH",
+            "B": "SIMILAR",
+            "C": "LIKE",
+            "D": "EQUAL"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the result of a CROSS JOIN?",
+        "options": {
+            "A": "The intersection of two tables",
+            "B": "The Cartesian product of two tables",
+            "C": "Only rows that match exactly",
+            "D": "A table with no rows"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL keyword is used to remove permissions from a user?",
+        "options": {
+            "A": "GRANT",
+            "B": "DENY",
+            "C": "REVOKE",
+            "D": "REMOVE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which constraint prevents a column from having a NULL value?",
+        "options": {
+            "A": "UNIQUE",
+            "B": "DEFAULT",
+            "C": "NOT NULL",
+            "D": "CHECK"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is an 'INDEX' used for in SQL?",
+        "options": {
+            "A": "To secure the data",
+            "B": "To speed up data retrieval",
+            "C": "To group similar data",
+            "D": "To backup the database"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to rename a table in SQL?",
+        "options": {
+            "A": "RENAME TABLE",
+            "B": "UPDATE TABLE NAME",
+            "C": "ALTER TABLE ... RENAME TO",
+            "D": "MODIFY TABLE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which keyword is used to create a rule for valid data in a column?",
+        "options": {
+            "A": "RULE",
+            "B": "VALIDATE",
+            "C": "CHECK",
+            "D": "CONSTRAINT"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "How do you select only the 'Name' and 'Email' from a table 'Customers'?",
+        "options": {
+            "A": "SELECT Name, Email FROM Customers",
+            "B": "SELECT * Name, Email FROM Customers",
+            "C": "GET Name, Email FROM Customers",
+            "D": "SELECT [Name], [Email] FROM Customers"
+        },
+        "answer": "A"
+    },
+{
+        "question": "Which SQL keyword is used to provide a temporary name to a table or a column?",
+        "options": {
+            "A": "ALIAS",
+            "B": "AS",
+            "C": "SET",
+            "D": "NAME"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which join returns all records from the right table, and the matched records from the left table?",
+        "options": {
+            "A": "LEFT JOIN",
+            "B": "RIGHT JOIN",
+            "C": "FULL JOIN",
+            "D": "INNER JOIN"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to return the current date and time in SQL?",
+        "options": {
+            "A": "GETDATE()",
+            "B": "NOW()",
+            "C": "CURRENT_TIMESTAMP",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the purpose of the SQL 'GROUP BY' statement?",
+        "options": {
+            "A": "To sort the result-set",
+            "B": "To group rows that have the same values into summary rows",
+            "C": "To group different tables together",
+            "D": "To filter rows based on a list of values"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL operator is used to test for the existence of any record in a subquery?",
+        "options": {
+            "A": "ANY",
+            "B": "EXISTS",
+            "C": "SOME",
+            "D": "IN"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of the following is an example of a DCL (Data Control Language) command?",
+        "options": {
+            "A": "SELECT",
+            "B": "INSERT",
+            "C": "GRANT",
+            "D": "UPDATE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is a 'Self-Join'?",
+        "options": {
+            "A": "A join that links a table to a different database",
+            "B": "A regular join where a table is joined with itself",
+            "C": "A join that doesn't require a keyword",
+            "D": "A join between a table and a view"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which constraint is used to set a default value for a column when no value is specified?",
+        "options": {
+            "A": "SET",
+            "B": "FIXED",
+            "C": "DEFAULT",
+            "D": "AUTO"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the 'DROP' command?",
+        "options": {
+            "A": "To delete a specific row",
+            "/B": "To delete a database or a table",
+            "C": "To empty a table but keep the structure",
+            "D": "To remove a column's data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function returns the smallest value of the selected column?",
+        "options": {
+            "A": "SMALL()",
+            "B": "MIN()",
+            "C": "LEAST()",
+            "D": "LOW()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which clause is used with aggregate functions to filter groups?",
+        "options": {
+            "A": "WHERE",
+            "B": "LIMIT",
+            "C": "HAVING",
+            "D": "GROUP"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL statement is used to remove a view?",
+        "options": {
+            "A": "DELETE VIEW",
+            "B": "REMOVE VIEW",
+            "C": "DROP VIEW",
+            "D": "ERASE VIEW"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which keyword is used to combine the results of two SELECT statements and include duplicate rows?",
+        "options": {
+            "A": "UNION",
+            "B": "UNION ALL",
+            "C": "JOIN ALL",
+            "D": "COMBINE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In database normalization, what does 1NF stand for?",
+        "options": {
+            "A": "First Numeric Form",
+            "B": "First Normal Form",
+            "C": "Format Number One",
+            "D": "Primary Normal Form"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to change the data type of a column in a table?",
+        "options": {
+            "A": "UPDATE COLUMN",
+            "B": "CHANGE TYPE",
+            "C": "ALTER TABLE ... ALTER COLUMN",
+            "D": "MODIFY DATA"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the 'IN' operator?",
+        "options": {
+            "A": "To check for a value within a range",
+            "B": "To specify multiple possible values for a column",
+            "C": "To join tables internally",
+            "D": "To find null values"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function is used to concatenate two or more strings?",
+        "options": {
+            "A": "ADD()",
+            "B": "COMBINE()",
+            "C": "CONCAT()",
+            "D": "JOIN()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is a 'Composite Key'?",
+        "options": {
+            "A": "A key made of multiple tables",
+            "B": "A primary key consisting of two or more columns",
+            "C": "A key that includes a foreign key",
+            "D": "A hidden system key"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which statement is used to create an index?",
+        "options": {
+            "A": "CREATE INDEX",
+            "B": "ADD INDEX",
+            "C": "MAKE INDEX",
+            "D": "SET INDEX"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What does the 'TRUNCATE' command do?",
+        "options": {
+            "A": "Deletes the table structure",
+            "B": "Deletes all rows in a table and resets auto-increment values",
+            "C": "Shortens the length of a string",
+            "D": "Deletes only the last 10 rows"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which keyword is used to add a new record to a table?",
+        "options": {
+            "A": "ADD NEW",
+            "B": "INSERT INTO",
+            "C": "UPDATE",
+            "D": "APPEND"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What type of relationship is represented by a junction table?",
+        "options": {
+            "A": "One-to-One",
+            "B": "One-to-Many",
+            "C": "Many-to-Many",
+            "D": "Self-referencing"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which operator is used to combine two or more conditions where all must be true?",
+        "options": {
+            "A": "OR",
+            "B": "AND",
+            "C": "PLUS",
+            "D": "BOTH"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the default behavior of the 'DELETE' command without a 'WHERE' clause?",
+        "options": {
+            "A": "It triggers an error",
+            "B": "It deletes the first row",
+            "C": "It deletes all rows in the table",
+            "D": "It deletes the table structure"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL function returns the length of a string?",
+        "options": {
+            "A": "LEN() or LENGTH()",
+            "B": "SIZE()",
+            "C": "CHARS()",
+            "D": "COUNT()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which clause is used to limit the number of rows returned in SQL Server?",
+        "options": {
+            "A": "LIMIT",
+            "B": "FIRST",
+            "C": "TOP",
+            "D": "FETCH"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the difference between 'DELETE' and 'TRUNCATE'?",
+        "options": {
+            "A": "DELETE is DDL, TRUNCATE is DML",
+            "B": "DELETE can be rolled back, TRUNCATE cannot (usually)",
+            "C": "DELETE is faster than TRUNCATE",
+            "D": "There is no difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL command is used to modify the structure of a database object?",
+        "options": {
+            "A": "CHANGE",
+            "B": "MODIFY",
+            "C": "ALTER",
+            "D": "SET"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "In a database, what is a 'Schema'?",
+        "options": {
+            "A": "A type of query",
+            "B": "The logical container or structure of the database",
+            "C": "A backup file",
+            "D": "A primary key"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which operator is used to compare a value to a list of literal values?",
+        "options": {
+            "A": "BETWEEN",
+            "B": "ANY",
+            "C": "IN",
+            "D": "ALL"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL command is used to remove a trigger?",
+        "options": {
+            "A": "DELETE TRIGGER",
+            "B": "REMOVE TRIGGER",
+            "C": "DROP TRIGGER",
+            "D": "ERASE TRIGGER"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is a 'Subquery'?",
+        "options": {
+            "A": "A query within another query",
+            "B": "A secondary database",
+            "C": "A type of join",
+            "D": "The result of a query"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which keyword is used to prevent the database from being modified during a transaction?",
+        "options": {
+            "A": "FREEZE",
+            "B": "LOCK",
+            "C": "STOP",
+            "D": "HOLD"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to remove leading and trailing spaces from a string?",
+        "options": {
+            "A": "CLEAN()",
+            "B": "STRIP()",
+            "C": "TRIM()",
+            "D": "REMOVE()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL clause is used to sort data in ascending or descending order?",
+        "options": {
+            "A": "SORT BY",
+            "B": "ORDER BY",
+            "C": "ARRANGE BY",
+            "D": "GROUP BY"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'ACID' property in SQL databases?",
+        "options": {
+            "A": "Atomicity, Consistency, Isolation, Durability",
+            "B": "Access, Control, Integrity, Data",
+            "C": "Allocation, Computation, Integration, Distribution",
+            "D": "None of the above"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which join is also known as a 'Full Outer Join'?",
+        "options": {
+            "A": "FULL JOIN",
+            "B": "CROSS JOIN",
+            "C": "INNER JOIN",
+            "D": "OUTER JOIN"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of the 'UNIQUE' constraint?",
+        "options": {
+            "A": "Ensures all rows are unique",
+            "B": "Ensures all values in a column are different",
+            "C": "Ensures a column cannot be null",
+            "D": "Creates a primary key"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL statement is used to create a new table?",
+        "options": {
+            "A": "NEW TABLE",
+            "B": "CREATE TABLE",
+            "C": "BUILD TABLE",
+            "D": "ADD TABLE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which operator returns true if any of the subquery values meet the condition?",
+        "options": {
+            "A": "ALL",
+            "B": "ANY",
+            "C": "LIKE",
+            "D": "AND"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Candidate Key'?",
+        "options": {
+            "A": "A key that could potentially be a primary key",
+            "B": "A key used for voting",
+            "C": "A foreign key in a subquery",
+            "D": "A key that is not unique"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which SQL function returns the sum of numeric values?",
+        "options": {
+            "A": "COUNT()",
+            "B": "TOTAL()",
+            "C": "SUM()",
+            "D": "ADD()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL command is used to create a stored procedure?",
+        "options": {
+            "A": "CREATE PROCEDURE",
+            "B": "NEW PROCEDURE",
+            "C": "ADD PROCEDURE",
+            "D": "SET PROCEDURE"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which clause is used to filter rows before grouping?",
+        "options": {
+            "A": "HAVING",
+            "B": "WHERE",
+            "C": "ORDER BY",
+            "D": "LIMIT"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Referential Integrity'?",
+        "options": {
+            "A": "Maintaining the accuracy and consistency of data in a relationship",
+            "B": "Encrypting references",
+            "C": "Speeding up joins",
+            "D": "Using aliases for tables"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which SQL command is used to add data to a specific column only?",
+        "options": {
+            "A": "INSERT INTO table_name (column) VALUES (value)",
+            "B": "ADD column VALUE value",
+            "C": "UPDATE table_name SET column = value",
+            "D": "SET column = value"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which keyword is used to remove a database?",
+        "options": {
+            "A": "DELETE DATABASE",
+            "B": "REMOVE DATABASE",
+            "C": "DROP DATABASE",
+            "D": "ERASE DATABASE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does the 'IS NOT NULL' operator do?",
+        "options": {
+            "A": "Selects rows with no values",
+            "B": "Filters out rows that have empty strings",
+            "C": "Selects rows that have a value in a column",
+            "D": "Deletes null rows"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL join is used to return only the rows that satisfy the join condition?",
+        "options": {
+            "A": "OUTER JOIN",
+            "B": "INNER JOIN",
+            "C": "LEFT JOIN",
+            "D": "RIGHT JOIN"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to end a transaction and make it permanent?",
+        "options": {
+            "A": "SAVE",
+            "B": "FINISH",
+            "C": "COMMIT",
+            "D": "END"
+        },
+        "answer": "C"
+    },
+{
+        "question": "Which SQL clause is used to define a Common Table Expression (CTE)?",
+        "options": {
+            "A": "USING",
+            "B": "WITH",
+            "C": "AS",
+            "D": "DEFINE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the RANK() window function?",
+        "options": {
+            "A": "To count the number of rows",
+            "B": "To assign a unique number to each row",
+            "C": "To assign a rank to each row within a partition",
+            "D": "To sort the data alphabetically"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which command is used to invoke a Stored Procedure in SQL?",
+        "options": {
+            "A": "RUN",
+            "B": "EXECUTE",
+            "C": "START",
+            "D": "OPEN"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between RANK() and DENSE_RANK()?",
+        "options": {
+            "A": "RANK() skips numbers after a tie, DENSE_RANK() does not",
+            "B": "DENSE_RANK() skips numbers, RANK() does not",
+            "C": "RANK() is only for numbers, DENSE_RANK() is for strings",
+            "D": "There is no difference"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which SQL keyword is used to handle errors in a stored procedure?",
+        "options": {
+            "A": "CATCH",
+            "B": "ERROR",
+            "C": "TRY...CATCH",
+            "D": "EXCEPTION"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which window function is used to access data from a previous row?",
+        "options": {
+            "A": "LEAD()",
+            "B": "PREV()",
+            "C": "LAG()",
+            "D": "BACK()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does the PARTITION BY clause do in a window function?",
+        "options": {
+            "A": "It deletes a part of the table",
+            "B": "It divides the result set into partitions to apply the function",
+            "C": "It physical splits the database disk",
+            "D": "It joins two tables together"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL statement is used to create a trigger that runs after a row is inserted?",
+        "options": {
+            "A": "CREATE TRIGGER ... AFTER INSERT",
+            "B": "CREATE TRIGGER ... BEFORE INSERT",
+            "C": "SET TRIGGER ... POST INSERT",
+            "D": "ADD TRIGGER ... ON INSERT"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'Correlated Subquery'?",
+        "options": {
+            "A": "A subquery that runs independently",
+            "B": "A subquery that uses values from the outer query",
+            "C": "A subquery that returns multiple tables",
+            "D": "A query that has no WHERE clause"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which keyword is used in a CASE statement to provide a default result?",
+        "options": {
+            "A": "DEFAULT",
+            "B": "OTHERWISE",
+            "C": "ELSE",
+            "D": "THEN"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL command is used to create a copy of an existing table?",
+        "options": {
+            "A": "CREATE TABLE ... AS SELECT",
+            "B": "COPY TABLE",
+            "C": "REPLICATE TABLE",
+            "D": "INSERT INTO ... FROM"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "In the context of database transactions, what does 'Atomicity' mean?",
+        "options": {
+            "A": "Data is stored in atoms",
+            "B": "The transaction is all-or-nothing",
+            "C": "Multiple users can access data",
+            "D": "Data is automatically backed up"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which operator is used to check if a value is greater than all values returned by a subquery?",
+        "options": {
+            "A": "ANY",
+            "B": "SOME",
+            "C": "ALL",
+            "D": "EXISTS"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the COALESCE() function?",
+        "options": {
+            "A": "To combine two strings",
+            "B": "To return the first non-null value in a list",
+            "C": "To count null values",
+            "D": "To delete null rows"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which clause is used to remove an index?",
+        "options": {
+            "A": "DELETE INDEX",
+            "B": "REMOVE INDEX",
+            "C": "DROP INDEX",
+            "D": "CLEAR INDEX"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is a 'Clustered Index'?",
+        "options": {
+            "A": "An index that defines the physical order of data in the table",
+            "B": "An index that clusters multiple tables together",
+            "C": "An index that only works on numeric columns",
+            "D": "A backup of the index"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which SQL function is used to return a specified number of characters from the left side of a string?",
+        "options": {
+            "A": "START()",
+            "B": "LEFT()",
+            "C": "SUBSTRING()",
+            "D": "BEGIN()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which statement is used to remove a stored procedure?",
+        "options": {
+            "A": "DELETE PROCEDURE",
+            "B": "DROP PROCEDURE",
+            "C": "REMOVE PROCEDURE",
+            "D": "ERASE PROCEDURE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the SQL NTILE() function?",
+        "options": {
+            "A": "To find the average of a tile",
+            "B": "To divide an ordered result set into a specified number of groups",
+            "C": "To create a tile-based view",
+            "D": "To count the number of columns"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which operator is used to combine the results of two SELECT statements, returning only the rows common to both?",
+        "options": {
+            "A": "UNION",
+            "B": "EXCEPT",
+            "C": "INTERSECT",
+            "D": "MINUS"
+        },
+        "answer": "C"
+    },
+{
+        "question": "Which SQL keyword is used to skip a specific number of rows before starting to return the records?",
+        "options": {
+            "A": "SKIP",
+            "B": "OFFSET",
+            "C": "LIMIT",
+            "D": "JUMP"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the primary difference between a View and a Materialized View?",
+        "options": {
+            "A": "Views are faster than Materialized Views",
+            "B": "Materialized Views physically store data, while Views are virtual",
+            "C": "Views can only be used with SELECT statements",
+            "D": "There is no difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which isolation level prevents 'Dirty Reads' but allows 'Non-Repeatable Reads'?",
+        "options": {
+            "A": "READ UNCOMMITTED",
+            "B": "READ COMMITTED",
+            "C": "REPEATABLE READ",
+            "D": "SERIALIZABLE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to return the current user name in most SQL dialects?",
+        "options": {
+            "A": "USER_NAME()",
+            "B": "CURRENT_USER",
+            "C": "WHOAMI()",
+            "D": "GET_USER()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Deadlock' in a database?",
+        "options": {
+            "A": "A database that has crashed",
+            "B": "A situation where two transactions are waiting for each other to release locks",
+            "C": "A table with no primary key",
+            "D": "A query that takes too long to run"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL command is used to remove a column from a table?",
+        "options": {
+            "A": "ALTER TABLE ... DELETE COLUMN",
+            "B": "ALTER TABLE ... DROP COLUMN",
+            "C": "REMOVE COLUMN ... FROM",
+            "D": "DELETE COLUMN ... FROM"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does the NULLIF(exp1, exp2) function return if exp1 equals exp2?",
+        "options": {
+            "A": "0",
+            "B": "TRUE",
+            "C": "NULL",
+            "D": "exp1"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "In database design, what is 'Denormalization' used for?",
+        "options": {
+            "A": "To reduce disk space",
+            "B": "To improve read performance by adding redundant data",
+            "C": "To eliminate all duplicate data",
+            "D": "To create new primary keys"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which window function is used to access data from the next row in the result set?",
+        "options": {
+            "A": "LAG()",
+            "B": "NEXT()",
+            "C": "LEAD()",
+            "D": "FORWARD()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which command is used to see the execution plan of a query?",
+        "options": {
+            "A": "SHOW PLAN",
+            "B": "EXPLAIN",
+            "C": "QUERY INFO",
+            "D": "ANALYZE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of a 'Non-Clustered Index'?",
+        "options": {
+            "A": "To reorder the physical rows of the table",
+            "B": "To create a separate structure that points to the table data",
+            "C": "To encrypt the table data",
+            "D": "To allow only unique values"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL operator is used to return rows from the first query that are not present in the second query?",
+        "options": {
+            "A": "NOT IN",
+            "B": "UNION",
+            "C": "EXCEPT / MINUS",
+            "D": "INTERSECT"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the 'RECURSIVE' keyword in a CTE?",
+        "options": {
+            "A": "To repeat a query 10 times",
+            "B": "To allow the CTE to reference itself",
+            "C": "To delete old data",
+            "D": "To sort data in reverse"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function is used to convert a value from one data type to another?",
+        "options": {
+            "A": "CONVERT() / CAST()",
+            "B": "CHANGE()",
+            "C": "TRANSFORM()",
+            "D": "TYPE()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is 'Database Sharding'?",
+        "options": {
+            "A": "Making a backup of the database",
+            "B": "Splitting a large database into smaller, faster, more manageable parts",
+            "C": "Deleting old records",
+            "D": "Joining tables from different databases"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which join returns all rows from the left table even if there are no matches in the right table?",
+        "options": {
+            "A": "LEFT OUTER JOIN",
+            "B": "INNER JOIN",
+            "C": "RIGHT OUTER JOIN",
+            "D": "FULL OUTER JOIN"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the default port number for MySQL?",
+        "options": {
+            "A": "5432",
+            "B": "1433",
+            "C": "3306",
+            "D": "1521"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL clause is used to handle multiple conditions in a single query by returning different values?",
+        "options": {
+            "A": "IF-THEN",
+            "B": "CASE",
+            "C": "SWITCH",
+            "D": "CHOOSE"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the maximum number of Primary Keys a single table can have?",
+        "options": {
+            "A": "0",
+            "B": "1",
+            "C": "2",
+            "D": "Unlimited"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which aggregate function ignores NULL values?",
+        "options": {
+            "A": "COUNT(*)",
+            "B": "SUM()",
+            "C": "Both A and B",
+            "D": "None of the above"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'BCNF' stand for in normalization?",
+        "options": {
+            "A": "Basic Core Normal Form",
+            "B": "Boyce-Codd Normal Form",
+            "C": "Binary Column Normal Form",
+            "D": "Bounded Coded Normal Form"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL constraint is used to ensure a child table's data matches a parent table's data?",
+        "options": {
+            "A": "PRIMARY KEY",
+            "B": "UNIQUE",
+            "C": "FOREIGN KEY",
+            "D": "CHECK"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the difference between 'WHERE' and 'HAVING'?",
+        "options": {
+            "A": "WHERE is for groups, HAVING is for rows",
+            "B": "WHERE is used before grouping, HAVING is used after grouping",
+            "C": "They are identical",
+            "D": "WHERE can only use aggregate functions"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which type of lock allows other transactions to read but not modify the locked data?",
+        "options": {
+            "A": "Exclusive Lock",
+            "B": "Shared Lock",
+            "C": "Deadlock",
+            "D": "Update Lock"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function returns the current date without the time?",
+        "options": {
+            "A": "NOW()",
+            "B": "CURRENT_DATE",
+            "C": "GETDATE()",
+            "D": "TIME()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In a 1-to-Many relationship, where is the foreign key usually placed?",
+        "options": {
+            "A": "On the 'One' side table",
+            "B": "On the 'Many' side table",
+            "C": "In a junction table",
+            "D": "In both tables"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which keyword is used to return only the first few rows in PostgreSQL?",
+        "options": {
+            "A": "TOP",
+            "B": "LIMIT",
+            "C": "FIRST",
+            "D": "OFFSET"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'SARGable' query?",
+        "options": {
+            "A": "A query that cannot be indexed",
+            "B": "A Search ARGumentable query that can efficiently use indexes",
+            "C": "A query that uses subqueries",
+            "D": "A query that has been deleted"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL command is used to add a Primary Key to an existing table?",
+        "options": {
+            "A": "ALTER TABLE ... ADD PRIMARY KEY",
+            "B": "UPDATE TABLE ... SET PRIMARY KEY",
+            "C": "CREATE PRIMARY KEY ON",
+            "D": "SET PRIMARY KEY TO"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of the 'FOR UPDATE' clause in a SELECT statement?",
+        "options": {
+            "A": "To update the data immediately",
+            "B": "To lock the selected rows for a future update",
+            "C": "To sort the data for an update",
+            "D": "To show only updated rows"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function returns the position of a substring within a string?",
+        "options": {
+            "A": "FIND()",
+            "B": "POSITION() / CHARINDEX()",
+            "C": "LOCATE()",
+            "D": "SEARCH()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does a 'Cartesian Product' result from?",
+        "options": {
+            "A": "An Inner Join",
+            "B": "A Cross Join",
+            "C": "A Left Join",
+            "D": "A Union"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to create a new user in SQL?",
+        "options": {
+            "A": "ADD USER",
+            "B": "CREATE USER",
+            "C": "NEW USER",
+            "D": "GRANT USER"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which clause is used to group data by the results of a mathematical expression?",
+        "options": {
+            "A": "GROUP BY",
+            "B": "ORDER BY",
+            "C": "HAVING",
+            "D": "WHERE"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the difference between 'UNION' and 'UNION ALL'?",
+        "options": {
+            "A": "UNION includes duplicates, UNION ALL does not",
+            "B": "UNION ALL includes duplicates, UNION does not",
+            "C": "UNION is for strings only",
+            "D": "There is no performance difference"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which character is used to separate multiple columns in a SELECT statement?",
+        "options": {
+            "A": ";",
+            "B": ":",
+            "C": ",",
+            "D": "|"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is a 'Hint' in SQL?",
+        "options": {
+            "A": "A comment for the developer",
+            "B": "An instruction to the query optimizer on how to execute the query",
+            "C": "A password reminder",
+            "D": "A type of subquery"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to change the name of a column in MySQL?",
+        "options": {
+            "A": "ALTER TABLE ... RENAME COLUMN",
+            "B": "ALTER TABLE ... CHANGE",
+            "C": "UPDATE COLUMN NAME",
+            "D": "RENAME COLUMN"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does the 'D' in ACID stand for?",
+        "options": {
+            "A": "Data",
+            "B": "Durability",
+            "C": "Distribution",
+            "D": "Definition"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which statement is used to remove a database user?",
+        "options": {
+            "A": "DELETE USER",
+            "B": "REMOVE USER",
+            "C": "DROP USER",
+            "D": "ERASE USER"
+        },
+        "answer": "C"
+    },
+{
+        "question": "Which SQL function is used to return the current database name?",
+        "options": {
+            "A": "DB_NAME()",
+            "B": "CURRENT_DATABASE",
+            "C": "DATABASE()",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the purpose of the 'UPSERT' operation?",
+        "options": {
+            "A": "To delete and then insert data",
+            "B": "To update a record if it exists, otherwise insert it",
+            "C": "To sort data in an upward direction",
+            "D": "To upload a script"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In SQL, which data type is best suited for storing large binary objects like images?",
+        "options": {
+            "A": "VARCHAR",
+            "B": "TEXT",
+            "C": "BLOB",
+            "D": "CLOB"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which SQL command is used to reclaim unused space from deleted rows in PostgreSQL?",
+        "options": {
+            "A": "CLEAN",
+            "B": "VACUUM",
+            "C": "PURGE",
+            "D": "REFRESH"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Phantom Read' in transaction isolation?",
+        "options": {
+            "A": "Reading data that was never there",
+            "B": "When new rows are added by another transaction during a range query",
+            "C": "A query that fails to return any results",
+            "D": "A deleted record that still appears in the index"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which system table/view is used to find information about all columns in a database?",
+        "options": {
+            "A": "sys.columns",
+            "B": "INFORMATION_SCHEMA.COLUMNS",
+            "C": "user_tab_cols",
+            "D": "All of the above"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is the purpose of the 'LATERAL' keyword in a join?",
+        "options": {
+            "A": "To join tables from different servers",
+            "B": "To allow a subquery to reference columns from a preceding table",
+            "C": "To perform a cross join automatically",
+            "D": "To speed up simple inner joins"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function converts a JSON string into a tabular format?",
+        "options": {
+            "A": "JSON_VALUE",
+            "B": "JSON_TABLE",
+            "C": "JSON_PARSE",
+            "D": "JSON_TO_ROWS"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Database Partitioning'?",
+        "options": {
+            "A": "Backing up half of the database",
+            "B": "Dividing a large table into smaller pieces based on a range or list",
+            "C": "Merging two different databases",
+            "D": "Encrypting specific columns"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which aggregate function is used to concatenate values from multiple rows into a single string?",
+        "options": {
+            "A": "GROUP_CONCAT() / STRING_AGG()",
+            "B": "SUM_STR()",
+            "C": "CONCAT_ALL()",
+            "D": "COLLECT_LIST()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the result of 'SELECT 1 / 0' in most SQL environments?",
+        "options": {
+            "A": "0",
+            "B": "NULL",
+            "C": "Division by zero error",
+            "D": "Infinity"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "Which keyword is used to specify that a stored procedure should not return a result set?",
+        "options": {
+            "A": "VOID",
+            "B": "NORESULT",
+            "C": "SET NOCOUNT ON",
+            "D": "PRIVATE"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is a 'Heap Table'?",
+        "options": {
+            "A": "A table with a clustered index",
+            "B": "A table without a clustered index where data is stored in no particular order",
+            "C": "A table stored entirely in RAM",
+            "D": "A table used for temporary calculations"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL statement is used to remove a foreign key constraint?",
+        "options": {
+            "A": "DELETE CONSTRAINT",
+            "B": "REMOVE FOREIGN KEY",
+            "C": "ALTER TABLE ... DROP CONSTRAINT",
+            "D": "DROP FOREIGN KEY"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of the 'FILLFACTOR' setting in an index?",
+        "options": {
+            "A": "To determine how fast the query runs",
+            "B": "To leave empty space on index pages for future growth",
+            "C": "To limit the number of rows in the table",
+            "D": "To calculate the total size of the database"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL operator is used to check if a value is 'TRUE', 'FALSE', or 'UNKNOWN'?",
+        "options": {
+            "A": "IS",
+            "B": "WHERE",
+            "C": "LIKE",
+            "D": "MATCH"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is a 'Deterministic Function' in SQL?",
+        "options": {
+            "A": "A function that always returns the same result for the same input",
+            "B": "A function that generates random numbers",
+            "C": "A function that updates the database",
+            "D": "A function used only in triggers"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "Which clause is used to filter results based on a window function's output?",
+        "options": {
+            "A": "WHERE",
+            "B": "HAVING",
+            "C": "QUALIFY (in some dialects) or a Subquery",
+            "D": "GROUP BY"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What does 'ETL' stand for in data warehousing?",
+        "options": {
+            "A": "Electronic Transfer Logic",
+            "B": "Extract, Transform, Load",
+            "C": "External Table Link",
+            "D": "Efficient Transaction List"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which command is used to permanently delete a schema and all its objects?",
+        "options": {
+            "A": "DELETE SCHEMA",
+            "B": "DROP SCHEMA ... CASCADE",
+            "C": "REMOVE SCHEMA",
+            "D": "CLEAR SCHEMA"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Covering Index'?",
+        "options": {
+            "A": "An index that covers the entire database",
+            "B": "An index that contains all columns required by a query",
+            "C": "A hidden index",
+            "D": "An index that cannot be deleted"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function is used to extract a specific part of a date (e.g., Year, Month)?",
+        "options": {
+            "A": "DATEPART() / EXTRACT()",
+            "B": "SUBDATE()",
+            "C": "GET()",
+            "D": "TIME()"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of a 'Savepoint' in a transaction?",
+        "options": {
+            "A": "To save the database to a file",
+            "B": "To set a point to which a transaction can be partially rolled back",
+            "C": "To end the transaction",
+            "D": "To prevent other users from reading data"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In SQL, what is the 'Information Schema'?",
+        "options": {
+            "A": "A backup of the data",
+            "B": "A standard set of read-only views providing metadata about the database",
+            "C": "A tutorial for new users",
+            "D": "The primary data storage area"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which operator is used to combine two strings in SQL Server?",
+        "options": {
+            "A": "||",
+            "B": "+",
+            "C": "&&",
+            "D": "CONCAT_OP"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Database Cursor'?",
+        "options": {
+            "A": "The mouse pointer in a GUI",
+            "B": "A control structure that allows traversal over records in a result set",
+            "C": "A type of primary key",
+            "D": "An error log"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which isolation level provides the highest level of data consistency?",
+        "options": {
+            "A": "READ COMMITTED",
+            "B": "REPEATABLE READ",
+            "C": "SERIALIZABLE",
+            "D": "SNAPSHOT"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is 'Window Partitioning' used for?",
+        "options": {
+            "A": "To delete old windows",
+            "B": "To group rows for window functions without collapsing them",
+            "C": "To increase the monitor resolution",
+            "D": "To split a table into 4 parts"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which keyword is used to specify that a column value must match a value in a list of values returned by a subquery?",
+        "options": {
+            "A": "IN",
+            "B": "EXISTS",
+            "C": "ANY",
+            "D": "MATCH"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the purpose of the 'IIF()' function in SQL?",
+        "options": {
+            "A": "To create an index",
+            "B": "A shorthand way to write a CASE statement (If-Then-Else)",
+            "C": "To check if a table is empty",
+            "D": "To join two tables"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL command is used to add a new user and grant them a role simultaneously?",
+        "options": {
+            "A": "CREATE USER ... WITH ROLE",
+            "B": "GRANT ROLE TO USER",
+            "C": "ADD USER ... SET ROLE",
+            "D": "Varies by dialect (usually two separate commands)"
+        },
+        "answer": "D"
+    },
+    {
+        "question": "What is a 'Wait Type' in SQL Server performance tuning?",
+        "options": {
+            "A": "The time a user spends typing",
+            "B": "An indicator of why a query thread is waiting (e.g., Disk I/O, Locks)",
+            "C": "A type of data that takes long to load",
+            "D": "The delay between two transactions"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which function is used to find the length of a string in bytes?",
+        "options": {
+            "A": "LEN()",
+            "B": "LENGTH()",
+            "C": "DATALENGTH() / OCTET_LENGTH()",
+            "D": "SIZE()"
+        },
+        "answer": "C"
+    },
+    {
+        "question": "What is the purpose of 'Database Mirroring'?",
+        "options": {
+            "A": "To flip the data horizontally",
+            "B": "To maintain a redundant copy of a database for high availability",
+            "C": "To see the data from another table",
+            "D": "To copy only the schema"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL clause is used to handle data versioning and temporal queries?",
+        "options": {
+            "A": "AS OF SYSTEM TIME",
+            "B": "VERSION BY",
+            "C": "HISTORY",
+            "D": "OLD_DATA"
+        },
+        "answer": "A"
+    },
+    {
+        "question": "What is the 'Query Optimizer'?",
+        "options": {
+            "A": "A person who writes fast queries",
+            "B": "A database engine component that chooses the most efficient execution plan",
+            "C": "A tool for compressing the database",
+            "D": "A type of index"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which join returns only rows where the joined columns have the same name?",
+        "options": {
+            "A": "INNER JOIN",
+            "B": "NATURAL JOIN",
+            "C": "CROSS JOIN",
+            "D": "SELF JOIN"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Dirty Read'?",
+        "options": {
+            "A": "Reading data that contains errors",
+            "B": "Reading uncommitted data from another transaction",
+            "C": "Reading data from a deleted table",
+            "D": "A query that takes too much memory"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SQL function is used to replace NULL values with a specified replacement?",
+        "options": {
+            "A": "NULLIF()",
+            "B": "ISNULL() / COALESCE()",
+            "C": "REPLACE_NULL()",
+            "D": "CLEAN()"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'OLAP' stand for?",
+        "options": {
+            "A": "Online Analytical Processing",
+            "B": "Online Archive Procedure",
+            "C": "Output List and Processing",
+            "D": "Optimal Level Access Protocol"
+        },
+        "answer": "A"
+    }
+]
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "SQL"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

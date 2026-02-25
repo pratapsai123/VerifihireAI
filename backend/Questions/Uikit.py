@@ -1,0 +1,2058 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+  {
+    "question": "Which class is the fundamental building block for managing a screen's content and transitions in UIKit?",
+    "options": {
+      "A": "UIView",
+      "B": "UIViewController",
+      "C": "UIWindow",
+      "D": "UIScreen"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the UIViewController lifecycle, which method is called after the view has been loaded into memory but before it appears on screen?",
+    "options": {
+      "A": "viewWillAppear",
+      "B": "viewDidAppear",
+      "C": "viewDidLoad",
+      "D": "loadView"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which Auto Layout attribute defines the space between the edge of a view and its internal content?",
+    "options": {
+      "A": "Margin",
+      "B": "Padding",
+      "C": "Constraint",
+      "D": "Inset"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of the 'AppDelegate' class in a UIKit application?",
+    "options": {
+      "A": "To design the UI",
+      "B": "To handle application-level events like launching and backgrounding",
+      "C": "To manage network requests",
+      "D": "To store local data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is used to display a scrollable list of single-column items?",
+    "options": {
+      "A": "UICollectionView",
+      "B": "UITableView",
+      "C": "UIScrollView",
+      "D": "UIStackView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to programmatically trigger a layout update for a view and its subviews?",
+    "options": {
+      "A": "setNeedsLayout()",
+      "B": "updateConstraints()",
+      "C": "layoutIfNeeded()",
+      "D": "Both A and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Safe Area' in the context of UIKit Auto Layout?",
+    "options": {
+      "A": "A sandbox for testing code",
+      "B": "An area that excludes system bars like the Status Bar, Navigation Bar, and Tab Bar",
+      "C": "A restricted part of the database",
+      "D": "A secure way to store passwords"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class allows you to create a horizontally or vertically stacked set of views automatically?",
+    "options": {
+      "A": "UIStackView",
+      "B": "UIGroupView",
+      "C": "UIGridView",
+      "D": "UIFlowLayout"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol must a class implement to provide data to a UITableView?",
+    "options": {
+      "A": "UITableViewDelegate",
+      "B": "UITableViewDataSource",
+      "C": "UITableViewCell",
+      "D": "UIScrollViewDelegate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Storyboard' in UIKit?",
+    "options": {
+      "A": "A text file for documentation",
+      "B": "A visual representation of the user interface and the flow between screens",
+      "C": "A database schema",
+      "D": "A set of app icons"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called when a view controller is about to be removed from the view hierarchy?",
+    "options": {
+      "A": "viewWillDisappear",
+      "B": "viewDidDisappear",
+      "C": "viewWillUnload",
+      "D": "deinit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Auto Layout, what happens if a view has 'Ambiguous Layout'?",
+    "options": {
+      "A": "The app crashes immediately",
+      "B": "The system cannot determine the view's position or size based on existing constraints",
+      "C": "The view becomes invisible",
+      "D": "The text color changes to red"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is used to navigate between a hierarchy of screens by pushing and popping view controllers?",
+    "options": {
+      "A": "UITabBarController",
+      "B": "UINavigationController",
+      "C": "UISplitViewController",
+      "D": "UIPageViewController"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'reuseIdentifier' in a UITableViewCell?",
+    "options": {
+      "A": "To name the cell for the database",
+      "B": "To allow the table view to reuse cell objects for performance during scrolling",
+      "C": "To identify the user",
+      "D": "To set the cell's background color"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is the base class for all UI elements in UIKit?",
+    "options": {
+      "A": "UIObject",
+      "B": "UIView",
+      "C": "UIControl",
+      "D": "UIResponder"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Compression Resistance' in Auto Layout?",
+    "options": {
+      "A": "The priority of a view to resist getting smaller than its intrinsic content size",
+      "B": "The ability to compress images",
+      "C": "The speed of the network",
+      "D": "The priority of a view to resist getting larger"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property allows a UIView to respond to user touch events?",
+    "options": {
+      "A": "isTouchEnabled",
+      "B": "isUserInteractionEnabled",
+      "C": "canRespond",
+      "D": "respondsToSelector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which delegate method is called when a user selects a row in a UITableView?",
+    "options": {
+      "A": "cellForRowAt",
+      "B": "didSelectRowAt",
+      "C": "willDisplayCell",
+      "D": "commitEditingStyle"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'rootViewController' property in UIWindow?",
+    "options": {
+      "A": "To manage background tasks",
+      "B": "To define the first view controller to be displayed when the app starts",
+      "C": "To store global variables",
+      "D": "To handle push notifications"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class is used to display high-performance, customizable grids of data?",
+    "options": {
+      "A": "UITableView",
+      "B": "UICollectionView",
+      "C": "UIStackView",
+      "D": "UIGridLayout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Intrinsic Content Size' mean?",
+    "options": {
+      "A": "The size of the database",
+      "B": "The natural size a view wants to be based on its content (e.g., text in a label)",
+      "C": "The size of the screen",
+      "D": "The size of the app binary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is used for selecting between multiple mutually exclusive options in a bar?",
+    "options": {
+      "A": "UISlider",
+      "B": "UISegmentedControl",
+      "C": "UISwitch",
+      "D": "UIStepper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In UIKit, how do you programmatically perform a 'segue' defined in a Storyboard?",
+    "options": {
+      "A": "pushViewController()",
+      "B": "performSegue(withIdentifier:sender:)",
+      "C": "present()",
+      "D": "navigate()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Asset Catalogs' (.xcassets) in an iOS project?",
+    "options": {
+      "A": "To write CSS",
+      "B": "To manage images, colors, and icons for different device resolutions",
+      "C": "To store JSON data",
+      "D": "To host video files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method should you call to force a view to redraw its content?",
+    "options": {
+      "A": "setNeedsDisplay()",
+      "B": "redraw()",
+      "C": "layoutSubviews()",
+      "D": "updateDisplay()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which UIKit component provides a way for users to enter a single line of text?",
+    "options": {
+      "A": "UITextView",
+      "B": "UITextField",
+      "C": "UILabel",
+      "D": "UISearchBar"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Responder Chain' in UIKit?",
+    "options": {
+      "A": "A list of database responses",
+      "B": "A hierarchy of objects that have the opportunity to handle an event",
+      "C": "A sequence of network calls",
+      "D": "A thread management system"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Auto Layout constraint priority is considered 'Required'?",
+    "options": {
+      "A": "250",
+      "B": "750",
+      "C": "1000",
+      "D": "500"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'Main.storyboard' file in a default template?",
+    "options": {
+      "A": "To store the app's business logic",
+      "B": "To define the visual interface and initial screen of the application",
+      "C": "To manage pod dependencies",
+      "D": "To configure the server URL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to create and manage 'Alert' and 'Action Sheet' popups in UIKit?",
+    "options": {
+      "A": "UIAlertView",
+      "B": "UIAlertController",
+      "C": "UIPopoverController",
+      "D": "UIPresentationController"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property of a UIView determines if its subviews are confined to its bounds?",
+    "options": {
+      "A": "isClipped",
+      "B": "clipsToBounds",
+      "C": "masksToBounds",
+      "D": "isBounded"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to detect a 'pinch' gesture in UIKit?",
+    "options": {
+      "A": "UITapGestureRecognizer",
+      "B": "UIPinchGestureRecognizer",
+      "C": "UIPanGestureRecognizer",
+      "D": "UIRotationGestureRecognizer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'prepare(for:sender:)' in a UIViewController?",
+    "options": {
+      "A": "To load the view from the NIB file",
+      "B": "To pass data to a destination view controller before a segue occurs",
+      "C": "To initialize the database",
+      "D": "To check network connectivity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to animate changes to a UIView's properties (like frame or alpha) over time?",
+    "options": {
+      "A": "UIView.animate(withDuration:animations:)",
+      "B": "UIView.startTransition()",
+      "C": "UIView.performLayout()",
+      "D": "UIView.commitAnimations()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a UICollectionView, which object is responsible for determining the visual placement of cells?",
+    "options": {
+      "A": "UICollectionViewDataSource",
+      "B": "UICollectionViewLayout",
+      "C": "UICollectionViewDelegate",
+      "D": "UICollectionViewCell"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Content Hugging Priority' in Auto Layout?",
+    "options": {
+      "A": "The priority of a view to resist being larger than its intrinsic content size",
+      "B": "The priority to resist being smaller",
+      "C": "The speed of UI rendering",
+      "D": "The alignment of text"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which UIKit component allows for multi-line, scrollable, and editable text?",
+    "options": {
+      "A": "UILabel",
+      "B": "UITextField",
+      "C": "UITextView",
+      "D": "UIWebView"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which method in the UITableViewDataSource protocol is required to return a cell for a specific row?",
+    "options": {
+      "A": "numberOfRowsInSection",
+      "B": "cellForRowAt",
+      "C": "didSelectRowAt",
+      "D": "heightForRowAt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lazy Loading' in the context of UIKit View Controllers?",
+    "options": {
+      "A": "Loading the app slowly",
+      "B": "Delaying the creation of a property or view until it is actually accessed",
+      "C": "Failing to load assets",
+      "D": "Using a slow network connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class provides a standard interface for sharing content (text, images, URLs) to other apps?",
+    "options": {
+      "A": "UIShareController",
+      "B": "UIActivityViewController",
+      "C": "UICloudController",
+      "D": "UIDocumentPickerViewController"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you add a child view controller to a parent view controller programmatically?",
+    "options": {
+      "A": "addChild(), then add the child's view, then didMove(toParent:)",
+      "B": "present()",
+      "C": "navigationController.push()",
+      "D": "addSubview()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'NSLayoutConstraint'?",
+    "options": {
+      "A": "To store strings",
+      "B": "To define a relationship between two user interface objects that can be satisfied by Auto Layout",
+      "C": "To handle local notifications",
+      "D": "To manage app permissions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property of a UITableViewCell allows you to add a checkmark or arrow on the right side?",
+    "options": {
+      "A": "cellStyle",
+      "B": "accessoryType",
+      "C": "selectionStyle",
+      "D": "detailTextLabel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Keyframe Animation' in UIKit?",
+    "options": {
+      "A": "A single-frame animation",
+      "B": "An animation consisting of multiple stages or 'keyframes' for more complex movement",
+      "C": "An animation using a physical key",
+      "D": "A locked animation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol allows a class to respond to changes in a UISearchBar?",
+    "options": {
+      "A": "UITextFieldDelegate",
+      "B": "UISearchBarDelegate",
+      "C": "UISearchControllerDelegate",
+      "D": "UIResponder"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default background color of a newly initialized UIView?",
+    "options": {
+      "A": "White",
+      "B": "Black",
+      "C": "Clear (nil)",
+      "D": "System Gray"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which method is called immediately after a view controller's view is added to the view hierarchy and is visible?",
+    "options": {
+      "A": "viewWillAppear",
+      "B": "viewDidAppear",
+      "C": "viewIsVisible",
+      "D": "viewDidLoad"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property wrapper (introduced later but used with UIKit) allows for the 'Modern' collection view cell configuration?",
+    "options": {
+      "A": "UIListContentConfiguration",
+      "B": "UIContentView",
+      "C": "UIConfigurationState",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Self-Sizing Cells' in UITableView?",
+    "options": {
+      "A": "Cells that change color",
+      "B": "Cells that automatically calculate their height based on their Auto Layout constraints",
+      "C": "Cells that resize the table",
+      "D": "Manual height calculation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to handle multiple simultaneous touch events and gestures?",
+    "options": {
+      "A": "UIGestureRecognizer",
+      "B": "UIGestureRecognizerDelegate",
+      "C": "UITouch",
+      "D": "UIEvent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'tag' property in a UIView?",
+    "options": {
+      "A": "To style the view",
+      "B": "To provide an integer identifier to find specific views in a hierarchy",
+      "C": "To categorize data",
+      "D": "To set the view's name"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component allows for 'Pull to Refresh' in a UIScrollView or UITableView?",
+    "options": {
+      "A": "UIRefreshControl",
+      "B": "UIUpdateAction",
+      "C": "UISpinner",
+      "D": "UIPullDown"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you programmatically add a constraint to a view in modern Swift (iOS 9+)?",
+    "options": {
+      "A": "view.addConstraint()",
+      "B": "NSLayoutConstraint.activate([]) using anchors",
+      "C": "setFrame()",
+      "D": "AutoLayout.on()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Size Classes' in UIKit?",
+    "options": {
+      "A": "A way to measure the app size",
+      "B": "A system of traits used to create adaptive UIs for different screen sizes and orientations",
+      "C": "A database of device names",
+      "D": "A method to compress views"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is used to display a horizontal slider for value selection?",
+    "options": {
+      "A": "UIProgressBar",
+      "B": "UISlider",
+      "C": "UISwitch",
+      "D": "UIStepper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method in UIViewController is the best place to perform layout-related adjustments after subviews are positioned?",
+    "options": {
+      "A": "viewWillAppear",
+      "B": "viewDidLayoutSubviews",
+      "C": "viewDidAppear",
+      "D": "viewDidLoad"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Nib' (or Xib) file?",
+    "options": {
+      "A": "A code file",
+      "B": "An XML file representing a visual interface component (like a custom cell or view)",
+      "C": "A compressed image",
+      "D": "A system log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class provides a way to display images using animation sequences?",
+    "options": {
+      "A": "UIImage",
+      "B": "UIImageView",
+      "C": "UIGraphic",
+      "D": "UIAnimator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic Provider' in the context of UIColors?",
+    "options": {
+      "A": "A color that changes based on the network",
+      "B": "A color that automatically adapts to Dark and Light mode",
+      "C": "A random color generator",
+      "D": "A way to download colors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to display the 'tab bar' at the bottom of the screen with multiple sections?",
+    "options": {
+      "A": "UINavigationController",
+      "B": "UITabBarController",
+      "C": "UISplitViewController",
+      "D": "UIToolbar"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Visual Format Language' (VFL)?",
+    "options": {
+      "A": "A tool to edit photos",
+      "B": "An older string-based syntax for creating Auto Layout constraints",
+      "C": "A way to describe colors",
+      "D": "A video format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called to dismiss a presented view controller?",
+    "options": {
+      "A": "pop()",
+      "B": "dismiss(animated:completion:)",
+      "C": "remove()",
+      "D": "close()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'IntrinsicContentSize'?",
+    "options": {
+      "A": "To tell Auto Layout the natural size of a view based on its internal properties",
+      "B": "To set the frame size manually",
+      "C": "To compress the UI",
+      "D": "To handle local storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which UIKit class is used for drawing vector-based graphics and paths?",
+    "options": {
+      "A": "UIImage",
+      "B": "UIBezierPath",
+      "C": "UIView",
+      "D": "UILayer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'View Debugger' in Xcode?",
+    "options": {
+      "A": "A tool to check the code for errors",
+      "B": "A 3D visualization tool to inspect the UI hierarchy and constraints during runtime",
+      "C": "A network monitor",
+      "D": "A database viewer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used for playing video content within a UIKit application?",
+    "options": {
+      "A": "UIVideoView",
+      "B": "AVPlayerViewController",
+      "C": "UIMediaPlayer",
+      "D": "UIWebView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'UIResponder' class responsible for?",
+    "options": {
+      "A": "Rendering images",
+      "B": "Handling and responding to events (touch, motion, remote-control)",
+      "C": "Managing network calls",
+      "D": "Storing user preferences"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to bring a subview to the front of all other subviews in a parent view?",
+    "options": {
+      "A": "addSubview()",
+      "B": "bringSubviewToFront()",
+      "C": "insertSubview()",
+      "D": "moveView()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shadow Path' in a UIView's layer properties?",
+    "options": {
+      "A": "The color of the shadow",
+      "B": "A specific path that improves performance by pre-calculating shadow shapes",
+      "C": "The distance of the shadow",
+      "D": "A hidden folder"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component allows for a 'Split View' layout often seen on iPad apps?",
+    "options": {
+      "A": "UITabBarController",
+      "B": "UISplitViewController",
+      "C": "UIPageViewController",
+      "D": "UIPanel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-resizing Mask'?",
+    "options": {
+      "A": "An older system for handling layout that predates Auto Layout",
+      "B": "A tool for image masking",
+      "C": "A network security mask",
+      "D": "A database encryption tool"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property determines the order of views when using a UIStackView?",
+    "options": {
+      "A": "subviews",
+      "B": "arrangedSubviews",
+      "C": "stackViews",
+      "D": "orderedViews"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Haptic Feedback' in UIKit?",
+    "options": {
+      "A": "A type of sound effect",
+      "B": "Physical vibrations or pulses using the Taptic Engine to provide feedback to the user",
+      "C": "A visual flash",
+      "D": "A network signal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is used for displaying an activity indicator (spinner)?",
+    "options": {
+      "A": "UIProgressView",
+      "B": "UIActivityIndicatorView",
+      "C": "UILoadingView",
+      "D": "UISpinner"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'willMove(toParent:)' in custom container view controllers?",
+    "options": {
+      "A": "To animate the view",
+      "B": "To notify a child view controller that it is about to be added to or removed from a parent",
+      "C": "To update the database",
+      "D": "To handle gestures"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is the foundation for creating 'Interactive Transitions' between view controllers?",
+    "options": {
+      "A": "UIPercentDrivenInteractiveTransition",
+      "B": "UITransitionManager",
+      "C": "UIPresentationController",
+      "D": "UIAnimator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'transform' property of a UIView allow you to do?",
+    "options": {
+      "A": "Change the class of the view",
+      "B": "Apply 2D affine transformations like scale, rotate, and translate",
+      "C": "Change the view's data",
+      "D": "Convert the view to an image"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to stop an animation that is currently in progress?",
+    "options": {
+      "A": "stopAnimation()",
+      "B": "removeAllAnimations() on the view's layer",
+      "C": "cancel()",
+      "D": "pause()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'tintColor' property in UIKit?",
+    "options": {
+      "A": "To set the background color",
+      "B": "To set the interactive color for icons, buttons, and system components throughout a view hierarchy",
+      "C": "To shade an image",
+      "D": "To change the text font"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class is used to display a date or time picker?",
+    "options": {
+      "A": "UIDatePicker",
+      "B": "UITimePicker",
+      "C": "UIPickerView",
+      "D": "UICalendar"
+    },
+    "answer": "A"
+    },
+    {
+    "question": "Which protocol is used to handle selection and high-level interaction events in a UICollectionView?",
+    "options": {
+      "A": "UICollectionViewDataSource",
+      "B": "UICollectionViewDelegate",
+      "C": "UICollectionViewLayout",
+      "D": "UICollectionViewFlowDelegate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'draw(_:)' method in a UIView subclass?",
+    "options": {
+      "A": "To layout subviews",
+      "B": "To provide custom vector drawing logic using Core Graphics",
+      "C": "To set the background color",
+      "D": "To handle animations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is best suited for displaying a large, paged collection of images or onboarding screens?",
+    "options": {
+      "A": "UIPageViewController",
+      "B": "UITableView",
+      "C": "UIStackView",
+      "D": "UITabBarController"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Content Inset' represent in a UIScrollView?",
+    "options": {
+      "A": "The size of the scrollable content",
+      "B": "The distance that the content view is inset from the enclosing scroll view",
+      "C": "The zoom level",
+      "D": "The background color area"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property allows you to add a custom view (like a toolbar) above the keyboard when a UITextField is active?",
+    "options": {
+      "A": "inputView",
+      "B": "inputAccessoryView",
+      "C": "keyboardHeader",
+      "D": "accessoryView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'State Restoration' in UIKit?",
+    "options": {
+      "A": "Reverting code to a previous version",
+      "B": "Saving and restoring the app's UI state (e.g., scroll position) across app launches",
+      "C": "Resetting the database",
+      "D": "Refreshing the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to create a spring-based physics animation in UIKit?",
+    "options": {
+      "A": "UIViewPropertyAnimator",
+      "B": "UIPhysicsEngine",
+      "C": "UIDynamicAnimator",
+      "D": "UISpringController"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'UIAccessibility' in UIKit?",
+    "options": {
+      "A": "To allow apps to be downloaded faster",
+      "B": "To make apps usable for people with disabilities (e.g., VoiceOver support)",
+      "C": "To handle remote logins",
+      "D": "To manage app permissions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UICollectionViewLayout subclass is most commonly used for basic grids and lists?",
+    "options": {
+      "A": "UICollectionViewCustomLayout",
+      "B": "UICollectionViewFlowLayout",
+      "C": "UICollectionViewGridLayout",
+      "D": "UICollectionViewStackLayout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Batch Updates' in UITableView?",
+    "options": {
+      "A": "Updating the app version",
+      "B": "Performing multiple insert, delete, or reload operations simultaneously with a single animation",
+      "C": "Downloading multiple images",
+      "D": "Updating the database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property determines whether a UIView's alpha value affects its subviews?",
+    "options": {
+      "A": "isOpaque",
+      "B": "alpha",
+      "C": "backgroundColor",
+      "D": "clearsContextBeforeDrawing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'UIAppearance' proxy?",
+    "options": {
+      "A": "To change a user's profile picture",
+      "B": "To customize the default appearance of all instances of a class (e.g., all UIButtons) globally",
+      "C": "To hide views",
+      "D": "To manage Dark Mode transitions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is used to select a single value from a custom spinning-wheel list?",
+    "options": {
+      "A": "UIDatePicker",
+      "B": "UIPickerView",
+      "C": "UISegmentedControl",
+      "D": "UIWheelView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you detect when a user shakes the device in UIKit?",
+    "options": {
+      "A": "Using a Gesture Recognizer",
+      "B": "Overriding motionEnded(_:with:) in a UIResponder",
+      "C": "Checking the accelerometer manually",
+      "D": "Using CoreData"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'HIT area' of a button?",
+    "options": {
+      "A": "The area where the button is visible",
+      "B": "The touch-sensitive region of a view that responds to user input",
+      "C": "The number of times a button is clicked",
+      "D": "The top of the view hierarchy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method should be used to provide a custom 'Swipe to Delete' action in a UITableView?",
+    "options": {
+      "A": "didSelectRowAt",
+      "B": "trailingSwipeActionsConfigurationForRowAt",
+      "C": "commitEditingStyle",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In Auto Layout, what is 'Priority 250' usually associated with?",
+    "options": {
+      "A": "Required constraints",
+      "B": "Low priority / Optional constraints",
+      "C": "High priority constraints",
+      "D": "Breaking constraints"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Placeholder' in a UITextField?",
+    "options": {
+      "A": "The text the user types",
+      "B": "Temporary text displayed when the field is empty to guide the user",
+      "C": "A database key",
+      "D": "A loading icon"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class is used to manage the display of a 'Popover' on iPad?",
+    "options": {
+      "A": "UIPopoverController (Deprecated) / UIPresentationController",
+      "B": "UIModalController",
+      "C": "UIFloatingView",
+      "D": "UIDialogController"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Rasterization' in a UIView layer?",
+    "options": {
+      "A": "Converting a view to vector graphics",
+      "B": "Rendering a view as a bitmap and caching it to improve performance for complex static views",
+      "C": "Deleting the view",
+      "D": "Changing the view's resolution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to notify a scroll view that zooming has finished?",
+    "options": {
+      "A": "scrollViewDidZoom",
+      "B": "scrollViewDidEndZooming",
+      "C": "scrollViewWillBeginZooming",
+      "D": "scrollViewDidScroll"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'UIStackView.Distribution'?",
+    "options": {
+      "A": "To set the stack's background",
+      "B": "To define how the stack view lays out its subviews along its axis (e.g., fillEqually)",
+      "C": "To distribute the app to users",
+      "D": "To manage memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to manage 'Drag and Drop' interactions in UIKit?",
+    "options": {
+      "A": "UIDragInteraction and UIDropInteraction",
+      "B": "UIMovementDelegate",
+      "C": "UIGestureManager",
+      "D": "UITransferController"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Diffable Data Source' in UITableView/UICollectionView?",
+    "options": {
+      "A": "A way to compare two databases",
+      "B": "A modern way to manage data and UI updates using snapshots instead of index paths",
+      "C": "A tool to find bugs in data",
+      "D": "An older way to reload data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property of UIView allows you to flip its content horizontally?",
+    "options": {
+      "A": "horizontalFlip",
+      "B": "transform (CGAffineTransform)",
+      "C": "isMirrored",
+      "D": "direction"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'UIWindowScene' in multi-window iPad apps?",
+    "options": {
+      "A": "To create new views",
+      "B": "To manage a specific instance of the app's UI across different windows",
+      "C": "To handle network scenes",
+      "D": "To store scene data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class is used to create 'contextual menus' when a user long-presses a view?",
+    "options": {
+      "A": "UIMenuController",
+      "B": "UIContextMenuInteraction",
+      "C": "UILongPressMenu",
+      "D": "UIActionMenu"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Prefetching' do in a UITableView?",
+    "options": {
+      "A": "Downloads the app early",
+      "B": "Predictively loads data for upcoming cells before they are displayed to improve scrolling smoothness",
+      "C": "Clears the cache",
+      "D": "Increases font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property allows a view to automatically resize itself when its superview's bounds change?",
+    "options": {
+      "A": "autoresizesSubviews",
+      "B": "autoresizingMask",
+      "C": "flexibleWidth",
+      "D": "isAdaptive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compositional Layout' in UICollectionView?",
+    "options": {
+      "A": "A way to compose music",
+      "B": "A highly flexible layout system that builds complex layouts by combining small components (sections, groups, items)",
+      "C": "A tool for layout debugging",
+      "D": "An old layout system"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method in AppDelegate is called when the app is about to enter the background?",
+    "options": {
+      "A": "applicationDidEnterBackground",
+      "B": "applicationWillResignActive",
+      "C": "applicationWillTerminate",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which UIKit class is used to display the 'share sheet'?",
+    "options": {
+      "A": "UIShareSheet",
+      "B": "UIActivityViewController",
+      "C": "UIExportController",
+      "D": "UIActionSheet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'NSLayoutAnchor'?",
+    "options": {
+      "A": "To anchor the app in the store",
+      "B": "A fluent API for creating Auto Layout constraints with type safety",
+      "C": "To store large assets",
+      "D": "To manage threads"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property determines if a view's subviews are automatically resized when its bounds change?",
+    "options": {
+      "A": "isFlexible",
+      "B": "autoresizesSubviews",
+      "C": "sizeToFit",
+      "D": "isDynamic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Large Titles' in UINavigationBar?",
+    "options": {
+      "A": "Capitalized text",
+      "B": "A design feature where the title is displayed prominently and shrinks as the user scrolls",
+      "C": "A font setting",
+      "D": "An accessibility feature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to manually trigger 'draw(_:)' on a view?",
+    "options": {
+      "A": "drawNow()",
+      "B": "setNeedsDisplay()",
+      "C": "refresh()",
+      "D": "layoutIfNeeded()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'UIKeyCommand'?",
+    "options": {
+      "A": "To encrypt keys",
+      "B": "To handle hardware keyboard shortcuts in an iOS app",
+      "C": "To manage primary keys in a database",
+      "D": "To unlock the app"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property determines the drawing order of overlapping subviews?",
+    "options": {
+      "A": "layer.zPosition",
+      "B": "viewIndex",
+      "C": "alpha",
+      "D": "orderId"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Content Configuration' in iOS 14+ cell design?",
+    "options": {
+      "A": "Setting the database content",
+      "B": "A standardized way to define the appearance of a cell's content independently of the cell itself",
+      "C": "A configuration for the network",
+      "D": "A way to size the screen"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component allows for 'Multiple Selection' in a UITableView?",
+    "options": {
+      "A": "UITableViewDelegate",
+      "B": "allowsMultipleSelection property",
+      "C": "UISelectAllController",
+      "D": "UISwitch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'System Background' color in UIKit?",
+    "options": {
+      "A": "Always white",
+      "B": "A semantic color that automatically switches between white (Light Mode) and black (Dark Mode)",
+      "C": "The color of the phone's case",
+      "D": "A transparent color"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to create custom 'segue' animations?",
+    "options": {
+      "A": "UIStoryboardSegue",
+      "B": "UIViewAnimation",
+      "C": "UINavigationControllerDelegate",
+      "D": "UICustomSegue"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Intrinsic Content Size' of a UIImageView with an image?",
+    "options": {
+      "A": "Zero",
+      "B": "The size of the image assigned to it",
+      "C": "The size of the screen",
+      "D": "The size of the parent view"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called when the device orientation changes?",
+    "options": {
+      "A": "orientationDidChange",
+      "B": "viewWillTransition(to:with:)",
+      "C": "layoutSubviews",
+      "D": "rotateView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIImpactFeedbackGenerator' used for?",
+    "options": {
+      "A": "Calculating app impact",
+      "B": "Generating haptic (tactile) feedback for user actions like button taps",
+      "C": "Monitoring crash reports",
+      "D": "Generating random numbers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property allows a text field to hide characters (for passwords)?",
+    "options": {
+      "A": "isHidden",
+      "B": "isSecureTextEntry",
+      "C": "isEncrypted",
+      "D": "isPassword"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'layoutSubviews()'?",
+    "options": {
+      "A": "To create new views",
+      "B": "To position and size subviews precisely when the default Auto Layout isn't enough",
+      "C": "To handle network responses",
+      "D": "To save the UI state"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to group related items into a single scrollable row in a CollectionView?",
+    "options": {
+      "A": "UICollectionViewSection",
+      "B": "NSCollectionLayoutGroup",
+      "C": "UICollectionViewRow",
+      "D": "UIStackView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Symbol Images' (SF Symbols) in UIKit?",
+    "options": {
+      "A": "Company logos",
+      "B": "A library of over 3,000 vector icons designed by Apple to integrate seamlessly with system fonts",
+      "C": "A coding symbol",
+      "D": "A mathematical icon"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method in UIViewController is the last one called before the view is completely destroyed?",
+    "options": {
+      "A": "viewDidDisappear",
+      "B": "deinit",
+      "C": "viewWillUnload",
+      "D": "finalize"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is responsible for managing the lifecycle of a specific instance of your app's UI in iOS 13+?",
+    "options": {
+      "A": "AppDelegate",
+      "B": "SceneDelegate",
+      "C": "WindowDelegate",
+      "D": "ScreenManager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary cause of a 'Memory Leak' in a UIKit View Controller?",
+    "options": {
+      "A": "Loading too many images",
+      "B": "A strong reference cycle, often caused by a closure capturing 'self' strongly",
+      "C": "Using too many Auto Layout constraints",
+      "D": "Forgetting to call super.viewDidLoad()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is used to display a floating action menu when a user interacts with a button?",
+    "options": {
+      "A": "UIMenu",
+      "B": "UIActionSheet",
+      "C": "UIPopover",
+      "D": "UIContextMenu"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you ensure a background network task updates the UI safely in UIKit?",
+    "options": {
+      "A": "Call the update method directly",
+      "B": "Wrap the UI update code in DispatchQueue.main.async { ... }",
+      "C": "Use a global variable",
+      "D": "UIKit handles this automatically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intrinsic Content Size' for a UIButton?",
+    "options": {
+      "A": "A fixed 44x44 points",
+      "B": "The size required to fit its title text and image plus padding",
+      "C": "The size of the screen",
+      "D": "It has no intrinsic size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property of UIScrollView determines if the scrolling stops on multiples of the scroll view's bounds?",
+    "options": {
+      "A": "isScrollEnabled",
+      "B": "isPagingEnabled",
+      "C": "isDirectionalLockEnabled",
+      "D": "bounces"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'CALayer' in relation to UIView?",
+    "options": {
+      "A": "It is a backup view",
+      "B": "It is the underlying engine that handles rendering and animations for the view",
+      "C": "It manages user touch events",
+      "D": "It stores data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to register a custom NIB file for use in a UITableView?",
+    "options": {
+      "A": "register(_:forCellReuseIdentifier:)",
+      "B": "addNib()",
+      "C": "loadNibNamed()",
+      "D": "setCellSource()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'View Debugging' used for in Xcode?",
+    "options": {
+      "A": "To check for syntax errors",
+      "B": "To inspect the UI hierarchy in 3D to find overlapping views or broken constraints",
+      "C": "To monitor network speed",
+      "D": "To see the database logs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class is used to create a blurring effect (glass effect) over a view?",
+    "options": {
+      "A": "UIBlurView",
+      "B": "UIVisualEffectView",
+      "C": "UIGlassEffect",
+      "D": "UIOpacityView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'UIUserInterfaceStyle' represent in the trait collection?",
+    "options": {
+      "A": "The font style",
+      "B": "Whether the app is in Light or Dark mode",
+      "C": "The language of the UI",
+      "D": "The device model"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a UICollectionView, what is a 'Supplementary View'?",
+    "options": {
+      "A": "A cell that is hidden",
+      "B": "A view used for headers or footers in a section",
+      "C": "A backup view for errors",
+      "D": "A floating action button"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'UIPanGestureRecognizer'?",
+    "options": {
+      "A": "To detect a quick tap",
+      "B": "To track the movement of a finger across the screen (dragging)",
+      "C": "To detect a rotate gesture",
+      "D": "To zoom in on an image"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property determines the spacing between items in a UIStackView?",
+    "options": {
+      "A": "padding",
+      "B": "spacing",
+      "C": "margin",
+      "D": "inset"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Offset' in a UIScrollView?",
+    "options": {
+      "A": "The total size of the content",
+      "B": "The point at which the origin of the content view is offset from the origin of the scroll view",
+      "C": "The margin around the content",
+      "D": "The speed of the scroll"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class allows you to create high-performance property-based animations that can be paused or reversed?",
+    "options": {
+      "A": "UIViewPropertyAnimator",
+      "B": "UIBasicAnimation",
+      "C": "UIViewAnimationGroup",
+      "D": "UIMotionEffects"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'NSDiffableDataSourceSnapshot'?",
+    "options": {
+      "A": "To take a screenshot of the UI",
+      "B": "To define the current state of data in a table or collection view to be applied with automatic diffing",
+      "C": "To backup the database",
+      "D": "To track user sessions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to respond to a 'low memory' warning in a View Controller?",
+    "options": {
+      "A": "viewDidUnload",
+      "B": "didReceiveMemoryWarning",
+      "C": "clearMemory",
+      "D": "onSystemPressure"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive Layout' in UIKit?",
+    "options": {
+      "A": "A layout that only works on iPhone",
+      "B": "A layout that adjusts its appearance and behavior based on the current environment (Size Classes)",
+      "C": "A layout that uses AI",
+      "D": "A fixed-size layout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit component is used to display a hierarchical 'split' interface on iPad and large iPhones?",
+    "options": {
+      "A": "UINavigationController",
+      "B": "UISplitViewController",
+      "C": "UITabBarController",
+      "D": "UIPageViewController"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Content Mode' property of a UIImageView used for?",
+    "options": {
+      "A": "To set the image's opacity",
+      "B": "To define how the image should be scaled or positioned within the view's bounds",
+      "C": "To change the image file type",
+      "D": "To rotate the image"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Auto Layout, what is 'Layout Guides'?",
+    "options": {
+      "A": "A manual for developers",
+      "B": "Invisible rectangles (like safeAreaLayoutGuide) that help position views without creating dummy views",
+      "C": "The lines drawn in Storyboard",
+      "D": "A grid system"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property of a UIView determines if it can be the first responder (e.g., to show the keyboard)?",
+    "options": {
+      "A": "canBecomeFirstResponder",
+      "B": "isInteractive",
+      "C": "allowsInput",
+      "D": "isFocused"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'UIDevice' class?",
+    "options": {
+      "A": "To control external hardware",
+      "B": "To get information about the current device (name, model, battery level, system version)",
+      "C": "To buy new devices",
+      "D": "To manage the SIM card"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method should be used to change the size of a view's frame without affecting its transform?",
+    "options": {
+      "A": "frame",
+      "B": "bounds",
+      "C": "center",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'CGAffineTransform.identity'?",
+    "options": {
+      "A": "A hidden variable",
+      "B": "A transformation that results in no change (resetting scale, rotation, and translation)",
+      "C": "A unique ID for a view",
+      "D": "A tool to identify users"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class provides a standard way to display 'Search' history and results?",
+    "options": {
+      "A": "UISearchBar",
+      "B": "UISearchController",
+      "C": "UITextField",
+      "D": "UIHistoryView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Haptic Feedback' implementation in UIKit?",
+    "options": {
+      "A": "Sound Effects",
+      "B": "UIFeedbackGenerator subclasses (Impact, Selection, Notification)",
+      "C": "Flash notification",
+      "D": "Auto-scrolling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property allows a view to have rounded corners?",
+    "options": {
+      "A": "view.cornerRadius",
+      "B": "view.layer.cornerRadius",
+      "C": "view.clipRadius",
+      "D": "view.rounded"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIPrintInteractionController' used for?",
+    "options": {
+      "A": "To print logs to console",
+      "B": "To manage printing content from an iOS device to a wireless printer",
+      "C": "To format text",
+      "D": "To take a screenshot"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which delegate method is used to provide the height of a header in a UITableView section?",
+    "options": {
+      "A": "viewForHeaderInSection",
+      "B": "heightForHeaderInSection",
+      "C": "numberOfRowsInSection",
+      "D": "titleForHeaderInSection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'UIKeyWindow'?",
+    "options": {
+      "A": "To lock the phone",
+      "B": "The designated window that currently receives keyboard and other non-touch events",
+      "C": "A window that stores passwords",
+      "D": "The main screen of the app"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property determines the transparency of a UIView?",
+    "options": {
+      "A": "isTransparent",
+      "B": "alpha",
+      "C": "isOpaque",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'UIBezierPath' used for?",
+    "options": {
+      "A": "To find a path to a server",
+      "B": "To define custom vector paths (lines, curves, shapes) for drawing or masking",
+      "C": "To handle navigation",
+      "D": "To store strings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to swap two subviews' positions in the view hierarchy?",
+    "options": {
+      "A": "exchangeSubview(at:withSubviewAt:)",
+      "B": "moveSubview()",
+      "C": "replaceSubview()",
+      "D": "swapViews()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Content Compression Resistance'?",
+    "options": {
+      "A": "The app's ability to compress files",
+      "B": "A priority value that tells Auto Layout how much the view wants to resist being smaller than its content",
+      "C": "A network setting",
+      "D": "A way to hide text"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property is used to set the font of a UILabel?",
+    "options": {
+      "A": "textStyle",
+      "B": "font",
+      "C": "typography",
+      "D": "appearance"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIActivityIndicatorView'?",
+    "options": {
+      "A": "A progress bar",
+      "B": "A spinning wheel that indicates a task is in progress",
+      "C": "A status bar notification",
+      "D": "A button"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is the root of the 'Responder Chain'?",
+    "options": {
+      "A": "UIApplication",
+      "B": "UIResponder",
+      "C": "UIView",
+      "D": "UIViewController"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Autoresizing Mask' used for?",
+    "options": {
+      "A": "A system to handle layout before Auto Layout was introduced",
+      "B": "To mask images",
+      "C": "To resize the app icon",
+      "D": "To handle local storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component is used for providing a 'Pull-to-Refresh' feature?",
+    "options": {
+      "A": "UIRefreshControl",
+      "B": "UIPullAction",
+      "C": "UISwipeDown",
+      "D": "UIUpdateView"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'UIEdgeInsets'?",
+    "options": {
+      "A": "To set the screen border",
+      "B": "To define margins or padding values for the four sides of a rectangle",
+      "C": "To change the font size",
+      "D": "To manage network traffic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called to trigger a layout update for a view hierarchy immediately?",
+    "options": {
+      "A": "setNeedsLayout()",
+      "B": "layoutIfNeeded()",
+      "C": "updateLayout()",
+      "D": "refresh()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIModalPresentationStyle'?",
+    "options": {
+      "A": "A way to present data",
+      "B": "A setting that determines how a presented view controller appears (e.g., fullScreen, pageSheet)",
+      "C": "An animation style",
+      "D": "A database mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to detect a 'long press' gesture?",
+    "options": {
+      "A": "UILongPressGestureRecognizer",
+      "B": "UITapGestureRecognizer",
+      "C": "UIHoldGestureRecognizer",
+      "D": "UITouchManager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'View Clipping' in UIKit?",
+    "options": {
+      "A": "Cutting out parts of the code",
+      "B": "A view property (clipsToBounds) that prevents subviews from drawing outside the parent view's frame",
+      "C": "Deleting unused views",
+      "D": "Screenshotting a view"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to manage a stack of view controllers for a 'drill-down' interface?",
+    "options": {
+      "A": "UITabBarController",
+      "B": "UINavigationController",
+      "C": "UIPageViewController",
+      "D": "UIStackController"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Core Animation' primarily used for in UIKit?",
+    "options": {
+      "A": "Drawing icons",
+      "B": "High-performance hardware-accelerated rendering and animations of the view's layers",
+      "C": "Managing network calls",
+      "D": "Handling local storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method in AppDelegate is the first entry point for app setup?",
+    "options": {
+      "A": "applicationDidBecomeActive",
+      "B": "application(_:didFinishLaunchingWithOptions:)",
+      "C": "applicationWillEnterForeground",
+      "D": "main()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIScrollView.keyboardDismissMode' used for?",
+    "options": {
+      "A": "To dismiss the keyboard when the user stops typing",
+      "B": "To automatically dismiss the keyboard when the user scrolls (e.g., onDrag)",
+      "C": "To hide the scroll bar",
+      "D": "To resize the scroll view"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property in a UITableViewCell is used to set the primary text?",
+    "options": {
+      "A": "titleLabel",
+      "B": "textLabel (deprecated in favor of contentConfiguration)",
+      "C": "mainLabel",
+      "D": "cellText"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIPasteboard'?",
+    "options": {
+      "A": "A board for pinning notes",
+      "B": "The system-wide clipboard used for copy and paste operations",
+      "C": "A tool to paste images in Storyboard",
+      "D": "A list of past network calls"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called to refresh the data of a UITableView?",
+    "options": {
+      "A": "update()",
+      "B": "reloadData()",
+      "C": "refresh()",
+      "D": "reset()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic Type' in UIKit?",
+    "options": {
+      "A": "A variable that changes its type",
+      "B": "A feature that allows the UI to respond to the user's system-wide text size preference",
+      "C": "A dynamic animation",
+      "D": "An auto-generated database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to create and manage the 'Tab Bar' icons and text?",
+    "options": {
+      "A": "UITabBar",
+      "B": "UITabBarItem",
+      "C": "UITabBarController",
+      "D": "UIBarItem"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Hugging'?",
+    "options": {
+      "A": "When the content is too large",
+      "B": "A priority value that tells Auto Layout how much the view wants to resist being larger than its content",
+      "C": "A network security feature",
+      "D": "A way to group views"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method in a UIViewController lifecycle is called only once when the view is first created?",
+    "options": {
+      "A": "viewWillAppear",
+      "B": "viewDidLoad",
+      "C": "viewDidAppear",
+      "D": "awakeFromNib"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIWindowScene'?",
+    "options": {
+      "A": "A background scene for the app",
+      "B": "A subclass of UIScene that manages the display of windows for an app instance",
+      "C": "A tool to design windows",
+      "D": "A list of active windows"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property allows you to change the corner radius of a view's shadow?",
+    "options": {
+      "A": "layer.shadowRadius",
+      "B": "layer.cornerRadius",
+      "C": "layer.shadowOffset",
+      "D": "layer.shadowOpacity"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'UIStatusBarStyle'?",
+    "options": {
+      "A": "The appearance of the navigation bar",
+      "B": "A setting that determines the color of the status bar text/icons (light vs dark content)",
+      "C": "A network status indicator",
+      "D": "A style for notifications"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is used to create a 'toolbar' at the bottom of a Navigation Controller?",
+    "options": {
+      "A": "UIToolbar",
+      "B": "UINavigationBar",
+      "C": "UITabBar",
+      "D": "UISearchBar"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Auto Layout Trace'?",
+    "options": {
+      "A": "A drawing tool",
+      "B": "A debugging command (_autolayoutTrace) used to identify ambiguous layouts in the console",
+      "C": "A history of layout changes",
+      "D": "A path for views to follow"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property is used to set the text color of a UILabel?",
+    "options": {
+      "A": "fontColor",
+      "B": "textColor",
+      "C": "color",
+      "D": "tintColor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIActivityViewController'?",
+    "options": {
+      "A": "A controller for app activity",
+      "B": "The system-provided interface for sharing content and performing actions on data",
+      "C": "A list of recent activities",
+      "D": "A tool for background tasks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called when a user taps a 'Bar Button Item'?",
+    "options": {
+      "A": "didSelect()",
+      "B": "The action method assigned to its 'target' and 'action' properties",
+      "C": "onPress()",
+      "D": "buttonTapped()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UIGraphicsGetImageFromCurrentImageContext'?",
+    "options": {
+      "A": "A method to download an image",
+      "B": "A function to capture the current drawing context as a UIImage",
+      "C": "A tool to edit photos",
+      "D": "A way to store images in CoreData"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property in a UIStackView determines the alignment of subviews perpendicular to its axis?",
+    "options": {
+      "A": "distribution",
+      "B": "alignment",
+      "C": "orientation",
+      "D": "gravity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'View Hierarchy'?",
+    "options": {
+      "A": "The company's management structure",
+      "B": "The tree-like structure of views nested within other views (superviews and subviews)",
+      "C": "A list of view controllers",
+      "D": "A database schema"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which UIKit class is used to display a multi-line, read-only text block?",
+    "options": {
+      "A": "UITextField",
+      "B": "UILabel (with numberOfLines = 0)",
+      "C": "UITextView (with isEditable = false)",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the final state of an app before it is terminated by the system?",
+    "options": {
+      "A": "Background",
+      "B": "Suspended",
+      "C": "Inactive",
+      "D": "Active"
+    },
+    "answer": "B"
+  }
+]
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "Uikit"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

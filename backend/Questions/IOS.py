@@ -1,0 +1,2259 @@
+from reportlab.lib.pagesizes import A4
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib import colors
+from reportlab.lib.units import inch
+
+# REAL Node.js question bank (add as many as you want)
+QUESTIONS = [
+    {
+        "question": "Which keyword is used in Swift to declare a constant whose value cannot be changed?",
+        "options": {
+            "A": "var",
+            "B": "let",
+            "C": "const",
+            "D": "static"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is an 'Optional' in Swift?",
+        "options": {
+            "A": "A function that might not run",
+            "B": "A type that represents either a value or 'nil' (no value at all)",
+            "C": "A setting in Xcode",
+            "D": "A button that is hidden"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which mechanism is used in Swift to safely unwrap an Optional only if it contains a value?",
+        "options": {
+            "A": "For-in loop",
+            "B": "if let or guard let",
+            "C": "try-catch",
+            "D": "Optional Force"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'App Delegate' responsible for in a UIKit-based application?",
+        "options": {
+            "A": "Designing the UI",
+            "B": "Handling high-level app lifecycle events like startup, termination, and backgrounding",
+            "C": "Managing the local database",
+            "D": "Connecting to the App Store"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In the iOS View Controller lifecycle, which method is called after the view has been loaded into memory but before it appears on screen?",
+        "options": {
+            "A": "viewDidAppear",
+            "B": "viewDidLoad",
+            "C": "viewWillAppear",
+            "D": "viewDidLayoutSubviews"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Auto Layout' in iOS development?",
+        "options": {
+            "A": "A tool that writes code automatically",
+            "B": "A system used to define the position and size of views based on constraints",
+            "C": "A feature that submits apps to Apple",
+            "D": "A type of database"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which architectural pattern is natively encouraged by Apple for UIKit development?",
+        "options": {
+            "A": "MVVM",
+            "B": "MVC (Model-View-Controller)",
+            "C": "VIPER",
+            "D": "Redux"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In SwiftUI, what does the '@State' property wrapper do?",
+        "options": {
+            "A": "It saves data to the cloud",
+            "B": "It allows SwiftUI to manage the storage of a value and re-render the view when that value changes",
+            "C": "It makes a variable private",
+            "D": "It identifies the user's location"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Closure' in Swift?",
+        "options": {
+            "A": "A way to close the app",
+            "B": "A self-contained block of functionality that can be passed around and used in your code",
+            "C": "A type of class",
+            "D": "A private variable"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which of these is a 'Value Type' in Swift?",
+        "options": {
+            "A": "Class",
+            "B": "Struct",
+            "C": "Function",
+            "D": "Closure"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'ARC' (Automatic Reference Counting)?",
+        "options": {
+            "A": "A tool to count lines of code",
+            "B": "Apple's system for managing memory by tracking and automatically deallocating objects no longer in use",
+            "C": "A security feature",
+            "D": "A type of network protocol"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Retain Cycle'?",
+        "options": {
+            "A": "The app loading in a loop",
+            "B": "A memory leak occurring when two objects hold strong references to each other, preventing ARC from deallocating them",
+            "C": "A type of UI animation",
+            "D": "A database backup cycle"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "How do you break a retain cycle in a closure?",
+        "options": {
+            "A": "Using a 'strong' reference",
+            "B": "Using a capture list with [weak self] or [unowned self]",
+            "C": "Deleting the closure",
+            "D": "Restarting the app"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Main Thread' primarily used for in iOS?",
+        "options": {
+            "A": "Network requests",
+            "B": "Updating the UI and handling user interactions",
+            "C": "Data processing",
+            "D": "Saving files"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which tool is used to manage third-party libraries in iOS (natively by Apple)?",
+        "options": {
+            "A": "CocoaPods",
+            "B": "Swift Package Manager (SPM)",
+            "C": "Carthage",
+            "D": "npm"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Combine' in iOS development?",
+        "options": {
+            "A": "A way to merge two apps",
+            "B": "A framework for processing values over time, used for reactive programming",
+            "C": "A tool to combine images",
+            "D": "A type of compiler"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between a 'Task' and a 'Thread' in modern Swift Concurrency?",
+        "options": {
+            "A": "They are the same",
+            "B": "A Task is a unit of work that can be suspended/resumed, while a Thread is a lower-level OS resource",
+            "C": "Tasks are only for UI",
+            "D": "Threads are faster than Tasks"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What does 'async/await' solve in Swift?",
+        "options": {
+            "A": "It makes the app run faster",
+            "B": "It simplifies asynchronous code, making it look and behave like synchronous code without blocking threads",
+            "C": "It creates a backup",
+            "D": "It handles UI layout"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Core Data'?",
+        "options": {
+            "A": "A cloud storage service",
+            "B": "An object-graph and persistence framework provided by Apple to manage local data",
+            "C": "A type of JSON parser",
+            "D": "A security framework"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of 'Interface Builder' in Xcode?",
+        "options": {
+            "A": "To write Swift code",
+            "B": "To visually design the app's user interface using Storyboards or XIBs",
+            "C": "To manage server connections",
+            "D": "To debug memory leaks"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In SwiftUI, which property wrapper is used to share data across many views in an app's hierarchy without passing it manually?",
+        "options": {
+            "A": "@State",
+            "B": "@EnvironmentObject",
+            "C": "@Binding",
+            "D": "@ObservedObject"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the purpose of the 'Codable' protocol in Swift?",
+        "options": {
+            "A": "To encrypt data",
+            "B": "To provide a standardized way to encode and decode data to/from formats like JSON",
+            "C": "To format strings",
+            "D": "To manage database migrations"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SwiftUI view is used to create a scrollable list of data, similar to UITableView?",
+        "options": {
+            "A": "ScrollView",
+            "B": "List",
+            "C": "VStack",
+            "D": "CollectionView"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'MainActor' attribute used for in Swift Concurrency?",
+        "options": {
+            "A": "To identify the lead developer",
+            "B": "To ensure that a function or class property is always accessed on the main thread (UI thread)",
+            "C": "To create a global constant",
+            "D": "To handle network timeouts"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is a 'Protocol' in Swift?",
+        "options": {
+            "A": "A type of network request",
+            "B": "A blueprint of methods, properties, and other requirements that suit a particular task or piece of functionality",
+            "C": "A security rule for the App Store",
+            "D": "A way to close a class"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Protocol Extensions' in Swift?",
+        "options": {
+            "A": "Adding more rules to a protocol",
+            "B": "Providing default implementations to protocol methods, allowing types to adopt them for free",
+            "C": "A way to inherit from multiple classes",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which framework is used for making HTTP network requests in iOS?",
+        "options": {
+            "A": "CoreNetwork",
+            "B": "URLSession",
+            "C": "HTTPKit",
+            "D": "SwiftRequest"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Escaping Closure' (@escaping) in Swift?",
+        "options": {
+            "A": "A closure that runs immediately",
+            "B": "A closure that is passed as an argument to a function but is called after the function returns",
+            "C": "A closure that crashes the app",
+            "D": "A private closure"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "In SwiftUI, what is a 'modifier'?",
+        "options": {
+            "A": "A user who edits the app",
+            "B": "A method called on a view to change its appearance or behavior (e.g., .padding() or .font())",
+            "C": "A type of variable",
+            "D": "A database tool"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Dependency Injection'?",
+        "options": {
+            "A": "A virus in the code",
+            "B": "A design pattern where an object receives its dependencies from the outside rather than creating them itself",
+            "C": "Downloading libraries from the web",
+            "D": "A type of memory leak"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Generics' in Swift?",
+        "options": {
+            "A": "Standard functions provided by Apple",
+            "B": "Flexible, reusable functions and types that can work with any type, subject to requirements you define",
+            "C": "Variables without names",
+            "D": "A type of database sharding"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Type Erasure' in Swift (e.g., AnyView or AnyPublisher)?",
+        "options": {
+            "A": "Deleting a data type",
+            "B": "Hiding the specific underlying type of an object while still allowing it to be used through a common interface",
+            "C": "A security vulnerability",
+            "D": "A compiler error"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which SwiftUI property wrapper is used for an external object that the view should observe for changes?",
+        "options": {
+            "A": "@State",
+            "B": "@ObservedObject",
+            "C": "@Binding",
+            "D": "@StateObject"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the difference between @ObservedObject and @StateObject?",
+        "options": {
+            "A": "They are identical",
+            "B": "@StateObject ensures the object is not destroyed and recreated when the view re-renders; @ObservedObject does not",
+            "C": "@ObservedObject is for local data only",
+            "D": "@StateObject is for UIKit only"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'LazyVStack' in SwiftUI?",
+        "options": {
+            "A": "A stack that doesn't work",
+            "B": "A vertical stack that only creates its child views as they are needed (scrolled into view)",
+            "C": "A stack with a slow animation",
+            "D": "A type of background thread"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "Which file in an iOS project contains the list of permissions (like Camera or Location) that the app requires?",
+        "options": {
+            "A": "AppDelegate.swift",
+            "B": "Info.plist",
+            "C": "Main.storyboard",
+            "D": "Package.swift"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Universal Links'?",
+        "options": {
+            "A": "Links that work in any language",
+            "B": "Apple's technology that allows a website URL to open directly in its corresponding app",
+            "C": "Links to the App Store",
+            "D": "A type of database join"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Grand Central Dispatch' (GCD)?",
+        "options": {
+            "A": "A train station in New York",
+            "B": "A low-level API for managing concurrent operations and asynchronous tasks on various queues",
+            "C": "A security protocol",
+            "D": "A tool to combine images"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is 'Diffable Data Source' in UIKit?",
+        "options": {
+            "A": "A data source for difficult apps",
+            "B": "A modern way to manage table and collection view data by calculating differences (snapshots) automatically",
+            "C": "A type of JSON parser",
+            "D": "A performance report"
+        },
+        "answer": "B"
+    },
+    {
+        "question": "What is the 'Scene Delegate'?",
+        "options": {
+            "A": "A person who designs movie scenes",
+            "B": "An object introduced in iOS 13 to handle multiple windows (scenes) and their lifecycles",
+            "C": "A tool for 3D modeling",
+            "D": "A security scanner"
+        },
+        "answer": "B"
+    },
+    {
+    "question": "In SwiftUI, which property wrapper is used to share data across many views in an app's hierarchy without passing it manually?",
+    "options": {
+      "A": "@State",
+      "B": "@EnvironmentObject",
+      "C": "@Binding",
+      "D": "@ObservedObject"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of the 'Codable' protocol in Swift?",
+    "options": {
+      "A": "To encrypt sensitive user data",
+      "B": "To provide a standardized way to encode and decode data to/from formats like JSON",
+      "C": "To format strings for localization",
+      "D": "To manage database migrations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI view is used to create a scrollable list of data, similar to UITableView in UIKit?",
+    "options": {
+      "A": "ScrollView",
+      "B": "List",
+      "C": "VStack",
+      "D": "CollectionView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'MainActor' attribute used for in Swift Concurrency?",
+    "options": {
+      "A": "To identify the lead developer account",
+      "B": "To ensure that a function or class property is always accessed on the main thread (UI thread)",
+      "C": "To create a global singleton",
+      "D": "To handle network timeouts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Protocol' in Swift?",
+    "options": {
+      "A": "A type of network request",
+      "B": "A blueprint of methods, properties, and requirements that suit a particular task",
+      "C": "A security rule for App Store submission",
+      "D": "A way to force-close a class"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Protocol Extensions' in Swift?",
+    "options": {
+      "A": "Adding more strict rules to a protocol",
+      "B": "Providing default implementations to protocol methods, allowing types to adopt them 'for free'",
+      "C": "A way to inherit from multiple classes",
+      "D": "A performance metric for the compiler"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which native framework is used for making HTTP network requests in iOS?",
+    "options": {
+      "A": "CoreNetwork",
+      "B": "URLSession",
+      "C": "HTTPKit",
+      "D": "SwiftRequest"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Escaping Closure' (@escaping) in Swift?",
+    "options": {
+      "A": "A closure that runs immediately within the function",
+      "B": "A closure passed as an argument that is called after the function it was passed to returns",
+      "C": "A closure that crashes the app to prevent memory leaks",
+      "D": "A private closure that cannot be accessed by subclasses"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SwiftUI, what is a 'modifier'?",
+    "options": {
+      "A": "A user who edits the app's code",
+      "B": "A method called on a view to change its appearance or behavior (e.g., .padding() or .font())",
+      "C": "A type of internal variable",
+      "D": "A tool used to modify the local database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dependency Injection'?",
+    "options": {
+      "A": "A security vulnerability in third-party libraries",
+      "B": "A design pattern where an object receives its dependencies from the outside rather than creating them itself",
+      "C": "The process of downloading libraries from the web",
+      "D": "A type of memory leak in ARC"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Generics' in Swift?",
+    "options": {
+      "A": "Standard functions provided by Apple for all apps",
+      "B": "Flexible, reusable functions and types that can work with any type, subject to requirements you define",
+      "C": "Variables that do not have names",
+      "D": "A type of database sharding for Core Data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Type Erasure' in Swift (e.g., AnyView or AnyPublisher)?",
+    "options": {
+      "A": "The process of deleting a data type to save memory",
+      "B": "Hiding the specific underlying type of an object while still allowing it to be used through a common interface",
+      "C": "A security vulnerability where types are overwritten",
+      "D": "A compiler error that occurs when a type is missing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI property wrapper is used for an external object that the view should observe for changes?",
+    "options": {
+      "A": "@State",
+      "B": "@ObservedObject",
+      "C": "@Binding",
+      "D": "@StateObject"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the key difference between @ObservedObject and @StateObject?",
+    "options": {
+      "A": "They are functionally identical",
+      "B": "@StateObject ensures the object is not destroyed and recreated when the view re-renders; @ObservedObject does not",
+      "C": "@ObservedObject is only for local data",
+      "D": "@StateObject is only used in UIKit-compatible views"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'LazyVStack' in SwiftUI?",
+    "options": {
+      "A": "A vertical stack that does not execute code",
+      "B": "A vertical stack that only creates its child views as they are scrolled into the viewport",
+      "C": "A stack with a built-in slow animation",
+      "D": "A type of background thread for data processing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file in an iOS project contains the list of permissions (like Camera or Location) the app requires?",
+    "options": {
+      "A": "AppDelegate.swift",
+      "B": "Info.plist",
+      "C": "Main.storyboard",
+      "D": "Package.swift"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Universal Links'?",
+    "options": {
+      "A": "Hyperlinks that work in any programming language",
+      "B": "Apple technology that allows a website URL to open directly in its corresponding app",
+      "C": "Links that lead directly to the App Store",
+      "D": "A type of database join in SQLite"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grand Central Dispatch' (GCD)?",
+    "options": {
+      "A": "A physical server in Apple's data centers",
+      "B": "A low-level API for managing concurrent operations and asynchronous tasks on various queues",
+      "C": "A security protocol for biometric data",
+      "D": "A tool used to combine multiple images into one"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Diffable Data Source' in UIKit?",
+    "options": {
+      "A": "A data source for complex, multi-language apps",
+      "B": "A modern way to manage table and collection view data by calculating differences (snapshots) automatically",
+      "C": "A type of high-speed JSON parser",
+      "D": "A performance report generated by Xcode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Scene Delegate'?",
+    "options": {
+      "A": "A developer who designs visual movie scenes",
+      "B": "An object introduced in iOS 13 to handle multiple windows (scenes) and their lifecycles",
+      "C": "A tool for 3D modeling in ARKit",
+      "D": "A security scanner for malicious code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Core Data class acts as a 'scratchpad' for managed objects, allowing you to create, delete, and modify data before saving it to disk?",
+    "options": {
+      "A": "NSManagedObjectModel",
+      "B": "NSManagedObjectContext",
+      "C": "NSPersistentStoreCoordinator",
+      "D": "NSPersistentContainer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SwiftUI, which modifier is used to animate changes to a view's state implicitly?",
+    "options": {
+      "A": "withAnimation { }",
+      "B": ".animation(_:value:)",
+      "C": ".transition()",
+      "D": ".onAppear()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of the 'Keychain' in iOS?",
+    "options": {
+      "A": "To store large binary files like images",
+      "B": "To securely store small pieces of sensitive data like passwords and tokens",
+      "C": "To manage app icon shortcuts",
+      "D": "To persist non-sensitive user settings like theme color"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'lazy' keyword do when applied to a property in Swift?",
+    "options": {
+      "A": "It makes the property thread-safe automatically",
+      "B": "It delays the initialization of the property until the first time it is accessed",
+      "C": "It marks the property for garbage collection",
+      "D": "It prevents the property from being modified"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the VIPER architecture, which component contains the business logic and makes network or database calls?",
+    "options": {
+      "A": "Presenter",
+      "B": "Interactor",
+      "C": "Entity",
+      "D": "Router"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Failable Initializer' in Swift?",
+    "options": {
+      "A": "An initializer that crashes if parameters are wrong",
+      "B": "An initializer that can return 'nil' if initialization fails (init?)",
+      "C": "A constructor that only works for Structs",
+      "D": "A background thread constructor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI property wrapper is used to create and own a source of truth for a reference type object?",
+    "options": {
+      "A": "@ObservedObject",
+      "B": "@StateObject",
+      "C": "@Environment",
+      "D": "@Binding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Dependency Rule' in Clean Architecture for iOS?",
+    "options": {
+      "A": "All layers must depend on the UI",
+      "B": "Dependencies must point inwards toward higher-level policies (Business Rules)",
+      "C": "Data layers must know about the View",
+      "D": "Every class must use a Singleton"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Method Swizzling' in Objective-C/Swift?",
+    "options": {
+      "A": "A way to speed up function calls",
+      "B": "The process of changing the implementation of an existing selector at runtime",
+      "C": "A type of memory compression",
+      "D": "A security encryption method"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework is used for building Augmented Reality experiences on iOS?",
+    "options": {
+      "A": "SceneKit",
+      "B": "ARKit",
+      "C": "RealityKit",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Content Hugging Priority' in Auto Layout?",
+    "options": {
+      "A": "The priority of a view to grow larger than its intrinsic content size",
+      "B": "The priority of a view to resist growing larger than its intrinsic content size",
+      "C": "The distance between two views",
+      "D": "The priority of a view to stay invisible"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compression Resistance Priority'?",
+    "options": {
+      "A": "The priority of a view to resist being made smaller than its intrinsic content size",
+      "B": "The ability of an app to compress images",
+      "C": "A network protocol",
+      "D": "The priority of a view to fill the screen"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property of a UIView is used to apply transparency?",
+    "options": {
+      "A": "isVisible",
+      "B": "alpha",
+      "C": "clearance",
+      "D": "opaqueIndex"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Method Dispatch' in Swift?",
+    "options": {
+      "A": "A way to send emails",
+      "B": "The mechanism by which the program selects which implementation of a method to call (Static vs Dynamic)",
+      "C": "A type of background queue",
+      "D": "A tool for shipping apps"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Weak' reference used for in Swift?",
+    "options": {
+      "A": "To make a variable optional",
+      "B": "To prevent strong reference cycles by not increasing the reference count of an object",
+      "C": "To speed up code execution",
+      "D": "To allow the variable to be null without being an optional"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI modifier is used to respond to a view appearing on the screen?",
+    "options": {
+      "A": ".viewDidLoad()",
+      "B": ".onAppear()",
+      "C": ".viewDidAppear()",
+      "D": ".start()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SwiftData' (introduced in iOS 17)?",
+    "options": {
+      "A": "A new programming language",
+      "B": "A powerful and expressive persistence framework that replaces Core Data's complexity with Swift macros",
+      "C": "A cloud-only database",
+      "D": "A way to parse JSON faster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is '@Query' used for in SwiftData?",
+    "options": {
+      "A": "To ask the user a question",
+      "B": "To fetch and keep data synchronized between the database and a SwiftUI view",
+      "C": "To search the web",
+      "D": "To debug network calls"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol must a class adopt to be used with '@StateObject' or '@ObservedObject'?",
+    "options": {
+      "A": "Codable",
+      "B": "ObservableObject",
+      "C": "Identifiable",
+      "D": "Equatable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'GeometryReader' in SwiftUI?",
+    "options": {
+      "A": "To draw shapes like circles",
+      "B": "To provide a view's size and coordinate space to its children",
+      "C": "To measure the distance between the phone and the user",
+      "D": "To handle 3D math"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which background process manages the communication between the app and the Apple Push Notification service (APNs)?",
+    "options": {
+      "A": "StoreKit",
+      "B": "UserNotifications framework",
+      "C": "PushCenter",
+      "D": "CoreDispatch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic Type' in iOS?",
+    "options": {
+      "A": "A variable that changes type at runtime",
+      "B": "An accessibility feature that allows users to choose their preferred text size across the system",
+      "C": "A type of animation",
+      "D": "A way to code without types"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Keychain Access Group' used for?",
+    "options": {
+      "A": "To group passwords by type",
+      "B": "To share keychain items between multiple apps from the same developer",
+      "C": "To restrict keychain access to only one user",
+      "D": "To back up passwords to iCloud"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'App Sandboxing'?",
+    "options": {
+      "A": "A game for developers",
+      "B": "A security measure that ensures an app can only access its own files and data unless explicitly permitted",
+      "C": "Testing an app on a physical device",
+      "D": "A type of memory management"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which attribute is used to allow a function to return different types of views in SwiftUI?",
+    "options": {
+      "A": "@State",
+      "B": "@ViewBuilder",
+      "C": "@Modifier",
+      "D": "@escaping"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'DispatchGroup' used for in GCD?",
+    "options": {
+      "A": "To group users by region",
+      "B": "To monitor a set of tasks and take action when all tasks in the group complete",
+      "C": "To create a serial queue",
+      "D": "To speed up the internet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'opaque' types (some View) in Swift?",
+    "options": {
+      "A": "To make a view transparent",
+      "B": "To hide the specific concrete type of a return value while still guaranteeing it conforms to a protocol",
+      "C": "To prevent memory leaks",
+      "D": "To make code harder to read"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pre-warming' in the context of iOS app startup?",
+    "options": {
+      "A": "Heating up the phone battery",
+      "B": "The OS launching the app process in the background before the user taps the icon to improve perceived launch speed",
+      "C": "Running unit tests before release",
+      "D": "Compiling code in the background"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Metadata' in Core Data?",
+    "options": {
+      "A": "Data stored on a server",
+      "B": "Storing large binary data (BLOBs) outside of the database file to keep the database performant",
+      "C": "User profile information",
+      "D": "A type of backup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Faulting' in Core Data?",
+    "options": {
+      "A": "A bug that crashes the app",
+      "B": "A placeholder for a managed object that hasn't been fully loaded into memory yet to save resources",
+      "C": "A type of network error",
+      "D": "A failed save operation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Opaque' property of a UIView used for?",
+    "options": {
+      "A": "To set the color to black",
+      "B": "An optimization hint to the drawing system that the view has no transparency, improving performance",
+      "C": "To make the view invisible",
+      "D": "To hide child views"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is used to profile and analyze performance, memory, and energy usage in an iOS app?",
+    "options": {
+      "A": "Interface Builder",
+      "B": "Instruments",
+      "C": "Simulator",
+      "D": "Console"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zombie Objects' in Xcode debugging?",
+    "options": {
+      "A": "Objects that come back to life",
+      "B": "A debugging mode that helps find 'use-after-free' errors by not truly deallocating memory",
+      "C": "Unused code",
+      "D": "Dead background threads"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI property wrapper allows access to system-wide settings like 'colorScheme' or 'editMode'?",
+    "options": {
+      "A": "@StateObject",
+      "B": "@Environment",
+      "C": "@Published",
+      "D": "@AppStorage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is '@AppStorage' used for?",
+    "options": {
+      "A": "To store images in the gallery",
+      "B": "To read and write values directly to 'UserDefaults' with automatic view updates",
+      "C": "To manage iCloud data",
+      "D": "To download apps"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Size Classes' in iOS layout?",
+    "options": {
+      "A": "The height of a font",
+      "B": "A system of categories (Regular/Compact) used to create adaptive layouts for different screen sizes and orientations",
+      "C": "A way to measure file size",
+      "D": "The number of elements in a list"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Intrinsic Content Size' of a UILabel?",
+    "options": {
+      "A": "The size of the screen",
+      "B": "The amount of space the label needs to display its text without clipping",
+      "C": "A fixed size of 44x44",
+      "D": "The size of the parent view"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to allow a variable to be modified inside a Swift function when passed as a parameter?",
+    "options": {
+      "A": "var",
+      "B": "inout",
+      "C": "mutating",
+      "D": "let"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Mutating' function in a Swift Struct?",
+    "options": {
+      "A": "A function that changes the return type",
+      "B": "A function that is allowed to modify the properties of the struct instance",
+      "C": "A function that runs in the background",
+      "D": "A function that deletes the struct"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used for types that can be converted to and from a string representation?",
+    "options": {
+      "A": "Codable",
+      "B": "CustomStringConvertible",
+      "C": "Stringable",
+      "D": "Hashable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Test-Driven Development' (TDD)?",
+    "options": {
+      "A": "Testing the app after it's finished",
+      "B": "Writing a failing test before writing the actual code that passes the test",
+      "C": "Testing only on physical devices",
+      "D": "A tool to generate tests automatically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework is used for unit testing and UI testing in iOS?",
+    "options": {
+      "A": "UnitKit",
+      "B": "XCTest",
+      "C": "SwiftTest",
+      "D": "Quick"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Mocking' in unit tests?",
+    "options": {
+      "A": "Making fun of the code",
+      "B": "Creating fake objects that simulate the behavior of real dependencies (like network calls)",
+      "C": "Testing the app's performance",
+      "D": "Checking the UI layout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Code Coverage'?",
+    "options": {
+      "A": "The total size of the app",
+      "B": "A metric that shows what percentage of your source code is executed during testing",
+      "C": "A type of insurance for developers",
+      "D": "The number of lines of comments"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snapshot Testing'?",
+    "options": {
+      "A": "Taking photos with the camera",
+      "B": "A type of test that compares the rendered UI of a view against a reference image file",
+      "C": "A quick memory test",
+      "D": "A security scan of data snapshots"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool allows you to distribute beta versions of your iOS app to testers?",
+    "options": {
+      "A": "App Store Connect",
+      "B": "TestFlight",
+      "C": "XCode Server",
+      "D": "GitHub"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Provisioning Profile'?",
+    "options": {
+      "A": "A user's bio in the app",
+      "B": "A digital entity that ties together developers, devices, and an App ID to allow the app to run on hardware",
+      "C": "A type of sharding",
+      "D": "A database config file"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bundle Identifier'?",
+    "options": {
+      "A": "A list of files in a folder",
+      "B": "A unique string (e.g., com.company.app) that identifies your app in the iOS system",
+      "C": "A security token",
+      "D": "The app's name"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'In-App Purchase' (IAP) 'Receipt Validation'?",
+    "options": {
+      "A": "Giving the user a paper receipt",
+      "B": "The process of verifying with Apple's servers that a purchase is legitimate and has not been tampered with",
+      "C": "Managing the app's budget",
+      "D": "A type of unit test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question: What is 'Swift Package Manager' (SPM) manifest file named?",
+    "options": {
+      "A": "Manifest.swift",
+      "B": "Package.swift",
+      "C": "Library.json",
+      "D": "Podfile"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of using 'Actors' in Swift Concurrency?",
+    "options": {
+      "A": "They make UI animations smoother",
+      "B": "They provide a synchronization mechanism that prevents data races by ensuring only one task can access their mutable state at a time",
+      "C": "They automatically encrypt all local data",
+      "D": "They allow for multiple inheritance"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework is used to integrate machine learning models directly into an iOS app?",
+    "options": {
+      "A": "TensorFlow iOS",
+      "B": "Core ML",
+      "C": "MLKit",
+      "D": "AIBrain"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metal' in the context of iOS development?",
+    "options": {
+      "A": "The physical material of the iPhone",
+      "B": "A low-level, hardware-accelerated graphics and data-parallel computation API",
+      "C": "A security framework for hardware encryption",
+      "D": "A tool to measure battery heat"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'App Thinning'?",
+    "options": {
+      "A": "Deleting apps you don't use",
+      "B": "A process where the App Store delivers only the assets required for a specific device, reducing the download size",
+      "C": "Reducing the code to only one file",
+      "D": "A battery saving mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bitcode'?",
+    "options": {
+      "A": "A type of cryptocurrency",
+      "B": "An intermediate representation of a compiled program that allows Apple to re-optimize app binaries for new hardware without a new submission",
+      "C": "A coding language for 8-bit games",
+      "D": "A security token"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property of a SwiftUI View prevents it from being interactive (disabling taps/gestures)?",
+    "options": {
+      "A": ".isHidden()",
+      "B": ".allowsHitTesting(false)",
+      "C": ".disableInteraction()",
+      "D": ".opaque(false)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Method Dispatch'? Which type is fastest in Swift?",
+    "options": {
+      "A": "Table Dispatch",
+      "B": "Static Dispatch (Direct Dispatch)",
+      "C": "Message Dispatch",
+      "D": "Dynamic Dispatch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SIMD' (Single Instruction, Multiple Data) used for in high-performance iOS apps?",
+    "options": {
+      "A": "Handling network requests",
+      "B": "Performing the same operation on multiple data points simultaneously, common in image processing",
+      "C": "Managing user sessions",
+      "D": "A type of database sharding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Background Fetch'?",
+    "options": {
+      "A": "A way to download large files while the app is active",
+      "B": "A capability that allows an app to wake up periodically in the background to refresh its content",
+      "C": "A security scan of background data",
+      "D": "Deleting data from the background"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool allows you to inspect the 'View Hierarchy' of a running app to debug layout issues?",
+    "options": {
+      "A": "Interface Builder",
+      "B": "Debug View Hierarchy (within Xcode)",
+      "C": "Instruments",
+      "D": "Terminal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SwiftyJSON' vs. native 'JSONDecoder'?",
+    "options": {
+      "A": "SwiftyJSON is a native Apple framework",
+      "B": "SwiftyJSON is a third-party library; JSONDecoder is the native, type-safe Apple standard",
+      "C": "They are the same thing",
+      "D": "JSONDecoder is only for Objective-C"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Livelock' in multi-threading?",
+    "options": {
+      "A": "A situation where a thread is stuck in a loop forever",
+      "B": "A condition where two or more threads continuously change their state in response to each other without making progress",
+      "C": "A successful database lock",
+      "D": "A type of security encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Priority Inversion'?",
+    "options": {
+      "A": "The CEO writing code",
+      "B": "A bug where a high-priority task is blocked by a low-priority task that holds a required resource",
+      "C": "Changing the order of the UI",
+      "D": "A network timeout error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework is used to implement biometric authentication (FaceID/TouchID)?",
+    "options": {
+      "A": "BioKit",
+      "B": "LocalAuthentication",
+      "C": "SecurityContext",
+      "D": "CoreIdentity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Push Notifications' 'Silent Push'?",
+    "options": {
+      "A": "A notification with no sound",
+      "B": "A notification that wakes the app in the background to perform a task without alerting the user",
+      "C": "A notification that is hidden in the settings",
+      "D": "A failed notification"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'App Store Connect'?",
+    "options": {
+      "A": "A social network for developers",
+      "B": "The web suite used to manage apps, submit updates, and view analytics for the App Store",
+      "C": "A type of charging cable",
+      "D": "A database for user profiles"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SKAdNetwork'?",
+    "options": {
+      "A": "Apple's private social network",
+      "B": "A privacy-preserving framework for measuring ad conversion rates on iOS",
+      "C": "A framework for in-app purchases",
+      "D": "A high-speed gaming network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'XCFramework'?",
+    "options": {
+      "A": "A legacy framework for macOS",
+      "B": "A distributable binary package that contains variants of a framework for multiple platforms and architectures",
+      "C": "A type of unit test",
+      "D": "A security certificate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Swift Testing' (introduced in 2024/2025)?",
+    "options": {
+      "A": "Manual QA testing",
+      "B": "A modern, macro-based testing framework designed specifically for Swift to complement or replace XCTest",
+      "C": "A type of beta testing",
+      "D": "A security scan"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question: What is 'WWDC'?",
+    "options": {
+      "A": "World Wide Developer Conference",
+      "B": "A type of encryption",
+      "C": "Apple's database name",
+      "D": "A performance report"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In visionOS development, what is a 'WindowGroup' used for?",
+    "options": {
+      "A": "To group multiple users into a chat",
+      "B": "To manage one or more instances of a spatial window in the Shared Space",
+      "C": "To create a 3D physical barrier",
+      "D": "To handle network requests"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Window' and a 'Volume' in visionOS?",
+    "options": {
+      "A": "Volumes have sound; windows do not",
+      "B": "Windows are 2D planes; Volumes are 3D containers with fixed boundaries in space",
+      "C": "Windows are for SwiftUI; Volumes are for UIKit",
+      "D": "There is no difference"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework is the primary engine for rendering high-fidelity 3D content and simulations in visionOS?",
+    "options": {
+      "A": "SceneKit",
+      "B": "RealityKit",
+      "C": "OpenGL",
+      "D": "UnityView"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Immersive Space' in visionOS?",
+    "options": {
+      "A": "A mode where the user is totally disconnected from Wi-Fi",
+      "B": "A dedicated environment where an app can present 3D content without other apps visible",
+      "C": "A type of memory management",
+      "D": "A security feature for face data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Combine operator is used to wait for a specific amount of time after the last value is received before emitting the next value?",
+    "options": {
+      "A": "throttle",
+      "B": "debounce",
+      "C": "delay",
+      "D": "filter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'StoreKit 2'?",
+    "options": {
+      "A": "A kit for building physical stores",
+      "B": "Apple's modern, Swift-native API for handling In-App Purchases and subscriptions",
+      "C": "A tool to manage app icons",
+      "D": "A database for product inventory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'App Intents' in iOS 16 and later?",
+    "options": {
+      "A": "To record the developer's intent for the app",
+      "B": "To expose app functionality to the system, allowing features like Siri and Shortcuts to interact with the app",
+      "C": "To encrypt user intent data",
+      "D": "To manage database queries"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SharePlay'?",
+    "options": {
+      "A": "Playing a game with a friend nearby",
+      "B": "A framework that allows users to share experiences (like watching movies or listening to music) during a FaceTime call",
+      "C": "A way to share the app's source code",
+      "D": "A type of database replication"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI modifier is used to define a 'Hero' animation between two different views (Matched Geometry)?",
+    "options": {
+      "A": ".transition()",
+      "B": ".matchedGeometryEffect(id:in:)",
+      "C": ".animation()",
+      "D": ".heroTransform()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Keychain Sharing' and why is it useful?",
+    "options": {
+      "A": "Sharing your keys with a friend",
+      "B": "Allowing a suite of apps from the same developer to share credentials (like login tokens) securely",
+      "C": "A way to back up passwords to the cloud",
+      "D": "A security vulnerability"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Background Tasks' framework used for?",
+    "options": {
+      "A": "Doing homework in the background",
+      "B": "Requesting the system to perform maintenance or long-running tasks while the app is in the background",
+      "C": "Monitoring user location without permission",
+      "D": "Deleting old files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Dependency Inversion' principle in the context of iOS architecture?",
+    "options": {
+      "A": "High-level modules should depend on low-level modules",
+      "B": "Both high-level and low-level modules should depend on abstractions (interfaces/protocols)",
+      "C": "Deleting all dependencies",
+      "D": "Using only third-party libraries"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI modifier is used to handle 'Dynamic Type' accessibility changes?",
+    "options": {
+      "A": ".font(.headline)",
+      "B": ".dynamicTypeSize(...)",
+      "C": ".scaledToFill()",
+      "D": ".accessibleText()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'URLSessionConfiguration.background'?",
+    "options": {
+      "A": "A way to change the background color of a network call",
+      "B": "A configuration that allows the system to take over data transfers while the app is suspended",
+      "C": "A security firewall",
+      "D": "A type of unit test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Paging' in the context of an iOS List or CollectionView?",
+    "options": {
+      "A": "Turning the pages of a book",
+      "B": "Fetching data in chunks from a server as the user scrolls to improve performance and memory usage",
+      "C": "A security scan",
+      "D": "A type of sharding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'WidgetKit'?",
+    "options": {
+      "A": "A kit for building physical widgets",
+      "B": "Apple's framework for creating small, glanceable app views on the Home Screen and Lock Screen",
+      "C": "A type of UI animation",
+      "D": "A tool to manage app icons"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In WidgetKit, what is a 'TimelineProvider'?",
+    "options": {
+      "A": "A person who schedules meetings",
+      "B": "An object that tells the system when to update the widget's content with new data",
+      "C": "A security certificate",
+      "D": "A database index"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'App Clips'?",
+    "options": {
+      "A": "Small video clips of the app",
+      "B": "A lightweight version of an app that can be launched instantly without a full installation",
+      "C": "A way to cut parts of the code",
+      "D": "A battery saving mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Accessory' framework?",
+    "options": {
+      "A": "Buying things for the iPhone",
+      "B": "A framework for communicating with hardware connected via Bluetooth or the Lightning/USB-C connector",
+      "C": "A way to manage app icons",
+      "D": "A type of unit test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CloudKit'?",
+    "options": {
+      "A": "A framework for weather apps",
+      "B": "Apple's backend-as-a-service for storing and syncing app data across a user's devices using their iCloud account",
+      "C": "A security firewall",
+      "D": "A type of JSON parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Partial Application' in Swift?",
+    "options": {
+      "A": "Running only half of the app",
+      "B": "The process of applying some arguments to a function, returning a new function that takes the remaining arguments",
+      "C": "A type of memory leak",
+      "D": "A compiler error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In visionOS, what is the 'Passthrough' feature?",
+    "options": {
+      "A": "A way to skip an animation",
+      "B": "The real-time video feed of the user's actual surroundings shown inside the headset",
+      "C": "A security vulnerability",
+      "D": "A network protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI attribute is used to allow a view to respond to 'Eye Tracking' and 'Hand Gestures' in visionOS?",
+    "options": {
+      "A": ".onTapGesture()",
+      "B": ".hoverEffect()",
+      "C": ".spatialInteraction()",
+      "D": ".visionFocus()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SIMD' (Single Instruction, Multiple Data) primarily used for in iOS performance optimization?",
+    "options": {
+      "A": "Handling user logins",
+      "B": "Executing the same operation on multiple data points at once, critical for image and signal processing",
+      "C": "Managing database migrations",
+      "D": "Compressing text files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Heap Allocation' vs 'Stack Allocation' in Swift?",
+    "options": {
+      "A": "Stack is for classes; Heap is for structs",
+      "B": "Stack is fast and used for value types; Heap is more flexible but slower and used for reference types",
+      "C": "Stack is only for 32-bit apps",
+      "D": "They are the same"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Metal object is responsible for encoding commands that the GPU will execute?",
+    "options": {
+      "A": "MTLDevice",
+      "B": "MTLCommandBuffer",
+      "C": "MTLRenderCommandEncoder",
+      "D": "MTLLibrary"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'App Store Server Notifications V2'?",
+    "options": {
+      "A": "Notifications sent to users about sales",
+      "B": "Real-time notifications sent from Apple to your server about subscription status changes",
+      "C": "A type of UI alert",
+      "D": "A bug report system"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phase' in SwiftUI Animations (C++17/iOS 17+)?",
+    "options": {
+      "A": "A type of variable",
+      "B": "A way to create multi-step, sequential animations using a single state trigger",
+      "C": "A performance metric",
+      "D": "A security scan"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Object Capture' API?",
+    "options": {
+      "A": "To catch memory leaks",
+      "B": "To create 3D models of real-world objects using a series of photos taken on an iPhone or iPad",
+      "C": "To record user screen activity",
+      "D": "To manage database objects"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shared Space' in visionOS?",
+    "options": {
+      "A": "A cloud folder",
+      "B": "An environment where multiple apps can run side-by-side as windows or volumes",
+      "C": "A multiplayer game mode",
+      "D": "A shared memory region"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Full Immersive Space' in visionOS?",
+    "options": {
+      "A": "A mode where the user's real world is completely hidden by the app's content",
+      "B": "A mode with high volume",
+      "C": "A security firewall",
+      "D": "A type of background fetch"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Privacy Manifest' in iOS 17+?",
+    "options": {
+      "A": "A list of private developers",
+      "B": "A file where developers declare the types of data their app collects and the 'Required Reason' for using specific APIs",
+      "C": "An encrypted database",
+      "D": "A user's privacy settings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Custom Hover Effects' in visionOS?",
+    "options": {
+      "A": "A way to make things float",
+      "B": "Defining how a 3D object or UI element reacts visually when a user looks at it",
+      "C": "A type of unit test",
+      "D": "A network protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ARKit Plane Detection'?",
+    "options": {
+      "A": "Detecting airplanes in the sky",
+      "B": "The ability of the device to identify horizontal or vertical surfaces in the real world",
+      "C": "A way to draw 2D lines",
+      "D": "A security scanner"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Entity-Component-System' (ECS) in RealityKit?",
+    "options": {
+      "A": "A type of database join",
+      "B": "An architecture that separates data (Components) from logic (Systems) for high-performance 3D rendering",
+      "C": "A security certificate",
+      "D": "A performance report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'LiDAR' used for in iOS apps?",
+    "options": {
+      "A": "To improve the battery life",
+      "B": "To perform light detection and ranging for high-accuracy depth sensing and spatial mapping",
+      "C": "To connect to satellites",
+      "D": "To encrypt user data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'App Tracking Transparency' (ATT)?",
+    "options": {
+      "A": "A way to track the app's location",
+      "B": "A framework that requires apps to ask for user permission before tracking them across other companies' apps and websites",
+      "C": "A tool for debugging",
+      "D": "A performance report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'On-Device Training' in Core ML?",
+    "options": {
+      "A": "Training the developer in the office",
+      "B": "Updating a machine learning model using data collected locally on the user's device without sending it to a server",
+      "C": "A type of unit test",
+      "D": "A security scan"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework allows iOS apps to communicate with smart home devices?",
+    "options": {
+      "A": "HouseKit",
+      "B": "HomeKit",
+      "C": "SmartConnect",
+      "D": "IoTLink"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question: What is 'TestFlight' external testing limit (approximate)?",
+    "options": {
+      "A": "100 testers",
+      "B": "10,000 testers",
+      "C": "Unlimited",
+      "D": "500 testers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'KeyPath' in Swift?",
+    "options": {
+      "A": "A path to the app's installation folder",
+      "B": "A strongly typed reference to a property of a class or struct, rather than the value itself",
+      "C": "A security key for the keychain",
+      "D": "A type of URL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI modifier allows a view to ignore the safe area insets (e.g., to draw behind the notch)?",
+    "options": {
+      "A": ".noSafeArea()",
+      "B": ".ignoresSafeArea()",
+      "C": ".fullScreen()",
+      "D": ".expandToEdges()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'App Extension' in iOS?",
+    "options": {
+      "A": "A library that adds more lines of code",
+      "B": "A separate binary that enables app functionality to be used in other parts of the system, like Widgets or Share sheets",
+      "C": "A type of software update",
+      "D": "An external hardware plugin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Swift, what does the 'rethrows' keyword indicate on a function?",
+    "options": {
+      "A": "The function will always throw an error",
+      "B": "The function only throws an error if one of its functional parameters (closures) throws an error",
+      "C": "The function will try to run again after a crash",
+      "D": "The function returns an Error type instead of a value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Copy-on-Write' (CoW) in Swift?",
+    "options": {
+      "A": "A way to backup code",
+      "B": "A resource management technique where data is only copied when a modification is made to a shared instance",
+      "C": "A security feature for preventing piracy",
+      "D": "A type of database replication"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool in Xcode is used to detect 'Memory Graph' issues and leaked objects at runtime?",
+    "options": {
+      "A": "Interface Builder",
+      "B": "Debug Memory Graph",
+      "C": "The Console",
+      "D": "The Simulator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Codable's' KeyDecodingStrategy used for?",
+    "options": {
+      "A": "To encrypt JSON keys",
+      "B": "To automatically convert JSON keys (like snake_case) into Swift property names (like camelCase)",
+      "C": "To hide keys from the user",
+      "D": "To delete keys during decoding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Task Isolation' in Swift 6?",
+    "options": {
+      "A": "Running the app without Wi-Fi",
+      "B": "The guarantee that code within a task is protected from data races by restricting how data is shared across boundaries",
+      "C": "A way to delete background tasks",
+      "D": "A security firewall for tasks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Action Extension' used for?",
+    "options": {
+      "A": "Running a movie in the background",
+      "B": "Allowing a user to transform or view content from within another app (e.g., a translator)",
+      "C": "Handling push notifications",
+      "D": "Managing app updates"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'View Clipping' in UIKit?",
+    "options": {
+      "A": "Cutting the view out of the code",
+      "B": "Restricting the rendering of subviews to the boundaries of the parent view (clipsToBounds)",
+      "C": "A type of video editing",
+      "D": "A performance bug"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI property wrapper is used to manage a value that is stored in the system's 'UserDefaults'?",
+    "options": {
+      "A": "@State",
+      "B": "@AppStorage",
+      "C": "@SceneStorage",
+      "D": "@StoredValue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is '@SceneStorage' used for?",
+    "options": {
+      "A": "Storing images for a movie scene",
+      "B": "Persisting small amounts of data unique to a specific window (scene), useful for state restoration",
+      "C": "Sharing data between two different apps",
+      "D": "Managing Core Data objects"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Method Dispatch'? Which type is used for 'final' classes in Swift?",
+    "options": {
+      "A": "Dynamic Dispatch",
+      "B": "Static Dispatch (Direct Dispatch)",
+      "C": "Table Dispatch",
+      "D": "Message Dispatch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'In-App Purchase' (IAP) 'Auto-Renewable Subscription'?",
+    "options": {
+      "A": "A one-time payment for an app",
+      "B": "A recurring payment that automatically renews at the end of a period unless canceled",
+      "C": "A free trial that never ends",
+      "D": "A type of discount"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Core Haptics'?",
+    "options": {
+      "A": "The physical vibrations of the phone",
+      "B": "A framework used to compose and play complex haptic and audio feedback patterns",
+      "C": "A type of UI layout",
+      "D": "A security feature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI modifier is used to present a pop-over or modal view?",
+    "options": {
+      "A": ".present()",
+      "B": ".sheet(isPresented:content:)",
+      "C": ".modalView()",
+      "D": ".pushView()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'User Activity' (NSUserActivity) used for?",
+    "options": {
+      "A": "To spy on what the user is doing",
+      "B": "To capture the state of an app for features like Handoff, Spotlight indexing, and Siri Suggestions",
+      "C": "To record the user's screen",
+      "D": "To manage app permissions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Symbolic Links' in the iOS file system?",
+    "options": {
+      "A": "Links that use emojis",
+      "B": "Files that act as pointers to other files or directories",
+      "C": "A security vulnerability",
+      "D": "A type of database join"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Frame' vs 'Bounds' in UIKit?",
+    "options": {
+      "A": "They are the same thing",
+      "B": "Frame is relative to the superview; Bounds is relative to the view's own coordinate system",
+      "C": "Frame is for height; Bounds is for width",
+      "D": "Bounds is only for circles"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question of Batch 7: What is 'App Store Optimization' (ASO)?",
+    "options": {
+      "A": "Optimizing the code to run faster",
+      "B": "The process of improving app visibility and conversion rates in the App Store through keywords and assets",
+      "C": "Reducing the app file size",
+      "D": "A type of unit test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Whole Module Optimization' in the Swift compiler settings?",
+    "options": {
+      "A": "It deletes unused modules automatically",
+      "B": "A mode where the compiler analyzes all files in a module at once to perform better optimizations like inlining",
+      "C": "It reduces the size of the app icon",
+      "D": "It allows for multi-language support"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI attribute ensures a function is always executed on the Main Thread?",
+    "options": {
+      "A": "@MainThread",
+      "B": "@MainActor",
+      "C": "@UIThread",
+      "D": "@Foreground"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spatial Audio' in visionOS development?",
+    "options": {
+      "A": "Music that plays very loudly",
+      "B": "Audio that is anchored to 3D coordinates, changing as the user moves their head relative to the source",
+      "C": "A type of background noise cancellation",
+      "D": "A tool to record voice memos"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Fastlane' in iOS development pipelines?",
+    "options": {
+      "A": "To make the app run faster on old iPhones",
+      "B": "To automate tedious tasks like generating screenshots, dealing with provisioning, and releasing to TestFlight",
+      "C": "A high-speed internet protocol for downloads",
+      "D": "A database for storing user logs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In visionOS, what is the 'Dwell Control' accessibility feature?",
+    "options": {
+      "A": "Controlling the brightness of the screen",
+      "B": "A way to interact with the UI by simply looking at an element for a specific duration without a physical gesture",
+      "C": "A type of battery saving mode",
+      "D": "A parental control setting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Xcode Cloud'?",
+    "options": {
+      "A": "A backup of your project files",
+      "B": "A continuous integration and delivery service built into Xcode for automated testing and distribution",
+      "C": "A type of cloud storage for user photos",
+      "D": "A web browser based version of Xcode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework allows iOS apps to detect and identify people, text, and barcodes in images?",
+    "options": {
+      "A": "ImageKit",
+      "B": "Vision",
+      "C": "FaceTime API",
+      "D": "CoreDetect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Network Link Conditioner'?",
+    "options": {
+      "A": "A tool to speed up the internet",
+      "B": "A tool used to simulate poor network conditions (latency, packet loss) for testing app stability",
+      "C": "A hardware accessory for the router",
+      "D": "A security encryption protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Address Sanitizer' in Xcode?",
+    "options": {
+      "A": "A tool to clean up user shipping addresses",
+      "B": "A debugging tool that detects memory corruption issues like buffer overflows and use-after-free",
+      "C": "A type of virus scanner",
+      "D": "A database cleanup tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SwiftUI modifier is used to define the behavior of a view when it is focused by a visionOS user's gaze?",
+    "options": {
+      "A": ".onFocusChange()",
+      "B": ".hoverEffect()",
+      "C": ".gazeInteraction()",
+      "D": ".onEyeContact()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'App Store Pre-order'?",
+    "options": {
+      "A": "Buying an app before you have money",
+      "B": "Allowing users to sign up to download your app automatically once it is released",
+      "C": "A type of beta testing",
+      "D": "A discount for early developers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic Versioning' (SemVer) used for in Swift Packages?",
+    "options": {
+      "A": "To name the variables in the code",
+      "B": "A standardized numbering system (Major.Minor.Patch) to communicate breaking changes and features",
+      "C": "A type of unit test",
+      "D": "A security scan of the code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Continuous Integration' (CI)?",
+    "options": {
+      "A": "Designing the app constantly",
+      "B": "The practice of automatically building and testing code changes every time they are committed to a repository",
+      "C": "A type of sharding",
+      "D": "A customer support strategy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Metal, what is a 'Shader'?",
+    "options": {
+      "A": "A tool to draw shadows on the UI",
+      "B": "A small program that runs on the GPU to calculate the color and position of pixels or vertices",
+      "C": "A privacy screen for the phone",
+      "D": "A type of memory management"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Device Check' framework?",
+    "options": {
+      "A": "Checking if the screen is cracked",
+      "B": "A framework to identify a device across app reinstalls to prevent fraud and manage trials",
+      "C": "A type of unit test",
+      "D": "A performance report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Widget Bundle'?",
+    "options": {
+      "A": "A sale on app widgets",
+      "B": "A way to include multiple types of widgets within a single app extension",
+      "C": "A type of zip file",
+      "D": "A group of apps"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'StoreKit Testing' in Xcode?",
+    "options": {
+      "A": "Buying real items to test the app",
+      "B": "A local environment that allows testing in-app purchases without needing an internet connection or App Store Connect",
+      "C": "A security scanner",
+      "D": "A performance report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property in Swift prevents a method from being overridden in a subclass?",
+    "options": {
+      "A": "static",
+      "B": "final",
+      "C": "private",
+      "D": "const"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Swift Macros'?",
+    "options": {
+      "A": "Large pieces of code",
+      "B": "A feature that allows the compiler to generate boilerplate code at build time based on your specifications",
+      "C": "A type of animation",
+      "D": "A security firewall"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reality Composer Pro'?",
+    "options": {
+      "A": "A person who writes music",
+      "B": "A developer tool used to assemble, preview, and prepare 3D content specifically for visionOS apps",
+      "C": "A type of unit test",
+      "D": "A database tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'App Analytics' in App Store Connect?",
+    "options": {
+      "A": "Searching for apps on Google",
+      "B": "Data provided by Apple about how users find and interact with your app, including conversion rates and crashes",
+      "C": "A type of security scan",
+      "D": "A developer's salary report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Privacy Nutrition Labels'?",
+    "options": {
+      "A": "A guide on what to eat in the office",
+      "B": "The summary in the App Store that discloses how your app collects and uses data",
+      "C": "A type of sharding",
+      "D": "A security certificate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bitcode' deprecation status?",
+    "options": {
+      "A": "It is now required for all apps",
+      "B": "Apple has deprecated Bitcode as a requirement for App Store submissions in recent Xcode versions",
+      "C": "It only works on Apple Watch",
+      "D": "It is a type of cryptocurrency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which background mode allows an app to continue playing sound even when the device is locked?",
+    "options": {
+      "A": "Continuous Play",
+      "B": "Audio, AirPlay, and Picture in Picture",
+      "C": "Background Sounder",
+      "D": "LockMode Audio"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Universal Purchase'?",
+    "options": {
+      "A": "Buying a phone that works anywhere",
+      "B": "Allowing users to buy an app once and have it available across iOS, iPadOS, macOS, tvOS, and visionOS",
+      "C": "A type of discount",
+      "D": "A security token"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'XCTestCase'?",
+    "options": {
+      "A": "A box to hold the iPhone",
+      "B": "The primary class used for defining unit tests in the XCTest framework",
+      "C": "A type of memory leak",
+      "D": "A security scan result"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Main Bundle' in Swift?",
+    "options": {
+      "A": "The largest file in the app",
+      "B": "The Bundle object representing the directory where the current executable is located",
+      "C": "A security certificate",
+      "D": "A type of sharding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic Search' in Core ML?",
+    "options": {
+      "A": "Searching for code by its name",
+      "B": "Using machine learning to find content (like photos) based on their actual meaning rather than just metadata",
+      "C": "A type of database join",
+      "D": "A security scanner"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'App Sandbox' inheritance?",
+    "options": {
+      "A": "Getting a sandbox from your parents",
+      "B": "The process where child processes spawned by an app also operate within the same security restrictions",
+      "C": "A type of unit test",
+      "D": "A performance report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Final question: What is 'Darwin' in the context of iOS?",
+    "options": {
+      "A": "A scientist",
+      "B": "The open-source Unix-like operating system that forms the core of iOS and macOS",
+      "C": "A type of sharding",
+      "D": "A security certificate"
+    },
+    "answer": "B"
+  }
+]
+
+    
+      
+
+def remove_duplicates(questions):
+    seen = set()
+    unique = []
+
+    for q in questions:
+        if q["question"] not in seen:
+            seen.add(q["question"])
+            unique.append(q)
+
+    return unique
+
+
+def generate_pdf(skill_name, questions):
+    doc = SimpleDocTemplate(
+        f"{skill_name}_Question_Bank.pdf",
+        pagesize=A4
+    )
+
+    elements = []
+    styles = getSampleStyleSheet()
+
+    title_style = styles["Heading1"]
+    normal_style = styles["Normal"]
+
+    elements.append(Paragraph(f"{skill_name} Question Bank ({len(questions)} Questions)", title_style))
+    elements.append(Spacer(1, 0.3 * inch))
+
+    for i, q in enumerate(questions, 1):
+        elements.append(Paragraph(f"{i}. {q['question']}", normal_style))
+        elements.append(Spacer(1, 0.1 * inch))
+
+        for key, value in q["options"].items():
+            elements.append(Paragraph(f"{key}) {value}", normal_style))
+            elements.append(Spacer(1, 0.05 * inch))
+
+        elements.append(Paragraph(f"<b>Answer:</b> {q['answer']}", normal_style))
+        elements.append(Spacer(1, 0.3 * inch))
+
+    doc.build(elements)
+    print(f"✅ PDF Generated with {len(questions)} UNIQUE questions only.")
+
+
+if __name__ == "__main__":
+    skill = "IOS"
+    unique_questions = remove_duplicates(QUESTIONS)
+    generate_pdf(skill, unique_questions)

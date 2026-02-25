@@ -68,6 +68,7 @@ const InterviewStart = () => {
     const [candidate, setCandidate] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [linkExpired, setLinkExpired] = useState(false);
     const [resumeFile, setResumeFile] = useState(null);
     const [isStarting, setIsStarting] = useState(false);
 
@@ -88,8 +89,11 @@ const InterviewStart = () => {
                 setCandidate(response.data);
                 setLoading(false);
             } catch (err) {
-                console.error('Error fetching candidate:', err);
-                setError('Invalid or expired interview link.');
+                if (err.response?.status === 403 && err.response?.data?.link_expired) {
+                    setLinkExpired(true);
+                } else {
+                    setError('Invalid or expired interview link.');
+                }
                 setLoading(false);
             }
         };
@@ -187,6 +191,21 @@ const InterviewStart = () => {
             <div style={{ textAlign: 'center' }}>
                 <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2rem', color: '#667eea', marginBottom: '1rem' }}></i>
                 <p>Verifying candidate...</p>
+            </div>
+        </div>
+    );
+
+    if (linkExpired) return (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#f4f6f8' }}>
+            <div style={{ textAlign: 'center', maxWidth: '420px', padding: '3rem 2.5rem', background: 'white', borderRadius: '24px', boxShadow: '0 20px 60px rgba(0,0,0,0.1)' }}>
+                <div style={{ width: '80px', height: '80px', background: '#FFF5F5', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.5rem' }}>
+                    <i className="fa-solid fa-hourglass-end" style={{ fontSize: '2rem', color: '#E53E3E' }} />
+                </div>
+                <h2 style={{ color: '#2D3748', margin: '0 0 0.75rem', fontSize: '1.6rem', fontWeight: '800' }}>Interview Link Expired</h2>
+                <p style={{ color: '#718096', lineHeight: '1.7', margin: '0 0 1.5rem' }}>
+                    This interview link was valid for <strong>60 minutes</strong> from when it was first opened and has now expired.
+                </p>
+                <p style={{ color: '#A0AEC0', fontSize: '0.85rem' }}>Please contact HR to receive a new interview link.</p>
             </div>
         </div>
     );

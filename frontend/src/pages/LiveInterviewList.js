@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Header from '../components/Header';
 import '../styles/LiveInterviewList.css';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
@@ -132,7 +131,6 @@ export default function LiveInterviewList() {
 
   return (
     <div className="live-interview-list-page">
-      <Header />
       <div className="live-interview-list-shell">
         <div className="live-interview-list-top">
           <div>

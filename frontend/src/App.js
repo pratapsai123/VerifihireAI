@@ -1,3 +1,4 @@
+// Main App entrance for VerifiHireAI
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
@@ -35,11 +36,14 @@ import InterviewStart from './pages/InterviewStart';
 import AiTakeAssessment from './pages/AiTakeAssessment';
 import AiInterviewSession from './pages/AiInterviewSession';
 import AiAssessmentDetail from './pages/AiAssessmentDetail';
+import ResultsAI from './pages/ResultsAI';
 import './App.css';
 
-import Header from './components/Header'; // Import Header
+import Header from './components/Header';
+import { useLocation } from 'react-router-dom';
 
-function App() {
+function AppContent() {
+  const location = useLocation();
   const [showCookieBanner, setShowCookieBanner] = useState(false);
 
   useEffect(() => {
@@ -54,94 +58,113 @@ function App() {
     setShowCookieBanner(false);
   };
 
-  // Check if we should show the header
-  const isCandidatePage =
-    window.location.pathname.startsWith('/interview-start/') ||
-    window.location.pathname.startsWith('/take-assessment/') ||
-    window.location.pathname.startsWith('/take-ai-assessment/') ||
-    window.location.pathname.startsWith('/ai-interview-session/');
+  // List of routes that should have the global header hidden for a full-screen experience
+  const fullScreenRoutes = [
+    '/dashboard',
+    '/create-assessment',
+    '/manual-questions',
+    '/coding/questions/new',
+    '/live-interview',
+    '/live-interview-interviewer',
+  ];
+
+  const isFullScreenPage =
+    fullScreenRoutes.includes(location.pathname) ||
+    location.pathname.startsWith('/ai-assessments/') ||
+    location.pathname.startsWith('/interview-start/') ||
+    location.pathname.startsWith('/take-assessment/') ||
+    location.pathname.startsWith('/take-ai-assessment/') ||
+    location.pathname.startsWith('/ai-interview-session/') ||
+    location.pathname.startsWith('/coding/questions/');
 
   return (
-    <BrowserRouter>
-      <div className="app-container">
-        {!isCandidatePage && <Header />}
-        <div className="app-scroll">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/assessments" element={<Assessment />} />
-            <Route path="/candidates" element={<CandidatePage />} />
-            <Route path="/results" element={<Result />} />
-            <Route path="/result/:token" element={<Result />} />
-            <Route path="/custom-assessment" element={<CustomAssessment />} />
-            <Route path="/review-assessment" element={<ReviewPage />} />
-            <Route path="/invite-candidates/:assessmentId" element={<InviteCandidates />} />
-            <Route path="/team-members" element={<TeamMembers />} />
-            <Route path="/manual-questions" element={<ManualQuestions />} />
-            <Route path="/live-interview-list" element={<LiveInterviewList />} />
-            <Route path="/send-invite" element={<InterviewInvite />} />
-            {/* Question Types */}
-            <Route path="/multiple-choice-question" element={<MultipleChoiceQuestion />} />
-            <Route path="/multiple-selection-question" element={<MultipleSelectionQuestion />} />
-            <Route path="/true-false-question" element={<TrueFalseQuestion />} />
-            <Route path="/pdf-upload-question" element={<PdfUploadQuestion />} />
-            {/* Recruiter Coding Views */}
-            <Route path="/coding" element={<CodingHome />} />
-            <Route path="/coding/questions/new" element={<CodingQuestionForm />} />
-            <Route path="/coding/questions/:id/edit" element={<CodingQuestionForm />} />
-            <Route path="/coding/review" element={<CodingReview />} />
-            <Route path="/coding-challenge-question" element={<CodingQuestionForm />} />
-            {/* Interviewer View */}
-            <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
+    <div className="app-container">
+      {!isFullScreenPage && <Header />}
+      <div className="app-scroll" style={isFullScreenPage ? { top: 0, height: '100vh' } : {}}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/assessments" element={<Assessment />} />
+          <Route path="/candidates" element={<CandidatePage />} />
+          <Route path="/results" element={<Result />} />
+          <Route path="/result/:token" element={<Result />} />
+          <Route path="/custom-assessment" element={<CustomAssessment />} />
+          <Route path="/review-assessment" element={<ReviewPage />} />
+          <Route path="/invite-candidates/:assessmentId" element={<InviteCandidates />} />
+          <Route path="/team-members" element={<TeamMembers />} />
+          <Route path="/manual-questions" element={<ManualQuestions />} />
+          <Route path="/live-interview-list" element={<LiveInterviewList />} />
+          <Route path="/send-invite" element={<InterviewInvite />} />
+          {/* Question Types */}
+          <Route path="/multiple-choice-question" element={<MultipleChoiceQuestion />} />
+          <Route path="/multiple-selection-question" element={<MultipleSelectionQuestion />} />
+          <Route path="/true-false-question" element={<TrueFalseQuestion />} />
+          <Route path="/pdf-upload-question" element={<PdfUploadQuestion />} />
+          {/* Recruiter Coding Views */}
+          <Route path="/coding" element={<CodingHome />} />
+          <Route path="/coding/questions/new" element={<CodingQuestionForm />} />
+          <Route path="/coding/questions/:id/edit" element={<CodingQuestionForm />} />
+          <Route path="/coding/review" element={<CodingReview />} />
+          <Route path="/coding-challenge-question" element={<CodingQuestionForm />} />
+          {/* Interviewer View */}
+          <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
 
-            {/* Public / Candidate Routes */}
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/take-assessment/:token" element={<TakeAssessment />} />
-            <Route path="/accept-invite" element={<AcceptInvite />} />
-            <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
-            <Route path="/live-interview" element={<LiveInterview />} />
-            <Route path="/ai-interview" element={<AiInterview />} />
-            <Route path="/ai-assessments" element={<AiAssessments />} />
-            <Route path="/create-assessment" element={<CreateAssessment />} />
-            <Route path="/resume-matcher" element={<ResumeMatcher />} />
-            <Route path="/interview-start/:token" element={<InterviewStart />} />
-            <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
-            <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
-            <Route path="/ai-assessments/:id" element={<AiAssessmentDetail />} />
-          </Routes>
+          {/* Public / Candidate Routes */}
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/take-assessment/:token" element={<TakeAssessment />} />
+          <Route path="/accept-invite" element={<AcceptInvite />} />
+          <Route path="/coding/questions/:id/attempt" element={<CodingAttempt />} />
+          <Route path="/live-interview" element={<LiveInterview />} />
+          <Route path="/ai-interview" element={<AiInterview />} />
+          <Route path="/ai-assessments" element={<AiAssessments />} />
+          <Route path="/create-assessment" element={<CreateAssessment />} />
+          <Route path="/resume-matcher" element={<ResumeMatcher />} />
+          <Route path="/interview-start/:token" element={<InterviewStart />} />
+          <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
+          <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
+          <Route path="/ai-assessments/:id" element={<AiAssessmentDetail />} />
+          <Route path="/results-ai" element={<ResultsAI />} />
+        </Routes>
 
-          {/* Cookie Consent Banner */}
-          <div
-            id="cookie-banner"
-            style={{
-              transform: showCookieBanner ? 'translateY(0)' : 'translateY(100%)',
-            }}
-          >
-            <div className="cookie-content">
-              <p className="cookie-text">
-                We use cookies to enhance your experience. By continuing to visit
-                this site you agree to our use of cookies.
-              </p>
-              <div className="cookie-buttons">
-                <button
-                  onClick={() => handleAcceptCookies()}
-                  className="cookie-btn cookie-accept-btn"
-                >
-                  Accept
-                </button>
-                <button
-                  onClick={() => setShowCookieBanner(false)}
-                  className="cookie-btn cookie-decline-btn"
-                >
-                  Decline
-                </button>
-              </div>
+        {/* Cookie Consent Banner */}
+        <div
+          id="cookie-banner"
+          style={{
+            transform: showCookieBanner ? 'translateY(0)' : 'translateY(100%)',
+          }}
+        >
+          <div className="cookie-content">
+            <p className="cookie-text">
+              We use cookies to enhance your experience. By continuing to visit
+              this site you agree to our use of cookies.
+            </p>
+            <div className="cookie-buttons">
+              <button
+                onClick={() => handleAcceptCookies()}
+                className="cookie-btn cookie-accept-btn"
+              >
+                Accept
+              </button>
+              <button
+                onClick={() => setShowCookieBanner(false)}
+                className="cookie-btn cookie-decline-btn"
+              >
+                Decline
+              </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 }
