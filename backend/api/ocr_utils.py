@@ -1,13 +1,17 @@
-import easyocr
-from PIL import Image
-import io
-import re
-import numpy as np
+# Global variable for the reader
+_reader = None
 
-# Initialize reader globally to avoid reloading model on every request
-# 'en' for English. gpu=False by default to be safe, or True if available.
-# We'll set gpu=False for compatibility unless we know otherwise.
-reader = easyocr.Reader(['en'], gpu=False)
+def _get_reader():
+    """Lazy initialization of the EasyOCR reader"""
+    global _reader
+    if _reader is None:
+        try:
+            import easyocr
+            _reader = easyocr.Reader(['en'], gpu=False)
+        except Exception as e:
+            print(f"Error initializing EasyOCR: {e}")
+            return None
+    return _reader
 
 def extract_text_from_image(image_file, strategies=['Standard'], rotations=[0, 90, 180, 270]):
     """
@@ -37,6 +41,10 @@ def extract_text_from_image(image_file, strategies=['Standard'], rotations=[0, 9
                 
                 # Extract text
                 # detail=0 returns just the list of strings
+                reader = _get_reader()
+                if not reader:
+                    return extracted_text_log + "\nOCR Reader failed to initialize", False
+                    
                 results = reader.readtext(image_np, detail=0) 
                 text = " ".join(results)
                 

@@ -17,7 +17,10 @@ def handle_candidate_save(sender, instance, created, **kwargs):
             cache.set(cache_key, True, timeout=86400) 
             logger.info(f"Signal: Candidate {instance.id} passed resume screening. Scheduling assessment task in 120 seconds.")
             # Delay execution by 120 seconds (2 minutes)
-            send_assessment_link_task.apply_async(args=[instance.id], countdown=120)
+            try:
+                send_assessment_link_task.apply_async(args=[instance.id], countdown=120)
+            except Exception as e:
+                logger.error(f"Failed to schedule assessment task: {e}")
 
 
 @receiver(post_save, sender=AIAssessmentSubmission)
@@ -28,4 +31,7 @@ def handle_assessment_save(sender, instance, created, **kwargs):
             cache.set(cache_key, True, timeout=86400)
             logger.info(f"Signal: Assessment {instance.id} passed. Scheduling interview task in 120 seconds.")
             # Delay execution by 120 seconds (2 minutes)
-            send_interview_link_task.apply_async(args=[instance.id], countdown=120)
+            try:
+                send_interview_link_task.apply_async(args=[instance.id], countdown=120)
+            except Exception as e:
+                logger.error(f"Failed to schedule interview task: {e}")

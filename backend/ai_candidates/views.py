@@ -26,10 +26,10 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 # Configure Groq
-groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
-if not groq_api_key:
-    raise ValueError("GROQ_API_KEY must be set in settings.py")
-groq_client = Groq(api_key=groq_api_key)
+# groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
+# if not groq_api_key:
+#     raise ValueError("GROQ_API_KEY must be set in settings.py")
+# groq_client = Groq(api_key=groq_api_key)
 
 def extract_json(text):
     if not text:
@@ -289,7 +289,11 @@ class ResumeMatchView(APIView):
             """
 
             logger.info("Using Groq for Resume Match & Extraction")
-            response = groq_client.chat.completions.create(
+            # Scoped lazy initialization for Windows stability
+            local_api_key = getattr(settings, 'GROQ_API_KEY', None)
+            local_groq_client = Groq(api_key=local_api_key)
+            
+            response = local_groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"}
@@ -329,6 +333,7 @@ class ResumeMatchView(APIView):
             return Response(match_result, status=status.HTTP_200_OK)
         except Exception as e:
             logger.error(f"ERROR in ResumeMatchView: {str(e)}")
+            logger.error(traceback.format_exc())
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class CandidateListCreateView(generics.ListCreateAPIView):
@@ -554,7 +559,11 @@ class ProcessAnswerView(APIView):
         }}
         """
 
-            response = groq_client.chat.completions.create(
+            # Lazy-load Groq for ProcessAnswerView
+            local_api_key = getattr(settings, 'GROQ_API_KEY', None)
+            local_groq_client = Groq(api_key=local_api_key)
+
+            response = local_groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0.7,

@@ -8,12 +8,15 @@ from ai_candidates.views import extract_json
 
 logger = logging.getLogger(__name__)
 
-groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
-if groq_api_key:
-    groq_client = Groq(api_key=groq_api_key)
+# groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
+# if groq_api_key:
+#     groq_client = Groq(api_key=groq_api_key)
 
 def process_resume_passed(candidate_id):
     try:
+        # Local Groq client for lazy loading
+        local_groq_key = getattr(settings, 'GROQ_API_KEY', None)
+        local_groq_client = Groq(api_key=local_groq_key) if local_groq_key else None
         candidate = Candidate.objects.get(id=candidate_id)
         if candidate.status != 'Resume Passed':
             return
@@ -54,8 +57,8 @@ def process_resume_passed(candidate_id):
         Format strictly as JSON with keys: "mcqs", "coding_challenges".
         """
         
-        if groq_api_key:
-            response = groq_client.chat.completions.create(
+        if local_groq_client:
+            response = local_groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"}

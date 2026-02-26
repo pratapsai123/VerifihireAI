@@ -156,7 +156,7 @@ const AiTakeAssessment = () => {
 
         setCodeOutput([{ type: 'info', content: `Running ${selectedLanguage}...` }]);
         try {
-            const r = await axios.post(`${API_BASE_URL}/api/ai/execute/`, {
+            const r = await axios.post(`${API_BASE_URL}/ai/execute/`, {
                 language: selectedLanguage, version: langData.version,
                 files: [{ content: code }], stdin: customInput
             });

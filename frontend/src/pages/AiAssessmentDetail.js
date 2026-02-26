@@ -213,8 +213,8 @@ const AiAssessmentDetail = () => {
                                                         <div style={{ fontSize: '0.8rem', color: '#A3AED0' }}>{sub.candidate_email}</div>
                                                     </td>
                                                     <td style={{ padding: '1rem' }}>
-                                                        <div style={{ fontSize: '1.1rem', fontWeight: '800', color: sub.percentage >= 60 ? '#05CD99' : '#EE5D50' }}>{sub.percentage}%</div>
-                                                        <div style={{ fontSize: '0.75rem', color: '#A3AED0' }}>{sub.score} / {(sub.total_questions || (mcqs.length + coding.length)) * pointPerQ} pts</div>
+                                                        <div style={{ fontSize: '1.1rem', fontWeight: '800', color: sub.percentage >= assessment.pass_threshold ? '#05CD99' : '#EE5D50' }}>{sub.percentage}%</div>
+                                                        <div style={{ fontSize: '0.75rem', color: '#A3AED0' }}>{sub.score} / {sub.results_breakdown?.total_possible || assessment.total_points || 'N/A'} pts</div>
                                                     </td>
                                                     <td style={{ padding: '1rem' }}>
                                                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -264,14 +264,20 @@ const AiAssessmentDetail = () => {
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
                                 <div style={{ background: '#F8F9FF', padding: '1.5rem', borderRadius: '25px', textAlign: 'center' }}>
                                     <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>{selectedSubmission.percentage}%</div>
-                                    <div style={{ color: '#1B254B', fontWeight: '600' }}>{selectedSubmission.score} Correct</div>
+                                    <div style={{ fontSize: '2rem', fontWeight: '800', color: '#4318FF' }}>{selectedSubmission.mcq_score} pts</div>
+                                    <div style={{ color: '#1B254B', fontWeight: '600' }}>Out of {selectedSubmission.results_breakdown?.mcq?.total || 'N/A'}</div>
                                 </div>
                                 <div style={{ background: '#F8F9FF', padding: '1.5rem', borderRadius: '25px', textAlign: 'center' }}>
-                                    <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Integrity Score</div>
-                                    <div style={{ fontSize: '2.5rem', fontWeight: '800', color: selectedSubmission.integrity_score >= 70 ? '#05CD99' : '#EE5D50' }}>{selectedSubmission.integrity_score}%</div>
-                                    <div style={{ color: '#1B254B', fontWeight: '600' }}>{selectedSubmission.integrity_score >= 70 ? 'High Trust' : 'Suspicious'}</div>
+                                    <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
+                                    <div style={{ fontSize: '2rem', fontWeight: '800', color: '#4318FF' }}>{selectedSubmission.coding_score} pts</div>
+                                    <div style={{ color: '#1B254B', fontWeight: '600' }}>Out of {selectedSubmission.results_breakdown?.coding?.total || 'N/A'}</div>
                                 </div>
+                            </div>
+
+                            <div style={{ background: selectedSubmission.percentage >= assessment.pass_threshold ? '#E6FBF5' : '#FFF5F5', padding: '1.5rem', borderRadius: '25px', textAlign: 'center', marginBottom: '3rem' }}>
+                                <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Overall Result</div>
+                                <div style={{ fontSize: '2.5rem', fontWeight: '800', color: selectedSubmission.percentage >= assessment.pass_threshold ? '#05CD99' : '#EE5D50' }}>{selectedSubmission.percentage}%</div>
+                                <div style={{ color: '#1B254B', fontWeight: '700', textTransform: 'uppercase' }}>{selectedSubmission.status}</div>
                             </div>
 
                             <h4 style={{ color: '#1B254B', marginBottom: '1.5rem' }}>Answer Verification</h4>

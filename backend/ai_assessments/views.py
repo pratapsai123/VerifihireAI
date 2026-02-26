@@ -19,10 +19,10 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Configure Groq
-groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
-if not groq_api_key:
-    raise ValueError("GROQ_API_KEY must be set in settings.py")
-groq_client = Groq(api_key=groq_api_key)
+# groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
+# if not groq_api_key:
+#     raise ValueError("GROQ_API_KEY must be set in settings.py")
+# groq_client = Groq(api_key=groq_api_key)
 
 class SubmitAssessmentView(APIView):
     def post(self, request):
@@ -53,39 +53,50 @@ class SubmitAssessmentView(APIView):
                     status='ONGOING'
                 )
 
-            points_per_q = {
-                'Easy': 100,
-                'Medium': 200,
-                'Hard': 300
-            }.get(assessment.difficulty_level, 100)
-            
             generated_content = assessment.generated_content or {}
             mcqs = generated_content.get('mcqs', [])
             coding_challenges = generated_content.get('coding_challenges', [])
             
-            total_mcqs = len(mcqs)
-            total_coding = len(coding_challenges)
-            total_q = total_mcqs + total_coding
+            total_possible_points = assessment.total_points or 0
+            possible_mcq_points = 0
+            possible_coding_points = 0
+            candidate_mcq_points = 0
+            candidate_coding_points = 0
             
-            total_possible_points = total_q * points_per_q
-            candidate_total_points = 0
-            
+            # Difficulty weights
+            weight_map = {'Easy': 100, 'Medium': 200, 'Hard': 300}
+
             # 1. MCQ Scoring
             for i, mcq in enumerate(mcqs):
+                difficulty = mcq.get('difficulty', 'Easy')
+                weight = weight_map.get(difficulty, 100)
+                possible_mcq_points += weight
+                
                 correct_ans = str(mcq.get('answer') or '').strip().upper()
                 candidate_ans = str(answers.get(f'mcq_{i}') or '').strip().upper()
+                
                 if correct_ans and candidate_ans == correct_ans:
-                    candidate_total_points += points_per_q
+                    candidate_mcq_points += weight
 
-            # 2. Coding Challenge Scoring (based on pass rate)
+            # 2. Coding Challenge Scoring
             for i, challenge in enumerate(coding_challenges):
+                difficulty = challenge.get('difficulty', 'Medium')
+                weight = weight_map.get(difficulty, 200)
+                possible_coding_points += weight
+                
                 res = coding_results.get(str(i))
                 if res:
                     passed = res.get('passed', 0)
                     total_tc = res.get('total', 1)
                     if total_tc > 0:
                         score_fraction = passed / total_tc
-                        candidate_total_points += (score_fraction * points_per_q)
+                        candidate_coding_points += (score_fraction * weight)
+
+            candidate_total_points = candidate_mcq_points + candidate_coding_points
+            
+            # Fallback if total_points wasn't set on assessment
+            if total_possible_points == 0:
+                total_possible_points = possible_mcq_points + possible_coding_points
 
             if total_possible_points > 0:
                 percentage = round((candidate_total_points / total_possible_points) * 100)
@@ -95,10 +106,17 @@ class SubmitAssessmentView(APIView):
             pass_status = 'selected' if percentage >= assessment.pass_threshold and submission.integrity_score >= 70 else 'rejected'
 
             submission.answers = answers
+            submission.mcq_score = round(candidate_mcq_points)
+            submission.coding_score = round(candidate_coding_points)
             submission.score = round(candidate_total_points)
-            submission.total_questions = total_q
+            submission.total_questions = len(mcqs) + len(coding_challenges)
             submission.percentage = percentage
             submission.status = pass_status
+            submission.results_breakdown = {
+                "mcq": {"scored": round(candidate_mcq_points), "total": possible_mcq_points},
+                "coding": {"scored": round(candidate_coding_points), "total": possible_coding_points},
+                "total_possible": total_possible_points
+            }
             submission.submitted_at = timezone.now()
             submission.save()
 
@@ -106,8 +124,9 @@ class SubmitAssessmentView(APIView):
                 "message": "Assessment submitted successfully",
                 "submission_id": submission.id,
                 "score": submission.score,
+                "mcq_score": submission.mcq_score,
+                "coding_score": submission.coding_score,
                 "total_possible_points": total_possible_points,
-                "total": total_q,
                 "percentage": percentage,
                 "status": pass_status
             }, status=status.HTTP_200_OK)
@@ -124,13 +143,17 @@ class GenerateAssessmentView(APIView):
         data = request.data
         job_description = data.get('job_description')
         required_skills = data.get('required_skills')
-        difficulty = data.get('difficulty', 'Medium')
-        try:
-            mcq_count = int(data.get('mcq_count', 10))
-            coding_count = int(data.get('coding_count', 2))
-            duration = int(data.get('duration', 60))
-        except (ValueError, TypeError):
-            mcq_count, coding_count, duration = 10, 2, 60
+        
+        # Granular inputs from new UI
+        mcq_easy = int(data.get('mcq_easy', 5))
+        mcq_medium = int(data.get('mcq_medium', 3))
+        mcq_hard = int(data.get('mcq_hard', 2))
+        coding_tasks = data.get('coding_tasks', ['Medium']) # List of difficulties
+        duration = int(data.get('duration', 60))
+        total_possible_points = int(data.get('total_possible_points', 1000))
+        
+        mcq_count = mcq_easy + mcq_medium + mcq_hard
+        coding_count = len(coding_tasks)
 
         if not job_description or not required_skills:
             return Response({
@@ -145,59 +168,53 @@ class GenerateAssessmentView(APIView):
                 mcq_count=mcq_count,
                 coding_count=coding_count,
                 duration_minutes=duration,
-                difficulty_level=difficulty,
+                total_points=total_possible_points,
                 available_from=data.get('available_from'),
                 available_until=data.get('available_until'),
                 pass_threshold=data.get('pass_threshold', 60)
             )
 
-            # Cap overly ambitious coding counts to prevent AI hallucinations/timeouts
-            safe_coding_count = min(coding_count, 3)
+            # Build a very specific prompt based on the granular breakdown
+            mcq_prompt = f"TASK 1: Generate {mcq_count} Multiple Choice Questions (MCQs).\n"
+            mcq_prompt += f"- {mcq_easy} Easy questions\n"
+            mcq_prompt += f"- {mcq_medium} Medium questions\n"
+            mcq_prompt += f"- {mcq_hard} Hard questions\n"
+            mcq_prompt += "Each MCQ object must have: 'question', 'options' (list of 4), 'answer', and 'difficulty' (Easy/Medium/Hard)."
+
+            coding_prompt = f"TASK 2: Generate {coding_count} Coding Challenges.\n"
+            for i, diff in enumerate(coding_tasks):
+                coding_prompt += f"- Challenge {i+1}: {diff} difficulty\n"
+            coding_prompt += "Each challenge object must have: 'title', 'problem_statement' (detailed), 'input_format', 'output_format', 'constraints', 'example_input', 'example_output', 'explanation', 'starter_code_java', 'starter_code_python', 'difficulty' (must match requested), and 'test_cases' (list of 5 objects)."
 
             prompt = f"""
-            Act as an expert technical recruiter. Create a {difficulty} difficulty technical assessment.
+            Act as an expert technical recruiter. Create a comprehensive technical assessment.
             Job Description: {job_description}
             Required Skills: {required_skills}
             
-            TASK 1: Generate {mcq_count} Multiple Choice Questions (MCQs).
-            Each MCQ object must have:
-            - "question": string
-            - "options": list of 4 strings
-            - "answer": string (must match one of the options exactly)
-
-            TASK 2: Generate {safe_coding_count} Coding Challenges.
-            Each challenge object must have:
-            - "title": string
-            - "problem_statement": string (DETAILED description, at least 2 paragraphs, explaining the scenario, edge cases, and requirements clearly like LeetCode/HackerRank)
-            - "input_format": string (e.g., "The first line contains an integer N...")
-            - "output_format": string (e.g., "Return a list of integers...")
-            - "constraints": list of strings (e.g., "1 <= N <= 10^5")
-            - "example_input": string (e.g., "5\\n1 2 3 4 5")
-            - "example_output": string (e.g., "15")
-            - "explanation": string (Step-by-step logic for the example)
-               - "starter_code_java": string (MUST be a complete class structure with imports, e.g., "import java.util.*;\nclass Solution {{\n    public static int solve(int[] arr) {{\n        // Write logic here\n        return 0;\n    }}\n}}")
-               - "starter_code_python": string (MUST be a function definition, e.g., "def solve(arr):\n    # Write logic here\n    pass")
-               - "test_cases": list of at least 5 objects for hidden evaluation: {{ "input": "...", "output": "..." }}
+            {mcq_prompt}
             
-            Format the output strictly as a raw JSON object with these keys: "mcqs", "coding_challenges".Ensure Java code is wrapped in a 'Solution' or 'Main' class.
+            {coding_prompt}
+            
+            Format the output strictly as a raw JSON object with these keys: "mcqs", "coding_challenges".
             """
 
-            logger.info(f"Using Groq for {difficulty} Assessment Generation")
-            response = groq_client.chat.completions.create(
+            logger.info(f"Using Groq for Granular Assessment Generation ({total_possible_points} pts)")
+            local_api_key = getattr(settings, 'GROQ_API_KEY', None)
+            local_groq_client = Groq(api_key=local_api_key)
+            
+            response = local_groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"}
             )
             raw_text = response.choices[0].message.content
-            logger.info(f"GROQ RAW RESPONSE: {raw_text}")
-
+            
             if not raw_text:
                 raise Exception("Empty response from AI engine")
 
             generated_data = extract_json(raw_text)
             if not generated_data:
-                logger.error(f"Failed JSON extraction from: {raw_text}")
-                raise Exception("The AI generated a response but the structure was invalid. Please try again.")
+                raise Exception("The AI generated a response but the structure was invalid.")
 
             assessment.generated_content = generated_data
             assessment.status = 'SCHEDULED'
@@ -336,6 +353,9 @@ class AssessmentDetailView(APIView):
                     "candidate_name": sub.candidate_name,
                     "candidate_email": sub.candidate_email,
                     "score": sub.score,
+                    "mcq_score": sub.mcq_score,
+                    "coding_score": sub.coding_score,
+                    "results_breakdown": sub.results_breakdown,
                     "total_questions": sub.total_questions,
                     "percentage": sub.percentage,
                     "status": sub.status,
@@ -352,6 +372,7 @@ class AssessmentDetailView(APIView):
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
                 "difficulty_level": assessment.difficulty_level,
+                "total_points": assessment.total_points,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": assessment.generated_content,
                 "status": assessment.status,

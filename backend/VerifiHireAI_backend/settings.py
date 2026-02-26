@@ -37,7 +37,7 @@ FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "http://localhost:3000")
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
+#    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
-    'channels',
+#    'channels',
     'api',
     'ai_assessments',
     'ai_candidates',
@@ -87,7 +87,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'VerifiHireAI_backend.wsgi.application'
-ASGI_APPLICATION = 'VerifiHireAI_backend.asgi.application'
+# ASGI_APPLICATION = 'VerifiHireAI_backend.asgi.application'
 
 CHANNEL_LAYERS = {
     'default': {
@@ -122,10 +122,10 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'verifihire_db',
-        'USER': 'verifihire_user',
-        'PASSWORD': 'verifihire_password',
-        'HOST': 'localhost',
+        'NAME': 'react_user',
+        'USER': 'postgres',
+        'PASSWORD': '12345',
+        'HOST': '127.0.0.1',
         'PORT': '5432',
         **({'OPTIONS': db_options} if db_options else {}),
     }
