@@ -501,39 +501,40 @@ class ProcessAnswerView(APIView):
         Job Context: {jd_context[:200]}
         
         GOAL:
-        Determine if the Candidate Answer is (A) A clear, explicit Clarification Request or (B) An Actual Answer.
+        Determine if the Candidate Answer is (A) A CLARIFICATION REQUEST, (B) An EXIT REQUEST, or (C) An ACTUAL ANSWER.
 
-        (A) CLARIFICATION REQUEST - ONLY trigger if:
+        (A) CLARIFICATION REQUEST - Trigger if:
         - The candidate explicitly asks to repeat: "repeat that", "pardon", "what?".
-        - The candidate explicitly asks for help because they are LOST or don't understand the question.
+        - The candidate indicates they didn't hear or understand the question.
         
-        (B) ACTUAL ANSWER - Trigger for:
-        - Greetings, introductions, or any info regarding their background/tech skills.
-        - EVEN if the transcript is slightly messy, use your logic to extract the meaning.
+        (B) EXIT REQUEST - Trigger if:
+        - The candidate asks to "end", "stop", "finish", or "exit" the interview.
+        - The candidate expresses they no longer want to continue.
+
+        (C) ACTUAL ANSWER - Trigger for:
+        - Any substantive information, greetings, or "I don't know" / "skip".
+        - IMPORTANT: If a candidate says "I don't know", "no idea", or "skip", it is an ACTUAL ANSWER (Score 0), NOT a clarification request. You must MOVE ON to the next topic.
         
-        STT & CONTEXT AWARENESS (CRITICAL):
-        - Microphones can be messy. "BTech an mlrit" = "B.Tech and MLRIT".
-        - "Java" is a PROGRAMMING LANGUAGE. If a candidate says "I am a Java developer", they are sharing their background, NOT talking about the island of Java.
-        - NEVER loop more than once on the same question. If they tried to answer (even with just one sentence), MOVE ON.
-        - DO NOT be a robot. If they said "graduated in 2015", that counts as an educational background. MOVE TO THE NEXT TOPIC.
+        STT & CONTEXT AWARENESS:
+        - NEVER loop more than once on the same question. If they tried to answer (even with just "I don't know"), MOVE ON.
+        - DO NOT be a robot. If they gave any info, acknowledge it briefly and move to a DIFFERENT topic.
+        - DO NOT start the question with "You were asked to..." or "Let's try again...". Just provide the next logical question.
 
         IF (A) CLARIFICATION REQUEST:
-        1. Set "is_clarification": true.
+        1. Set "is_clarification": true, "is_exit": false.
         2. Set "feedback": A helpful rephrasing of the Last Question.
-        3. Set "score": 0.
-        4. Set "refined_next_question": current_question.
+        3. Set "refined_next_question": current_question.
 
-        IF (B) ACTUAL ANSWER:
-        1. Set "is_clarification": false.
-        2. "feedback": A brief acknowledgement. BE KINDER AND MORE CONVERSATIONAL.
-        3. "refined_next_question": MUST BE A NEW, DIFFERENT QUESTION. 
-           - If this was the introduction, ask about a specific technical skill from the JD or Resume. 
-           - DO NOT start the question with "You were asked to..." or "Let's focus on...". 
-           - Just ask the next logical interview question.
-        4. SCORING: 
-           - 0-1: "no" or "don't know".
-           - 2-4: vague.
-           - 5-10: correct content. (Intro is always 5+ if they try).
+        IF (B) EXIT REQUEST:
+        1. Set "is_clarification": false, "is_exit": true.
+        2. Set "feedback": "I understand. Thank you for your time today. Goodbye!".
+        3. Set "refined_next_question": null.
+
+        IF (C) ACTUAL ANSWER:
+        1. Set "is_clarification": false, "is_exit": false.
+        2. "feedback": A brief acknowledgement.
+        3. "refined_next_question": MUST BE A NEW, DIFFERENT QUESTION.
+        4. SCORING: 0-1 for "I don't know", 2-4 for vague, 5-10 for correct.
 
         CONTEXT:
         Resume: {resume_context[:1000]}
@@ -546,6 +547,7 @@ class ProcessAnswerView(APIView):
         OUTPUT (JSON):
         {{
             "is_clarification": boolean,
+            "is_exit": boolean,
             "feedback": "...",
             "refined_next_question": "...",
             "score": integer
@@ -563,6 +565,19 @@ class ProcessAnswerView(APIView):
             
             if not data:
                 raise ValueError("AI returned invalid JSON structure")
+
+            # --- SAFETY GUARD: Prevent Question Looping ---
+            # If the candidate said "I don't know" or similar, and the AI tries to repeat the question 
+            # even while setting is_clarification=false, we force it to move on.
+            refined_q = data.get('refined_next_question')
+            if not data.get('is_clarification') and not data.get('is_exit'):
+                if refined_q == current_question or not refined_q:
+                    logger.warning(f"AI attempted to repeat question: {current_question}. Forcing move to next.")
+                    if remaining_questions:
+                        data['refined_next_question'] = remaining_questions[0]
+                    else:
+                        data['refined_next_question'] = "That's perfectly fine. Tell me about another project you've worked on recently."
+            # -----------------------------------------------
 
             # Scoring Update (Silent)
             if candidate_id and data.get('score') is not None and not data.get('is_clarification'):

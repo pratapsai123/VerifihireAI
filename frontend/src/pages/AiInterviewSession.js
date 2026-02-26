@@ -318,7 +318,16 @@ const AiInterviewSession = () => {
 
             const data = response.data;
             const isClarification = data.is_clarification === true;
+            const isExit = data.is_exit === true;
             let fullFeedback = data.feedback || "";
+
+            if (isExit) {
+                // Scenario: Candidate wants to end the interview
+                addMessage('ai', fullFeedback);
+                await speak(fullFeedback);
+                completeInterview();
+                return;
+            }
 
             if (isClarification) {
                 // Scenario A: Candidate asked for help/clarification
