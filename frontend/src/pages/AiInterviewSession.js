@@ -24,6 +24,7 @@ const AiInterviewSession = () => {
     const [responseInput, setResponseInput] = useState('');
     const [integrityBreech, setIntegrityBreech] = useState({ active: false, text: '' });
     const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
+    const [isCompleted, setIsCompleted] = useState(false);
 
     // Refs
     const videoRef = useRef(null);
@@ -250,6 +251,7 @@ const AiInterviewSession = () => {
         axios.patch(`${API_BASE_URL}/ai-candidates/${token}/status/`, { status: 'Completed' }).catch(console.error);
         setIsProcessing(true);
         setAiStatus("Session Finished");
+        setIsCompleted(true);
     }, [token, speak, addMessage]);
 
     const startListening = useCallback(() => {
@@ -401,13 +403,21 @@ const AiInterviewSession = () => {
                     return newQs;
                 });
 
-                // De-duplicate if feedback and next question are identical
-                const finalTurnText = (fullFeedback.trim() === nextQ.trim())
+                // De-duplicate and filter out transition phrases if ending
+                let finalTurnText = (fullFeedback.trim() === nextQ.trim())
                     ? nextQ
                     : (fullFeedback.trim() + " " + nextQ);
 
-                addMessage('ai', finalTurnText);
-                await speak(finalTurnText);
+                // If this is the last question being answered (nextIdx >= MAX_QUESTIONS), 
+                // we don't want "No worries, let's move on" right before the goodbye.
+                if (nextIdx >= MAX_QUESTIONS) {
+                    finalTurnText = fullFeedback.trim();
+                }
+
+                if (finalTurnText) {
+                    addMessage('ai', finalTurnText);
+                    await speak(finalTurnText);
+                }
 
                 setIsProcessing(false);
                 isProcessingRef.current = false;
@@ -674,11 +684,13 @@ const AiInterviewSession = () => {
                         {integrityBreech.active && <div className="integrity-overlay"><span>{integrityBreech.text}</span></div>}
                         {aiToast.active && <div className={`ai-event-toast ${aiToast.urgent ? 'urgent' : ''}`}>{aiToast.text}</div>}
                     </div>
-                    <div style={{ marginTop: '20px', textAlign: 'center', width: '100%' }}>
-                        <div className="ai-status-badge"><span className="speaking-indicator"></span>{aiStatus}</div>
-                    </div>
-                    <div style={{ flex: 1, display: 'flex', alignItems: 'flex-end', justifyContent: 'center', paddingBottom: '0.5rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, width: '100%', gap: '1rem' }}>
                         <ReadyPlayerMeAvatar isSpeaking={isSpeaking} />
+
+                        {/* Status Message moved to bottom as requested */}
+                        <div className="ai-status-badge" style={{ marginTop: 'auto', marginBottom: '1rem' }}>
+                            <span className="speaking-indicator"></span>{aiStatus}
+                        </div>
                     </div>
                 </div>
 
@@ -710,8 +722,8 @@ const AiInterviewSession = () => {
                         {chatMessages.map((msg, i) => <div key={i} className={`message ${msg.sender}`}>{msg.text}</div>)}
                     </div>
 
-                    {/* Live Transcript Display */}
-                    {(isRecording && aiStatus.startsWith('Heard:')) && (
+                    {/* Live Transcript Display - Restored below chat */}
+                    {isRecording && aiStatus.startsWith('Heard:') && (
                         <div className="live-transcript-bubble">
                             <i className="fa-solid fa-ear-listen" style={{ color: '#667eea', marginRight: '8px' }}></i>
                             {aiStatus.replace('Heard: ', '').replace(/"/g, '')}
@@ -754,6 +766,27 @@ const AiInterviewSession = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Success Completion Overlay */}
+            {isCompleted && (
+                <div className="completion-overlay">
+                    <div className="completion-card">
+                        <div className="completion-icon-wrap">
+                            <i className="fa-solid fa-circle-check"></i>
+                        </div>
+                        <h2 className="completion-title">Interview Completed!</h2>
+                        <p className="completion-text">
+                            Thank you, <strong>{candidateName}</strong>. Your interview session has been successfully recorded and submitted for review.
+                        </p>
+                        <div className="completion-next-steps">
+                            <p>Moving forward, our recruitment team will analyze the session and get back to you with the next steps via email.</p>
+                        </div>
+                        <button className="completion-exit-btn" onClick={() => navigate('/ai-interview')}>
+                            Exit and Return to Dashboard
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

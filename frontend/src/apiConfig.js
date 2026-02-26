@@ -6,8 +6,9 @@
 const getApiBaseUrl = () => {
     if (typeof window !== 'undefined') {
         const hostname = window.location.hostname;
+        // If accessed via IP or custom host, use that same host but port 8001
         if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-            return `${window.location.origin}/api`;
+            return `${window.location.protocol}//${hostname}:8001/api`;
         }
     }
     return process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
