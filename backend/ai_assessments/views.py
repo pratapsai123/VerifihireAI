@@ -93,9 +93,8 @@ class SubmitAssessmentView(APIView):
 
             candidate_total_points = candidate_mcq_points + candidate_coding_points
             
-            # Fallback if total_points wasn't set on assessment
-            if total_possible_points == 0:
-                total_possible_points = possible_mcq_points + possible_coding_points
+            # Always use the sum of calculated potential points for the denominator
+            total_possible_points = possible_mcq_points + possible_coding_points
 
             if total_possible_points > 0:
                 percentage = round((candidate_total_points / total_possible_points) * 100)

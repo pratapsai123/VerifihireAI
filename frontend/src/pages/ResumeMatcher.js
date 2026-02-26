@@ -14,11 +14,37 @@ const ResumeMatcher = () => {
     const [matchMode, setMatchMode] = useState('automatic'); // 'automatic' or 'manual'
 
     // Automation Pipeline Settings
-    const [difficulty, setDifficulty] = useState('Medium');
     const [duration, setDuration] = useState(60);
     const [mcqCount, setMcqCount] = useState(10);
     const [codingCount, setCodingCount] = useState(1);
     const [passThreshold, setPassThreshold] = useState(60);
+    const [codingChallenges, setCodingChallenges] = useState([{ id: 1, difficulty: 'Medium' }]);
+
+    const handleCodingCountChange = (val) => {
+        const count = Math.min(Math.max(parseInt(val) || 0, 0), 5);
+        let updated = [...codingChallenges];
+        if (count > updated.length) {
+            for (let i = updated.length; i < count; i++) {
+                updated.push({ id: Date.now() + i, difficulty: 'Medium' });
+            }
+        } else {
+            updated = updated.slice(0, count);
+        }
+        setCodingCount(count);
+        setCodingChallenges(updated);
+    };
+
+    const updateCodingDiff = (id, diff) => {
+        setCodingChallenges(prev => prev.map(c => c.id === id ? { ...c, difficulty: diff } : c));
+    };
+
+    const calculateTotalPoints = () => {
+        const mcqPts = mcqCount * 20;
+        const codingPts = codingChallenges.reduce((sum, c) => {
+            return sum + (c.difficulty === 'Easy' ? 100 : c.difficulty === 'Medium' ? 200 : 300);
+        }, 0);
+        return mcqPts + codingPts;
+    };
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -60,10 +86,9 @@ const ResumeMatcher = () => {
         formData.append('threshold', threshold);
 
         if (matchMode === 'automatic') {
-            formData.append('difficulty', difficulty);
             formData.append('duration', duration);
             formData.append('mcq_count', mcqCount);
-            formData.append('coding_count', codingCount);
+            formData.append('coding_tasks', JSON.stringify(codingChallenges.map(c => c.difficulty)));
             formData.append('pass_threshold', passThreshold);
             formData.append('is_fully_automatic', true);
         }
@@ -275,68 +300,60 @@ const ResumeMatcher = () => {
                                         </div>
                                     </div>
 
-                                    <div className="settings-grid">
+                                    {/* Row 1: MCQ, Coding Tasks, Total Time */}
+                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
                                         <div className="setting-item">
-                                            <label>Assessment Difficulty</label>
-                                            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className="modern-select">
-                                                <option value="Easy">Easy</option>
-                                                <option value="Medium">Medium</option>
-                                                <option value="Hard">Hard</option>
-                                            </select>
+                                            <label>MCQ Questions</label>
+                                            <input type="number" value={mcqCount} onChange={(e) => setMcqCount(parseInt(e.target.value) || 0)} className="modern-input" min="0" max="30" />
                                         </div>
-
                                         <div className="setting-item">
-                                            <label>Duration (Minutes)</label>
-                                            <input
-                                                type="number"
-                                                value={duration}
-                                                onChange={(e) => setDuration(e.target.value)}
-                                                className="modern-input"
-                                                min="15"
-                                                max="180"
-                                            />
+                                            <label>Coding Tasks</label>
+                                            <input type="number" value={codingCount} onChange={(e) => handleCodingCountChange(e.target.value)} className="modern-input" min="0" max="5" />
                                         </div>
-
                                         <div className="setting-item">
-                                            <label>No. of MCQs</label>
-                                            <input
-                                                type="number"
-                                                value={mcqCount}
-                                                onChange={(e) => setMcqCount(e.target.value)}
-                                                className="modern-input"
-                                                min="5"
-                                                max="30"
-                                            />
+                                            <label>Total Time (Mins)</label>
+                                            <input type="number" value={duration} onChange={(e) => setDuration(parseInt(e.target.value) || 60)} className="modern-input" min="15" max="180" />
                                         </div>
+                                    </div>
 
-                                        <div className="setting-item">
-                                            <label>No. of Coding Tasks</label>
-                                            <input
-                                                type="number"
-                                                value={codingCount}
-                                                onChange={(e) => setCodingCount(e.target.value)}
-                                                className="modern-input"
-                                                min="1"
-                                                max="5"
-                                            />
-                                        </div>
-
-                                        <div className="setting-item" style={{ gridColumn: 'span 2' }}>
-                                            <label>Assessment Pass Threshold ({passThreshold}%)</label>
-                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                                <input
-                                                    type="range"
-                                                    min="0" max="100"
-                                                    value={passThreshold}
-                                                    onChange={(e) => setPassThreshold(e.target.value)}
-                                                    style={{ flex: 1, accentColor: '#6366F1' }}
-                                                />
-                                                <span style={{ minWidth: '40px', fontWeight: '800', color: '#1E293B' }}>{passThreshold}%</span>
+                                    {/* Per-task coding difficulty — only if tasks > 0 */}
+                                    {codingCount > 0 && (
+                                        <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.25rem', marginBottom: '1.5rem' }}>
+                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                                <span style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.95rem' }}>Customize Coding Complexity</span>
+                                                <span style={{ fontSize: '0.85rem', color: '#4f46e5', fontWeight: '700' }}>Points: {calculateTotalPoints()}</span>
                                             </div>
-                                            <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>
-                                                Candidates scoring below this will be automatically rejected.
-                                            </p>
+                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                                                {codingChallenges.map((c, idx) => (
+                                                    <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#F8F9FF', padding: '0.6rem 1rem', borderRadius: '12px', border: '1px solid #e0e7ff' }}>
+                                                        <span style={{ color: '#4318FF', fontWeight: '800', fontSize: '0.85rem' }}>Q{idx + 1}</span>
+                                                        <select
+                                                            value={c.difficulty}
+                                                            onChange={(e) => updateCodingDiff(c.id, e.target.value)}
+                                                            style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '600', color: '#1B254B', cursor: 'pointer' }}
+                                                        >
+                                                            <option value="Easy">Easy</option>
+                                                            <option value="Medium">Medium</option>
+                                                            <option value="Hard">Hard</option>
+                                                        </select>
+                                                    </div>
+                                                ))}
+                                            </div>
                                         </div>
+                                    )}
+
+                                    {/* Pass Threshold */}
+                                    <div className="setting-item">
+                                        <label>Assessment Pass Threshold ({passThreshold}%)</label>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                            <input
+                                                type="range" min="0" max="100" value={passThreshold}
+                                                onChange={(e) => setPassThreshold(e.target.value)}
+                                                style={{ flex: 1, accentColor: '#6366F1' }}
+                                            />
+                                            <span style={{ minWidth: '40px', fontWeight: '800', color: '#1E293B' }}>{passThreshold}%</span>
+                                        </div>
+                                        <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
                                     </div>
                                 </div>
                             )}
