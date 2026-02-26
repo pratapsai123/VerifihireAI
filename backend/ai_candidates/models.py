@@ -31,11 +31,11 @@ class Candidate(models.Model):
     total_questions = models.IntegerField(default=0)
     submission_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    available_from = models.DateTimeField(blank=True, null=True)
-    available_until = models.DateTimeField(blank=True, null=True)
     completed_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview was completed")
     link_opened_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview link was first opened")
     interview_summary = models.JSONField(default=list, blank=True, help_text="Stores per-question AI feedback and scores")
+    automation_settings = models.JSONField(default=dict, blank=True, help_text="Stores difficulty, duration, and question counts for the automated pipeline")
+
 
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"

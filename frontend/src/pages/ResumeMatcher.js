@@ -11,6 +11,14 @@ const ResumeMatcher = () => {
     const [threshold, setThreshold] = useState(70);
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [results, setResults] = useState(null);
+    const [matchMode, setMatchMode] = useState('automatic'); // 'automatic' or 'manual'
+
+    // Automation Pipeline Settings
+    const [difficulty, setDifficulty] = useState('Medium');
+    const [duration, setDuration] = useState(60);
+    const [mcqCount, setMcqCount] = useState(10);
+    const [codingCount, setCodingCount] = useState(1);
+    const [passThreshold, setPassThreshold] = useState(60);
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
@@ -51,6 +59,16 @@ const ResumeMatcher = () => {
         formData.append('job_description', jobDescription);
         formData.append('threshold', threshold);
 
+        if (matchMode === 'automatic') {
+            formData.append('difficulty', difficulty);
+            formData.append('duration', duration);
+            formData.append('mcq_count', mcqCount);
+            formData.append('coding_count', codingCount);
+            formData.append('pass_threshold', passThreshold);
+            formData.append('is_fully_automatic', true);
+        }
+
+
         try {
             const response = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, formData, {
                 headers: {
@@ -58,6 +76,14 @@ const ResumeMatcher = () => {
                 }
             });
             const data = response.data;
+
+            // --- DETAILED CONSOLE LOG FOR DEBUGGING ---
+            console.log("🔍 ======= AI MATCHING PIPELINE REPORT ======= 🔍");
+            console.table(Array.isArray(data) ? data : [data], ["candidate_name", "candidate_email", "match_percentage", "is_eligible", "candidate_id"]);
+            console.log("Full AI Summary/Feedback:", data.summary);
+            console.log("==============================================");
+            // ------------------------------------------
+
             setResults(Array.isArray(data) ? data : [data]);
         } catch (error) {
             console.error('Error:', error);
@@ -207,7 +233,116 @@ const ResumeMatcher = () => {
                                 </div>
                             </div>
 
+                            <div className="glass-card mode-toggle-card">
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                        <i className="fa-solid fa-sliders"></i>
+                                    </div>
+                                    <div>
+                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Matching Mode</h3>
+                                        <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Choose between AI automation or manual review.</p>
+                                    </div>
+                                </div>
+                                <div className="toggle-container">
+                                    <button
+                                        type="button"
+                                        className={`toggle-option ${matchMode === 'automatic' ? 'active' : ''}`}
+                                        onClick={() => setMatchMode('automatic')}
+                                    >
+                                        <i className="fa-solid fa-bolt"></i>
+                                        <span>Fully-Automatic</span>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className={`toggle-option ${matchMode === 'manual' ? 'active' : ''}`}
+                                        onClick={() => setMatchMode('manual')}
+                                    >
+                                        <i className="fa-solid fa-hand"></i>
+                                        <span>Manual Review</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {matchMode === 'automatic' && (
+                                <div className="glass-card automation-settings-card">
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                        <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                            <i className="fa-solid fa-gear"></i>
+                                        </div>
+                                        <div>
+                                            <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Automation Settings</h3>
+                                            <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Configure the assessment that will be sent to candidates.</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="settings-grid">
+                                        <div className="setting-item">
+                                            <label>Assessment Difficulty</label>
+                                            <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)} className="modern-select">
+                                                <option value="Easy">Easy</option>
+                                                <option value="Medium">Medium</option>
+                                                <option value="Hard">Hard</option>
+                                            </select>
+                                        </div>
+
+                                        <div className="setting-item">
+                                            <label>Duration (Minutes)</label>
+                                            <input
+                                                type="number"
+                                                value={duration}
+                                                onChange={(e) => setDuration(e.target.value)}
+                                                className="modern-input"
+                                                min="15"
+                                                max="180"
+                                            />
+                                        </div>
+
+                                        <div className="setting-item">
+                                            <label>No. of MCQs</label>
+                                            <input
+                                                type="number"
+                                                value={mcqCount}
+                                                onChange={(e) => setMcqCount(e.target.value)}
+                                                className="modern-input"
+                                                min="5"
+                                                max="30"
+                                            />
+                                        </div>
+
+                                        <div className="setting-item">
+                                            <label>No. of Coding Tasks</label>
+                                            <input
+                                                type="number"
+                                                value={codingCount}
+                                                onChange={(e) => setCodingCount(e.target.value)}
+                                                className="modern-input"
+                                                min="1"
+                                                max="5"
+                                            />
+                                        </div>
+
+                                        <div className="setting-item" style={{ gridColumn: 'span 2' }}>
+                                            <label>Assessment Pass Threshold ({passThreshold}%)</label>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                                <input
+                                                    type="range"
+                                                    min="0" max="100"
+                                                    value={passThreshold}
+                                                    onChange={(e) => setPassThreshold(e.target.value)}
+                                                    style={{ flex: 1, accentColor: '#6366F1' }}
+                                                />
+                                                <span style={{ minWidth: '40px', fontWeight: '800', color: '#1E293B' }}>{passThreshold}%</span>
+                                            </div>
+                                            <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>
+                                                Candidates scoring below this will be automatically rejected.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+
                                 <button
                                     onClick={handleMatch}
                                     disabled={isAnalyzing}
@@ -216,11 +351,12 @@ const ResumeMatcher = () => {
                                     {isAnalyzing ? (
                                         <><i className="fa-solid fa-atom fa-spin"></i> Analyzing Candidate Profiles...</>
                                     ) : (
-                                        <><i className="fa-solid fa-wand-magic-sparkles"></i> Compare Resumes</>
+                                        <>
+                                            <i className="fa-solid fa-wand-magic-sparkles"></i>
+                                            {matchMode === 'automatic' ? ' Start' : ' Check Resume'}
+                                        </>
                                     )}
                                 </button>
-
-
                             </div>
                         </>
                     ) : (

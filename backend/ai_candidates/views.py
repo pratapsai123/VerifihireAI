@@ -268,9 +268,8 @@ class ResumeMatchView(APIView):
                     candidate.resume_text = resume_text
                     candidate.save()
 
-            candidate_name = candidate.full_name if candidate else "the candidate"
             prompt = f"""
-            Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description for {candidate_name}.
+            Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description.
             
             Resume Content:
             {resume_text}
@@ -279,58 +278,52 @@ class ResumeMatchView(APIView):
             {job_description}
             
             Please provide:
-            1. A match percentage (0-100).
-            2. Eligibility status (True if match percentage >= {threshold}, otherwise False).
-            3. A brief 2-3 sentence summary of the fit.
-            4. A list of 5 interview questions. 
-               - The FIRST question MUST be EXACTLY: "Could you please introduce yourself and provide a brief overview of your professional background?"
-               - Questions 2-5 MUST be technical and specific, based on the candidate's resume weaknesses or key job requirements.
+            1. The candidate's full name (Scan the top of the resume, usually the largest text. If not found, use "Applicant").
+            2. The candidate's email address (Look for '@' symbol patterns. If not found, use "social@verifihire.com").
+            3. A match percentage (0-100).
+            4. Eligibility status (True if match percentage >= {threshold}, otherwise False).
+            5. A brief 2-3 sentence summary of the fit.
+            6. A list of 5 interview questions. 
             
-            Format the output strictly as a raw JSON object with these keys: "match_percentage", "is_eligible", "summary", "interview_questions".
-            The "interview_questions" key must be a list of STRINGS only.
+            Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "is_eligible", "summary", "interview_questions".
             """
 
-            logger.info("Using Groq for Resume Match")
+            logger.info("Using Groq for Resume Match & Extraction")
             response = groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
                 response_format={"type": "json_object"}
             )
             raw_text = response.choices[0].message.content
-
-            if not raw_text:
-                raise Exception("Empty response from Groq")
-
             match_result = extract_json(raw_text)
-            if not match_result:
-                raise Exception(f"Failed to parse Groq response: {raw_text[:200]}")
             
-            # --- Safeguard: Flatten questions if AI returned objects ---
-            if 'interview_questions' in match_result and isinstance(match_result['interview_questions'], list):
-                sanitized_qs = []
-                for q in match_result['interview_questions']:
-                    if isinstance(q, dict):
-                        sanitized_qs.append(q.get('question', str(q)))
-                    else:
-                        sanitized_qs.append(str(q))
-                match_result['interview_questions'] = sanitized_qs
-            # -----------------------------------------------------------
+            # --- DEBUG LOGGING ---
+            logger.info(f"GROQ RAW RESPONSE: {raw_text}")
+            # --------------------
 
-            # --- Safeguard: Ensure is_eligible matches threshold ---
-            percentage = match_result.get('match_percentage', 0)
-            try:
-                percentage = int(percentage)
-            except:
-                percentage = 0
-            match_result['is_eligible'] = percentage >= threshold
-            # -----------------------------------------------------------
-
-            # --- Save resume score and status to Candidate ---
-            if candidate:
-                candidate.resume_score = percentage
-                candidate.status = 'Resume Passed' if percentage >= threshold else 'Resume Failed'
+            # --- Save scores and EXTRACTED data ---
+            if candidate and match_result:
+                # Key-agnostic fallbacks in case AI changes keys
+                extracted_name = match_result.get('candidate_name') or match_result.get('name') or candidate.full_name
+                extracted_email = match_result.get('candidate_email') or match_result.get('email') or candidate.email
+                
+                candidate.full_name = extracted_name
+                candidate.email = extracted_email
+                
+                percentage = match_result.get('match_percentage', 0)
+                candidate.resume_score = int(percentage) if str(percentage).isdigit() else 0
+                candidate.status = 'Resume Passed' if candidate.resume_score >= threshold else 'Resume Failed'
+                
+                if request.data.get('is_fully_automatic'):
+                    candidate.automation_settings = {
+                        'difficulty': request.data.get('difficulty', 'Medium'),
+                        'duration': int(request.data.get('duration', 60)),
+                        'mcq_count': int(request.data.get('mcq_count', 10)),
+                        'coding_count': int(request.data.get('coding_count', 1)),
+                        'pass_threshold': int(request.data.get('pass_threshold', 60))
+                    }
                 candidate.save()
-            # ---------------------------------------------------
+                logger.info(f"SUCCESS: Saved candidate {candidate.id} as {candidate.full_name} ({candidate.email})")
             
             match_result['candidate_id'] = candidate_id
             return Response(match_result, status=status.HTTP_200_OK)

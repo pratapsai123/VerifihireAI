@@ -18,6 +18,7 @@ const AiTakeAssessment = () => {
     // Intake
     const [candidateName, setCandidateName] = useState('');
     const [candidateEmail, setCandidateEmail] = useState('');
+    const [isAutoFilled, setIsAutoFilled] = useState(false);
     const [submissionId, setSubmissionId] = useState(null);
     const [timeLeft, setTimeLeft] = useState(null);
     const [isStarted, setIsStarted] = useState(false);
@@ -57,6 +58,17 @@ const AiTakeAssessment = () => {
     const lastDetectionTimeRef = useRef(0);
     const timerRef = useRef(null);
     const handleSubmitRef = useRef(null); // always points to latest handleSubmit
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const nameParam = params.get('name');
+        const emailParam = params.get('email');
+        if (nameParam || emailParam) {
+            if (nameParam) setCandidateName(nameParam);
+            if (emailParam) setCandidateEmail(emailParam);
+            setIsAutoFilled(true);
+        }
+    }, []);
 
     useEffect(() => {
         const fetchAssessment = async () => {
@@ -368,12 +380,14 @@ const AiTakeAssessment = () => {
                         <div>
                             <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>Full Name *</label>
                             <input type="text" value={candidateName} onChange={e => setCandidateName(e.target.value)} placeholder="Enter your full name"
-                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box', color: '#1B254B' }} />
+                                disabled={isAutoFilled}
+                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box', color: '#1B254B', background: isAutoFilled ? '#f8f9ff' : 'white', cursor: isAutoFilled ? 'not-allowed' : 'text' }} />
                         </div>
                         <div>
                             <label style={{ display: 'block', fontWeight: 700, color: '#1B254B', marginBottom: 6, fontSize: '0.85rem' }}>Email Address *</label>
                             <input type="email" value={candidateEmail} onChange={e => setCandidateEmail(e.target.value)} placeholder="Enter your email"
-                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box', color: '#1B254B' }} />
+                                disabled={isAutoFilled}
+                                style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', fontSize: '0.95rem', fontFamily: 'Poppins', boxSizing: 'border-box', color: '#1B254B', background: isAutoFilled ? '#f8f9ff' : 'white', cursor: isAutoFilled ? 'not-allowed' : 'text' }} />
                         </div>
                     </div>
                     <div style={{ background: '#FFF8E6', border: '1px solid #FFA800', borderRadius: 12, padding: '0.9rem 1rem', marginBottom: '1.5rem', fontSize: '0.82rem', color: '#1B254B' }}>
@@ -550,11 +564,14 @@ const AiTakeAssessment = () => {
                                                 )}
                                             </div>
                                         )}
-                                        {currentQ.constraints?.length > 0 && (
+                                        {currentQ.constraints && (Array.isArray(currentQ.constraints) ? currentQ.constraints.length > 0 : String(currentQ.constraints).length > 0) && (
                                             <div style={{ marginBottom: '0.8rem' }}>
                                                 <div style={{ fontSize: '0.62rem', fontWeight: 800, textTransform: 'uppercase', color: '#374151', marginBottom: 4 }}>Constraints</div>
                                                 <ul style={{ margin: 0, paddingLeft: '1rem', color: '#6b7280', fontSize: '0.75rem' }}>
-                                                    {currentQ.constraints.map((c, i) => <li key={i}>{c}</li>)}
+                                                    {Array.isArray(currentQ.constraints)
+                                                        ? currentQ.constraints.map((c, i) => <li key={i}>{c}</li>)
+                                                        : <li>{currentQ.constraints}</li>
+                                                    }
                                                 </ul>
                                             </div>
                                         )}

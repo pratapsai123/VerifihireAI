@@ -17,3 +17,5 @@ Pillow
 google-generativeai
 groq
 easyocr
+celery
+redis
