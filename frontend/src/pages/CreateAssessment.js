@@ -70,8 +70,7 @@ const CreateAssessment = () => {
     };
 
     const calculateTotalPoints = () => {
-        const { easy, medium, hard } = calculateMcqMix(formData.num_mcqs);
-        const mcqPoints = (easy * 100) + (medium * 200) + (hard * 300);
+        const mcqPoints = formData.num_mcqs * 20;
         const codingPoints = formData.coding_challenges.reduce((sum, c) => {
             const weight = c.difficulty === 'Easy' ? 100 : c.difficulty === 'Medium' ? 200 : 300;
             return sum + weight;

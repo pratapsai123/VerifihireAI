@@ -66,10 +66,9 @@ class SubmitAssessmentView(APIView):
             # Difficulty weights
             weight_map = {'Easy': 100, 'Medium': 200, 'Hard': 300}
 
-            # 1. MCQ Scoring
+            # 1. MCQ Scoring - Fixed 20 points per question
             for i, mcq in enumerate(mcqs):
-                difficulty = mcq.get('difficulty', 'Easy')
-                weight = weight_map.get(difficulty, 100)
+                weight = 20
                 possible_mcq_points += weight
                 
                 correct_ans = str(mcq.get('answer') or '').strip().upper()
