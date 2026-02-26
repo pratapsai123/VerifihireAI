@@ -39,14 +39,13 @@ const AiAssessmentDetail = () => {
     const coding = assessment.generated_content?.coding_challenges || [];
     const submissions = assessment.submissions || [];
 
-    // Calculate points based on difficulty mapping
-    const pointsMap = {
-        'Easy': 100,
-        'Medium': 200,
-        'Hard': 300
-    };
-    const pointPerQ = pointsMap[assessment.difficulty_level] || 100;
-    const totalPossiblePoints = (mcqs.length + coding.length) * pointPerQ;
+    // Calculate points based on backend logic (SubmitAssessmentView)
+    const MCQ_WEIGHT = 20;
+    const codingWeights = { 'Easy': 100, 'Medium': 200, 'Hard': 300 };
+
+    const possibleMcqPoints = mcqs.length * MCQ_WEIGHT;
+    const possibleCodingPoints = coding.reduce((sum, c) => sum + (codingWeights[c.difficulty] || 200), 0);
+    const totalPossiblePoints = possibleMcqPoints + possibleCodingPoints;
 
     const getStatusStyle = (status) => {
         return status === 'selected'
@@ -165,7 +164,7 @@ const AiAssessmentDetail = () => {
                                         <div style={{ fontSize: '0.9rem', color: '#707EAE', paddingBottom: '4px' }}>pts</div>
                                     </div>
                                     <div style={{ fontSize: '0.75rem', color: '#A3AED0', marginTop: '0.5rem' }}>
-                                        ({mcqs.length + coding.length} Qs × {pointPerQ} pts • {assessment.difficulty_level || 'Custom'})
+                                        ({mcqs.length} MCQs × {MCQ_WEIGHT} pts + {coding.length} Coding Tasks)
                                     </div>
                                 </div>
 
@@ -261,16 +260,42 @@ const AiAssessmentDetail = () => {
                                 </div>
                             </div>
 
-                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '3rem' }}>
+                                {/* MCQ Score */}
                                 <div style={{ background: '#F8F9FF', padding: '1.5rem', borderRadius: '25px', textAlign: 'center' }}>
                                     <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>MCQ Score</div>
-                                    <div style={{ fontSize: '2rem', fontWeight: '800', color: '#4318FF' }}>{selectedSubmission.mcq_score} pts</div>
-                                    <div style={{ color: '#1B254B', fontWeight: '600' }}>Out of {selectedSubmission.results_breakdown?.mcq?.total || 'N/A'}</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
+                                        {selectedSubmission.results_breakdown?.mcq?.total > 0
+                                            ? Math.round((selectedSubmission.mcq_score / selectedSubmission.results_breakdown.mcq.total) * 100)
+                                            : 0}%
+                                    </div>
+                                    <div style={{ color: '#1B254B', fontWeight: '600' }}>
+                                        {Math.round(selectedSubmission.mcq_score / MCQ_WEIGHT)} / {mcqs.length} Questions Correct
+                                    </div>
                                 </div>
+
+                                {/* Coding Score */}
                                 <div style={{ background: '#F8F9FF', padding: '1.5rem', borderRadius: '25px', textAlign: 'center' }}>
                                     <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Coding Score</div>
-                                    <div style={{ fontSize: '2rem', fontWeight: '800', color: '#4318FF' }}>{selectedSubmission.coding_score} pts</div>
-                                    <div style={{ color: '#1B254B', fontWeight: '600' }}>Out of {selectedSubmission.results_breakdown?.coding?.total || 'N/A'}</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: '800', color: '#4318FF' }}>
+                                        {selectedSubmission.results_breakdown?.coding?.total > 0
+                                            ? Math.round((selectedSubmission.coding_score / selectedSubmission.results_breakdown.coding.total) * 100)
+                                            : 0}%
+                                    </div>
+                                    <div style={{ color: '#1B254B', fontWeight: '600' }}>
+                                        {selectedSubmission.coding_score} / {selectedSubmission.results_breakdown?.coding?.total || 0} pts
+                                    </div>
+                                </div>
+
+                                {/* Integrity Score */}
+                                <div style={{ background: '#F8F9FF', padding: '1.5rem', borderRadius: '25px', textAlign: 'center' }}>
+                                    <div style={{ color: '#A3AED0', fontSize: '0.8rem', fontWeight: '700', textTransform: 'uppercase', marginBottom: '0.5rem' }}>Integrity Score</div>
+                                    <div style={{ fontSize: '2.5rem', fontWeight: '800', color: (selectedSubmission.integrity_score || 0) >= 70 ? '#05CD99' : '#EE5D50' }}>
+                                        {selectedSubmission.integrity_score || 0}%
+                                    </div>
+                                    <div style={{ color: (selectedSubmission.integrity_score || 0) >= 70 ? '#05CD99' : '#EE5D50', fontWeight: '800', textTransform: 'uppercase', fontSize: '0.85rem' }}>
+                                        {(selectedSubmission.integrity_score || 0) >= 70 ? '✓ Reliable' : '⚠ Suspicious'}
+                                    </div>
                                 </div>
                             </div>
 

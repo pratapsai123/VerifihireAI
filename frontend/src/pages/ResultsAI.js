@@ -65,7 +65,7 @@ const ResultsAI = () => {
                             email: sub.candidate_email,
                         },
                         score: sub.score,
-                        total: assessment.mcq_count + assessment.coding_count,
+                        total: sub.results_breakdown?.total_possible || (assessment.total_points || 100),
                         percentage: sub.percentage,
                         status: sub.status,
                         submitted_at: sub.submitted_at,
@@ -577,8 +577,12 @@ const ResultsAI = () => {
                                                     <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>{r.candidate?.email}</div>
                                                 </td>
                                                 <td>
-                                                    <div style={{ fontWeight: '800', color: '#334155', fontSize: '0.95rem', letterSpacing: '-0.01em' }}>{r.assessment?.display_name || r.assessment?.name}</div>
-                                                    <div style={{ fontSize: '0.8rem', color: '#4f46e5', fontWeight: '700' }}>Score: {r.score}/{r.total}</div>
+                                                    <div style={{ fontWeight: '800', color: '#4f46e5', fontSize: '1.1rem' }}>
+                                                        {r.total > 0 ? Math.round((r.score / r.total) * 100) : 0}%
+                                                    </div>
+                                                    <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700' }}>
+                                                        {r.score}/{r.total} pts
+                                                    </div>
                                                 </td>
                                                 <td style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '500' }}>
                                                     {r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '—'}
@@ -619,8 +623,12 @@ const ResultsAI = () => {
                                                     <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>{r.email}</div>
                                                 </td>
                                                 <td>
-                                                    <div style={{ fontSize: '1.3rem', fontWeight: '900', color: '#4F46E5', letterSpacing: '-0.02em' }}>{r.score}</div>
-                                                    <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>{r.total_questions} Qs</div>
+                                                    <div style={{ fontSize: '1.3rem', fontWeight: '900', color: '#4F46E5', letterSpacing: '-0.02em' }}>
+                                                        {r.total_questions > 0 ? Math.round((r.score / (r.total_questions * 10)) * 100) : 0}%
+                                                    </div>
+                                                    <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>
+                                                        {r.score} pts / {r.total_questions} Qs
+                                                    </div>
                                                 </td>
                                                 <td style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '500' }}>
                                                     {r.completed_at ? new Date(r.completed_at).toLocaleDateString() : 'In Progress'}

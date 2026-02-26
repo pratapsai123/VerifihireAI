@@ -20,7 +20,7 @@ const getWsBaseUrl = () => {
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 
         if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-            return `${protocol}//${window.location.host}/ws`;
+            return `${protocol}//${hostname}:8001/ws`;
         }
     }
     // Fallback for local development
