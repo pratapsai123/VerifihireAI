@@ -39,9 +39,20 @@ class SubmitAssessmentView(APIView):
         try:
             assessment = Assessment.objects.get(share_token=token)
             
+            # Absolute block against submitting multiple times
+            if AIAssessmentSubmission.objects.filter(
+                assessment=assessment,
+                candidate_email__iexact=email,
+                submitted_at__isnull=False
+            ).exists():
+                return Response(
+                    {"error": "You have already completed this assessment and cannot retake it."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
             submission = AIAssessmentSubmission.objects.filter(
                 assessment=assessment,
-                candidate_email=email,
+                candidate_email__iexact=email,
                 status='ONGOING'
             ).order_by('-id').first()
 
@@ -244,7 +255,7 @@ class CreateSubmissionView(APIView):
     def post(self, request):
         token = request.data.get('share_token')
         name = request.data.get('candidate_name')
-        email = request.data.get('candidate_email')
+        email = request.data.get('candidate_email', '').strip().lower()
 
         if not all([token, name, email]):
             return Response({"error": "Missing required fields"}, status=status.HTTP_400_BAD_REQUEST)
@@ -259,10 +270,10 @@ class CreateSubmissionView(APIView):
             if assessment.available_until and now > assessment.available_until:
                 return Response({"error": "This assessment has expired."}, status=status.HTTP_400_BAD_REQUEST)
 
-            # Prevent re-testing if already completed
+            # Prevent re-testing if already completed (case-insensitive check)
             if AIAssessmentSubmission.objects.filter(
                 assessment=assessment,
-                candidate_email=email,
+                candidate_email__iexact=email,
                 submitted_at__isnull=False
             ).exists():
                 return Response(
@@ -270,12 +281,21 @@ class CreateSubmissionView(APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-            submission = AIAssessmentSubmission.objects.create(
+            # If an ONGOING session exists, reconnect the user instead of spawning a new one
+            submission = AIAssessmentSubmission.objects.filter(
                 assessment=assessment,
-                candidate_name=name,
-                candidate_email=email,
+                candidate_email__iexact=email,
                 status='ONGOING'
-            )
+            ).order_by('-id').first()
+
+            if not submission:
+                submission = AIAssessmentSubmission.objects.create(
+                    assessment=assessment,
+                    candidate_name=name,
+                    candidate_email=email,
+                    status='ONGOING'
+                )
+                
             return Response({
                 "submission_id": submission.id,
                 "status": "success"

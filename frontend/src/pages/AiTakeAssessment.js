@@ -115,6 +115,9 @@ const AiTakeAssessment = () => {
         } catch (err) {
             const msg = err.response?.data?.error || 'Failed to start assessment.';
             alert(msg);
+            if (msg.includes('already completed')) {
+                navigate('/');
+            }
         }
     };
 
@@ -408,9 +411,24 @@ const AiTakeAssessment = () => {
         ...mcqs.map((q, i) => ({ ...q, type: 'mcq', id: i })),
         ...codingChallenges.map((c, i) => ({ ...c, type: 'coding', id: i }))
     ];
-    const currentQ = allQs[currentQuestionIdx];
+
+    if (allQs.length === 0) {
+        return (
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', background: '#f8f9ff', fontFamily: 'Poppins' }}>
+                <div style={{ background: 'white', padding: '2rem', borderRadius: 16, boxShadow: '0 10px 25px rgba(0,0,0,0.05)', textAlign: 'center', maxWidth: 400 }}>
+                    <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>⚠️</div>
+                    <h2 style={{ color: '#1B254B', margin: '0 0 1rem 0' }}>Assessment Content Empty</h2>
+                    <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '1.5rem', lineHeight: 1.5 }}>
+                        The AI was unable to generate any questions for your assessment, or the content format was malformed. Please contact the recruiter or attempt to regenerate the link.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
+    const currentQ = allQs[currentQuestionIdx] || allQs[0];
     const isLastQ = currentQuestionIdx === allQs.length - 1;
-    const currentAnswerKey = currentQ.type === 'mcq' ? `mcq_${currentQ.id}` : `coding_${currentQ.id}`;
+    const currentAnswerKey = currentQ?.type === 'mcq' ? `mcq_${currentQ?.id}` : `coding_${currentQ?.id}`;
 
     const mcqSection = allQs.filter(q => q.type === 'mcq');
     const codingSection = allQs.filter(q => q.type === 'coding');
