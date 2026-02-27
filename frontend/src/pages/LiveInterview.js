@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import '../styles/LiveInterview.css';
 import VideoPlaceholder from '../components/VideoPlaceholder';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 function LiveInterview() {
   const navigate = useNavigate();
@@ -1170,7 +1169,6 @@ function LiveInterview() {
     }
 
     const candidateToken = sessionId;
-    const API_BASE_URL = 'http://localhost:8001/api'; // Or use process.env.REACT_APP_API_BASE_URL if available
 
     console.log('Submitting candidate feedback with token:', candidateToken);
 

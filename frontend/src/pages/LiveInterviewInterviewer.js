@@ -3,8 +3,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/LiveInterviewInterviewer.css';
 import VideoPlaceholder from '../components/VideoPlaceholder';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 function LiveInterviewInterviewer() {
   const navigate = useNavigate();

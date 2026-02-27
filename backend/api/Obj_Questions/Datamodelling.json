@@ -1,0 +1,2005 @@
+{
+  "skill": "Datamodelling",
+  "questions": [
+    {
+      "question": "What is the primary goal of Data Modeling?",
+      "options": {
+        "A": "To write SQL queries faster",
+        "B": "To create a visual representation of data structures and business rules to ensure data consistency",
+        "C": "To choose the hardware for a database",
+        "D": "To encrypt sensitive user information"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which level of data modeling is most abstract and focuses on business concepts rather than technical details?",
+      "options": {
+        "A": "Physical Data Model",
+        "B": "Logical Data Model",
+        "C": "Conceptual Data Model",
+        "D": "Internal Data Model"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In an Entity-Relationship Diagram (ERD), what does a 'Rectangle' represent?",
+      "options": {
+        "A": "Attribute",
+        "B": "Entity",
+        "C": "Relationship",
+        "D": "Primary Key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does an 'Oval' or 'Ellipse' represent in an ERD?",
+      "options": {
+        "A": "Entity",
+        "B": "Attribute",
+        "C": "Relationship",
+        "D": "Weak Entity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a relationship between 'Teacher' and 'Student', what is the most likely cardinality?",
+      "options": {
+        "A": "One-to-One (1:1)",
+        "B": "One-to-Many (1:N)",
+        "C": "Many-to-Many (M:N)",
+        "D": "Many-to-One (N:1)"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Normalization'?",
+      "options": {
+        "A": "Converting data into a standard format like CSV",
+        "B": "The process of organizing data to minimize redundancy and dependency",
+        "C": "A way to speed up the internet connection",
+        "D": "Deleting old records from a table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "A table is in the First Normal Form (1NF) if:",
+      "options": {
+        "A": "It has no partial dependencies",
+        "B": "All its attributes contain only atomic (indivisible) values",
+        "C": "It has a primary key and a foreign key",
+        "D": "It is sorted by date"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which normal form deals with removing 'Partial Functional Dependencies'?",
+      "options": {
+        "A": "1NF",
+        "B": "2NF",
+        "C": "3NF",
+        "D": "BCNF"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "A table is in the Third Normal Form (3NF) if it is in 2NF and has no:",
+      "options": {
+        "A": "Composite keys",
+        "B": "Transitive dependencies",
+        "C": "Foreign keys",
+        "D": "Multi-valued attributes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Primary Key'?",
+      "options": {
+        "A": "The first column in every table",
+        "B": "A unique identifier for each record in a table",
+        "C": "A key used to encrypt the database",
+        "D": "A column that can contain NULL values"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Composite Key'?",
+      "options": {
+        "A": "A key made of plastic",
+        "B": "A primary key consisting of two or more columns",
+        "C": "A key used for multiple databases",
+        "D": "A foreign key that points to itself"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'Foreign Key'?",
+      "options": {
+        "A": "To translate data into other languages",
+        "B": "To establish a link between data in two tables",
+        "C": "To unlock the database remotely",
+        "D": "To identify the country of origin for the data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Referential Integrity'?",
+      "options": {
+        "A": "Keeping the data secret",
+        "B": "Ensuring that a foreign key value always matches an existing primary key value in the related table",
+        "C": "Speeding up database joins",
+        "D": "Backup strategy for the server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Weak Entity'?",
+      "options": {
+        "A": "An entity with few attributes",
+        "B": "An entity that cannot be uniquely identified by its own attributes alone and depends on a parent entity",
+        "C": "An entity that is frequently deleted",
+        "D": "A temporary table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which type of attribute can be divided into smaller sub-parts (e.g., Name into First Name and Last Name)?",
+      "options": {
+        "A": "Simple Attribute",
+        "B": "Composite Attribute",
+        "C": "Derived Attribute",
+        "D": "Multi-valued Attribute"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Derived Attribute'?",
+      "options": {
+        "A": "An attribute copied from another table",
+        "B": "An attribute whose value is calculated from other attributes (e.g., Age from Date of Birth)",
+        "C": "A private attribute",
+        "D": "A multi-valued attribute"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Cardinality' refer to in data modeling?",
+      "options": {
+        "A": "The number of tables in a database",
+        "B": "The numerical relationship between entities (e.g., 1:1, 1:N)",
+        "C": "The size of the data blocks",
+        "D": "The number of users connected"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Optionality' (or Modality) in a relationship?",
+      "options": {
+        "A": "Choosing the database engine",
+        "B": "Whether a relationship is mandatory or optional for an entity instance",
+        "C": "A type of primary key",
+        "D": "A backup option"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a 'Many-to-Many' relationship?",
+      "options": {
+        "A": "Person and Social Security Number",
+        "B": "Authors and Books",
+        "C": "Customer and Order",
+        "D": "Employee and Manager"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Associative Entity' (or Junction Table)?",
+      "options": {
+        "A": "A table used to store associations between companies",
+        "B": "A table used to resolve a Many-to-Many relationship into two One-to-Many relationships",
+        "C": "A type of backup table",
+        "D": "A table with no primary key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which normal form is stronger than 3NF but weaker than 4NF?",
+      "options": {
+        "A": "1NF",
+        "B": "BCNF (Boyce-Codd Normal Form)",
+        "C": "2NF",
+        "D": "5NF"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In data modeling, what is an 'Attribute'?",
+      "options": {
+        "A": "A row in a table",
+        "B": "A characteristic or property of an entity",
+        "C": "The name of the database",
+        "D": "A link between tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Candidate Key'?",
+      "options": {
+        "A": "A key waiting for election",
+        "B": "Any attribute or set of attributes that can uniquely identify a record",
+        "C": "A secondary key",
+        "D": "A foreign key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Surrogate Key'?",
+      "options": {
+        "A": "A key used by a representative",
+        "B": "An artificially generated unique identifier (like an Auto-increment ID) with no inherent business meaning",
+        "C": "A natural key like a Social Security Number",
+        "D": "A composite key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Recursive Relationship'?",
+      "options": {
+        "A": "A relationship that repeats every day",
+        "B": "A relationship where an entity is related to itself (e.g., Employee manages Employee)",
+        "C": "A relationship with no end",
+        "D": "A broken relationship"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Denormalization'?",
+      "options": {
+        "A": "Improving data integrity",
+        "B": "The process of intentionally introducing redundancy into a database to improve read performance",
+        "C": "Deleting normal forms",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which model defines how data is physically stored on the disk, including indexes and partitions?",
+      "options": {
+        "A": "Conceptual Model",
+        "B": "Physical Data Model",
+        "C": "Logical Model",
+        "D": "Business Model"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Crow’s Foot Notation'?",
+      "options": {
+        "A": "A type of handwriting",
+        "B": "A specific symbology used in ERDs to represent cardinality",
+        "C": "A security protocol",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 3NF, every non-key attribute must depend on 'the key, the whole key, and ______'.",
+      "options": {
+        "A": "The foreign key",
+        "B": "Nothing but the key",
+        "C": "The database name",
+        "D": "The table index"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Redundancy' in a database?",
+      "options": {
+        "A": "Having too many users",
+        "B": "Storing the same data in multiple places unnecessarily",
+        "C": "Deleting data twice",
+        "D": "A security firewall"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Multi-valued Attribute'?",
+      "options": {
+        "A": "An attribute with a high price",
+        "B": "An attribute that can have more than one value for a single entity (e.g., Phone Numbers)",
+        "C": "An attribute used in many tables",
+        "D": "A primary key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a 'One-to-One' relationship?",
+      "options": {
+        "A": "Class and Students",
+        "B": "Country and Capital City",
+        "C": "Store and Products",
+        "D": "User and Comments"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Identifier' in the context of an Entity?",
+      "options": {
+        "A": "The entity name",
+        "B": "An attribute that uniquely identifies an instance of the entity",
+        "C": "A foreign key",
+        "D": "The table index"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Subtyping' (Generalization/Specialization)?",
+      "options": {
+        "A": "Dividing data into smaller bits",
+        "B": "Creating a hierarchy where a 'Supertype' contains common attributes and 'Subtypes' contain specific ones",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Degree' of a relationship?",
+      "options": {
+        "A": "The temperature of the server",
+        "B": "The number of entities involved in the relationship (Binary, Ternary, etc.)",
+        "C": "The number of rows in a table",
+        "D": "A security level"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Ternary Relationship'?",
+      "options": {
+        "A": "A relationship that lasts three years",
+        "B": "A relationship involving three different entities",
+        "C": "A relationship with three primary keys",
+        "D": "A broken relationship"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which normal form addresses 'Multi-valued Dependencies'?",
+      "options": {
+        "A": "3NF",
+        "B": "4NF",
+        "C": "2NF",
+        "D": "1NF"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Business Rule' in data modeling?",
+      "options": {
+        "A": "A law about taxes",
+        "B": "A statement that defines or constrains some aspect of the business (e.g., 'A student must have an ID')",
+        "C": "The company's mission statement",
+        "D": "A type of SQL query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'ERD'?",
+      "options": {
+        "A": "Electronic Resource Data",
+        "B": "Entity-Relationship Diagram",
+        "C": "Entity Resource Descriptor",
+        "D": "Efficient relational Database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Metadata'?",
+      "options": {
+        "A": "Encrypted data",
+        "B": "Data about data (e.g., table names, column types, constraints)",
+        "C": "Very large data",
+        "D": "Deleted data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is NOT an anomaly caused by bad database design?",
+      "options": {
+        "A": "Insertion Anomaly",
+        "B": "Selection Anomaly",
+        "C": "Deletion Anomaly",
+        "D": "Update Anomaly"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Transitive Dependency'?",
+      "options": {
+        "A": "When a key depends on another key",
+        "B": "When a non-key attribute depends on another non-key attribute",
+        "C": "When a table depends on a view",
+        "D": "A security vulnerability"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Data Mapping'?",
+      "options": {
+        "A": "Finding the database on a map",
+        "B": "Defining how data from one system corresponds to data in another system",
+        "C": "Designing the UI layout",
+        "D": "Connecting to a printer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Domain' in data modeling?",
+      "options": {
+        "A": "The website address",
+        "B": "The set of all possible values an attribute can validly contain",
+        "C": "A group of servers",
+        "D": "A type of primary key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which normal form deals with 'Join Dependencies'?",
+      "options": {
+        "A": "3NF",
+        "B": "5NF",
+        "C": "4NF",
+        "D": "BCNF"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Static Attribute'?",
+      "options": {
+        "A": "An attribute that changes often",
+        "B": "An attribute whose value remains constant over time",
+        "C": "An attribute used for counting",
+        "D": "A noisy attribute"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Integrity Constraint'?",
+      "options": {
+        "A": "A law about data privacy",
+        "B": "A rule used to ensure that the data in the database is accurate and reliable",
+        "C": "A performance report",
+        "D": "A type of index"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Schema'?",
+      "options": {
+        "A": "A secret plan",
+        "B": "The overall structure or design of the database",
+        "C": "The actual data in the tables",
+        "D": "The database password"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of a 'Cross Join' (Cartesian Product) between two tables of 5 rows each?",
+      "options": {
+        "A": "10 rows",
+        "B": "25 rows",
+        "C": "5 rows",
+        "D": "0 rows"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question of Batch 1: Which of these is a 'Natural Key'?",
+      "options": {
+        "A": "Auto-incrementing ID",
+        "B": "Social Security Number",
+        "C": "UUID",
+        "D": "Randomly generated token"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of 'Dimensional Modeling'?",
+      "options": {
+        "A": "To normalize data for transactional integrity",
+        "B": "To optimize database design for easy data retrieval and high-performance analytical queries",
+        "C": "To store images in a database",
+        "D": "To manage real-time IoT sensors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a Star Schema, what is a 'Fact Table'?",
+      "options": {
+        "A": "A table containing descriptive attributes",
+        "B": "A central table that contains quantitative metrics (measures) and foreign keys to dimension tables",
+        "C": "A table that stores user passwords",
+        "D": "A temporary table used for backups"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are 'Dimension Tables' in a dimensional model?",
+      "options": {
+        "A": "Tables that store quantitative numbers",
+        "B": "Tables that store descriptive context (who, what, where, when) about the facts",
+        "C": "Tables that are always empty",
+        "D": "Tables used only for system logs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which schema is characterized by a central fact table surrounded by completely normalized dimension tables?",
+      "options": {
+        "A": "Star Schema",
+        "B": "Snowflake Schema",
+        "C": "Galaxy Schema",
+        "D": "Flat Schema"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the main advantage of a 'Star Schema' over a 'Snowflake Schema'?",
+      "options": {
+        "A": "It saves more disk space",
+        "B": "It is simpler for users to understand and generally provides faster query performance due to fewer joins",
+        "C": "It enforces stricter data integrity",
+        "D": "It supports multi-valued attributes better"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'SCD' (Slowly Changing Dimension)?",
+      "options": {
+        "A": "A dimension that takes a long time to load",
+        "B": "A technique to manage and track changes in dimension members over time",
+        "C": "A dimension with many rows",
+        "D": "A security certificate for databases"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In SCD 'Type 1', how are changes handled?",
+      "options": {
+        "A": "A new row is added",
+        "B": "Existing data is overwritten with the new value, losing history",
+        "C": "A version column is updated",
+        "D": "Nothing is changed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In SCD 'Type 2', how are changes handled?",
+      "options": {
+        "A": "The current row is deleted",
+        "B": "A new row is created with a new surrogate key to preserve historical data",
+        "C": "The data is overwritten",
+        "D": "The table is renamed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Grain' in a dimensional model?",
+      "options": {
+        "A": "The size of the hard drive",
+        "B": "The level of detail or the definition of what a single row in a fact table represents",
+        "C": "A type of primary key",
+        "D": "The speed of the network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Degenerate Dimension'?",
+      "options": {
+        "A": "A dimension that is broken",
+        "B": "A dimension attribute that is stored directly in the fact table without a separate dimension table (e.g., Order Number)",
+        "C": "A dimension with no attributes",
+        "D": "A dimension used for testing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'OLAP' cube?",
+      "options": {
+        "A": "A physical storage box",
+        "B": "A multi-dimensional array of data used for fast analysis and reporting",
+        "C": "A type of SQL query",
+        "D": "A database for mobile apps"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'ETL' stand for in Data Modeling and Warehousing?",
+      "options": {
+        "A": "Encryption, Transformation, Loading",
+        "B": "Extract, Transform, Load",
+        "C": "Entry, Transfer, Location",
+        "D": "Electronic Table Logic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Junk Dimension'?",
+      "options": {
+        "A": "A dimension full of errors",
+        "B": "A single dimension table created by combining multiple low-cardinality flags or indicators to reduce fact table columns",
+        "C": "A dimension that should be deleted",
+        "D": "A backup dimension"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Lineage'?",
+      "options": {
+        "A": "The age of the data",
+        "B": "The path or history of data as it moves from source systems to its final destination in a data warehouse",
+        "C": "The size of the database",
+        "D": "The number of users who saw the data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Bridge Table' used for in Dimensional Modeling?",
+      "options": {
+        "A": "To connect two databases",
+        "B": "To handle Many-to-Many relationships between a fact table and a dimension table",
+        "C": "To store backup data",
+        "D": "To speed up the network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Conformed Dimension'?",
+      "options": {
+        "A": "A dimension that looks like a star",
+        "B": "A dimension table that is consistently defined and shared across multiple fact tables or data marts",
+        "C": "A dimension only used once",
+        "D": "A dimension for local data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ODS' (Operational Data Store)?",
+      "options": {
+        "A": "A place to store office supplies",
+        "B": "A database used for immediate reporting on current operational data, often as an intermediary between source systems and a warehouse",
+        "C": "An old database",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Drill-down' in data analysis?",
+      "options": {
+        "A": "Deleting data quickly",
+        "B": "Moving from a high-level summary to more granular, detailed data",
+        "C": "Searching for a specific string",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Roll-up' in data analysis?",
+      "options": {
+        "A": "Summarizing data by climbing up a dimension hierarchy (e.g., from City to Country)",
+        "B": "Deleting data in bulk",
+        "C": "Updating the database version",
+        "D": "A type of backup"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Bus Architecture' in Data Warehousing?",
+      "options": {
+        "A": "A way to transport servers",
+        "B": "A design methodology that uses conformed dimensions to integrate different data marts into a cohesive warehouse",
+        "C": "A type of network cable",
+        "D": "A security firewall"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which normal form is typically preferred for OLTP (Online Transactional Processing) systems?",
+      "options": {
+        "A": "Star Schema",
+        "B": "3NF (Third Normal Form)",
+        "C": "NoSQL",
+        "D": "1NF"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Granularity'?",
+      "options": {
+        "A": "The amount of sugar in a system",
+        "B": "The level of detail represented by the data (high granularity means more detail)",
+        "C": "The speed of the database",
+        "D": "The number of tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Atomicity'?",
+      "options": {
+        "A": "Data at its lowest possible level of detail",
+        "B": "Data that is explosive",
+        "C": "Data used for nuclear research",
+        "D": "Data stored in the cloud"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Snapshot Fact Table'?",
+      "options": {
+        "A": "A table with photos",
+        "B": "A table that records the state of metrics at specific points in time (e.g., end-of-month balance)",
+        "C": "A temporary backup",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Accumulating Snapshot Fact Table'?",
+      "options": {
+        "A": "A table that grows forever",
+        "B": "A table used to track the progress of a process that has a clear beginning and end (e.g., order fulfillment steps)",
+        "C": "A type of log file",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'NoSQL' data modeling characterized by?",
+      "options": {
+        "A": "Strict 3NF normalization",
+        "B": "Flexible schemas, often denormalized for speed and horizontal scalability",
+        "C": "No use of keys",
+        "D": "Being written in C++ only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Polyglot Persistence'?",
+      "options": {
+        "A": "Speaking many languages in the office",
+        "B": "Using different data storage technologies (SQL, NoSQL, Graph) for different parts of an application based on the data's needs",
+        "C": "A type of database join",
+        "D": "A backup strategy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Impedance Mismatch'?",
+      "options": {
+        "A": "A broken electrical circuit",
+        "B": "The conflict between the relational data model and the object-oriented programming model",
+        "C": "A performance bottleneck",
+        "D": "A security vulnerability"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Data Vault' model?",
+      "options": {
+        "A": "A safe for hard drives",
+        "B": "A hybrid data modeling approach designed for agile, large-scale data warehousing using Hubs, Links, and Satellites",
+        "C": "A backup on a USB",
+        "D": "A legacy system"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a Data Vault, what is a 'Hub'?",
+      "options": {
+        "A": "A networking device",
+        "B": "A table that stores a unique list of business keys for a core business concept",
+        "C": "A central fact table",
+        "D": "A security firewall"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a Data Vault, what is a 'Satellite'?",
+      "options": {
+        "A": "A physical orb in space",
+        "B": "A table that stores descriptive attributes and history for a Hub or a Link",
+        "C": "A remote server",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Kimball Methodology' primarily known for?",
+      "options": {
+        "A": "Bottom-up approach focusing on Dimensional Modeling and Data Marts",
+        "B": "Top-down approach focusing on a centralized ER-modeled warehouse",
+        "C": "NoSQL development",
+        "D": "Database security"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Inmon Methodology' primarily known for?",
+      "options": {
+        "A": "Top-down approach emphasizing a centralized, normalized integrated data warehouse (EDW)",
+        "B": "Bottom-up approach",
+        "C": "Graph database design",
+        "D": "Deleting old data"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Sovereignty'?",
+      "options": {
+        "A": "The king of the database",
+        "B": "The concept that data is subject to the laws and governance structures of the country where it is located",
+        "C": "A type of encryption",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Profiling'?",
+      "options": {
+        "A": "Creating a social media account for data",
+        "B": "Analyzing data from existing sources to understand its quality, structure, and content",
+        "C": "A security scan",
+        "D": "A backup strategy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Natural Key'?",
+      "options": {
+        "A": "A key made of wood",
+        "B": "A unique identifier that already exists in the real world (e.g., SSN, Email, ISBN)",
+        "C": "An auto-incremented ID",
+        "D": "A randomly generated code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Self-Documenting' model?",
+      "options": {
+        "A": "A model that writes its own manual",
+        "B": "A model where table and column names are clear enough to understand the business logic without extra documentation",
+        "C": "A security scan",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Big Data' modeling 'Schema-on-Read'?",
+      "options": {
+        "A": "Defining the schema before saving data",
+        "B": "Defining the structure of data only when it is being read for analysis (typical in Hadoop/S3)",
+        "C": "A performance bug",
+        "D": "A security firewall"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Schema-on-Write'?",
+      "options": {
+        "A": "Defining the schema when the data is written to the database (typical in SQL)",
+        "B": "Writing data by hand",
+        "C": "A type of backup",
+        "D": "A security scan"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Metadata Repository'?",
+      "options": {
+        "A": "A folder for old files",
+        "B": "A centralized place to store all definitions, rules, and structures related to the data environment",
+        "C": "A type of database join",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Semi-structured Data'?",
+      "options": {
+        "A": "Data with no structure",
+        "B": "Data that does not reside in a relational database but has some organizational properties (e.g., JSON, XML)",
+        "C": "A broken database",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Unstructured Data'?",
+      "options": {
+        "A": "Text files only",
+        "B": "Data that has no predefined data model or organizational structure (e.g., Video, Audio, raw PDF images)",
+        "C": "A performance report",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Mart'?",
+      "options": {
+        "A": "A place to buy data",
+        "B": "A subset of a data warehouse focused on a specific business unit or department (e.g., Sales Data Mart)",
+        "C": "A large database",
+        "D": "A security firewall"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Lake'?",
+      "options": {
+        "A": "A literal body of water",
+        "B": "A vast repository of raw, unstructured, and structured data stored in its original format until needed",
+        "C": "A small database",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dimensionality Reduction' in data science context?",
+      "options": {
+        "A": "Deleting tables",
+        "B": "The process of reducing the number of input variables (features) in a dataset",
+        "C": "Shrinking the hard drive",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cardinality Ratio'?",
+      "options": {
+        "A": "The speed of the network",
+        "B": "The relationship between the number of instances of two entities in a relationship",
+        "C": "The size of a row",
+        "D": "The number of users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Integrity'?",
+      "options": {
+        "A": "Keeping data secret",
+        "B": "The accuracy, completeness, and reliability of data throughout its lifecycle",
+        "C": "The speed of data transfer",
+        "D": "The number of backup files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Temporal Data Modeling'?",
+      "options": {
+        "A": "Modeling temporary data only",
+        "B": "Storing and managing data that varies over time (e.g., history of a customer's address)",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Entity Integrity' rule?",
+      "options": {
+        "A": "Every table must have a name",
+        "B": "Every primary key must be unique and cannot contain NULL values",
+        "C": "Every user must have a password",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question of Batch 2: Which type of fact table has no quantitative measures, only foreign keys (used to track an event)?",
+      "options": {
+        "A": "Numeric Fact Table",
+        "B": "Factless Fact Table",
+        "C": "Empty Fact Table",
+        "D": "Small Fact Table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary focus of 'Graph Data Modeling'?",
+      "options": {
+        "A": "Storing data in rows and columns",
+        "B": "Representing data as nodes (entities) and edges (relationships) to prioritize connectivity",
+        "C": "Compressing data for long-term storage",
+        "D": "Managing file system metadata"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Graph Modeling, what is a 'Property'?",
+      "options": {
+        "A": "The physical location of the server",
+        "B": "Key-value pairs associated with either nodes or edges that store additional data",
+        "C": "A database index",
+        "D": "The size of the graph"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Polyglot Data Modeling'?",
+      "options": {
+        "A": "Writing code in multiple languages",
+        "B": "Using multiple database types (Relational, Document, Graph) to store different parts of a single application's data",
+        "C": "Translating the database schema",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'Document Store' (like MongoDB), what is the typical equivalent of a 'Row' in a relational database?",
+      "options": {
+        "A": "Collection",
+        "B": "Document",
+        "C": "Field",
+        "D": "Index"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Embedding' in Document Modeling?",
+      "options": {
+        "A": "Linking to an external file",
+        "B": "Nesting related data within a single document to avoid joins and improve read performance",
+        "C": "A type of database backup",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Referencing' in Document Modeling?",
+      "options": {
+        "A": "Storing a unique identifier of another document to link related information",
+        "B": "Copying data into every document",
+        "C": "A performance bug",
+        "D": "A type of sharding"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary use case for 'Vector Data Modeling' in 2026 AI applications?",
+      "options": {
+        "A": "Storing financial transactions",
+        "B": "Representing data (text, images) as high-dimensional numerical arrays for similarity searching",
+        "C": "Managing user logs",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Embedding Dimension' in a Vector Database?",
+      "options": {
+        "A": "The size of the hard drive",
+        "B": "The number of numerical values in a vector representing a piece of data",
+        "C": "The number of users",
+        "D": "A database index"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'CAP Theorem' in distributed data modeling?",
+      "options": {
+        "A": "Consistency, Availability, and Partition Tolerance",
+        "B": "Cloud, API, and Persistence",
+        "C": "Capacity, Access, and Performance",
+        "D": "A security protocol"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the context of CAP Theorem, what is 'BASE' consistency?",
+      "options": {
+        "A": "Basically Available, Soft state, Eventual consistency",
+        "B": "Binary, Atomic, Secure, Efficient",
+        "C": "A type of primary key",
+        "D": "A performance metric"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Sharding'?",
+      "options": {
+        "A": "Deleting data into small bits",
+        "B": "Horizontal partitioning of data across multiple database instances to distribute load",
+        "C": "A type of backup",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Shard Key'?",
+      "options": {
+        "A": "A key to unlock the server",
+        "B": "The attribute used to determine which shard a specific piece of data is stored in",
+        "C": "A foreign key",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Wide Column Store' (like Cassandra) best suited for?",
+      "options": {
+        "A": "Small transactional apps",
+        "B": "Large-scale data with high write volumes and varying column sets",
+        "C": "Mobile app UI state",
+        "D": "Encryption"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Time Series Data Modeling'?",
+      "options": {
+        "A": "Modeling data that only exists for 1 hour",
+        "B": "Optimizing storage for data sequences indexed by time (e.g., stock prices, IoT metrics)",
+        "C": "A type of unit test",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Schema Evolution'?",
+      "options": {
+        "A": "A database getting older",
+        "B": "The process of modifying the data model without breaking existing application code or data",
+        "C": "A type of sharding",
+        "D": "A performance bug"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Fan-out' in social media data modeling?",
+      "options": {
+        "A": "Cooling the server",
+        "B": "The process of delivering a piece of content (like a post) to a large number of followers' feeds",
+        "C": "A type of sharding",
+        "D": "A security vulnerability"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Key-Value' model primarily characterized by?",
+      "options": {
+        "A": "Complex joins",
+        "B": "Extreme simplicity where data is retrieved by a single unique key",
+        "C": "Strict normalization",
+        "D": "Being written in Python"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hotspotting' in NoSQL modeling?",
+      "options": {
+        "A": "A popular internet café",
+        "B": "When a disproportionate amount of traffic hits a single shard due to a poor choice of shard key",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Write-Ahead Logging' (WAL)?",
+      "options": {
+        "A": "Logging before you write code",
+        "B": "A technique to ensure data durability by recording changes in a log before applying them to the database",
+        "C": "A type of unit test",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Event Sourcing' model?",
+      "options": {
+        "A": "Sourcing events for a party",
+        "B": "Storing every change to the application state as a sequence of immutable events",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'CQRS' in modern data architecture?",
+      "options": {
+        "A": "Command Query Responsibility Segregation (separating read and write models)",
+        "B": "Cloud Query Real-time Service",
+        "C": "Centralized Query Recovery System",
+        "D": "A security protocol"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Semantic Data Modeling'?",
+      "options": {
+        "A": "Modeling based on word meanings",
+        "B": "Capturing the meaning of data elements and their relationships to reflect real-world business logic",
+        "C": "A type of encryption",
+        "D": "A performance bug"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'RDF' (Resource Description Framework)?",
+      "options": {
+        "A": "A standard for web metadata and data exchange using triples (Subject-Predicate-Object)",
+        "B": "A relational database",
+        "C": "A cloud provider",
+        "D": "A security scanner"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'SPARQL'?",
+      "options": {
+        "A": "A type of sparkling water",
+        "B": "A query language specifically designed for RDF graph data",
+        "C": "A performance report",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hierarchical Data Modeling'?",
+      "options": {
+        "A": "A tree-like structure where each record has a single parent (e.g., XML or file systems)",
+        "B": "A flat table",
+        "C": "A graph with no edges",
+        "D": "A security certificate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Network Data Model'?",
+      "options": {
+        "A": "Modeling computer cables",
+        "B": "A model where records can have multiple parents, allowing for more complex relationships than a hierarchy",
+        "C": "A type of primary key",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Materialized View'?",
+      "options": {
+        "A": "A view that is physically stored and updated to speed up complex queries",
+        "B": "A view that exists only in RAM",
+        "C": "A security scan",
+        "D": "A type of sharding"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Database Replication'?",
+      "options": {
+        "A": "Deleting the database twice",
+        "B": "Copying data from one database server to another to ensure high availability and load balancing",
+        "C": "A type of unit test",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Active-Active Replication'?",
+      "options": {
+        "A": "Both database nodes are simultaneously accepting read and write requests",
+        "B": "One node is off",
+        "C": "A type of unit test",
+        "D": "A security scanner"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Eventual Consistency'?",
+      "options": {
+        "A": "The database eventually fails",
+        "B": "A consistency model where all replicas will eventually become consistent if no new updates are made",
+        "C": "A performance bug",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Strong Consistency'?",
+      "options": {
+        "A": "The database is very fast",
+        "B": "Ensuring that every read operation returns the most recent write across all nodes",
+        "C": "A type of unit test",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Partitioning'?",
+      "options": {
+        "A": "Breaking the server",
+        "B": "Splitting a single large table into smaller, more manageable parts based on specific criteria (e.g., date)",
+        "C": "Deleting old rows",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Range Partitioning'?",
+      "options": {
+        "A": "Partitioning based on the user's name",
+        "B": "Dividing data into partitions based on a range of values (e.g., Year 2024, 2025, 2026)",
+        "C": "A type of sharding",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hash Partitioning'?",
+      "options": {
+        "A": "Using a hash function to evenly distribute data across a fixed number of partitions",
+        "B": "Searching for a hash tag",
+        "C": "A type of unit test",
+        "D": "A performance report"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'List Partitioning'?",
+      "options": {
+        "A": "Partitioning based on a predefined list of values (e.g., Region: North, South, East, West)",
+        "B": "A list of developers",
+        "C": "A security scan",
+        "D": "A type of sharding"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Cold Storage' for data?",
+      "options": {
+        "A": "Storing servers in a fridge",
+        "B": "Storage for data that is infrequently accessed and can have higher latency (e.g., backups)",
+        "C": "A performance bug",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hot Storage'?",
+      "options": {
+        "A": "High-performance storage for data that is frequently accessed and requires low latency",
+        "B": "Storing data on a hot drive",
+        "C": "A security firewall",
+        "D": "A performance report"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Cataloging'?",
+      "options": {
+        "A": "Buying data from a catalog",
+        "B": "Creating an organized inventory of data assets across an enterprise to help users find and understand data",
+        "C": "A security scan",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Obfuscation'?",
+      "options": {
+        "A": "Making data clearer",
+        "B": "Masking or hiding sensitive data to prevent unauthorized access while maintaining its usability for testing",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Immutable Data Modeling'?",
+      "options": {
+        "A": "Data that cannot be moved",
+        "B": "Designing systems where data is never updated or deleted; only new versions are appended",
+        "C": "A performance report",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'LSM Tree' (Log-Structured Merge-Tree)?",
+      "options": {
+        "A": "A type of plant",
+        "B": "A data structure optimized for high write throughput, commonly used in NoSQL databases",
+        "C": "A security scan",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bloom Filter' in data modeling context?",
+      "options": {
+        "A": "A filter for bad words",
+        "B": "A probabilistic data structure used to quickly check if an element is present in a set",
+        "C": "A performance report",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Vector Similarity' distance metric 'Cosine Similarity'?",
+      "options": {
+        "A": "The angle between two vectors",
+        "B": "The physical distance between two servers",
+        "C": "A type of sharding",
+        "D": "A security scanner"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Euclidean Distance' in vector search?",
+      "options": {
+        "A": "The straight-line distance between two points in vector space",
+        "B": "A type of sharding",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Semantic Search'?",
+      "options": {
+        "A": "Searching for exact words",
+        "B": "Searching based on the meaning and context of a query rather than just keyword matching",
+        "C": "A type of unit test",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'RAG' (Retrieval-Augmented Generation) in 2026 data modeling?",
+      "options": {
+        "A": "A type of rag used to clean the server",
+        "B": "Combining vector databases with LLMs to provide contextually accurate, grounded AI responses",
+        "C": "A performance report",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Graph Embedding'?",
+      "options": {
+        "A": "Drawing a graph",
+        "B": "Representing nodes and relationships in a graph as numerical vectors for machine learning",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Mesh'?",
+      "options": {
+        "A": "A messy database",
+        "B": "A decentralized architectural approach to managing data as a product, owned by specific domains",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Fabric'?",
+      "options": {
+        "A": "Clothing made for developers",
+        "B": "A unified architecture that connects disparate data sources across cloud and on-premise environments",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question of Batch 3: What is 'Dark Data'?",
+      "options": {
+        "A": "Data stored in the dark",
+        "B": "Data collected and stored by an organization that is not currently used for any analytical purpose",
+        "C": "A security scan",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Distributed Locking' in a multi-node database environment?",
+      "options": {
+        "A": "Locking the server room door",
+        "B": "A mechanism to ensure mutual exclusion across multiple processes or nodes when accessing a shared data resource",
+        "C": "A type of database backup",
+        "D": "Encrypting data on multiple disks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Two-Phase Commit' (2PC) protocol used for?",
+      "options": {
+        "A": "To save data twice",
+        "B": "To ensure atomic transaction commitment across multiple distributed database nodes",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Saga Pattern' in distributed data modeling?",
+      "options": {
+        "A": "A very long SQL query",
+        "B": "A sequence of local transactions where each update triggers the next, used to manage consistency in microservices",
+        "C": "A type of sharding",
+        "D": "A security firewall"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Governance'?",
+      "options": {
+        "A": "The government owning the data",
+        "B": "The overall management of data availability, usability, integrity, and security in an enterprise",
+        "C": "A type of primary key",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Data Dictionary'?",
+      "options": {
+        "A": "A book of data definitions",
+        "B": "A centralized repository of metadata describing the meaning, relationships, and origin of data elements",
+        "C": "A SQL command",
+        "D": "A backup tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Master Data Management' (MDM)?",
+      "options": {
+        "A": "Managing the master server",
+        "B": "A method used to define and manage the critical data of an organization to provide a single point of truth",
+        "C": "A type of sharding",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Shadowing'?",
+      "options": {
+        "A": "Hiding data from users",
+        "B": "Maintaining a real-time copy of data on a separate disk to provide immediate recovery in case of failure",
+        "C": "A performance report",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Z-order' indexing in modern data lakes?",
+      "options": {
+        "A": "Sorting data by the letter Z",
+        "B": "A technique to map multi-dimensional data to one dimension while preserving locality, improving query performance",
+        "C": "A security scan",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Partition Pruning'?",
+      "options": {
+        "A": "Deleting old partitions",
+        "B": "An optimization where the database engine skips reading partitions that do not match the query criteria",
+        "C": "A security scan",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Lazy Sharding'?",
+      "options": {
+        "A": "Sharding data only when the server is idle",
+        "B": "A strategy where data is moved to new shards only when it is accessed or updated",
+        "C": "A performance bug",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Write-Ahead Log' (WAL) Archiving?",
+      "options": {
+        "A": "Deleting the logs",
+        "B": "Shipping completed log segments to a secondary storage for point-in-time recovery",
+        "C": "A performance report",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Snapshot Isolation'?",
+      "options": {
+        "A": "Taking a photo of the database",
+        "B": "A consistency level where a transaction sees a consistent snapshot of the database from the start of the transaction",
+        "C": "A performance bug",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Optimistic Concurrency Control'?",
+      "options": {
+        "A": "Assuming no conflicts will occur and checking for them only at the time of commit",
+        "B": "Locking everything immediately",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Pessimistic Concurrency Control'?",
+      "options": {
+        "A": "Assuming conflicts will occur and locking resources as soon as they are accessed",
+        "B": "Never locking anything",
+        "C": "A type of sharding",
+        "D": "A security scan"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Phantom Read' in transaction isolation?",
+      "options": {
+        "A": "A ghost reading the data",
+        "B": "When a transaction re-executes a query and finds new rows added by another committed transaction",
+        "C": "A performance bug",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dirty Read'?",
+      "options": {
+        "A": "Reading data from a dusty drive",
+        "B": "When a transaction reads data that has been modified by another transaction but not yet committed",
+        "C": "A performance report",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which isolation level prevents 'Dirty Reads' but allows 'Non-repeatable Reads'?",
+      "options": {
+        "A": "Read Uncommitted",
+        "B": "Read Committed",
+        "C": "Repeatable Read",
+        "D": "Serializable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the highest (strictest) level of transaction isolation?",
+      "options": {
+        "A": "Read Committed",
+        "B": "Serializable",
+        "C": "Repeatable Read",
+        "D": "Snapshot"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Multi-Version Concurrency Control' (MVCC)?",
+      "options": {
+        "A": "Managing different versions of SQL",
+        "B": "A method commonly used by databases to provide concurrent access by keeping multiple versions of data rows",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Vacuuming' (e.g., in PostgreSQL)?",
+      "options": {
+        "A": "Cleaning the physical server",
+        "B": "The process of reclaiming storage occupied by dead rows (deleted or updated) to maintain performance",
+        "C": "A security scan",
+        "D": "A backup tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Silo'?",
+      "options": {
+        "A": "A farm for data",
+        "B": "An isolated pocket of data held by one department that is not easily accessible by other parts of the organization",
+        "C": "A type of primary key",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Sanitization'?",
+      "options": {
+        "A": "Cleaning the hard drive with alcohol",
+        "B": "The process of removing sensitive information from a dataset so it can be used for non-production purposes",
+        "C": "A type of sharding",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Primary-Replica' lag?",
+      "options": {
+        "A": "The delay between a change on the primary node and that change being reflected on the replica",
+        "B": "The size of the replica",
+        "C": "The speed of the primary",
+        "D": "A performance report"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Quorum' in a distributed database system?",
+      "options": {
+        "A": "The number of users",
+        "B": "The minimum number of nodes that must agree on a operation for it to be considered successful",
+        "C": "A security firewall",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Vector Clock' used for?",
+      "options": {
+        "A": "To tell the time in space",
+        "B": "A mechanism for capturing the chronological order (causal relationship) of events in a distributed system",
+        "C": "A type of primary key",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Conflict Resolution' in multi-master replication?",
+      "options": {
+        "A": "Hiring a mediator",
+        "B": "Strategies (like 'Last Write Wins' or 'Causal Context') used to decide which data is correct when two nodes update the same record",
+        "C": "A security scan",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Lineage' visualization?",
+      "options": {
+        "A": "Drawing a family tree",
+        "B": "A diagram showing how data flows from its source through various transformations to its final destination",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'PII' in data modeling?",
+      "options": {
+        "A": "Private Internet Information",
+        "B": "Personally Identifiable Information (sensitive data like names or SSNs that require special protection)",
+        "C": "A type of primary key",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Masking'?",
+      "options": {
+        "A": "Hiding data behind a mask",
+        "B": "The process of obscuring specific data within a database table to protect sensitive information (e.g., showing only last 4 digits of a card)",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Index Bloat'?",
+      "options": {
+        "A": "The index is too fast",
+        "B": "When an index grows significantly in size due to many updates/deletes, becoming inefficient",
+        "C": "A security scan",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'B-Tree Index'?",
+      "options": {
+        "A": "A tree made of bits",
+        "B": "A self-balancing tree data structure that maintains sorted data and allows searches, sequential access, and insertions in logarithmic time",
+        "C": "A type of sharding",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'LSM Tree' (Log-Structured Merge-Tree) optimized for?",
+      "options": {
+        "A": "Read operations",
+        "B": "Write operations",
+        "C": "Deleting data",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'In-Memory Database'?",
+      "options": {
+        "A": "A database stored in the developer's memory",
+        "B": "A database that relies primarily on main memory (RAM) for data storage to achieve extremely low latency",
+        "C": "A performance bug",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Columnar Storage'?",
+      "options": {
+        "A": "Storing data by rows",
+        "B": "A storage format where data is stored by columns instead of rows, ideal for analytical queries",
+        "C": "A type of primary key",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Row-level Security' (RLS)?",
+      "options": {
+        "A": "Locking a row with a key",
+        "B": "A security feature that allows access to specific rows in a table based on the characteristics of the user executing the query",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Democratization'?",
+      "options": {
+        "A": "Voting on data",
+        "B": "The process of making data accessible to non-technical users within an organization to enable data-driven decision-making",
+        "C": "A security scan",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Catalog' metadata 'Discovery'?",
+      "options": {
+        "A": "Searching for gold",
+        "B": "The automated process of finding and indexing new data assets in an organization",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Schema Drift'?",
+      "options": {
+        "A": "A database moving to the cloud",
+        "B": "The phenomenon where the source system schema changes, potentially breaking downstream ETL processes",
+        "C": "A performance bug",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Replication Lag' monitoring?",
+      "options": {
+        "A": "Watching a slow movie",
+        "B": "Measuring the time difference between the primary and the replica to ensure high availability",
+        "C": "A security scan",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Partitioning Strategy' based on 'Tenant ID' (Multi-tenancy)?",
+      "options": {
+        "A": "Storing data for each customer in a separate physical or logical partition for isolation and performance",
+        "B": "Deleting data for old customers",
+        "C": "A performance bug",
+        "D": "A security scan"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Cold Data' Archiving?",
+      "options": {
+        "A": "Moving data to a fridge",
+        "B": "Moving infrequently accessed data to cheaper, slower storage media",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bloom Filter' false positive?",
+      "options": {
+        "A": "The filter says data is NOT there, but it is",
+        "B": "The filter says data IS there, but it is not",
+        "C": "The filter is broken",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Vector Database' HNSW index?",
+      "options": {
+        "A": "A type of primary key",
+        "B": "Hierarchical Navigable Small World; an efficient algorithm for approximate nearest neighbor search",
+        "C": "A performance bug",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Connection Pooling'?",
+      "options": {
+        "A": "A swimming pool for developers",
+        "B": "Maintaining a cache of database connections so that connections can be reused for future requests",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Graph Database' traversal speed?",
+      "options": {
+        "A": "The speed of the network",
+        "B": "The performance of following relationships between nodes (constant time regardless of total data size in some systems)",
+        "C": "A security scan",
+        "D": "A type of sharding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Document Store' flexible schema advantage?",
+      "options": {
+        "A": "It is faster to load",
+        "B": "Allowing different documents in the same collection to have different fields, facilitating agile development",
+        "C": "It is more secure",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Hint'?",
+      "options": {
+        "A": "A suggestion for the developer",
+        "B": "An instruction to the database optimizer on how to execute a specific query (e.g., 'USE INDEX')",
+        "C": "A security scan",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Consistency' 'Read-Your-Writes'?",
+      "options": {
+        "A": "Reading out loud",
+        "B": "Ensuring a user can immediately see the data they just updated, even in an eventually consistent system",
+        "C": "A performance report",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Distributed Consensus' algorithm (e.g., Raft or Paxos)?",
+      "options": {
+        "A": "A voting system for developers",
+        "B": "A protocol used to achieve agreement on a single data value or state among multiple distributed nodes",
+        "C": "A type of sharding",
+        "D": "A performance report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question: What is the primary purpose of 'Semantic Layer' in a data architecture?",
+      "options": {
+        "A": "To style the data",
+        "B": "To translate complex data structures into business-friendly terms (e.g., 'Revenue' instead of 'SUM(sales_tax_excl)')",
+        "C": "A performance report",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    }
+  ]
+}

@@ -6,9 +6,10 @@
 const getApiBaseUrl = () => {
     if (typeof window !== 'undefined') {
         const hostname = window.location.hostname;
-        // If accessed via IP or custom host, use that same host but port 8001
+        // If accessed via custom host (like duckdns), Nginx proxies traffic on default ports
+        // to port 8001, so we don't append the port here.
         if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-            return `${window.location.protocol}//${hostname}:8001/api`;
+            return `${window.location.protocol}//${hostname}/api`;
         }
     }
     return process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
@@ -19,8 +20,9 @@ const getWsBaseUrl = () => {
         const hostname = window.location.hostname;
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 
+        // Same as above, Nginx handles port proxying for external access
         if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-            return `${protocol}//${hostname}:8001/ws`;
+            return `${protocol}//${hostname}/ws`;
         }
     }
     // Fallback for local development

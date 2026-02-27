@@ -423,23 +423,65 @@ def generate_candidate_report(submission_id):
             Paragraph('<b>Result</b>', styles['Normal']),
         ]]
 
+        # Add mapping extraction
+        option_map = inv.option_map or {}
+
         for idx, key in enumerate(objective_keys, 1):
             candidate_answer = answers[key]
             aq = aq_map.get(key)
+            
+            # Map submitted labels back to original labels if options were shuffled
+            mapping = option_map.get(key, None)
+
+            def _norm_choice(v):
+                if v is None:
+                    return ''
+                return str(v).strip().upper()
+                
+            def _get_option_text(q_obj, choice_label):
+                if not choice_label or not q_obj:
+                    return choice_label
+                cl = choice_label.strip().upper()
+                if cl == 'A' and getattr(q_obj, 'option_a', None):
+                    return f"A: {q_obj.option_a}"
+                if cl == 'B' and getattr(q_obj, 'option_b', None):
+                    return f"B: {q_obj.option_b}"
+                if cl == 'C' and getattr(q_obj, 'option_c', None):
+                    return f"C: {q_obj.option_c}"
+                if cl == 'D' and getattr(q_obj, 'option_d', None):
+                    return f"D: {q_obj.option_d}"
+                return choice_label
 
             if aq:
                 q_text = aq.question.question if aq.question else 'N/A'
                 q_type = (aq.question_type or '').strip().upper()
                 if q_type == 'MSQ':
-                    correct = ', '.join(sorted(aq.correct_answers or []))
-                    ans_display = ', '.join(sorted(candidate_answer)) if isinstance(candidate_answer, list) else str(candidate_answer)
-                    sub_set = sorted([str(x).strip().upper() for x in candidate_answer] if isinstance(candidate_answer, list) else [])
-                    cor_set = sorted([str(x).strip().upper() for x in (aq.correct_answers or [])])
-                    is_correct = sub_set == cor_set
+                    correct_raw = sorted(aq.correct_answers or [])
+                    correct_formatted = [_get_option_text(aq.question, c) for c in correct_raw]
+                    correct = ', '.join(correct_formatted)
+                    
+                    submitted_list = candidate_answer if isinstance(candidate_answer, list) else []
+                    raw = [_norm_choice(x) for x in submitted_list if _norm_choice(x)]
+                    if mapping and isinstance(mapping, dict):
+                        raw = [mapping.get(x, x) for x in raw]  # newLabel -> origLabel
+                    
+                    raw_sorted = sorted(raw)
+                    ans_formatted = [_get_option_text(aq.question, c) for c in raw_sorted]
+                    ans_display = ', '.join(ans_formatted) if ans_formatted else str(candidate_answer)
+                    
+                    sub_set = raw_sorted
+                    cor_set = sorted([_norm_choice(x) for x in (aq.correct_answers or [])])
+                    is_correct = sub_set == cor_set and len(sub_set) > 0
                 else:
-                    correct = aq.correct_answer or '-'
-                    ans_display = str(candidate_answer) if candidate_answer else '-'
-                    is_correct = str(candidate_answer).strip().upper() == str(aq.correct_answer or '').strip().upper()
+                    correct_raw = aq.correct_answer or '-'
+                    correct = _get_option_text(aq.question, correct_raw) if correct_raw != '-' else '-'
+                    
+                    submitted_choice = _norm_choice(candidate_answer)
+                    if mapping and isinstance(mapping, dict):
+                        submitted_choice = mapping.get(submitted_choice, submitted_choice)
+                        
+                    ans_display = _get_option_text(aq.question, submitted_choice) if submitted_choice else '-'
+                    is_correct = submitted_choice == _norm_choice(aq.correct_answer) and len(submitted_choice) > 0
             else:
                 q_text = f'Question {key}'
                 correct = '-'
