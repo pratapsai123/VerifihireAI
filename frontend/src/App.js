@@ -76,6 +76,7 @@ function AppContent() {
     '/feedback-page',
     '/ai-interview',
     '/ai-assessments',
+    '/results',
   ];
 
   const isFullScreenPage =
@@ -85,7 +86,8 @@ function AppContent() {
     location.pathname.startsWith('/take-assessment/') ||
     location.pathname.startsWith('/take-ai-assessment/') ||
     location.pathname.startsWith('/ai-interview-session/') ||
-    location.pathname.startsWith('/coding/questions/');
+    location.pathname.startsWith('/coding/questions/') ||
+    location.pathname.startsWith('/result/');
 
   return (
     <div className="app-container">

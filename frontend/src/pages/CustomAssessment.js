@@ -103,6 +103,22 @@ function CustomAssessment() {
       'Cloud Architect',
       'Cloud Security Engineer'
     ],
+    'system-administrator': [
+      'Linux Systems Administrator',
+      'Windows Server Administrator',
+      'Cloud Systems Administrator (AWS/Azure)',
+      'Infrastructure Operations Specialist',
+      'Systems / Network Administrator'
+    ],
+    'site-reliability-engineer': [
+      'Production SRE',
+      'Platform SRE',
+      'Cloud SRE',
+      'Observability / Monitoring SRE',
+      'Automation / Tooling SRE',
+      'Performance & Capacity SRE',
+      'Security-Focused SRE'
+    ],
     'data-engineer': [
       'ETL Developer',
       'Big Data Engineer',
@@ -135,6 +151,12 @@ function CustomAssessment() {
       'SQL Analyst',
       'BI Analyst'
     ],
+    'business-intelligence-analyst': [
+      'Data Analyst (BI-focused)',
+      'Power BI Analyst',
+      'Tableau BI Analyst',
+      'BI Developer'
+    ],
     'qa-engineer': [
       'Manual QA Engineer',
       'Automation QA Engineer',
@@ -149,6 +171,13 @@ function CustomAssessment() {
       'Playwright Automation Engineer',
       'API Automation Engineer',
       'Mobile Automation Engineer'
+    ],
+    'quality-assurance-lead': [
+      'Automation QA Lead',
+      'Manual QA Lead',
+      'SDET Lead',
+      'QA Technical Lead',
+      'Test Lead'
     ],
     'security-engineer': [
       'Application Security Engineer',
@@ -165,6 +194,13 @@ function CustomAssessment() {
       'Security Operations Engineer',
       'Vulnerability Assessment Engineer'
     ],
+    'information-security-analyst': [
+      'SOC Analyst – Tier 1',
+      'Security Analyst / Cybersecurity Analyst',
+      'Cloud Security Analyst',
+      'Vulnerability Management Analyst',
+      'Incident Response Analyst'
+    ],
     'database-administrator': [
       'MySQL DBA',
       'PostgreSQL DBA',
@@ -180,6 +216,13 @@ function CustomAssessment() {
       'ETL Developer',
       'Data Warehouse Developer'
     ],
+    'network-engineer': [
+      'Network Support Engineer / NOC Engineer',
+      'Cloud Network Engineer',
+      'Network Security Engineer',
+      'SD-WAN Engineer',
+      'Network Automation Engineer'
+    ],
     'ui-ux-designer': [
       'UI Designer',
       'UX Designer',
@@ -193,8 +236,21 @@ function CustomAssessment() {
       'Product Manager (B2B)',
       'Product Manager (B2C)',
       'Product Manager (Mobile)',
-      'Product Manager (SaaS)',
-      'Product Owner'
+      'Product Manager (SaaS)'
+    ],
+    'technical-product-manager': [
+      'Platform Technical Product Manager',
+      'API / Integration Technical Product Manager',
+      'Data / Analytics Technical Product Manager',
+      'AI / ML Technical Product Manager',
+      'Cloud / Infrastructure Technical Product Manager'
+    ],
+    'product-owner': [
+      'Technical Product Owner',
+      'Lead / Group Product Owner',
+      'Agile / Scrum Product Owner',
+      'Platform Product Owner',
+      'Data Product Owner'
     ],
     'technical-lead': [
       'Frontend Tech Lead',
@@ -237,9 +293,37 @@ function CustomAssessment() {
     'project-manager': [
       'IT Project Manager',
       'Agile Project Manager',
-      'Scrum Master',
-      'Program Manager',
-      'Technical Project Manager'
+      'Program Manager'
+    ],
+    'technical-project-manager': [
+      'Software Implementation Project Manager',
+      'Infrastructure / Cloud Project Manager',
+      'Data / AI Project Manager',
+      'Cybersecurity Project Manager',
+      'ERP / CRM Implementation Project Manager'
+    ],
+    'scrum-master': [
+      'Senior Scrum Master',
+      'Agile Scrum Master',
+      'Technical Scrum Master',
+      'SAFe Scrum Master',
+      'Release Train Engineer (RTE)',
+      'Associate / Junior Scrum Master'
+    ],
+    'support-engineer': [
+      'Technical Support Engineer',
+      'Application Support Engineer',
+      'Product Support Engineer',
+      'Cloud Support Engineer',
+      'Production Support Engineer',
+      'Network Support Engineer'
+    ],
+    'technical-writer': [
+      'API / Developer Documentation Writer',
+      'Product Documentation Writer',
+      'Software / Engineering Technical Writer',
+      'Cloud / DevOps Technical Writer',
+      'Senior Technical Writer'
     ]
   };
 
@@ -445,6 +529,22 @@ function CustomAssessment() {
     'Cloud Architect': ['Cloud Architecture', 'AWS', 'Azure', 'GCP', 'Scalability', 'Security', 'Cost Optimization', 'Design Patterns'],
     'Cloud Security Engineer': ['Cloud Security', 'AWS Security', 'Azure Security', 'IAM', 'Encryption', 'Compliance', 'Security Best Practices'],
 
+    // System Administrator sub-roles
+    'Linux Systems Administrator': ['Linux', 'Bash', 'Shell Scripting', 'System Administration', 'Networking', 'Security'],
+    'Windows Server Administrator': ['Windows Server', 'Active Directory', 'PowerShell', 'System Administration', 'Networking'],
+    'Cloud Systems Administrator (AWS/Azure)': ['AWS', 'Azure', 'Cloud Computing', 'System Administration', 'Virtualization', 'Infrastructure'],
+    'Infrastructure Operations Specialist': ['IT Infrastructure', 'Operations', 'Monitoring', 'Incident Management', 'System Administration', 'Troubleshooting'],
+    'Systems / Network Administrator': ['System Administration', 'Network Administration', 'Networking', 'Firewalls', 'Routing', 'Switches'],
+
+    // Site Reliability Engineer sub-roles
+    'Production SRE': ['Site Reliability', 'Operations', 'Incident Management', 'Linux', 'Troubleshooting', 'Automation'],
+    'Platform SRE': ['Platform Engineering', 'Kubernetes', 'Docker', 'Infrastructure as Code', 'Terraform', 'CI/CD'],
+    'Cloud SRE': ['AWS', 'Azure', 'GCP', 'Cloud Infrastructure', 'Site Reliability', 'Cloud Networking'],
+    'Observability / Monitoring SRE': ['Observability', 'Datadog', 'Prometheus', 'Grafana', 'ELK Stack', 'Monitoring'],
+    'Automation / Tooling SRE': ['Python', 'Go', 'Bash', 'Automation', 'Tooling', 'CI/CD'],
+    'Performance & Capacity SRE': ['Performance Testing', 'Capacity Planning', 'Load Testing', 'Optimization', 'Scalability'],
+    'Security-Focused SRE': ['Security', 'DevSecOps', 'Compliance', 'IAM', 'Network Security', 'Vulnerability Management'],
+
     // Data Engineer sub-roles
     'ETL Developer': ['ETL', 'Python', 'SQL', 'Data Pipeline', 'Apache Airflow', 'Data Warehouse', 'ETL Tools'],
     'Big Data Engineer': ['Hadoop', 'Spark', 'Kafka', 'Big Data', 'Scala', 'Python', 'Data Pipeline', 'Distributed Systems'],
@@ -477,6 +577,12 @@ function CustomAssessment() {
     'SQL Analyst': ['SQL', 'Database', 'Data Analysis', 'Query Optimization', 'ETL', 'Reporting', 'Excel'],
     'BI Analyst': ['Business Intelligence', 'Tableau', 'Power BI', 'SQL', 'Data Analysis', 'Data Visualization', 'Reporting'],
 
+    // Business Intelligence Analyst sub-roles
+    'Data Analyst (BI-focused)': ['Data Analysis', 'Business Intelligence', 'SQL', 'Data Visualization', 'Reporting', 'Excel'],
+    'Power BI Analyst': ['Power BI', 'DAX', 'Data Visualization', 'SQL', 'Data Modeling', 'Power Query'],
+    'Tableau BI Analyst': ['Tableau', 'Data Visualization', 'SQL', 'Dashboarding', 'Data Analytics', 'Calculated Fields'],
+    'BI Developer': ['Business Intelligence', 'ETL', 'SQL', 'Data Warehouse', 'Power BI', 'Tableau', 'Data Modeling'],
+
     // QA Engineer sub-roles
     'Manual QA Engineer': ['Manual Testing', 'Bug Tracking', 'Test Planning', 'JIRA', 'Agile', 'Scrum'],
     'Automation QA Engineer': ['Test Automation', 'Selenium', 'Python', 'Java', 'Test Framework', 'CI/CD', 'Git'],
@@ -492,6 +598,13 @@ function CustomAssessment() {
     'API Automation Engineer': ['API Testing', 'Postman', 'REST Assured', 'Test Automation', 'CI/CD', 'Git'],
     'Mobile Automation Engineer': ['Appium', 'Mobile Testing', 'Test Automation', 'iOS', 'Android', 'CI/CD'],
 
+    // Quality Assurance Lead sub-roles
+    'Automation QA Lead': ['QA Leadership', 'Test Automation', 'Strategy', 'Selenium', 'CI/CD', 'Mentoring'],
+    'Manual QA Lead': ['QA Leadership', 'Manual Testing', 'Test Planning', 'Test Strategy', 'JIRA', 'Agile'],
+    'SDET Lead': ['SDET', 'Test Automation', 'Software Engineering', 'CI/CD', 'Leadership', 'Architecture'],
+    'QA Technical Lead': ['QA Leadership', 'Technical Testing', 'Performance Testing', 'Security Testing', 'Test Architecture'],
+    'Test Lead': ['Test Leadership', 'Test Planning', 'Resource Management', 'Risk Management', 'Agile', 'Reporting'],
+
     // Security Engineer sub-roles
     'Application Security Engineer': ['Application Security', 'OWASP', 'Security Testing', 'Code Review', 'Vulnerability Assessment'],
     'Network Security Engineer': ['Network Security', 'Firewall', 'VPN', 'IDS/IPS', 'Network Monitoring', 'Security Protocols'],
@@ -504,6 +617,13 @@ function CustomAssessment() {
     'Incident Response Engineer': ['Incident Response', 'Forensics', 'Security Tools', 'Threat Analysis', 'Crisis Management'],
     'Security Operations Engineer': ['Security Operations', 'SIEM', 'Automation', 'Security Tools', 'Monitoring', 'Incident Response'],
     'Vulnerability Assessment Engineer': ['Vulnerability Assessment', 'Security Scanning', 'Penetration Testing', 'Risk Analysis'],
+
+    // Information Security Analyst sub-roles
+    'SOC Analyst – Tier 1': ['SOC', 'SIEM', 'Log Analysis', 'Incident Triage', 'Network Security', 'Monitoring'],
+    'Security Analyst / Cybersecurity Analyst': ['Cybersecurity', 'Threat Analysis', 'Security Operations', 'Vulnerability Assessment', 'Incident Response'],
+    'Cloud Security Analyst': ['Cloud Security', 'AWS Security', 'Azure Security', 'IAM', 'Compliance', 'Security Audits'],
+    'Vulnerability Management Analyst': ['Vulnerability Management', 'Qualys', 'Tenable', 'Security Patching', 'Risk Assessment'],
+    'Incident Response Analyst': ['Incident Response', 'Digital Forensics', 'Malware Analysis', 'Threat Hunting', 'Communication'],
 
     // Database Administrator sub-roles
     'MySQL DBA': ['MySQL', 'Database Administration', 'SQL', 'Performance Tuning', 'Backup & Recovery', 'Replication'],
@@ -519,6 +639,13 @@ function CustomAssessment() {
     'Database Designer': ['Database Design', 'ER Modeling', 'Normalization', 'SQL', 'Database Architecture'],
     'Data Warehouse Developer': ['Data Warehouse', 'ETL', 'SQL', 'Dimensional Modeling', 'BI', 'Data Integration'],
 
+    // Network Engineer sub-roles
+    'Network Support Engineer / NOC Engineer': ['Network Support', 'NOC', 'Troubleshooting', 'Cisco', 'Routing', 'Switching'],
+    'Cloud Network Engineer': ['Cloud Networking', 'AWS Networking', 'Azure Networking', 'VPC', 'VPN', 'BGP'],
+    'Network Security Engineer': ['Network Security', 'Firewalls', 'VPN', 'Palo Alto', 'Cisco ASA', 'IDS/IPS'],
+    'SD-WAN Engineer': ['SD-WAN', 'Network Architecture', 'Cisco Viptela', 'Silver Peak', 'Routing', 'BGP'],
+    'Network Automation Engineer': ['Network Automation', 'Python', 'Ansible', 'Netmiko', 'APIs', 'CI/CD'],
+
     // UI/UX Designer sub-roles
     'UI Designer': ['UI Design', 'Figma', 'Adobe XD', 'Sketch', 'Design Systems', 'Prototyping', 'Visual Design'],
     'UX Designer': ['UX Design', 'User Research', 'Wireframing', 'Prototyping', 'Usability Testing', 'Figma', 'Adobe XD'],
@@ -528,12 +655,24 @@ function CustomAssessment() {
     'Design Systems Designer': ['Design Systems', 'Component Libraries', 'Figma', 'Design Tokens', 'UI Design'],
 
     // Product Manager sub-roles
-    'Technical Product Manager': ['Product Management', 'Technical Skills', 'Agile', 'Scrum', 'Roadmap', 'Stakeholder Management'],
     'Product Manager (B2B)': ['Product Management', 'B2B', 'Enterprise Software', 'Agile', 'Scrum', 'Stakeholder Management'],
     'Product Manager (B2C)': ['Product Management', 'B2C', 'User Experience', 'Agile', 'Scrum', 'Analytics'],
     'Product Manager (Mobile)': ['Product Management', 'Mobile Apps', 'iOS', 'Android', 'Agile', 'Scrum', 'Analytics'],
     'Product Manager (SaaS)': ['Product Management', 'SaaS', 'Cloud', 'Agile', 'Scrum', 'Stakeholder Management'],
-    'Product Owner': ['Product Owner', 'Agile', 'Scrum', 'Backlog Management', 'Stakeholder Management', 'Requirements'],
+
+    // Technical Product Manager sub-roles
+    'Platform Technical Product Manager': ['Technical Product Management', 'Platform Engineering', 'Microservices', 'Agile', 'Architecture'],
+    'API / Integration Technical Product Manager': ['Technical Product Management', 'API Design', 'Integrations', 'REST', 'Agile'],
+    'Data / Analytics Technical Product Manager': ['Technical Product Management', 'Data Engineering', 'Big Data', 'Analytics', 'Agile'],
+    'AI / ML Technical Product Manager': ['Technical Product Management', 'AI', 'Machine Learning', 'Data Science', 'Agile'],
+    'Cloud / Infrastructure Technical Product Manager': ['Technical Product Management', 'Cloud Infrastructure', 'AWS', 'Azure', 'Agile'],
+
+    // Product Owner sub-roles
+    'Technical Product Owner': ['Technical Product Owner', 'Agile', 'Scrum', 'Technical Requirements', 'Architecture', 'Stakeholder Management'],
+    'Lead / Group Product Owner': ['Product Leadership', 'Agile', 'Scrum', 'Stakeholder Management', 'Vision', 'Strategy'],
+    'Agile / Scrum Product Owner': ['Agile', 'Scrum', 'Backlog Management', 'User Stories', 'Sprint Planning', 'Stakeholder Management'],
+    'Platform Product Owner': ['Platform Product Owner', 'Platform Engineering', 'APIs', 'Infrastructure', 'Agile', 'Stakeholder Management'],
+    'Data Product Owner': ['Data Product Owner', 'Data Analytics', 'Business Intelligence', 'Data Engineering', 'Agile', 'Stakeholder Management'],
 
     // Technical Lead sub-roles
     'Frontend Tech Lead': ['Frontend', 'React', 'Angular', 'Vue.js', 'Leadership', 'Architecture', 'Code Review', 'Mentoring'],
@@ -573,9 +712,37 @@ function CustomAssessment() {
     // Project Manager sub-roles
     'IT Project Manager': ['Project Management', 'Agile', 'Scrum', 'Stakeholder Management', 'Risk Management', 'Budget Management'],
     'Agile Project Manager': ['Project Management', 'Agile', 'Scrum', 'Kanban', 'Team Management', 'Stakeholder Management'],
-    'Scrum Master': ['Scrum', 'Agile', 'Scrum Master', 'Team Facilitation', 'Sprint Planning', 'Retrospectives'],
     'Program Manager': ['Program Management', 'Project Management', 'Stakeholder Management', 'Strategy', 'Risk Management'],
-    'Technical Project Manager': ['Project Management', 'Technical Skills', 'Agile', 'Scrum', 'Stakeholder Management', 'Risk Management']
+
+    // Technical Project Manager sub-roles
+    'Software Implementation Project Manager': ['Technical Project Management', 'SDLC', 'Agile', 'Software Implementation', 'Stakeholder Management'],
+    'Infrastructure / Cloud Project Manager': ['Technical Project Management', 'Cloud Infrastructure', 'AWS', 'Azure', 'Migration'],
+    'Data / AI Project Manager': ['Technical Project Management', 'Data Engineering', 'Machine Learning', 'Big Data', 'Analytics'],
+    'Cybersecurity Project Manager': ['Technical Project Management', 'Cybersecurity', 'Compliance', 'Security Audits', 'Risk Management'],
+    'ERP / CRM Implementation Project Manager': ['Technical Project Management', 'ERP', 'CRM', 'Salesforce', 'SAP', 'Implementation'],
+
+    // Scrum Master sub-roles
+    'Senior Scrum Master': ['Scrum Master Leadership', 'Agile Coaching', 'Team Facilitation', 'Sprint Planning', 'Retrospectives', 'Metrics'],
+    'Agile Scrum Master': ['Scrum', 'Agile', 'Kanban', 'Team Facilitation', 'Sprint Planning', 'Retrospectives'],
+    'Technical Scrum Master': ['Scrum Master', 'Technical Background', 'Agile', 'Team Facilitation', 'SDLC', 'Engineering Practices'],
+    'SAFe Scrum Master': ['SAFe', 'Scaled Agile', 'PI Planning', 'Scrum', 'Release Train', 'Agile Coaching'],
+    'Release Train Engineer (RTE)': ['RTE', 'SAFe', 'Release Management', 'Program Increment', 'Agile Coaching', 'Stakeholder Management'],
+    'Associate / Junior Scrum Master': ['Scrum basics', 'Agile', 'Team Support', 'Facilitation', 'Sprint Tracking'],
+
+    // Support Engineer sub-roles
+    'Technical Support Engineer': ['Technical Support', 'Troubleshooting', 'Customer Service', 'Linux', 'Windows', 'Networking'],
+    'Application Support Engineer': ['Application Support', 'SQL', 'Log Analysis', 'Troubleshooting', 'ITIL', 'Customer Service'],
+    'Product Support Engineer': ['Product Support', 'Troubleshooting', 'JIRA', 'SAAS', 'Customer Success', 'Technical Writing'],
+    'Cloud Support Engineer': ['Cloud Support', 'AWS', 'Azure', 'Linux', 'Troubleshooting', 'Networking'],
+    'Production Support Engineer (L1 / L2 / L3)': ['Production Support', 'Incident Management', 'Monitoring', 'Linux', 'SQL', 'Troubleshooting'],
+    'Network Support Engineer': ['Network Support', 'Troubleshooting', 'Cisco', 'Routing', 'Switching', 'Firewalls'],
+
+    // Technical Writer sub-roles
+    'API / Developer Documentation Writer': ['API Documentation', 'Technical Writing', 'REST', 'Postman', 'Swagger / OpenAPI', 'Markdown'],
+    'Product Documentation Writer': ['User Guides', 'Technical Writing', 'Product Documentation', 'Release Notes', 'Confluence', 'UX Writing'],
+    'Software / Engineering Technical Writer': ['Technical Writing', 'Software Documentation', 'Markdown', 'Git', 'Agile', 'SDLC'],
+    'Cloud / DevOps Technical Writer': ['Cloud Documentation', 'AWS', 'Azure', 'GCP', 'DevOps', 'CI/CD', 'Technical Writing'],
+    'Senior Technical Writer': ['Technical Writing Leadership', 'Documentation Strategy', 'Information Architecture', 'Mentoring', 'Style Guides', 'API Documentation']
   }), []);
 
   useEffect(() => {
@@ -939,7 +1106,7 @@ function CustomAssessment() {
         hours = '23';
       }
 
-      setFormData({ ...formData, time: `${hours}:${minutes}:${seconds} ` });
+      setFormData({ ...formData, time: `${hours}:${minutes}:${seconds}` });
     } else {
       // Too many colons, keep only first 3 parts
       setFormData({ ...formData, time: parts.slice(0, 3).join(':') });
@@ -953,13 +1120,15 @@ function CustomAssessment() {
     const mins = Math.floor((totalSeconds % 3600) / 60);
     const secs = totalSeconds % 60;
     const pad = (n) => n.toString().padStart(2, '0');
-    return `${pad(hrs)}:${pad(mins)}:${pad(secs)} `;
+    return `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
   };
 
   const validateTimeFormat = (timeString) => {
     // Validate HH:MM:SS format
+    if (!timeString) return false;
+    const trimmed = timeString.trim();
     const timeRegex = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/;
-    return timeRegex.test(timeString);
+    return timeRegex.test(trimmed);
   };
 
   const validateForm = () => {
@@ -1503,6 +1672,7 @@ function CustomAssessment() {
                 <optgroup label="Design & Product">
                   <option value="ui-ux-designer">UI/UX Designer</option>
                   <option value="product-manager">Product Manager</option>
+                  <option value="technical-product-manager">Technical Product Manager</option>
                   <option value="product-owner">Product Owner</option>
                 </optgroup>
                 <optgroup label="Leadership & Architecture">
@@ -1528,7 +1698,7 @@ function CustomAssessment() {
               {/* Sub-Role Selection - Show when role has sub-roles */}
               {hasSubRoles(formData.role) && (
                 <div style={{ marginTop: '0.75rem' }}>
-                  <label className="form-label">
+                  <label className="form-label" style={{ marginBottom: '0.5rem' }}>
                     Sub-Roles <span className="required">*</span>
                   </label>
                   <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
@@ -1653,7 +1823,7 @@ function CustomAssessment() {
               <label className="form-label">Adjust Percentages (must add up to 100)</label>
               <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
                 <div style={{ flex: '1 1 150px' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#374151' }}>Common (%)</span>
+                  <span style={{ fontSize: '0.75rem', color: '#374151', marginLeft: '0.5rem', display: 'inline-block', marginBottom: '0.25rem' }}>Common (%)</span>
                   <input
                     type="number"
                     min="0"
@@ -1664,7 +1834,7 @@ function CustomAssessment() {
                   />
                 </div>
                 <div style={{ flex: '1 1 150px' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#374151' }}>Role (%)</span>
+                  <span style={{ fontSize: '0.75rem', color: '#374151', marginLeft: '0.5rem', display: 'inline-block', marginBottom: '0.25rem' }}>Role (%)</span>
                   <input
                     type="number"
                     min="0"
@@ -1675,7 +1845,7 @@ function CustomAssessment() {
                   />
                 </div>
                 <div style={{ flex: '1 1 150px' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#374151' }}>Resume (%)</span>
+                  <span style={{ fontSize: '0.75rem', color: '#374151', marginLeft: '0.5rem', display: 'inline-block', marginBottom: '0.25rem' }}>Resume (%)</span>
                   <input
                     type="number"
                     min="0"
@@ -1929,7 +2099,7 @@ function CustomAssessment() {
                 className={`form-input ${errors.time ? 'error' : ''}`}
               />
               {errors.time && <span className="error-message">{errors.time}</span>}
-              <p className="form-hint">
+              <p className="form-hint" style={{ paddingLeft: '0.7rem' }}>
                 Format: Hours:Minutes:Seconds (e.g., 01:30:00). Auto-calculated at 2 minutes per question: {autoTime || '00:00:00'}.
               </p>
             </div>
@@ -2072,5 +2242,3 @@ function CustomAssessment() {
 }
 
 export default CustomAssessment;
-
-

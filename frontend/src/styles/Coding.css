@@ -1,4 +1,17 @@
-/* Ensure header spans edge-to-edge on coding pages */
+.coding-container {
+  padding-top: var(--vh-header-height, 45px);
+  /* Space for fixed header */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.coding-container::-webkit-scrollbar {
+  display: none;
+}
+
 .coding-container .vh-header {
   width: 100%;
   padding: 0;
@@ -12,7 +25,8 @@
 
 /* Pull coding page content upward and tighten title spacing */
 .coding-container .page-container {
-  padding: 12px 24px 24px;
+  padding: 12px 24px 100px;
+  /* Increased bottom padding for full scrollability */
   margin-top: 8px;
 }
 
@@ -22,9 +36,12 @@
 
 .coding-form-page {
   max-width: 1100px;
-  margin: 6px auto 20px;
-  padding: 10px 18px 24px;
+  margin: 6px auto 40px;
+  /* Increased margin bottom */
+  padding: 10px 18px 60px;
+  /* Increased padding bottom */
 }
+
 
 .coding-form-page .coding-card {
   padding: 14px;
@@ -48,7 +65,7 @@
   color: #6b7280;
 }
 
-details[open] > .coding-advanced-summary::before {
+details[open]>.coding-advanced-summary::before {
   content: "▾";
 }
 
@@ -334,14 +351,14 @@ select.coding-input {
   .coding-form-grid {
     grid-template-columns: 1fr;
   }
+
   .coding-table-head,
   .coding-table-row {
     grid-template-columns: 90px 100px 1fr;
   }
-  .coding-table-head > :nth-child(4),
-  .coding-table-row > :nth-child(4) {
+
+  .coding-table-head> :nth-child(4),
+  .coding-table-row> :nth-child(4) {
     display: none;
   }
 }
-
-
