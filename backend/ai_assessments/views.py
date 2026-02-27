@@ -65,6 +65,14 @@ class SubmitAssessmentView(APIView):
                 )
 
             generated_content = assessment.generated_content or {}
+            
+            # Unwrap historic nested dictionaries from Llama-3.1
+            if 'mcqs' not in generated_content and 'coding_challenges' not in generated_content:
+                for key, val in generated_content.items():
+                    if isinstance(val, dict) and ('mcqs' in val or 'coding_challenges' in val):
+                        generated_content = val
+                        break
+
             mcqs = generated_content.get('mcqs', [])
             coding_challenges = generated_content.get('coding_challenges', [])
             
@@ -433,6 +441,13 @@ class PublicAssessmentView(APIView):
     def get(self, request, token):
         try:
             assessment = Assessment.objects.get(share_token=token)
+            gen_content = assessment.generated_content or {}
+            if 'mcqs' not in gen_content and 'coding_challenges' not in gen_content:
+                for key, val in gen_content.items():
+                    if isinstance(val, dict) and ('mcqs' in val or 'coding_challenges' in val):
+                        gen_content = val
+                        break
+
             data = {
                 "id": assessment.id,
                 "job_description": assessment.job_description,
@@ -441,7 +456,7 @@ class PublicAssessmentView(APIView):
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
-                "generated_content": assessment.generated_content,
+                "generated_content": gen_content,
                 "status": assessment.status,
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None

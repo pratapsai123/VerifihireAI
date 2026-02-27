@@ -34,14 +34,25 @@ logger = logging.getLogger(__name__)
 def extract_json(text):
     if not text:
         return None
+        
+    def _unwrap_payload(data):
+        # If it's a dict and doesn't have the expected keys at root, but has a nested dict that DOES
+        if isinstance(data, dict):
+            if 'mcqs' not in data and 'coding_challenges' not in data:
+                # Look for a single nested wrapper dict
+                for key, val in data.items():
+                    if isinstance(val, dict) and ('mcqs' in val or 'coding_challenges' in val):
+                        return val
+        return data
+
     try:
         match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
         if match:
-            return json.loads(match.group(1))
+            return _unwrap_payload(json.loads(match.group(1)))
         match = re.search(r"\{.*\}", text, re.DOTALL)
         if match:
-            return json.loads(match.group(0))
-        return json.loads(text.strip())
+            return _unwrap_payload(json.loads(match.group(0)))
+        return _unwrap_payload(json.loads(text.strip()))
     except Exception as e:
         logger.error(f"JSON Extraction Error: {e}")
         return None
