@@ -319,13 +319,33 @@ class ResumeMatchView(APIView):
                 candidate.status = 'Resume Passed' if candidate.resume_score >= threshold else 'Resume Failed'
                 
                 if request.data.get('is_fully_automatic'):
+                    coding_count = request.data.get('coding_count')
+                    if coding_count is not None:
+                        c_count = int(coding_count)
+                    else:
+                        import json
+                        try:
+                            coding_tasks = json.loads(request.data.get('coding_tasks', '[]'))
+                            c_count = len(coding_tasks)
+                        except:
+                            c_count = 1
+
                     candidate.automation_settings = {
                         'difficulty': request.data.get('difficulty', 'Medium'),
                         'duration': int(request.data.get('duration', 60)),
                         'mcq_count': int(request.data.get('mcq_count', 10)),
-                        'coding_count': int(request.data.get('coding_count', 1)),
-                        'pass_threshold': int(request.data.get('pass_threshold', 60))
+                        'coding_count': c_count,
+                        'pass_threshold': int(request.data.get('pass_threshold', 60)),
+                        'assessment_available_from': request.data.get('assessment_available_from'),
+                        'assessment_available_until': request.data.get('assessment_available_until')
                     }
+
+                    interview_from = request.data.get('interview_available_from')
+                    interview_until = request.data.get('interview_available_until')
+                    if interview_from:
+                        candidate.available_from = parse_datetime(interview_from)
+                    if interview_until:
+                        candidate.available_until = parse_datetime(interview_until)
                 candidate.save()
                 logger.info(f"SUCCESS: Saved candidate {candidate.id} as {candidate.full_name} ({candidate.email})")
             
@@ -349,6 +369,14 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get(self, request, *args, **kwargs):
         candidate = self.get_object()
         now = timezone.now()
+
+        # Prevent retaking if already completed
+        if candidate.status in ['Completed', 'Hired', 'Rejected'] or candidate.completed_at:
+            from rest_framework.response import Response as DRFResponse
+            return DRFResponse(
+                {'error': 'You have already completed this interview session and cannot retake it.', 'link_expired': True},
+                status=403
+            )
 
         # First access — stamp the time
         if not candidate.link_opened_at:

@@ -179,10 +179,14 @@ class GenerateAssessmentView(APIView):
             mcq_prompt += f"- {mcq_hard} Hard questions\n"
             mcq_prompt += "Each MCQ object must have: 'question', 'options' (list of 4), 'answer', and 'difficulty' (Easy/Medium/Hard)."
 
-            coding_prompt = f"TASK 2: Generate {coding_count} Coding Challenges.\n"
-            for i, diff in enumerate(coding_tasks):
-                coding_prompt += f"- Challenge {i+1}: {diff} difficulty\n"
-            coding_prompt += "Each challenge object must have: 'title', 'problem_statement' (detailed), 'input_format', 'output_format', 'constraints', 'example_input', 'example_output', 'explanation', 'starter_code_java', 'starter_code_python', 'difficulty' (must match requested), and 'test_cases' (list of 5 objects)."
+            coding_prompt = ""
+            keys_expected = '"mcqs"'
+            if coding_count > 0:
+                coding_prompt = f"TASK 2: Generate {coding_count} Coding Challenges.\n"
+                for i, diff in enumerate(coding_tasks):
+                    coding_prompt += f"- Challenge {i+1}: {diff} difficulty\n"
+                coding_prompt += "Each challenge object must have: 'title', 'problem_statement' (detailed), 'input_format', 'output_format', 'constraints', 'example_input', 'example_output', 'explanation', 'starter_code_java', 'starter_code_python', 'difficulty' (must match requested), and 'test_cases' (list of 5 objects)."
+                keys_expected = '"mcqs", "coding_challenges"'
 
             prompt = f"""
             Act as an expert technical recruiter. Create a comprehensive technical assessment.
@@ -193,7 +197,7 @@ class GenerateAssessmentView(APIView):
             
             {coding_prompt}
             
-            Format the output strictly as a raw JSON object with these keys: "mcqs", "coding_challenges".
+            Format the output strictly as a raw JSON object with these keys: {keys_expected}. If a key represents 0 requested items, omit it or make it an empty list.
             """
 
             logger.info(f"Using Groq for Granular Assessment Generation ({total_possible_points} pts)")
@@ -251,6 +255,17 @@ class CreateSubmissionView(APIView):
                 return Response({"error": "This assessment is not yet available."}, status=status.HTTP_400_BAD_REQUEST)
             if assessment.available_until and now > assessment.available_until:
                 return Response({"error": "This assessment has expired."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Prevent re-testing if already completed
+            if AIAssessmentSubmission.objects.filter(
+                assessment=assessment,
+                candidate_email=email,
+                submitted_at__isnull=False
+            ).exists():
+                return Response(
+                    {"error": "You have already completed this assessment and cannot retake it."},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
             submission = AIAssessmentSubmission.objects.create(
                 assessment=assessment,
@@ -424,15 +439,21 @@ class InviteAssessmentCandidatesView(APIView):
         invite_type = request.data.get('type')  # 'individual' or 'bulk'
         invited_candidates = []
         
+        import urllib.parse
         # Use frontend base URL from settings
         base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifyhire.duckdns.org')
-        link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
+        base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
             name = request.data.get('name')
             email = request.data.get('email')
             if not name or not email:
                 return Response({"error": "Name and Email are required"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Append name and email
+            encoded_name = urllib.parse.quote(name)
+            encoded_email = urllib.parse.quote(email)
+            link = f"{base_link}?name={encoded_name}&email={encoded_email}"
             
             invited_candidates.append({"name": name, "email": email, "link": link})
             
@@ -506,6 +527,11 @@ class InviteAssessmentCandidatesView(APIView):
                 for _, row in df.iterrows():
                     name = str(row['name']).strip()
                     email = str(row['email']).strip()
+                    
+                    encoded_name = urllib.parse.quote(name)
+                    encoded_email = urllib.parse.quote(email)
+                    link = f"{base_link}?name={encoded_name}&email={encoded_email}"
+                    
                     invited_candidates.append({"name": name, "email": email, "link": link})
                     
                     try:
