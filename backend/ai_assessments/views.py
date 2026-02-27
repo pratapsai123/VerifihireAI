@@ -448,6 +448,17 @@ class PublicAssessmentView(APIView):
                         gen_content = val
                         break
 
+            # Check if this specific user email has already completed it (if passed via query param)
+            email_param = request.query_params.get('email', '').strip().lower()
+            already_completed = False
+            if email_param:
+                from .models import AIAssessmentSubmission
+                already_completed = AIAssessmentSubmission.objects.filter(
+                    assessment=assessment,
+                    candidate_email__iexact=email_param,
+                    submitted_at__isnull=False
+                ).exists()
+
             data = {
                 "id": assessment.id,
                 "job_description": assessment.job_description,
@@ -458,6 +469,7 @@ class PublicAssessmentView(APIView):
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "generated_content": gen_content,
                 "status": assessment.status,
+                "already_completed": already_completed,
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None
             }

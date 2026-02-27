@@ -82,7 +82,9 @@ const AiTakeAssessment = () => {
                 const from = data.available_from ? new Date(data.available_from) : null;
                 const until = data.available_until ? new Date(data.available_until) : null;
 
-                if (from && now < from) {
+                if (data.already_completed) {
+                    setError('You have already completed this assessment and cannot retake it.');
+                } else if (from && now < from) {
                     setError(`This assessment will be available starting ${from.toLocaleString()}.`);
                 } else if (until && now > until) {
                     setError(`This assessment link has expired. It was available until ${until.toLocaleString()}.`);
@@ -95,7 +97,7 @@ const AiTakeAssessment = () => {
             }
         };
         fetchAssessment();
-    }, [token]);
+    }, [token, candidateEmail]);
 
     const handleAnswerChange = (key, val) => {
         setAnswers(prev => ({ ...prev, [key]: val }));
