@@ -73,7 +73,12 @@ const AiTakeAssessment = () => {
     useEffect(() => {
         const fetchAssessment = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/ai/public/${token}/`);
+                const params = new URLSearchParams(window.location.search);
+                const emailParam = params.get('email');
+                const url = emailParam
+                    ? `${API_BASE_URL}/ai/public/${token}/?email=${encodeURIComponent(emailParam)}`
+                    : `${API_BASE_URL}/ai/public/${token}/`;
+                const response = await axios.get(url);
                 const data = response.data;
                 setAssessment(data);
 
