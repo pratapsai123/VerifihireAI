@@ -32,6 +32,14 @@ def process_resume_passed(candidate_id):
         coding_count = settings_data.get('coding_count', 1)
         pass_threshold = settings_data.get('pass_threshold', 60)
         
+        from django.utils.dateparse import parse_datetime
+        from django.utils import timezone
+        
+        a_from_str = settings_data.get('assessment_available_from')
+        a_until_str = settings_data.get('assessment_available_until')
+        assessment_from = parse_datetime(a_from_str) if a_from_str else None
+        assessment_until = parse_datetime(a_until_str) if a_until_str else None
+        
         # Generate Assessment Database Record
         assessment = Assessment.objects.create(
             job_description=job_desc,
@@ -41,20 +49,31 @@ def process_resume_passed(candidate_id):
             duration_minutes=duration,
             difficulty_level=difficulty,
             pass_threshold=pass_threshold,
-            status='GENERATING'
+            status='GENERATING',
+            available_from=assessment_from,
+            available_until=assessment_until
         )
         
+        coding_prompt = ""
+        keys_expected = '"mcqs"'
+        if int(coding_count) > 0:
+            coding_prompt = f"""
+        TASK 2: Generate {coding_count} Coding Challenge(s).
+        Challenge object must have: "title", "problem_statement", "input_format", "output_format", "constraints", "example_input", "example_output", "explanation", "starter_code_java", "starter_code_python", "test_cases" (list of 5 objects with "input" and "output").
+        """
+            keys_expected = '"mcqs", "coding_challenges"'
+            
         prompt = f"""
         Act as an expert technical recruiter. Create a {difficulty} difficulty technical assessment.
         Job Description: {job_desc}
         
         TASK 1: Generate {mcq_count} Multiple Choice Questions (MCQs).
         Each MCQ object must have: "question", "options" (list of 4 strings), "answer" (string matching exactly one option).
-
-        TASK 2: Generate {coding_count} Coding Challenge(s).
-        Challenge object must have: "title", "problem_statement", "input_format", "output_format", "constraints", "example_input", "example_output", "explanation", "starter_code_java", "starter_code_python", "test_cases" (list of 5 objects with "input" and "output").
-        
-        Format strictly as JSON with keys: "mcqs", "coding_challenges".
+{coding_prompt}
+        CRITICAL FORMATTING INSTRUCTION: 
+        You MUST return a single JSON object where the root keys are EXACTLY: {keys_expected}.
+        DO NOT wrap the output in any outer keys like "assessment" or "data".
+        If a key represents 0 requested items, omit it or make it an empty list.
         """
         
         if local_groq_client:
@@ -79,14 +98,45 @@ def process_resume_passed(candidate_id):
         link = f"{base_url}/take-ai-assessment/{assessment.share_token}?name={quote(candidate.full_name)}&email={quote(candidate.email)}"
         
         subject = f"Next Steps: Technical Assessment for {candidate.full_name}"
-        message = f"Dear {candidate.full_name},\n\nCongratulations! Your resume has been shortlisted.\nPlease complete the following technical assessment:\n{link}\n\nGood luck!"
+        
+        from_str = "Immediately"
+        if assessment_from:
+            local_from = timezone.localtime(assessment_from) if timezone.is_aware(assessment_from) else assessment_from
+            from_str = local_from.strftime('%B %d, %Y at %I:%M %p')
+            
+        until_str = "No fixed deadline"
+        if assessment_until:
+            local_until = timezone.localtime(assessment_until) if timezone.is_aware(assessment_until) else assessment_until
+            until_str = local_until.strftime('%B %d, %Y at %I:%M %p')
+            
+        message = f"Dear {candidate.full_name},\n\nYou have been invited to attempt an AI technical assessment for the role of {job_desc}.\n\nTiming Details:\n- Available From: {from_str}\n- Available Until: {until_str}\n- Duration: {duration} minutes\n\nPlease click the link below to start your assessment during the availability window:\n{link}\n\nBest of luck!"
         
         html_message = f"""
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-            <h2>Congratulations {candidate.full_name}!</h2>
-            <p>Your resume has successfully passed our initial AI screening.</p>
-            <p>The next step is a technical assessment automatically tailored to your background.</p>
-            <a href="{link}" style="display: inline-block; margin-top: 15px; padding: 12px 24px; background-color: #6366F1; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Start Assessment</a>
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+            <div style="background-color: #4318FF; padding: 24px; text-align: center;">
+                <h1 style="color: white; margin: 0; font-size: 24px;">Assessment Invitation</h1>
+            </div>
+            <div style="padding: 32px; background-color: white;">
+                <p style="font-size: 16px; margin-bottom: 24px;">Dear <strong>{candidate.full_name}</strong>,</p>
+                <p style="line-height: 1.6; margin-bottom: 24px;">You have been invited to attempt an AI technical assessment for the role: <br/><strong>{job_desc}</strong></p>
+                
+                <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+                    <h3 style="margin-top: 0; color: #4318FF; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Timing Details</h3>
+                    <p style="margin: 8px 0; font-size: 14px;"><strong>📅 Available From:</strong> {from_str}</p>
+                    <p style="margin: 8px 0; font-size: 14px;"><strong>⌛ Available Until:</strong> {until_str}</p>
+                    <p style="margin: 8px 0; font-size: 14px;"><strong>⏱️ Duration:</strong> {duration} minutes</p>
+                </div>
+                
+                <div style="text-align: center; margin: 32px 0;">
+                    <a href="{link}" style="background-color: #4318FF; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 6px -1px rgba(67, 24, 255, 0.2);">Start Assessment</a>
+                </div>
+                
+                <p style="font-size: 13px; color: #64748b; margin-top: 32px; border-top: 1px solid #f1f5f9; pt: 16px;">If the button above doesn't work, copy and paste this link into your browser:<br/>
+                <a href="{link}" style="color: #4318FF;">{link}</a></p>
+            </div>
+            <div style="background-color: #f1f5f9; padding: 16px; text-align: center; font-size: 12px; color: #94a3b8;">
+                &copy; 2026 VerifiHireAI. All rights reserved.
+            </div>
         </div>
         """
         
@@ -124,14 +174,47 @@ def process_assessment_passed(submission_id):
         link = f"{base_url}/interview-start/{candidate.id}"
         
         subject = f"Final Step: AI Video Interview Invitation"
-        message = f"Dear {candidate.full_name},\n\nYou passed the technical assessment!\nPlease complete the final AI video interview here:\n{link}\n\nGood luck!"
+        
+        from django.utils import timezone
+        
+        # Format availability dates for email (converted to local time)
+        from_str = "Immediately"
+        if candidate.available_from:
+            local_from = timezone.localtime(candidate.available_from)
+            from_str = local_from.strftime('%B %d, %Y at %I:%M %p')
+            
+        until_str = "No fixed deadline"
+        if candidate.available_until:
+            local_until = timezone.localtime(candidate.available_until)
+            until_str = local_until.strftime('%B %d, %Y at %I:%M %p')
+        
+        message = f"Dear {candidate.full_name},\n\nYou have been invited to complete an AI-powered video interview.\n\nTiming Details:\n- Available From: {from_str}\n- Available Until: {until_str}\n\nPlease click the link below to verify your details and start your session:\n{link}"
         
         html_message = f"""
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-            <h2>Excellent work {candidate.full_name}!</h2>
-            <p>You have successfully passed the technical assessment portion.</p>
-            <p>The final step is an AI-powered video interview.</p>
-            <a href="{link}" style="display: inline-block; margin-top: 15px; padding: 12px 24px; background-color: #6366F1; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Start Video Interview</a>
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+            <div style="background-color: #6366F1; padding: 24px; text-align: center;">
+                <h1 style="color: white; margin: 0; font-size: 24px;">Interview Invitation</h1>
+            </div>
+            <div style="padding: 32px; background-color: white;">
+                <p style="font-size: 16px; margin-bottom: 24px;">Dear <strong>{candidate.full_name}</strong>,</p>
+                <p style="line-height: 1.6; margin-bottom: 24px;">You have successfully passed the technical assessment portion. You have been invited to attempt an AI-powered video interview session.</p>
+                
+                <div style="background-color: #f8fafc; padding: 20px; border-radius: 8px; margin-bottom: 24px;">
+                    <h3 style="margin-top: 0; color: #6366F1; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Timing Details</h3>
+                    <p style="margin: 8px 0; font-size: 14px;"><strong>📅 Available From:</strong> {from_str}</p>
+                    <p style="margin: 8px 0; font-size: 14px;"><strong>⌛ Available Until:</strong> {until_str}</p>
+                </div>
+                
+                <div style="text-align: center; margin: 32px 0;">
+                    <a href="{link}" style="background-color: #6366F1; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px; display: inline-block; box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);">Start Interview Session</a>
+                </div>
+                
+                <p style="font-size: 13px; color: #64748b; margin-top: 32px; border-top: 1px solid #f1f5f9; padding-top: 16px;">If the button above doesn't work, copy and paste this link into your browser:<br/>
+                <a href="{link}" style="color: #6366F1;">{link}</a></p>
+            </div>
+            <div style="background-color: #f1f5f9; padding: 16px; text-align: center; font-size: 12px; color: #94a3b8;">
+                &copy; 2026 VerifiHireAI. All rights reserved.
+            </div>
         </div>
         """
         

@@ -197,7 +197,10 @@ class GenerateAssessmentView(APIView):
             
             {coding_prompt}
             
-            Format the output strictly as a raw JSON object with these keys: {keys_expected}. If a key represents 0 requested items, omit it or make it an empty list.
+            CRITICAL FORMATTING INSTRUCTION: 
+            You MUST return a single JSON object where the root keys are EXACTLY: {keys_expected}.
+            DO NOT wrap the output in any outer keys like "assessment" or "data".
+            If a key represents 0 requested items, omit it or make it an empty list.
             """
 
             logger.info(f"Using Groq for Granular Assessment Generation ({total_possible_points} pts)")
