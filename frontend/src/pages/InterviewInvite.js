@@ -89,6 +89,8 @@ export default function InterviewInvite() {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [interviewerName, setInterviewerName] = useState('');
+  const [interviewerEmail, setInterviewerEmail] = useState('');
   const [pan, setPan] = useState('');
   const [phone, setPhone] = useState('');
 
@@ -97,6 +99,8 @@ export default function InterviewInvite() {
   const [hydrated, setHydrated] = useState(false);
   const [importMsg, setImportMsg] = useState('');
   const fileRef = useRef(null);
+
+  const [userProfile, setUserProfile] = useState(null);
 
   // Scheduling / validity controls
   const [validityMode, setValidityMode] = useState('exact_window');
@@ -139,57 +143,54 @@ export default function InterviewInvite() {
   const canAdd = useMemo(() => {
     const n = name.trim();
     const e = email.trim();
+    const intN = interviewerName.trim();
+    const intE = interviewerEmail.trim();
     const p = pan.trim();
     if (!n) return false;
     if (!isValidEmail(e)) return false;
+    if (!isValidEmail(intE)) return false;
+    if (!intN) return false;
     if (!isValidPAN(p)) return false;
     return true;
-  }, [name, email, pan]);
+  }, [name, email, interviewerName, interviewerEmail, pan]);
 
-  // Restore draft candidates on refresh
-  useEffect(() => {
+  const userDomain = useMemo(() => {
+    if (!userProfile?.email) return '';
+    return userProfile.email.split('@')[1] || '';
+  }, [userProfile]);
+
+  // Fetch Profile and Existing Draft Candidates
+  const fetchDraftsAndProfile = async () => {
     try {
-      const raw = localStorage.getItem(draftKey);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (parsed && Array.isArray(parsed.candidates)) {
-          setCandidates(parsed.candidates);
-        }
-        if (parsed && typeof parsed.name === 'string') setName(parsed.name);
-        if (parsed && typeof parsed.email === 'string') setEmail(parsed.email);
-        if (parsed && typeof parsed.pan === 'string') setPan(parsed.pan);
-        if (parsed && typeof parsed.phone === 'string') setPhone(parsed.phone);
+      const storedUser = JSON.parse(localStorage.getItem('user') || '{}');
+      const email = storedUser?.email || '';
+      const profileUrl = email
+        ? `${API_BASE_URL}/profile/?email=${encodeURIComponent(email)}`
+        : `${API_BASE_URL}/profile/`;
+      const [profileRes, draftsRes] = await Promise.all([
+        axios.get(profileUrl),
+        axios.get(`${API_BASE_URL}/interviews/draft-invites/`)
+      ]);
+      setUserProfile(profileRes.data);
+      if (draftsRes.data?.results) {
+        setCandidates(draftsRes.data.results);
       }
-    } catch {
-      // ignore
+    } catch (err) {
+      console.error('Failed to load profile or drafts', err);
     } finally {
       setHydrated(true);
     }
-  }, [draftKey]);
+  };
 
-  // Persist draft while user is adding/removing candidates
   useEffect(() => {
-    if (!hydrated) return;
-    try {
-      localStorage.setItem(
-        draftKey,
-        JSON.stringify({
-          candidates,
-          name,
-          email,
-          pan,
-          phone,
-          updated_at: Date.now(),
-        })
-      );
-    } catch {
-      // ignore
-    }
-  }, [draftKey, hydrated, candidates, name, email, pan, phone]);
+    fetchDraftsAndProfile();
+  }, []);
 
-  const addCandidate = () => {
+  const addCandidate = async () => {
     const n = name.trim();
     const e = email.trim().toLowerCase();
+    const intN = interviewerName.trim();
+    const intE = interviewerEmail.trim().toLowerCase();
     const p = pan.trim().toUpperCase();
     const ph = phone.trim();
 
@@ -197,45 +198,68 @@ export default function InterviewInvite() {
     if (!isValidEmail(e)) return;
     if (!isValidPAN(p)) return;
 
+    if (!intN) return;
+    if (!isValidEmail(intE)) return;
+
+    if (userDomain && !intE.endsWith(`@${userDomain}`)) {
+      alert(`Interviewer email must belong to your company domain (@${userDomain}).`);
+      return;
+    }
+
     const dupe = candidates.some((c) => c.email.toLowerCase() === e || (p && c.pan_number && c.pan_number === p));
     if (dupe) {
       alert('This candidate email or PAN already exists in the list.');
       return;
     }
 
-    setCandidates((prev) => [
-      ...prev,
-      {
+    try {
+      const resp = await axios.post(`${API_BASE_URL}/interviews/draft-invites/`, {
         name: n,
         email: e,
+        interviewer_name: intN,
+        interviewer_email: intE,
         pan_number: p || null,
         phone: ph || null,
-      },
-    ]);
+      });
 
-    setName('');
-    setEmail('');
-    setPan('');
-    setPhone('');
+      if (resp.data?.results) {
+        setCandidates((prev) => [...prev, ...resp.data.results]);
+      }
+
+      setName('');
+      setEmail('');
+      setInterviewerName('');
+      setInterviewerEmail('');
+      setPan('');
+      setPhone('');
+    } catch (err) {
+      alert(err?.response?.data?.error || 'Failed to save draft candidate.');
+    }
   };
 
-  const removeCandidate = (idx) => {
+  const removeCandidate = async (idx) => {
     const c = candidates[idx];
     const label = `${c?.name || 'Candidate'}${c?.email ? ` (${c.email})` : ''}`;
     const ok = window.confirm(`Remove ${label}?`);
     if (!ok) return;
-    setCandidates((prev) => prev.filter((_, i) => i !== idx));
+
+    try {
+      await axios.delete(`${API_BASE_URL}/interviews/draft-invites/${c.id}/`);
+      setCandidates((prev) => prev.filter((_, i) => i !== idx));
+    } catch (err) {
+      alert('Failed to remove draft candidate.');
+    }
   };
 
   const downloadTemplate = () => {
     const sample = [
-      ['name', 'email', 'pan_number', 'phone'].join(','),
-      ['John Doe', 'john@example.com', 'ABCDE1234F', '9999999999'].join(','),
+      ['name', 'email', 'interviewer_name', 'interviewer_email', 'pan_number', 'phone'].join(','),
+      ['John Doe', 'john@example.com', 'Jane Smith', 'jane@iit.org.in', 'ABCDE1234F', '9999999999'].join(','),
     ].join('\n');
     downloadTextFile('interview_invite_template.csv', sample);
   };
 
-  const importFromCSVText = (csvText) => {
+  const importFromCSVText = async (csvText) => {
     setImportMsg('');
     const rows = parseCSV(csvText || '');
     if (!rows.length) {
@@ -265,14 +289,18 @@ export default function InterviewInvite() {
 
       const n = get('name', 0);
       const e = get('email', 1).toLowerCase();
-      const pRaw = get('pan_number', 2) || get('pan', 2);
-      const phRaw = get('phone', 3) || get('phone_number', 3) || get('mobile', 3);
+      const intN = get('interviewer_name', 2);
+      const intE = get('interviewer_email', 3).toLowerCase();
+      const pRaw = get('pan_number', 4) || get('pan', 4);
+      const phRaw = get('phone', 5) || get('phone_number', 5) || get('mobile', 5);
       const p = (pRaw || '').trim().toUpperCase();
       const ph = (phRaw || '').trim();
 
       return {
         name: n,
         email: e,
+        interviewer_name: intN || n,
+        interviewer_email: intE || '',
         pan_number: p || null,
         phone: ph || null,
       };
@@ -281,20 +309,25 @@ export default function InterviewInvite() {
     const existingEmails = new Set(candidates.map((c) => (c.email || '').toLowerCase()));
     const existingPANs = new Set(candidates.map((c) => (c.pan_number || '').toUpperCase()).filter(Boolean));
 
-    let added = 0;
+    let invalidDomain = 0;
     let dupes = 0;
     let invalid = 0;
-
-    const next = [...candidates];
+    const toUpload = [];
 
     dataRows.forEach((cells) => {
       const r = mapRow(cells);
       const n = (r.name || '').trim();
       const e = (r.email || '').trim();
       const p = (r.pan_number || '').trim().toUpperCase();
+      const intE = (r.interviewer_email || '').trim().toLowerCase();
 
-      if (!n || !isValidEmail(e) || !isValidPAN(p)) {
+      if (!n || !isValidEmail(e) || !isValidPAN(p) || !isValidEmail(intE)) {
         invalid += 1;
+        return;
+      }
+
+      if (userDomain && !intE.endsWith(`@${userDomain}`)) {
+        invalidDomain += 1;
         return;
       }
 
@@ -306,17 +339,25 @@ export default function InterviewInvite() {
 
       existingEmails.add(emailKey);
       if (p) existingPANs.add(p);
-      next.push({
-        name: n,
-        email: emailKey,
-        pan_number: p || null,
-        phone: r.phone ? String(r.phone).trim() : null,
-      });
-      added += 1;
+      toUpload.push(r);
     });
 
-    setCandidates(next);
-    setImportMsg(`Imported ${added}. Skipped duplicates ${dupes}. Invalid rows ${invalid}.`);
+    if (toUpload.length === 0) {
+      setImportMsg(`No valid candidates imported. Skipped duplicates: ${dupes}. Invalid format: ${invalid}. Invalid Domain: ${invalidDomain}.`);
+      return;
+    }
+
+    try {
+      const resp = await axios.post(`${API_BASE_URL}/interviews/draft-invites/`, {
+        candidates: toUpload
+      });
+      if (resp.data?.results) {
+        setCandidates((prev) => [...prev, ...resp.data.results]);
+        setImportMsg(`Imported ${resp.data.results.length}. Skipped duplicates: ${dupes}. Invalid format: ${invalid}. Invalid domain: ${invalidDomain}.`);
+      }
+    } catch (err) {
+      setImportMsg('Failed to save imported drafts to server.');
+    }
   };
 
   const handleCSVUpload = async (file) => {
@@ -427,7 +468,7 @@ export default function InterviewInvite() {
     setError('');
     try {
       const resp = await axios.post(`${API_BASE_URL}/interviews/invite/`, {
-        candidates: payloadCandidates,
+        draft_ids: candidates.map(c => c.id),
         interview_name: 'Interview Invitation',
       });
 
@@ -597,6 +638,14 @@ export default function InterviewInvite() {
               <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Candidate email" maxLength={100} />
             </div>
             <div className="field">
+              <label>Interviewer Name *</label>
+              <input value={interviewerName} onChange={(e) => setInterviewerName(e.target.value)} placeholder="Interviewer Name" maxLength={100} />
+            </div>
+            <div className="field">
+              <label>Interviewer Email *</label>
+              <input value={interviewerEmail} onChange={(e) => setInterviewerEmail(e.target.value)} placeholder={`e.g. user@${userDomain || 'company.com'}`} maxLength={100} />
+            </div>
+            <div className="field">
               <label>PAN Number (Optional)</label>
               <input value={pan} onChange={handlePanChange} placeholder="ABCDE1234F" maxLength={10} />
               {pan && !isValidPAN(pan) ? <div className="hint error-text">Invalid PAN format.</div> : null}
@@ -623,8 +672,10 @@ export default function InterviewInvite() {
               <table className="table">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Email</th>
+                    <th>Candidate Name</th>
+                    <th>Candidate Email</th>
+                    <th>Interviewer Name</th>
+                    <th>Interviewer Email</th>
                     <th>PAN</th>
                     <th>Phone</th>
                     <th style={{ textAlign: 'right' }}>Action</th>
@@ -635,6 +686,8 @@ export default function InterviewInvite() {
                     <tr key={`${c.email}-${idx}`}>
                       <td>{c.name}</td>
                       <td className="mono">{c.email}</td>
+                      <td>{c.interviewer_name}</td>
+                      <td className="mono">{c.interviewer_email}</td>
                       <td className="mono">{c.pan_number || '-'}</td>
                       <td className="mono">{c.phone || '-'}</td>
                       <td style={{ textAlign: 'right' }}>

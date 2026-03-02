@@ -6,30 +6,32 @@ const VideoPlaceholder = ({ name, width = '100%', height = '100%', style = {} })
             style={{
                 width: width,
                 height: height,
-                backgroundColor: '#e5e7eb', // gray-200
+                backgroundColor: '#1a1a1a', // Dark background
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#9ca3af', // gray-400
+                color: '#ffffff',
+                position: 'relative',
                 ...style
             }}
         >
             <div style={{
-                width: '120px',
-                height: '120px',
-                backgroundColor: '#f3f4f6', // gray-100
+                width: '80px',
+                height: '80px',
+                backgroundColor: 'rgba(255, 255, 255, 0.05)',
                 borderRadius: '50%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginBottom: '1rem'
+                marginBottom: '1rem',
+                border: '1px solid rgba(255, 255, 255, 0.1)'
             }}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    style={{ width: '80px', height: '80px' }}
+                    style={{ width: '40px', height: '40px', opacity: 0.5 }}
                 >
                     <path
                         fillRule="evenodd"
@@ -39,7 +41,7 @@ const VideoPlaceholder = ({ name, width = '100%', height = '100%', style = {} })
                 </svg>
             </div>
             {name && (
-                <span style={{ fontSize: '1.25rem', fontWeight: 600, color: '#4b5563' }}>
+                <span style={{ fontSize: '1rem', fontWeight: 500, color: 'rgba(255, 255, 255, 0.7)', textAlign: 'center', padding: '0 10px' }}>
                     {name}
                 </span>
             )}

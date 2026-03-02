@@ -28,8 +28,41 @@ import {
   BarChart,
   Bar
 } from 'recharts';
-import ProfileDropdown from '../components/ProfileDropdown';
 import '../styles/DashboardNew.css';
+
+const CustomTooltip = ({ active, payload, label }) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div style={{ background: 'white', padding: '1rem', border: '1px solid #e2e8f0', borderRadius: '12px', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}>
+        <p style={{ margin: '0 0 0.5rem', fontWeight: 700, color: '#1e293b' }}>{label}</p>
+        <div style={{ fontSize: '0.85rem', color: '#64748b', display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+            <span>Total Actions:</span> <span style={{ fontWeight: 600, color: '#6366f1' }}>{data.value}</span>
+          </div>
+          <hr style={{ border: 'none', borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+            <span>AI Assessments:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.aiAssessments || 0}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+            <span>Custom Assessments:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.customAssessments || 0}</span>
+          </div>
+          <hr style={{ border: 'none', borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+            <span>Interviews Scheduled:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.interviewsScheduled || 0}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+            <span>Interviews Ongoing:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.interviewsOngoing || 0}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+            <span>Interviews Completed:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.interviewsCompleted || 0}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  return null;
+};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -114,31 +147,53 @@ const Dashboard = () => {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const currentYear = new Date().getFullYear();
 
-        const trendsAi = months.map((m, i) => {
-          const count = resultsAi.filter(r => {
-            const d = new Date(r.submitted_at);
-            return !isNaN(d.getTime()) && d.getMonth() === i && d.getFullYear() === currentYear;
-          }).length;
-          return { name: m, value: count };
-        });
-
-        const trendsCustom = months.map((m, i) => {
-          const count = resultsCustom.filter(r => {
-            const d = new Date(r.submitted_at);
-            return d.getMonth() === i && d.getFullYear() === currentYear;
-          }).length;
-          return { name: m, value: count };
-        });
-
-        const successData = months.map((m, i) => {
-          const monthResults = results.filter(r => {
+        const trendsTotalData = months.map((m, i) => {
+          const mResults = results.filter(r => {
             const d = new Date(r.submitted_at);
             return !isNaN(d.getTime()) && d.getMonth() === i && d.getFullYear() === currentYear;
           });
-          const hired = monthResults.filter(r => r.status === 'selected' || r.result === 'selected').length;
-          const total = monthResults.length;
-          const rate = total > 0 ? (hired / total) * 100 : 0;
-          return { name: m, value: Math.round(rate) };
+          const mInterviews = interviews.filter(inv => {
+            const d = new Date(inv.created_at || inv.updated_at);
+            return !isNaN(d.getTime()) && d.getMonth() === i && d.getFullYear() === currentYear;
+          });
+
+          const aiAssessmentsValue = mResults.filter(r => String(r.submission_id || '').startsWith('ai_')).length;
+          const customAssessmentsValue = mResults.filter(r => !String(r.submission_id || '').startsWith('ai_')).length;
+          const interviewsCompleted = mInterviews.filter(inv => inv.status === 'completed').length;
+          const interviewsScheduled = mInterviews.filter(inv => inv.status === 'scheduled' || inv.status === 'pending').length;
+          const interviewsOngoing = mInterviews.filter(inv => inv.status === 'in_progress').length;
+
+          return {
+            name: m,
+            value: aiAssessmentsValue + customAssessmentsValue + mInterviews.length,
+            aiAssessments: aiAssessmentsValue,
+            customAssessments: customAssessmentsValue,
+            interviewsCompleted,
+            interviewsScheduled,
+            interviewsOngoing
+          };
+        });
+
+        // Day-wise Candidate Success Rate (Mon-Sun)
+        const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const curr = new Date();
+        const first = curr.getDate() - curr.getDay() + (curr.getDay() === 0 ? -6 : 1); // Monday
+        const startOfWeek = new Date(curr.setDate(first));
+        startOfWeek.setHours(0, 0, 0, 0);
+
+        const successData = days.map((dayName, index) => {
+          const dayDate = new Date(startOfWeek);
+          dayDate.setDate(dayDate.getDate() + index);
+
+          const dayResults = results.filter(r => {
+            const d = new Date(r.submitted_at);
+            return !isNaN(d.getTime()) &&
+              d.getDate() === dayDate.getDate() &&
+              d.getMonth() === dayDate.getMonth() &&
+              d.getFullYear() === dayDate.getFullYear();
+          });
+          const hired = dayResults.filter(r => r.status === 'selected' || r.result === 'selected').length;
+          return { name: dayName, value: hired };
         });
 
         setData({
@@ -154,12 +209,7 @@ const Dashboard = () => {
             activeTestsCustom: customAssessmentsCount,
             scheduledInterviews: interviews.length
           },
-          trendsAi,
-          trendsCustom,
-          trendsTotal: months.map((m, i) => ({
-            name: m,
-            value: (trendsAi[i]?.value || 0) + (trendsCustom[i]?.value || 0)
-          })),
+          trendsTotal: trendsTotalData,
           successRate: successData
         });
 
@@ -369,10 +419,6 @@ const Dashboard = () => {
           </div>
           <div className="topbar-right">
             <div className="topbar-actions">
-
-              <div className="dashboard-profile-wrapper">
-                <ProfileDropdown />
-              </div>
             </div>
           </div>
         </header>
@@ -579,10 +625,7 @@ const Dashboard = () => {
                     <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
                     <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
                     <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
-                    <Tooltip
-                      contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)' }}
-                      itemStyle={{ color: '#6366f1', fontWeight: 700 }}
-                    />
+                    <Tooltip content={<CustomTooltip />} />
                     <Area type="monotone" dataKey="value" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -593,7 +636,9 @@ const Dashboard = () => {
                   <h4 style={{ fontSize: '0.8rem', margin: '0 0 1rem' }}>Candidate Success Rate</h4>
                   <ResponsiveContainer width="100%" height={100}>
                     <BarChart data={data.successRate}>
-                      <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                      <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+                      <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>

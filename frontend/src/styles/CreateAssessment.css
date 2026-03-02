@@ -48,14 +48,12 @@
 
 .create-assessment-page {
     min-height: 100vh;
-    background: linear-gradient(-45deg, #f0f4ff, #f8f0ff, #f0faff, #f5f0ff);
-    background-size: 400% 400%;
-    animation: meshGradient 15s ease infinite;
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    padding: 2.5rem 0;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    padding: 0;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
     color: #1e293b;
     position: relative;
     overflow-x: hidden;
@@ -105,7 +103,7 @@
     gap: 1.5rem;
     position: relative;
     z-index: 1;
-    padding: 0 6rem;
+    padding: 0 20px;
 }
 
 /* Glass Card Component */
@@ -370,30 +368,30 @@
 
 /* Action Button */
 .generate-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 50%, #9333ea 100%);
-    background-size: 200% auto;
+    width: fit-content;
+    background: #4f46e5;
     color: white;
     border: none;
-    padding: 1.5rem;
-    border-radius: 20px;
-    font-size: 1.25rem;
-    font-weight: 900;
+    padding: 0.8rem 2rem;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
     margin-top: 1.25rem;
-    box-shadow: 0 15px 35px -5px rgba(79, 70, 229, 0.4);
-    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    transition: all 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
-    letter-spacing: -0.02em;
+    gap: 0.8rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .generate-btn:hover:not(:disabled) {
-    transform: translateY(-4px) scale(1.01);
-    box-shadow: 0 25px 50px -10px rgba(79, 70, 229, 0.5);
-    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(79, 70, 229, 0.3);
+    background: #4338ca;
 }
 
 .generate-btn:active:not(:disabled) {
@@ -418,7 +416,7 @@
 /* Responsive Tweaks */
 @media (max-width: 1100px) {
     .assessment-container {
-        padding: 0 2rem;
+        padding: 0;
     }
 
     .threshold-section {

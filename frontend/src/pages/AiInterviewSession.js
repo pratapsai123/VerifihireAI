@@ -243,12 +243,16 @@ const AiInterviewSession = () => {
         chatHistoryRef.current.push({ role: sender === 'ai' ? 'assistant' : 'user', content: displayText });
     }, []);
 
-    const completeInterview = useCallback(async () => {
+    const completeInterview = useCallback(async (customMessage = null) => {
         stopCamera();
-        const finishMessage = "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
+        const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
         addMessage('ai', finishMessage);
         await speak(finishMessage);
         axios.patch(`${API_BASE_URL}/ai-candidates/${token}/status/`, { status: 'Completed' }).catch(console.error);
+
+        // Mark as completed locally to prevent re-opening link
+        localStorage.setItem(`interview_completed_${token}`, 'true');
+
         setIsProcessing(true);
         setAiStatus("Session Finished");
         setIsCompleted(true);
@@ -325,9 +329,7 @@ const AiInterviewSession = () => {
 
             if (isExit) {
                 // Scenario: Candidate wants to end the interview
-                addMessage('ai', fullFeedback);
-                await speak(fullFeedback);
-                completeInterview();
+                completeInterview(fullFeedback);
                 return;
             }
 
@@ -352,11 +354,7 @@ const AiInterviewSession = () => {
 
             // --- HARD STOP: end after MAX_QUESTIONS ---
             if (totalAnswered >= MAX_QUESTIONS) {
-                if (fullFeedback.trim()) {
-                    addMessage('ai', fullFeedback.trim());
-                    await speak(fullFeedback.trim());
-                }
-                completeInterview();
+                completeInterview(fullFeedback.trim() ? fullFeedback.trim() : undefined);
                 return;
             }
             // ------------------------------------------
@@ -463,6 +461,13 @@ const AiInterviewSession = () => {
         isInitializedRef.current = true;
 
         const initSession = async () => {
+            // Check localStorage first for instant blocking
+            if (localStorage.getItem(`interview_completed_${token}`)) {
+                setAiToast({ active: true, text: 'You have already completed this interview.', urgent: true });
+                setIsCompleted(true);
+                return;
+            }
+
             const storedData = sessionStorage.getItem('interviewData');
             if (storedData) {
                 const data = JSON.parse(storedData);
@@ -471,7 +476,8 @@ const AiInterviewSession = () => {
                 startInterview(data.candidateName, data.questions);
             } else {
                 try {
-                    const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/`);
+                    // Cache-busting nonce _t
+                    const res = await axios.get(`${API_BASE_URL}/ai-candidates/${token}/?_t=${Date.now()}`);
                     setCandidateName(res.data.full_name);
                     const matchRes = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, {
                         candidate_id: token,
@@ -481,6 +487,9 @@ const AiInterviewSession = () => {
                     startInterview(res.data.full_name, matchRes.data.interview_questions);
                 } catch (err) {
                     console.error("Init session error:", err);
+                    if (err.response && err.response.data && err.response.data.error) {
+                        setAiToast({ active: true, text: err.response.data.error, urgent: true });
+                    }
                 }
             }
         };
@@ -781,9 +790,6 @@ const AiInterviewSession = () => {
                         <div className="completion-next-steps">
                             <p>Moving forward, our recruitment team will analyze the session and get back to you with the next steps via email.</p>
                         </div>
-                        <button className="completion-exit-btn" onClick={() => navigate('/ai-interview')}>
-                            Exit and Return to Dashboard
-                        </button>
                     </div>
                 </div>
             )}

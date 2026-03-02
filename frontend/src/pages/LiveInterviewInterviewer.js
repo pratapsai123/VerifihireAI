@@ -18,9 +18,15 @@ function LiveInterviewInterviewer() {
   const [connectionEstablished, setConnectionEstablished] = useState(false);
 
   // Media states
-  const [isMuted, setIsMuted] = useState(false);
-  const [isCameraOn, setIsCameraOn] = useState(true);
-  const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(true);
+  const [isMuted, setIsMuted] = useState(() => {
+    const saved = sessionStorage.getItem(`mic_muted_${sessionId}`);
+    return saved !== null ? JSON.parse(saved) : false;
+  });
+  const [isCameraOn, setIsCameraOn] = useState(() => {
+    const saved = sessionStorage.getItem(`camera_on_${sessionId}`);
+    return saved !== null ? JSON.parse(saved) : true;
+  });
+  const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(false);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
   const [isRemoteScreenSharing, setIsRemoteScreenSharing] = useState(false);
   const [screenShareLocked, setScreenShareLocked] = useState(false);
@@ -564,6 +570,34 @@ function LiveInterviewInterviewer() {
           const joinedUserName = data.user === 'Candidate' ? candidateName : data.user;
           showNotification(`${joinedUserName} joined the session.`);
           if (data.user === 'Candidate') {
+            console.log('🎯 Candidate joined — syncing media state...');
+            // Re-broadcast our current media state so the newcomer is in sync
+            // Added a slight delay to ensure newcomer socket is ready
+            setTimeout(() => {
+              if (socketRef.current?.readyState === WebSocket.OPEN) {
+                console.log('📤 Re-broadcasting media state to candidate...');
+                socketRef.current.send(JSON.stringify({
+                  type: 'media_state',
+                  media: 'camera',
+                  enabled: isCameraOn,
+                  userName: interviewerName,
+                  startTime: startTimeRef.current
+                }));
+                socketRef.current.send(JSON.stringify({
+                  type: 'media_state',
+                  media: 'mic',
+                  enabled: !isMuted,
+                  userName: interviewerName
+                }));
+                // Also ask candidate for their current state
+                socketRef.current.send(JSON.stringify({ 
+                  type: 'request_state_sync',
+                  userName: interviewerName,
+                  startTime: startTimeRef.current
+                }));
+              }
+            }, 1000);
+
             // Always mark candidate as joined — even if our WebRTC isn't ready yet.
             // initializeWebRTC() checks this ref when it finishes and auto-offers.
             candidateHasJoinedRef.current = true;
@@ -621,7 +655,20 @@ function LiveInterviewInterviewer() {
           break;
         case 'media_state':
           if (String(data.sender).toLowerCase() !== 'candidate') break;
-          const who = candidateName;
+          console.log('📥 Received media_state from Candidate:', data);
+          
+          // Sync Candidate Name if provided
+          if (data.userName && data.userName !== 'Candidate') {
+            setCandidateName(data.userName);
+          }
+          
+          // Sync Timer if provided
+          if (data.startTime) {
+            console.log('⏰ Received updated startTime from Candidate:', data.startTime);
+            startTimeRef.current = data.startTime;
+          }
+
+          const who = data.userName || candidateName;
           const what = data.media === 'mic' ? (data.enabled ? 'unmuted mic' : 'muted mic') : (data.enabled ? 'turned on camera' : 'turned off camera');
 
           if (data.media === 'camera') {
@@ -660,6 +707,34 @@ function LiveInterviewInterviewer() {
             createVideoOffer({ iceRestart: true });
           }
           break;
+        case 'request_state_sync':
+          console.log('📥 Received state sync request from candidate');
+          
+          // Sync info from request too if present
+          if (data.userName && data.userName !== 'Candidate') {
+            setCandidateName(data.userName);
+          }
+          if (data.startTime) {
+            startTimeRef.current = data.startTime;
+          }
+
+          if (socketRef.current?.readyState === WebSocket.OPEN) {
+            socketRef.current.send(JSON.stringify({
+              type: 'media_state',
+              media: 'camera',
+              enabled: isCameraOn,
+              userName: interviewerName,
+              startTime: startTimeRef.current
+            }));
+            socketRef.current.send(JSON.stringify({
+              type: 'media_state',
+              media: 'mic',
+              enabled: !isMuted,
+              userName: interviewerName
+            }));
+          }
+          break;
+
         case 'proxy_violation':
           if (String(data.sender).toLowerCase() === 'candidate') {
             showProxyViolationNotification(data.violation_type, data.violation_count, data.violation_limit);
@@ -730,7 +805,7 @@ function LiveInterviewInterviewer() {
     } catch (error) {
       console.error('Error processing message:', error);
     }
-  }, [candidateName, interviewerName, chatPanelVisible, sessionId, sessionKey, navigate, showNotification]);
+  }, [candidateName, interviewerName, chatPanelVisible, sessionId, sessionKey, navigate, showNotification, isCameraOn, isMuted]);
 
   // WebRTC functions
   const initializeWebRTC = useCallback(async () => {
@@ -754,6 +829,10 @@ function LiveInterviewInterviewer() {
 
       console.log('✅ Got local media stream');
       localStreamRef.current = localStream;
+
+      // Ensure tracks match current UI state (important for re-initialization/reconnect)
+      localStream.getVideoTracks().forEach(track => (track.enabled = isCameraOn));
+      localStream.getAudioTracks().forEach(track => (track.enabled = !isMuted));
 
       if (selfVideoRef.current) {
         selfVideoRef.current.srcObject = localStream;
@@ -858,6 +937,8 @@ function LiveInterviewInterviewer() {
               console.log('✅ Remote video playing');
               setConnectionStatus('Connected');
               setConnectionStatusClass('connected');
+              // If we are playing video, the remote camera must be on
+              setIsRemoteCameraOn(true);
               if (!videoConnectedNotifiedRef.current) {
                 showNotification('Video connection established!', 'success');
                 videoConnectedNotifiedRef.current = true;
@@ -1052,12 +1133,12 @@ function LiveInterviewInterviewer() {
   }, [chatInput, interviewerName, appendChatMessage]);
 
   // Media control functions
-  const handleMuteToggle = useCallback(() => {
+  const toggleMic = useCallback(() => {
     if (!localStreamRef.current) return;
     const newMuted = !isMuted;
     setIsMuted(newMuted);
-    localStreamRef.current.getAudioTracks().forEach(track => track.enabled = !newMuted);
-    showNotification(newMuted ? 'Microphone muted' : 'Microphone unmuted');
+    sessionStorage.setItem(`mic_muted_${sessionId}`, JSON.stringify(newMuted));
+    localStreamRef.current.getAudioTracks().forEach(track => (track.enabled = !newMuted));
 
     try {
       if (socketRef.current?.readyState === WebSocket.OPEN) {
@@ -1070,12 +1151,13 @@ function LiveInterviewInterviewer() {
     } catch (e) {
       console.warn('media_state mic send failed', e);
     }
-  }, [isMuted, showNotification]);
+  }, [isMuted, sessionId]);
 
-  const handleCameraToggle = useCallback(async () => {
+  const toggleCamera = useCallback(async () => {
     if (!localStreamRef.current) return;
     const newCameraOn = !isCameraOn;
     setIsCameraOn(newCameraOn);
+    sessionStorage.setItem(`camera_on_${sessionId}`, JSON.stringify(newCameraOn));
 
     if (!newCameraOn) {
       localStreamRef.current.getVideoTracks().forEach(track => track.enabled = false);
@@ -1114,7 +1196,7 @@ function LiveInterviewInterviewer() {
     } catch (e) {
       console.warn('media_state camera send failed', e);
     }
-  }, [isCameraOn, showNotification]);
+  }, [isCameraOn, showNotification, sessionId]);
 
   const handleScreenShareToggle = useCallback(async () => {
     if (!isScreenSharing) {
@@ -1230,11 +1312,14 @@ function LiveInterviewInterviewer() {
       const videoTrack = localStreamRef.current.getVideoTracks()[0];
       if (videoTrack) {
         try {
+          videoTrack.enabled = true; // ensure track is on
           const sender = peerConnectionRef.current.getSenders().find(s => s.track && s.track.kind === 'video');
           if (sender) {
             await sender.replaceTrack(videoTrack);
             console.log('✅ Camera track restored after screen share');
           }
+          setIsCameraOn(true); // sync button state — camera is back on
+          sessionStorage.setItem(`camera_on_${sessionId}`, JSON.stringify(true));
         } catch (e) {
           console.warn('Failed to restore camera:', e);
         }
@@ -1524,7 +1609,19 @@ function LiveInterviewInterviewer() {
   return (
     <div className={`live-interview-interviewer ${chatPanelVisible ? 'chat-active' : ''}`}>
       {/* Header */}
-
+      <header className="live-interview-header">
+        <div className="header-left">
+          <h1>Live Interview</h1>
+          {candidateName && candidateName !== 'Candidate' && (
+            <span style={{ marginLeft: '16px', fontSize: '14px', opacity: 0.8 }}>
+              — {candidateName}
+            </span>
+          )}
+        </div>
+        <div className="header-controls">
+          <div className="timer">{timer}</div>
+        </div>
+      </header>
 
       {/* Main Content */}
       <div className="main-wrapper">
@@ -1540,8 +1637,9 @@ function LiveInterviewInterviewer() {
             style={{ display: (isRemoteCameraOn || isRemoteScreenSharing) ? 'block' : 'none' }}
           />
 
-          {!isRemoteCameraOn && bothPartiesConnected && (
-            <div className="remote-video-placeholder" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+          {/* Remote camera-off placeholder — always visible, both sides */}
+          {!isRemoteCameraOn && (
+            <div className="remote-video-placeholder" style={{ position: 'absolute', inset: 0, zIndex: 1, backgroundColor: '#1a1a1a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <VideoPlaceholder name={candidateName} />
             </div>
           )}
@@ -1556,8 +1654,8 @@ function LiveInterviewInterviewer() {
             </div>
           )}
 
-          {/* Name Label for Candidate */}
-          {bothPartiesConnected && (
+          {/* Name Label for Candidate - Only show if camera is ON to avoid overlap with placeholder */}
+          {bothPartiesConnected && isRemoteCameraOn && (
             <div className="video-label" style={{ top: '20px', left: '20px', bottom: 'auto' }}>
               <span>{candidateName}</span>
               <i className="fas fa-microphone" style={{ fontSize: '12px', marginLeft: '6px' }}></i>
@@ -1634,7 +1732,7 @@ function LiveInterviewInterviewer() {
         <div className="control-bar">
           <button
             className={`control-btn ${!isMuted ? 'active' : 'off'}`}
-            onClick={handleMuteToggle}
+            onClick={toggleMic}
             title={isMuted ? "Unmute" : "Mute"}
           >
             <div className="icon-circle">
@@ -1645,7 +1743,7 @@ function LiveInterviewInterviewer() {
 
           <button
             className={`control-btn ${isCameraOn ? 'active' : 'off'}`}
-            onClick={handleCameraToggle}
+            onClick={toggleCamera}
             title={isCameraOn ? "Stop Video" : "Start Video"}
           >
             <div className="icon-circle">

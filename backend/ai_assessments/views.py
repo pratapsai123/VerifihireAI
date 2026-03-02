@@ -29,7 +29,7 @@ class SubmitAssessmentView(APIView):
         data = request.data
         token = data.get('token')
         name = data.get('name')
-        email = data.get('email')
+        email = data.get('email', '').strip().lower()
         answers = data.get('answers', {})
         coding_results = data.get('codingResults', {}) # Captured test case results
 
@@ -137,7 +137,8 @@ class SubmitAssessmentView(APIView):
             submission.submitted_at = timezone.now()
             submission.save()
 
-            return Response({
+            # After successful save, ensure we return no-cache headers to the submission confirmation
+            response_data = {
                 "message": "Assessment submitted successfully",
                 "submission_id": submission.id,
                 "score": submission.score,
@@ -146,7 +147,12 @@ class SubmitAssessmentView(APIView):
                 "total_possible_points": total_possible_points,
                 "percentage": percentage,
                 "status": pass_status
-            }, status=status.HTTP_200_OK)
+            }
+            response = Response(response_data, status=status.HTTP_200_OK)
+            response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response["Pragma"] = "no-cache"
+            response["Expires"] = "0"
+            return response
 
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -442,11 +448,29 @@ class PublicAssessmentView(APIView):
         try:
             assessment = Assessment.objects.get(share_token=token)
             gen_content = assessment.generated_content or {}
-            if 'mcqs' not in gen_content and 'coding_challenges' not in gen_content:
-                for key, val in gen_content.items():
-                    if isinstance(val, dict) and ('mcqs' in val or 'coding_challenges' in val):
-                        gen_content = val
-                        break
+            
+            # Robust extraction: Handle if it's a string or nested dict
+            if isinstance(gen_content, str):
+                import json
+                try:
+                    gen_content = json.loads(gen_content)
+                except:
+                    pass
+
+            # Unwrap if it's a wrapper dict (like {"technical_assessment": {...}})
+            if isinstance(gen_content, dict):
+                # If it doesn't have the main keys but has a nested dict that does, unwrap it
+                if 'mcqs' not in gen_content and 'coding_challenges' not in gen_content:
+                    for val in gen_content.values():
+                        if isinstance(val, dict) and ('mcqs' in val or 'coding_challenges' in val):
+                            gen_content = val
+                            break
+            # Second pass: if it's still a string (nested string), try one more parse
+            if isinstance(gen_content, str):
+                try:
+                    gen_content = json.loads(gen_content)
+                except:
+                    pass
 
             # Check if this specific user email has already completed it (if passed via query param)
             email_param = request.query_params.get('email', '').strip().lower()
@@ -473,7 +497,11 @@ class PublicAssessmentView(APIView):
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None
             }
-            return Response(data, status=status.HTTP_200_OK)
+            response = Response(data, status=status.HTTP_200_OK)
+            response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response["Pragma"] = "no-cache"
+            response["Expires"] = "0"
+            return response
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception:

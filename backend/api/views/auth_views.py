@@ -1,0 +1,653 @@
+﻿from ._imports import *
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def api_root(request):
+    """Root endpoint that displays available API endpoints."""
+    return Response({
+        'message': 'FaceD Interview Backend API',
+        'version': '1.0',
+        'endpoints': {'register': '/api/register/', 'login': '/api/login/', 'admin': '/admin/'},
+        'documentation': 'Use POST requests to /api/register/ and /api/login/'
+    })
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def send_otp_view(request):
+    """
+    Send OTP to email for verification.
+    Expected request body:
+    {
+        "email": "user@company.com"
+    }
+    """
+    try:
+        email = request.data.get('email', '').strip().lower()
+        context = request.data.get('context', '').strip().lower()
+        
+        if not email:
+            return Response(
+                {'error': 'Email is required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Validate email format
+        email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_regex, email):
+            return Response(
+                {'error': 'Invalid email format.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Check if user already exists (only for registration flow)
+        if context == 'register':
+            if UserProfile.objects.filter(email=email).exists():
+                return Response(
+                    {'error': 'Account with this email already exists. Please login.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        
+        # Generate OTP
+        otp = EmailOTP.generate_otp()
+        expires_in = _otp_expiry_seconds()
+        expires_minutes = max(1, int(round(expires_in / 60)))
+        
+        # Invalidate previous OTPs for this email
+        EmailOTP.objects.filter(email=email, is_verified=False).update(is_verified=True)
+        
+        # Create new OTP
+        email_otp = EmailOTP.objects.create(email=email, otp=otp)
+        
+        # Send email with OTP
+        try:
+            send_mail(
+                subject='VeriFiHire - Email Verification OTP',
+                message=f'Your OTP for email verification is: {otp}\n\nThis OTP is valid for {expires_minutes} minutes.',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+        except Exception as e:
+            # If email sending fails, log the error but still save the OTP
+            print(f"Email sending failed: {str(e)}")
+            # Return OTP in response for development/testing purposes
+            # In production, you may want to handle this differently
+            return Response(
+                {
+                    'message': 'OTP generated. Email sending failed, but OTP is available below for testing.',
+                    'otp': otp,  # For development/testing - remove in production
+                    'email': email,
+                    'expires_in': expires_in,
+                    'email_sent': False,
+                    'error': f'Email sending failed: {str(e)}'
+                },
+                status=status.HTTP_200_OK
+            )
+        
+        return Response(
+            {
+                'message': 'OTP sent to your email. Please check your inbox.',
+                'email': email,
+                'expires_in': expires_in
+            },
+            status=status.HTTP_200_OK
+        )
+        
+    except Exception as e:
+        import traceback
+        error_message = str(e)
+        # Check if it's a database error (table doesn't exist)
+        if 'no such table' in error_message.lower() or 'relation' in error_message.lower() or 'does not exist' in error_message.lower():
+            error_message = 'Database table not found. Please run migrations: python manage.py makemigrations && python manage.py migrate'
+        print(f"Error in send_otp_view: {error_message}")
+        print(traceback.format_exc())
+        return Response(
+            {'error': f'An error occurred: {error_message}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_otp_view(request):
+    """
+    Verify OTP for email.
+    Expected request body:
+    {
+        "email": "user@company.com",
+        "otp": "123456"
+    }
+    """
+    try:
+        email = request.data.get('email', '').strip().lower()
+        otp = request.data.get('otp', '').strip()
+        
+        if not email:
+            return Response(
+                {'error': 'Email is required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        if not otp:
+            return Response(
+                {'error': 'OTP is required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Find the most recent unverified OTP for this email
+        try:
+            email_otp = EmailOTP.objects.filter(
+                email=email,
+                is_verified=False
+            ).order_by('-created_at').first()
+            
+            if not email_otp:
+                return Response(
+                    {'error': 'No OTP found for this email. Please request a new OTP.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            if email_otp.is_expired():
+                return Response(
+                    {'error': 'OTP has expired. Please request a new OTP.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            if email_otp.otp != otp:
+                return Response(
+                    {'error': 'Invalid OTP. Please try again.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Mark OTP as verified
+            email_otp.is_verified = True
+            email_otp.save()
+            
+            return Response(
+                {
+                    'message': 'Email verified successfully!',
+                    'verified': True
+                },
+                status=status.HTTP_200_OK
+            )
+            
+        except EmailOTP.DoesNotExist:
+            return Response(
+                {'error': 'Invalid OTP or email.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+    except Exception as e:
+        return Response(
+            {'error': f'An error occurred: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def reset_password_view(request):
+    """
+    Reset password after email OTP verification.
+    Expected request body:
+    {
+        "email": "user@company.com",
+        "otp": "123456",
+        "new_password": "password123",
+        "confirm_password": "password123"
+    }
+    """
+    try:
+        email = request.data.get('email', '').strip().lower()
+        otp = request.data.get('otp', '').strip()
+        new_password = request.data.get('new_password', '')
+        confirm_password = request.data.get('confirm_password', '')
+
+        if not email:
+            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not otp:
+            return Response({'error': 'OTP is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not new_password or not confirm_password:
+            return Response({'error': 'New password and confirm password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if new_password != confirm_password:
+            return Response({'error': 'Passwords do not match.'}, status=status.HTTP_400_BAD_REQUEST)
+        if len(new_password) < 6:
+            return Response({'error': 'Password must be at least 6 characters long.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Find the most recent verified OTP for this email
+        email_otp = EmailOTP.objects.filter(email=email, is_verified=True).order_by('-created_at').first()
+        if not email_otp:
+            return Response({'error': 'Please verify OTP first.'}, status=status.HTTP_400_BAD_REQUEST)
+        if email_otp.is_expired():
+            return Response({'error': 'OTP has expired. Please request a new OTP.'}, status=status.HTTP_400_BAD_REQUEST)
+        if email_otp.otp != otp:
+            return Response({'error': 'Invalid OTP. Please try again.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Update user password (prefer Django auth user hashing)
+        try:
+            user_profile = UserProfile.objects.get(email=email)
+        except UserProfile.DoesNotExist:
+            user_profile = None
+
+        if user_profile and user_profile.user:
+            user_profile.user.set_password(new_password)
+            user_profile.user.save()
+            # Keep deprecated plaintext field cleared going forward
+            if user_profile.password:
+                user_profile.old_password = user_profile.password
+                user_profile.password = None
+                user_profile.save(update_fields=['old_password', 'password', 'updated_at'])
+        elif user_profile:
+            # Backward compatibility for profiles that aren't linked to auth.User yet.
+            user_profile.old_password = user_profile.password
+            user_profile.password = new_password
+            user_profile.save(update_fields=['old_password', 'password', 'updated_at'])
+        else:
+            # Allow password reset for application admin accounts (no UserProfile)
+            auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
+            if not auth_user:
+                return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+            auth_user.set_password(new_password)
+            auth_user.save()
+
+        return Response({'message': 'Password reset successful.'}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        import traceback
+        print(f"Error in reset_password_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def register_view(request):
+    """
+    Register a new user with ALL signup form fields.
+    Expected request body:
+    {
+        "first_name": "John",
+        "last_name": "Doe",
+        "email": "user@company.com",
+        "business_email": "user@company.com",
+        "role": "recruiter",
+        "organization_name": "ABC Company",
+        "password": "password123"
+    }
+    """
+    try:
+        # Get all fields from request
+        full_name = request.data.get('full_name', '').strip()
+        email = request.data.get('email', '').strip().lower() or request.data.get('business_email', '').strip().lower()
+        organization_name = request.data.get('organization_name', '').strip()
+        password = request.data.get('password', '')
+        
+        # Support legacy fields for backward compatibility
+        if not full_name:
+            first_name = request.data.get('first_name', '').strip()
+            last_name = request.data.get('last_name', '').strip()
+            if first_name:
+                full_name = f"{first_name} {last_name}".strip()
+        
+        if not full_name and request.data.get('name'):
+            full_name = request.data.get('name', '').strip()
+        
+        # Split full_name into first_name and last_name
+        name_parts = full_name.split(' ', 1) if full_name else []
+        first_name = name_parts[0] if name_parts else ''
+        last_name = name_parts[1] if len(name_parts) > 1 else ''
+
+        # Validation
+        if not full_name or not first_name:
+            return Response(
+                {'error': 'Full name is required.', 'full_name': ['This field is required.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not email:
+            return Response(
+                {'error': 'Business email is required.', 'email': ['This field is required.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not organization_name:
+            return Response(
+                {'error': 'Organization name is required.', 'organization_name': ['This field is required.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not password:
+            return Response(
+                {'error': 'Password is required.', 'password': ['This field is required.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if len(password) < 6:
+            return Response(
+                {'error': 'Password must be at least 6 characters long.', 'password': ['Password must be at least 6 characters.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Enforce business-domain signup for company registration (platform admin can be gmail, but is created separately)
+        domain = _email_domain(email)
+        if not domain:
+            return Response({'error': 'Invalid email address.'}, status=status.HTTP_400_BAD_REQUEST)
+        if domain in _free_email_domains():
+            return Response(
+                {'error': 'Please use your company email (free email domains are not allowed for company registration).', 'email': ['Please use your company email.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Check if email already exists in UserProfile
+        if UserProfile.objects.filter(email=email).exists():
+            return Response(
+                {'error': 'A user with this email already exists.', 'email': ['A user with this email already exists.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Verify that email has been verified via OTP
+        verified_otp = EmailOTP.objects.filter(
+            email=email,
+            is_verified=True
+        ).order_by('-created_at').first()
+        
+        if not verified_otp:
+            return Response(
+                {'error': 'Please verify your email first by entering the OTP.', 'email': ['Email verification required.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Check if OTP verification is recent (within 30 minutes)
+        if timezone.now() > verified_otp.created_at + timedelta(minutes=30):
+            return Response(
+                {'error': 'Email verification has expired. Please verify your email again.', 'email': ['Email verification expired.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Create/get company tenant (registration is ONLY allowed for the very first user of a company)
+        company, company_created = Company.objects.get_or_create(name=organization_name)
+        if company.domain and company.domain != domain:
+            return Response(
+                {'error': 'Email domain does not match this organization.', 'email': ['Email domain mismatch.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        if not company.domain:
+            company.domain = domain
+            company.save(update_fields=['domain'])
+
+        if UserProfile.objects.filter(company=company).count() >= 5:
+            return Response(
+                {'error': 'This organization already has 5 registered admins. Please request an invitation from your Company Admin.'},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # Always create Django User for authentication (hashed password)
+        user = User.objects.create_user(
+            username=email,
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+        )
+
+        # Create user profile (role is assigned automatically per PDF: first user is COMPANY_ADMIN)
+        user_profile = UserProfile.objects.create(
+            first_name=first_name,
+            last_name=last_name if last_name else None,
+            email=email,
+            password=None,  # deprecated field
+            role=UserProfile.ROLE_COMPANY_ADMIN,
+            organization_name=organization_name,
+            company=company,
+            user=user,
+        )
+
+        return Response(
+            {
+                'message': 'Account created successfully!',
+                'user': {
+                    'id': user_profile.id,
+                    'first_name': user_profile.first_name,
+                    'last_name': user_profile.last_name,
+                    'email': user_profile.email,
+                    'role': user_profile.role,
+                    'organization_name': user_profile.organization_name,
+                    'registration_timestamp': user_profile.registration_timestamp.isoformat(),
+                }
+            },
+            status=status.HTTP_201_CREATED
+        )
+
+    except Exception as e:
+        return Response(
+            {'error': f'An error occurred: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def login_view(request):
+    """
+    Login a user - Step 1: Verify email and password, then send OTP.
+    Expected request body:
+    {
+        "email": "user@example.com",
+        "password": "password123"
+    }
+    """
+    try:
+        email = request.data.get('email', '').strip().lower()
+        password = request.data.get('password', '')
+
+        # Validation
+        if not email:
+            return Response(
+                {'error': 'Email is required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not password:
+            return Response(
+                {'error': 'Password is required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        user_profile = UserProfile.objects.filter(email=email).first()
+
+        # Company users (UserProfile)
+        if user_profile:
+            if user_profile.user:
+                if not user_profile.user.check_password(password):
+                    return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+            else:
+                # Backward compatibility: plaintext profile password (legacy)
+                if user_profile.password != password:
+                    return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+                # Best-effort migrate to hashed auth user on successful legacy login
+                try:
+                    user = User.objects.create_user(
+                        username=email,
+                        email=email,
+                        password=password,
+                        first_name=user_profile.first_name or '',
+                        last_name=user_profile.last_name or '',
+                    )
+                    user_profile.user = user
+                    user_profile.old_password = user_profile.password
+                    user_profile.password = None
+                    user_profile.save(update_fields=['user', 'old_password', 'password', 'updated_at'])
+                except Exception:
+                    pass
+        else:
+            # Application Admin users (no UserProfile): must exist in ApplicationAdmin table
+            auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
+            if not auth_user or not auth_user.check_password(password):
+                return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+            if not ApplicationAdmin.objects.filter(user=auth_user).exists():
+                return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+
+        # Generate and send OTP for 2-step verification
+        otp = EmailOTP.generate_otp()
+        expires_in = _otp_expiry_seconds()
+        expires_minutes = max(1, int(round(expires_in / 60)))
+        
+        # Invalidate previous OTPs for this email
+        EmailOTP.objects.filter(email=email, is_verified=False).update(is_verified=True)
+        
+        # Create new OTP for login
+        email_otp = EmailOTP.objects.create(email=email, otp=otp)
+        
+        # Send email with OTP
+        try:
+            send_mail(
+                subject='VeriFiHire - Login Verification OTP',
+                message=f'Your OTP for login verification is: {otp}\n\nThis OTP is valid for {expires_minutes} minutes.',
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[email],
+                fail_silently=False,
+            )
+        except Exception as e:
+            print(f"Email sending failed: {str(e)}")
+            # Return OTP in response for development/testing
+            return Response(
+                {
+                    'message': 'Credentials verified. OTP generated. Check your email.',
+                    'otp_required': True,
+                    'otp': otp,  # Remove this in production
+                    'email': email,
+                    'expires_in': expires_in,
+                    'email_sent': False
+                },
+                status=status.HTTP_200_OK
+            )
+
+        # Return response indicating OTP is required
+        return Response(
+            {
+                'message': 'Credentials verified. OTP sent to your email. Please verify to complete login.',
+                'otp_required': True,
+                'email': email,
+                'expires_in': expires_in
+            },
+            status=status.HTTP_200_OK
+        )
+
+    except Exception as e:
+        import traceback
+        print(f"Error in login_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response(
+            {'error': f'An error occurred: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def verify_login_otp_view(request):
+    """
+    Login a user - Step 2: Verify OTP and complete login.
+    Expected request body:
+    {
+        "email": "user@example.com",
+        "otp": "123456"
+    }
+    """
+    try:
+        email = request.data.get('email', '').strip().lower()
+        otp = request.data.get('otp', '').strip()
+        
+        if not email:
+            return Response(
+                {'error': 'Email is required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        if not otp:
+            return Response(
+                {'error': 'OTP is required.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        # Find the most recent unverified OTP for this email
+        try:
+            email_otp = EmailOTP.objects.filter(
+                email=email,
+                is_verified=False
+            ).order_by('-created_at').first()
+            
+            if not email_otp:
+                return Response(
+                    {'error': 'No OTP found for this email. Please login again.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            if email_otp.is_expired():
+                return Response(
+                    {'error': 'OTP has expired. Please login again.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            if email_otp.otp != otp:
+                return Response(
+                    {'error': 'Invalid OTP. Please try again.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            # Mark OTP as verified
+            email_otp.is_verified = True
+            email_otp.save()
+            
+            # Prefer user profile; fallback to application admin
+            user_profile = UserProfile.objects.filter(email=email).first()
+            app_admin = None
+            if not user_profile:
+                auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
+                if auth_user:
+                    app_admin = ApplicationAdmin.objects.filter(user=auth_user).first()
+                if not app_admin:
+                    return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+            
+            # Return success response with user data and token
+            return Response(
+                {
+                    'message': 'Login successful!',
+                    'token': 'dummy-token-for-now',  # You can implement JWT here later
+                    'user': {
+                        'id': (user_profile.id if user_profile else app_admin.user_id),
+                        'first_name': (user_profile.first_name if user_profile else (app_admin.user.first_name or '')),
+                        'last_name': (user_profile.last_name if user_profile else (app_admin.user.last_name or '')),
+                        'email': (user_profile.email if user_profile else (app_admin.user.email or app_admin.user.username)),
+                        'role': (user_profile.role if user_profile else UserProfile.ROLE_APPLICATION_ADMIN),
+                        'organization_name': (user_profile.organization_name if user_profile else None),
+                        'registration_timestamp': (user_profile.registration_timestamp.isoformat() if user_profile else app_admin.created_at.isoformat()),
+                    }
+                },
+                status=status.HTTP_200_OK
+            )
+            
+        except Exception as e:
+            return Response(
+                {'error': f'An error occurred: {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+        
+    except Exception as e:
+        import traceback
+        print(f"Error in verify_login_otp_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response(
+            {'error': f'An error occurred: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+

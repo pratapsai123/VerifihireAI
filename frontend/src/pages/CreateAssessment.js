@@ -127,19 +127,15 @@ const CreateAssessment = () => {
     };
 
     return (
-        <div className="create-assessment-page">
-            <div className="bg-shape shape-1"></div>
-            <div className="bg-shape shape-2"></div>
-            <div className="bg-shape shape-3"></div>
-
-            <div className="assessment-container">
-                <header className="assessment-header">
-                    <h1>Create <span>Smart</span> Assessment</h1>
-                    <p>Our intelligent AI transforms your requirements into a precision-engineered technical evaluation.</p>
+        <div className="create-assessment-page" style={{ paddingTop: 0 }}>
+            <div className="assessment-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
+                <header className="assessment-header" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
+                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#111827', margin: 0, letterSpacing: '-0.025em' }}>Create <span style={{ color: '#6366F1', fontWeight: '400' }}>Smart</span> Assessment</h1>
+                    <p style={{ color: '#6b7280', fontSize: '0.95rem', marginTop: '0.25rem' }}>Our intelligent AI transforms your requirements into a precision-engineered technical evaluation.</p>
                 </header>
 
-                <div className="glass-card">
-                    <SectionHeader icon="📝" title="Role Context" />
+                <div>
+                    <SectionHeader title="Role Context" />
                     <div className="form-group">
                         <label>Job Requirements</label>
                         <textarea
@@ -159,8 +155,8 @@ const CreateAssessment = () => {
                     </div>
                 </div>
 
-                <div className="glass-card">
-                    <SectionHeader icon="⚙️" title="Structure & Difficulty" />
+                <div>
+                    <SectionHeader title="Structure & Difficulty" />
 
                     {/* Reverted Parameter Row (from screenshot) */}
                     <div className="parameters-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)', gap: '2rem', marginBottom: '2.5rem' }}>
@@ -260,7 +256,7 @@ const CreateAssessment = () => {
 
                         <div className="availability-grid">
                             <div className="form-group">
-                                <label><span>📅</span> Available From</label>
+                                <label>Available From</label>
                                 <div className="datetime-row">
                                     <input
                                         type="date"
@@ -275,7 +271,7 @@ const CreateAssessment = () => {
                                 </div>
                             </div>
                             <div className="form-group">
-                                <label><span>⌛</span> Available Until</label>
+                                <label>Available Until</label>
                                 <div className="datetime-row">
                                     <input
                                         type="date"
@@ -314,10 +310,9 @@ const CreateAssessment = () => {
     );
 };
 
-const SectionHeader = ({ icon, title }) => (
-    <div className="section-header">
-        <span className="icon-box">{icon}</span>
-        <h2>{title}</h2>
+const SectionHeader = ({ title }) => (
+    <div className="section-header" style={{ marginBottom: '1.5rem', borderBottom: '1px solid #e2e8f0', paddingBottom: '0.75rem' }}>
+        <h2 style={{ fontSize: '1.2rem', fontWeight: '700', color: '#111827', margin: 0 }}>{title}</h2>
     </div>
 );
 

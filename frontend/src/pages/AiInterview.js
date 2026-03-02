@@ -85,11 +85,8 @@ const AiInterview = () => {
             <div className="bg-shape" style={{ width: '600px', height: '600px', background: 'rgba(99, 102, 241, 0.15)', top: '-10%', right: '-5%' }}></div>
             <div className="bg-shape" style={{ width: '500px', height: '500px', background: 'rgba(168, 85, 247, 0.15)', bottom: '-10%', left: '-5%', animationDelay: '-5s' }}></div>
 
-            <div className="creation-container">
-                <header className="glass-card page-header">
-                    <div className="badge">
-                        <i className="fa-solid fa-bolt-lightning"></i> AI AUTOMATION HUB
-                    </div>
+            <div className="creation-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
+                <header className="page-header" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
                     <h1>AI <span style={{ color: '#6366F1' }}>Interview</span> Creation</h1>
                     <p>
                         Design high-fidelity AI interview experiences by providing job context and candidate lists for automated deployment.
@@ -157,7 +154,7 @@ const AiInterview = () => {
                                             <i className="fa-solid fa-file-signature"></i>
                                         </div>
                                         <div>
-                                            <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Job Requirements</h3>
+                                            <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Job Requirements</h3>
                                             <p style={{ color: '#6B7280', fontSize: '0.9rem', margin: '0.2rem 0 0' }}>Provide the context for the AI interviewer.</p>
                                         </div>
                                     </div>
@@ -191,7 +188,7 @@ const AiInterview = () => {
                                             <i className="fa-solid fa-user-plus"></i>
                                         </div>
                                         <div>
-                                            <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Candidate List</h3>
+                                            <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Candidate List</h3>
                                             <p style={{ color: '#6B7280', fontSize: '0.9rem', margin: '0.2rem 0 0' }}>Upload your recipient list here.</p>
                                         </div>
                                     </div>
@@ -216,7 +213,7 @@ const AiInterview = () => {
                                                 }}>
                                                     <i className="fa-solid fa-file-upload"></i>
                                                 </div>
-                                                <p style={{ fontSize: '1.1rem', fontWeight: '800', color: '#1E293B', marginBottom: '0.5rem' }}>Select List</p>
+                                                <p style={{ fontSize: '1rem', fontWeight: '500', color: '#1E293B', marginBottom: '0.5rem' }}>Select List</p>
                                                 <p style={{ fontSize: '0.85rem', color: '#94A3B8' }}>Drag & Drop file here</p>
                                             </>
                                         ) : (
@@ -232,9 +229,9 @@ const AiInterview = () => {
                                     </div>
 
                                     <div style={{ background: 'rgba(241, 245, 249, 0.5)', borderRadius: '24px', padding: '1.5rem', border: '1px solid rgba(226, 232, 240, 0.6)' }}>
-                                        <h4 style={{ fontSize: '0.75rem', fontWeight: '800', color: '#475569', marginBottom: '1rem', textTransform: 'uppercase' }}>Sample Format</h4>
+                                        <h4 style={{ fontSize: '0.75rem', fontWeight: '600', color: '#475569', marginBottom: '1rem', textTransform: 'uppercase' }}>Sample Format</h4>
                                         <div style={{ background: 'white', padding: '1rem', borderRadius: '12px', fontSize: '0.75rem', fontFamily: 'monospace', color: '#64748B', border: '1px solid #E2E8F0' }}>
-                                            <div style={{ fontWeight: '700', color: '#111827', borderBottom: '1px solid #F1F5F9', paddingBottom: '0.3rem', marginBottom: '0.3rem' }}>name, email</div>
+                                            <div style={{ fontWeight: '500', color: '#111827', borderBottom: '1px solid #F1F5F9', paddingBottom: '0.3rem', marginBottom: '0.3rem' }}>name, email</div>
                                             <div>John Doe, john@example.com</div>
                                             <div>Jane Smith, jane@example.com</div>
                                         </div>
@@ -297,57 +294,9 @@ const AiInterview = () => {
                                     </div>
                                 )}
 
-                                {/* Date & Time Selection Range */}
-                                <div className="module-card" style={{ width: '100%', padding: '2.5rem 2rem', background: 'transparent', borderRadius: '0', border: 'none', borderTop: '1px solid #E5E7EB' }}>
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                            <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.3rem', display: 'block' }}>
-                                                <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
-                                                Available From
-                                            </label>
-                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                                <input
-                                                    type="date"
-                                                    value={fromDate}
-                                                    onChange={(e) => setFromDate(e.target.value)}
-                                                    style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
-                                                />
-                                                <input
-                                                    type="time"
-                                                    value={fromTime}
-                                                    onChange={(e) => setFromTime(e.target.value)}
-                                                    style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
-                                                />
-                                            </div>
-                                        </div>
-                                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                            <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#374151', marginBottom: '-0.3rem', display: 'block' }}>
-                                                <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
-                                                Available Until
-                                            </label>
-                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                                <input
-                                                    type="date"
-                                                    value={untilDate}
-                                                    onChange={(e) => setUntilDate(e.target.value)}
-                                                    style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
-                                                />
-                                                <input
-                                                    type="time"
-                                                    value={untilTime}
-                                                    onChange={(e) => setUntilTime(e.target.value)}
-                                                    style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: '#F8FAFC', fontSize: '0.9rem' }}
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <button type="submit" className="primary-link-btn" disabled={isUploading} style={{
-                                    width: '100%', padding: '1.25rem', fontSize: '1.2rem', borderRadius: '24px', background: '#4F46E5',
-                                    boxShadow: '0 15px 30px -5px rgba(79, 70, 229, 0.4)', transition: 'all 0.3s transform'
-                                }} onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                                    onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}>
+
+                                <button type="submit" className="generate-btn" disabled={isUploading}>
                                     {isUploading ? (
                                         <><i className="fa-solid fa-atom fa-spin"></i> Deploying Interview Agents...</>
                                     ) : (

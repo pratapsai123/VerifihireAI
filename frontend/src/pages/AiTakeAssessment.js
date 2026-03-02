@@ -73,11 +73,19 @@ const AiTakeAssessment = () => {
     useEffect(() => {
         const fetchAssessment = async () => {
             try {
+                // Check if already completed via local storage first for instant blocking
+                if (localStorage.getItem(`assessment_completed_${token}`)) {
+                    setError('You have already completed this assessment and cannot retake it.');
+                    setLoading(false);
+                    return;
+                }
+
                 const params = new URLSearchParams(window.location.search);
                 const emailParam = params.get('email');
+                // Cache-busting nonce _t ensures we never get a "stale" in-progress response
                 const url = emailParam
-                    ? `${API_BASE_URL}/ai/public/${token}/?email=${encodeURIComponent(emailParam)}`
-                    : `${API_BASE_URL}/ai/public/${token}/`;
+                    ? `${API_BASE_URL}/ai/public/${token}/?email=${encodeURIComponent(emailParam)}&_t=${Date.now()}`
+                    : `${API_BASE_URL}/ai/public/${token}/?_t=${Date.now()}`;
                 const response = await axios.get(url);
                 const data = response.data;
                 setAssessment(data);
@@ -318,6 +326,8 @@ const AiTakeAssessment = () => {
                 answers,
                 codingResults // Added to send test case results
             });
+            // Mark as completed locally to prevent re-opening link later
+            localStorage.setItem(`assessment_completed_${token}`, 'true');
             setSubmitted(true);
             stopCamera();
         } catch { alert('Failed to submit.'); }

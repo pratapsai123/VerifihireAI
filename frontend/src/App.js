@@ -65,29 +65,20 @@ function AppContent() {
     '/login',
     '/signup',
     '/forgot-password',
-    '/dashboard',
-    '/create-assessment',
-    '/manual-questions',
-    '/coding/questions/new',
-    '/live-interview',
-    '/live-interview-interviewer',
+    '/live-interview',             // candidate — no main navbar
+    '/live-interview-interviewer', // interviewer — no main navbar (has its own internal header)
     '/accept-invite',
-    '/results-ai',
     '/feedback-page',
-    '/ai-interview',
-    '/ai-assessments',
     '/results',
   ];
 
   const isFullScreenPage =
     fullScreenRoutes.includes(location.pathname) ||
-    location.pathname.startsWith('/ai-assessments/') ||
     location.pathname.startsWith('/interview-start/') ||
     location.pathname.startsWith('/take-assessment/') ||
     location.pathname.startsWith('/take-ai-assessment/') ||
     location.pathname.startsWith('/ai-interview-session/') ||
-    location.pathname.startsWith('/coding/questions/') ||
-    location.pathname.startsWith('/result/');
+    location.pathname.endsWith('/attempt');
 
   return (
     <div className="app-container">

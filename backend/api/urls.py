@@ -25,6 +25,8 @@ urlpatterns = [
     path('interviews/invite/', views.create_interview_invitations_and_send_email_view, name='invite_interview_candidates'),
     path('interviews/invitations/', views.interview_invitations_overview_view, name='interview_invitations_overview'),
     path('interviews/invitations/<uuid:token>/', views.get_interview_invitation_by_token_view, name='get_interview_invitation_by_token'),
+    path('interviews/draft-invites/', views.draft_interview_invitations_view, name='draft_interview_invitations_list'),
+    path('interviews/draft-invites/<int:draft_id>/', views.draft_interview_invitations_view, name='draft_interview_invitations_detail'),
 
     # Internal user invitations (HR Manager / HR)
     path('users/invite/', views.invite_user_view, name='invite_user'),
@@ -33,6 +35,7 @@ urlpatterns = [
     path('users/invite/<uuid:token>/resend/', views.resend_invite_view, name='resend_invite'),
     path('users/accept-invite/', views.accept_invite_view, name='accept_invite'),
     path('users/team-members/', views.team_members_view, name='team_members'),
+    path('profile/', views.profile_view, name='profile'),
 
     path('invitations/public/<uuid:token>/', views.get_invitation_public_view, name='get_invitation_public'),
     path('invitations/public/<uuid:token>/submit/', views.submit_invitation_answers_view, name='submit_invitation_answers'),

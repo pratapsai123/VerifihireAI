@@ -10,6 +10,7 @@ const ResultsAI = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'resume');
     const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail'
+    const [currentPage, setCurrentPage] = useState(1);
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -98,6 +99,7 @@ const ResultsAI = () => {
         setSearchParams({ tab });
         setSelected(new Set());
         setStatusFilter('all'); // Reset filter when switching tabs
+        setCurrentPage(1); // Reset page
     };
 
     const getStatusStyle = (rawStatus) => {
@@ -144,6 +146,13 @@ const ResultsAI = () => {
             const pass = isPass(r, activeTab);
             return statusFilter === 'pass' ? pass : !pass;
         });
+
+    // Pagination
+    const itemsPerPage = 10;
+    const indexOfLastRow = currentPage * itemsPerPage;
+    const indexOfFirstRow = indexOfLastRow - itemsPerPage;
+    const paginatedRows = currentRows.slice(indexOfFirstRow, indexOfLastRow);
+    const totalPages = Math.ceil(currentRows.length / itemsPerPage);
 
     const allKeys = currentRows.map(r => r._deleteKey);
     const allSelected = allKeys.length > 0 && allKeys.every(k => selected.has(k));
@@ -406,7 +415,7 @@ const ResultsAI = () => {
                 <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#9CA3AF', textTransform: 'uppercase', marginRight: '0.25rem' }}>Filter:</span>
                     {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass ✓' }, { key: 'fail', label: 'Fail ✗' }].map(f => (
-                        <button key={f.key} onClick={() => setStatusFilter(f.key)} style={{
+                        <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
                             padding: '0.35rem 0.9rem', borderRadius: '20px', border: '1px solid',
                             fontSize: '0.78rem', fontWeight: '700', cursor: 'pointer', transition: 'all 0.15s',
                             borderColor: statusFilter === f.key
@@ -514,7 +523,7 @@ const ResultsAI = () => {
                                     )}
 
                                     {/* RESUME TAB */}
-                                    {activeTab === 'resume' && currentRows.map((r) => {
+                                    {activeTab === 'resume' && paginatedRows.map((r) => {
                                         const isSelected = selected.has(r._deleteKey);
                                         const isDeleting = deletingIds.has(r._deleteKey);
                                         return (
@@ -564,7 +573,7 @@ const ResultsAI = () => {
                                     })}
 
                                     {/* ASSESSMENT TAB */}
-                                    {activeTab === 'assessment' && currentRows.map((r) => {
+                                    {activeTab === 'assessment' && paginatedRows.map((r) => {
                                         const isSelected = selected.has(r._deleteKey);
                                         const isDeleting = deletingIds.has(r._deleteKey);
                                         return (
@@ -610,7 +619,7 @@ const ResultsAI = () => {
                                     })}
 
                                     {/* INTERVIEW TAB */}
-                                    {activeTab === 'interview' && currentRows.map((r) => {
+                                    {activeTab === 'interview' && paginatedRows.map((r) => {
                                         const isSelected = selected.has(r._deleteKey);
                                         const isDeleting = deletingIds.has(r._deleteKey);
                                         return (
@@ -659,6 +668,34 @@ const ResultsAI = () => {
                                     })}
                                 </tbody>
                             </table>
+
+                            {/* Pagination Controls */}
+                            {totalPages > 1 && (
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'white', borderTop: '1px solid #e2e8f0', borderRadius: '0 0 16px 16px' }}>
+                                    <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>
+                                        Showing {indexOfFirstRow + 1} to {Math.min(indexOfLastRow, currentRows.length)} of {currentRows.length} entries
+                                    </span>
+                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                        <button
+                                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                            disabled={currentPage === 1}
+                                            style={{ padding: '0.5rem 1rem', background: currentPage === 1 ? '#f8fafc' : 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer', color: currentPage === 1 ? '#94a3b8' : '#475569', fontSize: '0.85rem', fontWeight: '500', transition: 'all 0.2s' }}
+                                        >
+                                            Previous
+                                        </button>
+                                        <div style={{ display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.85rem', color: '#475569', fontWeight: '600' }}>
+                                            Page {currentPage} of {totalPages}
+                                        </div>
+                                        <button
+                                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                            disabled={currentPage === totalPages}
+                                            style={{ padding: '0.5rem 1rem', background: currentPage === totalPages ? '#f8fafc' : 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', color: currentPage === totalPages ? '#94a3b8' : '#475569', fontSize: '0.85rem', fontWeight: '500', transition: 'all 0.2s' }}
+                                        >
+                                            Next
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
                 </div>

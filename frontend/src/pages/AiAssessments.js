@@ -8,6 +8,7 @@ const AiAssessments = () => {
     const navigate = useNavigate();
     const [assessments, setAssessments] = useState([]);
     const [filter, setFilter] = useState('ALL');
+    const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -39,6 +40,12 @@ const AiAssessments = () => {
     const filteredAssessments = filter === 'ALL'
         ? assessments
         : assessments.filter(a => a.status === filter);
+
+    // Pagination logic
+    const indexOfLastItem = currentPage * 10;
+    const indexOfFirstItem = indexOfLastItem - 10;
+    const currentAssessments = filteredAssessments.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredAssessments.length / 10);
 
     const shareAssessment = (assessment) => {
         setSelectedAssessment(assessment);
@@ -99,14 +106,8 @@ const AiAssessments = () => {
     return (
         <div className="dashboard-container" style={{ paddingTop: 0 }}>
             <div className="dashboard-main" style={{ paddingTop: '1rem' }}>
-                <div style={{
-                    background: 'white',
-                    borderRadius: '24px',
-                    padding: '2rem',
-                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.03)',
-                    border: '1px solid #f1f5f9'
-                }}>
-                    <div className="header" style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                    <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
                             <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#111827', margin: 0, letterSpacing: '-0.025em' }}>
                                 Assessments <span style={{ color: '#6366f1', fontWeight: '400' }}>Archive</span>
@@ -132,7 +133,7 @@ const AiAssessments = () => {
                         {['ALL', 'SCHEDULED', 'ONGOING', 'COMPLETED'].map(status => (
                             <button
                                 key={status}
-                                onClick={() => setFilter(status)}
+                                onClick={() => { setFilter(status); setCurrentPage(1); }}
                                 style={{
                                     background: filter === status ? 'white' : 'transparent',
                                     border: 'none', padding: '0.6rem 1.2rem', fontFamily: 'inherit', fontSize: '0.9rem',
@@ -151,12 +152,12 @@ const AiAssessments = () => {
                     </div>
 
                     {/* Assessments Table */}
-                    <div className="table-container" style={{ background: 'white', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0, 0, 0, 0.02)', border: '1px solid #f1f5f9' }}>
+                    <div className="table-container" style={{ overflow: 'hidden' }}>
                         <table className="data-table" style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                             <thead>
                                 <tr>
                                     {['Assessment Title', 'Available From', 'Availability End', 'Attempts', 'Actions'].map((head, i) => (
-                                        <th key={i} style={{ padding: '1rem 1.2rem', background: '#F8F9FF', color: '#A3AED0', fontWeight: '700', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{head}</th>
+                                        <th key={i} style={{ padding: '1rem 1.2rem', background: '#F8F9FF', color: '#A3AED0', fontWeight: '700', fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.5px', borderBottom: '2px solid #E2E8F0' }}>{head}</th>
                                     ))}
                                 </tr>
                             </thead>
@@ -172,12 +173,12 @@ const AiAssessments = () => {
                                             {error}
                                         </td>
                                     </tr>
-                                ) : filteredAssessments.length === 0 ? (
+                                ) : currentAssessments.length === 0 ? (
                                     <tr>
                                         <td colSpan="5" style={{ textAlign: 'center', padding: '2rem', color: '#A3AED0' }}>No assessments found.</td>
                                     </tr>
                                 ) : (
-                                    filteredAssessments.map(assessment => (
+                                    currentAssessments.map(assessment => (
                                         <tr key={assessment.id} style={{ borderBottom: '1px solid #F1F4F9' }}>
                                             <td style={{ padding: '1rem 1.2rem', fontWeight: '500', color: '#1B254B', fontSize: '0.9rem' }}>
                                                 <div className="row-info" style={{ display: 'flex', alignItems: 'center' }}>
@@ -250,7 +251,7 @@ const AiAssessments = () => {
                                                     <button
                                                         className="action-btn"
                                                         onClick={() => deleteAssessment(assessment.id)}
-                                                        style={{ background: '#FFF5F5', color: '#EE5D50', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                                                        style={{ background: '#FFF5F5', color: '#EE5D50', border: 'none', width: '34px', height: '34px', padding: 0, borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                                                     >
                                                         <i className="fa-solid fa-trash"></i>
                                                     </button>
@@ -261,6 +262,34 @@ const AiAssessments = () => {
                                 )}
                             </tbody>
                         </table>
+
+                        {/* Pagination Controls */}
+                        {totalPages > 1 && (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'white', borderTop: '1px solid #e2e8f0' }}>
+                                <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>
+                                    Showing {indexOfFirstItem + 1} to {Math.min(indexOfLastItem, filteredAssessments.length)} of {filteredAssessments.length} entries
+                                </span>
+                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                    <button
+                                        onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                        disabled={currentPage === 1}
+                                        style={{ padding: '0.5rem 1rem', background: currentPage === 1 ? '#f8fafc' : 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer', color: currentPage === 1 ? '#94a3b8' : '#475569', fontSize: '0.85rem', fontWeight: '500', transition: 'all 0.2s' }}
+                                    >
+                                        Previous
+                                    </button>
+                                    <div style={{ display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.85rem', color: '#475569', fontWeight: '600' }}>
+                                        Page {currentPage} of {totalPages}
+                                    </div>
+                                    <button
+                                        onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                        disabled={currentPage === totalPages}
+                                        style={{ padding: '0.5rem 1rem', background: currentPage === totalPages ? '#f8fafc' : 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', color: currentPage === totalPages ? '#94a3b8' : '#475569', fontSize: '0.85rem', fontWeight: '500', transition: 'all 0.2s' }}
+                                    >
+                                        Next
+                                    </button>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

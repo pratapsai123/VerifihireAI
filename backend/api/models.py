@@ -880,6 +880,9 @@ class InterviewInvitation(models.Model):
     pan_number = models.CharField(max_length=10, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
 
+    interviewer_name = models.CharField(max_length=255, blank=True, null=True)
+    interviewer_email = models.EmailField(blank=True, null=True)
+
     start_time = models.DateTimeField(blank=True, null=True)
     end_time = models.DateTimeField(blank=True, null=True)
     time_zone = models.CharField(max_length=64, blank=True, null=True)

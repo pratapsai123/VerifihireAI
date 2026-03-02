@@ -403,7 +403,11 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
                     status=403
                 )
 
-        return super().get(request, *args, **kwargs)
+        response = super().get(request, *args, **kwargs)
+        response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response["Pragma"] = "no-cache"
+        response["Expires"] = "0"
+        return response
 
 
 class CandidateStatusUpdateView(APIView):
@@ -418,7 +422,11 @@ class CandidateStatusUpdateView(APIView):
                 if new_status == 'Completed':
                     candidate.completed_at = timezone.now()
                 candidate.save()
-                return Response({'status': 'success', 'new_status': candidate.status})
+                response = Response({'status': 'success', 'new_status': candidate.status})
+                response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+                response["Pragma"] = "no-cache"
+                response["Expires"] = "0"
+                return response
             return Response({'error': 'Invalid status'}, status=status.HTTP_400_BAD_REQUEST)
         except Candidate.DoesNotExist:
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)

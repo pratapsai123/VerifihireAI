@@ -43,6 +43,14 @@ export default function TeamMembers() {
   const [inviting, setInviting] = useState(false);
   const [inviteResult, setInviteResult] = useState(null);
 
+  const [memberPage, setMemberPage] = useState(1);
+  const [invitePage, setInvitePage] = useState(1);
+
+  useEffect(() => {
+    setMemberPage(1);
+    setInvitePage(1);
+  }, [q, companyFilter, invStatusFilter, invRoleFilter, memberRoleFilter]);
+
   const load = async () => {
     setLoading(true);
     setError('');
@@ -172,6 +180,19 @@ export default function TeamMembers() {
       return true;
     });
   }, [data.members, companyFilter, memberRoleFilter, query]);
+
+  // Pagination Logic
+  const itemsPerPage = 10;
+
+  const indexOfLastMember = memberPage * itemsPerPage;
+  const indexOfFirstMember = indexOfLastMember - itemsPerPage;
+  const paginatedMembers = filteredMembers.slice(indexOfFirstMember, indexOfLastMember);
+  const totalMemberPages = Math.ceil(filteredMembers.length / itemsPerPage);
+
+  const indexOfLastInvite = invitePage * itemsPerPage;
+  const indexOfFirstInvite = indexOfLastInvite - itemsPerPage;
+  const paginatedInvites = filteredInvitations.slice(indexOfFirstInvite, indexOfLastInvite);
+  const totalInvitePages = Math.ceil(filteredInvitations.length / itemsPerPage);
 
   return (
     <div className="dashboard-container">
@@ -401,7 +422,7 @@ export default function TeamMembers() {
                           </tr>
                         </thead>
                         <tbody>
-                          {filteredMembers.map((m) => (
+                          {paginatedMembers.map((m) => (
                             <tr key={m.id}>
                               <td style={{ padding: 8, borderBottom: '1px solid #f3f4f6' }}>
                                 {[m.first_name, m.last_name].filter(Boolean).join(' ') || '-'}
@@ -413,6 +434,34 @@ export default function TeamMembers() {
                           ))}
                         </tbody>
                       </table>
+
+                      {/* Member Pagination Controls */}
+                      {totalMemberPages > 1 && (
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', borderTop: '1px solid #e5e7eb' }}>
+                          <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>
+                            Showing {indexOfFirstMember + 1} to {Math.min(indexOfLastMember, filteredMembers.length)} of {filteredMembers.length}
+                          </span>
+                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <button
+                              onClick={() => setMemberPage(prev => Math.max(prev - 1, 1))}
+                              disabled={memberPage === 1}
+                              style={{ padding: '0.4rem 0.8rem', background: memberPage === 1 ? '#f9fafb' : 'white', border: '1px solid #e5e7eb', borderRadius: '6px', cursor: memberPage === 1 ? 'not-allowed' : 'pointer', color: memberPage === 1 ? '#9ca3af' : '#4b5563', fontSize: '0.8rem', fontWeight: '500' }}
+                            >
+                              Previous
+                            </button>
+                            <div style={{ display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.8rem', color: '#4b5563', fontWeight: '600' }}>
+                              Page {memberPage} of {totalMemberPages}
+                            </div>
+                            <button
+                              onClick={() => setMemberPage(prev => Math.min(prev + 1, totalMemberPages))}
+                              disabled={memberPage === totalMemberPages}
+                              style={{ padding: '0.4rem 0.8rem', background: memberPage === totalMemberPages ? '#f9fafb' : 'white', border: '1px solid #e5e7eb', borderRadius: '6px', cursor: memberPage === totalMemberPages ? 'not-allowed' : 'pointer', color: memberPage === totalMemberPages ? '#9ca3af' : '#4b5563', fontSize: '0.8rem', fontWeight: '500' }}
+                            >
+                              Next
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <div style={{ fontSize: 13, color: '#6b7280' }}>No team members found.</div>
@@ -438,7 +487,7 @@ export default function TeamMembers() {
                           </tr>
                         </thead>
                         <tbody>
-                          {filteredInvitations.map((inv) => (
+                          {paginatedInvites.map((inv) => (
                             <tr key={inv.id}>
                               <td style={{ padding: 8, borderBottom: '1px solid #f3f4f6' }}>{inv.email}</td>
                               <td style={{ padding: 8, borderBottom: '1px solid #f3f4f6' }}>{inv.role}</td>
@@ -525,6 +574,34 @@ export default function TeamMembers() {
                           ))}
                         </tbody>
                       </table>
+
+                      {/* Invite Pagination Controls */}
+                      {totalInvitePages > 1 && (
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', borderTop: '1px solid #e5e7eb' }}>
+                          <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>
+                            Showing {indexOfFirstInvite + 1} to {Math.min(indexOfLastInvite, filteredInvitations.length)} of {filteredInvitations.length}
+                          </span>
+                          <div style={{ display: 'flex', gap: '0.5rem' }}>
+                            <button
+                              onClick={() => setInvitePage(prev => Math.max(prev - 1, 1))}
+                              disabled={invitePage === 1}
+                              style={{ padding: '0.4rem 0.8rem', background: invitePage === 1 ? '#f9fafb' : 'white', border: '1px solid #e5e7eb', borderRadius: '6px', cursor: invitePage === 1 ? 'not-allowed' : 'pointer', color: invitePage === 1 ? '#9ca3af' : '#4b5563', fontSize: '0.8rem', fontWeight: '500' }}
+                            >
+                              Previous
+                            </button>
+                            <div style={{ display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.8rem', color: '#4b5563', fontWeight: '600' }}>
+                              Page {invitePage} of {totalInvitePages}
+                            </div>
+                            <button
+                              onClick={() => setInvitePage(prev => Math.min(prev + 1, totalInvitePages))}
+                              disabled={invitePage === totalInvitePages}
+                              style={{ padding: '0.4rem 0.8rem', background: invitePage === totalInvitePages ? '#f9fafb' : 'white', border: '1px solid #e5e7eb', borderRadius: '6px', cursor: invitePage === totalInvitePages ? 'not-allowed' : 'pointer', color: invitePage === totalInvitePages ? '#9ca3af' : '#4b5563', fontSize: '0.8rem', fontWeight: '500' }}
+                            >
+                              Next
+                            </button>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   ) : (
                     <div style={{ fontSize: 13, color: '#6b7280' }}>No invitations found.</div>

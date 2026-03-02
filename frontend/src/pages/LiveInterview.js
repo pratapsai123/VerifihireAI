@@ -17,9 +17,15 @@ function LiveInterview() {
   const [connectionEstablished, setConnectionEstablished] = useState(false);
 
   // Media states
-  const [isMuted, setIsMuted] = useState(false);
-  const [isCameraOn, setIsCameraOn] = useState(true);
-  const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(true);
+  const [isMuted, setIsMuted] = useState(() => {
+    const saved = sessionStorage.getItem(`mic_muted_${sessionId}`);
+    return saved !== null ? JSON.parse(saved) : false;
+  });
+  const [isCameraOn, setIsCameraOn] = useState(() => {
+    const saved = sessionStorage.getItem(`camera_on_${sessionId}`);
+    return saved !== null ? JSON.parse(saved) : true;
+  });
+  const [isRemoteCameraOn, setIsRemoteCameraOn] = useState(false);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
   const [isRemoteScreenSharing, setIsRemoteScreenSharing] = useState(false);
   const [screenShareLocked, setScreenShareLocked] = useState(false);
@@ -221,7 +227,17 @@ function LiveInterview() {
 
   const redirectToThankYou = useCallback(() => {
     setShowThankYou(true);
-    if (peerConnectionRef.current) peerConnectionRef.current.close();
+    if (peerConnectionRef.current) {
+      peerConnectionRef.current.close();
+      peerConnectionRef.current = null;
+    }
+    // Stop tracks for privacy
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach(track => track.stop());
+    }
+    if (screenShareStreamRef.current) {
+      screenShareStreamRef.current.getTracks().forEach(track => track.stop());
+    }
   }, []);
 
   const redirectToTerminationPage = useCallback((vCount, vLimit, reason) => {
@@ -314,7 +330,20 @@ function LiveInterview() {
 
         case 'media_state':
           if (String(data.sender).toLowerCase() !== 'interviewer') break;
-          const who = interviewerName;
+          console.log('📥 Received media_state from Interviewer:', data);
+          
+          // Sync Interviewer Name if provided
+          if (data.userName && data.userName !== 'Interviewer') {
+            setInterviewerName(data.userName);
+          }
+          
+          // Sync Timer if provided
+          if (data.startTime) {
+            console.log('⏰ Received updated startTime from Interviewer:', data.startTime);
+            startTimeRef.current = data.startTime;
+          }
+
+          const who = data.userName || interviewerName;
           const what = data.media === 'mic'
             ? (data.enabled ? 'unmuted mic' : 'muted mic')
             : (data.enabled ? 'turned on camera' : 'turned off camera');
@@ -327,10 +356,35 @@ function LiveInterview() {
           showSessionPopup(`${who} ${what}`, severity);
           break;
 
-        case 'screen_share_lock':
-          setScreenShareLocked(!!data.active);
-          setScreenShareHolder(data.active ? (data.holder || null) : null);
+        case 'request_state_sync':
+          console.log('📥 Received state sync request from interviewer');
+          
+          // Sync info from request too if present
+          if (data.userName && data.userName !== 'Interviewer') {
+            setInterviewerName(data.userName);
+          }
+          if (data.startTime) {
+            startTimeRef.current = data.startTime;
+          }
+
+          if (socketRef.current?.readyState === WebSocket.OPEN) {
+            socketRef.current.send(JSON.stringify({
+              type: 'media_state',
+              media: 'camera',
+              enabled: isCameraOn,
+              userName: candidateName,
+              startTime: startTimeRef.current
+            }));
+            socketRef.current.send(JSON.stringify({
+              type: 'media_state',
+              media: 'mic',
+              enabled: !isMuted,
+              userName: candidateName
+            }));
+          }
           break;
+
+        case 'screen_share_lock':
 
         case 'screen_share_state':
           // Handle when someone starts/stops screen sharing
@@ -461,24 +515,54 @@ function LiveInterview() {
     const joinedUserName = data.user === 'Interviewer' ? interviewerName : data.user;
     showSessionPopup(`${joinedUserName} joined the session`);
 
-    if (String(data.user).toLowerCase() === 'interviewer' && peerConnectionRef.current) {
-      console.log('🎯 Interviewer joined — waiting for their video offer...');
+    if (String(data.user).toLowerCase() === 'interviewer') {
+      console.log('🎯 Interviewer joined — syncing media state (isCameraOn:', isCameraOn, ')');
       setBothPartiesConnected(true);
 
-      // Fallback: if interviewer doesn't send an offer within 5s, ask them to re-offer
+      // Re-broadcast our current media state so the newcomer is in sync
+      // Added a slight delay to ensure newcomer socket is ready
       setTimeout(() => {
-        if (
-          peerConnectionRef.current &&
-          peerConnectionRef.current.connectionState !== 'connected' &&
-          peerConnectionRef.current.connectionState !== 'connecting' &&
-          socketRef.current?.readyState === WebSocket.OPEN
-        ) {
-          console.log('⏱️ No offer received from interviewer, requesting one...');
-          socketRef.current.send(JSON.stringify({ type: 'request_offer' }));
+        if (socketRef.current?.readyState === WebSocket.OPEN) {
+          console.log('📤 Re-broadcasting media state to interviewer...');
+          socketRef.current.send(JSON.stringify({
+            type: 'media_state',
+            media: 'camera',
+            enabled: isCameraOn,
+            userName: candidateName,
+            startTime: startTimeRef.current
+          }));
+          socketRef.current.send(JSON.stringify({
+            type: 'media_state',
+            media: 'mic',
+            enabled: !isMuted,
+            userName: candidateName
+          }));
+          // Also ask interviewer for their current state
+          socketRef.current.send(JSON.stringify({ 
+            type: 'request_state_sync',
+            userName: candidateName,
+            startTime: startTimeRef.current
+          }));
         }
-      }, 5000);
+      }, 1000);
+
+      if (peerConnectionRef.current) {
+        console.log('🎯 Waiting for their video offer...');
+        // Fallback: if interviewer doesn't send an offer within 5s, ask them to re-offer
+        setTimeout(() => {
+          if (
+            peerConnectionRef.current &&
+            peerConnectionRef.current.connectionState !== 'connected' &&
+            peerConnectionRef.current.connectionState !== 'connecting' &&
+            socketRef.current?.readyState === WebSocket.OPEN
+          ) {
+            console.log('⏱️ No offer received from interviewer, requesting one...');
+            socketRef.current.send(JSON.stringify({ type: 'request_offer' }));
+          }
+        }, 5000);
+      }
     }
-  }, [interviewerName, showSessionPopup]);
+  }, [interviewerName, showSessionPopup, isCameraOn, isMuted]);
 
   // Initialize WebRTC
   const initializeWebRTC = useCallback(async () => {
@@ -519,6 +603,10 @@ function LiveInterview() {
       }
 
       localStreamRef.current = localStream;
+
+      // Ensure tracks match current UI state (important for re-initialization/reconnect)
+      localStream.getVideoTracks().forEach(track => (track.enabled = isCameraOn));
+      localStream.getAudioTracks().forEach(track => (track.enabled = !isMuted));
 
       if (thumbnailVideoRef.current) {
         thumbnailVideoRef.current.srcObject = localStream;
@@ -653,6 +741,8 @@ function LiveInterview() {
           remoteVideoRef.current.play().then(() => {
             console.log('✅ Remote video playing');
             setConnectionStatusText('Connected');
+            // If we are playing video, the remote camera must be on
+            setIsRemoteCameraOn(true);
           }).catch(e => {
             console.warn('Primary video play failed:', e);
             // Retry play after a short delay
@@ -912,6 +1002,7 @@ function LiveInterview() {
     if (!localStreamRef.current) return;
     const newMuted = !isMuted;
     setIsMuted(newMuted);
+    sessionStorage.setItem(`mic_muted_${sessionId}`, JSON.stringify(newMuted));
     localStreamRef.current.getAudioTracks().forEach(track => (track.enabled = !newMuted));
 
     if (socketRef.current?.readyState === WebSocket.OPEN) {
@@ -921,12 +1012,13 @@ function LiveInterview() {
         enabled: !newMuted
       }));
     }
-  }, [isMuted]);
+  }, [isMuted, sessionId]);
 
   const toggleCamera = useCallback(() => {
     if (!localStreamRef.current) return;
     const newCameraOn = !isCameraOn;
     setIsCameraOn(newCameraOn);
+    sessionStorage.setItem(`camera_on_${sessionId}`, JSON.stringify(newCameraOn));
     localStreamRef.current.getVideoTracks().forEach(track => (track.enabled = newCameraOn));
 
     if (thumbnailVideoRef.current) {
@@ -949,7 +1041,7 @@ function LiveInterview() {
         enabled: newCameraOn
       }));
     }
-  }, [isCameraOn, cameraReady, isDetectionPaused, startDetection, stopDetection]);
+  }, [isCameraOn, cameraReady, isDetectionPaused, startDetection, stopDetection, sessionId]);
 
   const toggleScreenShare = useCallback(async () => {
     if (!isScreenSharing) {
@@ -1068,7 +1160,11 @@ function LiveInterview() {
         }
       }
 
-      if (camTrack) camTrack.enabled = true;
+      if (camTrack) {
+        camTrack.enabled = true;
+        setIsCameraOn(true); // sync button state — camera is on after screen share ends
+        sessionStorage.setItem(`camera_on_${sessionId}`, JSON.stringify(true));
+      }
 
       if (thumbnailVideoRef.current) {
         thumbnailVideoRef.current.srcObject = localStreamRef.current;
@@ -1155,6 +1251,14 @@ function LiveInterview() {
       socketRef.current.send(JSON.stringify({ type: 'screen_share_state', active: false }));
       socketRef.current.send(JSON.stringify({ type: 'screen_share_release' }));
       socketRef.current.send(JSON.stringify({ type: 'end_interview' }));
+    }
+
+    // Stop tracks for privacy
+    if (localStreamRef.current) {
+      localStreamRef.current.getTracks().forEach(track => track.stop());
+    }
+    if (screenShareStreamRef.current) {
+      screenShareStreamRef.current.getTracks().forEach(track => track.stop());
     }
 
     setShowThankYou(true);
@@ -1423,10 +1527,16 @@ function LiveInterview() {
 
   return (
     <div className={`live-interview ${chatPanelVisible ? 'chat-active' : ''}`}>
+
       {/* Header */}
       <header className="live-interview-header">
         <div className="header-left">
           <h1>Live Interview</h1>
+          {interviewerName && interviewerName !== 'Interviewer' && (
+            <span style={{ marginLeft: '16px', fontSize: '14px', opacity: 0.8, color: 'var(--text-secondary)' }}>
+              — {interviewerName}
+            </span>
+          )}
         </div>
         <div className="header-controls">
           <div className="timer">{timer}</div>
@@ -1448,8 +1558,9 @@ function LiveInterview() {
             style={{ display: (isRemoteCameraOn || isRemoteScreenSharing) ? 'block' : 'none' }}
           />
 
-          {!isRemoteCameraOn && bothPartiesConnected && (
-            <div className="remote-video-placeholder" style={{ position: 'absolute', inset: 0, zIndex: 1 }}>
+          {/* Remote camera-off placeholder — always visible, both sides */}
+          {!isRemoteCameraOn && (
+            <div className="remote-video-placeholder" style={{ position: 'absolute', inset: 0, zIndex: 1, backgroundColor: '#1a1a1a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <VideoPlaceholder name={interviewerName} />
             </div>
           )}
@@ -1463,8 +1574,8 @@ function LiveInterview() {
             </div>
           )}
 
-          {/* Name Label for Interviewer */}
-          {bothPartiesConnected && (
+          {/* Name Label for Interviewer - Only show if camera is ON to avoid overlap with placeholder */}
+          {bothPartiesConnected && isRemoteCameraOn && (
             <div className="video-label" style={{ top: '20px', left: '20px', bottom: 'auto' }}>
               <span>{interviewerName}</span>
               <i className="fas fa-microphone" style={{ fontSize: '12px', marginLeft: '6px' }}></i>
@@ -1485,6 +1596,7 @@ function LiveInterview() {
               playsInline
               style={{ display: isCameraOn ? 'block' : 'none' }}
             />
+            {/* Local camera-off placeholder */}
             {!isCameraOn && (
               <div style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}>
                 <VideoPlaceholder name="You" width="100%" height="100%" />

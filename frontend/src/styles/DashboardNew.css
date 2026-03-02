@@ -92,6 +92,7 @@
 
 .nav-item-content {
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 1rem;
 }
@@ -263,6 +264,12 @@
     top: 0;
     z-index: 90;
     border-bottom: 1px solid var(--border-color);
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .topbar-left h2 {

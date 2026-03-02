@@ -192,6 +192,7 @@ export default function LiveInterviewList() {
               <thead>
                 <tr>
                   <th>Candidate</th>
+                  <th>Interviewer</th>
                   <th>Interview</th>
                   <th>Status</th>
                   <th>Rating</th>
@@ -208,6 +209,10 @@ export default function LiveInterviewList() {
                       <div className="cell-title">{inv.name || '-'}</div>
                       <div className="cell-sub">{inv.email || '-'}</div>
                       {inv.phone && <div className="cell-sub" style={{ fontSize: '12px', color: '#64748b' }}>{inv.phone}</div>}
+                    </td>
+                    <td>
+                      <div className="cell-title">{inv.interviewer_name || '-'}</div>
+                      <div className="cell-sub">{inv.interviewer_email || '-'}</div>
                     </td>
                     <td>{inv.interview?.name || '-'}</td>
                     <td>

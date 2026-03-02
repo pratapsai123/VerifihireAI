@@ -15,6 +15,7 @@ const AiAssessmentDetail = () => {
     const initialTab = searchParams.get('tab') === 'submissions' ? 'submissions' : 'questions';
     const [activeTab, setActiveTab] = useState(initialTab);
     const [selectedSubmission, setSelectedSubmission] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         const fetchDetail = async () => {
@@ -38,6 +39,13 @@ const AiAssessmentDetail = () => {
     const mcqs = assessment.generated_content?.mcqs || [];
     const coding = assessment.generated_content?.coding_challenges || [];
     const submissions = assessment.submissions || [];
+
+    // Pagination logic for submissions
+    const itemsPerPage = 10;
+    const indexOfLastSubmission = currentPage * itemsPerPage;
+    const indexOfFirstSubmission = indexOfLastSubmission - itemsPerPage;
+    const currentSubmissions = submissions.slice(indexOfFirstSubmission, indexOfLastSubmission);
+    const totalPages = Math.ceil(submissions.length / itemsPerPage);
 
     // Calculate points based on backend logic (SubmitAssessmentView)
     const MCQ_WEIGHT = 20;
@@ -101,7 +109,7 @@ const AiAssessmentDetail = () => {
                             Question Paper
                         </button>
                         <button
-                            onClick={() => setActiveTab('submissions')}
+                            onClick={() => { setActiveTab('submissions'); setCurrentPage(1); }}
                             style={{ padding: '1rem 2rem', background: 'none', border: 'none', borderBottom: activeTab === 'submissions' ? '4px solid #4318FF' : 'none', color: activeTab === 'submissions' ? '#1B254B' : '#A3AED0', fontWeight: '700', fontSize: '1.1rem', cursor: 'pointer' }}
                         >
                             Candidate Submissions
@@ -205,7 +213,7 @@ const AiAssessmentDetail = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {submissions.map((sub, i) => (
+                                            {currentSubmissions.map((sub, i) => (
                                                 <tr key={i} style={{ borderBottom: '1px solid #F4F7FE' }}>
                                                     <td style={{ padding: '1.2rem 1rem' }}>
                                                         <div style={{ fontWeight: '700', color: '#1B254B' }}>{sub.candidate_name}</div>
@@ -240,6 +248,34 @@ const AiAssessmentDetail = () => {
                                             ))}
                                         </tbody>
                                     </table>
+
+                                    {/* Pagination Controls */}
+                                    {totalPages > 1 && (
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'white', borderTop: '1px solid #e2e8f0' }}>
+                                            <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>
+                                                Showing {indexOfFirstSubmission + 1} to {Math.min(indexOfLastSubmission, submissions.length)} of {submissions.length} entries
+                                            </span>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <button
+                                                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                                                    disabled={currentPage === 1}
+                                                    style={{ padding: '0.5rem 1rem', background: currentPage === 1 ? '#f8fafc' : 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer', color: currentPage === 1 ? '#94a3b8' : '#475569', fontSize: '0.85rem', fontWeight: '500', transition: 'all 0.2s' }}
+                                                >
+                                                    Previous
+                                                </button>
+                                                <div style={{ display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.85rem', color: '#475569', fontWeight: '600' }}>
+                                                    Page {currentPage} of {totalPages}
+                                                </div>
+                                                <button
+                                                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                                                    disabled={currentPage === totalPages}
+                                                    style={{ padding: '0.5rem 1rem', background: currentPage === totalPages ? '#f8fafc' : 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', color: currentPage === totalPages ? '#94a3b8' : '#475569', fontSize: '0.85rem', fontWeight: '500', transition: 'all 0.2s' }}
+                                                >
+                                                    Next
+                                                </button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>

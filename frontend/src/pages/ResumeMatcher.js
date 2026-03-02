@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/Dashboard.css';
@@ -19,6 +18,16 @@ const ResumeMatcher = () => {
     const [codingCount, setCodingCount] = useState(1);
     const [passThreshold, setPassThreshold] = useState(60);
     const [codingChallenges, setCodingChallenges] = useState([{ id: 1, difficulty: 'Medium' }]);
+
+    const [assessmentStartDate, setAssessmentStartDate] = useState('');
+    const [assessmentStartTime, setAssessmentStartTime] = useState('');
+    const [assessmentEndDate, setAssessmentEndDate] = useState('');
+    const [assessmentEndTime, setAssessmentEndTime] = useState('');
+
+    const [interviewStartDate, setInterviewStartDate] = useState('');
+    const [interviewStartTime, setInterviewStartTime] = useState('');
+    const [interviewEndDate, setInterviewEndDate] = useState('');
+    const [interviewEndTime, setInterviewEndTime] = useState('');
 
     const handleCodingCountChange = (val) => {
         const count = Math.min(Math.max(parseInt(val) || 0, 0), 5);
@@ -88,9 +97,23 @@ const ResumeMatcher = () => {
         if (matchMode === 'automatic') {
             formData.append('duration', duration);
             formData.append('mcq_count', mcqCount);
+            formData.append('coding_count', codingCount);
             formData.append('coding_tasks', JSON.stringify(codingChallenges.map(c => c.difficulty)));
             formData.append('pass_threshold', passThreshold);
             formData.append('is_fully_automatic', true);
+
+            if (assessmentStartDate && assessmentStartTime) {
+                formData.append('assessment_available_from', new Date(`${assessmentStartDate}T${assessmentStartTime}`).toISOString());
+            }
+            if (assessmentEndDate && assessmentEndTime) {
+                formData.append('assessment_available_until', new Date(`${assessmentEndDate}T${assessmentEndTime}`).toISOString());
+            }
+            if (interviewStartDate && interviewStartTime) {
+                formData.append('interview_available_from', new Date(`${interviewStartDate}T${interviewStartTime}`).toISOString());
+            }
+            if (interviewEndDate && interviewEndTime) {
+                formData.append('interview_available_until', new Date(`${interviewEndDate}T${interviewEndTime}`).toISOString());
+            }
         }
 
 
@@ -126,15 +149,10 @@ const ResumeMatcher = () => {
 
     return (
         <div className="resume-matcher-page">
-            <div className="mesh-bg"></div>
-            <div className="bg-shape" style={{ width: '600px', height: '600px', background: 'rgba(99, 102, 241, 0.15)', top: '-10%', right: '-5%' }}></div>
-            <div className="bg-shape" style={{ width: '500px', height: '500px', background: 'rgba(168, 85, 247, 0.15)', bottom: '-10%', left: '-5%', animationDelay: '-5s' }}></div>
 
-            <div className="matcher-container">
-                <header className="glass-card page-header">
-                    <div className="badge">
-                        <i className="fa-solid fa-magnifying-glass-chart"></i> RESUME ANALYTICS
-                    </div>
+
+            <div className="matcher-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
+                <header className="page-header" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
                     <h1>Resume <span style={{ color: '#6366F1' }}>Matcher</span></h1>
                     <p>
                         AI-powered side-by-side analysis of candidate fit against specific role requirements.
@@ -144,13 +162,13 @@ const ResumeMatcher = () => {
                 <div className="form-stack">
                     {!results ? (
                         <>
-                            <div className="glass-card">
+                            <div className="section-container">
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                     <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
                                         <i className="fa-solid fa-file-contract"></i>
                                     </div>
                                     <div>
-                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Job Description</h3>
+                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Job Description</h3>
                                         <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Define the benchmark for comparison.</p>
                                     </div>
                                 </div>
@@ -162,13 +180,13 @@ const ResumeMatcher = () => {
                                 />
                             </div>
 
-                            <div className="glass-card">
+                            <div className="section-container">
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                     <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
                                         <i className="fa-solid fa-file-pdf"></i>
                                     </div>
                                     <div>
-                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Candidate Resumes</h3>
+                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Candidate Resumes</h3>
                                         <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Match multiple candidates at once.</p>
                                     </div>
                                 </div>
@@ -191,7 +209,7 @@ const ResumeMatcher = () => {
                                             }}>
                                                 <i className="fa-solid fa-cloud-arrow-up"></i>
                                             </div>
-                                            <p style={{ fontSize: '1.1rem', fontWeight: '800', color: '#1E293B', marginBottom: '0.5rem' }}>Select Resumes</p>
+                                            <p style={{ fontSize: '1rem', fontWeight: '500', color: '#1E293B', marginBottom: '0.5rem' }}>Select Resumes</p>
                                             <p style={{ fontSize: '0.85rem', color: '#94A3B8' }}>Click or drag PDF files here</p>
                                         </>
                                     ) : (
@@ -229,13 +247,13 @@ const ResumeMatcher = () => {
                                 </div>
                             </div>
 
-                            <div className="glass-card">
+                            <div className="section-container">
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                     <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
                                         <i className="fa-solid fa-percent"></i>
                                     </div>
                                     <div>
-                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Sensitivity Settings</h3>
+                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Sensitivity Settings</h3>
                                         <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Set the minimum match score for qualification.</p>
                                     </div>
                                 </div>
@@ -252,19 +270,19 @@ const ResumeMatcher = () => {
                                         </div>
                                     </div>
                                     <div className="threshold-display">
-                                        <div style={{ fontSize: '0.65rem', color: '#6366F1', fontWeight: '800', textTransform: 'uppercase', marginBottom: '2px' }}>THRESHOLD</div>
-                                        <div style={{ fontSize: '1.6rem', fontWeight: '900', color: '#1E293B' }}>{threshold}%</div>
+                                        <div style={{ fontSize: '0.65rem', color: '#6366F1', fontWeight: '500', textTransform: 'uppercase', marginBottom: '2px' }}>THRESHOLD</div>
+                                        <div style={{ fontSize: '1.25rem', fontWeight: '500', color: '#1E293B' }}>{threshold}%</div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="glass-card mode-toggle-card">
+                            <div className="section-container mode-toggle-card">
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                     <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
                                         <i className="fa-solid fa-sliders"></i>
                                     </div>
                                     <div>
-                                        <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Matching Mode</h3>
+                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Matching Mode</h3>
                                         <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Choose between AI automation or manual review.</p>
                                     </div>
                                 </div>
@@ -289,13 +307,13 @@ const ResumeMatcher = () => {
                             </div>
 
                             {matchMode === 'automatic' && (
-                                <div className="glass-card automation-settings-card">
+                                <div className="section-container automation-settings-card">
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
                                         <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
                                             <i className="fa-solid fa-gear"></i>
                                         </div>
                                         <div>
-                                            <h3 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>Automation Settings</h3>
+                                            <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Automation Settings</h3>
                                             <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Configure the assessment that will be sent to candidates.</p>
                                         </div>
                                     </div>
@@ -320,17 +338,17 @@ const ResumeMatcher = () => {
                                     {codingCount > 0 && (
                                         <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.25rem', marginBottom: '1.5rem' }}>
                                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                                <span style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.95rem' }}>Customize Coding Complexity</span>
-                                                <span style={{ fontSize: '0.85rem', color: '#4f46e5', fontWeight: '700' }}>Points: {calculateTotalPoints()}</span>
+                                                <span style={{ fontWeight: '500', color: '#1B254B', fontSize: '0.95rem' }}>Customize Coding Complexity</span>
+                                                <span style={{ fontSize: '0.85rem', color: '#4f46e5', fontWeight: '500' }}>Points: {calculateTotalPoints()}</span>
                                             </div>
                                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
                                                 {codingChallenges.map((c, idx) => (
                                                     <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#F8F9FF', padding: '0.6rem 1rem', borderRadius: '12px', border: '1px solid #e0e7ff' }}>
-                                                        <span style={{ color: '#4318FF', fontWeight: '800', fontSize: '0.85rem' }}>Q{idx + 1}</span>
+                                                        <span style={{ color: '#4318FF', fontWeight: '500', fontSize: '0.85rem' }}>Q{idx + 1}</span>
                                                         <select
                                                             value={c.difficulty}
                                                             onChange={(e) => updateCodingDiff(c.id, e.target.value)}
-                                                            style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '600', color: '#1B254B', cursor: 'pointer' }}
+                                                            style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '500', color: '#1B254B', cursor: 'pointer' }}
                                                         >
                                                             <option value="Easy">Easy</option>
                                                             <option value="Medium">Medium</option>
@@ -343,7 +361,7 @@ const ResumeMatcher = () => {
                                     )}
 
                                     {/* Pass Threshold */}
-                                    <div className="setting-item">
+                                    <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
                                         <label>Assessment Pass Threshold ({passThreshold}%)</label>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                             <input
@@ -351,19 +369,77 @@ const ResumeMatcher = () => {
                                                 onChange={(e) => setPassThreshold(e.target.value)}
                                                 style={{ flex: 1, accentColor: '#6366F1' }}
                                             />
-                                            <span style={{ minWidth: '40px', fontWeight: '800', color: '#1E293B' }}>{passThreshold}%</span>
+                                            <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{passThreshold}%</span>
                                         </div>
                                         <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
                                     </div>
+
+                                    {/* Date & Time Selection Range */}
+                                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
+                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                            <div className="module-icon-wrapper teal-glow" style={{ width: '32px', height: '32px', borderRadius: '8px' }}>
+                                                <i className="fa-solid fa-clock"></i>
+                                            </div>
+                                            <h4 style={{ margin: 0, color: '#1B254B', fontSize: '0.95rem', fontWeight: '500' }}>Schedule Delivery</h4>
+                                        </div>
+
+                                        <p style={{ margin: '0 0 1rem', fontSize: '0.85rem', color: '#64748B', fontWeight: '700' }}>ASSESSMENT WINDOW</p>
+                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                                                <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
+                                                    <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
+                                                    Available From
+                                                </label>
+                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                    <input type="date" value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                                    <input type="time" value={assessmentStartTime} onChange={(e) => setAssessmentStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                                </div>
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                                                <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
+                                                    <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
+                                                    Available Until
+                                                </label>
+                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                    <input type="date" value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                                    <input type="time" value={assessmentEndTime} onChange={(e) => setAssessmentEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <p style={{ margin: '0 0 1rem', fontSize: '0.85rem', color: '#64748B', fontWeight: '700' }}>INTERVIEW WINDOW</p>
+                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                                                <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
+                                                    <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
+                                                    Available From
+                                                </label>
+                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                    <input type="date" value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                                    <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                                </div>
+                                            </div>
+                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                                                <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
+                                                    <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
+                                                    Available Until
+                                                </label>
+                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                    <input type="date" value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                                    <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                             )}
 
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
-
                                 <button
                                     onClick={handleMatch}
                                     disabled={isAnalyzing}
-                                    className="match-btn"
+                                    className="generate-btn"
                                 >
                                     {isAnalyzing ? (
                                         <><i className="fa-solid fa-atom fa-spin"></i> Analyzing Candidate Profiles...</>
@@ -379,7 +455,7 @@ const ResumeMatcher = () => {
                     ) : (
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                <h2 style={{ fontSize: '2rem', fontWeight: '800', color: '#1e293b', letterSpacing: '-0.02em' }}>Match <span style={{ color: '#6366F1' }}>Insights</span></h2>
+                                <h2 style={{ fontSize: '1.5rem', fontWeight: '500', color: '#1e293b', letterSpacing: '-0.02em' }}>Match <span style={{ color: '#6366F1' }}>Insights</span></h2>
                                 <button onClick={() => setResults(null)} className="view-details-btn">
                                     <i className="fa-solid fa-chevron-left" style={{ marginRight: '0.5rem' }}></i> New Analysis
                                 </button>
@@ -400,7 +476,7 @@ const ResumeMatcher = () => {
 
                                             <div>
                                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                                                    <h4 style={{ margin: 0, fontSize: '1.25rem', fontWeight: '800', color: '#1e293b' }}>{data.filename || 'Untitled Resume'}</h4>
+                                                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '500', color: '#1e293b' }}>{data.filename || 'Untitled Resume'}</h4>
                                                     <span className="status-tag" style={{
                                                         background: data.is_eligible ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
                                                         color: data.is_eligible ? '#059669' : '#dc2626'
