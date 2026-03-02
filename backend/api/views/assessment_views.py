@@ -279,7 +279,7 @@ def _create_question_from_payload(
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def create_question_view(request):
     """
     Create a manual Question (MCQ/MSQ/TF) from the Manual Questions UI.
@@ -358,7 +358,7 @@ def create_question_view(request):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_manual_questions_view(request):
     """
     Fetch manual questions created for a given custom_assessment_id.
@@ -703,7 +703,7 @@ def _parse_single_block(block: list[str], defaults: dict) -> tuple[Optional[dict
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def parse_questions_document_view(request):
     """
     Parse uploaded PDF/DOCX into question objects.
@@ -755,7 +755,7 @@ def parse_questions_document_view(request):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def bulk_create_questions_view(request):
     """
     Bulk create questions in DB.
@@ -861,7 +861,7 @@ def bulk_create_questions_view(request):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_questions_by_skills_view(request):
     """
     Get questions for multiple skills/topics.
@@ -965,7 +965,7 @@ def get_questions_by_skills_view(request):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def create_custom_assessment_view(request):
     """
     Create and store a CustomAssessment record with all configuration data
@@ -1106,7 +1106,7 @@ def create_custom_assessment_view(request):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_custom_assessment_view(request, custom_assessment_id: int):
     """
     Fetch a CustomAssessment by ID.
@@ -1162,7 +1162,7 @@ def get_custom_assessment_view(request, custom_assessment_id: int):
 
 @csrf_exempt
 @api_view(['GET', 'POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def create_assessment_view(request):
     """
     Create an Assessment record and associated AssessmentQuestion rows
@@ -1630,7 +1630,7 @@ def get_assessment_public_view(request, token):
 
 @csrf_exempt
 @api_view(['GET', 'PATCH'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_assessment_detail_view(request, assessment_id: int):
     """
     Fetch or update a single assessment by numeric ID.

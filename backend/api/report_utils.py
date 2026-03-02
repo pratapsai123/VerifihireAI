@@ -416,10 +416,7 @@ def generate_candidate_report(submission_id):
             pass
 
         obj_data = [[
-            Paragraph('<b>Q#</b>', styles['Normal']),
-            Paragraph('<b>Question</b>', styles['Normal']),
-            Paragraph('<b>Your Answer</b>', styles['Normal']),
-            Paragraph('<b>Correct</b>', styles['Normal']),
+            Paragraph('<b>Q# / Question</b>', styles['Normal']),
             Paragraph('<b>Result</b>', styles['Normal']),
         ]]
 
@@ -437,69 +434,87 @@ def generate_candidate_report(submission_id):
                 if v is None:
                     return ''
                 return str(v).strip().upper()
-                
-            def _get_option_text(q_obj, choice_label):
-                if not choice_label or not q_obj:
-                    return choice_label
-                cl = choice_label.strip().upper()
-                if cl == 'A' and getattr(q_obj, 'option_a', None):
-                    return f"A: {q_obj.option_a}"
-                if cl == 'B' and getattr(q_obj, 'option_b', None):
-                    return f"B: {q_obj.option_b}"
-                if cl == 'C' and getattr(q_obj, 'option_c', None):
-                    return f"C: {q_obj.option_c}"
-                if cl == 'D' and getattr(q_obj, 'option_d', None):
-                    return f"D: {q_obj.option_d}"
-                return choice_label
 
+            html_parts = []
+            
             if aq:
+                import xml.sax.saxutils as saxutils
                 q_text = aq.question.question if aq.question else 'N/A'
                 q_type = (aq.question_type or '').strip().upper()
+                
+                # Question header
+                escaped_q = saxutils.escape(q_text)
+                html_parts.append(f'<b>{idx}. {escaped_q}</b><br/><br/>')
+                
+                # Figure out correct set and selected set
                 if q_type == 'MSQ':
-                    correct_raw = sorted(aq.correct_answers or [])
-                    correct_formatted = [_get_option_text(aq.question, c) for c in correct_raw]
-                    correct = ', '.join(correct_formatted)
+                    correct_set = set([_norm_choice(x) for x in (aq.correct_answers or [])])
                     
                     submitted_list = candidate_answer if isinstance(candidate_answer, list) else []
                     raw = [_norm_choice(x) for x in submitted_list if _norm_choice(x)]
                     if mapping and isinstance(mapping, dict):
                         raw = [mapping.get(x, x) for x in raw]  # newLabel -> origLabel
+                    selected_set = set(raw)
                     
-                    raw_sorted = sorted(raw)
-                    ans_formatted = [_get_option_text(aq.question, c) for c in raw_sorted]
-                    ans_display = ', '.join(ans_formatted) if ans_formatted else str(candidate_answer)
-                    
-                    sub_set = raw_sorted
-                    cor_set = sorted([_norm_choice(x) for x in (aq.correct_answers or [])])
-                    is_correct = sub_set == cor_set and len(sub_set) > 0
+                    is_correct = sorted(list(selected_set)) == sorted(list(correct_set)) and len(selected_set) > 0
                 else:
-                    correct_raw = aq.correct_answer or '-'
-                    correct = _get_option_text(aq.question, correct_raw) if correct_raw != '-' else '-'
+                    correct_val = _norm_choice(aq.correct_answer)
+                    correct_set = {correct_val} if correct_val else set()
                     
+                    if q_type == 'TF':
+                        # Make sure correct_set maps TF to A/B so it matches the options check
+                        if correct_val == 'TRUE': correct_set = {'A'}
+                        elif correct_val == 'FALSE': correct_set = {'B'}
+                        
                     submitted_choice = _norm_choice(candidate_answer)
                     if mapping and isinstance(mapping, dict):
                         submitted_choice = mapping.get(submitted_choice, submitted_choice)
+                    selected_set = {submitted_choice} if submitted_choice else set()
+                    
+                    is_correct = len(selected_set) > 0 and (list(selected_set)[0] == list(correct_set)[0] if correct_set else False)
+                    
+                # Build options list
+                opts = []
+                if q_type == 'TF':
+                    opts.append(('A', 'True'))
+                    opts.append(('B', 'False'))
+                else:
+                    q_obj = aq.question
+                    if getattr(q_obj, 'option_a', None): opts.append(('A', getattr(q_obj, 'option_a')))
+                    if getattr(q_obj, 'option_b', None): opts.append(('B', getattr(q_obj, 'option_b')))
+                    if getattr(q_obj, 'option_c', None): opts.append(('C', getattr(q_obj, 'option_c')))
+                    if getattr(q_obj, 'option_d', None): opts.append(('D', getattr(q_obj, 'option_d')))
+                    
+                # Format options text
+                for opt_lbl, opt_text in opts:
+                    is_opt_correct = opt_lbl in correct_set
+                    is_opt_selected = opt_lbl in selected_set
+                    color = '#000000'
+                    
+                    if is_opt_correct: color = '#16a34a' # Green
+                    elif is_opt_selected: color = '#dc2626' # Red
                         
-                    ans_display = _get_option_text(aq.question, submitted_choice) if submitted_choice else '-'
-                    is_correct = submitted_choice == _norm_choice(aq.correct_answer) and len(submitted_choice) > 0
+                    # Pencil Emoji unicode is U+270E or U+270F
+                    pencil = ' <font color="#3b82f6">&#x270E;</font>' if is_opt_selected else ''
+                    
+                    escaped_opt = saxutils.escape(opt_text)
+                    html_parts.append(f'<font color="{color}">{opt_lbl}. {escaped_opt}</font>{pencil}<br/>')
+                
             else:
-                q_text = f'Question {key}'
-                correct = '-'
-                ans_display = str(candidate_answer) if candidate_answer else '-'
+                html_parts.append(f'<b>{idx}. Question {key}</b><br/><br/>')
                 is_correct = False
 
             icon = '\u2713' if is_correct else '\u2717'
             clr = colors.HexColor('#16a34a') if is_correct else colors.HexColor('#dc2626')
+            
+            cell_html = ''.join(html_parts)
 
             obj_data.append([
-                Paragraph(str(idx), styles['Normal']),
-                _safe_para(q_text[:120] + ('...' if len(str(q_text)) > 120 else ''), styles['Normal']),
-                _safe_para(ans_display, styles['Normal']),
-                _safe_para(correct, styles['Normal']),
-                Paragraph(f'<font color="{clr}">{icon}</font>', styles['Normal']),
+                Paragraph(cell_html, styles['Normal']),
+                Paragraph(f'<font color="{clr}"><b>{icon}</b></font>', styles['Normal']),
             ])
 
-        obj_table = Table(obj_data, colWidths=[30, 220, 80, 80, 40])
+        obj_table = Table(obj_data, colWidths=[410, 40])
         obj_table.setStyle(TableStyle([
             ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f1f5f9')),
             ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#0f172a')),

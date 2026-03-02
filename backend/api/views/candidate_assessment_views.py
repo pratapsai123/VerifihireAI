@@ -3,7 +3,7 @@
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def create_invitations_and_send_email_view(request, assessment_id: int):
     """
     Create candidate invitation(s) for an assessment and send email(s) immediately.
@@ -1340,7 +1340,7 @@ def get_invitation_result_view(request, token):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def results_overview_view(request):
     """
     Recruiter overview: list recent results (submissions).
@@ -1465,7 +1465,7 @@ def submit_rating_view(request, token):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def candidates_overview_view(request):
     """
     Recruiter overview: list invited candidates and their status.
@@ -1577,7 +1577,7 @@ def candidates_overview_view(request):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def backfill_assessment_questions_view(request):
     """
     Backfill existing AssessmentQuestion records with data from their linked Question records.

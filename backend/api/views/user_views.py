@@ -3,7 +3,7 @@
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def invite_user_view(request):
     """
     Create an invitation for internal company roles (HR Manager / HR).
@@ -144,7 +144,7 @@ def invite_user_view(request):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def cancel_invite_view(request, token):
     """
     Cancel a pending invitation.
@@ -183,7 +183,7 @@ def cancel_invite_view(request, token):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def resend_invite_view(request, token):
     """
     Resend a pending invitation. Regenerates the temporary password.
@@ -262,7 +262,7 @@ def resend_invite_view(request, token):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_invite_view(request, token):
     """
     Public: fetch invitation metadata for the accept-invite UI.
@@ -295,7 +295,7 @@ def get_invite_view(request, token):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def accept_invite_view(request):
     """
     Accept a user invitation and set password.
@@ -397,7 +397,7 @@ def accept_invite_view(request):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def team_members_view(request):
     """
     List team members and invitation details.

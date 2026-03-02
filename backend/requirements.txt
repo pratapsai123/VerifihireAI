@@ -19,3 +19,4 @@ groq
 easyocr
 celery
 redis
+djangorestframework-simplejwt

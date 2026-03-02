@@ -610,23 +610,34 @@ def verify_login_otp_view(request):
             # Prefer user profile; fallback to application admin
             user_profile = UserProfile.objects.filter(email=email).first()
             app_admin = None
+            auth_user = None
             if not user_profile:
                 auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
                 if auth_user:
                     app_admin = ApplicationAdmin.objects.filter(user=auth_user).first()
                 if not app_admin:
                     return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+            else:
+                if user_profile.user:
+                    auth_user = user_profile.user
+                else:
+                    auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
+            
+            if not auth_user:
+                return Response({'error': 'Authentication user not found. Please contact support.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            refresh = RefreshToken.for_user(auth_user)
             
             # Return success response with user data and token
             return Response(
                 {
                     'message': 'Login successful!',
-                    'token': 'dummy-token-for-now',  # You can implement JWT here later
+                    'token': str(refresh.access_token),
+                    'refresh': str(refresh),
                     'user': {
                         'id': (user_profile.id if user_profile else app_admin.user_id),
-                        'first_name': (user_profile.first_name if user_profile else (app_admin.user.first_name or '')),
-                        'last_name': (user_profile.last_name if user_profile else (app_admin.user.last_name or '')),
-                        'email': (user_profile.email if user_profile else (app_admin.user.email or app_admin.user.username)),
+                        'first_name': (user_profile.first_name if user_profile else (auth_user.first_name or '')),
+                        'last_name': (user_profile.last_name if user_profile else (auth_user.last_name or '')),
+                        'email': (user_profile.email if user_profile else (auth_user.email or auth_user.username)),
                         'role': (user_profile.role if user_profile else UserProfile.ROLE_APPLICATION_ADMIN),
                         'organization_name': (user_profile.organization_name if user_profile else None),
                         'registration_timestamp': (user_profile.registration_timestamp.isoformat() if user_profile else app_admin.created_at.isoformat()),

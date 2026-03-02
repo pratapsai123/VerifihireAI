@@ -333,7 +333,7 @@ def create_interview_invitations_and_send_email_view(request):
         return Response({'error': f'An error occurred while sending invitations: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def interview_invitations_overview_view(request):
     """
     Overview: list interview invitations and their status.
@@ -399,7 +399,7 @@ def interview_invitations_overview_view(request):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def get_interview_invitation_by_token_view(request, token):
     """
     Get interview invitation details by token.
@@ -763,7 +763,7 @@ def verify_pan_backend_view(request):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def download_candidate_report_view(request, submission_id: int):
     """
     Download a comprehensive PDF report for a candidate submission.
@@ -788,7 +788,7 @@ def download_candidate_report_view(request, submission_id: int):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def submit_interview_feedback(request):
     """
     Submit feedback after a live interview.

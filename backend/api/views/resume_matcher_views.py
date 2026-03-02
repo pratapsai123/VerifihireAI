@@ -3,7 +3,7 @@
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def extract_skills_from_resume_view(request):
     """
     Extract skills from uploaded resume file.
