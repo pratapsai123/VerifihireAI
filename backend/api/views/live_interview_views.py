@@ -879,6 +879,7 @@ def submit_interview_feedback(request):
         print(f"Error submitting feedback: {e}")
         print(traceback.format_exc())
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+@csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 @permission_classes([AllowAny])
 def draft_interview_invitations_view(request, draft_id=None):

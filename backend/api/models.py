@@ -149,6 +149,41 @@ class ApplicationAdmin(models.Model):
         return f"ApplicationAdmin({self.user.email or self.user.username})"
 
 
+class JobRole(models.Model):
+    """
+    Stores reusable job roles with titles and descriptions.
+    """
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='created_job_roles'
+    )
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='job_roles'
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'api_jobroles'
+        verbose_name = "Job Role"
+        verbose_name_plural = "Job Roles"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
+
+
 class UserInvitation(models.Model):
     """
     Invitation-based onboarding for internal company roles (HR Manager, HR).
@@ -906,12 +941,9 @@ class InterviewInvitation(models.Model):
             models.Index(fields=['token']),
         ]
 
+
     def __str__(self):
         return f"Interview Invitation #{self.id} - {self.email} (Interview {self.interview_id if self.interview else 'N/A'})"
-
-
-    def __str__(self):
-        return f"Submission #{self.id} (Q{self.question_id}) - {self.status}"
 
 
 class CodingInvite(models.Model):

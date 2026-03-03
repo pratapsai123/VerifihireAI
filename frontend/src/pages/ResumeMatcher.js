@@ -11,6 +11,23 @@ const ResumeMatcher = () => {
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [results, setResults] = useState(null);
     const [matchMode, setMatchMode] = useState('automatic'); // 'automatic' or 'manual'
+    const [customRoleTitle, setCustomRoleTitle] = useState('');
+
+    // Saved Roles from DB
+    const [jobRoles, setJobRoles] = useState([]);
+    const [selectedRoleId, setSelectedRoleId] = useState('');
+
+    React.useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const res = await axios.get(`${API_BASE_URL}/job-roles/`);
+                setJobRoles(res.data);
+            } catch (err) {
+                console.error("Error fetching job roles:", err);
+            }
+        };
+        fetchRoles();
+    }, []);
 
     // Automation Pipeline Settings
     const [duration, setDuration] = useState(60);
@@ -92,6 +109,15 @@ const ResumeMatcher = () => {
             formData.append('resume', file);
         });
         formData.append('job_description', jobDescription);
+
+        // Include Job Title for persistence
+        if (selectedRoleId === 'custom') {
+            formData.append('role_title', customRoleTitle);
+        } else {
+            const role = jobRoles.find(r => r.id.toString() === selectedRoleId);
+            if (role) formData.append('role_title', role.title);
+        }
+
         formData.append('threshold', threshold);
 
         if (matchMode === 'automatic') {
@@ -172,12 +198,49 @@ const ResumeMatcher = () => {
                                         <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Define the benchmark for comparison.</p>
                                     </div>
                                 </div>
-                                <textarea
-                                    value={jobDescription}
-                                    onChange={(e) => setJobDescription(e.target.value)}
-                                    placeholder="Paste the job requirements, responsibilities, and qualifications..."
-                                    className="modern-textarea"
-                                />
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <select
+                                        className="modern-input"
+                                        value={selectedRoleId}
+                                        onChange={(e) => {
+                                            const roleId = e.target.value;
+                                            setSelectedRoleId(roleId);
+                                            const role = jobRoles.find(r => r.id.toString() === roleId);
+                                            if (role) {
+                                                setJobDescription(role.description);
+                                            } else {
+                                                setJobDescription('');
+                                            }
+                                        }}
+                                        style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none', background: '#F8FAFC' }}
+                                    >
+                                        <option value="">-- Select a Saved Role --</option>
+                                        {jobRoles.map(r => (
+                                            <option key={r.id} value={r.id}>{r.title}</option>
+                                        ))}
+                                        <option value="custom">Custom (Type Manually)</option>
+                                    </select>
+
+                                    {selectedRoleId === 'custom' && (
+                                        <input
+                                            type="text"
+                                            value={customRoleTitle}
+                                            onChange={(e) => setCustomRoleTitle(e.target.value)}
+                                            placeholder="Enter Role Title (e.g. Senior Frontend Developer)"
+                                            className="modern-input"
+                                            style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none' }}
+                                        />
+                                    )}
+
+                                    {selectedRoleId === 'custom' && (
+                                        <textarea
+                                            value={jobDescription}
+                                            onChange={(e) => setJobDescription(e.target.value)}
+                                            placeholder="Paste the job requirements, responsibilities, and qualifications..."
+                                            className="modern-textarea"
+                                        />
+                                    )}
+                                </div>
                             </div>
 
                             <div className="section-container">

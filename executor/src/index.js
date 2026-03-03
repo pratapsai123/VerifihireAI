@@ -108,6 +108,10 @@ function demuxDockerMultiplexedBuffer(buf) {
   }
   return { stdout: out, stderr: err };
 }
+function stripAnsi(str) {
+  if (typeof str !== "string") return str;
+  return str.replace(/\x1b\[[0-9;]*[a-zA-Z]/g, "");
+}
 
 function buildTarFiles(files) {
   return new Promise((resolve, reject) => {
@@ -601,8 +605,8 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
       memory_mb: mem,
       timed_out: timedOut,
       exit_code: exitCode,
-      stdout,
-      stderr,
+      stdout: stripAnsi(stdout),
+      stderr: stripAnsi(stderr),
       execution_time_ms: (exitCode !== null && typeof tStart === 'number') ? (Date.now() - tStart) : 0,
     };
 

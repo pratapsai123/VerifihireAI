@@ -56,6 +56,7 @@ class AIAssessmentSubmission(models.Model):
 
     started_at = models.DateTimeField(default=timezone.now)
     submitted_at = models.DateTimeField(blank=True, null=True)
+    current_question_index = models.IntegerField(default=0)
 
     def __str__(self):
         return f"AI Submission - {self.candidate_name} ({self.candidate_email})"

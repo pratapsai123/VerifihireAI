@@ -18,8 +18,25 @@ const CreateAssessment = () => {
         start_time: '',
         end_date: '',
         end_time: '',
-        pass_threshold: 60
+        pass_threshold: 60,
+        customRoleTitle: ''
     });
+
+    // Job Roles State
+    const [jobRoles, setJobRoles] = useState([]);
+    const [selectedRoleId, setSelectedRoleId] = useState('');
+
+    React.useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const res = await axios.get(`${API_BASE_URL}/job-roles/`);
+                setJobRoles(res.data);
+            } catch (err) {
+                console.error("Error fetching job roles:", err);
+            }
+        };
+        fetchRoles();
+    }, []);
 
     const handleChange = (id, value) => {
         if (id === 'num_coding') {
@@ -92,14 +109,17 @@ const CreateAssessment = () => {
 
         setLoading(true);
 
-        const { easy, medium, hard } = calculateMcqMix(formData.num_mcqs);
-
-        const combinedData = {
+        const mcqMix = calculateMcqMix(formData.num_mcqs);
+        const payload = {
             job_description: formData.job_description,
             required_skills: formData.skills,
-            mcq_easy: easy,
-            mcq_medium: medium,
-            mcq_hard: hard,
+
+            // Include Job Title for persistence
+            role_title: selectedRoleId === 'custom' ? formData.customRoleTitle : (jobRoles.find(r => r.id.toString() === selectedRoleId)?.title || formData.skills),
+
+            mcq_easy: mcqMix.easy,
+            mcq_medium: mcqMix.medium,
+            mcq_hard: mcqMix.hard,
             coding_tasks: formData.coding_challenges.map(c => c.difficulty),
             duration: formData.coding_time,
             pass_threshold: formData.pass_threshold,
@@ -109,7 +129,7 @@ const CreateAssessment = () => {
         };
 
         try {
-            const response = await axios.post(`${API_BASE_URL}/ai/generate/`, combinedData, {
+            const response = await axios.post(`${API_BASE_URL}/ai/generate/`, payload, {
                 headers: { 'Content-Type': 'application/json' }
             });
 
@@ -138,21 +158,58 @@ const CreateAssessment = () => {
                     <SectionHeader title="Role Context" />
                     <div className="form-group">
                         <label>Job Requirements</label>
-                        <textarea
-                            placeholder="Describe the role, key responsibilities, and ideal candidate profile..."
-                            value={formData.job_description}
-                            onChange={(e) => handleChange('job_description', e.target.value)}
-                        />
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <select
+                                className="modern-input"
+                                style={{ width: '100%', padding: '0.85rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none', background: 'white' }}
+                                value={selectedRoleId}
+                                onChange={(e) => {
+                                    const roleId = e.target.value;
+                                    setSelectedRoleId(roleId);
+                                    const role = jobRoles.find(r => r.id.toString() === roleId);
+                                    if (role) {
+                                        handleChange('job_description', role.description);
+                                        handleChange('skills', role.title); // Populate skills with title to satisfy validation
+                                        handleChange('customRoleTitle', ''); // Clear custom title if switching from custom
+                                    } else {
+                                        handleChange('job_description', '');
+                                        handleChange('skills', '');
+                                        handleChange('customRoleTitle', '');
+                                    }
+                                }}
+                            >
+                                <option value="">-- Select a Saved Role --</option>
+                                {jobRoles.map(r => (
+                                    <option key={r.id} value={r.id}>{r.title}</option>
+                                ))}
+                                <option value="custom">Custom (Type Manually)</option>
+                            </select>
+
+                            {selectedRoleId === 'custom' && (
+                                <div className="input-group" style={{ marginTop: '1rem' }}>
+                                    <label>Role Title</label>
+                                    <input
+                                        type="text"
+                                        value={formData.customRoleTitle}
+                                        onChange={(e) => handleChange('customRoleTitle', e.target.value)}
+                                        placeholder="e.g. Senior Frontend Developer"
+                                        className="modern-input"
+                                    />
+                                </div>
+                            )}
+                        </div>
                     </div>
-                    <div className="form-group">
-                        <label>Target Skills</label>
-                        <input
-                            type="text"
-                            placeholder="e.g. React, Node.js, Python, System Design..."
-                            value={formData.skills}
-                            onChange={(e) => handleChange('skills', e.target.value)}
-                        />
-                    </div>
+                    {selectedRoleId === 'custom' && (
+                        <div className="form-group">
+                            <label>Target Skills</label>
+                            <input
+                                type="text"
+                                placeholder="e.g. React, Node.js, Python, System Design..."
+                                value={formData.skills}
+                                onChange={(e) => handleChange('skills', e.target.value)}
+                            />
+                        </div>
+                    )}
                 </div>
 
                 <div>

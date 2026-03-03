@@ -200,8 +200,8 @@ REST_FRAMEWORK = {
 default_cors_origins = [
     "https://verifyhire.duckdns.org",
     "https://verifyhire.duckdns.org",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
+    "https://verifyhire.duckdns.org",
+    "https://verifyhire.duckdns.org",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -239,8 +239,11 @@ CSRF_TRUSTED_ORIGINS = _env_list("CSRF_TRUSTED_ORIGINS", default_cors_origins)
 
 # CSRF cookie settings
 CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SECURE = False  # Set to True in production with HTTPS
+CSRF_COOKIE_SECURE = True  # Enforce HTTPS
 CSRF_USE_SESSIONS = False
+
+# Session cookie settings
+SESSION_COOKIE_SECURE = True # Enforce HTTPS
 
 # Email Configuration for Gmail SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

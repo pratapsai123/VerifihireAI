@@ -22,6 +22,9 @@ const ResultsAI = () => {
     const [resumeResults, setResumeResults] = useState([]);
     const [aiAssessments, setAiAssessments] = useState([]);
     const [aiInterviews, setAiInterviews] = useState([]);
+    const [groupedData, setGroupedData] = useState({}); // { roleName: { resume: [], assessment: [], interview: [] } }
+    const [viewMode, setViewMode] = useState('overview'); // 'overview' | 'detail'
+    const [selectedRole, setSelectedRole] = useState(null);
     const [summaryModal, setSummaryModal] = useState(null); // Candidate object
 
     const showToast = (type, message) => {
@@ -34,17 +37,20 @@ const ResultsAI = () => {
         setError(null);
         setSelected(new Set());
         try {
-            // Fetch resume/interview candidates
-            const candidatesResp = await axios.get(`${API_BASE_URL}/ai-candidates/`);
+            const [candidatesResp, aiResp, rolesResp] = await Promise.all([
+                axios.get(`${API_BASE_URL}/ai-candidates/`),
+                axios.get(`${API_BASE_URL}/ai/`),
+                axios.get(`${API_BASE_URL}/job-roles/`)
+            ]);
+
+            const rolesList = rolesResp.data || [];
+            const validRoleTitles = new Set(rolesList.map(r => r.title.trim()));
+
             const allCandidates = candidatesResp.data || [];
             setAiInterviews(allCandidates.filter(c => c.total_questions > 0));
             setResumeResults(allCandidates);
 
-            // Fetch AI assessments and their submissions from the correct endpoint
-            const aiAssessmentsResp = await axios.get(`${API_BASE_URL}/ai/`);
-            const assessmentList = aiAssessmentsResp.data || [];
-
-            // Fetch detail for each assessment to get its submissions, then flatten
+            const assessmentList = aiResp.data || [];
             const detailPromises = assessmentList.map(a =>
                 axios.get(`${API_BASE_URL}/ai/${a.id}/`).then(r => r.data).catch(() => ({ ...a, submissions: [] }))
             );
@@ -59,7 +65,8 @@ const ResultsAI = () => {
                         assessment: {
                             id: assessment.id,
                             name: assessment.required_skills,
-                            display_name: assessment.required_skills,
+                            display_name: assessment.role || assessment.required_skills, // Use role if available
+                            role: assessment.role,
                         },
                         candidate: {
                             name: sub.candidate_name,
@@ -74,11 +81,36 @@ const ResultsAI = () => {
                 });
             });
 
-            // Show only completed submissions, sorted newest first
             const sorted = allSubmissions
                 .filter(s => s.submitted_at && s.status !== 'ONGOING')
                 .sort((a, b) => new Date(b.submitted_at) - new Date(a.submitted_at));
             setAiAssessments(sorted);
+
+            const groups = {};
+            // Initialize with all valid job roles so they appear even if empty
+            rolesList.forEach(r => {
+                groups[r.title.trim()] = { resume: [], assessment: [], interview: [], total: 0 };
+            });
+
+            const addToGroup = (role, item, type) => {
+                const name = (role || '').trim();
+                // Only add to group if it's a known job role title
+                if (groups[name]) {
+                    groups[name][type].push(item);
+                    groups[name].total += 1;
+                }
+            };
+
+            allCandidates.forEach(c => {
+                if (c.total_questions > 0) addToGroup(c.job_title, c, 'interview');
+                else addToGroup(c.job_title, c, 'resume');
+            });
+
+            sorted.forEach(s => {
+                addToGroup(s.assessment.role || s.assessment.display_name, s, 'assessment');
+            });
+
+            setGroupedData(groups);
         } catch (err) {
             console.error('Error fetching AI results:', err);
             setError('Failed to load results. Please ensure the backend is running.');
@@ -98,8 +130,8 @@ const ResultsAI = () => {
         setActiveTab(tab);
         setSearchParams({ tab });
         setSelected(new Set());
-        setStatusFilter('all'); // Reset filter when switching tabs
-        setCurrentPage(1); // Reset page
+        setStatusFilter('all');
+        setCurrentPage(1);
     };
 
     const getStatusStyle = (rawStatus) => {
@@ -125,20 +157,23 @@ const ResultsAI = () => {
         return map[rawStatus] || rawStatus;
     };
 
-    /* ---- Helpers to determine pass/fail for filtering ---- */
     const isPass = (r, type) => {
         if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
         if (type === 'assessment') return r.status === 'selected' || (r.percentage != null && r.percentage >= 50);
-        if (type === 'interview') return r.status === 'Completed' || (r.score != null && r.total_questions > 0 && (r.score / (r.total_questions * 10)) >= 0.5);
+        if (type === 'interview') return r.status === 'Completed' || (r.score != null && (r.score / 100) >= 0.5);
         return false;
     };
 
-    /* ---- Selection ---- */
-    const allRows = activeTab === 'resume'
-        ? resumeResults.map(r => ({ ...r, _type: 'candidate', _deleteKey: `resume-${r.id}` }))
-        : activeTab === 'assessment'
-            ? aiAssessments.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }))
-            : aiInterviews.map(r => ({ ...r, _type: 'candidate', _deleteKey: `interview-${r.id}` }));
+    const getDataForActiveContext = () => {
+        if (!selectedRole || !groupedData[selectedRole]) return [];
+        const roleData = groupedData[selectedRole];
+        if (activeTab === 'resume') return roleData.resume.map(r => ({ ...r, _type: 'candidate', _deleteKey: `resume-${r.id}` }));
+        if (activeTab === 'assessment') return roleData.assessment.map(r => ({ ...r, _type: 'ai_assessment', _deleteKey: r.submission_id }));
+        if (activeTab === 'interview') return roleData.interview.map(r => ({ ...r, _type: 'candidate', _deleteKey: `interview-${r.id}` }));
+        return [];
+    };
+
+    const allRows = viewMode === 'detail' ? getDataForActiveContext() : [];
 
     const currentRows = statusFilter === 'all'
         ? allRows
@@ -147,7 +182,6 @@ const ResultsAI = () => {
             return statusFilter === 'pass' ? pass : !pass;
         });
 
-    // Pagination
     const itemsPerPage = 10;
     const indexOfLastRow = currentPage * itemsPerPage;
     const indexOfFirstRow = indexOfLastRow - itemsPerPage;
@@ -174,7 +208,6 @@ const ResultsAI = () => {
         });
     };
 
-    /* ---- Delete ---- */
     const requestDelete = (items) => setConfirmDelete({ items });
     const cancelDelete = () => setConfirmDelete(null);
 
@@ -201,13 +234,8 @@ const ResultsAI = () => {
             }
         }));
 
-        // Remove from state
-        const deletedCandidateIds = new Set(
-            items.filter(i => i._type === 'candidate').map(i => i.id)
-        );
-        const deletedAssessmentKeys = new Set(
-            items.filter(i => i._type === 'ai_assessment').map(i => i.submission_id)
-        );
+        const deletedCandidateIds = new Set(items.filter(i => i._type === 'candidate').map(i => i.id));
+        const deletedAssessmentKeys = new Set(items.filter(i => i._type === 'ai_assessment').map(i => i.submission_id));
 
         setResumeResults(prev => prev.filter(r => !deletedCandidateIds.has(r.id)));
         setAiInterviews(prev => prev.filter(r => !deletedCandidateIds.has(r.id)));
@@ -229,17 +257,27 @@ const ResultsAI = () => {
     const selectedItems = currentRows.filter(r => selected.has(r._deleteKey));
     const selectedCount = selectedItems.length;
 
-    /* ---- Styles ---- */
+    const handleRoleClick = (roleName) => {
+        setSelectedRole(roleName);
+        setViewMode('detail');
+        setActiveTab('resume');
+        setSearchParams({ tab: 'resume' });
+        setCurrentPage(1);
+    };
+
+    const handleBackToOverview = () => {
+        setViewMode('overview');
+        setSelectedRole(null);
+    };
+
     const checkboxStyle = { width: '16px', height: '16px', cursor: 'pointer', accentColor: '#4F46E5' };
 
     return (
         <div className="results-page">
-            {/* Decorative Background Elements */}
             <div className="bg-shape shape-1"></div>
             <div className="bg-shape shape-2"></div>
             <div className="bg-shape shape-3"></div>
 
-            {/* Toast */}
             {toast && (
                 <div style={{
                     position: 'fixed', top: '1.5rem', right: '1.5rem', zIndex: 9999,
@@ -255,14 +293,11 @@ const ResultsAI = () => {
                 </div>
             )}
 
-            {/* Confirm Modal */}
             {confirmDelete && (
                 <div className="glass-modal-overlay">
-                    <div className="glass-modal-content" style={{
-                        padding: '2.5rem', maxWidth: '420px', width: '90%', textAlign: 'center',
-                    }}>
+                    <div className="glass-modal-content" style={{ padding: '2.5rem', maxWidth: '420px', width: '90%', textAlign: 'center' }}>
                         <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🗑️</div>
-                        <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#111827', marginBottom: '0.5rem', letterSpacing: '-0.02em' }}>
+                        <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#111827', marginBottom: '0.5rem' }}>
                             Delete {confirmDelete.items.length > 1 ? `${confirmDelete.items.length} Results` : 'Result'}?
                         </h2>
                         <p style={{ color: '#475569', marginBottom: '1.75rem', lineHeight: '1.6', fontSize: '0.95rem' }}>
@@ -271,464 +306,239 @@ const ResultsAI = () => {
                                 : <>This will permanently delete <strong>{confirmDelete.items.length} selected results</strong>. This action cannot be undone.</>}
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                            <button onClick={cancelDelete} style={{ padding: '0.7rem 1.5rem', border: '1px solid #cbd5e1', borderRadius: '12px', background: 'rgba(255,255,255,0.7)', cursor: 'pointer', fontWeight: '700', color: '#334155' }}>
-                                Cancel
-                            </button>
-                            <button onClick={confirmAndDelete} style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '12px', background: '#EF4444', color: 'white', cursor: 'pointer', fontWeight: '700', boxShadow: '0 4px 12px rgba(239, 68, 68, 0.25)' }}>
-                                Delete
-                            </button>
+                            <button onClick={cancelDelete} style={{ padding: '0.7rem 1.5rem', border: '1px solid #cbd5e1', borderRadius: '12px', background: 'white', cursor: 'pointer', fontWeight: '700' }}>Cancel</button>
+                            <button onClick={confirmAndDelete} style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '12px', background: '#EF4444', color: 'white', cursor: 'pointer', fontWeight: '700' }}>Delete</button>
                         </div>
                     </div>
                 </div>
             )}
 
-            {/* AI Interview Summary Modal */}
             {summaryModal && (
                 <div className="glass-modal-overlay">
-                    <div className="glass-modal-content" style={{
-                        width: '100%', maxWidth: '800px', maxHeight: '85vh',
-                        display: 'flex', flexDirection: 'column',
-                    }}>
-                        <div style={{
-                            padding: '1.5rem 2rem',
-                            borderBottom: '1px solid #F3F4F6',
-                            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                            background: 'linear-gradient(to right, #F9FAFB, #FFFFFF)',
-                        }}>
+                    <div className="glass-modal-content" style={{ width: '100%', maxWidth: '800px', maxHeight: '85vh', display: 'flex', flexDirection: 'column' }}>
+                        <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid #F3F4F6', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <div>
-                                <h2 style={{ fontSize: '1.25rem', fontWeight: '800', color: '#111827', margin: 0 }}>
-                                    Interview Justification
-                                </h2>
-                                <p style={{ fontSize: '0.85rem', color: '#6B7280', margin: '0.2rem 0 0' }}>
-                                    AI Evaluation for <strong>{summaryModal.full_name}</strong>
-                                </p>
+                                <h2 style={{ fontSize: '1.25rem', fontWeight: '800', margin: 0 }}>Interview Justification</h2>
+                                <p style={{ fontSize: '0.85rem', color: '#6B7280', margin: '0.2rem 0 0' }}>AI Evaluation for <strong>{summaryModal.full_name}</strong></p>
                             </div>
-                            <button
-                                onClick={() => setSummaryModal(null)}
-                                style={{
-                                    width: '36px', height: '36px', borderRadius: '50%',
-                                    border: 'none', background: '#F3F4F6', color: '#4B5563',
-                                    cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                                }}
-                            >
+                            <button onClick={() => setSummaryModal(null)} style={{ border: 'none', background: '#F3F4F6', borderRadius: '50%', width: '36px', height: '36px', cursor: 'pointer' }}>
                                 <i className="fa-solid fa-xmark" />
                             </button>
                         </div>
-
                         <div style={{ padding: '2rem', overflowY: 'auto', flex: 1 }}>
                             {(!summaryModal.interview_summary || summaryModal.interview_summary.length === 0) ? (
-                                <div style={{ textAlign: 'center', padding: '3rem', color: '#9CA3AF' }}>
-                                    <i className="fa-solid fa-comment-slash" style={{ fontSize: '3rem', display: 'block', marginBottom: '1rem', opacity: 0.5 }} />
-                                    <p>No detailed feedback available for this candidate.</p>
-                                </div>
+                                <p>No feedback available.</p>
                             ) : (
                                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                     {summaryModal.interview_summary.map((item, idx) => (
-                                        <div key={idx} style={{
-                                            border: '1px solid #E5E7EB',
-                                            borderRadius: '16px',
-                                            overflow: 'hidden',
-                                        }}>
-                                            <div style={{
-                                                padding: '1rem 1.5rem',
-                                                background: '#F9FAFB',
-                                                borderBottom: '1px solid #E5E7EB',
-                                                display: 'flex', justifyContent: 'space-between', alignItems: 'center'
-                                            }}>
-                                                <span style={{ fontWeight: '800', fontSize: '0.75rem', color: '#4F46E5', textTransform: 'uppercase' }}>
-                                                    Question {idx + 1}
-                                                </span>
-                                                <div style={{
-                                                    background: item.score >= 7 ? '#DCFCE7' : item.score >= 4 ? '#FEF9C3' : '#FEE2E2',
-                                                    color: item.score >= 7 ? '#166534' : item.score >= 4 ? '#854D0E' : '#991B1B',
-                                                    padding: '0.25rem 0.75rem', borderRadius: '20px', fontSize: '0.75rem', fontWeight: '800'
-                                                }}>
-                                                    Score: {item.score}/10
-                                                </div>
+                                        <div key={idx} style={{ border: '1px solid #E5E7EB', borderRadius: '16px', overflow: 'hidden' }}>
+                                            <div style={{ padding: '1rem', background: '#F9FAFB', borderBottom: '1px solid #E5E7EB', display: 'flex', justifyContent: 'space-between' }}>
+                                                <span style={{ fontWeight: '800', color: '#4F46E5' }}>Question {idx + 1}</span>
+                                                <div style={{ fontWeight: '800' }}>Score: {item.score}/10</div>
                                             </div>
-                                            <div style={{ padding: '1.25rem 1.5rem' }}>
-                                                <p style={{ fontWeight: '700', color: '#111827', fontSize: '0.95rem', marginBottom: '0.75rem' }}>
-                                                    {item.question}
-                                                </p>
-                                                <div style={{ background: '#F3F4F6', padding: '0.8rem 1rem', borderRadius: '10px', fontSize: '0.9rem', color: '#4B5563', fontStyle: 'italic', marginBottom: '1rem' }}>
-                                                    "{item.answer}"
-                                                </div>
-                                                <div style={{ display: 'flex', gap: '0.75rem' }}>
-                                                    <i className="fa-solid fa-robot" style={{ color: '#4F46E5', marginTop: '0.2rem' }} />
-                                                    <div style={{ fontSize: '0.9rem', color: '#374151', lineHeight: '1.6' }}>
-                                                        <strong style={{ color: '#4F46E5' }}>AI Justification:</strong> {item.feedback}
-                                                    </div>
-                                                </div>
+                                            <div style={{ padding: '1.25rem' }}>
+                                                <p style={{ fontWeight: '700', marginBottom: '0.5rem' }}>{item.question}</p>
+                                                <p style={{ fontStyle: 'italic', color: '#4B5563' }}>"{item.answer}"</p>
+                                                <p style={{ marginTop: '1rem' }}><strong>AI Justification:</strong> {item.feedback}</p>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
-
-                        <div style={{ padding: '1.25rem 2rem', borderTop: '1px solid #F3F4F6', textAlign: 'right', background: '#F9FAFB' }}>
-                            <button
-                                onClick={() => setSummaryModal(null)}
-                                style={{
-                                    padding: '0.6rem 1.5rem', background: '#4F46E5', color: 'white', border: 'none', borderRadius: '10px',
-                                    fontWeight: '700', fontSize: '0.9rem', cursor: 'pointer', boxShadow: '0 4px 6px -1px rgba(79, 70, 229, 0.4)'
-                                }}
-                            >
-                                Close Summary
-                            </button>
+                        <div style={{ padding: '1.25rem 2rem', borderTop: '1px solid #F3F4F6', textAlign: 'right' }}>
+                            <button onClick={() => setSummaryModal(null)} style={{ padding: '0.6rem 1.5rem', background: '#4F46E5', color: 'white', border: 'none', borderRadius: '10px', fontWeight: '700' }}>Close</button>
                         </div>
                     </div>
                 </div>
             )}
 
-            <div className="dashboard-main" style={{ maxWidth: 'none', width: '100%', padding: '0 2rem 3rem' }}>
-                <header style={{ marginBottom: '0.25rem', textAlign: 'center', paddingTop: '0' }}>
-                    <h1 style={{ fontSize: '3.2rem', fontWeight: '900', color: '#111827', margin: 0, letterSpacing: '-0.04em', lineHeight: 1.1 }}>
+            <div className="dashboard-main" style={{ width: '100%', padding: '0 2rem 3rem' }}>
+                <header style={{ marginBottom: '2rem', textAlign: 'center' }}>
+                    <h1 style={{ fontSize: '3.2rem', fontWeight: '900', color: '#111827', margin: 0 }}>
                         AI <span style={{ color: '#4F46E5' }}>Results</span>
                     </h1>
-                </header>
-
-                {/* Tabs */}
-                <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.75rem' }}>
-                    <div style={{ display: 'flex', gap: '0.5rem', background: '#F4F7FE', padding: '0.35rem', borderRadius: '12px', width: 'fit-content' }}>
-                        {[
-                            { id: 'resume', label: 'Resume Screening', icon: 'fa-file-magnifying-glass' },
-                            { id: 'assessment', label: 'AI Assessments', icon: 'fa-brain' },
-                            { id: 'interview', label: 'AI Interviews', icon: 'fa-microphone-lines' }
-                        ].map(tab => (
-                            <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
-                                background: activeTab === tab.id ? 'white' : 'transparent',
-                                border: 'none', padding: '0.65rem 1.3rem', borderRadius: '10px',
-                                fontWeight: '700', color: activeTab === tab.id ? '#4F46E5' : '#718096',
-                                cursor: 'pointer', transition: 'all 0.2s',
-                                display: 'flex', alignItems: 'center', gap: '0.5rem',
-                                boxShadow: activeTab === tab.id ? '0 4px 10px rgba(0,0,0,0.05)' : 'none',
-                            }}>
-                                <i className={`fa-solid ${tab.icon}`} />
-                                {tab.label}
+                    {viewMode === 'detail' && (
+                        <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem' }}>
+                            <button onClick={handleBackToOverview} style={{ background: '#F3F4F6', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '10px', cursor: 'pointer', fontWeight: '700', color: '#4B5563' }}>
+                                <i className="fa-solid fa-arrow-left" /> Back to Roles
                             </button>
-                        ))}
-                    </div>
-                </div>
-
-                {/* Filter Chips */}
-                <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', alignItems: 'center' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#9CA3AF', textTransform: 'uppercase', marginRight: '0.25rem' }}>Filter:</span>
-                    {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass ✓' }, { key: 'fail', label: 'Fail ✗' }].map(f => (
-                        <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
-                            padding: '0.35rem 0.9rem', borderRadius: '20px', border: '1px solid',
-                            fontSize: '0.78rem', fontWeight: '700', cursor: 'pointer', transition: 'all 0.15s',
-                            borderColor: statusFilter === f.key
-                                ? (f.key === 'pass' ? '#05CD99' : f.key === 'fail' ? '#EE5D50' : '#4F46E5')
-                                : '#E5E7EB',
-                            background: statusFilter === f.key
-                                ? (f.key === 'pass' ? '#E6FBF5' : f.key === 'fail' ? '#FFF5F5' : '#EEF2FF')
-                                : 'white',
-                            color: statusFilter === f.key
-                                ? (f.key === 'pass' ? '#05CD99' : f.key === 'fail' ? '#EE5D50' : '#4F46E5')
-                                : '#6B7280',
-                        }}>{f.label}</button>
-                    ))}
-                    <span style={{ marginLeft: 'auto', fontSize: '0.8rem', color: '#9CA3AF' }}>{currentRows.length} result{currentRows.length !== 1 ? 's' : ''}</span>
-                </div>
-
-                {/* Bulk Action Toolbar */}
-                <div style={{
-                    height: selectedCount > 0 ? 'auto' : 0,
-                    overflow: 'hidden',
-                    transition: 'height 0.2s ease',
-                    marginBottom: selectedCount > 0 ? '1rem' : 0,
-                }}>
-                    {selectedCount > 0 && (
-                        <div style={{
-                            display: 'flex', alignItems: 'center', gap: '1rem',
-                            background: '#EEF2FF', border: '1px solid #C7D2FE',
-                            borderRadius: '12px', padding: '0.75rem 1.2rem',
-                        }}>
-                            <span style={{ fontWeight: '700', color: '#4338CA', fontSize: '0.9rem' }}>
-                                <i className="fa-solid fa-check-square" style={{ marginRight: '0.5rem' }} />
-                                {selectedCount} selected
-                            </span>
-                            <button
-                                onClick={() => requestDelete(selectedItems)}
-                                style={{
-                                    background: '#EF4444', color: 'white', border: 'none',
-                                    borderRadius: '8px', padding: '0.45rem 1rem',
-                                    fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
-                                    display: 'flex', alignItems: 'center', gap: '0.4rem',
-                                }}
-                            >
-                                <i className="fa-solid fa-trash-can" /> Delete Selected
-                            </button>
-                            <button
-                                onClick={() => setSelected(new Set())}
-                                style={{
-                                    background: 'transparent', color: '#6B7280', border: '1px solid #C7D2FE',
-                                    borderRadius: '8px', padding: '0.45rem 0.9rem',
-                                    fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer',
-                                }}
-                            >
-                                Clear Selection
-                            </button>
+                            <h2 style={{ fontSize: '1.5rem', fontWeight: '800' }}>{selectedRole}</h2>
                         </div>
                     )}
-                </div>
+                </header>
 
-                <div className="glass-table-card">
-                    {loading ? (
-                        <div style={{ padding: '6rem 2rem', textAlign: 'center', color: '#64748b' }}>
-                            <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2.5rem', display: 'block', marginBottom: '1.5rem', color: '#4f46e5' }} />
-                            <p style={{ fontSize: '1.2rem', fontWeight: '600' }}>Gathering intel...</p>
+                {viewMode === 'overview' && (
+                    <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+                        <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <div style={{ width: '4px', height: '24px', background: '#4F46E5', borderRadius: '2px' }} />
+                            <h2 style={{ fontSize: '1.4rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>Job Roles</h2>
+                            <span style={{ fontSize: '0.85rem', color: '#64748B', fontWeight: '600', marginLeft: 'auto' }}>
+                                {Object.keys(groupedData).length} Roles Found
+                            </span>
                         </div>
-                    ) : error ? (
-                        <div style={{ padding: '5rem 2rem', textAlign: 'center', color: '#ef4444' }}>
-                            <i className="fa-solid fa-circle-exclamation" style={{ fontSize: '3rem', display: 'block', marginBottom: '1.5rem' }} />
-                            <p style={{ fontSize: '1.1rem', fontWeight: '500' }}>{error}</p>
-                            <button onClick={fetchData} style={{ marginTop: '1.5rem', padding: '0.75rem 2rem', background: '#4F46E5', color: 'white', border: 'none', borderRadius: '12px', cursor: 'pointer', fontWeight: '800', fontSize: '1rem', boxShadow: '0 4px 15px rgba(79, 70, 229, 0.3)' }}>
-                                Retry Fetching
-                            </button>
-                        </div>
-                    ) : (
-                        <div style={{ overflowX: 'auto' }}>
-                            <table className="results-table">
-                                <thead>
-                                    <tr>
-                                        {/* Select All checkbox */}
-                                        <th style={{ width: '60px', textAlign: 'center' }}>
-                                            <input
-                                                type="checkbox"
-                                                style={checkboxStyle}
-                                                checked={allSelected}
-                                                ref={el => { if (el) el.indeterminate = someSelected && !allSelected; }}
-                                                onChange={toggleSelectAll}
-                                            />
-                                        </th>
-                                        <th>Candidate Info</th>
-                                        {activeTab === 'resume' && <th>Match Score</th>}
-                                        {activeTab === 'assessment' && <th>Assessment Data</th>}
-                                        {activeTab === 'interview' && <th>Interview Score</th>}
-                                        <th>Date</th>
-                                        <th>AI Status</th>
-                                        <th style={{ textAlign: 'center' }}>Action Matrix</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {currentRows.length === 0 && (
-                                        <tr>
-                                            <td colSpan="8" style={{ padding: '6rem 2rem', textAlign: 'center', color: '#64748b' }}>
-                                                <i className="fa-solid fa-folder-open" style={{ fontSize: '3.5rem', display: 'block', marginBottom: '1.25rem', opacity: 0.3 }} />
-                                                <span style={{ fontSize: '1.2rem', fontWeight: '600' }}>No candidates found in this category.</span>
-                                            </td>
-                                        </tr>
-                                    )}
-
-                                    {/* RESUME TAB */}
-                                    {activeTab === 'resume' && paginatedRows.map((r) => {
-                                        const isSelected = selected.has(r._deleteKey);
-                                        const isDeleting = deletingIds.has(r._deleteKey);
-                                        return (
-                                            <tr className={`results-row ${isSelected ? 'selected' : ''}`} key={r.id}>
-                                                <td style={{ textAlign: 'center' }}>
-                                                    <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
-                                                </td>
-                                                <td>
-                                                    <div style={{ fontWeight: '800', color: '#0f172a', fontSize: '1rem' }}>{r.full_name}</div>
-                                                    <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>{r.email}</div>
-                                                </td>
-                                                <td>
-                                                    <div style={{ width: '48px', height: '48px', borderRadius: '12px', background: 'rgba(238, 242, 255, 0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4f46e5', fontWeight: '900', fontSize: '0.85rem', boxShadow: 'inset 0 0 0 1px rgba(79, 70, 229, 0.1)' }}>
-                                                        {r.resume_score || 0}%
-                                                    </div>
-                                                </td>
-                                                <td style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '500' }}>
-                                                    {r.created_at ? new Date(r.created_at).toLocaleDateString() : '—'}
-                                                </td>
-                                                <td>
-                                                    {(() => {
-                                                        const isPassed = r.status === 'Resume Passed'
-                                                            || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
-                                                        const isScored = r.status === 'Resume Passed' || r.status === 'Resume Failed' || r.resume_score > 0;
-                                                        if (!isScored) return (
-                                                            <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', background: '#F4F7FE', color: '#A3AED0' }}>
-                                                                Not Screened
-                                                            </span>
-                                                        );
-                                                        return (
-                                                            <span style={{
-                                                                padding: '0.3rem 0.75rem', borderRadius: '8px',
-                                                                fontSize: '0.7rem', fontWeight: '800',
-                                                                ...(isPassed ? { background: '#E6FBF5', color: '#05CD99' } : { background: '#FFF5F5', color: '#EE5D50' })
-                                                            }}>
-                                                                {isPassed ? 'Pass ✓' : 'Fail ✗'}
-                                                            </span>
-                                                        );
-                                                    })()}
-                                                </td>
-
-                                                <td style={{ textAlign: 'center' }}>
-                                                    <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-
-                                    {/* ASSESSMENT TAB */}
-                                    {activeTab === 'assessment' && paginatedRows.map((r) => {
-                                        const isSelected = selected.has(r._deleteKey);
-                                        const isDeleting = deletingIds.has(r._deleteKey);
-                                        return (
-                                            <tr className={`results-row ${isSelected ? 'selected' : ''}`} key={r.submission_id}>
-                                                <td style={{ textAlign: 'center' }}>
-                                                    <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
-                                                </td>
-                                                <td>
-                                                    <div style={{ fontWeight: '800', color: '#0f172a', fontSize: '1rem' }}>{r.candidate?.name || 'Candidate'}</div>
-                                                    <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>{r.candidate?.email}</div>
-                                                </td>
-                                                <td>
-                                                    <div style={{ fontWeight: '800', color: '#4f46e5', fontSize: '1.1rem' }}>
-                                                        {r.total > 0 ? Math.round((r.score / r.total) * 100) : 0}%
-                                                    </div>
-                                                    <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700' }}>
-                                                        {r.score}/{r.total} pts
-                                                    </div>
-                                                </td>
-                                                <td style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '500' }}>
-                                                    {r.submitted_at ? new Date(r.submitted_at).toLocaleDateString() : '—'}
-                                                </td>
-                                                <td>
-                                                    <span style={{ padding: '0.3rem 0.75rem', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
-                                                        {r.status === 'selected' ? 'QUALIFIED' : 'NOT QUALIFIED'}
-                                                    </span>
-                                                </td>
-                                                <td style={{ textAlign: 'center' }}>
-                                                    <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center' }}>
-                                                        <button onClick={() => navigate(`/ai-assessments/${r.assessment?.id}?tab=submissions`)} style={{
-                                                            padding: '0.45rem 0.9rem', borderRadius: '10px',
-                                                            border: '1px solid rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.6)',
-                                                            cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700', color: '#334155',
-                                                            boxShadow: '0 2px 5px rgba(0,0,0,0.02)', backdropFilter: 'blur(5px)'
-                                                        }}>
-                                                            Review
-                                                        </button>
-                                                        <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-
-                                    {/* INTERVIEW TAB */}
-                                    {activeTab === 'interview' && paginatedRows.map((r) => {
-                                        const isSelected = selected.has(r._deleteKey);
-                                        const isDeleting = deletingIds.has(r._deleteKey);
-                                        return (
-                                            <tr className={`results-row ${isSelected ? 'selected' : ''}`} key={r.id}>
-                                                <td style={{ textAlign: 'center' }}>
-                                                    <input type="checkbox" style={checkboxStyle} checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
-                                                </td>
-                                                <td>
-                                                    <div style={{ fontWeight: '800', color: '#0f172a', fontSize: '1rem' }}>{r.full_name}</div>
-                                                    <div style={{ fontSize: '0.85rem', color: '#64748b', fontWeight: '500' }}>{r.email}</div>
-                                                </td>
-                                                <td>
-                                                    <div style={{ fontSize: '1.3rem', fontWeight: '900', color: '#4F46E5', letterSpacing: '-0.02em' }}>
-                                                        {r.total_questions > 0 ? Math.round((r.score / (r.total_questions * 10)) * 100) : 0}%
-                                                    </div>
-                                                    <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: '700', textTransform: 'uppercase' }}>
-                                                        {r.score} pts / {r.total_questions} Qs
-                                                    </div>
-                                                </td>
-                                                <td style={{ color: '#475569', fontSize: '0.9rem', fontWeight: '500' }}>
-                                                    {r.completed_at ? new Date(r.completed_at).toLocaleDateString() : 'In Progress'}
-                                                </td>
-                                                <td>
-                                                    <span style={{ padding: '0.35rem 0.8rem', borderRadius: '10px', fontSize: '0.75rem', fontWeight: '800', ...getStatusStyle(r.status), border: `1px solid ${getStatusStyle(r.status).color}30` }}>
-                                                        {getStatusLabel(r.status)}
-                                                    </span>
-                                                </td>
-                                                <td style={{ textAlign: 'center' }}>
-                                                    <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center' }}>
-                                                        <button
-                                                            onClick={() => setSummaryModal(r)}
-                                                            style={{
-                                                                padding: '0.45rem 0.9rem', borderRadius: '10px',
-                                                                border: '1px solid rgba(255,255,255,0.8)', background: 'rgba(255,255,255,0.6)',
-                                                                cursor: 'pointer', fontSize: '0.85rem', fontWeight: '700', color: '#334155',
-                                                                boxShadow: '0 2px 5px rgba(0,0,0,0.02)', backdropFilter: 'blur(5px)'
-                                                            }}
-                                                        >
-                                                            Review
-                                                        </button>
-                                                        <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        );
-                                    })}
-                                </tbody>
-                            </table>
-
-                            {/* Pagination Controls */}
-                            {totalPages > 1 && (
-                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 1.5rem', background: 'white', borderTop: '1px solid #e2e8f0', borderRadius: '0 0 16px 16px' }}>
-                                    <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>
-                                        Showing {indexOfFirstRow + 1} to {Math.min(indexOfLastRow, currentRows.length)} of {currentRows.length} entries
-                                    </span>
-                                    <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                        <button
-                                            onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                                            disabled={currentPage === 1}
-                                            style={{ padding: '0.5rem 1rem', background: currentPage === 1 ? '#f8fafc' : 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: currentPage === 1 ? 'not-allowed' : 'pointer', color: currentPage === 1 ? '#94a3b8' : '#475569', fontSize: '0.85rem', fontWeight: '500', transition: 'all 0.2s' }}
-                                        >
-                                            Previous
-                                        </button>
-                                        <div style={{ display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.85rem', color: '#475569', fontWeight: '600' }}>
-                                            Page {currentPage} of {totalPages}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            {Object.entries(groupedData).map(([roleName, data]) => (
+                                <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
+                                    padding: '1.25rem 2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                    transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)', borderLeft: '4px solid transparent'
+                                }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+                                        <div style={{ width: '42px', height: '42px', borderRadius: '10px', background: 'rgba(79, 70, 229, 0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#4F46E5' }}>
+                                            <i className="fa-solid fa-briefcase" />
                                         </div>
-                                        <button
-                                            onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                                            disabled={currentPage === totalPages}
-                                            style={{ padding: '0.5rem 1rem', background: currentPage === totalPages ? '#f8fafc' : 'white', border: '1px solid #e2e8f0', borderRadius: '8px', cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', color: currentPage === totalPages ? '#94a3b8' : '#475569', fontSize: '0.85rem', fontWeight: '500', transition: 'all 0.2s' }}
-                                        >
-                                            Next
-                                        </button>
+                                        <div>
+                                            <h3 style={{ fontSize: '1.1rem', fontWeight: '800', margin: 0, color: '#1E293B' }}>{roleName}</h3>
+                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.25rem' }}>
+                                                <span style={{ fontSize: '0.8rem', color: '#64748B', fontWeight: '600' }}>
+                                                    {data.total} Submission{data.total !== 1 ? 's' : ''}
+                                                </span>
+                                                {data.total > 0 && (
+                                                    <div style={{ display: 'flex', gap: '0.5rem', opacity: 0.7 }}>
+                                                        {data.resume.length > 0 && <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>• {data.resume.length} Screening</span>}
+                                                        {data.assessment.length > 0 && <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>• {data.assessment.length} Assessment</span>}
+                                                        {data.interview.length > 0 && <span style={{ fontSize: '0.75rem', color: '#94A3B8' }}>• {data.interview.length} Interview</span>}
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div style={{ color: '#94A3B8', fontSize: '1.2rem', transition: 'transform 0.2s' }} className="arrow-icon">
+                                        <i className="fa-solid fa-angle-right" />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
+                {viewMode === 'detail' && (
+                    <>
+                        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
+                            <div style={{ display: 'flex', gap: '0.5rem', background: '#F4F7FE', padding: '0.35rem', borderRadius: '12px' }}>
+                                {[
+                                    { id: 'resume', label: 'Resume Screening', icon: 'fa-file-magnifying-glass' },
+                                    { id: 'assessment', label: 'AI Assessments', icon: 'fa-brain' },
+                                    { id: 'interview', label: 'AI Interviews', icon: 'fa-microphone-lines' }
+                                ].map(tab => (
+                                    <button key={tab.id} onClick={() => handleTabChange(tab.id)} style={{
+                                        background: activeTab === tab.id ? 'white' : 'transparent',
+                                        border: 'none', padding: '0.65rem 1.3rem', borderRadius: '10px',
+                                        fontWeight: '700', color: activeTab === tab.id ? '#4F46E5' : '#718096',
+                                        cursor: 'pointer'
+                                    }}>
+                                        <i className={`fa-solid ${tab.icon}`} style={{ marginRight: '0.5rem' }} />
+                                        {tab.label}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.75rem', alignItems: 'center' }}>
+                            <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#9CA3AF' }}>FILTER:</span>
+                            {[{ key: 'all', label: 'All' }, { key: 'pass', label: 'Pass ✓' }, { key: 'fail', label: 'Fail ✗' }].map(f => (
+                                <button key={f.key} onClick={() => { setStatusFilter(f.key); setCurrentPage(1); }} style={{
+                                    padding: '0.35rem 0.9rem', borderRadius: '20px', border: '1px solid',
+                                    fontSize: '0.78rem', fontWeight: '700', cursor: 'pointer',
+                                    borderColor: statusFilter === f.key ? '#4F46E5' : '#E5E7EB',
+                                    background: statusFilter === f.key ? '#EEF2FF' : 'white',
+                                    color: statusFilter === f.key ? '#4F46E5' : '#6B7280',
+                                }}>{f.label}</button>
+                            ))}
+                            <span style={{ marginLeft: 'auto', fontSize: '0.8rem', color: '#9CA3AF' }}>{currentRows.length} results</span>
+                        </div>
+
+                        <div className="glass-table-card">
+                            {loading ? (
+                                <div style={{ padding: '6rem 2rem', textAlign: 'center' }}>
+                                    <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2rem', color: '#4F46E5' }} />
+                                    Loading...
+                                </div>
+                            ) : (
+                                <div style={{ overflowX: 'auto' }}>
+                                    <table className="results-table">
+                                        <thead>
+                                            <tr>
+                                                <th style={{ width: '60px', textAlign: 'center' }}>
+                                                    <input type="checkbox" checked={allSelected} onChange={toggleSelectAll} />
+                                                </th>
+                                                <th>Candidate Info</th>
+                                                <th>Result Data</th>
+                                                <th>Date</th>
+                                                <th>AI Status</th>
+                                                <th style={{ textAlign: 'center' }}>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {currentRows.length === 0 && (
+                                                <tr><td colSpan="6" style={{ padding: '4rem', textAlign: 'center' }}>No candidates found.</td></tr>
+                                            )}
+                                            {paginatedRows.map((r) => {
+                                                const isSelected = selected.has(r._deleteKey);
+                                                const isDeleting = deletingIds.has(r._deleteKey);
+                                                return (
+                                                    <tr key={r._deleteKey} className={isSelected ? 'selected' : ''}>
+                                                        <td style={{ textAlign: 'center' }}>
+                                                            <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
+                                                        </td>
+                                                        <td>
+                                                            <div style={{ fontWeight: '800' }}>{r.full_name || r.candidate?.name}</div>
+                                                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{r.email || r.candidate?.email}</div>
+                                                        </td>
+                                                        <td>
+                                                            {activeTab === 'resume' ? `${r.resume_score || 0}% Match` :
+                                                                activeTab === 'assessment' ? `${Math.round((r.score / r.total) * 100)}% (${r.score}/${r.total})` :
+                                                                    `${Math.round(r.score)}% Evaluation`}
+                                                        </td>
+                                                        <td>{new Date(r.created_at || r.submitted_at || r.completed_at).toLocaleDateString()}</td>
+                                                        <td>
+                                                            <span style={{ padding: '0.3rem 0.6rem', borderRadius: '6px', fontSize: '0.7rem', fontWeight: '800', ...getStatusStyle(r.status) }}>
+                                                                {getStatusLabel(r.status)}
+                                                            </span>
+                                                        </td>
+                                                        <td style={{ textAlign: 'center' }}>
+                                                            <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+                                                                {activeTab !== 'resume' && (
+                                                                    <button onClick={() => activeTab === 'assessment' ? navigate(`/ai-assessments/${r.assessment?.id}?tab=submissions`) : setSummaryModal(r)} style={{ padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', background: 'white', cursor: 'pointer', fontSize: '0.8rem' }}>Review</button>
+                                                                )}
+                                                                <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </table>
+
+                                    {totalPages > 1 && (
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', background: 'white', borderTop: '1px solid #e2e8f0' }}>
+                                            <span style={{ fontSize: '0.8rem' }}>Page {currentPage} of {totalPages}</span>
+                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                <button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>Prev</button>
+                                                <button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages}>Next</button>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             )}
                         </div>
-                    )}
-                </div>
+                    </>
+                )}
             </div>
         </div>
     );
 };
 
-/* Small inline delete button per row */
 const RowDeleteBtn = ({ item, isDeleting, onDelete }) => (
     <button
-        className="delete-btn-glass"
         onClick={onDelete}
         disabled={isDeleting}
-        title="Delete Record"
         style={{
-            background: isDeleting ? '#FEE2E2' : 'rgba(254, 226, 226, 0.6)',
-            border: '1px solid rgba(252, 165, 165, 0.8)',
-            color: '#ef4444',
-            borderRadius: '10px',
-            padding: '0.45rem 0.9rem',
-            cursor: isDeleting ? 'not-allowed' : 'pointer',
-            fontSize: '0.85rem',
-            fontWeight: '700',
-            display: 'inline-flex', alignItems: 'center', gap: '0.4rem',
-            whiteSpace: 'nowrap',
-            backdropFilter: 'blur(5px)',
-            transition: 'all 0.2s cubic-bezier(0.19, 1, 0.22, 1)',
-            boxShadow: '0 2px 5px rgba(239, 68, 68, 0.05)'
+            background: 'rgba(254, 226, 226, 0.6)', border: '1px solid #ef4444', color: '#ef4444',
+            borderRadius: '8px', padding: '0.4rem 0.8rem', cursor: isDeleting ? 'not-allowed' : 'pointer', fontSize: '0.8rem'
         }}
     >
-        <i className={isDeleting ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-trash-can'} />
-        {isDeleting ? '…' : 'Delete'}
+        {isDeleting ? '...' : 'Delete'}
     </button>
 );
 

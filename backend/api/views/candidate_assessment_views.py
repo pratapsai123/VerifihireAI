@@ -1105,6 +1105,10 @@ def invitation_coding_submit_view(request, token):
             
             answers = submission.answers or {}
             question_key = f"acq_{acq.id}"
+                        
+            # Store full test case results (including actual stdout and pass/fail status)
+            test_cases_results = result.get("results", [])
+            
             answers[question_key] = {
                 "acq_id": acq.id,
                 "question_id": acq.coding_question_id,
@@ -1112,6 +1116,7 @@ def invitation_coding_submit_view(request, token):
                 "language": exec_lang,
                 "passed_count": passed_count,
                 "total_tests": total_tests_exec,
+                "test_cases": test_cases_results,
                 "difficulty": acq.difficulty or 'medium', 
                 "submitted_at": timezone.now().isoformat(),
             }
@@ -1223,7 +1228,8 @@ def invitation_coding_finalize_view(request, token):
                             print(f"[DEBUG] Result for ACQ {acq.id}: {res}")
 
                             
-                            # Always save the submission attempt, even if evaluation failed
+                            # Always save the submission attempt, even if evaluation 
+                            test_cases_results = res.get("results", []) if res.get('ok') else []
                             submission_answers[ans_key] = {
                                 "acq_id": acq.id,
                                 "question_id": acq.coding_question_id,
@@ -1231,6 +1237,7 @@ def invitation_coding_finalize_view(request, token):
                                 "language": lang or (acq.allowed_languages[0] if acq.allowed_languages else 'python3'),
                                 "passed_count": res.get("passed_count", 0) if res.get('ok') else 0,
                                 "total_tests": res.get("total_tests", 0) if res.get('ok') else 0,
+                                "test_cases": test_cases_results,
                                 "difficulty": acq.difficulty or 'medium', 
                                 "submitted_at": timezone.now().isoformat(),
                                 "execution_error": res.get("error") if not res.get('ok') else None

@@ -6,11 +6,21 @@
 const getApiBaseUrl = () => {
     if (typeof window !== 'undefined') {
         const hostname = window.location.hostname;
-        // If accessed via custom host (like duckdns), Nginx proxies traffic on default ports
-        // to port 8001, so we don't append the port here.
-        if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
-            return `${window.location.protocol}//${hostname}/api`;
+        const protocol = window.location.protocol;
+
+        // If we are in development (localhost/127.0.0.1)
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            return `http://${hostname}:8001/api`;
         }
+
+        // If accessed via duckdns, Nginx handles the /api path.
+        // We use the same protocol and hostname as the frontend.
+        if (hostname === 'verifyhire.duckdns.org') {
+            return `${protocol}//${hostname}/api`;
+        }
+
+        // Fallback for other domains
+        return `${protocol}//${hostname}:8001/api`;
     }
     return process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 };
@@ -20,12 +30,18 @@ const getWsBaseUrl = () => {
         const hostname = window.location.hostname;
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 
-        // Same as above, Nginx handles port proxying for external access
-        if (hostname !== 'localhost' && hostname !== '127.0.0.1') {
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            return `ws://${hostname}:8001/ws`;
+        }
+
+        if (hostname === 'verifyhire.duckdns.org') {
+            // Nginx handles the /ws path
             return `${protocol}//${hostname}/ws`;
         }
+
+        // Default for other domains
+        return `${protocol}//${hostname}:8001/ws`;
     }
-    // Fallback for local development
     return process.env.REACT_APP_WS_BASE_URL || 'ws://localhost:8001/ws';
 };
 

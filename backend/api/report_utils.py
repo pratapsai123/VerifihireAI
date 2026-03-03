@@ -621,10 +621,15 @@ def generate_candidate_report(submission_id):
                      schema_sql = acq.coding_question.schema_sql
                      database_engine = acq.coding_question.database_engine
 
-                exec_results = _run_code_against_testcases(
-                    exec_code, language, tcs, 
-                    schema_sql=schema_sql, database_engine=database_engine
-                )
+                # Use stored test case results if available, otherwise fallback to re-evaluating
+                stored_test_cases = cdata.get('test_cases', [])
+                if stored_test_cases:
+                    exec_results = stored_test_cases
+                else:
+                    exec_results = _run_code_against_testcases(
+                        exec_code, language, tcs, 
+                        schema_sql=schema_sql, database_engine=database_engine
+                    )
 
                 if is_sql:
                     # ── SQL formatted layout (Vertical) ──
@@ -641,13 +646,19 @@ def generate_candidate_report(submission_id):
                         if exec_results and t_idx <= len(exec_results):
                             r = exec_results[t_idx - 1]
                             actual_str = str(r.get('stdout', r.get('output', '-')) or '-')
-                            p = r.get('passed', r.get('status', None))
-                            if isinstance(p, bool):
-                                status_str = 'Passed' if p else 'Failed'
-                            elif str(p).lower() in ('true', 'pass', 'passed', 'accepted'):
-                                status_str = 'Passed'
-                            else:
-                                status_str = 'Failed'
+                            # Check passed status explicitly since executor returns boolean passed or exit_code
+                            if 'passed' in r:
+                                status_str = 'Passed' if r['passed'] else 'Failed'
+                            elif 'status' in r:
+                                status = r['status']
+                                if isinstance(status, bool):
+                                    status_str = 'Passed' if status else 'Failed'
+                                elif str(status).lower() in ('true', 'pass', 'passed', 'accepted'):
+                                    status_str = 'Passed'
+                                else:
+                                    status_str = 'Failed'
+                            elif 'exit_code' in r:
+                                status_str = 'Passed' if r['exit_code'] == 0 else 'Failed'
 
                         status_clr = colors.HexColor('#16a34a') if status_str == 'Passed' else colors.HexColor('#dc2626')
 
@@ -699,14 +710,21 @@ def generate_candidate_report(submission_id):
                         status_str = '-'
                         if exec_results and t_idx <= len(exec_results):
                             r = exec_results[t_idx - 1]
+                            # Executor format from JS: r.stdout; or if fallback: r.get('stdout', '-')
                             actual_str = str(r.get('stdout', r.get('output', '-')) or '-')[:150]
-                            p = r.get('passed', r.get('status', None))
-                            if isinstance(p, bool):
-                                status_str = 'Passed' if p else 'Failed'
-                            elif str(p).lower() in ('true', 'pass', 'passed', 'accepted'):
-                                status_str = 'Passed'
-                            else:
-                                status_str = 'Failed'
+                            # Check passed status explicitly since executor returns boolean passed or exit_code
+                            if 'passed' in r:
+                                status_str = 'Passed' if r['passed'] else 'Failed'
+                            elif 'status' in r:
+                                status = r['status']
+                                if isinstance(status, bool):
+                                    status_str = 'Passed' if status else 'Failed'
+                                elif str(status).lower() in ('true', 'pass', 'passed', 'accepted'):
+                                    status_str = 'Passed'
+                                else:
+                                    status_str = 'Failed'
+                            elif 'exit_code' in r:
+                                status_str = 'Passed' if r['exit_code'] == 0 else 'Failed'
 
                         status_clr = colors.HexColor('#16a34a') if status_str == 'Passed' else colors.HexColor('#dc2626')
 

@@ -14,6 +14,23 @@ const AiInterview = () => {
     const [fromTime, setFromTime] = useState('');
     const [untilDate, setUntilDate] = useState('');
     const [untilTime, setUntilTime] = useState('');
+    const [customRoleTitle, setCustomRoleTitle] = useState('');
+
+    // Job Roles State
+    const [jobRoles, setJobRoles] = useState([]);
+    const [selectedRoleId, setSelectedRoleId] = useState('');
+
+    React.useEffect(() => {
+        const fetchRoles = async () => {
+            try {
+                const res = await axios.get(`${API_BASE_URL}/job-roles/`);
+                setJobRoles(res.data);
+            } catch (err) {
+                console.error("Error fetching job roles:", err);
+            }
+        };
+        fetchRoles();
+    }, []);
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -56,6 +73,14 @@ const AiInterview = () => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('job_description', jobDescription);
+
+        // Include Job Title for persistence
+        if (selectedRoleId === 'custom') {
+            formData.append('role_title', customRoleTitle);
+        } else {
+            const role = jobRoles.find(r => r.id.toString() === selectedRoleId);
+            if (role) formData.append('role_title', role.title);
+        }
 
         if (fromDate && fromTime) {
             formData.append('available_from', new Date(`${fromDate}T${fromTime}`).toISOString());
@@ -163,13 +188,52 @@ const AiInterview = () => {
                                     </div>
                                 </div>
 
-                                <textarea
-                                    value={jobDescription}
-                                    onChange={(e) => setJobDescription(e.target.value)}
-                                    placeholder="Paste the detailed Job Description here. AI will use this to dynamically generate probing questions."
-                                    className="modern-textarea"
-                                    required
-                                />
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <select
+                                        className="modern-input"
+                                        style={{ width: '100%', padding: '0.85rem', borderRadius: '12px', border: '1px solid #E2E8F0', outline: 'none', background: 'white' }}
+                                        value={selectedRoleId}
+                                        onChange={(e) => {
+                                            const roleId = e.target.value;
+                                            setSelectedRoleId(roleId);
+                                            const role = jobRoles.find(r => r.id.toString() === roleId);
+                                            if (role) {
+                                                setJobDescription(role.description);
+                                            } else {
+                                                setJobDescription('');
+                                            }
+                                        }}
+                                    >
+                                        <option value="">-- Select a Saved Role --</option>
+                                        {jobRoles.map(r => (
+                                            <option key={r.id} value={r.id}>{r.title}</option>
+                                        ))}
+                                        <option value="custom">Custom (Type Manually)</option>
+                                    </select>
+
+                                    {selectedRoleId === 'custom' && (
+                                        <div className="input-group" style={{ marginTop: '1rem' }}>
+                                            <label className="input-label">Role Title</label>
+                                            <input
+                                                type="text"
+                                                value={customRoleTitle}
+                                                onChange={(e) => setCustomRoleTitle(e.target.value)}
+                                                placeholder="e.g. Senior Frontend Developer"
+                                                className="modern-input"
+                                            />
+                                        </div>
+                                    )}
+
+                                    {selectedRoleId === 'custom' && (
+                                        <textarea
+                                            value={jobDescription}
+                                            onChange={(e) => setJobDescription(e.target.value)}
+                                            placeholder="Paste the detailed Job Description here. AI will use this to dynamically generate probing questions."
+                                            className="modern-textarea"
+                                            required
+                                        />
+                                    )}
+                                </div>
 
                                 <div style={{ marginTop: '1.25rem', display: 'flex', gap: '1.5rem' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', color: '#6366F1', fontWeight: '600' }}>
