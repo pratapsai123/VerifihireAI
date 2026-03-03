@@ -149,6 +149,40 @@ class ApplicationAdmin(models.Model):
         return f"ApplicationAdmin({self.user.email or self.user.username})"
 
 
+class JobRole(models.Model):
+    """
+    Stores reusable job roles with titles and descriptions.
+    """
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='created_job_roles'
+    )
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='job_roles'
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Job Role"
+        verbose_name_plural = "Job Roles"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
+
+
 class UserInvitation(models.Model):
     """
     Invitation-based onboarding for internal company roles (HR Manager, HR).
