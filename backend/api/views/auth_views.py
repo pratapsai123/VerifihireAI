@@ -1,4 +1,5 @@
-﻿from ._imports import *
+from ._imports import *
+from ._imports import _otp_expiry_seconds, _email_domain, _free_email_domains
 
 
 @api_view(['GET'])
@@ -46,9 +47,22 @@ def send_otp_view(request):
         if context == 'register':
             if UserProfile.objects.filter(email=email).exists():
                 return Response(
-                    {'error': 'Account with this email already exists. Please login.'},
+                    {'email': ['Account with this email already exists. Please login.']},
                     status=status.HTTP_400_BAD_REQUEST
                 )
+            
+            # Check company admin count for this domain
+            domain = _email_domain(email)
+            if domain:
+                company = Company.objects.filter(domain=domain).first()
+                if company and UserProfile.objects.filter(company=company).count() >= 5:
+                    return Response(
+                        {
+                            'businessEmail': ['This organization already has 5 registered admins. Please request an invitation from your Company Admin.'],
+                            'organizationName': ['This organization has reached its admin limit.']
+                        },
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
         
         # Generate OTP
         otp = EmailOTP.generate_otp()
@@ -209,15 +223,18 @@ def reset_password_view(request):
         confirm_password = request.data.get('confirm_password', '')
 
         if not email:
-            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'email': ['Email is required.']}, status=status.HTTP_400_BAD_REQUEST)
         if not otp:
-            return Response({'error': 'OTP is required.'}, status=status.HTTP_400_BAD_REQUEST)
-        if not new_password or not confirm_password:
-            return Response({'error': 'New password and confirm password are required.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'otp': ['OTP is required.']}, status=status.HTTP_400_BAD_REQUEST)
+        if not new_password:
+            return Response({'new_password': ['New password is required.']}, status=status.HTTP_400_BAD_REQUEST)
+        if not confirm_password:
+            return Response({'confirm_password': ['Confirm password is required.']}, status=status.HTTP_400_BAD_REQUEST)
+        
         if new_password != confirm_password:
-            return Response({'error': 'Passwords do not match.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'confirm_password': ['Passwords do not match.']}, status=status.HTTP_400_BAD_REQUEST)
         if len(new_password) < 6:
-            return Response({'error': 'Password must be at least 6 characters long.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'new_password': ['Password must be at least 6 characters long.']}, status=status.HTTP_400_BAD_REQUEST)
 
         # Find the most recent verified OTP for this email
         email_otp = EmailOTP.objects.filter(email=email, is_verified=True).order_by('-created_at').first()
@@ -371,20 +388,40 @@ def register_view(request):
             )
 
         # Create/get company tenant (registration is ONLY allowed for the very first user of a company)
-        company, company_created = Company.objects.get_or_create(name=organization_name)
-        if company.domain and company.domain != domain:
-            return Response(
-                {'error': 'Email domain does not match this organization.', 'email': ['Email domain mismatch.']},
-                status=status.HTTP_400_BAD_REQUEST
-            )
+        # Check if this domain is already registered to a different organization name
+        existing_company_with_domain = Company.objects.filter(domain=domain).first()
+        
+        if existing_company_with_domain:
+            # If domain exists, we must use this company
+            if existing_company_with_domain.name.lower() != organization_name.lower():
+                return Response(
+                    {'organizationName': [f"The email domain '{domain}' is already registered to organization '{existing_company_with_domain.name}'. Please enter the organization name correctly."]},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            company = existing_company_with_domain
+        else:
+            # Domain not registered yet, find or create company by name (case-insensitive)
+            company = Company.objects.filter(name__iexact=organization_name).first()
+            if not company:
+                company = Company.objects.create(name=organization_name)
+        
+        # Ensure company domain is set if not already
         if not company.domain:
             company.domain = domain
             company.save(update_fields=['domain'])
+        elif company.domain != domain:
+             return Response(
+                {'organization_name': [f"Organization '{company.name}' is already registered with a different domain. Please contact your admin."]},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
         if UserProfile.objects.filter(company=company).count() >= 5:
             return Response(
-                {'error': 'This organization already has 5 registered admins. Please request an invitation from your Company Admin.'},
-                status=status.HTTP_403_FORBIDDEN
+                {
+                    'businessEmail': ['This organization already has 5 registered admins. Please request an invitation from your Company Admin.'],
+                    'organizationName': ['This organization has reached its admin limit.']
+                },
+                status=status.HTTP_400_BAD_REQUEST
             )
 
         # Always create Django User for authentication (hashed password)
@@ -450,13 +487,13 @@ def login_view(request):
         # Validation
         if not email:
             return Response(
-                {'error': 'Email is required.'},
+                {'email': ['Email is required.']},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
         if not password:
             return Response(
-                {'error': 'Password is required.'},
+                {'password': ['Password is required.']},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -490,9 +527,9 @@ def login_view(request):
             # Application Admin users (no UserProfile): must exist in ApplicationAdmin table
             auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
             if not auth_user or not auth_user.check_password(password):
-                return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+                return Response({'email': ['Invalid email or password.']}, status=status.HTTP_401_UNAUTHORIZED)
             if not ApplicationAdmin.objects.filter(user=auth_user).exists():
-                return Response({'error': 'Invalid email or password.'}, status=status.HTTP_401_UNAUTHORIZED)
+                return Response({'email': ['Invalid email or password.']}, status=status.HTTP_401_UNAUTHORIZED)
 
         # Generate and send OTP for 2-step verification
         otp = EmailOTP.generate_otp()

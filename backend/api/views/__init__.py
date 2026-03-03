@@ -54,6 +54,7 @@ from .candidate_assessment_views import (
     backfill_assessment_questions_view,
     submit_objective_section,
     save_candidate_details_view,
+    _acq_merge_code,
 )
 
 from .live_interview_views import (

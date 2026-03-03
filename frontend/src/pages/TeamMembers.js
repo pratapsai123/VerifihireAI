@@ -42,6 +42,7 @@ export default function TeamMembers() {
   const [inviteRole, setInviteRole] = useState('hr');
   const [inviting, setInviting] = useState(false);
   const [inviteResult, setInviteResult] = useState(null);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   const [memberPage, setMemberPage] = useState(1);
   const [invitePage, setInvitePage] = useState(1);
@@ -80,13 +81,14 @@ export default function TeamMembers() {
   const handleInvite = async (e) => {
     e.preventDefault();
     setInviteResult(null);
+    setFieldErrors({});
     setError('');
     if (!canInvite) {
       setError('You are not allowed to send invitations.');
       return;
     }
     if (!inviteEmail.trim()) {
-      setError('Email is required.');
+      setFieldErrors(prev => ({ ...prev, email: 'Email is required.' }));
       return;
     }
     setInviting(true);
@@ -101,7 +103,18 @@ export default function TeamMembers() {
       await load();
       setTab('overview');
     } catch (e2) {
-      setError(e2?.response?.data?.error || 'Failed to create invitation.');
+      if (e2.response) {
+        const errorData = e2.response.data;
+        if (errorData.email) {
+          setFieldErrors(prev => ({ ...prev, email: errorData.email[0] }));
+        } else if (errorData.role) {
+          setFieldErrors(prev => ({ ...prev, role: errorData.role[0] }));
+        } else {
+          setError(errorData.error || 'Failed to create invitation.');
+        }
+      } else {
+        setError('Unable to connect to server.');
+      }
     } finally {
       setInviting(false);
     }
@@ -363,23 +376,35 @@ export default function TeamMembers() {
                   Company Admin can invite <strong>HR Manager</strong> and <strong>HR</strong>. HR Manager can invite only <strong>HR</strong>.
                 </div>
                 <form onSubmit={handleInvite} style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
-                  <input
-                    className="auth-input"
-                    placeholder="Invitee Email"
-                    value={inviteEmail}
-                    onChange={(e) => setInviteEmail(e.target.value)}
-                    disabled={inviting}
-                  />
-                  <select
-                    className="auth-input"
-                    value={inviteRole}
-                    onChange={(e) => setInviteRole(e.target.value)}
-                    disabled={inviting || myRole === 'hr_manager'}
-                    title={myRole === 'hr_manager' ? 'HR Manager can only invite HR' : ''}
-                  >
-                    <option value="hr">HR</option>
-                    <option value="hr_manager">HR Manager</option>
-                  </select>
+                  <div style={{ marginBottom: '0.5rem' }}>
+                    <input
+                      className="auth-input"
+                      placeholder="Invitee Email"
+                      value={inviteEmail}
+                      onChange={(e) => setInviteEmail(e.target.value)}
+                      disabled={inviting}
+                      style={{ marginBottom: 0 }}
+                    />
+                    {fieldErrors.email && (
+                      <div className="field-error-text" style={{ marginTop: '0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.email}</div>
+                    )}
+                  </div>
+                  <div style={{ marginBottom: '0.5rem' }}>
+                    <select
+                      className="auth-input"
+                      value={inviteRole}
+                      onChange={(e) => setInviteRole(e.target.value)}
+                      disabled={inviting || myRole === 'hr_manager'}
+                      title={myRole === 'hr_manager' ? 'HR Manager can only invite HR' : ''}
+                      style={{ marginBottom: 0 }}
+                    >
+                      <option value="hr">HR</option>
+                      <option value="hr_manager">HR Manager</option>
+                    </select>
+                    {fieldErrors.role && (
+                      <div className="field-error-text" style={{ marginTop: '0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.role}</div>
+                    )}
+                  </div>
                   <button type="submit" className="auth-primary-btn" disabled={inviting}>
                     {inviting ? 'Inviting...' : 'Send Invite'}
                   </button>

@@ -29,23 +29,22 @@ function Login() {
   const [loginEmailFocused, setLoginEmailFocused] = useState(false);
   const [loginPasswordFocused, setLoginPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
 
   // OTP verification state
   const [showOtpStep, setShowOtpStep] = useState(false);
   const [otp, setOtp] = useState('');
   const [verifyingOtp, setVerifyingOtp] = useState(false);
-  const [otpError, setOtpError] = useState('');
   const [otpSuccess, setOtpSuccess] = useState('');
   const [otpFocused, setOtpFocused] = useState(false);
   const [otpExpiresAtMs, setOtpExpiresAtMs] = useState(null);
   const [otpExpired, setOtpExpired] = useState(false);
-  const [otpRemainingSeconds, setOtpRemainingSeconds] = useState(null);
 
   // Handle Login - Step 1: Email and Password
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoginError('');
-    setOtpError('');
+    setFieldErrors({});
     setOtpSuccess('');
     setLoginLoading(true);
 
@@ -62,7 +61,6 @@ function Login() {
         const expiresIn = Number(response.data?.expires_in) || 120;
         setOtpExpiresAtMs(Date.now() + expiresIn * 1000);
         setOtpExpired(false);
-        setOtpRemainingSeconds(expiresIn);
         setOtp('');
 
         // If OTP is returned in response (for development), show it
@@ -90,9 +88,15 @@ function Login() {
       // Handle error
       if (error.response) {
         // Server responded with error
-        setLoginError(error.response.data.message || error.response.data.error || 'Login failed. Please check your credentials.');
+        const errorData = error.response.data;
+        if (errorData.email) {
+          setFieldErrors(prev => ({ ...prev, email: errorData.email[0] }));
+        } else if (errorData.password) {
+          setFieldErrors(prev => ({ ...prev, password: errorData.password[0] }));
+        } else {
+          setLoginError(errorData.message || errorData.error || 'Login failed. Please check your credentials.');
+        }
       } else if (error.request) {
-        // Request made but no response
         setLoginError('Unable to connect to server. Please check if Django backend is running.');
       } else {
         setLoginError('An error occurred. Please try again.');
@@ -107,16 +111,16 @@ function Login() {
   const handleVerifyLoginOtp = async (e) => {
     if (e) e.preventDefault();
     if (otpExpired || (otpExpiresAtMs && Date.now() >= otpExpiresAtMs)) {
-      setOtpError('OTP has expired. Please resend OTP.');
+      setFieldErrors(prev => ({ ...prev, otp: 'OTP has expired. Please resend OTP.' }));
       return;
     }
     if (!otp || otp.length !== 6) {
-      setOtpError('Please enter a valid 6-digit OTP.');
+      setFieldErrors(prev => ({ ...prev, otp: 'Please enter a valid 6-digit OTP.' }));
       return;
     }
 
     setVerifyingOtp(true);
-    setOtpError('');
+    setFieldErrors(prev => ({ ...prev, otp: '' }));
     setOtpSuccess('');
 
     try {
@@ -146,11 +150,11 @@ function Login() {
 
     } catch (error) {
       if (error.response) {
-        setOtpError(error.response.data.error || 'Invalid OTP. Please try again.');
+        setFieldErrors(prev => ({ ...prev, otp: error.response.data.error || 'Invalid OTP. Please try again.' }));
       } else if (error.request) {
-        setOtpError('Unable to connect to server. Please check if Django backend is running.');
+        setLoginError('Unable to connect to server.');
       } else {
-        setOtpError('An error occurred. Please try again.');
+        setLoginError('An error occurred. Please try again.');
       }
       console.error('OTP verification error:', error);
     } finally {
@@ -161,7 +165,7 @@ function Login() {
   // Handle resend OTP
   const handleResendOtp = async () => {
     setOtp('');
-    setOtpError('');
+    setFieldErrors({});
     setOtpSuccess('');
     setLoginLoading(true);
 
@@ -176,7 +180,6 @@ function Login() {
         const expiresIn = Number(response.data?.expires_in) || 120;
         setOtpExpiresAtMs(Date.now() + expiresIn * 1000);
         setOtpExpired(false);
-        setOtpRemainingSeconds(expiresIn);
 
         // If OTP is returned in response (for development), show it
         if (response.data.otp) {
@@ -185,9 +188,9 @@ function Login() {
       }
     } catch (error) {
       if (error.response) {
-        setOtpError(error.response.data.error || 'Failed to resend OTP. Please try again.');
+        setFieldErrors(prev => ({ ...prev, otp: error.response.data.error || 'Failed to resend OTP. Please try again.' }));
       } else {
-        setOtpError('Unable to connect to server. Please try again.');
+        setFieldErrors(prev => ({ ...prev, otp: 'Unable to connect to server. Please try again.' }));
       }
     } finally {
       setLoginLoading(false);
@@ -238,63 +241,69 @@ function Login() {
                 <form className="auth-form" onSubmit={handleLogin}>
 
 
-                  <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
-                    <i className="fas fa-envelope auth-input-icon"></i>
-                    <input
-                      type="email"
-                      className="auth-input-with-icon"
-                      placeholder=" "
-                      value={loginEmail}
-                      onChange={(e) => setLoginEmail(e.target.value)}
-                      onFocus={() => setLoginEmailFocused(true)}
-                      onBlur={() => setLoginEmailFocused(false)}
-                      required
-                      maxLength={100}
-                      disabled={loginLoading}
-                    />
-                    <label className="auth-floating-label">Email *</label>
-                  </div>
-                  <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
-                    <i className="fas fa-lock auth-input-icon"></i>
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      className="auth-input-with-icon"
-                      placeholder=" "
-                      value={loginPassword}
-                      onChange={(e) => setLoginPassword(e.target.value)}
-                      onFocus={() => setLoginPasswordFocused(true)}
-                      onBlur={() => setLoginPasswordFocused(false)}
-                      required
-                      maxLength={64}
-                      disabled={loginLoading}
-                      style={{ paddingRight: '2.5rem' }}
-                    />
-                    <label className="auth-floating-label">Password *</label>
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      style={{
-                        position: 'absolute',
-                        right: '0.75rem',
-                        top: '50%',
-                        transform: 'translateY(-50%)',
-                        background: 'none',
-                        border: 'none',
-                        cursor: 'pointer',
-                        color: '#6b7280',
-                        zIndex: 3,
-                        padding: 0,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: '1.5rem',
-                        width: '1.5rem',
-                      }}
-                      tabIndex="-1"
-                    >
-                      <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                    </button>
-                  </div>
+                    <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
+                      <i className="fas fa-envelope auth-input-icon"></i>
+                      <input
+                        type="email"
+                        className="auth-input-with-icon"
+                        placeholder=" "
+                        value={loginEmail}
+                        onChange={(e) => setLoginEmail(e.target.value)}
+                        onFocus={() => setLoginEmailFocused(true)}
+                        onBlur={() => setLoginEmailFocused(false)}
+                        required
+                        maxLength={100}
+                        disabled={loginLoading}
+                      />
+                      <label className="auth-floating-label">Email *</label>
+                    </div>
+                    {fieldErrors.email && (
+                      <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.email}</div>
+                    )}
+                    <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
+                      <i className="fas fa-lock auth-input-icon"></i>
+                      <input
+                        type={showPassword ? "text" : "password"}
+                        className="auth-input-with-icon"
+                        placeholder=" "
+                        value={loginPassword}
+                        onChange={(e) => setLoginPassword(e.target.value)}
+                        onFocus={() => setLoginPasswordFocused(true)}
+                        onBlur={() => setLoginPasswordFocused(false)}
+                        required
+                        maxLength={64}
+                        disabled={loginLoading}
+                        style={{ paddingRight: '2.5rem' }}
+                      />
+                      <label className="auth-floating-label">Password *</label>
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        style={{
+                          position: 'absolute',
+                          right: '0.75rem',
+                          top: '50%',
+                          transform: 'translateY(-50%)',
+                          background: 'none',
+                          border: 'none',
+                          cursor: 'pointer',
+                          color: '#6b7280',
+                          zIndex: 3,
+                          padding: 0,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          height: '1.5rem',
+                          width: '1.5rem',
+                        }}
+                        tabIndex="-1"
+                      >
+                        <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                      </button>
+                    </div>
+                    {fieldErrors.password && (
+                      <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.password}</div>
+                    )}
 
                   <button
                     type="submit"
@@ -340,11 +349,11 @@ function Login() {
               ) : (
                 // Step 2: OTP Verification
                 <form className="auth-form" onSubmit={handleVerifyLoginOtp}>
-                  {otpError && (
-                    <div className="auth-error-message">{otpError}</div>
+                  {fieldErrors.otp && (
+                    <div className="field-error-text" style={{ textAlign: 'center' }}>{fieldErrors.otp}</div>
                   )}
                   {otpSuccess && (
-                    <div className="auth-success-message">{otpSuccess}</div>
+                    <div className="auth-success-message" style={{ marginBottom: '1rem' }}>{otpSuccess}</div>
                   )}
 
                   <div style={{ marginBottom: '1.5rem' }}>
@@ -364,7 +373,6 @@ function Login() {
                       onChange={(e) => {
                         const value = e.target.value.replace(/\D/g, '').slice(0, 6);
                         setOtp(value);
-                        setOtpError('');
                       }}
                       onFocus={() => setOtpFocused(true)}
                       onBlur={() => setOtpFocused(false)}
@@ -377,7 +385,6 @@ function Login() {
                   <OtpCountdown
                     expiresAtMs={otpExpiresAtMs}
                     onExpire={() => setOtpExpired(true)}
-                    onRemainingSecondsChange={setOtpRemainingSeconds}
                   />
 
                   <button
@@ -398,7 +405,6 @@ function Login() {
                       onClick={() => {
                         setShowOtpStep(false);
                         setOtp('');
-                        setOtpError('');
                         setOtpSuccess('');
                         setOtpExpiresAtMs(null);
                         setOtpExpired(false);
@@ -417,15 +423,15 @@ function Login() {
                     <button
                       type="button"
                       onClick={handleResendOtp}
-                      disabled={loginLoading || (otpRemainingSeconds !== null && otpRemainingSeconds > 0)}
+                      disabled={loginLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)}
                       style={{
                         background: 'none',
                         border: 'none',
                         color: '#7c3aed',
-                        cursor: loginLoading || (otpRemainingSeconds !== null && otpRemainingSeconds > 0) ? 'not-allowed' : 'pointer',
+                        cursor: loginLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired) ? 'not-allowed' : 'pointer',
                         fontSize: '14px',
                         textDecoration: 'underline',
-                        opacity: loginLoading || (otpRemainingSeconds !== null && otpRemainingSeconds > 0) ? 0.6 : 1
+                        opacity: loginLoading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired) ? 0.6 : 1
                       }}
                     >
                       Resend OTP

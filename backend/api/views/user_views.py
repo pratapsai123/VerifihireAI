@@ -1,4 +1,5 @@
-﻿from ._imports import *
+from ._imports import *
+from ._imports import _email_domain, _free_email_domains, _generate_temp_password, _normalize_email, _is_application_admin_email
 
 
 @csrf_exempt
@@ -31,9 +32,9 @@ def invite_user_view(request):
             return Response({'error': 'Application Admin is not allowed to send invitations.'}, status=status.HTTP_403_FORBIDDEN)
 
         if not invitee_email:
-            return Response({'error': 'email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'email': ['Email is required.']}, status=status.HTTP_400_BAD_REQUEST)
         if role not in {UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR}:
-            return Response({'error': 'role must be hr_manager or hr.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'role': ['Role must be hr_manager or hr.']}, status=status.HTTP_400_BAD_REQUEST)
 
         inviter = UserProfile.objects.filter(email=inviter_email).select_related('company').first()
         if not inviter or not inviter.company:
@@ -52,24 +53,24 @@ def invite_user_view(request):
 
         invitee_domain = _email_domain(invitee_email)
         if not invitee_domain:
-            return Response({'error': 'Invalid email address.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'email': ['Invalid email address.']}, status=status.HTTP_400_BAD_REQUEST)
         if invitee_domain != company_domain:
-            return Response({'error': 'Invitee email domain must match company domain.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'email': [f'Invitee email domain must match company domain ({company_domain}).']}, status=status.HTTP_400_BAD_REQUEST)
         if invitee_domain in _free_email_domains():
-            return Response({'error': 'Free email domains are not allowed for internal roles.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'email': ['Free email domains are not allowed for internal roles.']}, status=status.HTTP_400_BAD_REQUEST)
 
         # Already registered?
         if UserProfile.objects.filter(email=invitee_email).exists():
-            return Response({'error': 'A user with this email already exists.'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'email': ['A user with this email already exists.']}, status=status.HTTP_400_BAD_REQUEST)
 
         # Enforce max 5 HR_MANAGER per company
         if role == UserProfile.ROLE_HR_MANAGER and UserProfile.objects.filter(company=company, role=UserProfile.ROLE_HR_MANAGER).count() >= 5:
-            return Response({'error': 'Maximum of 5 HR Managers allowed per company.'}, status=status.HTTP_409_CONFLICT)
+            return Response({'role': ['Maximum of 5 HR Managers allowed per company.']}, status=status.HTTP_409_CONFLICT)
 
         # Prevent multiple pending invites
         existing_pending = UserInvitation.objects.filter(company=company, email=invitee_email, status=UserInvitation.STATUS_PENDING).first()
         if existing_pending and not existing_pending.is_expired():
-            return Response({'error': 'A pending invitation already exists for this email.'}, status=status.HTTP_409_CONFLICT)
+            return Response({'email': ['A pending invitation already exists for this email.']}, status=status.HTTP_409_CONFLICT)
 
         temp_password = _generate_temp_password(12)
         expires_at = timezone.now() + timedelta(hours=48)

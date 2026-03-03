@@ -20,10 +20,9 @@ function ForgotPassword() {
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const [otpExpiresAtMs, setOtpExpiresAtMs] = useState(null);
   const [otpExpired, setOtpExpired] = useState(false);
-  const [otpRemainingSeconds, setOtpRemainingSeconds] = useState(null);
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,12}$/;
   const passwordRequirements = [
     { id: 'length', label: '6-12 characters', test: (pwd) => pwd.length >= 6 && pwd.length <= 12 },
@@ -50,12 +49,11 @@ function ForgotPassword() {
       const expiresIn = Number(res.data?.expires_in) || 120;
       setOtpExpiresAtMs(Date.now() + expiresIn * 1000);
       setOtpExpired(false);
-      setOtpRemainingSeconds(expiresIn);
       setOtp('');
       setStep('otp');
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.error || 'Failed to send OTP.');
+        setFieldErrors(prev => ({ ...prev, email: err.response.data.error || err.response.data.email?.[0] || 'Failed to send OTP.' }));
       } else {
         setError('Unable to connect to server. Please try again.');
       }
@@ -66,11 +64,11 @@ function ForgotPassword() {
 
   const handleVerifyOtp = async () => {
     if (otpExpired || (otpExpiresAtMs && Date.now() >= otpExpiresAtMs)) {
-      setError('OTP has expired. Please resend OTP.');
+      setFieldErrors(prev => ({ ...prev, otp: 'OTP has expired. Please resend OTP.' }));
       return;
     }
     if (!otp || otp.length !== 6) {
-      setError('Enter a valid 6-digit OTP.');
+      setFieldErrors(prev => ({ ...prev, otp: 'Enter a valid 6-digit OTP.' }));
       return;
     }
     setLoading(true);
@@ -84,7 +82,7 @@ function ForgotPassword() {
       setStep('reset');
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.error || 'Invalid OTP. Please try again.');
+        setFieldErrors(prev => ({ ...prev, otp: err.response.data.error || 'Invalid OTP. Please try again.' }));
       } else {
         setError('Unable to connect to server. Please try again.');
       }
@@ -95,12 +93,12 @@ function ForgotPassword() {
 
   const handleResetPassword = async () => {
     setError('');
-    setPasswordError('');
+    setFieldErrors({});
     setSuccess('');
 
     // Password strength validation
     if (!passwordRegex.test(newPassword)) {
-      setPasswordError('Password must be 6-12 characters and include uppercase, lowercase, number, and special character.');
+      setFieldErrors(prev => ({ ...prev, newPassword: 'Password must be 6-12 characters and include uppercase, lowercase, number, and special character.' }));
       return;
     }
 
@@ -109,7 +107,7 @@ function ForgotPassword() {
       return;
     }
     if (newPassword !== confirmPassword) {
-      setPasswordError('Passwords do not match.');
+      setFieldErrors(prev => ({ ...prev, confirmPassword: 'Passwords do not match.' }));
       return;
     }
     setLoading(true);
@@ -126,7 +124,14 @@ function ForgotPassword() {
       setTimeout(() => navigate('/login'), 1500);
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.error || 'Failed to reset password.');
+        const errorData = err.response.data;
+        if (errorData.new_password) {
+          setFieldErrors(prev => ({ ...prev, newPassword: errorData.new_password[0] }));
+        } else if (errorData.confirm_password) {
+          setFieldErrors(prev => ({ ...prev, confirmPassword: errorData.confirm_password[0] }));
+        } else {
+          setError(errorData.error || errorData.message || 'Failed to reset password.');
+        }
       } else {
         setError('Unable to connect to server. Please try again.');
       }
@@ -160,6 +165,9 @@ function ForgotPassword() {
           disabled={loading}
         />
       </div>
+      {fieldErrors.email && (
+        <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '1rem' }}>{fieldErrors.email}</div>
+      )}
       <button
         type="button"
         className="auth-primary-btn"
@@ -190,10 +198,12 @@ function ForgotPassword() {
           style={{ letterSpacing: '6px', textAlign: 'center' }}
         />
       </div>
+      {fieldErrors.otp && (
+        <div className="field-error-text" style={{ textAlign: 'center', marginBottom: '1rem' }}>{fieldErrors.otp}</div>
+      )}
       <OtpCountdown
         expiresAtMs={otpExpiresAtMs}
         onExpire={() => setOtpExpired(true)}
-        onRemainingSecondsChange={setOtpRemainingSeconds}
       />
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <button
@@ -209,7 +219,7 @@ function ForgotPassword() {
           type="button"
           className="auth-secondary-btn"
           onClick={handleSendOtp}
-          disabled={loading || (otpRemainingSeconds !== null && otpRemainingSeconds > 0)}
+          disabled={loading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)}
           style={{ flex: 1 }}
         >
           Resend OTP
@@ -220,9 +230,6 @@ function ForgotPassword() {
 
   const renderResetStep = () => (
     <>
-      {passwordError && (
-        <div className="auth-error-message">{passwordError}</div>
-      )}
       <div className={`auth-input-icon-wrapper ${newPasswordFocused || newPassword ? 'focused has-value' : ''}`}>
         <i className="fas fa-lock auth-input-icon"></i>
         <label className="auth-floating-label">New Password *</label>
@@ -267,6 +274,9 @@ function ForgotPassword() {
           </button>
         </div>
       </div>
+      {fieldErrors.newPassword && (
+        <div className="field-error-text" style={{ marginTop: '0.2rem', marginBottom: '0.8rem' }}>{fieldErrors.newPassword}</div>
+      )}
       {showPasswordHelper && (
         <div style={{
           marginTop: '0.5rem',
@@ -354,11 +364,9 @@ function ForgotPassword() {
           </button>
         </div>
       </div>
-
-      {/* Explicit Password Mismatch Error */}
-      {confirmPassword && newPassword !== confirmPassword && (
-        <div style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.5rem', marginBottom: '0.75rem' }}>
-          Passwords do not match
+      {(fieldErrors.confirmPassword || (confirmPassword && newPassword !== confirmPassword)) && (
+        <div className="field-error-text" style={{ marginTop: '0.2rem', marginBottom: '1rem' }}>
+          {fieldErrors.confirmPassword || 'Passwords do not match'}
         </div>
       )}
 

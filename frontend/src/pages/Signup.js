@@ -30,7 +30,6 @@ function Signup() {
   const [signupLoading, setSignupLoading] = useState(false);
   const [signupError, setSignupError] = useState('');
   const [signupSuccess, setSignupSuccess] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -39,6 +38,7 @@ function Signup() {
   const [organizationNameFocused, setOrganizationNameFocused] = useState(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
   const [otpFocused, setOtpFocused] = useState(false);
+  const [fieldErrors, setFieldErrors] = useState({});
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,12}$/;
   const passwordRequirements = [
     { id: 'length', label: '6-12 characters', test: (pwd) => pwd.length >= 6 && pwd.length <= 12 },
@@ -54,28 +54,26 @@ function Signup() {
   const [otpSent, setOtpSent] = useState(false);
   const [sendingOtp, setSendingOtp] = useState(false);
   const [verifyingOtp, setVerifyingOtp] = useState(false);
-  const [otpError, setOtpError] = useState('');
   const [otpSuccess, setOtpSuccess] = useState('');
   const [otpExpiresAtMs, setOtpExpiresAtMs] = useState(null);
   const [otpExpired, setOtpExpired] = useState(false);
-  const [otpRemainingSeconds, setOtpRemainingSeconds] = useState(null);
 
   // Handle sending OTP
   const handleSendOtp = async () => {
     if (!businessEmail) {
-      setOtpError('Please enter your business email first.');
+      setFieldErrors(prev => ({ ...prev, businessEmail: 'Please enter your business email first.' }));
       return;
     }
 
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(businessEmail)) {
-      setOtpError('Please enter a valid email address.');
+      setFieldErrors(prev => ({ ...prev, businessEmail: 'Please enter a valid email address.' }));
       return;
     }
 
     setSendingOtp(true);
-    setOtpError('');
+    setFieldErrors({}); // Clear previous errors
     setOtpSuccess('');
 
     try {
@@ -88,7 +86,6 @@ function Signup() {
       const expiresIn = Number(response.data?.expires_in) || 120;
       setOtpExpiresAtMs(Date.now() + expiresIn * 1000);
       setOtpExpired(false);
-      setOtpRemainingSeconds(expiresIn);
       setOtp('');
       setOtpSuccess(response.data.message || 'OTP sent to your email!');
 
@@ -98,9 +95,36 @@ function Signup() {
       }
     } catch (error) {
       if (error.response) {
-        setOtpError(error.response.data.error || 'Failed to send OTP. Please try again.');
+        const errorData = error.response.data;
+        const newFieldErrors = {};
+        
+        // Helper to map backend keys to frontend state keys
+        const keyMap = {
+          'email': 'businessEmail',
+          'businessEmail': 'businessEmail',
+          'organization_name': 'organizationName',
+          'organizationName': 'organizationName'
+        };
+
+        let hasFieldErrors = false;
+        Object.keys(errorData).forEach(key => {
+          const frontendKey = keyMap[key] || key;
+          if (Array.isArray(errorData[key])) {
+            newFieldErrors[frontendKey] = errorData[key][0];
+            hasFieldErrors = true;
+          } else if (typeof errorData[key] === 'string' && key !== 'error' && key !== 'message') {
+            newFieldErrors[frontendKey] = errorData[key];
+            hasFieldErrors = true;
+          }
+        });
+
+        if (hasFieldErrors) {
+          setFieldErrors(prev => ({ ...prev, ...newFieldErrors }));
+        } else {
+          setSignupError(errorData.message || errorData.error || 'Failed to send OTP.');
+        }
       } else {
-        setOtpError('Unable to connect to server. Please check if Django backend is running.');
+        setSignupError('Unable to connect to server. Please check if Django backend is running.');
       }
     } finally {
       setSendingOtp(false);
@@ -113,16 +137,16 @@ function Signup() {
   // Handle verifying OTP
   const handleVerifyOtp = async () => {
     if (otpExpired || (otpExpiresAtMs && Date.now() >= otpExpiresAtMs)) {
-      setOtpError('OTP has expired. Please resend OTP.');
+      setFieldErrors(prev => ({ ...prev, otp: 'OTP has expired. Please resend OTP.' }));
       return;
     }
     if (!otp || otp.length !== 6) {
-      setOtpError('Please enter a valid 6-digit OTP.');
+      setFieldErrors(prev => ({ ...prev, otp: 'Please enter a valid 6-digit OTP.' }));
       return;
     }
 
     setVerifyingOtp(true);
-    setOtpError('');
+    setFieldErrors(prev => ({ ...prev, otp: '' }));
     setOtpSuccess('');
 
     try {
@@ -133,14 +157,14 @@ function Signup() {
 
       setEmailVerified(true);
       setOtpSuccess('Email verified successfully!');
-      setOtpError('');
+      setFieldErrors(prev => ({ ...prev, otp: '' }));
       setOtpExpiresAtMs(null);
       setOtpExpired(false);
     } catch (error) {
       if (error.response) {
-        setOtpError(error.response.data.error || 'Invalid OTP. Please try again.');
+        setFieldErrors(prev => ({ ...prev, otp: error.response.data.error || 'Invalid OTP. Please try again.' }));
       } else {
-        setOtpError('Unable to connect to server. Please check if Django backend is running.');
+        setFieldErrors(prev => ({ ...prev, otp: 'Unable to connect to server.' }));
       }
     } finally {
       setVerifyingOtp(false);
@@ -151,12 +175,12 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     setSignupError('');
+    setFieldErrors({});
     setSignupSuccess('');
-    setPasswordError('');
 
     // Password strength validation
     if (!passwordRegex.test(password)) {
-      setPasswordError('Password must be 6-12 characters and include uppercase, lowercase, number, and special character.');
+      setFieldErrors(prev => ({ ...prev, password: 'Password must be 6-12 characters and include uppercase, lowercase, number, and special character.' }));
       return;
     }
 
@@ -168,7 +192,7 @@ function Signup() {
 
     // Validate password confirmation
     if (password !== confirmPassword) {
-      setPasswordError('Passwords do not match');
+      setFieldErrors(prev => ({ ...prev, confirmPassword: 'Passwords do not match' }));
       return;
     }
 
@@ -204,14 +228,34 @@ function Signup() {
       if (error.response) {
         // Server responded with error
         const errorData = error.response.data;
-        if (errorData.email) {
-          setSignupError(errorData.email[0]);
-        } else if (errorData.password) {
-          setSignupError(errorData.password[0]);
-        } else if (errorData.full_name) {
-          setSignupError(errorData.full_name[0]);
-        } else if (errorData.organization_name) {
-          setSignupError(errorData.organization_name[0]);
+        const newFieldErrors = {};
+
+        // Helper to map backend keys to frontend state keys
+        const keyMap = {
+          'email': 'businessEmail',
+          'business_email': 'businessEmail',
+          'full_name': 'fullName',
+          'organization_name': 'organizationName',
+          'organizationName': 'organizationName',
+          'password': 'password',
+          'confirm_password': 'confirmPassword',
+          'otp': 'otp'
+        };
+
+        let hasFieldErrors = false;
+        Object.keys(errorData).forEach(key => {
+          const frontendKey = keyMap[key] || key;
+          if (Array.isArray(errorData[key])) {
+            newFieldErrors[frontendKey] = errorData[key][0];
+            hasFieldErrors = true;
+          } else if (typeof errorData[key] === 'string' && key !== 'error' && key !== 'message') {
+            newFieldErrors[frontendKey] = errorData[key];
+            hasFieldErrors = true;
+          }
+        });
+
+        if (hasFieldErrors) {
+          setFieldErrors(newFieldErrors);
         } else {
           setSignupError(errorData.message || errorData.error || 'Registration failed. Please try again.');
         }
@@ -270,14 +314,11 @@ function Signup() {
               </p>
               <h3 className="auth-column-title" style={{ textAlign: 'center', marginBottom: '1rem' }}>Sign up</h3>
               <form className="auth-form" onSubmit={handleSignup}>
-                {signupError && (
-                  <div className="auth-error-message">{signupError}</div>
-                )}
-                {passwordError && (
-                  <div className="auth-error-message">{passwordError}</div>
+                {signupError && !Object.keys(fieldErrors).some(k => fieldErrors[k]) && (
+                  <div className="auth-error-message" style={{ marginBottom: '1rem' }}>{signupError}</div>
                 )}
                 {signupSuccess && (
-                  <div className="auth-success-message">{signupSuccess}</div>
+                  <div className="auth-success-message" style={{ marginBottom: '1rem' }}>{signupSuccess}</div>
                 )}
 
                 <div className={`auth-input-icon-wrapper ${fullNameFocused || fullName ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
@@ -299,6 +340,9 @@ function Signup() {
                     disabled={signupLoading}
                   />
                 </div>
+                {fieldErrors.fullName && (
+                  <div className="field-error-text">{fieldErrors.fullName}</div>
+                )}
 
                 <div className={`auth-input-icon-wrapper ${businessEmailFocused || businessEmail ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
                   <i className="fas fa-envelope auth-input-icon"></i>
@@ -321,9 +365,13 @@ function Signup() {
                     onBlur={() => setBusinessEmailFocused(false)}
                     required
                     maxLength={100}
-                    disabled={signupLoading || emailVerified}
+                    disabled={signupLoading}
+                    style={emailVerified ? { backgroundColor: '#f0fdf4', borderColor: '#16a34a' } : {}}
                   />
                 </div>
+                {fieldErrors.businessEmail && (
+                  <div className="field-error-text">{fieldErrors.businessEmail}</div>
+                )}
 
                 {/* Email Verification Section */}
                 {businessEmail && !emailVerified && (
@@ -338,9 +386,9 @@ function Signup() {
                       Verify your email
                     </div>
 
-                    {otpError && (
-                      <div className="auth-error-message" style={{ marginBottom: '0.5rem', fontSize: '12px' }}>
-                        {otpError}
+                    {fieldErrors.otp && (
+                      <div className="field-error-text" style={{ marginBottom: '0.5rem', textAlign: 'center' }}>
+                        {fieldErrors.otp}
                       </div>
                     )}
 
@@ -383,7 +431,7 @@ function Signup() {
                             onChange={(e) => {
                               const value = e.target.value.replace(/\D/g, '').slice(0, 6);
                               setOtp(value);
-                              setOtpError('');
+                              setFieldErrors(prev => ({ ...prev, otp: '' }));
                             }}
                             onFocus={() => setOtpFocused(true)}
                             onBlur={() => setOtpFocused(false)}
@@ -395,7 +443,6 @@ function Signup() {
                         <OtpCountdown
                           expiresAtMs={otpExpiresAtMs}
                           onExpire={() => setOtpExpired(true)}
-                          onRemainingSecondsChange={setOtpRemainingSeconds}
                         />
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                           <button
@@ -475,6 +522,9 @@ function Signup() {
                     disabled={signupLoading}
                   />
                 </div>
+                {fieldErrors.organizationName && (
+                  <div className="field-error-text">{fieldErrors.organizationName}</div>
+                )}
 
                 <div className={`auth-input-icon-wrapper ${passwordFocused || password ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
                   <i className="fas fa-lock auth-input-icon"></i>
@@ -522,9 +572,14 @@ function Signup() {
                     </button>
                   </div>
                 </div>
+                {fieldErrors.password && (
+                  <div className="field-error-text">{fieldErrors.password}</div>
+                )}
+
                 {showPasswordHelper && (
                   <div style={{
                     marginTop: '0.5rem',
+                    marginBottom: '1rem',
                     border: '1px solid #e2e8f0',
                     borderRadius: '8px',
                     padding: '0.75rem',
@@ -609,11 +664,9 @@ function Signup() {
                     </button>
                   </div>
                 </div>
-
-                {/* Explicit Password Mismatch Error */}
-                {confirmPassword && password !== confirmPassword && (
-                  <div style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.5rem', marginBottom: '0.75rem' }}>
-                    Passwords do not match
+                {(fieldErrors.confirmPassword || (confirmPassword && password !== confirmPassword)) && (
+                  <div className="field-error-text">
+                    {fieldErrors.confirmPassword || 'Passwords do not match'}
                   </div>
                 )}
 
