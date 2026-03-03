@@ -41,7 +41,10 @@ function ForgotPassword() {
     setError('');
     setSuccess('');
     try {
-      const res = await axios.post(`${API_BASE_URL}/send-otp/`, { email });
+      const res = await axios.post(`${API_BASE_URL}/send-otp/`, {
+        email,
+        context: 'forgot_password'
+      });
       setSuccess(res.data.message || 'OTP sent to your email.');
       if (res.data.otp) {
         setSuccess(`OTP sent! Your OTP is: ${res.data.otp} (for development)`);
@@ -140,6 +143,17 @@ function ForgotPassword() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (step === 'email') {
+      handleSendOtp();
+    } else if (step === 'otp') {
+      handleVerifyOtp();
+    } else if (step === 'reset') {
+      handleResetPassword();
+    }
+  };
+
   const passwordRequirementStatuses = passwordRequirements.map(req => ({
     ...req,
     met: req.test(newPassword),
@@ -169,9 +183,8 @@ function ForgotPassword() {
         <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '1rem' }}>{fieldErrors.email}</div>
       )}
       <button
-        type="button"
+        type="submit"
         className="auth-primary-btn"
-        onClick={handleSendOtp}
         disabled={loading || !email}
       >
         {loading ? 'Sending OTP...' : 'Send OTP'}
@@ -190,7 +203,22 @@ function ForgotPassword() {
           placeholder="Enter OTP *"
           value={otp}
           maxLength={6}
-          onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+          onChange={(e) => {
+            const val = e.target.value.replace(/\D/g, '').slice(0, 6);
+            setOtp(val);
+            if (val.length === 6 && !loading && !otpExpired) {
+              // Auto-verify when 6 digits are reached
+              setTimeout(() => handleVerifyOtp(), 100);
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              if (otp.length === 6 && !loading && !otpExpired) {
+                handleVerifyOtp();
+              }
+            }
+          }}
           onFocus={() => setOtpFocused(true)}
           onBlur={() => setOtpFocused(false)}
           required
@@ -207,9 +235,8 @@ function ForgotPassword() {
       />
       <div style={{ display: 'flex', gap: '0.5rem' }}>
         <button
-          type="button"
+          type="submit"
           className="auth-primary-btn"
-          onClick={handleVerifyOtp}
           disabled={loading || otp.length !== 6 || otpExpired}
           style={{ flex: 1 }}
         >
@@ -371,9 +398,8 @@ function ForgotPassword() {
       )}
 
       <button
-        type="button"
+        type="submit"
         className="auth-primary-btn"
-        onClick={handleResetPassword}
         disabled={
           loading ||
           !newPassword ||
@@ -440,7 +466,7 @@ function ForgotPassword() {
                 {step === 'email' ? 'Send OTP' : step === 'otp' ? 'Verify OTP' : 'Reset Password'}
               </h3>
 
-              <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
+              <form className="auth-form" onSubmit={handleSubmit}>
                 {error && <div className="auth-error-message">{error}</div>}
                 {success && <div className="auth-success-message">{success}</div>}
 

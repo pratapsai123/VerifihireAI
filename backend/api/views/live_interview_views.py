@@ -1,4 +1,4 @@
-﻿from ._imports import *
+from ._imports import *
 
 
 @api_view(['GET'])
@@ -399,7 +399,7 @@ def interview_invitations_overview_view(request):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def get_interview_invitation_by_token_view(request, token):
     """
     Get interview invitation details by token.

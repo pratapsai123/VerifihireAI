@@ -190,9 +190,25 @@ export default function CandidatePage() {
                                                     className="report-download-btn"
                                                     type="button"
                                                     title="Download full candidate report"
-                                                    onClick={() => {
+
+
+                                                    onClick={async () => {
                                                         const url = `${API_BASE_URL}/results/${c.submission_id}/report/`;
-                                                        window.open(url, '_blank');
+                                                        try {
+                                                            const response = await axios.get(url, { responseType: 'blob' });
+                                                            const fileBlob = new Blob([response.data], { type: 'application/pdf' });
+                                                            const fileUrl = window.URL.createObjectURL(fileBlob);
+                                                            const link = document.createElement('a');
+                                                            link.href = fileUrl;
+                                                            link.setAttribute('download', `Candidate_Report_${c.name || c.submission_id}.pdf`);
+                                                            document.body.appendChild(link);
+                                                            link.click();
+                                                            link.remove();
+                                                            window.URL.revokeObjectURL(fileUrl);
+                                                        } catch (err) {
+                                                            console.error('Download failed:', err);
+                                                            alert('Failed to download report.');
+                                                        }
                                                     }}
                                                 >
                                                     ⬇ Download

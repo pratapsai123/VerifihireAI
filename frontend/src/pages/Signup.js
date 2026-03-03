@@ -392,11 +392,7 @@ function Signup() {
                       </div>
                     )}
 
-                    {otpSuccess && (
-                      <div className="auth-success-message" style={{ marginBottom: '0.5rem', fontSize: '12px' }}>
-                        {otpSuccess}
-                      </div>
-                    )}
+                    {/* OTP Success Message - removed for cleaner UI */}
 
                     {!otpSent ? (
                       <button
@@ -488,45 +484,33 @@ function Signup() {
                   </div>
                 )}
 
+                {/* Email Verified Banner - removed for cleaner UI as the field indicates success */}
+
                 {emailVerified && (
-                  <div style={{
-                    marginBottom: '1.5rem',
-                    padding: '0.75rem',
-                    backgroundColor: '#d4edda',
-                    border: '1px solid #c3e6cb',
-                    borderRadius: '6px',
-                    color: '#155724',
-                    fontSize: '14px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.5rem'
-                  }}>
-                    <span>✓</span>
-                    <span>Email verified successfully!</span>
+                  <div className="registration-details-section" style={{ marginTop: '0.75rem' }} data-aos="fade-up">
+                    <div className={`auth-input-icon-wrapper ${organizationNameFocused || organizationName ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
+                      <i className="fas fa-building auth-input-icon"></i>
+                      <label className="auth-floating-label">Organization Name *</label>
+                      <input
+                        type="text"
+                        className="auth-input-with-icon"
+                        placeholder="Organization Name *"
+                        value={organizationName}
+                        onChange={(e) => setOrganizationName(e.target.value)}
+                        onFocus={() => setOrganizationNameFocused(true)}
+                        onBlur={() => setOrganizationNameFocused(false)}
+                        required
+                        maxLength={100}
+                        disabled={signupLoading || !emailVerified}
+                      />
+                    </div>
+                    {fieldErrors.organizationName && (
+                      <div className="field-error-text">{fieldErrors.organizationName}</div>
+                    )}
                   </div>
                 )}
 
-                <div className={`auth-input-icon-wrapper ${organizationNameFocused || organizationName ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
-                  <i className="fas fa-building auth-input-icon"></i>
-                  <label className="auth-floating-label">Organization Name *</label>
-                  <input
-                    type="text"
-                    className="auth-input-with-icon"
-                    placeholder="Organization Name *"
-                    value={organizationName}
-                    onChange={(e) => setOrganizationName(e.target.value)}
-                    onFocus={() => setOrganizationNameFocused(true)}
-                    onBlur={() => setOrganizationNameFocused(false)}
-                    required
-                    maxLength={100}
-                    disabled={signupLoading}
-                  />
-                </div>
-                {fieldErrors.organizationName && (
-                  <div className="field-error-text">{fieldErrors.organizationName}</div>
-                )}
-
-                <div className={`auth-input-icon-wrapper ${passwordFocused || password ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem' }}>
+                <div className={`auth-input-icon-wrapper ${passwordFocused || password ? 'focused has-value' : ''}`} style={{ marginBottom: '0.75rem', marginTop: emailVerified ? '0' : '0.75rem' }}>
                   <i className="fas fa-lock auth-input-icon"></i>
                   <label className="auth-floating-label">Password *</label>
                   <div style={{ position: 'relative' }}>
@@ -539,7 +523,7 @@ function Signup() {
                       minLength={6}
                       maxLength={12}
                       required
-                      disabled={signupLoading}
+                      disabled={signupLoading || !emailVerified}
                       onFocus={() => {
                         setPasswordFocused(true);
                       }}
@@ -549,7 +533,7 @@ function Signup() {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      disabled={signupLoading}
+                      disabled={signupLoading || !emailVerified}
                       style={{
                         position: 'absolute',
                         right: '12px',
@@ -557,14 +541,14 @@ function Signup() {
                         transform: 'translateY(-50%)',
                         background: 'none',
                         border: 'none',
-                        cursor: signupLoading ? 'not-allowed' : 'pointer',
+                        cursor: (signupLoading || !emailVerified) ? 'not-allowed' : 'pointer',
                         color: '#666',
                         fontSize: '18px',
                         padding: '5px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        opacity: signupLoading ? 0.5 : 1
+                        opacity: (signupLoading || !emailVerified) ? 0.5 : 1
                       }}
                       aria-label={showPassword ? "Hide password" : "Show password"}
                     >
@@ -576,47 +560,35 @@ function Signup() {
                   <div className="field-error-text">{fieldErrors.password}</div>
                 )}
 
-                {showPasswordHelper && (
+                {showPasswordHelper && unmetPasswordRequirements.length > 0 && (
                   <div style={{
                     marginTop: '0.5rem',
                     marginBottom: '1rem',
-                    border: '1px solid #e2e8f0',
+                    border: '1px solid #fee2e2',
                     borderRadius: '8px',
-                    padding: '0.75rem',
-                    backgroundColor: '#f8fafc'
+                    padding: '0.6rem 0.75rem',
+                    backgroundColor: '#fffafb'
                   }}>
-                    {unmetPasswordRequirements.length > 0 ? (
-                      <>
-                        <div style={{ color: '#e53e3e', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.25rem' }}>
-                          Password must include:
+                    <div style={{ color: '#e53e3e', fontWeight: 600, fontSize: '0.85rem', marginBottom: '0.25rem' }}>
+                      Password requirements:
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.2rem' }}>
+                      {unmetPasswordRequirements.map((req) => (
+                        <div
+                          key={req.id}
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.35rem',
+                            color: '#e53e3e',
+                            fontSize: '0.8rem',
+                          }}
+                        >
+                          <span style={{ fontWeight: 700 }}>•</span>
+                          <span>{req.label}</span>
                         </div>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                          {passwordRequirementStatuses.map((req) => (
-                            <div
-                              key={req.id}
-                              style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.35rem',
-                                color: req.met ? '#16a34a' : '#e53e3e',
-                                fontSize: '0.85rem',
-                                textDecoration: req.met ? 'line-through' : 'none',
-                                opacity: req.met ? 0.6 : 1,
-                                transition: 'all 0.2s ease'
-                              }}
-                            >
-                              <span style={{ fontWeight: 700 }}>{req.met ? '✓' : '•'}</span>
-                              <span>{req.label}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </>
-                    ) : (
-                      <div style={{ color: '#16a34a', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                        <span>✓</span>
-                        <span>All password requirements met</span>
-                      </div>
-                    )}
+                      ))}
+                    </div>
                   </div>
                 )}
 
@@ -633,7 +605,7 @@ function Signup() {
                       minLength={6}
                       maxLength={12}
                       required
-                      disabled={signupLoading}
+                      disabled={signupLoading || !emailVerified}
                       onFocus={() => setConfirmPasswordFocused(true)}
                       onBlur={() => setConfirmPasswordFocused(false)}
                       style={{ paddingRight: '45px' }}
@@ -641,7 +613,7 @@ function Signup() {
                     <button
                       type="button"
                       onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                      disabled={signupLoading}
+                      disabled={signupLoading || !emailVerified}
                       style={{
                         position: 'absolute',
                         right: '12px',
@@ -649,14 +621,14 @@ function Signup() {
                         transform: 'translateY(-50%)',
                         background: 'none',
                         border: 'none',
-                        cursor: signupLoading ? 'not-allowed' : 'pointer',
+                        cursor: (signupLoading || !emailVerified) ? 'not-allowed' : 'pointer',
                         color: '#666',
                         fontSize: '18px',
                         padding: '5px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        opacity: signupLoading ? 0.5 : 1
+                        opacity: (signupLoading || !emailVerified) ? 0.5 : 1
                       }}
                       aria-label={showConfirmPassword ? "Hide password" : "Show password"}
                     >

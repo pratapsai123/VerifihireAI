@@ -255,7 +255,7 @@ GROQ_API_KEY = os.environ.get('GROQ_API_KEY', 'gsk_8AO7D29cvZlpx3EzfOgNWGdyb3FYb
 
 from datetime import timedelta
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=12),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,

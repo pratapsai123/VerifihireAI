@@ -263,7 +263,7 @@ def resend_invite_view(request, token):
 
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def get_invite_view(request, token):
     """
     Public: fetch invitation metadata for the accept-invite UI.
@@ -296,7 +296,7 @@ def get_invite_view(request, token):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def accept_invite_view(request):
     """
     Accept a user invitation and set password.

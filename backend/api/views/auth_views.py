@@ -63,6 +63,17 @@ def send_otp_view(request):
                         },
                         status=status.HTTP_400_BAD_REQUEST
                     )
+        else:
+            # For non-registration flows (forgot password, etc.), verify email exists
+            user_exists = UserProfile.objects.filter(email=email).exists() or \
+                          User.objects.filter(email=email).exists() or \
+                          User.objects.filter(username=email).exists()
+            
+            if not user_exists:
+                return Response(
+                    {'error': 'Incorrect email or account does not exist.'},
+                    status=status.HTTP_404_NOT_FOUND
+                )
         
         # Generate OTP
         otp = EmailOTP.generate_otp()

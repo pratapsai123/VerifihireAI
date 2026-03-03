@@ -35,6 +35,32 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             }
         
         try:
+            # Validate session ID (InterviewInvitation token)
+            is_valid, is_expired = await self.validate_session()
+            
+            if not is_valid:
+                logger.warning(f"Γ£û WebSocket connection rejected: Invalid session {self.session_id}")
+                # We accept then immediately close with a custom code because 
+                # standard WebSocket protocols don't support rejecting during handshake 
+                # easily with custom codes in all client environments.
+                await self.accept()
+                await self.send(text_data=json.dumps({
+                    'type': 'error',
+                    'message': 'Invalid session ID. Please check your interview link.'
+                }))
+                await self.close(code=4004) # Not Found
+                return
+
+            if is_expired:
+                logger.warning(f"Γ£û WebSocket connection rejected: Expired session {self.session_id}")
+                await self.accept()
+                await self.send(text_data=json.dumps({
+                    'type': 'session_expired',
+                    'message': 'This interview session has already been completed or has expired.'
+                }))
+                await self.close(code=4003) # Forbidden/Expired
+                return
+
             # Join room group
             await self.channel_layer.group_add(
                 self.room_group_name,
@@ -63,17 +89,6 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                     'session_id': self.session_id,
                 }
             )
-            
-            # Check if session is expired
-            is_expired = await self.check_session_expired()
-            if is_expired:
-                await self.send(text_data=json.dumps({
-                    'type': 'session_expired',
-                    'message': 'Session has already been completed.'
-                }))
-                await self.close()
-                return
-
         except Exception as e:
             logger.error(f"Error in WebSocket connect: {str(e)}", exc_info=True)
             # Try to close with error code if possible, or just let it fail
@@ -404,16 +419,34 @@ class InterviewConsumer(AsyncWebsocketConsumer):
             }))
     
     @database_sync_to_async
-    def check_session_expired(self):
-        """Check if interview session is expired"""
+    def validate_session(self):
+        """
+        Check if interview session exists and is active.
+        Returns: (is_valid, is_expired)
+        """
         try:
-            # Try to find interview invitation by token
+            invitation = InterviewInvitation.objects.filter(token=self.session_id).first()
+            if not invitation:
+                return False, False
+            
+            # For now, we consider it expired if status is 'completed' or similar
+            # In your current model, 'sent' is the active status. 
+            # You might have 'completed' later.
+            is_expired = invitation.status == 'completed'
+            
+            return True, is_expired
+        except Exception as e:
+            logger.error(f"Error validating session: {e}")
+            return False, False
+
+    @database_sync_to_async
+    def check_session_expired(self):
+        """Check if interview session is expired (legacy helper)"""
+        try:
             invitation = InterviewInvitation.objects.filter(token=self.session_id).first()
             if invitation:
-                # Check if both parties have connected before (session expired)
-                # This is a simple check - you might want to add a field to track this
-                return False  # For now, allow reconnection
-            return False
+                return invitation.status == 'completed'
+            return True # If not found, treat as expired/invalid
         except Exception as e:
             logger.error(f"Error checking session expiry: {e}")
             return False

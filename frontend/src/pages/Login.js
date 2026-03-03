@@ -304,6 +304,10 @@ function Login() {
                     {fieldErrors.password && (
                       <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.password}</div>
                     )}
+                    
+                    {loginError && (
+                      <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{loginError}</div>
+                    )}
 
                   <button
                     type="submit"
@@ -313,9 +317,6 @@ function Login() {
                     {loginLoading ? 'Verifying...' : 'Login'}
                   </button>
 
-                  {loginError && (
-                    <div className="auth-error-message" style={{ marginTop: '0.75rem', marginBottom: '0.5rem', textAlign: 'center' }}>{loginError}</div>
-                  )}
 
                   <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <div>
