@@ -175,6 +175,7 @@ class JobRole(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        db_table = 'api_jobroles'
         verbose_name = "Job Role"
         verbose_name_plural = "Job Roles"
         ordering = ['-created_at']

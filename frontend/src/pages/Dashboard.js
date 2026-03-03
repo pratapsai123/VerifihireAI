@@ -13,6 +13,7 @@ import {
   Video,
   BarChart3,
   Clock,
+  PlusCircle,
   ChevronRight,
   ChevronDown,
   ChevronUp
@@ -71,6 +72,9 @@ const Dashboard = () => {
   const [expandedSubItem, setExpandedSubItem] = useState(null);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const [activeFloatingMenu, setActiveFloatingMenu] = useState(null);
+  const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
+  const [roleFormData, setRoleFormData] = useState({ title: '', description: '' });
+  const [isSubmittingRole, setIsSubmittingRole] = useState(false);
 
   useEffect(() => {
     if (isSidebarCollapsed) {
@@ -223,6 +227,23 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  const handleCreateRole = async (e) => {
+    e.preventDefault();
+    setIsSubmittingRole(true);
+    try {
+      await axios.post(`${API_BASE_URL}/job-roles/`, roleFormData);
+      setIsRoleModalOpen(false);
+      setRoleFormData({ title: '', description: '' });
+      // Reload roles if needed elsewhere, but for now just success
+      alert('Job Role created successfully!');
+    } catch (error) {
+      console.error("Error creating job role:", error);
+      alert('Failed to create job role. Please try again.');
+    } finally {
+      setIsSubmittingRole(false);
+    }
+  };
+
   const navItems = [
     { icon: LayoutDashboard, label: 'Dashboard', active: true, path: '/dashboard' },
     {
@@ -261,6 +282,7 @@ const Dashboard = () => {
     },
     { icon: Users, label: 'Candidates', path: '/candidates' },
     { icon: BarChart3, label: 'Reports', path: '/results' },
+    { icon: PlusCircle, label: 'Create Role', onClick: () => setIsRoleModalOpen(true), style: { color: '#6366f1', fontWeight: 700 } },
   ];
 
 
@@ -285,6 +307,10 @@ const Dashboard = () => {
               <div
                 className={`nav-item ${item.active ? 'active' : ''} ${expandedItem === item.label ? 'expanded' : ''}`}
                 onClick={(e) => {
+                  if (item.onClick) {
+                    item.onClick();
+                    return;
+                  }
                   if (item.subItems) {
                     if (isSidebarCollapsed) {
                       e.stopPropagation();
@@ -300,7 +326,7 @@ const Dashboard = () => {
                   }
                 }}
               >
-                <div className="nav-item-content">
+                <div className="nav-item-content" style={item.style}>
                   <item.icon size={20} />
                   <span>{item.label}</span>
                 </div>
@@ -657,6 +683,74 @@ const Dashboard = () => {
           </div>
         </div>
       </main>
+      {/* Job Role Modal */}
+      {isRoleModalOpen && (
+        <div
+          className="modal-overlay"
+          onClick={() => setIsRoleModalOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(15, 23, 42, 0.6)',
+            backdropFilter: 'blur(4px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000
+          }}
+        >
+          <div
+            className="glass-card modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: '500px',
+              width: '90%',
+              padding: '2rem',
+              background: 'white',
+              borderRadius: '2rem'
+            }}
+          >
+            <div className="modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h3 style={{ margin: 0 }}>Create New Job Role</h3>
+              <button className="icon-btn" onClick={() => setIsRoleModalOpen(false)}><ChevronDown size={20} /></button>
+            </div>
+            <form onSubmit={handleCreateRole}>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', color: '#64748b', marginBottom: '0.5rem' }}>Job Title</label>
+                <input
+                  type="text"
+                  className="filter-select"
+                  style={{ width: '100%', height: '42px', padding: '0 1rem' }}
+                  placeholder="e.g. Senior Frontend Engineer"
+                  value={roleFormData.title}
+                  onChange={(e) => setRoleFormData({ ...roleFormData, title: e.target.value })}
+                  required
+                />
+              </div>
+              <div style={{ marginBottom: '2rem' }}>
+                <label style={{ display: 'block', fontSize: '0.85rem', color: '#64748b', marginBottom: '0.5rem' }}>Job Description</label>
+                <textarea
+                  className="filter-select"
+                  style={{ width: '100%', minHeight: '150px', padding: '1rem', resize: 'vertical' }}
+                  placeholder="Paste the job description here..."
+                  value={roleFormData.description}
+                  onChange={(e) => setRoleFormData({ ...roleFormData, description: e.target.value })}
+                  required
+                />
+              </div>
+              <div style={{ display: 'flex', gap: '1rem' }}>
+                <button type="button" className="btn-premium btn-outline" style={{ flex: 1 }} onClick={() => setIsRoleModalOpen(false)}>Cancel</button>
+                <button type="submit" className="btn-premium btn-fill" style={{ flex: 1 }} disabled={isSubmittingRole}>
+                  {isSubmittingRole ? 'Creating...' : 'Create Role'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
