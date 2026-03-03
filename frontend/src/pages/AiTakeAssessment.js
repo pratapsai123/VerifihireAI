@@ -123,9 +123,55 @@ const AiTakeAssessment = () => {
             const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, {
                 share_token: token, candidate_name: candidateName, candidate_email: candidateEmail
             });
-            setSubmissionId(res.data.submission_id);
+            const { submission_id, time_left, answers: savedAnswers, current_question_index } = res.data;
+
+            setSubmissionId(submission_id);
             setIsStarted(true);
-            setTimeLeft(assessment.duration_minutes * 60);
+
+            // Restore session if resumed
+            if (savedAnswers && Object.keys(savedAnswers).length > 0) {
+                setAnswers(savedAnswers);
+
+                // Rebuild answeredQs and visitedQs from saved answer keys
+                // Keys are like 'mcq_0', 'mcq_3', 'coding_0' — extract the index from the key
+                const mcqsArr = assessment?.generated_content?.mcqs || [];
+                const codingArr = assessment?.generated_content?.coding_challenges || [];
+                const totalMcqs = mcqsArr.length;
+
+                const restoredAnswered = new Set();
+                const restoredVisited = new Set();
+
+                Object.keys(savedAnswers).forEach(key => {
+                    const val = savedAnswers[key];
+                    if (!val) return; // skip empty/null answers
+                    let globalIdx = null;
+                    if (key.startsWith('mcq_')) {
+                        const i = parseInt(key.replace('mcq_', ''), 10);
+                        if (!isNaN(i)) globalIdx = i;
+                    } else if (key.startsWith('coding_')) {
+                        const i = parseInt(key.replace('coding_', ''), 10);
+                        if (!isNaN(i)) globalIdx = totalMcqs + i;
+                    }
+                    if (globalIdx !== null) {
+                        restoredAnswered.add(globalIdx);
+                        restoredVisited.add(globalIdx);
+                    }
+                });
+
+                if (restoredAnswered.size > 0) {
+                    setAnsweredQs(restoredAnswered);
+                    setVisitedQs(prev => new Set([...prev, ...restoredVisited]));
+                }
+            }
+
+            if (current_question_index !== undefined) {
+                setCurrentQuestionIdx(current_question_index);
+                setVisitedQs(prev => new Set([...prev, current_question_index]));
+            }
+
+            // Sync timer
+            setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
+
             await startCamera();
         } catch (err) {
             const msg = err.response?.data?.error || 'Failed to start assessment.';
@@ -245,6 +291,52 @@ const AiTakeAssessment = () => {
         };
     }, [isStarted, submissionId]);
 
+    // Save progress periodically (debounced)
+    // Also exposes saveProgress via ref so beforeunload can call it synchronously
+    const saveProgressRef = useRef(null);
+    useEffect(() => {
+        if (!isStarted || !submissionId || submitted) return;
+
+        const saveProgress = async () => {
+            try {
+                await axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
+                    answers,
+                    current_question_index: currentQuestionIdx
+                });
+            } catch (err) {
+                console.error("Failed to save progress", err);
+            }
+        };
+
+        // Store reference so unload handler can call it
+        saveProgressRef.current = { answers, currentQuestionIdx, submissionId };
+
+        const timer = setTimeout(saveProgress, 1000); // 1-second debounce (reduced from 3s)
+        return () => clearTimeout(timer);
+    }, [answers, currentQuestionIdx, isStarted, submissionId, submitted]);
+
+    // Save progress immediately when user leaves the page (close tab, navigate away)
+    useEffect(() => {
+        if (!isStarted || !submissionId) return;
+
+        const handleBeforeUnload = () => {
+            const ctx = saveProgressRef.current;
+            if (!ctx) return;
+            // navigator.sendBeacon works even when the page is unloading
+            const payload = JSON.stringify({
+                answers: ctx.answers,
+                current_question_index: ctx.currentQuestionIdx
+            });
+            navigator.sendBeacon(
+                `${API_BASE_URL}/ai/submission/${ctx.submissionId}/progress/`,
+                new Blob([payload], { type: 'application/json' })
+            );
+        };
+
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+    }, [isStarted, submissionId]);
+
     useEffect(() => {
         if (isStarted && timeLeft > 0) {
             timerRef.current = setInterval(() => setTimeLeft(p => p - 1), 1000);
@@ -286,6 +378,13 @@ const AiTakeAssessment = () => {
     }, []);
 
     const goToQuestion = (idx) => {
+        // Save progress immediately before navigating away from current question
+        if (isStarted && submissionId && !submitted) {
+            axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
+                answers,
+                current_question_index: idx
+            }).catch(() => { });
+        }
         setCurrentQuestionIdx(idx);
         setVisitedQs(prev => new Set([...prev, idx]));
     };

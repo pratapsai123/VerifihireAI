@@ -369,12 +369,16 @@ const AiAssessmentDetail = () => {
                                                     let border = '1px solid #E0E5F2';
                                                     let color = '#1B254B';
                                                     let icon = null;
+                                                    let label = null;
 
                                                     if (isAnswer) {
                                                         bg = '#E6FBF5';
                                                         border = '2px solid #05CD99';
                                                         color = '#05CD99';
                                                         icon = <i className="fa-solid fa-check-circle" style={{ marginLeft: 'auto' }}></i>;
+                                                        if (!isCorrect) {
+                                                            label = <span style={{ fontSize: '0.65rem', fontWeight: '800', color: '#05CD99', textTransform: 'uppercase', marginLeft: 'auto', background: '#E6FBF5', padding: '2px 6px', borderRadius: '6px', whiteSpace: 'nowrap' }}>✓ Correct Answer</span>;
+                                                        }
                                                     } else if (isSelected && !isCorrect) {
                                                         bg = '#FFF5F5';
                                                         border = '2px solid #EE5D50';
@@ -392,19 +396,32 @@ const AiAssessmentDetail = () => {
                                                             fontWeight: (isAnswer || isSelected) ? '700' : '500',
                                                             fontSize: '0.95rem',
                                                             display: 'flex',
-                                                            alignItems: 'center'
+                                                            alignItems: 'center',
+                                                            gap: '8px'
                                                         }}>
-                                                            <span style={{ marginRight: '10px', opacity: 0.5, fontSize: '0.8rem' }}>{String.fromCharCode(65 + oi)}.</span>
-                                                            {opt}
-                                                            {icon}
+                                                            <span style={{ opacity: 0.5, fontSize: '0.8rem', flexShrink: 0 }}>{String.fromCharCode(65 + oi)}.</span>
+                                                            <span style={{ flex: 1 }}>{opt}</span>
+                                                            {label || icon}
                                                         </div>
                                                     );
                                                 })}
                                             </div>
 
+                                            {/* Skipped question notice */}
                                             {!candAns && (
                                                 <div style={{ marginTop: '1rem', padding: '0.75rem', background: '#F4F7FE', borderRadius: '12px', color: '#707EAE', fontSize: '0.85rem', textAlign: 'center', fontWeight: '600' }}>
                                                     <i className="fa-solid fa-circle-info" style={{ marginRight: '6px' }}></i> Candidate skipped this question.
+                                                </div>
+                                            )}
+
+                                            {/* Explicit correct answer banner for incorrect / skipped */}
+                                            {!isCorrect && (
+                                                <div style={{ marginTop: '1rem', padding: '0.85rem 1.25rem', background: 'linear-gradient(135deg, #E6FBF5, #d4f7ed)', borderRadius: '14px', display: 'flex', alignItems: 'center', gap: '10px', border: '1px solid #05CD9944' }}>
+                                                    <i className="fa-solid fa-circle-check" style={{ color: '#05CD99', fontSize: '1.1rem', flexShrink: 0 }}></i>
+                                                    <div>
+                                                        <div style={{ fontSize: '0.7rem', fontWeight: '800', color: '#05CD99', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Correct Answer</div>
+                                                        <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.9rem', marginTop: '2px' }}>{q.answer}</div>
+                                                    </div>
                                                 </div>
                                             )}
                                         </div>

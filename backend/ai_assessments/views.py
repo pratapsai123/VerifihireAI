@@ -246,6 +246,15 @@ class GenerateAssessmentView(APIView):
             if not generated_data:
                 raise Exception("The AI generated a response but the structure was invalid.")
 
+            # === ENFORCE EXACT COUNTS - AI sometimes over-generates ===
+            if 'mcqs' in generated_data and len(generated_data['mcqs']) > mcq_count:
+                logger.warning(f"AI over-generated {len(generated_data['mcqs'])} MCQs, truncating to {mcq_count}")
+                generated_data['mcqs'] = generated_data['mcqs'][:mcq_count]
+
+            if 'coding_challenges' in generated_data and len(generated_data['coding_challenges']) > coding_count:
+                logger.warning(f"AI over-generated {len(generated_data['coding_challenges'])} coding challenges, truncating to {coding_count}")
+                generated_data['coding_challenges'] = generated_data['coding_challenges'][:coding_count]
+
             assessment.generated_content = generated_data
             assessment.status = 'SCHEDULED'
             assessment.save()
@@ -309,10 +318,21 @@ class CreateSubmissionView(APIView):
                     candidate_email=email,
                     status='ONGOING'
                 )
-                
+             
+            # Calculate time left
+            elapsed = timezone.now() - submission.started_at
+            duration_seconds = assessment.duration_minutes * 60
+            time_left = max(0, duration_seconds - int(elapsed.total_seconds()))
+            
+            if time_left <= 0:
+                return Response({"error": "Assessment time has expired."}, status=status.HTTP_400_BAD_REQUEST)
+
             return Response({
                 "submission_id": submission.id,
-                "status": "success"
+                "status": "success",
+                "time_left": time_left,
+                "answers": submission.answers,
+                "current_question_index": submission.current_question_index
             }, status=status.HTTP_201_CREATED)
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -329,6 +349,12 @@ class UpdateAssessmentIntegrityView(APIView):
                 submission.phone_warnings += 1
             elif event_type == 'face_detection_lost':
                 submission.face_warnings += 1
+            
+            # Simple metadata log
+            submission.monitoring_logs.append({
+                "event": event_type,
+                "timestamp": timezone.now().isoformat()
+            })
             
             # Grace Warning System Phase 2: Handle First 3 as Warnings
             if len(submission.warning_logs) < 3:
@@ -357,6 +383,26 @@ class UpdateAssessmentIntegrityView(APIView):
                 "status": "success",
                 "integrity_score": submission.integrity_score
             })
+        except AIAssessmentSubmission.DoesNotExist:
+            return Response({"error": "Submission not found"}, status=status.HTTP_404_NOT_FOUND)
+
+class SaveAssessmentProgressView(APIView):
+    def post(self, request, pk):
+        try:
+            submission = AIAssessmentSubmission.objects.get(pk=pk)
+            if submission.submitted_at:
+                return Response({"error": "Already submitted"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            answers = request.data.get('answers')
+            index = request.data.get('current_question_index')
+            
+            if answers is not None:
+                submission.answers = answers
+            if index is not None:
+                submission.current_question_index = index
+            
+            submission.save()
+            return Response({"status": "progress saved"})
         except AIAssessmentSubmission.DoesNotExist:
             return Response({"error": "Submission not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -445,6 +491,11 @@ class AssessmentDetailView(APIView):
 
 class PublicAssessmentView(APIView):
     def get(self, request, token):
+        with open('api_debug.txt', 'a') as f:
+            f.write(f"\n[{timezone.now()}] PUBLIC ACCESS: Token='{token}'\n")
+            f.write(f"Query Params: {request.query_params}\n")
+            f.write(f"Host: {request.get_host()}\n")
+
         try:
             assessment = Assessment.objects.get(share_token=token)
             gen_content = assessment.generated_content or {}
@@ -503,9 +554,11 @@ class PublicAssessmentView(APIView):
             response["Expires"] = "0"
             return response
         except Assessment.DoesNotExist:
+            logger.error(f"PublicAssessmentView: Assessment not found for token {token}")
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
-        except Exception:
-             return Response({"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+             logger.error(f"PublicAssessmentView Error: {str(e)}\n{traceback.format_exc()}")
+             return Response({"error": "Invalid token or data structure"}, status=status.HTTP_400_BAD_REQUEST)
 class InviteAssessmentCandidatesView(APIView):
     def post(self, request):
         assessment_id = request.data.get('assessment_id')
@@ -518,8 +571,8 @@ class InviteAssessmentCandidatesView(APIView):
         invited_candidates = []
         
         import urllib.parse
-        # Use frontend base URL from settings
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifyhire.duckdns.org')
+        # Use frontend base URL from settings - Standardized to localhost for dev
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
