@@ -25,6 +25,8 @@ import pandas as pd
 # Setup Logger
 logger = logging.getLogger(__name__)
 
+from api.views import ensure_role_exists
+
 # Configure Groq
 # groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
 # if not groq_api_key:
@@ -97,9 +99,15 @@ class BulkInviteView(APIView):
                 name = str(row['name']).strip()
                 email = str(row['email']).strip()
                 
+                # Auto-persist role if title is provided
+                job_title = request.data.get('job_title') or request.data.get('role_title')
+                if job_title:
+                    ensure_role_exists(job_title, job_description, user=request.user)
+
                 candidate = Candidate.objects.create(
                     full_name=name,
                     email=email,
+                    job_title=job_title or "Applicant",
                     interview_time=batch_interview_time,
                     available_from=available_from if available_from else None,
                     available_until=available_until if available_until else None,
@@ -256,10 +264,15 @@ class ResumeMatchView(APIView):
                 for page in pdf_reader.pages:
                     resume_text += page.extract_text()
                 resume_file.seek(0)
+                # Auto-persist role if title is provided
+                job_title = request.data.get('job_title') or request.data.get('role_title')
+                if job_title:
+                    ensure_role_exists(job_title, job_description, user=request.user)
+
                 candidate = Candidate.objects.create(
                     full_name=resume_file.name.replace('.pdf', ''),
                     email="pending@example.com",
-                    job_title="Applicant",
+                    job_title=job_title or "Applicant",
                     resume=resume_file,
                     resume_text=resume_text,
                     status='New',

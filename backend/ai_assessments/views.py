@@ -18,6 +18,8 @@ import logging
 # Setup Logger
 logger = logging.getLogger(__name__)
 
+from api.views import ensure_role_exists
+
 # Configure Groq
 # groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
 # if not groq_api_key:
@@ -185,6 +187,12 @@ class GenerateAssessmentView(APIView):
             }, status=status.HTTP_400_BAD_REQUEST)
 
         try:
+            # Auto-persist role if title is provided
+            # required_skills often contains the role title in this app's context
+            job_title = data.get('job_title') or data.get('role_title') or required_skills
+            if job_title:
+                ensure_role_exists(job_title, job_description, user=request.user)
+
             assessment = Assessment.objects.create(
                 job_description=job_description,
                 required_skills=required_skills,

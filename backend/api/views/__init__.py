@@ -67,3 +67,8 @@ from .live_interview_views import (
     download_candidate_report_view,
     get_candidate_details_view,
 )
+from .job_role_views import (
+    job_role_list_create_view,
+    job_role_delete_view,
+    ensure_role_exists,
+)
