@@ -222,13 +222,15 @@ export default function LiveInterviewList() {
                     </td>
                     <td>
                       {inv.feedback ? (
-                        <div title={inv.feedback.interviewer_feedback}>
-                          {renderStars(inv.feedback.interviewer_average_rating)}
-                          {inv.feedback.interviewer_feedback && (
-                            <div className="cell-sub" style={{ maxWidth: '150px', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                              {inv.feedback.interviewer_feedback}
-                            </div>
-                          )}
+                        <div>
+                          {renderStars(inv.feedback.interviewer_average_rating || inv.feedback.interviewer_rating)}
+                          <button
+                            className="btn-secondary"
+                            style={{ padding: '2px 8px', fontSize: '12px', marginTop: '4px' }}
+                            onClick={() => navigate('/feedback-details', { state: { inv } })}
+                          >
+                            View Details
+                          </button>
                         </div>
                       ) : (
                         <span style={{ color: '#94a3b8' }}>-</span>

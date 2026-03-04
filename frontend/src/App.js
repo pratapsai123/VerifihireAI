@@ -38,6 +38,7 @@ import AiInterviewSession from './pages/AiInterviewSession';
 import AiAssessmentDetail from './pages/AiAssessmentDetail';
 import ResultsAI from './pages/ResultsAI';
 import FeedbackPage from './pages/FeedbackPage';
+import FeedbackDetails from './pages/FeedbackDetails';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -152,6 +153,7 @@ function AppContent() {
             <Route path="/ai-assessments/:id" element={<AiAssessmentDetail />} />
             <Route path="/results-ai" element={<ResultsAI />} />
             <Route path="/feedback-page" element={<FeedbackPage />} />
+            <Route path="/feedback-details" element={<FeedbackDetails />} />
             <Route path="/results" element={<Result />} />
           </Route>
 

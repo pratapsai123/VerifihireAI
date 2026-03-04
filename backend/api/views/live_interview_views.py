@@ -788,7 +788,7 @@ def download_candidate_report_view(request, submission_id: int):
 
 @csrf_exempt
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def submit_interview_feedback(request):
     """
     Submit feedback after a live interview.
@@ -830,7 +830,7 @@ def submit_interview_feedback(request):
             return Response({'error': 'Invalid token.'}, status=status.HTTP_404_NOT_FOUND)
 
         # Check if feedback object exists
-        from .models import LiveInterviewFeedback
+        from api.models import LiveInterviewFeedback
         feedback_obj, created = LiveInterviewFeedback.objects.get_or_create(invitation=invitation)
         print(f"DEBUG: Feedback object {'created' if created else 'found'}: {feedback_obj}")
 
