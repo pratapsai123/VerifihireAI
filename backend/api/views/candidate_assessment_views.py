@@ -385,8 +385,11 @@ def get_invitation_public_view(request, token):
                     inv.expires_at = end_time
 
         # If expired, block access
-        if inv.expires_at and now >= inv.expires_at:
-            return Response({'error': 'This assessment link has expired.'}, status=status.HTTP_410_GONE)
+        # NOTE: Since the frontend implements a "transition" stage where the timer is paused between objective and coding, 
+        # a strict backend check against a calculated `expires_at` logic locks out users who legitimately waited 
+        # on the transition screen. The frontend manages its own strict countdown interval for submissions.
+        # if inv.expires_at and now >= inv.expires_at:
+        #     return Response({'error': 'This assessment link has expired.'}, status=status.HTTP_410_GONE)
 
         aq_qs = (
             AssessmentQuestion.objects.filter(assessment=assessment)

@@ -8,7 +8,7 @@ import '../styles/Coding.css';
 const DEFAULT_LANGS = [
   'cpp',
   'java',
-  'python3',
+  // 'python3',
   'python',
   'javascript',
   'typescript',
@@ -28,7 +28,7 @@ const DEFAULT_LANGS = [
 const LANG_OPTIONS = [
   { value: 'cpp', label: 'C++' },
   { value: 'java', label: 'Java' },
-  { value: 'python3', label: 'Python3' },
+  // { value: 'python3', label: 'Python3' },
   { value: 'python', label: 'Python' },
   { value: 'javascript', label: 'JavaScript' },
   { value: 'typescript', label: 'TypeScript' },
@@ -42,7 +42,7 @@ const LANG_OPTIONS = [
   { value: 'php', label: 'PHP' },
   { value: 'dart', label: 'Dart' },
   { value: 'scala', label: 'Scala' },
-  { value: 'scala', label: 'Scala' },
+  // { value: 'scala', label: 'Scala' },
   { value: 'sql', label: 'SQL' },
 ];
 
@@ -657,7 +657,7 @@ export default function CodingQuestionForm() {
                         onChange={(e) => update('schema_sql', e.target.value)}
                         className="coding-textarea"
                         rows={8}
-                        placeholder={`CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT);\nINSERT INTO users (name) VALUES ('Alice');`}
+                        placeholder={`CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT);\nINSERT INTO users (name) VALUES ('Alice');\n\n\nNOTE:Please avoid writing comments in the SQL schema section.`}
                       />
                     </label>
                   </>

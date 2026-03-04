@@ -260,22 +260,51 @@ export default function TakeAssessment() {
   const [assessment, setAssessment] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [codingQuestions, setCodingQuestions] = useState([]);
-  const [answersById, setAnswersById] = useState({});
+  const [answersById, setAnswersById] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) return JSON.parse(saved).answersById || {};
+    } catch { }
+    return {};
+  });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [remainingSeconds, setRemainingSeconds] = useState(null);
-  const [codingState, setCodingState] = useState({
-    currentId: null,
-    codeById: {},
-    languageById: {},
-    runResultById: {},
-    runError: '',
-    running: false,
-    submittedIds: {},
+  const [remainingSeconds, setRemainingSeconds] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.remainingSeconds !== undefined) return parsed.remainingSeconds;
+      }
+    } catch { }
+    return null;
   });
+  const [codingState, setCodingState] = useState(() => {
+    const initialState = {
+      currentId: null,
+      codeById: {},
+      languageById: {},
+      runResultById: {},
+      runError: '',
+      running: false,
+      submittedIds: {},
+    };
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        initialState.codeById = parsed.codeById || {};
+        initialState.languageById = parsed.languageById || {};
+      }
+    } catch { }
+    return initialState;
+  });
+
+
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fsError, setFsError] = useState('');
+  const [showSubmitConfirm, setShowSubmitConfirm] = useState(false);
   const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
   const [leftWidth, setLeftWidth] = useState(44);
   const [lastExpandedWidth, setLastExpandedWidth] = useState(44);
@@ -286,15 +315,75 @@ export default function TakeAssessment() {
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
-  const [objectiveSeconds, setObjectiveSeconds] = useState(null);
-  const [codingSeconds, setCodingSeconds] = useState(null);
+  const [objectiveSeconds, setObjectiveSeconds] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.objectiveSeconds !== undefined) return parsed.objectiveSeconds;
+      }
+    } catch { }
+    return null;
+  });
+  const [codingSeconds, setCodingSeconds] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.codingSeconds !== undefined) return parsed.codingSeconds;
+      }
+    } catch { }
+    return null;
+  });
   const [objResult, setObjResult] = useState(null); // { passed, score, percentage, message }
 
   // New State for Exam Mode
-  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
-  const [markedReviewIds, setMarkedReviewIds] = useState({});
+  const [activeQuestionIndex, setActiveQuestionIndex] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.activeQuestionIndex !== undefined) return parsed.activeQuestionIndex;
+      }
+    } catch { }
+    return 0;
+  });
+  const [markedReviewIds, setMarkedReviewIds] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) return JSON.parse(saved).markedReviewIds || {};
+    } catch { }
+    return {};
+  });
   // Track visited questions to mark them as "Not Answered" (Red) vs "Not Visited" (Gray)
-  const [visitedIds, setVisitedIds] = useState({});
+  const [visitedIds, setVisitedIds] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) return JSON.parse(saved).visitedIds || {};
+    } catch { }
+    return {};
+  });
+
+  useEffect(() => {
+    if (!token || submitted || assessmentStage === 'loading') return;
+    try {
+      const progress = {
+        answersById,
+        codeById: codingState.codeById,
+        languageById: codingState.languageById,
+        assessmentStage,
+        activeQuestionIndex,
+        markedReviewIds,
+        visitedIds,
+        remainingSeconds,
+        objectiveSeconds,
+        codingSeconds,
+      };
+      localStorage.setItem(`take_assessment_progress_${token}`, JSON.stringify(progress));
+    } catch (e) {
+      console.error('Failed to autosave progress', e);
+    }
+  }, [token, answersById, codingState.codeById, codingState.languageById, submitted, assessmentStage, activeQuestionIndex, markedReviewIds, visitedIds, remainingSeconds, objectiveSeconds, codingSeconds]);
 
   useEffect(() => {
     // Mark current question as visited whenever index changes
@@ -621,6 +710,7 @@ export default function TakeAssessment() {
       }
 
       setSubmitted(true);
+      localStorage.removeItem(`take_assessment_progress_${token}`);
       // End test -> show result page (pass autoSubmit flag for timeout popup)
       navigate(`/result/${token}`, { replace: true, state: { autoSubmit: auto } });
     } catch (e) {
@@ -647,17 +737,8 @@ export default function TakeAssessment() {
     blockBack();
     window.addEventListener('popstate', onPopState);
 
-    const onBeforeUnload = (e) => {
-      // Some browsers will show default confirm dialog
-      e.preventDefault();
-      e.returnValue = '';
-      return '';
-    };
-    window.addEventListener('beforeunload', onBeforeUnload);
-
     return () => {
       window.removeEventListener('popstate', onPopState);
-      window.removeEventListener('beforeunload', onBeforeUnload);
     };
   }, [submitted]);
 
@@ -756,22 +837,36 @@ export default function TakeAssessment() {
           initialStage = 'coding';
         }
 
+        try {
+          const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.assessmentStage && parsed.assessmentStage !== 'loading') {
+              if (parsed.assessmentStage === 'coding' || parsed.assessmentStage === 'transition') {
+                initialStage = parsed.assessmentStage;
+              }
+            }
+          }
+        } catch { }
+
         // If assessment has `has_objective_cutoff` and we are in coding, it means we passed.
 
         setAssessmentStage(initialStage);
-        setObjectiveSeconds(objTimeLimit);
-        setCodingSeconds(codTimeLimit);
+
+        // Only set timers from backend if we didn't restore them from localStorage
+        setObjectiveSeconds(prev => prev !== null ? prev : objTimeLimit);
+        setCodingSeconds(prev => prev !== null ? prev : codTimeLimit);
 
         // Initialize timer based on remaining_seconds from backend (Total expiry)
         // If we are strict, we should respect the backend `expires_at`.
         // If `remaining_seconds` is small, we might clamp our local timers.
         if (typeof data.remaining_seconds === 'number') {
           const totalRem = data.remaining_seconds;
+          setRemainingSeconds(prev => prev !== null ? prev : totalRem);
           if (initialStage === 'objective') {
-            // If implied objective time is > total remaining, clamp it
-            if (objTimeLimit > totalRem) setObjectiveSeconds(totalRem);
+            setObjectiveSeconds(prev => prev !== null ? prev : (objTimeLimit > totalRem ? totalRem : objTimeLimit));
           } else if (initialStage === 'coding') {
-            if (codTimeLimit > totalRem) setCodingSeconds(totalRem);
+            setCodingSeconds(prev => prev !== null ? prev : (codTimeLimit > totalRem ? totalRem : codTimeLimit));
           }
         }
 
@@ -827,35 +922,44 @@ export default function TakeAssessment() {
 
   // Countdown timer (starts when candidate opens the link)
   useEffect(() => {
-    if (submitted) return;
+    if (submitted || submitting || codingState.running) return;
 
     // We don't want to reset the interval every second, so we DON'T include remainingSeconds in deps.
+    let lastTick = Date.now();
     const t = setInterval(() => {
-      setRemainingSeconds((s) => {
-        if (s === null) return null;
-        if (s <= 0) return 0;
-        return s - 1;
-      });
+      const now = Date.now();
+      const deltaSecs = Math.floor((now - lastTick) / 1000);
+      if (deltaSecs < 1) return;
+      lastTick += deltaSecs * 1000;
+
+      // Pause global timer if in transition
+      if (assessmentStage !== 'transition') {
+        setRemainingSeconds((s) => {
+          if (s === null) return null;
+          if (s <= 0) return 0;
+          return Math.max(0, s - deltaSecs);
+        });
+      }
 
       // Stage-specific timers
       if (assessmentStage === 'objective') {
         setObjectiveSeconds(prev => {
           if (prev === null) return null;
           if (prev <= 0) return 0;
-          return prev - 1;
+          return Math.max(0, prev - deltaSecs);
         });
       } else if (assessmentStage === 'coding') {
         setCodingSeconds(prev => {
           if (prev === null) return null;
           if (prev <= 0) return 0;
-          return prev - 1;
+          return Math.max(0, prev - deltaSecs);
         });
       }
     }, 1000);
 
     return () => clearInterval(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submitted, assessmentStage]);
+  }, [submitted, assessmentStage, submitting, codingState.running]);
 
   // Global timeout check
   useEffect(() => {
@@ -928,16 +1032,19 @@ export default function TakeAssessment() {
     }
   };
 
-  const submitCode = async () => {
+  const submitCode = () => {
     if (!activeCoding) return;
     // Check global timer - allow submitting code as long as total time remains
     if (remainingSeconds !== null && remainingSeconds <= 0) {
       setCodingState((prev) => ({ ...prev, runError: 'Time is over. The exam has ended.' }));
       return;
     }
-    if (!window.confirm('Are you sure you want to submit your code?')) {
-      return;
-    }
+    setShowSubmitConfirm(true);
+  };
+
+  const executeSubmitCode = async () => {
+    setShowSubmitConfirm(false);
+    if (!activeCoding) return;
     const key = String(activeCoding.id);
     setCodingState((prev) => ({
       ...prev,
@@ -1177,8 +1284,8 @@ export default function TakeAssessment() {
         {!isFullscreen && !submitted ? (
           <div className="fs-gate" role="dialog" aria-label="Enter full screen">
             <div className="fs-card">
-              <div className="fs-title">Start Exam</div>
-              <div className="fs-sub">Fullscreen is required to start the exam.</div>
+              <div className="fs-title">{assessmentStage !== 'loading' && assessmentStage !== 'objective' ? 'Resume Assessment' : 'Start Exam'}</div>
+              <div className="fs-sub">Fullscreen is required to {assessmentStage !== 'loading' && assessmentStage !== 'objective' ? 'continue' : 'start'} the exam.</div>
               {fsError ? <div className="fs-error">{fsError}</div> : null}
               <div className="fs-actions">
                 <button
@@ -1192,6 +1299,25 @@ export default function TakeAssessment() {
             </div>
           </div>
         ) : null}
+
+        {showSubmitConfirm && (
+          <div className="fs-gate" style={{ zIndex: 9999 }}>
+            <div className="fs-card" style={{ padding: '30px' }}>
+              <div className="fs-title" style={{ color: '#1e293b' }}>Confirm Submission</div>
+              <div className="fs-sub" style={{ color: '#475569', marginBottom: '20px' }}>
+                Are you sure you want to submit your code? You cannot edit it after submission.
+              </div>
+              <div className="fs-actions" style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
+                <button className="btn btn-secondary" onClick={() => setShowSubmitConfirm(false)}>
+                  Cancel
+                </button>
+                <button className="fs-primary" onClick={executeSubmitCode}>
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Floating Timer (Restored for ALL modes) */}
         {/* Floating Timer (Stage Based) */}
