@@ -1,0 +1,1989 @@
+{ 
+  "skill": "Postman", 
+  "questions": [
+    {
+    "question": "Which HTTP method is primarily used to retrieve data from an API in Postman?",
+    "options": {
+      "A": "POST",
+      "B": "GET",
+      "C": "PUT",
+      "D": "DELETE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 201 Created status code typically indicate?",
+    "options": {
+      "A": "The request was successful and a new resource was created.",
+      "B": "The server found a syntax error in the request.",
+      "C": "The user is not authorized to see the data.",
+      "D": "The page has moved to a new URL permanently."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Postman, how do you denote a variable in the URL or body?",
+    "options": {
+      "A": "[variable_name]",
+      "B": "{{variable_name}}",
+      "C": "$variable_name",
+      "D": "@variable_name"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where can you see the response body after sending a request in Postman?",
+    "options": {
+      "A": "In the 'Pre-request Script' tab.",
+      "B": "In the 'Authorization' tab.",
+      "C": "In the 'Response' pane at the bottom.",
+      "D": "In the 'Headers' section of the request."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Collection' in Postman?",
+    "options": {
+      "A": "A single API request.",
+      "B": "A group of related API requests saved together.",
+      "C": "A list of all users on the Postman server.",
+      "D": "A database for storing passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tab is used to write JavaScript snippets that run after a response is received?",
+    "options": {
+      "A": "Tests",
+      "B": "Pre-request Script",
+      "C": "Body",
+      "D": "Settings"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Postman can only be used to test REST APIs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code means 'Not Found'?",
+    "options": {
+      "A": "400",
+      "B": "401",
+      "C": "404",
+      "D": "500"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'Params' tab in the Postman request builder?",
+    "options": {
+      "A": "To add key-value pairs to the URL query string.",
+      "B": "To set the background color of the app.",
+      "C": "To write documentation for the API.",
+      "D": "To encrypt the request body."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which button is used to execute a request in Postman?",
+    "options": {
+      "A": "Execute",
+      "B": "Send",
+      "C": "Post",
+      "D": "Go"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does HTTP status code 401 mean?",
+    "options": {
+      "A": "Bad Request",
+      "B": "Forbidden",
+      "C": "Unauthorized",
+      "D": "Internal Server Error"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is a valid way to send data in a POST request?",
+    "options": {
+      "A": "In the URL query params only.",
+      "B": "In the request body.",
+      "C": "In the Postman settings menu.",
+      "D": "By clicking the 'History' tab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Console' used for in Postman?",
+    "options": {
+      "A": "To play video games.",
+      "B": "To debug requests and see the raw network logs.",
+      "C": "To change the user's password.",
+      "D": "To export collections to a printer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is typically used to completely replace an existing resource?",
+    "options": {
+      "A": "GET",
+      "B": "DELETE",
+      "C": "PUT",
+      "D": "PATCH"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you save a request to a collection?",
+    "options": {
+      "A": "It saves automatically every time you send.",
+      "B": "Click the 'Save' button and select a collection.",
+      "C": "Right-click the computer desktop.",
+      "D": "Use the 'Import' command."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 500 Internal Server Error indicate?",
+    "options": {
+      "A": "The client sent wrong data.",
+      "B": "The user's internet is disconnected.",
+      "C": "The server encountered an unexpected condition.",
+      "D": "The API key has expired."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Authorization' tab used for?",
+    "options": {
+      "A": "To design the API schema.",
+      "B": "To provide credentials like API Keys or Bearer Tokens.",
+      "C": "To change the request timeout.",
+      "D": "To view the history of sent requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which format is most commonly used for API data exchange in Postman?",
+    "options": {
+      "A": "HTML",
+      "B": "JSON",
+      "C": "TXT",
+      "D": "PDF"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Body tab, which option do you select to send a raw JSON string?",
+    "options": {
+      "A": "form-data",
+      "B": "binary",
+      "C": "raw (with JSON type selected)",
+      "D": "x-www-form-urlencoded"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'Environments' in Postman?",
+    "options": {
+      "A": "To change the visual theme of the application.",
+      "B": "To group related sets of variables (e.g., Development, Production).",
+      "C": "To monitor the temperature of the server.",
+      "D": "To translate the API into different languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code corresponds to 'Bad Request'?",
+    "options": {
+      "A": "200",
+      "B": "301",
+      "C": "400",
+      "D": "404"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'History' sidebar show?",
+    "options": {
+      "A": "The history of the Postman company.",
+      "B": "A list of past requests you have sent.",
+      "C": "A list of all users in your workspace.",
+      "D": "The history of your operating system updates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature allows you to run a collection automatically at set intervals?",
+    "options": {
+      "A": "Monitors",
+      "B": "Runner",
+      "C": "History",
+      "D": "Mock Servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can share Postman collections with your team members.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens when you click the 'Preview' button for a response?",
+    "options": {
+      "A": "It shows the raw JSON code.",
+      "B": "It renders HTML or images if returned by the API.",
+      "C": "It sends the request again.",
+      "D": "It deletes the response data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Workspace' in Postman?",
+    "options": {
+      "A": "A physical office location.",
+      "B": "A collaborative area to organize collections, environments, and team members.",
+      "C": "The hard drive space used by Postman.",
+      "D": "A tool to write C++ code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is used to remove a resource?",
+    "options": {
+      "A": "REMOVE",
+      "B": "POST",
+      "C": "DELETE",
+      "D": "GET"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'pm.test' do in a Postman script?",
+    "options": {
+      "A": "It starts a performance test.",
+      "B": "It defines a test case to validate response data.",
+      "C": "It sends a message to the Postman support team.",
+      "D": "It restarts the Postman application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code means the request was successful?",
+    "options": {
+      "A": "200 OK",
+      "B": "404 Not Found",
+      "C": "500 Error",
+      "D": "302 Redirect"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you add a new request to a Postman tab?",
+    "options": {
+      "A": "Click the '+' icon.",
+      "B": "Press the Space bar.",
+      "C": "Restart the computer.",
+      "D": "Click the 'Delete' button."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Headers' tab used for?",
+    "options": {
+      "A": "To write the title of the request.",
+      "B": "To set metadata like 'Content-Type' or 'Accept'.",
+      "C": "To view the response time.",
+      "D": "To list the names of the team members."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the status code 403 Forbidden mean?",
+    "options": {
+      "A": "The server is down.",
+      "B": "The user is authenticated but does not have permission for the resource.",
+      "C": "The URL is misspelled.",
+      "D": "The request was successful."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Dynamic Variable' in Postman?",
+    "options": {
+      "A": "{{$randomFirstName}}",
+      "B": "[[name]]",
+      "C": "dynamic.name",
+      "D": "GET.name"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Import' used for in Postman?",
+    "options": {
+      "A": "To bring in files, collections, or API specifications (like OpenAPI).",
+      "B": "To export your data to a CSV file.",
+      "C": "To buy a Postman license.",
+      "D": "To update the operating system."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Variables can be used in the Request URL.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Pre-request Script' tab used for?",
+    "options": {
+      "A": "To validate the response.",
+      "B": "To run code before the request is sent.",
+      "C": "To write a summary of the API.",
+      "D": "To generate a PDF report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tab allows you to send key-value pairs as 'application/x-www-form-urlencoded'?",
+    "options": {
+      "A": "Params",
+      "B": "Body",
+      "C": "Headers",
+      "D": "Tests"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 405 Method Not Allowed error mean?",
+    "options": {
+      "A": "The server is too busy.",
+      "B": "The HTTP method used is not supported by the specific URL.",
+      "C": "The user password is incorrect.",
+      "D": "The JSON body is too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where do you find the Postman 'Settings'?",
+    "options": {
+      "A": "The gear icon in the top right.",
+      "B": "The 'Send' button.",
+      "C": "The 'Tests' tab.",
+      "D": "The response pane."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code means 'No Content'?",
+    "options": {
+      "A": "200",
+      "B": "204",
+      "C": "404",
+      "D": "500"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Quick Look' (eye icon) used for?",
+    "options": {
+      "A": "To see a preview of the website.",
+      "B": "To quickly view the active environment and global variables.",
+      "C": "To check for syntax errors in the body.",
+      "D": "To see who is watching your screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use Postman without creating an account (Scratchpad mode).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Description' field in a request?",
+    "options": {
+      "A": "To execute code.",
+      "B": "To document what the request does for yourself and your team.",
+      "C": "To set the API timeout.",
+      "D": "To encrypt the URL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code corresponds to 'Service Unavailable'?",
+    "options": {
+      "A": "400",
+      "B": "404",
+      "C": "503",
+      "D": "200"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'Cookies' link in the request builder allow you to do?",
+    "options": {
+      "A": "Eat digital cookies.",
+      "B": "Manage and view cookies associated with different domains.",
+      "C": "Clear your browser cache.",
+      "D": "Change the app theme."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API Documentation' in Postman?",
+    "options": {
+      "A": "A list of all Postman employees.",
+      "B": "A web page generated from your collection that explains how to use the API.",
+      "C": "The source code of the Postman app.",
+      "D": "A legal contract with the API provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tab shows the time taken for a request to complete?",
+    "options": {
+      "A": "Headers",
+      "B": "Body",
+      "C": "Response pane (near status and size)",
+      "D": "Pre-request Script"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can change the order of requests inside a collection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Code' icon (</>) in the right sidebar?",
+    "options": {
+      "A": "To write JavaScript tests.",
+      "B": "To generate code snippets for the request in various languages (Python, Java, etc.).",
+      "C": "To see the Postman source code.",
+      "D": "To format JSON data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does status code 301 mean?",
+    "options": {
+      "A": "Created",
+      "B": "Moved Permanently",
+      "C": "Not Found",
+      "D": "Internal Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create a new Environment?",
+    "options": {
+      "A": "Click the '+' in the Environments tab on the left sidebar.",
+      "B": "Right-click the computer desktop.",
+      "C": "Go to the History tab.",
+      "D": "It is created automatically for every request."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tab is used to upload a file in a POST request?",
+    "options": {
+      "A": "Headers",
+      "B": "Body (using form-data and 'File' type)",
+      "C": "Params",
+      "D": "Settings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Global' variable scope?",
+    "options": {
+      "A": "Variables accessible across all collections and environments.",
+      "B": "Variables that only work in the cloud.",
+      "C": "Variables shared with the whole world.",
+      "D": "Variables that are deleted after every request."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Postman can generate a random email address using dynamic variables.",
+    "options": {
+      "A": "True ({{$randomEmail}})",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Schema'?",
+    "options": {
+      "A": "A drawing of the database.",
+      "B": "A formal definition of the API structure (like JSON Schema or RAML).",
+      "C": "A list of API users.",
+      "D": "A script that deletes data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code means 'Gateway Timeout'?",
+    "options": {
+      "A": "404",
+      "B": "500",
+      "C": "504",
+      "D": "408"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'JSON.parse()' do in a Postman script?",
+    "options": {
+      "A": "Converts a JSON string into a JavaScript object.",
+      "B": "Deletes a JSON file.",
+      "C": "Sends JSON to the server.",
+      "D": "Minifies a JSON body."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Visualize' tab in the response pane used for?",
+    "options": {
+      "A": "To see the binary code of the server.",
+      "B": "To view custom data visualizations (charts/tables) created via scripts.",
+      "C": "To watch API tutorial videos.",
+      "D": "To see a map of the server location."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can export an environment as a JSON file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Copy' icon next to response data?",
+    "options": {
+      "A": "To copy the entire response body to the clipboard.",
+      "B": "To create a duplicate request.",
+      "C": "To copy the URL.",
+      "D": "To copy team member emails."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is used for partial updates to a resource?",
+    "options": {
+      "A": "PUT",
+      "B": "PATCH",
+      "C": "UPDATE",
+      "D": "POST"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 400 status code mean?",
+    "options": {
+      "A": "Successful",
+      "B": "Bad Request (syntax or data error from client)",
+      "C": "Server is offline",
+      "D": "User logged out"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you find a specific request in a large collection?",
+    "options": {
+      "A": "Use the search bar at the top of the sidebar.",
+      "B": "Scroll down manually.",
+      "C": "Restart the app.",
+      "D": "Delete unrelated collections."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Postman desktop agent'?",
+    "options": {
+      "A": "A person who helps you with API testing.",
+      "B": "A helper app that allows the Postman web version to make local requests.",
+      "C": "A robot that tests APIs.",
+      "D": "A tool to clean your keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a standard authentication type in Postman?",
+    "options": {
+      "A": "Basic Auth",
+      "B": "OAuth 2.0",
+      "C": "API Key",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Tags' in a collection?",
+    "options": {
+      "A": "To group and filter requests based on metadata.",
+      "B": "To write code.",
+      "C": "To set the price of the API.",
+      "D": "To send an email."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Postman variable scope has the highest priority and will override all others if a name conflict occurs?",
+    "options": {
+      "A": "Global",
+      "B": "Environment",
+      "C": "Collection",
+      "D": "Local"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the primary difference between 'Initial Value' and 'Current Value' in an environment?",
+    "options": {
+      "A": "Initial Value is synced to the Postman cloud; Current Value stays local to your instance.",
+      "B": "Initial Value is for strings; Current Value is for integers.",
+      "C": "Current Value is shared with team members; Initial Value is private.",
+      "D": "Current Value is only used in the Collection Runner; Initial Value is for manual sends."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you retrieve a variable named 'token' in a test script regardless of its scope?",
+    "options": {
+      "A": "pm.environment.get('token')",
+      "B": "pm.variables.get('token')",
+      "C": "pm.globals.get('token')",
+      "D": "pm.collectionVariables.get('token')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Collection Runner' window in Postman?",
+    "options": {
+      "A": "To edit the raw source code of the Postman application.",
+      "B": "To execute a series of requests in a specific order and view the test results aggregated.",
+      "C": "To find and replace text across all requests in a workspace.",
+      "D": "To monitor the API server's CPU and RAM usage in real-time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JavaScript method is used to parse a JSON response body into a searchable object?",
+    "options": {
+      "A": "pm.response.toJson()",
+      "B": "JSON.parse(pm.response.text())",
+      "C": "pm.response.json()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What happens if you define a variable in both 'Globals' and an 'Environment' with the same name?",
+    "options": {
+      "A": "Postman throws a syntax error.",
+      "B": "The Global value is used because it is higher in the hierarchy.",
+      "C": "The Environment value is used because it has a narrower scope.",
+      "D": "The values are concatenated together."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which dynamic variable would you use to generate a random integer between 1 and 1000?",
+    "options": {
+      "A": "{{$randomInt}}",
+      "B": "{{$randomNum}}",
+      "C": "{{$guid}}",
+      "D": "{{$timestamp}}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you share a 'Private' workspace with a new team member?",
+    "options": {
+      "A": "Private workspaces cannot be shared; you must change it to 'Team' or 'Partner'.",
+      "B": "Send them your Postman login password.",
+      "C": "Export the workspace as a PDF and email it.",
+      "D": "Private workspaces are automatically visible to everyone on the same Wi-Fi."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'pm.sendRequest' method in a script?",
+    "options": {
+      "A": "To stop the current request from being sent.",
+      "B": "To execute an asynchronous HTTP request from within a Pre-request or Test script.",
+      "C": "To send the response to a specific email address.",
+      "D": "To restart the Postman desktop agent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tab allows you to view the documentation you have written for a specific request?",
+    "options": {
+      "A": "Body",
+      "B": "Authorization",
+      "C": "Documentation (right sidebar icon)",
+      "D": "Tests"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Mock Server' in Postman and why is it used?",
+    "options": {
+      "A": "A server that mocks users who send slow requests.",
+      "B": "A hosted service that simulates an API response based on saved examples for frontend development.",
+      "C": "A tool that scans for security vulnerabilities in your API.",
+      "D": "A dedicated database used solely for unit testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Collection Runner, what does the 'Delay' setting do?",
+    "options": {
+      "A": "It sets the timeout for the entire collection.",
+      "B": "It specifies an interval (in ms) to wait between executing each request.",
+      "C": "It delays the Postman update notifications.",
+      "D": "It slows down the user interface animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which pm function is used to clear an environment variable from a script?",
+    "options": {
+      "A": "pm.environment.delete('var')",
+      "B": "pm.environment.unset('var')",
+      "C": "pm.environment.remove('var')",
+      "D": "pm.environment.clear('var')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Example' in a Postman request?",
+    "options": {
+      "A": "A screenshot of the request.",
+      "B": "A saved pair of request parameters and their corresponding response for documentation or mocking.",
+      "C": "A request that is only used for training new employees.",
+      "D": "A link to a YouTube tutorial."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which assertion syntax is correct for checking if the status code is 200?",
+    "options": {
+      "A": "pm.test('Status is 200', () => { pm.response.to.have.status(200); });",
+      "B": "pm.expect(pm.response.code).to.be(200);",
+      "C": "tests['Status is 200'] = responseCode.code === 200;",
+      "D": "All of the above are valid (though some are legacy)."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "How do you access a specific header value from the response in a script?",
+    "options": {
+      "A": "pm.response.headers.get('Content-Type')",
+      "B": "pm.response.header('Content-Type')",
+      "C": "pm.headers['Content-Type']",
+      "D": "responseHeaders['Content-Type']"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'API Keys' in Postman settings?",
+    "options": {
+      "A": "To unlock the premium features of Postman for free.",
+      "B": "To allow external tools (like Newman or the Postman API) to access your Postman account data.",
+      "C": "To encrypt your hard drive.",
+      "D": "To log into the Postman community forum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Inherit auth from parent' mean for a request?",
+    "options": {
+      "A": "The request uses the authentication settings defined at the Collection or Folder level.",
+      "B": "The request uses the user's Windows login credentials.",
+      "C": "The request is public and requires no authentication.",
+      "D": "The request uses the same authentication as the previous request in the history."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scope allows you to use a data file (CSV or JSON) to drive tests in the Collection Runner?",
+    "options": {
+      "A": "Environment",
+      "B": "Data",
+      "C": "Global",
+      "D": "Collection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Tests' tab at the Collection level?",
+    "options": {
+      "A": "To run tests on the Postman application itself.",
+      "B": "To define scripts that will run after every single request within that collection.",
+      "C": "To create a backup of the collection variables.",
+      "D": "To show a summary of all passed/failed requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to stop the current collection run from within a script?",
+    "options": {
+      "A": "pm.runner.stop()",
+      "B": "postman.setNextRequest(null)",
+      "C": "pm.execution.halt()",
+      "D": "stopCollection()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you verify if a response body contains a specific string in a Postman test?",
+    "options": {
+      "A": "pm.expect(pm.response.text()).to.include('string')",
+      "B": "pm.test('Body match', () => { pm.response.to.have.body('string'); });",
+      "C": "pm.response.json().contains('string')",
+      "D": "pm.test('Body match', () => { pm.expect(pm.response.text()).to.equal('string'); });"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Monitor' in Postman?",
+    "options": {
+      "A": "A physical screen used to view API logs.",
+      "B": "A tool to schedule collection runs in the cloud to check API availability and performance.",
+      "C": "An administrator who reviews your API code.",
+      "D": "A specialized proxy for monitoring network traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tab would you use to set the 'Content-Type' of your request manually?",
+    "options": {
+      "A": "Params",
+      "B": "Headers",
+      "C": "Body",
+      "D": "Settings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access the query parameters of the current request in a Pre-request script?",
+    "options": {
+      "A": "pm.request.url.query",
+      "B": "pm.request.params",
+      "C": "pm.url.queryParams",
+      "D": "request.getQuery()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Workspace Roles' (Admin, Editor, Viewer)?",
+    "options": {
+      "A": "To determine who gets to pay for the Postman subscription.",
+      "B": "To control the level of access and permissions team members have within a workspace.",
+      "C": "To set the visual theme for each user.",
+      "D": "To assign different API servers to different developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which dynamic variable returns the current Unix timestamp in seconds?",
+    "options": {
+      "A": "{{$timestamp}}",
+      "B": "{{$currentDate}}",
+      "C": "{{$time}}",
+      "D": "{{$unixTime}}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Postman API'?",
+    "options": {
+      "A": "The API that the Postman app uses to talk to the internet.",
+      "B": "An API provided by Postman to programmatically access and manage your collections and environments.",
+      "C": "A library for building your own Postman clone.",
+      "D": "A documentation site for all public APIs in the world."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Environment variables can be updated programmatically during a collection run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Forking' a collection in Postman?",
+    "options": {
+      "A": "Deleting a collection.",
+      "B": "Creating a separate version of a collection to make changes without affecting the original.",
+      "C": "Splitting a collection into two different collections.",
+      "D": "Exporting a collection to a CSV format."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which pm method returns the entire response time in milliseconds?",
+    "options": {
+      "A": "pm.response.time",
+      "B": "pm.response.responseTime",
+      "C": "pm.response.duration",
+      "D": "pm.response.speed"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Bearer Token' typically used for in the Authorization tab?",
+    "options": {
+      "A": "To send the user's password in plain text.",
+      "B": "To provide an OAuth 2.0 access token for API authentication.",
+      "C": "To identify the user's browser type.",
+      "D": "To set the request priority on the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you view the raw HTTP request string being sent by Postman?",
+    "options": {
+      "A": "Look at the 'Params' tab.",
+      "B": "Open the 'Postman Console' (Ctrl+Alt+C) and expand the request.",
+      "C": "Check the 'Documentation' tab.",
+      "D": "It is not possible to see the raw string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which dynamic variable generates a random IP address?",
+    "options": {
+      "A": "{{$randomIP}}",
+      "B": "{{$randomIPV4}}",
+      "C": "{{$randomRemoteAddress}}",
+      "D": "{{$ipAddress}}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'pm.cookies' object in a script?",
+    "options": {
+      "A": "To clear the browser's history.",
+      "B": "To programmatically access, set, or remove cookies for the current domain.",
+      "C": "To order food through an API.",
+      "D": "To encrypt the request headers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Persist All' do in the environment manager?",
+    "options": {
+      "A": "Deletes all current variables.",
+      "B": "Copies all 'Current Values' to 'Initial Values' to sync them across the team/cloud.",
+      "C": "Makes variables permanent so they can never be changed.",
+      "D": "Exports the variables to an Excel file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tab allows you to view the size of the response (body and headers)?",
+    "options": {
+      "A": "Headers",
+      "B": "Response pane (top right metadata)",
+      "C": "Tests",
+      "D": "Pre-request Script"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between a 'Public' and 'Team' workspace?",
+    "options": {
+      "A": "Public is visible to the entire world; Team is visible only to invited members of your organization.",
+      "B": "Public is for personal use only.",
+      "C": "Team is for paid users only; Public is for everyone.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you set a 'Global' variable in a script?",
+    "options": {
+      "A": "pm.variables.setGlobal('key', 'val')",
+      "B": "pm.globals.set('key', 'val')",
+      "C": "globals.update('key', 'val')",
+      "D": "postman.setGlobal('key', 'val')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which dynamic variable returns a random job title?",
+    "options": {
+      "A": "{{$randomJobTitle}}",
+      "B": "{{$randomProfession}}",
+      "C": "{{$randomWork}}",
+      "D": "{{$randomTitle}}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Versioning' in Postman?",
+    "options": {
+      "A": "The version of the Postman app you are using.",
+      "B": "Managing different iterations of an API (v1, v2) within the API Builder tab.",
+      "C": "The version of JavaScript used in scripts.",
+      "D": "The number of times an API has been called."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Postman feature allows you to render the response data into an HTML table?",
+    "options": {
+      "A": "Console",
+      "B": "Visualizer (pm.visualizer.set())",
+      "C": "Mock Server",
+      "D": "API Builder"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a script, what does 'pm.response.to.be.success' check for?",
+    "options": {
+      "A": "That the status code is exactly 200.",
+      "B": "That the status code is in the 2xx range.",
+      "C": "That the server is located in the same country.",
+      "D": "That the response body is not empty."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Postman Vault'?",
+    "options": {
+      "A": "A place to store physical servers.",
+      "B": "A feature to store sensitive data (like passwords) locally on your machine, never syncing to the cloud.",
+      "C": "A backup of all deleted collections.",
+      "D": "A library of common API requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows you to get a random number in a test script?",
+    "options": {
+      "A": "Math.random()",
+      "B": "pm.random()",
+      "C": "postman.getRandom()",
+      "D": "{{$randomInt}}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Settings' tab within a specific Request?",
+    "options": {
+      "A": "To change the global font size.",
+      "B": "To configure request-specific behaviors like 'Follow Redirects' or 'SSL Verification'.",
+      "C": "To update the Postman application.",
+      "D": "To manage team permissions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you refer to a variable in a script if you don't know which scope it's in?",
+    "options": {
+      "A": "pm.variables.get('varname')",
+      "B": "pm.get('varname')",
+      "C": "variables['varname']",
+      "D": "getVar('varname')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 429 status code mean?",
+    "options": {
+      "A": "Unprocessable Entity",
+      "B": "Too Many Requests (Rate Limiting)",
+      "C": "Internal Server Error",
+      "D": "Service Unavailable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which dynamic variable returns a random city name?",
+    "options": {
+      "A": "{{$randomCity}}",
+      "B": "{{$randomLocation}}",
+      "C": "{{$randomAddress}}",
+      "D": "{{$city}}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Governance'?",
+    "options": {
+      "A": "Government regulations on API traffic.",
+      "B": "Ensuring that APIs built in Postman follow organizational standards (naming, security, etc.).",
+      "C": "Voting on which team gets to use an API.",
+      "D": "Monitoring the cost of cloud hosting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which script executes if there is code in both the Request 'Tests' tab and the Collection 'Tests' tab?",
+    "options": {
+      "A": "Only the Request tests.",
+      "B": "Only the Collection tests.",
+      "C": "Both (Collection level tests execute first).",
+      "D": "Both (Request level tests execute first)."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Postman Interceptor' used for?",
+    "options": {
+      "A": "To intercept and delete malicious requests.",
+      "B": "To capture network requests and sync browser cookies directly into the Postman app.",
+      "C": "To speed up API responses by 50%.",
+      "D": "To record user keystrokes for debugging."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access the JSON object of a response in a single line?",
+    "options": {
+      "A": "var data = pm.response.json();",
+      "B": "var data = JSON.parse(response);",
+      "C": "var data = pm.body.json();",
+      "D": "var data = responseBody.toJson();"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Postman Runtime'?",
+    "options": {
+      "A": "The time it takes to install Postman.",
+      "B": "The engine that executes requests and runs scripts in Postman.",
+      "C": "A tool to measure server uptime.",
+      "D": "A specific type of cloud database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is used for partial updates to a resource?",
+    "options": {
+      "A": "PUT",
+      "B": "PATCH",
+      "C": "UPDATE",
+      "D": "POST"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you specify that a variable should be of type 'Secret' in an environment?",
+    "options": {
+      "A": "Put an asterisk (*) next to it.",
+      "B": "Select 'Secret' from the Type dropdown (masks the value on screen).",
+      "C": "Encrypt it manually before pasting.",
+      "D": "Variables cannot be secrets in Postman."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Scraping' an API in Postman?",
+    "options": {
+      "A": "To delete the API from the internet.",
+      "B": "There is no 'Scraping' feature; Postman uses 'Capturing' or 'Importing' to bring in API details.",
+      "C": "To find all the images on a website.",
+      "D": "To hack into a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which dynamic variable returns a random past date?",
+    "options": {
+      "A": "{{$randomDatePast}}",
+      "B": "{{$randomPastDate}}",
+      "C": "{{$oldDate}}",
+      "D": "{{$dateBefore}}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you run a collection via the command line?",
+    "options": {
+      "A": "Using the 'postman run' command.",
+      "B": "Using the Newman CLI tool (newman run collection.json).",
+      "C": "Using the 'curl' command only.",
+      "D": "Using the Windows Command Prompt 'start' command."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Auth' dropdown in Postman?",
+    "options": {
+      "A": "To write your own encryption algorithm.",
+      "B": "To select from pre-configured authentication types (OAuth, Basic, AWS, etc.).",
+      "C": "To list the names of authorized developers.",
+      "D": "To change the server's password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 204 No Content response usually indicate?",
+    "options": {
+      "A": "An error occurred and no data was found.",
+      "B": "The request was successful, but the response body is intentionally empty (e.g., after a DELETE).",
+      "C": "The user is logged out.",
+      "D": "The API is in maintenance mode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to create a folder within a collection?",
+    "options": {
+      "A": "New-Folder",
+      "B": "Add Folder (via the '...' menu on a collection)",
+      "C": "pm.createFolder()",
+      "D": "Right-click the computer's C: drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Collection Webhook'?",
+    "options": {
+      "A": "A way to catch fish with an API.",
+      "B": "A URL that triggers the execution of a specific Postman collection when it receives a request.",
+      "C": "A tool to design website headers.",
+      "D": "A type of security vulnerability."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which dynamic variable returns a random country name?",
+    "options": {
+      "A": "{{$randomCountry}}",
+      "B": "{{$randomNation}}",
+      "C": "{{$randomPlace}}",
+      "D": "{{$country}}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you view the 'Internal' variables that Postman uses for its own state?",
+    "options": {
+      "A": "They are hidden and inaccessible.",
+      "B": "Use the 'pm.globals.toObject()' command in the console.",
+      "C": "Look in the 'Settings' menu under 'Internal'.",
+      "D": "Contact Postman support."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Postman Flows' feature?",
+    "options": {
+      "A": "A way to measure network traffic speed.",
+      "B": "A low-code visual tool to chain requests and build complex API workflows logically.",
+      "C": "A feature to animate API responses.",
+      "D": "A history of all team member logins."
+    },
+    "answer": "B"
+  },
+{
+    "question": "What is 'Newman' in the Postman ecosystem and its primary use case?",
+    "options": {
+      "A": "A visual theme engine for the desktop application.",
+      "B": "A command-line tool that allows you to run Postman collections in CI/CD pipelines.",
+      "C": "A specialized proxy for intercepting mobile application traffic.",
+      "D": "A database connector for syncing API results directly to SQL Server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which script method allows you to programmatically change the next request to be executed during a Collection Run?",
+    "options": {
+      "A": "pm.execution.setNext('RequestName')",
+      "B": "postman.setNextRequest('RequestName')",
+      "C": "pm.runner.goto('RequestName')",
+      "D": "pm.requests.jumpTo('RequestName')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you implement a 'Schema Validation' test in Postman using the built-in AJV library?",
+    "options": {
+      "A": "pm.test('Valid schema', () => { pm.response.to.have.jsonSchema(mySchema); });",
+      "B": "ajv.validate(mySchema, pm.response.json());",
+      "C": "pm.expect(pm.response.json()).to.matchSchema(mySchema);",
+      "D": "pm.response.validateAgainst(mySchema);"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the security purpose of 'Postman API Keys' generated in the user settings?",
+    "options": {
+      "A": "To unlock the local desktop application if a password is forgotten.",
+      "B": "To allow external tools like Newman to authenticate with the Postman API to fetch collections.",
+      "C": "To encrypt the request body before it is sent over the network.",
+      "D": "To provide access to the user's private computer files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when you call 'postman.setNextRequest(null)' in a script?",
+    "options": {
+      "A": "The current request is retried indefinitely.",
+      "B": "The collection runner stops execution after the current request finishes.",
+      "C": "The runner skips the next request and moves to the following one.",
+      "D": "The environment variables are cleared immediately."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Newman command option is used to specify an environment file stored locally?",
+    "options": {
+      "A": "newman run collection.json --env env.json",
+      "B": "newman run collection.json -e env.json",
+      "C": "newman collection.json --environment env.json",
+      "D": "newman start collection.json -env env.json"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you access the 'Request Body' sent in the current execution from within the 'Tests' script?",
+    "options": {
+      "A": "pm.request.body.raw",
+      "B": "JSON.parse(pm.request.body.raw)",
+      "C": "request.data",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of the 'pm.sendRequest' function in a Pre-request script?",
+    "options": {
+      "A": "To cancel the primary request if a condition isn't met.",
+      "B": "To execute a secondary, asynchronous HTTP request before the main request is sent.",
+      "C": "To send the response data to a logging server.",
+      "D": "To refresh the browser's cookies automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a correct way to use 'pm.expect' to check if a value is within a specific range?",
+    "options": {
+      "A": "pm.expect(val).to.be.between(1, 10);",
+      "B": "pm.expect(val).to.be.within(1, 10);",
+      "C": "pm.expect(val).to.have.range(1, 10);",
+      "D": "pm.expect(val).to.matchRange(1, 10);"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Federated or Team Workspace, what does 'Workspace RBAC' allow an administrator to do?",
+    "options": {
+      "A": "Change the physical IP address of the user's router.",
+      "B": "Set fine-grained permissions like 'Viewer', 'Editor', or 'Admin' for specific collections.",
+      "C": "Control the speed of the user's internet connection.",
+      "D": "Access the user's private, non-shared collections."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Visualizer' (pm.visualizer.set) primarily used for in the response pane?",
+    "options": {
+      "A": "To view a heatmap of the API server's location.",
+      "B": "To use Handlebars templates to render complex JSON response data as HTML/CSS visualizations.",
+      "C": "To see a binary visualization of the SSL certificate.",
+      "D": "To draw architectural diagrams of the API endpoints."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you handle dynamic OAuth 2.0 token expiration in a collection with 500 requests?",
+    "options": {
+      "A": "Update the token in a Collection-level Pre-request script that checks for expiry and refreshes if needed.",
+      "B": "Manually update the global token variable every hour.",
+      "C": "Hardcode the token in the 'History' tab settings.",
+      "D": "Disable the authentication check on the backend server for testing."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'postman-util-lib' or external libraries in Postman scripts?",
+    "options": {
+      "A": "To create physical database connections directly to PostgreSQL.",
+      "B": "To provide advanced cryptographic functions or data manipulation utilities not in standard JS.",
+      "C": "To bypass the Chrome V8 sandbox for file system access.",
+      "D": "To automatically generate UI mockups for mobile apps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Newman reporter generates a detailed HTML summary of the test results?",
+    "options": {
+      "A": "--reporters html",
+      "B": "--reporters htmlextra",
+      "C": "--output-format web",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the benefit of using 'Collection Variables' over 'Environment Variables'?",
+    "options": {
+      "A": "They are faster to retrieve than environment variables.",
+      "B": "They are scoped strictly to the collection and move with it when exported or shared.",
+      "C": "They can store larger binary files.",
+      "D": "They cannot be seen by other team members."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access the 'iterationData' variable when running a collection with a CSV file?",
+    "options": {
+      "A": "pm.data.get('column_name')",
+      "B": "pm.iterationData.get('column_name')",
+      "C": "pm.variables.get('column_name')",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Postman Sandbox'?",
+    "options": {
+      "A": "A physical area in the Postman headquarters.",
+      "B": "The isolated execution environment where scripts run, restricting access to sensitive local machine APIs.",
+      "C": "A database used for storing dummy data.",
+      "D": "A tool to test if the Postman app can run offline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to parse a string into a URL object to extract specific parts like the port or protocol?",
+    "options": {
+      "A": "pm.url.parse()",
+      "B": "new PostmanUrl(string)",
+      "C": "pm.request.url.toObject()",
+      "D": "url.toParts()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you ensure a variable value is NOT shared with the team in a shared Environment?",
+    "options": {
+      "A": "Set it in the 'Initial Value' column only.",
+      "B": "Set it in the 'Current Value' column and do not click 'Persist All'.",
+      "C": "Select 'Secret' as the variable type.",
+      "D": "Type it in the 'Description' field instead."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the use case for 'Collection Webhooks'?",
+    "options": {
+      "A": "To trigger a Postman collection run from an external event like a GitHub commit.",
+      "B": "To create a link between Postman and a phishing site.",
+      "C": "To update the Postman application on the fly.",
+      "D": "To monitor the mouse movements of the developers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a script, what does 'pm.response.to.have.jsonBody('key')' assert?",
+    "options": {
+      "A": "That the entire body matches the key exactly.",
+      "B": "That the response is valid JSON and contains the specified key.",
+      "C": "That the key is the only thing in the response.",
+      "D": "That the key is a mandatory header."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Postman feature would you use to enforce that all APIs in a workspace use HTTPS and have specific headers?",
+    "options": {
+      "A": "Monitors",
+      "B": "API Governance",
+      "C": "Collections",
+      "D": "Mock Servers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Forking' and 'Merging' in a Postman team environment?",
+    "options": {
+      "A": "A way to delete a collection permanently.",
+      "B": "A version control workflow allowing developers to work on collection copies and merge changes into the main version.",
+      "C": "A method to split the server cost between team members.",
+      "D": "A way to duplicate an environment into two separate databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'API Network' in Postman?",
+    "options": {
+      "A": "To measure the speed of the office Wi-Fi.",
+      "B": "A public or private directory of discoverable APIs and collections within an organization or the world.",
+      "C": "To troubleshoot hardware router issues.",
+      "D": "A list of all users who are currently using the Internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you write a test to check if the response time is less than 500ms?",
+    "options": {
+      "A": "pm.test('Fast response', () => { pm.expect(pm.response.time).to.be.below(500); });",
+      "B": "pm.response.to.be.fast(500);",
+      "C": "pm.test('Fast response', () => { pm.response.duration.to.be.lessThan(500); });",
+      "D": "expect(responseTime).below(500);"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Variable Shadowing' in Postman?",
+    "options": {
+      "A": "When a variable is deleted by the server.",
+      "B": "When a variable at a narrower scope (like Local) hides a variable with the same name at a broader scope (like Global).",
+      "C": "When a variable value is encrypted.",
+      "D": "When a variable is shared across two different workspaces."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which script executes if a collection runner is configured with a data file and an environment file?",
+    "options": {
+      "A": "Only the data file variables are used.",
+      "B": "Only the environment file variables are used.",
+      "C": "Both are used, but Data variables override Environment variables.",
+      "D": "Both are used, but Environment variables override Data variables."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'Postman Flows'?",
+    "options": {
+      "A": "To animate the transition between Postman tabs.",
+      "B": "A low-code visual builder for chaining complex API sequences and data processing logic.",
+      "C": "To monitor the flow of electricity to the server rack.",
+      "D": "To see which team member is currently editing a request."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you verify if the response is an Array using Postman BDD syntax?",
+    "options": {
+      "A": "pm.expect(pm.response.json()).to.be.an('array');",
+      "B": "pm.response.json().should.be.array();",
+      "C": "pm.test('Is array', () => { pm.response.to.have.type('array'); });",
+      "D": "is_array(pm.response.json());"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Postman Echo' service?",
+    "options": {
+      "A": "To improve the acoustics of the office.",
+      "B": "A tool that returns whatever data you send it, used for testing and debugging request construction.",
+      "C": "To duplicate requests to multiple servers simultaneously.",
+      "D": "A backup server for Postman data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'pm.info' object provide in a script?",
+    "options": {
+      "A": "The user's credit card information.",
+      "B": "Metadata about the current request execution, such as iteration count and request name.",
+      "C": "A list of all team member names.",
+      "D": "The version of the operating system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a 'Secret' variable in a Postman Environment?",
+    "options": {
+      "A": "By naming the variable starting with 'SECRET_'.",
+      "B": "By selecting 'Secret' from the variable type dropdown to mask the value in the UI.",
+      "C": "By encrypting the text manually before pasting it into the value cell.",
+      "D": "Secret variables are only available in the Enterprise version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Mock Server Response Tagging'?",
+    "options": {
+      "A": "To categorize the physical servers.",
+      "B": "To match specific mock responses based on request headers, params, or body content.",
+      "C": "To mark responses that should be deleted.",
+      "D": "To show who wrote the mock response."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to clear all Global variables in a single command?",
+    "options": {
+      "A": "pm.globals.clear();",
+      "B": "pm.globals.deleteAll();",
+      "C": "pm.globals.reset();",
+      "D": "globals.empty();"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'API Builder' in Postman?",
+    "options": {
+      "A": "To build physical hardware for APIs.",
+      "B": "A comprehensive tool to design, develop, test, and version APIs using specifications like OpenAPI.",
+      "C": "To write the code for the backend server in Java.",
+      "D": "To monitor the uptime of the Postman website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a script, how do you get the number of the current iteration during a collection run?",
+    "options": {
+      "A": "pm.info.iteration",
+      "B": "pm.runner.count",
+      "C": "postman.iterationNumber",
+      "D": "pm.info.getIteration()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Postman Interceptor' bridge used for?",
+    "options": {
+      "A": "To connect the Postman app to a printer.",
+      "B": "To sync cookies and browser requests directly between Chrome and the Postman desktop app.",
+      "C": "To bypass the corporate firewall.",
+      "D": "To translate the API response into multiple languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which assertion checks if a property 'id' is a number in a JSON response?",
+    "options": {
+      "A": "pm.expect(jsonData.id).to.be.a('number');",
+      "B": "pm.expect(jsonData.id).to.have.type('int');",
+      "C": "pm.test('ID is number', () => { jsonData.id.should.be.numeric(); });",
+      "D": "pm.response.id.isNumber();"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Private Networks' in Postman?",
+    "options": {
+      "A": "To provide free internet to employees.",
+      "B": "To allow Postman cloud features (like Monitors) to securely access APIs behind a corporate firewall.",
+      "C": "To hide API traffic from the government.",
+      "D": "To speed up the local network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you handle 'SSL Certificate' issues for a specific request that uses a self-signed certificate?",
+    "options": {
+      "A": "Change the request method to POST.",
+      "B": "Disable 'SSL certificate verification' in the request-specific or global settings.",
+      "C": "Delete the certificate from the computer.",
+      "D": "Use HTTP instead of HTTPS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API Documentation Versioning'?",
+    "options": {
+      "A": "Tracking the version of the Postman app.",
+      "B": "Maintaining and publishing different versions of documentation that correspond to different API releases.",
+      "C": "Counting the number of pages in the documentation.",
+      "D": "A way to see which developer wrote which part of the text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which script method retrieves the name of the request being currently executed?",
+    "options": {
+      "A": "pm.info.requestName",
+      "B": "pm.request.name",
+      "C": "pm.execution.request.label",
+      "D": "pm.info.getRequestName()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Token Refresh' automation?",
+    "options": {
+      "A": "Manually typing a new token every 10 minutes.",
+      "B": "Writing a script that detects a 401 error, calls a login endpoint, and updates the token variable automatically.",
+      "C": "Using a token that never expires.",
+      "D": "Restarting the Postman app to get a new token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method checks if an object is empty in a Postman test?",
+    "options": {
+      "A": "pm.expect(obj).to.be.empty;",
+      "B": "pm.expect(Object.keys(obj).length).to.eql(0);",
+      "C": "pm.test('Empty', () => { obj.isEmpty(); });",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Workspace Overview'?",
+    "options": {
+      "A": "To see a map of the office.",
+      "B": "To view high-level activity, README documentation, and a summary of all items in the workspace.",
+      "C": "To change the workspace color.",
+      "D": "To see the server's uptime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you perform a 'Soft Assertion' in Postman where the script continues even if a check fails?",
+    "options": {
+      "A": "Standard pm.test assertions are inherently 'hard'; for soft checks, use conditional logic and console.log.",
+      "B": "Use the pm.softExpect() method.",
+      "C": "Add a 'continue: true' flag to the test function.",
+      "D": "Use a try-catch block around the entire test."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Postman Desktop Agent' and why is it needed for the web version?",
+    "options": {
+      "A": "A support representative.",
+      "B": "A local application that allows the Postman web browser version to bypass CORS and make local network requests.",
+      "C": "A tool to clean the browser cache.",
+      "D": "A robot that writes APIs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature tracks every change made to a collection by any team member?",
+    "options": {
+      "A": "History",
+      "B": "Changelog (Collection Activity Feed)",
+      "C": "Runner",
+      "D": "Mock Servers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you specify the 'Newman' execution to fail if any test case within the collection fails?",
+    "options": {
+      "A": "--fail-on-test",
+      "B": "--bail",
+      "C": "--stop-on-error",
+      "D": "--exit-code-1"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pre-request Script Inheritance'?",
+    "options": {
+      "A": "When a child request inherits the scripts defined at the Folder or Collection level.",
+      "B": "When a developer inherits a collection from a former employee.",
+      "C": "When a script is copied from a website.",
+      "D": "When a script is translated to Python."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which assertion checks if a response header 'Server' exists?",
+    "options": {
+      "A": "pm.response.to.have.header('Server');",
+      "B": "pm.expect(pm.response.headers.has('Server')).to.be.true;",
+      "C": "pm.expect(pm.header.exists('Server')).to.be.true;",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'API Lifecycle' management in Postman?",
+    "options": {
+      "A": "To track how long the Postman app lasts on a computer.",
+      "B": "To manage an API through design, testing, deployment, and eventual retirement phases.",
+      "C": "To monitor the server's lifespan.",
+      "D": "To schedule the deletion of old user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method allows you to generate an MD5 hash of a string in a Postman script?",
+    "options": {
+      "A": "pm.crypto.md5(str)",
+      "B": "CryptoJS.MD5(str).toString()",
+      "C": "md5(str)",
+      "D": "pm.hash('md5', str)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Public API Network'?",
+    "options": {
+      "A": "A private database of passwords.",
+      "B": "A global directory of public APIs hosted on Postman for anyone to explore and fork.",
+      "C": "A network that only works in libraries.",
+      "D": "A way to share your home Wi-Fi password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you view 'Dynamic Metadata' of a request during execution?",
+    "options": {
+      "A": "Use console.log(pm.request) in the script.",
+      "B": "Look at the 'Documentation' tab.",
+      "C": "Check the 'History' tab.",
+      "D": "It is not possible to view metadata."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workspace Collaboration'?",
+    "options": {
+      "A": "Working in a shared office.",
+      "B": "Multiple team members working simultaneously on the same collections and environments with real-time syncing.",
+      "C": "Sharing a computer screen.",
+      "D": "Sending emails to team members."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which dynamic variable returns a random status (like 'active' or 'pending')?",
+    "options": {
+      "A": "{{$randomStatus}}",
+      "B": "{{$randomProductMaterial}}",
+      "C": "{{$randomPhrase}}",
+      "D": "There is no built-in status variable; you must use an array and Math.random()."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the role of 'Postman Elements'?",
+    "options": {
+      "A": "The physical parts of the computer.",
+      "B": "A set of UI components to embed Postman documentation directly into your own website.",
+      "C": "The chemical elements of the Postman logo.",
+      "D": "A list of all team member names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you perform 'Load Testing' in Postman (v10+)?",
+    "options": {
+      "A": "By clicking 'Send' very fast.",
+      "B": "Using the built-in 'Performance' tab in the Collection Runner to simulate multiple virtual users.",
+      "C": "By opening 100 browser tabs.",
+      "D": "Load testing is only possible via third-party tools like JMeter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment Forking'?",
+    "options": {
+      "A": "Deleting an environment.",
+      "B": "Creating a separate version of an environment to change variables without affecting the production team's version.",
+      "C": "Splitting an environment into two different databases.",
+      "D": "Exporting an environment to a CSV format."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which script method sets a Global variable?",
+    "options": {
+      "A": "pm.globals.set('key', 'val');",
+      "B": "pm.variables.setGlobal('key', 'val');",
+      "C": "globals.update('key', 'val');",
+      "D": "postman.setGlobal('key', 'val');"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Security Audit' in Postman?",
+    "options": {
+      "A": "A person who checks your ID.",
+      "B": "A feature that scans your API definition for security weaknesses (like exposed secrets or missing auth).",
+      "C": "A tool to delete insecure requests.",
+      "D": "A way to see the server's firewall logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access 'Cookies' for a different domain than the request URL in a script?",
+    "options": {
+      "A": "pm.cookies.jar().get('domain', 'name', callback);",
+      "B": "pm.cookies.get('domain', 'name');",
+      "C": "cookies['name'];",
+      "D": "pm.allCookies.get('name');"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Script Debugging' in Postman?",
+    "options": {
+      "A": "Killing insects on the server.",
+      "B": "Using console.log() and the Postman Console to inspect variable values and execution flow.",
+      "C": "Deleting buggy code automatically.",
+      "D": "Reinstalling the Postman application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Newman option saves the output to a specific JSON file?",
+    "options": {
+      "A": "--output results.json",
+      "B": "-r json --reporter-json-export results.json",
+      "C": "--save results.json",
+      "D": "newman run collection.json > results.json"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic Request Construction'?",
+    "options": {
+      "A": "Building the server on the fly.",
+      "B": "Using Pre-request scripts to modify the URL, headers, or body based on logic before the request is sent.",
+      "C": "Changing the request method randomly.",
+      "D": "Building the UI as the user types."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which pm method returns the status text (e.g., 'OK' or 'Not Found')?",
+    "options": {
+      "A": "pm.response.status",
+      "B": "pm.response.statusText",
+      "C": "pm.response.reason()",
+      "D": "pm.response.message"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Collection Multi-run' (Iteration)?",
+    "options": {
+      "A": "Running a collection on two different computers.",
+      "B": "Executing a collection multiple times in a row, often with different data from a CSV/JSON file.",
+      "C": "Running two collections at once.",
+      "D": "A collection that runs forever."
+    },
+    "answer": "B"
+  }
+  ]
+}

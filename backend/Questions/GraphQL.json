@@ -1,0 +1,1924 @@
+{ 
+  "skill": "GraphQL", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of GraphQL?",
+    "options": {
+      "A": "To query databases directly from the browser.",
+      "B": "To provide a flexible and efficient way to fetch data from APIs.",
+      "C": "To replace the need for a web server.",
+      "D": "To act as a new type of operating system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which company originally developed GraphQL?",
+    "options": {
+      "A": "Google",
+      "B": "Microsoft",
+      "C": "Facebook",
+      "D": "Amazon"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'G' in GraphQL stand for?",
+    "options": {
+      "A": "Global",
+      "B": "Graph",
+      "C": "Graphical",
+      "D": "Generated"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operation is used to read data from a GraphQL server?",
+    "options": {
+      "A": "Mutation",
+      "B": "Subscription",
+      "C": "Query",
+      "D": "Fetch"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which operation is used to modify or create data in GraphQL?",
+    "options": {
+      "A": "Query",
+      "B": "Subscription",
+      "C": "Mutation",
+      "D": "Update"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a GraphQL 'Schema'?",
+    "options": {
+      "A": "A list of all users in the database.",
+      "B": "A blueprint that defines the available types and fields for an API.",
+      "C": "The CSS styling for the API response.",
+      "D": "The hardware configuration of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How many endpoints does a typical GraphQL API expose?",
+    "options": {
+      "A": "One for every database table.",
+      "B": "A single endpoint (usually /graphql).",
+      "C": "Two: one for GET and one for POST.",
+      "D": "Multiple endpoints based on the version of the API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character is used to indicate that a field is non-nullable (mandatory) in SDL?",
+    "options": {
+      "A": "?",
+      "B": "!",
+      "C": "*",
+      "D": "&"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a built-in scalar type in GraphQL?",
+    "options": {
+      "A": "Object",
+      "B": "Array",
+      "C": "String",
+      "D": "Map"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the result of 'Over-fetching' in REST APIs?",
+    "options": {
+      "A": "The client receives more data than it actually needs.",
+      "B": "The server crashes due to too many requests.",
+      "C": "The client receives no data at all.",
+      "D": "The client receives data from the wrong user."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to explore and test GraphQL queries in the browser?",
+    "options": {
+      "A": "Postman (Legacy versions only)",
+      "B": "GraphiQL",
+      "C": "SQL Management Studio",
+      "D": "VS Code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In GraphQL, the client defines the shape of the data it receives.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scalar type would be best for a unique database identifier?",
+    "options": {
+      "A": "Int",
+      "B": "ID",
+      "C": "Boolean",
+      "D": "Float"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define an array of Strings in a GraphQL schema?",
+    "options": {
+      "A": "String[]",
+      "B": "(String)",
+      "C": "[String]",
+      "D": "{String}"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of a 'Resolver' function?",
+    "options": {
+      "A": "To handle CSS styling in the frontend.",
+      "B": "To fetch the actual data for a specific field in the schema.",
+      "C": "To validate the user's password.",
+      "D": "To compress the API response."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operation allows for real-time data updates via WebSockets?",
+    "options": {
+      "A": "Query",
+      "B": "Mutation",
+      "C": "Subscription",
+      "D": "LiveUpdate"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: GraphQL can work with any data source, including SQL, NoSQL, or other APIs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Under-fetching'?",
+    "options": {
+      "A": "The client does not get enough data, leading to multiple API calls.",
+      "B": "The server is running out of storage.",
+      "C": "The query is missing a semicolon.",
+      "D": "The data is returned too quickly."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scalar type handles decimal numbers like 19.99?",
+    "options": {
+      "A": "Int",
+      "B": "Float",
+      "C": "Double",
+      "D": "Decimal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SDL, what keyword is used to define an Enum?",
+    "options": {
+      "A": "list",
+      "B": "enum",
+      "C": "collection",
+      "D": "choices"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you comment a single line in a GraphQL Schema file?",
+    "options": {
+      "A": "// Comment",
+      "B": "# Comment",
+      "C": "-- Comment",
+      "D": "/* Comment */"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default HTTP method used for GraphQL queries?",
+    "options": {
+      "A": "GET",
+      "B": "POST",
+      "C": "PUT",
+      "D": "DELETE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every GraphQL response has a top-level 'data' or 'errors' key.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which type of operation is generally considered 'read-only'?",
+    "options": {
+      "A": "Mutation",
+      "B": "Query",
+      "C": "Subscription",
+      "D": "Upload"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Strongly Typed' mean in the context of GraphQL?",
+    "options": {
+      "A": "The server is very secure.",
+      "B": "All data must conform to the types defined in the schema.",
+      "C": "The programmer must type very fast.",
+      "D": "Variables can change types whenever they want."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How are fields separated in a GraphQL query?",
+    "options": {
+      "A": "By semicolons",
+      "B": "By commas (optional, but spaces/newlines are standard)",
+      "C": "By periods",
+      "D": "By ampersands"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which scalar type is used for True/False values?",
+    "options": {
+      "A": "Bit",
+      "B": "Boolean",
+      "C": "Flag",
+      "D": "Logic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Object Type'?",
+    "options": {
+      "A": "A primitive like a number.",
+      "B": "A group of fields that together define a entity (like a User).",
+      "C": "A database connection string.",
+      "D": "A system error message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL is only used with JavaScript backends.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Arguments' in a GraphQL field?",
+    "options": {
+      "A": "To slow down the server.",
+      "B": "To filter or identify specific data (like an ID for a user).",
+      "C": "To provide comments for other developers.",
+      "D": "To define the color of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the root type used to define all entry points for data modification?",
+    "options": {
+      "A": "RootQuery",
+      "B": "Mutation",
+      "C": "DataChange",
+      "D": "Modifier"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a GraphQL query, what are curly braces '{}' used for?",
+    "options": {
+      "A": "To define the database name.",
+      "B": "To define the selection set of fields being requested.",
+      "C": "To indicate a comment.",
+      "D": "To start a mathematical equation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL allows a client to request multiple unrelated resources in a single request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'null' value in a field mean in a non-mandatory field?",
+    "options": {
+      "A": "The data does not exist for that specific field.",
+      "B": "The server has crashed.",
+      "C": "The user is not logged in.",
+      "D": "The query was invalid."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword defines the entry point for all read operations in a schema?",
+    "options": {
+      "A": "Search",
+      "B": "Query",
+      "C": "Fetch",
+      "D": "Getter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you represent a mandatory list of mandatory Strings?",
+    "options": {
+      "A": "[String]",
+      "B": "[String!]!",
+      "C": "[String]!",
+      "D": "![String!]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GraphiQL' usually categorized as?",
+    "options": {
+      "A": "An IDE (Integrated Development Environment).",
+      "B": "A database driver.",
+      "C": "A network protocol.",
+      "D": "A browser extension."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: GraphQL is a query language for your database.",
+    "options": {
+      "A": "False (It is a query language for your API).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is the correct way to pass an ID argument in a query?",
+    "options": {
+      "A": "user(id = 1)",
+      "B": "user(id: 1)",
+      "C": "user{id: 1}",
+      "D": "user(id => 1)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a client requests a field that does not exist in the schema?",
+    "options": {
+      "A": "The server returns an error during the validation phase.",
+      "B": "The server returns 'null' for that field.",
+      "C": "The server crashes.",
+      "D": "The server returns a random field instead."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Introspection' in GraphQL?",
+    "options": {
+      "A": "The server's ability to self-destruct.",
+      "B": "The ability to query the server for its own schema details.",
+      "C": "A way to hide data from users.",
+      "D": "A performance bug."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What character is used for aliases in a query?",
+    "options": {
+      "A": "=",
+      "B": ":",
+      "C": "->",
+      "D": "as"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL is strictly used over HTTP.",
+    "options": {
+      "A": "False (It is protocol-agnostic, though HTTP is most common).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scalar is used for whole numbers like 42?",
+    "options": {
+      "A": "Float",
+      "B": "Int",
+      "C": "Number",
+      "D": "Digit"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What keyword is used to reuse a set of fields in multiple queries?",
+    "options": {
+      "A": "Template",
+      "B": "Fragment",
+      "C": "Snippet",
+      "D": "Macro"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In GraphQL, what is a 'Type'?",
+    "options": {
+      "A": "A font used in the UI.",
+      "B": "A definition of what kind of data can be returned.",
+      "C": "A category of database.",
+      "D": "A type of network cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL responses are typically in JSON format.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the '@deprecated' directive?",
+    "options": {
+      "A": "To delete a field from the database.",
+      "B": "To signal to clients that a field should no longer be used.",
+      "C": "To encrypt a field.",
+      "D": "To make a field mandatory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these allows you to rename the result of a field in your response?",
+    "options": {
+      "A": "Fragments",
+      "B": "Aliases",
+      "C": "Variables",
+      "D": "Directives"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'root' of a GraphQL schema?",
+    "options": {
+      "A": "The database admin password.",
+      "B": "The entry points for the Query, Mutation, and Subscription types.",
+      "C": "The first line of the code.",
+      "D": "The server's IP address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL supports both single-line and multi-line comments.",
+    "options": {
+      "A": "True (using # and \"\"\" respectively).",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scalar represents a unique identifier serializable as a String?",
+    "options": {
+      "A": "Key",
+      "B": "ID",
+      "C": "UUID",
+      "D": "UID"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Input Type'?",
+    "options": {
+      "A": "A specialized object type used for passing complex arguments to mutations.",
+      "B": "A keyboard event.",
+      "C": "A type of database.",
+      "D": "A frontend form component."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: All GraphQL fields are nullable by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you define a list of non-nullable integers?",
+    "options": {
+      "A": "[Int]",
+      "B": "[Int!]",
+      "C": "[!Int]",
+      "D": "(Int!)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT a root operation type?",
+    "options": {
+      "A": "Query",
+      "B": "Mutation",
+      "C": "Delete",
+      "D": "Subscription"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What character is used for variables in a GraphQL query string?",
+    "options": {
+      "A": "@",
+      "B": "$",
+      "C": "!",
+      "D": "&"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL reduces the number of network requests needed to fetch complex data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scalar type is used for a string of text?",
+    "options": {
+      "A": "Text",
+      "B": "Char",
+      "C": "String",
+      "D": "Varchar"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What keyword is used to define an Interface in SDL?",
+    "options": {
+      "A": "interface",
+      "B": "protocol",
+      "C": "blueprint",
+      "D": "abstract"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you signify that an operation is a Mutation?",
+    "options": {
+      "A": "POST { ... }",
+      "B": "mutation { ... }",
+      "C": "change { ... }",
+      "D": "update { ... }"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The selection set is required for every query.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SDL'?",
+    "options": {
+      "A": "Schema Definition Language.",
+      "B": "Structured Data Link.",
+      "C": "Standard Development Level.",
+      "D": "Simple Data Layout."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a valid GraphQL field name?",
+    "options": {
+      "A": "2ndUser",
+      "B": "first_name",
+      "C": "user-name",
+      "D": "class"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How many root types can a schema have?",
+    "options": {
+      "A": "Only one.",
+      "B": "Up to three (Query, Mutation, Subscription).",
+      "C": "Exactly four.",
+      "D": "Unlimited."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL results are always hierarchical.",
+    "options": {
+      "A": "True (The response shape matches the query shape).",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Resolver' function in a GraphQL server?",
+    "options": {
+      "A": "To convert GraphQL queries into CSS styles.",
+      "B": "To provide the actual data for a specific field in the schema by fetching it from a data source.",
+      "C": "To act as a load balancer for the API.",
+      "D": "To minify the JSON response before it is sent to the client."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which argument in a resolver function contains the arguments passed to the field in the query?",
+    "options": {
+      "A": "parent",
+      "B": "args",
+      "C": "context",
+      "D": "info"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of using 'Aliases' in a GraphQL query?",
+    "options": {
+      "A": "To hide the names of the fields from the user.",
+      "B": "To request the same field multiple times with different arguments in a single query.",
+      "C": "To bypass the schema's type checking.",
+      "D": "To automatically translate field names into different languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a GraphQL query, what does a 'Fragment' allow you to do?",
+    "options": {
+      "A": "Split a query into multiple network requests for parallel processing.",
+      "B": "Define a reusable set of fields that can be included in multiple queries.",
+      "C": "Delete a portion of the schema temporarily.",
+      "D": "Encrypt a specific part of the data in transit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Input Object Type' primarily used for?",
+    "options": {
+      "A": "Defining the layout of a web form in the frontend.",
+      "B": "Passing complex objects as arguments to mutations, keeping the schema organized.",
+      "C": "Tracking the user's keyboard input on the server.",
+      "D": "Creating a list of all possible database tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which resolver argument is a shared object used for global state like authentication and database connections?",
+    "options": {
+      "A": "root",
+      "B": "context",
+      "C": "args",
+      "D": "metadata"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you conditionally include a field in a query response using a boolean variable?",
+    "options": {
+      "A": "Using the @if directive.",
+      "B": "Using the @include(if: Boolean) directive.",
+      "C": "Using a JavaScript if statement inside the query string.",
+      "D": "Using the @maybe directive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of the '@skip(if: true)' directive on a field?",
+    "options": {
+      "A": "The field is included regardless of the value.",
+      "B": "The field is excluded from the query response.",
+      "C": "The server throws an error.",
+      "D": "The field returns a null value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A GraphQL field can have multiple arguments of different types.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to apply a fragment to a query?",
+    "options": {
+      "A": "include",
+      "B": "...",
+      "C": "using",
+      "D": "apply"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Schema Delegation'?",
+    "options": {
+      "A": "Deleting a schema from the server.",
+      "B": "Forwarding part of a query to another GraphQL server to be resolved.",
+      "C": "Assigning an administrator to manage the schema.",
+      "D": "Changing the schema version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'info' argument in a resolver function?",
+    "options": {
+      "A": "To provide the user's login information.",
+      "B": "To provide technical information about the query's execution state and field selection set.",
+      "C": "To list all available resolvers in the system.",
+      "D": "To show the server's CPU usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Union' type differ from an 'Interface' in GraphQL?",
+    "options": {
+      "A": "There is no difference.",
+      "B": "Interfaces require implementing types to share specific fields; Unions do not.",
+      "C": "Unions are only for numbers; Interfaces are for strings.",
+      "D": "Interfaces are faster to execute than Unions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL Subscriptions are usually implemented over WebSockets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Inline Fragment' used for?",
+    "options": {
+      "A": "Defining a fragment inside a CSS file.",
+      "B": "Accessing fields on a specific type within a Union or Interface result.",
+      "C": "Naming a query.",
+      "D": "Speeding up network requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character is used to define an Alias in a query?",
+    "options": {
+      "A": "=",
+      "B": ":",
+      "C": "->",
+      "D": "as"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a resolver returns 'null' for a field marked as non-nullable (!) in the schema?",
+    "options": {
+      "A": "The field is ignored.",
+      "B": "A GraphQL execution error is triggered, and the null value bubbles up to the next nullable parent.",
+      "C": "The server returns a default string.",
+      "D": "The client automatically retries the request."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the '@deprecated' directive in a schema?",
+    "options": {
+      "A": "To delete the field from the database immediately.",
+      "B": "To mark a field as no longer recommended for use while keeping it functional for backward compatibility.",
+      "C": "To encrypt the field.",
+      "D": "To make the field private."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid use case for GraphQL Subscriptions?",
+    "options": {
+      "A": "Sending a bulk email to users.",
+      "B": "Real-time chat messaging or live sports score updates.",
+      "C": "Formatting a PDF document.",
+      "D": "Deleting old database logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How are variables declared in a GraphQL query string?",
+    "options": {
+      "A": "By prefixing the name with an ampersand (&).",
+      "B": "By prefixing the name with a dollar sign ($).",
+      "C": "By using curly braces around the name.",
+      "D": "By using the 'var' keyword."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A single resolver can fetch data from multiple databases or REST APIs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'root' or 'parent' argument in a resolver function?",
+    "options": {
+      "A": "The system administrator's user object.",
+      "B": "The object returned by the resolver of the parent field in the query hierarchy.",
+      "C": "The root of the server's file system.",
+      "D": "The first field listed in the schema."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a schema, how do you define a field that takes an optional 'limit' argument?",
+    "options": {
+      "A": "field(limit: Int!)",
+      "B": "field(limit: Int)",
+      "C": "field[limit: Int]",
+      "D": "field{limit: Int}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Schema Stitching'?",
+    "options": {
+      "A": "Merging multiple GraphQL schemas into a single, unified API gateway.",
+      "B": "Fixing a broken schema file with code.",
+      "C": "Adding comments to a schema.",
+      "D": "Linking a schema to an HTML file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which directive can be used to prevent a field from being queried if a specific condition is true?",
+    "options": {
+      "A": "@include",
+      "B": "@skip",
+      "C": "@hidden",
+      "D": "@ignore"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL Enum values must be unique within their type.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'variables' object in an HTTP request to a GraphQL server?",
+    "options": {
+      "A": "To store the server's environment variables.",
+      "B": "To pass dynamic values separately from the query string to improve reusability and security.",
+      "C": "To count the number of fields in the query.",
+      "D": "To define the response format (JSON/XML)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you specify a default value for a variable in a query definition?",
+    "options": {
+      "A": "$var: Int = 10",
+      "B": "$var: Int (10)",
+      "C": "$var: Int : 10",
+      "D": "$var: Int -> 10"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'Scalar' serialization function do?",
+    "options": {
+      "A": "Calculates the sum of an array.",
+      "B": "Converts an internal value into a format that can be sent over the wire (like a string for a Date).",
+      "C": "Deletes the scalar from the schema.",
+      "D": "Converts JSON into XML."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every field on an Object type in GraphQL can potentially take arguments.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to access the specific type fields in a fragment on an Interface?",
+    "options": {
+      "A": "on",
+      "B": "as",
+      "C": "type",
+      "D": "from"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Abstract Type' in GraphQL?",
+    "options": {
+      "A": "A type that has no name.",
+      "B": "A type that cannot be returned directly, such as an Interface or a Union.",
+      "C": "A type that is only used for numbers.",
+      "D": "A type that is hidden from introspection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Query Batching' (Client-side)?",
+    "options": {
+      "A": "Deleting multiple queries at once.",
+      "B": "Combining multiple GraphQL operations into a single HTTP request to save on network overhead.",
+      "C": "Formatting queries to be readable.",
+      "D": "Running queries on different servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use a Mutation to perform a read-only action, but it is considered bad practice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a schema, how do you define a list that can be null, but if it exists, its elements cannot be null?",
+    "options": {
+      "A": "[String!]",
+      "B": "[String]!",
+      "C": "![String!]",
+      "D": "[String!]"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scalar handles a unique identifier, often used for caching in client-side libraries?",
+    "options": {
+      "A": "String",
+      "B": "ID",
+      "C": "UID",
+      "D": "Key"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'parseLiteral' method in a custom scalar implementation?",
+    "options": {
+      "A": "To convert an AST node (from a hardcoded value in a query) into an internal C# or JS value.",
+      "B": "To read a file from the server.",
+      "C": "To print the schema.",
+      "D": "To handle errors."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you handle 'Partial Success' in a GraphQL response?",
+    "options": {
+      "A": "By ignoring the 'errors' array.",
+      "B": "By checking the 'data' object for partial results while simultaneously inspecting the 'errors' array.",
+      "C": "By restarting the server.",
+      "D": "By alerting the user that the whole request failed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Fragment can be defined for a specific Object type, an Interface, or a Union.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Operation Names' in a GraphQL query?",
+    "options": {
+      "A": "To give the server a password.",
+      "B": "To provide a unique name for a query, which is helpful for server-side logging and debugging.",
+      "C": "To rename the root element of the JSON.",
+      "D": "To speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character indicates an optional field in some non-SDL documentation (though in SDL, all fields are optional by default)?",
+    "options": {
+      "A": "!",
+      "B": "?",
+      "C": "*",
+      "D": "$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Default Resolver' do?",
+    "options": {
+      "A": "Crashes the server if no resolver is found.",
+      "B": "Automatically looks for a property on the parent object with the same name as the field.",
+      "C": "Returns a random number.",
+      "D": "Always returns null."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GraphQL mutations are executed serially, while queries can be executed in parallel.",
+    "options": {
+      "A": "True (To avoid side-effect collisions).",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to see the performance of each resolver in a request?",
+    "options": {
+      "A": "GraphiQL",
+      "B": "Apollo Tracing",
+      "C": "Postman",
+      "D": "React DevTools"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'ID' type primarily designed for?",
+    "options": {
+      "A": "To store a user's driver license number.",
+      "B": "To provide a unique identifier that tools like Apollo use to normalize the local cache.",
+      "C": "To count the number of rows.",
+      "D": "To identify the server version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you indicate a field is both a list and non-nullable in SDL?",
+    "options": {
+      "A": "[Type!]",
+      "B": "[Type]!",
+      "C": "[Type!]",
+      "D": "![Type]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Introspection' used for by developer tools?",
+    "options": {
+      "A": "To hack the server.",
+      "B": "To query the server's schema and provide features like autocomplete and documentation in GraphiQL.",
+      "C": "To encrypt queries.",
+      "D": "To monitor network traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to define a set of constant options in the schema?",
+    "options": {
+      "A": "list",
+      "B": "enum",
+      "C": "choice",
+      "D": "option"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Directives can be used in both the Schema definition and the Query string.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if a client requests only 2 out of 10 available fields in a type?",
+    "options": {
+      "A": "The server sends all 10 fields anyway.",
+      "B": "The server only resolves and sends the 2 requested fields, saving bandwidth.",
+      "C": "The server throws a 'Missing Data' error.",
+      "D": "The client must pay a fee."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between '$var: String' and '$var: String!' in a query variable declaration?",
+    "options": {
+      "A": "One is for numbers; the other is for letters.",
+      "B": "One is optional; the other is mandatory.",
+      "C": "There is no difference.",
+      "D": "One is encrypted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which resolver argument is usually used to store information about the current user's permissions?",
+    "options": {
+      "A": "parent",
+      "B": "context",
+      "C": "args",
+      "D": "info"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Nullable' field?",
+    "options": {
+      "A": "A field that must always return a value.",
+      "B": "A field that can return 'null' if the data is missing or inaccessible.",
+      "C": "A field that is hidden from the user.",
+      "D": "A field with an error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An Input Object Type can contain other Input Object Types, but not standard Object Types.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a double underscore prefix (like __schema) indicate in a query?",
+    "options": {
+      "A": "A private field.",
+      "B": "A reserved field used for Introspection.",
+      "C": "A database table name.",
+      "D": "A system error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is the correct way to write an inline fragment in a query for a Search result Union?",
+    "options": {
+      "A": "... on User { name }",
+      "B": "on User { name }",
+      "C": "User { name }",
+      "D": "fragment User { name }"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Scalar Parsing'?",
+    "options": {
+      "A": "To convert a JSON value into an internal data type for processing.",
+      "B": "To read a file.",
+      "C": "To count the number of fields.",
+      "D": "To handle errors."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: GraphQL is designed to solve the problem of multiple network round-trips commonly found in REST.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to provide an implementation for a field in a class-based GraphQL server (like Java or C#)?",
+    "options": {
+      "A": "Handler",
+      "B": "Resolver",
+      "C": "Fetcher",
+      "D": "Either B or C depending on the library"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Persisted Queries' used for?",
+    "options": {
+      "A": "Saving results to a database forever.",
+      "B": "Storing a mapping of query IDs to query strings on the server to reduce bandwidth and increase security.",
+      "C": "Keeping a user logged in.",
+      "D": "Backing up the schema."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a mandatory list of non-nullable Strings in SDL?",
+    "options": {
+      "A": "[String!]",
+      "B": "[String!]!",
+      "C": "[String]!",
+      "D": "![String!]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Fragments cannot access variables defined in the operation that includes them.",
+    "options": {
+      "A": "False (They have full access to operation variables).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scalar type is appropriate for a field representing a person's age (whole number)?",
+    "options": {
+      "A": "Float",
+      "B": "Int",
+      "C": "String",
+      "D": "Boolean"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Execution Algorithm' for a GraphQL Query?",
+    "options": {
+      "A": "It executes all fields in a single SQL join.",
+      "B": "It recursively resolves fields starting from the root of the tree.",
+      "C": "It processes all fields alphabetically.",
+      "D": "It only resolves the first field."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a '!' at the end of a type mean in a query's variable definition (e.g., $id: ID!)?",
+    "options": {
+      "A": "The ID is very important.",
+      "B": "The ID argument is mandatory for the operation.",
+      "C": "The ID is encrypted.",
+      "D": "The ID must be a number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'N+1 problem' in GraphQL and why does it occur?",
+    "options": {
+      "A": "It occurs when a query fetches a list of N items and then executes N additional database queries to resolve a nested field for each item.",
+      "B": "It is a syntax error caused by adding more than one root type.",
+      "C": "It refers to having one more subscriber than the server can handle.",
+      "D": "It happens when the schema is larger than the data source."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does the 'DataLoader' utility mitigate the N+1 problem?",
+    "options": {
+      "A": "By compressing the JSON response.",
+      "B": "By batching multiple individual load requests into a single batch operation and caching results within a single request.",
+      "C": "By converting GraphQL into raw binary format.",
+      "D": "By preventing users from nesting queries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Schema Federation' in the context of Apollo?",
+    "options": {
+      "A": "A way to divide a single graph into multiple subgraphs that can be owned and developed by different teams.",
+      "B": "A legal agreement between API providers.",
+      "C": "A method for encrypting the entire schema.",
+      "D": "A tool for translating GraphQL into XML."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of the 'Gateway' in a Federated GraphQL architecture?",
+    "options": {
+      "A": "To act as a firewall for the database.",
+      "B": "To compose multiple subgraphs into a single schema and route portions of a query to the appropriate services.",
+      "C": "To store all the data in a central cache.",
+      "D": "To minify the JavaScript client code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Federation, what does the '@key' directive define for an Object type?",
+    "options": {
+      "A": "The primary key used to uniquely identify and fetch an entity instance across different subgraphs.",
+      "B": "A password for the field.",
+      "C": "The sort order of the results.",
+      "D": "The encryption algorithm for the ID scalar."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Introspection' and why is it often disabled in production environments?",
+    "options": {
+      "A": "It is a feature that allows querying the schema itself, which could leak internal API structure to malicious actors.",
+      "B": "It is a tool for self-healing servers that consumes too much CPU.",
+      "C": "It is a method for database indexing that is slow.",
+      "D": "It is a type of auto-generated documentation that is too large for the web."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Query Complexity Analysis'?",
+    "options": {
+      "A": "Calculating a numerical score based on the fields and depth of a query to reject overly expensive requests.",
+      "B": "Measuring how long it takes a developer to write a query.",
+      "C": "Counting the number of users on the site.",
+      "D": "Analyzing the spelling of the query."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Custom Directive' and where can it be applied?",
+    "options": {
+      "A": "A user-defined annotation that can be applied to fields, arguments, or types to modify execution logic.",
+      "B": "A new type of database column.",
+      "C": "A CSS rule for GraphiQL.",
+      "D": "A command that only works on the CLI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Schema Stitching'?",
+    "options": {
+      "A": "To manually merge multiple GraphQL APIs into a single endpoint by wrapping and delegating queries.",
+      "B": "To fix errors in a .graphql file.",
+      "C": "To add comments to a schema.",
+      "D": "To link a schema to a CSS file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do 'Abstract Syntax Trees' (AST) play a role in GraphQL execution?",
+    "options": {
+      "A": "The query string is parsed into an AST, which the server then traverses to validate and execute against the schema.",
+      "B": "They are used to represent the database table hierarchy.",
+      "C": "They store the physical addresses of the servers.",
+      "D": "They are a type of visual chart in GraphiQL."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deferred Execution' using the @defer directive?",
+    "options": {
+      "A": "Allowing the server to send the most critical data first and stream slower fields as they become available.",
+      "B": "Canceling a query if it takes too long.",
+      "C": "Scheduling a query to run at midnight.",
+      "D": "Moving the server to a different region."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Execution Context' in a GraphQL resolver?",
+    "options": {
+      "A": "The physical location of the server.",
+      "B": "The state maintained for a single request, including auth data, database loaders, and shared utilities.",
+      "C": "The history of all queries ever run.",
+      "D": "The version of the GraphQL engine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Schema Masking'?",
+    "options": {
+      "A": "Hiding specific parts of the schema from certain clients based on authorization levels.",
+      "B": "Obfuscating the code to make it unreadable.",
+      "C": "Encrypting the names of the fields.",
+      "D": "Using a VPN for the API."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of scaling, what is 'Persisted Queries'?",
+    "options": {
+      "A": "Sending a hash of the query instead of the full string to reduce bandwidth and prevent arbitrary queries.",
+      "B": "Storing results in a database forever.",
+      "C": "A query that never ends.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lookahead' optimization in a resolver?",
+    "options": {
+      "A": "Inspecting the query AST to see which child fields are requested so they can be fetched in a single SQL join.",
+      "B": "Predicting what the user will type next.",
+      "C": "Caching results before they are requested.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'Emitting' a schema vs 'Building' a schema?",
+    "options": {
+      "A": "Emitting refers to generating SDL from code (Code-first); Building refers to creating a runtime schema from SDL (Schema-first).",
+      "B": "Building is for production; Emitting is for development.",
+      "C": "Emitting is for XML; Building is for JSON.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Partial Success' in a GraphQL response?",
+    "options": {
+      "A": "When some resolvers succeed and others fail, returning a 'data' object with partial values and an 'errors' array.",
+      "B": "When only the header is sent.",
+      "C": "When the connection is cut halfway.",
+      "D": "When the client cancels the request."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scalar Coercion'?",
+    "options": {
+      "A": "The process of converting a raw input value into the expected internal data type based on the schema definition.",
+      "B": "Forcing a user to use a specific type.",
+      "C": "Changing the schema version.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of the 'info' object's 'fieldNodes' property?",
+    "options": {
+      "A": "It provides access to the AST nodes for the current field being resolved.",
+      "B": "It lists all the database nodes.",
+      "C": "It shows the user's IP address.",
+      "D": "It counts the number of times a field was queried."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a federated graph, a subgraph can extend a type that originated in a different subgraph.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Circular Dependency' in a GraphQL schema?",
+    "options": {
+      "A": "When Type A has a field of Type B, and Type B has a field of Type A, which is perfectly legal in GraphQL.",
+      "B": "When a query loops infinitely and crashes the server.",
+      "C": "When the server connects to itself.",
+      "D": "An error that prevents the schema from compiling."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Automatic Persisted Queries' (APQ) and how does it work?",
+    "options": {
+      "A": "The client sends a hash; if the server doesn't have it, the client sends the full query once to be cached.",
+      "B": "The server automatically writes every query to a log file.",
+      "C": "The database caches every result.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which directive is used in Federation to indicate that a field is defined in another subgraph?",
+    "options": {
+      "A": "@external",
+      "B": "@outside",
+      "C": "@foreign",
+      "D": "@remote"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Subscription Manager' in a real-time GraphQL implementation?",
+    "options": {
+      "A": "The component that keeps track of active WebSocket connections and maps them to PubSub events.",
+      "B": "A person who manages API subscriptions.",
+      "C": "A database table for users.",
+      "D": "A tool for sending newsletters."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema Documentation' in the context of SDL?",
+    "options": {
+      "A": "Description strings wrapped in triple-quotes (\"\"\") that appear in introspection tools.",
+      "B": "A separate PDF document.",
+      "C": "The code comments using #.",
+      "D": "A website for the API."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Inline fragments are the only way to query specific fields on a Union type.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Global ID' pattern as used in Relay?",
+    "options": {
+      "A": "A Base64 encoded string combining the Type name and the ID to provide a globally unique identifier.",
+      "B": "A user's social security number.",
+      "C": "The server's UUID.",
+      "D": "The session ID."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Query Depth Limiting'?",
+    "options": {
+      "A": "A security measure to reject queries that are nested too deeply, preventing resource exhaustion.",
+      "B": "A way to make queries faster.",
+      "C": "A restriction on the number of fields.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Custom Scalar Parsing'?",
+    "options": {
+      "A": "Validating and converting an incoming custom scalar value into its internal server representation.",
+      "B": "Reading a JSON file.",
+      "C": "Calculating the size of a string.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The @stream directive allows for processing list items one by one as they are returned from the data source.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which object in the 'info' argument contains the return type of the current field?",
+    "options": {
+      "A": "returnType",
+      "B": "dataType",
+      "C": "schemaType",
+      "D": "fieldType"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Operation Registry'?",
+    "options": {
+      "A": "A list of allowed query hashes that the server is permitted to execute, blocking all other incoming queries.",
+      "B": "A log of all server operations.",
+      "C": "A database of all user actions.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'rootValue' in a GraphQL execution?",
+    "options": {
+      "A": "The initial value passed to the top-level resolvers in a query execution.",
+      "B": "The admin password.",
+      "C": "The database name.",
+      "D": "The version number."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Custom Scalar Serialization'?",
+    "options": {
+      "A": "Converting an internal server value into a JSON-compatible format for the client response.",
+      "B": "Hashing a password.",
+      "C": "Compressing an image.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Apollo Federation, what does the '@provides' directive indicate?",
+    "options": {
+      "A": "That a subgraph can provide a field that belongs to another subgraph's type.",
+      "B": "That the subgraph provides a new database.",
+      "C": "That the field is mandatory.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Executable Schema'?",
+    "options": {
+      "A": "An object that combines the Type Definitions (SDL) with the Resolver functions for the server to run.",
+      "B": "A binary file.",
+      "C": "A script that builds the database.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Query Transformation' in a GraphQL gateway?",
+    "options": {
+      "A": "Modifying the query AST before it is executed against the underlying subgraphs or data sources.",
+      "B": "Changing JSON to XML.",
+      "C": "Renaming the types in the response.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Fragments can be used recursively within the same query.",
+    "options": {
+      "A": "False (GraphQL prevents circular fragment references).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema Composition'?",
+    "options": {
+      "A": "The process of merging multiple subgraphs into a single, cohesive supergraph schema.",
+      "B": "Writing the schema in a specific font.",
+      "C": "The design of the database schema.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the '@requires' directive in Federation used for?",
+    "options": {
+      "A": "To specify that a field's resolver needs other fields to be pre-fetched in order to function.",
+      "B": "To make a field mandatory.",
+      "C": "To check user permissions.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Batch Loading'?",
+    "options": {
+      "A": "Loading a group of objects by their IDs in a single database call instead of multiple individual calls.",
+      "B": "Loading all users into memory.",
+      "C": "Running multiple queries at once.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A GraphQL server can expose multiple different schemas on different endpoints.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Validation Rule' injection?",
+    "options": {
+      "A": "Adding custom logic to the GraphQL engine to reject specific query patterns during the validation phase.",
+      "B": "A type of security attack.",
+      "C": "Validating form input.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Type Variance' in GraphQL?",
+    "options": {
+      "A": "There is no native type variance; implementing types must match interface types exactly unless using Unions.",
+      "B": "The ability to change a field's type randomly.",
+      "C": "A database scaling metric.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema Versioning' in GraphQL?",
+    "options": {
+      "A": "Generally discouraged; GraphQL prefers continuous evolution by adding fields and deprecating old ones.",
+      "B": "Using /v1 and /v2 in the URL.",
+      "C": "Changing the whole schema every month.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hydration' in the context of GraphQL clients?",
+    "options": {
+      "A": "Populating a cache with data so that it can be instantly rendered without a new network request.",
+      "B": "Cleaning the database.",
+      "C": "Downloading the schema.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Every field in a GraphQL response must have a corresponding entry in the query.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Field Level Authorization'?",
+    "options": {
+      "A": "Checking if a user has permission to view a specific field within its individual resolver logic.",
+      "B": "Using a password for every field.",
+      "C": "Logging out a user who queries a private field.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Result Normalization'?",
+    "options": {
+      "A": "Flattening a nested GraphQL response into a dictionary of objects indexed by their IDs for client-side storage.",
+      "B": "Converting strings to lowercase.",
+      "C": "Formatting JSON with spaces.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Query Coalescing'?",
+    "options": {
+      "A": "Merging identical concurrent requests into a single execution to save server resources.",
+      "B": "Renaming queries.",
+      "C": "Combining different types.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema Polling'?",
+    "options": {
+      "A": "A gateway periodically checking subgraphs for schema changes to update the supergraph automatically.",
+      "B": "Asking users for feedback.",
+      "C": "Counting database rows.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: GraphQL handles binary file streaming natively without third-party extensions.",
+    "options": {
+      "A": "False (It requires multipart-request specs or Base64 encoding).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Response Caching'?",
+    "options": {
+      "A": "Storing the entire result of a query for a period of time to avoid re-execution.",
+      "B": "Caching the user's browser tabs.",
+      "C": "Saving the schema to disk.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Field Collection' during execution?",
+    "options": {
+      "A": "Gathering all selections for a specific field, including those from fragments, before resolving it.",
+      "B": "Gathering data from a farm.",
+      "C": "Deleting unused fields.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Value Completion'?",
+    "options": {
+      "A": "The process of ensuring a resolver's output matches the expected scalar or object type structure.",
+      "B": "Auto-completing a user's address.",
+      "C": "Finishing a query string.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The @include directive can be used to skip a field if a boolean variable is False.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Type Extension' in SDL?",
+    "level": "Hard",
+    "options": {
+      "A": "Using the 'extend' keyword to add new fields to an existing type definition.",
+      "B": "Making a type larger in memory.",
+      "C": "Inheriting from a class.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subscription Lifecycle'?",
+    "options": {
+      "A": "The stages of a subscription: Setup, Event Stream, and Teardown.",
+      "B": "The monthly billing of a user.",
+      "C": "The time it takes to load a page.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Loader Prime'?",
+    "options": {
+      "A": "Pre-populating the DataLoader cache with values you already have to prevent redundant fetches.",
+      "B": "The main data source.",
+      "C": "The first version of DataLoader.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Mutations can return a different type than the input object they receive.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Error Masking'?",
+    "options": {
+      "A": "Replacing detailed internal error messages with generic ones for security in production.",
+      "B": "Ignoring all errors.",
+      "C": "Using an image to cover an error.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Custom Scalar Validation'?",
+    "options": {
+      "A": "Checking if a custom scalar value (like an Email) matches a specific format (regex) before allowing it.",
+      "B": "Checking if the database is online.",
+      "C": "Formatting a string.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of using 'fragment' on a Union type without specifying a subtype?",
+    "options": {
+      "A": "It results in a validation error; fragments on Unions must use 'on' with a specific implementation type.",
+      "B": "It returns all fields.",
+      "C": "It returns only the ID.",
+      "D": "It returns a random type."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: GraphQL Federation subgraphs can communicate with each other directly.",
+    "options": {
+      "A": "False (All communication is routed through the Gateway).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Abstract Type Resolution'?",
+    "options": {
+      "A": "Determining the concrete object type for a result that belongs to an Interface or Union at runtime.",
+      "B": "Solving a math problem.",
+      "C": "Resolving a query.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'extensions' key in a GraphQL response?",
+    "options": {
+      "A": "To provide extra meta-information like tracing data or cache hints without affecting the 'data' key.",
+      "B": "To store extra user data.",
+      "C": "To list the server's plugins.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Batch Execution' of resolvers?",
+    "options": {
+      "A": "Executing a group of field resolvers at once to optimize performance.",
+      "B": "Running queries in a batch file.",
+      "C": "Executing queries at night.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A GraphQL field can be marked as both Deprecated and Mandatory at the same time.",
+    "options": {
+      "A": "True (Legal, though logically conflicting).",
+      "B": "False"
+    },
+    "answer": "A"
+  }
+  ]
+}

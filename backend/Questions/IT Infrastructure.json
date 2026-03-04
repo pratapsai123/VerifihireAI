@@ -1,0 +1,2005 @@
+{ 
+  "skill": "IT Infrastructure", 
+  "questions":[
+ {
+    "question": "What does the 'CPU' stand for in a computer system?",
+    "options": {
+      "A": "Central Power Unit",
+      "B": "Central Processing Unit",
+      "C": "Computer Primary User",
+      "D": "Control Peripheral Utility"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is considered the 'long-term memory' of a server where data is stored even after power is lost?",
+    "options": {
+      "A": "RAM",
+      "B": "CPU Cache",
+      "C": "Hard Disk Drive (HDD) / Solid State Drive (SSD)",
+      "D": "Motherboard"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: RAM is 'volatile' memory, meaning data is lost when the power is turned off.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for servers",
+      "D": "Only if not backed up to the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard width for most enterprise server racks?",
+    "options": {
+      "A": "15 inches",
+      "B": "19 inches",
+      "C": "24 inches",
+      "D": "32 inches"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In IT infrastructure, what is a 'UPS' primarily used for?",
+    "options": {
+      "A": "To ship hardware to different locations.",
+      "B": "To provide emergency power to a load when the input power source fails.",
+      "C": "To increase the speed of the local network.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common type of network cable used in modern office LANs?",
+    "options": {
+      "A": "Coaxial Cable",
+      "B": "Cat6 Ethernet Cable",
+      "C": "VGA Cable",
+      "D": "S-Video Cable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Server' in a network?",
+    "options": {
+      "A": "To play high-end video games.",
+      "B": "To provide data, resources, or services to other computers (clients) over a network.",
+      "C": "To act as a physical monitor for the administrator.",
+      "D": "To charge mobile devices via USB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component connects all the parts of a computer together, acting as the 'central nervous system'?",
+    "options": {
+      "A": "Hard Drive",
+      "B": "Motherboard",
+      "C": "Power Supply",
+      "D": "Graphic Card"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'On-premises' infrastructure means the servers are located physically within the organization's own building.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the company is a bank",
+      "D": "Only if the servers are not virtualized"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'I/O' stand for in computing?",
+    "options": {
+      "A": "Internet/Operations",
+      "B": "Input/Output",
+      "C": "Internal/Only",
+      "D": "Intelligent/Order"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which device is responsible for directing data packets between different networks?",
+    "options": {
+      "A": "Hub",
+      "B": "Switch",
+      "C": "Router",
+      "D": "Repeater"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Data Center'?",
+    "options": {
+      "A": "A store that sells computers.",
+      "B": "A dedicated space or building used to house computer systems and associated components.",
+      "C": "A specialized software for spreadsheets.",
+      "D": "A help desk for reset passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Scalability' is the ability of an infrastructure to handle an increasing amount of work by adding resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud computing",
+      "D": "Only for database systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bandwidth' in the context of networking?",
+    "options": {
+      "A": "The physical width of a server rack.",
+      "B": "The maximum rate of data transfer across a network path.",
+      "C": "The number of servers in a cluster.",
+      "D": "The time it takes to reboot a router."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is considered 'Peripherals' in an IT setup?",
+    "options": {
+      "A": "CPU and RAM",
+      "B": "Keyboards, Mice, and Printers",
+      "C": "BIOS and Firmware",
+      "D": "Operating Systems"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'RAID' (Redundant Array of Independent Disks)?",
+    "options": {
+      "A": "To make the hard drive spin faster manually.",
+      "B": "To combine multiple physical disk drives into a single logical unit for data redundancy or performance improvement.",
+      "C": "To encrypt files using a secret code.",
+      "D": "To clean the physical disk from dust."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Blade Server' is a stripped-down server enclosure designed to be inserted into a chassis to save space.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for storage devices",
+      "D": "Only if used in the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'NIC' stand for in networking?",
+    "options": {
+      "A": "Network Internal Controller",
+      "B": "Network Interface Card",
+      "C": "New Internet Connection",
+      "D": "Node Integration Component"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which measurement is used to define the height of a server (e.g., 1U, 2U)?",
+    "options": {
+      "A": "Universal Inch",
+      "B": "Rack Unit",
+      "C": "Standard Block",
+      "D": "Metric Meter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Latency' refers to the delay before a transfer of data begins following an instruction for its transfer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic cables",
+      "D": "Only for satellite internet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Firewall'?",
+    "options": {
+      "A": "To prevent the server room from catching fire.",
+      "B": "To monitor and control incoming and outgoing network traffic based on security rules.",
+      "C": "To increase the physical speed of the CPU.",
+      "D": "To store backup copies of all logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of storage is generally faster for booting an operating system?",
+    "options": {
+      "A": "HDD (Hard Disk Drive)",
+      "B": "SSD (Solid State Drive)",
+      "C": "Floppy Disk",
+      "D": "CD-ROM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'IP Address'?",
+    "options": {
+      "A": "The physical address of the office.",
+      "B": "A unique string of numbers separated by periods that identifies each computer using the Internet Protocol.",
+      "C": "The serial number of the motherboard.",
+      "D": "A code used to unlock a laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Operating System' (OS) acts as an interface between the hardware and the user.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile phones",
+      "D": "Only for Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Firmware'?",
+    "options": {
+      "A": "Software that is used for firm management.",
+      "B": "Low-level software programmed into a hardware device to control its basic functions.",
+      "C": "A specialized tool for cleaning keyboards.",
+      "D": "The outer casing of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Form Factor' for an enterprise server?",
+    "options": {
+      "A": "Square",
+      "B": "Rack-mount",
+      "C": "Circular",
+      "D": "Triangular"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Cooling' in a data center?",
+    "options": {
+      "A": "To keep the staff comfortable.",
+      "B": "To prevent hardware from overheating and failing due to the heat generated by electrical components.",
+      "C": "To increase the humidity in the room.",
+      "D": "To make the fans spin quieter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Virtualization' allows a single physical server to be divided into multiple virtual servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large corporations",
+      "D": "Only for Windows servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'LAN' stand for?",
+    "options": {
+      "A": "Large Area Network",
+      "B": "Local Area Network",
+      "C": "Light Access Node",
+      "D": "Logic Array Network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used for securely accessing a remote server's command line?",
+    "options": {
+      "A": "HTTP",
+      "B": "SSH (Secure Shell)",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Patch Panel' is used to organize and manage network cables in a rack.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber cables",
+      "D": "Only if the rack is over 42U"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Downtime'?",
+    "options": {
+      "A": "The time spent on the bottom floor of a data center.",
+      "B": "The period during which a system is unavailable or fails to perform its primary function.",
+      "C": "The speed of data download.",
+      "D": "The process of moving servers to a lower rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which connector type is standard for modern Ethernet cables?",
+    "options": {
+      "A": "USB-C",
+      "B": "RJ-45",
+      "C": "HDMI",
+      "D": "DB-9"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Switch' in a LAN?",
+    "options": {
+      "A": "To turn the power on and off.",
+      "B": "To connect multiple devices on the same network and forward data to the correct destination device.",
+      "C": "To connect the LAN to the global internet.",
+      "D": "To block all incoming traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Fiber Optic' cables use pulses of light to transmit data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for long distances",
+      "D": "Only if underwater"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLA' stand for in IT services?",
+    "options": {
+      "A": "System Level Audit",
+      "B": "Service Level Agreement",
+      "C": "Standard Logic Access",
+      "D": "Software License Arrangement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component provides the electrical power necessary for all internal computer parts?",
+    "options": {
+      "A": "Battery",
+      "B": "PSU (Power Supply Unit)",
+      "C": "Alternator",
+      "D": "Capacitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Backup' is a copy of data used to restore the original after a data loss event.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for databases",
+      "D": "Only if stored on a physical tape"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redundancy' in IT infrastructure?",
+    "options": {
+      "A": "Having too many employees.",
+      "B": "The inclusion of extra components that are not strictly necessary to functioning, in case of a failure in other components.",
+      "C": "Deleting old files that are no longer used.",
+      "D": "The speed of the network upload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which software is used to manage virtual machines on a physical host?",
+    "options": {
+      "A": "Browser",
+      "B": "Hypervisor",
+      "C": "Compiler",
+      "D": "Text Editor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'MTBF' stand for?",
+    "options": {
+      "A": "Maximum Time Between Failures",
+      "B": "Mean Time Between Failures",
+      "C": "Minimum Time Before Fix",
+      "D": "Manual Tool Base Format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Phishing' is a hardware failure in a network switch.",
+    "options": {
+      "A": "False (It is a form of social engineering where attackers trick users into revealing sensitive information).",
+      "B": "True",
+      "C": "Only in wireless networks",
+      "D": "Only if the switch is unmanaged"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' used for?",
+    "options": {
+      "A": "To increase the physical speed of the light in fiber cables.",
+      "B": "To create logical subgroups within a physical network to improve security and performance.",
+      "C": "To name the servers.",
+      "D": "To backup the system configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Network Topology'?",
+    "options": {
+      "A": "Triangle",
+      "B": "Star",
+      "C": "Hexagon",
+      "D": "Diamond"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Mainframe' is a small computer used by individuals for personal tasks.",
+    "options": {
+      "A": "False (It is a high-performance computer used by large organizations for critical applications and bulk data processing).",
+      "B": "True",
+      "C": "Only if it is made by IBM",
+      "D": "Only in research labs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Asset Tagging' in an IT department?",
+    "options": {
+      "A": "To make the hardware look cool.",
+      "B": "To track and manage physical IT equipment using unique identifiers/labels.",
+      "C": "To encrypt the computer's BIOS.",
+      "D": "To increase the resale value of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which device connects a local network to the global internet?",
+    "options": {
+      "A": "Switch",
+      "B": "Modem",
+      "C": "Keyboard",
+      "D": "Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bandwidth' and 'Throughput' are exactly the same thing.",
+    "options": {
+      "A": "False (Bandwidth is the maximum theoretical capacity; Throughput is the actual amount of data moved).",
+      "B": "True",
+      "C": "Only for fiber optics",
+      "D": "Only if using 10Gbps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'DHCP' server?",
+    "options": {
+      "A": "To encrypt user emails.",
+      "B": "To automatically assign IP addresses and other network configurations to devices on a network.",
+      "C": "To host a company's website.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'DNS' stand for?",
+    "options": {
+      "A": "Data Network System",
+      "B": "Domain Name System",
+      "C": "Digital Node Storage",
+      "D": "Direct Network Service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cat5e' is a newer and faster Ethernet standard than 'Cat6a'.",
+    "options": {
+      "A": "False",
+      "B": "True",
+      "C": "Only for short distances",
+      "D": "Only for 10Gbps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Storage'?",
+    "options": {
+      "A": "Storing files on a local floppy disk.",
+      "B": "Storing data on remote servers accessed via the internet, managed by a provider.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is commonly used for 'Unencrypted' web traffic (HTTP)?",
+    "options": {
+      "A": "22",
+      "B": "80",
+      "C": "443",
+      "D": "53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'RDP' is used to remotely control a Windows-based computer over a network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for servers",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' measured in?",
+    "options": {
+      "A": "Megabytes (MB)",
+      "B": "Milliseconds (ms)",
+      "C": "Watts (W)",
+      "D": "Pounds (lb)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Operating System' for servers?",
+    "options": {
+      "A": "Adobe Photoshop",
+      "B": "Linux (Ubuntu/CentOS)",
+      "C": "Microsoft Excel",
+      "D": "Google Chrome"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Internal' IP address is reachable from the public internet without any extra configuration.",
+    "options": {
+      "A": "False (Internal IPs are private; they require NAT or a VPN to be reached from the outside).",
+      "B": "True",
+      "C": "Only if using fiber optics",
+      "D": "Only for non-profit organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'KVM Switch' (Keyboard, Video, Mouse)?",
+    "options": {
+      "A": "To increase the internet speed.",
+      "B": "To allow a user to control multiple computers from a single keyboard, monitor, and mouse.",
+      "C": "To encrypt network signals.",
+      "D": "To backup the system logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Malware'?",
+    "options": {
+      "A": "A physical defect in a hard drive.",
+      "B": "Software specifically designed to disrupt, damage, or gain unauthorized access to a computer system.",
+      "C": "A tool used for measuring network speed.",
+      "D": "The brand name of a popular server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SFP' stands for Small Form-factor Pluggable, which is a type of transceiver module.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber connections",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'RAID 0' primarily used for?",
+    "options": {
+      "A": "Maximum data redundancy.",
+      "B": "Maximum performance (striping) with no redundancy.",
+      "C": "Encrypting the server's firmware.",
+      "D": "Calculating the monthly cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Encrypted' web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "21",
+      "D": "53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hot-swapping' is the ability to replace a component without shutting down the system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for RAM",
+      "D": "Only if using Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Inventory Management' in IT?",
+    "options": {
+      "A": "To make the office look busy.",
+      "B": "To maintain an up-to-date record of all hardware and software assets owned by an organization.",
+      "C": "To encrypt the daily database backups.",
+      "D": "To monitor the speed of the printers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Cold Aisle / Hot Aisle' configuration?",
+    "options": {
+      "A": "A way to organize employees by their preference for air conditioning.",
+      "B": "A layout for server racks to improve cooling efficiency by separating cold intake air from hot exhaust air.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The process of moving servers between different data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Workstation' is generally more powerful than a standard office desktop computer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it runs Windows",
+      "D": "Only for video editors"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which RAID level provides both mirroring and striping, requiring at least four disks, and is often preferred for high-performance databases?",
+    "options": {
+      "A": "RAID 0",
+      "B": "RAID 5",
+      "C": "RAID 10 (1+0)",
+      "D": "RAID 6"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary difference between NAS (Network Attached Storage) and SAN (Storage Area Network)?",
+    "options": {
+      "A": "NAS is block-level storage; SAN is file-level storage.",
+      "B": "NAS provides file-level access over a standard network; SAN provides block-level access over a dedicated high-speed network.",
+      "C": "SAN is only for home users; NAS is for enterprises.",
+      "D": "There is no difference between NAS and SAN."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: RAID 5 can survive the simultaneous failure of two disks without losing data.",
+    "options": {
+      "A": "False (RAID 5 can only survive one disk failure; RAID 6 can survive two).",
+      "B": "True",
+      "C": "Only if using SSDs",
+      "D": "Only if a hot spare is present"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'CIDR' block of /24 represent in terms of the number of available IP addresses (including network and broadcast)?",
+    "options": {
+      "A": "254",
+      "B": "256",
+      "C": "512",
+      "D": "1024"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hardware diagnostic process runs immediately after a computer is powered on to ensure basic components are functioning?",
+    "options": {
+      "A": "S.M.A.R.T. Check",
+      "B": "POST (Power-On Self-Test)",
+      "C": "Disk Defragmentation",
+      "D": "Kernel Panic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a data center, what is the purpose of a 'PDU' (Power Distribution Unit)?",
+    "options": {
+      "A": "To generate electricity from solar panels.",
+      "B": "To distribute electrical power to multiple servers and equipment within a rack.",
+      "C": "To act as a central firewall for the network.",
+      "D": "To monitor the humidity of the floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'S.M.A.R.T.' (Self-Monitoring, Analysis, and Reporting Technology) is used to predict hard drive failures by monitoring various reliability indicators.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for external USB drives",
+      "D": "Only for optical drives"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is commonly used by a SAN to transport block-level data over fiber optic cables?",
+    "options": {
+      "A": "NFS",
+      "B": "Fibre Channel (FC)",
+      "C": "SMB/CIFS",
+      "D": "HTTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'HBA' (Host Bus Adapter) card?",
+    "options": {
+      "A": "To provide high-definition video output.",
+      "B": "To connect a server to a Storage Area Network (SAN).",
+      "C": "To increase the RAM capacity of the server.",
+      "D": "To act as a cooling controller for fans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Virtual IP' (VIP) address is used to provide high availability by mapping a single IP to multiple physical servers in a cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in cloud environments",
+      "D": "Only for database servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which RAID level uses 'Distributed Parity' and requires a minimum of three disks?",
+    "options": {
+      "A": "RAID 1",
+      "B": "RAID 5",
+      "C": "RAID 0",
+      "D": "RAID 10"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In networking, what is the 'MTU' (Maximum Transmission Unit)?",
+    "options": {
+      "A": "The maximum number of users allowed on a switch.",
+      "B": "The largest size of a data packet that can be transmitted over a network.",
+      "C": "The time it takes for a router to reboot.",
+      "D": "The physical length of a rack rail."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'iSCSI' allows block-level storage data to be sent over standard Ethernet networks using TCP/IP.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the speed is below 1Gbps",
+      "D": "Only for Linux servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Hot Spare' disk?",
+    "options": {
+      "A": "A disk that is physically hot to the touch.",
+      "B": "An idle disk in a RAID array that automatically replaces a failed drive to begin reconstruction immediately.",
+      "C": "A backup disk kept in a different building.",
+      "D": "A specialized drive for high-speed video editing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of hypervisor is 'KVM' (Kernel-based Virtual Machine) considered to be?",
+    "options": {
+      "A": "Type 2",
+      "B": "Type 1 (Bare Metal, as it is part of the Linux kernel)",
+      "C": "Virtual Interface",
+      "D": "Emulator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'IPMI' (Intelligent Platform Management Interface) allows an administrator to manage a server even if the operating system is crashed or the power is off.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if connected via VGA",
+      "D": "Only for non-commercial servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN Tagging' (IEEE 802.1Q) primarily used for?",
+    "options": {
+      "A": "To name the cables with colorful stickers.",
+      "B": "To identify which VLAN a data frame belongs to as it travels across a trunk link between switches.",
+      "C": "To encrypt the payload of an Ethernet frame.",
+      "D": "To increase the speed of a single port."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric describes the amount of data that can be lost during an outage, measured in time?",
+    "options": {
+      "A": "RTO (Recovery Time Objective)",
+      "B": "RPO (Recovery Point Objective)",
+      "C": "SLA (Service Level Agreement)",
+      "D": "MTTR (Mean Time to Repair)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'LACP' (Link Aggregation Control Protocol) is used to combine multiple physical network links into a single logical link for higher bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for wireless links",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Load Balancer' in infrastructure?",
+    "options": {
+      "A": "To measure the physical weight of server racks.",
+      "B": "To distribute incoming network traffic across multiple backend servers to ensure no single server is overwhelmed.",
+      "C": "To charge the batteries in a UPS.",
+      "D": "To backup the system logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a Subnet Mask of 255.255.255.0 correspond to in CIDR notation?",
+    "options": {
+      "A": "/8",
+      "B": "/16",
+      "C": "/24",
+      "D": "/32"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: NVMe (Non-Volatile Memory Express) is a protocol designed specifically for high-speed communication with SSDs over the PCIe bus.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for external drives",
+      "D": "Only for legacy HDDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Bonding Mode' in Linux networking provides both fault tolerance and load balancing across two NICs?",
+    "options": {
+      "A": "Active-Backup (Mode 1)",
+      "B": "802.3ad (Mode 4 / LACP)",
+      "C": "Broadcast (Mode 3)",
+      "D": "None of the above"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'ECC' (Error Correction Code) RAM in servers?",
+    "options": {
+      "A": "To make the RAM run at higher frequencies.",
+      "B": "To detect and fix common types of internal data corruption (single-bit errors).",
+      "C": "To store encrypted passwords in memory.",
+      "D": "To increase the capacity of the RAM sticks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Internal-facing' load balancer is used to distribute traffic within a private network between different application tiers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for microservices",
+      "D": "Only if the servers are in the same rack"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NIC Teaming' (or Interface Bonding)?",
+    "options": {
+      "A": "A competition between IT staff.",
+      "B": "The process of combining multiple network interfaces for redundancy or increased throughput.",
+      "C": "A way to connect two servers with a single cable.",
+      "D": "A specialized way to encrypt network signals."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which RAID level should be avoided if data safety is the priority, as the failure of any single drive results in total data loss?",
+    "options": {
+      "A": "RAID 1",
+      "B": "RAID 0",
+      "C": "RAID 5",
+      "D": "RAID 6"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Spine-Leaf' architecture, Leaf switches are used to connect to end-devices like servers, while Spine switches act as the core backbone.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in small offices",
+      "D": "Only for wireless networks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Reverse Proxy'?",
+    "options": {
+      "A": "To let employees browse the web anonymously.",
+      "B": "To sit in front of web servers and forward client requests to them, often providing security, caching, or load balancing.",
+      "C": "To backup the firewall rules.",
+      "D": "To increase the internal CPU speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Hyper-converged Infrastructure' (HCI)?",
+    "options": {
+      "A": "It separates compute and storage into different physical buildings.",
+      "B": "It combines compute, storage, and networking into a single software-defined system.",
+      "C": "It removes the need for any software licenses.",
+      "D": "It makes the servers run without power."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Thin Provisioning' allows you to allocate more storage space to a VM than is physically available, relying on the fact that not all VMs use their full allocation immediately.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database VMs",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Default Gateway' in a network configuration?",
+    "options": {
+      "A": "The name of the main server.",
+      "B": "The IP address of the router that a host uses to send traffic to a different network.",
+      "C": "The first IP address in a subnet range.",
+      "D": "The password for the WiFi."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used by the 'Ping' command to check connectivity between two hosts?",
+    "options": {
+      "A": "TCP",
+      "B": "UDP",
+      "C": "ICMP",
+      "D": "HTTP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'LUN' (Logical Unit Number) is a unique identifier used to designate individual hard drives in a SAN.",
+    "options": {
+      "A": "False (A LUN identifies a logical slice of storage presented to a host, not necessarily a physical drive).",
+      "B": "True",
+      "C": "Only in Fibre Channel networks",
+      "D": "Only for non-production storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Provisioning' in the context of infrastructure?",
+    "options": {
+      "A": "Deleting old servers.",
+      "B": "The process of setting up and making IT infrastructure available to users or applications.",
+      "C": "The physical cleaning of the data center.",
+      "D": "Writing documentation for a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which RAID level is most efficient in terms of storage capacity while still providing redundancy for a 4-drive array?",
+    "options": {
+      "A": "RAID 10",
+      "B": "RAID 5",
+      "C": "RAID 1",
+      "D": "RAID 0"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VPC' (Virtual Private Cloud) allows you to provision a logically isolated section of a public cloud provider's network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS",
+      "D": "Only for private companies"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Kernel Panic' in Linux infrastructure?",
+    "options": {
+      "A": "When the IT manager gets worried.",
+      "B": "A safety measure taken by an OS kernel upon detecting an internal fatal error from which it cannot safely recover.",
+      "C": "A specialized way to encrypt the OS bootloader.",
+      "D": "The process of updating the CPU firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for standard 'DNS' queries?",
+    "options": {
+      "A": "22",
+      "B": "53",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Private IP Address' (e.g., 192.168.x.x) is unique across the entire global internet.",
+    "options": {
+      "A": "False (Private IPs are only unique within their local network).",
+      "B": "True",
+      "C": "Only if using IPv6",
+      "D": "Only if assigned by an ISP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Orchestration' in infrastructure management?",
+    "options": {
+      "A": "Playing music in the server room.",
+      "B": "The automated coordination and management of complex computer systems, middleware, and services.",
+      "C": "Hiring a team of engineers.",
+      "D": "Manually installing software on every server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which device is used to terminate and organize incoming fiber optic cables in a rack?",
+    "options": {
+      "A": "Patch Panel / LIU (Light Interface Unit)",
+      "B": "UPS",
+      "C": "KVM Switch",
+      "D": "PDU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Latency' and 'Jitter' are the same thing.",
+    "options": {
+      "A": "False (Latency is delay; Jitter is the variation in that delay over time).",
+      "B": "True",
+      "C": "Only for VoIP traffic",
+      "D": "Only for satellite links"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bare Metal' in cloud/virtualization terminology?",
+    "options": {
+      "A": "A server rack with no paint.",
+      "B": "A physical server dedicated to a single tenant without a hypervisor layer provided by the cloud vendor.",
+      "C": "A server that is powered off.",
+      "D": "The physical chassis of a router."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol allows a server to 'boot' its operating system over the network from a remote server?",
+    "options": {
+      "A": "HTTP",
+      "B": "PXE (Preboot Execution Environment)",
+      "C": "SSH",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Air-Gapped' system is physically disconnected from all other networks, including the internet, for maximum security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for government agencies",
+      "D": "Only for databases"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Active-Passive' cluster?",
+    "options": {
+      "A": "To run twice as many applications.",
+      "B": "To provide high availability by having a standby node ready to take over if the primary node fails.",
+      "C": "To backup data to a USB drive.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the standard 'MTU' size for standard Ethernet frames?",
+    "options": {
+      "A": "1000 bytes",
+      "B": "1500 bytes",
+      "C": "9000 bytes",
+      "D": "64 bytes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cold Storage' refers to high-speed storage used for data that is accessed every second.",
+    "options": {
+      "A": "False (Cold storage is for infrequently accessed data kept for long-term retention).",
+      "B": "True",
+      "C": "Only for bank records",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN Hopping'?",
+    "options": {
+      "A": "Jumping over physical server racks.",
+      "B": "A security exploit where an attacker on one VLAN gains access to traffic on another VLAN.",
+      "C": "A way to increase the internet speed.",
+      "D": "Moving a server between different data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' (Simple Network Management Protocol) polling?",
+    "options": {
+      "A": "161",
+      "B": "22",
+      "C": "443",
+      "D": "80"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Zoning' configuration in a SAN fabric determines which hosts can see which storage ports.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for iSCSI",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow IT'?",
+    "options": {
+      "A": "IT systems used at night.",
+      "B": "The use of IT systems, devices, or software by employees without the knowledge or approval of the IT department.",
+      "C": "A specialized way to encrypt backups.",
+      "D": "The dark corner of a data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code on a server motherboard indicates a problem during the boot process (often displayed as two hexadecimal digits)?",
+    "options": {
+      "A": "Error Log",
+      "B": "POST Code",
+      "C": "Kernel ID",
+      "D": "BIOS Stamp"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Port Mirroring' (SPAN) is used to send a copy of all network traffic from one port to another for monitoring.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic ports",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-segmentation'?",
+    "options": {
+      "A": "Dividing the server room into tiny segments.",
+      "B": "A security technique that creates granular security zones in data centers and cloud environments to isolate workloads from each other.",
+      "C": "A specialized way to encrypt small files.",
+      "D": "Hiring a large team of junior engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric measures the 'Total Cost of Ownership' (TCO) for a physical server?",
+    "options": {
+      "A": "Purchase price only.",
+      "B": "The sum of the purchase price, maintenance, power, cooling, and operational costs over the server's lifespan.",
+      "C": "The monthly cloud bill.",
+      "D": "The salary of the hardware engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Static IP' address changes every time a device connects to the network.",
+    "options": {
+      "A": "False (A static IP remains the same; a dynamic IP changes).",
+      "B": "True",
+      "C": "Only for laptops",
+      "D": "Only in public WiFi"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Hypervisor'?",
+    "options": {
+      "A": "To speed up the internet.",
+      "B": "To create and run virtual machines by isolating the OS and applications from the underlying physical hardware.",
+      "C": "To backup the system firmware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'NTP' (Network Time Protocol)?",
+    "options": {
+      "A": "80",
+      "B": "123",
+      "C": "443",
+      "D": "53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Infrastructure as Code' (IaC) allows you to manage and provision infrastructure using machine-readable definition files instead of manual configuration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jumbo Frames' in networking?",
+    "options": {
+      "A": "Physically larger server racks.",
+      "B": "Ethernet frames with more than 1500 bytes of payload (typically 9000 bytes) used to improve throughput for large data transfers.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "A tool to monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access (unencrypted remote access)?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "25"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'UPS' is designed to power a data center for several days during a blackout.",
+    "options": {
+      "A": "False (A UPS provides minutes of power for safe shutdown or to bridge the gap until generators start; generators provide power for days).",
+      "B": "True",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using solar power"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Convergence Time' in networking?",
+    "options": {
+      "A": "The time spent in a meeting.",
+      "B": "The time it takes for all routers/switches in a network to update their tables after a topology change.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Tier 4' Data Center?",
+    "options": {
+      "A": "A small room with one server.",
+      "B": "A highly redundant and fault-tolerant facility with 99.995% availability and no single point of failure.",
+      "C": "A data center located in a Tier 4 city.",
+      "D": "A specialized way to backup database files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "An architect is designing a high-frequency trading platform. Why would they choose to 'Pin' application threads to specific CPU cores and utilize 'NUMA-aware' memory allocation?",
+    "options": {
+      "A": "To increase the total amount of RAM available to the OS.",
+      "B": "To minimize memory access latency by ensuring processing occurs on the same physical socket that controls the local memory bank, avoiding the high-latency interconnect bus.",
+      "C": "To allow the application to bypass the firewall entirely.",
+      "D": "To ensure the application can run on both Intel and AMD processors simultaneously."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'Block Storage' and 'Object Storage' regarding how data is addressed and retrieved at the architectural level?",
+    "options": {
+      "A": "Block storage uses metadata; Object storage uses sector IDs.",
+      "B": "Block storage treats data as a sequence of bytes at specific offsets (LBA); Object storage treats data as discrete units managed by unique IDs and rich, customizable metadata.",
+      "C": "Block storage is always slower than Object storage.",
+      "D": "Object storage is only used for local hard drives."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a BGP-based hybrid cloud connection, 'AS-Path Prepending' is a technique used to influence INBOUND traffic by making a specific path appear longer and less desirable to external routers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using static routes",
+      "D": "Only if the on-premises router is in 'Passive' mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How is the 'PUE' (Power Usage Effectiveness) of a data center calculated, and what does a PUE of 1.0 represent?",
+    "options": {
+      "A": "Total Facility Power / IT Equipment Power; 1.0 represents a perfectly efficient facility where all power reaches the IT equipment.",
+      "B": "IT Equipment Power / Total Facility Power; 1.0 represents a facility with no cooling.",
+      "C": "Total Cost / Total Watts; 1.0 represents the cheapest possible energy.",
+      "D": "Server Count / Total Power; 1.0 represents one watt per server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'PCIe' generation and lane count would provide a theoretical maximum bandwidth of approximately 32 GB/s in one direction?",
+    "options": {
+      "A": "PCIe 3.0 x16",
+      "B": "PCIe 4.0 x16",
+      "C": "PCIe 5.0 x8",
+      "D": "PCIe 2.0 x32"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Erasure Coding' is a data protection method used in large-scale storage systems (like S3) that breaks data into fragments, expands them with redundant data, and stores them across different locations to survive multiple simultaneous failures.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for RAID 10 arrays",
+      "D": "Only if using tape backups"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'SmartNIC' (or DPU) in a modern cloud-scale infrastructure?",
+    "options": {
+      "A": "To provide Wi-Fi to the data center staff.",
+      "B": "To offload networking, security, and storage tasks (like NVMe-over-Fabrics or encryption) from the host CPU to specialized hardware on the network card.",
+      "C": "To act as a physical physical lock for the server chassis.",
+      "D": "To monitor the humidity of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Leaf-Spine' network fabric using 'VXLAN', what is the role of the 'VTEP' (VXLAN Tunnel End Point)?",
+    "options": {
+      "A": "To measure the physical length of the fiber cables.",
+      "B": "To perform the encapsulation and de-encapsulation of Layer 2 Ethernet frames into Layer 3 UDP packets.",
+      "C": "To act as the primary DHCP server for the entire fabric.",
+      "D": "To encrypt the console port messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'InfiniBand' is a high-bandwidth, low-latency networking standard often used in High-Performance Computing (HPC) and AI clusters because it supports RDMA (Remote Direct Memory Access).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for storage networks",
+      "D": "Only if using Windows Server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Gravity' in the context of infrastructure planning?",
+    "options": {
+      "A": "The weight of the physical hard drives in a rack.",
+      "B": "The concept that as datasets grow large, they 'attract' applications and services to be physically located near them to minimize latency and egress costs.",
+      "C": "A specialized way to encrypt data backups.",
+      "D": "The history of all data changes over time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'RAID' level uses dual parity to allow for the simultaneous failure of any two disks in an array without data loss?",
+    "options": {
+      "A": "RAID 5",
+      "B": "RAID 6",
+      "C": "RAID 50",
+      "D": "RAID 1"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Zero Trust' architecture, the 'Policy Decision Point' (PDP) is responsible for evaluating access requests against security policies and issuing a final 'Allow' or 'Deny' verdict.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile users",
+      "D": "Only if the user is an admin"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cold Row' containment intended to solve in a high-density data center?",
+    "options": {
+      "A": "To keep the employees from getting too cold.",
+      "B": "To prevent the mixing of cold intake air and hot exhaust air, significantly improving cooling efficiency and allowing for higher rack power densities.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'BGP' attribute is evaluated first when a router is choosing the best path among multiple valid routes?",
+    "options": {
+      "A": "AS-Path length",
+      "B": "Weight (local to the router) or Local Preference",
+      "C": "Origin type",
+      "D": "Multi-Exit Discriminator (MED)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'NVMe-over-Fabrics' (NVMe-oF) allows a host to access remote NVMe storage over a network with latency that is nearly as low as locally attached NVMe drives.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber channel networks",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical difference between 'Synchronous' and 'Asynchronous' storage replication?",
+    "options": {
+      "A": "Synchronous is only for files; Asynchronous is for blocks.",
+      "B": "Synchronous requires an acknowledgment from the secondary site before the write is considered complete; Asynchronous writes locally first and replicates later.",
+      "C": "Asynchronous is always more secure.",
+      "D": "Synchronous only works over the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Spine-Leaf' topology, why is 'ECMP' (Equal-Cost Multi-Pathing) critical for performance?",
+    "options": {
+      "A": "To encrypt the physical server hardware.",
+      "B": "To allow traffic to be balanced across all available Spine switches, ensuring that no single link becomes a bottleneck.",
+      "C": "To backup the routing table automatically.",
+      "D": "To monitor the temperature of the SFP modules."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) allows a single physical PCIe device to appear as multiple virtual functions, allowing VMs to bypass the hypervisor for high-speed networking.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for graphics cards",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'MTU Mismatch' between two adjacent network devices typically cause?",
+    "options": {
+      "A": "The devices will physically catch fire.",
+      "B": "Packet fragmentation or dropped packets, often leading to intermittent connectivity or slow performance for large data transfers.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'iSCSI' target discovery and traffic?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "UDP 500",
+      "C": "TCP 443",
+      "D": "TCP 80"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Content Delivery Network' (CDN) uses 'Anycast' routing to direct users to the geographically closest server sharing the same IP address.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for video streaming",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow Data' in an enterprise environment?",
+    "options": {
+      "A": "Data that is only stored at night.",
+      "B": "Sensitive data that resides in unmanaged or unauthorized storage locations (like personal cloud accounts) without the knowledge of the IT department.",
+      "C": "A specialized way to encrypt data backups.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon describes the situation where a system's throughput decreases as more resources are added due to the overhead of coordination (e.g., in a distributed database)?",
+    "options": {
+      "A": "Linear Scaling",
+      "B": "The Law of Diminishing Returns / Amdahl's Law",
+      "C": "Exponential Growth",
+      "D": "Vertical Integration"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VPC Peering' between two virtual networks typically does not support transitive routing (i.e., Network A cannot talk to Network C through Network B).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Microsoft Azure",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'L3 Switch' (Layer 3 Switch) compared to a traditional router?",
+    "options": {
+      "A": "To provide wireless access.",
+      "B": "To perform high-speed inter-VLAN routing using hardware-based ASICs rather than a software-based routing engine.",
+      "C": "To backup the system logs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to measure the 'efficiency' of a data center's cooling and power infrastructure?",
+    "options": {
+      "A": "PUE (Power Usage Effectiveness)",
+      "B": "DCiE (Data Center infrastructure Efficiency)",
+      "C": "CUE (Carbon Usage Effectiveness)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Immutable Infrastructure' is a practice where servers are never patched or modified in place; instead, they are replaced by new instances from a fresh image.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Docker"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' used for in a microservices infrastructure?",
+    "options": {
+      "A": "To track the location of the physical servers.",
+      "B": "To follow a single request as it travels through multiple services to identify latency bottlenecks and errors.",
+      "C": "To find a lost file on a hard drive.",
+      "D": "To monitor the room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which RAID level is known as 'Striping with Double Parity'?",
+    "options": {
+      "A": "RAID 5",
+      "B": "RAID 6",
+      "C": "RAID 10",
+      "D": "RAID 0"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Internal CA' (Certificate Authority) is used within an organization to issue and manage SSL certificates for internal-only services.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows servers",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Anycast DNS'?",
+    "options": {
+      "A": "To encrypt all DNS traffic.",
+      "B": "To provide high availability and low latency by having multiple servers around the world answer to the same IP address.",
+      "C": "To backup the whole DNS zone.",
+      "D": "To monitor the daily growth of the DNS zone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Converged Infrastructure'?",
+    "options": {
+      "A": "Infrastructure that is all located in one building.",
+      "B": "A pre-packaged bundle of compute, storage, networking, and virtualization resources from a single vendor.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VLAN Trunking' (802.1Q) allows multiple VLANs to share a single physical network link by adding a 4-byte tag to the Ethernet frame header.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic cables",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NIC Partitioning' (NPAR)?",
+    "options": {
+      "A": "Physically cutting a network card in half.",
+      "B": "A technology that allows a single physical 10GbE or 25GbE adapter to be divided into multiple logical NICs with dedicated bandwidth.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a server motherboard indicates a fatal hardware error (e.g., no RAM detected) during the POST process?",
+    "options": {
+      "A": "Beep Codes or Q-Codes",
+      "B": "IPMI Log",
+      "C": "Kernel ID",
+      "D": "BIOS Stamp"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Write-Back Caching' in a RAID controller improves performance by acknowledging a write as soon as it hits the controller's RAM, rather than waiting for it to hit the physical disk.",
+    "options": {
+      "A": "True (Requires a battery-backed cache for safety).",
+      "B": "False",
+      "C": "Only for RAID 0",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Transit Gateway' in a large-scale cloud network?",
+    "options": {
+      "A": "To act as a physical door to the data center.",
+      "B": "To act as a central hub that connects multiple VPCs and on-premises networks, simplifying network management.",
+      "C": "To increase the internet speed of the platform.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'BGP' (Border Gateway Protocol) peerings?",
+    "options": {
+      "A": "TCP 179",
+      "B": "UDP 179",
+      "C": "TCP 443",
+      "D": "UDP 53"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Multipathing' (MPIO) is a technique that allows a server to use multiple physical paths to access the same storage device for redundancy and performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jumbo Frames' MTU size typically set to for storage networks?",
+    "options": {
+      "A": "1500 bytes",
+      "B": "9000 bytes",
+      "C": "64000 bytes",
+      "D": "512 bytes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for translating 'Global' domain names (like google.com) into specific IP addresses within an internal corporate network?",
+    "options": {
+      "A": "The Router",
+      "B": "Internal DNS Server / Domain Controller",
+      "C": "The Firewall",
+      "D": "The Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'RAID 10' (1+0) is generally more expensive than 'RAID 5' because it requires 50% of the total disk capacity for redundancy.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using SSDs",
+      "D": "Only if the array is over 10TB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Mesh' infrastructure used for?",
+    "options": {
+      "A": "To backup the system configuration.",
+      "B": "To handle service-to-service communication, providing security (mTLS), observability, and traffic management at the infrastructure layer.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the speed of the printers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP Traps' (as opposed to polling)?",
+    "options": {
+      "A": "UDP 161",
+      "B": "UDP 162",
+      "C": "TCP 443",
+      "D": "UDP 53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bare Metal' cloud instances are vulnerable to the 'Noisy Neighbor' effect from other customers' virtual machines.",
+    "options": {
+      "A": "False (Since it is physical hardware dedicated to one tenant, there are no other VMs on that box).",
+      "B": "True",
+      "C": "Only for non-encrypted data",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Administrative Distance' (AD) used for in a router?",
+    "options": {
+      "A": "The physical distance between routers.",
+      "B": "A rating of the 'trustworthiness' of a routing information source; lower AD values are preferred when multiple protocols provide a route to the same destination.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon occurs when a data center's air conditioning cannot keep up with the heat output, leading to equipment downclocking or shutdown?",
+    "options": {
+      "A": "Latency Bloat",
+      "B": "Thermal Throttling",
+      "C": "Bandwidth Exhaustion",
+      "D": "Resource Leak"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'BGP Communities' are tags that can be applied to routes to influence how they are handled by upstream providers or other routers in the network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv6",
+      "D": "Only if using static routes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Object Storage' metadata and why is it powerful?",
+    "options": {
+      "A": "The text content of the code.",
+      "B": "Information about the data (e.g., author, expiration date, sensitivity level) stored with the object itself, allowing for extremely powerful search and automated management.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of electrical power used by IT equipment relative to the total power consumed by the facility?",
+    "options": {
+      "A": "PUE (Power Usage Effectiveness)",
+      "B": "DCiE (Data Center infrastructure Efficiency)",
+      "C": "Carbon Footprint",
+      "D": "Voltage Drop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Tier 3' Data Center must have multiple independent distribution paths serving the IT equipment, though only one path is required to be active.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in virtual networking?",
+    "options": {
+      "A": "The largest number of users allowed.",
+      "B": "A special ID used to enable 'Virtual Guest Tagging', allowing a VM to see and manage its own VLAN tags (Trunking to the VM).",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'NetFlow' exports from network devices?",
+    "options": {
+      "A": "UDP 2055",
+      "B": "TCP 443",
+      "C": "UDP 53",
+      "D": "TCP 80"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' provides better performance than full virtualization because the guest OS is aware it's virtualized and uses optimized 'hypercalls'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 95",
+      "D": "Only if using an IDE drive"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage Latency' (or I/O Wait) impact on an infrastructure?",
+    "options": {
+      "A": "The time it takes to buy a new hard drive.",
+      "B": "The delay in reading or writing to disk; high latency causes CPU wait cycles, leading to application lag and system unresponsiveness.",
+      "C": "A specialized way to encrypt the rule base.",
+      "D": "Hiring a new storage manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the amount of CPU time the OS kernel is spending on 'System' tasks like interrupt handling or context switching?",
+    "options": {
+      "A": "User CPU",
+      "B": "System CPU / Kernel Time",
+      "C": "Idle CPU",
+      "D": "Wait CPU"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'DirectPath I/O' (or Passthrough) allows a VM to directly access a physical PCIe device (like a GPU), but it prevents the VM from using Live Migration.",
+    "options": {
+      "A": "True (Because the hardware state is tied to a specific physical card).",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Anycast Routing' in a global infrastructure?",
+    "options": {
+      "A": "To walk directly to the server.",
+      "B": "To announce the same IP address from multiple locations, allowing the BGP network to route users to the 'closest' available server node.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' encrypted management interfaces?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a horizontally scalable, multi-tenant long-term storage backend for Prometheus metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation at the switch level?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "A security feature that prevents devices in different VLANs from communicating without a Layer 3 device (router/firewall).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' communication from ESXi hosts?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' allows a hypervisor to assign more RAM to virtual machines than is physically available on the host.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' used for?",
+    "options": {
+      "A": "Moving a physical hard drive while the server is on.",
+      "B": "Moving a running virtual machine's disk files between different storage arrays without downtime.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'iSCSI' traffic?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' (Link Aggregation Control Protocol) allows for the grouping of physical network ports into a single high-bandwidth logical link.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' in a data center?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Applying security rules to each individual workload (VM or Container) to prevent lateral movement of attackers within the same subnet.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active' time series in a Prometheus server?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  }
+]
+}

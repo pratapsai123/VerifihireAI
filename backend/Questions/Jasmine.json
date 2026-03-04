@@ -1,0 +1,2373 @@
+{ 
+  "skill": "Jasmine", 
+  "questions": [
+    {
+    "question": "Which function is used in Jasmine to group related specs into a test suite?",
+    "options": {
+      "A": "suite()",
+      "B": "describe()",
+      "C": "group()",
+      "D": "testCase()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'it' function in Jasmine represents a single spec or test case.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher is used to check for strict equality (===) between two values?",
+    "options": {
+      "A": "toEqual()",
+      "B": "toBe()",
+      "C": "toBeTruthy()",
+      "D": "toMatch()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO setup/teardown functions provided by Jasmine to manage test lifecycle.",
+    "options": {
+      "A": "beforeEach",
+      "B": "afterEach",
+      "C": "startTest",
+      "D": "endTest"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary keyword used to define an expectation in a Jasmine test?",
+    "options": {
+      "A": "assert",
+      "B": "expect",
+      "C": "should",
+      "D": "verify"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Jasmine requires a DOM (Document Object Model) to run its tests by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which matcher would you use to verify if a variable is not null?",
+    "options": {
+      "A": "toBeDefined()",
+      "B": "not.toBeNull()",
+      "C": "toBeTruthy()",
+      "D": "toContain()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO built-in matchers used for checking boolean values.",
+    "options": {
+      "A": "toBeTruthy()",
+      "B": "toBeFalsy()",
+      "C": "toBeYes()",
+      "D": "toBeNo()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "How do you disable a spec so that it is not executed by the test runner?",
+    "options": {
+      "A": "prefix it with 'x' (xit)",
+      "B": "prefix it with 'd' (dit)",
+      "C": "use the function ignore()",
+      "D": "comment out the expect() line"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The toEqual() matcher is used for deep equality, making it suitable for comparing objects and arrays.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher is used to check if a string matches a Regular Expression?",
+    "options": {
+      "A": "toContain()",
+      "B": "toMatch()",
+      "C": "toBe()",
+      "D": "toHaveString()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO math-related matchers in Jasmine.",
+    "options": {
+      "A": "toBeCloseTo()",
+      "B": "toBeGreaterThan()",
+      "C": "toBeRound()",
+      "D": "toBeExact()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the default filename used by Jasmine for its configuration in a Node.js project?",
+    "options": {
+      "A": "jasmine.json",
+      "B": "test.config.js",
+      "C": "spec.json",
+      "D": "package.json"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A describe block cannot contain other describe blocks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which matcher is used to check if an array contains a specific item?",
+    "options": {
+      "A": "toHave()",
+      "B": "toContain()",
+      "C": "toBeIn()",
+      "D": "toMatchArray()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO ways to execute only a specific suite or spec while ignoring others.",
+    "options": {
+      "A": "fdescribe()",
+      "B": "fit()",
+      "C": "onlySpec()",
+      "D": "focusSpec()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: The beforeEach function runs once before the entire describe block starts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which matcher is specifically designed to check if a value is 'undefined'?",
+    "options": {
+      "A": "toBeUndefined()",
+      "B": "toBeNull()",
+      "C": "not.toBe()",
+      "D": "toBeEmpty()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'not' property in an expectation?",
+    "options": {
+      "A": "To skip the test",
+      "B": "To invert the matcher following it",
+      "C": "To log a warning",
+      "D": "To mark a test as slow"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Jasmine provides a built-in test runner that can be used in both the browser and via the CLI.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher is used to check if a function throws an error when called?",
+    "options": {
+      "A": "toThrow()",
+      "B": "toError()",
+      "C": "toFail()",
+      "D": "toCatch()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Jasmine specs (it blocks) are executed in the exact order they are written in the file by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to run a block of code once after all specs in a describe block have finished?",
+    "options": {
+      "A": "afterAll()",
+      "B": "beforeAll()",
+      "C": "final()",
+      "D": "tearDown()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers used to compare numeric values.",
+    "options": {
+      "A": "toBeLessThan()",
+      "B": "toBeGreaterThanOrEqual()",
+      "C": "toBeHigher()",
+      "D": "toBeSmaller()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the result of a spec that contains no expectations?",
+    "options": {
+      "A": "It passes by default",
+      "B": "It fails by default",
+      "C": "It is marked as 'pending'",
+      "D": "It throws an error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'pending()' inside an 'it' block will cause the test to be skipped and marked as pending.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher is used to check if a specific property exists on an object?",
+    "options": {
+      "A": "toHaveProperty()",
+      "B": "toBe()",
+      "C": "not.toBeUndefined()",
+      "D": "None of the above (Jasmine 3.x+ uses toHaveSpyInteractions)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Select TWO valid ways to mark a test suite (describe) as disabled.",
+    "options": {
+      "A": "xdescribe()",
+      "B": "pending() inside the describe",
+      "C": "ddescribe()",
+      "D": "skipSuite()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does the matcher 'toBeNaN()' check for?",
+    "options": {
+      "A": "Whether a value is 'Not-a-Number'",
+      "B": "Whether a value is null",
+      "C": "Whether a value is zero",
+      "D": "Whether a value is a string"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: jasmine.any(Number) can be used inside an expectation to match any numeric value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher is most appropriate for checking if a value is 'null' specifically?",
+    "options": {
+      "A": "toBeNull()",
+      "B": "toBeFalsy()",
+      "C": "toBeUndefined()",
+      "D": "not.toBeDefined()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers that check for partial content within a string or array.",
+    "options": {
+      "A": "toContain()",
+      "B": "toMatch()",
+      "C": "toBe()",
+      "D": "toEqual()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the purpose of the 'fail()' function in Jasmine?",
+    "options": {
+      "A": "To manually force a test to fail with a specific message",
+      "B": "To stop the entire test suite",
+      "C": "To delete a test file",
+      "D": "To mark a test as slow"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'expect(true).not.toBe(false)' is a valid Jasmine expectation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to setup code that should run only once before any specs in a describe block?",
+    "options": {
+      "A": "beforeAll()",
+      "B": "beforeEach()",
+      "C": "initAll()",
+      "D": "start()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO built-in matchers for checking if a value is defined.",
+    "options": {
+      "A": "toBeDefined()",
+      "B": "not.toBeUndefined()",
+      "C": "isDefined()",
+      "D": "exists()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Jasmine matchers are chainable (e.g., expect(x).toBe(y).not.toBe(z)).",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which file is the default entry point for running Jasmine tests in a browser?",
+    "options": {
+      "A": "SpecRunner.html",
+      "B": "index.html",
+      "C": "test.html",
+      "D": "jasmine.html"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'expect([]).toEqual([])' return?",
+    "options": {
+      "A": "Pass (true)",
+      "B": "Fail (false)",
+      "C": "Undefined",
+      "D": "Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: describe blocks can be nested to create a hierarchy of tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to specifically check for a value being approximately equal to another (useful for floating point)?",
+    "options": {
+      "A": "toBeCloseTo()",
+      "B": "toBeApprox()",
+      "C": "toEqual()",
+      "D": "toBeAround()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers that can evaluate truthiness in JavaScript.",
+    "options": {
+      "A": "toBeTruthy()",
+      "B": "toBeFalsy()",
+      "C": "isTrue()",
+      "D": "isFalsy()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does the 'toBeNegativeInfinity()' matcher check for?",
+    "options": {
+      "A": "A value equal to Number.NEGATIVE_INFINITY",
+      "B": "Any negative number",
+      "C": "The value -1",
+      "D": "An empty array"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Jasmine allows you to write 'asynchronous' tests by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these represents a 'pending' spec in Jasmine code?",
+    "options": {
+      "A": "An 'it' block with no function body",
+      "B": "An 'it' block starting with 'xit'",
+      "C": "Calling pending() inside the block",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Select TWO global Jasmine functions that are used for basic testing structure.",
+    "options": {
+      "A": "describe",
+      "B": "it",
+      "C": "suite",
+      "D": "case"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Jasmine matchers always take an 'expected' value as an argument.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher checks if an object is an instance of a specific Class?",
+    "options": {
+      "A": "jasmine.any()",
+      "B": "toBeInstanceOf()",
+      "C": "toEqual()",
+      "D": "isA()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of using 'beforeEach'?",
+    "options": {
+      "A": "To reset variables and state between individual tests",
+      "B": "To make tests run faster",
+      "C": "To skip certain tests",
+      "D": "To document the code"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'expect(null).toBeDefined()' will pass.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher is used to check if a number is greater than another number?",
+    "options": {
+      "A": "toBeGreaterThan()",
+      "B": "toBeMoreThan()",
+      "C": "toBeAbove()",
+      "D": "toHaveMore()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to invert a matcher in Jasmine.",
+    "options": {
+      "A": "Using the .not property",
+      "B": "Writing a custom negative matcher",
+      "C": "Using ! before the expect",
+      "D": "Using .isNot property"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: In Jasmine, 'toEqual' is slower than 'toBe' because it performs deep object inspection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'jasmine' global object?",
+    "options": {
+      "A": "To access Jasmine utility functions like 'any()' or 'clock()'",
+      "B": "To define new test suites",
+      "C": "To stop the execution of Node.js",
+      "D": "To store user preferences"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher checks if a value is 'nothing' (null or undefined)?",
+    "options": {
+      "A": "toBeFalsy()",
+      "B": "toBeNull()",
+      "C": "toBeUndefined()",
+      "D": "None (you must check both separately or use a custom one)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: The 'afterEach' function runs even if the spec fails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher is used to check if a value is less than another?",
+    "options": {
+      "A": "toBeLessThan()",
+      "B": "toBeSmallerThan()",
+      "C": "toBeBelow()",
+      "D": "isLowerThan()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO Jasmine matchers that are used for identity/equality.",
+    "options": {
+      "A": "toBe",
+      "B": "toEqual",
+      "C": "toExist",
+      "D": "toMatch"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: xdescribe suites are shown in the SpecRunner output as 'skipped' or 'pending'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Spec' in Jasmine terminology?",
+    "options": {
+      "A": "A single test case (it block)",
+      "B": "A configuration file",
+      "C": "A reporting tool",
+      "D": "A documentation generator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher checks for values between a certain range?",
+    "options": {
+      "A": "None (you must use toBeGreaterThan and toBeLessThan together)",
+      "B": "toBeInRange()",
+      "C": "toBeBetween()",
+      "D": "toHaveRange()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO things Jasmine focuses on as a BDD framework.",
+    "options": {
+      "A": "Readability of tests",
+      "B": "Behavior of the application",
+      "C": "Code coverage percentage",
+      "D": "Static analysis of code"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: describe blocks can contain variables that are accessible to all 'it' blocks within them.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to create a manual failure with an optional message?",
+    "options": {
+      "A": "fail()",
+      "B": "throw()",
+      "C": "error()",
+      "D": "reject()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'expect(false).toBeFalsy()' return?",
+    "options": {
+      "A": "Pass",
+      "B": "Fail",
+      "C": "Null",
+      "D": "Undefined"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: beforeEach can be used at the top level (outside of any describe) to run before every spec in the project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to create a spy on an existing object's method?",
+    "options": {
+      "A": "spyOn()",
+      "B": "createSpy()",
+      "C": "mockMethod()",
+      "D": "observe()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: By default, calling spyOn(obj, 'method') will prevent the original function from being executed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to allow a spy to call through to the actual implementation of the function?",
+    "options": {
+      "A": "and.callThrough()",
+      "B": "and.realCall()",
+      "C": "and.original()",
+      "D": "and.pass()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers used specifically for verifying spy interactions.",
+    "options": {
+      "A": "toHaveBeenCalled()",
+      "B": "toHaveBeenCalledWith()",
+      "C": "toBeCalled()",
+      "D": "toWasInvoked()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "How do you test asynchronous code in Jasmine using the 'done' callback?",
+    "options": {
+      "A": "Pass 'done' as an argument to the 'it' block and call it when the work is finished.",
+      "B": "Use the wait() function.",
+      "C": "Jasmine automatically detects async code.",
+      "D": "Wrap the expectation in a setTimeout."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Jasmine 2.7+ and 3.x support returning a Promise from a spec for asynchronous testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine utility allows you to manipulate and 'fast-forward' time for functions like setTimeout or setInterval?",
+    "options": {
+      "A": "jasmine.clock()",
+      "B": "jasmine.timer()",
+      "C": "jasmine.fastForward()",
+      "D": "jasmine.mockTime()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods used to configure what a spy returns when called.",
+    "options": {
+      "A": "and.returnValue()",
+      "B": "and.returnValues()",
+      "C": "and.setResult()",
+      "D": "and.output()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'jasmine.createSpyObj()' do?",
+    "options": {
+      "A": "Creates a new object that contains multiple spies as methods.",
+      "B": "Creates a spy that tracks multiple objects.",
+      "C": "Mocks the entire global namespace.",
+      "D": "Generates a random test object."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'and.callFake()' method allows a spy to execute a completely different function instead of the original one.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine property allows you to inspect the arguments of every call made to a spy?",
+    "options": {
+      "A": "spy.calls.allArgs()",
+      "B": "spy.args",
+      "C": "spy.history",
+      "D": "spy.logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods to clear the state of the Jasmine Clock after a test.",
+    "options": {
+      "A": "jasmine.clock().uninstall()",
+      "B": "jasmine.clock().stop()",
+      "C": "jasmine.clock().clear()",
+      "D": "jasmine.clock().reset()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How can you check if a spy was called exactly three times?",
+    "options": {
+      "A": "expect(spy.calls.count()).toBe(3)",
+      "B": "expect(spy).toHaveBeenCalled(3)",
+      "C": "expect(spy.count).toBe(3)",
+      "D": "expect(spy.times).toBe(3)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using async/await in a Jasmine 'it' block is a valid way to handle asynchronous operations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method of 'jasmine.clock()' is used to advance time by a specific number of milliseconds?",
+    "options": {
+      "A": "tick()",
+      "B": "advance()",
+      "C": "step()",
+      "D": "forward()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers that use asymmetric equality (matching parts of an object/value).",
+    "options": {
+      "A": "jasmine.objectContaining()",
+      "B": "jasmine.stringMatching()",
+      "C": "jasmine.partial()",
+      "D": "jasmine.some()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'spy.calls.mostRecent()' returns the context (this) and arguments of the last call made to the spy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which spy configuration makes the spy throw an error whenever it is invoked?",
+    "options": {
+      "A": "and.throwError()",
+      "B": "and.fail()",
+      "C": "and.reject()",
+      "D": "and.stubError()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between 'toBe' and 'toEqual' when comparing objects?",
+    "options": {
+      "A": "'toBe' checks for reference equality; 'toEqual' checks for value/content equality.",
+      "B": "'toBe' is for strings; 'toEqual' is for objects.",
+      "C": "There is no difference.",
+      "D": "'toEqual' is deprecated."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: jasmine.any(Object) will match any value that is an instance of an Object, including arrays and null.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to reset a spy so that it forgets its call history?",
+    "options": {
+      "A": "spy.calls.reset()",
+      "B": "spy.reset()",
+      "C": "spy.clear()",
+      "D": "jasmine.reset(spy)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to handle a timeout in a Jasmine asynchronous test.",
+    "options": {
+      "A": "Setting jasmine.DEFAULT_TIMEOUT_INTERVAL",
+      "B": "Passing a timeout value as a third argument to 'it'",
+      "C": "Calling done.fail()",
+      "D": "Using the clock().tick() method"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'jasmine.createSpy()' used for?",
+    "options": {
+      "A": "Creating a bare spy that is not attached to any object.",
+      "B": "Mocking a constructor.",
+      "C": "Testing private functions.",
+      "D": "Starting a new test suite."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: If you return a Promise in 'beforeEach', Jasmine will wait for it to resolve before starting the tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property of 'spy.calls' returns an array of the 'this' context for every call?",
+    "options": {
+      "A": "spy.calls.all()",
+      "B": "spy.calls.thisValues()",
+      "C": "spy.contexts",
+      "D": "spy.allContexts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers that can be used with 'jasmine.clock()'.",
+    "options": {
+      "A": "None (The clock is a utility for triggering behavior, not a matcher itself).",
+      "B": "toHaveBeenCalled()",
+      "C": "toBeDelayed()",
+      "D": "toTriggerAt()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'and.stub()' method is used to make a spy stop calling through to the original implementation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if the 'done()' callback is never called in an async test?",
+    "options": {
+      "A": "The test fails after a timeout interval.",
+      "B": "The test passes automatically.",
+      "C": "The test runner crashes.",
+      "D": "The test is skipped."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine function is used to check if a spy was called with specific arguments?",
+    "options": {
+      "A": "toHaveBeenCalledWith()",
+      "B": "toBeCalledWith()",
+      "C": "toHaveArgs()",
+      "D": "toMatchArgs()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'jasmine.arrayContaining()' matches if the actual array contains the expected items, even if it contains others as well.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+{
+    "question": "Which property of a spy allows you to access the context ('this' value) of the first call made?",
+    "options": {
+      "A": "spy.calls.first().object",
+      "B": "spy.calls.first().this",
+      "C": "spy.calls.argsFor(0).context",
+      "D": "spy.firstCallContext"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'jasmine.clock().mockDate()' allows you to freeze the current system time for the duration of the test.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to handle a rejected Promise in a Jasmine test.",
+    "options": {
+      "A": "Use a try/catch block with 'done.fail()'",
+      "B": "Use the '.catch()' method and call 'done.fail()'",
+      "C": "Expect the promise to resolve and ignore errors",
+      "D": "Delete the promise object"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does the matcher 'toHaveBeenCalledBefore()' check for?",
+    "options": {
+      "A": "Whether one spy was called before another specific spy.",
+      "B": "Whether a spy was called before the expect line.",
+      "C": "Whether a spy was called before the 'done' callback.",
+      "D": "Whether a spy was called in the previous test."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine function is used to add a custom equality tester that affects how 'toEqual' works?",
+    "options": {
+      "A": "jasmine.addCustomEqualityTester()",
+      "B": "jasmine.addEquality()",
+      "C": "expect.addTester()",
+      "D": "jasmine.compareBy()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'spy.calls.reset()' clears the spy's return value configuration along with its call history.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'jasmine.Anything()' asymmetric matcher?",
+    "options": {
+      "A": "It matches any value except null or undefined.",
+      "B": "It matches literally any value including null.",
+      "C": "It is a wildcard for any string only.",
+      "D": "It returns a random object."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods provided by 'jasmine.clock()' to control the execution of time-dependent code.",
+    "options": {
+      "A": "install()",
+      "B": "tick()",
+      "C": "wait()",
+      "D": "pause()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: A spy created with 'jasmine.createSpy()' has no implementation and returns undefined unless configured otherwise.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method should you use to check if a spy was called with an object that has at least the specified properties?",
+    "options": {
+      "A": "expect(spy).toHaveBeenCalledWith(jasmine.objectContaining({...}))",
+      "B": "expect(spy).toHaveBeenCalledWith(jasmine.hasProperties({...}))",
+      "C": "expect(spy).toHaveBeenCalledWith({...})",
+      "D": "expect(spy).toMatchObject({...})"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you specify a custom timeout for a single 'it' block?",
+    "options": {
+      "A": "it('description', function() { ... }, 10000)",
+      "B": "it('description', 10000, function() { ... })",
+      "C": "it('description', function(done) { done(10000) })",
+      "D": "it.timeout(10000)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO results returned by 'spy.calls.all()'.",
+    "options": {
+      "A": "The context ('this')",
+      "B": "The arguments of the call",
+      "C": "The return value of the call",
+      "D": "The source code of the function"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'and.callThrough()' can be used on a spy created via 'jasmine.createSpy()'.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of 'expect(spy).not.toHaveBeenCalled()' if the spy was called once?",
+    "options": {
+      "A": "Fail",
+      "B": "Pass",
+      "C": "Pending",
+      "D": "Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'jasmine.clock()' method allows you to set the system clock to a specific Date object?",
+    "options": {
+      "A": "mockDate()",
+      "B": "setDate()",
+      "C": "timeTravel()",
+      "D": "freeze()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to fail an asynchronous test that uses the 'done' callback.",
+    "options": {
+      "A": "Call done.fail('message')",
+      "B": "Throw an error inside the async block",
+      "C": "Call done(false)",
+      "D": "Return false from the function"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'spy.calls.any()' returns true if the spy has been called at least once.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which asymmetric matcher would you use to verify a spy was called with a string containing a specific substring?",
+    "options": {
+      "A": "jasmine.stringMatching()",
+      "B": "jasmine.stringContaining()",
+      "C": "jasmine.any(String)",
+      "D": "jasmine.toMatch()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'and.identity' return for a spy?",
+    "options": {
+      "A": "The name given to the spy when it was created.",
+      "B": "The original function body.",
+      "C": "The object the spy is attached to.",
+      "D": "A unique ID number."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Jasmine, you can spy on property getters and setters using 'spyOnProperty()'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine utility provides a way to match any value that satisfies a custom predicate function?",
+    "options": {
+      "A": "jasmine.map()",
+      "B": "jasmine.anything()",
+      "C": "jasmine.customMatcher()",
+      "D": "None (Jasmine 3.x uses jasmine.asymmetricMatcher)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Select TWO properties that 'spy.calls.first()' contains.",
+    "options": {
+      "A": "object",
+      "B": "args",
+      "C": "returnValue",
+      "D": "timestamp"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'and.returnValues(1, 2, 3)' will make the spy return 1 on the first call, 2 on the second, and 3 on all subsequent calls.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you test a Promise that is expected to reject using Jasmine's 'async/await' support?",
+    "options": {
+      "A": "Use a try/catch block and expect the catch to be executed.",
+      "B": "It is not possible with async/await.",
+      "C": "Use the toThrow() matcher on the await call.",
+      "D": "Return the rejection directly."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method returns the arguments passed to a specific call of a spy (e.g., the 3rd call)?",
+    "options": {
+      "A": "spy.calls.argsFor(2)",
+      "B": "spy.calls.get(3).args",
+      "C": "spy.args[2]",
+      "D": "spy.history[2].args"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Jasmine 3.x allows using 'done' and returning a Promise in the same test.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'jasmine.empty()'?",
+    "options": {
+      "A": "It is an asymmetric matcher that matches an empty object or array.",
+      "B": "It clears the current test suite.",
+      "C": "It resets all spies.",
+      "D": "It deletes all mocks."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods to prevent a spy from calling through to the original function.",
+    "options": {
+      "A": "and.stub()",
+      "B": "and.returnValue()",
+      "C": "and.callThrough()",
+      "D": "and.execute()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: A spy can be used to track calls to a constructor if you spy on the prototype.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which asymmetric matcher matches if an object has the exact same properties as another, ignoring extra ones?",
+    "options": {
+      "A": "jasmine.objectContaining()",
+      "B": "jasmine.exactMatch()",
+      "C": "jasmine.subset()",
+      "D": "jasmine.match()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'expect(spy).toHaveBeenCalledTimes(0)' do?",
+    "options": {
+      "A": "Checks that the spy was never called (equivalent to .not.toHaveBeenCalled()).",
+      "B": "Resets the spy's counter to zero.",
+      "C": "Marks the test as pending.",
+      "D": "Throws an error."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can use 'jasmine.clock().withMock(function() { ... })' to automatically install and uninstall the clock for a block of code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to allow a spy to return a resolved Promise?",
+    "options": {
+      "A": "and.resolveTo(value)",
+      "B": "and.returnValue(Promise.resolve(value))",
+      "C": "and.promise(value)",
+      "D": "Both A and B (A is sugar for B in recent Jasmine versions)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Select TWO properties available on the object returned by 'spy.calls.mostRecent()'.",
+    "options": {
+      "A": "args",
+      "B": "object",
+      "C": "result",
+      "D": "time"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'jasmine.falsy()' is a built-in asymmetric matcher in Jasmine 3.x.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of advancing the clock with 'tick(500)' if a setTimeout was scheduled for 1000ms?",
+    "options": {
+      "A": "The timeout function is not yet executed.",
+      "B": "The timeout function is executed immediately.",
+      "C": "The timeout is cancelled.",
+      "D": "The test runner skips the test."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When creating a custom matcher, what is the purpose of the 'compare' function return object's 'message' property?",
+    "options": {
+      "A": "To provide a custom failure message when the expectation is not met.",
+      "B": "To log debug information to the console during execution.",
+      "C": "To define the name of the matcher in the report.",
+      "D": "To store the expected value for later comparison."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Jasmine, you can use 'jasmine.addMatchers()' inside a 'beforeEach' block to limit those matchers to a specific suite.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to track instances created by a constructor when using 'spyOn'?",
+    "options": {
+      "A": "By spying on the constructor function itself and using '.and.callThrough()'.",
+      "B": "By spying on 'Object.prototype.constructor'.",
+      "C": "By using 'jasmine.createSpyInstance()'.",
+      "D": "By setting 'trackInstances: true' in the spy configuration."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods required when implementing a custom Jasmine Reporter.",
+    "options": {
+      "A": "specDone",
+      "B": "suiteStarted",
+      "C": "testExecuted",
+      "D": "reportGenerated"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "In a custom matcher, what does the 'util.equals()' method provide?",
+    "options": {
+      "A": "A deep equality check that respects custom equality testers registered in the environment.",
+      "B": "A strict identity check (===).",
+      "C": "A string-based comparison of objects.",
+      "D": "A way to compare the memory addresses of two objects."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Spying on a private method in JavaScript/TypeScript requires using a string-based access or casting to 'any', as Jasmine cannot bypass native private '#' fields.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine function is used to check if a spy was called with a specific 'this' context?",
+    "options": {
+      "A": "None (You must check 'spy.calls.mostRecent().object' manually).",
+      "B": "toHaveBeenCalledWithContext()",
+      "C": "toBeCalledOn()",
+      "D": "toHaveContext()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to mock 'Date' to ensure consistent timestamps across different test environments.",
+    "options": {
+      "A": "jasmine.clock().mockDate(new Date())",
+      "B": "spyOn(window, 'Date').and.returnValue('fixed date')",
+      "C": "jasmine.freezeTime()",
+      "D": "jasmine.setDate()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the behavior of 'jasmine.createSpyObj' when passed an object for method names (e.g., { method: 'result' })?",
+    "options": {
+      "A": "It creates a spy object where each key is a spy that returns its corresponding value.",
+      "B": "It maps the spies to an external JSON file.",
+      "C": "It creates a spy that only works once.",
+      "D": "It throws an error, as it only accepts arrays of strings."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: If you write a custom matcher, it must support the '.not' prefix automatically without extra code.",
+    "options": {
+      "A": "False (You can provide a 'negativeCompare' function for more specific failure messages).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which internal object allows you to retrieve the full execution environment of Jasmine, including current reporters and configurations?",
+    "options": {
+      "A": "jasmine.getEnv()",
+      "B": "jasmine.currentContext()",
+      "C": "jasmine.getConfig()",
+      "D": "jasmine.env()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common causes for the 'Spec has no expectations' warning in strict Jasmine configurations.",
+    "options": {
+      "A": "Asynchronous code finishing after the spec has already ended.",
+      "B": "Conditional blocks that prevent 'expect' lines from being reached.",
+      "C": "Using a spy without a matcher.",
+      "D": "Having too many describe blocks."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'jasmine.DEFAULT_TIMEOUT_INTERVAL' control?",
+    "options": {
+      "A": "The maximum time Jasmine will wait for an asynchronous spec to finish before failing it.",
+      "B": "The interval between each tick of the Jasmine clock.",
+      "C": "The time allowed for the browser to load the SpecRunner.",
+      "D": "The delay between retrying failed tests."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'spyOnProperty' can only be used on properties that have explicit getter or setter functions defined.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a custom matcher, what is the purpose of the 'actual' parameter passed to the 'compare' function?",
+    "options": {
+      "A": "It represents the value passed into the 'expect()' function.",
+      "B": "It represents the value passed into the matcher itself.",
+      "C": "It is a reference to the Jasmine test runner.",
+      "D": "It is the expected result of the test."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of using 'jasmine.any()' inside a 'toHaveBeenCalledWith' expectation.",
+    "options": {
+      "A": "It allows matching arguments based on type when the exact value is dynamic.",
+      "B": "It reduces test fragility when dealing with generated IDs or timestamps.",
+      "C": "It speeds up the comparison of large objects.",
+      "D": "It automatically mocks the argument passed to the function."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "How do you test a spec that is expected to time out intentionally?",
+    "options": {
+      "A": "This is generally not supported; you should mock the timeout logic using 'jasmine.clock()'.",
+      "B": "Set the timeout to a very low number.",
+      "C": "Use the '.toTimeout()' matcher.",
+      "D": "Wrap the test in a try/catch block."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'jasmine.addCustomEqualityTester' affects comparison across all matchers that use Jasmine's internal equality util, like 'toEqual' and 'toContain'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which matcher is used to verify that one spy was called before another spy in the same execution flow?",
+    "options": {
+      "A": "toHaveBeenCalledBefore()",
+      "B": "toBeCalledPriorTo()",
+      "C": "toWasInvokedFirst()",
+      "D": "None (You must compare 'spy.calls.first().invocationOrder')."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods to prevent a 'done()' callback from being called multiple times in an async test.",
+    "options": {
+      "A": "Wrapping the logic in a 'once' utility function.",
+      "B": "Ensuring the 'done()' call is the final line of a specific logic path.",
+      "C": "Calling 'done.stop()'.",
+      "D": "Jasmine automatically handles this by ignoring subsequent calls."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "Which function is used to create a spy on an existing object's method?",
+    "options": {
+      "A": "spyOn()",
+      "B": "createSpy()",
+      "C": "mockMethod()",
+      "D": "observe()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: By default, calling spyOn(obj, 'method') will prevent the original function from being executed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to allow a spy to call through to the actual implementation of the function?",
+    "options": {
+      "A": "and.callThrough()",
+      "B": "and.realCall()",
+      "C": "and.original()",
+      "D": "and.pass()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers used specifically for verifying spy interactions.",
+    "options": {
+      "A": "toHaveBeenCalled()",
+      "B": "toHaveBeenCalledWith()",
+      "C": "toBeCalled()",
+      "D": "toWasInvoked()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "How do you test asynchronous code in Jasmine using the 'done' callback?",
+    "options": {
+      "A": "Pass 'done' as an argument to the 'it' block and call it when the work is finished.",
+      "B": "Use the wait() function.",
+      "C": "Jasmine automatically detects async code.",
+      "D": "Wrap the expectation in a setTimeout."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Jasmine 2.7+ and 3.x support returning a Promise from a spec for asynchronous testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine utility allows you to manipulate and 'fast-forward' time for functions like setTimeout or setInterval?",
+    "options": {
+      "A": "jasmine.clock()",
+      "B": "jasmine.timer()",
+      "C": "jasmine.fastForward()",
+      "D": "jasmine.mockTime()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods used to configure what a spy returns when called.",
+    "options": {
+      "A": "and.returnValue()",
+      "B": "and.returnValues()",
+      "C": "and.setResult()",
+      "D": "and.output()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'jasmine.createSpyObj()' do?",
+    "options": {
+      "A": "Creates a new object that contains multiple spies as methods.",
+      "B": "Creates a spy that tracks multiple objects.",
+      "C": "Mocks the entire global namespace.",
+      "D": "Generates a random test object."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'and.callFake()' method allows a spy to execute a completely different function instead of the original one.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine property allows you to inspect the arguments of every call made to a spy?",
+    "options": {
+      "A": "spy.calls.allArgs()",
+      "B": "spy.args",
+      "C": "spy.history",
+      "D": "spy.logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods to clear the state of the Jasmine Clock after a test.",
+    "options": {
+      "A": "jasmine.clock().uninstall()",
+      "B": "jasmine.clock().stop()",
+      "C": "jasmine.clock().clear()",
+      "D": "jasmine.clock().reset()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How can you check if a spy was called exactly three times?",
+    "options": {
+      "A": "expect(spy.calls.count()).toBe(3)",
+      "B": "expect(spy).toHaveBeenCalled(3)",
+      "C": "expect(spy.count).toBe(3)",
+      "D": "expect(spy.times).toBe(3)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using async/await in a Jasmine 'it' block is a valid way to handle asynchronous operations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method of 'jasmine.clock()' is used to advance time by a specific number of milliseconds?",
+    "options": {
+      "A": "tick()",
+      "B": "advance()",
+      "C": "step()",
+      "D": "forward()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers that use asymmetric equality (matching parts of an object/value).",
+    "options": {
+      "A": "jasmine.objectContaining()",
+      "B": "jasmine.stringMatching()",
+      "C": "jasmine.partial()",
+      "D": "jasmine.some()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'spy.calls.mostRecent()' returns the context (this) and arguments of the last call made to the spy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which spy configuration makes the spy throw an error whenever it is invoked?",
+    "options": {
+      "A": "and.throwError()",
+      "B": "and.fail()",
+      "C": "and.reject()",
+      "D": "and.stubError()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between 'toBe' and 'toEqual' when comparing objects?",
+    "options": {
+      "A": "'toBe' checks for reference equality; 'toEqual' checks for value/content equality.",
+      "B": "'toBe' is for strings; 'toEqual' is for objects.",
+      "C": "There is no difference.",
+      "D": "'toEqual' is deprecated."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: jasmine.any(Object) will match any value that is an instance of an Object, including arrays and null.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to reset a spy so that it forgets its call history?",
+    "options": {
+      "A": "spy.calls.reset()",
+      "B": "spy.reset()",
+      "C": "spy.clear()",
+      "D": "jasmine.reset(spy)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to handle a timeout in a Jasmine asynchronous test.",
+    "options": {
+      "A": "Setting jasmine.DEFAULT_TIMEOUT_INTERVAL",
+      "B": "Passing a timeout value as a third argument to 'it'",
+      "C": "Calling done.fail()",
+      "D": "Using the clock().tick() method"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'jasmine.createSpy()' used for?",
+    "options": {
+      "A": "Creating a bare spy that is not attached to any object.",
+      "B": "Mocking a constructor.",
+      "C": "Testing private functions.",
+      "D": "Starting a new test suite."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: If you return a Promise in 'beforeEach', Jasmine will wait for it to resolve before starting the tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property of 'spy.calls' returns an array of the 'this' context for every call?",
+    "options": {
+      "A": "spy.calls.all()",
+      "B": "spy.calls.thisValues()",
+      "C": "spy.contexts",
+      "D": "spy.allContexts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO matchers that can be used with 'jasmine.clock()'.",
+    "options": {
+      "A": "None (The clock is a utility for triggering behavior, not a matcher itself).",
+      "B": "toHaveBeenCalled()",
+      "C": "toBeDelayed()",
+      "D": "toTriggerAt()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'and.stub()' method is used to make a spy stop calling through to the original implementation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if the 'done()' callback is never called in an async test?",
+    "options": {
+      "A": "The test fails after a timeout interval.",
+      "B": "The test passes automatically.",
+      "C": "The test runner crashes.",
+      "D": "The test is skipped."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine function is used to check if a spy was called with specific arguments?",
+    "options": {
+      "A": "toHaveBeenCalledWith()",
+      "B": "toBeCalledWith()",
+      "C": "toHaveArgs()",
+      "D": "toMatchArgs()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'jasmine.arrayContaining()' matches if the actual array contains the expected items, even if it contains others as well.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method should you use to check if a spy was called with an object that has at least the specified properties?",
+    "options": {
+      "A": "expect(spy).toHaveBeenCalledWith(jasmine.objectContaining({...}))",
+      "B": "expect(spy).toHaveBeenCalledWith(jasmine.hasProperties({...}))",
+      "C": "expect(spy).toHaveBeenCalledWith({...})",
+      "D": "expect(spy).toMatchObject({...})"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a custom matcher, what is the required structure of the object returned by the 'compare' function?",
+    "options": {
+      "A": "{ pass: boolean, message: string }",
+      "B": "{ result: boolean, error: string }",
+      "C": "{ success: boolean, failureMessage: string }",
+      "D": "{ status: string, feedback: string }"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a custom matcher, the 'message' property can be a function that returns a string to allow for lazy evaluation of the failure message.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which argument is passed to the custom matcher factory to provide access to Jasmine's internal equality and utility functions?",
+    "options": {
+      "A": "matchersUtil",
+      "B": "jasmineUtil",
+      "C": "equalityHelper",
+      "D": "coreMatchers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods provided by 'matchersUtil' to help implement custom matching logic.",
+    "options": {
+      "A": "equals()",
+      "B": "contains()",
+      "C": "deepCompare()",
+      "D": "isEquivalent()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "How do you spy on a property that is defined with 'Object.defineProperty' and has only a getter?",
+    "options": {
+      "A": "spyOnProperty(obj, 'prop', 'get')",
+      "B": "spyOn(obj, 'prop')",
+      "C": "spyOnGetter(obj, 'prop')",
+      "D": "It is not possible to spy on read-only properties."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'jasmine.getEnv().addReporter()' allows you to hook into the test execution lifecycle to create custom output formats like XML or JSON.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which reporter method is triggered exactly once when the entire test execution is finished?",
+    "options": {
+      "A": "jasmineDone",
+      "B": "executionFinished",
+      "C": "allSpecsDone",
+      "D": "reportFinalized"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO properties available in the 'result' object passed to the 'specDone' reporter method.",
+    "options": {
+      "A": "failedExpectations",
+      "B": "passedExpectations",
+      "C": "executionTime",
+      "D": "sourceCode"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary difference between 'compare' and 'negativeCompare' in a custom matcher?",
+    "options": {
+      "A": "'negativeCompare' is used specifically when the '.not' prefix is applied to the matcher.",
+      "B": "'negativeCompare' handles null values.",
+      "C": "'compare' is for equality; 'negativeCompare' is for inequality.",
+      "D": "There is no difference; they are aliases."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Spying on a constructor using 'spyOn(window, \"MyClass\")' allows you to track calls made with the 'new' keyword.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine utility is used to create an object that can be used in expectations to match any value that satisfies a predicate function?",
+    "options": {
+      "A": "jasmine.asymmetricMatcher()",
+      "B": "jasmine.predicate()",
+      "C": "jasmine.anyCondition()",
+      "D": "jasmine.customLogic()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods to prevent 'global variable leaks' from being ignored in Jasmine tests.",
+    "options": {
+      "A": "Setting jasmine.getEnv().configure({ stopSpecOnExpectationFailure: true })",
+      "B": "Using a reporter to track the window/global object keys.",
+      "C": "Jasmine does not track global leaks by default.",
+      "D": "Running in 'Strict Mode'."
+    },
+    "answer": "B, C"
+  },
+  {
+    "question": "What does the 'jasmine.createSpyInstance(Constructor)' function do?",
+    "options": {
+      "A": "Creates a mock instance of a class with all methods automatically spied upon.",
+      "B": "Creates a real instance but tracks its method calls.",
+      "C": "Mocks the prototype of the class.",
+      "D": "Returns a spy that acts as a constructor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: If you add a custom equality tester via 'jasmine.addCustomEqualityTester()', it will be used by 'toEqual' but NOT by 'toContain'.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which internal object manages the global state of the Jasmine environment, including the clock and reporters?",
+    "options": {
+      "A": "Env",
+      "B": "GlobalContext",
+      "C": "JasmineManager",
+      "D": "TestRegistry"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO attributes of the 'jasmine.clock()' that are NOT related to setTimeout/setInterval.",
+    "options": {
+      "A": "mockDate()",
+      "B": "install()",
+      "C": "requestAnimationFrame",
+      "D": "process.nextTick"
+    },
+    "answer": "A, C"
+  },
+  {
+    "question": "What is the consequence of failing to call 'jasmine.clock().uninstall()' after a test suite?",
+    "options": {
+      "A": "The global timer functions remain mocked, potentially breaking subsequent tests or the test runner itself.",
+      "B": "The browser will crash.",
+      "C": "The next test suite will run twice as fast.",
+      "D": "Nothing; Jasmine uninstalls it automatically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Custom matchers must be registered before the 'it' block where they are used, typically in a 'beforeEach' or 'beforeAll'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method on a spy allows you to change its behavior to return a rejected Promise for a specific test case?",
+    "options": {
+      "A": "and.rejectWith(error)",
+      "B": "and.returnValue(Promise.reject(error))",
+      "C": "and.throwPromise(error)",
+      "D": "Both A and B (A is sugar for B in newer versions)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Select TWO ways to handle 'flaky' asynchronous tests in a Jasmine/CI environment.",
+    "options": {
+      "A": "Increasing jasmine.DEFAULT_TIMEOUT_INTERVAL",
+      "B": "Using the 'done.fail()' method to provide explicit error context.",
+      "C": "Using 'jasmine.clock().tick()' to remove real-time dependency.",
+      "D": "Running tests in parallel."
+    },
+    "answer": "A, C"
+  },
+  {
+    "question": "Which Jasmine property allows you to check the total number of expectations (assertions) that were executed during a single spec?",
+    "options": {
+      "A": "None (Jasmine does not expose a live 'assertion count' to the spec itself).",
+      "B": "jasmine.assertionCount",
+      "C": "this.expectations.length",
+      "D": "expect.count()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A custom matcher's 'compare' function can return a Promise to support asynchronous matching logic.",
+    "options": {
+      "A": "False (Jasmine matchers must be synchronous; async logic belongs in the spec).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you spy on a method that is defined as an 'arrow function' property on a class instance?",
+    "options": {
+      "A": "You must spy on the instance itself (e.g., spyOn(instance, 'methodName')) because arrow functions are not on the prototype.",
+      "B": "spyOn(Class.prototype, 'methodName')",
+      "C": "Arrow functions cannot be spied upon in Jasmine.",
+      "D": "Using spyOnProperty(instance, 'methodName', 'get')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods to ensure a spy always returns a specific value, regardless of how many times or with what arguments it is called.",
+    "options": {
+      "A": "and.returnValue(value)",
+      "B": "and.callFake(() => value)",
+      "C": "and.persistValue(value)",
+      "D": "and.fixed(value)"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the purpose of 'jasmine.getEnv().allowRespy(true)'?",
+    "options": {
+      "A": "It allows you to call spyOn() multiple times on the same method without throwing an error.",
+      "B": "It allows spies to work on read-only properties.",
+      "C": "It enables spying on private methods.",
+      "D": "It allows a spy to call another spy."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'jasmine.clock().withMock()' function automatically handles the install() and uninstall() of the clock for the provided function block.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which reporter method is called when a 'describe' block starts its execution?",
+    "options": {
+      "A": "suiteStarted",
+      "B": "describeStarted",
+      "C": "groupStarted",
+      "D": "collectionStarted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO Jasmine utilities used for partial matching of complex nested data structures.",
+    "options": {
+      "A": "jasmine.objectContaining()",
+      "B": "jasmine.arrayWith()",
+      "C": "jasmine.mapContaining()",
+      "D": "jasmine.setContaining()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "In a custom matcher, what is the role of the 'actual' parameter passed to the compare function?",
+    "options": {
+      "A": "It is the value passed into the expect() call (e.g., expect(actual).myMatcher()).",
+      "B": "It is the value passed into the matcher itself.",
+      "C": "It is a boolean representing the test status.",
+      "D": "It is the expected value provided by the developer."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Jasmine 4.0+ moved many global functions into the 'jasmine' object to reduce global namespace pollution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method allows you to retrieve the 'this' context of a specific call to a spy?",
+    "options": {
+      "A": "spy.calls.argsFor(index).context",
+      "B": "spy.calls.all()[index].object",
+      "C": "spy.calls.contextFor(index)",
+      "D": "spy.history[index].this"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO asymmetric matchers that can be used to check for specific string patterns.",
+    "options": {
+      "A": "jasmine.stringMatching()",
+      "B": "jasmine.stringContaining()",
+      "C": "jasmine.regex()",
+      "D": "jasmine.textLike()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What happens if 'jasmine.clock().tick()' is called with a value larger than the next scheduled setTimeout?",
+    "options": {
+      "A": "The scheduled function is executed immediately in the current execution loop.",
+      "B": "The function is executed after a real-world delay.",
+      "C": "The function is cancelled.",
+      "D": "An error is thrown."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Spying on 'window.location.href' is directly possible using standard spyOn() in all browsers.",
+    "options": {
+      "A": "False (location is often a non-configurable property; you must mock the object or use a wrapper).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to manually trigger the 'fail' state of a spec from within an asynchronous callback?",
+    "options": {
+      "A": "fail()",
+      "B": "done.fail()",
+      "C": "expect.fail()",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Select TWO reasons to use 'jasmine.any(Object)' over simply checking if a value is truthy.",
+    "options": {
+      "A": "It ensures the value is specifically an object and not a string/number.",
+      "B": "It allows the test to pass even if the object is empty ({}) but fail if it is null.",
+      "C": "It checks for deep property equality.",
+      "D": "It automatically mocks the object."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary function of the 'jasmine.DiffBuilder' utility in custom matchers?",
+    "options": {
+      "A": "To generate a formatted 'Expected X but got Y' string for complex objects.",
+      "B": "To compare two different files.",
+      "C": "To find differences in code coverage.",
+      "D": "To merge two test suites."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'jasmine.addCustomEqualityTester' is shared across all parallel execution threads in a Node.js environment.",
+    "options": {
+      "A": "False (It is scoped to the environment of the current process/thread).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which relationship parameter is required to spy on a 'getter' using spyOnProperty?",
+    "options": {
+      "A": "'get'",
+      "B": "'read'",
+      "C": "'accessor'",
+      "D": "'fetch'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to ignore a specific 'it' block in a way that is visible in the final report.",
+    "options": {
+      "A": "xit()",
+      "B": "pending() inside the it block",
+      "C": "it.skip()",
+      "D": "it.ignore()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "How do you test a function that uses 'requestAnimationFrame' using the Jasmine Clock?",
+    "options": {
+      "A": "The Jasmine Clock automatically mocks requestAnimationFrame when installed.",
+      "B": "You must manually spy on window.requestAnimationFrame.",
+      "C": "Use the clock().tick() method with a value of 16.",
+      "D": "Both A and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'spy.calls.mostRecent()' will return 'undefined' if the spy has never been called.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine asymmetric matcher matches any value that is NOT null and NOT undefined?",
+    "options": {
+      "A": "jasmine.anything()",
+      "B": "jasmine.any(Object)",
+      "C": "jasmine.truthy()",
+      "D": "jasmine.exists()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO items found in the 'result' object of a 'suiteDone' reporter callback.",
+    "options": {
+      "A": "status (passed/failed)",
+      "B": "description (the name of the describe block)",
+      "C": "totalCount",
+      "D": "averageSpeed"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "Which specific object is passed to a custom matcher factory to allow for nested deep equality checks?",
+    "options": {
+      "A": "matchersUtil",
+      "B": "jasmineCore",
+      "C": "equalityTester",
+      "D": "utilProxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a custom matcher, 'negativeCompare' is optional and Jasmine will fall back to 'compare' if it is not provided.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine property allows a reporter to identify the specific file path where a spec is defined?",
+    "options": {
+      "A": "None (Jasmine does not natively track file paths in the spec result object).",
+      "B": "result.filename",
+      "C": "result.location",
+      "D": "result.filePath"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO valid methods for creating a 'Spy' that acts as a constructor function.",
+    "options": {
+      "A": "jasmine.createSpy('MyConstructor').and.callFake(function() { ... })",
+      "B": "spyOn(window, 'MyConstructor').and.callThrough()",
+      "C": "jasmine.createConstructorSpy('MyConstructor')",
+      "D": "spyOnProperty(window, 'MyConstructor', 'new')"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the purpose of the 'jasmine.addCustomEqualityTester' function?",
+    "options": {
+      "A": "To provide a global rule for comparing two objects that applies to all equality-based matchers.",
+      "B": "To create a new matcher called 'toStrictlyEqual'.",
+      "C": "To speed up comparison for large arrays.",
+      "D": "To compare two different versions of the Jasmine library."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A custom matcher can access the 'expected' value passed to it via the second argument of the 'compare' function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which internal Jasmine class represents the metadata and state of an individual test case?",
+    "options": {
+      "A": "Spec",
+      "B": "TestUnit",
+      "C": "ExpectationGroup",
+      "D": "SpecDefinition"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO lifecycle methods in a Jasmine Reporter that receive a 'result' object containing information about failures.",
+    "options": {
+      "A": "specDone",
+      "B": "suiteDone",
+      "C": "specStarted",
+      "D": "suiteStarted"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does the 'jasmine.DiffBuilder' utility help you achieve in a custom matcher?",
+    "options": {
+      "A": "It builds a formatted string showing exactly where two objects differ for the failure message.",
+      "B": "It compares two text files for differences.",
+      "C": "It calculates the time difference between two specs.",
+      "D": "It merges two different test suites."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'spyOnProperty' can be used to spy on a property that only has a 'setter' but no 'getter'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jasmine function is used to check if a spy was called with a specific 'this' context (object instance)?",
+    "options": {
+      "A": "None (you must manually check spy.calls.mostRecent().object).",
+      "B": "toHaveBeenCalledWithContext()",
+      "C": "toBeCalledOnInstance()",
+      "D": "toHaveObjectContext()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO asymmetric matchers used to verify partial data within an object or string.",
+    "options": {
+      "A": "jasmine.objectContaining()",
+      "B": "jasmine.stringMatching()",
+      "C": "jasmine.partialObject()",
+      "D": "jasmine.regexMatch()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the role of the 'GlobalSetup' and 'GlobalTeardown' in Jasmine's configuration?",
+    "options": {
+      "A": "To run code once before all suites and once after all suites across the entire environment.",
+      "B": "To define global variables.",
+      "C": "To clear the cache of the test runner.",
+      "D": "To restart the browser between tests."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Jasmine supports parallel execution of specs within a single 'describe' block.",
+    "options": {
+      "A": "False (specs within a suite are executed sequentially to avoid state corruption).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method on the 'Env' (Environment) object allows you to clear all registered reporters?",
+    "options": {
+      "A": "clearReporters()",
+      "B": "resetReporters()",
+      "C": "stopReporting()",
+      "D": "removeReporters()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to handle 'memory leaks' when using spies in a long-running test suite.",
+    "options": {
+      "A": "Ensuring spies are created within a describe/it block so they are cleaned up automatically.",
+      "B": "Calling spy.calls.reset() or spy.and.stub() if reused.",
+      "C": "Restarting the Node process every 10 tests.",
+      "D": "Using the 'jasmine.gc()' command."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does the 'jasmine.Any' matcher return when its 'jasmineToString' method is called?",
+    "options": {
+      "A": "A string like '<jasmine.any(Number)>' for use in failure messages.",
+      "B": "The value being tested.",
+      "C": "A JSON representation of the type.",
+      "D": "An empty string."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Jasmine, you can use 'jasmine.addMatchers' at the top level of a spec file (outside any describe) to make them available globally.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which reporter method provides the 'failedExpectations' array for a specific test case?",
+    "options": {
+      "A": "specDone",
+      "B": "specFinished",
+      "C": "reportFailure",
+      "D": "onSpecFail"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO characteristics of 'Asymmetric Matchers' in Jasmine.",
+    "options": {
+      "A": "They can be used inside 'toHaveBeenCalledWith' or 'toEqual'.",
+      "B": "They define an 'asymmetricMatch' method internally.",
+      "C": "They only work for strings.",
+      "D": "They must always be used with the 'not' prefix."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "How does Jasmine handle an error thrown inside an 'afterEach' block?",
+    "options": {
+      "A": "It fails the current spec and continues to the next spec.",
+      "B": "It ignores the error and continues.",
+      "C": "It stops the entire test runner.",
+      "D": "It retries the 'afterEach' block."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'jasmine.clock()' can be used to mock 'process.nextTick' in Node.js environments.",
+    "options": {
+      "A": "False (Jasmine clock primarily targets browser APIs and standard JS timers).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property on a spy's call record (from 'spy.calls.all()') indicates the sequence number of that specific call relative to all other spies?",
+    "options": {
+      "A": "invocationOrder",
+      "B": "callIndex",
+      "C": "sequenceId",
+      "D": "globalOrder"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO reasons to implement a 'Custom Matcher' instead of just using multiple 'expect' statements.",
+    "options": {
+      "A": "To provide more descriptive and readable failure messages.",
+      "B": "To reuse complex validation logic across multiple test files.",
+      "C": "To make the tests run faster.",
+      "D": "To increase code coverage metrics."
+    },
+    "answer": "A, B"
+  }
+  ]
+}

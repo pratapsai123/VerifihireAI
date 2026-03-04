@@ -1,0 +1,1995 @@
+{ 
+  "skill": "NLP", 
+  "questions": [
+    {
+    "question": "What does NLP stand for in the context of Artificial Intelligence?",
+    "options": {
+      "A": "Numerical Logic Processing",
+      "B": "Natural Language Processing",
+      "C": "Node Link Protocol",
+      "D": "Network Language Programming"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the process of breaking a sentence into individual words called?",
+    "options": {
+      "A": "Summarization",
+      "B": "Translation",
+      "C": "Tokenization",
+      "D": "Encryption"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is a common 'Stop Word' in English NLP?",
+    "options": {
+      "A": "Innovation",
+      "B": "The",
+      "C": "Algorithm",
+      "D": "Processing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of 'Stemming'?",
+    "options": {
+      "A": "To translate words into another language.",
+      "B": "To increase the length of a document.",
+      "C": "To reduce words to their base or root form.",
+      "D": "To check for spelling errors."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which task involves determining if a movie review is positive or negative?",
+    "options": {
+      "A": "Summarization",
+      "B": "Sentiment Analysis",
+      "C": "Tokenization",
+      "D": "Dependency Parsing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lemmatization'?",
+    "options": {
+      "A": "Sorting words alphabetically.",
+      "B": "Removing all punctuation from a text.",
+      "C": "Reducing a word to its meaningful base form (lemma) using a dictionary.",
+      "D": "Counting the number of letters in a word."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'POS' tagging stand for?",
+    "options": {
+      "A": "Point of Service",
+      "B": "Part of Speech",
+      "C": "Position of Sentence",
+      "D": "Primary Object Source"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In NLP, what is a 'Corpus'?",
+    "options": {
+      "A": "A single specialized computer chip.",
+      "B": "A large collection of text documents used for analysis.",
+      "C": "A mathematical formula for probability.",
+      "D": "The physical casing of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Named Entity Recognition' (NER)?",
+    "options": {
+      "A": "To identify and categorize entities like names, places, and dates in text.",
+      "B": "To delete personal information from a file.",
+      "C": "To translate names into different languages.",
+      "D": "To count the total number of words."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bag of Words' (BoW)?",
+    "options": {
+      "A": "A physical bag used to carry hard drives.",
+      "B": "A representation of text that describes the occurrence of words within a document.",
+      "C": "A way to hide words from a computer.",
+      "D": "A list of all words that have been deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common Python library used for NLP?",
+    "options": {
+      "A": "Django",
+      "B": "NLTK (Natural Language Toolkit)",
+      "C": "Flask",
+      "D": "Matplotlib"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Syntax' in the context of language?",
+    "options": {
+      "A": "The meaning of individual words.",
+      "B": "The set of rules that govern the structure of a sentence.",
+      "C": "The emotional tone of a paragraph.",
+      "D": "The speed at which someone speaks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantics'?",
+    "options": {
+      "A": "The spelling of a word.",
+      "B": "The meaning of words and sentences.",
+      "C": "The length of a document.",
+      "D": "The font style used in a book."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Chatbot'?",
+    "options": {
+      "A": "A robot that cleans floors.",
+      "B": "A program designed to simulate conversation with human users.",
+      "C": "A type of computer virus.",
+      "D": "A specialized tool for video editing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Text Classification' task?",
+    "options": {
+      "A": "Spam Detection",
+      "B": "Image Resizing",
+      "C": "Sound Recording",
+      "D": "Hard Drive Formatting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Machine Translation'?",
+    "options": {
+      "A": "Moving a machine to another room.",
+      "B": "The automated translation of text or speech from one language to another.",
+      "C": "Teaching a robot how to walk.",
+      "D": "Converting code from Python to Java."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Speech-to-Text'?",
+    "options": {
+      "A": "Printing out a speech on paper.",
+      "B": "The process of converting spoken language into written text.",
+      "C": "Recording audio for a podcast.",
+      "D": "Increasing the volume of a digital file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Summarization'?",
+    "options": {
+      "A": "Adding more details to a story.",
+      "B": "Creating a shortened version of a text that retains the main points.",
+      "C": "Deleting a document permanently.",
+      "D": "Translating a text into 5 different languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'N-gram' in NLP?",
+    "options": {
+      "A": "A weight measurement for books.",
+      "B": "A continuous sequence of n items (words or characters) from a text.",
+      "C": "A type of high-speed internet connection.",
+      "D": "A secure password with 'n' characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word Embedding'?",
+    "options": {
+      "A": "Putting words inside a physical box.",
+      "B": "A technique where words are represented as real-valued vectors in a high-dimensional space.",
+      "C": "Writing words in a hidden code.",
+      "D": "Using a very small font size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Lowercasing' in preprocessing?",
+    "options": {
+      "A": "To make the text look more artistic.",
+      "B": "To ensure the model treats 'Apple' and 'apple' as the same word.",
+      "C": "To delete all capital letters from the keyboard.",
+      "D": "To decrease the file size of the document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Language Identification'?",
+    "options": {
+      "A": "Identifying the author of a book.",
+      "B": "Determining which natural language a given text is written in.",
+      "C": "Counting the number of characters in a string.",
+      "D": "Creating a new language for robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular library for NLP developed by Explosion AI?",
+    "options": {
+      "A": "Pandas",
+      "B": "spaCy",
+      "C": "NumPy",
+      "D": "Requests"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stop Word Removal'?",
+    "options": {
+      "A": "Stopping the computer from working.",
+      "B": "Removing common words that carry little unique meaning (e.g., 'and', 'the').",
+      "C": "Deleting words that are spelled incorrectly.",
+      "D": "Removing the last word of every sentence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Vocalbulary' in NLP?",
+    "options": {
+      "A": "The number of users on a platform.",
+      "B": "The set of unique words present in a corpus.",
+      "C": "The volume level of a digital audio file.",
+      "D": "A list of valid user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regular Expression' (Regex) commonly used for in NLP?",
+    "options": {
+      "A": "To generate realistic images.",
+      "B": "For pattern matching and text search/manipulation.",
+      "C": "To speed up the internet connection.",
+      "D": "To backup a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentiment' in NLP?",
+    "options": {
+      "A": "The physical weight of a document.",
+      "B": "The attitude, emotion, or opinion expressed in a piece of text.",
+      "C": "The grammatical structure of a phrase.",
+      "D": "The time of day a text was written."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Bi-gram'?",
+    "options": {
+      "A": "A word with two letters.",
+      "B": "A sequence of two adjacent words or characters.",
+      "C": "Two different languages mixed together.",
+      "D": "A document with two pages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Normalization'?",
+    "options": {
+      "A": "Making all text look 'normal' for a printer.",
+      "B": "Transforming text into a standard format (e.g., converting 'u' to 'you').",
+      "C": "Deleting text that is unusual.",
+      "D": "Ensuring the text font is consistent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dependency Parsing'?",
+    "options": {
+      "A": "Checking if the internet is working.",
+      "B": "Analyzing the grammatical structure of a sentence to find dependencies between words.",
+      "C": "Counting the number of nouns in a book.",
+      "D": "Identifying the file type of a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'TF-IDF'?",
+    "options": {
+      "A": "Total File - Image Data Format.",
+      "B": "Term Frequency-Inverse Document Frequency.",
+      "C": "Text Filtering - Internal Data Flow.",
+      "D": "Task Finished - Identification Data File."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word2Vec'?",
+    "options": {
+      "A": "A software for converting Word documents to PDFs.",
+      "B": "A model used to produce word embeddings.",
+      "C": "A way to count words in two different files.",
+      "D": "A specialized computer keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Punctuation Removal'?",
+    "options": {
+      "A": "Adding more commas to a sentence.",
+      "B": "Removing marks like periods, commas, and exclamation points from text.",
+      "C": "Changing the color of punctuation marks.",
+      "D": "Identifying the author by their punctuation style."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Sequence-to-Sequence' (Seq2Seq) task?",
+    "options": {
+      "A": "Image Cropping",
+      "B": "Language Translation",
+      "C": "File Deletion",
+      "D": "Password Resetting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word Segmentation'?",
+    "options": {
+      "A": "Deleting words from a sentence.",
+      "B": "Dividing a string of written language into its component words.",
+      "C": "Adding spaces between every letter.",
+      "D": "Translating words into binary code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Entity' in NER?",
+    "options": {
+      "A": "A type of computer virus.",
+      "B": "A real-world object like a person, location, or organization.",
+      "C": "A software bug.",
+      "D": "A line of code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Mining'?",
+    "options": {
+      "A": "Digging for gold.",
+      "B": "Discovering high-quality information from text.",
+      "C": "Deleting old text files.",
+      "D": "Typing text very fast."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Co-reference Resolution'?",
+    "options": {
+      "A": "Two people agreeing on a result.",
+      "B": "Task of finding all expressions that refer to the same entity in a text (e.g., 'he' refers to 'John').",
+      "C": "Connecting two different computers.",
+      "D": "Identifying the color of a font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Topic Modeling'?",
+    "options": {
+      "A": "Choosing a topic for a blog post.",
+      "B": "A type of statistical model for discovering abstract 'topics' that occur in a collection of documents.",
+      "C": "Designing a 3D model of a book.",
+      "D": "Counting the number of pages in a chapter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lemmatizer' versus 'Stemmer'?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "Lemmatizer uses a dictionary to be more accurate; Stemmer uses simple rules to chop off ends.",
+      "C": "Stemmer is only for English; Lemmatizer is for all languages.",
+      "D": "Lemmatizer is much slower and less useful."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Graph'?",
+    "options": {
+      "A": "A drawing in a textbook.",
+      "B": "A network of real-world entities and their interrelations.",
+      "C": "A list of passwords.",
+      "D": "A way to backup a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intent Classification'?",
+    "options": {
+      "A": "Identifying the purpose or goal behind a user's input (e.g., in a chatbot).",
+      "B": "Identifying the age of the user.",
+      "C": "Determining if a user is angry.",
+      "D": "Counting the number of words in a query."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Language Model'?",
+    "options": {
+      "A": "A person who speaks many languages.",
+      "B": "A probabilistic model that predicts the next word in a sequence.",
+      "C": "A dictionary of all words in the world.",
+      "D": "A type of robot that can speak."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Information Extraction'?",
+    "options": {
+      "A": "Deleting information from a file.",
+      "B": "The task of automatically extracting structured information from unstructured text.",
+      "C": "Reading a book to learn a new skill.",
+      "D": "Storing data on a cloud drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BLEU Score' used for?",
+    "options": {
+      "A": "Measuring the brightness of the screen.",
+      "B": "Evaluating the quality of machine-translated text.",
+      "C": "Counting the number of blue pixels in an image.",
+      "D": "Calculating the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encoder' in an NLP model?",
+    "options": {
+      "A": "A person who writes code.",
+      "B": "A component that processes the input text and converts it into a numerical representation.",
+      "C": "A security guard for a data center.",
+      "D": "A type of fast-charging battery."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Decoder' in an NLP model?",
+    "options": {
+      "A": "A component that takes a numerical representation and generates output text.",
+      "B": "A tool used to decrypt secret messages.",
+      "C": "A hardware chip for audio.",
+      "D": "A person who reads code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Word Frequency'?",
+    "options": {
+      "A": "The pitch of a person's voice.",
+      "B": "The number of times a word appears in a text.",
+      "C": "The speed at which a word is typed.",
+      "D": "The number of letters in a word."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Bloat'?",
+    "options": {
+      "A": "A text file that is too large to open.",
+      "B": "Unnecessary or redundant information in a text that adds no value.",
+      "C": "A bug in the word processor.",
+      "D": "A document with too many images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentiment Polarity'?",
+    "options": {
+      "A": "The magnetic field of the earth.",
+      "B": "The score indicating how positive or negative a sentiment is.",
+      "C": "The number of words in a sentence.",
+      "D": "The color of the text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Automated Content Generation'?",
+    "options": {
+      "A": "Hiring a writer to work for you.",
+      "B": "Using NLP models to create new text automatically.",
+      "C": "A way to backup website data.",
+      "D": "A tool for counting social media likes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spell Checking'?",
+    "options": {
+      "A": "Identifying and correcting misspelled words.",
+      "B": "Checking if a word has magical powers.",
+      "C": "Counting the number of characters in a word.",
+      "D": "A way to name a file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Case Folding'?",
+    "options": {
+      "A": "Folding a piece of paper.",
+      "B": "Converting all text to a single case (usually lowercase).",
+      "C": "Storing a laptop in its case.",
+      "D": "A type of data compression."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bag of N-grams'?",
+    "options": {
+      "A": "A physical bag with N items.",
+      "B": "A representation of text that counts the occurrences of sequences of N words.",
+      "C": "A way to hide N words from a model.",
+      "D": "A list of N deleted words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vocabulary Size'?",
+    "options": {
+      "A": "The physical size of a dictionary book.",
+      "B": "The total number of unique words the model knows.",
+      "C": "The number of pages in a document.",
+      "D": "The price of the AI software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Similarity Score'?",
+    "options": {
+      "A": "A score given to a student by a teacher.",
+      "B": "A numerical value representing how similar two pieces of text are.",
+      "C": "The number of identical letters in two words.",
+      "D": "The time it takes to compare two documents."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BERT'?",
+    "options": {
+      "A": "A name of a famous computer scientist.",
+      "B": "Bidirectional Encoder Representations from Transformers.",
+      "C": "Binary Encryption Real-time Tool.",
+      "D": "Basic Electronic Reporting Template."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GPT'?",
+    "options": {
+      "A": "Global Processing Table.",
+      "B": "Generative Pre-trained Transformer.",
+      "C": "General Purpose Text.",
+      "D": "Grid Power Transformer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Preprocessing'?",
+    "options": {
+      "A": "Printing the text on paper.",
+      "B": "The steps taken to clean and prepare text data for analysis.",
+      "C": "Storing text in a database.",
+      "D": "Reading the text out loud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Synonym' replacement?",
+    "options": {
+      "A": "Deleting a word and leaving a blank space.",
+      "B": "Replacing a word with another word that has the same meaning.",
+      "C": "Changing the color of a word.",
+      "D": "Translating a word into code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Noise' in NLP text?",
+    "options": {
+      "A": "Loud sounds from the data center.",
+      "B": "Irrelevant characters or data that do not contribute to meaning (e.g., HTML tags).",
+      "C": "A type of background music.",
+      "D": "The sound of someone typing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Term' in NLP?",
+    "options": {
+      "A": "A specific period of time.",
+      "B": "A word or phrase used as a unit of analysis.",
+      "C": "A security certificate.",
+      "D": "A type of computer hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata' of a text file?",
+    "options": {
+      "A": "The text inside the file.",
+      "B": "Data about the file, such as author, creation date, and size.",
+      "C": "A way to encrypt the text.",
+      "D": "A specialized software for reading text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parsing'?",
+    "options": {
+      "A": "Breaking text into smaller parts for analysis.",
+      "B": "Passing a document to another person.",
+      "C": "A type of data compression.",
+      "D": "Printing text in large font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dialogue System'?",
+    "options": {
+      "A": "A system for two people to talk.",
+      "B": "An AI system designed to converse with a human.",
+      "C": "A type of audio recording equipment.",
+      "D": "A way to backup chat history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Named Entity'?",
+    "options": {
+      "A": "A person, place, or thing with a specific name.",
+      "B": "A secret code used by the government.",
+      "C": "A type of computer virus.",
+      "D": "A software bug."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical advantage of using 'Word Embeddings' over 'One-Hot Encoding'?",
+    "options": {
+      "A": "Embeddings use only integer values to save disk space.",
+      "B": "Embeddings capture semantic relationships between words in a continuous vector space.",
+      "C": "One-Hot Encoding is much faster for training deep neural networks.",
+      "D": "Embeddings allow for the permanent deletion of the original text corpus."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific problem in standard RNNs do 'Gated Recurrent Units' (GRUs) aim to solve?",
+    "options": {
+      "A": "The inability to process numerical data.",
+      "B": "The vanishing gradient problem in long-term dependencies.",
+      "C": "The high cost of purchasing GPU hardware.",
+      "D": "The lack of support for image-to-text translation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Skip-gram' model of Word2Vec, what is the training objective?",
+    "options": {
+      "A": "To predict the current word based on a window of surrounding context words.",
+      "B": "To predict the surrounding context words given a single target word.",
+      "C": "To skip every second word in a sentence to speed up processing.",
+      "D": "To classify a document into ten different emotional categories."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Perplexity' measure in the context of language modeling?",
+    "options": {
+      "A": "How confused the human users are by the AI's output.",
+      "B": "How well a probability model predicts a sample (lower is usually better).",
+      "C": "The total number of grammatical errors in a generated text.",
+      "D": "The speed at which a model generates a single token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these evaluation metrics is most commonly used for 'Text Summarization'?",
+    "options": {
+      "A": "F1-Score",
+      "B": "ROUGE (Recall-Oriented Understudy for Gisting Evaluation)",
+      "C": "Mean Squared Error",
+      "D": "Cosine Similarity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Attention Mechanism' in an Encoder-Decoder model?",
+    "options": {
+      "A": "To force the user to pay attention to the AI's response.",
+      "B": "To allow the decoder to focus on specific parts of the input sequence for each output token.",
+      "C": "To delete unimportant words from the input automatically.",
+      "D": "To increase the cooling efficiency of the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global Vectors for Word Representation' (GloVe) primarily based on?",
+    "options": {
+      "A": "The physical location of the data center.",
+      "B": "The ratio of word co-occurrence probabilities from a global corpus.",
+      "C": "The number of letters in a word.",
+      "D": "A random number generator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which problem does 'Subword Tokenization' (like BPE or WordPiece) help solve?",
+    "options": {
+      "A": "The high price of electricity.",
+      "B": "The Out-of-Vocabulary (OOV) problem by breaking unknown words into known pieces.",
+      "C": "The inability of computers to read capital letters.",
+      "D": "The slow download speed of large models."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Topic Modeling', what does 'LDA' stand for?",
+    "options": {
+      "A": "Linear Data Analysis",
+      "B": "Latent Dirichlet Allocation",
+      "C": "Layered Dictionary Alignment",
+      "D": "Logical Document Arrangement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'TF-IDF' primarily used to determine?",
+    "options": {
+      "A": "The speed of a hard drive.",
+      "B": "The importance of a word to a specific document in a collection or corpus.",
+      "C": "The total number of sentences in a file.",
+      "D": "The grammatical correctness of a paragraph."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Causal' Language Model?",
+    "options": {
+      "A": "A model that only works on weekends.",
+      "B": "A model trained to predict the next token based only on past tokens (left-to-right).",
+      "C": "A model that has zero accuracy.",
+      "D": "A model used for medical diagnosis only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Negative Sampling' in training Word2Vec?",
+    "options": {
+      "A": "To delete all negative words from the vocabulary.",
+      "B": "To improve efficiency by updating only a small percentage of weights for each training sample.",
+      "C": "To ensure the model only learns positive sentiments.",
+      "D": "To increase the number of hidden layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-Entropy Loss' in text classification?",
+    "options": {
+      "A": "A measure of the distance between two physical servers.",
+      "B": "A loss function that measures the performance of a model whose output is a probability value.",
+      "C": "A way to count the number of words in a sentence.",
+      "D": "A bug in the classification algorithm."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-padding' used for in sequence modeling?",
+    "options": {
+      "A": "To make the text look more colorful.",
+      "B": "To ensure all sequences in a batch have the same length for matrix operations.",
+      "C": "To delete zero-value tokens from the memory.",
+      "D": "To encrypt the input data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'ELMo' (Embeddings from Language Models)?",
+    "options": {
+      "A": "A character in a children's television show.",
+      "B": "Contextualized word representations derived from an internal state of a deep bidirectional LSTM.",
+      "C": "A specialized GPU for processing audio.",
+      "D": "A way to compress text files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Attention' specifically in the Transformer architecture?",
+    "options": {
+      "A": "The model focusing on its own power consumption.",
+      "B": "A mechanism relating different positions of a single sequence to compute a representation of the sequence.",
+      "C": "A way for the model to fix its own bugs.",
+      "D": "The model ignoring the user's input."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'WER' stand for in speech recognition evaluation?",
+    "options": {
+      "A": "Word Encryption Rate",
+      "B": "Word Error Rate",
+      "C": "Weighted Element Ratio",
+      "D": "Weekly Efficiency Report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributional Semantics' fundamentally based on?",
+    "options": {
+      "A": "The idea that words with similar meanings tend to occur in similar contexts.",
+      "B": "A dictionary written by a linguist.",
+      "C": "The alphabetical order of words.",
+      "D": "The number of syllables in a word."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Dependency Parsing', what is the 'Root' of a sentence?",
+    "options": {
+      "A": "The first word of the sentence.",
+      "B": "The word that has no outgoing dependencies (often the main verb).",
+      "C": "The most expensive word in the vocabulary.",
+      "D": "A hidden folder in the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'Bidirectional' and 'Unidirectional' LSTMs?",
+    "options": {
+      "A": "Bidirectional is 10x slower.",
+      "B": "Bidirectional processes the sequence in both forward and backward directions to capture context from both sides.",
+      "C": "Unidirectional is only for English; Bidirectional is for all languages.",
+      "D": "There is no functional difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fine-tuning' in the context of Pre-trained Language Models?",
+    "options": {
+      "A": "Repairing the physical hardware.",
+      "B": "Taking a model trained on a general task and continuing training on a smaller, specific dataset.",
+      "C": "Deleting the model's weights.",
+      "D": "Changing the color of the logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Named Entity Disambiguation'?",
+    "options": {
+      "A": "The process of linking a named entity to a specific entry in a knowledge base (e.g., 'Apple' the fruit vs. 'Apple' the company).",
+      "B": "Finding the name of a user.",
+      "C": "Deleting duplicate names.",
+      "D": "Counting the number of times a name appears."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cosine Similarity' commonly used to measure in NLP?",
+    "options": {
+      "A": "The temperature of the CPU.",
+      "B": "The semantic distance or similarity between two word or document vectors.",
+      "C": "The length of a document in inches.",
+      "D": "The speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contextualized' word embedding?",
+    "options": {
+      "A": "An embedding that never changes.",
+      "B": "An embedding where the vector for a word depends on the other words surrounding it.",
+      "C": "An embedding stored in a specific room.",
+      "D": "A way to hide data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technique is used to prevent the 'Exploding Gradient' problem in deep NLP models?",
+    "options": {
+      "A": "Weight Deletion",
+      "B": "Gradient Clipping",
+      "C": "Batch Deletion",
+      "D": "Increasing the learning rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Soft-max' 'Temperature' (T) adjustment used for during text generation?",
+    "options": {
+      "A": "To cool down the hardware.",
+      "B": "To control the randomness or 'creativity' of the generated text.",
+      "C": "To count the number of words generated.",
+      "D": "To increase the training time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Masked' Language Model (like BERT)?",
+    "options": {
+      "A": "A model that wears a physical mask.",
+      "B": "A model trained to predict hidden (masked) words in a sentence using context from both sides.",
+      "C": "A model that hides the user's data.",
+      "D": "A model used for security only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Beam Search' decoding primarily intended to do?",
+    "options": {
+      "A": "To increase the brightness of the screen.",
+      "B": "To find a more optimal sequence than simple greedy decoding by exploring multiple paths.",
+      "C": "To search for words in a dictionary faster.",
+      "D": "To delete inaccurate results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Abstractive' Summarization?",
+    "options": {
+      "A": "Summarization that only uses words found in the original text.",
+      "B": "Summarization that generates new phrases and sentences to convey the main idea.",
+      "C": "Summarization done using abstract art.",
+      "D": "A summary that is zero words long."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Extractive' Summarization?",
+    "options": {
+      "A": "Summarization that creates entirely new sentences.",
+      "B": "Summarization that identifies and combines important existing sentences from the original text.",
+      "C": "Summarization using a robot arm.",
+      "D": "Summarization using only images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is an 'Encoder'?",
+    "options": {
+      "A": "A person who writes code.",
+      "B": "A component that processes input text into a fixed-length vector or representation.",
+      "C": "A security guard for the lab.",
+      "D": "A type of fast-charging battery."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Decoder'?",
+    "options": {
+      "A": "A component that generates output sequences from an internal representation.",
+      "B": "A tool used to decrypt secret messages.",
+      "C": "A hardware chip for audio.",
+      "D": "A person who reads code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Teacher Forcing' in training sequence models?",
+    "options": {
+      "A": "Hiring an expert to label data.",
+      "B": "Using the ground truth from the previous time step as input for the current step during training.",
+      "C": "Forcing the model to train for 1000 epochs.",
+      "D": "A specialized training for human teachers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SOTA' stand for in NLP research papers?",
+    "options": {
+      "A": "System of Token Analysis",
+      "B": "State of the Art",
+      "C": "Standard Output Type A",
+      "D": "Social Origin Task Alignment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Position Embedding'?",
+    "options": {
+      "A": "An embedding based on the user's physical location.",
+      "B": "A vector used to provide the model with information about the order of words in a sequence.",
+      "C": "A way to rotate the words.",
+      "D": "A way to skip word embeddings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Head Attention'?",
+    "options": {
+      "A": "Using 100 different computers to process one word.",
+      "B": "Running several attention mechanisms in parallel to focus on different aspects of the text.",
+      "C": "A model that has zero hidden layers.",
+      "D": "A model used for image classification only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Head'?",
+    "options": {
+      "A": "The most important token in a sentence.",
+      "B": "A single attention mechanism within a multi-head attention layer.",
+      "C": "The top layer of the model.",
+      "D": "The part of the code that handles input."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Layer Normalization' in Transformers?",
+    "options": {
+      "A": "To make the layers look aesthetic.",
+      "B": "To stabilize the hidden state dynamics and reduce training time.",
+      "C": "To delete neurons that are not working.",
+      "D": "To increase the VRAM usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Catastrophic Forgetting'?",
+    "options": {
+      "A": "The developer forgetting the password.",
+      "B": "A model losing previously learned information upon being trained on new information.",
+      "C": "The AI deleting its own source code.",
+      "D": "A total power failure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Augmentation' for NLP?",
+    "options": {
+      "A": "Deleting half the dataset.",
+      "B": "Techniques like synonym replacement or back-translation to increase training data diversity.",
+      "C": "Buying more hard drives.",
+      "D": "Encrypting the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Back-translation'?",
+    "options": {
+      "A": "Translating from the end of a document to the start.",
+      "B": "Translating text into a target language and then back to the original to create a variation.",
+      "C": "A way to undo a translation.",
+      "D": "A specialized software for linguists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-lingual' Transfer Learning?",
+    "options": {
+      "A": "Translating code into English.",
+      "B": "Using a model pre-trained on one language to improve performance on another language.",
+      "C": "Two models from different countries talking to each other.",
+      "D": "A model that has zero accuracy in English."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Distillation' in NLP?",
+    "options": {
+      "A": "Purifying the data.",
+      "B": "Training a smaller student model to mimic the behavior of a larger teacher model.",
+      "C": "Turning the model into a physical book.",
+      "D": "A way to hide model logic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pruning' in the context of large NLP models?",
+    "options": {
+      "A": "Cutting down trees in a lab.",
+      "B": "Removing unnecessary weights or neurons to make the model faster and smaller.",
+      "C": "Increasing the number of layers.",
+      "D": "Hiring fewer developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantization' for model deployment?",
+    "options": {
+      "A": "Increasing the number of parameters.",
+      "B": "Reducing the precision of the model's weights (e.g., 32-bit to 8-bit) to save memory.",
+      "C": "A way to count the number of neurons.",
+      "D": "Using a quantum computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sequence Labeling'?",
+    "options": {
+      "A": "Ordering files by size.",
+      "B": "The task of assigning a label to each element in a sequence (e.g., POS tagging).",
+      "C": "Deleting labels from a database.",
+      "D": "Naming the servers in a specific sequence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-shot' Classification?",
+    "options": {
+      "A": "A model that never works.",
+      "B": "The ability of a model to classify text into categories it has never seen during training.",
+      "C": "Training with zero data.",
+      "D": "A model that only has one layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Few-shot' Learning?",
+    "options": {
+      "A": "Training a model with only one layer.",
+      "B": "The ability of a model to learn a new task with a very small number of examples.",
+      "C": "A model that takes only one shot and then stops.",
+      "D": "Training a model for 5 minutes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prompt' in the context of LLMs?",
+    "options": {
+      "A": "A piece of hardware.",
+      "B": "The input text provided to a model to guide its response.",
+      "C": "A security certificate.",
+      "D": "The speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Context Window' size?",
+    "options": {
+      "A": "The physical size of the browser window.",
+      "B": "The maximum number of tokens a model can consider at one time.",
+      "C": "The time it takes to refresh a page.",
+      "D": "The number of users online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Token' 'Embedding' layer?",
+    "options": {
+      "A": "A layer that stores user passwords.",
+      "B": "A lookup table that maps token IDs to their corresponding vector representations.",
+      "C": "A layer that handles input images.",
+      "D": "A security layer for text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Positional' 'Encoding' 'Sinusoidal'?",
+    "options": {
+      "A": "Encoding based on the user's location.",
+      "B": "A method using sine and cosine functions of different frequencies to encode word order.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A way to skip position info."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Greedy' 'Decoding'?",
+    "options": {
+      "A": "Hiring the most expensive developer.",
+      "B": "An approach where the model simply picks the most likely next word at each step.",
+      "C": "A way to use all of the GPU RAM.",
+      "D": "A way to skip the training process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global' 'Average' 'Pooling' in text classification?",
+    "options": {
+      "A": "Averaging all languages.",
+      "B": "Taking the average of all token representations to create a single document-level vector.",
+      "C": "A way to count users.",
+      "D": "Scaling the text font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Masked' 'Self-Attention' in Decoders?",
+    "options": {
+      "A": "Hiding the model with a mask.",
+      "B": "Ensuring that the attention for a given token cannot look at future tokens.",
+      "C": "A security firewall.",
+      "D": "A way to encrypt text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-modal' NLP?",
+    "options": {
+      "A": "Hiring multiple people to write.",
+      "B": "NLP that integrates multiple types of data, such as text and images, together.",
+      "C": "A model that can run on multiple computers.",
+      "D": "A model that is very expensive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentiment' 'Granularity'?",
+    "options": {
+      "A": "The speed of the sentiment analysis.",
+      "B": "The level of detail in sentiment (e.g., 2-class vs 5-star scale).",
+      "C": "The physical size of a document.",
+      "D": "The number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stop' 'Word' 'List'?",
+    "options": {
+      "A": "A list of users who are banned.",
+      "B": "A collection of common words to be ignored during processing.",
+      "C": "A list of words to be translated.",
+      "D": "A security certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stemming' 'Overstemming'?",
+    "options": {
+      "A": "Using too many stems.",
+      "B": "When a stemmer chops off too much of a word, causing different words to have the same root incorrectly.",
+      "C": "A bug in the hardware.",
+      "D": "A specialized software for gardening."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Understemming'?",
+    "options": {
+      "A": "A stemmer that works too slowly.",
+      "B": "When a stemmer fails to reduce words that should have the same root to the same stem.",
+      "C": "A lack of power in the computer.",
+      "D": "Deleting the stemmer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parsing' 'Constituency'?",
+    "options": {
+      "A": "Breaking a sentence into hierarchical sub-phrases or constituents (like NP, VP).",
+      "B": "Breaking a sentence into individual letters.",
+      "C": "Passing a document to another person.",
+      "D": "Printing in large font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Syntax' 'Error' in text processing?",
+    "options": {
+      "A": "A mistake made by the user.",
+      "B": "A violation of the grammatical rules of the input language.",
+      "C": "A hardware failure.",
+      "D": "A way to name a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dialogue' 'State'?",
+    "options": {
+      "A": "The location where a chat occurs.",
+      "B": "An internal representation of the conversation history used to track the user's goals.",
+      "C": "The emotional state of the developer.",
+      "D": "The time of day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Entity' 'Span' in NER?",
+    "options": {
+      "A": "The wingspan of a bird.",
+      "B": "The start and end character positions of a named entity in a string.",
+      "C": "A bridge over a river.",
+      "D": "A way to count the number of names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word' 'Overlap' in document comparison?",
+    "options": {
+      "A": "Two words physically on top of each other.",
+      "B": "The number of unique words shared between two pieces of text.",
+      "C": "A way to merge documents.",
+      "D": "A bug in the word processor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Attention is All You Need' paper, why is the dot product of Query and Key scaled by the square root of the dimension (d_k)?",
+    "options": {
+      "A": "To compress the attention matrix to save VRAM on smaller GPUs.",
+      "B": "To ensure the attention weights are always positive before the Softmax function.",
+      "C": "To prevent the dot product from growing too large in magnitude, which would cause the Softmax to have extremely small gradients.",
+      "D": "To normalize the input embeddings so that they have a mean of zero and a variance of one."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which specific architectural bottleneck does the 'Reformer' model address using Locality-Sensitive Hashing (LSH)?",
+    "options": {
+      "A": "The vanishing gradient problem in extremely deep encoders.",
+      "B": "The O(n^2) time and memory complexity of the standard self-attention mechanism.",
+      "C": "The inability of Transformers to process non-textual data like audio.",
+      "D": "The discrepancy between training with teacher forcing and inference with auto-regression."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Exposure Bias' phenomenon in autoregressive language models?",
+    "options": {
+      "A": "The model becoming too sensitive to offensive language in the training set.",
+      "B": "The discrepancy where the model is fed ground-truth tokens during training but uses its own predicted (potentially erroneous) tokens during inference.",
+      "C": "A security vulnerability where the model reveals parts of its training data through specific prompts.",
+      "D": "The tendency of the model to prioritize tokens that appear at the very beginning of the training document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Lipschitz Continuity' constraint help regulate when training neural language generators like GANs?",
+    "options": {
+      "A": "The speed at which the model can generate a single sentence.",
+      "B": "The smoothness of the function to ensure gradients remain bounded, preventing mode collapse.",
+      "C": "The number of unique tokens the model is allowed to use in its output.",
+      "D": "The alignment between the source and target languages in machine translation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Byte-Level BPE' (used in GPT-2/3), what is the primary advantage over standard character-level BPE?",
+    "options": {
+      "A": "It results in a much smaller vocabulary size of only 256 tokens.",
+      "B": "It allows the model to handle any string of characters without encountering 'unknown' tokens, while keeping the vocabulary manageable.",
+      "C": "It significantly increases the training speed by using bitwise operations.",
+      "D": "It automatically corrects spelling errors at the byte level during tokenization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which objective is used in 'RoBERTa' to improve upon the original BERT training?",
+    "options": {
+      "A": "Introducing a new decoder layer for generative tasks.",
+      "B": "Removing the Next Sentence Prediction (NSP) task and using dynamic masking.",
+      "C": "Using a smaller dataset with higher quality labels.",
+      "D": "Reducing the number of attention heads to save computation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Kernel Trick' equivalent for attention mechanisms in 'Linear Transformers'?",
+    "options": {
+      "A": "Using a 1D convolution instead of self-attention.",
+      "B": "Approximating the Softmax kernel using a feature map to reduce complexity from O(n^2) to O(n).",
+      "C": "A way to hide the attention weights from the user for security.",
+      "D": "Calculating the dot product in a lower-dimensional latent space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Catastrophic Forgetting' in the context of continual learning for NLP?",
+    "options": {
+      "A": "The AI deleting its own source code when the server restarts.",
+      "B": "When a model fine-tuned on a new task loses its ability to perform the tasks it was originally pre-trained on.",
+      "C": "A hardware failure where the VRAM is wiped during a long training session.",
+      "D": "A human developer forgetting the hyperparameters used for the best model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Named Entity Recognition', what does the 'IOB2' tagging scheme represent?",
+    "options": {
+      "A": "Internal Object Binary version 2.",
+      "B": "Inside, Outside, Beginning; a way to denote the boundaries of entities.",
+      "C": "Integrated Output Buffer for 2-step processing.",
+      "D": "A way to categorize entities into exactly two groups: people and locations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Label Smoothing' in Transformer training?",
+    "options": {
+      "A": "Making the font of the training labels easier for the OCR to read.",
+      "B": "A regularization technique that replaces 1.0 target probabilities with a slightly lower value to prevent overconfidence.",
+      "C": "Automatically deleting labels that the model finds too difficult to predict.",
+      "D": "Ensuring all labels in the dataset are lowercase strings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Cross-Attention' in a standard T5 or BART model?",
+    "options": {
+      "A": "Allowing the encoder to look at the decoder's past outputs.",
+      "B": "Allowing the decoder to attend to the output of the encoder.",
+      "C": "Mixing two different languages in the same embedding space.",
+      "D": "A mechanism to prevent the model from repeating the same word twice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Contrastive Learning' (e.g., SimCSE), what is the 'Dropout' used for?",
+    "options": {
+      "A": "To randomly delete words from the input sentence.",
+      "B": "To create two different 'views' of the same sentence for the model to minimize distance between.",
+      "C": "To speed up the training of the final linear layer.",
+      "D": "To ensure the model ignores all punctuation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Squeezing' represent in the 'Squeeze-and-Excitation' block of some NLP-CNN architectures?",
+    "options": {
+      "A": "Compressing the text file to save disk space.",
+      "B": "Aggregating global spatial/temporal information into a channel descriptor via global average pooling.",
+      "C": "Reducing the learning rate as the model approaches convergence.",
+      "D": "Deleting the most unimportant neurons in the hidden layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Stochastic Weight Averaging' (SWA)?",
+    "options": {
+      "A": "A way to calculate the average weight of the server racks.",
+      "B": "An optimization technique that averages weights across different epochs to find a flatter, more generalizable minimum.",
+      "C": "Randomly deleting weights during the validation phase.",
+      "D": "A strategy for choosing a random learning rate for every single token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of 'Relative Positional Bias' in models like T5 or Swin?",
+    "options": {
+      "A": "Biasing the model toward users in specific geographic regions.",
+      "B": "Learning attention weights based on the distance between tokens rather than their absolute index.",
+      "C": "Rotating the token embeddings to ensure they are always positive.",
+      "D": "A way to hide certain sensitive tokens from the model's attention."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Zero-Shot' prompting rely on fundamentally in Large Language Models?",
+    "options": {
+      "A": "The model having a hidden database of all past user prompts.",
+      "B": "The emergent ability of the model to follow instructions based on patterns learned during massive pre-training.",
+      "C": "A specialized 'zero' layer in the Transformer architecture.",
+      "D": "The model being connected to the internet during inference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Gumbel-Softmax' trick used for in NLP?",
+    "options": {
+      "A": "To create a softer, more user-friendly chatbot interface.",
+      "B": "To allow gradients to flow through categorical sampling processes, making them differentiable.",
+      "C": "To compress the vocabulary size from 50k to 5k tokens.",
+      "D": "To calculate the probability of a hardware failure during training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Beam Search', what is 'Length Normalization' used to prevent?",
+    "options": {
+      "A": "The model from generating sentences that are too colorful.",
+      "B": "A bias toward shorter sequences, since the probability of a sequence decreases as more tokens are added.",
+      "C": "The model from using too much CPU power during decoding.",
+      "D": "A bug that causes the decoder to get stuck in an infinite loop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adversarial Training' for NLP robustness?",
+    "options": {
+      "A": "Training two different developers to compete for the best code.",
+      "B": "Augmenting the training set with perturbations (adversarial examples) to help the model resist small input changes.",
+      "C": "Training a model without any access to a GPU.",
+      "D": "Using a virus to deliberately corrupt the model's weights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Soft-Prompting' or 'Prompt Tuning' approach?",
+    "options": {
+      "A": "Writing very polite prompts to the AI.",
+      "B": "Learning a set of continuous virtual tokens (embeddings) while keeping the main model weights frozen.",
+      "C": "Manually editing the model's source code to change its personality.",
+      "D": "A way to decrease the cooling costs of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these represents 'Knowledge Distillation' in the context of BERT?",
+    "options": {
+      "A": "Turning a BERT model into a physical encyclopedia.",
+      "B": "Training a smaller 'DistilBERT' to mimic the output distribution of a larger teacher BERT.",
+      "C": "Hiding the internal logic of BERT from competing companies.",
+      "D": "A way to use BERT to write school textbooks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mixed Precision' training designed to optimize?",
+    "options": {
+      "A": "The mixture of different languages in the training corpus.",
+      "B": "The balance between 16-bit and 32-bit floating point math to speed up training and reduce memory usage.",
+      "C": "The combination of Python and C++ code in the same project.",
+      "D": "The simultaneous use of both CPUs and GPUs for one task."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Back-Translation' specifically used for in machine translation data augmentation?",
+    "options": {
+      "A": "Translating from the end of a document to the beginning.",
+      "B": "Translating target-language data back to the source language to create synthetic training pairs.",
+      "C": "A way to undo a translation if the user doesn't like it.",
+      "D": "A security feature to ensure translation remains private."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Generation', what is 'Top-p' (Nucleus) sampling?",
+    "options": {
+      "A": "Picking the top 'p' number of words from the dictionary.",
+      "B": "Sampling from the smallest set of tokens whose cumulative probability exceeds the threshold 'p'.",
+      "C": "A way to ensure the model only uses the top most popular words.",
+      "D": "Deleting tokens that have a probability higher than 'p'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Few-Shot' prompting vs 'In-Context' learning?",
+    "options": {
+      "A": "Few-Shot is for images; In-Context is for text.",
+      "B": "They are largely the same: providing a few examples within the input sequence to guide the model.",
+      "C": "Few-Shot is a 10x faster version of In-Context learning.",
+      "D": "In-Context learning requires retraining the model, while Few-Shot does not."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Attention' 'Query' vector intended to represent?",
+    "options": {
+      "A": "A database query to retrieve user information.",
+      "B": "The representation of the current token looking for relevant information from other tokens.",
+      "C": "A security token used to access the cloud API.",
+      "D": "The speed at which the attention mechanism is running."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight Tying' in language models?",
+    "options": {
+      "A": "Tying the physical cables of the cluster together.",
+      "B": "Sharing parameters between the input embedding and output projection layers to reduce model size.",
+      "C": "A way to lock the weights so they can never be changed.",
+      "D": "A specialized regularization for very small datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is a 'Constituency' parse tree?",
+    "options": {
+      "A": "A tree showing the political constituents of a region.",
+      "B": "A hierarchical structure that breaks a sentence into sub-phrases (e.g., NP, VP).",
+      "C": "A way to organize files on a desktop drive.",
+      "D": "A list of all unique tokens in a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'FlashAttention'?",
+    "options": {
+      "A": "It makes the screen flash when an error occurs.",
+      "B": "It optimizes GPU memory access (IO-aware) to make attention both faster and more memory-efficient.",
+      "C": "It allows the model to work on audio files in 'flash' time.",
+      "D": "It automatically generates high-resolution flashcards for students."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-Lingual' Language Model Pre-training (XLM)?",
+    "options": {
+      "A": "Translating all training code into English.",
+      "B": "Training a model on multiple languages simultaneously using a shared vocabulary and cross-lingual objectives.",
+      "C": "A model that can only work on two languages at once.",
+      "D": "A security protocol for international data transfers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Perplexity' indicate about a language model's performance?",
+    "options": {
+      "A": "The level of confusion in the human evaluation team.",
+      "B": "The average branching factor of the model when predicting the next token (lower is better).",
+      "C": "The total number of parameters in the Transformer architecture.",
+      "D": "The speed of the network connection between the user and the API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what is 'Feed-Forward' position-wise networking?",
+    "options": {
+      "A": "A network that moves forward through time segments.",
+      "B": "Applying two linear transformations and an activation function independently to each position.",
+      "C": "A network that only operates on certain positions in the document.",
+      "D": "A way to rotate the input data before the attention layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' pruning 'Unstructured' vs 'Structured'?",
+    "options": {
+      "A": "Structured pruning is for images; Unstructured for text.",
+      "B": "Unstructured prunes individual weights; Structured prunes entire neurons or attention heads for hardware speedup.",
+      "C": "Unstructured pruning is for beginners; Structured for experts.",
+      "D": "There is no difference in the resulting model size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Generation', what is 'Repetition Penalty'?",
+    "options": {
+      "A": "Fining the user for asking the same question twice.",
+      "B": "Adjusting the logits during decoding to reduce the probability of tokens that have already been generated.",
+      "C": "A way to increase the internet bandwidth used by the AI.",
+      "D": "Deleting the model if it generates a duplicate sentence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Temporal Difference' (TD) learning in dialogue systems?",
+    "options": {
+      "A": "Checking the time of day during a conversation.",
+      "B": "A prediction method that updates estimates of future rewards based on other learned estimates.",
+      "C": "A study on the history of linguistics.",
+      "D": "The speed at which a chatbot responds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Positional' 'Encoding' 'Absolute' vs 'Relative'?",
+    "options": {
+      "A": "Absolute is for images; Relative is for audio.",
+      "B": "Absolute uses fixed indices (1, 2, 3); Relative uses the distance between tokens in attention.",
+      "C": "Absolute encoding is 10x slower than Relative.",
+      "D": "There is no difference in model accuracy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is 'Internal Covariate Shift'?",
+    "options": {
+      "A": "Moving the physical servers to a different room.",
+      "B": "The change in the distribution of network activations as parameters are updated during training.",
+      "C": "A change in the user's password settings.",
+      "D": "A network delay that occurs between layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stochastic' in SGD for large language models?",
+    "options": {
+      "A": "The name of the researcher who invented the algorithm.",
+      "B": "The random selection of a data mini-batch to approximate the gradient of the whole dataset.",
+      "C": "A specific high-performance GPU instruction.",
+      "D": "The speed of the network connection between GPUs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loss function is specifically used for the 'Masked Language Model' task?",
+    "options": {
+      "A": "Huber Loss",
+      "B": "Cross-Entropy Loss",
+      "C": "Hinge Loss",
+      "D": "Mean Squared Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Clustering' for topic discovery, what does 'Silhouette Score' measure?",
+    "options": {
+      "A": "The color of the data points in a scatter plot.",
+      "B": "How similar a document is to its own topic compared to other topics.",
+      "C": "The total number of clusters found in the dataset.",
+      "D": "The speed of the clustering algorithm execution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Causal Inference' in NLP?",
+    "options": {
+      "A": "Inferring the cause of a software bug.",
+      "B": "Determining if a specific linguistic feature actually causes a change in the model's output.",
+      "C": "A study on the cause of human language development.",
+      "D": "A way to use AI for medical diagnosis only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-correlation' 'Lag' in time-series text analysis?",
+    "options": {
+      "A": "A network delay in a SQL database query.",
+      "B": "The relationship between a language trend's current value and its past values at specific intervals.",
+      "C": "The time it takes to save a text file to a disk.",
+      "D": "A bug in the word processor software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Virtualization' in an NLP pipeline?",
+    "options": {
+      "A": "Creating a fake dataset for testing purposes.",
+      "B": "Accessing and manipulating data without needing to know the technical details of its physical location.",
+      "C": "Using a VR headset to view word embeddings in 3D.",
+      "D": "Deleting the physical database from a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Elbow Method' used for in unsupervised NLP?",
+    "options": {
+      "A": "Measuring the physical height of the researcher.",
+      "B": "Determining the optimal number of topics or clusters by looking at variance explained.",
+      "C": "To find outliers in a 3D semantic plot.",
+      "D": "A way to sort topics by their file size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dimensionality' 'Reduction' 't-SNE'?",
+    "options": {
+      "A": "A new programming language for AI research.",
+      "B": "A non-linear technique for visualizing high-dimensional text embeddings in 2D or 3D.",
+      "C": "A way to delete exactly half of the columns in a CSV.",
+      "D": "A network speed test for GPU clusters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis Testing' for NLP models, what is a 'Type I Error'?",
+    "options": {
+      "A": "A math error in a complex calculation.",
+      "B": "The probability of rejecting a true null hypothesis (False Positive).",
+      "C": "Accepting a false null hypothesis as true (False Negative).",
+      "D": "Failing to collect enough data for a study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient' 'Accumulation' 'Batch Size' simulation?",
+    "options": {
+      "A": "Increasing the batch size to exactly infinity.",
+      "B": "Summing gradients over multiple small steps before an update to simulate a large effective batch size.",
+      "C": "A bug where gradients get stuck in memory.",
+      "D": "A way to speed up the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Graph' 'Link Prediction'?",
+    "options": {
+      "A": "Predicting which website a user will click next.",
+      "B": "Predicting missing relationships between entities in a structured knowledge base.",
+      "C": "A security certificate for a SQL database.",
+      "D": "A way to translate code into a different language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deep Learning' for NLP, what is 'Exposure Bias'?",
+    "options": {
+      "A": "Being biased against researchers who are famous.",
+      "B": "The error accumulation that occurs when a model is trained on ground truth but uses its own outputs during inference.",
+      "C": "A security risk from exposing the source code.",
+      "D": "A problem with too much light in the lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Supervised' 'DINO' for text?",
+    "options": {
+      "A": "An AI model specifically about prehistoric animals.",
+      "B": "A framework for learning representations using self-distillation with no labels.",
+      "C": "A network that only works on data older than ten years.",
+      "D": "A way to speed up the ingestion of raw text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hardware' 'Accelerator' 'TPU' (Tensor Processing Unit)?",
+    "options": {
+      "A": "A new type of high-resolution computer monitor.",
+      "B": "An AI-specific integrated circuit (ASIC) developed by Google for NLP workloads.",
+      "C": "A faster internet cable for data centers.",
+      "D": "A specialized fan for cooling the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Search Algorithms' for text, what is 'Beam Search' beam width?",
+    "options": {
+      "A": "The physical width of a laser beam.",
+      "B": "The number of candidate sequences maintained at each step of the decoding process.",
+      "C": "The number of users allowed to search at once.",
+      "D": "The size of the font on the search results page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ensemble' 'Method' 'Stacking'?",
+    "options": {
+      "A": "Stacking physical server racks on top of each other.",
+      "B": "A technique where multiple base models' predictions are used as inputs for a meta-model.",
+      "C": "Hiring a large group of developers to code together in a room.",
+      "D": "Using only one very complex model to solve every problem."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight' 'Tying' in seq2seq models?",
+    "options": {
+      "A": "Tying the physical cables of the cluster together.",
+      "B": "Using the same weights for the encoder and decoder embedding layers.",
+      "C": "A way to lock the weights so they can never be changed.",
+      "D": "A type of regularization used only for small datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spectral' 'Leakage' in audio NLP?",
+    "options": {
+      "A": "Data leaking from a broken hard drive.",
+      "B": "An artifact in signal processing where energy from one frequency spills into others due to windowing.",
+      "C": "A security breach where spectral data is stolen.",
+      "D": "A bug in the activation function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BERT' 'MLM' (Masked Language Modeling)?",
+    "options": {
+      "A": "A model that can only encode images.",
+      "B": "A pre-training task where some tokens are hidden and the model predicts them using bidirectional context.",
+      "C": "A model that has zero output layer.",
+      "D": "A model that is used by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GPT' 'Causal' 'Masking'?",
+    "options": {
+      "A": "A model that can only decode images.",
+      "B": "An attention mask that prevents tokens from attending to future tokens in the sequence.",
+      "C": "A model that has zero input layer.",
+      "D": "A model used by students."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Checkpoint' 'Averaging'?",
+    "options": {
+      "A": "Checking the model's overall grade in a class.",
+      "B": "A technique that averages the weights of several model versions to stabilize performance.",
+      "C": "Deleting the model after every single epoch.",
+      "D": "A security check for the source code repositories."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deep Learning', what is 'Gradient' 'Vanishing'?",
+    "options": {
+      "A": "The model becoming too colorful for the monitor.",
+      "B": "When gradients become exponentially smaller during backpropagation, stopping earlier layers from learning.",
+      "C": "A problem with having too much data in the dataset.",
+      "D": "A specific bug in the max-pooling layer code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reinforcement' 'Learning' 'Entropy' Regularization?",
+    "options": {
+      "A": "Turning on the heater in the server room.",
+      "B": "Adding an entropy term to the objective to prevent the policy from becoming too deterministic (encourage exploration).",
+      "C": "A physical exercise program for the AI developers.",
+      "D": "A way to speed up the data ingestion process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Attention' 'Scaling'?",
+    "options": {
+      "A": "A way to scale the resolution of an image.",
+      "B": "Dividing the dot product of Query and Key by the square root of their dimension.",
+      "C": "Increasing the learning rate by exactly 10%.",
+      "D": "The total number of neurons in the hidden layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' 'Robustness' 'Verification'?",
+    "options": {
+      "A": "Testing the physical durability of the computer hardware.",
+      "B": "Formally proving that a model's output remains within certain bounds under input noise.",
+      "C": "Verifying the identity of the human user.",
+      "D": "A way to backup the model's source code automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contrastive' 'Predictive' 'Coding' (CPC)?",
+    "options": {
+      "A": "A new programming language for AI systems.",
+      "B": "A self-supervised approach that learns to predict future information in a latent space.",
+      "C": "A way to encrypt predict files on a drive.",
+      "D": "A specialized tool for the lead developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory-Augmented' Neural Networks?",
+    "options": {
+      "A": "Adding more RAM to the physical computer.",
+      "B": "Using architectures with differentiable external memory like the Neural Turing Machine (NTM).",
+      "C": "A network that remembers its own weight values.",
+      "D": "A way to backup the model on a secondary cloud drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural' 'ODE' (Ordinary Differential Equations)?",
+    "options": {
+      "A": "A math problem for university students.",
+      "B": "Modeling the hidden state transitions of a neural network as a continuous dynamical system.",
+      "C": "A way to solve complex equations using Python code.",
+      "D": "A network that only works in one spatial dimension."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what is 'Relative Positional' Encoding?",
+    "options": {
+      "A": "Encoding data based on the user's physical location.",
+      "B": "A method to encode token positions based on the relative distance between pairs of tokens.",
+      "C": "A way to rotate the token vectors randomly.",
+      "D": "A way to skip position information entirely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Implicit' 'Bias' of SGD?",
+    "options": {
+      "A": "The bias of the researcher who wrote the code.",
+      "B": "The tendency of SGD to find solutions that have low complexity and generalize well.",
+      "C": "A mathematical error that occurs when the batch size is too small.",
+      "D": "Relu networks are only for linear functions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight' 'Initialization' 'Xavier' (Glorot)?",
+    "options": {
+      "A": "Initializing weights to the exact value of PI.",
+      "B": "Initializing weights such that the variance of activations and gradients is kept roughly the same across layers.",
+      "C": "Initializing all weights to exactly zero.",
+      "D": "Naming the AI model after its primary inventor."
+    },
+    "answer": "B"
+  }
+  ]
+}

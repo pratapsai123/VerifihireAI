@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Datadog", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of the 'Datadog Agent'?",
+    "options": {
+      "A": "To act as a secondary web server for the application.",
+      "B": "To collect metrics, logs, and traces from a host and send them to the Datadog platform.",
+      "C": "To encrypt the physical hard drives of the server.",
+      "D": "To provide a physical firewall for the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog is a SaaS-based monitoring and security platform.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows users",
+      "D": "Only for on-premises data centers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Datadog, what are 'Tags' primarily used for?",
+    "options": {
+      "A": "To name the physical servers after colors.",
+      "B": "To filter, group, and aggregate metrics across different environments, roles, or regions.",
+      "C": "To store user passwords securely.",
+      "D": "To increase the internet speed of the host."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of dashboard in Datadog is typically used for real-time troubleshooting and deep dives into specific systems?",
+    "options": {
+      "A": "Screenboard",
+      "B": "Timeboard",
+      "C": "Noticeboard",
+      "D": "Leaderboard"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'APM' stand for in the context of Datadog?",
+    "options": {
+      "A": "Application Performance Monitoring",
+      "B": "Advanced Power Management",
+      "C": "Automated Patching Module",
+      "D": "Analytical Protocol Map"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: To collect logs in Datadog, the 'logs_enabled' parameter must be set to 'true' in the Agent configuration file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux hosts",
+      "D": "Only for database logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a standard 'Metric Type' in Datadog used for values that only increase, like total request counts?",
+    "options": {
+      "A": "Gauge",
+      "B": "Count",
+      "C": "Set",
+      "D": "String"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'Monitor' in Datadog?",
+    "options": {
+      "A": "To provide a physical screen for the server.",
+      "B": "To alert administrators when a metric or log pattern crosses a specific threshold.",
+      "C": "To backup the application source code.",
+      "D": "To monitor the room temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Datadog feature provides a visual map showing the relationships and traffic flow between different microservices?",
+    "options": {
+      "A": "Service Map",
+      "B": "Host Map",
+      "C": "Route Map",
+      "D": "Trace Map"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Host Map' allows you to visualize all your monitored hosts across different regions and availability zones in one view.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS instances",
+      "D": "Only if using Kubernetes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Datadog, what is a 'Gauge' metric type used for?",
+    "options": {
+      "A": "To count the total number of events over a day.",
+      "B": "To track values that go up and down, such as current CPU usage or available memory.",
+      "C": "To store a list of all unique IP addresses.",
+      "D": "To monitor the daily growth of log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is used to manage the configuration of the Datadog Agent from the command line?",
+    "options": {
+      "A": "datadog-agent status",
+      "B": "datadog-config",
+      "C": "systemctl",
+      "D": "agent-setup"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Datadog integrations (like AWS, NGINX, or SQL) allow you to collect metrics from third-party services with minimal configuration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'Enterprise' edition",
+      "D": "Only for open-source tools"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Pipeline' in Datadog?",
+    "options": {
+      "A": "A physical pipe for carrying data cables.",
+      "B": "A series of processors that parse, enrich, and transform logs as they arrive in the platform.",
+      "C": "A way to delete old logs automatically.",
+      "D": "A specialized way to encrypt network signals."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status indicates that a Datadog Monitor has detected an issue and is currently firing?",
+    "options": {
+      "A": "OK",
+      "B": "Alert",
+      "C": "Warn",
+      "D": "No Data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog Synthetics can be used to monitor the uptime of a public-facing URL from multiple global locations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for .com domains",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Events Explorer' used for in Datadog?",
+    "options": {
+      "A": "To explore the office building.",
+      "B": "To view and filter high-level system events like code deployments, monitor state changes, and billing updates.",
+      "C": "To find a lost file on a server.",
+      "D": "To calculate the salary of the IT team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you monitor to see if a server is running out of disk space?",
+    "options": {
+      "A": "system.cpu.idle",
+      "B": "system.disk.free",
+      "C": "system.mem.used",
+      "D": "system.net.bytes_sent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Screenboard' in Datadog is free-form and often used for high-level status displays and 'wall of monitors' views.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for network metrics",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DogStatsD'?",
+    "options": {
+      "A": "A pet grooming service in the cloud.",
+      "B": "A metric aggregation service that accepts custom metrics via UDP and sends them to Datadog.",
+      "C": "A tool to delete duplicate logs.",
+      "D": "The password for the Datadog dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port does the Datadog Agent use by default to receive DogStatsD metrics via UDP?",
+    "options": {
+      "A": "80",
+      "B": "8125",
+      "C": "443",
+      "D": "9090"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog can monitor containerized environments like Docker and Kubernetes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux containers",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Datadog RUM' (Real User Monitoring)?",
+    "options": {
+      "A": "To monitor the physical health of users.",
+      "B": "To track the performance and errors experienced by actual users interacting with a web or mobile application.",
+      "C": "To encrypt user browser history.",
+      "D": "To monitor the daily growth of the customer database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Datadog, what does 'Multi-condition' in a monitor refer to?",
+    "options": {
+      "A": "Having multiple people agree to an alert.",
+      "B": "An alert that triggers based on a logical combination of multiple metrics (e.g., CPU > 90% AND Error Rate > 5%).",
+      "C": "A specialized way to encrypt alerts.",
+      "D": "An alert that only works during the day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should always keep your Datadog Agent API Key secret.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in production",
+      "D": "Only if using a public cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Infrastructure List' in Datadog?",
+    "options": {
+      "A": "A list of every physical cable in the office.",
+      "B": "A comprehensive list of all hosts, containers, and services being monitored by Datadog.",
+      "C": "A backup of the server BIOS.",
+      "D": "The history of all previous system errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of monitor is best for detecting when a specific service or server has stopped reporting data entirely?",
+    "options": {
+      "A": "Metric Monitor",
+      "B": "Check / Service Summary Monitor",
+      "C": "Anomaly Monitor",
+      "D": "Forecast Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog can be integrated with Slack or Microsoft Teams to send alert notifications.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for critical alerts",
+      "D": "Only if using the mobile app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Facet' in Datadog Log Management?",
+    "options": {
+      "A": "A physical part of a server rack.",
+      "B": "A specific attribute or tag that is indexed for searching, filtering, and aggregating logs.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The password for the log console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Metric Summarization' in Datadog?",
+    "options": {
+      "A": "It makes the data much heavier.",
+      "B": "It reduces storage costs while maintaining the ability to see long-term trends.",
+      "C": "It removes the need for any tags.",
+      "D": "It increases the number of CPU cores used by the agent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Datadog Agent is open-source software.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for version 5",
+      "D": "Only if using Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Downtime' scheduling in Datadog?",
+    "options": {
+      "A": "To intentionally crash a server for testing.",
+      "B": "To temporarily silence alerts for a system during planned maintenance.",
+      "C": "To calculate the salary deduction for the IT team.",
+      "D": "To monitor the end of a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Datadog feature allows you to see the exact lines of code causing a delay in a transaction?",
+    "options": {
+      "A": "Log Management",
+      "B": "APM (Distributed Tracing)",
+      "C": "Infrastructure Monitoring",
+      "D": "Network Performance Monitoring"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog's 'Notebooks' are collaborative documents used to combine live graphs, text, and images for incident reviews.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for senior managers",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Autodiscovery' in the context of the Datadog Agent?",
+    "options": {
+      "A": "Finding a new cloud provider automatically.",
+      "B": "The ability of the Agent to automatically detect and monitor containers as they are created in environments like Kubernetes.",
+      "C": "Finding lost passwords on a hard drive.",
+      "D": "A specialized way to encrypt network signals."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Status' in the Datadog infrastructure view indicates a host is healthy and reporting data?",
+    "options": {
+      "A": "Red",
+      "B": "Green",
+      "C": "Grey",
+      "D": "Yellow"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the Datadog API to create dashboards and monitors programmatically using code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only with Terraform",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Datadog Site' (e.g., US1, US3, EU1)?",
+    "options": {
+      "A": "To choose which website to browse.",
+      "B": "To specify the geographic region where your data is stored and the Datadog services are hosted.",
+      "C": "To encrypt the physical server rack.",
+      "D": "To monitor the daily stock price of Datadog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Synthetic Monitoring' in Datadog?",
+    "options": {
+      "A": "Monitoring the physical speed of the internet.",
+      "B": "Running automated scripts to simulate user interactions and verify application availability.",
+      "C": "Deleting old monitoring data automatically.",
+      "D": "Hiring a team of testers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Monitoring 'Memory' usage can help identify applications that are consuming too much RAM on a server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java apps",
+      "D": "Only if the server is virtualized"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Rehydration' in Datadog?",
+    "options": {
+      "A": "Adding water to a physical server.",
+      "B": "The process of bringing archived logs back into Datadog for searching and analysis.",
+      "C": "A tool to delete old log entries.",
+      "D": "A specialized way to encrypt logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Datadog, what is the purpose of 'Notebooks'?",
+    "options": {
+      "A": "To take physical notes during a meeting.",
+      "B": "To create post-mortem reports and investigation documents that include live metrics.",
+      "C": "To backup the whole system.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog provides a 'Security Monitoring' feature to detect real-time threats and misconfigurations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using a firewall"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Trace' in Datadog APM?",
+    "options": {
+      "A": "A visual diagram of a server room.",
+      "B": "A record of the end-to-end journey of a request as it flows through various services.",
+      "C": "The serial number of a server.",
+      "D": "The name of the application's owner."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would help you identify a 'CPU spike' in an application?",
+    "options": {
+      "A": "system.cpu.user",
+      "B": "system.cpu.idle",
+      "C": "system.cpu.wait",
+      "D": "All of the above"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Datadog can be configured to send alerts via phone calls (using third-party tools like PagerDuty).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for senior managers",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Log Explorer' used for?",
+    "options": {
+      "A": "To explore a forest.",
+      "B": "An interface used to search, filter, and analyze all ingested logs in real-time.",
+      "C": "To find a lost file on a hard drive.",
+      "D": "To monitor the room temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Infrastructure as Code' management of Datadog?",
+    "options": {
+      "A": "Using Terraform to provision Datadog dashboards and monitors.",
+      "B": "Writing manual instructions for the IT team.",
+      "C": "Buying more servers.",
+      "D": "Deleting the monitoring dashboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Global Search' in Datadog allows you to find any dashboard, monitor, or host across your entire organization.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only in the EU region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Cost Management' in Datadog?",
+    "options": {
+      "A": "Counting the number of physical clouds in the sky.",
+      "B": "A feature that allows you to monitor and analyze your cloud provider spending alongside your performance metrics.",
+      "C": "A specialized way to encrypt credit card data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the Datadog Agent to provide a local status web page?",
+    "options": {
+      "A": "80",
+      "B": "5001",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog's 'Error Tracking' automatically groups similar application errors to help prioritize fixes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java errors",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Patterns' in Datadog?",
+    "options": {
+      "A": "Geometric designs used in server rooms.",
+      "B": "An AI-powered feature that automatically groups millions of logs into a few high-level patterns for easier analysis.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Alert Notification' variable in Datadog?",
+    "options": {
+      "A": "{{value}}",
+      "B": "{{host.name}}",
+      "C": "{{monitor.status}}",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Monitoring 'Network Latency' can help identify slow communication between different microservices.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optics",
+      "D": "Only if the server is in a remote location"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Datadog CI Visibility'?",
+    "options": {
+      "A": "To act as a secondary firewall for CI/CD.",
+      "B": "To monitor and optimize the performance of CI/CD pipelines and test suites.",
+      "C": "To encrypt the source code in Git.",
+      "D": "To monitor the physical power usage of the build server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Datadog, what is 'Aggregation' in a query?",
+    "options": {
+      "A": "Making the data points look bigger.",
+      "B": "Combining multiple time series into a single value, such as the 'sum' or 'avg' across all hosts.",
+      "C": "A tool to delete old monitoring data.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog 'Audit Logs' keep a record of all user actions taken within the Datadog platform for compliance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for admin users",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Custom Metrics' in Datadog?",
+    "options": {
+      "A": "To create metrics that only use specific colors.",
+      "B": "To send and track business or application-specific data that is not collected by standard integrations.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the datacenter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'parsing' log data into searchable fields?",
+    "options": {
+      "A": "The Agent",
+      "B": "The Log Pipeline (Grok Parser)",
+      "C": "The Browser",
+      "D": "The Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Labels' is identical to using 'Tags' in Datadog nomenclature.",
+    "options": {
+      "A": "True (they refer to the same key-value metadata concept).",
+      "B": "False",
+      "C": "Only in the Kubernetes integration",
+      "D": "Only for cloud-based hosts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Datadog Browser Extension'?",
+    "options": {
+      "A": "To increase the browser's speed.",
+      "B": "To provide quick access to dashboards and monitors directly from your browser toolbar.",
+      "C": "To encrypt the user's password.",
+      "D": "To monitor the daily stock price of Datadog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Alert Message' field in Datadog?",
+    "options": {
+      "A": "Message",
+      "B": "Subject",
+      "C": "Priority",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Effective monitoring in Datadog requires at least one Agent to be installed on a host.",
+    "options": {
+      "A": "True (for host-level metrics, though some cloud integrations are agentless).",
+      "B": "False",
+      "C": "Only for small networks",
+      "D": "Only if using the mobile app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Ingestion'?",
+    "options": {
+      "A": "Deleting old log files.",
+      "B": "The process of sending log data from your systems to the Datadog platform.",
+      "C": "Encrypting the logs word-by-word.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' in a Datadog monitor indicates that the metric has returned to normal after an alert?",
+    "options": {
+      "A": "Alert",
+      "B": "OK",
+      "C": "Recovery",
+      "D": "Resolved"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Datadog query, what is the effect of using the 'rollup' function?",
+    "options": {
+      "A": "It physically rolls the graph into a circle.",
+      "B": "It allows you to define the aggregation method (avg, sum, max) and the time interval for a metric's data points.",
+      "C": "It deletes data points that are considered outliers.",
+      "D": "It increases the number of raw data points stored on disk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'Monitor Re-notification' in Datadog?",
+    "options": {
+      "A": "To congratulate the team for fixing an issue.",
+      "B": "To repeatedly send an alert notification at set intervals if a monitor remains in an 'Alert' state.",
+      "C": "To update the BIOS of the monitored server.",
+      "D": "To change the color of the dashboard graph."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Datadog APM, 'Spans' are the building blocks of a 'Trace', representing a specific unit of work or operation within a service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if using the Datadog SDK"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which log processor should you use to convert a string attribute into a proper timestamp that Datadog can use for event ordering?",
+    "options": {
+      "A": "Grok Parser",
+      "B": "Date Remapper",
+      "C": "URL Parser",
+      "D": "Arithmetic Processor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Process Agent' within the standard Datadog Agent installation?",
+    "options": {
+      "A": "To process the cloud billing report.",
+      "B": "To collect live information about running system processes, including CPU and RSS memory per process.",
+      "C": "To act as a secondary firewall.",
+      "D": "To restart the host if it becomes unresponsive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Multi-Alert' monitor allows you to set up a single monitor that alerts separately for every unique value of a specific tag (e.g., alert per 'host').",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-based hosts",
+      "D": "Only if using version 6.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Interpolation' setting in a Datadog query determine?",
+    "options": {
+      "A": "The language used for alert messages.",
+      "B": "How Datadog estimates values for a metric during time periods where no data was reported.",
+      "C": "The physical location of the monitoring server.",
+      "D": "The encryption level of the data in transit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid use case for 'Log Rehydration'?",
+    "options": {
+      "A": "Recovering logs from an archive (like S3) for troubleshooting an incident that occurred several weeks ago.",
+      "B": "Adding water to the server room to prevent fires.",
+      "C": "Automatically deleting logs that are too large.",
+      "D": "Moving logs from the US site to the EU site."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Anomaly Detection' in Datadog monitors?",
+    "options": {
+      "A": "An alert that triggers when everything is normal.",
+      "B": "An algorithmic monitor that uses historical trends to identify when a metric is behaving unusually, even if it hasn't hit a fixed threshold.",
+      "C": "A tool to detect physical hardware theft.",
+      "D": "The process of moving servers to a new region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog 'Dashboards' can be shared with external users who do not have a Datadog account via a public URL (Public Sharing).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the user is an Administrator",
+      "D": "Only for the 'Timeboard' type"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Trace Search & Analytics' in Datadog APM?",
+    "options": {
+      "A": "To search for lost servers on a map.",
+      "B": "To query and filter through all your ingested spans based on tags, metadata, and performance metrics.",
+      "C": "To encrypt the source code of the application.",
+      "D": "To monitor the daily growth of the trace database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration file in the Datadog Agent directory is used to enable specific integrations (like NGINX or Postgres)?",
+    "options": {
+      "A": "datadog.yaml",
+      "B": "conf.d/<integration_name>.d/conf.yaml",
+      "C": "agent.conf",
+      "D": "integrations.json"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Metric Outliers' monitors are specifically designed to detect a single member of a group (e.g., one host in a cluster) that is behaving differently from its peers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database clusters",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Log Pipeline' processor specifically used for?",
+    "options": {
+      "A": "To delete logs word-by-word.",
+      "B": "To extract, remap, or perform arithmetic on log attributes to make them more useful for analysis.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of log storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Datadog feature allows you to monitor the health of your 'Network' by tracking throughput and latency between services, pods, and cloud regions?",
+    "options": {
+      "A": "Infrastructure Monitoring",
+      "B": "Network Performance Monitoring (NPM)",
+      "C": "Network Device Monitoring (NDM)",
+      "D": "Cloud Cost Management"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the 'as_count()' function in a query tells Datadog to treat the metric data points as absolute counts rather than rates per second.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Gauge metrics",
+      "D": "Only if using version 7.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of the 'Cluster Agent' in a Kubernetes environment?",
+    "options": {
+      "A": "To physically move server racks.",
+      "B": "To act as a proxy between the API server and the node-based Agents, handling cluster-level metadata and reducing load on the API server.",
+      "C": "To backup the Kubernetes master node.",
+      "D": "To monitor the temperature of the worker nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Datadog monitors, what does 'Evaluation Delay' do?",
+    "options": {
+      "A": "It waits for the administrator to wake up before alerting.",
+      "B": "It delays the evaluation of a monitor to account for data latency or 'backfill' from cloud providers.",
+      "C": "It slows down the CPU of the host.",
+      "D": "It deletes the monitor history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Level Objectives' (SLOs) in Datadog can be based on either Monitor data or Metric data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for paid accounts",
+      "D": "Only for the SRE team"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DogstatsD' over UDS (Unix Domain Sockets) and why would you use it?",
+    "options": {
+      "A": "A pet grooming app; used for dogs.",
+      "B": "A communication method using local sockets instead of UDP to reduce network overhead and improve performance for containerized apps.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for the Datadog admin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of 'Processor' is used to group similar log messages together for easier viewing in the Log Explorer?",
+    "options": {
+      "A": "Grok Parser",
+      "B": "Log Message Remapper",
+      "C": "Arithmetic Processor",
+      "D": "URL Parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Datadog monitor, the '@' symbol is used in the notification message to route alerts to specific users or integrations (e.g., @slack-it-alerts).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for email addresses",
+      "D": "Only if using the 'stable' release"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Forecasting' in the context of Datadog monitors?",
+    "options": {
+      "A": "Predicting the weather in the data center.",
+      "B": "An algorithmic monitor type that predicts the future behavior of a metric to alert you before it hits a threshold (e.g., 'Disk will be full in 24 hours').",
+      "C": "A specialized way to encrypt alert data.",
+      "D": "The process of deleting old monitors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of Datadog allows you to see the health and status of your 'Physical' network devices like switches and routers?",
+    "options": {
+      "A": "NPM",
+      "B": "Network Device Monitoring (NDM)",
+      "C": "Infrastructure Map",
+      "D": "APM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog 'Log Pipelines' are evaluated in a top-to-bottom order, and a log can only pass through one pipeline.",
+    "options": {
+      "A": "False (Log pipelines are top-to-bottom, but a log can match and pass through multiple pipelines if they have matching filters).",
+      "B": "True",
+      "C": "Only if they have the same name",
+      "D": "Only for unencrypted logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sensitive Data Scanner' in Datadog used for?",
+    "options": {
+      "A": "To scan ID cards at the office entrance.",
+      "B": "To automatically detect and redact sensitive information like PII or credit card numbers from logs before they are indexed.",
+      "C": "A specialized way to encrypt hard drives.",
+      "D": "To monitor the daily growth of the user database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' metadata attribute should you change to ensure Datadog correctly aggregates a counter (e.g., total_purchases) as a sum over time?",
+    "options": {
+      "A": "Metric Type (Set to 'Count')",
+      "B": "Unit Name",
+      "C": "Host Tag",
+      "D": "Aggregation Interval"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Custom Agent Checks' allow you to write your own Python scripts to collect metrics from proprietary or legacy systems that Datadog doesn't support natively.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux hosts",
+      "D": "Only if using version 5.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Datadog Cloud SIEM'?",
+    "options": {
+      "A": "To act as a secondary firewall.",
+      "B": "To automatically detect and analyze security threats across your logs and cloud environment using out-of-the-box detection rules.",
+      "C": "To encrypt the source code in Git.",
+      "D": "To monitor the physical power usage of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Datadog monitor, what does the 'Notify No Data' setting do?",
+    "options": {
+      "A": "It deletes the monitor if no data is found.",
+      "B": "It triggers an alert if the monitor stops receiving data for a specified amount of time.",
+      "C": "It ignores the monitor for 5 minutes.",
+      "D": "It sets the password for the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Live Containers' allows you to see resource usage for all containers in your environment in real-time, even if they aren't part of a Kubernetes cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Docker containers",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Arithmetic Processor' in a log pipeline?",
+    "options": {
+      "A": "A processor that solves math homework.",
+      "B": "A processor that allows you to create a new attribute by performing math on existing numerical attributes (e.g., Calculating 'Response Time' from 'End' and 'Start' timestamps).",
+      "C": "A way to encrypt numerical data.",
+      "D": "A specialized tool for cleaning server fans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for custom metrics sent to the Agent via the DogStatsD protocol?",
+    "options": {
+      "A": "8125",
+      "B": "80",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Datadog 'Tags' are case-sensitive (e.g., 'env:prod' is different from 'env:PROD').",
+    "options": {
+      "A": "False (Datadog tags are normalized to lowercase by default).",
+      "B": "True",
+      "C": "Only for custom tags",
+      "D": "Only in the EU region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tracing without Limits' in Datadog APM?",
+    "options": {
+      "A": "A trace that never ends.",
+      "B": "The combination of 100% trace ingestion with intelligent, tag-based retention filtering to control costs while maintaining visibility.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The password for the trace dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of dashboard widget allows you to compare a single metric across multiple groups (like CPU usage per region) in a simple list?",
+    "options": {
+      "A": "Top List",
+      "B": "Query Value",
+      "C": "Timeseries",
+      "D": "Heatmap"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Log Exclusion Filters' are used to prevent certain logs from being indexed, allowing you to reduce costs by only storing important logs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for debug logs",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Watchdog' in Datadog?",
+    "options": {
+      "A": "A physical dog used to guard the data center.",
+      "B": "An AI-powered engine that automatically scans your environment to find potential performance issues and anomalies without any manual setup.",
+      "C": "A tool to delete old monitoring data.",
+      "D": "The password for the Datadog admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Datadog monitor, what does the 'Renotify Status' indicate?",
+    "options": {
+      "A": "How many times the alert has been sent.",
+      "B": "The current alert level (e.g., Alert, Warn) that will trigger a re-notification.",
+      "C": "The physical status of the notification server.",
+      "D": "The time it takes for an admin to respond."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Datadog Agent' can be used as a proxy to send data from servers with no internet access to the Datadog Cloud.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows servers",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Attribute Remapper'?",
+    "options": {
+      "A": "Moving a physical log file to another room.",
+      "B": "A processor that maps an existing attribute to a standard Datadog attribute (e.g., mapping 'client_ip' to 'network.client.ip').",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Datadog feature allows you to monitor the performance of your 'Serverless' functions (like AWS Lambda)?",
+    "options": {
+      "A": "Lambda Monitoring / Serverless View",
+      "B": "Infrastructure Map",
+      "C": "NPM",
+      "D": "NDM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Synthetic Browser Tests' record and playback user actions (like clicking buttons) to ensure critical user journeys are functioning.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile apps",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Metric Metadata' in Datadog?",
+    "options": {
+      "A": "To make the data much heavier.",
+      "B": "To define the properties of a metric, such as its unit (e.g., 'bytes'), description, and type.",
+      "C": "To encrypt individual data points.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' in the Datadog monitor history indicates that an alert was triggered because a metric went BELOW a threshold?",
+    "options": {
+      "A": "Alert (Threshold < X)",
+      "B": "Warning (High)",
+      "C": "Alert (Low)",
+      "D": "Resolved"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Datadog 'Workflows' allow you to automate remediation actions (like restarting a server) directly from an alert notification.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grok Parser' in the context of log management?",
+    "options": {
+      "A": "A language for writing code.",
+      "B": "A rule-based tool used to parse unstructured text into structured, searchable attributes using patterns.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "A tool to delete old logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'aggregating' multiple time series into one in a query?",
+    "options": {
+      "A": "The Agent",
+      "B": "The Datadog Query Engine",
+      "C": "The Browser",
+      "D": "The Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard' can contain widgets from multiple different services and integrations in a single view.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'Enterprise' edition",
+      "D": "Only for non-profit accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metric Summarization' frequency in Datadog?",
+    "options": {
+      "A": "Once every year.",
+      "B": "Datadog automatically rolls up older data into larger intervals (e.g., hourly, daily) to improve long-term query performance.",
+      "C": "Only when the system crashes.",
+      "D": "Every 5 seconds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Widget' is best for visualizing the current value of a metric relative to a target goal?",
+    "options": {
+      "A": "Change Widget",
+      "B": "Goal / Bullet Graph",
+      "C": "Timeseries",
+      "D": "Log Stream"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Multi-Org' accounts allow you to manage multiple separate Datadog organizations under a single parent account for billing and management.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud providers",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'APM Profile' used for?",
+    "options": {
+      "A": "To see the individual performance of developers.",
+      "B": "To analyze code-level performance, such as CPU and memory usage by individual functions within your application.",
+      "C": "To encrypt the source code in Git.",
+      "D": "A way to backup the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Datadog monitor, what does the 'Message' field support for dynamic content?",
+    "options": {
+      "A": "Plain text only.",
+      "B": "Markdown and Template Variables (e.g., {{host.name}}).",
+      "C": "Only HTML.",
+      "D": "It requires a specialized scripting language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog 'Sensitive Data Scanner' works in real-time as logs are ingested into the platform.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for archived logs",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Generate Metrics' used for?",
+    "options": {
+      "A": "To generate new log files from thin air.",
+      "B": "To create numerical metrics based on log data (e.g., counting the number of logs containing 'error'), allowing for longer retention at a lower cost.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for APM traces sent to the Datadog Agent?",
+    "options": {
+      "A": "8126",
+      "B": "8125",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Infrastructure List' can be filtered using the same tags that are used in metrics and monitors.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-based hosts",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Event Stream' filtering?",
+    "options": {
+      "A": "Filtering the water in the server room.",
+      "B": "The ability to search and filter through system events based on source, status, priority, and tags.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily cost of the event database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'remapping' a log's level (e.g., converting 'warning' to 'warn') for consistency?",
+    "options": {
+      "A": "Log Pipeline / Status Remapper",
+      "B": "The Agent",
+      "C": "The Database",
+      "D": "The UI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Service Map' updates automatically as new services and dependencies are detected by APM.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java services",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Datadog App Builder'?",
+    "options": {
+      "A": "To build mobile games.",
+      "B": "To create custom internal applications and UIs directly within Datadog for remediation or operational tasks.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the datacenter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Query' aggregation method in Datadog?",
+    "options": {
+      "A": "avg",
+      "B": "sum",
+      "C": "max",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can use the 'Agent Status' page to see which integrations are currently running and if they are failing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-based integrations",
+      "D": "Only if using version 6.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metric Tag Cardinality' limit in Datadog?",
+    "options": {
+      "A": "The number of colors used in a graph.",
+      "B": "The limit on the number of unique tag-value combinations allowed for a metric to ensure platform performance and cost control.",
+      "C": "A specialized way to encrypt metadata.",
+      "D": "The number of users allowed to access a metric."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for the Agent to communicate with the Datadog Cloud services (Outbound)?",
+    "options": {
+      "A": "80",
+      "B": "443 (HTTPS)",
+      "C": "8125",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Datadog Agent architecture, how are JMX metrics from Java applications collected compared to standard OS metrics?",
+    "options": {
+      "A": "The main Go process handles JMX natively.",
+      "B": "A dedicated 'JMXFetch' Java process is spawned by the Agent to connect to the MBean server and pipe data back to the Agent.",
+      "C": "JMX metrics are sent directly to Datadog via UDP, bypassing the Agent.",
+      "D": "The Agent requires a physical hardware bridge to read Java memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific monitor function should be used to compare a metric's current behavior to its behavior at the same time exactly one week ago?",
+    "options": {
+      "A": "timeshift()",
+      "B": "week_over_week()",
+      "C": "diff()",
+      "D": "day_before()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Datadog 'Log Pipelines', a 'Grok Parser' can use 'nested' rules to break down a complex string into primary attributes and then further sub-parse those attributes in a single pass.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for logs in JSON format",
+      "D": "Only if the log file is smaller than 1MB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical impact of 'High Cardinality' on the Datadog platform's indexing and cost model?",
+    "options": {
+      "A": "It increases CPU usage on the Agent host.",
+      "B": "It creates a massive number of unique 'Custom Metrics' (series), which can lead to significant billing increases and slower query performance in the Metrics Explorer.",
+      "C": "It automatically deletes old logs to save space.",
+      "D": "It forces the use of IPv6 for all monitoring traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When configuring a 'Multi-Alert' monitor, what happens if you select 'Require a full window of data'?",
+    "options": {
+      "A": "The monitor will never fire if a single host goes offline.",
+      "B": "Datadog will wait until the entire evaluation window (e.g., 5 minutes) is filled with data points before evaluating the threshold to prevent false positives from sparse data.",
+      "C": "The monitor will only work during business hours.",
+      "D": "The monitor will ignore all tags except for 'env:prod'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric Type' in Datadog is best suited for calculating the '95th Percentile' of request latencies across a cluster of servers?",
+    "options": {
+      "A": "Count",
+      "B": "Distribution",
+      "C": "Gauge",
+      "D": "Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Sensitive Data Scanner' uses Regex patterns and out-of-the-box 'Check-Digit' algorithms (like the Luhn algorithm for credit cards) to identify PII during log ingestion.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for logs archived in S3",
+      "D": "Only for non-encrypted log streams"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Datadog APM, what is 'Context Injection' in the context of Distributed Tracing?",
+    "options": {
+      "A": "Injecting a virus into the code.",
+      "B": "The process of adding trace headers (like x-datadog-trace-id) to outgoing HTTP requests to ensure the trace continues in the next service.",
+      "C": "Writing trace data directly to a local text file.",
+      "D": "The history of all previous trace configurations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which monitor algorithm is specifically designed to ignore a metric's absolute value and instead focus on how much it deviates from the average of its 'Peer' group?",
+    "options": {
+      "A": "Anomaly Detection",
+      "B": "Outlier Detection",
+      "C": "Forecast",
+      "D": "Change Alert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Trace ID' 128-bit support allow for in modern Datadog environments?",
+    "options": {
+      "A": "Faster internet speeds.",
+      "B": "Compatibility with the W3C Trace Context standard and better interoperability with other tracing tools (like OpenTelemetry).",
+      "C": "Encrypting the trace database with 128-bit AES.",
+      "D": "Storing traces for exactly 128 days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Log Rehydration' requires you to have previously configured a 'Log Archive' to a cloud storage bucket like Amazon S3, Azure Blob, or Google Cloud Storage.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the logs are older than 1 year",
+      "D": "Only if using the Datadog EU site"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Agent' component is responsible for receiving and aggregating custom metrics sent from an application using the StatsD protocol?",
+    "options": {
+      "A": "Core Agent",
+      "B": "DogStatsD",
+      "C": "Process Agent",
+      "D": "Trace Agent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Datadog monitor, what is the effect of setting 'Evaluation Delay' to 60 seconds for a cloud-based metric (like AWS CloudWatch)?",
+    "options": {
+      "A": "The alert will reach the admin 60 seconds late.",
+      "B": "Datadog waits 60 seconds for the cloud provider's API to populate the metric, preventing 'False Alarms' due to the latency of the cloud-to-Datadog sync.",
+      "C": "The host CPU is throttled for 60 seconds.",
+      "D": "The monitor history is deleted every 60 seconds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Arithmetic Processor' expression would you use in a Log Pipeline to calculate the percentage of a task completed if you have 'completed' and 'total' attributes?",
+    "options": {
+      "A": "(completed / total) * 100",
+      "B": "SUM(completed, total)",
+      "C": "completed % total",
+      "D": "total - completed"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'DogStatsD' supports 'Tags' as a native extension to the standard StatsD protocol, allowing for multi-dimensional custom metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Gauge metrics",
+      "D": "Only if using the Go client"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Trace Agent' inside the Datadog Agent?",
+    "options": {
+      "A": "To track the location of the physical servers.",
+      "B": "To receive, process, and sample APM traces from applications before sending them to Datadog.",
+      "C": "To encrypt the source code of the app.",
+      "D": "To monitor the daily growth of the trace database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric Function' would you use to find the peak value of a metric over a 10-minute window in a query?",
+    "options": {
+      "A": "avg()",
+      "B": "max()",
+      "C": "min()",
+      "D": "sum()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Kubernetes, the Datadog 'Cluster Agent' can automatically provide external metrics to the Horizontal Pod Autoscaler (HPA) to scale pods based on Datadog data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CPU/Memory metrics",
+      "D": "Only in version 1.25+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Interpolation = Last' setting in a dashboard widget accomplish?",
+    "options": {
+      "A": "It deletes the last data point.",
+      "B": "It displays a horizontal line from the last known data point until a new one arrives, effectively 'filling' gaps in sparse metrics.",
+      "C": "It translates the dashboard into the last used language.",
+      "D": "It sets the password for the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Log Processor' is used to extract information from a URL, such as the path, query parameters, and domain?",
+    "options": {
+      "A": "Grok Parser",
+      "B": "URL Parser",
+      "C": "Date Remapper",
+      "D": "Lookup Processor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Metric Outlier' monitors can use the 'DBSCAN' algorithm to identify abnormal hosts in a cluster without assuming a normal distribution of data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Pipeline' nesting used for in a complex environment?",
+    "options": {
+      "A": "To keep the logs warm in winter.",
+      "B": "To organize log processing by creating sub-pipelines for specific services or teams, allowing for modular and cleaner processing rules.",
+      "C": "To encrypt logs twice.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Datadog APM, what is a 'Root Span'?",
+    "options": {
+      "A": "A span that only works for the root user.",
+      "B": "The first span in a trace, representing the entry point of a request into the monitored system.",
+      "C": "A span that has no parents and no children.",
+      "D": "The name of the primary application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for the Agent's internal 'GUI' interface (often used on Windows or macOS for local management)?",
+    "options": {
+      "A": "8125",
+      "B": "5002",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'Metric Summary' page to identify which specific tags are contributing the most to your 'High Cardinality' and custom metric costs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for admin users",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Trace Sampling' at the Agent level?",
+    "options": {
+      "A": "To test the internet speed of the trace.",
+      "B": "To decide which traces to send to Datadog and which to discard to keep within ingestion limits and reduce bandwidth usage.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the trace database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Datadog monitor, what does the 'Renotify Occurrences' setting control?",
+    "options": {
+      "A": "The number of people who receive the alert.",
+      "B": "The maximum number of times a re-notification will be sent while the monitor remains in an alert state.",
+      "C": "The physical speed of the notification server.",
+      "D": "The time it takes to delete an alert."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog 'Synthetic Global Variables' allow you to share values (like passwords or tokens) across multiple synthetic tests.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile tests",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Log Ingestion' volume limit alert primarily used for?",
+    "options": {
+      "A": "To stop the internet if the logs are too fast.",
+      "B": "To notify administrators if a sudden surge in log volume occurs, preventing unexpected overage charges.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily cost of the log storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric Function' would you use to calculate the cumulative sum of a metric over a time range in a dashboard?",
+    "options": {
+      "A": "avg()",
+      "B": "cumsum()",
+      "C": "max()",
+      "D": "rate()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Log Status Remapper' allows you to define which log attributes (like 'severity' or 'level') determine the final status (INFO, WARN, ERROR) in Datadog.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java logs",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'APM Database Monitoring' in Datadog?",
+    "options": {
+      "A": "Counting the number of rows in a database.",
+      "B": "Providing deep visibility into query performance, execution plans, and database health directly within the APM interface.",
+      "C": "Encrypting the database log files.",
+      "D": "A way to backup the database to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the Datadog Agent to communicate with its own 'Process Agent'?",
+    "options": {
+      "A": "8125",
+      "B": "6162",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Metric Outlier' monitors can be configured to ignore 'Warm-up periods' for new instances.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DogStatsD' over TCP and why is it used?",
+    "options": {
+      "A": "A pet grooming service over a phone line.",
+      "B": "A reliable way to send metrics to the Agent that guarantees delivery, unlike the standard UDP method.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for the Datadog admin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'flattening' nested JSON logs into top-level searchable attributes?",
+    "options": {
+      "A": "The Agent",
+      "B": "The Log Pipeline / JSON Parser",
+      "C": "The Browser",
+      "D": "The Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Datadog 'Audit Logs' can be exported to an external SIEM or storage bucket for long-term retention.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for admin users",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Datadog Cluster Agent' 'Secret'?",
+    "options": {
+      "A": "To hide the agent from the cloud provider.",
+      "B": "To ensure secure communication between the node-based Agents and the Cluster Agent using a shared token.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily stock price of Datadog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Query' aggregation method used to find the total count of a metric across all sources?",
+    "options": {
+      "A": "avg",
+      "B": "sum",
+      "C": "max",
+      "D": "All of the above"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Template Variables' in a Datadog dashboard to allow users to dynamically filter all widgets by a specific tag (e.g., $env).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-based dashboards",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Attribute Remapper' specifically used for?",
+    "options": {
+      "A": "Moving a log file to another folder.",
+      "B": "Standardizing field names across different sources (e.g., remapping 'user_id' and 'usr' to a single 'user' attribute).",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Datadog feature allows you to see the real-time throughput and error rate for every 'SQL' query in your application?",
+    "options": {
+      "A": "Infrastructure Monitoring",
+      "B": "APM Database Monitoring",
+      "C": "Network Monitoring",
+      "D": "Log Management"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Synthetic Browser Tests' can be recorded using a local extension and then uploaded to Datadog for automated execution.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Chrome",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Metric Tags' in a query?",
+    "options": {
+      "A": "To make the data much heavier.",
+      "B": "To narrow down the results to specific groups or to segment the data visually (e.g., 'avg:system.cpu.idle{env:prod} by {host}').",
+      "C": "To encrypt individual data points.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' in the Datadog infrastructure view indicates that a host has stopped sending data but was not gracefully shut down?",
+    "options": {
+      "A": "Disconnected",
+      "B": "Missing",
+      "C": "Stale",
+      "D": "Grey"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Datadog 'Sensitive Data Scanner' can use 'OOTB' (Out-Of-The-Box) rules for common sensitive patterns like US Social Security Numbers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for archived logs",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Ingestion pipeline' latency?",
+    "options": {
+      "A": "The time it takes to delete a log.",
+      "B": "The duration between when a log is generated and when it becomes searchable in the Datadog Log Explorer.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The size of a single log packet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'parsing' log data into searchable fields?",
+    "options": {
+      "A": "The Agent",
+      "B": "The Log Pipeline / Grok Parser",
+      "C": "The Browser",
+      "D": "The Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard' can contain widgets from multiple different cloud accounts in a single view.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'Enterprise' edition",
+      "D": "Only for non-profit accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metric Summarization' in Datadog?",
+    "options": {
+      "A": "Writing a short story about a metric.",
+      "B": "The process of rolling up raw high-frequency data into larger time buckets to improve long-term query performance.",
+      "C": "Only when the system crashes.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for custom metrics sent to the Agent via the DogStatsD protocol?",
+    "options": {
+      "A": "8125",
+      "B": "80",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Datadog 'Tags' are normalized to lowercase by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for custom tags",
+      "D": "Only in the EU region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'APM Trace filtering' in Datadog?",
+    "options": {
+      "A": "Filtering the trace data in the server room.",
+      "B": "Defining rules to exclude certain traces from ingestion or indexing to focus on high-value data and manage costs.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The password for the trace dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of dashboard widget allows you to compare a single metric across multiple groups in a simple list?",
+    "options": {
+      "A": "Top List",
+      "B": "Query Value",
+      "C": "Timeseries",
+      "D": "Heatmap"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Log Exclusion Filters' are used to prevent certain logs from being indexed, allowing you to reduce costs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for debug logs",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Watchdog' in Datadog?",
+    "options": {
+      "A": "A physical dog used to guard the office.",
+      "B": "An AI-powered engine that automatically identifies performance anomalies without any manual setup.",
+      "C": "A tool to delete old monitoring data.",
+      "D": "The password for the Datadog admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Datadog monitor, what does the 'Renotify Status' indicate?",
+    "options": {
+      "A": "The current alert level (e.g., Alert, Warn) that will trigger a re-notification.",
+      "B": "How many times the alert has been sent.",
+      "C": "The physical status of the notification server.",
+      "D": "The time it takes for an admin to respond."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Datadog Agent' can be used as a proxy to send data from servers with no internet access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows servers",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Attribute Remapper'?",
+    "options": {
+      "A": "Moving a log file.",
+      "B": "A processor that maps an existing attribute to a standard Datadog attribute.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Datadog feature allows you to monitor the performance of your 'Serverless' functions?",
+    "options": {
+      "A": "Lambda Monitoring / Serverless View",
+      "B": "Infrastructure Map",
+      "C": "NPM",
+      "D": "NDM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Synthetic Browser Tests' record and playback user actions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile apps",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Metric Metadata' in Datadog?",
+    "options": {
+      "A": "To make the data much heavier.",
+      "B": "To define the properties of a metric, such as its unit, description, and type.",
+      "C": "To encrypt individual data points.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' indicates that an alert was triggered because a metric went BELOW a threshold?",
+    "options": {
+      "A": "Alert (Threshold < X)",
+      "B": "Warning (High)",
+      "C": "Alert (Low)",
+      "D": "Resolved"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Datadog 'Workflows' allow you to automate remediation actions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grok Parser'?",
+    "options": {
+      "A": "A language for writing code.",
+      "B": "A rule-based tool used to parse unstructured text into structured attributes.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "A tool to delete old logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'aggregating' time series in a query?",
+    "options": {
+      "A": "The Agent",
+      "B": "The Datadog Query Engine",
+      "C": "The Browser",
+      "D": "The Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard' can contain widgets from multiple different services.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'Enterprise' edition",
+      "D": "Only for non-profit accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metric Summarization' in Datadog?",
+    "options": {
+      "A": "Writing a short story.",
+      "B": "Rolling up raw data into larger time buckets for performance.",
+      "C": "Only when the system crashes.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  }
+  ]
+}

@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Network Administration", 
+  "questions": [
+    {
+    "question": "Which layer of the OSI model is responsible for routing data packets across different networks?",
+    "options": {
+      "A": "Layer 1 - Physical",
+      "B": "Layer 2 - Data Link",
+      "C": "Layer 3 - Network",
+      "D": "Layer 4 - Transport"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An IP address identifies a specific device on a network, while a MAC address identifies the physical network interface hardware.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in wireless networks",
+      "D": "Only for IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is primarily used to securely log into a remote server via a command-line interface?",
+    "options": {
+      "A": "HTTP",
+      "B": "FTP",
+      "C": "SSH",
+      "D": "Telnet"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary difference between a Hub and a Switch?",
+    "options": {
+      "A": "A Hub is faster than a Switch.",
+      "B": "A Hub broadcasts data to all ports, while a Switch sends data only to the specific destination port.",
+      "C": "A Hub uses fiber optics, while a Switch uses copper.",
+      "D": "A Hub is used for wireless, while a Switch is for wired."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used on Windows to display the current IP configuration of a computer?",
+    "options": {
+      "A": "ifconfig",
+      "B": "ipconfig",
+      "C": "netstat",
+      "D": "route print"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DNS (Domain Name System) translates human-readable domain names into numerical IP addresses.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for websites ending in .com",
+      "D": "Only if using Google Chrome"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'DHCP' stand for in networking?",
+    "options": {
+      "A": "Data Handling Control Protocol",
+      "B": "Dynamic Host Configuration Protocol",
+      "C": "Direct Home Connection Path",
+      "D": "Digital Hardware Communication Port"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port number is the standard for unencrypted web traffic (HTTP)?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Default Gateway' is the IP address of the router that a device uses to send traffic outside of its local network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for servers",
+      "D": "Only in IPv4"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is used to test the reachability of a host and measure round-trip time?",
+    "options": {
+      "A": "tracert",
+      "B": "ping",
+      "C": "nslookup",
+      "D": "netstat"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a Router?",
+    "options": {
+      "A": "To connect multiple computers in a single room to a printer.",
+      "B": "To connect different networks together and direct traffic between them.",
+      "C": "To increase the speed of a single computer's CPU.",
+      "D": "To store backup copies of website data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: TCP is a connection-oriented protocol, while UDP is connectionless.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for file transfers",
+      "D": "Only in the Application layer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a valid IPv4 address?",
+    "options": {
+      "A": "192.168.1.1",
+      "B": "256.0.0.1",
+      "C": "172.16.254.1.1",
+      "D": "G1.A2.C3.D4"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard port for HTTPS (Secure Web Traffic)?",
+    "options": {
+      "A": "80",
+      "B": "25",
+      "C": "443",
+      "D": "53"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An Ethernet cable uses an RJ-45 connector.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Cat6 cables",
+      "D": "Only in European countries"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to see the path that a packet takes to reach a remote destination?",
+    "options": {
+      "A": "ping",
+      "B": "tracert (Windows) / traceroute (Linux)",
+      "C": "ipconfig",
+      "D": "hostname"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a Firewall in a network?",
+    "options": {
+      "A": "To speed up the internet connection.",
+      "B": "To monitor and control incoming and outgoing network traffic based on security rules.",
+      "C": "To provide power to the network switches.",
+      "D": "To host the company's internal email server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Subnet Mask is used to distinguish between the Network ID and the Host ID in an IP address.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Class C networks",
+      "D": "Only if using a static IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used for sending emails between servers?",
+    "options": {
+      "A": "POP3",
+      "B": "SMTP",
+      "C": "IMAP",
+      "D": "HTTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'LAN' stand for?",
+    "options": {
+      "A": "Long Access Network",
+      "B": "Local Area Network",
+      "C": "Logical Address Node",
+      "D": "Latent Area Navigation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Wi-Fi networks typically use the 802.11 standard.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 5GHz bands",
+      "D": "Only if encrypted with WPA3"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which device is used to connect a LAN to the Internet through an ISP?",
+    "options": {
+      "A": "Switch",
+      "B": "Modem",
+      "C": "Repeater",
+      "D": "Bridge"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Static IP Address'?",
+    "options": {
+      "A": "An IP address that changes every time you reboot.",
+      "B": "An IP address that is manually assigned and does not change.",
+      "C": "An IP address used only for printers.",
+      "D": "An IP address provided by a DHCP server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: FTP (File Transfer Protocol) sends login credentials in plain text by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the file is large",
+      "D": "Only in binary mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which layer of the OSI model deals with physical cabling and binary transmission?",
+    "options": {
+      "A": "Layer 1 - Physical",
+      "B": "Layer 3 - Network",
+      "C": "Layer 5 - Session",
+      "D": "Layer 7 - Application"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'nslookup' command?",
+    "options": {
+      "A": "To find the physical location of a server.",
+      "B": "To query DNS servers for domain name or IP address mapping.",
+      "C": "To change the computer's network name.",
+      "D": "To scan a file for viruses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IPv6 addresses are 128 bits long.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Enterprise networks",
+      "D": "Only if written in Hexadecimal"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which networking hardware operates primarily at Layer 2 (Data Link) of the OSI model?",
+    "options": {
+      "A": "Router",
+      "B": "Switch",
+      "C": "Repeater",
+      "D": "Firewall"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'WAN' stand for?",
+    "options": {
+      "A": "Wireless Area Network",
+      "B": "Wide Area Network",
+      "C": "Web Access Node",
+      "D": "Wired Access Network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Loopback' address for a local machine is usually 127.0.0.1.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux machines",
+      "D": "Only if the network card is disabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used to automatically assign IP addresses to devices on a network?",
+    "options": {
+      "A": "DNS",
+      "B": "DHCP",
+      "C": "HTTP",
+      "D": "ICMP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ping' primarily used for?",
+    "options": {
+      "A": "To download a file.",
+      "B": "To verify connectivity between two network devices.",
+      "C": "To encrypt a hard drive.",
+      "D": "To find a forgotten password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A MAC address is globally unique and assigned by the manufacturer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Apple products",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a private IP address range commonly used in home networks?",
+    "options": {
+      "A": "8.8.8.8",
+      "B": "192.168.x.x",
+      "C": "1.1.1.1",
+      "D": "204.x.x.x"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of an 'Access Point' (AP)?",
+    "options": {
+      "A": "To provide a physical point to plug in a keyboard.",
+      "B": "To allow wireless devices to connect to a wired network.",
+      "C": "To block all incoming traffic.",
+      "D": "To restart the router automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Bandwidth refers to the maximum rate of data transfer across a network path.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cellular data",
+      "D": "Only if using a proxy server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used by the 'Ping' command?",
+    "options": {
+      "A": "TCP",
+      "B": "UDP",
+      "C": "ICMP",
+      "D": "IGMP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'SaaS' stand for in a cloud network context?",
+    "options": {
+      "A": "Storage as a Service",
+      "B": "Software as a Service",
+      "C": "Security as a Service",
+      "D": "Servers as a Service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A standard IPv4 address consists of four octets (numbers) separated by dots.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Class A networks",
+      "D": "Only on Windows 10"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which device 'connects' different VLANs together at Layer 3?",
+    "options": {
+      "A": "Hub",
+      "B": "Switch",
+      "C": "Router",
+      "D": "Repeater"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Latency' in a network?",
+    "options": {
+      "A": "The physical weight of the network cable.",
+      "B": "The delay before a transfer of data begins following an instruction.",
+      "C": "The number of users on a network.",
+      "D": "The amount of data a hard drive can hold."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: WPA2 is a more secure encryption standard for Wi-Fi than WEP.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for business networks",
+      "D": "Only on 2.4GHz bands"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used to fetch web pages from a server to your browser?",
+    "options": {
+      "A": "FTP",
+      "B": "SMTP",
+      "C": "HTTP",
+      "D": "SSH"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Firewall Rule'?",
+    "options": {
+      "A": "A law that says you cannot touch the server.",
+      "B": "An instruction that tells the firewall which traffic to allow or block.",
+      "C": "A manual for repairing a router.",
+      "D": "A way to measure the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Fiber optic cables transmit data using pulses of light.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for undersea cables",
+      "D": "Only in the Transport layer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command-line utility is used to see all active network connections on a host?",
+    "options": {
+      "A": "ping",
+      "B": "netstat",
+      "C": "ipconfig",
+      "D": "hostname"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Full Duplex' communication?",
+    "options": {
+      "A": "Data can only travel in one direction at a time.",
+      "B": "Data can travel in both directions simultaneously.",
+      "C": "Data travels twice as fast as normal.",
+      "D": "Communication between only two devices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DNS uses Port 53 by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for TCP connections",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is commonly used for voice and video streaming due to its lower overhead?",
+    "options": {
+      "A": "TCP",
+      "B": "UDP",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DHCP Lease' time?",
+    "options": {
+      "A": "The time it takes to buy a new router.",
+      "B": "The amount of time a device is allowed to use an assigned IP address.",
+      "C": "The speed of the network connection.",
+      "D": "The physical age of the modem."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Default Route' is used when there is no specific path to a destination in the routing table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for internet traffic",
+      "D": "Only on Cisco routers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which device is designed to amplify or 'repeat' a signal to extend its range?",
+    "options": {
+      "A": "Router",
+      "B": "Repeater",
+      "C": "Firewall",
+      "D": "Switch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a Proxy Server?",
+    "options": {
+      "A": "To increase the physical size of a hard drive.",
+      "B": "To act as an intermediary between a client and another server.",
+      "C": "To provide power to the network closet.",
+      "D": "To delete old email messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Internal' network is usually separated from the 'External' internet by a firewall.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a VPN",
+      "D": "Only for government networks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used for synchronizing clocks on network devices?",
+    "options": {
+      "A": "DNS",
+      "B": "NTP",
+      "C": "DHCP",
+      "D": "HTTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'VPN' stand for?",
+    "options": {
+      "A": "Virtual Private Network",
+      "B": "Verified Private Node",
+      "C": "Variable Protocol Number",
+      "D": "Virtual Packet Navigation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Port' is a logical endpoint for communication in an operating system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for network cards",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to display the hostname of the computer you are currently on?",
+    "options": {
+      "A": "name",
+      "B": "hostname",
+      "C": "whoami",
+      "D": "ipconfig"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Network Topology'?",
+    "options": {
+      "A": "The study of network speeds.",
+      "B": "The physical or logical layout of a network.",
+      "C": "A specialized way to encrypt data.",
+      "D": "The list of users in a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SSH typically uses Port 22.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux servers",
+      "D": "Only in the Data Link layer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these represents a 'Star Topology'?",
+    "options": {
+      "A": "All devices are connected in a single line.",
+      "B": "All devices are connected to a central hub or switch.",
+      "C": "All devices are connected in a circle.",
+      "D": "Every device is connected to every other device."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Network Masking'?",
+    "options": {
+      "A": "To hide the physical location of the server.",
+      "B": "To define the boundaries of a network and its hosts.",
+      "C": "To encrypt the user's password.",
+      "D": "To monitor the data center's air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Switch' maintains a MAC address table to know where to send data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is a Managed switch",
+      "D": "Only for fiber optic connections"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used for transferring files between a client and a server?",
+    "options": {
+      "A": "HTTP",
+      "B": "FTP",
+      "C": "DNS",
+      "D": "DHCP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Packet' in networking?",
+    "options": {
+      "A": "A small physical box for shipping routers.",
+      "B": "A small unit of data sent over a network.",
+      "C": "A way to backup a hard drive.",
+      "D": "The password for a Wi-Fi network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IPv4 addresses are 32 bits long.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for private networks",
+      "D": "Only in version 4.1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the CIDR equivalent for a subnet mask of 255.255.255.0?",
+    "options": {
+      "A": "/8",
+      "B": "/16",
+      "C": "/24",
+      "D": "/32"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A VLAN (Virtual Local Area Network) allows multiple logical networks to exist on a single physical switch.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the switch is unmanaged",
+      "D": "Only for wireless connections"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which field in an IPv4 header is decremented by each router to prevent infinite loops?",
+    "options": {
+      "A": "Checksum",
+      "B": "Payload Length",
+      "C": "Time to Live (TTL)",
+      "D": "Header Length"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary purpose of the 'Spanning Tree Protocol' (STP) in a switched network?",
+    "options": {
+      "A": "To increase bandwidth by combining ports.",
+      "B": "To prevent Layer 2 loops and broadcast storms.",
+      "C": "To assign IP addresses to switches automatically.",
+      "D": "To encrypt traffic between switches."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which routing protocol is classified as a 'Distance Vector' protocol?",
+    "options": {
+      "A": "OSPF",
+      "B": "BGP",
+      "C": "RIP",
+      "D": "IS-IS"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: NAT (Network Address Translation) allows multiple devices on a private network to share a single public IP address.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in IPv6 networks",
+      "D": "Only if using a proxy server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the '802.1Q' standard in networking?",
+    "options": {
+      "A": "It defines the encryption for Wi-Fi 6.",
+      "B": "It provides a method for VLAN tagging on Ethernet frames.",
+      "C": "It determines the speed of fiber optic cables.",
+      "D": "It manages the power output for PoE devices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Link State' routing protocol?",
+    "options": {
+      "A": "RIPv2",
+      "B": "OSPF",
+      "C": "BGP",
+      "D": "IGRP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a TCP Three-Way Handshake, the first packet sent is the SYN-ACK.",
+    "options": {
+      "A": "False (The first packet is the SYN).",
+      "B": "True",
+      "C": "Only for secure connections",
+      "D": "Only in Layer 3"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How many usable host IP addresses are available in a /29 subnet?",
+    "options": {
+      "A": "2",
+      "B": "6",
+      "C": "8",
+      "D": "14"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'Autonomous System' (AS) in the context of BGP?",
+    "options": {
+      "A": "A single computer running a web server.",
+      "B": "A collection of IP networks under the control of a single entity (like an ISP).",
+      "C": "A specialized firewall that runs itself.",
+      "D": "The automated backup system for a switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Access Port' on a switch can carry traffic for multiple VLANs simultaneously.",
+    "options": {
+      "A": "False (A Trunk Port carries multiple VLANs; an Access Port typically carries only one).",
+      "B": "True",
+      "C": "Only if connected to a router",
+      "D": "Only in data centers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used to map a known IP address to an unknown MAC address on a local network?",
+    "options": {
+      "A": "DNS",
+      "B": "DHCP",
+      "C": "ARP",
+      "D": "RARP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is the most secure wireless encryption standard currently available for modern devices?",
+    "options": {
+      "A": "WEP",
+      "B": "WPA",
+      "C": "WPA2",
+      "D": "WPA3"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: IPv6 removes the need for traditional Broadcast messages, replacing them with Multicast and Anycast.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in small networks",
+      "D": "Only for local-link addresses"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Address Translation' (PAT)?",
+    "options": {
+      "A": "Changing the physical port on a switch.",
+      "B": "A form of dynamic NAT that uses port numbers to map multiple internal IPs to one public IP.",
+      "C": "The process of moving a server to a new port.",
+      "D": "A way to encrypt traffic on Port 80."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer of the OSI model handles data encryption and compression?",
+    "options": {
+      "A": "Layer 4 - Transport",
+      "B": "Layer 5 - Session",
+      "C": "Layer 6 - Presentation",
+      "D": "Layer 7 - Application"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Stateful' firewall keeps track of the state of active connections and can make decisions based on the context of the traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only on Linux-based firewalls"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'Virtual IP' (VIP) in a high-availability load balancer setup?",
+    "options": {
+      "A": "To provide a fake IP address to hackers.",
+      "B": "To provide a single entry point that can be moved between multiple physical backend servers.",
+      "C": "To encrypt the load balancer's management interface.",
+      "D": "To increase the speed of the DNS resolution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP message type is used to keep a session active between two peers?",
+    "options": {
+      "A": "OPEN",
+      "B": "UPDATE",
+      "C": "KEEPALIVE",
+      "D": "NOTIFICATION"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'CSMA/CD' is a protocol used by Ethernet to manage data collisions on a shared medium.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Full-Duplex environments",
+      "D": "Only for Wi-Fi networks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is used to capture and analyze network packets in real-time for troubleshooting?",
+    "options": {
+      "A": "Nmap",
+      "B": "Wireshark",
+      "C": "PuTTY",
+      "D": "FileZilla"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the subnet mask for a /27 network?",
+    "options": {
+      "A": "255.255.255.128",
+      "B": "255.255.255.192",
+      "C": "255.255.255.224",
+      "D": "255.255.255.240"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Loopback Interface' on a router is a virtual interface that is always 'up' as long as the router is powered on.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if assigned a public IP",
+      "D": "Only on Cisco hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used for the management and monitoring of network-attached devices?",
+    "options": {
+      "A": "SMTP",
+      "B": "SNMP",
+      "C": "ICMP",
+      "D": "IGMP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Windowing' in the context of TCP communication?",
+    "options": {
+      "A": "The physical size of the monitor used by the admin.",
+      "B": "A flow control method where the receiver tells the sender how much data it can handle before an ACK is required.",
+      "C": "The number of browser windows a user can have open.",
+      "D": "The time period when updates are allowed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'PoE' (Power over Ethernet) allows electrical power to be transmitted over a standard Ethernet cable to devices like IP cameras.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Cat5 cables",
+      "D": "Only for fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a valid 'Public' IPv4 address?",
+    "options": {
+      "A": "10.0.0.5",
+      "B": "172.16.50.1",
+      "C": "8.8.4.4",
+      "D": "192.168.100.1"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the role of the 'Master Browser' in a legacy NetBIOS network?",
+    "options": {
+      "A": "To browse the internet faster.",
+      "B": "To maintain a list of all available resources (like printers/shares) on the network.",
+      "C": "To update the switch firmware.",
+      "D": "To monitor the room's air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In OSPF, routers in the same area maintain an identical Link-State Database (LSDB).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if there are fewer than 10 routers",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Anycast' addressing?",
+    "options": {
+      "A": "Sending a message to all devices on a network.",
+      "B": "Routing traffic to the 'nearest' of multiple identical servers sharing the same IP address.",
+      "C": "Sending a message to only one specific host.",
+      "D": "Blocking all traffic except from specific users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to perform a security scan of a network to find open ports and services?",
+    "options": {
+      "A": "Ping",
+      "B": "Nmap",
+      "C": "Nslookup",
+      "D": "Traceroute"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hub' operates at Layer 1, whereas a 'Switch' operates at Layer 2.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 10Gbps hardware",
+      "D": "Only if it is a smart hub"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'MTU' (Maximum Transmission Unit) define?",
+    "options": {
+      "A": "The total number of users allowed on a network.",
+      "B": "The largest size of a packet or frame that can be sent in a single network transaction.",
+      "C": "The physical weight of the server rack.",
+      "D": "The maximum speed of the router's CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used for the distribution of 'Multicast' traffic across a network?",
+    "options": {
+      "A": "ICMP",
+      "B": "IGMP",
+      "C": "SMTP",
+      "D": "OSPF"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Trunk' link is used to carry traffic for multiple VLANs between two switches.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber connections",
+      "D": "Only if the switch is unmanaged"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard port for the 'DNS' service?",
+    "options": {
+      "A": "25",
+      "B": "53",
+      "C": "67",
+      "D": "110"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a subnet of 10.0.0.0/24, what is the 'Broadcast Address'?",
+    "options": {
+      "A": "10.0.0.0",
+      "B": "10.0.0.1",
+      "C": "10.0.0.254",
+      "D": "10.0.0.255"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: TCP is considered a 'Reliable' protocol because it ensures data delivery through sequencing and acknowledgments.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only for web traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which routing metric is primarily used by RIP (Routing Information Protocol) to determine the best path?",
+    "options": {
+      "A": "Bandwidth",
+      "B": "Delay",
+      "C": "Hop Count",
+      "D": "Reliability"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Jitter' in a VoIP conversation?",
+    "options": {
+      "A": "The physical vibration of the phone.",
+      "B": "The variation in time between data packets arriving, which can cause audio distortion.",
+      "C": "The volume of the background noise.",
+      "D": "The number of people on the call."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Proxy Server' can hide a client's internal IP address from the external web server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using SOCKS5",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a symptom of a 'Broadcast Storm' on a network switch?",
+    "options": {
+      "A": "The switch turns off automatically.",
+      "B": "Extremely high CPU usage and network activity lights flickering rapidly on all ports.",
+      "C": "The internet connection becomes 2x faster.",
+      "D": "All users are automatically logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'DHCP Snooping' on a switch?",
+    "options": {
+      "A": "To see what users are typing in their browser.",
+      "B": "To prevent unauthorized (rogue) DHCP servers from assigning IP addresses on the network.",
+      "C": "To increase the speed of the DHCP assignment.",
+      "D": "To monitor the physical location of the DHCP server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Cross-over' cable is traditionally used to connect two similar devices, like two switches, directly together.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Cat6 cables",
+      "D": "Only if Auto-MDIX is disabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used for the secure transfer of files, effectively combining FTP with SSH?",
+    "options": {
+      "A": "TFTP",
+      "B": "SFTP",
+      "C": "FTPS",
+      "D": "NFS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default subnet mask for a Class B network?",
+    "options": {
+      "A": "255.0.0.0",
+      "B": "255.255.0.0",
+      "C": "255.255.255.0",
+      "D": "255.255.255.255"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Standard Access List' (ACL) can filter traffic based on source IP address only.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on routers, not switches",
+      "D": "Only for TCP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'UDP' protocol use to verify the integrity of its data, even though it doesn't guarantee delivery?",
+    "options": {
+      "A": "Sequence Numbers",
+      "B": "Acknowledgments",
+      "C": "Checksums",
+      "D": "Flow Control"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which OSI layer is responsible for establishing, managing, and terminating connections between applications?",
+    "options": {
+      "A": "Layer 4 - Transport",
+      "B": "Layer 5 - Session",
+      "C": "Layer 6 - Presentation",
+      "D": "Layer 7 - Application"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Port Forwarding' allows external devices to access a specific service on a private machine by mapping a public port to a private IP and port.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for gaming consoles",
+      "D": "Only if the router is in DMZ mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which BGP attribute is used to identify the path of Autonomous Systems that a route has passed through?",
+    "options": {
+      "A": "Next Hop",
+      "B": "AS-Path",
+      "C": "Local Preference",
+      "D": "MED"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'HSRP' (Hot Standby Router Protocol)?",
+    "options": {
+      "A": "To keep the router room warm in winter.",
+      "B": "To provide high availability by allowing multiple routers to act as a single virtual default gateway.",
+      "C": "To encrypt the routing table.",
+      "D": "To monitor the bandwidth of a single interface."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ping of Death' is a legacy network attack that involves sending an oversized ICMP packet to crash a system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on wireless networks",
+      "D": "Only on newer versions of Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard port for the 'SSH' service?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "25"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of NAT maps a single internal private IP address to a single external public IP address permanently?",
+    "options": {
+      "A": "Dynamic NAT",
+      "B": "Static NAT",
+      "C": "PAT",
+      "D": "Overloading"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Multiplexing' allows multiple signals or data streams to be transmitted over a single physical channel.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in fiber optics",
+      "D": "Only for analog signals"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Collison Domain' in a network?",
+    "options": {
+      "A": "A specialized room for testing routers.",
+      "B": "A section of a network where data packets from different devices can collide with each other.",
+      "C": "The area covered by a single Wi-Fi access point.",
+      "D": "The list of users who have administrator rights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used by routers to share information about the best paths to different networks automatically?",
+    "options": {
+      "A": "HTTP",
+      "B": "Routing Information Protocol (RIP)",
+      "C": "DHCP",
+      "D": "DNS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Gateway' acts as a 'translator' between two different network architectures or protocols.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud networks",
+      "D": "Only on Cisco hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'ARP Table' in a computer or switch?",
+    "options": {
+      "A": "To list the names of all users.",
+      "B": "To store the mapping between IP addresses and MAC addresses.",
+      "C": "To store the computer's firewall rules.",
+      "D": "To monitor the uptime of the switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer of the OSI model handles error checking and flow control between two adjacent nodes?",
+    "options": {
+      "A": "Layer 1 - Physical",
+      "B": "Layer 2 - Data Link",
+      "C": "Layer 3 - Network",
+      "D": "Layer 4 - Transport"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Private' IP address cannot be routed directly over the public internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Class A addresses",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'QoS' (Quality of Service) manage in a network?",
+    "options": {
+      "A": "The quality of the physical cabling.",
+      "B": "The prioritization of specific types of traffic (like voice or video) to ensure performance.",
+      "C": "The quality of the data center's air conditioning.",
+      "D": "The speed of the administrative login."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a standard port for the 'SMTP' email service?",
+    "options": {
+      "A": "25",
+      "B": "80",
+      "C": "110",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Broadcast Address' is used to send data to all hosts on a specific network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in small LANs",
+      "D": "Only for IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the BGP path selection process, which attribute is evaluated first on a Cisco router to determine the preferred exit point from the local Autonomous System?",
+    "options": {
+      "A": "Local Preference",
+      "B": "AS-Path Length",
+      "C": "Weight",
+      "D": "MED (Multi-Exit Discriminator)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An OSPF Type 5 LSA (External LSA) is generated by an ASBR to advertise routes redistributed into OSPF from another routing protocol.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Totally Stubby Areas",
+      "D": "Only if using OSPFv3 for IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which mechanism is used in IPv6 to allow a host to automatically configure its own IPv6 address without a DHCPv6 server?",
+    "options": {
+      "A": "NAT64",
+      "B": "SLAAC (Stateless Address Autoconfiguration)",
+      "C": "6to4 Tunneling",
+      "D": "Dual Stack Lite"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of the 'Label Forwarding Information Base' (LFIB) in an MPLS network?",
+    "options": {
+      "A": "To store the original IP routing table.",
+      "B": "To map incoming labels to outgoing labels and interfaces for fast hardware switching.",
+      "C": "To encrypt the payload of MPLS frames.",
+      "D": "To manage the DHCP leases for MPLS clients."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TCP congestion control algorithm is specifically designed to handle high-bandwidth, high-latency networks by using packet loss as a primary signal?",
+    "options": {
+      "A": "TCP Tahoe",
+      "B": "TCP Reno",
+      "C": "CUBIC",
+      "D": "BBR (Bottleneck Bandwidth and Round-trip propagation time)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In a 'Spine-Leaf' data center architecture, every Leaf switch is connected to every Spine switch, providing predictable latency and high east-west bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using 400Gbps fiber",
+      "D": "Only in a Layer 2 domain"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'BGP Route Reflector' solve in a large iBGP environment?",
+    "options": {
+      "A": "The need for a physical loopback interface.",
+      "B": "The requirement for a full-mesh iBGP topology.",
+      "C": "The limitation of 254 usable IP addresses.",
+      "D": "The latency caused by serialized data transfer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OSPF LSA type is used to describe a router's links to a specific area and is never flooded outside that area?",
+    "options": {
+      "A": "Type 1 (Router LSA)",
+      "B": "Type 2 (Network LSA)",
+      "C": "Type 3 (Summary LSA)",
+      "D": "Type 4 (ASBR Summary LSA)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Path MTU Discovery' (PMTUD) relies on ICMP 'Destination Unreachable' messages to determine the smallest MTU along a network path.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only if 'Don't Fragment' (DF) bit is set to 0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In SDN (Software Defined Networking), which plane is responsible for making decisions about where traffic is sent?",
+    "options": {
+      "A": "Data Plane",
+      "B": "Control Plane",
+      "C": "Management Plane",
+      "D": "Application Plane"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP attribute is a non-transitive, optional attribute used to influence inbound traffic from a neighboring Autonomous System?",
+    "options": {
+      "A": "Local Preference",
+      "B": "AS-Path",
+      "C": "MED (Multi-Exit Discriminator)",
+      "D": "Origin"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'VRF' (Virtual Routing and Forwarding) allows multiple instances of a routing table to coexist on the same router simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for MPLS providers",
+      "D": "Only if using EIGRP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific issue does the 'Split Horizon' rule prevent in Distance Vector protocols?",
+    "options": {
+      "A": "Hardware port failures.",
+      "B": "Routing loops by preventing a router from advertising a route back out the same interface it learned it from.",
+      "C": "High power consumption in the router.",
+      "D": "Duplicate IP addresses in a subnet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anycast Gateway' in the context of VXLAN EVPN?",
+    "options": {
+      "A": "A gateway that only works for multicast traffic.",
+      "B": "A configuration where multiple leaf switches share the same virtual IP and MAC address to provide local routing for mobile workloads.",
+      "C": "A specialized DNS server for VXLAN.",
+      "D": "A way to backup the VTEP configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: EIGRP uses the DUAL (Diffusing Update Algorithm) to ensure a loop-free topology and provide fast convergence.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the 'K-values' are all set to 0",
+      "D": "Only for IPv4"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used to carry multiple Layer 2 protocols (like Ethernet) over an IP/MPLS core, often called 'Pseudo-wire'?",
+    "options": {
+      "A": "L2TPv3",
+      "B": "VPLS (Virtual Private LAN Service)",
+      "C": "GRE",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of the 'LACP' (Link Aggregation Control Protocol) system priority?",
+    "options": {
+      "A": "To set the physical speed of the link.",
+      "B": "To decide which switch in an EtherChannel group is the 'master' and controls the bundle.",
+      "C": "To encrypt the traffic across the aggregated links.",
+      "D": "To monitor the temperature of the SFP modules."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An OSPF 'NSSA' (Not-So-Stubby Area) allows the injection of external routes while still blocking Type 5 LSAs from the rest of the OSPF domain.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the ABR is also a DR",
+      "D": "Only if using area 0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which field in the TCP header is used by the 'Selective Acknowledgment' (SACK) feature to handle multiple dropped packets in a single window?",
+    "options": {
+      "A": "Sequence Number",
+      "B": "Window Size",
+      "C": "TCP Options",
+      "D": "Acknowledgment Number"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In an IPv6 header, which field is equivalent to the IPv4 'Time to Live' (TTL)?",
+    "options": {
+      "A": "Flow Label",
+      "B": "Next Header",
+      "C": "Hop Limit",
+      "D": "Traffic Class"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: BGP 'Confederations' divide a large Autonomous System into smaller, private ASNs to reduce iBGP mesh requirements.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 4-byte ASN format",
+      "D": "Only for eBGP peering"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Route Poisoning' in routing protocol terminology?",
+    "options": {
+      "A": "A hacker sending false routes to a router.",
+      "B": "Setting the metric of a failed route to infinity to immediately inform other routers that the route is unreachable.",
+      "C": "Deleting the entire routing table during an update.",
+      "D": "Encrypting a route so it cannot be read by other routers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific OSPF state indicates that a full adjacency has been formed and the Link-State Databases are synchronized?",
+    "options": {
+      "A": "Init",
+      "B": "2-Way",
+      "C": "ExStart",
+      "D": "Full"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: IPsec 'Tunnel Mode' encrypts the entire original IP packet, including the original headers, and adds a new IP header.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using AH instead of ESP",
+      "D": "Only for IPv6 traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'VTEP' (VXLAN Tunnel End Point)?",
+    "options": {
+      "A": "To assign IP addresses to VXLAN clients.",
+      "B": "To handle the encapsulation and decapsulation of Layer 2 Ethernet frames into Layer 3 UDP packets.",
+      "C": "To monitor the bandwidth of the VXLAN tunnel.",
+      "D": "To act as a firewall between two VXLANs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP community attribute prevents a route from being advertised to any eBGP peers?",
+    "options": {
+      "A": "no-export",
+      "B": "no-advertise",
+      "C": "local-as",
+      "D": "internet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Segment Routing' removes the need for LDP or RSVP-TE in an MPLS network by using the source to define the path.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in greenfield deployments",
+      "D": "Only for IPv4 networks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'TCP Fast Open' (TFO) designed to reduce?",
+    "options": {
+      "A": "The CPU usage of the web server.",
+      "B": "The latency of the initial TCP handshake by allowing data transfer to begin during the SYN packet.",
+      "C": "The size of the TCP header.",
+      "D": "The number of open ports on the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OSPF LSA Type 4 is used for?",
+    "options": {
+      "A": "Advertising the path to an ASBR.",
+      "B": "Advertising a default route.",
+      "C": "Describing the network segment.",
+      "D": "Synchronizing the time between routers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In IPv6, routers are not permitted to fragment packets; fragmentation is handled exclusively by the source host.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Jumbo Frames",
+      "D": "Only if the MTU is exactly 1280 bytes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary advantage of 'Multicast Source Discovery Protocol' (MSDP)?",
+    "options": {
+      "A": "To find the IP address of a user.",
+      "B": "To allow PIM-SM domains to share information about active multicast sources.",
+      "C": "To increase the speed of the switch backplane.",
+      "D": "To encrypt multicast video streams."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mechanism prevents a BGP router from accepting a route that contains its own Autonomous System Number in the AS-Path?",
+    "options": {
+      "A": "Split Horizon",
+      "B": "AS-Path Loop Prevention",
+      "C": "Route Poisoning",
+      "D": "Dampening"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard 'VLAN Leakage' occurs when traffic from one VLAN is transmitted to another VLAN without a router or Layer 3 switch.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Cisco Catalyst switches",
+      "D": "Only if DTP is enabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'GRACEFUL Restart' in routing protocols?",
+    "options": {
+      "A": "Restarting the router during the weekend.",
+      "B": "A mechanism that allows a router to continue forwarding traffic while its control plane process is restarting.",
+      "C": "A way to turn off the router using a script.",
+      "D": "Automatically updating the firmware without a reboot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a TCP header, what is the 'Acknowledgment Number' representing?",
+    "options": {
+      "A": "The ID of the last packet received.",
+      "B": "The sequence number of the next byte the receiver expects to receive.",
+      "C": "The total number of packets in the session.",
+      "D": "The encryption key for the next packet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'BGP Peer Group' is used to apply the same update policy to multiple neighbors simultaneously, reducing CPU overhead.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for iBGP neighbors",
+      "D": "Only in ASNs higher than 65535"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used by 'Traceroute' on Linux/Unix systems by default?",
+    "options": {
+      "A": "ICMP Echo Request",
+      "B": "UDP packets with high-numbered destination ports.",
+      "C": "TCP SYN packets.",
+      "D": "HTTP GET requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Private ASNs' (64512-65535)?",
+    "options": {
+      "A": "For use by government agencies only.",
+      "B": "For internal BGP routing within an organization or for use with an ISP that strips them before the public internet.",
+      "C": "To encrypt public BGP sessions.",
+      "D": "To replace IPv4 addresses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Unicast Reverse Path Forwarding' (uRPF) is a security feature that checks if the source IP of a packet is reachable via the interface it arrived on.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in 'Loose Mode'",
+      "D": "Only for multicast traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Route Flap Dampening'?",
+    "options": {
+      "A": "Cleaning the dust off the router fans.",
+      "B": "A BGP feature that suppresses routes that frequently go up and down (flap) to prevent network instability.",
+      "C": "Increasing the speed of the routing updates.",
+      "D": "A way to backup the BGP table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SNMP version introduced 'User-based Security Model' (USM) for encryption and authentication?",
+    "options": {
+      "A": "SNMPv1",
+      "B": "SNMPv2c",
+      "C": "SNMPv3",
+      "D": "SNMPv4"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In a 'STP Root Bridge' election, the bridge with the highest Priority value wins.",
+    "options": {
+      "A": "False (The bridge with the LOWEST Priority value wins; if tied, the lowest MAC address wins).",
+      "B": "True",
+      "C": "Only if using Rapid-PVST+",
+      "D": "Only if the MAC address starts with '00'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'HOL Blocking' (Head-of-Line Blocking) in a network switch?",
+    "options": {
+      "A": "When the first user in a queue uses all the bandwidth.",
+      "B": "When a packet at the front of a buffer is blocked from moving forward, preventing all packets behind it from being processed.",
+      "C": "A hardware failure in the power supply.",
+      "D": "A way to prioritize administrative traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which routing protocol uses 'Administrative Distance' of 110 by default on Cisco devices?",
+    "options": {
+      "A": "RIP",
+      "B": "EIGRP",
+      "C": "OSPF",
+      "D": "BGP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Native VLAN' is an untagged VLAN on an 802.1Q trunk port.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is VLAN 1",
+      "D": "Only if using fiber optic cabling"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'MED' attribute influence in BGP?",
+    "options": {
+      "A": "The path chosen to exit the local AS.",
+      "B": "The path chosen by an external AS to enter the local AS.",
+      "C": "The weight of the local router.",
+      "D": "The number of hops to the destination."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which IPv6 address type is equivalent to an IPv4 'Private' address and starts with 'FE80'?",
+    "options": {
+      "A": "Global Unicast",
+      "B": "Link-Local",
+      "C": "Unique Local",
+      "D": "Multicast"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'NTP Stratum 1' servers receive their time directly from a high-precision time source like a GPS clock or Atomic clock.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they are located in Switzerland",
+      "D": "Only if using the PTP protocol"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Congestion Window' (cwnd) in TCP?",
+    "options": {
+      "A": "The size of the physical window in the server room.",
+      "B": "A variable that limits the amount of data a TCP sender can have in flight across the network.",
+      "C": "The time period when the network is busiest.",
+      "D": "The number of users who can connect to a port."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OSPF LSA type is used to advertise a default route into a stub area?",
+    "options": {
+      "A": "Type 1",
+      "B": "Type 3",
+      "C": "Type 5",
+      "D": "Type 7"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Jumbo Frames' typically allow an MTU of up to 9000 bytes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on 100Gbps links",
+      "D": "Only in wireless networks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'BGP Peer Group' used for?",
+    "options": {
+      "A": "To group friends together on a social network.",
+      "B": "To simplify configuration by applying the same policies to multiple BGP neighbors.",
+      "C": "To increase the speed of the switch.",
+      "D": "To backup the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header field in an IPv4 packet is used to fragment and reassemble large packets?",
+    "options": {
+      "A": "TTL",
+      "B": "Identification, Flags, and Fragment Offset.",
+      "C": "Checksum",
+      "D": "Options"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Router on a Stick' configuration uses a single physical interface to route traffic between multiple VLANs using sub-interfaces.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber connections",
+      "D": "Only if the switch is unmanaged"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NAT64'?",
+    "options": {
+      "A": "A way to run Nintendo 64 games on a network.",
+      "B": "A transition mechanism that allows IPv6-only hosts to communicate with IPv4-only servers.",
+      "C": "A specialized way to encrypt 64-bit data.",
+      "D": "The newest version of NAT for IPv4."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP attribute is transitive and carries a numeric value assigned to a route, often used for tagging?",
+    "options": {
+      "A": "Local Preference",
+      "B": "Communities",
+      "C": "MED",
+      "D": "Next Hop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'EIGRP' is considered a 'Hybrid' routing protocol because it combines features of both Distance Vector and Link State protocols.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in its open-source version",
+      "D": "Only if using 'Wide Metrics'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'BFD' (Bidirectional Forwarding Detection)?",
+    "options": {
+      "A": "To detect if a router is physically moving.",
+      "B": "To provide very fast failure detection for the forwarding path between two adjacent routers.",
+      "C": "To encrypt the routing updates.",
+      "D": "To monitor the temperature of the network cables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OSPF LSA type is used to advertise the location of an ASBR into other areas?",
+    "options": {
+      "A": "Type 1",
+      "B": "Type 3",
+      "C": "Type 4",
+      "D": "Type 5"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The 'Loopback' interface is always preferred as the OSPF Router ID because it never goes down as long as the router is powered on.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it has a /32 mask",
+      "D": "Only on Juniper hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'DHCP Relay' (IP Helper-Address) accomplish?",
+    "options": {
+      "A": "It makes DHCP assignments faster.",
+      "B": "It allows a router to forward DHCP broadcast requests from a client in one subnet to a DHCP server in another subnet.",
+      "C": "It acts as a backup DHCP server.",
+      "D": "It encrypts DHCP traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP path attribute indicates whether the route was learned via iBGP, eBGP, or redistribution?",
+    "options": {
+      "A": "Local Preference",
+      "B": "AS-Path",
+      "C": "Origin",
+      "D": "Next Hop"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'VPLS' creates a Layer 2 multipoint-to-multipoint Ethernet service over an MPLS network, making remote sites appear as if they are on the same switch.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber links",
+      "D": "Only if using VLAN 100"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'DR' (Designated Router) in an OSPF multi-access network?",
+    "options": {
+      "A": "To act as the only router that can send traffic to the internet.",
+      "B": "To reduce the number of OSPF adjacencies and LSDB synchronization traffic.",
+      "C": "To provide power to other routers.",
+      "D": "To encrypt the OSPF packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer of the OSI model is responsible for logical addressing and determining the best path for data?",
+    "options": {
+      "A": "Layer 2",
+      "B": "Layer 3",
+      "C": "Layer 4",
+      "D": "Layer 5"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MSTP' (Multiple Spanning Tree Protocol) allows multiple VLANs to be mapped to a single spanning tree instance, reducing switch resource usage.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for networks with over 100 switches",
+      "D": "Only on Cisco switches"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Route Summarization' used for in a large network?",
+    "options": {
+      "A": "To write a summary of the network for the CEO.",
+      "B": "To reduce the size of routing tables by representing a block of contiguous subnets as a single larger network.",
+      "C": "To encrypt the routing table.",
+      "D": "To monitor the total number of users."
+    },
+    "answer": "B"
+  }
+  ]
+}

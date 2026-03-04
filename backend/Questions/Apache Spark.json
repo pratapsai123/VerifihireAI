@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Apache Spark", 
+  "questions": [
+    {
+    "question": "Which method is used to register a DataFrame as a temporary table for Spark SQL?",
+    "options": {
+      "A": "createOrReplaceTempView()",
+      "B": "saveAsTable()",
+      "C": "registerTable()",
+      "D": "makeTempView()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of the 'Spark UI' (usually on port 4040)?",
+    "options": {
+      "A": "To write code in the browser",
+      "B": "To monitor job execution, stages, and storage levels",
+      "C": "To manage user passwords",
+      "D": "To download the Spark source code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Spark SQL, which function allows you to perform an aggregation like average?",
+    "options": {
+      "A": "mean()",
+      "B": "avg()",
+      "C": "average()",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which of these is a correct way to load a Parquet file into a DataFrame?",
+    "options": {
+      "A": "spark.read.parquet('path')",
+      "B": "spark.load.parquet('path')",
+      "C": "spark.parquet.open('path')",
+      "D": "spark.read('parquet', 'path')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'explain()' method do when called on a DataFrame?",
+    "options": {
+      "A": "Prints the data to the console",
+      "B": "Displays the logical and physical execution plans",
+      "C": "Shows the comments in the source code",
+      "D": "Gives a tutorial on Spark"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an Action that saves data to a text file?",
+    "options": {
+      "A": "saveAsTextFile()",
+      "B": "writeAsText()",
+      "C": "exportText()",
+      "D": "storeText()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Predicate Pushdown' in Spark?",
+    "options": {
+      "A": "Filtering data at the source (e.g., database) before loading it into Spark",
+      "B": "Moving the filter to the end of the job",
+      "C": "Deleting data that doesn't match the filter",
+      "D": "A way to speed up the Driver"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default storage level for 'persist()' in Spark?",
+    "options": {
+      "A": "MEMORY_ONLY",
+      "B": "MEMORY_AND_DISK",
+      "C": "DISK_ONLY",
+      "D": "OFF_HEAP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Spark 3.0+, what does 'Adaptive Query Execution' (AQE) do?",
+    "options": {
+      "A": "Automatically optimizes the query plan based on runtime statistics",
+      "B": "Allows Spark to run on mobile phones",
+      "C": "Translates Spark code into Python",
+      "D": "Increases the clock speed of the CPU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used to sort a DataFrame in ascending order?",
+    "options": {
+      "A": "sort()",
+      "B": "orderBy()",
+      "C": "arrange()",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does 'DataFrame.na.drop()' do?",
+    "options": {
+      "A": "Removes rows containing null values",
+      "B": "Deletes the entire table",
+      "C": "Drops the column 'na'",
+      "D": "Renames null values to zero"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to join two DataFrames?",
+    "options": {
+      "A": "merge()",
+      "B": "union()",
+      "C": "join()",
+      "D": "concat()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the result of 'df.limit(5)'?",
+    "options": {
+      "A": "A new DataFrame containing the first 5 rows",
+      "B": "An array of 5 rows",
+      "C": "Nothing",
+      "D": "A printout of 5 rows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you rename a column in a Spark DataFrame?",
+    "options": {
+      "A": "renameColumn()",
+      "B": "withColumnRenamed()",
+      "C": "alias()",
+      "D": "changeName()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Broadcast Hash Join'?",
+    "options": {
+      "A": "To join two very large tables",
+      "B": "To join a small table with a large table by broadcasting the small one to all nodes",
+      "C": "To speed up the network",
+      "D": "To encrypt the join key"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Spark configuration property sets the memory for the Driver?",
+    "options": {
+      "A": "spark.executor.memory",
+      "B": "spark.driver.memory",
+      "C": "spark.memory.fraction",
+      "D": "spark.master.memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Shuffled Hash Join'?",
+    "options": {
+      "A": "A join where data is redistributed across nodes based on the join key",
+      "B": "A join that doesn't use keys",
+      "C": "A join that happens only on the Driver",
+      "D": "A way to join CSV files only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'df.collect()' return in PySpark?",
+    "options": {
+      "A": "A list of Row objects",
+      "B": "A Pandas DataFrame",
+      "C": "A JSON string",
+      "D": "An RDD"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is used to select all columns from a DataFrame?",
+    "options": {
+      "A": "df.select('*')",
+      "B": "df.selectAll()",
+      "C": "df.pick('*')",
+      "D": "df.columns()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default output format for Spark SQL queries?",
+    "options": {
+      "A": "RDD",
+      "B": "DataFrame",
+      "C": "Dataset",
+      "D": "List"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows you to use SQL-like 'WHERE' clauses in DataFrames?",
+    "options": {
+      "A": "filter()",
+      "B": "where()",
+      "C": "match()",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the role of the 'Cluster Manager'?",
+    "options": {
+      "A": "To run the application code",
+      "B": "To provide resources (CPU, RAM) to the Spark application",
+      "C": "To save data to HDFS",
+      "D": "To debug the code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'persist(StorageLevel.DISK_ONLY)' do?",
+    "options": {
+      "A": "Caches the RDD only on disk",
+      "B": "Caches the RDD in memory first, then disk",
+      "C": "Deletes the RDD from memory",
+      "D": "Prevents the RDD from being modified"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which language is NOT natively supported by Apache Spark?",
+    "options": {
+      "A": "Java",
+      "B": "Scala",
+      "C": "PHP",
+      "D": "R"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Spark Streaming, what is a 'DStream'?",
+    "options": {
+      "A": "A Discrete Stream of RDDs",
+      "B": "A Direct Stream from a database",
+      "C": "A Distributed String",
+      "D": "A Dynamic Stream of tasks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the main benefit of using 'DataFrames' over 'RDDs'?",
+    "options": {
+      "A": "Optimization via the Catalyst Optimizer",
+      "B": "Support for unstructured data",
+      "C": "They are easier to use in C++",
+      "D": "They do not use memory"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to combine multiple columns into a single string column?",
+    "options": {
+      "A": "concat()",
+      "B": "merge()",
+      "C": "join()",
+      "D": "combine()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'repartition()' method?",
+    "options": {
+      "A": "To change the number of partitions by shuffling all data",
+      "B": "To reduce the number of partitions without shuffling",
+      "C": "To delete partitions",
+      "D": "To rename partitions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lineage' in Spark used for?",
+    "options": {
+      "A": "Tracking the data source",
+      "B": "Recovering lost data partitions by re-running transformations",
+      "C": "Optimizing network speed",
+      "D": "Calculating the total size of the dataset"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Wide' transformation?",
+    "options": {
+      "A": "map()",
+      "B": "filter()",
+      "C": "reduceByKey()",
+      "D": "union()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the default serialization used in Spark for RDDs?",
+    "options": {
+      "A": "Java Serialization",
+      "B": "Kryo Serialization",
+      "C": "JSON Serialization",
+      "D": "Avro Serialization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component manages the 'DAG' (Directed Acyclic Graph)?",
+    "options": {
+      "A": "Executor",
+      "B": "Task Scheduler",
+      "C": "DAG Scheduler",
+      "D": "Cluster Manager"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'DataFrame.describe()' provide?",
+    "options": {
+      "A": "The full content of the DataFrame",
+      "B": "Summary statistics (count, mean, stddev, min, max)",
+      "C": "The list of column names only",
+      "D": "The physical plan of the query"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to convert a JSON file into a Spark DataFrame?",
+    "options": {
+      "A": "spark.read.json()",
+      "B": "spark.load.json()",
+      "C": "spark.open.json()",
+      "D": "spark.json.read()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Speculative Execution' in Spark?",
+    "options": {
+      "A": "Executing tasks before they are needed",
+      "B": "Re-running slow tasks on different nodes to speed up the job",
+      "C": "Predicting the output of a query",
+      "D": "Running code without data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you count the number of unique values in a column?",
+    "options": {
+      "A": "df.select('col').distinct().count()",
+      "B": "df.countUnique('col')",
+      "C": "df.uniqueCount('col')",
+      "D": "df.distinct('col').size()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which deployment mode is most common for production Spark on Hadoop clusters?",
+    "options": {
+      "A": "Local",
+      "B": "Standalone",
+      "C": "YARN",
+      "D": "Mesos"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is an 'Accumulator' used for?",
+    "options": {
+      "A": "Storing intermediate results in memory",
+      "B": "Global counters or sums across the cluster",
+      "C": "Sharing large read-only variables",
+      "D": "Speeding up joins"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which format does Spark use to store data in its 'Warehouse' by default?",
+    "options": {
+      "A": "CSV",
+      "B": "JSON",
+      "C": "Parquet",
+      "D": "ORC"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'Catalyst Optimizer'?",
+    "options": {
+      "A": "To optimize RDD operations",
+      "B": "To optimize Spark SQL and DataFrame execution plans",
+      "C": "To manage the cluster resources",
+      "D": "To speed up the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Spark, what is a 'Pipeline'?",
+    "options": {
+      "A": "A sequence of stages in MLlib",
+      "B": "A network connection between nodes",
+      "C": "A way to stream data from HDFS",
+      "D": "A tool for data visualization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to drop a column from a DataFrame?",
+    "options": {
+      "A": "remove()",
+      "B": "delete()",
+      "C": "drop()",
+      "D": "exclude()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Dynamic Allocation' in Spark?",
+    "options": {
+      "A": "Changing the code at runtime",
+      "B": "Scaling the number of executors up or down based on workload",
+      "C": "Allocating more RAM to the Driver",
+      "D": "Automatically creating new DataFrames"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a correct way to get the list of column names in PySpark?",
+    "options": {
+      "A": "df.getColumns()",
+      "B": "df.columns",
+      "C": "df.names",
+      "D": "df.schema.names()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Master' URL for a Spark cluster running on Kubernetes?",
+    "options": {
+      "A": "spark://...",
+      "B": "yarn",
+      "C": "k8s://...",
+      "D": "mesos://..."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'spark-shell'?",
+    "options": {
+      "A": "To run Spark in a batch mode",
+      "B": "An interactive environment to run Spark code (Scala)",
+      "C": "To manage Spark logs",
+      "D": "To install Spark"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to aggregate data by key?",
+    "options": {
+      "A": "groupBy()",
+      "B": "aggregate()",
+      "C": "combine()",
+      "D": "sumBy()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'first()' action return?",
+    "options": {
+      "A": "The first row of the RDD/DataFrame",
+      "B": "The first column of the RDD/DataFrame",
+      "C": "The number of rows",
+      "D": "The schema"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Spark library is used for graph processing?",
+    "options": {
+      "A": "MLlib",
+      "B": "GraphX",
+      "C": "Spark SQL",
+      "D": "Spark Streaming"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Checkpoint' in Spark Streaming?",
+    "options": {
+      "A": "A way to save the state of the stream to reliable storage for recovery",
+      "B": "A pause in the streaming process",
+      "C": "A manual validation of the data",
+      "D": "A way to stop the stream"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a transformation?",
+    "options": {
+      "A": "count()",
+      "B": "collect()",
+      "C": "map()",
+      "D": "save()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the role of 'Tungsten' in Spark?",
+    "options": {
+      "A": "A new cluster manager",
+      "B": "An execution engine optimizer for memory and CPU management",
+      "C": "A file format",
+      "D": "A programming language"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'df.head(n)' return?",
+    "options": {
+      "A": "The last n rows",
+      "B": "The first n rows",
+      "C": "The schema for n columns",
+      "D": "A random sample of n rows"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to handle 'Dirty' or 'Missing' data in DataFrames?",
+    "options": {
+      "A": "df.na",
+      "B": "df.clean",
+      "C": "df.fix",
+      "D": "df.nulls"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Broadcast Variable' primarily used for?",
+    "options": {
+      "A": "Broadcasting small datasets to all worker nodes to avoid shuffles",
+      "B": "Counting total records",
+      "C": "Writing data to a database",
+      "D": "Sending logs to the driver"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'Union' and 'UnionAll' in Spark SQL?",
+    "options": {
+      "A": "'Union' removes duplicates; 'UnionAll' does not",
+      "B": "They are the same in modern Spark (no duplicate removal by default)",
+      "C": "'UnionAll' is faster",
+      "D": "'Union' only works on strings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PySpark'?",
+    "options": {
+      "A": "A Python library for data visualization",
+      "B": "The Python API for Apache Spark",
+      "C": "A type of database",
+      "D": "A cluster manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method returns the number of partitions in an RDD?",
+    "options": {
+      "A": "getNumPartitions()",
+      "B": "partitions.size()",
+      "C": "countPartitions()",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'SparkConf'?",
+    "options": {
+      "A": "To define the application configuration (name, master, memory)",
+      "B": "To write data to the disk",
+      "C": "To manage the network",
+      "D": "To encrypt the code"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Job' in Spark?",
+    "options": {
+      "A": "A single transformation",
+      "B": "The sequence of stages triggered by an Action",
+      "C": "A single task",
+      "D": "The entire Spark installation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to calculate the sum of a column in a GroupedData object?",
+    "options": {
+      "A": "sum()",
+      "B": "total()",
+      "C": "add()",
+      "D": "aggregateSum()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'df.write.mode(\"overwrite\").save()' do?",
+    "options": {
+      "A": "Appends data to an existing file",
+      "B": "Replaces the existing data with new data",
+      "C": "Throws an error if the file exists",
+      "D": "Deletes the file and does nothing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a correct storage level for Spark?",
+    "options": {
+      "A": "DISK_ONLY",
+      "B": "MEMORY_ONLY",
+      "C": "MEMORY_AND_DISK_SER",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the role of 'TaskSetManager'?",
+    "options": {
+      "A": "To schedule tasks for a specific stage",
+      "B": "To create the DAG",
+      "C": "To manage the Spark UI",
+      "D": "To allocate memory to the Driver"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which action is used to return a sample of the data to the Driver?",
+    "options": {
+      "A": "take(n)",
+      "B": "sample()",
+      "C": "pick(n)",
+      "D": "grab(n)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Spark, what is an 'Application'?",
+    "options": {
+      "A": "A user program built on Spark",
+      "B": "A single line of code",
+      "C": "The Spark installation folder",
+      "D": "A worker node"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between a 'Global Temporary View' and a 'Temporary View'?",
+    "options": {
+      "A": "Global views are shared across all sessions within a Spark application.",
+      "B": "Global views are stored permanently on disk.",
+      "C": "Temporary views can only be accessed via Python.",
+      "D": "There is no difference; they are the same."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which join type should be used to find records that exist in the left DataFrame but have no match in the right DataFrame?",
+    "options": {
+      "A": "Inner Join",
+      "B": "Left Semi Join",
+      "C": "Left Anti Join",
+      "D": "Full Outer Join"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Spark UI' storage tab help you visualize?",
+    "options": {
+      "A": "The amount of data stored in HDFS.",
+      "B": "The RDDs or DataFrames that have been cached/persisted and their memory usage.",
+      "C": "The SQL query execution history.",
+      "D": "The number of active CPU cores."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Spark 3.x, what is 'Dynamic Partition Pruning'?",
+    "options": {
+      "A": "A feature that skips reading unnecessary partitions based on values from a joined table.",
+      "B": "A way to delete empty partitions at runtime.",
+      "C": "A manual technique for repartitioning data.",
+      "D": "A method to compress partition headers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Skew' in a Spark cluster?",
+    "options": {
+      "A": "When data is perfectly balanced across all nodes.",
+      "B": "When a small number of partitions are much larger than the others, causing bottlenecks.",
+      "C": "When the data format is changed from CSV to Parquet.",
+      "D": "When the Driver runs out of memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method would you use to add an external JAR file to a Spark session at runtime?",
+    "options": {
+      "A": "spark.addJar()",
+      "B": "spark.sparkContext.addJar()",
+      "C": "spark.read.jar()",
+      "D": "spark.config.jar()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Window Functions' in Spark SQL?",
+    "options": {
+      "A": "To resize the browser window for Spark UI.",
+      "B": "To perform calculations across a set of rows related to the current row.",
+      "C": "To stream data through a specific TCP port.",
+      "D": "To limit the number of columns displayed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration controls the maximum size for a table to be broadcast in a join?",
+    "options": {
+      "A": "spark.sql.autoBroadcastJoinThreshold",
+      "B": "spark.driver.maxResultSize",
+      "C": "spark.sql.shuffle.partitions",
+      "D": "spark.broadcast.limit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'explode()' function do in Spark?",
+    "options": {
+      "A": "Deletes the DataFrame from memory.",
+      "B": "Creates a new row for each element in an array or map column.",
+      "C": "Compresses the data to save space.",
+      "D": "Triggers an intentional error for testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of using 'repartition' on a DataFrame with fewer partitions than it currently has?",
+    "options": {
+      "A": "It will always be faster than coalesce.",
+      "B": "It will cause a full shuffle of the data across the network.",
+      "C": "It will fail if the data is too large.",
+      "D": "It will only work on the Driver node."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true about 'Bucketing' in Spark?",
+    "options": {
+      "A": "It sorts the data and stores it in a pre-defined number of files based on a column hash.",
+      "B": "It is only available for CSV files.",
+      "C": "It eliminates the need for any partitions.",
+      "D": "It is a transformation used only in MLlib."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In PySpark, how do you define a User Defined Function (UDF)?",
+    "options": {
+      "A": "Using the @udf decorator or the udf() function from pyspark.sql.functions.",
+      "B": "By writing a standard Python function and calling it directly on the column.",
+      "C": "By using the 'spark.register' command.",
+      "D": "UDFs are not supported in PySpark."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the disadvantage of using a UDF in Spark?",
+    "options": {
+      "A": "They cannot be used in SQL queries.",
+      "B": "They are black boxes to the Catalyst Optimizer, often resulting in slower performance.",
+      "C": "They can only return string values.",
+      "D": "They require the cluster to be restarted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Salting' in the context of Spark performance tuning?",
+    "options": {
+      "A": "Encrypting the data for security.",
+      "B": "Adding a random value to join keys to redistribute skewed data more evenly.",
+      "C": "Removing null values from the dataset.",
+      "D": "Compressing small files into larger ones."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of 'Checkpointing' truncates the RDD lineage?",
+    "options": {
+      "A": "Local Checkpointing",
+      "B": "Reliable Checkpointing (HDFS)",
+      "C": "Soft Checkpointing",
+      "D": "Cache-based Checkpointing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Z-Ordering' (often used with Delta Lake on Spark)?",
+    "options": {
+      "A": "A technique to co-locate related information in the same set of files to reduce data skipped.",
+      "B": "A way to sort data alphabetically.",
+      "C": "A network protocol for faster shuffles.",
+      "D": "An encryption standard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Spark object provides access to the 'Hadoop Configuration'?",
+    "options": {
+      "A": "spark.hadoopContext",
+      "B": "spark.sparkContext._jsc.hadoopConfiguration()",
+      "C": "spark.sqlContext.hadoop",
+      "D": "spark.conf.getHadoop()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'spark.sql.shuffle.partitions' control?",
+    "options": {
+      "A": "The number of partitions used when saving data to HDFS.",
+      "B": "The default number of partitions to use during shuffles (joins or aggregations).",
+      "C": "The number of CPU cores used by the Driver.",
+      "D": "The number of executors in the cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you handle 'Schema Evolution' in Spark when reading Parquet files?",
+    "options": {
+      "A": "By setting the option 'mergeSchema' to 'true'.",
+      "B": "Spark does not support schema evolution.",
+      "C": "By manually editing the Parquet metadata.",
+      "D": "By converting all data to JSON first."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Predicate Pushdown'?",
+    "options": {
+      "A": "A technique where filters are pushed down to the data source level to minimize data transfer.",
+      "B": "A way to force Spark to ignore filters.",
+      "C": "A method to reorder the columns in a table.",
+      "D": "A tool for debugging SQL syntax errors."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary use of 'mapPartitions' over 'map'?",
+    "options": {
+      "A": "It is easier to write code with mapPartitions.",
+      "B": "It allows for heavy initialization (like a DB connection) to happen once per partition instead of once per row.",
+      "C": "It automatically encrypts the data.",
+      "D": "It only works on the Driver node."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which join strategy is chosen if both tables are too large to be broadcast but are bucketed on the join key?",
+    "options": {
+      "A": "Broadcast Hash Join",
+      "B": "Sort Merge Join",
+      "C": "Bucket Join (SortMergeJoin without the shuffle)",
+      "D": "Cartesian Product Join"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'PySpark Gateway' (Py4J)?",
+    "options": {
+      "A": "The firewall protecting the Spark cluster.",
+      "B": "The library that allows Python programs to dynamically access Java objects in the JVM.",
+      "C": "A web interface for Python developers.",
+      "D": "The data storage layer for PySpark."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Whole-Stage Code Generation'?",
+    "options": {
+      "A": "A Spark feature that collapses a whole query into a single function to improve CPU efficiency.",
+      "B": "A tool that writes Spark code for the user.",
+      "C": "A way to generate documentation for the code.",
+      "D": "A debugging mode that shows every line of executed code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to create a new column by applying a conditional logic (If-Then-Else)?",
+    "options": {
+      "A": "when() and otherwise()",
+      "B": "ifElse()",
+      "C": "case()",
+      "D": "condition()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'DataFrame.cache()' actually do under the hood?",
+    "options": {
+      "A": "Immediately loads data into memory.",
+      "B": "Marks the DataFrame to be cached with the default storage level (MEMORY_AND_DISK).",
+      "C": "Saves the DataFrame to a temporary file on the local disk.",
+      "D": "Clears the memory of all other DataFrames."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Structured Streaming, what is the 'Watermark'?",
+    "options": {
+      "A": "A threshold used to handle late data by defining how long to wait for delayed events.",
+      "B": "A visual logo on the Spark UI.",
+      "C": "A limit on the amount of data processed per second.",
+      "D": "A way to tag the data source."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which aggregation function would you use to find the number of non-null values in a column?",
+    "options": {
+      "A": "count()",
+      "B": "sum()",
+      "C": "total()",
+      "D": "nonNullCount()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Vectorized Parquet Reader' in Spark?",
+    "options": {
+      "A": "To read Parquet files 10x faster by processing blocks of rows at once.",
+      "B": "To read Parquet files from a vector database.",
+      "C": "To convert Parquet to CSV automatically.",
+      "D": "To encrypt Parquet files during the read operation."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you cast a column from String type to Integer type in a DataFrame?",
+    "options": {
+      "A": "df.withColumn('col', df['col'].cast('int'))",
+      "B": "df.withColumn('col', int(df['col']))",
+      "C": "df.convert('col', 'int')",
+      "D": "df.select('col').asType('int')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Overheads' in Spark executor memory?",
+    "options": {
+      "A": "Memory used for the OS and other non-executor processes.",
+      "B": "Memory used for VM overheads, interned strings, and other native overheads.",
+      "C": "The memory used solely for caching RDDs.",
+      "D": "The memory allocated to the Cluster Manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to find the intersection of two DataFrames?",
+    "options": {
+      "A": "intersect()",
+      "B": "common()",
+      "C": "overlap()",
+      "D": "join()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Spark Listener' interface used for?",
+    "options": {
+      "A": "To intercept and handle events like job starts, stage completions, and task failures.",
+      "B": "To listen to music while coding.",
+      "C": "To provide audio alerts when a job fails.",
+      "D": "To connect Spark to a microphone."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does 'Sort Merge Join' work?",
+    "options": {
+      "A": "By hashing the keys and sending them to nodes.",
+      "B": "By sorting both datasets on the join key and then merging them in a single pass.",
+      "C": "By broadcasting the smaller table.",
+      "D": "By randomly matching rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows you to calculate the rank of a row within a window partition?",
+    "options": {
+      "A": "rank()",
+      "B": "dense_rank()",
+      "C": "row_number()",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Broadcast Variable' immutability?",
+    "options": {
+      "A": "The value of a broadcast variable cannot be changed after it is sent to the executors.",
+      "B": "The variable can only be changed by the Driver.",
+      "C": "The variable is deleted immediately after use.",
+      "D": "The variable can only store integers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Columnar Storage' optimization?",
+    "options": {
+      "A": "Storing data column by column to allow for better compression and faster analytical queries.",
+      "B": "Storing data in a vertical table.",
+      "C": "Limiting the number of columns to 10.",
+      "D": "A way to sort the columns alphabetically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Spark-Submit' --files flag?",
+    "options": {
+      "A": "To upload data files to the HDFS.",
+      "B": "To distribute small configuration files or resource files to all executors.",
+      "C": "To list the source code files.",
+      "D": "To delete files after the job is done."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Spark SQL, what is a 'UDAF'?",
+    "options": {
+      "A": "User Defined Aggregate Function.",
+      "B": "User Defined Analytical Formula.",
+      "C": "Universal Data Access File.",
+      "D": "Unified Data Application Framework."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if a Spark executor runs out of memory (OOM)?",
+    "options": {
+      "A": "The entire cluster shuts down.",
+      "B": "The executor process is killed and the Cluster Manager attempts to restart it.",
+      "C": "The job pauses until memory is freed.",
+      "D": "The data is automatically moved to the Driver."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Sorting' in Spark?",
+    "options": {
+      "A": "Sorting data using a third-party tool.",
+      "B": "Spilling data to disk when it cannot fit into memory during a sort operation.",
+      "C": "Sorting the files on HDFS before Spark reads them.",
+      "D": "Sorting data on the client machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to check if a DataFrame is empty?",
+    "options": {
+      "A": "df.isEmpty() (Spark 3.3+)",
+      "B": "df.count() == 0",
+      "C": "len(df.head(1)) == 0",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Catalog' in SparkSession?",
+    "options": {
+      "A": "A list of all Spark developers.",
+      "B": "An interface to manage metadata of databases, tables, and functions.",
+      "C": "A directory of file paths.",
+      "D": "A collection of RDDs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default join type in Spark?",
+    "options": {
+      "A": "Inner Join",
+      "B": "Outer Join",
+      "C": "Cross Join",
+      "D": "Left Join"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How can you disable the 'Broadcast Join' optimization?",
+    "options": {
+      "A": "Set spark.sql.autoBroadcastJoinThreshold to -1.",
+      "B": "Uninstall the broadcast library.",
+      "C": "Set the number of executors to 1.",
+      "D": "It cannot be disabled."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lazy Transformation' chaining?",
+    "options": {
+      "A": "Connecting multiple transformations together into a single execution plan without processing data.",
+      "B": "Waiting for a user to press a button.",
+      "C": "Running transformations one by one with pauses.",
+      "D": "Automatically skipping difficult transformations."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a way to optimize 'Small File Problem' in Spark?",
+    "options": {
+      "A": "Using coalesce() or repartition() before writing to disk.",
+      "B": "Deleting the small files.",
+      "C": "Increasing the number of partitions.",
+      "D": "Changing the CPU architecture."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shuffle Spill'?",
+    "options": {
+      "A": "When shuffle data is too large for the memory buffer and is written to local disk.",
+      "B": "When data is lost during a shuffle.",
+      "C": "When data is sent to the wrong executor.",
+      "D": "When the shuffle configuration is incorrect."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'DataFrame.unpersist()' do?",
+    "options": {
+      "A": "Deletes the DataFrame from the HDFS.",
+      "B": "Removes the DataFrame from the Spark cache (memory/disk).",
+      "C": "Prevents the DataFrame from being read.",
+      "D": "Stops the Spark session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows you to parse a string column containing JSON into a Struct type?",
+    "options": {
+      "A": "from_json()",
+      "B": "to_json()",
+      "C": "json_tuple()",
+      "D": "parse_json()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Execution Plan' in Spark?",
+    "options": {
+      "A": "The physical steps the cluster takes to compute the result of an action.",
+      "B": "The project timeline for a Spark developer.",
+      "C": "The documentation for the code.",
+      "D": "The list of employees working on Spark."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Object Serialization' in Spark?",
+    "options": {
+      "A": "Converting data objects into a format that can be stored or transmitted across the network.",
+      "B": "Deleting objects from memory.",
+      "C": "Naming objects in alphabetical order.",
+      "D": "A way to hide data from users."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Spark Thrift Server'?",
+    "options": {
+      "A": "A server that allows JDBC/ODBC clients to run SQL queries on Spark.",
+      "B": "A server for downloading free Spark software.",
+      "C": "A database built into Spark.",
+      "D": "A way to save money on cloud costs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is NOT a storage level in Spark?",
+    "options": {
+      "A": "MEMORY_ONLY",
+      "B": "DISK_ONLY",
+      "C": "NETWORK_ONLY",
+      "D": "MEMORY_AND_DISK_SER"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of 'Static Partition Pruning'?",
+    "options": {
+      "A": "Skipping partitions based on the query filter at the time the query is compiled.",
+      "B": "Skipping partitions based on the user's name.",
+      "C": "Deleting partitions that haven't been used in a week.",
+      "D": "A tool for pruning trees in the Spark logo."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of the 'Kryo Serializer'?",
+    "options": {
+      "A": "To be more compact and faster than standard Java serialization.",
+      "B": "To allow Spark to work with Python.",
+      "C": "To encrypt the data.",
+      "D": "To allow Spark to read image files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'DataFrame.sample(0.1)' return?",
+    "options": {
+      "A": "The first 10% of the rows.",
+      "B": "A random 10% sample of the rows.",
+      "C": "The first 10 rows.",
+      "D": "Every 10th row."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you view the partitions of a DataFrame in PySpark?",
+    "options": {
+      "A": "df.rdd.getNumPartitions()",
+      "B": "df.partitions()",
+      "C": "df.countPartitions()",
+      "D": "df.get('partitions')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'CoGroup' in Spark RDDs?",
+    "options": {
+      "A": "To group data from multiple RDDs sharing the same key.",
+      "B": "To combine two RDDs without keys.",
+      "C": "To sort the data on two columns.",
+      "D": "To delete duplicate records across RDDs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component is responsible for task execution on the Worker node?",
+    "options": {
+      "A": "Driver",
+      "B": "Executor",
+      "C": "Cluster Manager",
+      "D": "Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Cartesian Product Join' in Spark?",
+    "options": {
+      "A": "A join where every row from table A is joined with every row from table B.",
+      "B": "A very fast join.",
+      "C": "A join that only works on numeric data.",
+      "D": "The default join type."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the impact of a 'Wide Dependency' on fault recovery?",
+    "options": {
+      "A": "It makes recovery faster.",
+      "B": "It may require recomputing all partitions in the parent RDDs, making it more expensive than narrow dependencies.",
+      "C": "It prevents any recovery from happening.",
+      "D": "It has no impact on recovery."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Hive Metastore' in Spark?",
+    "options": {
+      "A": "To store the actual data files.",
+      "B": "To store the table schemas and metadata across different Spark sessions and engines.",
+      "C": "To manage the cluster's CPU.",
+      "D": "To provide a user interface for SQL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Locality Wait' in Spark scheduling?",
+    "options": {
+      "A": "The time Spark waits to launch a task on a node that already has the required data.",
+      "B": "The time the user waits for the job to start.",
+      "C": "The speed of the local network.",
+      "D": "A delay caused by slow hard drives."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to drop rows with any null values from a DataFrame?",
+    "options": {
+      "A": "df.na.drop()",
+      "B": "df.dropna()",
+      "C": "df.filter(col.isNotNull())",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of the 'foreach()' action?",
+    "options": {
+      "A": "To apply a function to each row, usually for side effects like writing to an external database.",
+      "B": "To count the number of rows.",
+      "C": "To sort the data.",
+      "D": "To create a new RDD."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Spark memory region is responsible for storing dataframes that have been cached using the MEMORY_ONLY storage level?",
+    "options": {
+      "A": "Execution Memory",
+      "B": "Storage Memory",
+      "C": "User Memory",
+      "D": "Reserved Memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Sort Merge Join', why might Spark still choose to perform a shuffle even if the input DataFrames are already sorted?",
+    "options": {
+      "A": "If the number of partitions between the two DataFrames does not match.",
+      "B": "If the sorting was done on a different column than the join key.",
+      "C": "If the data is not co-partitioned across the nodes.",
+      "D": "All of the above."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the primary technical reason why 'groupByKey()' is generally discouraged compared to 'reduceByKey()' in RDD operations?",
+    "options": {
+      "A": "groupByKey does not support Python.",
+      "B": "reduceByKey performs a local 'map-side' combine before shuffling, significantly reducing network traffic.",
+      "C": "groupByKey is limited to 100 partitions.",
+      "D": "reduceByKey is only available in Spark SQL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'spark.memory.fraction' configuration parameter define?",
+    "options": {
+      "A": "The fraction of JVM heap space used for Spark's internal memory (Execution + Storage).",
+      "B": "The amount of memory allocated to the Driver only.",
+      "C": "The percentage of disk space used for spilling.",
+      "D": "The ratio of CPU cores to RAM."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "During a 'Shuffle', Spark writes intermediate files to the local disk of the worker nodes. Which component is responsible for serving these files to other executors?",
+    "options": {
+      "A": "External Shuffle Service",
+      "B": "Block Manager",
+      "C": "DAG Scheduler",
+      "D": "Netty Connecter"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does 'Cost-Based Optimizer' (CBO) differ from the standard Catalyst Optimizer?",
+    "options": {
+      "A": "It ignores the logical plan.",
+      "B": "It uses table statistics (like cardinality and histogram) to choose the most efficient physical plan.",
+      "C": "It only works with CSV files.",
+      "D": "It is designed to increase the cost of queries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Spark Structured Streaming, what is the consequence of setting the 'Trigger' to 'Continuous'?",
+    "options": {
+      "A": "It switches from micro-batching to a low-latency (~1ms) processing model.",
+      "B": "It prevents the stream from ever stopping.",
+      "C": "It doubles the memory usage of the executors.",
+      "D": "It only allows reading from Kafka."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Object Pooling' in the context of the Spark TaskRunner?",
+    "options": {
+      "A": "Reusing JVM threads to avoid the overhead of thread creation for every task.",
+      "B": "Sharing DataFrames between different users.",
+      "C": "Storing all objects in the Driver's memory.",
+      "D": "A way to delete unused RDDs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What occurs during 'Deserilaization Bottleneck' in PySpark?",
+    "options": {
+      "A": "Data is stuck in the network interface card.",
+      "B": "The overhead of moving data between the JVM and the Python process via Py4J becomes the primary job latency.",
+      "C": "The hard drive is too slow to read the files.",
+      "D": "The Python version is incompatible with Spark."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Off-Heap Memory' configuration (spark.memory.offHeap.enabled)?",
+    "options": {
+      "A": "To allow Spark to use memory outside the JVM heap, reducing Garbage Collection (GC) overhead.",
+      "B": "To use the GPU memory instead of RAM.",
+      "C": "To store logs on a remote server.",
+      "D": "To increase the Driver's memory dynamically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific internal Spark component translates the Logical Plan into one or more Physical Plans?",
+    "options": {
+      "A": "Analyzer",
+      "B": "Optimizer",
+      "C": "Query Planner",
+      "D": "Code Generator"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a 'SortMergeJoin', if one side of the join has a massive key skew, how can 'Adaptive Query Execution' (AQE) help automatically?",
+    "options": {
+      "A": "By converting the join to a Broadcast Join at runtime.",
+      "B": "By splitting skewed partitions into smaller sub-partitions.",
+      "C": "By deleting the skewed records.",
+      "D": "By increasing the number of executors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of the 'Netty' framework within the Spark ecosystem?",
+    "options": {
+      "A": "Data visualization.",
+      "B": "High-performance network communication for shuffling and block transfers.",
+      "C": "SQL parsing.",
+      "D": "Machine learning model training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Blacklisting' (now 'Exclusion') mechanism in Spark do?",
+    "options": {
+      "A": "Prevents certain users from logging in.",
+      "B": "Temporarily stops scheduling tasks on executors/nodes that are consistently failing.",
+      "C": "Blocks specific IP addresses from the network.",
+      "D": "Prevents certain files from being read."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Spark SQL configuration is used to enable the 'Bucketed Blast Join'?",
+    "options": {
+      "A": "spark.sql.sources.bucketing.enabled",
+      "B": "spark.sql.join.preferBuckets",
+      "C": "spark.sql.bucketJoin.force",
+      "D": "There is no such configuration."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'External Storage' for Spark Accumulators?",
+    "options": {
+      "A": "A way to use Accumulators for fault-tolerant data writing.",
+      "B": "Storing accumulator values in a file on HDFS.",
+      "C": "Using a database like Redis to track accumulator states.",
+      "D": "This is not a feature in Spark."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "When using 'Kryo' serialization, why must you sometimes register your classes manually?",
+    "options": {
+      "A": "To allow Kryo to work with Python.",
+      "B": "To improve performance by avoiding the storage of full class names in the serialized data.",
+      "C": "To encrypt the classes.",
+      "D": "To bypass the license check."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Resource Allocation', what is the difference between 'Client Mode' and 'Cluster Mode'?",
+    "options": {
+      "A": "In Client Mode, the Driver runs on the machine that submitted the job; in Cluster Mode, it runs on a worker node.",
+      "B": "Client Mode is only for Windows.",
+      "C": "Cluster Mode is only for streaming.",
+      "D": "There is no difference in resource allocation."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'BroadcastManager'?",
+    "options": {
+      "A": "To send emails to the cluster admins.",
+      "B": "To manage the creation and destruction of broadcast variables and their storage across executors.",
+      "C": "To broadcast the Spark UI port.",
+      "D": "To manage the TV signal in the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Zombie Task' in Spark?",
+    "options": {
+      "A": "A task that continues to run even after its stage has completed or failed.",
+      "B": "A task that deletes data.",
+      "C": "A task that has no code.",
+      "D": "A task that runs on an expired executor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Window' boundary in Spark SQL would include all rows from the beginning of the partition to the current row?",
+    "options": {
+      "A": "RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW",
+      "B": "ROWS BETWEEN 1 PRECEDING AND 1 FOLLOWING",
+      "C": "RANGE BETWEEN CURRENT ROW AND UNBOUNDED FOLLOWING",
+      "D": "ROWS BETWEEN UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'PySpark Pickling' issue?",
+    "options": {
+      "A": "Python cannot serialize certain complex objects (like active DB connections) to send them to workers.",
+      "B": "Spark cannot read .pickle files.",
+      "C": "Pickling is too slow for large datasets.",
+      "D": "Pickling only works with strings."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fair Scheduler' in Spark?",
+    "options": {
+      "A": "A mode where tasks from different jobs are given equal access to cluster resources.",
+      "B": "A mode that only runs jobs that are easy.",
+      "C": "A way to charge users based on usage.",
+      "D": "The default FIFO scheduler."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Delta Lake', what does 'VACUUM' do?",
+    "options": {
+      "A": "Deletes the entire table.",
+      "B": "Removes files that are no longer in the latest state of the transaction log and are older than a retention threshold.",
+      "C": "Compresses the table.",
+      "D": "Clears the Spark cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Task Locality' level 'NODE_LOCAL'?",
+    "options": {
+      "A": "Data is in the same executor as the task.",
+      "B": "Data is on the same physical node but in a different executor or in the OS cache.",
+      "C": "Data is in the same rack.",
+      "D": "Data is on a different continent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'mapPartitionsWithIndex'?",
+    "options": {
+      "A": "To perform a map operation where you also have access to the integer index of the partition.",
+      "B": "To sort the partitions.",
+      "C": "To count the rows in each partition.",
+      "D": "To rename the partitions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic Resource Allocation' idle timeout?",
+    "options": {
+      "A": "The time Spark waits before removing an executor that has no active tasks.",
+      "B": "The time the user is allowed to be idle.",
+      "C": "The time before the Spark UI closes.",
+      "D": "The time before a query times out."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Spark feature allows it to interoperate with Apache Arrow for high-speed data transfer to Pandas?",
+    "options": {
+      "A": "Vectorized UDFs (Pandas UDFs).",
+      "B": "Arrow-to-Spark Connector.",
+      "C": "PySpark Streaming.",
+      "D": "Spark Arrow API."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Internal Row' format in Spark?",
+    "options": {
+      "A": "The UnsafeRow format that uses raw memory (off-heap) to represent structured data for high performance.",
+      "B": "A standard Java Object.",
+      "C": "A JSON string used internally.",
+      "D": "A way to store data in the Driver."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'spark.sql.codegen.wholeStage' = true enable?",
+    "options": {
+      "A": "It compiles entire query stages into single Java functions.",
+      "B": "It generates documentation for the stage.",
+      "C": "It sends the code to a remote server for execution.",
+      "D": "It allows Spark to run without a JVM."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shuffle Map Stage' vs 'Result Stage'?",
+    "options": {
+      "A": "Shuffle Map Stage produces intermediate files; Result Stage computes the final action result.",
+      "B": "They are the same.",
+      "C": "Result Stage always happens first.",
+      "D": "Shuffle Map Stage only happens in local mode."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How can you mitigate 'Garbage Collection' (GC) overhead in Spark?",
+    "options": {
+      "A": "Using Kryo serialization and DataFrames/Datasets instead of RDDs.",
+      "B": "Reducing the executor memory.",
+      "C": "Increasing the number of partitions to very large numbers.",
+      "D": "Disabling the cache."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Unsafe' API in Spark?",
+    "options": {
+      "A": "A set of internal classes that bypass JVM memory management for direct memory access.",
+      "B": "A library for testing vulnerabilities.",
+      "C": "A mode that allows code to run with errors.",
+      "D": "A way to access the root filesystem."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Broadcast Join' threshold '0'?",
+    "options": {
+      "A": "It disables automatic broadcast joins.",
+      "B": "It broadcasts every table regardless of size.",
+      "C": "It crashes the Spark session.",
+      "D": "It forces all joins to be SortMergeJoins."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Checkpointing', what is the purpose of the '_SUCCESS' file?",
+    "options": {
+      "A": "To indicate that the job/stage completed successfully and the data is valid.",
+      "B": "To store the job logs.",
+      "C": "To store the user credentials.",
+      "D": "To notify the cluster manager."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Filter Pushdown' to Parquet?",
+    "options": {
+      "A": "Reading only the relevant columns and rows from a Parquet file based on its footer metadata.",
+      "B": "Converting Parquet to a filter.",
+      "C": "Deleting data from the Parquet file.",
+      "D": "A way to encrypt Parquet."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'LSM Tree' used for in some Spark-related storage engines?",
+    "options": {
+      "A": "Efficiently handling high-throughput write operations.",
+      "B": "Sorting data in the UI.",
+      "C": "Visualizing the DAG.",
+      "D": "Managing user sessions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'PySpark Worker' vs 'PySpark Driver'?",
+    "options": {
+      "A": "The Driver orchestrates; Workers execute Python code via a daemon process on each node.",
+      "B": "There is only a Driver in PySpark.",
+      "C": "Workers only run Scala code.",
+      "D": "The Driver is only for storage."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Code Generation' fallback?",
+    "options": {
+      "A": "When Spark switches back to the interpreted execution mode if code generation fails.",
+      "B": "When Spark deletes the code.",
+      "C": "When the user writes the code manually.",
+      "D": "When Spark crashes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Spark class handles the 'Block Management' across the cluster?",
+    "options": {
+      "A": "BlockManagerMaster",
+      "B": "FileManager",
+      "C": "DataNode",
+      "D": "NodeManager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Store' vs 'Disk Store' in Spark?",
+    "options": {
+      "A": "Internal abstractions for managing where blocks of data are physically stored.",
+      "B": "Two different Spark versions.",
+      "C": "Commercial storage products.",
+      "D": "A way to buy more RAM."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fetch Failed Exception' usually indicative of?",
+    "options": {
+      "A": "Network issues or an executor being lost during a shuffle operation.",
+      "B": "A syntax error in SQL.",
+      "C": "The file does not exist.",
+      "D": "The user is not authorized."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Locality-aware Scheduling'?",
+    "options": {
+      "A": "Placing tasks near the nodes where their required data resides.",
+      "B": "Running jobs in the user's time zone.",
+      "C": "A way to find local Spark developers.",
+      "D": "A network protocol."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Heartbeats' in Spark?",
+    "options": {
+      "A": "Periodic signals from executors to the Driver to confirm they are still active.",
+      "B": "The clock speed of the CPU.",
+      "C": "A way to measure job speed.",
+      "D": "An alert system."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tungsten Row' memory layout?",
+    "options": {
+      "A": "A compact, binary format that allows Spark to operate directly on serialized data.",
+      "B": "A way to store data in a circular buffer.",
+      "C": "A JSON-based row format.",
+      "D": "A row that contains only integers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Stage Level Scheduling'?",
+    "options": {
+      "A": "Specifying different resource requirements (like GPUs) for different stages of a job.",
+      "B": "Scheduling one stage at a time.",
+      "C": "Running stages in alphabetical order.",
+      "D": "A way to skip stages."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Event Loop' in the Spark Driver?",
+    "options": {
+      "A": "The central mechanism that processes and dispatches internal Spark events.",
+      "B": "A way to repeat the same job forever.",
+      "C": "A coding mistake.",
+      "D": "A user interface feature."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Coarse-grained Execution' in Mesos/YARN?",
+    "options": {
+      "A": "Holding onto resources for the entire duration of the Spark application.",
+      "B": "Releasing resources after every task.",
+      "C": "Using only large CPU cores.",
+      "D": "A way to speed up the Driver."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Spark Secret' used for?",
+    "options": {
+      "A": "Authentication between Spark components (Driver, Executors, etc.).",
+      "B": "A hidden feature in the code.",
+      "C": "The administrator password.",
+      "D": "Encryption of the hard drive."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Barrier Execution Mode'?",
+    "options": {
+      "A": "A mode for ML jobs that require all tasks to run simultaneously and communicate with each other.",
+      "B": "A way to block certain users.",
+      "C": "A security firewall.",
+      "D": "A mode where tasks wait at the end of a stage."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Predicate Subquery' optimization?",
+    "options": {
+      "A": "Turning a subquery into a join or a filter to improve performance.",
+      "B": "Deleting the subquery.",
+      "C": "Running the subquery on a different cluster.",
+      "D": "A way to write shorter SQL."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shuffle Write' metrics?",
+    "options": {
+      "A": "Measurement of the amount of data written to disk/network during a shuffle.",
+      "B": "The speed of the hard drive.",
+      "C": "The number of files created.",
+      "D": "The time it takes to write a row."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Task Deserialization' time?",
+    "options": {
+      "A": "The time an executor takes to turn the task binary from the Driver into a runnable object.",
+      "B": "The time to read data from HDFS.",
+      "C": "The time to write data to the cache.",
+      "D": "The time it takes to load the Spark JAR."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Result Serialization' time?",
+    "options": {
+      "A": "The time an executor spends turning task results into a format to send back to the Driver.",
+      "B": "The time to save a file to disk.",
+      "C": "The time to encrypt the result.",
+      "D": "The time to print the result."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Executor Deserialization' lag?",
+    "options": {
+      "A": "A delay in starting tasks caused by large environment variables or broadast variables.",
+      "B": "A slow CPU.",
+      "C": "A network timeout.",
+      "D": "A bug in the Spark code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Direct Task Scheduling'?",
+    "options": {
+      "A": "Bypassing the DAG scheduler for very simple, low-latency tasks.",
+      "B": "Running tasks manually.",
+      "C": "Scheduling tasks on the Driver node only.",
+      "D": "A way to skip transformations."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Local Checkpoint' vs 'Reliable Checkpoint'?",
+    "options": {
+      "A": "Local uses executor storage (fast but not fault-tolerant); Reliable uses HDFS (slow but persistent).",
+      "B": "They are the same.",
+      "C": "Local is only for Windows.",
+      "D": "Reliable is only for streaming."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'UDF Registration' in SQL?",
+    "options": {
+      "A": "Making a custom function available for use within Spark SQL strings.",
+      "B": "Deleting a function.",
+      "C": "Renaming a function.",
+      "D": "A way to download functions from the web."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Spark Connect' (Spark 3.4+)?",
+    "options": {
+      "A": "A decoupled client-server architecture for Spark that allows thin clients to connect to remote clusters.",
+      "B": "A way to connect Spark to a phone.",
+      "C": "A social network for Spark users.",
+      "D": "A new database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Protobuf' support in Spark?",
+    "options": {
+      "A": "The ability to natively read and write Protocol Buffer data in DataFrames.",
+      "B": "A new programming language.",
+      "C": "A way to compress files.",
+      "D": "A security protocol."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Python UDF Arrow' optimization?",
+    "options": {
+      "A": "Using Apache Arrow to speed up data transfer between JVM and Python during UDF execution.",
+      "B": "A way to run Python code in the JVM.",
+      "C": "A new type of join.",
+      "D": "A way to encrypt Python code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Spark History Server' cleanup?",
+    "options": {
+      "A": "A background process that deletes old job logs to save disk space.",
+      "B": "A way to delete the entire history.",
+      "C": "A tool for fixing logs.",
+      "D": "A way to hide logs from users."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic Partition Insert' in Spark?",
+    "options": {
+      "A": "Automatically creating new partitions in a table based on the data values being written.",
+      "B": "Inserting data into a random partition.",
+      "C": "A way to delete partitions.",
+      "D": "A way to rename partitions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bucket Pruning'?",
+    "options": {
+      "A": "Skipping buckets that do not contain the relevant data based on the query filter.",
+      "B": "Deleting buckets.",
+      "C": "A way to combine buckets.",
+      "D": "A tool for cleaning buckets."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shuffle Read' Local vs Remote?",
+    "options": {
+      "A": "Local is reading shuffle data from the same node; Remote is fetching it over the network.",
+      "B": "They are the same speed.",
+      "C": "Local is only for small files.",
+      "D": "Remote is only for cloud clusters."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'External Catalog' implementation?",
+    "options": {
+      "A": "Plugging in a custom metadata store (like AWS Glue or Hive) into Spark.",
+      "B": "A list of external Spark libraries.",
+      "C": "A way to use Excel as a database.",
+      "D": "A tool for managing user files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Push-based Shuffle' (Spark 3.2+)?",
+    "options": {
+      "A": "Executors push shuffle blocks to a central service to improve reliability and reduce small random IO.",
+      "B": "A way to force data to the driver.",
+      "C": "A security feature.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Task Culling'?",
+    "options": {
+      "A": "Automatically canceling tasks whose results are no longer needed (e.g., in a LIMIT query).",
+      "B": "Deleting tasks with errors.",
+      "C": "A way to prioritize tasks.",
+      "D": "A way to skip stages."
+    },
+    "answer": "A"
+  }
+  ]
+}

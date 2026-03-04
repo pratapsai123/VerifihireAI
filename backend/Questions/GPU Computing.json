@@ -1,0 +1,2006 @@
+{ 
+  "skill": "GPU Computing", 
+  "questions": [
+    {
+    "question": "What does GPU stand for in the context of computer hardware?",
+    "options": {
+      "A": "General Processing Unit",
+      "B": "Graphics Processing Unit",
+      "C": "Global Parallel Unit",
+      "D": "Grid Power Utitily"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is the primary difference between a CPU and a GPU?",
+    "options": {
+      "A": "CPUs have thousands of cores; GPUs have only a few.",
+      "B": "GPUs are designed for sequential task processing.",
+      "C": "CPUs excel at complex logic; GPUs excel at parallel processing of simple tasks.",
+      "D": "GPUs cannot be used for mathematical calculations."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which company developed the CUDA parallel computing platform?",
+    "options": {
+      "A": "Intel",
+      "B": "AMD",
+      "C": "NVIDIA",
+      "D": "Apple"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the name of the smallest execution unit in a GPU that runs a single thread?",
+    "options": {
+      "A": "A Cluster",
+      "B": "A CUDA Core",
+      "C": "A Hyper-thread",
+      "D": "A Logic Gate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parallel Computing'?",
+    "options": {
+      "A": "Executing tasks one after another in a strict line.",
+      "B": "The simultaneous execution of multiple bits of data or tasks across many cores.",
+      "C": "A way to connect two computers with a parallel cable.",
+      "D": "Running a computer program on a mobile phone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common programming language used for GPU computing via the CUDA API?",
+    "options": {
+      "A": "HTML",
+      "B": "C++",
+      "C": "PHP",
+      "D": "CSS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does GPGPU stand for?",
+    "options": {
+      "A": "General-Purpose computing on Graphics Processing Units",
+      "B": "Global Parallel Graphics Processing Unit",
+      "C": "Generic Programmed GPU",
+      "D": "Grid Power Graphics Unit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In GPU computing, what is a 'Kernel'?",
+    "options": {
+      "A": "The core of the operating system.",
+      "B": "A function that is executed in parallel on the GPU.",
+      "C": "The physical plastic casing of the GPU.",
+      "D": "The fan that cools the hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which memory type on the GPU is accessible by all threads but is the slowest?",
+    "options": {
+      "A": "Registers",
+      "B": "Shared Memory",
+      "C": "Global Memory",
+      "D": "L1 Cache"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Thread' in the context of GPU execution?",
+    "options": {
+      "A": "A physical wire on the circuit board.",
+      "B": "The smallest unit of work that performs a calculation.",
+      "C": "A user account on the computer.",
+      "D": "A type of fast internet cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'VRAM' (Video RAM)?",
+    "options": {
+      "A": "To play videos on the monitor only.",
+      "B": "To store data that the GPU needs to access quickly during processing.",
+      "C": "To backup the operating system.",
+      "D": "To increase the internet download speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these industries uses GPU computing for 'Deep Learning'?",
+    "options": {
+      "A": "Artificial Intelligence",
+      "B": "Agriculture",
+      "C": "Textile Manufacturing",
+      "D": "Classical Literature"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Thread Block' in CUDA?",
+    "options": {
+      "A": "A security feature that blocks threads.",
+      "B": "A logical grouping of threads that can communicate and synchronize.",
+      "C": "A physical part of the GPU chip.",
+      "D": "The time a thread spends waiting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latency' in GPU computing?",
+    "options": {
+      "A": "The total number of cores in the unit.",
+      "B": "The time delay between a request for data and the data being available.",
+      "C": "The physical size of the GPU board.",
+      "D": "The number of programs running at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a major open standard for cross-platform parallel programming (not limited to NVIDIA)?",
+    "options": {
+      "A": "DirectX",
+      "B": "OpenCL",
+      "C": "CUDA",
+      "D": "Metal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Throughput' measure in a GPU?",
+    "options": {
+      "A": "The physical weight of the hardware.",
+      "B": "The amount of work completed in a given unit of time.",
+      "C": "The amount of electricity consumed.",
+      "D": "The length of the data cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SIMT' (Single Instruction, Multiple Threads)?",
+    "options": {
+      "A": "A way to run only one thread at a time.",
+      "B": "An execution model where multiple threads execute the same instruction on different data.",
+      "C": "A type of memory storage.",
+      "D": "A tool for editing video files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which GPU component is responsible for cooling the device during heavy computing?",
+    "options": {
+      "A": "The Transistor",
+      "B": "The Heatsink and Fan",
+      "C": "The Logic Core",
+      "D": "The Power Connector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens during a 'Host-to-Device' data transfer?",
+    "options": {
+      "A": "Data is sent from the GPU to the monitor.",
+      "B": "Data is copied from the CPU (Host) RAM to the GPU (Device) memory.",
+      "C": "The computer is restarted.",
+      "D": "Data is deleted from the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compute Unified Device Architecture' commonly known as?",
+    "options": {
+      "A": "DirectCompute",
+      "B": "CUDA",
+      "C": "Vulkan",
+      "D": "OpenGL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a GPU, which memory is localized to a thread block and provides low-latency communication?",
+    "options": {
+      "A": "Global Memory",
+      "B": "Shared Memory",
+      "C": "Hard Drive",
+      "D": "Cloud Storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Occupancy' in the context of GPU performance?",
+    "options": {
+      "A": "The number of users logged into the computer.",
+      "B": "The ratio of active warps to the maximum number of warps supported by the hardware.",
+      "C": "The physical space the GPU takes up in the case.",
+      "D": "The percentage of time the fan is spinning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these file extensions is commonly used for CUDA source code?",
+    "options": {
+      "A": ".exe",
+      "B": ".cu",
+      "C": ".jpg",
+      "D": ".pdf"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Warp' in NVIDIA GPU terminology?",
+    "options": {
+      "A": "A physical distortion of the chip.",
+      "B": "A group of 32 threads that execute instructions in lock-step.",
+      "C": "A type of fast travel in a video game.",
+      "D": "A way to backup the GPU firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Coalesced Memory Access'?",
+    "options": {
+      "A": "Accessing data from a different computer.",
+      "B": "Combining multiple memory requests into a single transaction for efficiency.",
+      "C": "Deleting memory that isn't used.",
+      "D": "Encrypting every bit of data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is NOT a benefit of using a GPU for computation?",
+    "options": {
+      "A": "High parallel processing capability.",
+      "B": "Lower power consumption for simple office tasks compared to a CPU.",
+      "C": "Large memory bandwidth.",
+      "D": "Acceleration of matrix operations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Floating Point Operations Per Second' (FLOPS)?",
+    "options": {
+      "A": "The number of times a GPU falls over.",
+      "B": "A measure of a computer's performance in decimal math.",
+      "C": "The speed of the network card.",
+      "D": "The number of pixels on a screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which software provides the compiler for CUDA code?",
+    "options": {
+      "A": "GCC",
+      "B": "NVCC",
+      "C": "Python Interpreter",
+      "D": "Java Virtual Machine"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Host' in a heterogeneous computing system?",
+    "options": {
+      "A": "The person using the computer.",
+      "B": "The CPU and its memory.",
+      "C": "The GPU and its memory.",
+      "D": "The cloud server provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Device' in a heterogeneous computing system?",
+    "options": {
+      "A": "The mouse and keyboard.",
+      "B": "The GPU and its memory.",
+      "C": "The CPU only.",
+      "D": "The computer monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double Precision' (FP64)?",
+    "options": {
+      "A": "Doing the same calculation twice.",
+      "B": "A high-accuracy numeric format using 64 bits.",
+      "C": "Using two GPUs for one task.",
+      "D": "A way to print the results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common application of GPU computing in science?",
+    "options": {
+      "A": "Molecular Dynamics simulation.",
+      "B": "Writing research papers.",
+      "C": "Sending emails to other scientists.",
+      "D": "Organizing a digital library."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shared Memory' bandwidth compared to 'Global Memory'?",
+    "options": {
+      "A": "It is much slower.",
+      "B": "It is much higher and has lower latency.",
+      "C": "They are exactly the same.",
+      "D": "Shared memory is only for text files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Synchronization' in GPU programming?",
+    "options": {
+      "A": "Setting the system clock.",
+      "B": "Ensuring that multiple threads reach a certain point before any proceed.",
+      "C": "Connecting the GPU to a smartphone.",
+      "D": "Making sure the fans spin at the same speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Atomic Operation' in GPU computing?",
+    "options": {
+      "A": "A nuclear-powered calculation.",
+      "B": "An operation that completes without interference from other threads.",
+      "C": "A very fast calculation using one bit.",
+      "D": "A way to delete data permanently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PCI Express' (PCIe) used for?",
+    "options": {
+      "A": "To encrypt the computer's storage.",
+      "B": "A high-speed interface connecting the GPU to the motherboard and CPU.",
+      "C": "A type of software for creating games.",
+      "D": "A social network for hardware enthusiasts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thread Divergence'?",
+    "options": {
+      "A": "Threads becoming too famous.",
+      "B": "When threads in a warp take different execution paths (e.g., inside an IF statement).",
+      "C": "When threads are deleted by the OS.",
+      "D": "A way to increase the number of threads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Grid' in CUDA terminology?",
+    "options": {
+      "A": "A drawing tool for designers.",
+      "B": "A collection of all the thread blocks that execute a single kernel.",
+      "C": "A network of multiple GPUs.",
+      "D": "The physical grid on the GPU's surface."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Register Pressure'?",
+    "options": {
+      "A": "The physical weight of the CPU.",
+      "B": "When a kernel uses too many registers per thread, limiting the number of active threads.",
+      "C": "The pressure on the computer's power supply.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a GPU-accelerated library for Deep Learning?",
+    "options": {
+      "A": "NumPy",
+      "B": "cuDNN",
+      "C": "jQuery",
+      "D": "Bootstrap"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Profiling' in GPU development?",
+    "options": {
+      "A": "Creating a social media account for the GPU.",
+      "B": "The process of analyzing code performance to identify bottlenecks.",
+      "C": "Naming the different parts of the hardware.",
+      "D": "Deleting the history of calculations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unified Memory'?",
+    "options": {
+      "A": "A single hard drive for the whole world.",
+      "B": "A single memory space accessible from both CPU and GPU without manual copying.",
+      "C": "Memory that only stores zeros and ones.",
+      "D": "A way to combine RAM and VRAM permanently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Asynchronous' execution in GPU programming?",
+    "options": {
+      "A": "Running tasks at exactly the same time.",
+      "B": "Launching a task on the GPU and immediately returning control to the CPU before the task finishes.",
+      "C": "A task that never finishes.",
+      "D": "Running a task twice to be safe."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Compute Capability' of an NVIDIA GPU?",
+    "options": {
+      "A": "The amount of electricity it uses.",
+      "B": "A version number identifying the features and hardware generation of the device.",
+      "C": "The number of hours it can run.",
+      "D": "The maximum temperature of the chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bandwidth' in the context of GPU memory?",
+    "options": {
+      "A": "The thickness of the cable.",
+      "B": "The rate at which data can be read from or written to memory.",
+      "C": "The range of radio frequencies emitted.",
+      "D": "The total capacity of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'nvprof' used for?",
+    "options": {
+      "A": "A way to play games.",
+      "B": "A command-line profiling tool for NVIDIA applications.",
+      "C": "A tool for designing the GPU circuit.",
+      "D": "A chat app for NVIDIA employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Task Parallelism' vs 'Data Parallelism'?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "Task parallelism distributes different tasks; Data parallelism distributes same task on different data.",
+      "C": "Data parallelism is only for Excel spreadsheets.",
+      "D": "Task parallelism is for humans; Data parallelism is for machines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic Parallelism'?",
+    "options": {
+      "A": "The GPU moving physically.",
+      "B": "The ability of a GPU kernel to launch new kernels directly without CPU intervention.",
+      "C": "A way to change the number of cores at runtime.",
+      "D": "A network protocol."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a major manufacturer of discrete GPUs?",
+    "options": {
+      "A": "Logitech",
+      "B": "AMD",
+      "C": "Bose",
+      "D": "Samsung"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Streaming Multiprocessor' (SM)?",
+    "options": {
+      "A": "A tool for live-streaming games.",
+      "B": "The fundamental architectural block of a GPU that contains many CUDA cores.",
+      "C": "A hardware chip for audio processing.",
+      "D": "A way to connect multiple computers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Leak' in a GPU context?",
+    "options": {
+      "A": "Data falling out of the computer case.",
+      "B": "Failing to release allocated VRAM after it is no longer needed.",
+      "C": "A security hack to steal data.",
+      "D": "The physical destruction of a memory chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does '__global__' signify in CUDA code?",
+    "options": {
+      "A": "A global variable accessible by all users.",
+      "B": "A keyword that defines a function as a kernel to be called from the CPU and run on the GPU.",
+      "C": "An error message for the whole system.",
+      "D": "The location of the cloud server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thrust' in the CUDA ecosystem?",
+    "options": {
+      "A": "A physical force used to install the GPU.",
+      "B": "A C++ template library for parallel algorithms (similar to STL).",
+      "C": "A software for speed-testing computers.",
+      "D": "A rocket science application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double Buffering'?",
+    "options": {
+      "A": "Using two different GPUs.",
+      "B": "Using two buffers to overlap data transfer with computation.",
+      "C": "A way to backup data twice.",
+      "D": "A security feature for browsers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pinned Memory'?",
+    "options": {
+      "A": "Memory that is physically pinned to the wall.",
+      "B": "Page-locked Host memory that allows for faster CPU-GPU transfers.",
+      "C": "Memory that cannot be used by the GPU.",
+      "D": "A way to mark a file as important."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Arithmetic Intensity'?",
+    "options": {
+      "A": "How hard the math problems are.",
+      "B": "The ratio of floating-point operations to memory access operations.",
+      "C": "The amount of noise a GPU makes.",
+      "D": "The number of hours spent on math."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GPU Virtualization'?",
+    "options": {
+      "A": "Wearing a VR headset.",
+      "B": "Sharing a single physical GPU among multiple virtual machines.",
+      "C": "Creating a fake GPU in software.",
+      "D": "A 3D simulation of a computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a Python library for GPU-accelerated computing?",
+    "options": {
+      "A": "Django",
+      "B": "CuPy",
+      "C": "Flask",
+      "D": "Requests"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'TDP' (Thermal Design Power)?",
+    "options": {
+      "A": "The time it takes to delete data.",
+      "B": "The maximum amount of heat a cooling system is designed to dissipate.",
+      "C": "The price of the GPU cooling fan.",
+      "D": "The speed of the network data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-copy' memory?",
+    "options": {
+      "A": "Memory that cannot be copied.",
+      "B": "Memory that can be accessed by the GPU without explicitly being copied to VRAM.",
+      "C": "Deleting a file without leaving a trace.",
+      "D": "A way to duplicate a file for free."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'nvcc'?",
+    "options": {
+      "A": "An NVIDIA video game console.",
+      "B": "The NVIDIA CUDA Compiler.",
+      "C": "A security certificate for servers.",
+      "D": "A way to name a GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shared Memory Bank Conflict'?",
+    "options": {
+      "A": "A bank losing money in a GPU simulation.",
+      "B": "When multiple threads attempt to access different data in the same memory bank simultaneously.",
+      "C": "Two users trying to use the same GPU.",
+      "D": "A hardware error in the memory chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Stream' in CUDA?",
+    "options": {
+      "A": "A river in a forest.",
+      "B": "A sequence of operations that execute in order on the GPU.",
+      "C": "A way to watch videos online.",
+      "D": "A list of active users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Device Synchronization' do?",
+    "options": {
+      "A": "Sets the clock on your smartphone.",
+      "B": "Stops the Host (CPU) until all tasks on the Device (GPU) are finished.",
+      "C": "Connects two computers together.",
+      "D": "Ensures the GPU fan is working."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Constant Memory'?",
+    "options": {
+      "A": "Memory that is always on.",
+      "B": "A small, read-only cache optimized for all threads reading the same value.",
+      "C": "A memory chip that never breaks.",
+      "D": "Memory used for the system clock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GPU Direct'?",
+    "options": {
+      "A": "Buying a GPU directly from the factory.",
+      "B": "A technology allowing direct communication between a GPU and other devices (like NICs) bypassing CPU memory.",
+      "C": "Talking to the GPU using voice commands.",
+      "D": "A way to connect a GPU to a TV."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical reason for 'Warp Divergence' hurting performance?",
+    "options": {
+      "A": "It causes the GPU to physicaly overheat.",
+      "B": "The hardware must execute each branch path sequentially for the entire warp, disabling threads not on the current path.",
+      "C": "It force-quits the kernel execution and returns an error.",
+      "D": "It doubles the amount of VRAM required for the calculation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific CUDA memory type is 'Page-Locked' and allows for asynchronous data transfers using DMA?",
+    "options": {
+      "A": "Global Memory",
+      "B": "Shared Memory",
+      "C": "Pinned Host Memory",
+      "D": "Constant Memory"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the '__syncthreads()' function in a CUDA kernel?",
+    "options": {
+      "A": "To synchronize all threads across the entire GPU grid.",
+      "B": "To ensure all threads within a single thread block reach the same point before proceeding.",
+      "C": "To update the global clock of the CPU.",
+      "D": "To clear the L2 cache of the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Roofline Model' used for in GPU performance analysis?",
+    "options": {
+      "A": "To calculate the physical height of a server rack.",
+      "B": "To determine whether a kernel is limited by memory bandwidth or by compute throughput.",
+      "C": "To estimate the cost of cooling the data center.",
+      "D": "To visualize the network topology of a multi-GPU cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes a 'Bank Conflict' in Shared Memory?",
+    "options": {
+      "A": "When two GPUs try to access the same bank account.",
+      "B": "When multiple threads in a warp access different addresses that map to the same memory bank simultaneously.",
+      "C": "When the GPU runs out of physical memory banks.",
+      "D": "When the power supply to the memory module is interrupted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'Texture Memory' in modern GPGPU computing?",
+    "options": {
+      "A": "To make the user interface look more realistic.",
+      "B": "A read-only cache optimized for 2D spatial locality and hardware-accelerated interpolation.",
+      "C": "To store the source code of the GPU driver.",
+      "D": "To encrypt image data before it is displayed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Compute Intensity' refer to in a parallel algorithm?",
+    "options": {
+      "A": "The brightness of the monitor during execution.",
+      "B": "The ratio of arithmetic operations to the number of bytes transferred from memory.",
+      "C": "The total number of cores available in the GPU.",
+      "D": "The percentage of CPU usage during a GPU task."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Occupancy', which resource is most likely to be the bottleneck preventing higher occupancy?",
+    "options": {
+      "A": "The speed of the PCIe bus.",
+      "B": "Register usage per thread or Shared Memory usage per block.",
+      "C": "The number of users logged into the OS.",
+      "D": "The size of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Loop Unrolling' in GPU kernel optimization?",
+    "options": {
+      "A": "Deleting a loop to save space.",
+      "B": "A compiler or manual optimization that reduces loop overhead by repeating the loop body.",
+      "C": "Running a loop in reverse order.",
+      "D": "Translating a C++ loop into Python."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which CUDA function is used to allocate memory on the GPU (Device)?",
+    "options": {
+      "A": "malloc()",
+      "B": "cudaMalloc()",
+      "C": "new DeviceMemory()",
+      "D": "alloc_gpu()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kernel Latency'?",
+    "options": {
+      "A": "The time it takes to write the kernel code.",
+      "B": "The overhead time required to launch a kernel from the CPU to the GPU.",
+      "C": "The time a thread spends waiting for a fan to cool the chip.",
+      "D": "The duration of the final result being displayed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Coalescing' primarily dependent on?",
+    "options": {
+      "A": "The brand of the GPU.",
+      "B": "The pattern of memory addresses accessed by threads within a single warp.",
+      "C": "The version of the Windows operating system.",
+      "D": "The number of blocks in the grid."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a significant advantage of using 'Streams' in CUDA?",
+    "options": {
+      "A": "They allow for 100% accurate mathematical results.",
+      "B": "They enable overlapping of data transfers with kernel execution.",
+      "C": "They automatically delete unused variables.",
+      "D": "They increase the VRAM capacity of the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Instruction Throughput' of a GPU?",
+    "options": {
+      "A": "The weight of the hardware manual.",
+      "B": "The number of operations the GPU can execute per clock cycle per multiprocessor.",
+      "C": "The length of time it takes to boot the computer.",
+      "D": "The number of lines of code in the kernel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used in CUDA to specify that a variable should be stored in 'Shared Memory'?",
+    "options": {
+      "A": "__global__",
+      "B": "__shared__",
+      "C": "__device__",
+      "D": "__local__"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Branch Predication' do in GPU hardware?",
+    "options": {
+      "A": "Predicts the stock market using AI.",
+      "B": "Executes both paths of a conditional and uses a predicate mask to discard the results of the untaken path.",
+      "C": "Automatically fixes errors in the code logic.",
+      "D": "Warns the user if the GPU is getting too hot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tiling' in the context of matrix multiplication on a GPU?",
+    "options": {
+      "A": "Putting tiles on the floor of the data center.",
+      "B": "Breaking large matrices into smaller blocks that fit into Shared Memory to reduce Global Memory traffic.",
+      "C": "Naming the rows and columns of a matrix.",
+      "D": "A way to compress matrix data for storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool in the NVIDIA suite is used for visual debugging and performance profiling?",
+    "options": {
+      "A": "NVIDIA Paint",
+      "B": "NVIDIA Nsight",
+      "C": "NVIDIA Chat",
+      "D": "NVIDIA Backup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unified Virtual Addressing' (UVA)?",
+    "options": {
+      "A": "A single physical address for every computer in the world.",
+      "B": "A feature that gives a single virtual address space to both CPU and GPU memory.",
+      "C": "A way to hide the computer's IP address.",
+      "D": "A system for naming GPU cores."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the effect of 'Register Spilling'?",
+    "options": {
+      "A": "The GPU leaking electricity.",
+      "B": "Moving thread variables from fast registers to slower local memory (L1/Global) because of register pressure.",
+      "C": "Increasing the number of available registers.",
+      "D": "The computer crashing due to high pressure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intrinsic Function' in CUDA?",
+    "options": {
+      "A": "A function that is very hard to understand.",
+      "B": "A high-performance, hardware-specific version of a function (e.g., __sinf) provided by the compiler.",
+      "C": "A function that runs on the CPU only.",
+      "D": "A way to define a global variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Dynamic Parallelism' help in recursive algorithms?",
+    "options": {
+      "A": "It makes recursion impossible.",
+      "B": "It allows a kernel to launch child kernels from the GPU, enabling complex nested data structures.",
+      "C": "It automatically converts recursion into loops.",
+      "D": "It increases the stack size of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Zero-copy' memory pointer?",
+    "options": {
+      "A": "A pointer that points to nothing.",
+      "B": "A pointer to Host memory that the GPU can access directly over the PCIe bus.",
+      "C": "A pointer that deletes data after reading.",
+      "D": "A way to copy data instantly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Little's Law' imply for GPU performance?",
+    "options": {
+      "A": "Small GPUs are better than large ones.",
+      "B": "The number of active threads needed to hide latency is equal to the product of latency and bandwidth.",
+      "C": "Only small kernels can run fast.",
+      "D": "There is a limit to how small a transistor can be."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Multi-GPU' systems, what is 'Peer-to-Peer' (P2P) memory access?",
+    "options": {
+      "A": "Two users sharing a computer.",
+      "B": "Allowing one GPU to directly read or write to another GPU's memory without using the CPU as an intermediary.",
+      "C": "Connecting a GPU to a printer.",
+      "D": "A way to backup data on a secondary drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NVLink'?",
+    "options": {
+      "A": "A new social network for NVIDIA fans.",
+      "B": "A high-speed interconnect technology for GPU-to-GPU and GPU-to-CPU communication.",
+      "C": "A software for linking text files.",
+      "D": "A cable used for the computer monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thread Rank'?",
+    "options": {
+      "A": "The salary of a developer.",
+      "B": "A unique index for each thread within a block or grid used for data indexing.",
+      "C": "A score given to the best performing threads.",
+      "D": "The number of cycles a thread has completed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Warp Shuffle' (shfl) instruction used for?",
+    "options": {
+      "A": "Randomly mixing the training data.",
+      "B": "Exchanging data between threads within the same warp without using Shared Memory.",
+      "C": "A way to move threads to a different GPU.",
+      "D": "A screensaver for the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double-Precision' throughput compared to 'Single-Precision' on most consumer GPUs?",
+    "options": {
+      "A": "It is much higher.",
+      "B": "It is typically much lower (e.g., 1/32 or 1/64 of SP throughput).",
+      "C": "They are exactly the same.",
+      "D": "Double-precision is only for audio files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Bound' execution?",
+    "options": {
+      "A": "When the GPU is tied to the memory physically.",
+      "B": "When the performance of a kernel is limited by the rate at which data can be fetched from memory.",
+      "C": "When the memory is 100% full.",
+      "D": "When the memory is encrypted and cannot be read."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compute Bound' execution?",
+    "options": {
+      "A": "When the CPU does all the work.",
+      "B": "When the performance is limited by the GPU's processing power (floating point operations).",
+      "C": "When the computer is used only for math.",
+      "D": "When the software is too expensive to run."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Constant Memory' caching?",
+    "options": {
+      "A": "To store data that changes every second.",
+      "B": "To provide high-speed access when all threads in a warp read the same memory address.",
+      "C": "To keep the system clock accurate.",
+      "D": "To backup the L1 cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pinned Memory' 'Deregistration'?",
+    "options": {
+      "A": "Deleting the user's account.",
+      "B": "The process of unmapping and unlocking page-locked memory after use.",
+      "C": "Removing a physical pin from the chip.",
+      "D": "A way to stop the GPU fan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'cudaDeviceSynchronize()' function do?",
+    "options": {
+      "A": "Sets the time zone of the GPU.",
+      "B": "Blocks the CPU until all preceding commands in all streams on the GPU have completed.",
+      "C": "Connects two different GPU brands.",
+      "D": "Ensures all GPUs in a cluster have the same drivers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Occupancy Calculator' used for?",
+    "options": {
+      "A": "To calculate the price of a GPU.",
+      "B": "To help developers choose block sizes that maximize hardware utilization.",
+      "C": "To count the number of pixels on a screen.",
+      "D": "To measure the room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Static' vs 'Dynamic' Shared Memory allocation?",
+    "options": {
+      "A": "Static is for text; Dynamic is for images.",
+      "B": "Static size is known at compile time; Dynamic size is specified at kernel launch.",
+      "C": "Dynamic is 10x slower than Static.",
+      "D": "There is no difference in CUDA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instruction Latency' in a GPU multiprocessor?",
+    "options": {
+      "A": "The number of lines in an instruction.",
+      "B": "The number of clock cycles it takes for an instruction to complete its execution.",
+      "C": "The time it takes to type an instruction.",
+      "D": "The size of the instruction in bytes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Process Service' (MPS)?",
+    "options": {
+      "A": "A way to hire 100 people at once.",
+      "B": "A feature that allows multiple CPU processes to share a single GPU more efficiently.",
+      "C": "A type of server hardware.",
+      "D": "A security system for the OS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PTX' in the NVIDIA compilation pipeline?",
+    "options": {
+      "A": "A file used for 3D printing.",
+      "B": "Parallel Thread Execution: a low-level virtual machine and instruction set architecture.",
+      "C": "A type of graphics card for laptops.",
+      "D": "A secure password for developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Device Code' vs 'Host Code'?",
+    "options": {
+      "A": "Host code is for users; Device code is for admins.",
+      "B": "Host code runs on the CPU; Device code runs on the GPU.",
+      "C": "Device code is encrypted; Host code is not.",
+      "D": "Host code is for Windows; Device code for Linux."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which memory has the highest capacity but the lowest bandwidth?",
+    "options": {
+      "A": "Shared Memory",
+      "B": "Registers",
+      "C": "Global Memory",
+      "D": "L1 Cache"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Error Correcting Code' (ECC) memory in professional GPUs?",
+    "options": {
+      "A": "Memory that fixes spelling mistakes.",
+      "B": "Memory that detects and fixes data corruption caused by electrical interference.",
+      "C": "Memory that only stores error logs.",
+      "D": "A way to encrypt data files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Floating Point 16' (Half Precision) used for?",
+    "options": {
+      "A": "To get 100% accurate results.",
+      "B": "To speed up Deep Learning by reducing memory usage and using Tensor Cores.",
+      "C": "A way to save half of the data.",
+      "D": "A font size for results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grid-level Synchronization'?",
+    "options": {
+      "A": "Synchronizing the whole electricity grid.",
+      "B": "A challenging operation because standard CUDA only supports block-level synchronization naturally.",
+      "C": "Synchronizing two different GPUs.",
+      "D": "Setting the time on the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Math' library provided by CUDA for linear algebra?",
+    "options": {
+      "A": "cuFFT",
+      "B": "cuBLAS",
+      "C": "cuSPARSE",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Shared Memory' initialization?",
+    "options": {
+      "A": "Setting the memory to zero automatically.",
+      "B": "Manually loading data from Global Memory into Shared Memory before processing.",
+      "C": "A hardware-only process.",
+      "D": "Deleting the memory contents."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Warp-synchronous' programming?",
+    "options": {
+      "A": "A dangerous practice of assuming warp threads are always in sync without explicit guards.",
+      "B": "A way to synchronize the internet speed.",
+      "C": "Programming two warps at once.",
+      "D": "A new language for GPUs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Unified Memory' 'Page Faulting'?",
+    "options": {
+      "A": "A bug that crashes the computer.",
+      "B": "The process of moving data pages between CPU and GPU on-demand when accessed.",
+      "C": "A way to count the pages in a document.",
+      "D": "Deleting a page from memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Global Memory' alignment requirement?",
+    "options": {
+      "A": "Aligning the GPU to the North Pole.",
+      "B": "Ensuring data addresses are multiples of 32, 64, or 128 bytes for efficient bus utilization.",
+      "C": "Making sure the data is in alphabetical order.",
+      "D": "A way to group data by file size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cooperative Groups' in CUDA?",
+    "options": {
+      "A": "A team of developers working together.",
+      "B": "An API for defining and synchronizing flexible groups of threads beyond simple blocks.",
+      "C": "A social network for AI researchers.",
+      "D": "A way to share GPU time between companies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Bandwidth Utilization'?",
+    "options": {
+      "A": "The percentage of users using the internet.",
+      "B": "The ratio of observed memory throughput to the theoretical peak bandwidth of the hardware.",
+      "C": "The physical width of the data cable.",
+      "D": "The number of Gigabytes used per hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stream Priority'?",
+    "options": {
+      "A": "Choosing the best movie to stream.",
+      "B": "Giving certain CUDA streams higher access to GPU resources than others.",
+      "C": "A way to speed up the network.",
+      "D": "A list of important users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Just-In-Time' (JIT) Compilation in CUDA?",
+    "options": {
+      "A": "Compiling the code exactly at 9:00 AM.",
+      "B": "Compiling PTX code into machine code at runtime when the application starts.",
+      "C": "Writing code in a hurry.",
+      "D": "A way to fix bugs instantly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which memory is read-only and cached for all threads in the same multiprocessor?",
+    "options": {
+      "A": "Shared Memory",
+      "B": "Constant Memory",
+      "C": "Registers",
+      "D": "Local Memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pinned' memory overhead?",
+    "options": {
+      "A": "The time it takes to pin a physical document.",
+      "B": "The fact that allocating pinned memory is slower than standard pageable memory.",
+      "C": "The electricity cost of pinning memory.",
+      "D": "The risk of the GPU fan stopping."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'cuSPARSE' library used for?",
+    "options": {
+      "A": "Processing sparse datasets (mostly zeros) efficiently on the GPU.",
+      "B": "Designing high-end furniture.",
+      "C": "A library for checking spelling.",
+      "D": "A security tool for thin files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throughput-oriented' architecture?",
+    "options": {
+      "A": "Architecture that focuses on individual task speed.",
+      "B": "Architecture designed to maximize total work done, even if individual tasks take longer (latency).",
+      "C": "Architecture for small computers only.",
+      "D": "Architecture that uses less metal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inter-block' communication restriction?",
+    "options": {
+      "A": "Thread blocks cannot communicate or synchronize with each other directly during kernel execution.",
+      "B": "Two blocks cannot be the same color.",
+      "C": "Blocks must be placed in alphabetical order.",
+      "D": "A security firewall between blocks."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Memory' 'Stall'?",
+    "options": {
+      "A": "The GPU engine stopping physically.",
+      "B": "When threads must wait for hundreds of clock cycles for data to arrive from Global Memory.",
+      "C": "A bathroom stall in the data center.",
+      "D": "Deleting a file very slowly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Visual Profiler' 'Dependency Graph'?",
+    "options": {
+      "A": "A drawing of a family tree.",
+      "B": "A visual representation of how different GPU tasks and data transfers depend on each other.",
+      "C": "A chart of the company's stock price.",
+      "D": "A map of the data center's wiring."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Single Precision' (FP32) performance vs 'Double Precision' (FP64)?",
+    "options": {
+      "A": "FP64 is 10x faster.",
+      "B": "FP32 is significantly faster on almost all GPU hardware.",
+      "C": "They are exactly the same.",
+      "D": "FP32 is only for text files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Warp' 'Voting'?",
+    "options": {
+      "A": "Threads choosing a new manager.",
+      "B": "Instructions (__any, __all) that allow threads in a warp to compare conditions across the whole warp.",
+      "C": "A way to pick random numbers.",
+      "D": "A security feature for elections."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic' parallelism 'Recursion' limit?",
+    "options": {
+      "A": "The number of hours the GPU can run.",
+      "B": "A configuration setting that limits how many levels of kernels can be launched from the device.",
+      "C": "The price of the GPU driver.",
+      "D": "The number of users allowed in a session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA Event' used for?",
+    "options": {
+      "A": "A party for NVIDIA developers.",
+      "B": "Measuring the time taken by GPU tasks and creating synchronization points.",
+      "C": "A list of upcoming software releases.",
+      "D": "A way to log user logins."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Host-Device' 'Bottleneck'?",
+    "options": {
+      "A": "The neck of a physical bottle in the lab.",
+      "B": "The slow data transfer speed of the PCIe bus compared to the internal GPU memory bandwidth.",
+      "C": "A disagreement between the CPU and GPU brands.",
+      "D": "A security error in the driver."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Register' usage optimization?",
+    "options": {
+      "A": "Using only one register per project.",
+      "B": "Balancing thread complexity with the number of concurrent threads that can fit in a multiprocessor.",
+      "C": "Buying more registers for the hardware.",
+      "D": "A way to name registers alphabetically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical constraint describes the Lipschitz continuity required for stable training in Wasserstein GANs (WGANs) on GPUs?",
+    "options": {
+      "A": "Ensuring the gradient norm of the critic is exactly zero.",
+      "B": "Setting the learning rate of the Generator to be 10x higher than the Discriminator.",
+      "C": "Restricting the spectral norm of the weight matrices to be less than or equal to 1.",
+      "D": "Deleting all negative weights in the convolutional layers."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary technical cause of 'Partition Camping' in older GPU architectures?",
+    "options": {
+      "A": "Threads waiting too long for the CPU to respond.",
+      "B": "Multiple thread blocks accessing the same memory partition simultaneously, causing an L2 cache bottleneck.",
+      "C": "The GPU running out of physical power during a kernel launch.",
+      "D": "A software bug in the NVIDIA driver suite."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In CUDA, what is the role of the '__threadfence_block()' intrinsic?",
+    "options": {
+      "A": "To synchronize all threads in the entire grid.",
+      "B": "To ensure that all memory writes by the calling thread are visible to other threads in the same block before proceeding.",
+      "C": "To prevent the GPU from overheating during heavy loops.",
+      "D": "To lock a specific register for exclusive use by one thread."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PTX (Parallel Thread Execution) state space is used for variables stored in registers?",
+    "options": {
+      "A": ".global",
+      "B": ".shared",
+      "C": ".reg",
+      "D": ".local"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Register Spilling' technically referred to when data is moved to the L1 cache or DRAM?",
+    "options": {
+      "A": "Cache Bloat",
+      "B": "Local Memory usage",
+      "C": "Arithmetic Intensity",
+      "D": "DRAM Congestion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do 'Tensor Cores' achieve massive throughput for matrix multiplication compared to standard CUDA cores?",
+    "options": {
+      "A": "By running only one operation per clock cycle.",
+      "B": "By performing a $4 \times 4 \times 4$ matrix-multiply-and-accumulate operation in a single clock cycle.",
+      "C": "By using 64-bit integer math for all floating point tasks.",
+      "D": "By bypassing the VRAM and reading directly from the CPU RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Instruction Issue Latency' penalty for a warp experiencing a branch divergence?",
+    "options": {
+      "A": "It is exactly zero because of the hardware scheduler.",
+      "B": "The cycles required to execute the diverged paths are additive, as they are executed serially.",
+      "C": "The entire kernel is terminated and restarted.",
+      "D": "The learning rate is automatically halved to compensate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary disadvantage of using 'Pinned Memory' excessively in a system?",
+    "options": {
+      "A": "It slows down the GPU clock speed.",
+      "B": "It reduces the amount of physical RAM available to the OS for other processes, potentially leading to system thrashing.",
+      "C": "It encrypts the data so the CPU cannot read it.",
+      "D": "It increases the number of bank conflicts in shared memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which CUDA feature allows for 'Wait-Free' synchronization between threads in the same warp?",
+    "options": {
+      "A": "Grid Fencing",
+      "B": "Warp Shuffle Instructions (__shfl_sync)",
+      "C": "Atomic Add operations",
+      "D": "Global Barriers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In high-performance GPU kernels, what is 'Occupancy' 'Sweet Spot'?",
+    "options": {
+      "A": "Always 100% at any cost.",
+      "B": "The balance point where enough warps are active to hide latency without causing excessive register spilling or memory congestion.",
+      "C": "Having exactly one thread per core.",
+      "D": "The temperature at which the GPU performs best."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Instruction-Level Parallelism' (ILP) in a single GPU thread?",
+    "options": {
+      "A": "To run the same instruction on multiple threads.",
+      "B": "To execute multiple independent instructions from the same thread simultaneously to hide instruction latency.",
+      "C": "To translate C++ code into assembly in real-time.",
+      "D": "To allow the thread to access the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'L1 Cache' behavior in NVIDIA Maxwell and later architectures?",
+    "options": {
+      "A": "It only caches global memory reads.",
+      "B": "The functionality of L1 cache and Shared Memory is unified into the same hardware unit with configurable sizes.",
+      "C": "It is physically located on the motherboard, not the GPU.",
+      "D": "It is disabled by default for all compute kernels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a side-effect of 'Atomic' operations on a highly contended memory address?",
+    "options": {
+      "A": "The data is deleted.",
+      "B": "Serialization of access, leading to significant performance degradation as threads wait in a queue.",
+      "C": "The GPU clock speed is boosted.",
+      "D": "The memory address is automatically encrypted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Over-subscription' in the context of CUDA Unified Memory?",
+    "options": {
+      "A": "Paying for more VRAM than you need.",
+      "B": "Allocating more memory than is physically available on the GPU, relying on the driver to swap pages with system RAM.",
+      "C": "Using a single memory address for 1000 variables.",
+      "D": "A hardware error where memory is duplicated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'restrict' keyword (or __restrict__) tell the CUDA compiler?",
+    "options": {
+      "A": "To limit the number of threads to 32.",
+      "B": "That a pointer is the sole means of accessing a particular data block, allowing for better optimization and caching.",
+      "C": "To restrict the kernel from using any VRAM.",
+      "D": "To prevent the user from editing the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which CUDA metric measures the efficiency of moving data between the SM and L2 cache?",
+    "options": {
+      "A": "Arithmetic Throughput",
+      "B": "DRAM Utilization",
+      "C": "L2 Cache Hit Rate",
+      "D": "PCIe Overhead"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Cooperative Launch' in CUDA used for?",
+    "options": {
+      "A": "Allowing two different companies to share a GPU.",
+      "B": "Launching a kernel that allows for synchronization across all thread blocks in the grid via a grid-wide barrier.",
+      "C": "Launching a kernel that uses only one thread per block.",
+      "D": "Automatically dividing a task between the CPU and GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Multi-Instance GPU' (MIG), what is physically partitioned?",
+    "options": {
+      "A": "The user accounts.",
+      "B": "The GPU's compute resources (SMs) and memory system into separate hardware-isolated instances.",
+      "C": "The computer's power supply units.",
+      "D": "The network bandwidth only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Implicit Warp Synchronicity' assumption error?",
+    "options": {
+      "A": "Assuming all threads in a block finish at the same time.",
+      "B": "Assuming threads in a warp will always be in sync without using __syncwarp(), which can fail on newer architectures (Volta+).",
+      "C": "Assuming the GPU is always connected to the CPU.",
+      "D": "Assuming the learning rate is constant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NVLink' bandwidth compared to 'PCIe Gen 4'?",
+    "options": {
+      "A": "It is 10x slower.",
+      "B": "It provides significantly higher bidirectional bandwidth (e.g., 600 GB/s vs 64 GB/s).",
+      "C": "They are exactly the same speed.",
+      "D": "NVLink is only for audio data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Prefetching' do in a Unified Memory environment?",
+    "options": {
+      "A": "Deletes data before it is read.",
+      "B": "Manually triggers the migration of data to the GPU before a kernel starts to avoid page fault latency.",
+      "C": "Caches the output of the next three kernels.",
+      "D": "Increases the resolution of the input images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific hardware unit handles 'Warp Scheduling' inside an SM?",
+    "options": {
+      "A": "The ALU",
+      "B": "The Warp Scheduler and Dispatch Unit",
+      "C": "The L2 Cache Controller",
+      "D": "The PCIe Bridge"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vectorized Memory Access' in CUDA (e.g., using float4)?",
+    "options": {
+      "A": "Accessing data in a random order.",
+      "B": "Loading multiple data elements (e.g., 128 bits) in a single instruction to improve bandwidth utilization.",
+      "C": "A way to draw vectors on the screen.",
+      "D": "Encrypting vectors during transfer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Arithmetic Intensity' of a kernel that performs 100 additions but loads 1000 bytes of data?",
+    "options": {
+      "A": "High intensity",
+      "B": "Low intensity (Memory-bound)",
+      "C": "Zero intensity",
+      "D": "Infinite intensity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global Memory Coalescing' 'Segmented' access?",
+    "options": {
+      "A": "Data spread across 100 different hard drives.",
+      "B": "When threads in a warp access non-contiguous memory, forcing the hardware to issue multiple memory transactions.",
+      "C": "Accessing data only on the weekend.",
+      "D": "A way to backup memory segments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'NVIDIA Nsight Systems' primary use case?",
+    "options": {
+      "A": "A chat app for system admins.",
+      "B": "System-wide performance analysis to visualize GPU/CPU scaling and identify pipeline gaps.",
+      "C": "Designing the physical case for a GPU.",
+      "D": "A security tool for scanning viruses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'CUDA Streams', what is 'Stream Callbacks' used for?",
+    "options": {
+      "A": "Calling a developer on the phone.",
+      "B": "Executing a host-side function automatically once all tasks in a specific GPU stream have completed.",
+      "C": "A way to undo a kernel launch.",
+      "D": "A security alert system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fast Math' (--use_fast_math) compiler flag tradeoff?",
+    "options": {
+      "A": "It costs more money to use.",
+      "B": "It improves performance by using lower-precision hardware intrinsics but reduces numerical accuracy.",
+      "C": "It makes the math 10x harder to read.",
+      "D": "It deletes all decimal points from the results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shared Memory' 'Padding' used to solve?",
+    "options": {
+      "A": "The GPU getting physically damaged.",
+      "B": "Eliminating bank conflicts by adding extra columns to a shared memory array to shift the mapping.",
+      "C": "Increasing the storage capacity of the VRAM.",
+      "D": "A way to cool down the memory chips."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Peer-to-Peer' (P2P) 'Direct Access'?",
+    "options": {
+      "A": "Two users chatting through a GPU.",
+      "B": "A feature where one GPU can access another GPU's memory directly via the PCIe bus without copying to the CPU.",
+      "C": "Connecting a GPU to a printer.",
+      "D": "Sharing a Netflix account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instruction Latency' hiding?",
+    "options": {
+      "A": "Deleting instructions you don't like.",
+      "B": "The GPU's ability to switch to a different warp while one warp waits for an instruction or memory to complete.",
+      "C": "A way to encrypt instructions.",
+      "D": "The time it takes to type a command."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PTX' 'SASS' relationship?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "PTX is the intermediate architecture-independent code; SASS is the final machine-specific binary code.",
+      "C": "SASS is for text; PTX for images.",
+      "D": "They are two different GPU brands."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA Graph' API designed to reduce?",
+    "options": {
+      "A": "The resolution of the charts.",
+      "B": "The overhead of launching many small kernels individually by defining the entire sequence as a single graph.",
+      "C": "The price of the GPU driver.",
+      "D": "The number of colors in a plot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Memory Fence' scope in CUDA?",
+    "options": {
+      "A": "Planet-wide",
+      "B": "Thread-block, Device, and System",
+      "C": "CPU-only",
+      "D": "User-specific"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Warp-synchronous' 'Race Condition' risk?",
+    "options": {
+      "A": "The threads running in a physical race.",
+      "B": "Errors occurring on modern GPUs because warps no longer execute in strict lock-step across different paths.",
+      "C": "The computer running out of RAM.",
+      "D": "A security breach in the scheduler."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'CUDA', what does 'texture<float, 2>' define?",
+    "options": {
+      "A": "The flavor of the data.",
+      "B": "A 2D texture reference used for hardware-accelerated bilinear filtering and spatial caching.",
+      "C": "A list of two floating point numbers.",
+      "D": "A security certificate for a 2D image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Divergent Control Flow'?",
+    "options": {
+      "A": "The GPU moving physically in two directions.",
+      "B": "When threads in the same warp execute different branches of an IF-ELSE or SWITCH statement.",
+      "C": "When the CPU and GPU disagree.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Device-side' 'Assert'?",
+    "options": {
+      "A": "Telling the GPU what to do using voice.",
+      "B": "A mechanism to perform error checking inside a kernel and terminate execution if a condition is not met.",
+      "C": "A security guard for the hardware.",
+      "D": "A way to backup the VRAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Global Memory' 'Coalescing' benefit?",
+    "options": {
+      "A": "Making the data look more colorful.",
+      "B": "Maximizing data throughput by using a single large memory transaction for a whole warp instead of 32 small ones.",
+      "C": "Saving data on a USB drive.",
+      "D": "Deleting duplicate data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NVIDIA Management Library' (NVML) used for?",
+    "options": {
+      "A": "Writing emails to NVIDIA support.",
+      "B": "Monitoring and managing various GPU states like temperature, clock speed, and memory usage programmatically.",
+      "C": "A library for 3D animation.",
+      "D": "A list of all NVIDIA employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kernel Fusion'?",
+    "options": {
+      "A": "Two GPUs merging into one.",
+      "B": "Combining multiple small kernels into one large kernel to reduce memory traffic and launch overhead.",
+      "C": "A type of nuclear power for computers.",
+      "D": "Hiring two developers to work on one kernel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic' 'Shared' 'Memory' pointer declaration syntax?",
+    "options": {
+      "A": "shared int array[100];",
+      "B": "extern __shared__ int array[];",
+      "C": "int* array = new int[100];",
+      "D": "allocate_shared(100);"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unified Memory' 'Advise' API?",
+    "options": {
+      "A": "Telling the user how to use the computer.",
+      "B": "Giving hints to the driver about data access patterns to optimize page migrations and prefetching.",
+      "C": "A security warning for the cloud.",
+      "D": "A list of software tips."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Host' 'Spin-waiting' in CUDA?",
+    "options": {
+      "A": "A physical exercise for the CPU fan.",
+      "B": "The CPU continuously checking a flag to see if the GPU is finished, which provides the lowest latency but uses 100% CPU.",
+      "C": "The computer being stuck in a loop.",
+      "D": "A way to delete data slowly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA' 'MPS' 'Spatial' Isolation?",
+    "options": {
+      "A": "Sending a GPU into space.",
+      "B": "Limiting the percentage of GPU compute resources that a specific process can use in a shared environment.",
+      "C": "Separating the physical server racks.",
+      "D": "A way to encrypt the GPU memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Occupancy' 'Register' constraint?",
+    "options": {
+      "A": "The number of users who can use a register.",
+      "B": "The hardware limit on how many registers are available per multiprocessor, which can restrict the number of active warps.",
+      "C": "The price of the register memory.",
+      "D": "The physical size of the register file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA' 'Context'?",
+    "options": {
+      "A": "The story behind a project.",
+      "B": "The primary structure that holds all resources associated with a specific GPU for a CPU process.",
+      "C": "The user manual for the hardware.",
+      "D": "A list of all the functions in the driver."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instruction Throughput' 'Optimization' 'Fast Math' flag?",
+    "options": {
+      "A": "Buying a faster calculator.",
+      "B": "Forcing the compiler to use hardware-level approximations for transcendental functions like sin and log.",
+      "C": "A way to count instructions faster.",
+      "D": "A security feature for math functions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global' 'Memory' 'Atomic' 'CAS' (Compare-And-Swap)?",
+    "options": {
+      "A": "A way to swap two different GPUs.",
+      "B": "An atomic primitive used to implement high-level synchronization structures like mutexes on the GPU.",
+      "C": "A way to compare two images.",
+      "D": "A security check for the VRAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shared' 'Memory' 'Broadcast'?",
+    "options": {
+      "A": "Sending a message to everyone in the world.",
+      "B": "An optimization where all threads in a warp read the same address, resulting in zero bank conflicts.",
+      "C": "A way to stream videos on the GPU.",
+      "D": "A list of active developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA' 'Binary' 'Forward Compatibility'?",
+    "options": {
+      "A": "Running old code on old hardware.",
+      "B": "The ability of a binary compiled for an older architecture to run on a newer architecture (often via PTX JIT).",
+      "C": "A way to use two different operating systems.",
+      "D": "A security feature for passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instruction' 'Dependency' 'Stall'?",
+    "options": {
+      "A": "The GPU engine stopping physically.",
+      "B": "When a warp is paused because the next instruction requires the result of a previous one that hasn't finished.",
+      "C": "A bathroom stall in the lab.",
+      "D": "Deleting a file very slowly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-GPU' 'All-Reduce'?",
+    "options": {
+      "A": "Reducing the number of GPUs to one.",
+      "B": "A communication pattern used in deep learning where gradients are summed across all GPUs in a cluster.",
+      "C": "A way to delete data from all GPUs.",
+      "D": "A network speed test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Constant' 'Memory' 'Cache Hit' latency?",
+    "options": {
+      "A": "As fast as a register read if all threads access the same address.",
+      "B": "As slow as a hard drive read.",
+      "C": "Exactly zero cycles.",
+      "D": "It depends on the time of day."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Warp' 'Scheduling' 'Greedy-then-oldest'?",
+    "options": {
+      "A": "A way to pick random threads.",
+      "B": "A policy where the scheduler favors the current warp until it stalls, then picks the oldest ready warp.",
+      "C": "A list of the best developers.",
+      "D": "A way to name GPU cores."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA' 'Unified' 'Memory' 'Concurrent' 'Access'?",
+    "options": {
+      "A": "Two users sharing a computer.",
+      "B": "The ability for both the CPU and GPU to access the same memory concurrently on Pascal+ architectures.",
+      "C": "Connecting a GPU to a printer.",
+      "D": "A way to backup data on a secondary drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shared' 'Memory' 'Bank' 'Multicast'?",
+    "options": {
+      "A": "A bank losing money in a GPU simulation.",
+      "B": "A feature where multiple threads in a warp can read from the same bank simultaneously without conflict.",
+      "C": "Two users trying to use the same GPU.",
+      "D": "A hardware error in the memory chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA' 'Stream' 'Synchronization' 'Implicit' vs 'Explicit'?",
+    "options": {
+      "A": "Explicit uses CPU; Implicit uses GPU.",
+      "B": "Explicit uses events/commands; Implicit occurs automatically due to shared resources or NULL stream usage.",
+      "C": "Explicit is only for text files.",
+      "D": "There is no difference in performance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global' 'Memory' 'Atomic' 'Performance' 'Contention'?",
+    "options": {
+      "A": "When the GPU engine stops physically.",
+      "B": "The decrease in speed when hundreds of threads attempt to update the same memory location atomically.",
+      "C": "A security breach in the scheduler.",
+      "D": "Deleting a file very slowly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PCIe' 'Gen 4' vs 'Gen 5' 'Bandwidth' limit?",
+    "options": {
+      "A": "Gen 5 is 10x slower.",
+      "B": "Gen 5 provides double the per-lane bandwidth of Gen 4 (e.g., 32GT/s vs 16GT/s).",
+      "C": "They are exactly the same speed.",
+      "D": "Gen 5 is only for video data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Register' 'File' 'Fragmentation'?",
+    "options": {
+      "A": "The physical breakdown of the chip.",
+      "B": "Inefficiency caused when varying register counts per thread prevent optimal block scheduling.",
+      "C": "A way to name registers alphabetically.",
+      "D": "The computer crashing due to high pressure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA' 'Device' 'Pointer' 'Dereference' on Host?",
+    "options": {
+      "A": "It works normally and returns the data.",
+      "B": "It results in a segmentation fault or illegal memory access because the CPU cannot directly dereference GPU memory.",
+      "C": "It returns a zero value.",
+      "D": "It deletes the data on the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NVIDIA' 'Turing' 'Architecture' 'RT Cores'?",
+    "options": {
+      "A": "Cores for running standard Python code.",
+      "B": "Specialized hardware units designed to accelerate ray-tracing calculations (BVH traversal and triangle intersection).",
+      "C": "A way to speed up the network bandwidth.",
+      "D": "A security feature for elections."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA' 'Launch' 'Overhead' 'Optimization'?",
+    "options": {
+      "A": "Buying a faster CPU.",
+      "B": "Using CUDA Graphs or grouping small kernels to minimize the CPU-side time spent preparing for GPU work.",
+      "C": "A way to count the number of threads.",
+      "D": "A security feature for the driver."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global' 'Memory' 'Cache' 'L2' 'Bypass'?",
+    "options": {
+      "A": "A way to skip the hardware entirely.",
+      "B": "A compiler flag or PTX instruction used to prevent data from being cached in L2 to avoid polluting it with one-time data.",
+      "C": "A way to increase the resolution of a video.",
+      "D": "Deleting the L2 cache physically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Warp' 'Level' 'Reduction'?",
+    "options": {
+      "A": "Reducing the number of warps to one.",
+      "B": "An efficient algorithm for summing or finding the max value across threads in a warp using shuffle instructions.",
+      "C": "A way to delete warps after use.",
+      "D": "A security feature for voting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CUDA' 'Shared' 'Memory' 'Dynamic' 'Configuration'?",
+    "options": {
+      "A": "Telling the GPU what to do using voice.",
+      "B": "Using 'cudaFuncSetAttribute' to prioritize larger L1 cache over shared memory or vice versa at runtime.",
+      "C": "A security guard for the hardware.",
+      "D": "A way to backup the VRAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instruction' 'Pipeline' 'Stall' 'Scoreboard'?",
+    "options": {
+      "A": "A board for keeping score in a sports game.",
+      "B": "The hardware mechanism that tracks register dependencies and stalls warps until their operands are ready.",
+      "C": "A list of active developers.",
+      "D": "A way to name GPU cores."
+    },
+    "answer": "B"
+  }
+]
+  
+}

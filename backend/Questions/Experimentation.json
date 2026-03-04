@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Experimentation", 
+  "questions": [
+    {
+    "question": "What is a 'Hypothesis' in the context of an experiment?",
+    "options": {
+      "A": "The final result of the study",
+      "B": "A testable prediction about the relationship between variables",
+      "C": "A proven scientific law",
+      "D": "The equipment used in a lab"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a controlled experiment, which variable is deliberately changed by the researcher?",
+    "options": {
+      "A": "Dependent Variable",
+      "B": "Control Variable",
+      "C": "Independent Variable",
+      "D": "Extraneous Variable"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary purpose of a 'Control Group'?",
+    "options": {
+      "A": "To ensure every participant gets the treatment",
+      "B": "To provide a baseline for comparison with the experimental group",
+      "C": "To increase the cost of the experiment",
+      "D": "To collect the final data points"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable is measured or observed to see the effect of the changes made?",
+    "options": {
+      "A": "Independent Variable",
+      "B": "Dependent Variable",
+      "C": "Constant Variable",
+      "D": "Predictor Variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Randomization' help to reduce in an experiment?",
+    "options": {
+      "A": "The number of participants",
+      "B": "The duration of the study",
+      "C": "Selection bias and confounding variables",
+      "D": "The accuracy of the results"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "A 'Double-Blind' study is used to prevent bias from which parties?",
+    "options": {
+      "A": "The participants only",
+      "B": "The researchers only",
+      "C": "Both the participants and the researchers",
+      "D": "The financial sponsors only"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Replication' in scientific experimentation?",
+    "options": {
+      "A": "Deleting the data after the study",
+      "B": "Repeating an experiment to verify the results",
+      "C": "Writing the report in two languages",
+      "D": "Using two different labs for one study"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of data involves descriptions, feelings, or observations that cannot be easily measured by numbers?",
+    "options": {
+      "A": "Quantitative Data",
+      "B": "Qualitative Data",
+      "C": "Discrete Data",
+      "D": "Continuous Data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Placebo'?",
+    "options": {
+      "A": "A new high-strength medicine",
+      "B": "A surgical tool",
+      "C": "An inactive substance or treatment given to the control group",
+      "D": "A data analysis software"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "If an experiment measures what it actually claims to measure, it is said to have high:",
+    "options": {
+      "A": "Reliability",
+      "B": "Validity",
+      "C": "Standardization",
+      "D": "Complexity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the first step of the Scientific Method?",
+    "options": {
+      "A": "Forming a Hypothesis",
+      "B": "Analyzing Data",
+      "C": "Making an Observation",
+      "D": "Drawing a Conclusion"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which variable must be kept exactly the same for all groups in an experiment?",
+    "options": {
+      "A": "Independent Variable",
+      "B": "Dependent Variable",
+      "C": "Controlled/Constant Variable",
+      "D": "Random Variable"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Pilot Study'?",
+    "options": {
+      "A": "A study about aviation",
+      "B": "A small-scale preliminary study conducted before the main experiment",
+      "C": "The final version of a research project",
+      "D": "A study conducted by students only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Quantitative research is primarily focused on:",
+    "options": {
+      "A": "Interviews and narratives",
+      "B": "Numerical data and statistical analysis",
+      "C": "Historical documents",
+      "D": "Individual case histories"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Informed Consent'?",
+    "options": {
+      "A": "Asking a colleague for help",
+      "B": "Ensuring participants understand the study and agree to take part voluntarily",
+      "C": "Getting permission from the government",
+      "D": "A signed contract to pay the researcher"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "An outlier in a dataset is:",
+    "options": {
+      "A": "The average of all numbers",
+      "B": "The most frequent value",
+      "C": "A data point that differs significantly from other observations",
+      "D": "The title of the graph"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Sample Size'?",
+    "options": {
+      "A": "The physical height of the participants",
+      "B": "The number of observations or individuals included in a study",
+      "C": "The amount of liquid in a test tube",
+      "D": "The number of pages in the final report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Naturalistic Observation'?",
+    "options": {
+      "A": "Testing a drug in a high-tech lab",
+      "B": "Surveying people about their favorite colors",
+      "C": "Watching animal behavior in the wild without interfering",
+      "D": "Answering questions on a computer"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Correlation' between two variables mean?",
+    "options": {
+      "A": "One variable causes the other to change",
+      "B": "The variables are measured in the same units",
+      "C": "There is a statistical relationship or association between the variables",
+      "D": "The variables are both constant"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Does 'Correlation' always imply 'Causation'?",
+    "options": {
+      "A": "Yes, always",
+      "B": "No, correlation does not necessarily mean one causes the other",
+      "C": "Only in medical studies",
+      "D": "Only if the correlation is negative"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Peer Review'?",
+    "options": {
+      "A": "Checking your own work for typos",
+      "B": "Evaluation of research by other experts in the same field",
+      "C": "A presentation to the public",
+      "D": "A survey of friends"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Categorical' variable?",
+    "options": {
+      "A": "Weight in kilograms",
+      "B": "Temperature in Celsius",
+      "C": "Eye color (Blue, Brown, Green)",
+      "D": "Height in centimeters"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Mean' of a dataset?",
+    "options": {
+      "A": "The middle value",
+      "B": "The most frequent value",
+      "C": "The arithmetic average",
+      "D": "The difference between high and low"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Median' of a dataset?",
+    "options": {
+      "A": "The average",
+      "B": "The middle value when the data is ordered",
+      "C": "The sum of all values",
+      "D": "The most common value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bias' in an experiment?",
+    "options": {
+      "A": "A statistical formula",
+      "B": "A prejudice or inclination that influences results unfairly",
+      "C": "A type of lab equipment",
+      "D": "The speed of the experiment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "A 'Case Study' typically focuses on:",
+    "options": {
+      "A": "Large populations across the country",
+      "B": "A single individual, group, or event in great depth",
+      "C": "Chemical reactions in a vacuum",
+      "D": "Computer simulations of weather"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Standardization' in testing?",
+    "options": {
+      "A": "To make the test as difficult as possible",
+      "B": "To ensure the test is administered and scored consistently",
+      "C": "To translate the test into 10 languages",
+      "D": "To reduce the number of questions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which scale of measurement uses names or labels with no numerical value?",
+    "options": {
+      "A": "Ordinal",
+      "B": "Interval",
+      "C": "Nominal",
+      "D": "Ratio"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Confounding Variable'?",
+    "options": {
+      "A": "The variable you want to study",
+      "B": "An outside influence that changes the effect of both the independent and dependent variables",
+      "C": "A variable that stays the same",
+      "D": "The result of the experiment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Empirical Evidence'?",
+    "options": {
+      "A": "Opinions from famous people",
+      "B": "Information acquired by objective observation or experimentation",
+      "C": "Theories written in old books",
+      "D": "Mathematical proofs without testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'P-value' help scientists determine?",
+    "options": {
+      "A": "The physical weight of the sample",
+      "B": "The statistical significance of the results",
+      "C": "The cost of the research",
+      "D": "The number of hours the lab was used"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Single-Blind' experiment:",
+    "options": {
+      "A": "The researcher knows the group assignments, but the participants do not",
+      "B": "The participants know the assignments, but the researcher does not",
+      "C": "Neither party knows the assignments",
+      "D": "Only one participant is tested"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Attrition' in a longitudinal study?",
+    "options": {
+      "A": "Adding more participants over time",
+      "B": "The loss of participants over the course of the study",
+      "C": "The increase in funding",
+      "D": "The improvement in technology"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "A 'Survey' is best used for:",
+    "options": {
+      "A": "Determining exact cause-and-effect in a lab",
+      "B": "Collecting data on attitudes, opinions, or reported behaviors from a large group",
+      "C": "Observing brain activity during sleep",
+      "D": "Testing chemical reactions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operationalization'?",
+    "options": {
+      "A": "Starting a new business",
+      "B": "Defining variables in terms of how they will be measured or manipulated",
+      "C": "Building the lab equipment",
+      "D": "Hiring lab technicians"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable type has an absolute zero point (e.g., weight, height)?",
+    "options": {
+      "A": "Nominal",
+      "B": "Ordinal",
+      "C": "Interval",
+      "D": "Ratio"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Null Hypothesis'?",
+    "options": {
+      "A": "The hypothesis the researcher hopes is true",
+      "B": "The statement that there is no relationship or effect between variables",
+      "C": "An empty hypothesis",
+      "D": "The final conclusion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reliability' in research?",
+    "options": {
+      "A": "The truthfulness of the data",
+      "B": "The consistency of the measurement results over time",
+      "C": "The speed of data collection",
+      "D": "The cost of the tools"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which research method involves looking at past records or documents?",
+    "options": {
+      "A": "Experimental Research",
+      "B": "Archival Research",
+      "C": "Survey Research",
+      "D": "Naturalistic Observation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Likert Scale'?",
+    "options": {
+      "A": "A tool for measuring weight",
+      "B": "A rating scale used in surveys (e.g., 1 to 5, strongly disagree to strongly agree)",
+      "C": "A scale for measuring temperature",
+      "D": "A way to measure distance"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Scientific Method, what follows 'Experimentation'?",
+    "options": {
+      "A": "Observation",
+      "B": "Hypothesis generation",
+      "C": "Data Analysis",
+      "D": "Background Research"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Subjectivity'?",
+    "options": {
+      "A": "Objective measurement with tools",
+      "B": "Influence of personal feelings, tastes, or opinions",
+      "C": "A type of mathematical average",
+      "D": "The main topic of the study"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable is often called the 'Predictor' variable?",
+    "options": {
+      "A": "Independent Variable",
+      "B": "Dependent Variable",
+      "C": "Outcome Variable",
+      "D": "Controlled Variable"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "A study that follows the same participants over many years is called:",
+    "options": {
+      "A": "Cross-sectional",
+      "B": "Longitudinal",
+      "C": "Archival",
+      "D": "Retrospective"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Generalizability'?",
+    "options": {
+      "A": "The speed of the study",
+      "B": "The extent to which findings from a sample can be applied to the larger population",
+      "C": "The complexity of the instructions",
+      "D": "The amount of data collected"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Type I Error'?",
+    "options": {
+      "A": "Accepting a true null hypothesis",
+      "B": "Rejecting a true null hypothesis (False Positive)",
+      "C": "A math error in calculation",
+      "D": "Failing to reject a false null hypothesis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Type II Error'?",
+    "options": {
+      "A": "Rejecting a true null hypothesis",
+      "B": "Failing to reject a false null hypothesis (False Negative)",
+      "C": "A spelling error in the report",
+      "D": "Using the wrong lab group"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Quantitative' measurement?",
+    "options": {
+      "A": "The texture of a fabric",
+      "B": "The color of a chemical reaction",
+      "C": "The concentration of a solution (e.g., 5 molar)",
+      "D": "The smell of a sample"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Mode' of a dataset?",
+    "options": {
+      "A": "The average",
+      "B": "The most frequently occurring value",
+      "C": "The middle number",
+      "D": "The highest number minus the lowest"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Experimental Group'?",
+    "options": {
+      "A": "The group that stays the same",
+      "B": "The group that receives the treatment or manipulation",
+      "C": "The group that analyzes the data",
+      "D": "The researchers themselves"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Why is 'Ethics' important in experimentation?",
+    "options": {
+      "A": "To make the study more expensive",
+      "B": "To ensure the safety and dignity of participants",
+      "C": "To help the researcher get famous",
+      "D": "To speed up the results"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which chart is best for showing parts of a whole?",
+    "options": {
+      "A": "Line Graph",
+      "B": "Bar Chart",
+      "C": "Pie Chart",
+      "D": "Scatter Plot"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Range' of a dataset?",
+    "options": {
+      "A": "The average",
+      "B": "The middle number",
+      "C": "The difference between the highest and lowest values",
+      "D": "The sum of all values"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In research, what is a 'Population'?",
+    "options": {
+      "A": "The small group being tested",
+      "B": "The entire group that the researcher is interested in studying",
+      "C": "The number of researchers",
+      "D": "The total number of books on the topic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Debriefing'?",
+    "options": {
+      "A": "A meeting before the study starts",
+      "B": "Explaining the purpose and any deceptions of the study to participants after it is over",
+      "C": "Cleaning the lab equipment",
+      "D": "Writing the bibliography"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes data that can take any value within a range (e.g., time)?",
+    "options": {
+      "A": "Discrete",
+      "B": "Continuous",
+      "C": "Categorical",
+      "D": "Nominal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes data that can only take specific, separate values (e.g., number of children)?",
+    "options": {
+      "A": "Continuous",
+      "B": "Discrete",
+      "C": "Ratio",
+      "D": "Interval"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Observer Bias'?",
+    "options": {
+      "A": "The participants behaving differently because they are being watched",
+      "B": "When the researcher's expectations influence their observations",
+      "C": "Using a faulty camera",
+      "D": "Recording data in the wrong notebook"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The 'Hawthorne Effect' occurs when:",
+    "options": {
+      "A": "The lab equipment breaks",
+      "B": "Participants change their behavior because they know they are being studied",
+      "C": "The researcher forgets the hypothesis",
+      "D": "The results are published too early"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Meta-analysis'?",
+    "options": {
+      "A": "Thinking about your own data",
+      "B": "A statistical technique that combines results from multiple studies on the same topic",
+      "C": "Deleting data that doesn't fit",
+      "D": "A study conducted in a metaverse"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "A 'Correlation Coefficient' of +1.00 indicates:",
+    "options": {
+      "A": "No relationship",
+      "B": "A perfect positive relationship",
+      "C": "A perfect negative relationship",
+      "D": "An error in math"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Convenience Sample'?",
+    "options": {
+      "A": "A perfectly representative group",
+      "B": "A group chosen because they are easily available to the researcher",
+      "C": "A group chosen randomly from a hat",
+      "D": "A sample that is stored in a convenient box"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "The 'Direction of Causality' problem in correlation refers to:",
+    "options": {
+      "A": "The variables moving in opposite directions",
+      "B": "Not knowing which variable caused the change in the other",
+      "C": "The compass used in the lab",
+      "D": "The order of the bibliography"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ecological Validity'?",
+    "options": {
+      "A": "The study's impact on the environment",
+      "B": "The extent to which research findings can be applied to real-world settings",
+      "C": "The health of the participants",
+      "D": "Using organic materials in the lab"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section of a report interprets the results and suggests future research?",
+    "options": {
+      "A": "Introduction",
+      "B": "Methodology",
+      "C": "Results",
+      "D": "Discussion"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Statistical Power'?",
+    "options": {
+      "A": "The speed of the computer used",
+      "B": "The probability that a study will detect an effect if there is one to be found",
+      "C": "The influence of the lead scientist",
+      "D": "The number of math formulas used"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary advantage of a 'Within-Subjects' design over a 'Between-Subjects' design?",
+    "options": {
+      "A": "It eliminates the need for a control group",
+      "B": "It requires fewer participants and controls for individual differences (participant variables)",
+      "C": "It prevents any 'Order Effects' from occurring",
+      "D": "It is much faster to analyze statistically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Order Effects' in a repeated measures experiment?",
+    "options": {
+      "A": "The order in which authors are listed in a publication",
+      "B": "The sequence of tasks influencing performance (e.g., fatigue or practice effects)",
+      "C": "The chronological order of the steps in the scientific method",
+      "D": "The organization of data in a spreadsheet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technique is used to balance 'Order Effects' by varying the sequence of treatments given to different participants?",
+    "options": {
+      "A": "Random Assignment",
+      "B": "Counterbalancing",
+      "C": "Standardization",
+      "D": "Double-Blinding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Quasi-Experimental' design?",
+    "options": {
+      "A": "A study that uses only qualitative interviews",
+      "B": "A study that resembles an experiment but lacks random assignment to groups",
+      "C": "A study conducted entirely through computer simulation",
+      "D": "An experiment with more than 10 independent variables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Internal Validity' refer to?",
+    "options": {
+      "A": "How well the results generalize to the real world",
+      "B": "The extent to which we can be confident that the independent variable caused the change in the dependent variable",
+      "C": "The honesty of the participants in the study",
+      "D": "The accuracy of the internal computer clock used for timing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Factorial Design' described as a 2x3 experiment, how many independent variables are there?",
+    "options": {
+      "A": "One",
+      "B": "Two",
+      "C": "Three",
+      "D": "Six"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the same 2x3 Factorial Design, how many total unique conditions/groups are there?",
+    "options": {
+      "A": "Two",
+      "B": "Three",
+      "C": "Five",
+      "D": "Six"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'Main Effect' in a Factorial experiment?",
+    "options": {
+      "A": "The combined effect of all variables",
+      "B": "The effect of a single independent variable on the dependent variable, ignoring other variables",
+      "C": "The most expensive part of the experiment",
+      "D": "The unintended consequence of the treatment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Interaction Effect'?",
+    "options": {
+      "A": "When participants talk to each other during the study",
+      "B": "When the effect of one independent variable depends on the level of another independent variable",
+      "C": "When the researcher interacts with the control group",
+      "D": "When the data is automatically uploaded to a server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a threat to 'External Validity'?",
+    "options": {
+      "A": "Selection Bias",
+      "B": "Using a highly artificial laboratory setting",
+      "C": "Maturation of participants",
+      "D": "Instrumentation errors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Construct Validity'?",
+    "options": {
+      "A": "Building a sturdy lab bench",
+      "B": "The degree to which a test measures the theoretical concept it is intended to measure",
+      "C": "How long it takes to construct a survey",
+      "D": "The physical structure of the research report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Validity'?",
+    "options": {
+      "A": "The number of pages in the paper",
+      "B": "The extent to which a measure represents all facets of a given social construct",
+      "C": "How happy participants are with the study content",
+      "D": "Whether the journal is published online or in print"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In statistics, what is 'Standard Deviation'?",
+    "options": {
+      "A": "The difference between the high and low scores",
+      "B": "A measure of the amount of variation or dispersion in a set of values",
+      "C": "The average score of the group",
+      "D": "The total number of data points"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which statistical test is used to compare the means of exactly two groups?",
+    "options": {
+      "A": "ANOVA",
+      "B": "T-test",
+      "C": "Chi-square",
+      "D": "Regression"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which statistical test is used to compare the means of three or more groups?",
+    "options": {
+      "A": "T-test",
+      "B": "ANOVA (Analysis of Variance)",
+      "C": "Correlation",
+      "D": "Standard Deviation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Chi-square' test typically analyze?",
+    "options": {
+      "A": "The difference between means of two groups",
+      "B": "The relationship between categorical variables (frequencies)",
+      "C": "The standard deviation of a population",
+      "D": "The prediction of a continuous outcome"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Concurrent Validity'?",
+    "options": {
+      "A": "Validity that happens at the end of the study",
+      "B": "The degree to which the results of a new test correlate with a previously established test",
+      "C": "When two researchers agree on a result",
+      "D": "When the study is run in two labs simultaneously"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predictive Validity'?",
+    "options": {
+      "A": "The ability to guess the participant's age",
+      "B": "The extent to which a score on a scale predicts scores on some criterion measure later",
+      "C": "Writing the conclusion before the data is analyzed",
+      "D": "Predicting the weather for the experiment day"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Demand Characteristics'?",
+    "options": {
+      "A": "The amount of money demanded by participants",
+      "B": "Cues in an experiment that tell the participant what behavior is expected",
+      "C": "The personality of the researcher",
+      "D": "The heavy workload of a lab manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Social Desirability Bias'?",
+    "options": {
+      "A": "The researcher wanting to be famous",
+      "B": "Participants answering questions in a way that will be viewed favorably by others",
+      "C": "Only testing people from a specific social class",
+      "D": "A study about social media trends"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regression to the Mean'?",
+    "options": {
+      "A": "Data points getting smaller over time",
+      "B": "The tendency for extreme scores to move toward the average upon retesting",
+      "C": "Calculating the average of multiple regressions",
+      "D": "Participants becoming bored during a study"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Random Sampling'?",
+    "options": {
+      "A": "Assigning people to groups randomly",
+      "B": "Selecting participants from the population so that every individual has an equal chance of being chosen",
+      "C": "Picking the first 10 people you see",
+      "D": "Asking for volunteers on a website"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'Random Sampling' and 'Random Assignment'?",
+    "options": {
+      "A": "Sampling is for groups; Assignment is for individuals",
+      "B": "Sampling is for selecting a study group; Assignment is for placing them into specific conditions",
+      "C": "They are the same thing",
+      "D": "Assignment is only used in qualitative research"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standard Error'?",
+    "options": {
+      "A": "A common mistake made in the lab",
+      "B": "An estimate of how much the sample mean is likely to vary from the true population mean",
+      "C": "The total number of outliers",
+      "D": "The difference between two standard deviations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inter-rater Reliability'?",
+    "options": {
+      "A": "The speed at which a rater works",
+      "B": "The degree of agreement between different observers or researchers",
+      "C": "Comparing a rater to a computer",
+      "D": "How a rater feels about the research topic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Test-retest Reliability'?",
+    "options": {
+      "A": "Failing a test and taking it again",
+      "B": "The consistency of scores when the same test is administered at two different times",
+      "C": "Having a second person check the answers",
+      "D": "A test that has two different versions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Matched-Pairs' design?",
+    "options": {
+      "A": "Two researchers working together",
+      "B": "Participants are matched based on a specific variable and then one of each pair is assigned to different groups",
+      "C": "Using the same participants for two conditions",
+      "D": "A design where two independent variables are used"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stratified Random Sampling'?",
+    "options": {
+      "A": "Sampling only from the top layer of data",
+      "B": "Dividing the population into subgroups and then sampling randomly from each subgroup",
+      "C": "Sampling people from different countries",
+      "D": "Picking people randomly from a telephone book"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Ex Post Facto' study?",
+    "options": {
+      "A": "A study that predicts future events",
+      "B": "A study that examines variables after they have naturally occurred without manipulation",
+      "C": "A study conducted in a courtroom",
+      "D": "A study where the hypothesis is changed after the results are known"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ecological Fallacy'?",
+    "options": {
+      "A": "A mistake in measuring environmental impact",
+      "B": "Inferring characteristics about individuals based on group data",
+      "C": "The idea that nature is always perfect",
+      "D": "A study conducted in a forest that cannot be repeated"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Effect Size'?",
+    "options": {
+      "A": "The physical dimensions of the treatment",
+      "B": "A quantitative measure of the magnitude of the experimental effect",
+      "C": "The number of people affected by the study",
+      "D": "The size of the font on the questionnaire"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Type III Error' sometimes defined as in research?",
+    "options": {
+      "A": "A spelling error in the title",
+      "B": "Correctly rejecting the null hypothesis but for the wrong reason",
+      "C": "Calculating the P-value incorrectly",
+      "D": "Losing the original data files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Response Rate' in survey research?",
+    "options": {
+      "A": "How fast participants answer the questions",
+      "B": "The percentage of people who completed the survey out of those invited",
+      "C": "The heart rate of the participants",
+      "D": "The number of questions per page"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double-Barrelled Question' in a survey?",
+    "options": {
+      "A": "A question with two correct answers",
+      "B": "A single question that asks about two different issues but only allows for one answer",
+      "C": "A question asked twice for reliability",
+      "D": "A question that uses very aggressive language"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cronbach’s Alpha' used to measure?",
+    "options": {
+      "A": "The speed of light in a vacuum",
+      "B": "The internal consistency (reliability) of a set of items or a scale",
+      "C": "The difference between two group means",
+      "D": "The amount of funding for a project"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowball Sampling'?",
+    "options": {
+      "A": "Sampling performed during winter months",
+      "B": "Current participants recruiting future participants from among their acquaintances",
+      "C": "A random sample that gets larger over time",
+      "D": "Testing a hypothesis about cold weather"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Analysis'?",
+    "options": {
+      "A": "Checking if a paper is satisfying to read",
+      "B": "A research technique for the objective, systematic, and quantitative description of manifest content of communication",
+      "C": "Analyzing the chemical content of a sample",
+      "D": "The study of the weight of book contents"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Likert-type' item?",
+    "options": {
+      "A": "A math problem",
+      "B": "An individual question using a balanced rating scale (e.g., disagree to agree)",
+      "C": "A true or false question",
+      "D": "A blank space for comments"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triangulation' in research?",
+    "options": {
+      "A": "Using three participants for a study",
+      "B": "Using multiple methods or data sources to get a more comprehensive understanding",
+      "C": "A geometric measurement in the lab",
+      "D": "Testing three independent variables at once"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'History Threat' to internal validity?",
+    "options": {
+      "A": "The researcher forgetting the study's history",
+      "B": "An external event occurring during the study that affects the participants' performance",
+      "C": "The study being too old to be relevant",
+      "D": "Using historical documents that are inaccurate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Maturation Threat'?",
+    "options": {
+      "A": "The researcher becoming older and wiser",
+      "B": "Naturally occurring changes in participants over time (e.g., getting tired or growing up)",
+      "C": "The equipment becoming outdated",
+      "D": "The hypothesis becoming accepted as fact"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instrumentation Threat'?",
+    "options": {
+      "A": "Participants being afraid of the tools",
+      "B": "Changes in the measurement tool or observers over the course of the study",
+      "C": "Not having enough tools for the experiment",
+      "D": "The noise level of the instruments"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical Conclusion Validity'?",
+    "options": {
+      "A": "The ability to use a calculator correctly",
+      "B": "The degree to which conclusions about the relationship among variables based on the data are correct",
+      "C": "Winning an award for best statistics",
+      "D": "The number of decimals used in the final report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Selection-Maturation Interaction'?",
+    "options": {
+      "A": "Choosing participants who are mature",
+      "B": "When groups in a study change at different rates because of their initial characteristics",
+      "C": "Picking participants based on their age only",
+      "D": "A study about how children choose toys"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mundane Realism'?",
+    "options": {
+      "A": "A boring research topic",
+      "B": "The degree to which an experiment surface-level resembles everyday life",
+      "C": "A study about house cleaning",
+      "D": "Using standard equipment instead of fancy tools"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Experimental Realism'?",
+    "options": {
+      "A": "How much the lab looks like a movie set",
+      "B": "The extent to which an experiment absorbs and involves its participants",
+      "C": "Testing real people instead of actors",
+      "D": "Using real money in a study"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Convergent Validity'?",
+    "options": {
+      "A": "Two researchers coming to the same conclusion",
+      "B": "The degree to which two measures of constructs that theoretically should be related, are in fact related",
+      "C": "Two paths on a graph meeting",
+      "D": "A study that is repeated 10 times"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Discriminant Validity'?",
+    "options": {
+      "A": "Discriminating against a group of participants",
+      "B": "The degree to which measures of constructs that theoretically should not be related, are in fact not related",
+      "C": "Identifying the difference between two data points",
+      "D": "A test that only certain people can pass"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Face Validity'?",
+    "options": {
+      "A": "Testing a hypothesis about facial expressions",
+      "B": "The degree to which a procedure, especially a psychological test, appears effective in terms of its stated aims",
+      "C": "Scanning the participant's face for data",
+      "D": "A validity check performed by looking at the cover of the report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Criterion-Related Validity'?",
+    "options": {
+      "A": "Meeting the criteria for a grant",
+      "B": "How well one measure predicts an outcome for another measure",
+      "C": "The criteria for choosing a lab location",
+      "D": "The number of criteria used to grade a student"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Internal Consistency'?",
+    "options": {
+      "A": "The researcher staying in the lab all day",
+      "B": "The correlation between different items on the same test",
+      "C": "The results being the same across different labs",
+      "D": "The consistency of the room temperature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Likert Scale' vs a 'Likert Item'?",
+    "options": {
+      "A": "They are exactly the same",
+      "B": "An item is one question; a scale is the sum or average of multiple items",
+      "C": "A scale is for weight; an item is for length",
+      "D": "The scale is for experts; the item is for beginners"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'The Rosenthal Effect'?",
+    "options": {
+      "A": "The effect of a specific drug",
+      "B": "A type of experimenter bias where expectations lead to participants performing better",
+      "C": "A math formula for dispersion",
+      "D": "A way to analyze outliers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Artifact' in data?",
+    "options": {
+      "A": "An old object found in the ground",
+      "B": "A feature or result that is not naturally present but occurs due to the investigative procedure",
+      "C": "A high-quality data point",
+      "D": "The first result of a new study"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Manipulation Check'?",
+    "options": {
+      "A": "Checking the researcher's hands",
+      "B": "A measure used to determine whether the independent variable manipulation had its intended effect",
+      "C": "Checking if participants are cheating",
+      "D": "Validating the statistical software"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ceiling Effect'?",
+    "options": {
+      "A": "The height of the lab ceiling affecting results",
+      "B": "When a task is so easy that almost everyone gets the maximum score, making it hard to see differences",
+      "C": "The limit on how much funding a researcher can get",
+      "D": "A feeling of boredom among participants"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Floor Effect'?",
+    "options": {
+      "A": "Dropping a sample on the floor",
+      "B": "When a task is so difficult that almost everyone gets the lowest score",
+      "C": "The minimum number of participants allowed",
+      "D": "A measure of ground vibration"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A Priori' hypothesis?",
+    "options": {
+      "A": "A hypothesis formed after the results are known",
+      "B": "A hypothesis formed before the experiment is conducted",
+      "C": "A hypothesis about prior events",
+      "D": "A hypothesis that is proven to be false"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Post Hoc' analysis?",
+    "options": {
+      "A": "An analysis done before the study",
+      "B": "Statistical analysis performed after the data has been collected and patterns have been observed",
+      "C": "Analyzing the mail delivery to the lab",
+      "D": "An analysis of the researcher's previous works"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standardization' of scores (Z-scores)?",
+    "options": {
+      "A": "Making sure everyone gets the same grade",
+      "B": "Transforming scores into a common scale with a mean of 0 and SD of 1",
+      "C": "Alphabetizing the scores",
+      "D": "Dividing every score by 10"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'N-of-1' trial?",
+    "options": {
+      "A": "A study with no participants",
+      "B": "A clinical trial in which a single patient is the entire unit of observation",
+      "C": "A trial that lasts for one day",
+      "D": "A study where only one question is asked"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ecological Momentary Assessment' (EMA)?",
+    "options": {
+      "A": "Checking the weather every hour",
+      "B": "Repeated sampling of participants' current behaviors and experiences in real-time, in their natural environments",
+      "C": "A brief study on nature",
+      "D": "An assessment of the participant's house"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Reliability'?",
+    "options": {
+      "A": "The researcher's reputation outside the lab",
+      "B": "The extent to which a measure varies from one use to another",
+      "C": "How long the results stay relevant",
+      "D": "The durability of the tools"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Incidental Findings' in research?",
+    "options": {
+      "A": "Results that are not important",
+      "B": "Discoveries made that were not the original aim of the study",
+      "C": "Errors in the data analysis",
+      "D": "A list of additional citations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Debriefing' for ethics?",
+    "options": {
+      "A": "Telling a participant's family about the results",
+      "B": "Providing participants with full information about the study after it is complete, including its purpose and any deception",
+      "C": "Writing a summary for the public",
+      "D": "Asking the ethics board for a refund"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Participant Reactivity'?",
+    "options": {
+      "A": "A chemical reaction in the participant's body",
+      "B": "Changes in participant behavior caused by the awareness of being observed",
+      "C": "The participant becoming angry during the study",
+      "D": "The participant answering questions very quickly"
+    },
+    "answer": "B"
+  },
+{
+    "question": "What is the primary objective of using 'Latin Square Design' in an experiment?",
+    "options": {
+      "A": "To ensure the study is conducted in Latin America.",
+      "B": "To control for two sources of extraneous variation without needing a full factorial design.",
+      "C": "To translate the results into multiple languages simultaneously.",
+      "D": "To increase the number of participants to an infinite level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In structural equation modeling (SEM), what is a 'Latent Variable'?",
+    "options": {
+      "A": "A variable that is measured directly with high precision.",
+      "B": "A variable that is not directly observed but inferred from other variables that are observed.",
+      "C": "A variable that has been deleted from the dataset.",
+      "D": "The independent variable in a simple linear regression."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific threat to validity occurs when the initial testing process itself changes the participants' responses to a subsequent test?",
+    "options": {
+      "A": "Maturation.",
+      "B": "Testing Effect (or Reactivity to Testing).",
+      "C": "Selection Bias.",
+      "D": "Statistical Regression."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Bonferroni Correction' address in statistical analysis?",
+    "options": {
+      "A": "It corrects for spelling errors in the final report.",
+      "B": "It controls the family-wise error rate when performing multiple hypothesis tests.",
+      "C": "It increases the sample size automatically.",
+      "D": "It calculates the distance between the mean and the median."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Solomon Four-Group Design' designed to evaluate?",
+    "options": {
+      "A": "The financial cost of running four different labs.",
+      "B": "The interaction between the pretest and the experimental treatment.",
+      "C": "The difference between four different independent variables.",
+      "D": "The impact of having four researchers in one study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Heteroscedasticity'?",
+    "options": {
+      "A": "When the variance of the residual terms is constant across all levels of an independent variable.",
+      "B": "When the variance of the residual terms is not constant, violating an assumption of linear regression.",
+      "C": "When the mean of the dataset is equal to the median.",
+      "D": "When two variables have a perfect 1.0 correlation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Propensity Score Matching' technique used for?",
+    "options": {
+      "A": "Matching the font size of two different reports.",
+      "B": "Estimating the effect of a treatment by accounting for the covariates that predict receiving the treatment.",
+      "C": "Calculating the total number of participants needed for a study.",
+      "D": "Finding the average score of a group."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Generalizability Theory', what does a 'G-study' assess?",
+    "options": {
+      "A": "The gender of the researchers.",
+      "B": "The multiple sources of error variance that affect the reliability of a measurement.",
+      "C": "The geographical location of the participants.",
+      "D": "The total number of graphs in a publication."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ecological Fallacy' in research logic?",
+    "options": {
+      "A": "Mistaking a forest for a laboratory.",
+      "B": "Making inferences about individuals based on data collected at the group or aggregate level.",
+      "C": "Using plastic instead of glass in a lab.",
+      "D": "Assuming that nature is always consistent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multicollinearity' in regression analysis?",
+    "options": {
+      "A": "When the dependent variable is measured twice.",
+      "B": "When independent variables are highly correlated with each other, making it difficult to isolate their individual effects.",
+      "C": "When the data is displayed in multiple colors.",
+      "D": "When the regression line is not straight."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which index is commonly used to measure 'Internal Consistency' while specifically accounting for the dimensionality of the scale?",
+    "options": {
+      "A": "Cronbach's Alpha.",
+      "B": "McDonald's Omega.",
+      "C": "Pearson's R.",
+      "D": "Cohen's D."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dampening' in longitudinal data analysis?",
+    "options": {
+      "A": "Spilling water on the paper results.",
+      "B": "The reduction of an effect or variance over time as a study progresses.",
+      "C": "Increasing the frequency of data collection.",
+      "D": "The participants becoming more excited over time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bayesian' approach to experimentation?",
+    "options": {
+      "A": "Ignoring all previous data.",
+      "B": "Updating the probability of a hypothesis as more evidence or information becomes available.",
+      "C": "Only using qualitative interviews.",
+      "D": "A study conducted in a bay or coastal area."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sensitivity Analysis' in research?",
+    "options": {
+      "A": "Testing how sensitive participants are to noise.",
+      "B": "Testing how different values of an independent variable affect a particular dependent variable under a given set of assumptions.",
+      "C": "Asking participants about their feelings.",
+      "D": "Using a highly sensitive scale to weigh chemicals."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Factor Analysis', what is a 'Loading'?",
+    "options": {
+      "A": "The time it takes to upload data to HDFS.",
+      "B": "The correlation between an observed variable and a latent factor.",
+      "C": "The weight of the participants.",
+      "D": "The total number of factors in the study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Validity Ratio' (CVR)?",
+    "options": {
+      "A": "The ratio of text to images in a paper.",
+      "B": "A statistic used to determine the level of agreement among panelists on how essential an item is.",
+      "C": "The number of contents in a box.",
+      "D": "The speed of content delivery."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Sphericity' assume in repeated measures ANOVA?",
+    "options": {
+      "A": "That the data is shaped like a sphere.",
+      "B": "That the variances of the differences between all combinations of related groups are equal.",
+      "C": "That the participants are all the same age.",
+      "D": "That the study is conducted globally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Stepwise Regression'?",
+    "options": {
+      "A": "A regression performed while walking.",
+      "B": "A method of fitting regression models in which the choice of predictive variables is carried out by an automatic procedure.",
+      "C": "A regression with only one step.",
+      "D": "A way to visualize data step-by-step."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attrition Bias'?",
+    "options": {
+      "A": "Being biased against people who are tired.",
+      "B": "Bias introduced when the people who drop out of a study are systematically different from those who stay.",
+      "C": "Bias in the way data is entered into a computer.",
+      "D": "Bias toward researchers with more experience."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Non-Parametric' test?",
+    "options": {
+      "A": "T-test.",
+      "B": "Mann-Whitney U Test.",
+      "C": "ANOVA.",
+      "D": "Linear Regression."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Validity' 'Interaction of Setting and Treatment'?",
+    "options": {
+      "A": "The furniture in the lab affecting the study.",
+      "B": "The possibility that the results of a study would only occur in a specific environment (e.g., a high-tech lab) and not in the real world.",
+      "C": "The researcher and participant interacting in the hallway.",
+      "D": "The cost of the lab setting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Construct Underrepresentation'?",
+    "options": {
+      "A": "Not having enough construction workers in a study.",
+      "B": "When a measure fails to include important dimensions or facets of the construct it is intended to measure.",
+      "C": "Using a small font on a survey.",
+      "D": "A theory that is not well-known."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Construct-Irrelevant Variance'?",
+    "options": {
+      "A": "Variance that happens at night.",
+      "B": "Variance in test scores that is caused by factors unrelated to the construct being measured (e.g., reading ability on a math test).",
+      "C": "The difference between two different researchers.",
+      "D": "A math error in the final calculation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Item Response Theory' (IRT), what is the 'Discrimination' parameter?",
+    "options": {
+      "A": "Discriminating against a group of people.",
+      "B": "A parameter that indicates how well an item distinguishes between individuals with different levels of the trait being measured.",
+      "C": "A way to delete items from a test.",
+      "D": "The length of the test item."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Fisher's Exact Test' used for?",
+    "options": {
+      "A": "Testing the speed of a fisherman.",
+      "B": "Determining if there are non-random associations between two categorical variables, especially with small sample sizes.",
+      "C": "An exact calculation of the mean.",
+      "D": "A test for the age of a sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Alpha Inflation'?",
+    "options": {
+      "A": "The price of research rising.",
+      "B": "The increase in Type I error probability when multiple statistical tests are conducted on the same data.",
+      "C": "The first letter of the Greek alphabet getting bigger.",
+      "D": "The sample size becoming too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Curvilinear' relationship?",
+    "options": {
+      "A": "A perfectly straight line.",
+      "B": "A relationship where the data points follow a curve rather than a straight line.",
+      "C": "A relationship between three variables.",
+      "D": "A relationship that has no data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Restriction of Range'?",
+    "options": {
+      "A": "Limiting the participants to one room.",
+      "B": "When the data used in a correlation lacks the full range of possible values, usually leading to an underestimated correlation coefficient.",
+      "C": "A law about how many variables can be used.",
+      "D": "The difference between the max and min values."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standard Error of Measurement' (SEM)?",
+    "options": {
+      "A": "The most common error in a lab.",
+      "B": "An estimate of the amount of 'error' in an individual's observed score relative to their true score.",
+      "C": "The error rate of a computer.",
+      "D": "The standard deviation of the whole population."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Discriminant Analysis'?",
+    "options": {
+      "A": "Discriminating against a hypothesis.",
+      "B": "A statistical technique used to predict a categorical dependent variable based on one or more continuous independent variables.",
+      "C": "Analyzing the differences between two people.",
+      "D": "Deleting data points that are too different."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Path Analysis'?",
+    "options": {
+      "A": "The route the researcher takes to work.",
+      "B": "An extension of multiple regression used to evaluate causal models by examining the relationships between a set of variables.",
+      "C": "A map of the lab.",
+      "D": "The order of the bibliography."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time-Series Analysis'?",
+    "options": {
+      "A": "Checking the clock frequently.",
+      "B": "Analyzing a series of data points collected at successive intervals over time to identify trends or cycles.",
+      "C": "A study that only lasts for one hour.",
+      "D": "Comparing the age of two participants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exploratory Factor Analysis' (EFA) vs 'Confirmatory Factor Analysis' (CFA)?",
+    "options": {
+      "A": "EFA is for explorers; CFA is for office workers.",
+      "B": "EFA is used to discover the underlying structure of a large set of variables; CFA is used to test a specific hypothesized structure.",
+      "C": "EFA uses Python; CFA uses Java.",
+      "D": "EFA is for small data; CFA is for big data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Differential Item Functioning' (DIF)?",
+    "options": {
+      "A": "Items on a test that are broken.",
+      "B": "When individuals from different groups with the same latent trait level have a different probability of giving a certain answer on a test item.",
+      "C": "The items being in a different order.",
+      "D": "A test that has different fonts for different items."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Homogeneity of Variance'?",
+    "options": {
+      "A": "The data being all the same number.",
+      "B": "The assumption that the different groups being compared have roughly equal variances.",
+      "C": "The participants coming from the same city.",
+      "D": "The independent variable having no effect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Survival Analysis'?",
+    "options": {
+      "A": "A study on outdoor survival skills.",
+      "B": "A branch of statistics for analyzing the expected duration of time until one or more events happen.",
+      "C": "A study that lasts for 100 years.",
+      "D": "Checking if participants are still alive after a study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an experiment, what is 'History' as a threat to internal validity?",
+    "options": {
+      "A": "The researcher's past experience.",
+      "B": "External events that occur between the first and second measurements that could affect the outcome.",
+      "C": "The historical context of the topic.",
+      "D": "A participant's personal history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical Power' (1 - Beta)?",
+    "options": {
+      "A": "The speed of the statistical software.",
+      "B": "The probability of correctly rejecting a false null hypothesis.",
+      "C": "The influence of the lead statistician.",
+      "D": "The number of calculations per second."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Moderation' vs 'Mediation'?",
+    "options": {
+      "A": "Moderation is about 'When'; Mediation is about 'How/Why'.",
+      "B": "Moderation is for experts; Mediation is for beginners.",
+      "C": "They are the same concept.",
+      "D": "Moderation uses a group; Mediation uses an individual."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Standardized' 'Beta' coefficient in regression?",
+    "options": {
+      "A": "The first result of a regression.",
+      "B": "A coefficient that has been normalized so its value represents the change in the dependent variable in terms of standard deviations.",
+      "C": "The font used for beta.",
+      "D": "A coefficient that is only for small datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Testing' in a digital context?",
+    "options": {
+      "A": "Testing the letters A and B.",
+      "B": "A randomized experiment with two variants, A and B, used to identify which one performs better.",
+      "C": "A study with only two participants.",
+      "D": "A test that takes two days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multivariate Analysis of Variance' (MANOVA)?",
+    "options": {
+      "A": "An ANOVA with many researchers.",
+      "B": "An ANOVA that tests multiple dependent variables simultaneously.",
+      "C": "An ANOVA that lasts for multiple years.",
+      "D": "An ANOVA with many independent variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-Validation'?",
+    "options": {
+      "A": "Validating the data twice.",
+      "B": "A technique for assessing how the results of a statistical analysis will generalize to an independent data set.",
+      "C": "Two researchers checking each other's work.",
+      "D": "A way to delete invalid data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Effect Size' 'Cohen's d'?",
+    "options": {
+      "A": "The size of a person named Cohen.",
+      "B": "A measure of the standardized difference between two means.",
+      "C": "The number of people in Cohen's group.",
+      "D": "The weight of a sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grounded Theory'?",
+    "options": {
+      "A": "A theory about the Earth.",
+      "B": "A qualitative research methodology that involves developing theory through the analysis of data.",
+      "C": "A theory that is proven to be true.",
+      "D": "A theory taught in elementary school."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ethical' 'Equipoise'?",
+    "options": {
+      "A": "Balanced scales in a lab.",
+      "B": "The ethical requirement that there be genuine uncertainty in the expert medical community over which treatment is better.",
+      "C": "A researcher having a balanced life.",
+      "D": "The cost of the ethics review."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hierarchical Linear Modeling' (HLM)?",
+    "options": {
+      "A": "A regression where the most famous person is first.",
+      "B": "A statistical model used to analyze data that is nested within groups (e.g., students within classrooms).",
+      "C": "A model with 10 different layers.",
+      "D": "A way to sort data by height."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cronbach’s Alpha' 'Lower Bound'?",
+    "options": {
+      "A": "The lowest score on a test.",
+      "B": "Alpha is considered a lower-bound estimate of reliability, meaning the true reliability is usually higher.",
+      "C": "A mathematical error.",
+      "D": "The first question on a survey."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Construct' 'Divergent' validity?",
+    "options": {
+      "A": "Validity that changes over time.",
+      "B": "Showing that a measure is NOT related to measures of different constructs.",
+      "C": "A study that is split into two paths.",
+      "D": "Two researchers disagreeing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Principal Component Analysis' (PCA)?",
+    "options": {
+      "A": "Analyzing the principal of a school.",
+      "B": "A dimensionality-reduction method that is often used to reduce the dimensionality of large data sets.",
+      "C": "Finding the most important person in a study.",
+      "D": "The main component of a chemical."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Logistic Regression' used for?",
+    "options": {
+      "A": "Predicting a continuous number.",
+      "B": "Predicting a binary outcome (e.g., Yes/No, Success/Failure).",
+      "C": "Analyzing the logistics of a lab.",
+      "D": "A regression with 10 independent variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sample' 'Representativeness'?",
+    "options": {
+      "A": "How many people are in the sample.",
+      "B": "The degree to which the sample accurately reflects the characteristics of the population.",
+      "C": "How famous the participants are.",
+      "D": "The cost of the sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Power Analysis' 'A Priori'?",
+    "options": {
+      "A": "Analyzing power after the study.",
+      "B": "Determining the required sample size before a study starts to achieve a certain level of statistical power.",
+      "C": "A study on electricity.",
+      "D": "A way to speed up the computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Missing Data' 'Imputation'?",
+    "options": {
+      "A": "Deleting all missing data.",
+      "B": "The process of replacing missing data with substituted values.",
+      "C": "Ignoring the missing data.",
+      "D": "Asking the participant for the data again."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Factor' 'Rotation' in Factor Analysis?",
+    "options": {
+      "A": "Rotating the paper results.",
+      "B": "A mathematical transformation of the factor axes to make the results more interpretable.",
+      "C": "Changing the order of the researchers.",
+      "D": "A study conducted in a rotating room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Structural' 'Invariance'?",
+    "options": {
+      "A": "A building that never falls down.",
+      "B": "The property of a model where the relationships between variables remain consistent across different groups or time points.",
+      "C": "A formula that never changes.",
+      "D": "The structure of the lab being constant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Propensity' 'Matching' 'Caliper'?",
+    "options": {
+      "A": "A tool to measure the thickness of paper.",
+      "B": "The maximum allowed distance between matched propensity scores.",
+      "C": "The speed of the matching process.",
+      "D": "A way to count the number of matches."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ordinal' 'Logistic Regression'?",
+    "options": {
+      "A": "A regression for numbers 1 to 10.",
+      "B": "A type of regression used when the dependent variable is ordinal (ranked).",
+      "C": "A regular regression done in order.",
+      "D": "A regression for categorical data with no order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bootstrap' 'Resampling'?",
+    "options": {
+      "A": "Starting a computer.",
+      "B": "A technique that involves repeatedly sampling from a data set with replacement to estimate the sampling distribution of a statistic.",
+      "C": "Putting on boots for a study.",
+      "D": "A way to delete data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dixon’s Q-Test'?",
+    "options": {
+      "A": "A test for the letter Q.",
+      "B": "A statistical test used to identify and reject outliers in small datasets.",
+      "C": "A test for the quality of the sample.",
+      "D": "A test for the speed of data collection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multivariate' 'Normality'?",
+    "options": {
+      "A": "Everyone behaving normally in a study.",
+      "B": "The assumption that all combinations of variables in a multivariate dataset are normally distributed.",
+      "C": "A dataset with only one variable.",
+      "D": "The mean being equal to zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fixed Effects' vs 'Random Effects'?",
+    "options": {
+      "A": "Fixed effects are for permanent things; Random are for temporary.",
+      "B": "Fixed effects assume that the data is the entire population; Random assume it is a sample from a larger population.",
+      "C": "Fixed effects are for numbers; Random are for words.",
+      "D": "Fixed effects never change; Random change every day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mahalanobis Distance'?",
+    "options": {
+      "A": "The distance from the lab to the city.",
+      "B": "A measure of the distance between a point and a distribution, often used to detect multivariate outliers.",
+      "C": "The height of a researcher named Mahalanobis.",
+      "D": "The time it takes to travel between two points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hausman Test'?",
+    "options": {
+      "A": "A test for house prices.",
+      "B": "A statistical test used to decide between fixed effects or random effects models in econometrics.",
+      "C": "A test for the presence of a ghost in a house.",
+      "D": "A test for the durability of a lab building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gini Coefficient' used for in research?",
+    "options": {
+      "A": "Measuring the cost of a study.",
+      "B": "Measuring statistical dispersion or inequality within a distribution.",
+      "C": "Calculating the number of authors.",
+      "D": "Determining the age of a sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kolmogorov-Smirnov' (K-S) test?",
+    "options": {
+      "A": "A test for the presence of chemicals.",
+      "B": "A non-parametric test used to determine if a sample comes from a specific distribution (e.g., normal distribution).",
+      "C": "A test for the speed of light.",
+      "D": "A test for the quality of HDFS data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Levene's Test'?",
+    "options": {
+      "A": "A test for the presence of water.",
+      "B": "A test used to check the assumption of homogeneity of variance before performing an ANOVA.",
+      "C": "A test for the personality of a researcher.",
+      "D": "A test for the weight of a sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shapiro-Wilk' test?",
+    "options": {
+      "A": "A test for the presence of animals.",
+      "B": "A statistical test specifically used to check the assumption of normality in a dataset.",
+      "C": "A test for the speed of a computer.",
+      "D": "A test for the height of a researcher."
+    },
+    "answer": "B"
+  }
+  ]
+}

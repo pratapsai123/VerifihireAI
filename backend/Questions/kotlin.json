@@ -1,0 +1,2001 @@
+{
+  "skill": "kotlin",
+  "questions": [
+    {
+      "question": "Which keyword is used to declare a read-only (immutable) variable in Kotlin?",
+      "options": {
+        "A": "var",
+        "B": "const",
+        "C": "val",
+        "D": "let"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you declare a nullable String in Kotlin?",
+      "options": {
+        "A": "String",
+        "B": "String?",
+        "C": "Nullable<String>",
+        "D": "Optional<String>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator is known as the 'Elvis Operator' in Kotlin?",
+      "options": {
+        "A": "!!",
+        "B": "?.",
+        "C": "?:",
+        "D": "->"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the default return type of a function that does not return any meaningful value?",
+      "options": {
+        "A": "Void",
+        "B": "Null",
+        "C": "Unit",
+        "D": "Empty"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of these is used to check the type of an object in Kotlin?",
+      "options": {
+        "A": "instanceof",
+        "B": "is",
+        "C": "typeof",
+        "D": "as"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you create a helper for string concatenation using variables (String Templates)?",
+      "options": {
+        "A": "'Hello ' + name",
+        "B": "\"Hello $name\"",
+        "C": "\"Hello {name}\"",
+        "D": "String.format(\"Hello %s\", name)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword replaces the traditional 'switch' statement in Kotlin?",
+      "options": {
+        "A": "select",
+        "B": "match",
+        "C": "when",
+        "D": "case"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the '!!' operator do?",
+      "options": {
+        "A": "Safely unwraps a value",
+        "B": "Checks for equality",
+        "C": "Converts any value to a non-null type and throws an exception if it is null",
+        "D": "Inverts a boolean value"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you define a function in Kotlin?",
+      "options": {
+        "A": "function myFunc()",
+        "B": "def myFunc()",
+        "C": "fun myFunc()",
+        "D": "void myFunc()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which function allows you to iterate over a range from 1 to 5 inclusive?",
+      "options": {
+        "A": "for (i in 1..5)",
+        "B": "for (i in 1 until 5)",
+        "C": "for (i in 1 to 5)",
+        "D": "for (i from 1 to 5)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the difference between 'val' and 'var'?",
+      "options": {
+        "A": "val is for classes, var is for functions",
+        "B": "val is immutable, var is mutable",
+        "C": "val is mutable, var is immutable",
+        "D": "There is no difference"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to handle exceptions in Kotlin?",
+      "options": {
+        "A": "try-catch",
+        "B": "throw",
+        "C": "finally",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "How do you define a primary constructor in Kotlin?",
+      "options": {
+        "A": "Inside the class body",
+        "B": "Right after the class name in the header",
+        "C": "Using the 'init' keyword only",
+        "D": "Using the 'constructor' keyword inside the class"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the entry point of a Kotlin program?",
+      "options": {
+        "A": "fun main()",
+        "B": "void main()",
+        "C": "fun start()",
+        "D": "static void main()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a valid way to create an array in Kotlin?",
+      "options": {
+        "A": "arrayOf(1, 2, 3)",
+        "B": "int[] {1, 2, 3}",
+        "C": "Array(1, 2, 3)",
+        "D": "[1, 2, 3]"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'step' keyword do in a for loop?",
+      "options": {
+        "A": "Stops the loop",
+        "B": "Changes the increment interval of the loop",
+        "C": "Skips the current iteration",
+        "D": "Goes to the next function"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator is used for 'Safe Calls'?",
+      "options": {
+        "A": "!!",
+        "B": "?:",
+        "C": "?.",
+        "D": "as?"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In Kotlin, are semicolons mandatory at the end of statements?",
+      "options": {
+        "A": "Yes",
+        "B": "No",
+        "C": "Only in classes",
+        "D": "Only inside functions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Identity Equality' operator in Kotlin?",
+      "options": {
+        "A": "==",
+        "B": "===",
+        "C": ".equals()",
+        "D": "is"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to import a package?",
+      "options": {
+        "A": "include",
+        "B": "using",
+        "C": "import",
+        "D": "package"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you define a multiline string in Kotlin?",
+      "options": {
+        "A": "Using single quotes",
+        "B": "Using triple quotes \"\"\"",
+        "C": "Using backticks",
+        "D": "Using /n"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'downTo' keyword?",
+      "options": {
+        "A": "To divide a number",
+        "B": "To iterate backwards in a range",
+        "C": "To cast a variable",
+        "D": "To exit a loop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Any' represent in Kotlin?",
+      "options": {
+        "A": "A nullable type",
+        "B": "The root of the Kotlin class hierarchy",
+        "C": "A generic placeholder",
+        "D": "A dynamic type"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used for a 'Safe Cast'?",
+      "options": {
+        "A": "as",
+        "B": "as?",
+        "C": "is",
+        "D": "check"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of 5 / 2 in Kotlin (Integer division)?",
+      "options": {
+        "A": "2.5",
+        "B": "2",
+        "C": "3",
+        "D": "Error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword allows you to check if a value is NOT in a range?",
+      "options": {
+        "A": "not in",
+        "B": "!in",
+        "C": "outside",
+        "D": "exclude"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Data Class' in Kotlin primarily used for?",
+      "options": {
+        "A": "UI logic",
+        "B": "Storing data and automatically generating toString(), equals(), etc.",
+        "C": "Handling network requests",
+        "D": "Creating singletons"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to inherit from a class or implement an interface?",
+      "options": {
+        "A": "extends",
+        "B": "implements",
+        "C": "A colon (:)",
+        "D": "inherit"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "By default, are Kotlin classes final or open?",
+      "options": {
+        "A": "Final (cannot be inherited)",
+        "B": "Open (can be inherited)",
+        "C": "Abstract",
+        "D": "Static"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword makes a class inheritable?",
+      "options": {
+        "A": "public",
+        "B": "open",
+        "C": "internal",
+        "D": "sealed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Secondary Constructor'?",
+      "options": {
+        "A": "The only constructor allowed in a class",
+        "B": "An additional constructor prefixed with the 'constructor' keyword",
+        "C": "A constructor that is private",
+        "D": "A constructor that returns a different class"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which block is used for initialization logic in a class?",
+      "options": {
+        "A": "init { }",
+        "B": "constructor { }",
+        "C": "main { }",
+        "D": "setup { }"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you create a Singleton in Kotlin?",
+      "options": {
+        "A": "Using 'class' with a private constructor",
+        "B": "Using the 'object' keyword",
+        "C": "Using the 'singleton' keyword",
+        "D": "Using a static factory method"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Companion Object'?",
+      "options": {
+        "A": "An object that stays with the class and acts like 'static' in Java",
+        "B": "A nested class",
+        "C": "An interface implementation",
+        "D": "A private variable"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to define an interface?",
+      "options": {
+        "A": "protocol",
+        "B": "interface",
+        "C": "contract",
+        "D": "abstract"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Can an interface in Kotlin contain property declarations?",
+      "options": {
+        "A": "Yes",
+        "B": "No"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which visibility modifier is the default in Kotlin?",
+      "options": {
+        "A": "private",
+        "B": "protected",
+        "C": "internal",
+        "D": "public"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does 'internal' visibility mean?",
+      "options": {
+        "A": "Visible only within the class",
+        "B": "Visible only within the same file",
+        "C": "Visible only within the same module",
+        "D": "Visible to everyone"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you declare a constant that is known at compile-time?",
+      "options": {
+        "A": "val",
+        "B": "const val",
+        "C": "static val",
+        "D": "final val"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a valid Kotlin collection?",
+      "options": {
+        "A": "List",
+        "B": "Set",
+        "C": "Map",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the difference between List and MutableList?",
+      "options": {
+        "A": "List is for integers, MutableList is for strings",
+        "B": "List is read-only, MutableList can be modified",
+        "C": "MutableList is faster",
+        "D": "There is no difference"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to create a mutable map?",
+      "options": {
+        "A": "mapOf()",
+        "B": "mutableMapOf()",
+        "C": "hashMapOf()",
+        "D": "B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "How do you access the first element of a list 'items'?",
+      "options": {
+        "A": "items[0]",
+        "B": "items.first()",
+        "C": "items.get(0)",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'Smart Casting' in Kotlin?",
+      "options": {
+        "A": "Manually casting every variable",
+        "B": "The compiler automatically casting a variable after a type check",
+        "C": "Casting variables at runtime only",
+        "D": "Converting a string to an int"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to mark a function as a 'Tail-Recursive' function?",
+      "options": {
+        "A": "recursive",
+        "B": "tailrec",
+        "C": "loop",
+        "D": "optimized"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a functional programming feature of Kotlin?",
+      "options": {
+        "A": "Higher-order functions",
+        "B": "Lambda expressions",
+        "C": "In-line functions",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "How do you denote a lambda expression?",
+      "options": {
+        "A": "{ x -> x * x }",
+        "B": "(x) => x * x",
+        "C": "lambda(x) { x * x }",
+        "D": "func(x) { return x * x }"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the implicit name for a single parameter in a lambda?",
+      "options": {
+        "A": "this",
+        "B": "it",
+        "C": "self",
+        "D": "arg"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to transform a list into another list by applying a function?",
+      "options": {
+        "A": "filter",
+        "B": "map",
+        "C": "reduce",
+        "D": "forEach"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'filter' do to a collection?",
+      "options": {
+        "A": "Changes every element",
+        "B": "Returns a list containing only elements that match a given predicate",
+        "C": "Removes the collection from memory",
+        "D": "Sorts the collection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to declare a nested class that can access the members of its outer class?",
+      "options": {
+        "A": "nested",
+        "B": "inner",
+        "C": "internal",
+        "D": "static"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Extension Function' in Kotlin?",
+      "options": {
+        "A": "A function that can only be used inside a class",
+        "B": "A way to add new functions to existing classes without inheriting from them",
+        "C": "A function that extends the execution time of a program",
+        "D": "A function that must be declared in an interface"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to define a class that represents a restricted class hierarchy?",
+      "options": {
+        "A": "enum",
+        "B": "sealed",
+        "C": "closed",
+        "D": "private"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you call an extension function 'isEven()' on an Int variable named 'num'?",
+      "options": {
+        "A": "isEven(num)",
+        "B": "num.isEven()",
+        "C": "Int.isEven(num)",
+        "D": "num->isEven()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between a 'Sealed Class' and an 'Enum'?",
+      "options": {
+        "A": "Enums can have multiple instances; Sealed classes cannot",
+        "B": "Sealed class cases can have multiple instances with their own state; Enum cases are singletons",
+        "C": "Enums are for numbers; Sealed classes are for strings",
+        "D": "There is no difference"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is used to refer to the current instance of a class?",
+      "options": {
+        "A": "self",
+        "B": "super",
+        "C": "this",
+        "D": "me"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which keyword is used to override a member of a superclass?",
+      "options": {
+        "A": "new",
+        "B": "override",
+        "C": "replace",
+        "D": "over"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you implement multiple interfaces in a single class?",
+      "options": {
+        "A": "class MyClass : InterfaceA, InterfaceB",
+        "B": "class MyClass extends InterfaceA, InterfaceB",
+        "C": "class MyClass : InterfaceA & InterfaceB",
+        "D": "class MyClass : InterfaceA + InterfaceB"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'init' block used for?",
+      "options": {
+        "A": "To declare variables",
+        "B": "To run code during the initialization of a class instance",
+        "C": "To start a background thread",
+        "D": "To define the main entry point"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Lateinit' variable used for?",
+      "options": {
+        "A": "To declare a variable that will be initialized later, avoiding null checks",
+        "B": "To declare a variable that is always null",
+        "C": "To slow down the initialization of a class",
+        "D": "To define a constant"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Can 'lateinit' be used with primitive types like Int or Boolean?",
+      "options": {
+        "A": "Yes",
+        "B": "No"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'delegated property' keyword in Kotlin?",
+      "options": {
+        "A": "using",
+        "B": "by",
+        "C": "delegate",
+        "D": "from"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which standard delegate is used to initialize a property only when it is first accessed?",
+      "options": {
+        "A": "observable",
+        "B": "lazy",
+        "C": "lateinit",
+        "D": "vetoable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you check if a 'lateinit' property has been initialized?",
+      "options": {
+        "A": "if (property != null)",
+        "B": "if (::property.isInitialized)",
+        "C": "if (property.exists())",
+        "D": "if (property == initialized)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these scope functions returns the result of the lambda expression?",
+      "options": {
+        "A": "also",
+        "B": "apply",
+        "C": "run",
+        "D": "Both 'run' and 'let'"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which scope function is primarily used for object configuration and returns the object itself?",
+      "options": {
+        "A": "let",
+        "B": "apply",
+        "C": "run",
+        "D": "with"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Abstract' classes?",
+      "options": {
+        "A": "To create instances of generic objects",
+        "B": "To provide a base class that cannot be instantiated on its own",
+        "C": "To speed up the app",
+        "D": "To hide code from other developers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to call the superclass constructor or method?",
+      "options": {
+        "A": "parent",
+        "B": "base",
+        "C": "super",
+        "D": "this"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is a 'typealias' used for?",
+      "options": {
+        "A": "To rename a variable",
+        "B": "To provide an alternative name for an existing type",
+        "C": "To create a new class",
+        "D": "To define a macro"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'infix' keyword used for?",
+      "options": {
+        "A": "To call a function without dots or parentheses (e.g., 'a plus b')",
+        "B": "To make a function private",
+        "C": "To allow a function to return multiple values",
+        "D": "To define a mathematical formula"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the correct way to declare an 'Enum' class?",
+      "options": {
+        "A": "enum Color { RED, GREEN }",
+        "B": "enum class Color { RED, GREEN }",
+        "C": "class enum Color { RED, GREEN }",
+        "D": "sealed enum Color { RED, GREEN }"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to convert a list to a set to remove duplicates?",
+      "options": {
+        "A": "toList()",
+        "B": "toSet()",
+        "C": "distinct()",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the 'Nothing' type in Kotlin?",
+      "options": {
+        "A": "A synonym for Unit",
+        "B": "A type that has no instances and represents a value that never exists (e.g., a function that always throws an exception)",
+        "C": "A nullable object",
+        "D": "An empty list"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword allows a function to be passed as a parameter?",
+      "options": {
+        "A": "inline",
+        "B": "The function type syntax (e.g., (Int) -> String)",
+        "C": "callback",
+        "D": "lambda"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Inline' function?",
+      "options": {
+        "A": "A function defined in a single line",
+        "B": "A function where the compiler replaces the call with the actual code of the function to reduce overhead",
+        "C": "A function that runs in the background",
+        "D": "A private function"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'destructuring declaration'?",
+      "options": {
+        "A": "Deleting a class",
+        "B": "Unpacking an object into multiple variables (e.g., val (x, y) = point)",
+        "C": "Splitting a string",
+        "D": "Breaking a loop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to define a 'Value Class' (previously Inline Class)?",
+      "options": {
+        "A": "inline class",
+        "B": "value class",
+        "C": "data class",
+        "D": "Both A and B (A is deprecated)"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does the 'field' identifier represent inside a custom setter?",
+      "options": {
+        "A": "The class itself",
+        "B": "The backing field of the property",
+        "C": "The value being assigned",
+        "D": "A global variable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these functions is used to find an element in a collection or return null if not found?",
+      "options": {
+        "A": "get()",
+        "B": "find()",
+        "C": "search()",
+        "D": "filter()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'backing property' in Kotlin?",
+      "options": {
+        "A": "A copy of a variable",
+        "B": "A private property that holds the data for a public property",
+        "C": "A variable stored on a disk",
+        "D": "A deleted property"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you create a range that excludes the last element?",
+      "options": {
+        "A": "1..10",
+        "B": "1 until 10",
+        "C": "1 to 10",
+        "D": "1 downTo 10"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'operator' keyword?",
+      "options": {
+        "A": "To declare a math teacher class",
+        "B": "To overload standard operators like + or ",
+        "C": "To define a new symbol",
+        "D": "To start a background process"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to execute a block only if an object is not null?",
+      "options": {
+        "A": "run",
+        "B": "let",
+        "C": "also",
+        "D": "check"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Higher-Order Function'?",
+      "options": {
+        "A": "A function that is very long",
+        "B": "A function that takes another function as a parameter or returns one",
+        "C": "A function that is static",
+        "D": "A function with many arguments"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you define a default value for a function parameter?",
+      "options": {
+        "A": "fun greet(name: String = \\\"Guest\\\")",
+        "B": "fun greet(name: String : \\\"Guest\\\")",
+        "C": "fun greet(name: String ? \\\"Guest\\\")",
+        "D": "fun greet(name: String || \\\"Guest\\\")"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'reified' keyword used for?",
+      "options": {
+        "A": "To make a variable constant",
+        "B": "To access the type information of a generic parameter at runtime inside an inline function",
+        "C": "To restart a function",
+        "D": "To verify a null value"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a valid way to create a list of strings?",
+      "options": {
+        "A": "listOf(\"A\", \"B\")",
+        "B": "mutableListOf(\"A\", \"B\")",
+        "C": "arrayListOf(\"A\", \"B\")",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the result of 'println(null ?: \"Default\")'?",
+      "options": {
+        "A": "null",
+        "B": "Default",
+        "C": "Error",
+        "D": "Nothing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to define a 'Singleton' inside a class?",
+      "options": {
+        "A": "object",
+        "B": "companion object",
+        "C": "static",
+        "D": "single"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'crossinline' keyword do?",
+      "options": {
+        "A": "Allows a lambda to return from the outer function",
+        "B": "Prevents a lambda from using non-local returns",
+        "C": "Makes a function run on multiple threads",
+        "D": "Converts a lambda to a class"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you call a function with named arguments?",
+      "options": {
+        "A": "greet(user = \"John\")",
+        "B": "greet(\"John\" as user)",
+        "C": "greet(:user \"John\")",
+        "D": "greet(user : \"John\")"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is used to concatenate strings in a performant way?",
+      "options": {
+        "A": "StringBuilder",
+        "B": "String Templates ($)",
+        "C": "The '+' operator",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is an 'Annotation' in Kotlin?",
+      "options": {
+        "A": "A comment",
+        "B": "Metadata that provides data about the program but is not part of the program itself",
+        "C": "A type of error",
+        "D": "A mathematical formula"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to declare an annotation class?",
+      "options": {
+        "A": "@class",
+        "B": "annotation class",
+        "C": "metadata class",
+        "D": "note class"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'vararg' keyword used for?",
+      "options": {
+        "A": "To declare a variable that changes type",
+        "B": "To allow a function to accept a variable number of arguments",
+        "C": "To declare a global variable",
+        "D": "To mark a variable as private"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator is used to spread an array into vararg parameters?",
+      "options": {
+        "A": "&",
+        "B": "",
+        "C": "...",
+        "D": "@"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Pair' and 'Triple' in Kotlin?",
+      "options": {
+        "A": "To perform math operations",
+        "B": "To store 2 or 3 related values without creating a custom data class",
+        "C": "To define loop counters",
+        "D": "To manage threads"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function returns a list containing all elements except the first n elements?",
+      "options": {
+        "A": "remove(n)",
+        "B": "drop(n)",
+        "C": "skip(n)",
+        "D": "slice(n)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Visibility Modifier' for members of an Interface?",
+      "options": {
+        "A": "Always private",
+        "B": "Always public by default",
+        "C": "Internal by default",
+        "D": "Protected"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to define a 'Contract' in Kotlin (Experimental)?",
+      "options": {
+        "A": "contract",
+        "B": "rule",
+        "C": "ensure",
+        "D": "expect"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to mark a function that can be paused and resumed later?",
+      "options": {
+        "A": "async",
+        "B": "suspend",
+        "C": "await",
+        "D": "yield"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the main advantage of Coroutines over Threads?",
+      "options": {
+        "A": "They are much lighter and can run in the thousands without overhead",
+        "B": "They are only for UI updates",
+        "C": "They cannot be cancelled",
+        "D": "They always run on the main thread"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Coroutine builder returns a 'Job' and does not provide a result?",
+      "options": {
+        "A": "async",
+        "B": "launch",
+        "C": "runBlocking",
+        "D": "withContext"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Coroutine builder is used to get a result back (returns Deferred<T>)?",
+      "options": {
+        "A": "launch",
+        "B": "async",
+        "C": "produce",
+        "D": "broadcast"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you wait for the result of an 'async' block?",
+      "options": {
+        "A": "job.join()",
+        "B": "deferred.await()",
+        "C": "deferred.get()",
+        "D": "job.wait()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'CoroutineScope' used for?",
+      "options": {
+        "A": "To define the lifetime of a coroutine",
+        "B": "To debug code",
+        "C": "To print logs",
+        "D": "To create a new class"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Dispatcher is optimized for disk or network I/O tasks?",
+      "options": {
+        "A": "Dispatchers.Main",
+        "B": "Dispatchers.Default",
+        "C": "Dispatchers.IO",
+        "D": "Dispatchers.Unconfined"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which Dispatcher is used for CPU-intensive work (like sorting large lists)?",
+      "options": {
+        "A": "Dispatchers.Main",
+        "B": "Dispatchers.Default",
+        "C": "Dispatchers.IO",
+        "D": "Dispatchers.Unconfined"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Structured Concurrency' in Kotlin?",
+      "options": {
+        "A": "Running tasks in a random order",
+        "B": "Ensuring new coroutines are launched within a specific scope to prevent leaks",
+        "C": "Using only one thread",
+        "D": "A way to write faster loops"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to switch the context of a coroutine?",
+      "options": {
+        "A": "switchContext",
+        "B": "withContext",
+        "C": "changeDispatcher",
+        "D": "moveTask"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if a coroutine is cancelled?",
+      "options": {
+        "A": "It stops immediately without any check",
+        "B": "It throws a CancellationException at the next suspension point",
+        "C": "It crashes the app",
+        "D": "It restarts automatically"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Flow' in Kotlin Coroutines?",
+      "options": {
+        "A": "A single value returned asynchronously",
+        "B": "A stream of values that are computed asynchronously and cold by default",
+        "C": "A type of loop",
+        "D": "A UI component"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the difference between a 'Cold Flow' and a 'Hot Flow'?",
+      "options": {
+        "A": "Cold Flow starts only when collected; Hot Flow emits even without subscribers",
+        "B": "Cold Flow is for UI; Hot Flow is for Data",
+        "C": "Hot Flow is slower",
+        "D": "There is no difference"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which terminal operator is used to start receiving values from a Flow?",
+      "options": {
+        "A": "start()",
+        "B": "collect()",
+        "C": "emit()",
+        "D": "flow()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'StateFlow'?",
+      "options": {
+        "A": "A flow that never changes",
+        "B": "A hot flow that represents a state and always holds the latest value",
+        "C": "A flow used for database migrations",
+        "D": "A private flow"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'SharedFlow'?",
+      "options": {
+        "A": "A flow that can be shared among multiple collectors",
+        "B": "A flow that deletes data after reading",
+        "C": "A flow only for integers",
+        "D": "A flow that runs on one thread only"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to handle exceptions inside a coroutine?",
+      "options": {
+        "A": "CoroutineExceptionHandler",
+        "B": "try-catch",
+        "C": "catchCoroutine",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does 'yield()' do inside a coroutine?",
+      "options": {
+        "A": "Stops the coroutine forever",
+        "B": "Gives other coroutines a chance to run on the current thread",
+        "C": "Returns a value to the caller",
+        "D": "Crashes the program"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'runBlocking'?",
+      "options": {
+        "A": "To run a coroutine in the background",
+        "B": "To bridge regular blocking code and coroutines (usually in tests or main)",
+        "C": "To prevent a loop from running",
+        "D": "To encrypt data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Sequence' in Kotlin?",
+      "options": {
+        "A": "A list that is stored in memory",
+        "B": "A lazily evaluated collection that performs operations one element at a time",
+        "C": "A mathematical formula",
+        "D": "A type of array"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the benefit of using 'Sequence' over 'List' for large datasets?",
+      "options": {
+        "A": "It is always faster for small lists",
+        "B": "It avoids creating intermediate collections for each transformation",
+        "C": "It stores data in a database",
+        "D": "It makes code shorter"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function converts a Collection into a Sequence?",
+      "options": {
+        "A": "toSequence()",
+        "B": "asSequence()",
+        "C": "makeSequence()",
+        "D": "sequenceOf()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of 'listOf(1, 2, 3).fold(10) { acc, i -> acc + i }'?",
+      "options": {
+        "A": "6",
+        "B": "16",
+        "C": "10",
+        "D": "13"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the difference between 'fold' and 'reduce'?",
+      "options": {
+        "A": "fold takes an initial accumulator value; reduce uses the first element as the initial value",
+        "B": "reduce is only for strings",
+        "C": "fold is slower",
+        "D": "There is no difference"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to group elements of a list by a key?",
+      "options": {
+        "A": "sortBy()",
+        "B": "groupBy()",
+        "C": "associateBy()",
+        "D": "filterBy()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'associateBy' do?",
+      "options": {
+        "A": "Groups elements into lists",
+        "B": "Creates a Map where elements are the values and the key is derived from the element",
+        "C": "Sorts the elements",
+        "D": "Deletes the list"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to flatten a list of lists into a single list?",
+      "options": {
+        "A": "merge()",
+        "B": "flatten()",
+        "C": "compact()",
+        "D": "combine()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'flatMap'?",
+      "options": {
+        "A": "To map elements and then flatten the resulting collections into one list",
+        "B": "To make a list flat in memory",
+        "C": "To sort a list of lists",
+        "D": "To remove nulls only"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which collection operation returns the first N elements?",
+      "options": {
+        "A": "first(n)",
+        "B": "take(n)",
+        "C": "limit(n)",
+        "D": "slice(n)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'zip' do in Kotlin?",
+      "options": {
+        "A": "Compresses a file",
+        "B": "Combines two collections into a list of pairs",
+        "C": "Speeds up code execution",
+        "D": "Closes a stream"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Channel' in Kotlin Coroutines?",
+      "options": {
+        "A": "A way to send a stream of values between coroutines",
+        "B": "A UI thread",
+        "C": "A network socket",
+        "D": "A storage file"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a valid capacity for a Channel?",
+      "options": {
+        "A": "RENDEZVOUS (0 capacity)",
+        "B": "UNLIMITED",
+        "C": "BUFFERED",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the 'select' expression used for in Coroutines?",
+      "options": {
+        "A": "To choose a thread",
+        "B": "To wait for multiple suspending functions and select the first one that becomes available",
+        "C": "To select an item from a list",
+        "D": "To query a database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'SupervisorJob' do?",
+      "options": {
+        "A": "Monitors all coroutines in the app",
+        "B": "Ensures that a failure of one child coroutine doesn't cancel its siblings",
+        "C": "Increases the speed of coroutines",
+        "D": "Runs coroutines with admin privileges"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to create a Flow from a fixed set of values?",
+      "options": {
+        "A": "flowOf(1, 2, 3)",
+        "B": "asFlow()",
+        "C": "newFlow()",
+        "D": "createFlow()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Backpressure' in the context of Flow?",
+      "options": {
+        "A": "When the producer is faster than the consumer",
+        "B": "When the internet is slow",
+        "C": "A memory leak",
+        "D": "Low battery warning"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operator is used to handle backpressure by skipping intermediate values?",
+      "options": {
+        "A": "buffer()",
+        "B": "conflate()",
+        "C": "collectLatest()",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the 'main' thread in Android/JVM called in Kotlin Dispatchers?",
+      "options": {
+        "A": "Dispatchers.Main",
+        "B": "Dispatchers.UI",
+        "C": "Dispatchers.Foreground",
+        "D": "Dispatchers.Primary"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to check if a Coroutine is still active?",
+      "options": {
+        "A": "job.isRunning",
+        "B": "job.isActive",
+        "C": "job.isAlive",
+        "D": "job.status"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Mutex' in Coroutines?",
+      "options": {
+        "A": "To play audio",
+        "B": "To provide mutual exclusion (locking) for shared state",
+        "C": "To mute errors",
+        "D": "To speed up network requests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to declare a function as 'external' (for JNI calls)?",
+      "options": {
+        "A": "native",
+        "B": "external",
+        "C": "foreign",
+        "D": "jni"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you declare a property that can be accessed from Java without getters/setters?",
+      "options": {
+        "A": "@JvmField",
+        "B": "@JavaProperty",
+        "C": "@Expose",
+        "D": "@Public"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to provide default values to Java callers for a Kotlin function?",
+      "options": {
+        "A": "@JvmStatic",
+        "B": "@JvmOverloads",
+        "C": "@JvmName",
+        "D": "@JvmDefault"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'KSP' in the Kotlin ecosystem?",
+      "options": {
+        "A": "Kotlin Standard Provider",
+        "B": "Kotlin Symbol Processing (a faster alternative to kapt)",
+        "C": "Kotlin Speed Project",
+        "D": "Kotlin Security Protocol"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to delay a coroutine for a specific time?",
+      "options": {
+        "A": "sleep()",
+        "B": "delay()",
+        "C": "wait()",
+        "D": "pause()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the return type of a 'launch' coroutine builder?",
+      "options": {
+        "A": "Unit",
+        "B": "Job",
+        "C": "Deferred",
+        "D": "Flow"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'callbackFlow' builder do?",
+      "options": {
+        "A": "Converts a callback-based API into a Flow",
+        "B": "Creates a Flow for UI events",
+        "C": "A flow that calls back a function",
+        "D": "None of the above"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operator combines two flows but emits a value only when the primary flow emits?",
+      "options": {
+        "A": "zip",
+        "B": "combine",
+        "C": "withLatestFrom (via custom implementation or libraries)",
+        "D": "merge"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Cold' stream in Coroutines?",
+      "options": {
+        "A": "A stream that starts fresh for every collector",
+        "B": "A stream that runs on a slow thread",
+        "C": "A stream that is deprecated",
+        "D": "A stream that stores data on ice"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to run a block of code and measure its execution time?",
+      "options": {
+        "A": "measureTimeMillis { }",
+        "B": "getTime { }",
+        "C": "stopwatch { }",
+        "D": "benchmark { }"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is Kotlin Multiplatform (KMP)?",
+      "options": {
+        "A": "A way to run Android apps on Windows",
+        "B": "A technology allowing code sharing across platforms like iOS, Android, and Web",
+        "C": "A new programming language",
+        "D": "A compiler for C++"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used in a common module to declare a platform-specific API?",
+      "options": {
+        "A": "abstract",
+        "B": "expect",
+        "C": "actual",
+        "D": "external"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used in a platform-specific module (like iOS) to implement an 'expect' declaration?",
+      "options": {
+        "A": "implement",
+        "B": "actual",
+        "C": "override",
+        "D": "platform"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to mark an API as experimental or internal to a library?",
+      "options": {
+        "A": "@Experimental",
+        "B": "@RequiresOptIn",
+        "C": "@Internal",
+        "D": "@Beta"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Compose Multiplatform'?",
+      "options": {
+        "A": "A tool to combine strings",
+        "B": "A declarative UI framework based on Jetpack Compose for Android, iOS, Desktop, and Web",
+        "C": "A database for Kotlin",
+        "D": "A testing library"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which framework is the standard for unit testing in Kotlin?",
+      "options": {
+        "A": "Kotlin.test",
+        "B": "JUnit",
+        "C": "Spek",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does the 'assertEquals(expected, actual)' function do?",
+      "options": {
+        "A": "Changes the value of a variable",
+        "B": "Verifies that two values are equal during a test",
+        "C": "Prints a message to the console",
+        "D": "Deletes a test case"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which library is popular for creating 'Mocks' in Kotlin tests?",
+      "options": {
+        "A": "Mockito-Kotlin",
+        "B": "MockK",
+        "C": "PowerMock",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of 'runTest' in Coroutine testing?",
+      "options": {
+        "A": "To run a test on a physical device",
+        "B": "To run coroutines in a test environment with virtual time skipping",
+        "C": "To skip tests",
+        "D": "To measure the speed of the CPU"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to define a setup method that runs before every test?",
+      "options": {
+        "A": "@BeforeTest",
+        "B": "@Setup",
+        "C": "@Start",
+        "D": "@PreTest"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Kotlin/Native'?",
+      "options": {
+        "A": "A way to compile Kotlin to JVM bytecode",
+        "B": "A technology for compiling Kotlin code to native binaries that run without a VM",
+        "C": "A translation tool for Java",
+        "D": "A style of writing code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to manage Kotlin versions and build projects?",
+      "options": {
+        "A": "Gradle",
+        "B": "Maven",
+        "C": "Ant",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'kotlinx.serialization'?",
+      "options": {
+        "A": "A library for networking",
+        "B": "A Kotlin-native library for converting objects to JSON, Protobuf, or other formats",
+        "C": "A way to save files to a disk",
+        "D": "A database engine"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to access the 'class' object of a type (like T::class)?",
+      "options": {
+        "A": "reflect",
+        "B": "class",
+        "C": "type",
+        "D": "::class"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'Type Erasure' in the context of Kotlin generics?",
+      "options": {
+        "A": "Deleting a class at runtime",
+        "B": "The removal of generic type information at runtime (inherited from JVM)",
+        "C": "Replacing a variable with null",
+        "D": "A compilation error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Contract' API used for?",
+      "options": {
+        "A": "To hire developers",
+        "B": "To inform the compiler about the behavior of a function (e.g., that it returns only if a variable is not null)",
+        "C": "To define an interface",
+        "D": "To encrypt code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator is used for property delegation?",
+      "options": {
+        "A": "in",
+        "B": "by",
+        "C": "as",
+        "D": "is"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Value Class'?",
+      "options": {
+        "A": "A class with many properties",
+        "B": "A class that is inlined into its single property to reduce memory overhead",
+        "C": "A data class with no methods",
+        "D": "A class that represents a number"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is used to define a 'Type-Safe DSL' in Kotlin?",
+      "options": {
+        "A": "Function literals with receiver",
+        "B": "Extension functions",
+        "C": "Infix functions",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does '@DslMarker' do?",
+      "options": {
+        "A": "It marks a function as fast",
+        "B": "It prevents calling members of an outer receiver from a nested DSL scope",
+        "C": "It creates a website",
+        "D": "It highlights code in the editor"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Ktor'?",
+      "options": {
+        "A": "A Kotlin-only game engine",
+        "B": "A framework for building asynchronous servers and clients",
+        "C": "A database for Android",
+        "D": "A UI library"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you specify a generic type to be 'contravariant'?",
+      "options": {
+        "A": "<out T>",
+        "B": "<in T>",
+        "C": "<T : Any>",
+        "D": "<>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does '<out T>' mean in generics?",
+      "options": {
+        "A": "T is used only as an input",
+        "B": "T is used only as an output (covariance)",
+        "C": "T is a private type",
+        "D": "T is an external type"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to allow a Kotlin function to be called from Java as a static method?",
+      "options": {
+        "A": "@Static",
+        "B": "@JvmStatic",
+        "C": "@JvmName",
+        "D": "@JvmField"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'backing field' for a property?",
+      "options": {
+        "A": "A temporary variable",
+        "B": "The actual memory storage for a property's value, accessed via 'field'",
+        "C": "A database field",
+        "D": "A UI text field"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which scope function is used when you want to execute a block on a non-null object and return the object itself?",
+      "options": {
+        "A": "let",
+        "B": "also",
+        "C": "run",
+        "D": "with"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'kapt'?",
+      "options": {
+        "A": "A Kotlin compiler plugin for Annotation Processing",
+        "B": "A testing framework",
+        "C": "A code formatter",
+        "D": "A way to run Kotlin on iOS"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the difference between 'lazy' and 'lateinit'?",
+      "options": {
+        "A": "lazy is for 'val' and calculated once; lateinit is for 'var' and initialized manually",
+        "B": "lateinit is for 'val'",
+        "C": "lazy is faster",
+        "D": "There is no difference"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to convert a String to an Integer safely (returning null if it fails)?",
+      "options": {
+        "A": "toInt()",
+        "B": "toIntOrNull()",
+        "C": "asInt()",
+        "D": "parse()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'it' keyword in a lambda?",
+      "options": {
+        "A": "A keyword to stop the program",
+        "B": "The default name for a single parameter in a lambda",
+        "C": "A reference to the outer class",
+        "D": "A reserved word for loops"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Kotlin Script' (.kts)?",
+      "options": {
+        "A": "A way to write Kotlin code that is executed as a script without compilation to a JAR",
+        "B": "A style of writing comments",
+        "C": "A translation of Kotlin to JavaScript",
+        "D": "A legacy version of Kotlin"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which collection function returns a Map with keys as elements and values as their count?",
+      "options": {
+        "A": "countBy()",
+        "B": "groupingBy { it }.eachCount()",
+        "C": "sumBy()",
+        "D": "tally()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'takeUnless' do?",
+      "options": {
+        "A": "Takes a value only if it is null",
+        "B": "Returns the object if it does NOT satisfy the predicate, otherwise returns null",
+        "C": "Takes the value and throws it away",
+        "D": "Restarts a loop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Tailrec' function?",
+      "options": {
+        "A": "A function that runs at the end of the app",
+        "B": "A function that uses tail recursion and can be optimized into a loop by the compiler",
+        "C": "A function with a tail return",
+        "D": "A function that is slow"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to handle generic type variance in Java-Kotlin interop?",
+      "options": {
+        "A": "@JvmWildcard",
+        "B": "@JvmSuppressWildcards",
+        "C": "@JvmVariance",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "How do you declare a 'top-level' function?",
+      "options": {
+        "A": "Inside a class",
+        "B": "Outside of any class directly in a file",
+        "C": "Inside the main function",
+        "D": "Using the 'top' keyword"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Unit' type equivalent to in Java?",
+      "options": {
+        "A": "void",
+        "B": "Object",
+        "C": "null",
+        "D": "Integer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'SAM' conversion?",
+      "options": {
+        "A": "Single Abstract Method conversion (allowing lambdas to represent interfaces with one method)",
+        "B": "Static Access Method",
+        "C": "Secure Access Module",
+        "D": "String Association Method"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is used for 'Reflection' in Kotlin?",
+      "options": {
+        "A": "kotlin-reflect.jar",
+        "B": "java.lang.reflect",
+        "C": "Both A and B",
+        "D": "Neither"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the 'inner' keyword enable?",
+      "options": {
+        "A": "Private access to the class",
+        "B": "A nested class to have a reference to its outer class instance",
+        "C": "Access to local variables",
+        "D": "Static methods"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to create a read-only list from an array?",
+      "options": {
+        "A": "toList()",
+        "B": "asList()",
+        "C": "toArray()",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'Backing Property' syntax primarily for?",
+      "options": {
+        "A": "Encapsulation (keeping mutable data private and exposing immutable data)",
+        "B": "Speed",
+        "C": "Debugging",
+        "D": "Saving memory"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to mark a function that does not return to its caller?",
+      "options": {
+        "A": "Nothing",
+        "B": "Stop",
+        "C": "Exit",
+        "D": "Void"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'fun <T : Number> sum(a: T, b: T)' specify?",
+      "options": {
+        "A": "T can be any type",
+        "B": "T must be a subclass of Number (Upper Bound)",
+        "C": "T must be equal to Number",
+        "D": "T is an Integer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to name the generated Java class for a Kotlin file?",
+      "options": {
+        "A": "@JvmName",
+        "B": "@file:JvmName",
+        "C": "@JavaClass",
+        "D": "@FileClass"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Kotlin Symbol Processing' (KSP)?",
+      "options": {
+        "A": "A tool to find emojis in code",
+        "B": "A powerful, lightweight API for building compiler plugins and processing annotations",
+        "C": "A way to compress files",
+        "D": "A database tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'const' modifier?",
+      "options": {
+        "A": "To mark a variable as private",
+        "B": "To define a compile-time constant",
+        "C": "To prevent a class from being inherited",
+        "D": "To declare a static variable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to get an element at an index or a default value if out of bounds?",
+      "options": {
+        "A": "get()",
+        "B": "getOrElse()",
+        "C": "getOrDefault()",
+        "D": "at()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Spread Operator' symbol?",
+      "options": {
+        "A": "&",
+        "B": "",
+        "C": "...",
+        "D": "->"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Who developed the Kotlin language?",
+      "options": {
+        "A": "Google",
+        "B": "JetBrains",
+        "C": "Oracle",
+        "D": "Microsoft"
+      },
+      "answer": "B"
+    }
+  ]
+}

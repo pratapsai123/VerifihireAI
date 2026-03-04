@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Performance Optimization", 
+  "questions": [
+    {
+    "question": "What does 'Latency' refer to in the context of system performance?",
+    "options": {
+      "A": "The time it takes for a data packet to travel from source to destination.",
+      "B": "The total amount of data processed per second.",
+      "C": "The number of concurrent users on a site.",
+      "D": "The physical size of the server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Minification is the process of removing unnecessary characters (like spaces and comments) from source code without changing its functionality.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a primary goal of a Content Delivery Network (CDN)?",
+    "options": {
+      "A": "To reduce latency by serving content from a location closer to the user.",
+      "B": "To encrypt the database storage.",
+      "C": "To provide a compiler for JavaScript.",
+      "D": "To manage user passwords."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common formats for image compression on the web that offer better performance than traditional PNG.",
+    "options": {
+      "A": "WebP",
+      "B": "AVIF",
+      "C": "BMP",
+      "D": "TIFF"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Lazy Loading'?",
+    "options": {
+      "A": "Deferring the loading of non-critical resources at page load time.",
+      "B": "Loading all resources as fast as possible.",
+      "C": "The delay caused by a slow database.",
+      "D": "A bug where images fail to appear."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Gzip compression is performed on the server to reduce the size of files sent to the browser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP header is used to control how long a browser should cache a specific resource?",
+    "options": {
+      "A": "Cache-Control",
+      "B": "User-Agent",
+      "C": "Content-Type",
+      "D": "Set-Cookie"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to reduce the number of HTTP requests on a web page.",
+    "options": {
+      "A": "Combining multiple CSS/JS files into one.",
+      "B": "Using CSS sprites for small icons.",
+      "C": "Using more high-resolution images.",
+      "D": "Adding more external scripts for tracking."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the purpose of a Database Index?",
+    "options": {
+      "A": "To speed up data retrieval operations on a table.",
+      "B": "To ensure data is encrypted.",
+      "C": "To prevent duplicate entries.",
+      "D": "To make the database file size smaller."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Horizontal Scaling involves adding more RAM to a single existing server.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric measures the time from when a user first interacts with a page to the time when the browser is actually able to respond to that interaction?",
+    "options": {
+      "A": "First Input Delay (FID)",
+      "B": "Largest Contentful Paint (LCP)",
+      "C": "Cumulative Layout Shift (CLS)",
+      "D": "Time to First Byte (TTFB)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO methods for optimizing front-end assets.",
+    "options": {
+      "A": "Tree Shaking",
+      "B": "Code Splitting",
+      "C": "Database Normalization",
+      "D": "SQL Profiling"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'TTFB' stand for in performance monitoring?",
+    "options": {
+      "A": "Time to First Byte",
+      "B": "Total Time For Build",
+      "C": "Tested Time For Browsing",
+      "D": "Task Timing For Backend"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Brotli is a compression algorithm developed by Google that is generally more efficient than Gzip.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a benefit of using 'Asynchronous' script loading (async/defer)?",
+    "options": {
+      "A": "It prevents scripts from blocking the parsing of the HTML document.",
+      "B": "It makes the script file size smaller.",
+      "C": "It removes bugs from the code automatically.",
+      "D": "It forces the script to run before any CSS is loaded."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO factors that contribute to slow Largest Contentful Paint (LCP).",
+    "options": {
+      "A": "Slow server response times",
+      "B": "Render-blocking JavaScript and CSS",
+      "C": "Small font sizes",
+      "D": "Using too many comments in HTML"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Code Splitting'?",
+    "options": {
+      "A": "Breaking a large bundle into smaller chunks to load them on demand.",
+      "B": "Dividing the backend and frontend into different repositories.",
+      "C": "A method to encrypt JavaScript code.",
+      "D": "Splitting a database table into two."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cumulative Layout Shift (CLS) measures the visual stability of a page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which performance tool is built directly into Google Chrome for auditing web pages?",
+    "options": {
+      "A": "Lighthouse",
+      "B": "Postman",
+      "C": "Wireshark",
+      "D": "Docker"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to optimize SQL query performance.",
+    "options": {
+      "A": "Avoiding SELECT * in favor of specific columns.",
+      "B": "Adding indexes to columns used in WHERE clauses.",
+      "C": "Increasing the number of JOINs.",
+      "D": "Storing all data in a single text field."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "Which HTTP header is used to serve a compressed version of a resource to the client?",
+    "options": {
+      "A": "Content-Encoding",
+      "B": "Accept-Language",
+      "C": "Server-Type",
+      "D": "Transfer-Protocol"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'defer' attribute on a script tag ensures the script is executed only after the HTML document has been fully parsed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a benefit of using 'Tree Shaking' in a build process?",
+    "options": {
+      "A": "It removes unused code from the final bundle to reduce file size.",
+      "B": "It organizes the folder structure of the project.",
+      "C": "It automatically fixes syntax errors.",
+      "D": "It speeds up the database connection."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO resources that are considered 'Render-Blocking' by default.",
+    "options": {
+      "A": "CSS files in the <head>",
+      "B": "Synchronous JavaScript files in the <head>",
+      "C": "Images at the bottom of the page",
+      "D": "Web Worker scripts"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the purpose of the 'preconnect' resource hint?",
+    "options": {
+      "A": "To inform the browser to establish a connection to a domain as soon as possible, including DNS and TLS.",
+      "B": "To download a font file in the background.",
+      "C": "To restart the server if it hangs.",
+      "D": "To refresh the page automatically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Inline CSS is generally faster for small, critical styles because it eliminates an extra network request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Core Web Vital measures 'Visual Stability' by tracking how much elements move around while loading?",
+    "options": {
+      "A": "Cumulative Layout Shift (CLS)",
+      "B": "Largest Contentful Paint (LCP)",
+      "C": "First Input Delay (FID)",
+      "D": "Total Blocking Time (TBT)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways that a CDN improves global performance.",
+    "options": {
+      "A": "Reducing physical distance between data and the user.",
+      "B": "Caching static assets at edge locations.",
+      "C": "Automatically rewriting inefficient SQL queries.",
+      "D": "Increasing the CPU speed of the origin server."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'Reflow' (or Layout) mean in browser rendering?",
+    "options": {
+      "A": "The process of calculating the position and size of all elements on the page.",
+      "B": "Changing the color of a button.",
+      "C": "Downloading a new image.",
+      "D": "Clearing the browser history."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using the 'alt' attribute on images significantly improves the page load speed.",
+    "options": {
+      "A": "False (It improves accessibility/SEO, but not raw load speed).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these practices helps optimize 'Time to First Byte' (TTFB)?",
+    "options": {
+      "A": "Implementing server-side caching.",
+      "B": "Minifying JavaScript files.",
+      "C": "Using WebP images.",
+      "D": "Adding more fonts to the page."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of 'HTTP/2' over 'HTTP/1.1'.",
+    "options": {
+      "A": "Multiplexing (multiple requests over one connection).",
+      "B": "Server Push capabilities.",
+      "C": "Automatic image compression.",
+      "D": "The ability to run without a server."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary goal of 'Resource Prioritization'?",
+    "options": {
+      "A": "To load the most important assets (like hero images) before less critical ones.",
+      "B": "To delete old files from the server.",
+      "C": "To prioritize paid users over free users.",
+      "D": "To run all scripts at the same time."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A '304 Not Modified' response means the browser can use its cached version of the resource.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which CSS property can be used to inform the browser that an element will change, allowing it to optimize rendering in advance?",
+    "options": {
+      "A": "will-change",
+      "B": "optimize-render",
+      "C": "transform-future",
+      "D": "display-fast"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO techniques for optimizing font loading.",
+    "options": {
+      "A": "Using 'font-display: swap'.",
+      "B": "Self-hosting fonts instead of using multiple 3rd-party domains.",
+      "C": "Loading every available weight and style of a font family.",
+      "D": "Converting fonts into large Base64 strings in CSS."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Database Connection Pooling'?",
+    "options": {
+      "A": "Reusing a cache of database connections to avoid the overhead of opening a new one for every request.",
+      "B": "Connecting multiple databases together into one.",
+      "C": "A way to backup data in real-time.",
+      "D": "Sharing a database password among multiple developers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Prefetching a resource downloads it with low priority because it is likely needed for the *next* navigation, not the current one.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric tracks the total amount of time a page is blocked from responding to user input during the loading process?",
+    "options": {
+      "A": "Total Blocking Time (TBT)",
+      "B": "First Contentful Paint (FCP)",
+      "C": "Speed Index",
+      "D": "Request Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO characteristics of a 'Service Worker' related to performance.",
+    "options": {
+      "A": "It can intercept network requests and serve cached content offline.",
+      "B": "It runs in the background, separate from the main browser thread.",
+      "C": "It directly manipulates the DOM to make it faster.",
+      "D": "It reduces the size of the HTML file."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "In the 'Critical Rendering Path', what follows the creation of the Render Tree?",
+    "options": {
+      "A": "Layout (Reflow)",
+      "B": "Downloading the HTML",
+      "C": "DNS Lookup",
+      "D": "Creating the DOM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vertical Scaling' (Scaling Up) is usually easier to implement but has a definitive hardware ceiling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which image attribute allows the browser to choose between different image sizes based on the user's screen resolution?",
+    "options": {
+      "A": "srcset",
+      "B": "src-variable",
+      "C": "media-query",
+      "D": "auto-size"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of using a 'Brotli' compression over 'Gzip'.",
+    "options": {
+      "A": "Higher compression ratios for text-based assets.",
+      "B": "Faster decompression speeds for the browser.",
+      "C": "It works on non-HTTPS connections.",
+      "D": "It compresses images better than JPEG."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the effect of 'Memory Leaks' on application performance?",
+    "options": {
+      "A": "They gradually consume available RAM, leading to sluggishness and eventually crashing.",
+      "B": "They make the internet connection slower.",
+      "C": "They increase the size of the JavaScript files on the server.",
+      "D": "They cause the CPU to run cooler."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'display: none' on an element removes it from the Render Tree.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to see a 'Flame Chart' of JavaScript execution and identify 'Long Tasks'?",
+    "options": {
+      "A": "Chrome DevTools Performance Tab",
+      "B": "The Network Tab",
+      "C": "The Console",
+      "D": "The Elements Panel"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to optimize the 'Main Thread' of a browser.",
+    "options": {
+      "A": "Offloading heavy tasks to Web Workers.",
+      "B": "Breaking up long-running JavaScript tasks into smaller chunks.",
+      "C": "Running all CSS animations using the 'left' and 'top' properties.",
+      "D": "Using synchronous XHR requests."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Cache Hit Ratio'?",
+    "options": {
+      "A": "The percentage of requests that are successfully served from the cache rather than the origin.",
+      "B": "The number of times a user clears their cache.",
+      "C": "The total size of the cache folder.",
+      "D": "The speed of the cache memory."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'CSS Sprite' is a single image file that contains multiple smaller images, reducing HTTP requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a risk of 'Over-Indexing' a database?",
+    "options": {
+      "A": "Slowed 'Write' performance (INSERT/UPDATE/DELETE).",
+      "B": "Slowed 'Read' performance.",
+      "C": "The database becomes easier to hack.",
+      "D": "Data becomes corrupted automatically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO characteristics of 'Passive Event Listeners'.",
+    "options": {
+      "A": "They improve scroll performance by telling the browser they won't call preventDefault().",
+      "B": "They are used for touch and wheel events.",
+      "C": "They make the event fire twice.",
+      "D": "They allow the event to be canceled at any time."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does the 'loading=\"lazy\"' attribute do when added to an <img> tag?",
+    "options": {
+      "A": "It instructs the browser to wait until the image is near the viewport before downloading it.",
+      "B": "It makes the image appear blurry.",
+      "C": "It converts the image to a smaller format.",
+      "D": "It loads the image only when the user clicks it."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Etag' is a unique identifier assigned by the server to a specific version of a resource to help with conditional caching.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which performance concept involves reducing the amount of data that needs to be sent by only sending the 'delta' or changes since the last update?",
+    "options": {
+      "A": "Differential Synchronization",
+      "B": "Full-State Refresh",
+      "C": "Total Replacement",
+      "D": "Batch Loading"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to optimize the 'Paint' phase of rendering.",
+    "options": {
+      "A": "Promoting elements to their own layers using 'transform: translateZ(0)'.",
+      "B": "Reducing the use of expensive CSS effects like 'box-shadow' and 'filters'.",
+      "C": "Using more 'float' based layouts.",
+      "D": "Increasing the number of DOM nodes."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'DNS Prefetching'?",
+    "options": {
+      "A": "Resolving domain names in the background before a user clicks a link.",
+      "B": "A way to hide your IP address.",
+      "C": "Downloading the entire website to the local DNS server.",
+      "D": "Clearing the DNS cache on every load."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Monolithic' architecture is always slower than 'Microservices' regardless of the scale.",
+    "options": {
+      "A": "False (Monoliths can be faster for small apps due to lack of network overhead).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric focuses specifically on the 'interactivity' of a page as it loads?",
+    "options": {
+      "A": "First Input Delay (FID)",
+      "B": "First Contentful Paint (FCP)",
+      "C": "Total Page Weight",
+      "D": "DOM Depth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common causes of 'Jank' (stuttering animations).",
+    "options": {
+      "A": "Executing long-running JavaScript on the main thread during an animation.",
+      "B": "Forcing synchronous layouts (Layout Thrashing).",
+      "C": "Using 'requestAnimationFrame'.",
+      "D": "Minifying CSS files."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary benefit of 'Server-Side Rendering' (SSR) for performance?",
+    "options": {
+      "A": "Faster 'First Contentful Paint' because the browser receives a ready-to-render HTML string.",
+      "B": "Smaller JavaScript bundles.",
+      "C": "Elimination of all API calls.",
+      "D": "Reduced server load."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Keep-Alive' allows the same TCP connection to be used for multiple requests, reducing latency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a 'synthetic' monitoring tool (vs. real user monitoring)?",
+    "options": {
+      "A": "Running a scheduled Lighthouse audit in a lab environment.",
+      "B": "Collecting data from actual visitors via Google Analytics.",
+      "C": "Reading server error logs.",
+      "D": "Conducting a user interview."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO techniques to optimize JavaScript bundles.",
+    "options": {
+      "A": "Uglification/Minification.",
+      "B": "Dependency analysis to remove unused libraries.",
+      "C": "Converting all code to synchronous execution.",
+      "D": "Embedding all images as Base64 in the JS files."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the purpose of 'Subresource Integrity' (SRI)?",
+    "options": {
+      "A": "To ensure that a resource fetched from a CDN has not been tampered with (security, but impacts load reliability).",
+      "B": "To speed up the download of small files.",
+      "C": "To combine multiple files into one.",
+      "D": "To automatically update library versions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Content Visibility: auto' is a CSS property that allows the browser to skip rendering off-screen content.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+{
+    "question": "What is 'Layout Thrashing' and why is it a performance bottleneck?",
+    "options": {
+      "A": "Interleaving multiple DOM reads and writes that force the browser to recalculate layout repeatedly in a single frame.",
+      "B": "A bug where elements move randomly on the screen.",
+      "C": "When the CSS takes too long to download, delaying the initial paint.",
+      "D": "The process of deleting and recreating the entire DOM tree."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Vary: Accept-Encoding' header tells the CDN/Cache to store different versions of a resource based on the compression format supported by the client.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which caching strategy is most effective for resources that change frequently but need to be validated before use?",
+    "options": {
+      "A": "Cache-Control: no-cache",
+      "B": "Cache-Control: no-store",
+      "C": "Cache-Control: public, max-age=31536000",
+      "D": "Cache-Control: immutable"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of using 'HTTP/2 Prioritization' (Dependency Trees).",
+    "options": {
+      "A": "Allows the browser to express which resources are most critical to render the page.",
+      "B": "Optimizes the bandwidth allocation for high-priority assets.",
+      "C": "It automatically compresses images on the fly.",
+      "D": "It encrypts the traffic between the server and the CDN."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary purpose of 'Preload' (rel=\"preload\")?",
+    "options": {
+      "A": "To force the browser to download a high-priority resource that is not immediately discovered by the parser.",
+      "B": "To load the next page's assets in the background.",
+      "C": "To establish a TLS handshake early.",
+      "D": "To refresh the cache of an existing file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'requestAnimationFrame' is generally more performant than 'setTimeout' for animations because it syncs with the browser's refresh rate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In database optimization, what does 'Index Cardinality' refer to?",
+    "options": {
+      "A": "The uniqueness of data values in a specific column of a table.",
+      "B": "The total number of indexes on a single table.",
+      "C": "The time it takes to build an index.",
+      "D": "The physical size of the index file on disk."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO side effects of 'Long Tasks' (>50ms) on the browser's main thread.",
+    "options": {
+      "A": "High Total Blocking Time (TBT)",
+      "B": "Unresponsive UI and delayed input handling (High FID)",
+      "C": "Increased download speed of images",
+      "D": "Automatic browser crashes"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'TCP Slow Start'?",
+    "options": {
+      "A": "A congestion control mechanism that limits the number of packets sent until the network capacity is verified.",
+      "B": "The delay caused by a cold server start.",
+      "C": "A method to slow down malicious bot traffic.",
+      "D": "The time it takes to resolve a DNS query."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Database 'Normalization' always improves query performance because it reduces data redundancy.",
+    "options": {
+      "A": "False (Normalization can slow down reads by requiring more JOINs; Denormalization is often used for performance).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which concept involves the browser skipping the 'Layout' and 'Paint' steps of the rendering pipeline by only using 'Composite' properties?",
+    "options": {
+      "A": "Hardware Acceleration (GPU layers)",
+      "B": "Server Side Rendering",
+      "C": "Progressive Hydration",
+      "D": "Content Delivery"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to optimize 'Time to Interactive' (TTI) in a heavy JavaScript application.",
+    "options": {
+      "A": "Implementing Route-based Code Splitting.",
+      "B": "Reducing the size of the JavaScript execution payload.",
+      "C": "Adding more heavy libraries to the main bundle.",
+      "D": "Using synchronous blocking scripts in the body."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the role of 'In-Memory Caching' (e.g., Redis) in a backend architecture?",
+    "options": {
+      "A": "To reduce database load by storing the results of expensive queries in RAM.",
+      "B": "To permanently store large files like videos.",
+      "C": "To act as the primary source of truth for all data.",
+      "D": "To compile application code at runtime."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Web Workers' allows you to run heavy computation on a background thread, keeping the UI responsive.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool provides a 'Waterfall' chart to visualize the sequence and duration of network requests?",
+    "options": {
+      "A": "Chrome DevTools Network Tab",
+      "B": "The Console Tab",
+      "C": "The Sources Tab",
+      "D": "The Memory Tab"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO performance benefits of using a 'Reverse Proxy' (like Nginx).",
+    "options": {
+      "A": "SSL/TLS Termination offloading.",
+      "B": "Static file caching and Gzip compression.",
+      "C": "Automatic debugging of backend logic errors.",
+      "D": "Encryption of the client's local hard drive."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Tree Shaking' specifically designed to remove?",
+    "options": {
+      "A": "Dead or unused code from the JavaScript bundles during the build process.",
+      "B": "Broken links from the HTML.",
+      "C": "Old files from the server's cache.",
+      "D": "Low-resolution images from the assets folder."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: '0-RTT' (Zero Round Trip Time) in TLS 1.3 allows a client to send data in the first packet of a reconnection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which database operation is most likely to benefit from a 'Covering Index'?",
+    "options": {
+      "A": "A query that only selects columns that are already part of the index itself.",
+      "B": "A query that updates every row in a table.",
+      "C": "A query that deletes old log data.",
+      "D": "A query that performs a full-text search."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO risks of 'Aggressive Caching' without a proper invalidation strategy.",
+    "options": {
+      "A": "Users seeing stale or outdated content.",
+      "B": "Difficulty in deploying critical bug fixes to the client.",
+      "C": "The server running out of disk space.",
+      "D": "Increased server CPU usage."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'Hydration' mean in the context of modern frontend frameworks (e.g., Next.js, Nuxt)?",
+    "options": {
+      "A": "The process of attaching event listeners to server-rendered HTML to make it interactive.",
+      "B": "Downloading the initial HTML file.",
+      "C": "Optimizing images for high-density screens.",
+      "D": "Cleaning up unused variables in memory."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Preconnect' is more 'aggressive' than 'DNS-prefetch' because it also handles the TCP handshake and TLS negotiation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric measures the 'sturdiness' of a page—how much the content jumps during the load process?",
+    "options": {
+      "A": "Cumulative Layout Shift (CLS)",
+      "B": "Speed Index",
+      "C": "First Contentful Paint (FCP)",
+      "D": "Interaction to Next Paint (INP)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO factors that contribute to 'Time to First Byte' (TTFB) latency.",
+    "options": {
+      "A": "Server processing time (e.g., slow SQL queries).",
+      "B": "Network latency between the client and the server.",
+      "C": "The time it takes to parse the CSS.",
+      "D": "The size of the hero image."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Font Subsetting'?",
+    "options": {
+      "A": "Removing unused characters from a font file to reduce its size (e.g., only keeping Latin characters).",
+      "B": "Using multiple fonts at the same time.",
+      "C": "Converting a font to an image.",
+      "D": "A way to animate text on the screen."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Cold Cache' refers to a state where the cache is empty or contains no relevant data, leading to higher latency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP version introduced 'Multiplexing', allowing multiple requests to be sent over a single TCP connection simultaneously?",
+    "options": {
+      "A": "HTTP/2",
+      "B": "HTTP/1.1",
+      "C": "HTTP/1.0",
+      "D": "HTTP/3"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO techniques to reduce 'Main Thread Blocking'.",
+    "options": {
+      "A": "Breaking long tasks into smaller chunks using setTimeout or requestIdleCallback.",
+      "B": "Using Web Workers for data intensive processing.",
+      "C": "Executing all JavaScript inside the <head> tag synchronously.",
+      "D": "Adding more DOM nodes to the document."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the purpose of the 'Content-Visibility' CSS property?",
+    "options": {
+      "A": "To allow the browser to skip the rendering work for off-screen elements until they are needed.",
+      "B": "To make the text invisible to screen readers.",
+      "C": "To hide elements until the images are loaded.",
+      "D": "To prevent the user from copying text."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Gzip' is always superior to 'Brotli' for every file type.",
+    "options": {
+      "A": "False (Brotli generally offers higher compression ratios for text-based assets).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific TCP mechanism is responsible for preventing a sender from overwhelming a receiver that has limited buffer space?",
+    "options": {
+      "A": "Flow Control (Sliding Window)",
+      "B": "Congestion Control",
+      "C": "Retransmission Timeout",
+      "D": "Checksum Validation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Priority Hints' API (e.g., fetchpriority='high') allows developers to signal the relative importance of a resource to the browser's downloader.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Critical Request Chain'?",
+    "options": {
+      "A": "The sequence of dependent network requests that must be loaded to realize the initial paint of a page.",
+      "B": "The list of all third-party tracking scripts.",
+      "C": "The order in which the database executes JOIN operations.",
+      "D": "A security feature that prevents unauthorized API calls."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of using 'Constructed Stylesheets' for Web Components performance.",
+    "options": {
+      "A": "They allow a single CSSStyleSheet instance to be shared across many Shadow Roots.",
+      "B": "They reduce memory overhead compared to duplicating <style> tags in every instance.",
+      "C": "They automatically minify the CSS at runtime.",
+      "D": "They prevent the 'Flash of Unstyled Content' (FOUC) entirely."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "Which SQL command is most useful for analyzing how a database engine intends to execute a specific query?",
+    "options": {
+      "A": "EXPLAIN",
+      "B": "ANALYZE",
+      "C": "DESCRIBE",
+      "D": "SHOW PLAN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'B-Tree' indexes is typically more efficient for range queries (e.g., age BETWEEN 20 AND 30) than 'Hash' indexes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OCSP Stapling' and how does it help performance?",
+    "options": {
+      "A": "It allows the server to provide the certificate revocation status to the client, removing the need for the client to contact a CA.",
+      "B": "It compresses the TLS handshake packets.",
+      "C": "It speeds up DNS resolution for secure sites.",
+      "D": "It caches the results of database queries in the browser."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to optimize 'Interaction to Next Paint' (INP).",
+    "options": {
+      "A": "Yielding to the main thread frequently using 'scheduler.yield()'.",
+      "B": "Minimizing DOM size to reduce the time spent in the 'Commit' and 'Paint' phases.",
+      "C": "Loading more fonts to ensure text renders correctly.",
+      "D": "Using synchronous 'localStorage' calls during event handlers."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "In the context of CDNs, what is an 'Edge Function'?",
+    "options": {
+      "A": "Code that runs at the CDN's edge location to transform requests and responses closer to the user.",
+      "B": "A specialized function that only works on Microsoft Edge.",
+      "C": "A database trigger that runs on the origin server.",
+      "D": "A CSS property for sharpening image borders."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'STALE-WHILE-REVALIDATE' cache directive allows a browser to use a stale resource while fetching a fresh one in the background.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which browser API is used to measure precise timestamps for custom application events and performance marks?",
+    "options": {
+      "A": "User Timing API (performance.mark)",
+      "B": "Console API (console.time)",
+      "C": "Date API (Date.now)",
+      "D": "Intersection Observer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO characteristics of 'HTTP/3' (QUIC) that improve performance over 'HTTP/2'.",
+    "options": {
+      "A": "Elimination of Head-of-Line (HoL) blocking at the transport layer.",
+      "B": "Built-in connection migration (IP address changes don't drop the connection).",
+      "C": "It runs over TCP but with fewer handshakes.",
+      "D": "It does not require TLS for security."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Database Vacuuming' (e.g., in PostgreSQL)?",
+    "options": {
+      "A": "A maintenance process that reclaims storage space occupied by 'dead tuples' (deleted or updated rows).",
+      "B": "A way to delete all data in a database.",
+      "C": "The process of moving a database to a new server.",
+      "D": "A method for encrypting the database disk."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Composite Layer' is a separate bitmap that the browser sends to the GPU to be positioned independently of other layers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is the primary cause of 'FOIT' (Flash of Invisible Text)?",
+    "options": {
+      "A": "The browser hiding text until the custom web font has finished downloading.",
+      "B": "The CSS file being too large.",
+      "C": "The JavaScript bundle crashing the main thread.",
+      "D": "The user's internet connection dropping."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO performance-oriented features of 'Nginx'.",
+    "options": {
+      "A": "Event-driven asynchronous architecture.",
+      "B": "FastCGI caching.",
+      "C": "Built-in PHP compiler.",
+      "D": "Automatic database indexing."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Speculative Prerendering'?",
+    "options": {
+      "A": "The browser rendering an entire hidden page in the background if it predicts the user will navigate there.",
+      "B": "A way to predict user passwords.",
+      "C": "Pre-calculating the layout of the current page only.",
+      "D": "Generating a random number to speed up encryption."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Selective Hydration' allows a framework to prioritize which parts of the page become interactive first based on user priority.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which concept describes the maximum number of requests a system can handle per second while staying within a defined latency limit?",
+    "options": {
+      "A": "Throughput",
+      "B": "Bandwidth",
+      "C": "Load Factor",
+      "D": "Resource Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO strategies to mitigate 'Cold Starts' in Serverless functions.",
+    "options": {
+      "A": "Keeping the function warm with scheduled 'ping' requests.",
+      "B": "Reducing the deployment package size (fewer dependencies).",
+      "C": "Using a slower programming language.",
+      "D": "Increasing the distance between the user and the function."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is a 'Compound Index' in a database?",
+    "options": {
+      "A": "An index created on multiple columns of a table.",
+      "B": "An index that is shared between two different databases.",
+      "C": "A list of all words in a text field.",
+      "D": "An index that is encrypted with two keys."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Inline CSS' can negatively impact performance if the same styles are repeated across many pages, as they cannot be cached separately.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric provides a better indication of 'perceived' load speed by capturing the point at which the largest element in the viewport is visible?",
+    "options": {
+      "A": "Largest Contentful Paint (LCP)",
+      "B": "First Paint",
+      "C": "DOM Content Loaded",
+      "D": "OnLoad Event"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO risks of 'Micro-optimizations' in code.",
+    "options": {
+      "A": "Reduced code readability and maintainability.",
+      "B": "Ignoring larger architectural bottlenecks that have more impact.",
+      "C": "The code running too fast for the CPU.",
+      "D": "Automatically introducing security vulnerabilities."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Long Animation Frame' (LoAF) API intended to help with?",
+    "options": {
+      "A": "Identifying specifically what caused the main thread to be blocked for more than 50ms.",
+      "B": "Speeding up video playback.",
+      "C": "Creating 60fps animations in CSS.",
+      "D": "Compressing GIF files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Connection Coalescing' allows a browser to use a single TCP connection for different hostnames if they resolve to the same IP and use the same certificate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which caching mechanism is typically located between the web server and the client to cache full HTML responses?",
+    "options": {
+      "A": "HTTP Accelerator (e.g., Varnish)",
+      "B": "Browser LocalStorage",
+      "C": "Database Buffer Pool",
+      "D": "CPU L2 Cache"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO indicators that a database table needs 'Denormalization' for performance.",
+    "options": {
+      "A": "A specific read query requires joining 10+ tables and is unacceptably slow.",
+      "B": "The application is read-heavy and data consistency is manageable.",
+      "C": "The database is running out of disk space.",
+      "D": "The table has only one row."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Memory Bloat'?",
+    "options": {
+      "A": "High memory usage that is not technically a leak but is caused by inefficient object allocation and storage.",
+      "B": "When the server's RAM physically expands.",
+      "C": "A way to increase the speed of the browser.",
+      "D": "The process of clearing the cache."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'TLS Resumption' allows a client and server to skip the full handshake process if they have connected recently.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to simulate a 'Fast 3G' network to test how a page loads in sub-optimal conditions?",
+    "options": {
+      "A": "Chrome DevTools Network Throttling",
+      "B": "Google Analytics",
+      "C": "Postman",
+      "D": "Wireshark"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of 'Pre-rendering' over 'Server-Side Rendering'.",
+    "options": {
+      "A": "Zero server processing time at request time (HTML is already generated).",
+      "B": "Better scalability during traffic spikes (serving static files).",
+      "C": "Dynamic data is updated in real-time on every request.",
+      "D": "Reduced file size of JavaScript bundles."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does the 'X-Cache' response header usually indicate?",
+    "options": {
+      "A": "Whether the request was a 'HIT' or 'MISS' from a cache server/CDN.",
+      "B": "The version of the browser being used.",
+      "C": "The location of the origin server.",
+      "D": "The size of the user's hard drive."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Image Lazy-loading' should be applied to the 'hero' image (LCP element) to speed up initial page load.",
+    "options": {
+      "A": "False (Lazy-loading the LCP element actually delays the Largest Contentful Paint).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which performance strategy involves 'splitting' a database into smaller, faster, more easily managed pieces called data shards?",
+    "options": {
+      "A": "Database Sharding",
+      "B": "Database Partitioning",
+      "C": "Database Mirroring",
+      "D": "Database Normalization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO consequences of 'Forced Synchronous Layout'.",
+    "options": {
+      "A": "Excessive browser work causing 'dropped' frames (jank).",
+      "B": "Significant delays in the JS execution thread.",
+      "C": "The browser automatically refreshing the page.",
+      "D": "The CSS file being deleted from the cache."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "In the V8 JavaScript engine, what is the 'Orinoco' project primarily responsible for?",
+    "options": {
+      "A": "Implementing parallel, incremental, and concurrent garbage collection to reduce main-thread pause times.",
+      "B": "Optimizing the Just-In-Time (JIT) compiler for WebAssembly.",
+      "C": "Improving the execution speed of regular expressions.",
+      "D": "Managing the network stack for Fetch API requests."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Write Barrier' in garbage collection is a mechanism that tracks pointers from old-generation objects to young-generation objects to ensure correct marking.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which TCP congestion control algorithm, developed by Google, focuses on bottleneck bandwidth and round-trip propagation time (BDP) rather than packet loss?",
+    "options": {
+      "A": "BBR (Bottleneck Bandwidth and RR)",
+      "B": "CUBIC",
+      "C": "NewReno",
+      "D": "Vegas"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common causes of 'Detached DOM Tree' memory leaks.",
+    "options": {
+      "A": "JavaScript references to DOM nodes that have been removed from the document.",
+      "B": "Global arrays or objects storing references to UI elements.",
+      "C": "Using 'display: none' on too many elements.",
+      "D": "Failing to minify the HTML file."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'Tail Call Optimization' (TCO) achieve in functional programming performance?",
+    "options": {
+      "A": "It allows a function call to happen without increasing the call stack size, preventing stack overflow.",
+      "B": "It speeds up the final line of every function.",
+      "C": "It automatically converts recursion into a for-loop.",
+      "D": "It prioritizes the return value of a function in the CPU cache."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Heap Snapshot', the 'Shallow Size' of an object represents the total memory of the object plus all of its retained objects.",
+    "options": {
+      "A": "False (Shallow Size is the memory held by the object itself; Retained Size includes dependencies).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Linux kernel parameter is commonly tuned to increase the maximum number of open file descriptors for high-concurrency servers?",
+    "options": {
+      "A": "fs.file-max",
+      "B": "net.core.somaxconn",
+      "C": "vm.swappiness",
+      "D": "kernel.pid_max"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways to mitigate 'Head-of-Line Blocking' at the transport layer.",
+    "options": {
+      "A": "Using HTTP/3 over QUIC (UDP-based).",
+      "B": "Opening multiple TCP connections (HTTP/1.1 style) to different shards.",
+      "C": "Switching from Gzip to Brotli compression.",
+      "D": "Minifying all JavaScript files into a single bundle."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "In SQL performance tuning, what is a 'Nested Loop Join' and when is it most efficient?",
+    "options": {
+      "A": "An algorithm that iterates over the outer table and looks up rows in the inner table; most efficient when the inner table is indexed and small.",
+      "B": "A join that runs two queries in parallel and merges the results.",
+      "C": "A join that sorts both tables before comparing them.",
+      "D": "A join that only works on primary keys."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Speculative Optimization' in JIT compilers involves making assumptions about the types of variables to generate faster machine code, which must be 'de-optimized' if the assumption fails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which concept describes the performance degradation caused by multiple CPU cores competing for the same cached data, leading to excessive 'Cache Invalidation'?",
+    "options": {
+      "A": "False Sharing",
+      "B": "Context Switching",
+      "C": "Resource Contention",
+      "D": "Pipeline Stall"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO metrics that are critical when profiling 'Garbage Collection' impact on UI jank.",
+    "options": {
+      "A": "GC Pause Time (Stop-the-world duration)",
+      "B": "GC Frequency (How often the scavenger runs)",
+      "C": "The total number of objects created.",
+      "D": "The file size of the heap dump."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Zero-Copy' networking (e.g., using 'sendfile' in Linux)?",
+    "options": {
+      "A": "A technique that allows the kernel to copy data directly from the disk to the network card buffer without involving the CPU.",
+      "B": "A method to compress data to zero bytes.",
+      "C": "A way to send data without a TCP handshake.",
+      "D": "A protocol for peer-to-peer file sharing."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In 'Micro-benchmark' testing, 'Warm-up' loops are necessary to ensure the JIT compiler has optimized the code path before measurement begins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which data structure is used by the 'Intersection Observer' and 'Lighthouse' to calculate layout shifts and element visibility efficiently?",
+    "options": {
+      "A": "Spatial Indexing (e.g., R-Tree or Quadtree)",
+      "B": "Linked List",
+      "C": "Hash Map",
+      "D": "Binary Search Tree"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO consequences of 'Bufferbloat' in network hardware.",
+    "options": {
+      "A": "High latency (lag) during periods of high throughput.",
+      "B": "Increased Jitter in real-time communication.",
+      "C": "Reduction in total bandwidth capacity.",
+      "D": "Automatic encryption of all packets."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Scavenge' phase in V8's garbage collector?",
+    "options": {
+      "A": "A fast, frequent operation that moves surviving objects from the 'from-space' to the 'to-space' in the young generation.",
+      "B": "A full scan of the entire heap for dead objects.",
+      "C": "The process of deleting the oldest files in the cache.",
+      "D": "A method to defragment the hard drive."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'TLS 1.3' reduces the standard handshake time by one round-trip (1-RTT) compared to TLS 1.2.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which performance issue occurs when a 'Hot' database shard is overwhelmed because it contains too much of the frequently accessed data (e.g., 'A' surnames in an alphabetical shard)?",
+    "options": {
+      "A": "Data Skew",
+      "B": "Deadlock",
+      "C": "Lock Contention",
+      "D": "Fragmentation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of 'Off-heap' memory allocation in languages like Java or Node.js.",
+    "options": {
+      "A": "Reduced pressure on the Garbage Collector for large data sets.",
+      "B": "Sharing memory directly between different processes.",
+      "C": "Automatic memory management by the VM.",
+      "D": "Faster access times than L1 cache."
+    },
+    "answer": "A, B"
+  },
+{
+    "question": "In the V8 engine, what is the 'Hidden Class' (or Shape) optimization used for?",
+    "options": {
+      "A": "To allow property access to be as fast as an offset in a fixed struct rather than a hash map lookup.",
+      "B": "To hide private variables from the global scope.",
+      "C": "To group objects that are ready for garbage collection.",
+      "D": "To encrypt JavaScript objects during transit."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Idle-time GC' in modern browsers uses the 'requestIdleCallback' mechanism to perform memory cleanup when the main thread is not busy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Linux I/O scheduler is specifically designed to minimize latency for SSDs and NVMe drives by using multiple submission queues?",
+    "options": {
+      "A": "blk-mq (Multi-Queue Block IO)",
+      "B": "CFQ (Completely Fair Queuing)",
+      "C": "Deadline",
+      "D": "NOOP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO performance implications of 'Write Amplification' in SSD-based database systems.",
+    "options": {
+      "A": "Decreased SSD lifespan due to excessive P/E (Program/Erase) cycles.",
+      "B": "Increased latency for write operations as the controller performs background garbage collection.",
+      "C": "Reduction in the total storage capacity of the drive.",
+      "D": "Corrupted data blocks during power loss."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Memory Compaction' in the context of garbage collection?",
+    "options": {
+      "A": "Moving surviving objects to a contiguous area of memory to reduce fragmentation.",
+      "B": "Compressing object data to save RAM.",
+      "C": "Deleting objects that haven't been used in 5 minutes.",
+      "D": "Swapping memory from RAM to the hard drive."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In TCP, the 'Nagle's Algorithm' improves performance for bulk data transfers but can increase latency for real-time interactive applications.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific V8 compiler is responsible for generating highly optimized machine code for 'hot' functions using speculative optimization?",
+    "options": {
+      "A": "Turbofan",
+      "B": "Ignition",
+      "C": "Crankshaft",
+      "D": "Liftoff"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of 'HugePages' in Linux for high-performance databases.",
+    "options": {
+      "A": "Reduced Translation Lookaside Buffer (TLB) misses.",
+      "B": "Lower overhead for memory management in large RAM configurations.",
+      "C": "Automatic encryption of the page table.",
+      "D": "Faster disk I/O for log files."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Adaptive Radix Tree' (ART) and why is it used in modern in-memory databases?",
+    "options": {
+      "A": "A space-efficient trie that adapts its node size based on density, offering faster lookups than B-Trees in RAM.",
+      "B": "An algorithm for sorting data in a distributed cluster.",
+      "C": "A method to compress time-series data.",
+      "D": "A security feature for indexing encrypted columns."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'NUMA' (Non-Uniform Memory Access) effects can cause performance degradation if a CPU core frequently accesses memory controlled by a different CPU socket.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP/3 feature prevents 'Head-of-Line Blocking' by allowing multiple streams to be independent at the transport layer?",
+    "options": {
+      "A": "QUIC Stream Isolation",
+      "B": "TCP Fast Open",
+      "C": "HPACK Compression",
+      "D": "TLS 1.3 Session Resumption"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO characteristics of 'Copy-on-Write' (CoW) in system performance.",
+    "options": {
+      "A": "It delays the actual copying of data until a write operation occurs.",
+      "B": "It allows multiple processes to share the same physical memory pages initially.",
+      "C": "It speeds up write operations for large files.",
+      "D": "It eliminates the need for virtual memory."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Cache Line Padding' used to prevent?",
+    "options": {
+      "A": "False Sharing (where different threads modify variables on the same cache line).",
+      "B": "Memory leaks in global variables.",
+      "C": "Buffer overflows in the stack.",
+      "D": "Slow disk reads for cold data."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Introspection' in SQL refers to the database engine monitoring its own query performance to adjust indexes or statistics automatically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which mechanism is used by 'Redis' to achieve high-performance persistence without blocking the main execution thread?",
+    "options": {
+      "A": "BGSAVE (background save via fork() and CoW).",
+      "B": "Synchronous file writing.",
+      "C": "Direct disk mapping.",
+      "D": "Network-only storage."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO risks of disabling 'TCP Nagle's Algorithm' (TCP_NODELAY).",
+    "options": {
+      "A": "Increased network overhead due to many small packets (the 'silly window' syndrome).",
+      "B": "Potentially reduced throughput on high-latency networks.",
+      "C": "Increased server CPU usage for encryption.",
+      "D": "Higher probability of packet corruption."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Instruction Pipelining' in CPU performance?",
+    "options": {
+      "A": "A technique where multiple instructions are overlapped in execution stages to increase throughput.",
+      "B": "A way to send data between two servers faster.",
+      "C": "The process of minifying binary code.",
+      "D": "A method to cool down the CPU during heavy load."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Eager Garbage Collection' immediately reclaims memory as soon as an object is no longer referenced, often using reference counting.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which database index type is optimized for searching 'multi-dimensional' data, such as geographic coordinates or shapes?",
+    "options": {
+      "A": "R-Tree",
+      "B": "B-Tree",
+      "C": "Hash Index",
+      "D": "Full-text Index"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways in which 'Content-Security-Policy' (CSP) can inadvertently impact performance.",
+    "options": {
+      "A": "Increasing the size of HTTP headers sent with every request.",
+      "B": "Blocking optimized 3rd-party CDNs if not explicitly allowed.",
+      "C": "Making the JavaScript bundle larger.",
+      "D": "Encrypting the HTML on the server."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Write-Ahead Logging' (WAL) designed to protect against in a database?",
+    "options": {
+      "A": "Data loss during a system crash (Ensures Durability).",
+      "B": "Unauthorized access to data.",
+      "C": "Slow read speeds for indexed columns.",
+      "D": "Duplicate rows in a primary key column."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In V8, 'Smis' (Small Integers) are stored directly in the pointer itself to avoid the overhead of allocating a full object heap.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which performance-tracking API allows you to measure the 'Long Task' duration directly from the browser's performance timeline?",
+    "options": {
+      "A": "PerformanceLongTaskTiming",
+      "B": "PerformanceResourceTiming",
+      "C": "PerformanceNavigationTiming",
+      "D": "PerformancePaintTiming"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of 'Kernel Bypass' networking (e.g., DPDK or RDMA).",
+    "options": {
+      "A": "Significant reduction in latency by moving packet processing to user space.",
+      "B": "Elimination of context switching between user and kernel mode.",
+      "C": "Automatic encryption of all network traffic.",
+      "D": "Compatible with all standard consumer hardware."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "In the context of high-performance computing, what is 'False Sharing' and how is it mitigated?",
+    "options": {
+      "A": "When multiple processors modify independent variables on the same cache line; mitigated by adding 'padding' between variables.",
+      "B": "When two users share the same database credentials; mitigated by multi-factor authentication.",
+      "C": "When a cache miss occurs in the L1 cache but hits in L2; mitigated by increasing L1 size.",
+      "D": "When data is duplicated across multiple shards; mitigated by normalization."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Spectre' and 'Meltdown' CPU vulnerabilities primarily exploited 'Speculative Execution' and 'Branch Prediction' to leak data from kernel memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific V8 garbage collection phase is responsible for 'Marking' reachable objects while the main JavaScript thread is still running?",
+    "options": {
+      "A": "Concurrent Marking",
+      "B": "Stop-the-world Marking",
+      "C": "Incremental Compaction",
+      "D": "Lazy Sweeping"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO performance impacts of 'Context Switching' in high-concurrency Linux environments.",
+    "options": {
+      "A": "CPU cycles wasted on saving and restoring register states.",
+      "B": "Potential pollution of the CPU L1/L2 caches with different process data.",
+      "C": "Automatic reduction in the maximum number of network connections.",
+      "D": "Physical wear and tear on the server's RAM modules."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'JIT De-optimization' (Bailing out) and why does it occur?",
+    "options": {
+      "A": "The engine reverts from optimized machine code to interpreted code when a variable's 'Hidden Class' or type changes unexpectedly.",
+      "B": "The process of deleting old code from the server to save space.",
+      "C": "When the CPU overheats and slows down the execution speed.",
+      "D": "A security feature that stops malicious code from running."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'HugePages' configuration in Linux prevents the kernel from swapping the memory associated with those pages to the disk.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which distributed consensus bottleneck describes the performance limit reached when the 'Leader' node becomes overwhelmed by the volume of log replication requests?",
+    "options": {
+      "A": "Leader Bottleneck",
+      "B": "Quorum Lag",
+      "C": "Consensus Drift",
+      "D": "Partition Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO ways in which 'Mechanical Sympathy' improves software performance.",
+    "options": {
+      "A": "Aligning data structures with the CPU cache line size (64 bytes).",
+      "B": "Designing algorithms that favor sequential memory access over random access.",
+      "C": "Writing code that is compatible with older versions of Java.",
+      "D": "Using more high-level abstractions to hide hardware complexity."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary function of the 'Translation Lookaside Buffer' (TLB) in a CPU?",
+    "options": {
+      "A": "A specialized cache used to speed up the translation of virtual memory addresses to physical addresses.",
+      "B": "To translate JavaScript into machine code.",
+      "C": "To handle network packet translation (NAT).",
+      "D": "To translate SQL queries into relational algebra."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In SSD performance, 'Over-provisioning' is the practice of setting aside a portion of the drive's capacity to be used only by the controller for wear leveling and garbage collection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric measures the performance cost of 'branch misprediction' in a CPU pipeline?",
+    "options": {
+      "A": "Pipeline Stall Cycles",
+      "B": "Instructions Per Cycle (IPC)",
+      "C": "L3 Cache Miss Rate",
+      "D": "Context Switch Frequency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO characteristics of 'LSM-Tree' (Log-Structured Merge-Tree) performance compared to B-Trees.",
+    "options": {
+      "A": "Superior write throughput due to sequential I/O.",
+      "B": "Potentially slower read performance due to the need to check multiple levels/SSTables.",
+      "C": "Guaranteed O(1) read time for all keys.",
+      "D": "Lower CPU overhead during background compaction."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Memory Tiering' in modern data center architectures?",
+    "options": {
+      "A": "Using different types of memory (HBM, DDR5, PMEM) to balance performance and cost for various data workloads.",
+      "B": "Dividing the application into frontend and backend memory.",
+      "C": "A way to encrypt memory at different levels.",
+      "D": "The process of upgrading RAM in a server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'epoll' system call in Linux is significantly more efficient than 'select' or 'poll' for monitoring a large number of file descriptors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which concept describes the ability of a CPU to execute instructions in an order different from their appearance in the code to keep functional units busy?",
+    "options": {
+      "A": "Out-of-Order Execution (OoOE)",
+      "B": "Sequential Consistency",
+      "C": "Atomic Ordering",
+      "D": "Data Parallelism"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO risks of using 'Large Receive Offload' (LRO) in network-intensive applications.",
+    "options": {
+      "A": "Increased latency for individual small packets.",
+      "B": "Potential issues with TCP timestamping and ACK generation.",
+      "C": "Reduction in total network bandwidth.",
+      "D": "Automatic disconnection of idle users."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Data Oriented Design' (DOD) and how does it relate to performance?",
+    "options": {
+      "A": "Organizing data to maximize cache hits by grouping related data in memory (e.g., Arrays of Structs vs. Struct of Arrays).",
+      "B": "A method to ensure all data is stored in a SQL database.",
+      "C": "Focusing on the user's data privacy.",
+      "D": "A way to visualize data using charts."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In 'Ring Buffers', the producer and consumer can operate concurrently without expensive locking if they use atomic pointers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Linux kernel feature allows a user-space application to securely and efficiently execute code within the kernel context for networking or tracing?",
+    "options": {
+      "A": "eBPF (Extended Berkeley Packet Filter)",
+      "B": "Cgroups",
+      "C": "Namespaces",
+      "D": "KVM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO performance metrics associated with 'Garbage Collection' in the JVM or V8.",
+    "options": {
+      "A": "Allocation Rate (MB/sec)",
+      "B": "Promotion Rate (Young to Old generation migration)",
+      "C": "Number of lines of code processed.",
+      "D": "The file size of the JavaScript bundle."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Thundering Herd' problem in network server design?",
+    "options": {
+      "A": "When a large number of processes are woken up to handle a single event, causing excessive context switching and contention.",
+      "B": "A spike in traffic caused by a marketing campaign.",
+      "C": "A database deadlocking issue.",
+      "D": "When the server's hard drive fails due to too many writes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Lock Elision' is a technique used by some CPUs to speculatively execute critical sections without acquiring a lock if no conflicts are detected.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which architectural pattern is used to reduce the 'read-modify-write' overhead in distributed storage by only appending new versions of data?",
+    "options": {
+      "A": "Immutable Storage / Append-only Log",
+      "B": "Direct Mapping",
+      "C": "Lazy Updating",
+      "D": "In-place Mutation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of 'Page Cache' in the Linux Operating System.",
+    "options": {
+      "A": "Transparently caching disk data in unused RAM to speed up file access.",
+      "B": "Allowing multiple processes to read the same file data from memory simultaneously.",
+      "C": "Encrypting the user's home directory.",
+      "D": "Automatically deleting large log files."
+    },
+    "answer": "A, B"
+  }
+  ]
+}

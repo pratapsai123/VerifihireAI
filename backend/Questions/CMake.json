@@ -1,0 +1,1903 @@
+{ 
+  "skill": "CMake", 
+  "questions": [
+    {
+    "question": "What is the standard name for the primary configuration file used by CMake?",
+    "options": {
+      "A": "cmake.conf",
+      "B": "CMakeLists.txt",
+      "C": "MakeFile.cmake",
+      "D": "project.cmake"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is required at the very top of a CMakeLists.txt file to specify the minimum version allowed?",
+    "options": {
+      "A": "cmake_minimum_required(VERSION x.x)",
+      "B": "set(CMAKE_VERSION x.x)",
+      "C": "version_check(x.x)",
+      "D": "require_cmake(x.x)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: CMake is a compiler that directly converts source code into machine-executable binaries.",
+    "options": {
+      "A": "True",
+      "B": "False (CMake is a build-system generator that creates files for tools like Make, Ninja, or Visual Studio)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to define the name of the project and its metadata?",
+    "options": {
+      "A": "set_project()",
+      "B": "project()",
+      "C": "name()",
+      "D": "init()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create an executable target from source files in CMake?",
+    "options": {
+      "A": "create_binary()",
+      "B": "build_exe()",
+      "C": "add_executable()",
+      "D": "target_bin()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to set a variable value in CMake?",
+    "options": {
+      "A": "var()",
+      "B": "set()",
+      "C": "define()",
+      "D": "assign()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select ALL that apply: Which of the following are valid ways to comment in a CMake file?",
+    "options": {
+      "A": "# This is a comment",
+      "B": "// This is a comment",
+      "C": "/* This is a comment */",
+      "D": "#[[ This is a bracket comment ]]"
+    },
+    "answer": "A, D"
+  },
+  {
+    "question": "What is the purpose of the 'add_library()' command?",
+    "options": {
+      "A": "To download external dependencies from the internet.",
+      "B": "To create a static or shared library from source files.",
+      "C": "To include header files in the search path.",
+      "D": "To link an executable to a system DLL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: CMake variables are case-sensitive.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command links a library to an executable target?",
+    "options": {
+      "A": "link_libraries()",
+      "B": "target_link_libraries()",
+      "C": "add_dependency()",
+      "D": "include_lib()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'target_link_libraries', what does the 'PRIVATE' keyword signify?",
+    "options": {
+      "A": "The dependency is only used for building the target and is not passed to users of the target.",
+      "B": "The dependency is hidden from the debugger.",
+      "C": "The dependency is shared with all other targets in the project automatically.",
+      "D": "The dependency is downloaded privately at build time."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'CMake Cache' file (CMakeCache.txt) used for?",
+    "options": {
+      "A": "Storing temporary build artifacts to speed up compilation.",
+      "B": "Storing persistent variables that remain across multiple runs of CMake.",
+      "C": "Keeping track of compiler errors.",
+      "D": "Storing the source code of the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to include another CMake file or a module into the current scope?",
+    "options": {
+      "A": "import()",
+      "B": "include()",
+      "C": "load()",
+      "D": "require()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'if()' command in CMake requires the variable name to be wrapped in '${}' to check its value in modern versions.",
+    "options": {
+      "A": "True",
+      "B": "False (Modern CMake can evaluate the variable name directly in the if() statement)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to find an external package (like OpenSSL or Boost) on the system?",
+    "options": {
+      "A": "search_package()",
+      "B": "find_package()",
+      "C": "locate_lib()",
+      "D": "get_external()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a custom option that can be toggled by the user in a GUI like cmake-gui?",
+    "options": {
+      "A": "set(VAR ON)",
+      "B": "option(NAME 'description' DEFAULT)",
+      "C": "toggle(NAME)",
+      "D": "user_var(NAME)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select ALL that apply: Which keywords are valid for 'target_include_directories'?",
+    "options": {
+      "A": "PRIVATE",
+      "B": "PUBLIC",
+      "C": "INTERFACE",
+      "D": "GLOBAL"
+    },
+    "answer": "A, B, C"
+  },
+  {
+    "question": "What is the purpose of 'target_compile_definitions'?",
+    "options": {
+      "A": "To set the C++ standard (e.g., C++17).",
+      "B": "To pass preprocessor macros (e.g., -DDEBUG) to the compiler for a specific target.",
+      "C": "To list the source files for a target.",
+      "D": "To define the installation path."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'add_subdirectory()' creates a new child scope for variables.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable contains the path to the top-level directory where the build files are generated?",
+    "options": {
+      "A": "CMAKE_SOURCE_DIR",
+      "B": "CMAKE_BINARY_DIR",
+      "C": "PROJECT_SOURCE_DIR",
+      "D": "CMAKE_CURRENT_LIST_DIR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Generator Expressions' in CMake (e.g., $<CONFIG:Debug>)?",
+    "options": {
+      "A": "Variables that are evaluated during the configuration phase.",
+      "B": "Expressions that are evaluated during the build-system generation phase to provide configuration-specific logic.",
+      "C": "Commands used to generate source code from template files.",
+      "D": "Special loops used for iterating over target properties."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which modern CMake module is preferred for downloading and integrating external Git repositories at configure time?",
+    "options": {
+      "A": "ExternalProject",
+      "B": "FetchContent",
+      "C": "GitDownload",
+      "D": "DownloadPackage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an 'install()' command, what is the 'COMPONENT' argument used for?",
+    "options": {
+      "A": "To group files into logical sets for partial installation or packaging (e.g., 'Runtime', 'Development').",
+      "B": "To specify the hardware architecture (x86 vs x64).",
+      "C": "To list the libraries required by the executable.",
+      "D": "To define the compression level of the installer."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'CMake Toolchain' file?",
+    "options": {
+      "A": "To list all the developers in the project.",
+      "B": "To configure CMake for cross-compiling (e.g., building for Android on a Windows machine).",
+      "C": "To automate the Git commit process.",
+      "D": "To clean the build directory before every run."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select ALL that apply: Which of the following are valid CMake Generator Expressions?",
+    "options": {
+      "A": "$<TARGET_FILE:tgt>",
+      "B": "$<COMPILE_LANGUAGE:CXX>",
+      "C": "$<IF:condition,true_val,false_val>",
+      "D": "$[VAR_NAME]"
+    },
+    "answer": "A, B, C"
+  },
+  {
+    "question": "True or False: Using 'INTERFACE' libraries in CMake allows you to create targets that consist only of header files and compile definitions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to run a custom script or shell command at build time?",
+    "options": {
+      "A": "execute_process()",
+      "B": "add_custom_command()",
+      "C": "run_command()",
+      "D": "script()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'RPATH' in the context of CMake and Linux binaries?",
+    "options": {
+      "A": "The path to the compiler executable.",
+      "B": "A list of paths embedded in the executable to help the dynamic linker find shared libraries at runtime.",
+      "C": "The directory where the source code is stored.",
+      "D": "The remote path for cloud-based building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you export a CMake package so that other projects can use 'find_package()' to find it?",
+    "options": {
+      "A": "By using the 'export()' and 'install(EXPORT ...)' commands.",
+      "B": "By copying the .lib files to the system folder manually.",
+      "C": "By uploading the project to GitHub.",
+      "D": "By setting the CMAKE_EXPORT_COMPILE_COMMANDS variable."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'execute_process()' runs at build time (when you run make/ninja).",
+    "options": {
+      "A": "True",
+      "B": "False (It runs at configure time when you run cmake)."
+    },
+    "answer": "B"
+  },
+{
+    "question": "Which command is used to add a directory to the compiler's header search path for a specific target?",
+    "options": {
+      "A": "include_directories()",
+      "B": "target_include_directories()",
+      "C": "add_include_path()",
+      "D": "set_headers()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'message()' command can be used to print debug information to the terminal during the configuration phase.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of the command 'set(MY_LIST a b c)' in CMake?",
+    "options": {
+      "A": "A single string 'abc'",
+      "B": "A semicolon-separated list 'a;b;c'",
+      "C": "A space-separated string 'a b c'",
+      "D": "An error, lists must use the list() command"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable is used to check if the current system is running Windows?",
+    "options": {
+      "A": "IS_WINDOWS",
+      "B": "WIN32",
+      "C": "MSVC_ONLY",
+      "D": "CMAKE_SYSTEM_WIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you include all .cpp files in the current directory into a variable named SOURCES?",
+    "options": {
+      "A": "set(SOURCES *.cpp)",
+      "B": "file(GLOB SOURCES *.cpp)",
+      "C": "add_sources(SOURCES *.cpp)",
+      "D": "list(APPEND SOURCES *.cpp)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'BUILD_SHARED_LIBS' variable control when set to ON?",
+    "options": {
+      "A": "It makes all libraries shared (DLLs/SOs) by default unless specified otherwise.",
+      "B": "It shares the build folder over the network.",
+      "C": "It enables multi-threaded compilation.",
+      "D": "It creates a zip file of the build."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'add_definitions(-DDEBUG)' is the modern, recommended way to add preprocessor macros to a specific target.",
+    "options": {
+      "A": "True",
+      "B": "False (target_compile_definitions() is the modern, scoped preference)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to move into a subfolder and process its CMakeLists.txt file?",
+    "options": {
+      "A": "include_subfolder()",
+      "B": "add_subdirectory()",
+      "C": "enter_dir()",
+      "D": "process_path()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default build type in CMake if 'CMAKE_BUILD_TYPE' is not set on many generators?",
+    "options": {
+      "A": "Debug",
+      "B": "Release",
+      "C": "MinSizeRel",
+      "D": "Empty string (No specific flags applied)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Select ALL that apply: Which of the following are valid build types in CMake?",
+    "options": {
+      "A": "Debug",
+      "B": "Release",
+      "C": "RelWithDebInfo",
+      "D": "FastBuild"
+    },
+    "answer": "A, B, C"
+  },
+  {
+    "question": "Which variable stores the full path to the directory containing the CMakeLists.txt currently being processed?",
+    "options": {
+      "A": "CMAKE_CURRENT_SOURCE_DIR",
+      "B": "CMAKE_ROOT_DIR",
+      "C": "PROJECT_DIR",
+      "D": "CMAKE_HOME"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In CMake, '${MY_VAR}' is used to get the value of a variable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to ensure a target is built with a specific C++ standard (like C++17)?",
+    "options": {
+      "A": "set_target_properties(target PROPERTIES CXX_STANDARD 17)",
+      "B": "add_cpp_standard(17)",
+      "C": "target_compile_options(target PRIVATE -std=c++17)",
+      "D": "require_std(17)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'MATH' command in CMake?",
+    "options": {
+      "A": "To include the C math library.",
+      "B": "To perform basic arithmetic evaluations like addition or multiplication.",
+      "C": "To calculate the size of source files.",
+      "D": "To verify the number of targets in a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'STATIC' library is linked into the executable at runtime.",
+    "options": {
+      "A": "True",
+      "B": "False (Static libraries are embedded into the binary at link time)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command-line flag is used to pass a variable to CMake from the terminal (e.g., setting the build type)?",
+    "options": {
+      "A": "-V",
+      "B": "-D",
+      "C": "-S",
+      "D": "-B"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable is set to True if the compiler being used is GNU GCC?",
+    "options": {
+      "A": "COMPILER_IS_GCC",
+      "B": "CMAKE_COMPILER_IS_GNUCXX",
+      "C": "IS_LINUX",
+      "D": "USE_GCC"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'list(APPEND ...)' command do?",
+    "options": {
+      "A": "Creates a new list from scratch.",
+      "B": "Adds elements to the end of an existing list variable.",
+      "C": "Deletes the last element of a list.",
+      "D": "Sorts the list alphabetically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'add_library(mylib SHARED ...)' creates a shared library (like a .so or .dll).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command allows you to define a list of source files to be used across multiple targets?",
+    "options": {
+      "A": "sources()",
+      "B": "set()",
+      "C": "target_sources()",
+      "D": "group_files()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CMAKE_CXX_FLAGS' do?",
+    "options": {
+      "A": "It sets the version of C++.",
+      "B": "It contains a string of flags passed to the C++ compiler for all targets.",
+      "C": "It lists the C++ source files.",
+      "D": "It disables C++ support."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If you change a CMakeLists.txt file, you usually need to delete the build folder and restart from scratch.",
+    "options": {
+      "A": "True",
+      "B": "False (CMake detects changes and re-configures automatically during the next build)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command provides a way to find where a specific header file is located on the system?",
+    "options": {
+      "A": "find_file()",
+      "B": "find_path()",
+      "C": "search_header()",
+      "D": "locate_include()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'target_link_directories()'?",
+    "options": {
+      "A": "To tell the linker where to look for library files (.lib/.a).",
+      "B": "To copy libraries into the build folder.",
+      "C": "To list the source files in a directory.",
+      "D": "To define the installation path for libraries."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select ALL that apply: Which of these are valid arguments for the 'message()' command?",
+    "options": {
+      "A": "STATUS",
+      "B": "WARNING",
+      "C": "FATAL_ERROR",
+      "D": "CRITICAL"
+    },
+    "answer": "A, B, C"
+  },
+  {
+    "question": "True or False: 'CMAKE_MODULE_PATH' is used to tell CMake where to look for custom .cmake modules.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to copy a file from the source tree to the build tree, often used for configuration headers?",
+    "options": {
+      "A": "copy_file()",
+      "B": "configure_file()",
+      "C": "transfer_data()",
+      "D": "sync_file()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'target_compile_options()'?",
+    "options": {
+      "A": "Setting preprocessor macros.",
+      "B": "Adding compiler-specific flags like -Wall or /W4 to a target.",
+      "C": "Linking libraries to the target.",
+      "D": "Naming the target output file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Variables in CMake can be 'UNSET' using the 'unset()' command.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable identifies the C++ compiler being used (e.g., /usr/bin/g++)?",
+    "options": {
+      "A": "CMAKE_CXX_COMPILER",
+      "B": "COMPILER_PATH",
+      "C": "CXX_BIN",
+      "D": "PROJECT_COMPILER"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'aux_source_directory()' command do?",
+    "options": {
+      "A": "Creates a backup of the source files.",
+      "B": "Finds all source files in a directory and adds them to a list variable.",
+      "C": "Moves the source files to a different folder.",
+      "D": "Checks for syntax errors in the sources."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every directory in a project that contains source files must have its own CMakeLists.txt file.",
+    "options": {
+      "A": "True",
+      "B": "False (You can reference files in subdirectories from a parent CMakeLists.txt)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to define a list of include directories that everyone linking to this library must also use?",
+    "options": {
+      "A": "target_include_directories(tgt PRIVATE ...)",
+      "B": "target_include_directories(tgt INTERFACE ...)",
+      "C": "add_include_directories(...)",
+      "D": "set_public_headers(...)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'CMAKE_INSTALL_PREFIX'?",
+    "options": {
+      "A": "To set the root directory where the project will be installed (e.g., /usr/local).",
+      "B": "To prefix all variable names with a project name.",
+      "C": "To specify the location of the source code.",
+      "D": "To set the name of the executable."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select ALL that apply: Which of the following can be a target in CMake?",
+    "options": {
+      "A": "An executable",
+      "B": "A static library",
+      "C": "A shared library",
+      "D": "A variable"
+    },
+    "answer": "A, B, C"
+  },
+  {
+    "question": "True or False: The 'project()' command automatically enables C and C++ support if no languages are specified.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command allows you to set the output name of a target, differing from the CMake target name?",
+    "options": {
+      "A": "set_output_name()",
+      "B": "set_target_properties(tgt PROPERTIES OUTPUT_NAME 'newname')",
+      "C": "rename_target()",
+      "D": "target_binary_name()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'APPLE' represent as a variable in CMake?",
+    "options": {
+      "A": "A variable that is True if the system is macOS, iOS, tvOS, or watchOS.",
+      "B": "The version of the Clang compiler.",
+      "C": "A shortcut for the 'install' command.",
+      "D": "A variable for mobile-only builds."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: CMake can be used to generate project files for Xcode on macOS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to define an alias for a target (e.g., MyProject::Lib)?",
+    "options": {
+      "A": "alias_target()",
+      "B": "add_library(MyProject::Lib ALIAS existing_lib)",
+      "C": "set_alias()",
+      "D": "target_name_alias()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'CMAKE_CURRENT_BINARY_DIR'?",
+    "options": {
+      "A": "It points to the directory in the build tree corresponding to the current source directory.",
+      "B": "It stores the path to the compiler executable.",
+      "C": "It is where the final .exe is always placed.",
+      "D": "It stores the source code for the current target."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select ALL that apply: Which of these are valid ways to create a variable in CMake?",
+    "options": {
+      "A": "set(VAR VALUE)",
+      "B": "option(VAR 'desc' ON)",
+      "C": "file(READ file VAR)",
+      "D": "var VAR = VALUE"
+    },
+    "answer": "A, B, C"
+  },
+  {
+    "question": "True or False: Using 'file(GLOB ...)' to collect source files is generally discouraged because CMake won't know to re-run if a new file is added without modifying CMakeLists.txt.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command returns the length of a list?",
+    "options": {
+      "A": "list(LENGTH listname output_var)",
+      "B": "size(listname)",
+      "C": "length(listname)",
+      "D": "get_list_count()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'include_guard()'?",
+    "options": {
+      "A": "To protect header files from being included twice in C++.",
+      "B": "To prevent a CMake module from being included multiple times in the same scope.",
+      "C": "To check if the user has permission to run the script.",
+      "D": "To encrypt the CMakeLists.txt file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'string()' command can be used for regex matching and substring extraction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to add a custom target that does not produce an output file, such as a target to run documentation generation?",
+    "options": {
+      "A": "add_executable()",
+      "B": "add_custom_target()",
+      "C": "add_utility()",
+      "D": "add_script_target()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'set(VAR val)' and 'set(VAR val PARENT_SCOPE)'?",
+    "options": {
+      "A": "PARENT_SCOPE makes the variable available in the directory that called add_subdirectory().",
+      "B": "PARENT_SCOPE makes the variable a global cache variable.",
+      "C": "PARENT_SCOPE is used to hide the variable from child directories.",
+      "D": "There is no difference in modern CMake."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Modern CMake, why is 'target_include_directories' preferred over 'include_directories'?",
+    "options": {
+      "A": "It is faster to type.",
+      "B": "It allows for fine-grained control over which targets receive the include paths and how they propagate to dependencies.",
+      "C": "It is only compatible with Visual Studio.",
+      "D": "It automatically downloads missing headers from GitHub."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'foreach()' command can be used to iterate over a list of items or a range of numbers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable contains a list of all directories that CMake should search when 'find_package()' is called?",
+    "options": {
+      "A": "CMAKE_PACKAGES",
+      "B": "CMAKE_PREFIX_PATH",
+      "C": "PACKAGE_SEARCH_DIR",
+      "D": "LIBRARY_OUTPUT_PATH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check if a target already exists in the current project?",
+    "options": {
+      "A": "if(TARGET target_name)",
+      "B": "if(EXISTS target_name)",
+      "C": "if(DEFINED target_name)",
+      "D": "check_target(target_name)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'INTERFACE' keyword mean in 'target_compile_definitions(mytgt INTERFACE DEF)'?",
+    "options": {
+      "A": "The definition is only used to build 'mytgt'.",
+      "B": "The definition is not used to build 'mytgt', but is passed to any target that links to 'mytgt'.",
+      "C": "The definition is shared across all targets in the project.",
+      "D": "The definition is only used for header files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to evaluate a string as a CMake command?",
+    "options": {
+      "A": "eval()",
+      "B": "cmake_language(EVAL ...)",
+      "C": "execute_code()",
+      "D": "string(EXECUTE ...)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select ALL that apply: Which of the following are valid ways to define a function or macro in CMake?",
+    "options": {
+      "A": "function(name args) ... endfunction()",
+      "B": "macro(name args) ... endmacro()",
+      "C": "def name(args) ... end",
+      "D": "procedure(name)"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Unlike a function, a macro in CMake does not create a new scope for variables.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to find the absolute path of a program (like 'grep' or 'doxygen') on the system?",
+    "options": {
+      "A": "find_file()",
+      "B": "find_program()",
+      "C": "locate_bin()",
+      "D": "get_filename_component()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'while()' command in CMake?",
+    "options": {
+      "A": "To create a background process during build.",
+      "B": "To repeat a block of commands as long as a condition is true.",
+      "C": "To wait for a file to be created.",
+      "D": "To pause the configuration for a set number of seconds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable is used to determine if the project is being built on a 64-bit system?",
+    "options": {
+      "A": "CMAKE_SIZEOF_VOID_P",
+      "B": "IS_64BIT",
+      "C": "CMAKE_SYSTEM_PROCESSOR",
+      "D": "CPU_ARCH_64"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'target_link_libraries' can link both other CMake targets and raw paths to library files.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to check if a specific C++ source code snippet can be compiled by the current compiler?",
+    "options": {
+      "A": "try_compile()",
+      "B": "check_cxx_compiler_flag()",
+      "C": "test_source()",
+      "D": "verify_code()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of 'string(TIMESTAMP ...)'?",
+    "options": {
+      "A": "It measures the time a build takes.",
+      "B": "It returns a formatted string representing the current date and/or time.",
+      "C": "It sets the 'last modified' date of a file.",
+      "D": "It synchronizes the system clock with a build server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'find_package' call, what does the 'REQUIRED' keyword do?",
+    "options": {
+      "A": "It downloads the package if it isn't found.",
+      "B": "It stops the CMake configuration with a fatal error if the package is not found.",
+      "C": "It marks the package as mandatory for the end-user.",
+      "D": "It forces a re-scan of the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to create a file with a list of all targets and their properties to be used by other projects?",
+    "options": {
+      "A": "export()",
+      "B": "install_targets()",
+      "C": "save_project()",
+      "D": "package_init()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'set_property(TARGET ...)' is more flexible than specialized commands like 'target_include_directories' but generally harder to read.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable stores the name of the project as defined in the most recent 'project()' call?",
+    "options": {
+      "A": "CMAKE_PROJECT_NAME",
+      "B": "PROJECT_NAME",
+      "C": "CURRENT_PROJECT",
+      "D": "APP_NAME"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you append a value to an existing list variable 'MY_LIST' without using the 'list' command?",
+    "options": {
+      "A": "set(MY_LIST ${MY_LIST} new_val)",
+      "B": "MY_LIST += new_val",
+      "C": "append(MY_LIST new_val)",
+      "D": "MY_LIST.add(new_val)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In CMake, 'ARGV' refers to the list of all arguments passed to a function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command converts a relative path to an absolute path?",
+    "options": {
+      "A": "get_filename_component(... ABSOLUTE)",
+      "B": "to_absolute_path()",
+      "C": "file(REAL_PATH ...)",
+      "D": "set_full_path()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select ALL that apply: Which of these are valid scopes for variables in CMake?",
+    "options": {
+      "A": "Function scope",
+      "B": "Directory scope",
+      "C": "Global/Cache scope",
+      "D": "Target scope (Modern CMake properties)"
+    },
+    "answer": "A, B, C, D"
+  },
+  {
+    "question": "What happens when you use 'option()' with a variable that already exists in the Cache?",
+    "options": {
+      "A": "It overwrites the cache value.",
+      "B": "It does nothing; the existing cache value is preserved.",
+      "C": "It throws an error.",
+      "D": "It creates a local variable that hides the cache variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'target_compile_features' can be used to request specific compiler features like 'cxx_std_17'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to define the version of the project in the 'project()' command?",
+    "options": {
+      "A": "project(MyProj VERSION 1.0.0)",
+      "B": "set(PROJECT_VERSION 1.0.0)",
+      "C": "version(1.0.0)",
+      "D": "project_version(1.0.0)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'return()' command in a CMake file?",
+    "options": {
+      "A": "To exit the entire build process.",
+      "B": "To stop processing the current file or function and return to the caller.",
+      "C": "To return a value from a function (functions in CMake don't return values this way).",
+      "D": "To restart the configuration from the top."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable points to the path where CMake modules (like FindBoost.cmake) are stored in the system?",
+    "options": {
+      "A": "CMAKE_ROOT",
+      "B": "CMAKE_MODULE_PATH",
+      "C": "CMAKE_DATA_DIR",
+      "D": "CMAKE_FIND_ROOT_PATH"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'add_executable(tgt IMPORTED)' is used to reference an executable that was built outside of the current CMake project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to mark a variable as 'advanced' so it is hidden in the standard view of cmake-gui?",
+    "options": {
+      "A": "hide_variable()",
+      "B": "mark_as_advanced()",
+      "C": "set_advanced_property()",
+      "D": "private_var()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'list(REMOVE_DUPLICATES list_var)'?",
+    "options": {
+      "A": "It creates a second list without duplicates.",
+      "B": "It modifies 'list_var' in place, removing all repeated elements.",
+      "C": "It returns the number of duplicates found.",
+      "D": "It sorts the list and removes duplicates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable specifies the directory where all library output files (.lib, .so) should be placed?",
+    "options": {
+      "A": "CMAKE_LIBRARY_OUTPUT_DIRECTORY",
+      "B": "LIBRARY_DESTINATION",
+      "C": "PROJECT_LIB_DIR",
+      "D": "EXECUTABLE_OUTPUT_PATH"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'include()' command can be used to load a .cmake file from a remote URL.",
+    "options": {
+      "A": "False (It only works for local files; use file(DOWNLOAD ...) first).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to read the value of a specific property from a target?",
+    "options": {
+      "A": "get_target_property()",
+      "B": "read_property()",
+      "C": "get_property(TARGET ...)",
+      "D": "show_property()"
+    },
+    "answer": "A, C"
+  },
+  {
+    "question": "What is the purpose of 'target_precompile_headers()'?",
+    "options": {
+      "A": "To list the headers that need to be installed.",
+      "B": "To specify a set of headers to be precompiled to speed up build times.",
+      "C": "To check for syntax errors in headers.",
+      "D": "To automatically generate header guards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'cmake_parse_arguments' is the standard way to handle named arguments in CMake functions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable is set to True when using the Ninja generator?",
+    "options": {
+      "A": "NINJA",
+      "B": "CMAKE_GENERATOR_IS_NINJA",
+      "C": "USE_NINJA",
+      "D": "GENERATOR_TYPE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'source_group()' command do?",
+    "options": {
+      "A": "It compiles a group of source files together.",
+      "B": "It organizes source files into folders (filters) in IDEs like Visual Studio or Xcode.",
+      "C": "It creates a static library from a group of files.",
+      "D": "It checks for circular dependencies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'add_library(tgt OBJECT ...)' creates a library that only exists as a set of object files, without creating an archive or shared library.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable defines the C compiler executable used by CMake?",
+    "options": {
+      "A": "CMAKE_C_COMPILER",
+      "B": "C_BIN",
+      "C": "PROJECT_C_COMPILER",
+      "D": "CC"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you add a custom configuration (e.g., 'Coverage') to the list of build types?",
+    "options": {
+      "A": "set(CMAKE_CONFIGURATION_TYPES 'Debug;Release;Coverage' CACHE STRING '' FORCE)",
+      "B": "add_build_type(Coverage)",
+      "C": "set(BUILD_TYPES Coverage)",
+      "D": "project(MyProj CONFIGS Coverage)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: CMake 'List' variables are just strings where elements are joined by semicolons.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to set the C++ standard for the entire project instead of per-target?",
+    "options": {
+      "A": "set(CMAKE_CXX_STANDARD 17)",
+      "B": "add_definitions(-std=c++17)",
+      "C": "global_cpp_std(17)",
+      "D": "require_cxx(17)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'STREQUAL' operator in an 'if()' statement?",
+    "options": {
+      "A": "To check if two strings are identical.",
+      "B": "To check if a string is empty.",
+      "C": "To perform a case-insensitive comparison.",
+      "D": "To check if a string is a valid variable name."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'find_library' will search in standard system paths by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+{
+    "question": "Which generator expression is used to include a directory only when the target is being consumed by another target (e.g., in 'target_include_directories')?",
+    "options": {
+      "A": "$<BUILD_INTERFACE:...>",
+      "B": "$<INSTALL_INTERFACE:...>",
+      "C": "$<TARGET_PROPERTY:INCLUDE_DIRECTORIES>",
+      "D": "$<CONFIG:Release>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'add_custom_command', what is the purpose of the 'DEPENDS' argument when pointing to another file?",
+    "options": {
+      "A": "It ensures the command re-runs whenever the dependency file's timestamp changes.",
+      "B": "It automatically includes the file in the executable's source list.",
+      "C": "It marks the file for deletion after the build completes.",
+      "D": "It encrypts the dependency file for security."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'FetchContent_MakeAvailable' is the modern, high-level command that combines 'FetchContent_Declare' and 'FetchContent_Populate' logic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable is used to specify the path to a toolchain file when invoking CMake from the command line?",
+    "options": {
+      "A": "-D_CMAKE_TOOLCHAIN_FILE",
+      "B": "-DCMAKE_TOOLCHAIN_FILE",
+      "C": "-DTOOLCHAIN",
+      "D": "-DSET_COMPILER_PATH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'IMMEDIATE' keyword do in a 'variable_watch' command?",
+    "options": {
+      "A": "It triggers the callback only once.",
+      "B": "It forces the callback to run before the variable is actually modified.",
+      "C": "It stops the build immediately if the variable changes.",
+      "D": "It is a legacy keyword that has no effect in modern CMake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which CPack generator is specifically used to create .deb packages for Debian-based Linux distributions?",
+    "options": {
+      "A": "CPACK_GENERATOR = 'DEB'",
+      "B": "CPACK_BINARY_DEB",
+      "C": "CPACK_LINUX_TYPE",
+      "D": "CPACK_DEBIAN_PACKAGE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Generator expressions can be used inside 'set_target_properties' for the 'LINK_FLAGS' property.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between 'add_custom_command' and 'add_custom_target'?",
+    "options": {
+      "A": "add_custom_command creates a file output; add_custom_target is a named target that always runs.",
+      "B": "add_custom_target can only run shell scripts.",
+      "C": "add_custom_command is global, while add_custom_target is local.",
+      "D": "There is no functional difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to record the current values of target properties into a file so they can be imported by another project using 'find_package'?",
+    "options": {
+      "A": "export(TARGETS ...)",
+      "B": "install(EXPORT ...)",
+      "C": "save_targets()",
+      "D": "write_basic_package_config_file()"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "Select ALL that apply: Which of the following are valid 'TRANSFORM' actions for the 'string' command?",
+    "options": {
+      "A": "TOUPPER",
+      "B": "STRIP",
+      "C": "REPLACE",
+      "D": "REVERSE"
+    },
+    "answer": "A, B, C, D"
+  },
+  {
+    "question": "What does the 'EXCLUDE_FROM_ALL' property do when applied to a target?",
+    "options": {
+      "A": "The target is deleted from the source tree.",
+      "B": "The target will not be built when running 'make all' unless specifically requested by name.",
+      "C": "The target is hidden from the 'find_package' command.",
+      "D": "The target is excluded from the final installation package."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'target_link_options' was introduced in CMake 3.13 to provide a target-scoped way to pass flags to the linker.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable is used to determine the bitness of the target architecture during a build (e.g., checking for 4 or 8 bytes)?",
+    "options": {
+      "A": "CMAKE_SIZEOF_VOID_P",
+      "B": "CMAKE_SYSTEM_BITNESS",
+      "C": "CPU_WORD_SIZE",
+      "D": "PROJECT_ARCH_SIZE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'find_package(Config)', what is the purpose of the 'NAMES' argument?",
+    "options": {
+      "A": "To specify alternative names for the package file (e.g., 'MyLibConfig.cmake' or 'mylib-config.cmake').",
+      "B": "To list the developers of the package.",
+      "C": "To rename the package once it is found.",
+      "D": "To check for specific version strings."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property is used to set the 'SOVERSION' of a shared library for versioning on Unix systems?",
+    "options": {
+      "A": "VERSION",
+      "B": "SOVERSION",
+      "C": "LIBRARY_VERSION",
+      "D": "UNIX_VERSION"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'ExternalProject_Add' command runs at CMake configuration time.",
+    "options": {
+      "A": "False (It is a build-time command; use FetchContent for configuration-time downloads).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'IN_LIST' operator in an 'if()' statement?",
+    "options": {
+      "A": "To check if a specific element exists within a semicolon-separated list variable.",
+      "B": "To convert a string into a list.",
+      "C": "To find the index of an item.",
+      "D": "To merge two lists."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to find a specific file (e.g., a header) and stop the build if it's missing?",
+    "options": {
+      "A": "find_file(... REQUIRED)",
+      "B": "locate_file()",
+      "C": "check_include_file()",
+      "D": "search_path()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you specify that a target should use 'UTF-8' encoding for source files on MSVC via CMake?",
+    "options": {
+      "A": "target_compile_options(tgt PRIVATE '/utf-8')",
+      "B": "set(CMAKE_CHARSET UTF8)",
+      "C": "project(MyProj ENCODING UTF8)",
+      "D": "add_definitions(-D_UTF8)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Macro' in CMake evaluates arguments by string replacement, not by creating local variable bindings like a 'Function'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'CMAKE_EXPORT_COMPILE_COMMANDS' variable used for?",
+    "options": {
+      "A": "To generate a 'compile_commands.json' file for use by LSP servers and tools like Clang-Tidy.",
+      "B": "To export the build results to a web server.",
+      "C": "To list the exact shell commands used to compile the project.",
+      "D": "To bypass the build system and run the compiler directly."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command-line argument is used to generate a dependency graph of the targets in a DOT file format?",
+    "options": {
+      "A": "--graphviz=file.dot",
+      "B": "--dep-graph",
+      "C": "--visualize",
+      "D": "--show-deps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'target_link_libraries', what happens if you link to a target marked as 'INTERFACE'?",
+    "options": {
+      "A": "No actual binary linking occurs; only properties like include paths and definitions are inherited.",
+      "B": "A static library is created automatically.",
+      "C": "The target is ignored during the build.",
+      "D": "The compiler throws a warning about missing symbols."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'file(LOCK ...)' command can be used to synchronize multiple CMake instances running on the same machine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable holds the full path to the C++ compiler when the project language is 'CXX'?",
+    "options": {
+      "A": "CMAKE_CXX_COMPILER",
+      "B": "CXX_PATH",
+      "C": "COMPILER_CXX_BIN",
+      "D": "PROJECT_CXX_COMPILER"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'CMAKE_STAGING_PREFIX' variable?",
+    "options": {
+      "A": "To specify a directory on the host machine where cross-compiled binaries are 'installed' before being moved to the target device.",
+      "B": "To set the location of the source code.",
+      "C": "To define the prefix for all global variables.",
+      "D": "To store temporary build artifacts."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to handle 'named' arguments in a custom CMake function?",
+    "options": {
+      "A": "cmake_parse_arguments()",
+      "B": "get_func_args()",
+      "C": "set_named_args()",
+      "D": "parse_args_list()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'include_directories' is generally preferred over 'target_include_directories' in large, modular projects.",
+    "options": {
+      "A": "False (target-based commands are better for scoping and dependency management).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'target_sources' command with 'PUBLIC' scope do?",
+    "options": {
+      "A": "It adds source files to the target and mandates that any target linking to it must also compile those same source files.",
+      "B": "It makes the source code available on a public web server.",
+      "C": "It marks the files as ready for open-source distribution.",
+      "D": "It allows the files to be read by the debugger."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which generator expression checks if the current build configuration is 'Debug'?",
+    "options": {
+      "A": "$<CONFIG:Debug>",
+      "B": "$<IF_DEBUG:1,0>",
+      "C": "$<DEBUG_MODE>",
+      "D": "$[IS_DEBUG]"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select ALL that apply: Which of the following can trigger a re-configuration of CMake automatically?",
+    "options": {
+      "A": "Modifying any CMakeLists.txt file in the project.",
+      "B": "Adding a new .cmake file that is 'included' by the project.",
+      "C": "Changing the value of a Cache variable via the CLI.",
+      "D": "Changing a C++ source file."
+    },
+    "answer": "A, B, C"
+  },
+  {
+    "question": "True or False: 'add_library(tgt SHARED IMPORTED)' is used to link against an existing .so or .dll file from another build system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'set_target_properties' when setting 'POSITION_INDEPENDENT_CODE' to ON?",
+    "options": {
+      "A": "It ensures the target is built with -fPIC (Position Independent Code), required for shared libraries.",
+      "B": "It allows the binary to be moved to any folder on the disk.",
+      "C": "It disables the use of absolute memory addresses in the assembly.",
+      "D": "It makes the target compatible with 32-bit systems."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command allows you to add a directory to the end of the RPATH of an installed binary?",
+    "options": {
+      "A": "set_target_properties(... INSTALL_RPATH_USE_LINK_PATH TRUE)",
+      "B": "add_install_path()",
+      "C": "target_link_directories()",
+      "D": "set_rpath_destination()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if 'cmake_minimum_required' is set to a version higher than the installed CMake version?",
+    "options": {
+      "A": "CMake terminates with a fatal error.",
+      "B": "CMake ignores the version check and continues.",
+      "C": "CMake tries to update itself automatically.",
+      "D": "CMake runs in a restricted compatibility mode."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'CheckIPOSupported' module is used to verify if the compiler supports Interprocedural Optimization (LTO).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable contains the list of all enabled languages in the current project?",
+    "options": {
+      "A": "ENABLED_LANGUAGES",
+      "B": "CMAKE_ENABLED_LANGUAGES",
+      "C": "PROJECT_LANGUAGES",
+      "D": "LANGS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'message(DEPRECATION ...)' command?",
+    "options": {
+      "A": "To warn users that a feature or variable will be removed in future versions of the project.",
+      "B": "To log errors into a hidden file.",
+      "C": "To prevent the build from finishing.",
+      "D": "To automatically update the CMakeLists.txt file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to read a specific line from a text file into a CMake variable?",
+    "options": {
+      "A": "file(STRINGS file_name var_name)",
+      "B": "read_line(file_name var_name)",
+      "C": "string(READ ...)",
+      "D": "get_file_content()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'add_test' command alone is sufficient to run tests; you do not need to call 'enable_testing()'.",
+    "options": {
+      "A": "False (You must call enable_testing() in the root CMakeLists.txt for ctest to work).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property can be set on a source file to prevent it from being compiled?",
+    "options": {
+      "A": "HEADER_FILE_ONLY",
+      "B": "SKIP_COMPILATION",
+      "C": "IS_DOCUMENTATION",
+      "D": "COMPILE_IGNORE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'CPACK_RESOURCE_FILE_LICENSE' used for?",
+    "options": {
+      "A": "To specify the text file containing the license agreement shown during installation.",
+      "B": "To verify the developer's digital signature.",
+      "C": "To encrypt the final package.",
+      "D": "To set the project's open-source license type."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable identifies the Operating System name (e.g., 'Linux', 'Windows', 'Darwin')?",
+    "options": {
+      "A": "CMAKE_SYSTEM_NAME",
+      "B": "OS_TYPE",
+      "C": "SYSTEM_ID",
+      "D": "PROJECT_OS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'target_compile_definitions' can accept generator expressions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'CMAKE_PREFIX_PATH' during a 'find_library' call?",
+    "options": {
+      "A": "It provides a list of root directories where CMake will search for libraries, headers, and packages.",
+      "B": "It sets the installation directory.",
+      "C": "It renames the libraries to have a specific prefix.",
+      "D": "It lists the libraries already linked to the target."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command-line option is used to run CMake in 'script' mode, executing a .cmake file without generating a build system?",
+    "options": {
+      "A": "-P",
+      "B": "-S",
+      "C": "-X",
+      "D": "-Script"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'configure_file', what does '@ONLY' specify?",
+    "options": {
+      "A": "Only variables wrapped in '@' (e.g., @VAR@) will be replaced; '${VAR}' will be ignored.",
+      "B": "The file is read-only.",
+      "C": "Only one copy of the file is allowed in the build tree.",
+      "D": "The command only works on Linux systems."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of 'get_filename_component(... NAME_WE)'?",
+    "options": {
+      "A": "It returns the filename without its path and without its last extension.",
+      "B": "It returns the extension only.",
+      "C": "It returns the full absolute path.",
+      "D": "It returns the directory name."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to specify the minimum version of CMake required for a project?",
+    "options": {
+      "A": "cmake_version(3.10)",
+      "B": "cmake_minimum_required(VERSION 3.10)",
+      "C": "require_cmake(3.10)",
+      "D": "set(CMAKE_MIN_VERSION 3.10)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The project() command must be called before add_executable() or add_library().",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which variable contains the path to the top-level directory of the source tree?",
+    "options": {
+      "A": "CMAKE_BINARY_DIR",
+      "B": "CMAKE_SOURCE_DIR",
+      "C": "PROJECT_SOURCE_DIR",
+      "D": "CMAKE_CURRENT_LIST_DIR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a static library named 'math_lib' from a source file 'math.cpp'?",
+    "options": {
+      "A": "add_library(math_lib STATIC math.cpp)",
+      "B": "add_executable(math_lib math.cpp)",
+      "C": "set_library(math_lib math.cpp)",
+      "D": "create_archive(math_lib math.cpp)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to print a status message to the console during configuration?",
+    "options": {
+      "A": "print('message')",
+      "B": "message(STATUS 'message')",
+      "C": "echo('message')",
+      "D": "log_info('message')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: CMake is a build system itself, similar to 'make' or 'ninja'.",
+    "options": {
+      "A": "True",
+      "B": "False (It is a build system generator that creates files for make, ninja, etc.)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to access the value of a variable named 'MY_VAR'?",
+    "options": {
+      "A": "&MY_VAR",
+      "B": "${MY_VAR}",
+      "C": "@MY_VAR@",
+      "D": "(MY_VAR)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of the CMakeLists.txt file?",
+    "options": {
+      "A": "To store the C++ source code.",
+      "B": "To describe the build process and dependencies in a platform-independent way.",
+      "C": "To act as a linker script.",
+      "D": "To manage git branches."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command links a library named 'log' to an executable named 'app'?",
+    "options": {
+      "A": "link_libraries(app log)",
+      "B": "target_link_libraries(app PRIVATE log)",
+      "C": "add_dependency(app log)",
+      "D": "include_library(app log)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Comments in CMake start with a '#' character.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'target_include_directories', what does the 'PUBLIC' keyword signify?",
+    "options": {
+      "A": "The directory is used to build the target and passed to any target that links to it.",
+      "B": "The directory is only used to build the target itself.",
+      "C": "The directory is only for external consumers, not for building the target itself.",
+      "D": "The directory is globally accessible by all targets in the project."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command allows you to locate an external dependency like 'OpenCV' or 'Threads'?",
+    "options": {
+      "A": "import_package()",
+      "B": "find_package()",
+      "C": "locate_lib()",
+      "D": "add_external()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'set(VAR val PARENT_SCOPE)' modifies the variable in the current directory's scope.",
+    "options": {
+      "A": "True",
+      "B": "False (It only modifies the variable in the scope that called the current directory via add_subdirectory)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable is used to set the C++ standard for all targets in a project?",
+    "options": {
+      "A": "CPP_STANDARD",
+      "B": "CMAKE_CXX_STANDARD",
+      "C": "CXX_VERSION",
+      "D": "PROJECT_CPP_STD"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between a 'Function' and a 'Macro' in CMake?",
+    "options": {
+      "A": "Functions create a new variable scope, while Macros do not.",
+      "B": "Macros are faster than Functions.",
+      "C": "Functions can only be called once.",
+      "D": "Macros cannot take arguments."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to add a preprocessor definition (e.g., -DDEBUG) to a specific target?",
+    "options": {
+      "A": "add_definitions()",
+      "B": "target_compile_definitions()",
+      "C": "set_target_defines()",
+      "D": "add_compile_flag()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'option()' creates a boolean variable that can be toggled from the CMake GUI or command line.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to navigate into a sub-folder containing another CMakeLists.txt file?",
+    "options": {
+      "A": "include_dir()",
+      "B": "add_subdirectory()",
+      "C": "enter_path()",
+      "D": "process_child()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if you use 'file(GLOB ...)' to collect source files?",
+    "options": {
+      "A": "CMake will automatically re-run whenever a new file is added to the folder.",
+      "B": "CMake might not detect new files unless the CMakeLists.txt file itself is modified.",
+      "C": "The build will be 2x faster.",
+      "D": "It only works for header files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'target_link_libraries' can be used to set the dependency of one target on another, even if no actual library is being linked.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What are 'Generator Expressions' (e.g., $<...>) primarily used for in CMake?",
+    "options": {
+      "A": "Evaluating logic during the build-system generation phase rather than the configuration phase.",
+      "B": "Printing messages to the console.",
+      "C": "Managing Git submodules.",
+      "D": "Defining CMake version requirements."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to run a command at 'Build Time' (e.g., to generate a source file)?",
+    "options": {
+      "A": "execute_process()",
+      "B": "add_custom_command()",
+      "C": "run_script()",
+      "D": "add_utility()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'execute_process()' runs during the 'Configure' phase when you run the 'cmake' command.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Modern CMake, how do you handle downloading external dependencies at 'Configure Time'?",
+    "options": {
+      "A": "ExternalProject_Add()",
+      "B": "FetchContent module",
+      "C": "add_subdirectory(REMOTE)",
+      "D": "git_clone()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Toolchain File' in CMake?",
+    "options": {
+      "A": "To list all the source files in a project.",
+      "B": "To define the compilers and target system properties for cross-compilation.",
+      "C": "To automate the installation of CMake.",
+      "D": "To manage unit test execution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which generator expression allows you to set a property only when the configuration is 'Release'?",
+    "options": {
+      "A": "$<IF_RELEASE:1,0>",
+      "B": "$<CONFIG:Release>",
+      "C": "$<IS_RELEASE>",
+      "D": "$[RELEASE_ONLY]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'INTERFACE' libraries can be used to group header-only libraries that require no compilation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'install(EXPORT ...)' do in a CMake project?",
+    "options": {
+      "A": "It copies the executable to a remote server.",
+      "B": "It generates and installs a CMake file that allows other projects to use find_package() to locate your library.",
+      "C": "It exports the project variables to the system environment.",
+      "D": "It creates a zip file of the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to create a custom target that always runs, regardless of whether its dependencies are up to date?",
+    "options": {
+      "A": "add_custom_command()",
+      "B": "add_custom_target()",
+      "C": "force_target()",
+      "D": "add_executable(ALWAYS)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: CMake variables can be 'watched' using 'variable_watch()' to trigger a callback whenever they are modified.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  }
+  ]
+}

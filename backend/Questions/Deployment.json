@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Deployment", 
+  "questions": [
+    {
+    "question": "What does the 'CD' in CI/CD stand for in the context of software engineering?",
+    "options": {
+      "A": "Code Development",
+      "B": "Centralized Database",
+      "C": "Continuous Deployment / Continuous Delivery",
+      "D": "Cloud Distribution"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary goal of Continuous Integration (CI)?",
+    "options": {
+      "A": "To write documentation faster",
+      "B": "To automatically merge code changes from multiple contributors into a shared repository",
+      "C": "To decrease the salary of developers",
+      "D": "To increase the number of physical servers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common version control system used in deployment pipelines?",
+    "options": {
+      "A": "Photoshop",
+      "B": "Git",
+      "C": "Excel",
+      "D": "Outlook"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Deployment' in the software lifecycle?",
+    "options": {
+      "A": "Designing the user interface",
+      "B": "Writing the initial source code",
+      "C": "The process of moving software from a development environment to a production environment",
+      "D": "Hiring a new project manager"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a standard pipeline, which environment comes typically just before Production?",
+    "options": {
+      "A": "Local Development",
+      "B": "Staging / QA",
+      "C": "Archive",
+      "D": "Backup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Build' in software development?",
+    "options": {
+      "A": "Buying a new office building",
+      "B": "The process of converting source code into a standalone artifact that can be run",
+      "C": "The list of employees in a company",
+      "D": "A manual for using the software"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Rollback' mean in deployment?",
+    "options": {
+      "A": "Moving to a newer version of the software",
+      "B": "Reverting to a previous stable version of the software after a failed deployment",
+      "C": "Deleting the entire database",
+      "D": "Increasing the price of the application"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a popular open-source automation server for CI/CD?",
+    "options": {
+      "A": "Jenkins",
+      "B": "Spotify",
+      "C": "Microsoft Word",
+      "D": "Zoom"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Staging' environment?",
+    "options": {
+      "A": "To store old versions of code",
+      "B": "To test software in an environment that closely mimics Production before release",
+      "C": "To write the project's marketing plan",
+      "D": "To host the company's internal email"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Docker Container' primarily used for in deployment?",
+    "options": {
+      "A": "Editing photos",
+      "B": "Storing hardware cables",
+      "C": "Packaging an application and its dependencies to run consistently across environments",
+      "D": "Generating random passwords"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Production' environment?",
+    "options": {
+      "A": "The place where developers write code",
+      "B": "The live environment where real users interact with the application",
+      "C": "The database used for testing only",
+      "D": "The folder where documentation is kept"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Commit' in Git?",
+    "options": {
+      "A": "Deleting a file permanently",
+      "B": "Saving changes to the local repository with a descriptive message",
+      "C": "Sending an email to the team",
+      "D": "Shutting down the server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Artifact' in a pipeline?",
+    "options": {
+      "A": "A historical object found in a museum",
+      "B": "The output produced by a build process (e.g., a .jar or .exe file)",
+      "C": "A bug found during testing",
+      "D": "The user manual"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Automation' refer to in deployment?",
+    "options": {
+      "A": "Hiring robots to clean the office",
+      "B": "Using software tools to perform tasks with minimal human intervention",
+      "C": "Writing code in automatically generated languages",
+      "D": "Buying more RAM for the server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Unit Test'?",
+    "options": {
+      "A": "Testing the entire application at once",
+      "B": "Testing the smallest isolated parts of the code (functions or methods)",
+      "C": "Testing the hardware of the server",
+      "D": "Surveying users about the app's design"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment Variables' used for?",
+    "options": {
+      "A": "To track the weather in the data center",
+      "B": "To store configuration settings (like API keys) that vary between Dev and Prod",
+      "C": "To name the different developers on a project",
+      "D": "To count the number of lines of code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cloud provider offers a service called 'AWS CodePipeline'?",
+    "options": {
+      "A": "Google Cloud",
+      "B": "Microsoft Azure",
+      "C": "Amazon Web Services",
+      "D": "DigitalOcean"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Hotfix'?",
+    "options": {
+      "A": "A new feature for a summer release",
+      "B": "A quick fix applied directly to Production to resolve a critical bug",
+      "C": "Increasing the temperature of the CPU",
+      "D": "A way to delete old user accounts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Downtime'?",
+    "options": {
+      "A": "The time developers spend sleeping",
+      "B": "The period when a system or service is unavailable to users",
+      "C": "The time it takes to download a file",
+      "D": "A scheduled meeting for the team"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Pull Request' (PR)?",
+    "options": {
+      "A": "To request more hardware resources",
+      "B": "To propose changes to a codebase and request a review before merging",
+      "C": "To pull data from a production database to a local machine",
+      "D": "To ask for a salary increase"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Uptime'?",
+    "options": {
+      "A": "The time it takes to wake up",
+      "B": "The measure of time a system is functional and available",
+      "C": "The speed of the internet connection",
+      "D": "The number of users logged in"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Cloud Native' deployment platform?",
+    "options": {
+      "A": "Windows 95",
+      "B": "Kubernetes",
+      "C": "A physical CD-ROM",
+      "D": "Notepad++"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Rollout'?",
+    "options": {
+      "A": "Deleting the code",
+      "B": "The process of introducing a new version of an application to the user base",
+      "C": "A meeting to discuss project failures",
+      "D": "The list of dependencies in a project"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC)?",
+    "options": {
+      "A": "Writing instructions on a piece of paper",
+      "B": "Managing and provisioning server infrastructure using machine-readable definition files",
+      "C": "Building a server using physical bricks",
+      "D": "Coding a website about architecture"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Continuous Delivery'?",
+    "options": {
+      "A": "Sending emails to customers every day",
+      "B": "A practice where code is always in a state where it could be deployed to production manually at any time",
+      "C": "Providing infinite storage to users",
+      "D": "Writing code without taking breaks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Continuous Deployment'?",
+    "options": {
+      "A": "Automatically deploying every change that passes the automated tests to Production",
+      "B": "Hiring a person to manually move files 24/7",
+      "C": "A way to backup the code on a USB drive",
+      "D": "Developing software for a continuous period of 24 hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Web Hook'?",
+    "options": {
+      "A": "A tool for catching fish in the ocean",
+      "B": "An automated message sent from an app when something happens (e.g., triggering a build after a code push)",
+      "C": "A physical device for hanging servers",
+      "D": "A secure password for a website"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Version Control'?",
+    "options": {
+      "A": "Choosing the best version of a movie",
+      "B": "The practice of tracking and managing changes to software code",
+      "C": "Setting the volume on a computer",
+      "D": "Controlling the speed of the CPU"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to send local Git changes to a remote repository?",
+    "options": {
+      "A": "git pull",
+      "B": "git push",
+      "C": "git delete",
+      "D": "git save"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of CI/CD?",
+    "options": {
+      "A": "Faster time-to-market and higher code quality through frequent testing",
+      "B": "Reducing the amount of code written",
+      "C": "Eliminating the need for developers",
+      "D": "Increasing the size of the application"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Repository'?",
+    "options": {
+      "A": "A place to buy computer parts",
+      "B": "A central location where data or code is stored and managed",
+      "C": "A type of computer virus",
+      "D": "A meeting room for engineers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'YAML' commonly used for in deployment?",
+    "options": {
+      "A": "Writing a novel",
+      "B": "Configuration files for pipelines and infrastructure (like Kubernetes or Ansible)",
+      "C": "Creating high-resolution images",
+      "D": "Calculating complex mathematical formulas"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'High Availability' mean?",
+    "options": {
+      "A": "The system is expensive to use",
+      "B": "The system is designed to be operational and accessible a high percentage of the time",
+      "C": "The system uses the highest version of the software",
+      "D": "The system is only available during high tide"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Load Balancer'?",
+    "options": {
+      "A": "A device that measures the weight of a server",
+      "B": "A system that distributes incoming network traffic across multiple servers",
+      "C": "A tool for balancing the budget",
+      "D": "A way to slow down the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scripting' in deployment?",
+    "options": {
+      "A": "Writing a movie script",
+      "B": "Writing small programs (scripts) to automate repetitive deployment tasks",
+      "C": "Drawing diagrams of the network",
+      "D": "Hiring actors for a commercial"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Binary' in deployment terms?",
+    "options": {
+      "A": "A choice between two things",
+      "B": "A file that is not plain text and can be executed by a computer",
+      "C": "A type of digital currency",
+      "D": "A code with only zeros and ones"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scalability'?",
+    "options": {
+      "A": "The ability of a system to handle a growing amount of work by adding resources",
+      "B": "The physical size of the server rack",
+      "C": "The number of stairs in the data center",
+      "D": "The weight of the hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DevOps'?",
+    "options": {
+      "A": "Developing only on Saturdays",
+      "B": "A set of practices that combines software development (Dev) and IT operations (Ops)",
+      "C": "A type of programming language",
+      "D": "A software for editing videos"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pipeline'?",
+    "options": {
+      "A": "A physical pipe for water",
+      "B": "A series of automated steps to move code from a repository to production",
+      "C": "A way to organize the office desk",
+      "D": "A list of customer names"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular version control hosting service?",
+    "options": {
+      "A": "GitHub",
+      "B": "Netflix",
+      "C": "Uber",
+      "D": "Starbucks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Blue-Green Deployment'?",
+    "options": {
+      "A": "A deployment that uses two identical environments to reduce risk and downtime",
+      "B": "Color-coding the servers for organization",
+      "C": "Deploying only on sunny days",
+      "D": "Using environmentally friendly servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Stage' in a pipeline?",
+    "options": {
+      "A": "A place for a theater performance",
+      "B": "A specific phase in the automation process (e.g., Build, Test, Deploy)",
+      "C": "The age of the developer",
+      "D": "A folder on the desktop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Orchestration' in deployment?",
+    "options": {
+      "A": "Conducting a musical orchestra",
+      "B": "The automated configuration, coordination, and management of computer systems and software",
+      "C": "Hiring a large group of people to work together",
+      "D": "Writing complex music for the app"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Branch' in Git?",
+    "options": {
+      "A": "A part of a tree in the office",
+      "B": "A parallel version of a repository that allows for separate development without affecting the main line",
+      "C": "A separate company office",
+      "D": "A type of network cable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Legacy' software?",
+    "options": {
+      "A": "Software that is brand new",
+      "B": "Old or outdated software systems that are still in use",
+      "C": "Software that is free to use",
+      "D": "Software used only by legal firms"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Provisioning'?",
+    "options": {
+      "A": "Buying groceries for the team",
+      "B": "The process of setting up and configuring IT infrastructure (like servers or networks)",
+      "C": "Writing the code for a new feature",
+      "D": "Providing snacks in the breakroom"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Microservices' architecture?",
+    "options": {
+      "A": "One giant application with all features in one place",
+      "B": "Breaking an application into small, independent services that communicate over a network",
+      "C": "An application used only on very small screens",
+      "D": "A company with only 1-5 employees"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Configuration Management'?",
+    "options": {
+      "A": "Managing the configuration of the office chairs",
+      "B": "The process of maintaining computer systems and software in a desired, consistent state",
+      "C": "Choosing the right font for the website",
+      "D": "Managing the social media accounts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Log' file?",
+    "options": {
+      "A": "A piece of wood from a tree",
+      "B": "A file that records events and actions that happen within an application or system",
+      "C": "A list of all the files in a folder",
+      "D": "A backup of the source code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Serverless' computing?",
+    "options": {
+      "A": "A system where no servers are used at all",
+      "B": "A cloud model where the provider manages the server infrastructure, and developers only write code",
+      "C": "A computer with no hard drive",
+      "D": "A way to use the internet without a modem"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kubernetes' primarily used for?",
+    "options": {
+      "A": "Designing logos",
+      "B": "Automating deployment, scaling, and management of containerized applications",
+      "C": "Editing text files",
+      "D": "Playing video games"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SLA' stand for?",
+    "options": {
+      "A": "System Level Analysis",
+      "B": "Service Level Agreement",
+      "C": "Software Lifecycle Assessment",
+      "D": "Server Layout Arrangement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Canary Deployment'?",
+    "options": {
+      "A": "Deploying code only on bird-themed websites",
+      "B": "Releasing a new version to a small subset of users before rolling it out to everyone",
+      "C": "Putting a bird in the data center for safety",
+      "D": "Using a yellow color scheme for the app"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Terraform' used for?",
+    "options": {
+      "A": "Growing plants on another planet",
+      "B": "An Infrastructure as Code tool to build, change, and version infrastructure safely",
+      "C": "Designing 3D models of the earth",
+      "D": "Writing code for mobile phones"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Secret' in deployment (e.g., Kubernetes secret)?",
+    "options": {
+      "A": "A hidden feature in the app",
+      "B": "Sensitive data like passwords, tokens, or keys that must be protected",
+      "C": "A private joke among the developers",
+      "D": "A file that nobody is allowed to read"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bash' commonly used for?",
+    "options": {
+      "A": "Hitting a computer when it's slow",
+      "B": "A command-line shell and scripting language for interacting with the OS",
+      "C": "Creating high-end video games",
+      "D": "Editing audio files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SSH'?",
+    "options": {
+      "A": "A way to tell someone to be quiet",
+      "B": "A secure protocol for remote login and command execution on a server",
+      "C": "A type of fast hard drive",
+      "D": "A social media platform for coders"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Virtual Machine' (VM)?",
+    "options": {
+      "A": "A computer that doesn't physically exist",
+      "B": "An emulation of a computer system that runs on a physical host machine",
+      "C": "A headset for playing virtual reality games",
+      "D": "A computer used only for video calls"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Idempotency' in deployment scripts?",
+    "options": {
+      "A": "The ability to run a script multiple times and get the same result without unintended effects",
+      "B": "The speed at which a script runs",
+      "C": "Making sure the script is only run by one person",
+      "D": "Using a specific programming language"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'GitOps'?",
+    "options": {
+      "A": "Operating a company using Git",
+      "B": "Using Git repositories as the single source of truth for infrastructure and application deployment",
+      "C": "A type of game developed on Git",
+      "D": "A way to buy software using Git credits"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero Downtime Deployment'?",
+    "options": {
+      "A": "Updating a system without users noticing any interruption in service",
+      "B": "Deploying software at exactly midnight",
+      "C": "A system that never needs to be updated",
+      "D": "Reducing the developer's lunch break to zero"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Observability'?",
+    "options": {
+      "A": "Watching a developer work through a window",
+      "B": "The ability to measure the internal states of a system by examining its outputs (logs, metrics, traces)",
+      "C": "A type of telescope used in space research",
+      "D": "Making sure the app has a good design"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Artifact Registry'?",
+    "options": {
+      "A": "A museum for old computers",
+      "B": "A central location to store and manage build artifacts (packages, images)",
+      "C": "A list of all the bugs found in a project",
+      "D": "A way to register a new domain name"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shadow Deployment'?",
+    "options": {
+      "A": "Deploying code in a dark room",
+      "B": "A technique where production traffic is copied to a new version of the app without affecting the real response to the user",
+      "C": "Hiding a deployment from the manager",
+      "D": "A way to backup the code in a hidden folder"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment Parity'?",
+    "options": {
+      "A": "Ensuring the number of servers is an even number",
+      "B": "Keeping development, staging, and production environments as similar as possible",
+      "C": "Having an equal number of male and female developers",
+      "D": "Making sure the app works on all brands of computers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pre-commit Hook'?",
+    "options": {
+      "A": "A physical hook for holding keychains",
+      "B": "A script that runs automatically before a code commit is allowed (e.g., to check for linting errors)",
+      "C": "A way to catch bugs after the app is released",
+      "D": "A meeting before a project starts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical difference between 'Continuous Delivery' and 'Continuous Deployment'?",
+    "options": {
+      "A": "Continuous Delivery uses Docker; Continuous Deployment does not.",
+      "B": "Continuous Delivery requires a manual approval step before production; Continuous Deployment is fully automated.",
+      "C": "Continuous Deployment only works for mobile apps.",
+      "D": "Continuous Delivery is performed by developers; Continuous Deployment by Ops."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Blue-Green' deployment, what is the role of the load balancer during the switch?",
+    "options": {
+      "A": "To encrypt the traffic between the two environments.",
+      "B": "To delete the 'Blue' environment data.",
+      "C": "To reroute 100% of user traffic from the old version (Blue) to the new version (Green) instantaneously.",
+      "D": "To monitor the temperature of the server racks."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Immutable Infrastructure' in the context of modern deployment?",
+    "options": {
+      "A": "Infrastructure that is made of physical hardware only.",
+      "B": "Infrastructure that is updated manually every day.",
+      "C": "Infrastructure that is shared between multiple companies.",
+      "D": "Infrastructure that cannot be changed once deployed; updates require replacing the old server with a new one."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'Deployment Descriptor' file used for?",
+    "options": {
+      "A": "A configuration file (like web.xml) that tells a web container how to deploy an application.",
+      "B": "To describe the physical appearance of the developer.",
+      "C": "A manual for the customer support team.",
+      "D": "A list of all the fonts used in the application."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the main benefit of 'Canary Deployments'?",
+    "options": {
+      "A": "It automatically translates the app into 5 languages.",
+      "B": "It allows for testing new features on a small percentage of users to minimize the impact of failures.",
+      "C": "It is the cheapest way to deploy.",
+      "D": "It speeds up the build process by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Configuration Drift' refer to?",
+    "options": {
+      "A": "The time it takes to write a configuration file.",
+      "B": "Moving a server from one room to another.",
+      "C": "When the actual state of a server deviates from the desired state due to manual changes.",
+      "D": "Using the same configuration for 10 years."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Kubernetes, what is the purpose of a 'Liveness Probe'?",
+    "options": {
+      "A": "To verify the security certificate of the app.",
+      "B": "To count the number of users currently logged in.",
+      "C": "To determine if a container is still running and restart it if it fails.",
+      "D": "To check the network speed of the cluster."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Jenkinsfile'?",
+    "options": {
+      "A": "A text file that stores the admin's password.",
+      "B": "A manual for installing Jenkins on Windows.",
+      "C": "A list of all the plugins installed in Jenkins.",
+      "D": "A script that defines the entire CI/CD pipeline in Jenkins using code."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Self-healing' in a deployment environment?",
+    "options": {
+      "A": "The ability of a system to automatically detect and recover from failures.",
+      "B": "When a developer fixes their own bugs.",
+      "C": "A medical app for first aid.",
+      "D": "When the server hardware repairs itself physically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Semantic Versioning' (SemVer)?",
+    "options": {
+      "A": "To provide a standard (MAJOR.MINOR.PATCH) that communicates the nature of code changes.",
+      "B": "To make the version numbers look more professional.",
+      "C": "To protect the application from being copied.",
+      "D": "To track the name of the developer who wrote the code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dark Launching'?",
+    "options": {
+      "A": "Deploying code in a secret data center.",
+      "B": "Running a deployment at 2:00 AM.",
+      "C": "Releasing a feature to the backend without making it visible in the UI to test load.",
+      "D": "A deployment that uses 100% black color schemes."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is an 'Agent' (or Runner) in a CI/CD system?",
+    "options": {
+      "A": "A person who sells the software.",
+      "B": "A service or machine that actually executes the tasks defined in the pipeline.",
+      "C": "A type of database software.",
+      "D": "A security guard in the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Build Cache' and why is it used?",
+    "options": {
+      "A": "To store old versions of the app.",
+      "B": "To encrypt the final executable.",
+      "C": "To store intermediate build results to speed up subsequent builds.",
+      "D": "To backup the source code on a cloud drive."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of an 'Ingress Controller' in Kubernetes?",
+    "options": {
+      "A": "To manage the storage of data blocks.",
+      "B": "To manage external access to services in a cluster, typically via HTTP/HTTPS.",
+      "C": "To count the number of pods in a node.",
+      "D": "To delete unused Docker images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tainting' a node in Kubernetes?",
+    "options": {
+      "A": "Applying a property to a node that prevents pods from being scheduled unless they have a toleration.",
+      "B": "Painting the node a specific color.",
+      "C": "A way to indicate the node is corrupted.",
+      "D": "A security feature for encrypting the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Fail-fast' principle in CI pipelines?",
+    "options": {
+      "A": "Accepting failures without fixing them.",
+      "B": "Deleting the code if it doesn't build the first time.",
+      "C": "Hiring new developers as soon as a mistake is made.",
+      "D": "Designing the pipeline to stop immediately if a single step (like a unit test) fails."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'Sidecar Container'?",
+    "options": {
+      "A": "A secondary container that runs alongside the main application container to provide support.",
+      "B": "A backup container in a different data center.",
+      "C": "A container used only by the manager.",
+      "D": "A container that runs on a mobile device."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Infrastructure Provisioning'?",
+    "options": {
+      "A": "Buying servers from a store.",
+      "B": "Cleaning the servers with compressed air.",
+      "C": "The process of setting up IT infrastructure and assigning resources to those systems.",
+      "D": "Writing the code for the frontend."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Static Code Analysis'?",
+    "options": {
+      "A": "Analyzing the code while it is running in production.",
+      "B": "Checking the speed of the code execution.",
+      "C": "Printing the code on paper for manual review.",
+      "D": "Examining code without executing it to find potential bugs or security vulnerabilities."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Dynamic Analysis' (DAST)?",
+    "options": {
+      "A": "Checking the code for typos.",
+      "B": "Testing the application for security vulnerabilities while it is running.",
+      "C": "Analyzing the code logic before it is compiled.",
+      "D": "Writing code that changes itself automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Ansible' in deployment?",
+    "options": {
+      "A": "An IT automation tool used for configuration management and task automation.",
+      "B": "To create 3D animations.",
+      "C": "A database for storing user photos.",
+      "D": "A tool for recording video meetings."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Container Registry'?",
+    "options": {
+      "A": "A list of all the developers in the world.",
+      "B": "A hardware store for servers.",
+      "C": "A repository for storing and managing container images.",
+      "D": "A way to register a new domain name."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Stateful' application?",
+    "options": {
+      "A": "An application that runs in multiple states/countries.",
+      "B": "An application that remembers client data (state) from one session to the next.",
+      "C": "An application that is very expensive to host.",
+      "D": "An application that never crashes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Stateless' application?",
+    "options": {
+      "A": "An application that is free to use.",
+      "B": "An application used only by the government.",
+      "C": "An application that has no code.",
+      "D": "An application that does not store any client data on the server between requests."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Secrets Management'?",
+    "options": {
+      "A": "Keeping the project a secret from competitors.",
+      "B": "The process of managing and securing sensitive data like passwords and API keys.",
+      "C": "A private chat for the developers.",
+      "D": "Hiding the source code in an encrypted folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Rolling Update' in deployment?",
+    "options": {
+      "A": "Updating instances of an application one by one to ensure availability.",
+      "B": "Updating the software at exactly 12:00 AM.",
+      "C": "Moving the servers on wheels.",
+      "D": "Updating the font size in the app."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC) 'Declarative' approach?",
+    "options": {
+      "A": "Writing a list of instructions for a human to follow.",
+      "B": "Specifying the desired final state of infrastructure without describing exact steps.",
+      "C": "Using only Java for infrastructure.",
+      "D": "Talking to the servers using voice commands."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC) 'Imperative' approach?",
+    "options": {
+      "A": "Defining the final state only.",
+      "B": "Specifying the exact sequence of commands to reach the desired infrastructure state.",
+      "C": "A way to encrypt configuration files.",
+      "D": "A system that doesn't use code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Artifact Versioning'?",
+    "options": {
+      "A": "Naming the artifacts after the developers.",
+      "B": "Uniquely identifying each build output to allow for easy identification and rollbacks.",
+      "C": "Increasing the price of each build.",
+      "D": "Choosing a color for the .jar files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Linting' in a CI pipeline?",
+    "options": {
+      "A": "Cleaning the dust out of the server.",
+      "B": "Using a tool to flag programming errors, stylistic errors, and bugs in source code.",
+      "C": "Checking the network cable for lint.",
+      "D": "A way to compress the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Testing' (in a Deployment context)?",
+    "options": {
+      "A": "Testing the letters A and B.",
+      "B": "A study with only two participants.",
+      "C": "Testing the app on two different brands of phones.",
+      "D": "Deploying two different versions of an app to see which one performs better with users."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Mean Time to Recovery' (MTTR)?",
+    "options": {
+      "A": "The average time it takes to restore a system to full functionality after a failure.",
+      "B": "The time it takes to hire a new developer.",
+      "C": "The speed of the network recovery.",
+      "D": "The number of hours the server was active."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Prometheus' commonly used for?",
+    "options": {
+      "A": "A Greek mythology app.",
+      "B": "An open-source monitoring and alerting toolkit designed for reliability.",
+      "C": "To create high-end 3D graphics.",
+      "D": "A secure browser for developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grafana'?",
+    "options": {
+      "A": "A social media platform for designers.",
+      "B": "A tool for editing large spreadsheets.",
+      "C": "A multi-platform analytics and interactive visualization web application.",
+      "D": "A security scanner for firewalls."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Horizontal Scaling'?",
+    "options": {
+      "A": "Upgrading a server's CPU or RAM.",
+      "B": "Adding more machines to your pool of resources.",
+      "C": "Changing the orientation of the server rack.",
+      "D": "Expanding the physical size of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vertical Scaling'?",
+    "options": {
+      "A": "Adding more servers to the cluster.",
+      "B": "Increasing the capacity (CPU, RAM) of an existing single machine.",
+      "C": "Stacking servers on top of each other.",
+      "D": "Moving the servers to a higher floor in the building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Centralized Logging'?",
+    "options": {
+      "A": "Keeping all logs on a single local USB drive.",
+      "B": "Collecting logs from multiple sources and storing them in a single, searchable location.",
+      "C": "Only logging errors from the main server.",
+      "D": "Writing all logs in the center of the page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Test Coverage'?",
+    "options": {
+      "A": "The number of people who took the test.",
+      "B": "A measure of the percentage of source code executed during automated tests.",
+      "C": "The physical area covered by the Wi-Fi in the lab.",
+      "D": "A warranty for the testing software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GitHub Actions'?",
+    "options": {
+      "A": "A list of things you can do on GitHub.",
+      "B": "A security guard for GitHub repositories.",
+      "C": "A CI/CD platform that allows you to automate workflows directly from GitHub.",
+      "D": "A way to buy GitHub credits."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Docker Compose'?",
+    "options": {
+      "A": "Writing a letter to Docker.",
+      "B": "A tool for defining and running multi-container Docker applications using a YAML file.",
+      "C": "The musical score for a Docker commercial.",
+      "D": "A way to delete Docker images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment-as-a-Service' (EaaS)?",
+    "options": {
+      "A": "A solution that provides fully-functional, temporary environments for development on demand.",
+      "B": "A cloud service for weather prediction.",
+      "C": "A service that cleans the server room.",
+      "D": "A way to share office space."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Trunk-based Development'?",
+    "options": {
+      "A": "Developing code in a tree trunk.",
+      "B": "A version control strategy where developers merge frequent updates to a single main branch.",
+      "C": "Developing code inside the trunk of a car.",
+      "D": "Only allowing senior developers to merge code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature Toggles' (or Feature Flags)?",
+    "options": {
+      "A": "Switching between different apps on a phone.",
+      "B": "A list of features in the project plan.",
+      "C": "A hardware switch on the server.",
+      "D": "A technique to turn features on or off in a live app without redeploying code."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Drift Detection' in Terraform?",
+    "options": {
+      "A": "The process of identifying differences between real-world infrastructure and the state file.",
+      "B": "Detecting when a server moves physically.",
+      "C": "A way to measure network delay.",
+      "D": "Checking the weather forecast."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Testing'?",
+    "options": {
+      "A": "Testing how much a developer can carry.",
+      "B": "A type of performance testing that measures how a system behaves under a specific expected load.",
+      "C": "Testing the weight limit of the server rack.",
+      "D": "Loading a truck with servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stress Testing'?",
+    "options": {
+      "A": "Testing how stressed the developers are.",
+      "B": "Testing a system beyond its normal operating capacity to find its breaking point.",
+      "C": "A psychological test for the IT team.",
+      "D": "Increasing the voltage of the CPU until it burns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Helm' in Kubernetes?",
+    "options": {
+      "A": "A package manager for Kubernetes that helps define and install complex applications.",
+      "B": "To steer a physical ship.",
+      "C": "A security helmet for the data center.",
+      "D": "A tool for editing text files in Kubernetes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Release Orchestration'?",
+    "options": {
+      "A": "Conducting a concert for the app release.",
+      "B": "Managing and coordinating the end-to-end process of delivering a software release.",
+      "C": "A list of songs for the release party.",
+      "D": "Hiring a large group of people to code together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shadow Traffic'?",
+    "options": {
+      "A": "Traffic that happens at night.",
+      "B": "A way to hide traffic from the firewall.",
+      "C": "Data sent to a hidden backup server.",
+      "D": "Production traffic mirrored to a new version for testing without impacting users."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Chaos Engineering'?",
+    "options": {
+      "A": "Running a project with no plan.",
+      "B": "The discipline of experimenting on a system to build confidence in its capability to withstand turbulence.",
+      "C": "Deleting files randomly to see if anyone notices.",
+      "D": "A meeting that has no agenda."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Serverless Framework'?",
+    "options": {
+      "A": "A hardware rack for servers.",
+      "B": "An open-source web framework used to build and deploy serverless applications.",
+      "C": "A system that uses no servers at all.",
+      "D": "A way to use the internet without a modem."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure Observability'?",
+    "options": {
+      "A": "The ability to gain insights into infrastructure health through metrics and logs.",
+      "B": "Watching a developer work through a window.",
+      "C": "A type of telescope for space research.",
+      "D": "Making sure the app has a good design."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Artifact Immutability'?",
+    "options": {
+      "A": "The artifact being very small.",
+      "B": "The principle that once an artifact is created and versioned, it should never be modified.",
+      "C": "The artifact being free to download.",
+      "D": "The artifact being encrypted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Canary Release' percentage roll-out?",
+    "options": {
+      "A": "Releasing only to users who like birds.",
+      "B": "A security feature for bird websites.",
+      "C": "A way to count the number of users.",
+      "D": "Gradually increasing the percentage of traffic directed to the new version."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Post-mortem' analysis?",
+    "options": {
+      "A": "A detailed review conducted after a failure to learn and prevent recurrence.",
+      "B": "An analysis done after a developer leaves the company.",
+      "C": "A document written after a project is finished successfully.",
+      "D": "A security scan of the trash directory."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Build Pipeline' visualization?",
+    "options": {
+      "A": "Drawing a picture of a pipe.",
+      "B": "A graphical representation of the stages and status of a CI/CD process.",
+      "C": "A 3D model of the data center.",
+      "D": "A way to see hidden files in the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parallel Testing' in a pipeline?",
+    "options": {
+      "A": "Testing two different apps.",
+      "B": "Executing multiple automated tests simultaneously to reduce total testing time.",
+      "C": "Two developers testing the same code.",
+      "D": "Testing code on two different computers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment Configuration' management?",
+    "options": {
+      "A": "Managing specific settings for different environments (Dev, Staging, Prod) to ensure consistency.",
+      "B": "Managing the office temperature.",
+      "C": "Choosing a color for each environment.",
+      "D": "A way to share servers between teams."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Rollback' strategy automated?",
+    "options": {
+      "A": "Manually deleting the new code.",
+      "B": "A pipeline feature that automatically triggers a reversion to the previous version if tests fail.",
+      "C": "A way to restart the server automatically.",
+      "D": "A script that emails the developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Micro-deployment'?",
+    "options": {
+      "A": "Deploying code on very small servers.",
+      "B": "Deploying very small, atomic changes frequently to minimize risk.",
+      "C": "A deployment with only 1 file.",
+      "D": "A deployment that lasts for 1 second."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC) 'Versioned'?",
+    "options": {
+      "A": "Naming each server version.",
+      "B": "A system that doesn't use code.",
+      "C": "Using a specific programming language for servers.",
+      "D": "Storing infrastructure definition files in a version control system like Git."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Dependency Management' in CI?",
+    "options": {
+      "A": "Hiring developers who are reliable.",
+      "B": "Automating the identification and installation of external libraries required by an application.",
+      "C": "A way to count the number of files.",
+      "D": "Managing the office supplies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Artifact Repository' cleanup?",
+    "options": {
+      "A": "The practice of periodically deleting old build artifacts to save storage space.",
+      "B": "Deleting all artifacts.",
+      "C": "A security scan of the artifact folder.",
+      "D": "A way to organize artifacts by color."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Configuration Injection'?",
+    "options": {
+      "A": "Giving a computer a medical shot.",
+      "B": "Providing configuration data to an application at runtime (e.g., via environment variables).",
+      "C": "A security attack on the configuration file.",
+      "D": "A way to delete the configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Build Matrix'?",
+    "options": {
+      "A": "A CI feature that allows running builds across multiple versions of OS and languages simultaneously.",
+      "B": "A movie about servers.",
+      "C": "A list of all the developers in the company.",
+      "D": "A 3D chart of build times."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deployment' 'Consistency'?",
+    "options": {
+      "A": "Deploying once a day.",
+      "B": "Ensuring that the deployment process behaves identically every time it is executed.",
+      "C": "Having the same number of files in every deployment.",
+      "D": "Using the same font in the app."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific mechanism does 'GitOps' use to handle configuration drift in a production Kubernetes cluster?",
+    "options": {
+      "A": "A manual SSH script that overrides local changes every hour.",
+      "B": "A continuous reconciliation loop that compares the live state with the desired state stored in Git.",
+      "C": "A firewall rule that blocks all manual 'kubectl' commands.",
+      "D": "An automated email alert sent to the DevOps lead."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Chaos Engineering', what is the 'Blast Radius'?",
+    "options": {
+      "A": "The physical distance a server explodes if it overheats.",
+      "B": "The total number of developers involved in a failed deployment.",
+      "C": "The subset of users or services that could be impacted by a specific experiment.",
+      "D": "The size of the backup data stored in the cloud."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which deployment strategy involves a 'Service Mesh' (like Istio) to shift traffic based on request headers or cookies?",
+    "options": {
+      "A": "Advanced Canary Deployment / Traffic Shifting",
+      "B": "Standard Blue-Green Deployment",
+      "C": "Binary Replacement",
+      "D": "Direct In-place Upgrade"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical challenge of 'Database Rollbacks' in a CI/CD pipeline?",
+    "options": {
+      "A": "The speed of the network connection to the database.",
+      "B": "The risk of data loss or corruption when reverting a destructive schema change (like a dropped column).",
+      "C": "The cost of storing multiple versions of the database.",
+      "D": "The difficulty of naming the backup tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Mutating Admission Webhooks' in Kubernetes impact the deployment process?",
+    "options": {
+      "A": "They delete pods that use too much memory.",
+      "B": "They can intercept and modify requests to the Kubernetes API server before an object is persisted.",
+      "C": "They automatically increase the number of replicas to 10.",
+      "D": "They encrypt the source code stored in Git."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Sidecar Proxy' in a Zero Trust deployment architecture?",
+    "options": {
+      "A": "To provide a faster UI for the application.",
+      "B": "To act as a backup for the main application container.",
+      "C": "To handle mTLS (Mutual TLS) and policy enforcement for all service communication.",
+      "D": "To compress the log files before they are sent to the server."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a 'Multi-Region' deployment, what is the 'Split-Brain' risk?",
+    "options": {
+      "A": "When a developer forgets their password.",
+      "B": "When a network partition causes two independent regions to believe they are the primary master.",
+      "C": "When the application is translated into two different languages incorrectly.",
+      "D": "When the CPU is shared between two different tasks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic Release' automation based on?",
+    "options": {
+      "A": "The length of the code changes.",
+      "B": "The specific format of the commit messages (following Conventional Commits).",
+      "C": "The time of day the code is pushed.",
+      "D": "The number of files modified in the PR."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a significant disadvantage of 'Serverless' deployments in a high-traffic production environment?",
+    "options": {
+      "A": "High latency caused by 'Cold Starts' and vendor lock-in.",
+      "B": "The lack of any security features.",
+      "C": "The requirement to manage your own physical hardware.",
+      "D": "The inability to use Python or Java."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotent' infrastructure provisioning?",
+    "options": {
+      "A": "Deleting the infrastructure after every use.",
+      "B": "Building infrastructure that only works once.",
+      "C": "The property where applying a configuration multiple times results in the same state without errors.",
+      "D": "Writing code that changes its behavior every time it is run."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Dynamic Admission Controller' in Kubernetes used for during deployment security?",
+    "options": {
+      "A": "To verify user passwords.",
+      "B": "To ensure that all container images come from a trusted, scanned registry.",
+      "C": "To calculate the total cost of the cluster.",
+      "D": "To monitor the speed of the load balancer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'GitOps' workflow, what does 'Opaque Secrets' refers to in Kubernetes?",
+    "options": {
+      "A": "Secrets that are completely transparent.",
+      "B": "The default secret type where data is Base64 encoded but not encrypted at rest by default.",
+      "C": "Secrets that are only visible to the CEO.",
+      "D": "Secrets that have no value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shift-Left' Security in a CI/CD pipeline?",
+    "options": {
+      "A": "Moving the security check to the very end of the release cycle.",
+      "B": "Integrating security tools and audits early in the development and build phases.",
+      "C": "Using a keyboard that only has a left side.",
+      "D": "Hiring security guards for the left side of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Feature Branching' differ from 'Trunk-based Development' regarding deployment frequency?",
+    "options": {
+      "A": "Feature branching typically results in larger, less frequent deployments due to long-lived branches.",
+      "B": "Feature branching is always faster.",
+      "C": "Trunk-based development requires a manual review for every single line of code.",
+      "D": "There is no difference in frequency."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC) 'State Locking'?",
+    "options": {
+      "A": "Locking the data center door.",
+      "B": "A mechanism to prevent multiple users from running Terraform simultaneously and corrupting the state file.",
+      "C": "A way to encrypt the source code.",
+      "D": "A system that prevents servers from moving."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Blue-Green' deployment, what is the 'Time-to-Switch' critical path?",
+    "options": {
+      "A": "The time it takes to brew coffee.",
+      "B": "The TTL (Time to Live) of the DNS record or the load balancer's connection draining time.",
+      "C": "The time it takes to write the code.",
+      "D": "The number of hours a developer is awake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Binary Authorization' in a Google Cloud GKE deployment?",
+    "options": {
+      "A": "A system that only allows code with two lines.",
+      "B": "A deploy-time security control that ensures only trusted container images are deployed.",
+      "C": "A way to pay for cloud services using binary code.",
+      "D": "A system that allows only two people to deploy code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used by 'Prometheus' to gather metrics from an application?",
+    "options": {
+      "A": "Binary TCP Stream",
+      "B": "HTTP Pull over a /metrics endpoint",
+      "C": "UDP Multicast",
+      "D": "Email attachment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Horizontal Pod Autoscaler' (HPA) primarily based on in Kubernetes?",
+    "options": {
+      "A": "The time of day.",
+      "B": "Metrics like CPU utilization or custom application-specific metrics.",
+      "C": "The number of files in the repository.",
+      "D": "The physical weight of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Canary' rollout, what is 'Linear' vs 'Expontential' shifting?",
+    "options": {
+      "A": "Linear increases by a fixed amount (e.g. 10%); Exponential doubles the traffic at each step.",
+      "B": "Linear is for small apps; Exponential for large ones.",
+      "C": "Linear uses Python; Exponential uses Java.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Dead Letter Queues' in a distributed deployment?",
+    "options": {
+      "A": "To store letters that were never sent.",
+      "B": "To capture and isolate messages that could not be processed successfully for later analysis.",
+      "C": "To delete all messages after 24 hours.",
+      "D": "To store the personal mail of the DevOps team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Configuration as Code' (CaC) versus 'Infrastructure as Code' (IaC)?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "IaC manages the servers/networks; CaC manages the application settings inside those servers.",
+      "C": "IaC is only for the cloud; CaC is only for local machines.",
+      "D": "CaC is for hardware; IaC is for software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jenkins', what is the difference between 'Scripted' and 'Declarative' pipelines?",
+    "options": {
+      "A": "Declarative provides a more structured, simplified syntax with pre-defined sections.",
+      "B": "Scripted is only for Python; Declarative for Java.",
+      "C": "Declarative is 10x faster than Scripted.",
+      "D": "Scripted is used only for mobile apps."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ternary' deployment in high-availability systems?",
+    "options": {
+      "A": "A deployment with three different versions of the app.",
+      "B": "A system where code is deployed to three different planets.",
+      "C": "A deployment that uses three identical environments (often Red-Black-Green) to ensure extreme redundancy.",
+      "D": "A way to use 3 CPU cores for one task."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Observability' 'Trace' represent?",
+    "options": {
+      "A": "A drawing of the network topology.",
+      "B": "The journey of a single request through all the various services in a distributed system.",
+      "C": "A list of all the deleted files.",
+      "D": "The history of the project's budget."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Immutable Artifact' strategy in a multi-environment pipeline?",
+    "options": {
+      "A": "Rebuilding the code for every environment (Dev, Staging, Prod).",
+      "B": "Building once and promoting the exact same binary/image through all environments.",
+      "C": "Building the code on the production server directly.",
+      "D": "Deleting the artifact after it is deployed to Production."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Docker', what is 'Layer Caching'?",
+    "options": {
+      "A": "Using a physical cache chip.",
+      "B": "Reusing previously built image layers to significantly speed up the build process for unchanged instructions.",
+      "C": "A way to hide layers of code.",
+      "D": "A system for layering multiple operating systems."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deployment' 'Blast Radius' limitation via 'Cell-based' Architecture?",
+    "options": {
+      "A": "Storing servers in different prison cells.",
+      "B": "Partitioning infrastructure into small, isolated 'cells' to ensure a failure in one does not impact the entire platform.",
+      "C": "Using only mobile cellular networks for deployment.",
+      "D": "Reducing the number of rows in a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Helm' 'Dry Run' command used for?",
+    "options": {
+      "A": "To dry the physical servers with a fan.",
+      "B": "To simulate a chart installation and see the generated manifests without actually applying them to the cluster.",
+      "C": "To run the cluster without using any electricity.",
+      "D": "To delete all charts in the repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In CI/CD, what is 'Dependency Confusion' attack?",
+    "options": {
+      "A": "When a developer is confused about which library to use.",
+      "B": "Tricking a build system into pulling a malicious package from a public registry instead of a private internal one.",
+      "C": "A system where all dependencies are deleted randomly.",
+      "D": "A network attack that slows down file downloads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC) 'Declarative' state drift?",
+    "options": {
+      "A": "When the code moves physically.",
+      "B": "When the real-world infrastructure is modified manually, causing the IaC tool to attempt to 'fix' it on the next run.",
+      "C": "When the configuration file is too large to read.",
+      "D": "When the server clock is wrong."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kubernetes' 'RollingUpdate' 'maxUnavailable' parameter?",
+    "options": {
+      "A": "The maximum number of users allowed.",
+      "B": "The maximum number of pods that can be unavailable during the update process.",
+      "C": "The maximum amount of memory a pod can use.",
+      "D": "The number of hours a deployment can last."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Service Discovery' in a Microservices deployment?",
+    "options": {
+      "A": "Searching for new apps on the internet.",
+      "B": "A way for services to automatically find and communicate with each other over a network without hardcoded IP addresses.",
+      "C": "A tool for finding the names of all the servers.",
+      "D": "A map of the data center's location."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'AWS', what is the purpose of 'CodeDeploy' 'AppSpec' file?",
+    "options": {
+      "A": "To specify the app's color scheme.",
+      "B": "To define the deployment actions and hooks to be executed during a deployment lifecycle.",
+      "C": "To list the names of the project managers.",
+      "D": "To store the application's source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Git' 'Rebase' vs 'Merge' in a CI workflow?",
+    "options": {
+      "A": "Merge creates a new commit; Rebase moves the entire branch to begin on the tip of the main branch for a cleaner history.",
+      "B": "Rebase is for small files; Merge is for large ones.",
+      "C": "Merge is only used in Windows; Rebase in Linux.",
+      "D": "There is no functional difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Kubernetes' 'Node Affinity'?",
+    "options": {
+      "A": "A node's preference for certain developers.",
+      "B": "A set of rules used by the scheduler to determine which pods can be placed on which nodes based on labels.",
+      "C": "The speed of the node's CPU.",
+      "D": "A way to group nodes by rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure' 'Self-Service'?",
+    "options": {
+      "A": "Developers building their own physical servers.",
+      "B": "Allowing developers to provision the resources they need via automated portals or APIs without waiting for a ticket.",
+      "C": "A cafeteria for the DevOps team.",
+      "D": "Servers that fix their own hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Terraform', what is the 'Output' variable used for?",
+    "options": {
+      "A": "To print the log files to the console.",
+      "B": "To extract and display specific information about the infrastructure (like a public IP) after a successful run.",
+      "C": "To name the final project.",
+      "D": "To delete the resources."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Continuous Testing' in the DevOps lifecycle?",
+    "options": {
+      "A": "Testing the code once a year.",
+      "B": "Executing automated tests as part of the software delivery pipeline to obtain immediate feedback on business risks.",
+      "C": "Testing the lab equipment every day.",
+      "D": "A test that never ends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Docker' 'Multi-stage Build'?",
+    "options": {
+      "A": "Building a Docker image on multiple servers.",
+      "B": "Using multiple FROM statements in a Dockerfile to create smaller, optimized final images by excluding build-time tools.",
+      "C": "A build that takes 5 days.",
+      "D": "A way to use multiple operating systems in one container."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Helm' 'Rollback' command?",
+    "options": {
+      "A": "Moving the physical ship backward.",
+      "B": "Reverting a Kubernetes release to a previous version stored in the Helm history.",
+      "C": "Deleting all code in the cluster.",
+      "D": "Restarting the cluster manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deployment' 'Audit Logs', what is 'Immutability'?",
+    "options": {
+      "A": "The logs are very small.",
+      "B": "Ensuring that once a log is written, it cannot be altered or deleted, providing a reliable record of changes.",
+      "C": "The logs are written in a hidden font.",
+      "D": "The logs are encrypted with a rotating key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC) 'Idempotent' vs 'Non-idempotent'?",
+    "options": {
+      "A": "Idempotent tools fix the state; Non-idempotent tools might try to create the same resource again and fail.",
+      "B": "They are the same.",
+      "C": "Non-idempotent is only for local machines.",
+      "D": "Idempotent tools are slower."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canary' 'Analysis' 'Kayenta'?",
+    "options": {
+      "A": "A tool for watching birds.",
+      "B": "An automated canary analysis (ACA) tool that uses statistical methods to decide if a new version is healthy.",
+      "C": "A new programming language from Google.",
+      "D": "A network speed test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kubernetes' 'StatefulSet' used for?",
+    "options": {
+      "A": "Stateless applications only.",
+      "B": "Managing applications that require a persistent identity and stable storage (like databases).",
+      "C": "Deleting user data after 1 hour.",
+      "D": "A group of servers in the same state/country."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ansible' 'Playbook'?",
+    "options": {
+      "A": "A book for playing video games.",
+      "B": "A YAML file containing a set of instructions (tasks) for Ansible to execute on remote hosts.",
+      "C": "A manual for the company sports team.",
+      "D": "A list of developers' names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Container' 'Orchestration' 'Scheduling'?",
+    "options": {
+      "A": "Hiring a person to start containers manually.",
+      "B": "The process where the orchestrator (like Kubernetes) decides which node is best suited to run a specific container.",
+      "C": "Creating a calendar for deployment.",
+      "D": "A way to limit the CPU usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deployment' 'Observability', what is 'Cardinality' in metrics?",
+    "options": {
+      "A": "The color of the metrics graph.",
+      "B": "The number of unique label-value pairs for a metric; high cardinality can overwhelm monitoring systems.",
+      "C": "The speed of the metrics update.",
+      "D": "The number of people watching the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Terraform' 'State' file security risk?",
+    "options": {
+      "A": "The file is too large to download.",
+      "B": "The file often contains sensitive data (like passwords) in plain text and must be stored securely.",
+      "C": "The file can be edited by a robot.",
+      "D": "The file is only available on one computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deployment' 'Freeze'?",
+    "options": {
+      "A": "Putting the servers in a refrigerator.",
+      "B": "A period during which no new code changes are allowed to be deployed to production (e.g., during a major holiday).",
+      "C": "The application crashing because of cold weather.",
+      "D": "A way to backup the code in a permanent state."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kubernetes' 'Namespace' isolation?",
+    "options": {
+      "A": "Separating the physical servers.",
+      "B": "Providing a logical grouping and scope for resources within a cluster to allow for multi-tenancy.",
+      "C": "Naming the servers after different countries.",
+      "D": "A security firewall for the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DevOps', what is 'DORA' metrics?",
+    "options": {
+      "A": "A list of the best developers.",
+      "B": "Four key metrics (Deployment Frequency, Lead Time, MTTR, Change Failure Rate) used to measure team performance.",
+      "C": "A map of the office layout.",
+      "D": "A way to count the number of lines of code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Artifact' 'Sign-off' in a pipeline?",
+    "options": {
+      "A": "The developer signing a piece of paper.",
+      "B": "A manual or automated approval step where a stakeholder confirms the build is ready for the next stage.",
+      "C": "The artifact being deleted from the repository.",
+      "D": "Naming the artifact after the CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Blue-Green' 'Rollback' speed?",
+    "options": {
+      "A": "Very slow, as it requires rebuilding the app.",
+      "B": "Nearly instantaneous, as it only requires switching the load balancer back to the 'Blue' environment.",
+      "C": "It depends on the time of day.",
+      "D": "It takes 24 hours to sync the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Configuration' 'Decoupling'?",
+    "options": {
+      "A": "Merging the configuration with the code.",
+      "B": "Removing configuration settings from the application code to allow for easier management across environments.",
+      "C": "Deleting the configuration file.",
+      "D": "A way to encrypt the configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC) 'Testing' 'Terratest'?",
+    "options": {
+      "A": "A test for the durability of the servers.",
+      "B": "A Go library that makes it easier to write automated tests for your infrastructure code.",
+      "C": "Testing the speed of the internet.",
+      "D": "A manual check for errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Kubernetes', what is a 'Job' vs a 'Deployment'?",
+    "options": {
+      "A": "A Job is for a finite task that runs to completion; a Deployment is for long-running services.",
+      "B": "They are the same thing.",
+      "C": "A Job is for developers; a Deployment is for users.",
+      "D": "A Job is manual; a Deployment is automated."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deployment' 'Observability' 'Log Aggregation'?",
+    "options": {
+      "A": "Reading logs one by one.",
+      "B": "Collecting and consolidating log data from multiple sources for easy analysis and visualization.",
+      "C": "Deleting logs after 5 minutes.",
+      "D": "A list of project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AWS' 'CloudFormation'?",
+    "options": {
+      "A": "A system for predicting the weather.",
+      "B": "An AWS-native Infrastructure as Code service for provisioning resources using templates.",
+      "C": "A system for building physical server racks.",
+      "D": "A way to backup your photos to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Docker', what is 'Image' 'Squashing'?",
+    "options": {
+      "A": "Deleting the image.",
+      "B": "Combining multiple image layers into a single layer to reduce size and improve performance.",
+      "C": "A way to hide the code in the image.",
+      "D": "A way to encrypt the image metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deployment' 'Versioning' 'Git Tags'?",
+    "options": {
+      "A": "Using social media tags for the app.",
+      "B": "Using specific Git tags (e.g., v1.0.2) to mark specific release points in the repository's history.",
+      "C": "A way to name the developers.",
+      "D": "A way to count the number of commits."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kubernetes' 'ConfigMap' used for?",
+    "options": {
+      "A": "Storing secret passwords.",
+      "B": "Storing non-confidential configuration data as key-value pairs for use by pods.",
+      "C": "A map of the cluster's location.",
+      "D": "A way to limit the network speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deployment' 'Observability' 'Prometheus' 'Alertmanager'?",
+    "options": {
+      "A": "A person who sends alerts manually.",
+      "B": "A component that handles alerts sent by Prometheus and routes them to notification services (e.g., Slack).",
+      "C": "A system for deleting the cluster if it fails.",
+      "D": "A security guard for the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Terraform', what is 'Resource' 'Tainting' command used for?",
+    "options": {
+      "A": "Painting a server a specific color.",
+      "B": "Forcing a specific resource to be destroyed and recreated on the next 'apply' run.",
+      "C": "A way to indicate the resource is corrupted.",
+      "D": "A security feature for encrypting the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deployment' 'Observability' 'ELK Stack'?",
+    "options": {
+      "A": "A system for tracking elk in the wild.",
+      "B": "A group of open-source tools (Elasticsearch, Logstash, Kibana) for log search and visualization.",
+      "C": "A system for managing the office temperature.",
+      "D": "A secure browser for DevOps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kubernetes' 'RollingUpdate' 'maxSurge' parameter?",
+    "options": {
+      "A": "The maximum number of users allowed.",
+      "B": "The maximum number of pods that can be created above the desired number during an update.",
+      "C": "The maximum amount of CPU a pod can use.",
+      "D": "The number of hours a deployment can last."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deployment' 'Consistency' 'Environment Parity'?",
+    "options": {
+      "A": "Deploying once a day.",
+      "B": "Ensuring that the development, staging, and production environments are as identical as possible.",
+      "C": "Having the same number of files in every deployment.",
+      "D": "Using the same font in the app."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'CI/CD', what is a 'Gated Deployment'?",
+    "options": {
+      "A": "A deployment that is only for people in a gated community.",
+      "B": "A release process that requires specific manual or automated conditions (gates) to be met before proceeding.",
+      "C": "A deployment that uses a physical gate at the data center.",
+      "D": "A way to limit the number of users."
+    },
+    "answer": "B"
+  }
+  ]
+}

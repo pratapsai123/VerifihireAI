@@ -1,0 +1,2015 @@
+{ 
+  "skill": "Data Processing", 
+  "questions": [
+    {
+    "question": "What is the primary goal of Data Processing?",
+    "options": {
+      "A": "To collect as much random data as possible without looking at it.",
+      "B": "To convert raw data into meaningful and usable information.",
+      "C": "To physically move server racks to a new building.",
+      "D": "To increase the monitor brightness for better visibility."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which processing method handles data in large, discrete groups at scheduled intervals?",
+    "options": {
+      "A": "Real-time Processing",
+      "B": "Batch Processing",
+      "C": "Stream Processing",
+      "D": "Interactive Processing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'T' in 'ETL' represent?",
+    "options": {
+      "A": "Transfer",
+      "B": "Transform",
+      "C": "Translate",
+      "D": "Terminate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes processing data as soon as it is produced or received?",
+    "options": {
+      "A": "Offline Processing",
+      "B": "Stream Processing",
+      "C": "Manual Processing",
+      "D": "Delayed Processing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Cleaning' (or Data Scrubbing)?",
+    "options": {
+      "A": "Wiping the physical hard drive with a damp cloth.",
+      "B": "Identifying and correcting or removing corrupt, inaccurate, or irrelevant records from a dataset.",
+      "C": "A specialized way to name VM folders.",
+      "D": "Buying new software to replace the old database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In an 'ELT' process, data is loaded into the target system before it is transformed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Excel files",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Schema' in data processing?",
+    "options": {
+      "A": "A secret plan to delete the database.",
+      "B": "The formal structure or blueprint that defines how data is organized (tables, fields, types).",
+      "C": "The physical location of the server rack.",
+      "D": "The annual cost of the cloud subscription."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Data Transformation' task?",
+    "options": {
+      "A": "Converting currency from USD to EUR.",
+      "B": "Filtering out rows with missing values.",
+      "C": "Aggregating daily sales into a monthly total.",
+      "D": "All of the above."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In data processing, what is 'Metadata'?",
+    "options": {
+      "A": "Data that is made of physical metal.",
+      "B": "Data that provides information about other data (e.g., file size, creation date).",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The password used to log in to the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Ingestion' is the first step in a data processing pipeline where data is imported from various sources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web-based data",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' in a data processing context?",
+    "options": {
+      "A": "The physical weight of the data packets.",
+      "B": "The time delay between data being input and the processed output being available.",
+      "C": "The total number of users logged into the system.",
+      "D": "A specialized way to encrypt logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which format is widely used for structured data exchange in processing pipelines because it is both human-readable and machine-readable?",
+    "options": {
+      "A": "MP3",
+      "B": "JSON",
+      "C": "JPEG",
+      "D": "AVI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Validation'?",
+    "options": {
+      "A": "Deleting the data to see if anyone notices.",
+      "B": "Ensuring the data meets specific quality and format standards (e.g., checking if a field is numeric).",
+      "C": "A specialized way to name VM folders.",
+      "D": "The salary of a data entry clerk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Parallel Processing allows a system to perform multiple data tasks simultaneously to increase speed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using the root user"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deduplication'?",
+    "options": {
+      "A": "Creating more copies of the data for safety.",
+      "B": "The process of identifying and removing duplicate copies of data from a dataset.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "Hiring two people to do the same task."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in a distributed system is often used to 'buffer' data between a fast producer and a slower consumer?",
+    "options": {
+      "A": "CPU Cache",
+      "B": "Message Queue (e.g., Kafka, RabbitMQ)",
+      "C": "Keyboard",
+      "D": "Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Profiling'?",
+    "options": {
+      "A": "Creating a social media profile for the database.",
+      "B": "The process of examining the data available in an existing source to understand its structure, content, and quality.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new database administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'API' can be used as a source for data processing by fetching data from a web service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for internal services",
+      "D": "Only if the data is in CSV format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Throughput' measure in a data pipeline?",
+    "options": {
+      "A": "The physical speed of the cooling fans.",
+      "B": "The amount of data processed by the system within a specific timeframe (e.g., rows per second).",
+      "C": "The price of the cloud infrastructure.",
+      "D": "The number of lines of code in the script."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer of the OSI model is most likely to be monitored for network bottlenecks during data processing?",
+    "options": {
+      "A": "Physical Layer",
+      "B": "Transport Layer",
+      "C": "Application Layer",
+      "D": "Presentation Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scalability' in data processing systems?",
+    "options": {
+      "A": "The ability to handle larger volumes of data by adding more resources.",
+      "B": "The weight of the server on a scale.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "Hiring more people to watch the server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' usage during a data transformation task?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "Disk IOPS",
+      "C": "Network Jitter",
+      "D": "RAM Paging"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Data at rest refers to data that is currently being transferred over a network.",
+    "options": {
+      "A": "False (Data at rest is data stored on a physical device; data being transferred is 'data in transit').",
+      "B": "True",
+      "C": "Only for cloud storage",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Data Partitioning'?",
+    "options": {
+      "A": "To make the data icons look like partitions.",
+      "B": "To divide a large dataset into smaller, manageable chunks to improve processing performance.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with standard secure shell (SSH) access for managing processing nodes?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Fault Tolerance' ensures that data processing can continue even if a node in the cluster fails.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for batch jobs",
+      "D": "Only if the team is over 10 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Aggregation'?",
+    "options": {
+      "A": "Deleting old data to make room for new data.",
+      "B": "The process of summarizing or combining data points into a single value (e.g., calculating a total sum).",
+      "C": "A specialized tool for drawing networks.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Database Connections' currently in use by a processing app?",
+    "options": {
+      "A": "Connection Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool designed to provide long-term storage for processing metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for data processing?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using separate network segments to protect sensitive data traffic from general user traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management heartbeats in a virtualized processing environment?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is used in virtualization to allocate more RAM to VMs than is physically available.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "The legal requirement that data is subject to the laws of the country where it is physically stored.",
+      "B": "Naming the database after a president.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets' in a network link?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can increase network bandwidth between processing nodes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for security?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Enforcing security rules at the individual workload level to prevent lateral movement of threats.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a monitoring system?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a method for tracking historical data changes in a separate table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Reconciliation'?",
+    "options": {
+      "A": "Comparing two sets of data to ensure they match and are accurate.",
+      "B": "Deleting the data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The salary of a data architect."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an automated data job?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that re-running an operation results in the same final state.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation?",
+    "options": {
+      "A": "The process of creating unique, system-generated keys to protect real data IDs.",
+      "B": "Naming the servers after keys.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures are common in modern cloud-based processing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing'?",
+    "options": {
+      "A": "The automated process of cleaning and verifying data sets.",
+      "B": "Wiping the hard drive.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is typically scheduled using cron expressions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Processing Monitor' architecture?",
+    "options": {
+      "A": "A system that provides continuous oversight of health across processing nodes.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Processed'?",
+    "options": {
+      "A": "Throughput / Row Count",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for processing clusters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's processing tools and policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is essential for reliable software delivery pipelines.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for code processing?",
+    "options": {
+      "A": "Checking source code for errors or vulnerabilities without running it.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a processing failure?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involve testing a live processing environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management'?",
+    "options": {
+      "A": "A structured process for managing passwords and keys used by processing nodes.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for processing workloads.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility'?",
+    "options": {
+      "A": "A model where security duties are split between the provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Security Remediations' completed?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving testing earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "Identifying and evaluating security threats to a processing architecture.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Network security is essential for reliable data processing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption' in transit?",
+    "options": {
+      "A": "Protecting data as it moves through the network.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the MapReduce programming model, what is the primary technical purpose of the 'Shuffle and Sort' phase?",
+    "options": {
+      "A": "To encrypt the data before it is stored.",
+      "B": "To collect all intermediate values associated with the same intermediate key and group them together before passing them to the Reducer.",
+      "C": "To randomly delete records to improve processing speed.",
+      "D": "To change the physical location of the data on the disk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Windowing' strategy in stream processing defines fixed-size, non-overlapping time intervals (e.g., every 5 minutes)?",
+    "options": {
+      "A": "Sliding Window",
+      "B": "Tumbling Window",
+      "C": "Session Window",
+      "D": "Global Window"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the term 'Backpressure' refer to in a distributed data pipeline?",
+    "options": {
+      "A": "The physical air pressure inside a server rack.",
+      "B": "A mechanism where a slow consumer signals the producer to slow down the data flow to avoid overwhelming the system and causing crashes.",
+      "C": "The speed of the network bandwidth reversing.",
+      "D": "Hiring a new team of data engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a distributed join operation, a 'Broadcast Join' is most efficient when one of the two tables is small enough to fit entirely in the memory of every node in the cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for NoSQL databases",
+      "D": "Only if the data is encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which set of properties describes a system that prioritizes 'Availability' and 'Eventual Consistency' over immediate 'Strong Consistency'?",
+    "options": {
+      "A": "ACID (Atomicity, Consistency, Isolation, Durability)",
+      "B": "BASE (Basically Available, Soft state, Eventual consistency)",
+      "C": "REST (Representational State Transfer)",
+      "D": "CRUD (Create, Read, Update, Delete)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Schema-on-Read' approach, often used in Data Lakes and tools like Apache Hive?",
+    "options": {
+      "A": "The structure is enforced when the data is written to the disk.",
+      "B": "The raw data is stored without a strict structure, and the schema is only applied when the data is queried or processed.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Checkpointing' in stream processing allows a system to recover from a failure by resuming from the last successfully saved state rather than starting from the beginning.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for batch jobs",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Distributed Shuffling', what is a 'Data Skew' and why is it a performance problem?",
+    "options": {
+      "A": "When the data is physically leaning on the disk.",
+      "B": "When an uneven distribution of keys causes one node to handle significantly more data than others, creating a bottleneck for the entire job.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The salary of a senior data scientist."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Join' type in a distributed environment requires both datasets to be redistributed across the cluster based on the join key?",
+    "options": {
+      "A": "Broadcast Join",
+      "B": "Shuffle Hash Join",
+      "C": "Nested Loop Join",
+      "D": "Cross Join"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a distributed processing engine that competes with Apache Spark for large-scale data transformations.",
+    "options": {
+      "A": "False (Mimir is a long-term metrics storage backend for Prometheus).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Serialization' in the context of distributed data processing?",
+    "options": {
+      "A": "Watching a series of movies about data.",
+      "B": "The process of converting a data structure or object into a format (like bytes) that can be easily transmitted over a network or stored.",
+      "C": "A specialized way to name VM folders.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'Spark UI' to monitor the progress of a processing job?",
+    "options": {
+      "A": "4040",
+      "B": "8080",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Exactly-once Processing' is a guarantee in stream processing where each record is processed once and only once, even in the event of system failures.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local files",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Combiner' in a MapReduce job?",
+    "options": {
+      "A": "To combine two different databases.",
+      "B": "An optional local reducer that aggregates data on the Map node before it is shuffled, reducing network traffic.",
+      "C": "A specialized tool for cleaning servers.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Aggregation' method is more efficient for calculating the 'Count' of items across multiple distributed nodes?",
+    "options": {
+      "A": "Centralized Count (send all records to one node).",
+      "B": "Local Count followed by Global Sum (Aggregate local counts first).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VLAN' isolation can be used to separate data processing traffic from management and monitoring traffic to prevent congestion.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' in a complex processing pipeline?",
+    "options": {
+      "A": "Tracing the history of the software developer.",
+      "B": "The ability to trace the origin, movement, and transformations applied to data from source to destination.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Processing Lag'—the time difference between the event time and the time it was processed?",
+    "options": {
+      "A": "Consumer Lag",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is generally avoided on nodes running high-performance data processing tasks (like Spark executors) to prevent 'Out of Memory' crashes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-batching' in stream processing?",
+    "options": {
+      "A": "Processing very tiny individual records one by one.",
+      "B": "A technique where a stream of data is grouped into small batches and processed every few seconds (e.g., Spark Streaming).",
+      "C": "A specialized way to name VM folders.",
+      "D": "The newest version of the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'vCenter' management heartbeats, which must be secured in a virtualized data processing cluster?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' (Link Aggregation) can provide increased network bandwidth for shuffling large datasets between nodes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' in a secure data processing environment?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "The process of applying fine-grained security rules to individual workloads or processing pods to limit the 'Blast Radius' of a threat.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The total number of users logged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' for monitoring processing node health?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' involves moving historical changes to a separate history table to maintain a clean record in the main table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty' in a global processing infrastructure?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The legal concept that data is subject to the laws of the country in which it is physically located.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an automated data validation job?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a goal for ensuring data processing jobs can be safely retried without creating duplicates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a data transformation step?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The automated process of creating unique, non-identifying keys for database records to protect privacy and improve query performance.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server' access?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures leverage the target processing power (like a cloud warehouse) for transformations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in a secure processing pipeline?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The automated process of Identifying and fixing errors or personally identifiable information (PII) from a dataset.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' for processing dashboard access?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is typically used for generating historical compliance reports.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Processing Monitor' architecture?",
+    "options": {
+      "A": "A system that provides continuous oversight of health across processing nodes.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Processed'?",
+    "options": {
+      "A": "Throughput / Row Count",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for processing clusters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's software tools and compliance standards.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is essential for reliable software delivery pipelines.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for code processing?",
+    "options": {
+      "A": "Checking source code for errors or vulnerabilities without running it.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a processing failure?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involves testing a live processing environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' for data nodes?",
+    "options": {
+      "A": "A structured process for managing passwords and keys used by nodes securely.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for distributed workloads.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility' model?",
+    "options": {
+      "A": "A model where security duties are split between the provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' completed across the cluster?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving testing earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for data processing?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to a processing architecture.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Network security is essential for a reliable data system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption' at rest?",
+    "options": {
+      "A": "Protecting data stored on disks by encoding it.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Nodes' in the processing cluster?",
+    "options": {
+      "A": "Node Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in processing cluster security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SSL/TLS provides encryption for the processing dashboard.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "Sending emails to induce individuals to reveal sensitive processing credentials.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of a processing service?",
+    "options": {
+      "A": "Uptime %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Data processing systems are essential for modern analytics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Batch Processing' cycle?",
+    "options": {
+      "A": "The regular, repeated execution of batch data jobs.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Failed Processing Tasks'?",
+    "options": {
+      "A": "Fail Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In stream processing, what is the primary technical function of a 'Watermark'?",
+    "options": {
+      "A": "To add a visible logo to data visualizations.",
+      "B": "A threshold used to tell the engine how long to wait for late-arriving events before closing a time window and emitting results.",
+      "C": "To encrypt the stream metadata.",
+      "D": "To monitor the physical humidity in the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which architecture pattern eliminates the 'Batch Layer' entirely, treating all data as a stream and using a single processing engine for both real-time and historical data?",
+    "options": {
+      "A": "Lambda Architecture",
+      "B": "Kappa Architecture",
+      "C": "Monolithic Architecture",
+      "D": "Three-Tier Architecture"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does the 'Two-Phase Commit' (2PC) protocol ensure 'Exactly-once' processing when a stream processor (like Flink) writes to an external sink (like Kafka or a DB)?",
+    "options": {
+      "A": "It processes every record twice to be safe.",
+      "B": "It coordinates a global transaction where the sink only commits data when the stream processor successfully saves its internal checkpoint.",
+      "C": "It deletes all records from the source after processing.",
+      "D": "It increases the network bandwidth during the write phase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a distributed shuffle (e.g., Spark), 'Spilling to Disk' occurs when the data allocated to a specific task exceeds the available executor memory (RAM), leading to a significant performance penalty.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using 100Gbps network links"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Zombie Task' detection in a distributed processing framework?",
+    "options": {
+      "A": "A security scan for literal malware.",
+      "B": "The process where the driver/master identifies tasks that are still running on a worker node but whose corresponding job has been aborted or timed out.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the temperature of the worker CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JVM Garbage Collection (GC) behavior is most detrimental to the stability of a high-throughput data processing cluster?",
+    "options": {
+      "A": "Minor GC",
+      "B": "Stop-the-World (STW) Full GC pauses",
+      "C": "Incremental Marking",
+      "D": "Parallel Scavenging"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Changelog LSN' (Log Sequence Number) is used in Change Data Capture (CDC) processing to ensure that updates are applied to the target system in the exact order they occurred at the source.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java-based systems",
+      "D": "Only if the network is encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Distributed State Management', what is the impact of choosing 'RocksDB' as a state backend over an 'In-Memory' backend for a stream processor?",
+    "options": {
+      "A": "It makes the code simpler to write.",
+      "B": "It allows the system to handle state larger than available RAM by using local SSDs, but introduces higher I/O latency compared to pure memory.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'Spark History Server' default UI, used to analyze completed processing jobs?",
+    "options": {
+      "A": "18080",
+      "B": "4040",
+      "C": "8080",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a specialized distributed processing library used for real-time windowed aggregations of IoT sensor data.",
+    "options": {
+      "A": "False (Mimir is a long-term metrics storage backend).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Broadcast Join' vs 'Sort-Merge Join' in an execution plan, and which is better for two massive (TB-scale) datasets?",
+    "options": {
+      "A": "Broadcast Join is better for TB-scale data.",
+      "B": "Sort-Merge Join is better for two massive datasets as it handles data that cannot fit in memory by shuffling and sorting based on join keys.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the temperature of the BIOS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'vCenter' management heartbeats that ensure the availability of a virtualized data processing cluster?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is considered extremely dangerous for large-scale data shuffles because it can trigger host-level swapping, leading to non-deterministic task timeouts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) latency-based balancing in a processing environment?",
+    "options": {
+      "A": "Measuring the weight of the logs.",
+      "B": "Automatically migrating virtual disks between datastores if I/O latency (often caused by heavy data shuffling) exceeds a set threshold.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' encrypted management of a processing engine dashboard?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' uses a three-node cluster to ensure the management plane of the data cluster remains operational during host failure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in a virtualized data processing network?",
+    "options": {
+      "A": "The largest number of workers allowed.",
+      "B": "A special ID used to enable Virtual Guest Tagging (VGT), allowing a node to manage its own 802.1Q tags.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access to manage data infrastructure?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) provides near-native performance for data shuffling but often disables the ability to perform 'vMotion'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in a hypervisor context?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts memory assigned to a VM based on real-time application demand.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' architecture feature is required for hardware-assisted memory virtualization to reduce overhead in high-throughput processing?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX-512",
+      "D": "SSE4.2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can cause a complete outage of the data cluster if the underlying physical array reaches 100% capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The component of the hypervisor responsible for managing execution and hardware isolation for virtual machines.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic in a DR setup?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' generally provides higher performance for data tasks than full emulation because the Guest OS is 'hypervisor-aware'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "A process that mirrors write operations to both source and destination during a live migration to ensure consistency of active data sets.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of data nodes?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An interface policy that puts a port into an error-disabled state immediately if an unauthorized device is detected.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is the node with the lowest Bridge ID.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a specific VLAN segment to improve internal security for sensitive data flows.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' prevents a port from sending or receiving BPDUs, which can cause network loops if used on interconnected switches.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' hashing algorithm?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "The logic used to determine which physical link in a bundle is used for a specific packet to ensure load distribution.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is often disabled to prevent 'VLAN Hopping' security attacks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A feature where the VTP password is not displayed in the running configuration file.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can cause a broadcast storm that completely disables a data processing network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Restrict'?",
+    "options": {
+      "A": "Turning off the switch.",
+      "B": "An action that drops packets from unauthorized devices and increments a counter without disabling the physical port.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' provides faster STP convergence than standard 802.1D.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in data platform automation?",
+    "options": {
+      "A": "A physical tool for fixing servers.",
+      "B": "The property where applying a configuration or operation multiple times results in the same final state.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a data pipeline build?",
+    "options": {
+      "A": "(Successes / Total Runs) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving validation earlier in the data engineering lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for data pipelines?",
+    "options": {
+      "A": "Identifying and evaluating security threats to sensitive data movement and storage.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' for a data codebase?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for data system infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Platform Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's data tools, standards, and compliance policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes' in a data pipeline?",
+    "options": {
+      "A": "The time from code commit to data being live in production.",
+      "B": "The number of users.",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is critical for ensuring data processing jobs do not introduce security risks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' impact in a Bash script for data automation?",
+    "options": {
+      "A": "The resource overhead required to fork a child process to execute commands.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a CI/CD job?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' can store historical data processing metrics for long-term trend analysis.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' performance impact?",
+    "options": {
+      "A": "Potential latency increase due to L3 processing at the inter-VLAN gateway.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a goal for reliable data processing workflows.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' traceability?",
+    "options": {
+      "A": "The ability to follow data from its source to its final processing state.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' processing time?",
+    "options": {
+      "A": "Mean Execution Time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' helps find data processing bugs earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into a system for processing.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Consumers' in a stream?",
+    "options": {
+      "A": "Consumer Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in data infrastructure security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network security threats to processing nodes.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points to protect data movement.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface to protect processing clusters.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SSL/TLS provides encryption for processing dashboards.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  }
+  ]
+}

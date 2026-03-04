@@ -1,0 +1,1995 @@
+{ 
+  "skill": "DevSecOps", 
+  "questions": [
+    {
+    "question": "What is the primary goal of DevSecOps?",
+    "options": {
+      "A": "To perform security audits only once a year.",
+      "B": "To integrate security practices and tools throughout the entire DevOps lifecycle.",
+      "C": "To replace all developers with security engineers.",
+      "D": "To slow down the deployment process for safety."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the term 'Shift-Left' mean in DevSecOps?",
+    "options": {
+      "A": "Moving the physical server to the left side of the rack.",
+      "B": "Integrating security testing earlier in the software development life cycle (SDLC).",
+      "C": "Deleting the oldest security logs.",
+      "D": "Promoting junior developers to senior positions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SAST (Static Application Security Testing) analyzes the application's source code without executing it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile apps",
+      "D": "Only if using Java"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which security testing method involves testing the application while it is running from the outside (black-box)?",
+    "options": {
+      "A": "SAST",
+      "B": "DAST (Dynamic Application Security Testing)",
+      "C": "SCA",
+      "D": "Code Review"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SCA' (Software Composition Analysis) used for?",
+    "options": {
+      "A": "To write the application's README file.",
+      "B": "To identify and manage security vulnerabilities in open-source libraries and third-party dependencies.",
+      "C": "To measure the physical weight of the servers.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Secrets Management involves the secure storage and handling of sensitive data like API keys, passwords, and certificates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Vulnerability' in the context of IT security?",
+    "options": {
+      "A": "A physical defect in a hard drive.",
+      "B": "A weakness in a system or software that can be exploited by a threat actor.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Security as Code'?",
+    "options": {
+      "A": "Manual security checks are required for every change.",
+      "B": "Security policies can be automated, version-controlled, and consistently applied.",
+      "C": "It removes the need for any developers.",
+      "D": "It makes the source code free to use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'False Positive' is a security alert that incorrectly identifies a benign activity as a threat.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for firewalls",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hardening' a server?",
+    "options": {
+      "A": "Adding more physical metal to the case.",
+      "B": "The process of securing a system by reducing its surface of vulnerability (e.g., closing unused ports).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a higher floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Secret Management' tool?",
+    "options": {
+      "A": "HashiCorp Vault",
+      "B": "Microsoft Excel",
+      "C": "Adobe Reader",
+      "D": "WinZip"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps emphasizes that security is the responsibility of everyone, not just a dedicated security team.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for startups",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Principle of Least Privilege'?",
+    "options": {
+      "A": "Granting every user administrator access.",
+      "B": "Giving users and systems only the minimum access levels they need to perform their jobs.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a CI/CD pipeline, when should SAST typically be executed?",
+    "options": {
+      "A": "After the application is deployed to production.",
+      "B": "During the build or commit stage.",
+      "C": "Only during business hours.",
+      "D": "Once every six months."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Container Scanning' checks container images for known vulnerabilities before they are deployed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Docker images",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'CVE'?",
+    "options": {
+      "A": "Central Vault Encryption",
+      "B": "Common Vulnerabilities and Exposures (a list of publicly disclosed security flaws).",
+      "C": "Control Variable Entry",
+      "D": "Critical Velocity Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Man-in-the-Middle' (MitM) attack?",
+    "options": {
+      "A": "A person standing in the middle of a server room.",
+      "B": "An attacker who intercepts and potentially alters communication between two parties.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Encryption at Rest protects data while it is stored on a disk or storage system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for bank records",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'IAST' (Interactive Application Security Testing)?",
+    "options": {
+      "A": "To test the application's UI speed.",
+      "B": "To combine SAST and DAST elements by testing the application from the inside during runtime.",
+      "C": "To encrypt the database password.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Secure Coding' practice?",
+    "options": {
+      "A": "Input validation and sanitization.",
+      "B": "Hardcoding API keys in the source code.",
+      "C": "Using 'admin' as the default password.",
+      "D": "Disabling all security logs to save space."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Infrastructure as Code (IaC) can be scanned for security misconfigurations (like open ports) before deployment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS CloudFormation",
+      "D": "Only if the system is old"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Penetration Testing'?",
+    "options": {
+      "A": "A physical test of how strong a server rack is.",
+      "B": "A simulated cyberattack against a system to check for exploitable vulnerabilities.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'RBAC' stand for in access control?",
+    "options": {
+      "A": "Remote Backup Access Control",
+      "B": "Role-Based Access Control",
+      "C": "Root Block Access Component",
+      "D": "Relational Base Audit Check"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Multi-Factor Authentication (MFA) requires more than one method of authentication to verify a user's identity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for bank apps",
+      "D": "Only if using a mobile phone"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Blast Radius' in a security incident?",
+    "options": {
+      "A": "The physical area affected by a fire.",
+      "B": "The potential scope of impact or damage caused by a security breach or system failure.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used for automated SAST in a DevSecOps pipeline?",
+    "options": {
+      "A": "SonarQube",
+      "B": "Adobe Photoshop",
+      "C": "Google Chrome",
+      "D": "Microsoft Word"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps aims to replace manual security gates with automated security checks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Obfuscation'?",
+    "options": {
+      "A": "Deleting data forever.",
+      "B": "The process of making data unintelligible to unauthorized users while still remaining functional for authorized processes.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Container Orchestration' platform that requires specific security hardening?",
+    "options": {
+      "A": "Kubernetes",
+      "B": "PostgreSQL",
+      "C": "Nginx",
+      "D": "Redis"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Encryption in Transit protects data as it moves between different points in a network (e.g., using TLS/SSL).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "Building a physical model of a server.",
+      "B": "A structured process to identify, quantify, and address security threats associated with an application or system.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The salary of a security engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Zero-Day' vulnerability?",
+    "options": {
+      "A": "A vulnerability that was discovered zero days ago.",
+      "B": "A security flaw in software that is unknown to the vendor and for which no patch is available.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In DevSecOps, developers should receive security feedback directly within their IDE or PR process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for senior developers",
+      "D": "Only if the code is in Java"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Patch Management'?",
+    "options": {
+      "A": "Managing the physical patches on a server rack.",
+      "B": "The process of managing and applying software updates (patches) to fix security vulnerabilities and bugs.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Snyk and Checkmarx are examples of security tools used in DevSecOps pipelines.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Compliance as Code'?",
+    "options": {
+      "A": "Writing laws in a programming language.",
+      "B": "The practice of using automated tools and code to verify that systems meet regulatory and security compliance requirements.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Continuous Monitoring' in DevSecOps?",
+    "options": {
+      "A": "Watching the server room through a window.",
+      "B": "The ongoing process of monitoring systems for security threats and performance issues in real-time.",
+      "C": "A tool used for measuring network speed.",
+      "D": "The brand name of a popular monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Running a container as 'Root' is a recommended security best practice.",
+    "options": {
+      "A": "False (Containers should run as a non-privileged user to minimize the impact of a potential breach).",
+      "B": "True",
+      "C": "Only for production apps",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Firewall' policy?",
+    "options": {
+      "A": "A plan for what to do in case of a physical fire.",
+      "B": "A set of rules that determines which network traffic is allowed or blocked.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'WAF' stand for?",
+    "options": {
+      "A": "Web Application Firewall",
+      "B": "Wireless Access Format",
+      "C": "Wide Area Filter",
+      "D": "Web Audit File"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Dynamic Application Security Testing (DAST) requires the application to be running in an environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity and Access Management' (IAM)?",
+    "options": {
+      "A": "A tool for fixing servers.",
+      "B": "A framework of policies and technologies to ensure that the right people have the appropriate access to technology resources.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure remote management (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Code Signing is the process of digitally signing code to verify its origin and ensure it hasn't been altered.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Automation'?",
+    "options": {
+      "A": "Naming the servers after famous people.",
+      "B": "Using technology to perform security tasks with reduced human intervention.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Network Security' protocol?",
+    "options": {
+      "A": "HTTPS",
+      "B": "SFTP",
+      "C": "SSH",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'Vulnerability Scanner' automatically identifies known security flaws in systems or software.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security'?",
+    "options": {
+      "A": "The discipline of protecting data, applications, and infrastructure associated with cloud computing.",
+      "B": "Hiding the data in a literal cloud.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Security Vulnerabilities'?",
+    "options": {
+      "A": "Vulnerability Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps encourages 'Security Champions'—developers who act as liaisons between security and development teams.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 50 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis'?",
+    "options": {
+      "A": "The process of turning off the server.",
+      "B": "The automated analysis of source code without executing the program.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The time an engineer spends thinking."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard web traffic (HTTP)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Security testing should only happen at the end of the development cycle.",
+    "options": {
+      "A": "False (It should happen throughout the lifecycle).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Monitoring'?",
+    "options": {
+      "A": "Watching a server rack physically.",
+      "B": "The process of collecting and analyzing security data to detect and respond to threats.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Remediate' a vulnerability?",
+    "options": {
+      "A": "MTTR (Mean Time To Remediate)",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Strong Passwords' is a basic but essential security practice.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for admin users",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Container Hardening'?",
+    "options": {
+      "A": "Making the container physically harder.",
+      "B": "The process of securing container images and runtime environments by removing unnecessary tools and services.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Failed Security Checks'?",
+    "options": {
+      "A": "Failure Rate",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps requires collaboration between development, security, and operations teams.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Automated Security Testing'?",
+    "options": {
+      "A": "The use of software tools to perform security tests automatically.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Unauthorized Access Attempts'?",
+    "options": {
+      "A": "Attempt Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is the process of identifying, evaluating, and mitigating security flaws.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Governance'?",
+    "options": {
+      "A": "A framework for managing and directing an organization's security activities.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps aims to make security a continuous part of the development process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary advantage of using IAST (Interactive Application Security Testing) over a combination of separate SAST and DAST tools?",
+    "options": {
+      "A": "It is significantly cheaper to license.",
+      "B": "It provides real-time access to code, runtime data, and control flow, leading to higher accuracy and fewer false positives.",
+      "C": "It does not require the application to be running during the test.",
+      "D": "It can only be used for legacy mainframe applications."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When implementing 'Secrets Management' in a Kubernetes environment, why is using native K8s Secrets often considered insufficient without additional encryption?",
+    "options": {
+      "A": "K8s Secrets are stored in plain text by default in etcd (only base64 encoded).",
+      "B": "K8s Secrets can only store up to 1KB of data.",
+      "C": "K8s Secrets automatically expire every 24 hours.",
+      "D": "They cannot be used with Linux-based containers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' (DAST) is highly effective at finding logical vulnerabilities, such as horizontal privilege escalation, because it understands the application's business logic.",
+    "options": {
+      "A": "False (DAST is generally poor at finding logic flaws; it excels at finding common web vulnerabilities like XSS or SQLi).",
+      "B": "True",
+      "C": "Only for banking applications",
+      "D": "Only if using an AI-driven scanner"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a GitHub Actions pipeline, what is the 'Workflow Identity' (OIDC) used for in a DevSecOps context?",
+    "options": {
+      "A": "To identify the physical location of the developer.",
+      "B": "To allow the pipeline to authenticate with cloud providers (like AWS or Azure) without storing long-lived static secrets.",
+      "C": "To encrypt the source code repository.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Mutating Admission Controller' in Kubernetes security?",
+    "options": {
+      "A": "To delete all pods that are not running.",
+      "B": "To intercept requests to the API server and modify them (e.g., injecting a security sidecar or enforcing specific labels) before the object is created.",
+      "C": "To act as a physical hardware firewall.",
+      "D": "To backup the cluster configuration to a local disk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technique involves signing a container image with a private key and verifying it with a public key before it is allowed to run in production?",
+    "options": {
+      "A": "Image Hardening",
+      "B": "Image Attestation (e.g., using Cosign or Notary)",
+      "C": "Image Layering",
+      "D": "Image Compression"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vulnerability Prioritization' should be based solely on the CVSS score of the finding.",
+    "options": {
+      "A": "False (It should also consider 'Reachability'—whether the vulnerable code is actually reachable in production—and the business criticality of the asset).",
+      "B": "True",
+      "C": "Only for government-regulated industries",
+      "D": "Only if the score is above 9.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Drift Detection' in the context of Infrastructure as Code (IaC) security?",
+    "options": {
+      "A": "Detecting when a server physically moves in a rack.",
+      "B": "Identifying discrepancies between the defined state in code (e.g., Terraform) and the actual state of the live infrastructure.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to enforce fine-grained security policies (e.g., 'no container can run as root') across a Kubernetes cluster using the Rego language?",
+    "options": {
+      "A": "HashiCorp Vault",
+      "B": "OPA (Open Policy Agent) / Gatekeeper",
+      "C": "Jenkins",
+      "D": "Wireshark"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Fuzz Testing' (Fuzzing) involves providing invalid, unexpected, or random data as inputs to a computer program to find memory leaks or crashes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for C++ applications",
+      "D": "Only in non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of 'Ephemeral' build agents in a DevSecOps pipeline?",
+    "options": {
+      "A": "They are cheaper to buy than permanent servers.",
+      "B": "They provide a clean environment for every build, preventing cross-contamination of secrets or malicious artifacts from previous jobs.",
+      "C": "They automatically encrypt the network traffic.",
+      "D": "They increase the speed of the source code compilation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In threat modeling, what does the 'DREAD' mnemonic help evaluate?",
+    "options": {
+      "A": "The speed of the network bandwidth.",
+      "B": "The risk level of a threat (Damage, Reproducibility, Exploitability, Affected users, Discoverability).",
+      "C": "The physical weight of the server rack.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dependency Confusion' is an attack where a malicious package is uploaded to a public repository with the same name as an internal private package, tricking the build system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python packages",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Service Mesh' (like Istio) in DevSecOps?",
+    "options": {
+      "A": "To backup the system configuration.",
+      "B": "To provide automatic mTLS (mutual TLS) for all service-to-service communication and centralized policy enforcement.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a security dashboard indicates that a vulnerability has been identified but a 'Risk Acceptance' has been filed?",
+    "options": {
+      "A": "Open",
+      "B": "Deferred / Ignored",
+      "C": "Resolved",
+      "D": "Pending"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SAST' tools are best at finding vulnerabilities like hardcoded secrets and insecure cryptographic implementations in the source code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Container Escape' in the context of cloud security?",
+    "options": {
+      "A": "When a container physically falls out of a rack.",
+      "B": "An exploit where a process inside a container breaks out to the host operating system, gaining access to the host's resources.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Secrets Management', what is 'Dynamic Secret' generation?",
+    "options": {
+      "A": "Passwords that the admin chooses randomly.",
+      "B": "Creating unique, short-lived credentials for a specific service on-demand (e.g., a database user that expires after 1 hour).",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'SBOM' (Software Bill of Materials) is a list of all components, libraries, and modules used in a piece of software, which is critical for identifying vulnerable dependencies.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for open-source projects",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'WAF' (Web Application Firewall) compared to a traditional network firewall?",
+    "options": {
+      "A": "To block all traffic from the internet.",
+      "B": "To filter and monitor Layer 7 (HTTP/S) traffic specifically to block attacks like SQL Injection and Cross-Site Scripting.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for secure management of a Vault server?",
+    "options": {
+      "A": "80",
+      "B": "8200",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Red Teaming' is a continuous process within DevSecOps that involves automating the developer workflow.",
+    "options": {
+      "A": "False (Red Teaming is a full-scope multi-layered attack simulation to measure how well an organization's people, networks, and physical security can withstand an attack).",
+      "B": "True",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 50 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Observability'?",
+    "options": {
+      "A": "Watching a server rack physically.",
+      "B": "Using runtime data (logs, metrics, traces) to detect and analyze active security threats and anomalous behavior in a system.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of automated security scans in a CI/CD pipeline?",
+    "options": {
+      "A": "(Passed Scans / Total Scans) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'DAST' tools can be used to find vulnerabilities in APIs by sending malformed requests to endpoint definitions (e.g., Swagger/OpenAPI files).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SOAP APIs",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Blast Radius' of a compromised developer's personal laptop?",
+    "options": {
+      "A": "The physical area around the laptop.",
+      "B": "The extent of the systems and data the developer has access to, including source code repositories, cloud credentials, and internal VPNs.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'HTTPS' traffic often inspected by a WAF?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps requires that all security vulnerabilities, regardless of severity, must be fixed before a release can go to production.",
+    "options": {
+      "A": "False (Teams typically use a 'Security Threshold' or 'Quality Gate' based on severity—e.g., zero Criticals allowed, but Lows might be deferred).",
+      "B": "True",
+      "C": "Only for bank apps",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' of Dockerfiles used for?",
+    "options": {
+      "A": "To measure the weight of the container.",
+      "B": "To identify insecure patterns in the build instructions (e.g., using 'latest' tags, running as root, or installing unnecessary SSH tools).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'Zookeeper' used in some security stacks?",
+    "options": {
+      "A": "2181",
+      "B": "9092",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a security-focused tool for analyzing malware in a sandbox environment.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for secure workloads?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using VLANs to logically separate sensitive workloads (e.g., database servers) from public-facing web servers to prevent lateral movement.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management communication?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a common security feature that prevents buffer overflow attacks.",
+    "options": {
+      "A": "False (Memory overcommit is a resource management feature; buffer overflow is a code-level vulnerability).",
+      "B": "True",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Runtime Security' for containers?",
+    "options": {
+      "A": "Monitoring the container's physical movement.",
+      "B": "Real-time monitoring and alerting on suspicious activities within running containers (e.g., unexpected process execution or file system changes).",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'iSCSI' storage traffic, which should be isolated from the management network for security?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can be used to improve security by detecting unauthorized physical link tampering.",
+    "options": {
+      "A": "False (LACP is for link aggregation and redundancy, not specifically for detecting tampering).",
+      "B": "True",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' in a secure data center?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Enforcing security policies at the individual workload level to prevent an attacker from moving horizontally between servers in the same subnet.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to check the 'Vulnerability Burn-down Rate'?",
+    "options": {
+      "A": "Rate of vulnerability remediation over time.",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 2' is a common method for tracking the history of security policy changes in a database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The principle that data is subject to the legal protections and regulations of the country in which it is physically located.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Code Coverage' for security tests?",
+    "options": {
+      "A": "Security Test Coverage",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is critical for automated security patching to ensure that applying a patch twice doesn't cause system instability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' management in a secure data warehouse?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "Using internally generated keys to decouple the data warehouse from the natural keys of the source system, which may contain sensitive information.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' is more secure than ETL because data is never moved outside of the target system for transformation.",
+    "options": {
+      "A": "False (Security depends on the implementation of encryption, access controls, and auditing in both models).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in a security context?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of identifying and removing or obfuscating sensitive data to ensure compliance with privacy regulations.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is inherently more secure than stream processing.",
+    "options": {
+      "A": "False (Both have unique security challenges; batch processing often involves large files at rest, while streaming involves real-time data in transit).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DevSecOps Automation'?",
+    "options": {
+      "A": "The use of tools to perform security tasks automatically throughout the software development life cycle.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Security Policies' being enforced?",
+    "options": {
+      "A": "Policy Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' includes the continuous monitoring of security flaws.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Governance' framework?",
+    "options": {
+      "A": "A structured approach to managing an organization's security activities.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps aims to make security a continuous part of the development lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for security?",
+    "options": {
+      "A": "The automated analysis of source code to find security flaws without executing the program.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a security incident?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' for security involves testing a running application.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' workflow?",
+    "options": {
+      "A": "A structured process for managing sensitive data like passwords and API keys.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes the scanning of container images.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' responsibility model?",
+    "options": {
+      "A": "A model that defines the security responsibilities of the cloud provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' completed?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving security testing earlier in the development process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for applications?",
+    "options": {
+      "A": "A structured process to identify and evaluate security threats to an application.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "An architect is implementing a 'Zero Trust' network for a microservices environment. Which mechanism is most critical for ensuring that service-to-service communication is both encrypted and identity-verified without relying on IP addresses?",
+    "options": {
+      "A": "Standard Layer 4 Firewalls",
+      "B": "Mutual TLS (mTLS) with short-lived X.509 certificates issued by an internal CA (e.g., SPIFFE/Spire).",
+      "C": "A shared 'admin' password stored in etcd.",
+      "D": "Physical network isolation using separate switches for every service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary objective of the 'SLSA' (Supply-chain Levels for Software Artifacts) framework in a DevSecOps context?",
+    "options": {
+      "A": "To increase the speed of the JavaScript compiler.",
+      "B": "To provide a security framework that prevents tampering, improves integrity, and secures the software supply chain from source to deployment.",
+      "C": "To calculate the total monthly cost of open-source licenses.",
+      "D": "To replace all human code reviewers with a single AI bot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'GitOps' workflow, the 'Source of Truth' for security policies is the live state of the Kubernetes cluster, not the configuration files in the Git repository.",
+    "options": {
+      "A": "False (The Git repository is the source of truth; any drift in the cluster is automatically corrected to match the repository).",
+      "B": "True",
+      "C": "Only for non-production namespaces",
+      "D": "Only if using Bitbucket"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technique involves injecting a security agent directly into the application process to monitor library calls and memory access for malicious behavior (e.g., RASP)?",
+    "options": {
+      "A": "Network Intrusion Detection",
+      "B": "Runtime Application Self-Protection (RASP)",
+      "C": "Static Code Analysis",
+      "D": "Packet Sniffing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When configuring 'Vault' for high-scale DevSecOps, what is the purpose of 'AppRole' authentication?",
+    "options": {
+      "A": "To allow human developers to log in using their personal social media accounts.",
+      "B": "To provide a machine-to-machine authentication method that allows applications or CI/CD pipelines to programmatically fetch secrets.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Automated Threat Hunting', which specific data source is most valuable for identifying 'Living off the Land' (LotL) attacks where attackers use legitimate system tools for malicious purposes?",
+    "options": {
+      "A": "CPU Temperature logs",
+      "B": "Endpoint Detection and Response (EDR) telemetry, including process execution command lines and parent-child process relationships.",
+      "C": "Network bandwidth usage reports.",
+      "D": "The number of users logged out of the portal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'FIPS 140-2' compliance requires that all cryptographic modules used by an application are validated by NIST to ensure they meet specific security requirements.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Service Account Token Volume Projection' in Kubernetes security hardening?",
+    "options": {
+      "A": "To measure the physical volume of a server rack.",
+      "B": "To provide a more secure, time-bound, and audience-restricted service account token to a pod, reducing the risk of token theft.",
+      "C": "To encrypt the database password.",
+      "D": "To monitor the daily growth of the etcd database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'DAST' optimization technique involves using a proxy to record human 'Seed' traffic to guide the automated scanner through complex multi-step business flows (e.g., a checkout process)?",
+    "options": {
+      "A": "Fuzzing",
+      "B": "Sequence Scanning / Guided Crawling",
+      "C": "Port Scanning",
+      "D": "Dictionary Attacks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Homomorphic Encryption' allows for computations to be performed on ciphertext, yielding an encrypted result that, when decrypted, matches the result of the same operations performed on the plaintext.",
+    "options": {
+      "A": "True (Highly valuable for processing sensitive data in the cloud without ever decrypting it).",
+      "B": "False",
+      "C": "Only for 8-bit integers",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical difference between 'Confidential Computing' (using TEEs) and standard encryption at rest/transit?",
+    "options": {
+      "A": "Confidential computing is only for files.",
+      "B": "Confidential computing protects data *in use* by performing computations in a hardware-isolated 'Enclave' that even the host OS cannot access.",
+      "C": "Confidential computing is always faster.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Software Bill of Materials' (SBOM) context, what does 'VEX' (Vulnerability Exploitability eXchange) provide?",
+    "options": {
+      "A": "A way to exchange money for vulnerabilities.",
+      "B": "A machine-readable companion to an SBOM that clarifies if a specific vulnerability actually impacts a product (e.g., 'Not affected' vs 'Affected').",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Seccomp' (Secure Computing Mode) profiles in Kubernetes allows you to restrict the specific system calls (syscalls) a container can make to the Linux kernel.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python applications",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Attestation' in the context of a trusted build pipeline?",
+    "options": {
+      "A": "A physical witness to the build process.",
+      "B": "A signed statement (provenance) about how a software artifact was created, including the source code, build tools, and environment used.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a container image scan indicates a 'False Positive' that has been formally verified and suppressed by the security team?",
+    "options": {
+      "A": "Open",
+      "B": "Whitelisted / Verified Ignored",
+      "C": "Resolved",
+      "D": "Critical"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Canary Analysis' can be used for security by comparing the behavior of a new release against a baseline to detect anomalies that might indicate a backdoor or malicious injection.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if using Istio"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'BGP Hijacking' and how does it impact cloud security?",
+    "options": {
+      "A": "When a router is physically stolen.",
+      "B": "When an attacker maliciously reroutes internet traffic by announcing false IP prefix information in the Border Gateway Protocol, potentially intercepting sensitive data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Secrets Management', what is the 'Secret Zero' problem?",
+    "options": {
+      "A": "When there are zero secrets in the vault.",
+      "B": "The challenge of how to securely provide the initial identity or credential to an application so it can then authenticate with a secrets manager like Vault.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Side-channel' attacks (like Meltdown or Spectre) exploit physical implementation flaws in hardware to leak information, even if the software is logically secure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 32-bit CPUs",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Policy as Code' (using tools like Kyverno or OPA) in a multi-tenant Kubernetes cluster?",
+    "options": {
+      "A": "To write the company's employee handbook.",
+      "B": "To programmatically enforce compliance and security standards (e.g., 'all pods must have resource limits') at the API level for all tenants.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for standard 'OAuth2' callback redirection?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Infrastructure as Code' (IaC) templates should be scanned for 'Hardcoded Credentials' before being committed to a repository.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Terraform files",
+      "D": "Only if the team is over 50 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Hunting' 'Hypothesis' generation?",
+    "options": {
+      "A": "Guessing who the attacker is based on their name.",
+      "B": "Developing a testable theory about a specific attack technique (e.g., 'attackers are using DNS tunneling for exfiltration') and then searching logs to prove or disprove it.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a 'WAF' in blocking known malicious patterns?",
+    "options": {
+      "A": "(Blocked Requests / Malicious Requests) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'mTLS' provides both encryption of data and authentication of both the client and the server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Blast Radius' containment using 'VPC Peering' and 'Transitive Routing' restrictions?",
+    "options": {
+      "A": "Building a physical wall around the server.",
+      "B": "Limiting network connectivity between environments so that a breach in a 'Dev' VPC cannot transit through a 'Shared Services' VPC into the 'Production' VPC.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS' traffic that is typically decrypted by a WAF for inspection?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Snyk' can be used to scan both application dependencies and container images for known vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Compliance as Code' validation 'Drift'?",
+    "options": {
+      "A": "When the server physically moves.",
+      "B": "When the live configuration of a system no longer matches the security policies defined in the compliance code (e.g., a firewall rule was added manually).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'LDAP' used for identity management?",
+    "options": {
+      "A": "389",
+      "B": "9092",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' can be used to store and query security-related metrics for long-term threat trend analysis.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' segmentation for high-security workloads?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using Layer 2 isolation to ensure that sensitive data processing occurs on a network segment that is physically or logically separated from general traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' heartbeats from the ESXi hosts in a secure virtualization stack?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Poisoning' is a security exploit that involves corrupting the data stored in a server's RAM to alter the behavior of an application.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secure Boot' for hardware nodes?",
+    "options": {
+      "A": "Cleaning the physical server before booting.",
+      "B": "A security standard that ensures a device boots using only software that is trusted by the Original Equipment Manufacturer (OEM).",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic, which should always be on a dedicated, non-routed network?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' should be configured with 'Link Security' to prevent an attacker from spoofing a switch and intercepting aggregated traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' using 'Security Groups'?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Defining granular 'Allow/Deny' rules for every individual service instance to implement a zero-trust model at the network layer.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Unencrypted S3 Buckets' in a cloud security audit?",
+    "options": {
+      "A": "Unencrypted Bucket Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is often used to maintain a separate 'Audit Trail' of security permission changes while keeping the main user table clean.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Residency' vs 'Data Sovereignty'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Residency refers to the physical location of data; Sovereignty refers to the data being subject to the laws of the country where it is located.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an automated 'Secret Rotation' job?",
+    "options": {
+      "A": "Rotation Success Rate",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is essential for security 'Remediation' scripts to ensure that re-running a fix doesn't cause a service outage.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deterministic' key generation in a secure DevSecOps environment?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of generating the same cryptographic key from a specific set of inputs, allowing for reproducible encryption in distributed systems.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures often leverage 'Column-level Access Control' to restrict sensitive data access within the data warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in a GDPR compliance context?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The automated process of identifying and removing personally identifiable information (PII) from logs and databases to ensure the 'Right to be Forgotten'.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' of security logs is generally preferred over real-time processing for immediate threat detection.",
+    "options": {
+      "A": "False (Real-time processing is critical for detecting and responding to active attacks as they happen).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DevSecOps Observability' 'Cardinality' impact?",
+    "options": {
+      "A": "Measuring the weight of the servers.",
+      "B": "The explosion of unique security labels (like session IDs or IPs) which can significantly increase storage costs for security metrics and logs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Security Policies' currently deployed?",
+    "options": {
+      "A": "Policy Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a one-time process.",
+    "options": {
+      "A": "False (It is a continuous lifecycle of discovery, assessment, and remediation).",
+      "B": "True",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Governance' 'Automation'?",
+    "options": {
+      "A": "A framework for managing security tasks using automated tools and code.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is strictly about tools and does not involve cultural change.",
+    "options": {
+      "A": "False (It is fundamentally a cultural shift to share responsibility for security across all teams).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' 'False Positive' rate?",
+    "options": {
+      "A": "The percentage of alerts that are not actually security vulnerabilities.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Acknowledge' (TTA) a critical security alert?",
+    "options": {
+      "A": "TTA (Mean Time To Acknowledge)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' can find vulnerabilities like 'Unvalidated Redirects' in a running application.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' 'Leasing'?",
+    "options": {
+      "A": "Hiring a new server.",
+      "B": "The practice of issuing credentials that are valid for a very short duration, requiring the application to periodically renew or 'lease' them.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Runtime Security' involves monitoring process execution inside a container.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility' model?",
+    "options": {
+      "A": "A model where the cloud provider handles all security tasks.",
+      "B": "A model where security duties are split between the cloud provider (security OF the cloud) and the customer (security IN the cloud).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Critical Security Findings' in a production environment?",
+    "options": {
+      "A": "Critical Finding Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security helps find and fix vulnerabilities earlier in the SDLC.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' 'STRIDE'?",
+    "options": {
+      "A": "A structured approach for identifying system threats: Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of building reliable and secure modern applications.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  }
+  ]
+}

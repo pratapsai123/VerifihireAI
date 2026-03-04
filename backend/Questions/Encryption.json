@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Encryption", 
+  "questions": [
+    {
+    "question": "What is the primary goal of encryption?",
+    "options": {
+      "A": "To compress data so it takes up less space.",
+      "B": "To ensure the confidentiality of information by making it unreadable to unauthorized users.",
+      "C": "To delete data automatically after it is read.",
+      "D": "To increase the physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Symmetric encryption, the same key is used for both encryption and decryption.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the AES algorithm",
+      "D": "Only for text files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Plaintext' in the context of cryptography?",
+    "options": {
+      "A": "Data that has been encrypted and is unreadable.",
+      "B": "The original, unencrypted message or data.",
+      "C": "A specialized programming language for security.",
+      "D": "The password used to lock a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ciphertext'?",
+    "options": {
+      "A": "The physical hardware used to store keys.",
+      "B": "The encrypted form of data that is unreadable without a key.",
+      "C": "The person who writes the encryption code.",
+      "D": "A type of transparent font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of encryption uses a pair of keys: a Public Key and a Private Key?",
+    "options": {
+      "A": "Symmetric Encryption",
+      "B": "Asymmetric Encryption",
+      "C": "Hash-based Encryption",
+      "D": "Sequential Encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Hashing is a reversible process that allows you to retrieve the original data from the hash value.",
+    "options": {
+      "A": "True",
+      "B": "False (Hashing is a one-way function)",
+      "C": "Only if using SHA-256",
+      "D": "Only if the data is shorter than 10 characters"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'AES' stand for in encryption terminology?",
+    "options": {
+      "A": "Advanced Encryption Standard",
+      "B": "Automated Encoding System",
+      "C": "Asymmetric Electronic Security",
+      "D": "Applied Encryption Script"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common use for Hashing?",
+    "options": {
+      "A": "Decrypting large video files.",
+      "B": "Storing passwords securely by saving the hash instead of the cleartext.",
+      "C": "Increasing the size of an image.",
+      "D": "Communicating privately between two people."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Public Key can be shared with anyone without compromising security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is encrypted with a Private Key",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Decryption'?",
+    "options": {
+      "A": "The process of deleting a key.",
+      "B": "The process of converting ciphertext back into plaintext using a key.",
+      "C": "The process of generating a random number.",
+      "D": "Writing code in a secret language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is commonly used to secure communication over the web (HTTPS)?",
+    "options": {
+      "A": "FTP",
+      "B": "SMTP",
+      "C": "TLS/SSL",
+      "D": "SNMP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Brute Force' attack involves trying every possible key until the correct one is found.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Symmetric encryption",
+      "D": "Only for Wi-Fi passwords"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Digital Signature' used for?",
+    "options": {
+      "A": "To draw a picture on an electronic document.",
+      "B": "To verify the authenticity and integrity of a message or document.",
+      "C": "To hide the identity of the sender.",
+      "D": "To increase the encryption speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Asymmetric encryption, if Bob wants to send an encrypted message to Alice, which key should he use to encrypt it?",
+    "options": {
+      "A": "Bob's Private Key",
+      "B": "Bob's Public Key",
+      "C": "Alice's Public Key",
+      "D": "Alice's Private Key"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: MD5 is considered a highly secure hashing algorithm for modern password storage.",
+    "options": {
+      "A": "True",
+      "B": "False (It is vulnerable to collisions and considered obsolete for security)",
+      "C": "True, but only for mobile apps",
+      "D": "False, but only on Windows servers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cryptography'?",
+    "options": {
+      "A": "The study of ancient maps.",
+      "B": "The practice and study of techniques for secure communication.",
+      "C": "A specialized database for storing keys.",
+      "D": "The art of writing clear documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Salt' in the context of password hashing?",
+    "options": {
+      "A": "A physical component in the server room.",
+      "B": "Random data added to a password before hashing to protect against rainbow table attacks.",
+      "C": "A way to dissolve old data.",
+      "D": "The total number of characters in a password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Encryption at rest refers to protecting data while it is being transmitted over a network.",
+    "options": {
+      "A": "False (That is encryption in transit; at rest is for stored data).",
+      "B": "True",
+      "C": "Only for cloud storage",
+      "D": "Only for database backups"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is an example of Asymmetric encryption?",
+    "options": {
+      "A": "AES",
+      "B": "DES",
+      "C": "RSA",
+      "D": "Blowfish"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary disadvantage of Asymmetric encryption compared to Symmetric encryption?",
+    "options": {
+      "A": "It is less secure.",
+      "B": "It is computationally slower and more resource-intensive.",
+      "C": "It cannot be used on the internet.",
+      "D": "It requires a physical key card."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If a Private Key is lost or stolen, any data encrypted with its corresponding Public Key is potentially compromised.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the key is under 2048 bits",
+      "D": "Only for government data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'End-to-End Encryption' (E2EE)?",
+    "options": {
+      "A": "Encryption that only works at the ends of a cable.",
+      "B": "A system where only the communicating users can read the messages, and even the service provider cannot.",
+      "C": "A way to encrypt only the first and last letters of a message.",
+      "D": "Encrypting data twice for extra safety."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes a mathematical algorithm that maps data of arbitrary size to a fixed-size bit string?",
+    "options": {
+      "A": "Cipher",
+      "B": "Hash Function",
+      "C": "Validator",
+      "D": "Compactor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Steganography is the same as Encryption.",
+    "options": {
+      "A": "False (Steganography hides the existence of a message; Encryption makes it unreadable).",
+      "B": "True",
+      "C": "Only in military applications",
+      "D": "True, they are interchangeable terms"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Certificate Authority' (CA)?",
+    "options": {
+      "A": "A person who teaches cryptography.",
+      "B": "A trusted entity that issues digital certificates to verify the identity of websites or users.",
+      "C": "A government agency that regulates passwords.",
+      "D": "A specialized server for generating random numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'S' in HTTPS stand for?",
+    "options": {
+      "A": "Standard",
+      "B": "Secure",
+      "C": "System",
+      "D": "Static"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 256-bit key is significantly harder to crack than a 128-bit key using brute force.",
+    "options": {
+      "A": "True (It is exponentially harder)",
+      "B": "False",
+      "C": "Only if using RSA",
+      "D": "Only on quantum computers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Key Exchange' protocol?",
+    "options": {
+      "A": "Physically trading hard drives with keys on them.",
+      "B": "A method for two parties to safely agree on a shared secret key over an insecure channel.",
+      "C": "Changing your password every 30 days.",
+      "D": "Moving a database to a new server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'One-Way' function?",
+    "options": {
+      "A": "AES Encryption",
+      "B": "RSA Encryption",
+      "C": "SHA-256 Hashing",
+      "D": "Base64 Encoding"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Base64 encoding is a form of encryption.",
+    "options": {
+      "A": "False (It is an encoding scheme for data representation, not for security).",
+      "B": "True",
+      "C": "Only if used with a password",
+      "D": "Only for binary images"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Integrity' in the CIA triad of security?",
+    "options": {
+      "A": "Ensuring data is available to users.",
+      "B": "Ensuring that data has not been altered or tampered with during transit or storage.",
+      "C": "Ensuring the identity of the server.",
+      "D": "Ensuring the message is as short as possible."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Entropy' in key generation?",
+    "options": {
+      "A": "To increase the temperature of the CPU.",
+      "B": "To ensure that keys are generated with enough randomness to be unpredictable.",
+      "C": "To count the number of characters in a key.",
+      "D": "To monitor the server uptime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Caesar Cipher is a modern, secure encryption method.",
+    "options": {
+      "A": "False (It is a primitive substitution cipher that is very easy to break).",
+      "B": "True",
+      "C": "Only for local text files",
+      "D": "Only if the shift is greater than 13"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of an SSL/TLS certificate proves that it belongs to the domain you are visiting?",
+    "options": {
+      "A": "The color of the lock icon.",
+      "B": "The digital signature of the Certificate Authority.",
+      "C": "The physical address of the data center.",
+      "D": "The history of the website's updates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-repudiation'?",
+    "options": {
+      "A": "The ability to delete a message without a trace.",
+      "B": "Ensuring that a sender cannot later deny having sent a message.",
+      "C": "Ensuring that the server is always online.",
+      "D": "A way to backup the encryption keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: WPA3 is the current standard for securing Wi-Fi networks using encryption.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for business networks",
+      "D": "Only on Apple devices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Obfuscation'?",
+    "options": {
+      "A": "Deleting code to save space.",
+      "B": "Making code or data difficult for humans to understand without changing its function.",
+      "C": "A form of military-grade encryption.",
+      "D": "A specialized way to sort data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hash algorithm is currently recommended for ensuring data integrity in most modern systems?",
+    "options": {
+      "A": "MD5",
+      "B": "SHA-1",
+      "C": "SHA-256",
+      "D": "CRC32"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In a man-in-the-middle (MITM) attack, an attacker intercepts communication between two parties to steal or alter data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on public Wi-Fi",
+      "D": "Only if the encryption is symmetric"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Session Key'?",
+    "options": {
+      "A": "A permanent key used for all logins.",
+      "B": "A temporary key used for a single communication session between two parties.",
+      "C": "The key used to open the server rack.",
+      "D": "The password for the administrator account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Key Management System' (KMS)?",
+    "options": {
+      "A": "To create physical keys for doors.",
+      "B": "To securely store, manage, and rotate cryptographic keys.",
+      "C": "To list the names of all system users.",
+      "D": "To monitor network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Collision' in hashing occurs when two different inputs produce the same hash output.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in MD5",
+      "D": "Only if the inputs are over 1GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Perfect Forward Secrecy' (PFS)?",
+    "options": {
+      "A": "A system where keys are never changed.",
+      "B": "A feature that ensures if a long-term private key is compromised, past session keys remain secure.",
+      "C": "An encryption method that cannot be broken by quantum computers.",
+      "D": "A way to predict future encryption trends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a widely used symmetric encryption algorithm?",
+    "options": {
+      "A": "RSA",
+      "B": "Diffie-Hellman",
+      "C": "ChaCha20",
+      "D": "ECC"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Using a longer key length generally makes encryption stronger against brute-force attacks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Asymmetric encryption",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Diffie-Hellman' algorithm used for?",
+    "options": {
+      "A": "Encrypting email bodies.",
+      "B": "Securely exchanging cryptographic keys over a public channel.",
+      "C": "Deleting user accounts.",
+      "D": "Identifying hardware errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'PKI' stand for?",
+    "options": {
+      "A": "Personal Key Information",
+      "B": "Public Key Infrastructure",
+      "C": "Private Key Integrated",
+      "D": "Password Key Identifier"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Encryption can protect data against unauthorized deletion.",
+    "options": {
+      "A": "False (Encryption protects confidentiality; it does not stop data from being deleted).",
+      "B": "True",
+      "C": "Only if the data is in the cloud",
+      "D": "Only if using a 4096-bit key"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a symptom of weak encryption?",
+    "options": {
+      "A": "The ciphertext is the same size as the plaintext.",
+      "B": "Patterns in the plaintext are visible in the ciphertext.",
+      "C": "The decryption process is too fast.",
+      "D": "The key is saved in a JSON file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantum Cryptography'?",
+    "options": {
+      "A": "Cryptography that uses extremely large numbers.",
+      "B": "Cryptography that utilizes the principles of quantum mechanics for security.",
+      "C": "Cryptography that only works on weekends.",
+      "D": "A way to speed up old encryption methods."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SSL has been largely replaced by the more secure TLS protocol.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking apps",
+      "D": "Only on mobile devices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bit Strength'?",
+    "options": {
+      "A": "The weight of the data in bits.",
+      "B": "A measure of the difficulty to guess or break a cryptographic key.",
+      "C": "The total number of 1s in a binary file.",
+      "D": "The speed of a single bit transfer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT a legitimate reason to use encryption?",
+    "options": {
+      "A": "Compliance with data protection laws.",
+      "B": "Protecting user privacy.",
+      "C": "Hiding illegal activities from law enforcement.",
+      "D": "Securing financial transactions."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Hashing the same input twice will always result in the same output (deterministic).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a salt",
+      "D": "Only on 64-bit systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Symmetric Padding' used for in block ciphers?",
+    "options": {
+      "A": "To make the ciphertext more comfortable to read.",
+      "B": "To fill the last block of data to a specific size so the algorithm can process it.",
+      "C": "To add random numbers to the key.",
+      "D": "To increase the priority of the file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In RSA encryption, which mathematical operation is the foundation of its security?",
+    "options": {
+      "A": "Adding very large numbers.",
+      "B": "The difficulty of factoring the product of two large prime numbers.",
+      "C": "The speed of light in a vacuum.",
+      "D": "Calculating the square root of 2."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Initialization Vector' (IV) is used to ensure that the same plaintext results in different ciphertext each time it is encrypted.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for asymmetric encryption",
+      "D": "Only if the key is under 64 bits"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Access Control' alongside encryption?",
+    "options": {
+      "A": "To make the encryption faster.",
+      "B": "To determine who is permitted to hold or use the keys needed for decryption.",
+      "C": "To count how many times a key was used.",
+      "D": "To monitor the room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cryptanalysis'?",
+    "options": {
+      "A": "Writing new encryption code.",
+      "B": "The study of analyzing and breaking cryptographic systems.",
+      "C": "Managing a library of encryption books.",
+      "D": "The history of the enigma machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard HTTPS uses both asymmetric and symmetric encryption during a single session.",
+    "options": {
+      "A": "True (Asymmetric for initial handshake; Symmetric for data transfer).",
+      "B": "False",
+      "C": "Only for e-commerce sites",
+      "D": "Only on Google Chrome"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'HMAC'?",
+    "options": {
+      "A": "Hardware Management Access Center.",
+      "B": "Hash-based Message Authentication Code, used to verify both integrity and authenticity.",
+      "C": "A specialized way to compress JSON files.",
+      "D": "A way to monitor the server's CPU load."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of encryption is generally preferred for securing huge databases with terabytes of data?",
+    "options": {
+      "A": "Asymmetric",
+      "B": "Symmetric (due to speed and efficiency)",
+      "C": "Hashing",
+      "D": "Rotational"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Key Rotation' is the practice of replacing old cryptographic keys with new ones on a regular basis.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for military keys",
+      "D": "Only if a key is stolen"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Rainbow Table'?",
+    "options": {
+      "A": "A colorful chart for beginners in coding.",
+      "B": "A precomputed table for reversing cryptographic hash functions, usually for cracking passwords.",
+      "C": "A database of all known computer viruses.",
+      "D": "A way to sort data by the spectrum of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Elliptic Curve Cryptography' (ECC)?",
+    "options": {
+      "A": "It is easier to draw.",
+      "B": "It provides the same level of security as RSA but with much smaller key sizes.",
+      "C": "It only works on curved monitors.",
+      "D": "It is the oldest form of encryption."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Private Key' should never be shared or transmitted across a network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is encrypted first",
+      "D": "Only for personal use"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which block cipher mode of operation is considered insecure because it encrypts identical plaintext blocks into identical ciphertext blocks?",
+    "options": {
+      "A": "CBC (Cipher Block Chaining)",
+      "B": "ECB (Electronic Codebook)",
+      "C": "GCM (Galois/Counter Mode)",
+      "D": "CTR (Counter Mode)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Stream Cipher encrypts data one bit or byte at a time, making it generally faster than a Block Cipher for real-time traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the RSA algorithm",
+      "D": "Only for data stored on hard drives"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary advantage of GCM (Galois/Counter Mode) over CBC (Cipher Block Chaining)?",
+    "options": {
+      "A": "It uses shorter keys.",
+      "B": "It provides both encryption and built-in authentication (AEAD).",
+      "C": "It does not require an Initialization Vector (IV).",
+      "D": "It only works with Asymmetric encryption."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Diffie-Hellman key exchange, what is actually transmitted over the public network?",
+    "options": {
+      "A": "The final shared secret key.",
+      "B": "Public values derived from private exponents.",
+      "C": "The user's private key.",
+      "D": "The entire plaintext message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Nonce' in cryptographic protocols?",
+    "options": {
+      "A": "To compress the ciphertext.",
+      "B": "To ensure a unique value is used only once to prevent replay attacks.",
+      "C": "To store the user's name in the header.",
+      "D": "To increase the CPU clock speed during encryption."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: PKCS#7 is a standard often used for padding data in block ciphers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for hashing algorithms",
+      "D": "Only for quantum-resistant keys"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes a 'Rainbow Table' attack bypass?",
+    "options": {
+      "A": "Increasing the internet bandwidth.",
+      "B": "Using a unique, random salt for every password before hashing.",
+      "C": "Converting the hash to a JSON format.",
+      "D": "Using symmetric encryption instead of hashing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Root Certificate' represent in a PKI (Public Key Infrastructure)?",
+    "options": {
+      "A": "The first user registered in the system.",
+      "B": "A self-signed certificate that forms the top of the trust hierarchy.",
+      "C": "A backup of the database keys.",
+      "D": "The encryption key for the server's BIOS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Birthday Attack' on a hashing function, what is the attacker trying to find?",
+    "options": {
+      "A": "The user's date of birth.",
+      "B": "Two different inputs that result in the same hash output (a collision).",
+      "C": "The password of the system administrator.",
+      "D": "The expiration date of an SSL certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elliptic Curve Cryptography (ECC) allows for smaller keys than RSA while maintaining the same security level.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only on 32-bit systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Key Stretching' (e.g., using PBKDF2 or bcrypt)?",
+    "options": {
+      "A": "Physically making the server longer.",
+      "B": "Repeating a hash function many times to make brute-force attacks significantly slower.",
+      "C": "Adding more bits to a key to fill a gap.",
+      "D": "Transmitting a key over a long-distance cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol phase allows a client and server to agree on a Cipher Suite during an HTTPS connection?",
+    "options": {
+      "A": "The HTTP GET request",
+      "B": "The TLS Handshake",
+      "C": "The DNS lookup",
+      "D": "The TCP Three-way handshake"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AES-256 is currently considered secure against attacks from known quantum computers.",
+    "options": {
+      "A": "True (Symmetric encryption is generally resistant if key sizes are doubled).",
+      "B": "False (All encryption is broken by quantum computers).",
+      "C": "Only if used with RSA-4096",
+      "D": "Only on Linux-based quantum simulators"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Intermediate Certificate Authority'?",
+    "options": {
+      "A": "A CA that is only used during the middle of the week.",
+      "B": "A CA that is signed by a Root CA and used to issue end-entity certificates to reduce risk to the root.",
+      "C": "A CA that is waiting to be approved.",
+      "D": "A CA that only works for local network domains."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In CBC mode, what is the purpose of the Initialization Vector (IV)?",
+    "options": {
+      "A": "To encrypt the final block of data.",
+      "B": "To ensure that identical plaintexts result in different ciphertexts when encrypted with the same key.",
+      "C": "To store the password of the user.",
+      "D": "To speed up the parallel processing of blocks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: HMAC (Hash-based Message Authentication Code) uses a secret key in addition to a hash function.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using SHA-1",
+      "D": "Only for binary file transfers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ciphertext Stealing' (CTS)?",
+    "options": {
+      "A": "An attack where a hacker steals the encrypted file.",
+      "B": "A technique in block cipher modes to handle plaintexts that are not a multiple of the block size without padding.",
+      "C": "A bug in the OpenSSL library.",
+      "D": "A way to hide a message inside an image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these algorithms is a popular choice for 'Password Hashing' because it has a configurable work factor?",
+    "options": {
+      "A": "SHA-256",
+      "B": "Bcrypt",
+      "C": "MD5",
+      "D": "AES"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Digital Signature provides 'Confidentiality' for the message being signed.",
+    "options": {
+      "A": "False (It provides Authenticity and Integrity; the message itself is still plaintext).",
+      "B": "True",
+      "C": "Only if using a 4096-bit key",
+      "D": "Only if the message is in a PDF format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Public Key' used for in a Digital Signature process?",
+    "options": {
+      "A": "To create the signature.",
+      "B": "To verify the signature created by the private key.",
+      "C": "To encrypt the message body.",
+      "D": "To identify the user's IP address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes the process of converting a short password into a longer, more secure key for encryption?",
+    "options": {
+      "A": "Key Expansion",
+      "B": "Key Derivation Function (KDF)",
+      "C": "Key Rotation",
+      "D": "Key Wrapping"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Asymmetric encryption, the Private Key can be used to derive the Public Key.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in RSA",
+      "D": "Only if the key is stored in a PEM file"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Certificate Revocation List' (CRL)?",
+    "options": {
+      "A": "A list of all users who have been banned from the internet.",
+      "B": "A list of digital certificates that have been cancelled before their expiration date.",
+      "C": "A list of all current Certificate Authorities.",
+      "D": "A list of passwords that are too weak to use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which block cipher mode allows for parallel encryption of blocks?",
+    "options": {
+      "A": "CBC (Cipher Block Chaining)",
+      "B": "CTR (Counter Mode)",
+      "C": "PCBC (Propagating Cipher Block Chaining)",
+      "D": "None; block ciphers are strictly sequential."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A self-signed certificate will trigger a security warning in most modern web browsers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the date is incorrect",
+      "D": "Only if using HTTP/3"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Entropy' in the context of generating random numbers for crypto?",
+    "options": {
+      "A": "The number of bits in the key.",
+      "B": "The degree of unpredictability or randomness in the source data.",
+      "C": "The speed of the random number generator.",
+      "D": "The physical size of the hardware chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Padding Oracle' attack target?",
+    "options": {
+      "A": "Asymmetric encryption",
+      "B": "Block ciphers using CBC mode with improper error handling.",
+      "C": "Hashing algorithms like SHA-3.",
+      "D": "Public Key Infrastructure (PKI)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AES is a 'Substitution-Permutation Network' (SPN) cipher.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 128-bit version",
+      "D": "It is a Feistel cipher"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of the 'Cipher Suite' in TLS?",
+    "options": {
+      "A": "A physical room where encryption is performed.",
+      "B": "A combination of algorithms used to secure the connection (Key Exchange, Encryption, Hashing).",
+      "C": "A list of all websites a user has visited.",
+      "D": "The password used to log in to the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Perfect Forward Secrecy' achieved by?",
+    "options": {
+      "A": "Using extremely long keys.",
+      "B": "Generating unique, ephemeral session keys for every connection.",
+      "C": "Hiding the server's location.",
+      "D": "Changing the user's password daily."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'X.509' standard defines the format for public key certificates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for email encryption",
+      "D": "Only for VPN connections"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In cryptography, what is 'Avalanche Effect'?",
+    "options": {
+      "A": "The server crashing when too many people log in.",
+      "B": "A property where a small change in input results in a significant and unpredictable change in output.",
+      "C": "The process of deleting data from the bottom up.",
+      "D": "A way to speed up the encryption of large files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Digest' and a 'MAC'?",
+    "options": {
+      "A": "A digest is for text; a MAC is for binary.",
+      "B": "A MAC uses a secret key to provide authenticity, whereas a standard digest only provides integrity.",
+      "C": "A digest is longer than a MAC.",
+      "D": "A MAC is reversible, while a digest is not."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: RSA-2048 is generally considered secure against modern classical computers for the near future.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local networks",
+      "D": "Only on ARM-based servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Subject Alternative Name' (SAN) field in an SSL certificate?",
+    "options": {
+      "A": "To list the developer's middle name.",
+      "B": "To allow a single certificate to protect multiple different domain names.",
+      "C": "To provide a backup password for the site.",
+      "D": "To specify the server's physical address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cryptographic algorithm is based on the difficulty of the 'Discrete Logarithm' problem?",
+    "options": {
+      "A": "RSA",
+      "B": "Diffie-Hellman",
+      "C": "AES",
+      "D": "SHA-512"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SHA-3 is the newest member of the Secure Hash Algorithm family and is based on a sponge construction.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for military use",
+      "D": "It was replaced by SHA-4 in 2024"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Side-Channel Attack'?",
+    "options": {
+      "A": "An attack that uses a secondary internet connection.",
+      "B": "An attack based on information gained from the physical implementation of a system (e.g., power consumption, timing).",
+      "C": "A way to steal a physical key.",
+      "D": "An attack on the user's monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Pre-Master Secret' in TLS?",
+    "options": {
+      "A": "A secret shared by the developer before writing code.",
+      "B": "A value shared during the handshake used to generate the final master secret and session keys.",
+      "C": "A backup password stored in a JSON file.",
+      "D": "The encryption key for the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Symmetric encryption algorithms are generally much faster than Asymmetric ones.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small files",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cryptographic Salt' primarily intended to prevent?",
+    "options": {
+      "A": "The server from rusting.",
+      "B": "The use of precomputed Rainbow Tables to crack hashes.",
+      "C": "The user from choosing a common password.",
+      "D": "The encryption from taking too long."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of SSL/TLS, what is 'HSTS'?",
+    "options": {
+      "A": "High Speed Terminal System.",
+      "B": "HTTP Strict Transport Security, which forces browsers to use HTTPS for a site.",
+      "C": "A specialized way to compress CSS files.",
+      "D": "A tool to monitor the server's room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a key difference between 'Block Ciphers' and 'Stream Ciphers'?",
+    "options": {
+      "A": "Block ciphers only work with numbers.",
+      "B": "Block ciphers operate on fixed-size chunks of data, while stream ciphers operate on continuous bits.",
+      "C": "Stream ciphers are more secure.",
+      "D": "Block ciphers do not require a key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A hash function should ideally be 'Collision Resistant', meaning it is difficult to find any two different inputs with the same hash.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for password storage",
+      "D": "Only in the 64-bit version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OCSP' (Online Certificate Status Protocol)?",
+    "options": {
+      "A": "A protocol for playing online video games.",
+      "B": "An automated way to check the current validity of a digital certificate in real-time.",
+      "C": "A way to backup SSL certificates to the cloud.",
+      "D": "A tool to measure the internet speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a widely used library for implementing cryptography in applications?",
+    "options": {
+      "A": "Photoshop",
+      "B": "OpenSSL",
+      "C": "AutoCAD",
+      "D": "Excel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AES-GCM provides 'Forward Secrecy' by itself without any other protocols.",
+    "options": {
+      "A": "False (Forward secrecy is a property of the key exchange protocol, not the encryption algorithm).",
+      "B": "True",
+      "C": "Only in the 256-bit version",
+      "D": "Only for web traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Quantum-Resistant' Cryptography?",
+    "options": {
+      "A": "Cryptography that runs on a quantum computer.",
+      "B": "Cryptographic algorithms believed to be secure against an attack by a quantum computer.",
+      "C": "Encryption that only works for extremely small particles.",
+      "D": "A way to speed up classical encryption."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of certificate provides the highest level of trust and involves a rigorous identity verification process?",
+    "options": {
+      "A": "Domain Validated (DV)",
+      "B": "Organization Validated (OV)",
+      "C": "Extended Validation (EV)",
+      "D": "Self-Signed"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Hashing an empty string results in a zero or empty hash value.",
+    "options": {
+      "A": "False (It results in a standard-length hash unique to an empty input).",
+      "B": "True",
+      "C": "Only if using MD5",
+      "D": "Only if the salt is also empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Message Authentication Code' (MAC)?",
+    "options": {
+      "A": "The address of the network card.",
+      "B": "A small block of data used to confirm that a message came from the stated sender and has not been changed.",
+      "C": "A specialized way to encrypt Apple computers.",
+      "D": "A way to monitor the server's network traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for a 'Secure Random Number Generator'?",
+    "options": {
+      "A": "The numbers must be easily predictable.",
+      "B": "The output must be statistically indistinguishable from truly random data.",
+      "C": "It must only produce even numbers.",
+      "D": "It must use a 128-character seed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Poly1305 is a high-speed message authentication code often paired with ChaCha20.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-web traffic",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Key Rotation'?",
+    "options": {
+      "A": "Physically turning a key in a lock.",
+      "B": "The process of periodically retiring old cryptographic keys and replacing them with new ones.",
+      "C": "Sharing a key with a rotating group of people.",
+      "D": "Moving a key from the hard drive to the RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'CSR' (Certificate Signing Request)?",
+    "options": {
+      "A": "To request a customer service representative.",
+      "B": "A file sent to a CA to apply for a digital certificate, containing the applicant's public key.",
+      "C": "To backup the server configuration.",
+      "D": "To encrypt the user's login session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Asymmetric encryption, the Public Key can be used to decrypt data that was encrypted with the Private Key.",
+    "options": {
+      "A": "True (This is how digital signatures are verified).",
+      "B": "False",
+      "C": "Only if using ECC",
+      "D": "Only if the data is a small hash"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Cryptographic Agility'?",
+    "options": {
+      "A": "The ability to run encryption on mobile devices.",
+      "B": "The ability of a system to easily switch between different cryptographic algorithms if one is compromised.",
+      "C": "The speed at which a person can type encryption code.",
+      "D": "The capacity to encrypt data while it is moving."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Master Secret' in the context of a TLS session?",
+    "options": {
+      "A": "A password known only to the site owner.",
+      "B": "A value derived from the pre-master secret used to generate all actual session keys for the current connection.",
+      "C": "A backup of all the user's private keys.",
+      "D": "The primary encryption key for the entire cloud provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Hashing is widely used for 'Data Deduplication' in storage systems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for image files",
+      "D": "Only if using SHA-1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Meet-in-the-Middle' attack target?",
+    "options": {
+      "A": "Asymmetric encryption",
+      "B": "Block ciphers that use multiple rounds of encryption with different keys (like Double DES).",
+      "C": "Public Wi-Fi networks.",
+      "D": "The user's password reset page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In RSA, what is the role of the 'Exponent' (e)?",
+    "options": {
+      "A": "To set the expiration date of the key.",
+      "B": "Part of the public key used during the modular exponentiation calculation.",
+      "C": "To count the number of prime numbers found.",
+      "D": "To increase the priority of the encryption process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Wildcard Certificates' can protect a main domain and all of its subdomains.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the subdomains are on the same server",
+      "D": "Only for non-HTTPS traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption Overhead'?",
+    "options": {
+      "A": "The cost of buying a physical encryption device.",
+      "B": "The additional data and processing time required to perform encryption and decryption.",
+      "C": "The total size of the ciphertext compared to the plaintext.",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which of these is a valid 'Hashing' characteristic?",
+    "options": {
+      "A": "The output size changes based on the input size.",
+      "B": "The output size is always the same for a given algorithm.",
+      "C": "It is easy to reverse if you have the key.",
+      "D": "It is only used for numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 1024-bit RSA key is now considered potentially vulnerable to well-funded attackers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if stored in a plain text file"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Diffie-Hellman' in a modern TLS handshake?",
+    "options": {
+      "A": "To encrypt the HTTP headers.",
+      "B": "To securely establish a shared secret session key between the client and server.",
+      "C": "To verify the website's digital certificate.",
+      "D": "To scan the network for hackers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary mathematical advantage of 'Lattice-based Cryptography' in a post-quantum world?",
+    "options": {
+      "A": "It uses smaller prime numbers than RSA, making it faster for mobile devices.",
+      "B": "It relies on NP-hard problems like the 'Shortest Vector Problem' (SVP), which are resistant to Shor's algorithm.",
+      "C": "It eliminates the need for an Initialization Vector (IV) in symmetric ciphers.",
+      "D": "It allows for the encryption of data without a private key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Fully Homomorphic Encryption' (FHE) allows a third party to perform arbitrary computations on encrypted data without ever decrypting it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for addition and subtraction operations",
+      "D": "Only if using a 8192-bit RSA key"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Elliptic Curve Cryptography (ECC), what is the 'Point Addition' rule used to define?",
+    "options": {
+      "A": "The method for adding two different user accounts together.",
+      "B": "An algebraic group operation on the points of the curve that forms the basis of the trapdoor function.",
+      "C": "The way the server calculates the expiration date of a certificate.",
+      "D": "The process of appending a salt to a password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific quantum algorithm poses the greatest threat to current RSA and ECC implementations?",
+    "options": {
+      "A": "Grover's Algorithm",
+      "B": "Shor's Algorithm",
+      "C": "Deustch-Jozsa Algorithm",
+      "D": "Simon's Algorithm"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Differential Power Analysis' (DPA) in the context of hardware security?",
+    "options": {
+      "A": "A method to boost the CPU speed during encryption.",
+      "B": "A side-channel attack that uses statistical methods to extract secrets by measuring variations in electrical power consumption.",
+      "C": "A way to backup encryption keys to a magnetic drive.",
+      "D": "A software bug that causes a memory leak in the crypto library."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Zero-Knowledge Proof' (ZKP), the prover can convince a verifier that a statement is true without revealing any information beyond the validity of the statement.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the verifier has the private key",
+      "D": "Only in blockchain-based systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which NIST-selected Post-Quantum Cryptography (PQC) algorithm is primarily intended for Digital Signatures?",
+    "options": {
+      "A": "Kyber",
+      "B": "Dilithium",
+      "C": "AES-GCM",
+      "D": "ChaCha20"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Double Ratchet' algorithm used for in secure messaging apps like Signal?",
+    "options": {
+      "A": "To encrypt two different files at the same time.",
+      "B": "To provide perfect forward secrecy and 'break-in recovery' by deriving new keys for every message.",
+      "C": "To backup messages to two different cloud providers.",
+      "D": "To scan for viruses in both incoming and outgoing traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Key Encapsulation Mechanism' (KEM) is a class of encryption techniques designed to secure a symmetric key for transmission using asymmetric cryptography.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in legacy SSL 3.0",
+      "D": "Only for hardware-based tokens"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Length Extension Attack' vulnerability associated with?",
+    "options": {
+      "A": "Asymmetric keys that are too short.",
+      "B": "Merkle-Damgård based hash functions like MD5, SHA-1, and SHA-2 when used in certain MAC constructions.",
+      "C": "Network cables that are physically too long.",
+      "D": "The time it takes to decrypt a 4096-bit key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of Block Ciphers, what is 'Linear Cryptanalysis'?",
+    "options": {
+      "A": "Analyzing the code line by line.",
+      "B": "A known-plaintext attack that finds high-probability linear approximations of the cipher's internal structure.",
+      "C": "Measuring the linear distance between two server racks.",
+      "D": "A way to sort encrypted data alphabetically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical structure is used in 'Code-based Cryptography' (like the McEliece cryptosystem)?",
+    "options": {
+      "A": "Prime number factorization.",
+      "B": "Error-correcting codes.",
+      "C": "Elliptic curve point multiplication.",
+      "D": "Discrete logarithms in a finite field."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Indistinguishability under Chosen Ciphertext Attack' (IND-CCA2) is considered the 'Gold Standard' for security in asymmetric encryption.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for symmetric block ciphers",
+      "D": "Only if the key is managed by a TPM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Merkle Tree' primarily used for in the context of data integrity?",
+    "options": {
+      "A": "To grow a digital forest.",
+      "B": "To efficiently and securely verify large data structures by hashing in a hierarchical branch-and-leaf format.",
+      "C": "To sort database records by their creation date.",
+      "D": "To encrypt the physical address space of the RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Format-Preserving Encryption' (FPE)?",
+    "options": {
+      "A": "Encryption that keeps the JSON keys the same.",
+      "B": "Encryption where the ciphertext has the same format (e.g., length, character set) as the plaintext.",
+      "C": "Encryption that saves the file as a PDF.",
+      "D": "A method to delete the format metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sponge Construction' is a mode of operation used in the Keccak (SHA-3) algorithm that allows for variable-length input and output.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for binary data",
+      "D": "It was deprecated in 2023"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Trusted Execution Environment' (TEE) in cryptographic operations?",
+    "options": {
+      "A": "A server room with no windows.",
+      "B": "A secure area of a main processor that provides an isolated environment for sensitive code and key handling.",
+      "C": "A specialized IDE for security developers.",
+      "D": "A cloud region that is legally approved by the government."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which problem serves as the basis for 'Multivariate Cryptography'?",
+    "options": {
+      "A": "The difficulty of solving systems of non-linear polynomial equations over finite fields.",
+      "B": "The speed of sorting large arrays.",
+      "C": "Factoring the product of three prime numbers.",
+      "D": "The capacity of a network router."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In 'Isogeny-based Cryptography', the security relies on the difficulty of finding maps (isogenies) between two elliptic curves.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the SIKE algorithm (which was broken in 2022)",
+      "D": "False, isogenies are for symmetric encryption only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'White-Box Cryptography'?",
+    "options": {
+      "A": "Encryption that only uses white-listed keys.",
+      "B": "Protecting cryptographic keys and operations in a setting where the attacker has full control over the execution environment.",
+      "C": "A specialized way to encrypt white-paper documents.",
+      "D": "A server rack that is painted white for cooling."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property of a hash function does a 'Preimage Attack' attempt to violate?",
+    "options": {
+      "A": "The inability to find any input that produces a specific given hash.",
+      "B": "The inability to find two inputs that produce the same hash.",
+      "C": "The speed of the hashing process.",
+      "D": "The uniqueness of the salt used."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Argon2' is the winner of the Password Hashing Competition (PHC) and is designed to resist GPU-based cracking.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux systems",
+      "D": "Only if using the 'stable' profile"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Discrete Logarithm Problem' specifically applied to in ECC?",
+    "options": {
+      "A": "Finding the number of logs in the system.",
+      "B": "Finding the integer 'k' given a point 'P' and its scalar multiple 'kP' on a curve.",
+      "C": "Calculating the surface area of the elliptic curve.",
+      "D": "Converting a curve into a straight line."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of 'Nonce Reuse' in AES-GCM?",
+    "options": {
+      "A": "It speeds up the next session.",
+      "B": "It is catastrophic, as it allows an attacker to recover the authentication key and potentially the plaintext.",
+      "C": "It is a standard feature for reducing overhead.",
+      "D": "It identifies the user's browser version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ring Learning With Errors' (R-LWE) is a variant of Lattice-based cryptography that allows for much smaller keys and faster operations than standard LWE.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the ring is non-mathematical",
+      "D": "Only for file encryption at rest"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Cryptographic Accumulator'?",
+    "options": {
+      "A": "A specialized battery for hardware security modules.",
+      "B": "A one-way membership function that allows proving an element belongs to a set without revealing the entire set.",
+      "C": "A counter that tracks the number of encryption rounds.",
+      "D": "A way to add multiple keys together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these best describes 'Poly1305'?",
+    "options": {
+      "A": "A symmetric encryption algorithm for mobile.",
+      "B": "A high-speed message authentication code (MAC) designed by Daniel J. Bernstein.",
+      "C": "A specialized way to compress JSON schemas.",
+      "D": "A protocol for multi-user logins."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Malleability' in a cryptosystem is a desirable feature for general-purpose secure communication.",
+    "options": {
+      "A": "False (Malleability allows an attacker to transform a ciphertext into another ciphertext that decrypts to a related plaintext).",
+      "B": "True",
+      "C": "Only for digital signatures",
+      "D": "Only if using RSA"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Differential Cryptanalysis' primarily used to attack?",
+    "options": {
+      "A": "The speed of the network handshake.",
+      "B": "Block ciphers, by studying how differences in plaintext input affect the differences in the resulting output.",
+      "C": "Asymmetric key storage in the cloud.",
+      "D": "The logic of a zero-knowledge proof."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Blind Signature' in privacy-preserving protocols?",
+    "options": {
+      "A": "A signature that cannot be seen by the admin.",
+      "B": "Allowing a party to have a document signed by another party without the signer seeing the content of the document.",
+      "C": "A signature made by a user who has lost their private key.",
+      "D": "A signature that expires after one use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In RSA, the 'Chinese Remainder Theorem' (CRT) is often used to speed up the decryption process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the modulus is a prime number",
+      "D": "Only on Chinese-manufactured hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Oracle' in a padding oracle attack?",
+    "options": {
+      "A": "A database software from a specific corporation.",
+      "B": "A server response that leaks information about whether the padding of an encrypted message is correct or incorrect.",
+      "C": "A person who predicts the encryption trends.",
+      "D": "The private key stored in a HSM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'S-Box' in a cipher like AES provide?",
+    "options": {
+      "A": "Physical storage for the key.",
+      "B": "Non-linearity to the encryption process, making it resistant to linear cryptanalysis.",
+      "C": "A way to backup the S-variables.",
+      "D": "Encryption of the network socket."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Electronic Codebook' (ECB) mode is considered secure for images because it hides the pixel patterns.",
+    "options": {
+      "A": "False (Identical blocks are encrypted identically, often making the image recognizable).",
+      "B": "True",
+      "C": "Only if using a 256-bit key",
+      "D": "Only if the image is in grayscale"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threshold Cryptography'?",
+    "options": {
+      "A": "Encryption that only works at the threshold of the server room.",
+      "B": "A system where a cryptographic operation (like decryption or signing) requires the cooperation of a minimum number of parties.",
+      "C": "A way to limit the number of encryption requests.",
+      "D": "Encryption that changes its algorithm at a specific traffic threshold."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of hashing, what is 'Avalanche Effect' strength measured by?",
+    "options": {
+      "A": "The weight of the output in bits.",
+      "B": "The percentage of output bits that change when a single input bit is flipped (ideally 50%).",
+      "C": "The time it takes for a hash to be computed.",
+      "D": "The number of users who can access the hash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Perfect Secrecy' (OTP) is the only encryption method mathematically proven to be unbreakable if used correctly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for quantum-resistant ciphers",
+      "D": "False, RSA is also proven unbreakable"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Quantum Key Distribution' (QKD)?",
+    "options": {
+      "A": "Distributing keys to every quantum computer on Earth.",
+      "B": "Using quantum mechanics (like photon polarization) to securely establish a shared secret key between two parties.",
+      "C": "A way to backup keys using magnetic particles.",
+      "D": "A specialized way to encrypt quantum bits (qubits)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Birthday Bound' of a 128-bit hash function?",
+    "options": {
+      "A": "2^128",
+      "B": "2^64",
+      "C": "128 million",
+      "D": "The date the algorithm was released."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Elliptic Curve Diffie-Hellman' (ECDH) is more efficient than standard Diffie-Hellman for a given security level.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on 64-bit systems",
+      "D": "Only if using the NIST P-256 curve"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ciphertext-only attack'?",
+    "options": {
+      "A": "An attack where only the ciphertext is stolen.",
+      "B": "An attack where the adversary has access to only the ciphertext and tries to recover the plaintext or the key.",
+      "C": "An attack that disables the decryption software.",
+      "D": "A way to delete ciphertext without the key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Key Schedule' in a block cipher?",
+    "options": {
+      "A": "A calendar of when to rotate keys.",
+      "B": "An algorithm that derives subkeys for each round of encryption from the main master key.",
+      "C": "A specialized database for storing key history.",
+      "D": "A tool to set the priority of a key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Probabilistic Encryption' ensures that encrypting the same plaintext multiple times with the same key results in different ciphertexts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using AES",
+      "D": "Only if the plaintext is a number"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fault-Based Cryptanalysis'?",
+    "options": {
+      "A": "Finding bugs in the code comments.",
+      "B": "An attack that induces physical errors in a device (e.g., via heat or radiation) to leak cryptographic information.",
+      "C": "Measuring the fault tolerance of the data center.",
+      "D": "Analyzing the logs for software errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical property does 'RSA' rely on for the generation of public and private keys?",
+    "options": {
+      "A": "The Euclidean algorithm.",
+      "B": "Euler's Totient Theorem.",
+      "C": "The Pythagorean Theorem.",
+      "D": "The Laws of Thermodynamics."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Key Wrapping' is the use of one cryptographic key to encrypt another key for secure storage or transport.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for hardware security modules",
+      "D": "Only if the wrapped key is under 128 bits"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Commitment Scheme' in cryptography?",
+    "options": {
+      "A": "A plan to commit to a long-term contract.",
+      "B": "A protocol that allows a user to commit to a value while keeping it hidden, with the ability to reveal it later.",
+      "C": "A specialized way to backup Git commits.",
+      "D": "A tool to monitor the uptime of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Side-Channel Resistance' in hardware design?",
+    "options": {
+      "A": "Physically shielding the server from radiation.",
+      "B": "Designing circuits and software to have constant power consumption and execution time regardless of the data processed.",
+      "C": "Blocking all side-channels in the network router.",
+      "D": "Increasing the number of lines of code in the implementation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: NIST's 'FIPS 140-3' standard defines security requirements for cryptographic modules used by the U.S. government.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for software modules",
+      "D": "It was replaced by FIPS 150 in 2024"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Key Generation' entropy requirement for a truly random 256-bit key?",
+    "options": {
+      "A": "At least 128 bits of entropy.",
+      "B": "At least 256 bits of entropy.",
+      "C": "At least 1024 bits of entropy.",
+      "D": "The number of bits in the key doesn't matter for entropy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Collision Resistance' versus 'Second Preimage Resistance'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Collision: finding ANY two inputs with the same hash. Second Preimage: finding another input for a SPECIFIC given input.",
+      "C": "One is for binary data; one is for text.",
+      "D": "Collision is for producers; Second Preimage is for consumers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Authenticated Encryption' (AE), the algorithm provides both secrecy and authenticity in a single operation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using RSA-PSS",
+      "D": "Only if the data is encrypted twice"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Galois Field' (GF) used for in AES?",
+    "options": {
+      "A": "To represent the physical field where the server room is built.",
+      "B": "A finite field used for efficient mathematical operations on bytes during encryption.",
+      "C": "A specialized database for storing field metadata.",
+      "D": "A way to backup the encryption logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Searchable Encryption'?",
+    "options": {
+      "A": "Searching for a lost key in the cloud.",
+      "B": "Encryption that allows for searching over encrypted data without decrypting the entire dataset.",
+      "C": "A specialized way to encrypt search engines.",
+      "D": "A tool to search for syntax errors in crypto code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Edwards-curve Digital Signature Algorithm' (EdDSA) is designed to be faster than ECDSA and more resistant to side-channel attacks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'standard' profile",
+      "D": "Only on ARM-based servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secret Sharing' (e.g., Shamir's Secret Sharing)?",
+    "options": {
+      "A": "Sharing a password with a friend.",
+      "B": "A method for distributing a secret among a group of n participants, each of whom is allocated a share.",
+      "C": "A specialized way to backup secrets in the cloud.",
+      "D": "A tool to delete secrets automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Padding' in the context of RSA-OAEP?",
+    "options": {
+      "A": "Adding extra descriptive words to the title.",
+      "B": "A specific formatting scheme that adds randomness and structural integrity to RSA encryption to prevent several known attacks.",
+      "C": "Physical padding around a HSM to prevent tampering.",
+      "D": "Adding zero bytes at the end of a private key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cryptographic Agility' is the ability to support multiple cryptographic protocols and switch between them if one is found to be insecure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web traffic",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Indifferentiability' from a random oracle?",
+    "options": {
+      "A": "A property ensuring a hash function behaves like an ideal random function in a way that is mathematically provable.",
+      "B": "The inability to tell the difference between two users.",
+      "C": "A way to hide the server's location.",
+      "D": "A specialized encryption for random numbers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Meet-in-the-middle' attack specifically used to defeat?",
+    "options": {
+      "A": "Encryption that only uses one key.",
+      "B": "Multi-round encryption with different keys, like Triple DES with only two keys.",
+      "C": "Public Wi-Fi networks.",
+      "D": "The user's password reset page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'BIP39' is a standard for generating mnemonic phrases used as human-readable representations of cryptographic seeds.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-financial data",
+      "D": "It was replaced by BIP44 in 2024"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Verifiable Random Function' (VRF)?",
+    "options": {
+      "A": "A random number generator that is physically verified by a person.",
+      "B": "A function that provides a random value along with a proof that it was calculated correctly from a specific input.",
+      "C": "A specialized way to encrypt random numbers.",
+      "D": "A tool to monitor the entropy of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Merkle-Hellman Knapsack Cryptosystem', what was the primary reason for its eventual failure?",
+    "options": {
+      "A": "It was too slow for modern computers.",
+      "B": "It was found to be vulnerable to lattice reduction attacks.",
+      "C": "It required a physical key card.",
+      "D": "The encryption keys were too large for the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Oblivious Transfer' (OT) is a protocol where a sender transfers one of several pieces of information to a receiver, but remains oblivious as to which piece was transferred.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using RSA",
+      "D": "Only for small datasets"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cryptographic Anchoring'?",
+    "options": {
+      "A": "Tying the server rack to the floor for security.",
+      "B": "Linking the integrity of a set of data to a trusted source like a blockchain or a secure hardware module.",
+      "C": "A way to set the priority of a certificate.",
+      "D": "Deleting data after a specific anchor date."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'K' in HMAC-SHA-256-K represent in some implementations?",
+    "options": {
+      "A": "The Key size in bits.",
+      "B": "The specialized 'Keccak' hash function.",
+      "C": "A constant representing the CPU architecture.",
+      "D": "The number of rounds of hashing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Forward Secrecy' ensures that the compromise of long-term keys does not compromise past session keys.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for symmetric encryption",
+      "D": "Only if using a 4096-bit key"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'NIST SP 800-90A/B/C'?",
+    "options": {
+      "A": "To regulate the internet speed in the U.S.",
+      "B": "To provide guidelines for the design and analysis of Random Number Generators (RNGs).",
+      "C": "To provide legal contracts for cloud providers.",
+      "D": "To monitor the temperature of cryptographic hardware."
+    },
+    "answer": "B"
+  }
+  ]
+}

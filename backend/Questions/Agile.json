@@ -1,0 +1,1887 @@
+{ 
+  "skill": "Agile", 
+  "questions": [
+    {
+    "question": "Which of the following is one of the four core values of the Agile Manifesto?",
+    "options": {
+      "A": "Processes and tools over individuals and interactions",
+      "B": "Customer collaboration over contract negotiation",
+      "C": "Following a plan over responding to change",
+      "D": "Comprehensive documentation over working software"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Scrum, the Scrum Master is the manager of the Development Team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Who is responsible for prioritizing the Product Backlog?",
+    "options": {
+      "A": "Scrum Master",
+      "B": "Project Manager",
+      "C": "Product Owner",
+      "D": "Stakeholders"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Select TWO official Scrum Ceremonies.",
+    "options": {
+      "A": "Sprint Planning",
+      "B": "Daily Stand-up",
+      "C": "Project Kickoff",
+      "D": "Status Reporting Meeting"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the recommended maximum duration for a Daily Scrum (Stand-up)?",
+    "options": {
+      "A": "5 minutes",
+      "B": "15 minutes",
+      "C": "30 minutes",
+      "D": "1 hour"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Agile development is iterative and incremental.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of a Sprint Retrospective?",
+    "options": {
+      "A": "To demonstrate the work to stakeholders",
+      "B": "To inspect the team's processes and plan improvements",
+      "C": "To estimate the next set of user stories",
+      "D": "To assign tasks to team members"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO roles that are part of a standard Scrum Team.",
+    "options": {
+      "A": "Product Owner",
+      "B": "Scrum Master",
+      "C": "Business Analyst",
+      "D": "Quality Assurance Manager"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'WIP' stand for in an Agile/Kanban context?",
+    "options": {
+      "A": "Work In Progress",
+      "B": "Weekly Iteration Plan",
+      "C": "Work Improvement Process",
+      "D": "Waiting In Pipeline"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A Sprint cannot be cancelled once it has started.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which artifact describes the work remaining to reach the Sprint Goal?",
+    "options": {
+      "A": "Product Backlog",
+      "B": "Sprint Backlog",
+      "C": "Burndown Chart",
+      "D": "Definition of Done"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO key characteristics of an Agile team.",
+    "options": {
+      "A": "Self-organizing",
+      "B": "Cross-functional",
+      "C": "Strictly hierarchical",
+      "D": "Specialized in single silos"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the typical length of a Sprint in most organizations?",
+    "options": {
+      "A": "1 to 4 weeks",
+      "B": "1 to 4 months",
+      "C": "6 months",
+      "D": "Fixed at exactly 1 week"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The Product Owner must be present at every Daily Scrum.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which meeting occurs at the very end of the Sprint to show the product increment to stakeholders?",
+    "options": {
+      "A": "Sprint Review",
+      "B": "Sprint Retrospective",
+      "C": "Product Refinement",
+      "D": "Demo Day"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO items that are usually found on a Kanban board.",
+    "options": {
+      "A": "To Do",
+      "B": "In Progress",
+      "C": "Resource Histogram",
+      "D": "Gantt Chart"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Story points are a measure of time (hours or days).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Definition of Done'?",
+    "options": {
+      "A": "A checklist of requirements to be met before an increment is considered complete",
+      "B": "The user story description",
+      "C": "The project deadline",
+      "D": "The point when the Product Owner stops accepting new features"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Agile framework is most focused on visualizing work and limiting WIP?",
+    "options": {
+      "A": "Scrum",
+      "B": "Kanban",
+      "C": "Waterfall",
+      "D": "XP (Extreme Programming)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Agile promotes documentation, but values working software more.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following best describes the Agile approach to planning?",
+    "options": {
+      "A": "Plan once at the beginning of the project",
+      "B": "Continuous and adaptive planning",
+      "C": "No planning is required in Agile",
+      "D": "Planning is done only by the Scrum Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Scrum Master's role is to remove 'impediments' that hinder the team's progress.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common Agile estimations techniques.",
+    "options": {
+      "A": "Planning Poker",
+      "B": "T-Shirt Sizing",
+      "C": "Gantt Scheduling",
+      "D": "Critical Path Method"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is an 'Epic' in Agile?",
+    "options": {
+      "A": "A very large user story that needs to be broken down",
+      "B": "The final version of the software",
+      "C": "A celebration at the end of a project",
+      "D": "A team member with 10+ years of experience"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which artifact is used to capture all the functional and non-functional requirements for a product?",
+    "options": {
+      "A": "Sprint Backlog",
+      "B": "Product Backlog",
+      "C": "Iteration Plan",
+      "D": "Requirement Traceability Matrix"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Kanban, there are no fixed-length iterations like Sprints.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'I' in the INVEST acronym for user stories stand for?",
+    "options": {
+      "A": "Independent",
+      "B": "Incremental",
+      "C": "Important",
+      "D": "Immediate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO primary purposes of the Sprint Review.",
+    "options": {
+      "A": "Demonstrate the increment to stakeholders",
+      "B": "Gather feedback from customers",
+      "C": "Assign tasks for the next Sprint",
+      "D": "Perform an annual performance review"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "Who decides how much work can be done during a Sprint?",
+    "options": {
+      "A": "The Product Owner",
+      "B": "The Scrum Master",
+      "C": "The Development Team",
+      "D": "The Stakeholders"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A user story is typically written from the perspective of the end user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Velocity' in an Agile context?",
+    "options": {
+      "A": "The average amount of work a team completes in a Sprint",
+      "B": "The speed of the internet connection in the office",
+      "C": "The time it takes to hire a new developer",
+      "D": "The number of hours worked per day"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO types of 'Waste' defined in Lean-Agile manufacturing.",
+    "options": {
+      "A": "Overproduction",
+      "B": "Waiting",
+      "C": "Innovation",
+      "D": "Collaboration"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: The Daily Scrum is meant for status reporting to the Scrum Master.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which chart shows the total amount of work remaining in a Sprint on a daily basis?",
+    "options": {
+      "A": "Burnup Chart",
+      "B": "Burndown Chart",
+      "C": "Pie Chart",
+      "D": "Control Chart"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary focus of the 'Extreme Programming' (XP) framework?",
+    "options": {
+      "A": "Technical excellence and software engineering practices",
+      "B": "Marketing and sales coordination",
+      "C": "Financial budgeting",
+      "D": "Long-term documentation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO values from the Agile Manifesto.",
+    "options": {
+      "A": "Working software over comprehensive documentation",
+      "B": "Responding to change over following a plan",
+      "C": "Tools over people",
+      "D": "Negotiation over collaboration"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Story points are a relative measure of effort, complexity, and risk.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What should a team do if they realize they cannot finish all items in the Sprint Backlog?",
+    "options": {
+      "A": "Work overtime to finish them",
+      "B": "Negotiate with the Product Owner to remove some items",
+      "C": "Wait until the next Sprint and say nothing",
+      "D": "Cancel the Sprint immediately"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a pillar of Scrum?",
+    "options": {
+      "A": "Transparency",
+      "B": "Adaptation",
+      "C": "Inspection",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Pair Programming is an XP practice where two developers work at one workstation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Timebox' in Agile?",
+    "options": {
+      "A": "A fixed period of time during which an activity takes place",
+      "B": "A box to store old project documents",
+      "C": "A clock used for the Daily Stand-up",
+      "D": "The total duration of the project"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO attributes of a good user story using the INVEST criteria.",
+    "options": {
+      "A": "Small",
+      "B": "Testable",
+      "C": "Vague",
+      "D": "Expensive"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Kanban teams usually use a 'Pull' system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Who is responsible for facilitating the Sprint Retrospective?",
+    "options": {
+      "A": "The Product Owner",
+      "B": "The Scrum Master",
+      "C": "The CEO",
+      "D": "The Team Lead"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Agile ceremony is held to plan the work for the upcoming iteration?",
+    "options": {
+      "A": "Sprint Planning",
+      "B": "Sprint Review",
+      "C": "Retrospective",
+      "D": "Backlog Grooming"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO key artifacts of Scrum.",
+    "options": {
+      "A": "Product Backlog",
+      "B": "Sprint Backlog",
+      "C": "Vision Document",
+      "D": "Project Charter"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Scrum teams should change their Sprint length every week.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Product Goal' in Scrum?",
+    "options": {
+      "A": "A long-term objective for the Scrum Team",
+      "B": "The total sales target for the year",
+      "C": "The list of every feature the competitor has",
+      "D": "The date the product will be retired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which role represents the 'Voice of the Customer'?",
+    "options": {
+      "A": "Scrum Master",
+      "B": "Developer",
+      "C": "Product Owner",
+      "D": "QA Lead"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The Scrum Master can choose the tasks for the team members.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of a 'Cross-functional' team?",
+    "options": {
+      "A": "The team has all the skills necessary to create an increment",
+      "B": "The team is cheaper to hire",
+      "C": "The team doesn't need to talk to each other",
+      "D": "The team works in different time zones"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO typical questions answered in a Daily Scrum.",
+    "options": {
+      "A": "What did I do yesterday?",
+      "B": "Are there any blockers in my way?",
+      "C": "When will the project be finished?",
+      "D": "Who should be fired?"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Agile methodology was originally created for software development.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is NOT a formal Scrum event?",
+    "options": {
+      "A": "Sprint Planning",
+      "B": "Project Status Meeting",
+      "C": "Sprint Review",
+      "D": "Sprint Retrospective"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kanban, what does a 'Bottleneck' indicate?",
+    "options": {
+      "A": "A stage in the process where work accumulates and slows down delivery",
+      "B": "A place to store drinks in the office",
+      "C": "The end of the project",
+      "D": "A successful deployment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Continuous Integration (CI) is a common Agile technical practice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Refinement' (or Grooming) in Scrum?",
+    "options": {
+      "A": "Breaking down and further defining Product Backlog items",
+      "B": "Polishing the code for better performance",
+      "C": "Redesigning the logo",
+      "D": "Deleting old emails"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common Kanban metrics.",
+    "options": {
+      "A": "Cycle Time",
+      "B": "Lead Time",
+      "C": "Lines of Code",
+      "D": "Number of Meetings"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: An Agile team should ideally be between 3 and 9 members.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the main output of Sprint Planning?",
+    "options": {
+      "A": "A Sprint Goal and a Sprint Backlog",
+      "B": "A detailed 6-month roadmap",
+      "C": "A budget for the project",
+      "D": "A list of employee salaries"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Self-organizing' mean for a Scrum Team?",
+    "options": {
+      "A": "The team decides how to best accomplish their work",
+      "B": "The team works without any goals",
+      "C": "Each member works on their own project",
+      "D": "There is no Product Owner"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Agile teams prefer face-to-face communication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which role is responsible for the 'Product Value'?",
+    "options": {
+      "A": "Product Owner",
+      "B": "Scrum Master",
+      "C": "Developers",
+      "D": "Customers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO key aspects of 'Inspection' in Scrum.",
+    "options": {
+      "A": "Reviewing the product increment",
+      "B": "Looking at the team's process during the Retrospective",
+      "C": "Checking the developer's browsing history",
+      "D": "Monitoring the office temperature"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: Agile projects have no documentation at all.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to unfinished Sprint Backlog items at the end of a Sprint?",
+    "options": {
+      "A": "They return to the Product Backlog",
+      "B": "They are deleted",
+      "C": "They are automatically finished by the Scrum Master",
+      "D": "They stay in the Sprint Backlog for the next 10 Sprints"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "If a team completes 30 story points in Sprint 1, 35 in Sprint 2, and 25 in Sprint 3, what is their average Velocity?",
+    "options": {
+      "A": "35",
+      "B": "30",
+      "C": "90",
+      "D": "25"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Sprint Backlog' is frozen after Sprint Planning and cannot be modified by the developers under any circumstances.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO primary differences between Kanban and Scrum.",
+    "options": {
+      "A": "Scrum has fixed-length iterations; Kanban is a continuous flow.",
+      "B": "Scrum uses predefined roles; Kanban does not require them.",
+      "C": "Kanban uses Sprints; Scrum uses 'Swimlanes'.",
+      "D": "Scrum limits WIP; Kanban does not."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary purpose of 'Backlog Refinement'?",
+    "options": {
+      "A": "To assign tasks to specific developers",
+      "B": "To ensure backlog items are 'Ready' for the next Sprint Planning",
+      "C": "To update the project budget",
+      "D": "To perform code reviews for finished stories"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Lead Time' measure in Kanban?",
+    "options": {
+      "A": "The time from when a request is made until it is delivered",
+      "B": "The time work spends in the 'In Progress' column",
+      "C": "The time it takes to lead a meeting",
+      "D": "The total time developers spend coding"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: If the Product Owner is unavailable, the Scrum Master can prioritize the Product Backlog on their behalf.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which estimation technique uses a modified Fibonacci sequence to determine the size of a story?",
+    "options": {
+      "A": "Dot Voting",
+      "B": "Affinity Mapping",
+      "C": "Planning Poker",
+      "D": "Bucket System"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Select TWO characteristics of a 'User Story' that is considered 'Ready' for a Sprint.",
+    "options": {
+      "A": "It has clear Acceptance Criteria.",
+      "B": "It is small enough to be completed within one Sprint.",
+      "C": "The code for it has already been drafted.",
+      "D": "It has been assigned a specific developer name."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "During a Sprint, a developer identifies a significant technical hurdle. What is the most appropriate next step?",
+    "options": {
+      "A": "Wait until the Sprint Review to mention it.",
+      "B": "Bring it up at the next Daily Scrum as an impediment.",
+      "C": "Immediately cancel the Sprint.",
+      "D": "Ask the Product Owner to extend the Sprint duration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Spike' is a special type of user story used for research or exploration to reduce technical uncertainty.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary reason for 'Limiting Work in Progress' (WIP) in Kanban?",
+    "options": {
+      "A": "To force developers to work on fewer things and finish them faster",
+      "B": "To reduce the number of employees needed",
+      "C": "To ensure the board looks less cluttered",
+      "D": "To track how many hours people are working"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common outcomes of a successful Sprint Retrospective.",
+    "options": {
+      "A": "At least one high-priority process improvement for the next Sprint.",
+      "B": "Improved team morale and collaboration.",
+      "C": "A fully demoed product feature.",
+      "D": "A revised Product Vision document."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "How should a Scrum Team handle 'Non-functional Requirements' (like security or performance)?",
+    "options": {
+      "A": "They should be ignored until the final release.",
+      "B": "They should be included in the Definition of Done or as specific backlog items.",
+      "C": "Only the Scrum Master is responsible for them.",
+      "D": "They belong in a separate 'Testing' Sprint at the end of the year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Product Owner' is the only person allowed to cancel a Sprint.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'Cumulative Flow Diagram' help identify in an Agile project?",
+    "options": {
+      "A": "The individual performance of each developer",
+      "B": "Bottlenecks and process stability",
+      "C": "The total budget remaining",
+      "D": "The date of the final release"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO valid reasons for a Sprint Goal to be changed mid-sprint.",
+    "options": {
+      "A": "The Product Owner realizes the goal is no longer relevant.",
+      "B": "Extreme technical issues make the goal impossible.",
+      "C": "The developers want to work on something more interesting.",
+      "D": "The stakeholders have changed their mind about the UI colors."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: In Scrum, 'Grooming' (Refinement) is a mandatory event with a fixed timebox in the Scrum Guide.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'Verification' and 'Validation' in an Agile context?",
+    "options": {
+      "A": "Verification checks if the product meets specs; Validation checks if it meets user needs.",
+      "B": "Validation is done by developers; Verification is done by the Product Owner.",
+      "C": "They are identical terms.",
+      "D": "Verification is for hardware; Validation is for software."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which role is primarily responsible for explaining the Product Backlog items to the team?",
+    "options": {
+      "A": "Scrum Master",
+      "B": "Product Owner",
+      "C": "Lead Developer",
+      "D": "Customer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Sprint Review' is a gate to decide if the increment is ready for release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kanban, what is 'Cycle Time'?",
+    "options": {
+      "A": "The time it takes for a task to move from 'In Progress' to 'Done'",
+      "B": "The total time from customer request to delivery",
+      "C": "The time between two consecutive releases",
+      "D": "The time spent in meetings every week"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of having a stable Sprint length.",
+    "options": {
+      "A": "It helps the team establish a consistent rhythm (cadence).",
+      "B": "It makes Velocity calculations more reliable for forecasting.",
+      "C": "It prevents the Product Owner from adding new stories.",
+      "D": "It guarantees that no bugs will be found."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What happens to Story Points for a task that is 90% finished at the end of a Sprint?",
+    "options": {
+      "A": "The team gets 90% of the points in the current velocity.",
+      "B": "The team gets 0 points for that Sprint; points are only counted when 'Done'.",
+      "C": "The points are carried over and doubled in the next Sprint.",
+      "D": "The team is penalized 10 points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Scrum Master should be the one to update the Burndown chart every day.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an example of an 'Information Radiator'?",
+    "options": {
+      "A": "A Kanban board on the office wall",
+      "B": "A private email sent to the CEO",
+      "C": "The source code comments",
+      "D": "A locked Excel sheet with project dates"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO components of the 'Three C's' in user story writing.",
+    "options": {
+      "A": "Card",
+      "B": "Conversation",
+      "C": "Constraint",
+      "D": "Correction"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: An Agile team should never change their 'Definition of Done' during a Sprint.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Scrum Master' during a Sprint Review?",
+    "options": {
+      "A": "To demonstrate the code to the client",
+      "B": "To facilitate the meeting and ensure it stays within the timebox",
+      "C": "To decide which features are 'Done'",
+      "D": "To present the budget report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Sprint Burndown Chart', what does it mean if the actual line is above the ideal line?",
+    "options": {
+      "A": "The team is ahead of schedule.",
+      "B": "The team is behind schedule and work is remaining.",
+      "C": "The team has completed more work than planned.",
+      "D": "The scope has been reduced."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Scrum allows for 'hardening' sprints to fix bugs and perform final testing before a release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'Sprint Zero' in some Agile implementations?",
+    "options": {
+      "A": "To develop the first set of features",
+      "B": "To set up the environment, team, and initial backlog",
+      "C": "To perform final user acceptance testing",
+      "D": "To give the team a vacation before starting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Technical Debt should ideally be managed as part of the Product Backlog or the Definition of Done.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common reasons why a team's Velocity might decrease.",
+    "options": {
+      "A": "Increased technical debt",
+      "B": "The team is growing in size and needs to re-sync",
+      "C": "The Product Owner is attending too many meetings",
+      "D": "The team has switched to a digital board"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "In Scrum, who is responsible for tracking the remaining work in the Sprint Backlog?",
+    "options": {
+      "A": "The Scrum Master",
+      "B": "The Developers",
+      "C": "The Project Manager",
+      "D": "The Product Owner"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MoSCoW' prioritization used for?",
+    "options": {
+      "A": "Categorizing requirements into Must-have, Should-have, Could-have, and Won't-have",
+      "B": "Planning a release in Russia",
+      "C": "Calculating the team's velocity",
+      "D": "Managing technical documentation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The Scrum Master should act as a 'Servant Leader' to the team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which artifact is the primary source of 'Truth' for the scope of the entire project?",
+    "options": {
+      "A": "Sprint Backlog",
+      "B": "Product Backlog",
+      "C": "Project Charter",
+      "D": "Daily Stand-up notes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO key components of a well-written User Story.",
+    "options": {
+      "A": "Acceptance Criteria",
+      "B": "Value Statement (The 'So that...' part)",
+      "C": "The name of the developer assigned",
+      "D": "The number of hours required"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What does 'Swarming' mean in an Agile team?",
+    "options": {
+      "A": "The whole team working together to finish a single high-priority story",
+      "B": "Hiring many people at once",
+      "C": "Leaving the office together for lunch",
+      "D": "Moving all tasks to 'Done' at the very last second"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Burn-up Chart' shows both the total scope and the work completed over time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What should the Product Owner do if the Developers have free time at the end of a Sprint?",
+    "options": {
+      "A": "Give them some high-priority items from the Product Backlog to start",
+      "B": "Tell them to go home early",
+      "C": "Ask them to help the HR department",
+      "D": "Invent new tasks that aren't in the backlog"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common techniques used for 'Product Backlog Refinement'.",
+    "options": {
+      "A": "Breaking large stories into smaller ones",
+      "B": "Clarifying acceptance criteria with the team",
+      "C": "Writing the actual unit tests for the stories",
+      "D": "Updating the company's organizational chart"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Cone of Uncertainty'?",
+    "options": {
+      "A": "A phenomenon where project estimates become more accurate as the project progresses",
+      "B": "The feeling of confusion during the first day of a Sprint",
+      "C": "The area around the Scrum Master during a meeting",
+      "D": "A specific type of Kanban bottleneck"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: User Stories should ideally be small enough to be completed in half a Sprint or less.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Scrum, who has the final say on the order of the Product Backlog?",
+    "options": {
+      "A": "The Stakeholders",
+      "B": "The Product Owner",
+      "C": "The Scrum Master",
+      "D": "The CEO"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a typical output of a 'Sprint Planning' session?",
+    "options": {
+      "A": "A Sprint Goal",
+      "B": "A Sprint Backlog",
+      "C": "Both A and B",
+      "D": "A release date for the final product"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Agile is a 'Push' system of work management.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of the 'Daily Scrum'?",
+    "options": {
+      "A": "To provide a status update to the boss",
+      "B": "To synchronize the team and plan the next 24 hours of work",
+      "C": "To solve all technical problems discovered yesterday",
+      "D": "To check if everyone arrived on time"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO 'Pillars' of Empiricism that Scrum is based on.",
+    "options": {
+      "A": "Transparency",
+      "B": "Inspection",
+      "C": "Consistency",
+      "D": "Speed"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: If a team is consistently failing to meet its Sprint Goal, the Scrum Master should suggest shortening the Sprints.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'External Dependency' in Agile?",
+    "options": {
+      "A": "Work that requires input or completion from a team outside of the Scrum Team",
+      "B": "Using a third-party library",
+      "C": "The coffee machine in the break room",
+      "D": "The legal department's annual audit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Scrum role is responsible for ensuring the Scrum Guide is understood and followed?",
+    "options": {
+      "A": "Product Owner",
+      "B": "Scrum Master",
+      "C": "Development Team",
+      "D": "HR Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sashimi' is a technique where every story must be fully tested and documented before being called 'Done'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'MVP' in Agile product development?",
+    "options": {
+      "A": "Minimum Viable Product",
+      "B": "Most Valuable Programmer",
+      "C": "Maximum Vertical Progress",
+      "D": "Mobile Version Protocol"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO characteristics of a 'Self-Managing' team.",
+    "options": {
+      "A": "They decide who does what work.",
+      "B": "They decide how to do the work.",
+      "C": "They decide their own salaries.",
+      "D": "They decide the company's stock price."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: In a Sprint Review, only finished items (meeting the Definition of Done) should be shown.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if the team realizes they have over-committed in a Sprint?",
+    "options": {
+      "A": "They should work through the weekend to catch up.",
+      "B": "They should inform the Product Owner as soon as possible and adjust the scope.",
+      "C": "They should only finish the easy tasks and hide the hard ones.",
+      "D": "They should quit the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which artifact bridges the gap between the 'Product Goal' and the individual Sprint items?",
+    "options": {
+      "A": "Sprint Goal",
+      "B": "Definition of Done",
+      "C": "User Manual",
+      "D": "Burndown Chart"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Agile is a mindset, not just a set of practices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which meeting is specifically for the Developers, by the Developers?",
+    "options": {
+      "A": "Daily Scrum",
+      "B": "Sprint Planning",
+      "C": "Sprint Review",
+      "D": "Stakeholder Update"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO key advantages of 'Iterative' development.",
+    "options": {
+      "A": "Faster feedback from users",
+      "B": "Reduced risk of major project failure",
+      "C": "Elimination of all documentation",
+      "D": "Cheaper overall cost for every project"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Sprint Backlog' composed of?",
+    "options": {
+      "A": "The Sprint Goal, the selected PBI items, and the plan for delivering them",
+      "B": "Only the list of bugs from the previous release",
+      "C": "The developers' resumes",
+      "D": "A list of features for the next two years"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Agile teams should ideally be co-located in the same room for best communication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Just-in-Time' (JIT) planning mean in Agile?",
+    "options": {
+      "A": "Planning only the details of work that is about to be performed",
+      "B": "Arriving at a meeting exactly when it starts",
+      "C": "Finishing the project at the very last second",
+      "D": "Only hiring developers when a task is assigned"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO 'Agile' principles from the manifesto.",
+    "options": {
+      "A": "Simplicity—the art of maximizing the amount of work not done—is essential.",
+      "B": "Welcome changing requirements, even late in development.",
+      "C": "The bigger the team, the better the software.",
+      "D": "Follow the plan strictly to avoid confusion."
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: In a Kanban system, the number of tasks in 'Testing' can be limited independently of 'Development'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the Scaled Agile Framework (SAFe), what is the primary purpose of the 'Innovation and Planning' (IP) Iteration?",
+    "options": {
+      "A": "To provide a buffer for unfinished work from the Program Increment",
+      "B": "To allow for professional development, innovation, and PI Planning readiness",
+      "C": "To act as a mandatory vacation period for the Agile Release Train",
+      "D": "To finalize the project's long-term financial budget"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Large-Scale Scrum (LeSS), there is only one Product Owner and one Product Backlog for the entire product, regardless of the number of teams.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO key metrics used in 'Value Stream Mapping' to identify process efficiency.",
+    "options": {
+      "A": "Process Time (Touch Time)",
+      "B": "Wait Time (Queue Time)",
+      "C": "Story Point Variance",
+      "D": "Daily Stand-up Attendance Rate"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "Which concept describes the 'cost' of choosing a quick, sub-optimal solution now instead of a better approach that would take longer?",
+    "options": {
+      "A": "Technical Debt",
+      "B": "Opportunity Cost",
+      "C": "Sunk Cost Fallacy",
+      "D": "The Law of Diminishing Returns"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In SAFe, what are 'Enabler' stories used for?",
+    "options": {
+      "A": "Supporting the activities needed to extend the Architectural Runway",
+      "B": "Rewriting the Agile Manifesto for specific teams",
+      "C": "Training new Scrum Masters",
+      "D": "Hiring external consultants"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Cynefin' is a decision-making framework used in Agile to categorize problems into Simple, Complicated, Complex, and Chaotic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Weighted Shortest Job First' (WSJF) model prioritize?",
+    "options": {
+      "A": "Jobs with the highest 'Cost of Delay' and shortest duration",
+      "B": "The oldest items in the Product Backlog",
+      "C": "Tasks assigned to the most senior developers",
+      "D": "Features with the lowest implementation cost"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO core competencies of 'Business Agility' according to modern scaling frameworks.",
+    "options": {
+      "A": "Team and Technical Agility",
+      "B": "Agile Product Delivery",
+      "C": "Strict Functional Siloing",
+      "D": "Annual Fixed-Scope Planning"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Little's Law' primarily used to calculate in a Kanban system?",
+    "options": {
+      "A": "Cycle Time based on WIP and Throughput",
+      "B": "The number of defects per story point",
+      "C": "The ideal size of a Scrum team",
+      "D": "The salary of a Project Manager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In an Agile organization, 'Functional Managers' typically shift their focus from task assignment to talent development and coaching.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Agile leadership style focuses on removing obstacles and empowering teams rather than command and control?",
+    "options": {
+      "A": "Transactional Leadership",
+      "B": "Servant Leadership",
+      "C": "Autocratic Leadership",
+      "D": "Laissez-faire Leadership"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select TWO indicators of 'Cargo Cult Agile' (Agile in name only).",
+    "options": {
+      "A": "Focusing on ceremonies without understanding the underlying values",
+      "B": "High pressure to maintain 'Artificial Velocity' over quality",
+      "C": "Continuous process improvement via Retrospectives",
+      "D": "Empowered teams making their own technical decisions"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the primary goal of an 'Agile Release Train' (ART) in SAFe?",
+    "options": {
+      "A": "To align teams to a common mission and deliver value on a regular cadence",
+      "B": "To track the individual hours of every employee in a department",
+      "C": "To replace the need for any communication between teams",
+      "D": "To move physical hardware between offices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Value Stream Mapping' is a Lean-Agile tool used to visualize the flow of material and information required to bring a product to a customer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a symptom of 'Groupthink' in an Agile team?",
+    "options": {
+      "A": "Lack of critical evaluation or dissenting opinions to maintain harmony",
+      "B": "Too much arguing during the Retrospective",
+      "C": "Highly accurate estimation in Planning Poker",
+      "D": "Cross-functional skill sharing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO roles usually found at the 'Program' level of a scaled Agile implementation.",
+    "options": {
+      "A": "Release Train Engineer (RTE)",
+      "B": "Product Management",
+      "C": "Scrum Master",
+      "D": "Junior Developer"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'Shu-Ha-Ri' is a Japanese martial arts concept used in Agile to describe the stages of learning and mastery.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Agile PMO' (Project Management Office) primarily responsible for?",
+    "options": {
+      "A": "Supporting the transition to Agile and facilitating value delivery across portfolios",
+      "B": "Standardizing all code into a single language",
+      "C": "Assigning specific tickets to developers",
+      "D": "Authorizing overtime for the teams"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Agile Fluency', what does it mean for a team to be 'Optimizing'?",
+    "options": {
+      "A": "The team focuses on delivering business value rather than just software features",
+      "B": "The team codes faster than anyone else",
+      "C": "The team uses the most expensive tools available",
+      "D": "The team has no Product Owner"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO attributes of the 'Spotify Model' of Agile at scale.",
+    "options": {
+      "A": "Squads and Tribes",
+      "B": "Chapters and Guilds",
+      "C": "Command and Control Hierarchy",
+      "D": "Quarterly Performance Rankings"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'Feature Injection' is a technique used to derive requirements by starting with the business value and working backward.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric is the most effective way to measure the 'Health' of an Agile transformation across an enterprise?",
+    "options": {
+      "A": "Time-to-Market (Lead Time) and Customer Satisfaction",
+      "B": "The total number of JIRA tickets closed",
+      "C": "The percentage of employees who are 'Scrum Certified'",
+      "D": "The reduction in total head count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Gemba' in Lean-Agile leadership?",
+    "options": {
+      "A": "The actual place where work is done (visiting the team)",
+      "B": "A specific type of Japanese user story",
+      "C": "A software tool for tracking velocity",
+      "D": "The name of the founder of Kanban"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO challenges commonly faced when scaling Agile to 100+ teams.",
+    "options": {
+      "A": "Managing inter-team dependencies",
+      "B": "Maintaining a consistent 'Definition of Done' across teams",
+      "C": "Deciding which color the office walls should be",
+      "D": "Finding enough chairs for the Daily Stand-up"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: In a 'Holacracy', authority and decision-making are distributed throughout a holarchy of self-organizing circles.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Theory of Constraints' (ToC) applied to Agile software development?",
+    "options": {
+      "A": "Identifying the single most limiting factor (bottleneck) in the delivery process",
+      "B": "A theory that code cannot be perfect",
+      "C": "A limit on how many developers can be hired",
+      "D": "The rule that Sprints must be exactly two weeks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which framework uses 'Big Room Planning' as a core event every 8-12 weeks?",
+    "options": {
+      "A": "SAFe (Scaled Agile Framework)",
+      "B": "Scrum of Scrums",
+      "C": "Kanban",
+      "D": "TDD (Test Driven Development)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO benefits of 'Test-Driven Development' (TDD) for long-term project health.",
+    "options": {
+      "A": "Reduced defect rates and higher code quality",
+      "B": "Creation of a living documentation through tests",
+      "C": "Elimination of the need for any QA engineers",
+      "D": "Instantaneous feature delivery"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'Evolutionary Architecture' in Agile means that the system design is expected to change over time based on feedback.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Behavior-Driven Development' (BDD) primarily focused on?",
+    "options": {
+      "A": "Collaborative communication using a shared language (Given/When/Then)",
+      "B": "Tracking the psychological behavior of developers",
+      "C": "Replacing the Product Owner with an AI",
+      "D": "Writing code in assembly language"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a primary role of the 'Solution Architect' in a large-scale Agile environment?",
+    "options": {
+      "A": "Defining the technical vision and cross-cutting architectural requirements",
+      "B": "Writing all the unit tests for the teams",
+      "C": "Managing the HR department's hiring plan",
+      "D": "Acting as a backup Scrum Master"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In 'Lean Portfolio Management', funding is typically allocated to Value Streams rather than individual projects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO components of 'Economic Framework' in SAFe.",
+    "options": {
+      "A": "Participatory Budgeting",
+      "B": "Job Sequencing (WSJF)",
+      "C": "Individual Developer Bonuses",
+      "D": "Fixed-Price Vendor Contracts"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Abilene Paradox' in the context of Agile team decision-making?",
+    "options": {
+      "A": "When a group collectively decides on a course of action that no individual member actually wants",
+      "B": "The law that says velocity will always increase",
+      "C": "A specific type of Kanban board design",
+      "D": "The belief that story points are equal to hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Value Stream'?",
+    "options": {
+      "A": "The end-to-end sequence of steps used to deliver value to a customer",
+      "B": "The bank account where project funds are stored",
+      "C": "A list of features with the highest ROI",
+      "D": "The flow of data between two databases"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Continuous Deployment' means that every change that passes automated tests is automatically released to production.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric is the best indicator of a 'Stale' Product Backlog?",
+    "options": {
+      "A": "Items at the top of the backlog have not been updated or refined for several Sprints",
+      "B": "The backlog has more than 50 items",
+      "C": "The Product Owner hasn't attended a Daily Scrum",
+      "D": "The team uses story points instead of hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO key principles of 'Lean-Agile' Leadership.",
+    "options": {
+      "A": "Mindset and Principles",
+      "B": "Leading by Example",
+      "C": "Detailed Micro-management",
+      "D": "Hierarchy Enforcement"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is the 'Agile Manifesto for Software Development's position on 'Tools'?",
+    "options": {
+      "A": "Individuals and interactions are valued more than processes and tools",
+      "B": "Tools are more important than people",
+      "C": "Tools should be eliminated entirely",
+      "D": "Only open-source tools should be used"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Scrum of Scrums' is a technique to scale Scrum up to large groups, where representatives from each team meet to coordinate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Takt Time' refer to in Lean-Agile production?",
+    "options": {
+      "A": "The rate at which a finished product needs to be completed to meet customer demand",
+      "B": "The time it takes to write one line of code",
+      "C": "The duration of a Sprint Planning meeting",
+      "D": "The frequency of the coffee breaks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO 'Lean' wastes that often occur in software development.",
+    "options": {
+      "A": "Task Switching (Multi-tasking)",
+      "B": "Extra Features (Gold Plating)",
+      "C": "Pair Programming",
+      "D": "Backlog Refinement"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Mob Programming'?",
+    "options": {
+      "A": "The whole team working on the same thing, at the same time, in the same space, and at the same computer",
+      "B": "Hiring a large group of contractors for a week",
+      "C": "A chaotic meeting without an agenda",
+      "D": "A security attack on a server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Beyond Budgeting' is an Agile approach to finance that moves away from traditional annual, fixed-budget cycles.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which concept describes the 'Optimal' state where a team is so engaged in their work that they lose track of time?",
+    "options": {
+      "A": "Flow",
+      "B": "Sprint Velocity",
+      "C": "Agile Nirvana",
+      "D": "Hustle Culture"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO types of 'Value Streams' defined in SAFe.",
+    "options": {
+      "A": "Operational Value Streams",
+      "B": "Development Value Streams",
+      "C": "Financial Value Streams",
+      "D": "Marketing Value Streams"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'Feature Toggles' (Feature Flags) allow teams to deploy code to production while keeping the feature hidden from users until it is ready.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'A3 Thinking' in Lean-Agile?",
+    "options": {
+      "A": "A structured problem-solving and continuous improvement approach based on a single sheet of paper",
+      "B": "A method to estimate stories using only the number 3",
+      "C": "Thinking about three Sprints at once",
+      "D": "The third version of the Agile Manifesto"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which role in SAFe is responsible for 'owning' the Program Backlog?",
+    "options": {
+      "A": "Product Management",
+      "B": "Release Train Engineer",
+      "C": "System Architect",
+      "D": "Business Owner"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Community of Practice' (CoP) is a group of people who share a concern or a passion for something they do and learn how to do it better as they interact regularly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of 'User Story Mapping'?",
+    "options": {
+      "A": "To visualize the user journey and ensure the product covers the entire workflow",
+      "B": "To track the GPS location of the users",
+      "C": "To draw a map of the office layout",
+      "D": "To assign story points to epics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO common inhibitors to Agile at the 'Executive' level.",
+    "options": {
+      "A": "Fear of losing control and status",
+      "B": "Focus on short-term quarterly financial results over long-term value",
+      "C": "Asking for too many Retrospectives",
+      "D": "Empowering teams too much"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'Vertical Slicing' in user stories means delivering a small part of every layer (UI, Logic, Database) in a single story.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Rule of Three' in Agile leadership?",
+    "options": {
+      "A": "If you can't think of three things that could go wrong, you don't understand the problem",
+      "B": "Teams must have exactly three members",
+      "C": "Each story must be reviewed by three people",
+      "D": "Meetings must end within three minutes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In SAFe, what is the 'Architectural Runway'?",
+    "options": {
+      "A": "Existing code, hardware, and infrastructure required to support the implementation of near-term features",
+      "B": "The physical space where architects work",
+      "C": "A fashion show for software designers",
+      "D": "The time it takes to hire a Lead Architect"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Lean Startup' principles like Build-Measure-Learn are often integrated into Agile Product Management.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scaling framework is based on the idea of 'Descaling' the organization rather than adding more process?",
+    "options": {
+      "A": "Large-Scale Scrum (LeSS)",
+      "B": "Scaled Agile Framework (SAFe)",
+      "C": "Nexus",
+      "D": "Scrum at Scale"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO characteristics of 'High-Performing' Agile teams.",
+    "options": {
+      "A": "High psychological safety and trust",
+      "B": "Clear shared goals and purpose",
+      "C": "High turnover of team members",
+      "D": "Competing individual performance bonuses"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'OKR' (Objectives and Key Results) is a goal-setting framework often used alongside Agile to align team goals with company strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary focus of 'Agile Governance'?",
+    "options": {
+      "A": "Ensuring value is delivered while meeting compliance and regulatory requirements through transparency",
+      "B": "Enforcing strict rules on when developers can take lunch",
+      "C": "Standardizing the brand of keyboards used",
+      "D": "Replacing all managers with Scrum Masters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO elements of 'Design Thinking' used in Agile.",
+    "options": {
+      "A": "Empathize and Ideate",
+      "B": "Prototype and Test",
+      "C": "Document and Sign-off",
+      "D": "Bid and Contract"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "True or False: 'Self-Selection' is a process where employees choose which team they want to work on.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Agile Coaching' primarily focused on?",
+    "options": {
+      "A": "Developing the team's ability to self-organize and improve their own processes",
+      "B": "Assigning Jira tickets to people",
+      "C": "Checking the time people spend at their desks",
+      "D": "Managing the project budget"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which concept describes a small, permanent team of 5-9 people who work together to deliver value?",
+    "options": {
+      "A": "Agile Team",
+      "B": "Resource Pool",
+      "C": "Task Force",
+      "D": "Functional Unit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Value Stream Engineer' is a role often found in organizations that use Value Stream Management to optimize their flow.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of 'Continuous Integration' (CI)?",
+    "options": {
+      "A": "Detecting integration errors early by merging code frequently",
+      "B": "Making the build process more complicated",
+      "C": "Replacing the need for developers to talk to each other",
+      "D": "Saving money on server costs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select TWO key components of an 'Agile Mindset'.",
+    "options": {
+      "A": "Growth Mindset (embracing challenges)",
+      "B": "Focus on Customer Value",
+      "C": "Fixed Mindset (sticking to what works)",
+      "D": "Focus on Output Volume"
+    },
+    "answer": "A, B"
+  },
+  {
+    "question": "What is 'Lean UX'?",
+    "options": {
+      "A": "Integrating user experience design with Agile and Lean principles to reduce waste and deliver value",
+      "B": "A UX design that uses very few colors",
+      "C": "Designing only the 'Minimum Viable Logo'",
+      "D": "UX design done only by the Product Owner"
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Neural Networks", 
+  "questions": [
+    {
+    "question": "What is the basic building block of a neural network?",
+    "options": {
+      "A": "A layer",
+      "B": "A neuron (or node)",
+      "C": "A weight",
+      "D": "A bias"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer is responsible for receiving features from the dataset?",
+    "options": {
+      "A": "Hidden Layer",
+      "B": "Output Layer",
+      "C": "Input Layer",
+      "D": "Pooling Layer"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What mathematical operation do weights perform on input signals?",
+    "options": {
+      "A": "Addition",
+      "B": "Subtraction",
+      "C": "Multiplication",
+      "D": "Division"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of an 'Activation Function'?",
+    "options": {
+      "A": "To increase the number of neurons",
+      "B": "To introduce non-linearity into the network",
+      "C": "To store the final prediction",
+      "D": "To delete zero values"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the formula y = f(wx + b), what does 'b' represent?",
+    "options": {
+      "A": "Binary",
+      "B": "Bias",
+      "C": "Build",
+      "D": "Batch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What do we call the process of moving input through the network to get a prediction?",
+    "options": {
+      "A": "Backpropagation",
+      "B": "Forward Propagation",
+      "C": "Gradient Descent",
+      "D": "Data Ingestion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a widely used non-linear activation function?",
+    "options": {
+      "A": "Linear",
+      "B": "ReLU",
+      "C": "Constant",
+      "D": "Integer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Hidden Layer' do in a neural network?",
+    "options": {
+      "A": "It hides the data from the user.",
+      "B": "It extracts features and patterns from the data.",
+      "C": "It only stores the input values.",
+      "D": "It generates the final labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Loss' in the context of neural networks?",
+    "options": {
+      "A": "A physical loss of hardware",
+      "B": "The difference between predicted and actual values",
+      "C": "The number of neurons that stopped working",
+      "D": "A way to speed up the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which algorithm is used to update weights to minimize loss?",
+    "options": {
+      "A": "Binary Search",
+      "B": "Gradient Descent",
+      "C": "Merge Sort",
+      "D": "Standard Deviation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Epoch'?",
+    "options": {
+      "A": "A single data point",
+      "B": "A complete pass through the entire training dataset",
+      "C": "A type of activation function",
+      "D": "The first layer of a network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of training a neural network?",
+    "options": {
+      "A": "To maximize the number of layers",
+      "B": "To find the optimal set of weights and biases",
+      "C": "To increase the training time",
+      "D": "To delete the input data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is best suited for binary classification in the output layer?",
+    "options": {
+      "A": "ReLU",
+      "B": "Sigmoid",
+      "C": "Linear",
+      "D": "Softplus"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Weight' in a neural network?",
+    "options": {
+      "A": "The physical size of the model file",
+      "B": "A parameter that scales the input signal",
+      "C": "A counter for the number of epochs",
+      "D": "The learning rate value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is considered a 'Multi-Layer Perceptron' (MLP)?",
+    "options": {
+      "A": "A single neuron network",
+      "B": "A feedforward neural network with at least one hidden layer",
+      "C": "A network with zero weights",
+      "D": "A network that only works on images"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Learning Rate' control?",
+    "options": {
+      "A": "The speed of the internet during training",
+      "B": "The size of the steps taken toward the minimum loss",
+      "C": "The number of layers in the network",
+      "D": "The font size of the training logs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens in 'Backpropagation'?",
+    "options": {
+      "A": "The input data is reversed.",
+      "B": "Error information is sent backward to update weights.",
+      "C": "The network is deleted and restarted.",
+      "D": "The results are printed on paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer produces the final prediction?",
+    "options": {
+      "A": "Hidden Layer",
+      "B": "Input Layer",
+      "C": "Output Layer",
+      "D": "Middle Layer"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Deep' neural network?",
+    "options": {
+      "A": "A network stored deep in the cloud",
+      "B": "A network with many hidden layers",
+      "C": "A network that costs a lot of money",
+      "D": "A network used for oceanic research"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Overfitting'?",
+    "options": {
+      "A": "The model fits into the GPU memory perfectly.",
+      "B": "The model learns noise in training data and performs poorly on new data.",
+      "C": "The model is too small for the dataset.",
+      "D": "The model completes training in record time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to convert multiple outputs into probabilities that sum to 1?",
+    "options": {
+      "A": "Sigmoid",
+      "B": "ReLU",
+      "C": "Softmax",
+      "D": "Tanh"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Batch Size'?",
+    "options": {
+      "A": "The total number of neurons in the network",
+      "B": "The number of training examples used in one iteration",
+      "C": "The version number of the software",
+      "D": "The temperature of the CPU"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Supervised Learning'?",
+    "options": {
+      "A": "Learning without any human supervision",
+      "B": "Learning from labeled data with inputs and correct outputs",
+      "C": "Learning by deleting random data",
+      "D": "Learning only from image files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Optimizer'?",
+    "options": {
+      "A": "A tool to make images look better",
+      "B": "An algorithm that modifies weights and biases to reduce loss",
+      "C": "A person who checks the code",
+      "D": "A type of activation function"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common problem when training very deep networks?",
+    "options": {
+      "A": "Too many users",
+      "B": "Vanishing Gradients",
+      "C": "CPU overheating",
+      "D": "Deleting the database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'ReLU' function do to negative inputs?",
+    "options": {
+      "A": "Doubles them",
+      "B": "Turns them into zero",
+      "C": "Makes them positive",
+      "D": "Leaves them unchanged"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weights Initialization'?",
+    "options": {
+      "A": "The final result of the model",
+      "B": "Setting the starting values of the weights before training",
+      "C": "Deleting the weights from the network",
+      "D": "Naming the layers of the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which neural network type is most famous for identifying objects in images?",
+    "options": {
+      "A": "RNN",
+      "B": "CNN (Convolutional Neural Network)",
+      "C": "GAN",
+      "D": "Linear Regression"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Augmentation'?",
+    "options": {
+      "A": "Deleting half of the data to save space",
+      "B": "Artificially increasing data variety by transforming existing images",
+      "C": "Buying data from a different company",
+      "D": "Encrypting the training data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Perceptron'?",
+    "options": {
+      "A": "A type of advanced GPU",
+      "B": "A single neuron model for linear classification",
+      "C": "A way to backup the model",
+      "D": "A software for editing photos"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a CNN, what does 'Pooling' do?",
+    "options": {
+      "A": "It adds more pixels.",
+      "B": "It reduces the spatial size of the representation.",
+      "C": "It increases the number of weights.",
+      "D": "It changes the color to grayscale."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dropout'?",
+    "options": {
+      "A": "Students leaving school",
+      "B": "Randomly ignoring neurons during training to prevent overfitting",
+      "C": "The model crashing",
+      "D": "Reducing the learning rate to zero"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Validation Data'?",
+    "options": {
+      "A": "Data used for the final test only",
+      "B": "Data used to tune hyperparameters during training",
+      "C": "The data that the model learns from directly",
+      "D": "A list of valid user passwords"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Tanh' function output range?",
+    "options": {
+      "A": "0 to 1",
+      "B": "-1 to 1",
+      "C": "0 to infinity",
+      "D": "-infinity to infinity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Convergence'?",
+    "options": {
+      "A": "The loss increasing every epoch",
+      "B": "The model reaching a stable state with minimal loss",
+      "C": "Two networks merging into one",
+      "D": "Deleting the training set"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of an 'Unsupervised Learning' task?",
+    "options": {
+      "A": "Spam detection",
+      "B": "Clustering",
+      "C": "Image classification",
+      "D": "House price prediction"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Fully Connected' layer?",
+    "options": {
+      "A": "A layer connected to the internet",
+      "B": "A layer where every neuron is connected to every neuron in the next layer",
+      "C": "A layer that has zero bias",
+      "D": "The input layer only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fine-tuning'?",
+    "options": {
+      "A": "Fixing the hardware of the computer",
+      "B": "Taking a pre-trained model and training it slightly on a new dataset",
+      "C": "Deleting the weights of the model",
+      "D": "Changing the color of the GUI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean Squared Error' (MSE)?",
+    "options": {
+      "A": "The average number of neurons",
+      "B": "A common loss function for regression tasks",
+      "C": "The speed of the GPU",
+      "D": "A way to count epochs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of network has 'Memory' of previous inputs?",
+    "options": {
+      "A": "CNN",
+      "B": "RNN (Recurrent Neural Network)",
+      "C": "MLP",
+      "D": "Perceptron"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Hyperparameter'?",
+    "options": {
+      "A": "A parameter learned by the network",
+      "B": "A setting chosen by the developer before training (e.g., learning rate)",
+      "C": "The final prediction value",
+      "D": "The name of the first neuron"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Normalization' of inputs?",
+    "options": {
+      "A": "Making all inputs into text",
+      "B": "Scaling input features to a similar range (e.g., 0 to 1)",
+      "C": "Deleting extreme outliers",
+      "D": "Multiplying inputs by 100"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is commonly used as a 'Step Function' alternative?",
+    "options": {
+      "A": "Linear",
+      "B": "Sigmoid",
+      "C": "Sum",
+      "D": "Log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Feature Vector'?",
+    "options": {
+      "A": "A drawing of the network",
+      "B": "A numerical representation of input features",
+      "C": "A list of developers",
+      "D": "A security key"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Early Stopping' used for?",
+    "options": {
+      "A": "To crash the computer",
+      "B": "To stop training when validation performance starts to drop (prevents overfitting)",
+      "C": "To delete the model",
+      "D": "To increase the learning rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Gradient' refer to?",
+    "options": {
+      "A": "The color of the chart",
+      "B": "The partial derivative of the loss function with respect to weights",
+      "C": "The number of layers in the model",
+      "D": "The speed of data loading"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a CNN, what is a 'Kernel'?",
+    "options": {
+      "A": "The operating system",
+      "B": "A small matrix used for convolution (filtering)",
+      "C": "The power supply",
+      "D": "A type of activation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transfer Learning'?",
+    "options": {
+      "A": "Moving a computer to a new office",
+      "B": "Using knowledge from one task to solve a different but related task",
+      "C": "Teaching a person how to use AI",
+      "D": "Copying data from HDFS to S3"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a classic dataset used for digit recognition?",
+    "options": {
+      "A": "IMDb",
+      "B": "MNIST",
+      "C": "Wikipedia",
+      "D": "Spotify"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight Decay'?",
+    "options": {
+      "A": "The physical breakdown of hardware",
+      "B": "A regularization technique that penalizes large weights",
+      "C": "The weights getting smaller because of errors",
+      "D": "A way to speed up the network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Input Vector' length in a 28x28 image MLP?",
+    "options": {
+      "A": "28",
+      "B": "56",
+      "C": "784",
+      "D": "100"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which layer does not have weights or biases?",
+    "options": {
+      "A": "Input Layer",
+      "B": "Hidden Layer",
+      "C": "Output Layer",
+      "D": "Dense Layer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'One-Hot Encoding'?",
+    "options": {
+      "A": "A way to heat the GPU",
+      "B": "Representing categories as binary vectors (e.g., [1,0,0])",
+      "C": "A type of data compression",
+      "D": "Deleting duplicate rows"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Batch Normalization'?",
+    "options": {
+      "A": "Deleting batches of data",
+      "B": "Scaling activations within a layer for each batch to stabilize training",
+      "C": "Sorting batches by size",
+      "D": "Increasing the batch size manually"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Stochastic' Gradient Descent?",
+    "options": {
+      "A": "To use random numbers for everything",
+      "B": "To update weights using small random samples (mini-batches) rather than the whole dataset",
+      "C": "To make the training process slower",
+      "D": "To ensure the result is always different"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature Extraction'?",
+    "options": {
+      "A": "Removing features from the app",
+      "B": "The process of identifying the most important information in raw data",
+      "C": "Deleting files from the hard drive",
+      "D": "A type of bias"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Layer' in a neural network?",
+    "options": {
+      "A": "A sheet of paper",
+      "B": "A group of neurons operating at the same depth",
+      "C": "A backup of the model",
+      "D": "A list of hyperparameters"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to calculate the 'Steepness' of the error?",
+    "options": {
+      "A": "Summation",
+      "B": "Derivative",
+      "C": "Average",
+      "D": "Maximum"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inference'?",
+    "options": {
+      "A": "Training the network",
+      "B": "Using the trained network to make predictions",
+      "C": "Collecting data for a project",
+      "D": "Designing the architecture"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global Average Pooling'?",
+    "options": {
+      "A": "Taking the average of all networks in the world",
+      "B": "Reducing an entire feature map to a single number",
+      "C": "A way to backup data",
+      "D": "Scaling the input image"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean Absolute Error' (MAE)?",
+    "options": {
+      "A": "The square root of the error",
+      "B": "A loss function that uses the absolute difference between values",
+      "C": "The most common error",
+      "D": "The number of epochs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a deep learning framework?",
+    "options": {
+      "A": "Pandas",
+      "B": "PyTorch",
+      "C": "Flask",
+      "D": "React"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Dense' layer also known as?",
+    "options": {
+      "A": "Convolutional Layer",
+      "B": "Fully Connected Layer",
+      "C": "Input Layer",
+      "D": "Pooling Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Latent Space'?",
+    "options": {
+      "A": "A room in the data center",
+      "B": "A compressed internal representation of data",
+      "C": "The space between two servers",
+      "D": "A list of hidden weights"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Weight Initialization' method?",
+    "options": {
+      "A": "ReLU",
+      "B": "Xavier / Glorot",
+      "C": "Softmax",
+      "D": "Dropout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Padding'?",
+    "options": {
+      "A": "Adding extra RAM",
+      "B": "Adding zeros around the edges of an image",
+      "C": "Adding more neurons to a layer",
+      "D": "Filling the lab with chairs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific activation function is most prone to the 'Vanishing Gradient' problem due to its derivative being near zero for high and low inputs?",
+    "options": {
+      "A": "ReLU",
+      "B": "Leaky ReLU",
+      "C": "Sigmoid",
+      "D": "ELU"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary technical advantage of 'Leaky ReLU' over standard 'ReLU'?",
+    "options": {
+      "A": "It is much faster to compute.",
+      "B": "It prevents the 'Dying ReLU' problem by allowing a small gradient for negative inputs.",
+      "C": "It limits the output to a range between 0 and 1.",
+      "D": "It automatically adjusts the learning rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Backpropagation', what does the 'Chain Rule' allow the algorithm to calculate?",
+    "options": {
+      "A": "The sum of all weights in the network.",
+      "B": "The gradient of the loss function with respect to weights in early layers by multiplying partial derivatives.",
+      "C": "The total number of neurons needed for a specific task.",
+      "D": "The probability that a model will overfit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Momentum' in a Gradient Descent optimizer used for?",
+    "options": {
+      "A": "To increase the weight of the input features.",
+      "B": "To delete neurons that are not contributing to the output.",
+      "C": "To help the optimizer oscillate less and navigate through flat regions or local minima.",
+      "D": "To rotate the feature maps in a CNN."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these describes 'Underfitting' in a neural network?",
+    "options": {
+      "A": "High training error and high validation error.",
+      "B": "Low training error and high validation error.",
+      "C": "The model file size is too small for the disk.",
+      "D": "The learning rate is too small to start training."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Stride' in a Convolutional layer?",
+    "options": {
+      "A": "To define the size of the kernel.",
+      "B": "To determine the step size the filter moves across the input image.",
+      "C": "To add zero-padding to the input.",
+      "D": "To calculate the average of the pixels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Batch Normalization' contribute to faster training?",
+    "options": {
+      "A": "By reducing the total number of epochs to 1.",
+      "B": "By reducing internal covariate shift, allowing for higher learning rates.",
+      "C": "By deleting 50% of the training data automatically.",
+      "D": "By switching the network to a linear model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which optimizer adaptively scales the learning rate for each parameter based on the square of the gradients?",
+    "options": {
+      "A": "Stochastic Gradient Descent",
+      "B": "Nesterov Momentum",
+      "C": "RMSprop",
+      "D": "Binary Cross-Entropy"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'L2 Regularization' (Weight Decay) technically adding to the loss function?",
+    "options": {
+      "A": "The sum of absolute values of weights.",
+      "B": "A penalty term equal to the square of the magnitude of weights.",
+      "C": "A random number to increase complexity.",
+      "D": "The count of all active neurons."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Saddle Point' in a loss landscape?",
+    "options": {
+      "A": "The global minimum of the function.",
+      "B": "A point where the slope is zero but is a minimum in one direction and a maximum in another.",
+      "C": "A point where the model automatically crashes.",
+      "D": "The starting point of weight initialization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific layer in a CNN provides translation invariance by taking the maximum value in a window?",
+    "options": {
+      "A": "Fully Connected Layer",
+      "B": "Max Pooling Layer",
+      "C": "Flatten Layer",
+      "D": "Dropout Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Leakage' in the training process?",
+    "options": {
+      "A": "When the GPU memory leaks into the RAM.",
+      "B": "When information from the test/validation set is unintentionally present in the training set.",
+      "C": "When the model source code is stolen.",
+      "D": "When data is lost during a cloud transfer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Softmax' function ensure about the output of a multi-class classifier?",
+    "options": {
+      "A": "All outputs are integers.",
+      "B": "The highest output is always exactly 1.",
+      "C": "The outputs are between 0 and 1 and sum to 1.",
+      "D": "Negative outputs are converted to positive."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a 'Residual Network' (ResNet), what is the purpose of the 'Skip Connection'?",
+    "options": {
+      "A": "To skip the training process for small datasets.",
+      "B": "To allow gradients to flow directly through the network, helping train much deeper architectures.",
+      "C": "To skip the validation phase.",
+      "D": "To connect the model to a secondary GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Dying ReLU' problem specifically caused by?",
+    "options": {
+      "A": "The computer running out of power.",
+      "B": "Large negative gradients making the bias so negative that the neuron never activates again.",
+      "C": "Using too many hidden layers.",
+      "D": "The learning rate being too high for the output layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Transfer Learning'?",
+    "options": {
+      "A": "It eliminates the need for any training data.",
+      "B": "It allows a model to achieve high performance on a small dataset by using pre-learned features.",
+      "C": "It makes the model 100% accurate.",
+      "D": "It reduces the physical size of the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient Clipping' used to prevent?",
+    "options": {
+      "A": "Small gradients from slowing down training.",
+      "B": "Exploding Gradients where weight updates become too large and unstable.",
+      "C": "The loss function from reaching zero.",
+      "D": "The model from using too much memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an RNN, what is 'BPTT'?",
+    "options": {
+      "A": "Binary Processing Target Tool.",
+      "B": "Backpropagation Through Time.",
+      "C": "Batch Processing Technical Table.",
+      "D": "Build Pattern Transition Type."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main difference between 'Stochastic Gradient Descent' (SGD) and 'Mini-batch Gradient Descent'?",
+    "options": {
+      "A": "SGD uses the whole dataset; Mini-batch uses one example.",
+      "B": "SGD uses one example per update; Mini-batch uses a small subset of data.",
+      "C": "Mini-batch is only for image data.",
+      "D": "SGD is 10x faster than Mini-batch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Receptive Field' of a neuron in a CNN?",
+    "options": {
+      "A": "The area of the GPU where the neuron is stored.",
+      "B": "The specific region of the input image that affects the neuron's activation.",
+      "C": "The total number of parameters in the layer.",
+      "D": "The distance between the input and output layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which activation function is 'Zero-Centered', unlike the Sigmoid function?",
+    "options": {
+      "A": "ReLU",
+      "B": "Tanh",
+      "C": "Softmax",
+      "D": "Linear"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight Tying'?",
+    "options": {
+      "A": "Tying the physical cables of the cluster.",
+      "B": "Forcing different layers or parts of a network to share the exact same weights.",
+      "C": "Setting all weights to the same initial value.",
+      "D": "Locking the weights so they cannot be updated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Loss Curve' that plateaus very early usually indicate?",
+    "options": {
+      "A": "The model has reached perfect accuracy.",
+      "B": "The learning rate is too low or the model has reached a local minimum/saddle point.",
+      "C": "The dataset is too large.",
+      "D": "The GPU is overheating."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Autoencoder' primarily used for?",
+    "options": {
+      "A": "Automatically writing Python code.",
+      "B": "Unsupervised feature learning and dimensionality reduction.",
+      "C": "Supervised image classification.",
+      "D": "Deleting duplicate files in HDFS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a neural network, what is 'Early Stopping' considered a form of?",
+    "options": {
+      "A": "Data Augmentation",
+      "B": "Regularization",
+      "C": "Weight Initialization",
+      "D": "Optimizer selection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Flatten' layer in a CNN architecture?",
+    "options": {
+      "A": "To reduce the color depth of an image.",
+      "B": "To convert 2D/3D feature maps into a 1D vector before entering a Dense layer.",
+      "C": "To delete unimportant features.",
+      "D": "To increase the training speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'He Initialization' (or Kaiming Initialization) specifically optimized for?",
+    "options": {
+      "A": "Sigmoid activation functions.",
+      "B": "ReLU and its variants.",
+      "C": "Standard Linear networks.",
+      "D": "RNN architectures."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Hyperparameter' that cannot be learned via Backpropagation?",
+    "options": {
+      "A": "Weight values",
+      "B": "Bias values",
+      "C": "Number of hidden layers",
+      "D": "Output activations"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Catastrophic Forgetting' in neural networks?",
+    "options": {
+      "A": "The developer forgetting the password to the server.",
+      "B": "A model losing information about previous tasks when trained on a new task.",
+      "C": "The model deleting its own weights.",
+      "D": "A hardware failure in the memory module."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'L1' and 'L2' Regularization?",
+    "options": {
+      "A": "L1 is for small data; L2 for big data.",
+      "B": "L1 can lead to sparse weights (some weights become zero); L2 usually results in small, non-zero weights.",
+      "C": "L1 uses the average; L2 uses the median.",
+      "D": "There is no functional difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does '1x1 Convolution' accomplish in an architecture like Inception or ResNet?",
+    "options": {
+      "A": "It zooms into the image.",
+      "B": "It reduces or increases the number of channels (feature maps) without changing spatial dimensions.",
+      "C": "It acts as a global average pool.",
+      "D": "It rotates the image by 1 degree."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stochastic' in SGD?",
+    "options": {
+      "A": "The name of the scientist who invented it.",
+      "B": "The random selection of a single data point (or mini-batch) to estimate the gradient.",
+      "C": "A specific type of GPU instruction.",
+      "D": "The speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which problem does 'LSTM' solve that standard 'RNN' cannot handle effectively?",
+    "options": {
+      "A": "Image classification.",
+      "B": "Long-term dependencies in sequences.",
+      "C": "Data encryption.",
+      "D": "High network latency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'One-Cycle Policy'?",
+    "options": {
+      "A": "Training the model for only one epoch.",
+      "B": "A learning rate schedule where the rate increases to a maximum and then decreases back to a minimum.",
+      "C": "A way to use only one GPU core.",
+      "D": "Deleting the model after one use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient Accumulation' used for?",
+    "options": {
+      "A": "To make the model heavier in terms of file size.",
+      "B": "To simulate larger batch sizes when GPU memory is limited.",
+      "C": "To count the number of epochs.",
+      "D": "To speed up data ingestion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Weight Initialization', what happens if weights are initialized to all zeros?",
+    "options": {
+      "A": "The model trains 2x faster.",
+      "B": "All neurons in a layer will perform the same calculation and the model will fail to learn complex patterns (Symmetry).",
+      "C": "The model automatically becomes a linear regression.",
+      "D": "The training process is unaffected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Label Smoothing'?",
+    "options": {
+      "A": "Making the font of the labels easier to read.",
+      "B": "A regularization technique that prevents the model from assigning 100% probability to a single class during training.",
+      "C": "Deleting labels that are hard to predict.",
+      "D": "Changing all labels to lowercase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Mean Average Precision' (mAP) evaluate in object detection?",
+    "options": {
+      "A": "The speed of the CPU.",
+      "B": "The accuracy of object detection across various classes and overlap thresholds.",
+      "C": "The brightness of the input images.",
+      "D": "The total number of layers in the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Vanishing Gradient' specifically?",
+    "options": {
+      "A": "The model becoming invisible.",
+      "B": "Gradients becoming extremely small during backpropagation, stopping the weights from updating.",
+      "C": "The loss function reaching zero perfectly.",
+      "D": "The dataset disappearing from memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mixed Precision Training'?",
+    "options": {
+      "A": "Using both Python and Java in one model.",
+      "B": "Using both 16-bit and 32-bit floats to speed up training and reduce memory usage.",
+      "C": "Training a model on two different datasets.",
+      "D": "Using two different types of GPUs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is most commonly used for 'Hidden Layers' in modern deep learning?",
+    "options": {
+      "A": "Sigmoid",
+      "B": "ReLU",
+      "C": "Softmax",
+      "D": "Step Function"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight Normalization'?",
+    "options": {
+      "A": "Scaling all weights to be integers.",
+      "B": "Decoupling the length of weight vectors from their direction to improve optimization.",
+      "C": "Deleting weights that are too large.",
+      "D": "A way to measure the weight of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning', what is the 'Exploration-Exploitation' tradeoff?",
+    "options": {
+      "A": "Choosing between Python and R.",
+      "B": "Choosing between trying new actions to find rewards or using known actions that yield rewards.",
+      "C": "Hiring a new developer vs keeping the old one.",
+      "D": "Deleting data vs saving it."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ghost Batch Normalization'?",
+    "options": {
+      "A": "Normalizing a dataset that has no data.",
+      "B": "Calculating normalization stats on small 'virtual' batches to improve stability in large batch training.",
+      "C": "A bug in the batch norm layer.",
+      "D": "A way to normalize images of ghosts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Universal Approximation Theorem'?",
+    "options": {
+      "A": "The idea that AI will take over the world.",
+      "B": "The mathematical proof that a neural network with one hidden layer can approximate any continuous function.",
+      "C": "A theorem about the speed of light.",
+      "D": "A law about how many nodes a cluster can have."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is best for evaluating a model on an imbalanced dataset?",
+    "options": {
+      "A": "Accuracy",
+      "B": "F1-Score",
+      "C": "Mean Squared Error",
+      "D": "R-squared"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Gating' mechanism in GRU and LSTM?",
+    "options": {
+      "A": "To physically lock the data center.",
+      "B": "To control the flow of information (what to remember and what to forget).",
+      "C": "To count the number of time steps.",
+      "D": "To encrypt the hidden state."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Attention' in the context of Transformers?",
+    "options": {
+      "A": "A model focusing on its own power usage.",
+      "B": "A mechanism that allows a model to weigh the importance of different words in a sequence relative to a single word.",
+      "C": "The model training itself without data.",
+      "D": "A way to count characters in a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is 'Adaptive' learning rate optimizer?",
+    "options": {
+      "A": "Vanilla SGD",
+      "B": "Adam",
+      "C": "Momentum",
+      "D": "Nesterov"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spatial Pyramid Pooling'?",
+    "options": {
+      "A": "Building a pyramid of servers.",
+      "B": "A pooling layer that allows the network to handle images of different sizes and produce fixed-length outputs.",
+      "C": "A way to sort pixels by color.",
+      "D": "A way to backup 3D data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when 'Over-parameterization' occurs?",
+    "options": {
+      "A": "The model becomes too small.",
+      "B": "The model has significantly more parameters than data points, which can sometimes improve generalization in deep learning.",
+      "C": "The hyperparameters are deleted.",
+      "D": "The training process is impossible."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural Architecture Search' (NAS)?",
+    "options": {
+      "A": "Searching for neural networks on Google.",
+      "B": "Automating the design of the neural network's structure.",
+      "C": "Searching for a job in AI.",
+      "D": "Scanning a human brain."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Ingestion', what is 'Shuffling' the training set important for?",
+    "options": {
+      "A": "To make the data file smaller.",
+      "B": "To ensure that the model doesn't learn the order of the data, which could lead to bias.",
+      "C": "To encrypt the data.",
+      "D": "To increase the CPU speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Exploding Gradient' often lead to during training?",
+    "options": {
+      "A": "The gradients becoming zero.",
+      "B": "Weight updates that are too large, leading to NaN loss and a failing model.",
+      "C": "The model training 10x faster.",
+      "D": "A hardware explosion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hard Parameter Sharing' in Multi-task learning?",
+    "options": {
+      "A": "Sharing a single GPU.",
+      "B": "Using the same hidden layers for all tasks while having task-specific output layers.",
+      "C": "Sharing passwords between developers.",
+      "D": "Using the same dataset for 100 models."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Dice Coefficient' commonly used for?",
+    "options": {
+      "A": "Playing board games.",
+      "B": "Measuring the overlap between predicted and ground-truth segments (Image Segmentation).",
+      "C": "Calculating the learning rate randomly.",
+      "D": "A way to name the different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pruning' in the context of neural networks?",
+    "options": {
+      "A": "Cutting down trees in a lab.",
+      "B": "Removing unimportant weights or neurons to make the model smaller and faster.",
+      "C": "Increasing the number of layers.",
+      "D": "Hiring fewer developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distillation' of models?",
+    "options": {
+      "A": "Purifying the code to remove errors.",
+      "B": "Training a smaller 'student' model to mimic the performance of a large 'teacher' model.",
+      "C": "Hiding the model from competitors.",
+      "D": "Turning a neural network into a physical chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adversarial Training'?",
+    "options": {
+      "A": "Training two developers to compete.",
+      "B": "Training a model on examples that have been slightly modified to deceive the network to improve robustness.",
+      "C": "Training a model without any data.",
+      "D": "Training a model on a different continent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight Initialization' 'Xavier' (Glorot) goal?",
+    "options": {
+      "A": "To make all weights equal to 1.",
+      "B": "To keep the variance of the activations the same across all layers.",
+      "C": "To name the network after its inventor.",
+      "D": "To initialize weights randomly between 0 and 100."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Depthwise Separable Convolution'?",
+    "options": {
+      "A": "A convolution that takes 10 days to run.",
+      "B": "A convolution split into a depthwise and a pointwise part to reduce computation.",
+      "C": "A way to separate colors in an image.",
+      "D": "A way to skip convolutional layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'NLP', what is an 'Embedding' layer?",
+    "options": {
+      "A": "A layer that stores the user's name.",
+      "B": "A layer that maps categorical tokens (words) to dense numerical vectors.",
+      "C": "A layer that handles input images.",
+      "D": "A security layer for text files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dropout' 'Rate'?",
+    "options": {
+      "A": "The number of students who fail.",
+      "B": "The probability that a neuron is 'dropped' (ignored) during a training step.",
+      "C": "The speed at which neurons are deleted.",
+      "D": "The number of hidden layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean Squared Logarithmic Error' (MSLE) used for?",
+    "options": {
+      "A": "Classification tasks.",
+      "B": "Regression tasks when you don't want to penalize large errors heavily when the values are high.",
+      "C": "Calculating the square root of the loss.",
+      "D": "Counting the number of neurons."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cosine Similarity' used to measure?",
+    "options": {
+      "A": "The heat of the computer.",
+      "B": "The angle between two vectors to determine how similar they are.",
+      "C": "The length of a document.",
+      "D": "The speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Object Detection', what is 'IoU'?",
+    "options": {
+      "A": "Input over User.",
+      "B": "Intersection over Union (measures bounding box overlap).",
+      "C": "Integer over Unit.",
+      "D": "Internal over User."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical constraint is enforced by 'Spectral Normalization' to stabilize GAN training?",
+    "options": {
+      "A": "Ensuring the weights are orthogonal.",
+      "B": "Setting the spectral radius of the weight matrix to infinity.",
+      "C": "Restricting the Lipschitz constant of the discriminator to be less than or equal to one.",
+      "D": "Calculating the determinant of every hidden layer."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary objective of the 'Label Smoothing' regularization technique?",
+    "options": {
+      "A": "To increase the numerical value of the learning rate.",
+      "B": "To prevent the network from becoming overconfident and overshooting in the logit space.",
+      "C": "To delete labels that have a high variance.",
+      "D": "To change the labels from integers to strings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Transformer' architecture, why is the 'Query-Key' dot product divided by the square root of the dimension (d_k)?",
+    "options": {
+      "A": "To compress the model size for mobile deployment.",
+      "B": "To prevent gradients from vanishing in the input layer.",
+      "C": "To counteract the effect of extremely large values that would push the Softmax function into regions with tiny gradients.",
+      "D": "To ensure that the attention matrix is always lower-triangular."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'Lottery Ticket Hypothesis' suggest about neural network pruning?",
+    "options": {
+      "A": "Pruning is only possible if the weights are initialized with random noise.",
+      "B": "Dense, randomly-initialized networks contain sub-networks that, when trained in isolation, can reach the same accuracy as the original.",
+      "C": "Pruning a model always results in a 50% loss of accuracy.",
+      "D": "Only the output layer of a network can be pruned effectively."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon describes the observation that very deep networks can have many more parameters than data points and still generalize well?",
+    "options": {
+      "A": "The Underfitting Bias.",
+      "B": "Double Descent.",
+      "C": "The Curse of Dimensionality.",
+      "D": "Vanishing Entropy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Polyak-Ruppert Averaging' used for during the optimization process?",
+    "options": {
+      "A": "Calculating the average temperature of the GPU cluster.",
+      "B": "A technique to average the iterates of Gradient Descent to provide more stable convergence.",
+      "C": "Finding the average weight of the training dataset.",
+      "D": "Deleting duplicate neurons across different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Weight Standardisation' (WS) differ from 'Batch Normalisation' (BN)?",
+    "options": {
+      "A": "WS normalizes the activations; BN normalizes the weights.",
+      "B": "WS is performed on the weight parameters themselves, whereas BN is performed on the feature map activations.",
+      "C": "WS is only used for Recurrent Neural Networks.",
+      "D": "WS requires a larger batch size than BN to be effective."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the specific purpose of the 'Temperature' (T) parameter in the Knowledge Distillation loss function?",
+    "options": {
+      "A": "To prevent the hardware from overheating.",
+      "B": "To soften the probability distribution of the teacher model to reveal 'dark knowledge' for the student.",
+      "C": "To increase the training speed of the student model by 2x.",
+      "D": "To adjust the learning rate based on the current epoch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Capsule Networks' (CapsNets), what is the 'Dynamic Routing' algorithm designed to handle?",
+    "options": {
+      "A": "Routing network traffic between different servers.",
+      "B": "Ensuring that the output of a capsule is sent to an appropriate parent capsule in the next layer based on pose agreement.",
+      "C": "Automatically choosing the best learning rate for each neuron.",
+      "D": "Encrypting the communication between the GPU and the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Elastic Weight Consolidation' (EWC) used to mitigate?",
+    "options": {
+      "A": "The weights becoming too large (Exploding Gradients).",
+      "B": "Catastrophic Forgetting in continual learning scenarios by protecting important weights from previous tasks.",
+      "C": "The model file size growing exponentially.",
+      "D": "The loss of data during a power failure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Neural Tangent Kernel' (NTK) used to describe?",
+    "options": {
+      "A": "The physical hardware architecture of a TPU.",
+      "B": "The evolution of neural networks during training as they approach infinite width.",
+      "C": "A way to connect 100 different neural networks together.",
+      "D": "A new programming language for AI development."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Vision Transformer' (ViT), what is the role of the 'CLS' token?",
+    "options": {
+      "A": "To compress the image into a smaller JPEG file.",
+      "B": "To act as a learned embedding that represents the aggregate representation of the entire image for classification.",
+      "C": "To count the number of pixels in each patch.",
+      "D": "To clear the cache of the attention mechanism."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Sharpness-Aware Minimization' (SAM) objective?",
+    "options": {
+      "A": "Making the image borders sharper in a CNN.",
+      "B": "Finding a region in the loss landscape where the loss is low and the surface is flat to improve generalization.",
+      "C": "A way to increase the resolution of a video file.",
+      "D": "Increasing the precision of weight storage from 16-bit to 32-bit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grouped Convolution' primarily used for in architectures like ResNeXt?",
+    "options": {
+      "A": "Grouping developers into teams.",
+      "B": "Splitting input channels into groups to reduce computational complexity and improve multi-path representation.",
+      "C": "Grouping all weights into a single matrix.",
+      "D": "Calculating the mean of different layers together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stochastic Depth' in the context of training very deep ResNets?",
+    "options": {
+      "A": "Measuring the depth of the water cooling system.",
+      "B": "Randomly dropping entire layers during training while keeping them active during inference to improve regularization.",
+      "C": "The random number of weights in the output layer.",
+      "D": "A way to calculate the learning rate randomly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is the purpose of 'Relative Positional Bias'?",
+    "options": {
+      "A": "Biasing the model toward users in specific locations.",
+      "B": "Allowing the attention mechanism to consider the distance between tokens rather than their absolute index.",
+      "C": "Rotating the word embeddings randomly.",
+      "D": "A way to hide certain words from the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Frechet Inception Distance' (FID) score used to measure?",
+    "options": {
+      "A": "The distance between the input and output layers.",
+      "B": "The quality and diversity of images generated by a GAN compared to real images.",
+      "C": "The time it takes to process one image batch.",
+      "D": "The number of neurons that are inactive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical benefit of 'Layer Normalization' over 'Batch Normalization' for RNNs?",
+    "options": {
+      "A": "It requires less RAM to compute.",
+      "B": "It normalizes each sample independently of others, making it suitable for varying sequence lengths and online learning.",
+      "C": "It eliminates the need for any hidden layers.",
+      "D": "It is much faster on mobile CPUs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Atrous Convolution' (or Dilated Convolution) primarily used for in semantic segmentation?",
+    "options": {
+      "A": "To encrypt the image data.",
+      "B": "To increase the receptive field of the filter without losing spatial resolution or increasing parameters.",
+      "C": "To rotate the feature maps by 45 degrees.",
+      "D": "To delete the background of an image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used in 'Neural Architecture Search' to estimate the performance of a network without full training?",
+    "options": {
+      "A": "Randomly guessing the accuracy.",
+      "B": "Weight Sharing (or One-Shot Models) where a large 'Super-network' is trained.",
+      "C": "Asking a human expert for their opinion.",
+      "D": "Multiplying the number of layers by 10."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mixed Precision' 'Loss Scaling'?",
+    "options": {
+      "A": "Changing the font of the loss value.",
+      "B": "Multiplying the loss by a large factor during FP16 training to prevent gradients from becoming zero (underflow).",
+      "C": "Using both Python and Java to calculate loss.",
+      "D": "A way to delete small loss values."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning', what is 'Proximal Policy Optimization' (PPO) designed to ensure?",
+    "options": {
+      "A": "The agent never makes a mistake.",
+      "B": "That the policy update does not stray too far from the previous policy (trust region), ensuring training stability.",
+      "C": "The agent uses the fastest network path.",
+      "D": "The total reward is always an integer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-Attention' in an Encoder-Decoder Transformer?",
+    "options": {
+      "A": "A model focusing on its own errors.",
+      "B": "An attention layer where the Queries come from the decoder and the Keys/Values come from the encoder.",
+      "C": "Combining two different neural networks together.",
+      "D": "A mechanism for skipping certain layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Universal Approximation Theorem' (Enhanced) regarding the width of a network?",
+    "options": {
+      "A": "A network must be at least 1000 neurons wide to work.",
+      "B": "A neural network with a single hidden layer of sufficient width can approximate any continuous function on compact subsets of R^n.",
+      "C": "Infinite width results in a model that cannot learn.",
+      "D": "The width of the network is proportional to the CPU speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Temporal Difference' (TD) learning?",
+    "options": {
+      "A": "Checking the clock frequently during training.",
+      "B": "A prediction method that updates based on the difference between successive estimates of the same quantity.",
+      "C": "A study on the history of neural networks.",
+      "D": "The speed at which the weights change."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adversarial Robustness' 'Min-Max' optimization?",
+    "options": {
+      "A": "Finding the minimum and maximum weights.",
+      "B": "Minimizing the loss for the worst-case (maximum) perturbations created by an adversary.",
+      "C": "Using the smallest and largest GPUs together.",
+      "D": "A way to backup the model source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Squeeze-and-Excitation' (SE) block specifically recalibrate?",
+    "options": {
+      "A": "The speed of the training iterations.",
+      "B": "Channel-wise feature responses by modeling the interdependencies between channels.",
+      "C": "The resolution of the input image.",
+      "D": "The number of epochs in a session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Supervised' 'Contrastive Predictive Coding' (CPC)?",
+    "options": {
+      "A": "A new programming language.",
+      "B": "Learning representations by predicting the future of a latent space sequence using contrastive loss.",
+      "C": "A way to encrypt text files.",
+      "D": "A tool for the developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what is 'Feed-Forward' 'Position-wise' networking?",
+    "options": {
+      "A": "A network that moves forward in time.",
+      "B": "Applying the same fully connected network to each position separately and identically.",
+      "C": "A network that only works on certain positions.",
+      "D": "A way to rotate the input data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' 'Pruning' 'Unstructured' vs 'Structured'?",
+    "options": {
+      "A": "Structured pruning is for images; Unstructured for text.",
+      "B": "Unstructured prunes individual weights; Structured prunes entire neurons or channels to improve hardware speed.",
+      "C": "Unstructured pruning is for beginners.",
+      "D": "There is no difference in the result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'GANs', what is 'Gradient Penalty' (WGAN-GP)?",
+    "options": {
+      "A": "A fine paid to the GPU manufacturer.",
+      "B": "A soft version of the Lipschitz constraint that penalizes the norm of the discriminator's gradient.",
+      "C": "A way to speed up the network.",
+      "D": "Deleting gradients that are negative."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Manifold' 'Mixup'?",
+    "options": {
+      "A": "A mistake made in a 3D model.",
+      "B": "A regularization method that performs linear interpolation of hidden representations and labels during training.",
+      "C": "A way to merge two datasets.",
+      "D": "A type of GPU memory error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural Architecture' 'NAS-Bench'?",
+    "options": {
+      "A": "A physical bench for researchers to sit on.",
+      "B": "Standardized datasets containing performance metrics for thousands of architectures to simplify NAS research.",
+      "C": "A search engine for architectural blueprints.",
+      "D": "A list of the best AI developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'NLP', what is 'Beam Search' decoding?",
+    "options": {
+      "A": "Using a laser to scan documents.",
+      "B": "A heuristic search algorithm that keeps a small number of the most likely partial sequences (the beam width).",
+      "C": "A way to search for words in a dictionary.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Consistency' 'Regularization' in Semi-Supervised Learning?",
+    "options": {
+      "A": "Making sure the developer is consistent.",
+      "B": "Ensuring the model's output for an unlabeled point remains the same under different stochastic perturbations.",
+      "C": "A way to sort data consistently.",
+      "D": "Ensuring the learning rate is constant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Graph' 'Embedding' 'TransE'?",
+    "options": {
+      "A": "Drawing a chart of knowledge.",
+      "B": "Representing relations as translations in the embedding space (h + r ≈ t).",
+      "C": "A way to translate code into English.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-Shot' 'Prompting' 'Few-Shot' comparison?",
+    "options": {
+      "A": "Zero-shot has zero accuracy; Few-shot has 100%.",
+      "B": "Zero-shot provides no task examples; Few-shot provides a small number of examples in the prompt.",
+      "C": "Few-shot uses fewer words than Zero-shot.",
+      "D": "They are identical in Large Language Models."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adversarial' 'Perturbation' 'Epsilon' (ε)?",
+    "options": {
+      "A": "The name of the first neural network layer.",
+      "B": "The maximum allowed change to an input to ensure it remains visually similar to the original during an attack.",
+      "C": "A mathematical error in the calculation.",
+      "D": "The duration of the training session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning', what is the 'Experience Replay' buffer size tradeoff?",
+    "options": {
+      "A": "Large buffers are cheap; small are expensive.",
+      "B": "Large buffers store more diverse data but may include 'stale' data from an older, less optimized policy.",
+      "C": "Small buffers are only for experts.",
+      "D": "Buffer size has no impact on stability."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural' 'Style Transfer' 'Gram Matrix'?",
+    "options": {
+      "A": "A matrix for checking grammar.",
+      "B": "A matrix representing the correlations between features in a layer to capture the 'style' of an image.",
+      "C": "A matrix with zero entries.",
+      "D": "A way to backup the style data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Decoder' 'Masked Self-Attention'?",
+    "options": {
+      "A": "An attention layer that uses masks to hide the GPU.",
+      "B": "An mechanism that prevents tokens from 'attending' to future positions in the sequence during training.",
+      "C": "A way to hide certain users from the model.",
+      "D": "A type of data encryption for text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' 'Parallelism' 'Pipeline Parallelism'?",
+    "options": {
+      "A": "Running two models at the same time.",
+      "B": "Splitting a model across multiple devices and processing different 'micro-batches' simultaneously in a pipeline.",
+      "C": "A list of all the developers in the company.",
+      "D": "A way to name the different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Denoising Diffusion Probabilistic Models' (DDPM) 'Variance Schedule'?",
+    "options": {
+      "A": "A calendar for when the GPU will fail.",
+      "B": "The sequence of values (betas) that determine how much noise is added to the data at each forward step.",
+      "C": "The price of the dataset.",
+      "D": "A way to rotate the input data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deep Learning', what is 'Catastrophic' 'Forgetting' 'Replay'?",
+    "options": {
+      "A": "Watching a video of the failure.",
+      "B": "Mixing previously learned data with current training data to help the model retain old knowledge.",
+      "C": "A software tool for logic checking.",
+      "D": "A security risk from exposing the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hardware' 'Quantization-Aware Training' (QAT)?",
+    "options": {
+      "A": "Training a model on a quantum computer.",
+      "B": "Simulating low-precision math during training so the model learns to be robust to quantization errors.",
+      "C": "Hiding the model from competitors.",
+      "D": "Turning a neural network into a chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient' 'Descent' 'Learning Rate Scheduler' 'Warmup'?",
+    "options": {
+      "A": "Turning on the computer heater.",
+      "B": "Starting training with a very small learning rate and increasing it to prevent early instability.",
+      "C": "A physical exercise for the developer.",
+      "D": "A way to speed up the data ingestion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature' 'Attribution' 'Integrated Gradients'?",
+    "options": {
+      "A": "Combining all features into one.",
+      "B": "An axiomatic approach to assigning importance scores to features based on the integral of gradients along a path.",
+      "C": "A way to delete unimportant features.",
+      "D": "A tool for the librarian."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Neural Networks', what is 'Universal Approximation' 'Relu'?",
+    "options": {
+      "A": "Relu networks are only for linear functions.",
+      "B": "A network using ReLU can approximate any continuous function given enough width.",
+      "C": "Relu networks are 100% accurate.",
+      "D": "Relu is used only by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight' 'Initialization' 'He' (Kaiming) standard?",
+    "options": {
+      "A": "Initializing weights to the value of PI.",
+      "B": "An initialization method designed specifically for ReLU networks to account for the zeroing of negative inputs.",
+      "C": "Initializing all weights to zero.",
+      "D": "Naming the model after its inventor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient' 'Accumulation' 'Batch Size' simulation?",
+    "options": {
+      "A": "Increasing the batch size to infinity.",
+      "B": "Calculating gradients over several small steps before updating weights to effectively use a larger batch size.",
+      "C": "A bug where gradients get stuck.",
+      "D": "A way to speed up the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Graph' 'Neural' 'Message Passing'?",
+    "options": {
+      "A": "Sending emails between nodes.",
+      "B": "A paradigm where nodes in a graph update their representations by aggregating information from their neighbors.",
+      "C": "A way to draw charts in Python.",
+      "D": "A security protocol for HDFS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Multi-Head Attention' 'Heads'?",
+    "options": {
+      "A": "Using 100 different computers.",
+      "B": "Parallel attention mechanisms that allow the model to focus on different types of information simultaneously.",
+      "C": "A way to name the different layers.",
+      "D": "A way to skip position info entirely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Denoising' 'Autoencoder' 'Noise' injection?",
+    "options": {
+      "A": "Screaming at the computer during training.",
+      "B": "Intentionally corrupting input data during training to force the model to learn robust features for reconstruction.",
+      "C": "A bug in the input layer.",
+      "D": "A way to speed up the data ingestion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural' 'Style' 'Transfer' 'Texture Synthesis'?",
+    "options": {
+      "A": "Creating a new type of cloth.",
+      "B": "Using the Gram Matrix of feature maps to synthesize artistic textures from a style image.",
+      "C": "A way to rotate images randomly.",
+      "D": "A tool for cooling the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deep Learning', what is 'Exposure Bias' in Seq2Seq models?",
+    "options": {
+      "A": "Being biased against researchers who are famous.",
+      "B": "The cumulative error caused when a model is trained with ground-truth inputs but tested using its own generated outputs.",
+      "C": "A security risk from exposing the source code.",
+      "D": "A problem with too much light in the lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ensemble' 'Stacking'?",
+    "options": {
+      "A": "Stacking server racks on top of each other.",
+      "B": "A method where a second-level model (meta-learner) is trained to combine the predictions of several base models.",
+      "C": "Hiring a group of developers to work together.",
+      "D": "Using only one very complex model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight' 'Quantization' 'Dynamic' vs 'Static'?",
+    "options": {
+      "A": "Static quantization is for images; Dynamic for text.",
+      "B": "Dynamic quantization calculates scales at runtime; Static quantization pre-calculates them using calibration data.",
+      "C": "Static quantization is 100x faster than Dynamic.",
+      "D": "There is no difference in accuracy between them."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spectral' 'Analysis' in neural networks?",
+    "options": {
+      "A": "Analyzing ghosts in the data.",
+      "B": "Studying the distribution of eigenvalues of the weight matrices or the Hessian to understand optimization.",
+      "C": "A security breach where spectral data is stolen.",
+      "D": "A way to count the number of layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Computer Vision', what is 'Panoptic' 'Segmentation'?",
+    "options": {
+      "A": "Deleting parts of an image.",
+      "B": "A unified task that combines Semantic Segmentation (categories) and Instance Segmentation (individual objects).",
+      "C": "Compressing an image into a smaller file.",
+      "D": "A way to rotate the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural' 'ODE' 'Adjoint' method?",
+    "options": {
+      "A": "A way to join two different models.",
+      "B": "A technique to calculate gradients through an ODE solver with constant memory cost, regardless of depth.",
+      "C": "The price of the content.",
+      "D": "The time it takes to distill the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BERT' 'MLM' (Masked Language Modeling)?",
+    "options": {
+      "A": "A model that can only encode images.",
+      "B": "A pre-training task where a certain percentage of input tokens are hidden and the model must predict them using context.",
+      "C": "A model that has zero output layer.",
+      "D": "A model that is used by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GPT' 'Causal' 'Masking'?",
+    "options": {
+      "A": "A model that can only decode images.",
+      "B": "A mask used in the attention mechanism to ensure that the prediction for a token only depends on previous tokens.",
+      "C": "A model that has zero input layer.",
+      "D": "A model used by students."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Checkpoint' 'Ensemble'?",
+    "options": {
+      "A": "Checking the model's grades.",
+      "B": "A technique where several checkpoints from a single training run are averaged to improve the final model's performance.",
+      "C": "Deleting the model after every epoch.",
+      "D": "A security check for the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Neural Networks', what is 'Gradient' 'Vanishing' 'Initialization' solution?",
+    "options": {
+      "A": "The model becoming too colorful.",
+      "B": "Using specialized initialization like He or Xavier to ensure that gradient variance is maintained across layers.",
+      "C": "A problem with too much data.",
+      "D": "A bug in the pooling layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reinforcement' 'Learning' 'Exploration' 'Entropy' Regularization?",
+    "options": {
+      "A": "Turning on the computer heater.",
+      "B": "Adding an entropy term to the objective function to encourage the agent to explore different actions and prevent premature convergence.",
+      "C": "A physical exercise for the developer.",
+      "D": "A way to speed up the data ingestion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Consistency' 'Regularization' 'Mean Teacher'?",
+    "options": {
+      "A": "A teacher who is very mean to students.",
+      "B": "A semi-supervised method where a 'student' network is regularized by a 'teacher' network that is an exponential moving average of its own weights.",
+      "C": "A way to delete unimportant features.",
+      "D": "A tool for the librarian."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Neural Networks', what is 'Implicit' 'Bias' of SGD?",
+    "options": {
+      "A": "Relu networks are only for linear functions.",
+      "B": "The tendency of Stochastic Gradient Descent to favor certain types of low-complexity solutions that generalize better, even without explicit regularization.",
+      "C": "Relu networks are 100% accurate.",
+      "D": "Relu is used only by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Normalisation' 'Group' 'Group Size' vs 'Batch Size'?",
+    "options": {
+      "A": "Initializing weights to the value of PI.",
+      "B": "In Group Normalization, performance is stable across a wide range of batch sizes because the groups are calculated per-sample.",
+      "C": "Initializing all weights to zero.",
+      "D": "Naming the model after its inventor."
+    },
+    "answer": "B"
+  }
+  ]
+}

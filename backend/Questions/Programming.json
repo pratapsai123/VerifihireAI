@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Programming", 
+  "questions": [
+    {
+    "question": "Which data type is most appropriate for storing a single character like 'A' or '$'?",
+    "options": {
+      "A": "String",
+      "B": "Float",
+      "C": "Char",
+      "D": "Boolean"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In most programming languages, variable names can start with a number.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Python",
+      "D": "Only if the number is zero"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Boolean' data type?",
+    "options": {
+      "A": "To store large decimal numbers.",
+      "B": "To store text strings.",
+      "C": "To represent one of two values: True or False.",
+      "D": "To handle complex mathematical formulas."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which loop is best used when you know the exact number of iterations beforehand?",
+    "options": {
+      "A": "While loop",
+      "B": "Do-While loop",
+      "C": "For loop",
+      "D": "Infinite loop"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An 'Array' is a collection of elements of the same data type stored in contiguous memory locations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in C++",
+      "D": "Only if the array size is prime"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the modulo operator (%) return?",
+    "options": {
+      "A": "The quotient of a division.",
+      "B": "The remainder of a division.",
+      "C": "The percentage of a number.",
+      "D": "The square root of a number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Logical Operator'?",
+    "options": {
+      "A": "+",
+      "B": "==",
+      "C": "&&",
+      "D": "="
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Constant' is a variable whose value cannot be changed once it is assigned.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Java",
+      "D": "False, constants can be changed in 'dev' mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the index of the first element in most zero-indexed programming languages?",
+    "options": {
+      "A": "1",
+      "B": "-1",
+      "C": "0",
+      "D": "Any number assigned by the user"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is used to end a statement in languages like C++, Java, and C#?",
+    "options": {
+      "A": "Period (.)",
+      "B": "Semicolon (;)",
+      "C": "Colon (:)",
+      "D": "Comma (,)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Compilers' translate high-level code into machine code all at once before execution.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python",
+      "D": "Only for web applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of the logical expression (True AND False)?",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Null",
+      "D": "Undefined"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data type would you use to store a price like 19.99?",
+    "options": {
+      "A": "Integer",
+      "B": "Float or Double",
+      "C": "Boolean",
+      "D": "Char"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Infinite Loop' is a loop that never finds its termination condition.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in JavaScript",
+      "D": "True, but only if the computer runs out of RAM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Function' in programming?",
+    "options": {
+      "A": "A physical button on the keyboard.",
+      "B": "A reusable block of code that performs a specific task.",
+      "C": "A type of database table.",
+      "D": "A mathematical error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is often used to exit a loop prematurely?",
+    "options": {
+      "A": "stop",
+      "B": "exit",
+      "C": "break",
+      "D": "return"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Global Variable' can be accessed from any part of the program.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in PHP",
+      "D": "Only if the variable is public"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Syntax' in programming?",
+    "options": {
+      "A": "The speed at which code runs.",
+      "B": "The set of rules defining the structure of the language.",
+      "C": "A tax on programmers.",
+      "D": "A bug that causes a crash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Comparison Operator'?",
+    "options": {
+      "A": "=",
+      "B": "!=",
+      "C": "++",
+      "D": "%"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'While' loop, the condition is checked *after* the code block executes.",
+    "options": {
+      "A": "True",
+      "B": "False (The condition is checked before)",
+      "C": "Only in C#",
+      "D": "Only if the loop is infinite"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Debugging' mean?",
+    "options": {
+      "A": "Adding more features to a program.",
+      "B": "The process of finding and fixing errors in code.",
+      "C": "Converting code to a different language.",
+      "D": "Deleting the entire project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data type is best for storing a whole number like 42?",
+    "options": {
+      "A": "String",
+      "B": "Char",
+      "C": "Integer",
+      "D": "Boolean"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Comments in code are executed by the computer to provide hints to the CPU.",
+    "options": {
+      "A": "True",
+      "B": "False (Comments are ignored by the compiler/interpreter)",
+      "C": "Only in HTML",
+      "D": "Only in modern AI-based languages"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which control structure allows you to choose between two or more blocks of code based on a condition?",
+    "options": {
+      "A": "Loop",
+      "B": "If-Else",
+      "C": "Function",
+      "D": "Variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Return' keyword in a function?",
+    "options": {
+      "A": "To go back to the first line of the code.",
+      "B": "To send a value back to the code that called the function.",
+      "C": "To delete the function from memory.",
+      "D": "To restart the computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: String concatenation is the process of joining two or more strings together.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Java",
+      "D": "Only for numbers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Algorithm'?",
+    "options": {
+      "A": "A musical rhythm used in coding.",
+      "B": "A step-by-step procedure for solving a problem.",
+      "C": "A specialized database.",
+      "D": "The physical hardware of a computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is used to store a sequence of characters?",
+    "options": {
+      "A": "Integer",
+      "B": "Float",
+      "C": "String",
+      "D": "Boolean"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An 'Interpreter' translates and executes code line-by-line during runtime.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for assembly language",
+      "D": "Only for C++"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scope' in programming?",
+    "options": {
+      "A": "The magnification of the code on the screen.",
+      "B": "The region of a program where a variable is defined and accessible.",
+      "C": "A tool used to find bugs.",
+      "D": "The total number of functions in a program."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used for assignment in most languages?",
+    "options": {
+      "A": "==",
+      "B": "=",
+      "C": ":=",
+      "D": "=>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Null' value represents a variable that has no value or points to nothing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Python",
+      "D": "False, Null is equal to zero"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Nested Loop'?",
+    "options": {
+      "A": "A loop that is broken.",
+      "B": "A loop inside another loop.",
+      "C": "A loop that runs very slowly.",
+      "D": "A loop used for bird-watching software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid way to increment a variable 'x' by 1?",
+    "options": {
+      "A": "x = 1",
+      "B": "x++",
+      "C": "x + 1",
+      "D": "inc(x)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Pass-by-Value', a copy of the actual parameter's value is made in memory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Strings",
+      "D": "Only in JavaScript"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'Header File' or 'Import' statement?",
+    "options": {
+      "A": "To clear the screen.",
+      "B": "To include external libraries or modules in your program.",
+      "C": "To set the title of the window.",
+      "D": "To encrypt the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which logic gate returns True only if both inputs are True?",
+    "options": {
+      "A": "OR",
+      "B": "XOR",
+      "C": "AND",
+      "D": "NOT"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Refactoring' means changing the code's external behavior without changing its internal structure.",
+    "options": {
+      "A": "False (It is changing the structure without changing behavior).",
+      "B": "True",
+      "C": "Only for UI design",
+      "D": "Only in Agile development"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Parameter' in the context of a function?",
+    "options": {
+      "A": "The name of the function.",
+      "B": "A variable passed into a function to be used as input.",
+      "C": "The output of a function.",
+      "D": "A type of mathematical constant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a multi-line comment in many C-style languages?",
+    "options": {
+      "A": "// Comment",
+      "B": "# Comment",
+      "C": "/* Comment */",
+      "D": "-- Comment"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An 'Integer Overflow' occurs when a value exceeds the maximum storage capacity of an integer type.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on 32-bit systems",
+      "D": "Only if using floating point numbers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Recursion'?",
+    "options": {
+      "A": "A way to repeat code using a for loop.",
+      "B": "A function that calls itself.",
+      "C": "A mathematical error.",
+      "D": "A process that deletes variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to handle exceptions or errors in many languages?",
+    "options": {
+      "A": "search",
+      "B": "find",
+      "C": "try",
+      "D": "error"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Class' is a blueprint for creating objects.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Object-Oriented languages",
+      "D": "Only if the class is static"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Indentation' in programming?",
+    "options": {
+      "A": "To make the computer run the code faster.",
+      "B": "To improve code readability and, in some languages, define code blocks.",
+      "C": "To encrypt the source code.",
+      "D": "To save disk space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT a primitive data type?",
+    "options": {
+      "A": "Int",
+      "B": "Char",
+      "C": "Array",
+      "D": "Boolean"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Variable' is a storage location in memory with a specific name.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for numbers",
+      "D": "Only in compiled languages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'CamelCase'?",
+    "options": {
+      "A": "A type of database.",
+      "B": "A naming convention where the first letter of each word is capitalized except for the first word.",
+      "C": "A way to compress text files.",
+      "D": "A specific error in the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which logic gate returns True if *either* input is True?",
+    "options": {
+      "A": "AND",
+      "B": "OR",
+      "C": "NOT",
+      "D": "NAND"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Syntax Error' will prevent a program from being compiled or executed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in C++",
+      "D": "False, the computer will guess the correct code"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Casting' in programming?",
+    "options": {
+      "A": "Throwing an error to the console.",
+      "B": "Converting a variable from one data type to another.",
+      "C": "A way to duplicate a function.",
+      "D": "Printing the code on paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loop will always execute at least once?",
+    "options": {
+      "A": "For loop",
+      "B": "While loop",
+      "C": "Do-While loop",
+      "D": "Switch case"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'High-level' languages are closer to human language than machine code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python",
+      "D": "Only for binary data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Main' function in most programs?",
+    "options": {
+      "A": "A function that is only used for debugging.",
+      "B": "The entry point where program execution begins.",
+      "C": "The function that stores global variables.",
+      "D": "A function that deletes the cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'DRY' stand for in programming?",
+    "options": {
+      "A": "Data Recovery Yield",
+      "B": "Don't Repeat Yourself",
+      "C": "Direct Resource Year",
+      "D": "Delete Redundant Yield"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static' variables retain their value between function calls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Java",
+      "D": "Only if they are constant"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following represents a 'Logical NOT' operator?",
+    "options": {
+      "A": "!",
+      "B": "~",
+      "C": "NOT",
+      "D": "Both A and C are common"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'Library' in programming?",
+    "options": {
+      "A": "A physical room where books about coding are kept.",
+      "B": "A collection of pre-written code that can be used by other programs.",
+      "C": "A database of all user passwords.",
+      "D": "The part of the IDE that stores saved files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Binary' code consists only of 0s and 1s.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on 64-bit systems",
+      "D": "False, it also includes 2s and 3s"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Switch Case' used for?",
+    "options": {
+      "A": "To turn the computer on and off.",
+      "B": "To select one of many code blocks to be executed based on a variable's value.",
+      "C": "To convert lowercase to uppercase.",
+      "D": "To monitor the temperature of the case."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Escape Character'?",
+    "options": {
+      "A": "\\n (Newline)",
+      "B": "\\t (Tab)",
+      "C": "\\\" (Double Quote)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'Syntax Error' is the same as a 'Logic Error'.",
+    "options": {
+      "A": "False (Logic errors produce wrong results; syntax errors prevent the code from running).",
+      "B": "True",
+      "C": "Only in Python",
+      "D": "True, but only if they happen at the same time"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Source Code'?",
+    "options": {
+      "A": "The binary code that the CPU runs.",
+      "B": "The human-readable instructions written by a programmer.",
+      "C": "The history of all code changes.",
+      "D": "The physical hardware of the motherboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to allocate memory dynamically in C++?",
+    "options": {
+      "A": "malloc",
+      "B": "new",
+      "C": "create",
+      "D": "alloc"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'IDE' stands for Integrated Development Environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web development",
+      "D": "Only for open-source tools"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which OOP principle refers to the ability of different classes to be treated as instances of the same interface through a single interface name?",
+    "options": {
+      "A": "Encapsulation",
+      "B": "Inheritance",
+      "C": "Polymorphism",
+      "D": "Abstraction"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Linked List' requires a contiguous block of memory to store its elements.",
+    "options": {
+      "A": "True",
+      "B": "False (Elements are linked via pointers and can be scattered in memory)",
+      "C": "Only if it is a Doubly Linked List",
+      "D": "Only in the C++ programming language"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the time complexity of searching for an element in a balanced Binary Search Tree (BST) in the average case?",
+    "options": {
+      "A": "O(1)",
+      "B": "O(n)",
+      "C": "O(log n)",
+      "D": "O(n log n)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a Stack data structure, which principle is used for adding and removing elements?",
+    "options": {
+      "A": "FIFO (First In First Out)",
+      "B": "LIFO (Last In First Out)",
+      "C": "Random Access",
+      "D": "Priority-based"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encapsulation' in Object-Oriented Programming?",
+    "options": {
+      "A": "The process of creating multiple objects from one class.",
+      "B": "Bundling data and methods that work on that data within a single unit and restricting access.",
+      "C": "A way to speed up the compilation of large files.",
+      "D": "The ability of a function to call itself."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Constructor' is a special method used to initialize an object when it is created.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Java and C#",
+      "D": "Only if the class is public"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which data structure uses the FIFO (First In First Out) principle?",
+    "options": {
+      "A": "Stack",
+      "B": "Queue",
+      "C": "Binary Tree",
+      "D": "Hash Map"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pointer' in languages like C and C++?",
+    "options": {
+      "A": "A variable that stores the memory address of another variable.",
+      "B": "An arrow icon used in the IDE to find errors.",
+      "C": "A data type used specifically for large decimal numbers.",
+      "D": "A function that points to the main entry of the program."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In 'Pass-by-Reference', changes made to the parameter inside the function affect the original variable.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the variable is a constant",
+      "D": "Only in Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'protected' access modifier usually indicate?",
+    "options": {
+      "A": "The member is accessible only within the same class.",
+      "B": "The member is accessible within the same class and by its subclasses.",
+      "C": "The member is accessible by any class in the entire program.",
+      "D": "The member is encrypted and hidden from the developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is the most efficient sorting algorithm for very large datasets in most cases?",
+    "options": {
+      "A": "Bubble Sort",
+      "B": "Insertion Sort",
+      "C": "Quick Sort",
+      "D": "Selection Sort"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An 'Abstract Class' can be instantiated directly to create an object.",
+    "options": {
+      "A": "False (It serves as a base for other classes and cannot be instantiated on its own).",
+      "B": "True",
+      "C": "True, but only if it has no methods",
+      "D": "False, but only in Java"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of a 'Hash Function' in a Hash Map?",
+    "options": {
+      "A": "To encrypt the data for security purposes.",
+      "B": "To map a key to a specific index in an array.",
+      "C": "To delete all duplicate items in the map.",
+      "D": "To sort the keys in alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Big O notation, which of the following represents the slowest growth (best performance)?",
+    "options": {
+      "A": "O(n^2)",
+      "B": "O(n log n)",
+      "C": "O(1)",
+      "D": "O(n)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Binary Tree' where every node has either 0 or 2 children is called a Full Binary Tree.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the tree is balanced",
+      "D": "Only if the tree is stored in an array"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Inheritance' in OOP?",
+    "options": {
+      "A": "The process by which one class acquires the properties and methods of another.",
+      "B": "The ability of a class to be deleted by the system.",
+      "C": "Creating a copy of an object in a different memory location.",
+      "D": "Passing a variable to a function by value."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which data structure is typically used to implement a 'Undo' feature in software?",
+    "options": {
+      "A": "Queue",
+      "B": "Linked List",
+      "C": "Stack",
+      "D": "Graph"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Method Overloading is defining multiple methods with the same name but different parameters within the same class.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Python",
+      "D": "Only if the methods return the same data type"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Memory Leak'?",
+    "options": {
+      "A": "When the computer's RAM physically leaks fluid.",
+      "B": "When a program fails to release memory it no longer needs, leading to increased usage.",
+      "C": "A security vulnerability where data is stolen from the RAM.",
+      "D": "A way to speed up the computer by clearing unused data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data structure is used by the 'Breadth-First Search' (BFS) algorithm to visit nodes in a graph?",
+    "options": {
+      "A": "Stack",
+      "B": "Priority Queue",
+      "C": "Queue",
+      "D": "Hash Set"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Static Method' belongs to the class itself rather than to any specific object instance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the method is private",
+      "D": "Only in C++"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Base Case' in a recursive function?",
+    "options": {
+      "A": "The first line of code in the function.",
+      "B": "The condition that stops the recursion and prevents infinite loops.",
+      "C": "The heaviest part of the algorithm's logic.",
+      "D": "The name of the function being called."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a key characteristic of a 'Set' data structure?",
+    "options": {
+      "A": "It allows duplicate elements.",
+      "B": "It stores elements in the order they were inserted.",
+      "C": "It contains only unique elements.",
+      "D": "It must always contain integers."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Circular Linked List' is a linked list where the last node points back to the first node.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it has more than 10 nodes",
+      "D": "Only if it is a doubly linked list"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Method Overriding'?",
+    "options": {
+      "A": "Deleting a method from a subclass.",
+      "B": "Providing a new implementation for a method that is already defined in a superclass.",
+      "C": "Calling a method multiple times in a row.",
+      "D": "Defining two methods with the same name in the same class."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the time complexity of inserting an element at the beginning of a Singly Linked List (given the head pointer)?",
+    "options": {
+      "A": "O(n)",
+      "B": "O(log n)",
+      "C": "O(1)",
+      "D": "O(n^2)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An 'Interface' can contain actual code for method implementations in standard Java versions (pre-Java 8).",
+    "options": {
+      "A": "False (It only contains method signatures; subclasses must implement them).",
+      "B": "True",
+      "C": "Only if the methods are static",
+      "D": "Only if using the 'default' keyword"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Destructor' used for?",
+    "options": {
+      "A": "To delete the source code from the disk.",
+      "B": "To perform cleanup tasks (like releasing memory or closing files) when an object is destroyed.",
+      "C": "To crash the program intentionally for testing.",
+      "D": "To reset the computer's CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data structure represents a 'hierarchical' relationship between elements?",
+    "options": {
+      "A": "Array",
+      "B": "Hash Table",
+      "C": "Tree",
+      "D": "Stack"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Garbage Collection is an automatic memory management process that removes objects no longer in use.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in C++",
+      "D": "Only if the user clicks 'Clean Up'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Composition' in the context of OOP?",
+    "options": {
+      "A": "Writing a long program in a single file.",
+      "B": "Creating a complex class by combining objects of other classes as its parts.",
+      "C": "The ability to inherit from multiple parents.",
+      "D": "Converting code into a mathematical set."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which sorting algorithm works by repeatedly picking the smallest element from the unsorted part and putting it at the beginning?",
+    "options": {
+      "A": "Selection Sort",
+      "B": "Merge Sort",
+      "C": "Bubble Sort",
+      "D": "Heap Sort"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Priority Queue', elements are removed based on their arrival time only.",
+    "options": {
+      "A": "False (Elements are removed based on their associated priority level).",
+      "B": "True",
+      "C": "Only if they all have the same priority",
+      "D": "Only in Java's implementation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the main benefit of using a 'Binary Search' over a 'Linear Search'?",
+    "options": {
+      "A": "It works on unsorted lists.",
+      "B": "It is much faster for large sorted lists.",
+      "C": "It requires less memory.",
+      "D": "It can find multiple items at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OOP concept allows the programmer to hide complex implementation details and only show necessary features?",
+    "options": {
+      "A": "Abstraction",
+      "B": "Inheritance",
+      "C": "Instantiation",
+      "D": "Recursion"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Graph' can contain cycles, whereas a 'Tree' cannot.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is a Directed Graph",
+      "D": "Only if the graph is fully connected"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Type Safety'?",
+    "options": {
+      "A": "The speed at which a person can type code.",
+      "B": "The extent to which a language prevents or discourages errors by ensuring variables are used consistently with their types.",
+      "C": "Encrypting your code with a password.",
+      "D": "A tool that checks for hardware failure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the time complexity of accessing an element in an array by its index?",
+    "options": {
+      "A": "O(n)",
+      "B": "O(1)",
+      "C": "O(log n)",
+      "D": "O(n^2)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Multiple Inheritance' (inheriting from more than one class) is supported in Java.",
+    "options": {
+      "A": "False (Java uses Interfaces to achieve similar goals without the complexity of multiple inheritance).",
+      "B": "True",
+      "C": "Only in the Enterprise version",
+      "D": "Only for static classes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'this' (or 'self') keyword?",
+    "options": {
+      "A": "To refer to the parent class of the current object.",
+      "B": "To refer to the current instance of the class.",
+      "C": "To create a new object from a different class.",
+      "D": "To restart the current function loop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data structure is typically used for a 'Call Stack' in a computer's memory?",
+    "options": {
+      "A": "Array",
+      "B": "Queue",
+      "C": "Stack",
+      "D": "Binary Search Tree"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Deep Copy' creates a new object and recursively copies all objects referenced by the original.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Arrays",
+      "D": "Only if the object is serialized"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Wrapper Class' used for?",
+    "options": {
+      "A": "To wrap the program in an installer.",
+      "B": "To convert primitive data types into objects.",
+      "C": "To hide a function from the compiler.",
+      "D": "To add a graphical border around the console output."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Graph, what is an 'Edge'?",
+    "options": {
+      "A": "The end of the data file.",
+      "B": "The connection between two vertices (nodes).",
+      "C": "A node with no connections.",
+      "D": "The border of the computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Binary Search' algorithm always requires the input list to be sorted.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using floating point numbers",
+      "D": "Only if the list is larger than 100 elements"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the time complexity of the 'Merge Sort' algorithm in the worst case?",
+    "options": {
+      "A": "O(n^2)",
+      "B": "O(n)",
+      "C": "O(n log n)",
+      "D": "O(1)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which keyword is often used to prevent a class from being inherited by other classes?",
+    "options": {
+      "A": "final or sealed",
+      "B": "static",
+      "C": "const",
+      "D": "private"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'HashMap' provides constant time O(1) average performance for put and get operations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the keys are integers",
+      "D": "Only if it contains less than 1000 items"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Late Binding'?",
+    "options": {
+      "A": "Finishing a coding assignment after the deadline.",
+      "B": "The process where the method to be called is determined at runtime based on the object's type.",
+      "C": "Waiting until the end of the program to assign memory.",
+      "D": "A way to link two different libraries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data structure is best for checking if an element exists in a massive dataset with no duplicates?",
+    "options": {
+      "A": "Linked List",
+      "B": "Array",
+      "C": "Set or Hash Set",
+      "D": "Stack"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Doubly Linked List' allows traversal in both forward and backward directions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is sorted",
+      "D": "Only in Java"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Exception Handling'?",
+    "options": {
+      "A": "To stop the program from ever starting.",
+      "B": "To gracefully manage runtime errors and prevent the program from crashing unexpectedly.",
+      "C": "To find typos in the source code.",
+      "D": "To optimize the database speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Binary Tree, what is a 'Leaf Node'?",
+    "options": {
+      "A": "The very first node at the top.",
+      "B": "A node that has no children.",
+      "C": "A node that has exactly two children.",
+      "D": "A node that contains a string value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Immutable' objects, the state of the object cannot be modified after it is created.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Functional programming",
+      "D": "Only if the object is public"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Dijkstra's Algorithm' used for?",
+    "options": {
+      "A": "Sorting strings alphabetically.",
+      "B": "Finding the shortest path between nodes in a graph.",
+      "C": "Deleting duplicate nodes in a tree.",
+      "D": "Compressing image files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a common way to resolve 'Hash Collisions' in a Hash Map?",
+    "options": {
+      "A": "Deleting the entire map.",
+      "B": "Chaining (using Linked Lists) or Open Addressing.",
+      "C": "Restarting the computer.",
+      "D": "Using a faster CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Overloading' happens at compile-time, while 'Overriding' happens at runtime.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in C++",
+      "D": "Both happen at compile-time"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Space Complexity' of an algorithm?",
+    "options": {
+      "A": "The amount of physical space the server takes up.",
+      "B": "The amount of memory an algorithm needs to run relative to the input size.",
+      "C": "The resolution of the graphical user interface.",
+      "D": "The number of lines of code in the source file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these data structures is typically used to store a 'Dictionary' of words and their definitions?",
+    "options": {
+      "A": "Stack",
+      "B": "Queue",
+      "C": "Map or Hash Table",
+      "D": "Linked List"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Queue' can be used to manage print jobs on a server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for black and white printers",
+      "D": "Only if the queue is stored in a database"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Polymorphism' through an Interface?",
+    "options": {
+      "A": "When one class has two different names.",
+      "B": "The ability of different classes that implement the same interface to be used interchangeably.",
+      "C": "Changing the color of the application UI.",
+      "D": "A way to duplicate a class blueprint."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Boxing' and 'Unboxing'?",
+    "options": {
+      "A": "A physical sport played by developers.",
+      "B": "The process of converting a value type to a reference type and back.",
+      "C": "Packing the server into a shipping box.",
+      "D": "A way to compress JSON data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Min-Heap', the parent node is always smaller than or equal to its children.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in binary heaps",
+      "D": "Only if the heap is balanced"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Pure Function'?",
+    "options": {
+      "A": "A function that has no parameters.",
+      "B": "A function where the return value is determined only by its input and has no side effects.",
+      "C": "A function that is written in assembly language.",
+      "D": "A function that cannot be modified."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used in Java and C# to inherit from a superclass?",
+    "options": {
+      "A": "extends or :",
+      "B": "parent",
+      "C": "copy",
+      "D": "implement"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Object-Oriented Programming (OOP) focus is on 'what to do', whereas Functional Programming focus is on 'how to represent data'.",
+    "options": {
+      "A": "False (OOP focuses on representing data through objects; Functional focuses on what to compute via functions).",
+      "B": "True",
+      "C": "Only in JavaScript",
+      "D": "Only for web development"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In memory management, what is the primary difference between a 'Stack' and a 'Heap'?",
+    "options": {
+      "A": "The stack is for large objects; the heap is for local variables.",
+      "B": "The stack is managed automatically via scope and is faster; the heap requires manual or GC-based management and is more flexible.",
+      "C": "The stack is stored on the hard drive; the heap is stored in the CPU cache.",
+      "D": "The stack allows random access; the heap only allows sequential access."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Deadlock' state, four conditions must be met: Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait.",
+    "options": {
+      "A": "True (known as Coffman conditions)",
+      "B": "False (only two conditions are necessary)",
+      "C": "True, but only in single-threaded systems",
+      "D": "False, circular wait is not a requirement"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Design Pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation?",
+    "options": {
+      "A": "Singleton",
+      "B": "Iterator",
+      "C": "Observer",
+      "D": "Adapter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the worst-case time complexity of adding an element to a Hash Map if collisions are handled via chaining?",
+    "options": {
+      "A": "O(1)",
+      "B": "O(log n)",
+      "C": "O(n)",
+      "D": "O(n^2)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'L' in the SOLID principles stand for?",
+    "options": {
+      "A": "Logistical Interface Segregation",
+      "B": "Liskov Substitution Principle",
+      "C": "Linear Dependency Inversion",
+      "D": "Layered Abstraction"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Tail Call Optimization (TCO) allows a recursive function to execute without increasing the size of the call stack.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Java",
+      "D": "Only for iterative loops"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of the 'Dependency Inversion' principle?",
+    "options": {
+      "A": "High-level modules should depend on low-level modules.",
+      "B": "Both high-level and low-level modules should depend on abstractions.",
+      "C": "Classes should be open for modification but closed for extension.",
+      "D": "Subclasses should be able to replace their base classes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which sorting algorithm has a guaranteed best-case, average-case, and worst-case time complexity of O(n log n)?",
+    "options": {
+      "A": "Quick Sort",
+      "B": "Merge Sort",
+      "C": "Bubble Sort",
+      "D": "Selection Sort"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'B-Tree' is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, and insertions in logarithmic time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for binary data",
+      "D": "Only in Python dictionaries"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Heap Fragmentation'?",
+    "options": {
+      "A": "When the CPU cache lines are overwritten.",
+      "B": "When free memory is broken into small non-contiguous blocks, making it difficult to allocate large objects.",
+      "C": "A process that speeds up the garbage collector.",
+      "D": "A security vulnerability involving buffer overflows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of concurrent programming, what is a 'Race Condition'?",
+    "options": {
+      "A": "A competition to see which programmer can write code faster.",
+      "B": "When the output of a program depends on the timing or sequence of uncontrollable events.",
+      "C": "When the program reaches its maximum execution speed.",
+      "D": "A way to optimize loops for multicore processors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Design Pattern is used to attach additional responsibilities to an object dynamically?",
+    "options": {
+      "A": "Strategy",
+      "B": "Decorator",
+      "C": "Factory",
+      "D": "Proxy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Strictly Typed' language, the type of a variable is determined at runtime.",
+    "options": {
+      "A": "False (Strict/Strong typing refers to how types are enforced; Dynamic/Static refers to when they are checked).",
+      "B": "True",
+      "C": "Only in JavaScript",
+      "D": "Only if the compiler is disabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the time complexity of the 'Floyd-Warshall' algorithm?",
+    "options": {
+      "A": "O(V^2)",
+      "B": "O(V^3)",
+      "C": "O(E log V)",
+      "D": "O(V + E)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Flyweight' design pattern primarily used for?",
+    "options": {
+      "A": "To secure the network connection.",
+      "B": "To reduce memory usage by sharing as much data as possible with similar objects.",
+      "C": "To create a lightweight version of a class for testing.",
+      "D": "To increase the speed of floating-point arithmetic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'SemaPhore' with a value of 1 is functionally identical to a Mutex.",
+    "options": {
+      "A": "False (Mutexes have ownership and priority inheritance; semaphores do not).",
+      "B": "True",
+      "C": "True, but only in Java",
+      "D": "False, a Mutex is always faster"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memoization' in Dynamic Programming?",
+    "options": {
+      "A": "Writing comments to help remember what code does.",
+      "B": "Storing the results of expensive function calls and returning the cached result when the same inputs occur.",
+      "C": "A method to delete old variables from memory.",
+      "D": "Formatting the code to look more professional."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these represents 'O(n!)' complexity?",
+    "options": {
+      "A": "A binary search.",
+      "B": "Finding all permutations of a string.",
+      "C": "Sorting an array with Quick Sort.",
+      "D": "Iterating through a linked list."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Double Dispatch' is a mechanism that dispatches a function call to different concrete functions based on the runtime types of two objects involved.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in functional programming",
+      "D": "Only in C++"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Priority Inversion' in multitasking?",
+    "options": {
+      "A": "When a low-priority task holds a resource needed by a high-priority task, causing the high-priority task to wait.",
+      "B": "When the CPU switches priorities of all tasks randomly.",
+      "C": "A way to speed up high-priority tasks.",
+      "D": "When the administrator changes the task priority in the OS."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Observer' design pattern?",
+    "options": {
+      "A": "To allow a developer to observe the code while it runs.",
+      "B": "To define a one-to-many dependency between objects so that when one object changes state, all its dependents are notified.",
+      "C": "To keep track of how many users are logged in.",
+      "D": "To monitor the hardware performance of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Non-blocking I/O' system, a thread must wait for the data to be fully read from the disk before continuing.",
+    "options": {
+      "A": "False (The thread is notified when data is ready or it can poll for status).",
+      "B": "True",
+      "C": "Only if using asynchronous calls",
+      "D": "True, but only on Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Currying' in functional programming?",
+    "options": {
+      "A": "Adding spice to the code comments.",
+      "B": "Translating the evaluation of a function that takes multiple arguments into evaluating a sequence of functions, each with a single argument.",
+      "C": "Deleting unused functions automatically.",
+      "D": "A way to speed up the execution of loops."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data structure is most efficient for implementing a 'Least Recently Used' (LRU) Cache?",
+    "options": {
+      "A": "Array",
+      "B": "Hash Map combined with a Doubly Linked List",
+      "C": "Binary Search Tree",
+      "D": "Stack"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'P vs NP' is a major unsolved problem in computer science that asks whether every problem whose solution can be quickly verified can also be quickly solved.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "It was solved in 2021",
+      "D": "It only applies to encryption algorithms"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Reflection' in programming?",
+    "options": {
+      "A": "The code mirror-imaging itself for backup.",
+      "B": "The ability of a program to examine, introspect, and modify its own structure and behavior at runtime.",
+      "C": "A security feature that blocks unauthorized access.",
+      "D": "A way to see the source code in the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a characteristic of a 'Microkernel' architecture?",
+    "options": {
+      "A": "All system services run in the kernel space.",
+      "B": "Only essential services run in the kernel; most others run in user space.",
+      "C": "It is only used for small embedded devices.",
+      "D": "It is written entirely in assembly language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Type Erasure' in Java means that generic type information is removed during compilation and is not available at runtime.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for primitive types",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Copy-on-Write' (COW)?",
+    "options": {
+      "A": "An optimization strategy where the actual copy of a resource is deferred until the first time it is modified.",
+      "B": "A legal protection for software authors.",
+      "C": "A way to write code twice for safety.",
+      "D": "A hardware feature that backups data while the user types."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the time complexity of the 'A*' search algorithm in the worst case?",
+    "options": {
+      "A": "O(V + E)",
+      "B": "Exponential O(b^d) where b is the branching factor.",
+      "C": "O(log n)",
+      "D": "O(n^2)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Deadlock', the 'No Preemption' condition means that a resource can only be released voluntarily by the thread holding it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a Mutex",
+      "D": "Only on Linux systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic Link Library' (DLL) Hell?",
+    "options": {
+      "A": "A place where broken servers go.",
+      "B": "Conflict between different versions of shared library files in a system.",
+      "C": "A security attack targeting DLL files.",
+      "D": "A database error involving foreign keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Design Pattern uses a 'private static' instance of the class and a 'public static' method to return that instance?",
+    "options": {
+      "A": "Factory",
+      "B": "Singleton",
+      "C": "Builder",
+      "D": "Prototype"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Idempotent' operation is one that can be performed multiple times without changing the result beyond the initial application.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for GET requests",
+      "D": "Only in SQL"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Closure' in programming?",
+    "options": {
+      "A": "Closing the application gracefully.",
+      "B": "A function that remembers and accesses variables from its lexical scope even when executed outside that scope.",
+      "C": "The last line of a code file.",
+      "D": "A security feature that hides private variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which sorting algorithm is commonly used internally by Java for primitive types (Dual-Pivot)?",
+    "options": {
+      "A": "Merge Sort",
+      "B": "Quick Sort",
+      "C": "Insertion Sort",
+      "D": "Radix Sort"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Heuristic' in algorithm design refers to a technique that finds an optimal solution to a problem given unlimited time.",
+    "options": {
+      "A": "False (It is a practical method not guaranteed to be optimal but sufficient for immediate goals).",
+      "B": "True",
+      "C": "Only for AI algorithms",
+      "D": "Only in graph theory"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cache Thrashing'?",
+    "options": {
+      "A": "When the cache is too small for the data.",
+      "B": "A state where the computer spends more time moving data in and out of the cache than actually processing it.",
+      "C": "A way to clear the cache using a hammer icon.",
+      "D": "A hardware failure in the CPU cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Visitor' design pattern useful for?",
+    "options": {
+      "A": "Welcoming new users to the application.",
+      "B": "Adding new operations to existing object structures without modifying them.",
+      "C": "Counting how many times an object is accessed.",
+      "D": "Moving objects between different servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'Big-Endian' systems, the most significant byte is stored at the smallest memory address.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Intel processors",
+      "D": "Only for 64-bit integers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Trie' (Prefix Tree) primarily used for?",
+    "options": {
+      "A": "Storing images in a compressed format.",
+      "B": "Fast retrieval of keys in a large dataset, often for autocomplete features.",
+      "C": "Sorting numbers in ascending order.",
+      "D": "Managing the power state of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Compaction'?",
+    "options": {
+      "A": "Compressing memory using ZIP algorithms.",
+      "B": "The process of moving allocated objects together in memory to eliminate fragmentation.",
+      "C": "Deleting unused memory segments.",
+      "D": "A tool to increase the RAM capacity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'State' design pattern allows an object to alter its behavior when its internal state changes, appearing as if the object changed its class.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in functional programming",
+      "D": "Only for UI elements"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Dining Philosophers' problem meant to illustrate?",
+    "options": {
+      "A": "The cost of meals for developers.",
+      "B": "Challenges of resource allocation and deadlock in concurrent systems.",
+      "C": "A specific logic error in the C language.",
+      "D": "The history of computer science philosophy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'RAII' (Resource Acquisition Is Initialization) in C++?",
+    "options": {
+      "A": "A way to initialize variables to zero.",
+      "B": "A technique where resource management is tied to object lifetime (constructor/destructor).",
+      "C": "A specialized compiler mode for high speed.",
+      "D": "A database protocol for C++."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Big O notation, O(log n) is strictly better than O(sqrt(n)).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if n is less than 100",
+      "D": "They are functionally equal"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lazy Initialization'?",
+    "options": {
+      "A": "When a developer waits until the last minute to write code.",
+      "B": "Delaying the creation of an object or calculation of a value until it is actually needed.",
+      "C": "Initializing variables with random values.",
+      "D": "A bug where a variable is never initialized."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantics' vs 'Syntax' in programming?",
+    "options": {
+      "A": "Syntax is the rules; Semantics is the meaning or logic behind the code.",
+      "B": "They are the same thing.",
+      "C": "Syntax is for text; Semantics is for binary.",
+      "D": "Semantics is the rules; Syntax is the meaning."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Critical Section' is a part of the code that accesses a shared resource and must not be executed by more than one thread at a time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a database",
+      "D": "Only in kernel programming"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Function Currying' useful for?",
+    "options": {
+      "A": "Adding extra descriptive words to the title.",
+      "B": "Partial function application, allowing you to create new functions from existing ones by fixing some arguments.",
+      "C": "Making the code more colorful.",
+      "D": "Increasing the speed of function calls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Structural' design pattern?",
+    "options": {
+      "A": "Strategy",
+      "B": "Facade",
+      "C": "Iterator",
+      "D": "Singleton"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Duck Typing' is a concept where the suitability of an object for a purpose is determined by the presence of certain methods/properties, rather than its inheritance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Java",
+      "D": "Only for object-oriented languages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cache Coherency'?",
+    "options": {
+      "A": "Ensuring that the cache is cleaned every day.",
+      "B": "The consistency of shared resource data stored in multiple local caches.",
+      "C": "The total capacity of the CPU cache.",
+      "D": "A way to see who accessed the cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which algorithmic technique is used by 'Dijkstra's' and 'Prim's' algorithms?",
+    "options": {
+      "A": "Divide and Conquer",
+      "B": "Greedy Algorithm",
+      "C": "Backtracking",
+      "D": "Dynamic Programming"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Inversion of Control' (IoC) is a design principle where the control of object creation and lifecycle is delegated to a container or framework.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Spring Boot",
+      "D": "Only for web APIs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary risk of using 'Shared Mutable State' in concurrent applications?",
+    "options": {
+      "A": "It makes the code too long.",
+      "B": "It leads to data races and non-deterministic behavior.",
+      "C": "It increases the cost of the cloud server.",
+      "D": "It identifies the user's location."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Amdahl's Law' used for?",
+    "options": {
+      "A": "To calculate the price of a CPU.",
+      "B": "To predict the theoretical speedup in latency of the execution of a task at a fixed workload that can be expected of a system whose resources are improved.",
+      "C": "To find bugs in parallel code.",
+      "D": "To monitor the temperature of the motherboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Monotonic Time' is a clock that only moves forward and is never affected by system time adjustments like NTP sync.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'JIT' (Just-In-Time) compiler?",
+    "options": {
+      "A": "To compile code exactly 1 minute before it runs.",
+      "B": "To compile bytecode into native machine code at runtime to improve performance.",
+      "C": "To find syntax errors just in time.",
+      "D": "To delete old binary files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Design Pattern provides a unified interface to a set of interfaces in a subsystem (making the subsystem easier to use)?",
+    "options": {
+      "A": "Proxy",
+      "B": "Facade",
+      "C": "Adapter",
+      "D": "Bridge"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Endianness' refers to the order or sequence in which bytes of a multi-byte data type are stored in memory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in C++",
+      "D": "Only on mobile devices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Alignment'?",
+    "options": {
+      "A": "Organizing files on the hard drive.",
+      "B": "Storing data in memory at addresses that are multiples of the data size to improve CPU access speed.",
+      "C": "Aligning the text in the code editor.",
+      "D": "A way to see the memory address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Command' design pattern primarily used for?",
+    "options": {
+      "A": "To run terminal commands automatically.",
+      "B": "To encapsulate a request as an object, allowing for parameterization, queuing, and undoable operations.",
+      "C": "To hide a function from the admin.",
+      "D": "To increase the priority of an API call."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Paging' is a memory management scheme that eliminates the need for contiguous allocation of physical memory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for virtual machines",
+      "D": "Only in the 64-bit kernel"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Strict Aliasing' in C and C++?",
+    "options": {
+      "A": "A rule that forbids using two different names for the same user.",
+      "B": "A compiler assumption that pointers of different types do not refer to the same memory location.",
+      "C": "A security feature that blocks unauthorized pointers.",
+      "D": "A way to see the pointer address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these algorithms is used to find the 'Strongly Connected Components' of a directed graph?",
+    "options": {
+      "A": "Dijkstra's",
+      "B": "Tarjan's or Kosaraju's",
+      "C": "Prim's",
+      "D": "Kruskal's"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Tail Recursion' is always more efficient than iteration in all programming languages.",
+    "options": {
+      "A": "False (It is only efficient in languages that implement Tail Call Optimization).",
+      "B": "True",
+      "C": "Only if using the 'final' keyword",
+      "D": "Only in Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Mediator' design pattern used for?",
+    "options": {
+      "A": "To negotiate between two different companies.",
+      "B": "To reduce complex dependencies between objects by making them communicate through a central mediator object.",
+      "C": "To calculate the average speed of the network.",
+      "D": "To monitor the uptime of the server."
+    },
+    "answer": "B"
+  }
+  ]
+}

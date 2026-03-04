@@ -1,0 +1,1965 @@
+{ 
+  "skill": "Grafana", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of Grafana?",
+    "options": {
+      "A": "To act as a primary database for storing log files.",
+      "B": "To provide a multi-platform open-source analytics and interactive visualization web application.",
+      "C": "To compile source code into executable binaries.",
+      "D": "To provide a physical firewall for the office network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Grafana, what is a 'Data Source'?",
+    "options": {
+      "A": "A physical battery for the server.",
+      "B": "A connection to a backend that provides data (e.g., Prometheus, MySQL, InfluxDB).",
+      "C": "A specialized tool for cleaning monitors.",
+      "D": "The person who writes the application code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Grafana can connect to multiple different data sources at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Enterprise edition",
+      "D": "Only if they are from the same manufacturer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Panel' in a Grafana dashboard?",
+    "options": {
+      "A": "A physical solar panel for the data center.",
+      "B": "The basic visualization block (graph, table, gauge) that displays data from a query.",
+      "C": "A list of all users logged into the system.",
+      "D": "A specialized software for spreadsheets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'Dashboard'?",
+    "options": {
+      "A": "A physical steering wheel for a server.",
+      "B": "A set of one or more panels organized and arranged into a single view.",
+      "C": "A backup of the entire database.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Visualization' type available in Grafana?",
+    "options": {
+      "A": "Time series graph",
+      "B": "Bar chart",
+      "C": "Heatmap",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Grafana Variables (Templating) allow you to create dynamic dashboards where users can select values like 'host' or 'environment' from a dropdown.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Prometheus data",
+      "D": "Only if using a mobile app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Time Picker' in Grafana do?",
+    "options": {
+      "A": "It changes the time zone of the server room.",
+      "B": "It allows you to control the time range of the data displayed on the dashboard.",
+      "C": "It acts as a physical alarm clock for engineers.",
+      "D": "It deletes old data after a certain time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Grafana, what is an 'Organization'?",
+    "options": {
+      "A": "A folder for keeping physical paper files.",
+      "B": "A logical grouping of users, dashboards, and data sources for access control.",
+      "C": "A list of all the company's competitors.",
+      "D": "A specialized tool for drawing diagrams."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Grafana is strictly limited to visualizing data and cannot send alerts.",
+    "options": {
+      "A": "False (Grafana has a built-in alerting engine that can notify users via Slack, email, etc.).",
+      "B": "True",
+      "C": "Only in version 1.0",
+      "D": "Only for non-commercial use"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a popular data source used with Grafana for time-series metrics?",
+    "options": {
+      "A": "Microsoft Word",
+      "B": "Prometheus",
+      "C": "Adobe Reader",
+      "D": "WinZip"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default port for the Grafana web interface?",
+    "options": {
+      "A": "80",
+      "B": "3000",
+      "C": "9090",
+      "D": "8080"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Row' in a Grafana dashboard can be used to group related panels together.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a widescreen monitor",
+      "D": "Only if the panels are of the same type"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Transformations' in Grafana?",
+    "options": {
+      "A": "To change the physical appearance of the server.",
+      "B": "To manipulate data (rename, join, filter) after it is fetched but before it is visualized.",
+      "C": "To encrypt individual data points.",
+      "D": "To monitor the daily cost of the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status indicates that a Grafana Alert is currently being sent to the notification channel?",
+    "options": {
+      "A": "OK",
+      "B": "Firing",
+      "C": "Pending",
+      "D": "No Data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Grafana can visualize log data from sources like Loki or Elasticsearch.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux logs",
+      "D": "Only if the logs are in JSON format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Snapshot' in Grafana?",
+    "options": {
+      "A": "A physical photo of the server rack.",
+      "B": "An interactive, read-only copy of a dashboard at a specific point in time that can be shared externally.",
+      "C": "A way to increase the disk space of the server.",
+      "D": "A specialized tool for cleaning keyboards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Explore' mode in Grafana allow you to do?",
+    "options": {
+      "A": "Explore the physical data center building.",
+      "B": "Query and interact with your data sources directly without creating a permanent dashboard.",
+      "C": "Find a lost file on a hard drive.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can set a 'Refresh Interval' to have a dashboard update its data automatically at regular intervals.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database sources",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Plugin' in Grafana?",
+    "options": {
+      "A": "A physical electrical plug.",
+      "B": "An extension that adds new data sources, panel types, or apps to the Grafana platform.",
+      "C": "A tool to delete old monitoring data.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Folder' in the Grafana UI?",
+    "options": {
+      "A": "A physical drawer in an office.",
+      "B": "A logical container used to organize and manage permissions for multiple dashboards.",
+      "C": "A way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Grafana Cloud' is a managed service where the platform is hosted by Grafana Labs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Administrator' in Grafana?",
+    "options": {
+      "A": "To write application code.",
+      "B": "To manage users, organizations, data sources, and server-wide settings.",
+      "C": "To handle the company's financial accounting.",
+      "D": "To monitor the physical power usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Grafana, what is 'Annotation' used for?",
+    "options": {
+      "A": "To write a fictional story on a graph.",
+      "B": "To mark specific events (like code deployments) on a graph to correlate them with metric changes.",
+      "C": "To encrypt the database password.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Grafana supports 'Provisioning' where dashboards and data sources are configured using configuration files (YAML) rather than the UI.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Legend' in a graph panel?",
+    "options": {
+      "A": "To tell ancient stories about the server.",
+      "B": "To provide labels for the different time series lines or bars displayed on the graph.",
+      "C": "To encrypt the data labels.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a panel indicates that a query is taking too long to return data?",
+    "options": {
+      "A": "Timeout",
+      "B": "OK",
+      "C": "Pending",
+      "D": "Resolved"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana can be used to visualize data from SQL databases like PostgreSQL or MySQL.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the database is in the cloud",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threshold' setting in a panel configuration?",
+    "options": {
+      "A": "The door to the data center.",
+      "B": "A specific value used to trigger a color change in the visualization (e.g., turning a gauge red if CPU > 90%).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Multi-Tenancy' in Grafana?",
+    "options": {
+      "A": "One user having ten dashboards.",
+      "B": "The ability for multiple separate organizations to use the same Grafana instance with isolated data and users.",
+      "C": "A building with ten different server rooms.",
+      "D": "Using ten different programming languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the 'Stat' visualization is best for showing a single current large numerical value.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for error metrics",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Query Inspector'?",
+    "options": {
+      "A": "To inspect the physical hardware of the server.",
+      "B": "To view the raw request and response data between Grafana and the data source to troubleshoot query issues.",
+      "C": "To write documentation for the team.",
+      "D": "To monitor the daily stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Action' allows you to share a Grafana dashboard as a JSON file?",
+    "options": {
+      "A": "Export",
+      "B": "Import",
+      "C": "Clone",
+      "D": "Delete"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana's 'Logs' panel can only display logs from a single file on a local disk.",
+    "options": {
+      "A": "False (It can display logs from various aggregators like Loki, Elasticsearch, or Datadog).",
+      "B": "True",
+      "C": "Only in version 2.0",
+      "D": "Only for non-encrypted logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Alerting' based on?",
+    "options": {
+      "A": "Guessing when an alert might happen.",
+      "B": "Defining rules that evaluate queries over a period of time and trigger notifications when conditions are met.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The history of all previous server reboots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web access to Grafana by default?",
+    "options": {
+      "A": "80",
+      "B": "3000",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Public Dashboards' allow anyone with a link to view a dashboard without requiring them to log in.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for government agencies",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Faro'?",
+    "options": {
+      "A": "A tool for fixing servers.",
+      "B": "An SDK used for Real User Monitoring (RUM) to collect performance data from the frontend of an application.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Grafana, what does 'Grouping' in a query do?",
+    "options": {
+      "A": "Combines multiple data streams into a single visualization based on shared labels.",
+      "B": "Makes the graphs physically bigger.",
+      "C": "Deletes duplicate data points.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Variables' makes dashboards more flexible by allowing users to toggle between different views without changing the dashboard itself.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Mimir'?",
+    "options": {
+      "A": "A specialized tool for drawing clouds.",
+      "B": "A highly scalable, long-term storage backend for Prometheus metrics that is compatible with Grafana.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for secure HTTPS management of a Grafana instance (if configured)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Gage' visualization displays data using a circular dial or vertical bar to show progress relative to a maximum value.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for latency metrics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Grafana Agent'?",
+    "options": {
+      "A": "To write application code.",
+      "B": "A lightweight telemetry collector to collect and send metrics, logs, and traces to a backend like Grafana Cloud.",
+      "C": "A specialized tool for cleaning server hardware.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a dashboard variable indicates that it is fetching values from a data source?",
+    "options": {
+      "A": "Loading",
+      "B": "OK",
+      "C": "Ready",
+      "D": "Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can change the theme of Grafana between 'Light' and 'Dark' modes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the year 2026",
+      "D": "Only if using a widescreen monitor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Loki' primarily used for?",
+    "options": {
+      "A": "Counting the number of physical clouds.",
+      "B": "A cost-effective, multi-tenant log aggregation system inspired by Prometheus.",
+      "C": "A specialized way to encrypt database files.",
+      "D": "A way to backup the power grid."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used by Grafana to connect to an external Prometheus data source?",
+    "options": {
+      "A": "80",
+      "B": "9090",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Grafana, 'Tags' can be used to filter dashboards in the search interface.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana OnCall'?",
+    "options": {
+      "A": "A tool for making phone calls over the internet.",
+      "B": "An incident response tool that helps manage on-call rotations and scheduling within the Grafana platform.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to calculate the total number of visits to a dashboard?",
+    "options": {
+      "A": "Grafana Internal Metrics (e.g., grafana_stat_totals_dashboards)",
+      "B": "system.cpu.usage",
+      "C": "The color of the dashboard",
+      "D": "The number of pixels on a screen"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Dashboard Variable' can use a regex to filter the list of possible values.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only if using version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Library Panels' in Grafana?",
+    "options": {
+      "A": "Panels that can only be used in a literal library.",
+      "B": "Re-usable panels that can be defined once and used across multiple dashboards; changes to the library panel update all dashboards.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "Hiring a new visualization manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Grafana can be configured to use external authentication providers like OAuth, LDAP, or SAML.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Tempo'?",
+    "options": {
+      "A": "A tool for measuring the speed of light.",
+      "B": "A high-volume, minimal dependency distributed tracing backend.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the trace database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a dashboard indicates that the Grafana server is unable to connect to the data source?",
+    "options": {
+      "A": "Data source connection error",
+      "B": "OK",
+      "C": "Ready",
+      "D": "Resolved"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can use 'Calculations' (like mean, total, last) to summarize the data shown in a legend.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canvas' visualization in Grafana?",
+    "options": {
+      "A": "A way to draw literal art on a server.",
+      "B": "A flexible, drag-and-drop visualization that allows for creating custom static diagrams and infographics with live data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Users' currently active in a Grafana instance?",
+    "options": {
+      "A": "grafana_active_sessions",
+      "B": "system_user_count",
+      "C": "node_sessions_total",
+      "D": "grafana_total_accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana supports 'Interactive' panels where users can click on data points to drill down into other dashboards or external links.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Incident'?",
+    "options": {
+      "A": "A specialized tool for drawing networks.",
+      "B": "A dedicated application within Grafana for managing and collaborating during system incidents.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana can be used to visualize data from cloud providers like AWS CloudWatch or Azure Monitor.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Phlare'?",
+    "options": {
+      "A": "A tool for fixing servers.",
+      "B": "A database for continuous profiling data (now part of Grafana Pyroscope).",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Grafana, what is the primary purpose of 'Chained Variables'?",
+    "options": {
+      "A": "To link multiple physical server racks together in the UI.",
+      "B": "To create a dependency where the values of one variable are filtered based on the current selection of another variable (e.g., selecting a 'Region' updates the 'Host' list).",
+      "C": "To encrypt the dashboard URL.",
+      "D": "To increase the polling frequency of the data source."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Grafana 'Transformation' should be used to merge data from two different data sources into a single table based on a common time column?",
+    "options": {
+      "A": "Filter data by name",
+      "B": "Join by field",
+      "C": "Organize fields",
+      "D": "Add field from calculation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Grafana Alerting, a 'Contact Point' defines WHERE a notification is sent (e.g., a specific Slack channel or email address).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Prometheus alerts",
+      "D": "Only if using Grafana Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Organize fields' transformation in a Panel?",
+    "options": {
+      "A": "To delete all data fields except for the timestamp.",
+      "B": "To rename, reorder, or hide specific columns/fields returned by a query for a cleaner visualization.",
+      "C": "To backup the panel configuration to a JSON file.",
+      "D": "To monitor the CPU temperature of the Grafana server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable type allows you to define a static, comma-separated list of values manually in the dashboard settings?",
+    "options": {
+      "A": "Query",
+      "B": "Custom",
+      "C": "Text box",
+      "D": "Constant"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Notification Policies' in Grafana allow you to route alerts to different Contact Points based on labels and timing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for system administrators",
+      "D": "Only in version 9.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Ad hoc filters' variable type allow a user to do on a dashboard?",
+    "options": {
+      "A": "Automatically delete all graphs on the page.",
+      "B": "Add key-value filters on the fly that apply to all queries on the dashboard that use that data source.",
+      "C": "A specialized way to encrypt the dashboard password.",
+      "D": "The process of moving panels between folders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific panel setting allows you to display a 'unit' (e.g., Celsius, Bytes, or Percent) next to the numerical values?",
+    "options": {
+      "A": "Standard options > Unit",
+      "B": "Field > Unit",
+      "C": "Legend > Unit",
+      "D": "Both A and B depending on the visualization type."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Grafana 'Dashboard Version History' allows you to compare two versions of a dashboard and restore an older one if a mistake was made.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Enterprise edition",
+      "D": "Only if the dashboard is in the 'General' folder"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Value Mappings' in a Stat or Table panel?",
+    "options": {
+      "A": "To map the physical location of servers on a world map.",
+      "B": "To replace specific numerical values or ranges with text and colors (e.g., mapping '1' to 'UP' in green and '0' to 'DOWN' in red).",
+      "C": "To encrypt the database connection string.",
+      "D": "To increase the internet speed of the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Grafana Alerting, what does the 'Mute Timings' feature accomplish?",
+    "options": {
+      "A": "It turns off the sound on the administrator's computer.",
+      "B": "It prevents alerts from sending notifications during specific recurring time windows, such as planned maintenance or non-business hours.",
+      "C": "It deletes alerts that have been firing for more than 24 hours.",
+      "D": "It slows down the CPU of the Grafana host."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the 'Mixed' data source allows a single panel to display data from two completely different backends (e.g., CloudWatch and Prometheus).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the Time Series panel",
+      "D": "Only if using fiber optic links"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Grafana Image Renderer' plugin?",
+    "options": {
+      "A": "To edit photos inside Grafana.",
+      "B": "To allow Grafana to capture snapshots of panels or dashboards as PNG images for inclusion in emails or Slack alerts.",
+      "C": "To increase the resolution of the dashboard icons.",
+      "D": "To backup the source code of the visualization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' would you use to calculate the 'Total' sum of a column and display it as a new row or field?",
+    "options": {
+      "A": "Add field from calculation",
+      "B": "Reduce",
+      "C": "Group by",
+      "D": "Filter data by values"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Query' variable, you can use a Regex to filter the values returned by the data source before they are shown in the dropdown.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL data sources",
+      "D": "Only in the 'standard' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dashboard Provisioning' in the context of GitOps?",
+    "options": {
+      "A": "Giving names to the dashboards manually.",
+      "B": "The process of automatically deploying dashboards from JSON files stored in a version control system (like Git) to the Grafana server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new visualization team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' in the Alerting UI indicates that the alert condition is met but the 'Wait time' (pending period) hasn't finished yet?",
+    "options": {
+      "A": "Firing",
+      "B": "Pending",
+      "C": "Normal",
+      "D": "No Data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can set a 'Min' and 'Max' value for the Y-axis of a graph to prevent the scale from changing automatically.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Counter metrics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Repeat' setting in a Panel or Row?",
+    "options": {
+      "A": "To repeat the same alert every minute.",
+      "B": "To automatically duplicate the panel or row for every value selected in a multi-value variable (e.g., creating a separate graph for every host).",
+      "C": "To restart the dashboard every hour.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which transformation allows you to perform SQL-like grouping and aggregation (e.g., Summing sales by Region) on the data within Grafana?",
+    "options": {
+      "A": "Group by",
+      "B": "Filter by name",
+      "C": "Outer Join",
+      "D": "Series to rows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Service Account' in Grafana can be used to provide API access to external tools without tying it to a specific human user's credentials.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-based accounts",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Override' system in panel configurations?",
+    "options": {
+      "A": "To override the administrator's password.",
+      "B": "To apply specific settings (like color or unit) to a single time series or column that differ from the panel's general defaults.",
+      "C": "To encrypt the database connection.",
+      "D": "To monitor the temperature of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for the Grafana Live feature (WebSockets) to provide real-time data streaming?",
+    "options": {
+      "A": "80",
+      "B": "3000 (standard port used for the WebSocket connection)",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Grafana supports 'Public Dashboards' which allow anyone with the link to view the data without logging in.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Query Inspector' JSON tab used for?",
+    "options": {
+      "A": "To write code for a new website.",
+      "B": "To view the raw data structure returned by the data source, helping to debug how transformations or visualizations are interpreting the data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Visualization' is best for showing a distribution of values over time, highlighting outliers and density?",
+    "options": {
+      "A": "Stat",
+      "B": "Heatmap",
+      "C": "Bar Gauge",
+      "D": "Table"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Template Variables' in the 'Title' of a panel so the title updates based on what the user has selected.",
+    "options": {
+      "A": "True (e.g., 'CPU Usage for $host').",
+      "B": "False",
+      "C": "Only for Windows guests",
+      "D": "Only if using version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Grafana Alerting' Silences?",
+    "options": {
+      "A": "To delete all alerts in a folder.",
+      "B": "To temporarily stop notifications for a set of alerts based on matching labels, without disabling the alert rules themselves.",
+      "C": "To encrypt the alert payload.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dashboards' currently stored in a Grafana instance?",
+    "options": {
+      "A": "grafana_stat_totals_dashboards",
+      "B": "system_dashboard_count",
+      "C": "node_dashboard_total",
+      "D": "grafana_active_dashboards"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Grafana Faro' is primarily used to collect frontend logs, errors, and performance metrics from user browsers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Mimir' ingestion performance?",
+    "options": {
+      "A": "It is identical to a single Prometheus server.",
+      "B": "It is significantly higher because Mimir uses a distributed architecture to shard data ingestion across many nodes.",
+      "C": "It is slower due to encryption.",
+      "D": "It is only for cloud-native apps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Query' variable, what does the 'Refresh' setting 'On Dashboard Load' ensure?",
+    "options": {
+      "A": "The dashboard is deleted after it loads.",
+      "B": "The list of available variable values is updated from the data source every time a user opens the dashboard.",
+      "C": "The dashboard title is encrypted.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based secure management (HTTPS) of Grafana if an SSL certificate is installed?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Library Panels' allow you to create a 'master' panel that can be used across multiple dashboards; updating the library panel updates all of them.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canvas' visualization primarily used for?",
+    "options": {
+      "A": "To play video games inside Grafana.",
+      "B": "To create custom, interactive diagrams and infographics using static images and live data points (e.g., a floor plan with live sensor data).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The history of all previous hardware changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' should you use to convert a single time series with multiple labels into multiple separate time series for graphing?",
+    "options": {
+      "A": "Prepare time series",
+      "B": "Filter data by name",
+      "C": "Outer join",
+      "D": "Sort by"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana 'Plugins' must be manually approved by an administrator before they can be used by regular users.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'stable' release",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dashboards as Code' (using tools like Jsonnet or Terraform)?",
+    "options": {
+      "A": "Writing manual instructions for the IT team.",
+      "B": "The practice of defining dashboard layouts in code to enable versioning, peer reviews, and automated deployment.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'NTP' used for Grafana server clock synchronization?",
+    "options": {
+      "A": "80",
+      "B": "123",
+      "C": "443",
+      "D": "53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Grafana, a 'Data Source' can be shared across multiple organizations in a multi-tenant setup.",
+    "options": {
+      "A": "False (Data sources are scoped to a specific organization and cannot be shared directly).",
+      "B": "True",
+      "C": "Only if using version 2.0",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Time series to rows' transformation?",
+    "options": {
+      "A": "To rotate the graph 90 degrees.",
+      "B": "To flatten complex multi-series data into a format that can be easily displayed in a Table panel.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of physical RAM currently being used by the Grafana server process?",
+    "options": {
+      "A": "grafana_process_resident_memory_bytes",
+      "B": "system_ram_used_bytes",
+      "C": "node_memory_usage_percent",
+      "D": "grafana_memory_limit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can use 'Calculations' (like 'Difference' or 'Percentage Change') in a Transformation to create new data points from existing ones.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Prometheus queries",
+      "D": "Only if using version 10.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana OnCall' escalation logic?",
+    "options": {
+      "A": "A set of stairs in the data center.",
+      "B": "A defined sequence of users and notification methods (e.g., Slack first, then SMS, then Phone Call) used to ensure an alert is acknowledged.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Port' is associated with standard 'HTTPS' for accessing Grafana Cloud?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "3000",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Grafana 'Row' titles can also use dashboard variables to provide dynamic grouping (e.g., 'Servers in $region').",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Message Remapper' processor used for in the context of Loki/Grafana?",
+    "options": {
+      "A": "To move log files to a new folder.",
+      "B": "To ensure that the most important part of a log line is displayed prominently in the 'Message' column of a Logs panel.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'vCenter' for data source connection in a virtualized environment?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard Folder' can have its own independent permissions, allowing you to restrict sensitive dashboards to a specific team.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the year 2026",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Pyroscope' used for?",
+    "options": {
+      "A": "To monitor physical fires in the server room.",
+      "B": "To visualize continuous profiling data, showing which parts of an application's code are consuming the most CPU or memory.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active' users logged into Grafana?",
+    "options": {
+      "A": "grafana_active_sessions",
+      "B": "system_user_count",
+      "C": "node_sessions_total",
+      "D": "grafana_total_accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana supports 'Interactive' panels where users can click on data points to drill down into other dashboards.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Incident' management?",
+    "options": {
+      "A": "Naming the servers after famous incidents.",
+      "B": "A specialized tool within Grafana to manage the full lifecycle of an incident, from detection to resolution and post-mortem.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana can be used to visualize data from cloud providers like AWS CloudWatch.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Phlare' (Pyroscope)?",
+    "options": {
+      "A": "A tool for fixing servers.",
+      "B": "A database for continuous profiling data.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a dashboard indicates that the Grafana server is unable to connect to the data source?",
+    "options": {
+      "A": "Data source connection error",
+      "B": "OK",
+      "C": "Ready",
+      "D": "Resolved"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can use 'Calculations' (like mean or total) to summarize data shown in a legend.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canvas' visualization in Grafana?",
+    "options": {
+      "A": "A way to draw literal art on a server.",
+      "B": "A flexible visualization that allows for creating custom diagrams with live data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Users' active in Grafana?",
+    "options": {
+      "A": "grafana_active_sessions",
+      "B": "system_user_count",
+      "C": "node_sessions_total",
+      "D": "grafana_total_accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana supports 'Interactive' panels.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Incident'?",
+    "options": {
+      "A": "A specialized tool for drawing networks.",
+      "B": "A dedicated application within Grafana for managing system incidents.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana can be used to visualize data from cloud providers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Phlare'?",
+    "options": {
+      "A": "A tool for fixing servers.",
+      "B": "A database for continuous profiling data.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When scaling Grafana in a High Availability (HA) configuration, which backend component is mandatory to ensure session consistency and synchronized dashboard updates across nodes?",
+    "options": {
+      "A": "Local Sqlite3 database",
+      "B": "A shared external database (Postgres or MySQL) and a KV store like Redis for session storage.",
+      "C": "A shared NFS mount for the /var/lib/grafana directory.",
+      "D": "Sticky sessions configured at the Load Balancer level only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' would you use to perform a many-to-one join where you need to append metadata from a 'Constant' data source to every row of a time-series result?",
+    "options": {
+      "A": "Merge",
+      "B": "Join by field (Outer Join)",
+      "C": "Add field from calculation",
+      "D": "Labels to fields"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Grafana 'Unified Alerting', a single alert rule can query multiple data sources and combine them using expressions (Math/Reduce/Resample).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Prometheus and Loki",
+      "D": "Only if using Grafana Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical benefit of using 'Jsonnet' (via the grafonnet library) for dashboard creation in a CI/CD pipeline?",
+    "options": {
+      "A": "It makes the dashboard load 50% faster in the browser.",
+      "B": "It allows for reusable templates, functions, and variables, reducing the 'boilerplate' JSON and preventing manual errors in large environments.",
+      "C": "It automatically encrypts the data source credentials.",
+      "D": "It allows the dashboard to be viewed without an internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a multi-tenant Grafana setup, what is the role of 'Teams' vs. 'Folders' in terms of security inheritance?",
+    "options": {
+      "A": "Teams own folders; folders own users.",
+      "B": "Permissions are applied to Folders and inherited by all Dashboards within; Teams are used to group users to apply those permissions at scale.",
+      "C": "Folders are strictly for organization and do not support permissions.",
+      "D": "Teams can only be used in the Grafana Enterprise edition."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Data decimation' strategy does Grafana use to handle queries that return millions of data points, ensuring the browser doesn't crash?",
+    "options": {
+      "A": "Data Source side MaxDataPoints (requesting fewer points based on pixel width).",
+      "B": "Client-side JPEG compression of the graph.",
+      "C": "Browser-based thread killing.",
+      "D": "Converting all data to 8-bit integers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A Grafana 'Panel Plugin' written in React must utilize the 'PanelProps' interface to receive data, time range, and configuration options from the Grafana core.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the plugin is signed",
+      "D": "Only for 'Standard' visualizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Resample' expression in the Grafana Alerting engine?",
+    "options": {
+      "A": "To restart the query if it fails.",
+      "B": "To align multiple time series with different intervals to a common time base so they can be mathematically compared.",
+      "C": "To change the color of the alert notification.",
+      "D": "To delete duplicate data points in the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' is required to turn a series of discrete events (like log entries) into a numerical count that can be displayed on a 'Stat' panel?",
+    "options": {
+      "A": "Organize fields",
+      "B": "Reduce (calculating the 'Count' or 'Total')",
+      "C": "Filter by name",
+      "D": "Sort by"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Grafana CLI' can be used to reset the admin password directly on the server if access to the UI is lost.",
+    "options": {
+      "A": "True (grafana-cli admin reset-admin-password ...)",
+      "B": "False",
+      "C": "Only if using the Postgres backend",
+      "D": "Only in the open-source version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Grafana's internal database schema, which table stores the metadata and JSON definitions for all created dashboards?",
+    "options": {
+      "A": "user_settings",
+      "B": "dashboard",
+      "C": "data_source",
+      "D": "alert_rule"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Maximum Data Points' (MDP) setting impact on query performance?",
+    "options": {
+      "A": "Higher MDP increases browser rendering time but provides higher resolution detail.",
+      "B": "Lower MDP makes the query slower because of compression.",
+      "C": "MDP only affects the legend, not the graph.",
+      "D": "It has no impact on performance."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Anonymous Access' in Grafana allows users to view dashboards without credentials, but it applies to the entire instance and cannot be restricted to specific dashboards.",
+    "options": {
+      "A": "True (standard configuration applies globally to the instance/org).",
+      "B": "False",
+      "C": "Only in version 10.0+",
+      "D": "Only if using a reverse proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'BGP' attribute might you monitor via a Grafana dashboard to troubleshoot path instability in a multi-homed enterprise network?",
+    "options": {
+      "A": "AS-Path length flapping",
+      "B": "The color of the BGP cable",
+      "C": "The physical weight of the router",
+      "D": "The size of the hard drive"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a 'Canvas' panel, what is an 'Element Link'?",
+    "options": {
+      "A": "A physical link between two monitors.",
+      "B": "A trigger that allows an action (like opening a dashboard or calling an API) when a user clicks a specific part of the canvas.",
+      "C": "A tool to delete old canvas versions.",
+      "D": "The password for the canvas editor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Grafana Faro' requires the injection of a small JavaScript snippet into the application's HTML to start capturing RUM data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for React applications",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backend Data Source' (DataSourceSrv) in the context of custom plugin development?",
+    "options": {
+      "A": "A way to backup the source code.",
+      "B": "The Grafana service that manages data source discovery and communication, allowing plugins to query backends programmatically.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' would you use to remove the internal '__name__' and 'job' labels from a Prometheus result for a cleaner table display?",
+    "options": {
+      "A": "Filter by name",
+      "B": "Organize fields / Filter by name",
+      "C": "Join by field",
+      "D": "Labels to fields"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Grafana Alerting, 'No Data' can be configured to either fire an alert, keep the previous state, or mark the alert as 'Normal'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL data sources",
+      "D": "Only if using version 9.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dashboard Versioning' storage impact on the Grafana database?",
+    "options": {
+      "A": "It creates a full copy of the dashboard JSON in the database for every save, which can lead to database bloat if not pruned.",
+      "B": "It only stores the changes (diffs).",
+      "C": "It stores versions in the cloud for free.",
+      "D": "It deletes all previous versions after 24 hours."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Grafana Mimir' distributor traffic?",
+    "options": {
+      "A": "9090",
+      "B": "9095 (standard gRPC/Mimir distributor port)",
+      "C": "9093",
+      "D": "80"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Stat' panel can display the 'Last' value of a time series even if that value arrived several hours ago, depending on the time range selected.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Grafana Play' feature?",
+    "options": {
+      "A": "To play video games.",
+      "B": "To create a continuous slideshow of multiple dashboards for 'Wall of Monitors' or NOC displays.",
+      "C": "To encrypt the alert payload.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' should you use to convert a wide data frame (multiple value columns) into a long format (single value column with a label)?",
+    "options": {
+      "A": "Series to rows",
+      "B": "Labels to fields",
+      "C": "Group by",
+      "D": "Partition by values"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Grafana RBAC, you can grant a user permission to view a specific folder but deny them the ability to edit any dashboards within it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Relabeling' in the Grafana Agent (or Alloy) pipeline?",
+    "options": {
+      "A": "To walk directly to the server.",
+      "B": "To modify the metadata of metrics and logs before they are shipped to the backend, ensuring consistent labeling across services.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Grafana Loki' query traffic?",
+    "options": {
+      "A": "3100",
+      "B": "443",
+      "C": "9090",
+      "D": "80"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Calculated Field' transformation can perform mathematical operations between two different queries returned in the same panel.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for NAT traffic",
+      "D": "Only in 'Standard' mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Live' and how does it affect server resources?",
+    "options": {
+      "A": "Watching a live video of the server.",
+      "B": "A WebSocket-based real-time data streaming engine; it increases the number of concurrent open connections on the Grafana server.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' is best for calculating the 'Percentage' of one field relative to another in a Table?",
+    "options": {
+      "A": "Add field from calculation (mode: Binary operation)",
+      "B": "Group by",
+      "C": "Filter data by name",
+      "D": "Outer Join"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can configure Grafana to use 'Redis' for caching query results to improve performance for high-traffic public dashboards.",
+    "options": {
+      "A": "True (standard in HA/Enterprise setups).",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Panel Decimation'?",
+    "options": {
+      "A": "Deleting every tenth panel.",
+      "B": "The process of reducing the number of data points drawn in a graph to match the available pixel width, improving browser performance.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Grafana Tempo' gRPC ingestion?",
+    "options": {
+      "A": "9090",
+      "B": "4317 (OTLP gRPC standard)",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Recording Rules' in Prometheus can be used to optimize Grafana dashboards by moving expensive aggregation logic from the browser to the Prometheus server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grafana Scenes'?",
+    "options": {
+      "A": "A physical scene for a play.",
+      "B": "A frontend framework for building dashboard-like experiences directly into custom React applications using Grafana components.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' would you use to filter out data rows where a specific field is 'Null' or 'NaN'?",
+    "options": {
+      "A": "Filter data by values",
+      "B": "Filter by name",
+      "C": "Sort by",
+      "D": "Limit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Grafana 'App Plugins' can provide their own custom UI pages and navigation within the Grafana sidebar.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Provisioning' validation in a CI/CD pipeline?",
+    "options": {
+      "A": "Checking if the admin is root.",
+      "B": "Running automated tests to ensure that the JSON/YAML configuration for a dashboard is syntactically correct and all data sources exist before deployment.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for secure shell (SSH) access?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Grafana, 'Alert Groups' allow you to combine notifications from different alert rules into a single message based on labels.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dashboard Scripting' (legacy)?",
+    "options": {
+      "A": "To stop the switch from talking to the admin.",
+      "B": "A legacy feature where dashboards were generated dynamically using JavaScript; now replaced by the Grafana HTTP API.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' is primarily used to provide direct network hardware access to VMs, but it often prevents the use of Live Migration.",
+    "options": {
+      "A": "True (because the hardware state is tied to a specific physical device).",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in Hyper-V?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts the amount of memory assigned to a VM based on real-time demand, ranging between a minimum and maximum value.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is used to improve the performance of nested virtualization by managing virtual-to-physical memory mappings across layers?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can cause a complete host crash if the physical data store runs out of actual space while VMs are trying to write data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The component of the hypervisor that manages the execution of a single VM, handling its CPU instructions and memory access.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic between sites?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' allows the Guest OS to communicate directly with the hypervisor using 'Hypercalls'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "The process where write operations are mirrored to both the source and destination disks during a migration to ensure data consistency.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of a Linux-based hypervisor?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "Disabling the specific port immediately and moving it to an error-disabled state when a violation occurs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management of a switch?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is selected based on the switch with the lowest Bridge ID (Priority + MAC Address).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a VLAN (intra-VLAN) before it is routed or bridged, providing Layer 2 and Layer 3 security.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' stops a port from sending or receiving BPDUs, essentially disabling STP on that port, which is generally dangerous.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' load balancing 'Hashing'?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "An algorithm that determines which physical link in a bundle to use for a specific packet based on fields like IP or MAC address.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is enabled by default on most Cisco switch ports.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password that the admin can't see.",
+      "B": "A feature where the password is not stored in plain text in the configuration file, improving security.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can occur if multiple physical links are connected between two switches without EtherChannel or STP enabled.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Restrict'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "Dropping packets from the unauthorized MAC address and incrementing the violation counter, but keeping the port operational for authorized MACs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' is a Cisco implementation that combines RSTP with PVST+ to provide fast convergence for every VLAN.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  }
+  ]
+}

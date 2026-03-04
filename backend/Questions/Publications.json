@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Publications", 
+  "questions": [
+  {
+    "question": "What is the primary purpose of a 'Peer Review' process in scholarly publishing?",
+    "options": {
+      "A": "To increase the speed of publication",
+      "B": "To market the research to a wider audience",
+      "C": "To ensure the quality, validity, and originality of the research",
+      "D": "To verify the author's social media presence"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'DOI' stand for in the context of academic papers?",
+    "options": {
+      "A": "Data Output Information",
+      "B": "Digital Object Identifier",
+      "C": "Document Online Index",
+      "D": "Direct Original Item"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section of a research paper provides a brief summary of the entire study?",
+    "options": {
+      "A": "Methodology",
+      "B": "Results",
+      "C": "Discussion",
+      "D": "Abstract"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is an 'Impact Factor' used to measure?",
+    "options": {
+      "A": "The physical weight of a journal",
+      "B": "The average number of citations received by articles in a journal",
+      "C": "The total number of authors in a field",
+      "D": "The salary of a lead researcher"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In academic writing, what is 'Plagiarism'?",
+    "options": {
+      "A": "Using too many citations",
+      "B": "Collaborating with researchers from other countries",
+      "C": "Presenting someone else's work or ideas as your own without credit",
+      "D": "Publishing a paper in more than one language"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Open Access' publishing?",
+    "options": {
+      "A": "Research that is only available in libraries",
+      "B": "A system where researchers must pay to read papers",
+      "C": "Publications that are free to read online for everyone",
+      "D": "A journal that accepts every paper without review"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is a commonly used citation style in the Social Sciences?",
+    "options": {
+      "A": "APA (American Psychological Association)",
+      "B": "Python Style Guide",
+      "C": "Hadoop Formatting",
+      "D": "Blueprint Style"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Who is usually listed as the 'Corresponding Author'?",
+    "options": {
+      "A": "The person who funded the research",
+      "B": "The oldest researcher in the group",
+      "C": "The person responsible for communication with the journal and readers",
+      "D": "The person who designed the cover art"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Preprint'?",
+    "options": {
+      "A": "A final version of a book",
+      "B": "A version of a research paper shared before formal peer review",
+      "C": "A newspaper article about science",
+      "D": "An encrypted file format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Bibliography' in a publication?",
+    "options": {
+      "A": "To list the equipment used in the lab",
+      "B": "To provide a biography of the authors",
+      "C": "To show the list of sources cited in the work",
+      "D": "To list the future research plans"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which database is most commonly used for searching medical and life sciences literature?",
+    "options": {
+      "A": "IMDb",
+      "B": "Spotify",
+      "C": "LinkedIn",
+      "D": "PubMed"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does 'h-index' measure?",
+    "options": {
+      "A": "The number of hours spent in a lab",
+      "B": "The productivity and citation impact of a researcher",
+      "C": "The height of a researcher",
+      "D": "The number of help requests in a forum"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Blind Review'?",
+    "options": {
+      "A": "Reviewing a paper without reading it",
+      "B": "A process where reviewers do not know the identity of the authors",
+      "C": "Reviewing research performed in total darkness",
+      "D": "A review done by people outside of science"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main goal of the 'Methodology' section?",
+    "options": {
+      "A": "To list the authors' hobbies",
+      "B": "To explain the results of the study",
+      "C": "To describe how the research was conducted so it can be replicated",
+      "D": "To thank the sponsors"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is considered a 'Primary Source'?",
+    "options": {
+      "A": "A textbook",
+      "B": "A review article",
+      "C": "An original research article reporting new data",
+      "D": "A Wikipedia page"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'ORCID'?",
+    "options": {
+      "A": "A flower used in biology research",
+      "B": "A unique digital identifier for researchers",
+      "C": "A database of chemical elements",
+      "D": "A software for editing images"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Introduction' section typically establish?",
+    "options": {
+      "A": "The final conclusion of the paper",
+      "B": "The budget of the research project",
+      "C": "The context, background, and specific research question",
+      "D": "The list of raw data points"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Self-Citation'?",
+    "options": {
+      "A": "Citing a friend's work",
+      "B": "Citing your own previously published work",
+      "C": "Citing the same source twice",
+      "D": "Citing a book that doesn't exist"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes a journal that charges high fees without providing quality peer review?",
+    "options": {
+      "A": "Premium Journal",
+      "B": "Fast-track Journal",
+      "C": "Predatory Journal",
+      "D": "Elite Journal"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In publishing, what does 'In Press' mean?",
+    "options": {
+      "A": "The paper was rejected",
+      "B": "The paper has been accepted but not yet officially published in a volume",
+      "C": "The paper is currently being written",
+      "D": "The paper is being presented at a news conference"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double-Blind Review'?",
+    "options": {
+      "A": "The author and reviewer both know each other",
+      "B": "Two reviewers are used instead of one",
+      "C": "Neither the author nor the reviewer knows the other's identity",
+      "D": "The review is conducted twice"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of an 'Acknowledgment' section?",
+    "options": {
+      "A": "To list the references used",
+      "B": "To apologize for errors",
+      "C": "To thank individuals or organizations that supported the work",
+      "D": "To explain the methodology"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is a bibliographic management tool?",
+    "options": {
+      "A": "Zotero",
+      "B": "Photoshop",
+      "C": "Excel",
+      "D": "PowerPoint"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Results' section of a paper dedicated to?",
+    "options": {
+      "A": "Interpreting why the data is important",
+      "B": "Describing the history of the field",
+      "C": "Reporting the findings of the study without interpretation",
+      "D": "Listing the names of the lab technicians"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Literature Review'?",
+    "options": {
+      "A": "A critique of a new novel",
+      "B": "A survey of existing research on a particular topic",
+      "C": "A list of books available in the library",
+      "D": "A section where authors list their own publications"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Citing'?",
+    "options": {
+      "A": "Drawing a diagram",
+      "B": "Correcting a typo",
+      "C": "Formally recognizing the source of information or ideas",
+      "D": "Submitting a paper to a journal"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'ISSN' used for?",
+    "options": {
+      "A": "To identify individual researchers",
+      "B": "To identify specific serial publications like journals",
+      "C": "To track laboratory equipment",
+      "D": "To mark the price of a journal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Monograph'?",
+    "options": {
+      "A": "A short research article",
+      "B": "A detailed written study on a single specialized subject (usually a book)",
+      "C": "A graph with one line",
+      "D": "A letter to the editor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Discussion' section of a paper focused on?",
+    "options": {
+      "A": "Describing the statistical tools used",
+      "B": "Listing the raw data",
+      "C": "Interpreting findings and explaining their significance",
+      "D": "Establishing the research budget"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'CC BY' stand for in Creative Commons licensing?",
+    "options": {
+      "A": "Company Copy",
+      "B": "Creative Copyright",
+      "C": "Attribution (must give credit to the author)",
+      "D": "Closed Circuit"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is a major academic publisher?",
+    "options": {
+      "A": "Elsevier",
+      "B": "Netflix",
+      "C": "Adobe",
+      "D": "Federal Express"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Appendix' used for in a publication?",
+    "options": {
+      "A": "The main argument of the paper",
+      "B": "Author biographies",
+      "C": "Supplementary material that is too detailed for the main text",
+      "D": "The table of contents"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Manuscript'?",
+    "options": {
+      "A": "The final printed journal",
+      "B": "The version of the work submitted for publication",
+      "C": "A hand-written note by a reviewer",
+      "D": "The list of references"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Peer Commentary'?",
+    "options": {
+      "A": "A review from a student",
+      "B": "Critical discussion of a published paper by other experts in the field",
+      "C": "The introduction written by the author",
+      "D": "A summary of the paper for the public"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term refers to the rights granted to authors to control the use of their work?",
+    "options": {
+      "A": "Patents",
+      "B": "Trademarks",
+      "C": "Copyright",
+      "D": "Grants"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Case Study'?",
+    "options": {
+      "A": "A mathematical formula",
+      "B": "An in-depth investigation of an individual, group, or event",
+      "C": "A study conducted in a courtroom",
+      "D": "A review of a laptop case"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gold Open Access'?",
+    "options": {
+      "A": "Papers that cost $1000 to read",
+      "B": "Publishing in a journal where the entire content is free immediately upon publication",
+      "C": "Research about gold mining",
+      "D": "A reward given to top authors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section contains the 'Keywords'?",
+    "options": {
+      "A": "Methodology",
+      "B": "Usually following the Abstract",
+      "C": "Bibliography",
+      "D": "Acknowledgment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Errata'?",
+    "options": {
+      "A": "A new chapter in a book",
+      "B": "A correction of errors published in a previous issue of a journal",
+      "C": "A list of common mistakes",
+      "D": "An award for excellence"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Call for Papers'?",
+    "options": {
+      "A": "To recycle old journals",
+      "B": "To invite researchers to submit their work to a specific journal or conference",
+      "C": "To complain about a publication",
+      "D": "To order stationery for the office"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata' in research?",
+    "options": {
+      "A": "The physical data blocks",
+      "B": "Data about the research data (e.g., date, author, methodology used)",
+      "C": "A type of database software",
+      "D": "Encryption keys"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Embargo' in publishing?",
+    "options": {
+      "A": "A total ban on a researcher",
+      "B": "A period during which access to research is restricted to subscribers before becoming open",
+      "C": "A shipping port for books",
+      "D": "A type of peer review"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Citation Indexing'?",
+    "options": {
+      "A": "Calculating the word count",
+      "B": "Linking publications based on the references they share",
+      "C": "Alphabetizing the author list",
+      "D": "Rating the quality of paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Secondary Source'?",
+    "options": {
+      "A": "A lab notebook",
+      "B": "A review article synthesizing previous research",
+      "C": "An original patent",
+      "D": "Raw survey data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Lead Author'?",
+    "options": {
+      "A": "The person who pays for the coffee",
+      "B": "The primary researcher who typically did the bulk of the work and writing",
+      "C": "The author who writes in lead pencil",
+      "D": "The youngest member of the team"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scholarly Communication'?",
+    "options": {
+      "A": "Talking to students",
+      "B": "The system through which research and other scholarly writings are created, evaluated, and shared",
+      "C": "Sending emails in formal English",
+      "D": "Writing a blog about school"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Symposium'?",
+    "options": {
+      "A": "A type of musical instrument",
+      "B": "A meeting or conference for the public discussion of some topic",
+      "C": "A laboratory experiment",
+      "D": "A software for statistics"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Repository'?",
+    "options": {
+      "A": "A trash can for deleted files",
+      "B": "A digital archive for collecting, preserving, and sharing research data",
+      "C": "A spreadsheet",
+      "D": "A computer's RAM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is the most formal academic document?",
+    "options": {
+      "A": "A Tweet",
+      "B": "A Journal Article",
+      "C": "A LinkedIn Post",
+      "D": "A Personal Blog"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Affiliation' in an academic paper?",
+    "options": {
+      "A": "The author's political party",
+      "B": "The institution (university or organization) where the author works",
+      "C": "The author's family history",
+      "D": "The author's religious beliefs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Plagiarism'?",
+    "options": {
+      "A": "Reading your own paper",
+      "B": "Reusing significant portions of your own previously published work without citation",
+      "C": "Citing yourself correctly",
+      "D": "Sharing your paper on social media"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Impact' in research?",
+    "options": {
+      "A": "The force of a book falling",
+      "B": "The influence of research on the scientific community and society",
+      "C": "The number of pages in a paper",
+      "D": "The speed of light"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bibliometrics'?",
+    "options": {
+      "A": "The study of old books",
+      "B": "The statistical analysis of books, articles, or other publications",
+      "C": "Measuring the weight of journals",
+      "D": "Choosing a font for a paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a widely used citation manager?",
+    "options": {
+      "A": "Mendeley",
+      "B": "Instagram",
+      "C": "Discord",
+      "D": "Zoom"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Mining' in publications?",
+    "options": {
+      "A": "Digging for coal",
+      "B": "Analyzing large sets of research data to discover patterns and trends",
+      "C": "Deleting old data",
+      "D": "Selling research data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Scope' of a journal?",
+    "options": {
+      "A": "The length of the articles",
+      "B": "The specific subject areas and types of research a journal publishes",
+      "C": "The cost of a subscription",
+      "D": "The number of reviewers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Festschrift'?",
+    "options": {
+      "A": "A German dictionary",
+      "B": "A collection of writings published in honor of a scholar",
+      "C": "A type of research methodology",
+      "D": "A statistical error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Post-Publication Peer Review'?",
+    "options": {
+      "A": "Deleting a paper after it's out",
+      "B": "Critical commentary and evaluation of research after it has been formally published",
+      "C": "Changing the author's name after publication",
+      "D": "Reviewing the journal's cover"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gray Literature'?",
+    "options": {
+      "A": "Books about the color gray",
+      "B": "Research that is published outside of traditional commercial or academic channels (e.g., reports)",
+      "C": "Old books with gray pages",
+      "D": "Secret research"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Creative Commons'?",
+    "options": {
+      "A": "A park for researchers",
+      "B": "A system of standardized licenses that allow authors to share their work with specific permissions",
+      "C": "A type of university",
+      "D": "A government agency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'In-text Citations'?",
+    "options": {
+      "A": "To make the text look longer",
+      "B": "To briefly identify the source of a specific idea or quote within the body of the paper",
+      "C": "To correct grammar",
+      "D": "To list the author's address"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Article Processing Charge' (APC)?",
+    "options": {
+      "A": "A fine for late submission",
+      "B": "A fee sometimes charged to authors to make their work open access",
+      "C": "The electricity bill of the publisher",
+      "D": "The cost of paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Collaborative Research'?",
+    "options": {
+      "A": "Research done alone",
+      "B": "Research conducted by multiple investigators, often from different institutions",
+      "C": "A type of individual study",
+      "D": "Reading other people's work"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata Harvesting'?",
+    "options": {
+      "A": "Planting seeds in a lab",
+      "B": "Automatically collecting metadata from different repositories for indexing",
+      "C": "Deleting metadata",
+      "D": "Selling user data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scholarly Impact'?",
+    "options": {
+      "A": "The weight of a degree",
+      "B": "The extent to which research is cited and used by other scholars",
+      "C": "The speed of writing",
+      "D": "The number of students in a class"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Citation Sentiment'?",
+    "options": {
+      "A": "How much an author loves their work",
+      "B": "Analyzing whether a citation is positive, negative, or neutral about the cited work",
+      "C": "The font used in citations",
+      "D": "The number of citations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'Systematic Reviews' and 'Narrative Reviews'?",
+    "options": {
+      "A": "Narrative reviews use a strict protocol for searching; Systematic reviews do not",
+      "B": "Systematic reviews follow a rigorous, transparent, and reproducible methodology to synthesize data",
+      "C": "Narrative reviews are always written by a single author",
+      "D": "Systematic reviews are only used in computer science"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Altmetrics' score represent in scholarly communication?",
+    "options": {
+      "A": "Alternative ways to measure the length of a paper",
+      "B": "Non-traditional metrics tracking research impact via social media, news, and policy documents",
+      "C": "A score given by students during a lecture",
+      "D": "The number of typos found in a manuscript"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes the 'salami slicing' of research data?",
+    "options": {
+      "A": "A data visualization technique using slices",
+      "B": "A method for encrypting large datasets",
+      "C": "Breaking up a single study into several small, thin publications to increase publication count",
+      "D": "The process of cutting physical lab samples"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of a 'Data Availability Statement' (DAS)?",
+    "options": {
+      "A": "To prove the researcher is currently available for hire",
+      "B": "To list the hours the library is open",
+      "C": "To indicate whether the data underlying the research is accessible and where it can be found",
+      "D": "To show the hard drive storage capacity"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In the context of 'Creative Commons' (CC) licenses, what does the 'ND' restriction mean?",
+    "options": {
+      "A": "Non-Digital: Only physical copies allowed",
+      "B": "Non-Downloadable: Only online viewing allowed",
+      "C": "No Derivatives: Others cannot share a modified version of the work",
+      "D": "No Distribution: Personal use only"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'COPE' (Committee on Publication Ethics)?",
+    "options": {
+      "A": "A support group for rejected authors",
+      "B": "An international organization providing guidance on how to handle publication misconduct",
+      "C": "A software for checking grammar",
+      "D": "A database of ethical research grants"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is calculated specifically for journals within the Scopus database, representing the average citations per document?",
+    "options": {
+      "A": "Impact Factor",
+      "B": "CiteScore",
+      "C": "Eigenfactor",
+      "D": "Source Normalized Impact per Paper (SNIP)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Green Open Access'?",
+    "options": {
+      "A": "Publications printed on recycled paper",
+      "B": "Self-archiving a version of the paper in a repository while the journal is published traditionally",
+      "C": "Research focused on environmental science",
+      "D": "A license that requires a fee to be paid to the author"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Retraction' in academic publishing?",
+    "options": {
+      "A": "A request for a second review",
+      "B": "Changing the font of a published paper",
+      "C": "Withdrawing a published paper due to errors or ethical misconduct",
+      "D": "Updating the author's contact information"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'SNIP' metric used for?",
+    "options": {
+      "A": "Calculating the word count of a paper",
+      "B": "Measuring journal impact by normalizing citations across different subject fields",
+      "C": "A tool for cropping images in a manuscript",
+      "D": "Tracking the speed of the peer-review process"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Co-authorship Network' analysis?",
+    "options": {
+      "A": "Checking the internet speed of researchers",
+      "B": "Studying the patterns of collaboration between researchers and institutions",
+      "C": "A social network for academic writers",
+      "D": "Verifying the familial relationship of authors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Hybrid Open Access' refer to?",
+    "options": {
+      "A": "A journal that is half-digital and half-print",
+      "B": "A subscription journal where individual authors pay to make their specific articles open access",
+      "C": "A journal that uses two different peer-review systems",
+      "D": "Research that combines two different scientific fields"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Conflict of Interest' (COI) disclosure?",
+    "options": {
+      "A": "Reporting a disagreement with a co-author",
+      "B": "Disclosing financial or personal interests that could influence the research's objectivity",
+      "C": "Listing all previous employers",
+      "D": "A list of researchers the author dislikes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Eigenfactor' score?",
+    "options": {
+      "A": "A measure of a journal's total importance to the scientific community based on citation networks",
+      "B": "The number of pages in a volume",
+      "C": "A way to calculate the cost of a journal subscription",
+      "D": "The number of years a journal has been active"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'DOI' (Digital Object Identifier) resolution?",
+    "options": {
+      "A": "To encrypt the document for security",
+      "B": "To ensure a permanent link to the research object, even if the URL changes",
+      "C": "To check for plagiarism in the document",
+      "D": "To verify the identity of the person reading the document"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Guest Authorship'?",
+    "options": {
+      "A": "An author visiting a different lab",
+      "B": "Granting authorship to someone who made no significant contribution to the study",
+      "C": "Inviting a famous person to write the introduction",
+      "D": "Writing a paper under a pseudonym"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Manipulation' in research ethics?",
+    "options": {
+      "A": "Changing the file format of a graph",
+      "B": "Improperly altering data-rich images (like gel blots) to hide or enhance results",
+      "C": "Adding a logo to the corner of a photo",
+      "D": "Compressing an image to make the file smaller"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'G-index'?",
+    "options": {
+      "A": "A metric that gives more weight to highly cited articles in a researcher's profile",
+      "B": "The amount of grant money a researcher has received",
+      "C": "The number of graduate students a professor has",
+      "D": "A ranking of geographical locations of research"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Post-print'?",
+    "options": {
+      "A": "A summary of a paper after it is read",
+      "B": "The version of a paper that has undergone peer review but is not yet formatted by the publisher",
+      "C": "A physical copy of the journal",
+      "D": "The raw data after the paper is finished"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Open Peer Review'?",
+    "options": {
+      "A": "A review anyone on the internet can do",
+      "B": "A model where the identities of authors and reviewers are known to each other",
+      "C": "A review that happens on live television",
+      "D": "A system with no editors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'I10-index'?",
+    "options": {
+      "A": "The number of publications with at least 10 citations",
+      "B": "The number of researchers in a 10-mile radius",
+      "C": "The top 10 papers in a specific field",
+      "D": "The number of citations in the last 10 years"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in the context of research data?",
+    "options": {
+      "A": "Cleaning physical lab equipment",
+      "B": "The process of identifying and correcting errors or inconsistencies in a dataset",
+      "C": "Deleting data to fit a hypothesis",
+      "D": "Encrypting data for long-term storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Embargoed Research'?",
+    "options": {
+      "A": "Research that is forbidden to be published",
+      "B": "Information shared with the press under the agreement that it won't be published until a certain date",
+      "C": "Research that costs a high price to access",
+      "D": "Research conducted in international waters"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bibliographic Coupling'?",
+    "options": {
+      "A": "Two authors getting married",
+      "B": "Two papers citing the same third paper, suggesting they share a related topic",
+      "C": "Using the same font in two different books",
+      "D": "Publishing two papers in the same journal issue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text and Data Mining' (TDM) rights?",
+    "options": {
+      "A": "The right to copy-paste text",
+      "B": "The legal permission to use automated tools to analyze large collections of digital publications",
+      "C": "The right to change the font of a text",
+      "D": "The right to use a metal detector in a library"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Co-citation' analysis?",
+    "options": {
+      "A": "When two authors cite each other",
+      "B": "When two papers are cited together by a newer paper, indicating they are conceptually related",
+      "C": "A citation written by two people",
+      "D": "Citing a paper in two different languages"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Plan S' initiative?",
+    "options": {
+      "A": "A plan to stop scientific research",
+      "B": "An initiative for Open Access publishing requiring all research funded by public grants to be openly available",
+      "C": "A secret plan for laboratory safety",
+      "D": "A plan to standardize citation formats"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fair Use' in academic publishing?",
+    "options": {
+      "A": "The rule that everyone should pay the same price for a journal",
+      "B": "Legal doctrine allowing limited use of copyrighted material without permission for purposes like criticism or research",
+      "C": "The requirement that all authors get equal credit",
+      "D": "Sharing a Netflix password with a colleague"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Falsification' in research misconduct?",
+    "options": {
+      "A": "Writing a paper under a false name",
+      "B": "Manipulating research materials, equipment, or processes to change data and results",
+      "C": "Publishing in a non-existent journal",
+      "D": "Using a fake bibliography"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fabrication' of data?",
+    "options": {
+      "A": "Building a machine to collect data",
+      "B": "Inventing data or results and recording or reporting them as real findings",
+      "C": "Summarizing data for a poster",
+      "D": "Compressing data into a smaller file"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Consortium' license for journals?",
+    "options": {
+      "A": "A license for a single person",
+      "B": "A contract where a group of libraries or institutions share access to a bundle of electronic journals",
+      "C": "A license to print books",
+      "D": "A license given to student researchers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transferred Attribution'?",
+    "options": {
+      "A": "Giving credit to a different university",
+      "B": "Providing credit for an idea used in one context but originating in another work",
+      "C": "Moving a researcher to a new lab",
+      "D": "Selling the copyright of a paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double Dipping' in publishing?",
+    "options": {
+      "A": "Having two snacks during a break",
+      "B": "Charging both subscription fees to libraries and article processing fees to authors",
+      "C": "Publishing the same data in two different journals",
+      "D": "Citing the same author twice"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Archiving'?",
+    "options": {
+      "A": "Keeping a copy of your paper on your own laptop",
+      "B": "Depositing a copy of your work in an open repository (like an institutional repository)",
+      "C": "Burning a CD of your research",
+      "D": "Saving a paper as a draft"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Article-Level Metrics' (ALM)?",
+    "options": {
+      "A": "Measuring the font size of an article",
+      "B": "Metrics that measure the impact of an individual paper rather than the whole journal",
+      "C": "Counting the number of letters in an article",
+      "D": "Tracking the cost of printing an article"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Persistent Identifier' (PID)?",
+    "options": {
+      "A": "A researcher who never gives up",
+      "B": "A unique, permanent digital reference to an object, person, or organization (like DOI or ORCID)",
+      "C": "A password that never changes",
+      "D": "A watermark on a document"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Technical Review' versus 'Peer Review'?",
+    "options": {
+      "A": "Technical review is done by a robot; Peer review by humans",
+      "B": "Technical review checks for formatting/language; Peer review checks scientific content",
+      "C": "Technical review is only for IT papers",
+      "D": "There is no difference"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pre-registration' of a study?",
+    "options": {
+      "A": "Signing up for a conference early",
+      "B": "Registering a study's design and analysis plan before data is collected to prevent bias",
+      "C": "Submitting a paper before it is finished",
+      "D": "Applying for a grant"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SJR' (SCImago Journal Rank)?",
+    "options": {
+      "A": "A ranking of journals based on the quality and reputation of the journals citing them",
+      "B": "A list of the world's oldest journals",
+      "C": "A score for the most colorful journal covers",
+      "D": "The cost of a journal in different countries"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mirror Journal'?",
+    "options": {
+      "A": "A journal that prints text backward",
+      "B": "An open access version of an existing subscription journal with the same editorial board",
+      "C": "A journal about optics",
+      "D": "A copy of a journal stored on a backup server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Casing' in the context of academic database searches?",
+    "options": {
+      "A": "Designing the physical box for a book",
+      "B": "Specifying whether a search term should be case-sensitive or not",
+      "C": "A way to organize paper folders",
+      "D": "Encrypting the database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Desk Rejection'?",
+    "options": {
+      "A": "Breaking a physical desk",
+      "B": "A paper being rejected by the editor before it is even sent for peer review",
+      "C": "A reviewer refusing to use their desk",
+      "D": "A paper that falls off the desk and is lost"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'APC Waiver'?",
+    "options": {
+      "A": "An increase in the publishing fee",
+      "B": "A reduction or removal of the article processing charge for authors from low-income countries",
+      "C": "A document signed to confirm payment",
+      "D": "A tool to calculate taxes on publishing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Aggregator'?",
+    "options": {
+      "A": "A very angry author",
+      "B": "A service that gathers content from multiple journals and makes it searchable in one place",
+      "C": "A tool for merging two papers into one",
+      "D": "A machine for printing books"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Abstracting and Indexing' (A&I) service?",
+    "options": {
+      "A": "A group that writes abstracts for authors",
+      "B": "Services that index publications and provide abstracts to help researchers find relevant work",
+      "C": "A tool for counting the number of pages",
+      "D": "A service that translates papers into different languages"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Crossref'?",
+    "options": {
+      "A": "A way to cite a paper twice",
+      "B": "An official DOI registration agency that helps researchers cite and link scholarly content",
+      "C": "A person who checks references",
+      "D": "A database of maps"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Meta-Analysis'?",
+    "options": {
+      "A": "Analysis of metadata only",
+      "B": "A statistical procedure for combining data from multiple studies to identify common results",
+      "C": "Thinking about your own analysis",
+      "D": "A long research paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ghost Authorship'?",
+    "options": {
+      "A": "Research conducted in a cemetery",
+      "B": "Failure to list as an author someone who made a substantial contribution to the research",
+      "C": "Writing under a fake name",
+      "D": "A paper about ghosts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'I10-index' on Google Scholar?",
+    "options": {
+      "A": "The number of publications with at least 10 citations",
+      "B": "The number of times a paper has been read",
+      "C": "The top 10 researchers in the world",
+      "D": "A metric for the last 10 years of work"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'COI' in a peer review form?",
+    "options": {
+      "A": "Cost Of Integrity",
+      "B": "Conflict Of Interest",
+      "C": "Correction Of Information",
+      "D": "Citation Of Importance"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Impact Factor' calculation period?",
+    "options": {
+      "A": "The last 6 months",
+      "B": "The previous two years",
+      "C": "The entire history of the journal",
+      "D": "The current month only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attribution-ShareAlike' (CC BY-SA)?",
+    "options": {
+      "A": "Sharing the cost of a paper",
+      "B": "A license requiring that new works based on the original carry the same license",
+      "C": "An agreement to cite everyone in the team",
+      "D": "A license that prevents sharing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Sequestration'?",
+    "options": {
+      "A": "Removing data from public access",
+      "B": "Deleting data after a study is over",
+      "C": "Saving data on an encrypted drive",
+      "D": "Selling data to a private company"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Author-Pays' model?",
+    "options": {
+      "A": "The author pays the reviewers",
+      "B": "The author pays a fee (APC) to publish, allowing the paper to be free to readers",
+      "C": "The author pays for their own travel",
+      "D": "The author pays for the lab equipment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standardized Citation'?",
+    "options": {
+      "A": "Citing in a random order",
+      "B": "Following a specific format (like APA or MLA) consistently throughout the work",
+      "C": "Citing only famous authors",
+      "D": "Using a single font for all citations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Citation Density'?",
+    "options": {
+      "A": "The number of pages in a bibliography",
+      "B": "The number of citations per unit of text (e.g., per 1,000 words)",
+      "C": "The weight of the citation list",
+      "D": "The number of times an author is cited"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Institutional Repository' (IR)?",
+    "options": {
+      "A": "A bank for universities",
+      "B": "An online database for collecting and preserving the intellectual output of an institution",
+      "C": "A library for students only",
+      "D": "A vault for secret research"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predatory Publishing' awareness?",
+    "options": {
+      "A": "Looking for journals about predators",
+      "B": "Being aware of journals that mimic academic standards to exploit authors financially",
+      "C": "Avoiding publishing research about animals",
+      "D": "A list of dangerous authors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Citation'?",
+    "options": {
+      "A": "Reading a spreadsheet out loud",
+      "B": "Treating a dataset as a citable object with its own DOI",
+      "C": "Listing data in a table",
+      "D": "Counting the numbers in a paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mirror Site' in publishing?",
+    "options": {
+      "A": "A website that shows things backward",
+      "B": "A website that contains a replica of the content of another site to balance traffic",
+      "C": "A website with author photos",
+      "D": "A backup of a single paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Publication Bias'?",
+    "options": {
+      "A": "Preferring papers written in English",
+      "B": "The tendency to publish only positive results, while leaving negative results unpublished",
+      "C": "The tendency to cite your friends",
+      "D": "Choosing only famous journals"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'License to Publish'?",
+    "options": {
+      "A": "A driver's license for researchers",
+      "B": "A legal agreement where an author grants a publisher specific rights while retaining copyright",
+      "C": "A permission from the university to write a paper",
+      "D": "An award for the best paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Informed Consent' in human research?",
+    "options": {
+      "A": "Telling a colleague about the study",
+      "B": "Ensuring participants understand the research and voluntarily agree to participate",
+      "C": "Asking the government for permission",
+      "D": "Signing a form to pay a fee"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bibliographic Management Software'?",
+    "options": {
+      "A": "A word processor",
+      "B": "A tool like EndNote or RefWorks used to organize references and create bibliographies",
+      "C": "A way to backup the whole computer",
+      "D": "An encrypted storage for papers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Open Data'?",
+    "options": {
+      "A": "Data that anyone can see through the window",
+      "B": "Data that is made available for anyone to access, use, and share without restrictions",
+      "C": "Data that is not encrypted",
+      "D": "Data stored on a USB drive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Research Integrity'?",
+    "options": {
+      "A": "The speed of the research",
+      "B": "Conducting research according to high ethical and professional standards",
+      "C": "The size of the research team",
+      "D": "The number of publications"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Matthew Effect' in scholarly citations?",
+    "options": {
+      "A": "The tendency for researchers to cite only the most recent works",
+      "B": "A phenomenon where eminent researchers receive disproportionately more credit than less well-known researchers for similar work",
+      "C": "The statistical probability of a paper being cited within the first 48 hours of publication",
+      "D": "A citation pattern where authors only cite work from their own institution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'COI Fencing' in the context of peer review management?",
+    "options": {
+      "A": "Encrypting the reviewer's comments",
+      "B": "A rigorous algorithmic process used by editors to isolate and exclude reviewers with even indirect institutional or financial ties to authors",
+      "C": "A physical security measure for journal offices",
+      "D": "A method of hiding the budget of a research project"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary objective of the 'Helsinki Declaration' in research publications?",
+    "options": {
+      "A": "To standardize the use of LaTeX in physics",
+      "B": "To provide ethical principles for medical research involving human subjects",
+      "C": "To regulate the cost of open-access journals in Europe",
+      "D": "To define the copyright limits of digital libraries"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric uses a 3-year citation window and accounts for the prestige of the citing journal, similar to the Google PageRank algorithm?",
+    "options": {
+      "A": "Journal Impact Factor (JIF)",
+      "B": "SJR (SCImago Journal Rank)",
+      "C": "CiteScore",
+      "D": "h-index"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vertical Integration' in the academic publishing industry?",
+    "options": {
+      "A": "Publishing papers in alphabetical order",
+      "B": "When a single publisher controls the entire lifecycle, from lab data tools and preprints to final journals and discovery analytics",
+      "C": "A method of citation where authors cite the oldest paper in the field first",
+      "D": "The process of moving from a student to a lead author"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the term 'Plan S' require regarding 'Hybrid' journals?",
+    "options": {
+      "A": "Hybrid journals are the only ones allowed",
+      "B": "Open access via hybrid journals is generally not compliant unless part of a 'Transformative Agreement'",
+      "C": "All hybrid journals must be converted to print-only",
+      "D": "Hybrid journals must charge a flat fee regardless of article length"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In copyright law, what is the 'Rule of the Shorter Term' regarding international publications?",
+    "options": {
+      "A": "The author must choose the shortest citation format",
+      "B": "The principle that copyright protection should not exceed the term granted in the work's country of origin",
+      "C": "A rule stating that papers under 10 pages have no copyright",
+      "D": "The requirement to publish a paper within one year of finishing the study"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bibliographic Decoupling'?",
+    "options": {
+      "A": "Separating the references from the main text",
+      "B": "When two papers that previously shared common references evolve into distinct research areas with no shared citations",
+      "C": "A software error in reference managers",
+      "D": "Removing an author from a publication after a disagreement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best defines 'Paratext' in scholarly publications?",
+    "options": {
+      "A": "The raw data stored in HDFS",
+      "B": "The surrounding elements of a text (titles, forewords, indices) that frame the way a reader perceives the research",
+      "C": "The code used to analyze the data",
+      "D": "A translation of the paper into a second language"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Lotka's Law' in bibliometrics?",
+    "options": {
+      "A": "The law of diminishing returns in lab funding",
+      "B": "A law describing the frequency of publication by authors, stating that a small number of authors produce the majority of work",
+      "C": "The rule for naming chemical elements in a paper",
+      "D": "The probability of a paper being rejected by three different journals"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dark Open Access'?",
+    "options": {
+      "A": "Research about deep-sea life",
+      "B": "The unauthorized distribution of paywalled scholarly content through 'shadow libraries' or peer-to-peer sharing",
+      "C": "Publishing in journals that have no website",
+      "D": "Research funded by secret government grants"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Post-hoc Ergo Propter Hoc' fallacy in research discussion?",
+    "options": {
+      "A": "Assuming that correlation implies causation",
+      "B": "Assuming that because one event followed another, the first must have caused the second",
+      "C": "Focusing only on positive results",
+      "D": "Citing a source that was retracted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Ingelfinger Rule'?",
+    "options": {
+      "A": "A rule stating that only three authors are allowed per paper",
+      "B": "A policy where journals refuse to publish research that has already been reported in the popular media or other journals",
+      "C": "The requirement to use SI units in all publications",
+      "D": "A protocol for checking the statistical power of a study"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Co-citation Proximity Analysis' (CPA), what is being measured?",
+    "options": {
+      "A": "The physical distance between two researchers",
+      "B": "The closeness of two citations within the full text of a document to determine their conceptual relationship",
+      "C": "The time difference between two publications",
+      "D": "The cost difference between two open-access fees"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Retraction Inflation'?",
+    "options": {
+      "A": "The rising cost of removing a paper from a database",
+      "B": "The phenomenon where the rate of retracted papers is rising faster than the rate of total publications",
+      "C": "The practice of retracting small sections of a paper instead of the whole thing",
+      "D": "A decrease in the importance of citations from retracted papers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bradford's Law' of scattering?",
+    "options": {
+      "A": "The distribution of data points in a scatter plot",
+      "B": "A pattern where a small 'core' group of journals accounts for the majority of articles on a specific subject",
+      "C": "The way citations decrease as a paper gets older",
+      "D": "The movement of researchers between different universities"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gold Open Access' with a 'Transformative Agreement'?",
+    "options": {
+      "A": "A deal to move from print to digital",
+      "B": "Contracts between libraries and publishers where subscription costs are shifted to cover open-access publishing costs",
+      "C": "An agreement to translate a paper into 10 languages",
+      "D": "A reward for authors who publish more than 5 papers a year"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific copyright 'moral right' allows an author to withdraw a work from the public because it no longer represents their current views?",
+    "options": {
+      "A": "Right of Attribution",
+      "B": "Right of Withdrawal (Droit de Retrait)",
+      "C": "Right of Integrity",
+      "D": "Right of Disclosure"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Orphan Work' in scholarly publishing?",
+    "options": {
+      "A": "A paper with no references",
+      "B": "A copyrighted work for which the copyright owner cannot be identified or contacted",
+      "C": "A study conducted by a single student",
+      "D": "A paper published in a defunct journal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Meme-style' citation distortion?",
+    "options": {
+      "A": "Using jokes in a bibliography",
+      "B": "The spread of a specific (often incorrect) claim across papers because authors cite a secondary source without checking the original",
+      "C": "A viral marketing campaign for a journal",
+      "D": "A way to use images instead of text in a citation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Price's Law' regarding scientific productivity?",
+    "options": {
+      "A": "The cost of research doubles every ten years",
+      "B": "The square root of the total number of authors in a field accounts for 50% of the total contributions",
+      "C": "The price of a journal is proportional to its impact factor",
+      "D": "A paper's value is determined by the number of its equations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Semantic Scholar' or similar AI engines, what is 'Influential Citation'?",
+    "options": {
+      "A": "A citation from a Nobel Prize winner",
+      "B": "An algorithmic identification of citations where the citing paper builds significantly upon the cited paper's methods or results",
+      "C": "The very first citation a paper receives",
+      "D": "A citation that appears in the introduction"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double-Anon' review versus 'Double-Blind'?",
+    "options": {
+      "A": "Anonymity for the editor and the author",
+      "B": "They are synonymous, representing the anonymity of both author and reviewer",
+      "C": "Anonymity for the data sources",
+      "D": "A review where the author's name is encrypted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Impact Factor' 'Self-Citation' manipulation risk?",
+    "options": {
+      "A": "An author citing their own work 100 times",
+      "B": "A journal forcing authors to cite other papers from the same journal to artificially inflate its JIF",
+      "C": "Citing a paper from a different field",
+      "D": "A researcher using the same references in every paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata Cross-walking'?",
+    "options": {
+      "A": "Sharing data between two researchers",
+      "B": "The process of mapping metadata elements from one schema (like Dublin Core) to another (like MARC) for interoperability",
+      "C": "Moving a database from HDFS to S3",
+      "D": "A security protocol for data transfer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Recycling' (Self-Plagiarism) policy in 'COPE' guidelines?",
+    "options": {
+      "A": "It is always strictly forbidden",
+      "B": "It is permissible in small amounts (e.g., in Methodology sections) if clearly disclosed and necessary for context",
+      "C": "It is only allowed in student papers",
+      "D": "It is mandatory for series publications"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Zif's Law' application in bibliometrics?",
+    "options": {
+      "A": "Predicting the price of books",
+      "B": "Analyzing the frequency of word usage in a large corpus of scientific literature to identify key emerging topics",
+      "C": "Determining the optimal number of authors",
+      "D": "Calculating the network latency of a database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Public Domain' versus 'CC0' license?",
+    "options": {
+      "A": "Public Domain is for books; CC0 is for data",
+      "B": "Public Domain is a legal status (copyright expired); CC0 is a tool for owners to voluntarily waive all rights globally",
+      "C": "They are identical in all countries",
+      "D": "CC0 requires a fee; Public Domain is free"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'San Francisco Declaration on Research Assessment' (DORA)?",
+    "options": {
+      "A": "A guide for laboratory safety",
+      "B": "A worldwide initiative to reduce reliance on the Journal Impact Factor (JIF) for individual researcher evaluation",
+      "C": "A protocol for clinical trials in California",
+      "D": "A treaty on the copyright of digital images"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bibliographic Coupling' vs 'Co-citation'?",
+    "options": {
+      "A": "Coupling is for authors; Co-citation is for journals",
+      "B": "Coupling is backward-looking (shared references); Co-citation is forward-looking (papers cited together by new works)",
+      "C": "They are the same measurement",
+      "D": "Coupling is for digital files; Co-citation is for physical books"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Author-Check' in modern submission systems?",
+    "options": {
+      "A": "Verifying the author's bank account",
+      "B": "An automated check for ORCID validity, institutional email verification, and previous ethical flags",
+      "C": "A way to see if the author is famous",
+      "D": "A spell-check for the author's name"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Journal Citation Indicator' (JCI)?",
+    "options": {
+      "A": "The number of times a journal is mentioned on Twitter",
+      "B": "A field-normalized metric by Clarivate that represents the average category-normalized citation impact for a journal",
+      "C": "A list of the world's fastest-growing journals",
+      "D": "The percentage of papers a journal rejects"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cascading Peer Review'?",
+    "options": {
+      "A": "Reviewers falling asleep",
+      "B": "A process where a rejected paper's reviews are forwarded to a different (often lower-tier) journal within the same publisher",
+      "C": "A review that is done by 10 different people",
+      "D": "A way to speed up the review by 50%"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Leiden Manifesto'?",
+    "options": {
+      "A": "A guide for using AI in writing",
+      "B": "Ten principles to guide the responsible use of metrics in research evaluation",
+      "C": "A treaty on the use of Dutch in publications",
+      "D": "A set of rules for publishing in the field of history"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Silver Open Access'?",
+    "options": {
+      "A": "A deprecated term sometimes referring to the archiving of an abstract only",
+      "B": "A journal that is open access for the first year only",
+      "C": "Research that is funded by private donors",
+      "D": "A way to pay for publishing with cryptocurrency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Data Management Plans' (DMP), what is 'Metadata Interoperability'?",
+    "options": {
+      "A": "Translating data into Python",
+      "B": "The ability of data systems to exchange and use information based on shared metadata standards",
+      "C": "Storing data in the cloud",
+      "D": "A way to hide data from the public"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predatory Journal' 'Hijacking'?",
+    "options": {
+      "A": "Authors stealing code from a journal",
+      "B": "When a predatory publisher creates a fake website mimicking a legitimate, often print-only, academic journal",
+      "C": "An attack on the journal's physical office",
+      "D": "A software virus in the submission system"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Negative Citation'?",
+    "options": {
+      "A": "A citation that doesn't count toward the h-index",
+      "B": "A citation that specifically disputes, criticizes, or fails to replicate the findings of the cited work",
+      "C": "Citing a paper from a different language",
+      "D": "A citation in the bibliography but not in the text"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Correction' in the scientific record?",
+    "options": {
+      "A": "An author fixing their own typos",
+      "B": "The iterative process where subsequent publications correct, refine, or debunk previous findings",
+      "C": "A software for checking logic in a paper",
+      "D": "A way to edit a paper after it's printed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Article-Level' 'Capture' metric?",
+    "options": {
+      "A": "The number of photos in an article",
+      "B": "Metrics tracking when a user bookmarks or saves an article (e.g., Mendeley saves) as a precursor to future citation",
+      "C": "Taking a screenshot of a paper",
+      "D": "The number of times a paper is printed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Cofactor' in scholarly publishing automation?",
+    "options": {
+      "A": "A second lead author",
+      "B": "An automated tool or service used to assist in journal selection or manuscript screening",
+      "C": "A multiplier for the impact factor",
+      "D": "The cost of the submission system"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformative Journal'?",
+    "options": {
+      "A": "A journal that changes its name every year",
+      "B": "A subscription journal that has formally committed to transitioning to a full Open Access model over time",
+      "C": "A journal about chemistry",
+      "D": "A journal that only publishes reviews"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Citation Decay'?",
+    "options": {
+      "A": "A paper disappearing from a database",
+      "B": "The decrease in the rate of citations for a paper as it ages and is replaced by newer research",
+      "C": "Errors in the bibliography",
+      "D": "The physical destruction of old journals"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'YARN' for research compute, what is 'Pre-emption'?",
+    "options": {
+      "A": "Starting a study before the grant is approved",
+      "B": "Reclaiming resources from lower-priority jobs to give to higher-priority research tasks",
+      "C": "Predicting the results of an experiment",
+      "D": "A way to backup the server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Co-authorship' 'Credit Splitting'?",
+    "options": {
+      "A": "Sharing the money from a grant",
+      "B": "The complex problem of assigning proportional credit to authors based on their specific roles (e.g., CRediT taxonomy)",
+      "C": "Splitting the paper into two",
+      "D": "Alphabetizing the author names"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'OJS' (Open Journal Systems)?",
+    "options": {
+      "A": "A system for opening physical books",
+      "B": "An open-source software platform for managing and publishing scholarly journals",
+      "C": "A list of open researchers",
+      "D": "A security software for HDFS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Price Index' in a bibliography?",
+    "options": {
+      "A": "The cost of the referenced books",
+      "B": "The percentage of references in a paper that were published within the last five years",
+      "C": "The inflation rate of the journal's price",
+      "D": "A list of the author's previous grants"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bibliometric' 'Activity Index'?",
+    "options": {
+      "A": "The number of hours a researcher works",
+      "B": "The relative research effort of a country or institution in a specific field compared to the world average",
+      "C": "A score for the author's social media activity",
+      "D": "The number of times a paper is downloaded"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic' 'Linkage' in a digital library?",
+    "options": {
+      "A": "Searching for words that mean the same thing",
+      "B": "Connecting publications based on the underlying concepts and entities they describe, rather than just keyword matches",
+      "C": "A faster internet connection to the library",
+      "D": "A way to translate a paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Research Parasitism'?",
+    "options": {
+      "A": "A biological study on parasites",
+      "B": "A derogatory term for researchers who use others' open data to publish papers without contributing new data or collaborating",
+      "C": "A virus in a database",
+      "D": "When one author does all the work for others"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Graph' construction in publishing?",
+    "options": {
+      "A": "A chart of the author's grades",
+      "B": "Creating a structured network of entities (authors, papers, concepts, grants) to improve discovery and analytics",
+      "C": "A way to draw maps for a paper",
+      "D": "A tool for the librarian"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Institutional' 'Diamond' Open Access?",
+    "options": {
+      "A": "A very expensive journal",
+      "B": "A model where journals are free for both readers and authors, often supported by university or government subsidies",
+      "C": "Research about diamonds",
+      "D": "A journal with only elite authors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Post-Publication' 'Correction'?",
+    "options": {
+      "A": "Editing a paper on your own laptop",
+      "B": "A formal addendum or erratum published by the journal to fix a non-fatal error in a published work",
+      "C": "A note in the bibliography",
+      "D": "Writing a blog post about the error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Citation' 'Inflation' in global metrics?",
+    "options": {
+      "A": "The price of citations rising",
+      "B": "The increase in the average number of references per paper over time, leading to higher overall citation counts",
+      "C": "Too many authors on a paper",
+      "D": "A decrease in the quality of papers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Peer Review' 'Recognition' (e.g., Publons)?",
+    "options": {
+      "A": "An award for the fastest reviewer",
+      "B": "The practice of formally recording and crediting researchers for their peer review activities",
+      "C": "A way to see the reviewer's photo",
+      "D": "A higher salary for reviewers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Textual' 'Overlap' threshold in plagiarism software?",
+    "options": {
+      "A": "The number of pages that are identical",
+      "B": "The specific percentage of matching text that triggers a manual investigation by an editor",
+      "C": "The number of words in a sentence",
+      "D": "A way to merge two texts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Author-Self-Correction'?",
+    "options": {
+      "A": "When an author fixes their own grammar",
+      "B": "The ethical act of an author notifying a journal of an honest error in their published work to request a correction or retraction",
+      "C": "A software tool for logic checking",
+      "D": "A way to delete a paper before anyone reads it"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Ethics' 'Anonymization'?",
+    "options": {
+      "A": "Hiding the researcher's name",
+      "B": "The process of removing personally identifiable information from datasets to protect participant privacy before publication",
+      "C": "Using a code name for the study",
+      "D": "Encrypting the hard drive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'License' 'Compatibility' in open research?",
+    "options": {
+      "A": "Using a license that works with Python",
+      "B": "Ensuring that data or text combined from different sources have licenses that allow them to be legally merged into a new work",
+      "C": "Having a license from the government",
+      "D": "Using a license that never expires"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scholarly' 'Discovery Service'?",
+    "options": {
+      "A": "A search for new planets",
+      "B": "An enterprise-level search engine (like Primo or Summon) that searches across an institution's entire digital and physical collection",
+      "C": "A way to find new researchers",
+      "D": "A map of a library"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Preprint' 'Citation' 'Policy'?",
+    "options": {
+      "A": "You can never cite a preprint",
+      "B": "A journal's rules on whether preprints can be cited as valid references in a formal paper",
+      "C": "A rule about the font used in preprints",
+      "D": "The requirement to pay a fee to cite a preprint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Research' 'Reproducibility' 'Crisis'?",
+    "options": {
+      "A": "A shortage of lab equipment",
+      "B": "The ongoing concern that many published research findings cannot be replicated by other independent scientists",
+      "C": "A lack of researchers in the world",
+      "D": "The high cost of publishing research"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Persistent Link' stability?",
+    "options": {
+      "A": "How fast a link opens",
+      "B": "The reliability of a URI (like a DOI) to point to the correct digital object over decades",
+      "C": "The security of a network connection",
+      "D": "A link that never requires a password"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Citation' 'Typology'?",
+    "options": {
+      "A": "The font used in a citation",
+      "B": "The classification of citations based on their purpose (e.g., 'perfunctory', 'methodological', 'critique')",
+      "C": "A list of citation styles",
+      "D": "The number of citations per page"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bibliometric' 'Normalisation'?",
+    "options": {
+      "A": "Making every paper the same length",
+      "B": "Adjusting citation counts to account for different citation habits and growth rates across different scientific fields",
+      "C": "Standardizing the author names",
+      "D": "Using the same units in all studies"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scholarly' 'Curation'?",
+    "options": {
+      "A": "Cleaning a museum",
+      "B": "The active management and preservation of digital research outputs to ensure they remain accessible and usable over time",
+      "C": "Choosing which researchers can use the lab",
+      "D": "A way to organize books in a library"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double-Sided' 'Blind Review'?",
+    "options": {
+      "A": "A review done in two languages",
+      "B": "A common synonym for double-blind review, where both author and reviewer are anonymous",
+      "C": "A review that happens twice",
+      "D": "A review of the front and back of a paper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Research' 'Dissemination' 'Strategy'?",
+    "options": {
+      "A": "A plan to hide data",
+      "B": "A planned approach to sharing research findings with specific target audiences (policy makers, public, academics) beyond just journal publication",
+      "C": "A way to get more grants",
+      "D": "Choosing which font to use in a paper"
+    },
+    "answer": "B"
+  }
+]
+}

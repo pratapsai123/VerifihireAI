@@ -1,0 +1,1965 @@
+{ 
+  "skill": "ELK Stack", 
+  "questions": [
+    {
+    "question": "What does the acronym 'ELK' stand for in the context of the Elastic Stack?",
+    "options": {
+      "A": "Endpoint, Logic, Kernel",
+      "B": "Elasticsearch, Logstash, Kibana",
+      "C": "Encryption, Logging, Kibana",
+      "D": "Elastic, Linux, Kubernetes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of the ELK stack is primarily responsible for storing, searching, and analyzing data?",
+    "options": {
+      "A": "Logstash",
+      "B": "Elasticsearch",
+      "C": "Kibana",
+      "D": "Beats"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kibana is a web interface used to visualize and explore data stored in Elasticsearch.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for log data",
+      "D": "Only if using version 8.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Logstash' in the ELK pipeline?",
+    "options": {
+      "A": "To act as a physical firewall.",
+      "B": "To ingest, transform, and ship data to a 'stash' like Elasticsearch.",
+      "C": "To provide a user login screen.",
+      "D": "To monitor the temperature of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component was added to the stack to provide lightweight data shippers for edge machines?",
+    "options": {
+      "A": "X-Pack",
+      "B": "Beats",
+      "C": "Lucene",
+      "D": "Fleet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Elasticsearch, what is an 'Index'?",
+    "options": {
+      "A": "A list of all employees in the IT department.",
+      "B": "A collection of documents that have similar characteristics, analogous to a database in a relational system.",
+      "C": "A specialized tool for cleaning keyboards.",
+      "D": "The physical location of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elasticsearch stores data in a schema-free JSON document format.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for text fields",
+      "D": "Only if using Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default port for the Elasticsearch REST API?",
+    "options": {
+      "A": "5601",
+      "B": "9200",
+      "C": "9300",
+      "D": "8080"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Beat' would you use to collect and ship system log files?",
+    "options": {
+      "A": "Metricbeat",
+      "B": "Filebeat",
+      "C": "Packetbeat",
+      "D": "Auditbeat"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Cluster' is a collection of one or more Elasticsearch nodes that together hold your entire data set.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for production environments",
+      "D": "Only if using a load balancer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NRT' in the context of Elasticsearch performance?",
+    "options": {
+      "A": "Network Response Time",
+      "B": "Near Real-Time (data is searchable within about one second of indexing)",
+      "C": "Node Recovery Tool",
+      "D": "Non-Relational Table"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific port is used by default to access the Kibana web interface?",
+    "options": {
+      "A": "9200",
+      "B": "5601",
+      "C": "80",
+      "D": "3000"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Document' in Elasticsearch?",
+    "options": {
+      "A": "A physical paper file.",
+      "B": "The basic unit of information that can be indexed, represented in JSON.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The user manual for the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Logstash requires three main stages in its configuration: Input, Filter, and Output.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Grok",
+      "D": "Only in version 7.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Grok' in a Logstash pipeline?",
+    "options": {
+      "A": "To encrypt the data on disk.",
+      "B": "To parse unstructured log data into structured, searchable fields using pattern matching.",
+      "C": "To restart the Logstash service automatically.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Sharding' in Elasticsearch?",
+    "options": {
+      "A": "It makes the servers physically smaller.",
+      "B": "It allows you to split an index into multiple pieces to distribute data and parallelize operations across nodes.",
+      "C": "It removes the need for an internet connection.",
+      "D": "It makes the OS free to use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Replica' shard provides a redundant copy of the data to protect against hardware failure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production indices",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Mapping' define in an Elasticsearch index?",
+    "options": {
+      "A": "The physical location of nodes on a world map.",
+      "B": "The data types (e.g., text, keyword, date) for the fields in a document.",
+      "C": "The list of allowed IP addresses for the firewall.",
+      "D": "The password for the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kibana, what is an 'Index Pattern' used for?",
+    "options": {
+      "A": "To choose a color pattern for the dashboard.",
+      "B": "To tell Kibana which Elasticsearch indices you want to explore and visualize.",
+      "C": "To encrypt the indices.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Beats can send data directly to Elasticsearch without using Logstash.",
+    "options": {
+      "A": "True (Logstash is only needed if advanced transformations are required).",
+      "B": "False",
+      "C": "Only for Metricbeat",
+      "D": "Only if the server is in the same rack"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Metricbeat'?",
+    "options": {
+      "A": "To ship log files.",
+      "B": "To collect system and service metrics (CPU, RAM, etc.) and send them to the stack.",
+      "C": "To backup the system configuration.",
+      "D": "To monitor the total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Discover' mode in Kibana?",
+    "options": {
+      "A": "Finding a new cloud provider.",
+      "B": "A space to search and filter raw documents to understand your data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers between different data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can delete an entire index in Elasticsearch using a single REST command.",
+    "options": {
+      "A": "True (DELETE /index_name).",
+      "B": "False",
+      "C": "Only if the index is empty",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lucene'?",
+    "options": {
+      "A": "The name of the founder of Elastic.",
+      "B": "The underlying open-source search library that Elasticsearch is built upon.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Node' in an Elasticsearch cluster?",
+    "options": {
+      "A": "A physical point of connection for a cable.",
+      "B": "A single server that is part of a cluster and stores data.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The login page for Kibana."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Logstash is written in Java and runs on the JVM.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only version 1.0",
+      "D": "Only if using the ARM architecture"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'cat API' in Elasticsearch?",
+    "options": {
+      "A": "To show pictures of cats on the dashboard.",
+      "B": "To provide a compact, human-readable view of cluster and index health (e.g., /_cat/health).",
+      "C": "To encrypt the system logs.",
+      "D": "To monitor the room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for node-to-node communication in an Elasticsearch cluster?",
+    "options": {
+      "A": "9200",
+      "B": "9300",
+      "C": "5601",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard' in Kibana allows you to combine multiple visualizations into a single page.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they come from the same index",
+      "D": "Only if using Grafana"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Aggregation' in Elasticsearch used for?",
+    "options": {
+      "A": "To delete all duplicate data.",
+      "B": "To summarize and group data for analytics (e.g., finding the average response time).",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the total number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status in 'cluster health' indicates that at least one primary shard is missing and data is unavailable?",
+    "options": {
+      "A": "Green",
+      "B": "Yellow",
+      "C": "Red",
+      "D": "Grey"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Filebeat' is a lightweight agent that must be installed on the servers where the log files are generated.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic Mapping' in Elasticsearch?",
+    "options": {
+      "A": "Moving a server while it is on.",
+      "B": "The ability of Elasticsearch to automatically detect and add new fields to an index based on the incoming data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Field Type' in Elasticsearch for full-text search?",
+    "options": {
+      "A": "Integer",
+      "B": "Text",
+      "C": "Keyword",
+      "D": "Boolean"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Keyword' field type is used for exact values, sorting, and aggregations rather than full-text search.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for numerical data",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'X-Pack' (now integrated into the default distribution)?",
+    "options": {
+      "A": "A physical pack for carrying servers.",
+      "B": "A set of features providing security, monitoring, alerting, and reporting for the Elastic Stack.",
+      "C": "A tool to delete old monitoring data.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component acts as the 'visualization and management' layer for the Elastic Stack?",
+    "options": {
+      "A": "Logstash",
+      "B": "Kibana",
+      "C": "Beats",
+      "D": "Elasticsearch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An Elasticsearch query can be performed using a simple URL (URI Search) or a JSON body (Request Body Search).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for admin users",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of an 'Ingest Node'?",
+    "options": {
+      "A": "To provide power to the cluster.",
+      "B": "To pre-process and transform documents before they are actually indexed in Elasticsearch.",
+      "C": "To encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if an index has a status of 'Yellow'?",
+    "options": {
+      "A": "The index is being deleted.",
+      "B": "All primary shards are active, but one or more replica shards are not allocated to a node.",
+      "C": "The data is completely unreachable.",
+      "D": "The password has expired."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Packetbeat' is used to analyze network traffic in real-time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for WiFi",
+      "D": "Only if the switch is unmanaged"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Inverted Index' in Elasticsearch?",
+    "options": {
+      "A": "An index where the data is written upside down.",
+      "B": "A data structure that stores a mapping from content (like words) to its locations in a document, enabling very fast searches.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'parsing' log messages in a standard ELK pipeline?",
+    "options": {
+      "A": "Elasticsearch",
+      "B": "Logstash",
+      "C": "Kibana",
+      "D": "Beats"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A single Kibana instance can be connected to multiple Elasticsearch clusters.",
+    "options": {
+      "A": "True (using Cross-Cluster Search).",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Persistent Queue' in Logstash used for?",
+    "options": {
+      "A": "A set of stairs in the data center.",
+      "B": "To store incoming events on disk to prevent data loss in case of a service crash.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Output' for Logstash?",
+    "options": {
+      "A": "Elasticsearch",
+      "B": "Email",
+      "C": "Slack",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Elasticsearch is designed to scale horizontally by adding more nodes to a cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using version 1.0",
+      "D": "Only for cloud-native firewalls"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Watchers' in the Elastic Stack?",
+    "options": {
+      "A": "People who watch the servers through a camera.",
+      "B": "To set up alerts and automated actions based on conditions in your data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' communication for Elasticsearch?",
+    "options": {
+      "A": "80",
+      "B": "9200",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Logstash can receive data from multiple sources at the same time using different input plugins.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for proxy users",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canvas' in Kibana?",
+    "options": {
+      "A": "A way to draw literal art on a server.",
+      "B": "A data visualization and design tool that allows you to create custom infographics and live dashboards.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to check the total number of documents in an Elasticsearch index?",
+    "options": {
+      "A": "GET /index_name/_count",
+      "B": "system.doc.total",
+      "C": "The color of the index",
+      "D": "The size of the index on disk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Beats' is generally more CPU-efficient for basic log shipping than installing Logstash on every edge host.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mutate' filter in Logstash used for?",
+    "options": {
+      "A": "To change the physical appearance of the server.",
+      "B": "To perform general transformations on fields, such as renaming, removing, or replacing values.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kibana dashboards can be shared with others via a public URL or by embedding them in an iframe.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Auditbeat' used for?",
+    "options": {
+      "A": "To play music in the server room.",
+      "B": "To collect audit data from your systems to monitor user activity and system changes.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for node-to-node communication?",
+    "options": {
+      "A": "9200",
+      "B": "9300",
+      "C": "80",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elasticsearch indices can be backed up using 'Snapshots' to a remote repository like S3.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Index Lifecycle Management' (ILM)?",
+    "options": {
+      "A": "The process of deleting indices manually every day.",
+      "B": "A feature that automates how you manage your indices over time (e.g., moving data from hot to cold storage).",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Nodes' currently in an Elasticsearch cluster?",
+    "options": {
+      "A": "GET /_cat/nodes",
+      "B": "system.node.total",
+      "C": "The color of the cluster",
+      "D": "The size of the cluster on disk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Logstash can handle data in various formats including CSV, XML, and JSON.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Heartbeat' in the context of Beats?",
+    "options": {
+      "A": "To play music for the servers.",
+      "B": "A lightweight shipper for uptime monitoring that periodically probes your services to see if they are active.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Elasticsearch supports 'Cross-Cluster Replication' to keep indices in sync across different geographic locations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Logstash' pipeline workers setting used for?",
+    "options": {
+      "A": "Hiring more people to manage the stack.",
+      "B": "To control the number of parallel threads used to process events in a pipeline for better performance.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Elasticsearch Query DSL, what is the primary difference between a 'match' query and a 'term' query?",
+    "options": {
+      "A": "Match is for numbers; Term is for text.",
+      "B": "Match is analyzed (useful for full-text search); Term is not analyzed (useful for exact keyword matches).",
+      "C": "Term is faster but only works on replica shards.",
+      "D": "Match only works on indices created after version 7.0."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Logstash, how do you implement conditional logic to apply a filter only to a specific type of log?",
+    "options": {
+      "A": "Using the 'switch' plugin.",
+      "B": "Using 'if' statements within the filter block (e.g., if [type] == 'apache' { ... }).",
+      "C": "By creating a separate physical server for every log type.",
+      "D": "Using the 'Grok-Only' setting in the input plugin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Hot' phase of Index Lifecycle Management (ILM) is typically where data is actively being indexed and queried most frequently.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using SSDs",
+      "D": "Only for indices smaller than 10GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'bool' query in Elasticsearch?",
+    "options": {
+      "A": "To convert strings into Boolean values.",
+      "B": "To combine multiple query clauses (must, should, must_not, filter) using Boolean logic.",
+      "C": "To count the number of 'true' values in a field.",
+      "D": "To restart the search engine if it hangs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Elasticsearch node role is responsible for deciding which shards are allocated to which nodes?",
+    "options": {
+      "A": "Data node",
+      "B": "Master node",
+      "C": "Ingest node",
+      "D": "Client node"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Logstash, the 'mutate' filter can be used to convert a field's data type, such as turning a string '123' into an integer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for field names longer than 5 characters",
+      "D": "Only if the target field already exists"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens during a 'Rollover' in an ILM policy?",
+    "options": {
+      "A": "The server physically rolls over in the rack.",
+      "B": "A new index is created when the current one reaches a certain age, size, or document count.",
+      "C": "All data in the index is deleted and replaced with zeros.",
+      "D": "The index name is changed to uppercase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Filter' plugin in Logstash is best suited for adding geographical information (latitude/longitude) based on an IP address?",
+    "options": {
+      "A": "Grok",
+      "B": "Geoip",
+      "C": "Dns",
+      "D": "Useragent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shard Allocation Awareness' allows you to ensure that primary and replica shards are stored on different physical racks or zones to prevent data loss.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cross-cluster search",
+      "D": "Only if using a 10Gbps network"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Refresh' operation in Elasticsearch?",
+    "options": {
+      "A": "To reboot the server.",
+      "B": "To make recent changes to an index available for search by creating a new Lucene segment.",
+      "C": "To clear the browser cache in Kibana.",
+      "D": "To delete all indices older than 7 days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Elasticsearch, what is a 'Tombstone'?",
+    "options": {
+      "A": "A physical marker for a failed server.",
+      "B": "A marker used in distributed systems to signify that a document has been deleted, ensuring the deletion propagates to all replicas.",
+      "C": "A specialized way to encrypt data backups.",
+      "D": "A backup index created before a cluster upgrade."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Doc Value' is an on-disk data structure used by Elasticsearch for efficient sorting and aggregations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 'Text' fields",
+      "D": "Only if using version 6.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Logstash setting controls how many events the pipeline can fetch from inputs at once before sending them to filters?",
+    "options": {
+      "A": "pipeline.workers",
+      "B": "pipeline.batch.size",
+      "C": "pipeline.batch.delay",
+      "D": "queue.type"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reindexing' used for in Elasticsearch?",
+    "options": {
+      "A": "To change the name of a server.",
+      "B": "To move data from an old index to a new one, often to change mappings or settings that cannot be updated in place.",
+      "C": "To encrypt the indices using a new key.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Kibana' feature allows you to browse and manage Elasticsearch indices, shards, and ILM policies through a GUI?",
+    "options": {
+      "A": "Dev Tools",
+      "B": "Stack Management",
+      "C": "Discover",
+      "D": "Canvas"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Warm' phase in ILM usually involves moving indices to nodes with cheaper storage and reducing the number of replicas.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for indices older than 1 year",
+      "D": "Only if the index is set to read-only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'kv' (Key-Value) filter in Logstash?",
+    "options": {
+      "A": "To encrypt user passwords.",
+      "B": "To automatically parse strings formatted as key=value (e.g., 'user=admin status=success') into separate fields.",
+      "C": "To backup the system configuration.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Elasticsearch, what does 'Oversharding' refer to?",
+    "options": {
+      "A": "Using shards that are too large (e.g., > 100GB).",
+      "B": "Having too many small shards in a cluster, which leads to excessive overhead on the master node and high memory usage.",
+      "C": "Using only replica shards.",
+      "D": "The process of moving shards between nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Keyword' mapping instead of 'Text' mapping for a field prevents that field from being used in full-text searches.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 8.0+",
+      "D": "Only for non-encrypted logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Logstash Dead Letter Queue' (DLQ) used for?",
+    "options": {
+      "A": "To store old letters from the IT team.",
+      "B": "To store events that cannot be processed by Logstash (e.g., mapping conflicts) so they can be analyzed later.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Elasticsearch query type returns documents that contain an exact value in a specific field?",
+    "options": {
+      "A": "Match",
+      "B": "Term",
+      "C": "Range",
+      "D": "Prefix"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kibana 'Spaces' allow you to organize dashboards and index patterns into different categories for different teams.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'standard' tier",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Force Merge' operation in Elasticsearch?",
+    "options": {
+      "A": "Forcing two servers to share a cable.",
+      "B": "Reducing the number of segments in a Lucene index to improve query performance and reclaim disk space, typically done on read-only indices.",
+      "C": "Deleting duplicate data points.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Logstash' to receive data from Filebeat via the Lumberjack protocol?",
+    "options": {
+      "A": "9200",
+      "B": "5044",
+      "C": "5601",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elasticsearch 'Analyzers' consist of three parts: Character Filters, Tokenizers, and Token Filters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-English text",
+      "D": "Only if using version 7.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Snapshot Lifecycle Management' (SLM)?",
+    "options": {
+      "A": "The process of taking physical photos of the rack.",
+      "B": "A feature that automates the creation and deletion of cluster snapshots (backups) based on a schedule.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kibana, what is the 'Lens' feature primarily used for?",
+    "options": {
+      "A": "To clean the monitor screen.",
+      "B": "An easy-to-use, drag-and-drop visualization builder for creating charts without knowing query syntax.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Multiple Pipelines' in Logstash allows you to run different ingestion logic in isolation within the same Logstash instance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-based accounts",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Doc Value' specifically used for in Elasticsearch?",
+    "options": {
+      "A": "Storing the document ID.",
+      "B": "On-disk column-based storage used for sorting, aggregations, and scripting.",
+      "C": "Encrypting the database connection.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'Fleet' server used to manage Elastic Agents?",
+    "options": {
+      "A": "80",
+      "B": "8220",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Cluster Search' allows you to run a single query against multiple separate Elasticsearch clusters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'fingerprint' filter in Logstash?",
+    "options": {
+      "A": "To log in using a physical fingerprint scanner.",
+      "B": "To create a consistent hash of specific fields, often used to create a unique document ID and prevent duplicates in Elasticsearch.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Elasticsearch, what is a 'Primary Shard'?",
+    "options": {
+      "A": "The first server ever built.",
+      "B": "The main copy of a shard where write operations are initially performed.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Action' in an ILM policy moves an index to 'Cold' storage?",
+    "options": {
+      "A": "Shrink",
+      "B": "Allocate",
+      "C": "Rollover",
+      "D": "Delete"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Streams' are a modern way in Elasticsearch to manage time-series data, internally using multiple backing indices and an ILM policy.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows logs",
+      "D": "Only if using version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Logstash Pipeline Congestion'?",
+    "options": {
+      "A": "When the server room is too crowded.",
+      "B": "A state where the outputs are slower than the inputs, causing events to back up in the Logstash queue.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of JVM Heap currently used by an Elasticsearch node?",
+    "options": {
+      "A": "GET /_nodes/stats/jvm",
+      "B": "system.cpu.usage",
+      "C": "The color of the dashboard",
+      "D": "The number of pixels on a screen"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can use 'Dev Tools' in Kibana to send raw JSON requests to the Elasticsearch API.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for admin users",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Index Templates' used for?",
+    "options": {
+      "A": "A ruler for measuring server width.",
+      "B": "To define settings, mappings, and aliases that are automatically applied when a new index is created with a matching name pattern.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "Hiring a new visualization manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS' access for Kibana?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "5601",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elasticsearch 'Shards' can be physically moved from one node to another while the cluster is online.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Runtime Fields' in Elasticsearch?",
+    "options": {
+      "A": "Fields that only work while the admin is running.",
+      "B": "Fields that are calculated at query time rather than being stored, allowing you to change logic without reindexing data.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'routing' search requests to the correct shards in an Elasticsearch cluster?",
+    "options": {
+      "A": "Logstash",
+      "B": "Coordinating Node",
+      "C": "Kibana",
+      "D": "Master Node"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'range' query to find documents with a date field falling between two specific timestamps.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for integer fields",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grok' pattern 'COMBINEDAPACHELOG' used for?",
+    "options": {
+      "A": "Naming the servers after pilots.",
+      "B": "A pre-defined pattern used to parse the standard combined log format generated by Apache web servers.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'APM Server' (part of the stack) for receiving trace data?",
+    "options": {
+      "A": "80",
+      "B": "8200",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elasticsearch 'Aliases' allow you to point a single name to one or more indices, making it easier to rotate indices without updating application code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Frozen' phase in ILM used for?",
+    "options": {
+      "A": "Keeping the servers in a literal freezer.",
+      "B": "Extremely long-term archival where data is stored in searchable snapshots on object storage (like S3) to save cost, with slower query performance.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active' shards currently on an Elasticsearch node?",
+    "options": {
+      "A": "GET /_cat/shards",
+      "B": "system.shard.count",
+      "C": "node.active.shards",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Logstash' can act as a TCP or UDP server to receive logs directly from network devices.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shard Recovery' in Elasticsearch?",
+    "options": {
+      "A": "Recovering a physical server from a fire.",
+      "B": "The process of bringing a shard back into sync with its primary or replica after a node failure or cluster restart.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'Beats' to send data directly to 'Elasticsearch'?",
+    "options": {
+      "A": "5044",
+      "B": "9200",
+      "C": "5601",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Elastic Agent' is a single, unified way to monitor hosts, replacing the need to install multiple individual Beats.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Query DSL' 'Filtering' vs 'Scoring'?",
+    "options": {
+      "A": "Filtering is at the front door; Scoring is at the back door.",
+      "B": "Filtering excludes documents (Yes/No); Scoring calculates how well a document matches (Relevance).",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the trace database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'Logstash' HTTP input?",
+    "options": {
+      "A": "80",
+      "B": "8080",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elasticsearch 'Searchable Snapshots' allow you to query data directly from your backup repository without restoring the full index to local disk.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Logstash' persistent queue memory usage limit?",
+    "options": {
+      "A": "1GB by default.",
+      "B": "Configurable based on the 'queue.max_bytes' setting in logstash.yml.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for node communication?",
+    "options": {
+      "A": "9200",
+      "B": "9300",
+      "C": "80",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'ILM' policies can automatically delete indices once they reach a certain age.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Field Mapping' conflict?",
+    "options": {
+      "A": "Two physical racks being in the same spot.",
+      "B": "When a field is defined as one data type (e.g., numeric) in one index but as another (e.g., text) in another, causing errors in cross-index searches.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elasticsearch supports 'Auto-sharding' based on the size of the cluster nodes.",
+    "options": {
+      "A": "False (Shard count is usually defined at index creation or handled via ILM; it doesn't automatically change based on node size alone).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Kibana' saved objects 'Export' format?",
+    "options": {
+      "A": "JSON / NDJSON.",
+      "B": "TXT.",
+      "C": "CSV.",
+      "D": "PNG."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Elasticsearch' is built on top of the Apache Lucene library.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Logstash' aggregate filter used for?",
+    "options": {
+      "A": "To delete all duplicate logs.",
+      "B": "To group data from multiple different log lines that belong to the same task or transaction (e.g., matching a 'start' and 'end' log).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Elasticsearch, what is the primary technical trade-off when increasing the 'index.refresh_interval' from 1s to 60s?",
+    "options": {
+      "A": "Search performance decreases due to larger segment files.",
+      "B": "Higher indexing throughput and lower CPU usage because fewer Lucene segments are created, but data takes longer to become searchable.",
+      "C": "The master node becomes unstable due to cluster state bloat.",
+      "D": "Replica shards are no longer synchronized with the primary."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which internal mechanism does Elasticsearch use to ensure that data is not lost if a node crashes before the in-memory buffer is flushed to a Lucene segment?",
+    "options": {
+      "A": "Cross-Cluster Replication",
+      "B": "The Translog (Transaction Log)",
+      "C": "Snapshot Lifecycle Management",
+      "D": "The Inverted Index"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a multi-node cluster, a 'Split-Brain' scenario is prevented by the 'cluster.initial_master_nodes' and 'discovery.zen.minimum_master_nodes' (legacy) or the voting configuration (modern).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Ingest nodes",
+      "D": "Only if using Windows Server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the specific purpose of 'Shard Allocation Filtering' using node attributes?",
+    "options": {
+      "A": "To filter out spam documents during indexing.",
+      "B": "To control exactly which nodes can host shards for a specific index, allowing for Hot/Warm architecture or compliance-based data placement.",
+      "C": "To encrypt the communication between the Data and Master nodes.",
+      "D": "To increase the RAM limit of the JVM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Logstash, why would an architect implement an 'Aggregated' pipeline with a message broker like Redis or Kafka between Beats and Logstash?",
+    "options": {
+      "A": "To make the log files physically smaller.",
+      "B": "To provide a 'buffer' or 'load balancer' that prevents Logstash from becoming overwhelmed during sudden spikes in log volume.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The only way to support JSON logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Term Frequency / Inverse Document Frequency' (TF/IDF) in the context of Lucene?",
+    "options": {
+      "A": "A method for measuring the temperature of the CPU.",
+      "B": "A numerical statistic intended to reflect how important a word is to a document in a collection or corpus, used for search relevance scoring.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "A way to calculate the cost of cloud storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the 'Wildcard' field type is more efficient for leading-wildcard searches (*search) than the standard 'Keyword' field type.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for logs longer than 1024 characters",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Elasticsearch node role is the only one capable of performing 'Master-eligible' duties like maintaining the cluster state and handling node membership?",
+    "options": {
+      "A": "Data node",
+      "B": "Master-eligible node (node.roles: [master])",
+      "C": "Coordinating node",
+      "D": "Voting node only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Segment Merging' and why is it a resource-intensive background process?",
+    "options": {
+      "A": "Merging two physical server racks.",
+      "B": "Combining multiple small Lucene segments into larger ones to improve search efficiency and permanently remove deleted documents.",
+      "C": "A specialized way to encrypt database connections.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kibana, what is the 'TSVB' (Time Series Visual Builder) specifically designed for compared to standard visualizations?",
+    "options": {
+      "A": "To clean the monitor screen.",
+      "B": "For complex time-series analysis using the full power of Elasticsearch aggregations (like moving averages and rate of change) in a single view.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Circuit Breakers' in Elasticsearch are used to prevent a single node from crashing due to 'Out of Memory' (OOM) errors by tracking memory usage for queries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-based accounts",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Cluster State' in an Elasticsearch cluster?",
+    "options": {
+      "A": "To name the servers.",
+      "B": "A metadata structure containing information about the nodes, indices, mappings, and shard allocations that must be consistent across all nodes.",
+      "C": "To encrypt the database connection.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' in a Logstash filter would you use to prevent 'Mapping Explosions' caused by an unpredictable number of dynamic keys in a JSON object?",
+    "options": {
+      "A": "Mutate (rename/remove)",
+      "B": "Ruby (to iterate and flatten/filter keys)",
+      "C": "Grok",
+      "D": "Kv"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Searchable Snapshots' in the 'Frozen' phase use a local cache on the data node to improve query performance for data that is otherwise stored solely on S3/Azure Blob.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'BM25' (Best Matching 25) in Elasticsearch?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "The default ranking function used by Elasticsearch to estimate the relevance of documents to a given search query.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for Logstash monitoring if the 'xpack.monitoring' feature is enabled?",
+    "options": {
+      "A": "80",
+      "B": "9600",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Elasticsearch, 'Nested' objects are stored as separate hidden documents to maintain the relationship between internal fields, avoiding 'Flattening' issues.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows guests",
+      "D": "Only if using version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Force Merge' impact on the ILM 'Delete' phase?",
+    "options": {
+      "A": "It speeds up the deletion.",
+      "B": "It is usually recommended before moving an index to a 'read-only' phase (Warm/Cold) to optimize performance, but not required for deletion.",
+      "C": "It is a specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' indicates that an Elasticsearch cluster is experiencing 'GC' (Garbage Collection) pressure?",
+    "options": {
+      "A": "jvm.gc.collectors.old.collection_time_in_millis",
+      "B": "system.cpu.idle_percent",
+      "C": "node.shards.total",
+      "D": "index.segments.count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Cross-Cluster Replication' (CCR) requires the follower cluster to have exactly the same number of nodes as the leader cluster.",
+    "options": {
+      "A": "False (The hardware configurations can be entirely different).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shrink' API used for in an ILM policy?",
+    "options": {
+      "A": "To make the physical server smaller.",
+      "B": "To reduce the number of primary shards in an existing index, typically used when moving data from Hot to Warm storage.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'Elasticsearch Transport' protocol used for cluster-wide internal traffic?",
+    "options": {
+      "A": "9200",
+      "B": "9300",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Tiers' allow you to assign specific nodes to 'hot', 'warm', or 'cold' roles using the node.roles setting (e.g., data_hot).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux kernels above 5.0",
+      "D": "Only if the VM is in a 'Restricted' mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Global Cluster State Revision'?",
+    "options": {
+      "A": "To track the version of the kibana.yml file.",
+      "B": "To ensure that all nodes in the cluster agree on the same version of the metadata, preventing conflicting updates.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon occurs when Elasticsearch primary and replica shards are allocated on the same physical host?",
+    "options": {
+      "A": "Latency Bloat",
+      "B": "Single Point of Failure (Anti-Affinity Violation)",
+      "C": "Bandwidth Exhaustion",
+      "D": "Shard Flapping"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Logstash' can handle 'Multiline' log entries (like Java Stack Traces) using a specialized codec on the input or a filter.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Shard Prefetch' mechanism?",
+    "options": {
+      "A": "To restart a server during the night.",
+      "B": "To preemptively load shard data into the OS filesystem cache to speed up anticipated search requests.",
+      "C": "A specialized way to encrypt BGP updates.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'Tokenization' during the indexing process in Elasticsearch?",
+    "options": {
+      "A": "The BIOS",
+      "B": "The Analyzer (Tokenizer phase)",
+      "C": "The Network Card",
+      "D": "The Hard Drive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Point-in-Time' (PIT) searches allow you to run multiple queries against a constant dataset even if that data is being actively modified or deleted.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for outbound traffic",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Discovery' in an Elasticsearch cluster?",
+    "options": {
+      "A": "To play music for the servers.",
+      "B": "The process by which nodes find each other, form a cluster, and elect a Master node.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Elasticsearch feature allows you to 'undo' an accidental document deletion within a specific 'Retention' window?",
+    "options": {
+      "A": "Clone",
+      "B": "None (Deletions are immediate; requires Snapshot restore).",
+      "C": "Live Migration",
+      "D": "Backup Restore"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shard Splitting' allows you to increase the number of primary shards in an index after it has been created.",
+    "options": {
+      "A": "True (Introduced in newer versions, though it requires specific configuration).",
+      "B": "False",
+      "C": "Only if the accounts have the same credit card",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation in a virtual switch?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using VLAN IDs to logically separate traffic from different VMs so they cannot communicate without a router.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' heartbeats from the ESXi hosts?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Ballooning' can cause the Guest OS to start swapping memory to its own virtual disk if the Guest OS becomes RAM-starved.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) I/O Metric and why is it used?",
+    "options": {
+      "A": "Measuring the weight of the hard drive.",
+      "B": "A feature that monitors storage latency and automatically moves VM disks (Storage vMotion) to less congested data stores to maintain performance.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' (encrypted web management)?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' (VCHA) uses a three-node cluster (Active, Passive, Witness) to protect the management layer of the virtualization stack.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in VMware virtual networking?",
+    "options": {
+      "A": "The largest number of users allowed.",
+      "B": "A special ID used to enable Virtual Guest Tagging (VGT), allowing a VM to see and manage its own VLAN tags (Trunking).",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' is primarily used to provide direct network hardware access to VMs, but it often prevents the use of Live Migration.",
+    "options": {
+      "A": "True (because the hardware state is tied to a specific physical device).",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in Hyper-V?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts the amount of memory assigned to a VM based on real-time demand, ranging between a minimum and maximum value.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is used to improve the performance of nested virtualization by managing virtual-to-physical memory mappings across layers?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can cause a complete host crash if the physical data store runs out of actual space while VMs are trying to write data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The component of the hypervisor that manages the execution of a single VM, handling its CPU instructions and memory access.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic between sites?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' allows the Guest OS to communicate directly with the hypervisor using 'Hypercalls'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "The process where write operations are mirrored to both the source and destination disks during a migration to ensure data consistency.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of a Linux-based hypervisor?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "Disabling the specific port immediately and moving it to an error-disabled state when a violation occurs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management of a switch?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is selected based on the switch with the lowest Bridge ID (Priority + MAC Address).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a VLAN (intra-VLAN) before it is routed or bridged, providing Layer 2 and Layer 3 security.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' stops a port from sending or receiving BPDUs, essentially disabling STP on that port, which is generally dangerous.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' load balancing 'Hashing'?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "An algorithm that determines which physical link in a bundle to use for a specific packet based on fields like IP or MAC address.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is enabled by default on most Cisco switch ports.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password that the admin can't see.",
+      "B": "A feature where the password is not stored in plain text in the configuration file, improving security.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can occur if multiple physical links are connected between two switches without EtherChannel or STP enabled.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Restrict'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "Dropping packets from the unauthorized MAC address and incrementing the violation counter, but keeping the port operational for authorized MACs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' is a Cisco implementation that combines RSTP with PVST+ to provide fast convergence for every VLAN.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  }
+  ]
+}

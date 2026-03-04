@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Shell Scripting", 
+  "questions": [
+    {
+    "question": "Which of the following is the standard 'shebang' used to specify the POSIX shell as the interpreter?",
+    "options": {
+      "A": "#!/bin/sh",
+      "B": "#!/usr/bin/python",
+      "C": "#!/bin/bash",
+      "D": "#!/shell/sh"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a shell script, spaces are required around the '=' sign when assigning a value to a variable (e.g., NAME = 'User').",
+    "options": {
+      "A": "False (There must be no spaces around the '=' for variable assignment).",
+      "B": "True",
+      "C": "Only if the value is a string",
+      "D": "Only in the Zsh shell"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to output text or variables to the standard output in a script?",
+    "options": {
+      "A": "print",
+      "B": "echo",
+      "C": "display",
+      "D": "log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of adding a comment in a shell script using the '#' symbol?",
+    "options": {
+      "A": "To make the script run faster.",
+      "B": "To provide human-readable explanations that are ignored by the interpreter.",
+      "C": "To encrypt the script's contents.",
+      "D": "To define a global constant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you correctly reference the value of a variable named 'VERSION' in a script?",
+    "options": {
+      "A": "VERSION",
+      "B": "$VERSION",
+      "C": "&VERSION",
+      "D": "@VERSION"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A script must have the 'execute' permission bit set to be run directly by its filename (e.g., ./myscript.sh).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for root users",
+      "D": "Only if it is in the /tmp directory"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used to redirect the output of a script and append it to an existing file?",
+    "options": {
+      "A": ">",
+      "B": ">>",
+      "C": "|",
+      "D": "<"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which special variable represents the name of the script currently being executed?",
+    "options": {
+      "A": "$1",
+      "B": "$0",
+      "C": "$#",
+      "D": "$*"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The command 'chmod 700 script.sh' allows everyone in the system to read and execute the script.",
+    "options": {
+      "A": "False (It grants full permissions only to the owner).",
+      "B": "True",
+      "C": "Only for directories",
+      "D": "Only on Debian systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to accept user input from the terminal and store it in a variable?",
+    "options": {
+      "A": "input",
+      "B": "read",
+      "C": "get",
+      "D": "prompt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of the special variable '$#' in a script?",
+    "options": {
+      "A": "The ID of the current process.",
+      "B": "The number of command-line arguments passed to the script.",
+      "C": "The exit status of the last command.",
+      "D": "The username of the person running the script."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check if a script was executed successfully using its exit status?",
+    "options": {
+      "A": "Check if $? is 0.",
+      "B": "Check if $# is 1.",
+      "C": "Check if $0 is 'success'.",
+      "D": "Check if the script file was deleted."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a shell script, 'if' statements must always end with the 'fi' keyword.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using 'else'",
+      "D": "Only in the Bash shell"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command allows you to execute a script in the current shell environment, often used to load variables?",
+    "options": {
+      "A": "exec",
+      "B": "source (or . )",
+      "C": "bash",
+      "D": "fork"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'exit' command in a script?",
+    "options": {
+      "A": "To pause the script for 10 seconds.",
+      "B": "To terminate the script and optionally return a status code.",
+      "C": "To delete the script file.",
+      "D": "To restart the computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Variables in shell scripts are untyped by default, meaning they can hold strings or numbers without explicit declaration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Zsh",
+      "D": "Only if declared as 'local'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which symbol is used to pipe the output of one command as the input to another command in a script?",
+    "options": {
+      "A": ">",
+      "B": "|",
+      "C": "&",
+      "D": "$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the meaning of the '$1' variable in a shell script?",
+    "options": {
+      "A": "The name of the script.",
+      "B": "The first argument passed to the script via the command line.",
+      "C": "The current line number in the script.",
+      "D": "The total number of arguments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Shell scripts can be used to automate repetitive system administration tasks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Ubuntu",
+      "D": "Only for root users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which file extension is most commonly used for shell scripts?",
+    "options": {
+      "A": ".exe",
+      "B": ".sh",
+      "C": ".bat",
+      "D": ".py"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you run a script named 'backup.sh' that is in your current directory?",
+    "options": {
+      "A": "run backup.sh",
+      "B": "./backup.sh",
+      "C": "execute backup.sh",
+      "D": "open backup.sh"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'for' loop do in a script?",
+    "options": {
+      "A": "Executes a block of code if a condition is true.",
+      "B": "Iterates over a list of items and executes a block of code for each.",
+      "C": "Waits for a specific file to be created.",
+      "D": "Exits the script immediately."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Environment variables like $PATH are accessible within your shell scripts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if exported using 'export'",
+      "D": "Only if the script is run as sudo"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to display the manual or help page for a shell command used in a script?",
+    "options": {
+      "A": "help",
+      "B": "man",
+      "C": "info",
+      "D": "doc"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'test' command (or '[ ]' brackets) in a script?",
+    "options": {
+      "A": "To check if the script has any syntax errors.",
+      "B": "To evaluate conditional expressions (e.g., file existence, string comparison).",
+      "C": "To benchmark the script's speed.",
+      "D": "To verify the user's password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In shell scripting, string comparison '==' is the same as numeric comparison '-eq'.",
+    "options": {
+      "A": "False ( '==' is for strings; '-eq' is specifically for integers).",
+      "B": "True",
+      "C": "Only in the Bash shell",
+      "D": "Only if comparing variable values"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to see the list of all commands you have typed in the current session?",
+    "options": {
+      "A": "log",
+      "B": "history",
+      "C": "cmds",
+      "D": "list"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'while' loop do in a script?",
+    "options": {
+      "A": "Runs a block of code once.",
+      "B": "Repeatedly executes a block of code as long as a condition is true.",
+      "C": "Stops the script for 5 seconds.",
+      "D": "Calculates the time it takes to run a command."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A script can be terminated prematurely by the user by pressing Ctrl+C.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the script is in an infinite loop",
+      "D": "Only if run in the background"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you make a variable 'MYVAR' available to sub-processes or scripts called by the current script?",
+    "options": {
+      "A": "set MYVAR",
+      "B": "export MYVAR",
+      "C": "global MYVAR",
+      "D": "make MYVAR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which special variable provides the Process ID (PID) of the current script?",
+    "options": {
+      "A": "$!",
+      "B": "$$",
+      "C": "$?",
+      "D": "$*"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'sudo' inside a script allows that specific command to run with root privileges.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the user knows the root password",
+      "D": "Only if the script is owned by root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the effect of putting a script in the background using '&' (e.g., ./script.sh &)?",
+    "options": {
+      "A": "The script is deleted after it finishes.",
+      "B": "The shell returns control to the user immediately while the script runs in the background.",
+      "C": "The script is executed with high priority.",
+      "D": "The script's output is automatically hidden."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character is used to escape a special character (like a space or a quote) in a script?",
+    "options": {
+      "A": "/",
+      "B": "\\",
+      "C": "|",
+      "D": "^"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Zsh' and 'Bash' are different types of shells, but they can both execute standard POSIX shell scripts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on macOS",
+      "D": "Only if the shebang is removed"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'case' statement in a script?",
+    "options": {
+      "A": "To convert text to uppercase.",
+      "B": "To perform multi-way branching based on a variable's value (similar to switch in other languages).",
+      "C": "To check the file system for errors.",
+      "D": "To monitor the script's memory usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to concatenate and display the content of multiple files in a script?",
+    "options": {
+      "A": "merge",
+      "B": "cat",
+      "C": "join",
+      "D": "add"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'env' in the shebang (e.g., #!/usr/bin/env bash) is a more portable way to locate the interpreter.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python scripts",
+      "D": "Only if the script is run on Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'sleep' command in a shell script?",
+    "options": {
+      "A": "To turn off the computer.",
+      "B": "To pause the script's execution for a specified amount of time.",
+      "C": "To background the script process.",
+      "D": "To clear the terminal buffer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which special variable contains all the command-line arguments as a single string?",
+    "options": {
+      "A": "$#",
+      "B": "$*",
+      "C": "$?",
+      "D": "$!"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In shell scripting, a directory can be checked for existence using the '-d' flag inside a test expression.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the root directory",
+      "D": "Only if the directory is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to find the path of the current user's home directory in a script?",
+    "options": {
+      "A": "echo $HOME",
+      "B": "pwd ~",
+      "C": "whoami --dir",
+      "D": "path home"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Default' exit status of a shell script that finishes without a specific 'exit' command?",
+    "options": {
+      "A": "1",
+      "B": "0",
+      "C": "255",
+      "D": "The exit status of the very last command executed in the script."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can use single quotes (' ') to prevent the shell from interpreting variables inside the quotes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for numeric variables",
+      "D": "Only if using the echo command"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character is used to denote the start of a subcommand expansion (command substitution) in modern scripts?",
+    "options": {
+      "A": "$()",
+      "B": "``",
+      "C": "Both A and B",
+      "D": "None of the above"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the command 'ls -l' do when called within a script?",
+    "options": {
+      "A": "Lists files in a long format with extra details.",
+      "B": "Lists only hidden files.",
+      "C": "Lists files in reverse order.",
+      "D": "Deletes the first file in the list."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Double quotes (\" \") allow for variable expansion and backtick interpretation, unlike single quotes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for system variables",
+      "D": "Only if the script is executable"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to change the working directory within a shell script?",
+    "options": {
+      "A": "dir",
+      "B": "cd",
+      "C": "move",
+      "D": "goto"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'alias' command in a shell environment?",
+    "options": {
+      "A": "To create a permanent backup of a file.",
+      "B": "To create a short name or shortcut for a longer command.",
+      "C": "To rename a user account.",
+      "D": "To encrypt a shell script."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A script can access arguments beyond the 9th ($9) by using curly braces, like ${10}.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Zsh shell",
+      "D": "Only if the arguments are numeric"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to display the first 10 lines of a file in a script?",
+    "options": {
+      "A": "first",
+      "B": "head",
+      "C": "start",
+      "D": "top"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'wc' command in a script?",
+    "options": {
+      "A": "To check the system's weather.",
+      "B": "To count lines, words, and characters in a file.",
+      "C": "To write data to a database.",
+      "D": "To monitor web traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'grep' command is commonly used in scripts to find lines that match a specific pattern.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for searching filenames",
+      "D": "Only in the /bin directory"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which redirection symbol is used to read input from a file instead of the keyboard?",
+    "options": {
+      "A": ">",
+      "B": "<",
+      "C": "|",
+      "D": "&"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the meaning of the '$?' variable after a command runs in a script?",
+    "options": {
+      "A": "The ID of the command's parent process.",
+      "B": "The exit status of the most recently executed command.",
+      "C": "The name of the command.",
+      "D": "The number of lines produced by the command."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Scripting is restricted to only interacting with files and cannot interact with network services.",
+    "options": {
+      "A": "False (Scripts can interact with networks using tools like curl, wget, or ssh).",
+      "B": "True",
+      "C": "Only if run as a non-root user",
+      "D": "Only on legacy systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to remove a file within a shell script?",
+    "options": {
+      "A": "del",
+      "B": "rm",
+      "C": "erase",
+      "D": "remove"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'mkdir -p' flag in a script?",
+    "options": {
+      "A": "To make the directory private.",
+      "B": "To create parent directories as needed without throwing an error if they already exist.",
+      "C": "To create a directory with a specific password.",
+      "D": "To list the contents of the directory after creation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'until' loop continues to run as long as the condition evaluates to 'False'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 5.0 of Bash",
+      "D": "Only if checking for file existence"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command displays the current date and time in a script?",
+    "options": {
+      "A": "time",
+      "B": "date",
+      "C": "now",
+      "D": "today"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'clear' command in an interactive script?",
+    "options": {
+      "A": "To delete all variables.",
+      "B": "To clear the terminal screen to improve readability.",
+      "C": "To empty the trash bin.",
+      "D": "To reset the terminal's font size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Bash scripts are cross-platform and will run on Windows, Linux, and macOS without any modifications.",
+    "options": {
+      "A": "False (They require a Unix-like environment; Windows requires tools like WSL or Git Bash).",
+      "B": "True",
+      "C": "Only if using the '.sh' extension",
+      "D": "Only if written in version 3.2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to find the location of an executable file used in a script (e.g., 'which python')?",
+    "options": {
+      "A": "where",
+      "B": "which",
+      "C": "find",
+      "D": "locate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the '&&' operator between two commands in a script?",
+    "options": {
+      "A": "To run both commands at the same time.",
+      "B": "To run the second command only if the first command succeeds (returns exit status 0).",
+      "C": "To pipe the output of the first into the second.",
+      "D": "To ignore the output of the first command."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Shell scripts are interpreted line-by-line rather than being compiled into a binary file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Bash, not Zsh",
+      "D": "Only if the file is smaller than 1MB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command would you use to change the file owner of a script to 'admin'?",
+    "options": {
+      "A": "chmod admin script.sh",
+      "B": "chown admin script.sh",
+      "C": "chgrp admin script.sh",
+      "D": "user admin script.sh"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to catch and handle system signals (like SIGINT or SIGTERM) within a shell script?",
+    "options": {
+      "A": "catch",
+      "B": "trap",
+      "C": "signal",
+      "D": "handle"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a shell script, the 'export' command is used to make a local variable available to child processes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for numeric variables",
+      "D": "Only if the script is run by root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the '2>&1' notation in a script command?",
+    "options": {
+      "A": "To run the command twice.",
+      "B": "To redirect Standard Error (stderr) to the same location as Standard Output (stdout).",
+      "C": "To redirect input from file descriptor 2 to file 1.",
+      "D": "To background the process and redirect it to a log."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to check if a string is NOT empty (length is greater than zero)?",
+    "options": {
+      "A": "-z",
+      "B": "-n",
+      "C": "-e",
+      "D": "-s"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'shift' command do in a shell script?",
+    "options": {
+      "A": "It moves the script to a different directory.",
+      "B": "It shifts positional parameters ($1, $2...) to the left, discarding the current $1.",
+      "C": "It changes the execution priority of the script.",
+      "D": "It converts all lowercase characters in a variable to uppercase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In most shells, using '$(( expression ))' is the standard way to perform integer arithmetic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Zsh, not Bash",
+      "D": "Only if using the 'expr' command"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character sequence is used to end a 'case' block for a specific pattern match?",
+    "options": {
+      "A": "!!",
+      "B": ";;",
+      "C": "&&",
+      "D": "::"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of using '${VAR:-default}' in a script?",
+    "options": {
+      "A": "It sets VAR to 'default' permanently.",
+      "B": "It returns the value of VAR, or 'default' if VAR is unset or empty.",
+      "C": "It deletes VAR if it equals 'default'.",
+      "D": "It returns an error if VAR is not defined."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check if a file named 'config.txt' exists and is readable by the script?",
+    "options": {
+      "A": "if [ -e \"config.txt\" ]",
+      "B": "if [ -r \"config.txt\" ]",
+      "C": "if [ -f \"config.txt\" ]",
+      "D": "if [ -x \"config.txt\" ]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Subshell' is created when you enclose a list of commands in parentheses (e.g., (cd /tmp; ls)).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a pipe",
+      "D": "Only in Bash version 4.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to remove a specific string pattern from a stream of text or a file in a script?",
+    "options": {
+      "A": "grep",
+      "B": "sed",
+      "C": "find",
+      "D": "echo"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'readonly' command in a script?",
+    "options": {
+      "A": "To make a file read-only on the disk.",
+      "B": "To ensure a variable's value cannot be changed or unset later in the script.",
+      "C": "To prevent the script from being executed by other users.",
+      "D": "To open a file in a text viewer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a shell script, 'set -x' is used to enable 'trace' mode, printing each command before it is executed for debugging.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for error messages",
+      "D": "Only if the script is run as root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you perform a 'string inequality' check in a standard test expression?",
+    "options": {
+      "A": "[ \"$A\" -ne \"$B\" ]",
+      "B": "[ \"$A\" != \"$B\" ]",
+      "C": "[ \"$A\" <> \"$B\" ]",
+      "D": "[ \"$A\" !~ \"$B\" ]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the special variable '$@' used for?",
+    "options": {
+      "A": "The PID of the last background process.",
+      "B": "All positional parameters (arguments) as separate words.",
+      "C": "The name of the current script.",
+      "D": "The home directory of the current user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator allows you to check if a file exists and its size is greater than zero?",
+    "options": {
+      "A": "-e",
+      "B": "-s",
+      "C": "-f",
+      "D": "-z"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Variables defined inside a function without the 'local' keyword are global to the entire script.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Zsh",
+      "D": "Only if they are exported"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the command 'dirname $0' return inside a script?",
+    "options": {
+      "A": "The filename of the script.",
+      "B": "The directory path where the script is located.",
+      "C": "The full path including the filename.",
+      "D": "The name of the parent process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loop structure is used to read a file line-by-line within a script?",
+    "options": {
+      "A": "for line in $(cat file.txt)",
+      "B": "while read line; do ... done < file.txt",
+      "C": "until line=file.txt; do ... done",
+      "D": "foreach line (file.txt) { ... }"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of '10 % 3' in a shell arithmetic expansion?",
+    "options": {
+      "A": "3",
+      "B": "1",
+      "C": "0.33",
+      "D": "10"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'exec' command replaces the current shell process with the specified command instead of creating a new one.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if run as root",
+      "D": "Only if the script is in the /bin directory"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which special variable represents the exit status of the most recently executed background pipeline?",
+    "options": {
+      "A": "$?",
+      "B": "$!",
+      "C": "$#",
+      "D": "$$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check if a variable '$NUM' is greater than 10 using numeric comparison?",
+    "options": {
+      "A": "[ $NUM > 10 ]",
+      "B": "[ $NUM -gt 10 ]",
+      "C": "[ $NUM -ge 10 ]",
+      "D": "[ $NUM >> 10 ]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'continue' command in a script loop?",
+    "options": {
+      "A": "Exits the script immediately.",
+      "B": "Skips the rest of the current iteration and moves to the next iteration of the loop.",
+      "C": "Restarts the entire script.",
+      "D": "Pauses the loop for a user input."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'set -u' (or set -o nounset) causes the script to exit if it tries to use an undefined variable.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in interactive shells",
+      "D": "Only if the variable is numeric"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character is used to match exactly one character in a standard shell globbing pattern?",
+    "options": {
+      "A": "*",
+      "B": "?",
+      "C": ".",
+      "D": "#"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Here Document' (EOF pattern) primarily used for in scripts?",
+    "options": {
+      "A": "To document the author of the script.",
+      "B": "To provide a multi-line block of text as input to a command.",
+      "C": "To create a permanent log file.",
+      "D": "To signal the end of a variable definition."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command-line utility is often used in scripts to extract specific columns from a text file?",
+    "options": {
+      "A": "grep",
+      "B": "cut",
+      "C": "ls",
+      "D": "touch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'basename' command returns the last portion of a file path, effectively removing the directory info.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for executable files",
+      "D": "Only on Linux distributions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you combine two conditions in an 'if' statement to check if both are true (logical AND)?",
+    "options": {
+      "A": "[ condition1 ] || [ condition2 ]",
+      "B": "[ condition1 ] && [ condition2 ]",
+      "C": "[ condition1 -o condition2 ]",
+      "D": "[ condition1 ++ condition2 ]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'wait' command in a script?",
+    "options": {
+      "A": "To pause the script for 5 seconds.",
+      "B": "To wait for all background processes in the current shell to finish before continuing.",
+      "C": "To wait for a specific network port to open.",
+      "D": "To slow down the script execution for visibility."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which shell built-in command is used to replace a string with another globally in a script?",
+    "options": {
+      "A": "grep -r",
+      "B": "sed 's/old/new/g'",
+      "C": "replace old new",
+      "D": "echo ${var/old/new}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'case' statement, '*' acts as a catch-all pattern that matches anything if no other patterns match.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if placed at the beginning",
+      "D": "Only for numeric values"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if you use 'set -e' at the top of a shell script?",
+    "options": {
+      "A": "The script ignores all errors.",
+      "B": "The script exits immediately if any command returns a non-zero exit status.",
+      "C": "The script prints all variables before exiting.",
+      "D": "The script enters 'expert' mode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable expansion returns the length of the string stored in '$STR'?",
+    "options": {
+      "A": "${STR:len}",
+      "B": "${#STR}",
+      "C": "${STR.length}",
+      "D": "$length(STR)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Positional parameters can only go up to $9 in standard POSIX shell scripting.",
+    "options": {
+      "A": "False (You can access $10 and beyond by using curly braces, like ${10}).",
+      "B": "True",
+      "C": "Only in the Bourne shell",
+      "D": "Only if using arrays"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'su' and 'sudo' in a script context?",
+    "options": {
+      "A": "There is no difference.",
+      "B": "su switches the user context (requiring the target user's password); sudo executes a command as another user (requiring the current user's password).",
+      "C": "su is faster than sudo.",
+      "D": "sudo can only be used by root."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which symbol is used to perform command substitution in modern shell scripts (e.g., getting the output of a command into a variable)?",
+    "options": {
+      "A": "${}",
+      "B": "$()",
+      "C": "[]",
+      "D": "(())"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a shell script, 'break' exits only the innermost loop if loops are nested.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 'while' loops",
+      "D": "Only in Bash 5.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you provide a default value 'guest' to a variable 'USER_NAME' if it is empty, while also assigning it back to the variable?",
+    "options": {
+      "A": ": ${USER_NAME:=guest}",
+      "B": "USER_NAME=${USER_NAME:-guest}",
+      "C": "USER_NAME=default(guest)",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does 'grep -i' do in a script?",
+    "options": {
+      "A": "Inverts the match.",
+      "B": "Performs a case-insensitive search.",
+      "C": "Displays the line numbers.",
+      "D": "Limits the search to one file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to check if string A matches a regular expression in a conditional statement?",
+    "options": {
+      "A": "==",
+      "B": "=~",
+      "C": "regexp",
+      "D": "~~"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'IFS' variable (Internal Field Separator) determines how the shell splits strings into words.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for space characters",
+      "D": "Only if using the 'awk' command"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'alias' command in a script?",
+    "options": {
+      "A": "To create a backup of a script.",
+      "B": "To create short nicknames for longer commands (though functions are generally preferred in scripts).",
+      "C": "To rename the computer.",
+      "D": "To encrypt user data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which numeric comparison operator checks if a value is 'Less Than or Equal to'?",
+    "options": {
+      "A": "-lt",
+      "B": "-le",
+      "C": "-eq",
+      "D": "-ne"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The command 'source script.sh' executes the script in the current process, meaning variables defined in the script persist in the current shell.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the script is in /tmp",
+      "D": "Only if the script has no shebang"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'umask' command in a script?",
+    "options": {
+      "A": "To mask the user's IP address.",
+      "B": "To set the default file creation permissions for the current session.",
+      "C": "To encrypt a specific file.",
+      "D": "To hide a directory from other users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character is used to run multiple commands on a single line sequentially, regardless of whether the previous one succeeded?",
+    "options": {
+      "A": "&&",
+      "B": ";",
+      "C": "||",
+      "D": "|"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The command 'cat << 'EOF' > file.txt' is a way to create a multi-line file with specific content from within a script.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the root directory",
+      "D": "Only if using double quotes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'sed -n 'p'' do?",
+    "options": {
+      "A": "Deletes all lines.",
+      "B": "Suppresses default output and prints everything (effectively acting like cat).",
+      "C": "Prints only the first line.",
+      "D": "Clears the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which special variable represents the PID of the current shell or script?",
+    "options": {
+      "A": "$!",
+      "B": "$$",
+      "C": "$#",
+      "D": "$?"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Double brackets '[[ ]]' in shell scripts provide more advanced features (like regex matching) and are safer against word splitting than single brackets '[ ]'.",
+    "options": {
+      "A": "True (in shells like Bash and Zsh)",
+      "B": "False",
+      "C": "Only for numeric comparisons",
+      "D": "Only if the variable is unquoted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which expansion is used to convert a variable to all uppercase (in Bash 4.0+)?",
+    "options": {
+      "A": "${VAR^^}",
+      "B": "${VAR,,}",
+      "C": "${VAR:upper}",
+      "D": "upper($VAR)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'readonly -f' command?",
+    "options": {
+      "A": "To make a file read-only.",
+      "B": "To mark a function as read-only, preventing it from being redefined or deleted.",
+      "C": "To create a read-only folder.",
+      "D": "To display the code of a function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A script can check if it is running with root privileges by checking if the $EUID variable is equal to 0.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Fedora",
+      "D": "Only if using sudo"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you find all files that have '777' permissions using the 'find' command in a script?",
+    "options": {
+      "A": "find . -perm 777",
+      "B": "find . -access 777",
+      "C": "find . -all-access",
+      "D": "find . -security 777"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of 'echo ${VAR#*.}' if VAR is 'test.backup.gz'?",
+    "options": {
+      "A": "test",
+      "B": "backup.gz",
+      "C": "gz",
+      "D": "test.backup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'until' loop is functionally identical to the 'while' loop but exits when the condition becomes false.",
+    "options": {
+      "A": "False (The until loop executes *while* the condition is false and exits when it becomes true).",
+      "B": "True",
+      "C": "Only for checking network ports",
+      "D": "Only if the condition is numeric"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character is used to escape the next character, treating it literally in a script (e.g., escaping a space)?",
+    "options": {
+      "A": "/",
+      "B": "\\",
+      "C": "|",
+      "D": "^"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of the 'tr' command in a script?",
+    "options": {
+      "A": "To track changes in a file.",
+      "B": "To translate or delete characters from standard input.",
+      "C": "To trace the execution of a function.",
+      "D": "To transfer files to a remote host."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which special parameter represents all positional arguments as a single string, with the values separated by the first character of IFS?",
+    "options": {
+      "A": "$@",
+      "B": "$*",
+      "C": "$#",
+      "D": "$!"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a shell script, the 'return' command is used to exit a function with a numeric status, but it does not exit the whole script.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the return value is 0",
+      "D": "Only if the function is local"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the effect of 'sed -i'?",
+    "options": {
+      "A": "Ignores the case of the pattern.",
+      "B": "Edits the file in-place, saving changes directly.",
+      "C": "Includes subdirectories in the search.",
+      "D": "Displays the index of each match."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you get the length of an array named 'MYARRAY' in Bash?",
+    "options": {
+      "A": "${MYARRAY[@]}",
+      "B": "${#MYARRAY[@]}",
+      "C": "${MYARRAY:length}",
+      "D": "length(MYARRAY)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a script, the command 'cat file.txt | while read line; do ... done' runs the while loop in a subshell, meaning variables modified inside the loop are lost after the loop finishes.",
+    "options": {
+      "A": "True (because of the pipe)",
+      "B": "False",
+      "C": "Only if the file is large",
+      "D": "Only if using the Dash shell"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does '${VAR%/*}' typically do to a full file path string?",
+    "options": {
+      "A": "Returns the filename only.",
+      "B": "Returns the directory path (removes everything after the last slash).",
+      "C": "Returns the file extension.",
+      "D": "Deletes the entire string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a shell script, what is the primary architectural difference between 'command1 | command2' and 'command2 < <(command1)'?",
+    "options": {
+      "A": "The pipe runs command2 in a subshell, while process substitution allows command2 to run in the current shell context.",
+      "B": "Pipe is only for text data; process substitution is for binary.",
+      "C": "Process substitution is slower because it uses physical disk files.",
+      "D": "Pipe only works with two commands, whereas process substitution can handle five."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'set -o pipefail' ensures that a pipeline's return status is the value of the last (rightmost) command to exit with a non-zero status.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'zsh' interpreter",
+      "D": "Only if 'sudo' is used in the pipeline"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'awk' feature would you use to store and count unique occurrences of IP addresses from a web log file?",
+    "options": {
+      "A": "Sequential Arrays",
+      "B": "Associative Arrays (e.g., count[$1]++)",
+      "C": "Global String Buffers",
+      "D": "Binary Search Trees"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'Named Pipe' (FIFO) created with 'mkfifo'?",
+    "options": {
+      "A": "To rename a standard pipe symbol in the shell configuration.",
+      "B": "To provide a persistent communication channel between two independent processes that acts like a file.",
+      "C": "To increase the buffer size of standard output.",
+      "D": "To encrypt data as it passes between commands."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'sed', what does the command 'sed -n '1,5p;10p'' accomplish?",
+    "options": {
+      "A": "It deletes lines 1 through 5 and line 10.",
+      "B": "It prints only lines 1 through 5 and line 10, suppressing all other output.",
+      "C": "It replaces lines 1-5 with the content of line 10.",
+      "D": "It prints the first 5 characters of line 10."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Coprocess' (coproc) in Bash allows for two-way asynchronous communication between the shell and a background process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in shell scripts with a .sh extension",
+      "D": "Only if the process is a Python script"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'awk' built-in variable contains the record separator, which is a newline by default?",
+    "options": {
+      "A": "FS",
+      "B": "RS",
+      "C": "OFS",
+      "D": "ORS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you perform a non-greedy string deletion in Bash to remove everything before the *first* occurrence of a dot in variable $FILE?",
+    "options": {
+      "A": "${FILE#*.}",
+      "B": "${FILE##*.}",
+      "C": "${FILE%*.}",
+      "D": "${FILE%%*.}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'trap' command can capture 'SIGKILL' (Signal 9) to perform cleanup before a process is forced to stop.",
+    "options": {
+      "A": "False (SIGKILL cannot be caught, blocked, or ignored).",
+      "B": "True",
+      "C": "Only if the script is run by the root user",
+      "D": "Only on systems using the systemd init system"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'xargs -0' (or -print0) pattern in shell scripting?",
+    "options": {
+      "A": "To run a command zero times if no input is found.",
+      "B": "To correctly handle filenames that contain spaces, quotes, or newlines by using the null character as a delimiter.",
+      "C": "To reset the system exit code to zero.",
+      "D": "To encrypt the input stream using a null cipher."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'sed' command is used to append a line of text *after* a specific pattern match?",
+    "options": {
+      "A": "sed '/pattern/i text'",
+      "B": "sed '/pattern/a text'",
+      "C": "sed '/pattern/c text'",
+      "D": "sed '/pattern/p text'"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'awk', what is the difference between '$NF' and 'NF'?",
+    "options": {
+      "A": "$NF is the value of the last field; NF is the total number of fields in the record.",
+      "B": "NF is the value of the last field; $NF is the number of fields.",
+      "C": "They are identical.",
+      "D": "$NF refers to the first field; NF refers to the last."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An 'indirect variable reference' like '${!VAR}' allows you to access the value of a variable whose name is stored in VAR.",
+    "options": {
+      "A": "True (in Bash)",
+      "B": "False",
+      "C": "Only for environment variables",
+      "D": "Only if the variable is an array"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Double Dash' (--) used for in a command-line string within a script?",
+    "options": {
+      "A": "To start a multi-line comment.",
+      "B": "To signal the end of command options, treating everything that follows as a positional argument (filenames).",
+      "C": "To indicate that the command should be run twice.",
+      "D": "To force the command to use the 64-bit version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which redirection is used to duplicate a file descriptor, such as sending both stdout and stderr to the same pipe?",
+    "options": {
+      "A": "2>&1",
+      "B": "1>|2",
+      "C": "2<1",
+      "D": "&>1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a shell function, the 'local' keyword creates a variable that is scoped to that function and any child functions it calls.",
+    "options": {
+      "A": "True (it uses dynamic scoping).",
+      "B": "False (it uses static scoping).",
+      "C": "Only if the variable is an integer",
+      "D": "Only in the Zsh shell"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Word Splitting' in a shell context?",
+    "options": {
+      "A": "Splitting a long string into two separate files.",
+      "B": "The process where the shell breaks unquoted variable expansions into separate arguments based on the IFS variable.",
+      "C": "A way to compress text by removing duplicate words.",
+      "D": "A database error where a string is too long for a field."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'awk' command would you use to change the field separator to a comma for CSV processing?",
+    "options": {
+      "A": "awk -F','",
+      "B": "awk -S','",
+      "C": "awk --sep=','",
+      "D": "awk BEGIN{FS=','}"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'exec' command, when used without a command (e.g., 'exec > file.log'), redirects all subsequent output of the current shell to that file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for stderr",
+      "D": "Only if run as root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'readonly -f' command do?",
+    "options": {
+      "A": "Makes a file read-only.",
+      "B": "Marks a shell function as read-only, preventing it from being modified or deleted.",
+      "C": "Creates a read-only filesystem.",
+      "D": "Prints the content of a function to a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'sed', what is the purpose of the 'Hold Space'?",
+    "options": {
+      "A": "To pause the script execution for 5 seconds.",
+      "B": "To provide a secondary buffer for storing and manipulating text across different lines.",
+      "C": "To store the encryption keys for the file.",
+      "D": "To keep the terminal window open after the script ends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Shell scripts are susceptible to 'Command Injection' if they pass unsanitized user input directly into an 'eval' command.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the script is owned by root",
+      "D": "Only in legacy Bourne shells"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which special variable represents the PID of the most recently executed background command?",
+    "options": {
+      "A": "$!",
+      "B": "$$",
+      "C": "$?",
+      "D": "$*"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'ulimit' command in a script?",
+    "options": {
+      "A": "To set the maximum speed of the CPU.",
+      "B": "To set or display resource limits (like max file size or memory) for the shell and its children.",
+      "C": "To update the system's time limit.",
+      "D": "To monitor the network bandwidth limit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Bash, 'associative arrays' must be explicitly declared using 'declare -A' before they can be used.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the keys are integers",
+      "D": "Only in version 3.2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'awk' built-in variable represents the number of the current record (usually the line number)?",
+    "options": {
+      "A": "NF",
+      "B": "NR",
+      "C": "FNR",
+      "D": "RN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary risk of using 'rm -rf /tmp/*' in a script if not careful?",
+    "options": {
+      "A": "It will run too slowly.",
+      "B": "Race conditions where a symbolic link could be exploited to delete files outside of /tmp (Symlink attack).",
+      "C": "The /tmp directory will be physically deleted.",
+      "D": "The script will stop working after 100 files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Subshells' inherit the current environment variables, but cannot pass changes back to the parent shell's memory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'export' command",
+      "D": "Only in the Zsh shell"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'printf' format specifier '%q' do in a script?",
+    "options": {
+      "A": "Prints the output in a quiet mode.",
+      "B": "Outputs the argument in a format that can be reused as shell input (escaping special characters).",
+      "C": "Prints the quality of the network connection.",
+      "D": "Converts a string to a quoted integer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'sed' flag allows for case-insensitive pattern matching?",
+    "options": {
+      "A": "/pattern/i",
+      "B": "/pattern/I",
+      "C": "/pattern/c",
+      "D": "/pattern/v"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Bash supports multi-dimensional arrays using the 'matrix' keyword.",
+    "options": {
+      "A": "False (Bash only natively supports one-dimensional indexed and associative arrays).",
+      "B": "True",
+      "C": "Only if using the 'declare -M' flag",
+      "D": "Only if the values are floating-point"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'hash' command in a shell environment?",
+    "options": {
+      "A": "To create a checksum of a file.",
+      "B": "To maintain a table of the recently executed command paths to speed up execution.",
+      "C": "To encrypt the shell history file.",
+      "D": "To group multiple processes together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to view the system's real-time IO statistics, useful for debugging script performance?",
+    "options": {
+      "A": "top",
+      "B": "iostat",
+      "C": "netstat",
+      "D": "df"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In an 'if' statement, the [[ ... ]] construct performs better than [ ... ] because it is a shell keyword, not an external command.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if comparing strings",
+      "D": "Only on BSD systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you provide a default value to a variable only if it is currently unset (not if it is empty)?",
+    "options": {
+      "A": "${VAR:-default}",
+      "B": "${VAR-default}",
+      "C": "${VAR:=default}",
+      "D": "${VAR+default}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Shebang' path recommended for scripts that should work regardless of where the interpreter is installed in the user's path?",
+    "options": {
+      "A": "#!/bin/sh",
+      "B": "#!/usr/bin/env sh",
+      "C": "#!/sh",
+      "D": "#! interpreter/sh"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable expansion would you use to convert a string to all UPPERCASE in modern Bash?",
+    "options": {
+      "A": "${VAR,,}",
+      "B": "${VAR^^}",
+      "C": "${VAR:upper}",
+      "D": "upper($VAR)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'wait' command can be used to wait for a specific background process by passing its PID as an argument.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the process is owned by the same user",
+      "D": "Only in version 5.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the command 'ls -i' display in the output?",
+    "options": {
+      "A": "The index of the file in the list.",
+      "B": "The inode number for each file.",
+      "C": "Information about file integrity.",
+      "D": "The identity of the file owner."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'awk' block is executed once after all input has been processed?",
+    "options": {
+      "A": "STOP",
+      "B": "END",
+      "C": "FINAL",
+      "D": "EXIT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard shell scripts can manipulate floating-point numbers without using external utilities like 'bc'.",
+    "options": {
+      "A": "False (Shell arithmetic is integer-only).",
+      "B": "True",
+      "C": "Only if using the 'double' keyword",
+      "D": "Only in the Zsh shell"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'shopt -s nullglob'?",
+    "options": {
+      "A": "To delete all empty files.",
+      "B": "To ensure that a glob pattern that matches nothing expands to an empty string instead of the pattern itself.",
+      "C": "To allow the use of null characters in strings.",
+      "D": "To monitor the system for null pointers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'sed' command replaces only the *second* occurrence of 'foo' with 'bar' in each line?",
+    "options": {
+      "A": "sed 's/foo/bar/g'",
+      "B": "sed 's/foo/bar/2'",
+      "C": "sed 's/foo/bar/2g'",
+      "D": "sed 's/foo/bar/x2'"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check if the last background job is still running using the 'kill' command?",
+    "options": {
+      "A": "kill -0 $!",
+      "B": "kill -9 $!",
+      "C": "kill -1 $!",
+      "D": "kill --status $!"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'cat file | grep pattern' is less efficient than 'grep pattern file' because it creates an extra subshell and pipe.",
+    "options": {
+      "A": "True (Useless Use of Cat - UUOC).",
+      "B": "False",
+      "C": "Only if the file is over 1GB",
+      "D": "Only on legacy UNIX systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which special variable represents the 'Last argument' of the previous command?",
+    "options": {
+      "A": "$?",
+      "B": "$_",
+      "C": "$!",
+      "D": "$*"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Process Substitution' syntax for reading the output of command1 as if it were a file?",
+    "options": {
+      "A": "command2 <(command1)",
+      "B": "command2 >(command1)",
+      "C": "command2 | command1",
+      "D": "command2 $(command1)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'declare -i' command forces a variable to be treated as an integer, allowing for direct arithmetic without '$(( ))'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local variables",
+      "D": "Only in version 5.2+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the Bash parameter expansion '${VAR//pattern/replacement}' do?",
+    "options": {
+      "A": "Replaces the first occurrence of the pattern.",
+      "B": "Replaces all occurrences of the pattern.",
+      "C": "Deletes the variable if the pattern is found.",
+      "D": "Returns the number of occurrences of the pattern."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character is used to escape a newline in a shell script to continue a single command on the next line?",
+    "options": {
+      "A": "/",
+      "B": "\\",
+      "C": "|",
+      "D": "^"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'while read' loop, using 'IFS=' (empty IFS) prevents the shell from trimming leading and trailing whitespace from each line.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if reading from a pipe",
+      "D": "Only if using the -r flag"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Subshell' vs. a 'Source' execution?",
+    "options": {
+      "A": "Subshells are faster.",
+      "B": "Subshells run in a separate process and cannot modify the parent's environment; sourcing runs in the current process and can modify it.",
+      "C": "Subshells are for binary files; sourcing is for text.",
+      "D": "There is no functional difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'awk' command would you use to print the 5th line of a file only?",
+    "options": {
+      "A": "awk 'NR==5'",
+      "B": "awk 'line==5'",
+      "C": "awk 'NF==5'",
+      "D": "awk 'FNR==5'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Globbing' (filename expansion) is performed by the shell before the command is executed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the asterisk symbol",
+      "D": "Only for the 'ls' command"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you convert a string to all lowercase in modern Bash?",
+    "options": {
+      "A": "${VAR,,}",
+      "B": "${VAR^^}",
+      "C": "${VAR:lower}",
+      "D": "lower($VAR)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which signal is sent to a process when you press Ctrl+C in the terminal?",
+    "options": {
+      "A": "SIGTERM",
+      "B": "SIGINT",
+      "C": "SIGKILL",
+      "D": "SIGSTOP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'select' loop, the user's choice is stored in the specified variable, while the actual text of the choice is stored in '$REPLY'.",
+    "options": {
+      "A": "False (The text is in the variable; the index is in $REPLY).",
+      "B": "True",
+      "C": "Only in the Zsh shell",
+      "D": "Only if using the 'case' statement"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'sed -i.bak' do?",
+    "options": {
+      "A": "Deletes the file and creates a backup.",
+      "B": "Edits the file in-place and creates a backup file with the '.bak' extension.",
+      "C": "Only edits the backup file.",
+      "D": "Encrypts the backup file using AES."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'find' flag allows you to search for files based on their exact numeric permissions (e.g., 644)?",
+    "options": {
+      "A": "-access",
+      "B": "-perm",
+      "C": "-mode",
+      "D": "-rights"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'env -i' command runs a script in a completely clean environment with no inherited variables.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for root users",
+      "D": "Only if used with 'sudo'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'PS4' variable in a shell session?",
+    "options": {
+      "A": "To set the primary command prompt.",
+      "B": "To define the prefix printed for each line of output when 'set -x' (trace mode) is enabled.",
+      "C": "To set the password for the terminal.",
+      "D": "To increase the priority of background tasks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'awk' built-in function is used to calculate the square root of a number?",
+    "options": {
+      "A": "root()",
+      "B": "sqrt()",
+      "C": "pow()",
+      "D": "math.sqrt()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'sed', the '/' delimiter can be changed to another character (like '#') to avoid escaping slashes in file paths.",
+    "options": {
+      "A": "True (e.g., sed 's#old#new#')",
+      "B": "False",
+      "C": "Only for the 'search' command",
+      "D": "Only on macOS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Exit Status' of a process that was terminated by a signal?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "128 + Signal Number",
+      "D": "255"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command allows you to rename multiple files at once using a regular expression pattern?",
+    "options": {
+      "A": "mv",
+      "B": "rename (or prename)",
+      "C": "batch-mv",
+      "D": "sed-mv"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bash' scripts can handle signals differently for foreground vs. background processes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using 'job control'",
+      "D": "Only if run by the root user"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'getopts' built-in command?",
+    "options": {
+      "A": "To download files from the internet.",
+      "B": "To parse short-form command-line options and arguments passed to a script.",
+      "C": "To list the available options for the system kernel.",
+      "D": "To optimize the script's memory usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you get the length of the string stored in variable $TEXT in 'awk'?",
+    "options": {
+      "A": "length(TEXT)",
+      "B": "len(TEXT)",
+      "C": "TEXT.length",
+      "D": "strlen(TEXT)"
+    },
+    "answer": "A"
+  }
+  ]
+}

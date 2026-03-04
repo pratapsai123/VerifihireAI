@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Cloud Networking", 
+  "questions": [
+    {
+    "question": "What does VPC stand for in cloud networking?",
+    "options": {
+      "A": "Virtual Private Connection",
+      "B": "Virtual Private Cloud",
+      "C": "Verified Private Cloud",
+      "D": "Variable Protocol Control"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component allows resources within a VPC to communicate with the internet?",
+    "options": {
+      "A": "NAT Gateway",
+      "B": "Internet Gateway (IGW)",
+      "C": "Virtual Private Gateway",
+      "D": "Direct Connect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Private Subnet has a direct route to an Internet Gateway.",
+    "options": {
+      "A": "False (Private subnets route through a NAT gateway or have no internet path).",
+      "B": "True",
+      "C": "Only if it contains a Load Balancer",
+      "D": "Only in the AWS cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service is used to distribute incoming application traffic across multiple targets, such as EC2 instances?",
+    "options": {
+      "A": "Route 53",
+      "B": "Elastic Load Balancer (ELB)",
+      "C": "CloudFront",
+      "D": "Direct Connect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Security Group' in a cloud environment?",
+    "options": {
+      "A": "To act as a physical lock on the server rack.",
+      "B": "To act as a virtual firewall for instances, controlling inbound and outbound traffic.",
+      "C": "To encrypt data stored on hard drives.",
+      "D": "To manage user passwords for the cloud console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Security Groups are 'Stateful', meaning if you send a request from your instance, the response traffic is allowed regardless of inbound rules.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Azure",
+      "D": "Only for TCP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which IP address type changes when a cloud instance is stopped and started (unless it is reserved)?",
+    "options": {
+      "A": "Static IP",
+      "B": "Dynamic / Public IP",
+      "C": "Private IP",
+      "D": "Elastic IP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In cloud networking, what is 'Peering' used for?",
+    "options": {
+      "A": "To look at another user's code.",
+      "B": "To connect two VPCs/VNets so they can route traffic between each other using private IP addresses.",
+      "C": "To backup a database to another region.",
+      "D": "To increase the speed of a single virtual machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a CIDR block used for in a VPC?",
+    "options": {
+      "A": "To name the VPC.",
+      "B": "To define the range of IP addresses for the network.",
+      "C": "To set the password for the router.",
+      "D": "To encrypt the internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Network ACL (NACL) is applied at the instance level, while a Security Group is applied at the subnet level.",
+    "options": {
+      "A": "False (Security Groups are instance-level; NACLs are subnet-level).",
+      "B": "True",
+      "C": "Only in Google Cloud",
+      "D": "Only for IPv6 traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service allows you to create a dedicated network connection from your on-premises data center to the cloud provider?",
+    "options": {
+      "A": "Internet Gateway",
+      "B": "Direct Connect (AWS) / ExpressRoute (Azure)",
+      "C": "VPC Peering",
+      "D": "CloudFront"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Route Table' in a VPC?",
+    "options": {
+      "A": "To list the names of all employees.",
+      "B": "To determine where network traffic from a subnet or gateway is directed.",
+      "C": "To increase the internet speed.",
+      "D": "To backup the server configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Private IP' address is reachable from the public internet.",
+    "options": {
+      "A": "False",
+      "B": "True",
+      "C": "Only if the firewall is off",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'NAT Gateway' allow instances in a private subnet to do?",
+    "options": {
+      "A": "Receive incoming traffic from the internet.",
+      "B": "Initiate outbound traffic to the internet while preventing the internet from initiating a connection with them.",
+      "C": "Change their IP address every hour.",
+      "D": "Connect to a physical printer in the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service provides highly available and scalable Domain Name System (DNS) web services?",
+    "options": {
+      "A": "CloudWatch",
+      "B": "Route 53 (AWS) / Azure DNS",
+      "C": "S3",
+      "D": "EC2"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every VPC must have at least one subnet to host resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'standard' tier",
+      "D": "Only for web servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' in a cloud network?",
+    "options": {
+      "A": "The physical weight of the fiber optic cable.",
+      "B": "The time it takes for data to travel from one point to another in the network.",
+      "C": "The number of users logged in.",
+      "D": "The storage capacity of a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of a Content Delivery Network (CDN) like CloudFront?",
+    "options": {
+      "A": "It deletes old files automatically.",
+      "B": "It reduces latency by delivering content from 'edge locations' closer to the user.",
+      "C": "It removes the need for a web server.",
+      "D": "It increases the cost of the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: By default, instances in different VPCs cannot communicate with each other unless peering or a gateway is configured.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they are in different regions",
+      "D": "Only for non-root users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Public Subnet'?",
+    "options": {
+      "A": "To store top-secret company data.",
+      "B": "To host resources that need to be accessible from the internet (e.g., a web server).",
+      "C": "To provide free Wi-Fi to the public.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for standard, unencrypted HTTP web traffic?",
+    "options": {
+      "A": "22",
+      "B": "80",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A VPC is logically isolated from other virtual networks in the cloud provider's infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a VPN",
+      "D": "Only in the government region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Elastic IP' address (AWS terminology)?",
+    "options": {
+      "A": "An IP that stretches to fit any server.",
+      "B": "A static, public IPv4 address designed for dynamic cloud computing.",
+      "C": "An IP that only works for 5 minutes.",
+      "D": "An internal IP used by the cloud provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In cloud networking, what does 'Region' refer to?",
+    "options": {
+      "A": "A specific floor in a data center.",
+      "B": "A separate geographic area with multiple, isolated 'Availability Zones'.",
+      "C": "The country where the company is headquartered.",
+      "D": "A list of all users in a specific time zone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A single VPC can span multiple Availability Zones within a region.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only for the root user"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service acts as a 'Virtual Private Network' (VPN) gateway to connect a local office to a VPC?",
+    "options": {
+      "A": "Internet Gateway",
+      "B": "Virtual Private Gateway",
+      "C": "NAT Instance",
+      "D": "Peering Connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Availability Zone' (AZ)?",
+    "options": {
+      "A": "To show if a developer is online.",
+      "B": "To provide high availability by having isolated locations within a region with redundant power and cooling.",
+      "C": "To store the cloud provider's marketing materials.",
+      "D": "To monitor the daily stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incoming traffic (Ingress) is usually free in most cloud provider networking models.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for S3 buckets",
+      "D": "Only if using a 1Gbps connection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used by 'Ping' to test connectivity?",
+    "options": {
+      "A": "TCP",
+      "B": "UDP",
+      "C": "ICMP",
+      "D": "HTTP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Egress' traffic?",
+    "options": {
+      "A": "Traffic coming into the VPC.",
+      "B": "Traffic leaving the VPC to the internet or another network.",
+      "C": "Internal traffic between two servers.",
+      "D": "Encrypted traffic only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DNS is used to translate domain names (like example.com) into IP addresses.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for .gov sites",
+      "D": "Only if using Chrome"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a private IP address range often used for VPC CIDRs?",
+    "options": {
+      "A": "8.8.8.8",
+      "B": "10.0.0.0/16",
+      "C": "1.1.1.1",
+      "D": "204.x.x.x"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Subnet'?",
+    "options": {
+      "A": "A small physical server.",
+      "B": "A range of IP addresses in your VPC.",
+      "C": "A backup of the internet.",
+      "D": "A tool for naming servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can change the CIDR block of a VPC after it has been created.",
+    "options": {
+      "A": "False (In most clouds, you must create a new VPC; however, you can add secondary CIDRs in some cases).",
+      "B": "True",
+      "C": "Only if it is empty",
+      "D": "Only for IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of a Load Balancer checks if the backend instances are 'Healthy'?",
+    "options": {
+      "A": "Security Group",
+      "B": "Health Check",
+      "C": "Route Table",
+      "D": "CloudWatch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the standard port for encrypted HTTPS web traffic?",
+    "options": {
+      "A": "80",
+      "B": "22",
+      "C": "443",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A Network ACL (NACL) is 'Stateless', meaning both inbound and outbound rules must be configured for traffic to flow.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in AWS",
+      "D": "Only for SSH"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VPC Endpoints'?",
+    "options": {
+      "A": "To end the internet connection.",
+      "B": "To allow private connection to cloud services (like S3) without leaving the cloud provider's network.",
+      "C": "To monitor the end of a project.",
+      "D": "To encrypt the user's hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is commonly used for 'SSH' to manage Linux servers?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "25"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Reserved IP' ensures that the IP remains assigned to your account even if you delete the resource using it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Azure",
+      "D": "Only for IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Transit Gateway'?",
+    "options": {
+      "A": "To speed up the network transit time.",
+      "B": "To connect multiple VPCs and on-premises networks through a central hub.",
+      "C": "To monitor the daily growth of the data center.",
+      "D": "To encrypt physical server cables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service provides a way to visualize and monitor network traffic logs in the cloud?",
+    "options": {
+      "A": "S3",
+      "B": "VPC Flow Logs",
+      "C": "IAM",
+      "D": "RDS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Bandwidth refers to the maximum capacity of a network link to transfer data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optics",
+      "D": "Only for public IPs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Anycast IP' used for?",
+    "options": {
+      "A": "Sending traffic to all IPs at once.",
+      "B": "Routing traffic to the nearest available server in a group of servers sharing the same IP.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "The password for a Wi-Fi network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Internet-Facing' Load Balancer?",
+    "options": {
+      "A": "To face the internet physically.",
+      "B": "To receive requests from the public internet and distribute them to backend instances.",
+      "C": "To block all internet traffic.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Cloud networks are software-defined, meaning they are managed via API and code rather than physical cables.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Azure",
+      "D": "Only for large companies"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which port is used for 'Remote Desktop' (RDP) on Windows servers?",
+    "options": {
+      "A": "22",
+      "B": "443",
+      "C": "3389",
+      "D": "53"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'Direct Connect' / 'ExpressRoute'?",
+    "options": {
+      "A": "To connect to the cloud via the public internet.",
+      "B": "To provide a private, high-speed connection between an office and the cloud provider.",
+      "C": "To restart the router remotely.",
+      "D": "To backup the whole internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard Load Balancers operate at Layer 4 or Layer 7 of the OSI model.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS",
+      "D": "Only if using HTTP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jitter' in a network context?",
+    "options": {
+      "A": "The physical vibration of the server.",
+      "B": "The variation in time between packets arriving, caused by network congestion.",
+      "C": "The number of users active at 12 PM.",
+      "D": "The total cost of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service is used to protect web applications from common web exploits (WAF)?",
+    "options": {
+      "A": "Security Group",
+      "B": "Web Application Firewall",
+      "C": "Route 53",
+      "D": "VPC Endpoint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DNS Propagation is the time it takes for DNS changes to spread across the internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for .com domains",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Routing Policy' in Route 53?",
+    "options": {
+      "A": "To hire a new manager.",
+      "B": "To determine how DNS queries are responded to (e.g., Simple, Failover, Geolocation).",
+      "C": "To encrypt the DNS requests.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Bastion Host' (or Jump Box)?",
+    "options": {
+      "A": "A server that hosts a physical bird's nest.",
+      "B": "A secure server used to provide administrative access to other instances in a private subnet.",
+      "C": "A specialized way to encrypt virtual disks.",
+      "D": "The process of moving servers between regions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Port Forwarding' allows external access to a specific service on a private machine by mapping ports.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for gaming",
+      "D": "Only if the router is in DMZ mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used for the management and monitoring of network devices?",
+    "options": {
+      "A": "SMTP",
+      "B": "SNMP",
+      "C": "DNS",
+      "D": "HTTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput' in a network?",
+    "options": {
+      "A": "The time it takes to reboot the server.",
+      "B": "The actual amount of data successfully transferred over a specific period.",
+      "C": "The physical speed of light in a fiber cable.",
+      "D": "The number of users active at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Private Link' (Azure) or 'VPC Endpoint' (AWS) provides a private connection to a service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for storage",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Multicast' traffic?",
+    "options": {
+      "A": "A network that only exists at night.",
+      "B": "Communication where data is sent from one sender to multiple specific recipients simultaneously.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is used to troubleshoot network connectivity and show the path of a packet?",
+    "options": {
+      "A": "Ping",
+      "B": "Traceroute / Tracert",
+      "C": "Dig",
+      "D": "Nslookup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: VPN traffic is encrypted by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web traffic",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of an 'Internet Gateway'?",
+    "options": {
+      "A": "To act as a physical door to the data center.",
+      "B": "To allow communication between a VPC and the public internet.",
+      "C": "To count the number of users in a network.",
+      "D": "To increase the internet speed of the platform."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IP addresses in the range 169.254.x.x are 'link-local' addresses used when a DHCP server is unreachable.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' tagging used for in cloud-native platforms?",
+    "options": {
+      "A": "To logically separate traffic for different tenants or applications on the same physical infrastructure.",
+      "B": "To make the cables look different.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subnet Masking'?",
+    "options": {
+      "A": "Following the rules for building a physical office.",
+      "B": "Using a mask to divide an IP address into network and host portions.",
+      "C": "Hiring a security guard for the server room.",
+      "D": "The amount of storage used by security logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DNS Port 53 can use both TCP and UDP protocols.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv6",
+      "D": "Only if using the 'stable' release"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "If a VPC CIDR block is 10.0.0.0/16, how many total IP addresses are available in that network?",
+    "options": {
+      "A": "256",
+      "B": "4,096",
+      "C": "65,536",
+      "D": "1,048,576"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary difference between a Network Load Balancer (NLB) and an Application Load Balancer (ALB)?",
+    "options": {
+      "A": "NLB operates at Layer 4 (TCP/UDP); ALB operates at Layer 7 (HTTP/HTTPS).",
+      "B": "ALB is faster for database traffic.",
+      "C": "NLB only works with static IP addresses.",
+      "D": "ALB cannot perform health checks."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a VPC Peering connection, transitive routing is supported by default (e.g., if A peers with B, and B peers with C, A can talk to C).",
+    "options": {
+      "A": "False (VPC Peering is non-transitive; a direct peering or Transit Gateway is required).",
+      "B": "True",
+      "C": "Only if they are in the same region",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Route 53 routing policy would you use to route traffic to the resource that provides the best response time for the user?",
+    "options": {
+      "A": "Weighted Routing",
+      "B": "Latency Routing",
+      "C": "Failover Routing",
+      "D": "Geolocation Routing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sticky Sessions' (Session Persistence) in a Load Balancer?",
+    "options": {
+      "A": "A feature that makes the server rack physically sticky.",
+      "B": "A mechanism to ensure a user's requests are always routed to the same backend instance for the duration of a session.",
+      "C": "A way to backup user passwords.",
+      "D": "A specialized way to encrypt network packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is required to enable communication between a VPC and an on-premises network over a Site-to-Site VPN?",
+    "options": {
+      "A": "Internet Gateway",
+      "B": "Virtual Private Gateway (VGW) or Transit Gateway",
+      "C": "NAT Gateway",
+      "D": "VPC Endpoint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Network ACL (NACL) rule with a lower rule number is processed before a rule with a higher number.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for outbound rules",
+      "D": "Only if using the 'Deny' action"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of an 'Alias Record' in Route 53 compared to a standard CNAME?",
+    "options": {
+      "A": "Alias records are slower.",
+      "B": "Alias records can map the zone apex (root domain like example.com) to a cloud resource, which CNAMEs cannot do.",
+      "C": "Alias records only work for external websites.",
+      "D": "CNAMEs are free, but Alias records always cost more."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a /24 subnet, how many IP addresses are actually usable by the user in an AWS VPC?",
+    "options": {
+      "A": "256",
+      "B": "254",
+      "C": "251 (AWS reserves 5 addresses).",
+      "D": "240"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Path MTU Discovery' (PMTUD) help prevent in a cloud network?",
+    "options": {
+      "A": "Data center fires.",
+      "B": "Packet fragmentation by determining the largest packet size allowed on the path between two hosts.",
+      "C": "Hackers from guessing passwords.",
+      "D": "Duplicate IP addresses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Transit Gateway' can connect thousands of VPCs and on-premises networks, acting as a cloud router.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv4",
+      "D": "Only within a single region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is typically used to exchange routing information between a cloud Virtual Private Gateway and an on-premises router over a VPN?",
+    "options": {
+      "A": "OSPF",
+      "B": "BGP (Border Gateway Protocol)",
+      "C": "RIP",
+      "D": "EIGRP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'VPC Flow Log'?",
+    "options": {
+      "A": "To increase the water flow in the data center cooling system.",
+      "B": "To capture information about IP traffic going to and from network interfaces in a VPC.",
+      "C": "To encrypt the source code of the network.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of VPC Endpoint uses an Elastic Network Interface (ENI) with a private IP address to provide access to services?",
+    "options": {
+      "A": "Gateway Endpoint",
+      "B": "Interface Endpoint (PrivateLink)",
+      "C": "Service Endpoint",
+      "D": "Network Endpoint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Security Groups are assigned to the Subnet, while NACLs are assigned to the individual Instance.",
+    "options": {
+      "A": "False (Security Groups are instance-level; NACLs are subnet-level).",
+      "B": "True",
+      "C": "Only in Google Cloud",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Accelerator' used for?",
+    "options": {
+      "A": "To make the earth spin faster.",
+      "B": "To improve application availability and performance for local and global users by using the cloud provider's global network.",
+      "C": "To backup a hard drive to a remote region.",
+      "D": "To increase the CPU speed of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Weighted' routing policy, if Server A has a weight of 70 and Server B has a weight of 30, what percentage of traffic goes to Server A?",
+    "options": {
+      "A": "30%",
+      "B": "70%",
+      "C": "100%",
+      "D": "50%"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service protects against Distributed Denial of Service (DDoS) attacks at the edge of the cloud network?",
+    "options": {
+      "A": "CloudTrail",
+      "B": "Shield / Azure DDoS Protection",
+      "C": "Inspector",
+      "D": "Trusted Advisor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Standard' Load Balancer can handle millions of requests per second with ultra-low latency.",
+    "options": {
+      "A": "True (especially Network Load Balancers).",
+      "B": "False",
+      "C": "Only for HTTP traffic",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Secondary CIDR' block used for?",
+    "options": {
+      "A": "To create a backup VPC.",
+      "B": "To extend the IP address range of an existing VPC when the primary block is full.",
+      "C": "To encrypt the primary network.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of an IPsec VPN is responsible for encrypting the data payload?",
+    "options": {
+      "A": "IKE",
+      "B": "ESP (Encapsulating Security Payload)",
+      "C": "AH",
+      "D": "Diffie-Hellman"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'VPC Peering' CIDR overlap restriction?",
+    "options": {
+      "A": "You can peer VPCs with overlapping CIDRs.",
+      "B": "You cannot peer VPCs if their CIDR blocks overlap.",
+      "C": "Overlap is only allowed in the same region.",
+      "D": "Overlap is only allowed for IPv6."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS Client VPN allows users to securely access resources in a VPC using an OpenVPN-based client.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux users",
+      "D": "Only if using a physical hardware token"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Private DNS' in a VPC?",
+    "options": {
+      "A": "To hide your website from the public.",
+      "B": "To allow instances to resolve hostnames within a private network without exposure to the public internet.",
+      "C": "To encrypt DNS requests.",
+      "D": "To monitor the internet usage of employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Load Balancer feature allows you to route requests to different backend groups based on the URL path (e.g., /api vs /images)?",
+    "options": {
+      "A": "Host-based routing",
+      "B": "Path-based routing",
+      "C": "Query-string routing",
+      "D": "Source-IP routing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: When using a NAT Gateway, you must update the private subnet's route table to point 0.0.0.0/0 traffic to the NAT Gateway ID.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only if the NAT Gateway is in a different region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Cross-Zone Load Balancing' accomplish?",
+    "options": {
+      "A": "It moves servers between zones automatically.",
+      "B": "It distributes traffic evenly across all registered instances in all enabled Availability Zones, regardless of the zone the load balancer node is in.",
+      "C": "It increases the internet speed by 2x.",
+      "D": "It encrypts traffic between zones."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Route 53 routing policy is best for preventing a site from going down by automatically switching to a backup resource?",
+    "options": {
+      "A": "Simple Routing",
+      "B": "Failover Routing",
+      "C": "Weighted Routing",
+      "D": "Multivalue Answer Routing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Customer Gateway' (CGW) in cloud networking?",
+    "options": {
+      "A": "A portal where customers can buy cloud services.",
+      "B": "The physical or software appliance on the customer side of a Site-to-Site VPN connection.",
+      "C": "A specialized firewall for cloud users.",
+      "D": "A tool to monitor customer satisfaction."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An Internet Gateway (IGW) provides a target in your VPC route tables for internet-routable traffic and performs NAT for instances with public IPs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the instance is in a private subnet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Split-Horizon' DNS?",
+    "options": {
+      "A": "DNS that only works during sunset.",
+      "B": "Providing different DNS responses (e.g., internal vs. external IP) based on where the query originated.",
+      "C": "A way to backup DNS records.",
+      "D": "A specialized way to encrypt DNS traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AWS networking service is used to connect multiple VPCs in a hub-and-spoke model to simplify management?",
+    "options": {
+      "A": "VPC Peering",
+      "B": "Transit Gateway",
+      "C": "Direct Connect",
+      "D": "Route 53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Network ACL, you can explicitly deny a specific IP address from accessing a subnet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for inbound traffic",
+      "D": "Only if using Security Groups"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Health Checks' for a Load Balancer?",
+    "options": {
+      "A": "To check the physical health of the server rack.",
+      "B": "To ensure traffic is only sent to backend instances that are functioning correctly.",
+      "C": "To update the BIOS of the servers.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which IP address range is reserved for 'APIPA' and is used when a device cannot find a DHCP server?",
+    "options": {
+      "A": "10.0.x.x",
+      "B": "169.254.x.x",
+      "C": "127.0.x.x",
+      "D": "192.168.x.x"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An ALB can route traffic based on the 'Host' header, allowing it to host multiple domains on a single load balancer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for .com domains",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VPC Endpoint Gateway' primarily used for?",
+    "options": {
+      "A": "To connect to S3 and DynamoDB without needing a NAT gateway or public IP.",
+      "B": "To end the internet connection.",
+      "C": "To encrypt the VPC source code.",
+      "D": "To monitor the end of a cloud project."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'BGP Peer' status?",
+    "options": {
+      "A": "When two routers have established a neighbor relationship and are exchanging routing information.",
+      "B": "When two users are looking at the same cloud console.",
+      "C": "When the router is updating its firmware.",
+      "D": "The password for a network engineer."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Public subnets should always contain your database servers to make them easier to manage.",
+    "options": {
+      "A": "False (Databases should be in private subnets for security).",
+      "B": "True",
+      "C": "Only for high-performance databases",
+      "D": "Only if using an encrypted hard drive"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service acts as a 'Global' Load Balancer to route users to the closest healthy regional endpoint?",
+    "options": {
+      "A": "ALB",
+      "B": "Global Accelerator / Route 53 Traffic Flow",
+      "C": "NLB",
+      "D": "Gateway Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Subnetting'?",
+    "options": {
+      "A": "Naming your servers after fish.",
+      "B": "Dividing a large network into smaller, manageable sub-networks to improve security and performance.",
+      "C": "Deleting old network cables.",
+      "D": "A way to measure the physical width of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Route 53 can perform health checks on non-AWS endpoints, such as on-premises servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they have a public IP",
+      "D": "Only for HTTP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component provides high-speed, 10-100Gbps physical network connectivity between your office and the cloud?",
+    "options": {
+      "A": "VPN",
+      "B": "Direct Connect / ExpressRoute",
+      "C": "Transit Gateway",
+      "D": "VPC Peering"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Direct Connect Gateway'?",
+    "options": {
+      "A": "To connect a single Direct Connect to multiple VPCs across different regions.",
+      "B": "To restart the Direct Connect router.",
+      "C": "To encrypt the physical fiber optic light.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Every instance in a VPC must have a public IP address to communicate with other instances in the same VPC.",
+    "options": {
+      "A": "False (Instances communicate via private IPs within the VPC).",
+      "B": "True",
+      "C": "Only if they are in different subnets",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jumbo Frames' (MTU 9001) used for in a VPC?",
+    "options": {
+      "A": "To make the server rack physically larger.",
+      "B": "To increase network throughput and reduce CPU usage by allowing larger packets to be sent within a VPC.",
+      "C": "To encrypt the physical server cables.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Route' target in an AWS Route Table?",
+    "options": {
+      "A": "igw-xxxxxxxx",
+      "B": "nat-xxxxxxxx",
+      "C": "pcx-xxxxxxxx (Peering)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can use 'Security Group References' (referencing one SG in another) to allow traffic between instances without needing to know their specific IP addresses.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the same subnet",
+      "D": "Only for SSH traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Route 53 Resolver' used for?",
+    "options": {
+      "A": "To resolve conflicts between developers.",
+      "B": "To provide recursive DNS queries between VPCs and on-premises networks in a hybrid cloud setup.",
+      "C": "To encrypt DNS requests.",
+      "D": "To monitor the daily growth of the DNS zone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In cloud networking, what is 'Throughput'?",
+    "options": {
+      "A": "The time it takes to reboot the server.",
+      "B": "The actual amount of data successfully transferred over a specific period.",
+      "C": "The physical speed of light in a fiber cable.",
+      "D": "The number of users active at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: NAT Gateways are highly available within an Availability Zone but are not redundant across multiple zones.",
+    "options": {
+      "A": "True (You should deploy one NAT Gateway per zone for high availability).",
+      "B": "False",
+      "C": "Only in the North Virginia region",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Inbound' traffic vs 'Outbound' traffic?",
+    "options": {
+      "A": "Inbound comes into the instance; Outbound leaves it.",
+      "B": "Inbound is for root users; Outbound is for guests.",
+      "C": "Inbound is free; Outbound always costs money.",
+      "D": "Both A and C are often true in cloud models."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which DNS record type is used to map one domain name to another (e.g., www.example.com to example.com)?",
+    "options": {
+      "A": "A",
+      "B": "CNAME",
+      "C": "MX",
+      "D": "PTR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Security Groups are applied to the network interface (ENI) of an instance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for virtual machines",
+      "D": "Only if using version 1.0+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' and how is it measured?",
+    "options": {
+      "A": "Measured in Megabytes per second.",
+      "B": "Measured in Milliseconds (ms); it is the delay between a request and a response.",
+      "C": "Measured in pounds or kilograms.",
+      "D": "Measured by the number of clicks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Direct Connect Link Aggregation Group' (LAG)?",
+    "options": {
+      "A": "To combine multiple physical Direct Connect connections into a single logical one for more bandwidth and redundancy.",
+      "B": "To restart the Direct Connect connection.",
+      "C": "To encrypt the physical fiber optic light.",
+      "D": "To monitor the daily growth of the LAG."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Weighted' routing is a good way to perform Canary deployments (rolling out new versions to a small group).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile users",
+      "D": "Only if the servers are in the same building"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Load Balancer' type is designed to handle millions of requests while maintaining high performance and extremely low latency?",
+    "options": {
+      "A": "ALB",
+      "B": "NLB",
+      "C": "Classic Load Balancer",
+      "D": "Gateway Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'VPC Endpoint Interface' vs 'Gateway'?",
+    "options": {
+      "A": "Interface uses an IP; Gateway uses a route table entry.",
+      "B": "Interface is for S3; Gateway is for everything else.",
+      "C": "Interface is free; Gateway is paid.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Private Subnet' can communicate with other private subnets in the same VPC by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they are in the same Availability Zone",
+      "D": "Only if using Security Group references"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Anycast DNS'?",
+    "options": {
+      "A": "To ensure DNS queries are answered by the closest available server in a global network.",
+      "B": "To encrypt all DNS traffic.",
+      "C": "To backup the whole DNS zone.",
+      "D": "To monitor the daily growth of the DNS zone."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a valid 'CIDR' block for a small VPC subnet?",
+    "options": {
+      "A": "10.0.1.0/24",
+      "B": "10.0.1.0/8",
+      "C": "10.0.1.0/32",
+      "D": "10.0.1.0/0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Stateless' NACL, you must manually allow the return traffic for every request.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SSH",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Traffic Shaping' in cloud networking?",
+    "options": {
+      "A": "Naming the network logs after geometric shapes.",
+      "B": "Controlling the volume of traffic sent into a network to optimize performance and prevent congestion.",
+      "C": "A way to backup the whole VPC.",
+      "D": "The physical layout of the network cables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is required to enable communication between two VPCs in different AWS accounts?",
+    "options": {
+      "A": "VPC Peering or Transit Gateway",
+      "B": "Internet Gateway",
+      "C": "NAT Gateway",
+      "D": "VPC Endpoint"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Gateway Load Balancer' (GWLB) is primarily used to deploy and manage third-party virtual appliances like firewalls and IPS.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Azure users",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Transit Gateway (TGW) architecture, what is the primary purpose of 'TGW Route Tables' compared to standard VPC Route Tables?",
+    "options": {
+      "A": "To increase the physical speed of the TGW hardware.",
+      "B": "To allow for granular control over how traffic is routed between different attachments, enabling hub-and-spoke or isolated network topologies.",
+      "C": "To encrypt traffic between VPCs automatically.",
+      "D": "To store the MAC addresses of all instances in the connected VPCs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP attribute is transitive and can be used to group routes and apply administrative policies across multiple Autonomous Systems (AS)?",
+    "options": {
+      "A": "Local Preference",
+      "B": "AS-Path",
+      "C": "Communities",
+      "D": "Multi-Exit Discriminator (MED)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In an IPv6 Dual-Stack VPC, resources can communicate over IPv4 and IPv6 simultaneously, but each protocol requires its own separate route table entries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a NAT64 gateway",
+      "D": "Only in the AWS 'us-east-1' region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Perfect Forward Secrecy' (PFS) in the context of a Cloud Site-to-Site VPN?",
+    "options": {
+      "A": "A way to predict future network traffic patterns.",
+      "B": "A feature that ensures that even if one session key is compromised, previous and future session keys remain secure by generating unique keys for each session.",
+      "C": "A specialized backup for the VPN gateway.",
+      "D": "The ability to run a VPN without an internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Load Balancer' algorithm is most effective for handling long-lived TCP connections, such as those used by database or web socket applications?",
+    "options": {
+      "A": "Round Robin",
+      "B": "Least Outstanding Requests (LOR)",
+      "C": "Source IP Hash",
+      "D": "Weighted Random"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VPC Endpoint Services' (PrivateLink) allow you to share a service located in one VPC with thousands of other VPCs without using VPC Peering or Transit Gateway.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the VPCs are in the same account",
+      "D": "Only for non-HTTP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'BGP Path Prepending' in a cloud network environment?",
+    "options": {
+      "A": "To encrypt the BGP update messages.",
+      "B": "To influence inbound traffic patterns by artificially lengthening the AS-Path of a route, making it less desirable to external peers.",
+      "C": "To increase the bandwidth of a Direct Connect link.",
+      "D": "To monitor the health of a BGP neighbor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is necessary to allow IPv6-only resources in a private subnet to communicate with the IPv4-only public internet?",
+    "options": {
+      "A": "NAT Gateway",
+      "B": "Egress-Only Internet Gateway",
+      "C": "NAT64 (integrated with DNS64)",
+      "D": "Virtual Private Gateway"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In AWS, a 'Network ACL' is evaluated before a 'Security Group' for inbound traffic reaching an instance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only if the NACL has more than 10 rules"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of 'SNI' (Server Name Indication) on an Application Load Balancer?",
+    "options": {
+      "A": "It speeds up the DNS resolution time.",
+      "B": "It allows the load balancer to host multiple SSL/TLS certificates on a single listener, routing to different domains based on the hostname requested by the client.",
+      "C": "It removes the need for a certificate authority.",
+      "D": "It encrypts the source IP of the client."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Direct Connect SiteLink' enable?",
+    "options": {
+      "A": "Direct communication between on-premises sites over the cloud provider's backbone, bypassing the cloud VPC entirely.",
+      "B": "A faster way to upload files to S3.",
+      "C": "Automatic encryption for all Direct Connect traffic.",
+      "D": "A connection between two different cloud providers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'VPC Reachability Analyzer' is a tool that can perform connectivity testing without actually sending any packets, by analyzing the network configuration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public IP addresses",
+      "D": "Only for regional traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which BGP attribute is used to influence the preferred path out of an Autonomous System when multiple exit points exist to the same destination?",
+    "options": {
+      "A": "Weight (Cisco specific) or Local Preference",
+      "B": "AS-Path",
+      "C": "Origin",
+      "D": "MED"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a 'Hub and Spoke' network, what is the 'Blast Radius' concern when using a single Transit Gateway for all environments (Dev/Test/Prod)?",
+    "options": {
+      "A": "The TGW might explode physically.",
+      "B": "A misconfiguration or failure in the central TGW can cause a total network outage across all environments simultaneously.",
+      "C": "The cloud provider will double the price.",
+      "D": "The internet speed will be divided by the number of VPCs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Gateway Load Balancer' (GWLB) uses the GENEVE protocol to encapsulate traffic and maintain flow information while passing it to third-party security appliances.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv4 traffic",
+      "D": "Only if using a hardware firewall"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Route 53 Resolver DNS Firewall' used for?",
+    "options": {
+      "A": "To block hackers from accessing the DNS console.",
+      "B": "To filter and block DNS queries for known malicious domains (FQDNs) to prevent data exfiltration or malware communication.",
+      "C": "To encrypt all DNS traffic in the VPC.",
+      "D": "To increase the speed of DNS resolution by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mechanism ensures that a VPC Peering connection remains active and routable even if the underlying physical hardware in a data center fails?",
+    "options": {
+      "A": "Manual intervention by the admin.",
+      "B": "Cloud-native SDN automatically reroutes traffic across redundant physical paths (High Availability is built-in).",
+      "C": "Restarting the VPC.",
+      "D": "Backing up the VPC to another region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'PrivateLink' (VPC Endpoints) eliminates the need for an Internet Gateway or NAT Gateway to access supported cloud services.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for S3 and DynamoDB",
+      "D": "Only if the service is in the same account"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Asymmetric Routing' in a hybrid cloud environment?",
+    "options": {
+      "A": "Traffic that moves faster in one direction than the other.",
+      "B": "When traffic enters the cloud via one path (e.g., Direct Connect) but returns via another (e.g., VPN), often causing stateful firewalls to drop the connection.",
+      "C": "A network that only works on weekends.",
+      "D": "When the upload speed matches the download speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Route 53 feature allows you to create complex, multi-level routing logic using a graphical editor?",
+    "options": {
+      "A": "Simple Routing",
+      "B": "Traffic Flow",
+      "C": "Resolver",
+      "D": "Health Checks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Security Group' rules can only 'Allow' traffic; there is no 'Deny' rule capability.",
+    "options": {
+      "A": "True (Implicit deny: anything not allowed is blocked).",
+      "B": "False",
+      "C": "Only for outbound traffic",
+      "D": "Only in the 'standard' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Direct Connect Gateway' (DXGW) in a multi-region deployment?",
+    "options": {
+      "A": "To restart the Direct Connect connection.",
+      "B": "To act as a concentration point for Direct Connect virtual interfaces, allowing a single connection to access VPCs in any region (except China).",
+      "C": "To encrypt the physical light signals.",
+      "D": "To monitor the daily cost of the fiber optics."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific phenomenon occurs when the MTU of a VPN tunnel is smaller than the MTU of the connected networks, leading to packet drops?",
+    "options": {
+      "A": "Latency Bloat",
+      "B": "MTU Mismatch / Fragmentation Failure",
+      "C": "Bandwidth Exhaustion",
+      "D": "DNS Timeout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Public IPv4' address in the cloud is globally unique across the entire internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Elastic IPs",
+      "D": "Only in version 4.1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Accelerator' Custom Routing primarily used for?",
+    "options": {
+      "A": "To speed up the whole internet.",
+      "B": "To route users to a specific EC2 instance and port based on the listener port they connect to, often used for multi-player gaming.",
+      "C": "To encrypt traffic between continents.",
+      "D": "To backup a VPC to a local hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which BGP message is used to 'Withdraw' a route that is no longer valid?",
+    "options": {
+      "A": "OPEN",
+      "B": "UPDATE",
+      "C": "KEEPALIVE",
+      "D": "NOTIFICATION"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An AWS 'Elastic Load Balancer' (ELB) automatically scales its capacity to handle increasing levels of traffic without manual intervention.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if 'Pre-warming' is requested",
+      "D": "Only for the Application Load Balancer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VPC Ingress Routing' used for?",
+    "options": {
+      "A": "To count the number of users entering the VPC.",
+      "B": "To redirect incoming traffic from an Internet Gateway or Virtual Private Gateway to a specific network interface (ENI), usually a security appliance.",
+      "C": "To encrypt the VPC's login screen.",
+      "D": "To monitor the physical power of the routers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DNS record type is required to enable 'DNSSEC' for a hosted zone?",
+    "options": {
+      "A": "A",
+      "B": "DS (Delegation Signer) and RRSIG",
+      "C": "MX",
+      "D": "CNAME"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Secondary Private IP' can be moved from one instance to another in the same subnet to perform basic failover.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database instances",
+      "D": "Only if using a Load Balancer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'BGP Local Preference' attribute?",
+    "options": {
+      "A": "To choose the path for traffic entering the Autonomous System.",
+      "B": "To choose the path for traffic leaving the Autonomous System (higher value is preferred).",
+      "C": "To calculate the weight of the router.",
+      "D": "To monitor the health of the neighbor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In cloud networking, what is 'Throughput' and how is it typically billed?",
+    "options": {
+      "A": "The physical speed of the CPU; billed by the hour.",
+      "B": "The amount of data transferred per second; billed by the amount of data processed (GB).",
+      "C": "The number of network cables used; billed per cable.",
+      "D": "The latency of the connection; billed by the millisecond."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can peer two VPCs that have identical CIDR blocks (e.g., both are 10.0.0.0/16).",
+    "options": {
+      "A": "False (Peering is not possible with overlapping CIDR blocks).",
+      "B": "True",
+      "C": "Only if they are in different regions",
+      "D": "Only if using a Transit Gateway"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Unicast Reverse Path Forwarding' (uRPF) in a cloud context?",
+    "options": {
+      "A": "A way to send traffic backwards through the network.",
+      "B": "A security feature that checks if the source IP of an incoming packet is reachable via the same interface it arrived on, preventing IP spoofing.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Transit Gateway' feature allows for the automatic propagation of routes from an attachment into a route table?",
+    "options": {
+      "A": "Static Routing",
+      "B": "Route Propagation",
+      "C": "Route Association",
+      "D": "BGP Peering"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An AWS 'Network Load Balancer' (NLB) provides a static IP address for each Availability Zone it is enabled in.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for HTTPS traffic",
+      "D": "Only if using Elastic IPs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VPC Flow Logs' aggregation interval primarily used to control?",
+    "options": {
+      "A": "The speed of the network traffic.",
+      "B": "The trade-off between real-time visibility and the volume/cost of log data generated.",
+      "C": "The total number of VPCs allowed.",
+      "D": "The encryption level of the logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of an ALB allows you to terminate HTTPS at the load balancer and pass traffic to backends over HTTP?",
+    "options": {
+      "A": "SSL Offloading / SSL Termination",
+      "B": "Source IP Affinity",
+      "C": "WAF Integration",
+      "D": "Path-based routing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Private Subnet' can still reach the public internet if it has a route to a NAT Gateway located in a Public Subnet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for inbound traffic",
+      "D": "Only if the NAT Gateway has a private IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Anycast' DNS and how does it improve performance?",
+    "options": {
+      "A": "It sends traffic to all servers at once.",
+      "B": "It uses the same IP address for multiple servers globally; the network routes the user to the geographically closest server, reducing latency.",
+      "C": "It encrypts the DNS zone.",
+      "D": "It backups the whole DNS database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Site-to-Site VPN', what is the function of 'IKE' (Internet Key Exchange)?",
+    "options": {
+      "A": "To exchange physical keys with the cloud provider.",
+      "B": "To securely negotiate the encryption keys and security associations used for the VPN tunnel.",
+      "C": "To backup the VPN gateway configuration.",
+      "D": "To increase the internet speed by 2x."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'IPv6' addresses in a cloud VPC are always public and do not require NAT.",
+    "options": {
+      "A": "True (they are globally unique; use an Egress-Only IGW for privacy instead of NAT).",
+      "B": "False",
+      "C": "Only in version 6.1",
+      "D": "Only for storage resources"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Route 53 Resolver Endpoint' used for?",
+    "options": {
+      "A": "To end the DNS resolution process.",
+      "B": "To allow DNS queries to flow between a VPC and an on-premises network (Inbound/Outbound).",
+      "C": "To encrypt DNS traffic.",
+      "D": "To monitor the daily cost of the DNS zone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Load Balancer' feature allows it to handle traffic for multiple separate applications based on the 'Host' header (e.g., app1.com and app2.com)?",
+    "options": {
+      "A": "Cross-zone balancing",
+      "B": "Host-based routing",
+      "C": "Source-IP affinity",
+      "D": "Dynamic Port Mapping"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Transit Gateway Connect' allows you to establish GRE tunnels between the cloud and a virtual appliance (like an SD-WAN router) with BGP support.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Azure users",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Route Hijacking' in the context of BGP security?",
+    "options": {
+      "A": "Stealing a physical router from a data center.",
+      "B": "When an attacker maliciously or accidentally advertises IP prefixes they do not own, causing traffic to be routed incorrectly.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AWS networking service allows for 'Direct' connectivity between two EC2 instances in different Availability Zones using a high-speed, low-latency link?",
+    "options": {
+      "A": "VPC Peering",
+      "B": "Placement Groups (Cluster or Partition)",
+      "C": "Transit Gateway",
+      "D": "Direct Connect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Private Hosted Zone' in Route 53 can only be accessed by resources within the VPCs it is associated with.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a VPN",
+      "D": "Only if the zone is public"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'TCP Fast Open' and why is it beneficial in cloud networks?",
+    "options": {
+      "A": "A way to open the server case faster.",
+      "B": "A mechanism that allows data to be sent during the initial TCP handshake, reducing the number of round trips and lowering latency.",
+      "C": "A specialized way to encrypt TCP packets.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is required to enable 'BGP' on an AWS Site-to-Site VPN?",
+    "options": {
+      "A": "A static route in the route table.",
+      "B": "An ASN (Autonomous System Number) configured on both the Virtual Private Gateway and the Customer Gateway.",
+      "C": "A physical hardware firewall.",
+      "D": "An internet gateway."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Network ACLs' are the first line of defense for a VPC, as they evaluate traffic before it even reaches the instance's Security Group.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for outbound traffic",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of 'VPC Peering'?",
+    "options": {
+      "A": "To allow instances in one VPC to communicate with instances in another VPC using private IP addresses.",
+      "B": "To backup a VPC to a remote region.",
+      "C": "To encrypt traffic between two servers.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a BGP environment, what does 'Multi-Exit Discriminator' (MED) influence?",
+    "options": {
+      "A": "How traffic leaves the local Autonomous System.",
+      "B": "How traffic from an external AS should enter the local AS (lower value is preferred).",
+      "C": "The weight of the local router.",
+      "D": "The encryption level of the connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In AWS, you can use 'Gateway Load Balancer' to chain multiple security appliances together for deep packet inspection.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for HTTP traffic",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Congestion Window' (cwnd) and why is it relevant in high-speed cloud links?",
+    "options": {
+      "A": "The physical window in the server room.",
+      "B": "A TCP state variable that limits the amount of data a sender can transmit before receiving an acknowledgment, preventing network overload.",
+      "C": "The time it takes to reboot a server.",
+      "D": "The number of users active at 12 PM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service provides a centralized way to manage and audit network security policies across multiple cloud accounts and VPCs?",
+    "options": {
+      "A": "Security Group",
+      "B": "Firewall Manager / Azure Policy",
+      "C": "Inspector",
+      "D": "Trusted Advisor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'VPC Peering' between regions (Inter-Region Peering) uses the cloud provider's global network backbone, ensuring secure and predictable performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'IP Address Overlap' and why is it a major problem in cloud networking?",
+    "options": {
+      "A": "When two network cables cross each other.",
+      "B": "When two connected networks use the same IP ranges, making it impossible to route traffic correctly between them.",
+      "C": "Hiring too many network engineers.",
+      "D": "The process of moving servers to a new region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to view the actual hop-by-hop path of a packet within the AWS network to identify where it is being dropped?",
+    "options": {
+      "A": "Ping",
+      "B": "Reachability Analyzer / Network Insights",
+      "C": "Traceroute",
+      "D": "Nslookup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Transit Gateway' route table can contain static routes that override routes propagated via BGP.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv6",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jumbo Frames' MTU size and where is it supported?",
+    "options": {
+      "A": "1500 bytes; supported everywhere.",
+      "B": "9001 bytes; supported within a VPC and over Direct Connect (not over the public internet or VPN).",
+      "C": "65535 bytes; supported for databases only.",
+      "D": "100 bytes; supported for small packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DNS record is used to verify domain ownership for services like SSL certificate issuance?",
+    "options": {
+      "A": "A",
+      "B": "TXT (Text)",
+      "C": "MX",
+      "D": "CNAME"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Shared VPC' model, a central networking account owns the VPC and subnets, but other accounts can launch resources into them.",
+    "options": {
+      "A": "True (AWS RAM / Resource Access Manager).",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'BGP Graceful Restart' used for?",
+    "options": {
+      "A": "Restarting a server during the night.",
+      "B": "A mechanism that allows a router to continue forwarding traffic even if its BGP control plane process restarts, preventing network flaps.",
+      "C": "A specialized way to encrypt BGP updates.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Security Group' rule allows an instance to reach any destination on the internet?",
+    "options": {
+      "A": "Inbound 0.0.0.0/0",
+      "B": "Outbound 0.0.0.0/0",
+      "C": "Inbound 10.0.0.0/16",
+      "D": "Outbound 127.0.0.1/32"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Private Subnet' can have its own dedicated Internet Gateway.",
+    "options": {
+      "A": "False (By definition, if a subnet has a route to an IGW, it is a Public Subnet).",
+      "B": "True",
+      "C": "Only if using IPv6",
+      "D": "Only for Windows instances"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Route 53 Health Checks' in a global application?",
+    "options": {
+      "A": "To check the physical health of the data center staff.",
+      "B": "To monitor the availability of application endpoints and automatically trigger DNS failover if an endpoint becomes unhealthy.",
+      "C": "To encrypt DNS traffic.",
+      "D": "To monitor the daily growth of the DNS zone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component allows for the 'Mapping' of a public IP to a private IP for a single instance in a VPC?",
+    "options": {
+      "A": "Internet Gateway",
+      "B": "Virtual Private Gateway",
+      "C": "NAT Gateway",
+      "D": "NAT Instance"
+    },
+    "answer": "A"
+  }
+  ]
+}

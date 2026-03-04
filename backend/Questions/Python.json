@@ -1,0 +1,1837 @@
+{
+  "skill": "Python",
+  "questions": [
+    {
+      "question": "Who developed the Python programming language?",
+      "options": {
+        "A": "James Gosling",
+        "B": "Guido van Rossum",
+        "C": "Dennis Ritchie",
+        "D": "Bjarne Stroustrup"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Python is an interpreted, high-level, and general-purpose programming language.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO are correct ways to start a comment in Python?",
+      "options": {
+        "A": "# (Single line)",
+        "B": "\"\"\" \"\"\" (Multi-line string used as comment)",
+        "C": "//",
+        "D": "/* */"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Python uses indentation to define blocks of code instead of curly braces {}.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the correct file extension for Python files?",
+      "options": {
+        "A": ".pt",
+        "B": ".py",
+        "C": ".pyt",
+        "D": ".pw"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO valid variable names in Python:",
+      "options": {
+        "A": "my_var",
+        "B": "_var2",
+        "C": "2var",
+        "D": "my-var"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Python is a case-sensitive language.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to display output in Python?",
+      "options": {
+        "A": "display()",
+        "B": "print()",
+        "C": "write()",
+        "D": "out()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to check the version of Python in the terminal?",
+      "options": {
+        "A": "python --version",
+        "B": "py --v",
+        "C": "python -ver",
+        "D": "python -V"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Python 3 is backward compatible with Python 2.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is used to define a multi-line string in Python?",
+      "options": {
+        "A": "''' ''' or \"\"\" \"\"\"",
+        "B": "/ /",
+        "C": "### ###",
+        "D": "[[ ]]"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Python is a dynamically typed language, meaning you don't need to declare variable types.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO illegal variable names in Python:",
+      "options": {
+        "A": "global",
+        "B": "99bottles",
+        "C": "_private",
+        "D": "first_name"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The input() function always returns the data as a string.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the correct way to create a variable with the numeric value 5?",
+      "options": {
+        "A": "x = 5",
+        "B": "int x = 5",
+        "C": "variable x = 5",
+        "D": "x := 5"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO are Python keywords?",
+      "options": {
+        "A": "yield",
+        "B": "with",
+        "C": "array",
+        "D": "integer"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Indentation is optional in Python if you use semicolons.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function returns the number of items in a list or characters in a string?",
+      "options": {
+        "A": "size()",
+        "B": "length()",
+        "C": "len()",
+        "D": "count()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the output of print(2 * 3 ** 2)?",
+      "options": {
+        "A": "36",
+        "B": "18",
+        "C": "12",
+        "D": "64"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: _ is a valid variable name in Python.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command is used to exit a Python script or the interpreter?",
+      "options": {
+        "A": "exit()",
+        "B": "quit()",
+        "C": "stop()",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Identify TWO assignment operators in Python:",
+      "options": {
+        "A": "+=",
+        "B": "*=",
+        "C": "=>",
+        "D": "=<"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Python strings can be enclosed in either single quotes or double quotes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the output of print(\"Hi\" * 3)?",
+      "options": {
+        "A": "HiHiHi",
+        "B": "Hi 3",
+        "C": "Error",
+        "D": "Hi, Hi, Hi"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Dividing two integers in Python 3 (e.g., 5 / 2) always returns a float.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the output of print(type(5.0))?",
+      "options": {
+        "A": "<class 'int'>",
+        "B": "<class 'float'>",
+        "C": "<class 'double'>",
+        "D": "<class 'number'>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A String in Python is immutable.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO operators are used for exponentiation (power) in Python?",
+      "options": {
+        "A": "**",
+        "B": "pow(x, y)",
+        "C": "^",
+        "D": "^^"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Python supports complex numbers as a built-in data type.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of the expression 10 // 3?",
+      "options": {
+        "A": "3.333",
+        "B": "3",
+        "C": "1",
+        "D": "4"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO sequence types in Python:",
+      "options": {
+        "A": "list",
+        "B": "tuple",
+        "C": "int",
+        "D": "dictionary"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The operator == checks for identity, while is checks for equality.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to remove whitespace from both ends of a string?",
+      "options": {
+        "A": "clear()",
+        "B": "strip()",
+        "C": "trim()",
+        "D": "cut()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Boolean values in Python must start with an uppercase letter (True/False).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of bool([])?",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method converts the first character of a string to uppercase?",
+      "options": {
+        "A": "upper()",
+        "B": "capitalize()",
+        "C": "first()",
+        "D": "title()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The in operator can be used to check if a substring exists within a string.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO membership operators:",
+      "options": {
+        "A": "in",
+        "B": "not in",
+        "C": "is",
+        "D": "exists"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Python 3 uses Unicode for its string representation by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of round(4.576, 2)?",
+      "options": {
+        "A": "4.5",
+        "B": "4.58",
+        "C": "4.57",
+        "D": "4.6"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO methods used to format strings in modern Python:",
+      "options": {
+        "A": "f-strings",
+        "B": ".format()",
+        "C": "% (printf style)",
+        "D": "concat()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: String slicing s[::-1] effectively reverses a string.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operator is used for logical 'AND'?",
+      "options": {
+        "A": "&&",
+        "B": "and",
+        "C": "&",
+        "D": "amp"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Bitwise operators like | and & work only on integers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the output of print(10 % 3)?",
+      "options": {
+        "A": "3",
+        "B": "1",
+        "C": "0",
+        "D": "3.33"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO methods can check if a string contains only digits?",
+      "options": {
+        "A": "isdigit()",
+        "B": "isnumeric()",
+        "C": "isint()",
+        "D": "isval()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: int(\"10.5\") will successfully convert the string to the integer 10.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which escape character is used for a new line?",
+      "options": {
+        "A": "\\t",
+        "B": "\\n",
+        "C": "\\r",
+        "D": "\\\\"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can concatenate a string and an integer directly using + (e.g., \"Age: \" + 25).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator has the highest precedence in Python?",
+      "options": {
+        "A": "+",
+        "B": "*",
+        "C": "**",
+        "D": "()"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which collection is ordered, changeable, and allows duplicate members?",
+      "options": {
+        "A": "List",
+        "B": "Tuple",
+        "C": "Set",
+        "D": "Dictionary"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Tuples are faster than lists in Python.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO ways to add an element to a list:",
+      "options": {
+        "A": ".append()",
+        "B": ".insert()",
+        "C": ".add()",
+        "D": ".push()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: A Dictionary key must be of an immutable type (like string or tuple).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you access the value associated with the key \"name\" in a dictionary d?",
+      "options": {
+        "A": "d[\"name\"]",
+        "B": "d.get(\"name\")",
+        "C": "d{name}",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which TWO statements are true about a Set?",
+      "options": {
+        "A": "It is unordered.",
+        "B": "It does not allow duplicate elements.",
+        "C": "It is indexed.",
+        "D": "It is defined with ()."
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: list.pop() removes and returns the first item in a list.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the syntax for slicing a list L from index 1 to 3 (exclusive)?",
+      "options": {
+        "A": "L[1:3]",
+        "B": "L[1,2,3]",
+        "C": "L[1 to 3]",
+        "D": "L{1:3}"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO methods can be used to join two lists?",
+      "options": {
+        "A": "list1 + list2",
+        "B": "list1.extend(list2)",
+        "C": "list1.join(list2)",
+        "D": "list1.merge(list2)"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Tuples are defined using square brackets [].",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which collection is unordered, unchangeable, and does NOT allow duplicate members?",
+      "options": {
+        "A": "Set",
+        "B": "Tuple",
+        "C": "List",
+        "D": "FrozenSet"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: List comprehensions provide a shorter syntax for creating a new list based on existing lists.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO methods to remove an item from a list by its value:",
+      "options": {
+        "A": ".remove()",
+        "B": ".pop()",
+        "C": ".discard()",
+        "D": ".delete()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Dictionaries are ordered as of Python 3.7.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method returns a list of all the values in a dictionary?",
+      "options": {
+        "A": "keys()",
+        "B": "values()",
+        "C": "items()",
+        "D": "list()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO ways to copy a list L1 to L2 so they don't share the same reference:",
+      "options": {
+        "A": "L2 = L1.copy()",
+        "B": "L2 = list(L1)",
+        "C": "L2 = L1",
+        "D": "L2 = L1.clone()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: A set can contain a list as an element.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of {1, 2, 3} & {2, 3, 4}?",
+      "options": {
+        "A": "{1, 2, 3, 4}",
+        "B": "{2, 3}",
+        "C": "{1, 4}",
+        "D": "{}"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO methods are used to clear all elements from a dictionary?",
+      "options": {
+        "A": ".clear()",
+        "B": "del dict_name",
+        "C": ".reset()",
+        "D": "dict_name = {}"
+      },
+      "answer": "A, D"
+    },
+    {
+      "question": "True or False: Slicing a list returns a new list object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to convert a list of strings into a single string?",
+      "options": {
+        "A": "concat()",
+        "B": "join()",
+        "C": "merge()",
+        "D": "sum()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: L.sort() sorts the list in place, while sorted(L) returns a new list.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO immutable types in Python:",
+      "options": {
+        "A": "tuple",
+        "B": "frozenset",
+        "C": "list",
+        "D": "dict"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "What is the output of len({\"A\": 1, \"B\": 2, \"A\": 3})?",
+      "options": {
+        "A": "3",
+        "B": "2",
+        "C": "1",
+        "D": "Error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A tuple can be used as a key in a dictionary.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to create a function in Python?",
+      "options": {
+        "A": "function",
+        "B": "def",
+        "C": "fun",
+        "D": "define"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Python functions can return multiple values as a tuple.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO types of loops in Python:",
+      "options": {
+        "A": "for",
+        "B": "while",
+        "C": "do-while",
+        "D": "foreach"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The range(5) function generates numbers from 0 to 5 inclusive.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which statement is used to skip the rest of the code inside a loop for the current iteration?",
+      "options": {
+        "A": "break",
+        "B": "continue",
+        "C": "pass",
+        "D": "skip"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a \"Lambda\" function?",
+      "options": {
+        "A": "A function with a large memory footprint.",
+        "B": "An anonymous, one-line function.",
+        "C": "A function that cannot return a value.",
+        "D": "A function used only for math."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In Python, *args allows a function to accept a variable number of positional arguments.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO keywords used in error handling:",
+      "options": {
+        "A": "try",
+        "B": "except",
+        "C": "catch",
+        "D": "throw"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The finally block runs only if an exception occurs.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the pass statement do?",
+      "options": {
+        "A": "Breaks the loop.",
+        "B": "It is a null operation; nothing happens.",
+        "C": "Skips the current iteration.",
+        "D": "Returns a value."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What keyword is used to raise an exception manually?",
+      "options": {
+        "A": "throw",
+        "B": "raise",
+        "C": "except",
+        "D": "error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The nonlocal keyword is used to work with variables inside nested functions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO standard Python exceptions:",
+      "options": {
+        "A": "ValueError",
+        "B": "TypeError",
+        "C": "NullPointerError",
+        "D": "LogicError"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: A function can access a global variable without the global keyword if it is only reading the value.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which block is used to catch all exceptions if no specific one matches?",
+      "options": {
+        "A": "except Exception:",
+        "B": "catch All:",
+        "C": "finally:",
+        "D": "else:"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the scope of a variable defined inside a function?",
+      "options": {
+        "A": "Global",
+        "B": "Local",
+        "C": "Protected",
+        "D": "System"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: assert is used for debugging purposes to test if a condition is true.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO ways to import only the pi constant from the math module:",
+      "options": {
+        "A": "from math import pi",
+        "B": "import math.pi",
+        "C": "import pi from math",
+        "D": "from math import *"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Python's with statement is used to ensure resources like files are closed properly.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the dir() function do when used on an object?",
+      "options": {
+        "A": "Deletes the object.",
+        "B": "Lists all valid attributes and methods of the object.",
+        "C": "Changes the object's directory.",
+        "D": "Displays the object's memory address."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO are valid ways to create a generator in Python?",
+      "options": {
+        "A": "Generator expressions",
+        "B": "Functions using the yield keyword",
+        "C": "Functions using return list()",
+        "D": "Using gen_func()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Python supports 'Duck Typing'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of __init__ in a class?",
+      "options": {
+        "A": "To destroy an object.",
+        "B": "To initialize an object's attributes (Constructor).",
+        "C": "To make a class private.",
+        "D": "To inherit from another class."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A child class inherits all attributes and methods from its parent class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to call a method from the parent class?",
+      "options": {
+        "A": "parent",
+        "B": "super()",
+        "C": "this",
+        "D": "self"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the first parameter of any method in a Python class?",
+      "options": {
+        "A": "this",
+        "B": "self",
+        "C": "cls",
+        "D": "init"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Python supports Multiple Inheritance.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO pillars of Object-Oriented Programming:",
+      "options": {
+        "A": "Encapsulation",
+        "B": "Polymorphism",
+        "C": "Compilation",
+        "D": "Interpretation"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Attributes defined inside __init__ are class-level attributes shared by all instances.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the isinstance() function do?",
+      "options": {
+        "A": "Checks if an object is of a specific class or subclass.",
+        "B": "Creates a new instance of a class.",
+        "C": "Deletes an instance.",
+        "D": "Changes the name of an instance."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO special 'Magic Methods' (Dunder methods) in Python:",
+      "options": {
+        "A": "__str__",
+        "B": "__len__",
+        "C": "__create__",
+        "D": "__delete__"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Private variables in Python are defined by prefixing the name with two underscores (e.g., __name).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to create a subclass?",
+      "options": {
+        "A": "extends",
+        "B": "sub",
+        "C": "Using parentheses after class name",
+        "D": "inherits"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of the @classmethod decorator?",
+      "options": {
+        "A": "To hide a method from the user.",
+        "B": "To define a method that belongs to the class itself rather than a specific instance.",
+        "C": "To make a method run faster.",
+        "D": "To convert a class into a dictionary."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: __del__ is the method called when an object is about to be destroyed (Destructor).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Method Overriding'?",
+      "options": {
+        "A": "Calling a method multiple times.",
+        "B": "Defining a method in a child class that has the same name as a method in the parent class.",
+        "C": "Deleting a method from a class.",
+        "D": "Using a method without defining it."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: An Abstract Base Class (ABC) cannot be instantiated directly.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO ways to restrict attribute creation using __slots__:",
+      "options": {
+        "A": "Reducing memory footprint of objects.",
+        "B": "Preventing the creation of a dynamic __dict__.",
+        "C": "Encrypting attributes.",
+        "D": "Speeding up math operations."
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Python's MRO stands for Method Resolution Order.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to check if a class is a subclass of another?",
+      "options": {
+        "A": "isclass()",
+        "B": "issubclass()",
+        "C": "checksub()",
+        "D": "type()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which mode is used to open a file for writing, but creates it if it doesn't exist?",
+      "options": {
+        "A": "'r'",
+        "B": "'w'",
+        "C": "'a'",
+        "D": "'x'"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'a' mode appends data to the end of an existing file without overwriting it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO methods to read data from a file object f:",
+      "options": {
+        "A": "f.read()",
+        "B": "f.readlines()",
+        "C": "f.scan()",
+        "D": "f.get()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Closing a file manually using f.close() is not necessary if you use the with statement.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which module is used to work with JSON data in Python?",
+      "options": {
+        "A": "js",
+        "B": "json",
+        "C": "javascript",
+        "D": "serialize"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO methods provided by the os module for file management:",
+      "options": {
+        "A": "os.remove()",
+        "B": "os.rename()",
+        "C": "os.delete()",
+        "D": "os.move()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The pickle module is used for serializing and de-serializing Python objects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of if __name__ == \"__main__\":?",
+      "options": {
+        "A": "To prevent the code from running on Linux.",
+        "B": "To ensure certain code only runs when the script is executed directly, not when imported.",
+        "C": "To define the main class.",
+        "D": "To check the user's name."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The sys.path list determines where Python looks for modules to import.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command is used to install third-party packages in Python?",
+      "options": {
+        "A": "npm",
+        "B": "pip",
+        "C": "install",
+        "D": "git"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which file is used to specify all the dependencies for a Python project?",
+      "options": {
+        "A": "setup.py",
+        "B": "requirements.txt",
+        "C": "dependencies.log",
+        "D": "project.ini"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A Virtual Environment (venv) allows you to install packages in isolation for a specific project.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO commands used to manage virtual environments in Python:",
+      "options": {
+        "A": "python -m venv",
+        "B": "pipenv",
+        "C": "venv-create",
+        "D": "pyenv-new"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The __pycache__ folder contains bytecode compiled versions of your imported modules to speed up loading.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which module is used to measure the execution time of small code snippets?",
+      "options": {
+        "A": "datetime",
+        "B": "timeit",
+        "C": "timer",
+        "D": "clock"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO ways to import a module named math:",
+      "options": {
+        "A": "import math",
+        "B": "from math import *",
+        "C": "using math",
+        "D": "include math"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The sys.argv list in the sys module contains command-line arguments passed to a script.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function allows you to list all the functions and variables defined in a module?",
+      "options": {
+        "A": "list()",
+        "B": "dir()",
+        "C": "help()",
+        "D": "vars()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In Python, a 'Package' is a directory containing a special file named __init__.py.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to provide an alias for an imported module?",
+      "options": {
+        "A": "alias",
+        "B": "as",
+        "C": "with",
+        "D": "for"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO standard library modules used for mathematical operations:",
+      "options": {
+        "A": "math",
+        "B": "statistics",
+        "C": "numeric",
+        "D": "calculator"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The copy module is used to create 'shallow' or 'deep' copies of objects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the collections module?",
+      "options": {
+        "A": "To manage database connections.",
+        "B": "To provide specialized container datatypes like namedtuple, deque, and Counter.",
+        "C": "To sort lists faster.",
+        "D": "To delete duplicate files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The glob module is used to find all pathnames matching a specified pattern (e.g., *.txt).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which module is used to interact with the Python interpreter and system-specific parameters?",
+      "options": {
+        "A": "os",
+        "B": "sys",
+        "C": "system",
+        "D": "platform"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which module provides functions for generating random numbers?",
+      "options": {
+        "A": "math",
+        "B": "random",
+        "C": "rand",
+        "D": "stats"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The datetime module is used to manipulate dates and times.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO methods to iterate through a dictionary d:",
+      "options": {
+        "A": "for k in d.keys():",
+        "B": "for k, v in d.items():",
+        "C": "for i in range(d):",
+        "D": "for val in d.all():"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: An 'Iterator' is an object that contains a countable number of values and can be traversed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in function returns an iterator that yields the index and value of each item in a list?",
+      "options": {
+        "A": "zip()",
+        "B": "enumerate()",
+        "C": "map()",
+        "D": "filter()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO functions used for functional programming in Python:",
+      "options": {
+        "A": "map()",
+        "B": "filter()",
+        "C": "each()",
+        "D": "loop()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The zip() function combines elements from multiple iterables into tuples.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the output of math.ceil(4.2)?",
+      "options": {
+        "A": "4",
+        "B": "5",
+        "C": "4.0",
+        "D": "4.5"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The re module provides support for regular expressions in Python.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to pause the execution of a generator function and return a value?",
+      "options": {
+        "A": "return",
+        "B": "yield",
+        "C": "pause",
+        "D": "break"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Decorator' in Python?",
+      "options": {
+        "A": "A way to change the background color of the code.",
+        "B": "A function that takes another function and extends its behavior without explicitly modifying it.",
+        "C": "A method to delete unused variables.",
+        "D": "A type of class constructor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A generator function uses the yield keyword instead of return.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO benefits of using Generators over Lists:",
+      "options": {
+        "A": "They are more memory-efficient for large datasets.",
+        "B": "They allow for 'lazy evaluation.'",
+        "C": "They allow for faster index-based access.",
+        "D": "They can be sorted in-place."
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The @property decorator is used to define 'getter' methods for class attributes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to create an iterator from an iterable?",
+      "options": {
+        "A": "iter()",
+        "B": "next()",
+        "C": "list()",
+        "D": "gen()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO built-in decorators in Python:",
+      "options": {
+        "A": "@staticmethod",
+        "B": "@classmethod",
+        "C": "@function",
+        "D": "@global"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: A 'Closure' is a function object that remembers values in enclosing scopes even if they are not present in memory.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the next() function do when called on an iterator?",
+      "options": {
+        "A": "Resets the iterator to the beginning.",
+        "B": "Returns the next item from the iterator.",
+        "C": "Skips the next item.",
+        "D": "Closes the iterator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which exception is raised when an iterator has no more items?",
+      "options": {
+        "A": "EOFError",
+        "B": "StopIteration",
+        "C": "IndexError",
+        "D": "RuntimeError"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Generator expressions use parentheses () while list comprehensions use square brackets [].",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which library is the fundamental package for scientific computing with Python?",
+      "options": {
+        "A": "Django",
+        "B": "NumPy",
+        "C": "Flask",
+        "D": "Requests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Pandas is primarily used for data manipulation and analysis via DataFrames.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO libraries used for data visualization in Python:",
+      "options": {
+        "A": "Matplotlib",
+        "B": "Seaborn",
+        "C": "Scipy",
+        "D": "PyTest"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Scikit-learn is a popular library for Machine Learning in Python.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the main data structure in NumPy?",
+      "options": {
+        "A": "DataFrame",
+        "B": "n-dimensional array (ndarray)",
+        "C": "Dictionary",
+        "D": "Linked List"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: TensorFlow and PyTorch are libraries used for Deep Learning.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO frameworks used for Web Development in Python:",
+      "options": {
+        "A": "Django",
+        "B": "Flask",
+        "C": "Pandas",
+        "D": "NumPy"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The Requests library is used to send HTTP requests easily.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool is widely used for interactive Python development and data science 'notebooks'?",
+      "options": {
+        "A": "PyCharm",
+        "B": "Jupyter Notebook",
+        "C": "VS Code",
+        "D": "Notepad++"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Python's GIL (Global Interpreter Lock) allows only one thread to execute Python bytecode at a time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'PEP 8'?",
+      "options": {
+        "A": "A Python compiler version.",
+        "B": "The official Style Guide for Python Code.",
+        "C": "A security patch for Python 2.",
+        "D": "A library for encryption."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Type Hinting' in Python (e.g., def func(x: int):) enforces strict types at runtime.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO ways to improve the performance of a Python script:",
+      "options": {
+        "A": "Using built-in functions (written in C).",
+        "B": "Using multiprocessing to bypass the GIL.",
+        "C": "Using as many global variables as possible.",
+        "D": "Writing all code in a single line."
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: is checks if two variables point to the same object in memory, while == checks if the values are equal.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command is used to run a Python module as a script?",
+      "options": {
+        "A": "python -m module_name",
+        "B": "python -s module_name",
+        "C": "python module_name.run",
+        "D": "python run module_name"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The math module is written in C and is faster than writing the same math logic in pure Python.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of 2 ** 3 ** 2?",
+      "options": {
+        "A": "64",
+        "B": "512",
+        "C": "18",
+        "D": "81"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO ways to reverse a list my_list:",
+      "options": {
+        "A": "my_list.reverse()",
+        "B": "my_list[::-1]",
+        "C": "reversed(my_list)",
+        "D": "my_list.flip()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: __name__ == \"__main__\" is used to prevent code from executing when a file is imported as a module.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in function returns a sorted list from the items in any iterable?",
+      "options": {
+        "A": ".sort()",
+        "B": "sorted()",
+        "C": "order()",
+        "D": "arrange()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Strings, Tuples, and Integers are all examples of Immutable objects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the yield from expression?",
+      "options": {
+        "A": "To stop a generator.",
+        "B": "To delegate part of a generator's operations to another generator.",
+        "C": "To delete a generator.",
+        "D": "To import data from a file into a generator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO Python testing frameworks:",
+      "options": {
+        "A": "unittest",
+        "B": "pytest",
+        "C": "test-it",
+        "D": "pycheck"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: nonlocal is used to declare that a variable inside a nested function is not local to it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'docstring' in Python?",
+      "options": {
+        "A": "A string that stores document paths.",
+        "B": "A string literal used as the first statement in a module, function, class, or method to provide documentation.",
+        "C": "A type of encrypted string.",
+        "D": "A string that only contains numbers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: list.extend() adds elements of another list individually, while list.append() adds the entire list as a single element.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to convert an integer to a hexadecimal string?",
+      "options": {
+        "A": "hex()",
+        "B": "oct()",
+        "C": "bin()",
+        "D": "convert()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO methods to format a string:",
+      "options": {
+        "A": "f-strings (e.g., f\"{var}\")",
+        "B": ".format() method",
+        "C": "string.join()",
+        "D": "string.split()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: The set data structure automatically removes duplicate items.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the output of bool(0)?",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: float('inf') can be used to represent positive infinity in Python.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operator is used for bitwise XOR?",
+      "options": {
+        "A": "&",
+        "B": "|",
+        "C": "^",
+        "D": "~"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Identify TWO standard library modules for handling web/network protocols:",
+      "options": {
+        "A": "http.client",
+        "B": "urllib",
+        "C": "webbrowser",
+        "D": "html-parser"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: Python's int type has arbitrary precision (it can store very large numbers limited only by memory).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of 'Python'[1:4]?",
+      "options": {
+        "A": "'Pyt'",
+        "B": "'yth'",
+        "C": "'ytho'",
+        "D": "'tho'"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Python 3.10 introduced the match statement for structural pattern matching.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO ways to create a dictionary:",
+      "options": {
+        "A": "d = {}",
+        "B": "d = dict()",
+        "C": "d = []",
+        "D": "d = set()"
+      },
+      "answer": "A, B"
+    },
+    {
+      "question": "True or False: map(func, iterable) returns a list by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which module would you use to serialize Python objects into a byte stream?",
+      "options": {
+        "A": "json",
+        "B": "pickle",
+        "C": "marshal",
+        "D": "csv"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'BeautifulSoup' is a standard library module in Python for web scraping.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    }
+  ]
+}

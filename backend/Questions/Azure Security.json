@@ -1,0 +1,1985 @@
+{ 
+  "skill": "Azure Security", 
+  "questions": [
+    {
+    "question": "Under the Azure Shared Responsibility Model, who is responsible for managing the security of the physical data center?",
+    "options": {
+      "A": "The Customer",
+      "B": "Microsoft",
+      "C": "The Third-party Auditor",
+      "D": "The Local Government"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In an IaaS (Infrastructure as a Service) model, the customer is responsible for patching the Guest Operating System.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux VMs",
+      "D": "Only if using Premium Storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary identity and access management service in Azure?",
+    "options": {
+      "A": "Azure Bastion",
+      "B": "Microsoft Entra ID (Azure AD)",
+      "C": "Azure Policy",
+      "D": "Azure Sentinel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service is used to store and manage application secrets, encryption keys, and certificates?",
+    "options": {
+      "A": "Azure Blob Storage",
+      "B": "Azure Key Vault",
+      "C": "Azure App Service",
+      "D": "Azure Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'MFA' stand for in the context of Azure security?",
+    "options": {
+      "A": "Microsoft Firewall Access",
+      "B": "Multi-Factor Authentication",
+      "C": "Managed File Authorization",
+      "D": "Main Frame Architecture"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Azure Network Security Groups (NSGs) are used to filter network traffic to and from Azure resources in an Azure Virtual Network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for outbound traffic",
+      "D": "Only if the VM has a Public IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Azure role provides full access to all resources in the subscription, including the ability to assign roles in Azure RBAC?",
+    "options": {
+      "A": "Contributor",
+      "B": "Owner",
+      "C": "Reader",
+      "D": "User Access Administrator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Microsoft Defender for Cloud' primarily used for?",
+    "options": {
+      "A": "To host website code.",
+      "B": "To provide security management and advanced threat protection across hybrid cloud workloads.",
+      "C": "To calculate the monthly Azure bill.",
+      "D": "To register new domain names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Conditional Access policies in Microsoft Entra ID allow you to require MFA based on the user's location or device health.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Global Administrators",
+      "D": "Only for non-Microsoft apps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service helps protect Azure Virtual Machines from large-scale volumetric network attacks?",
+    "options": {
+      "A": "Azure DNS",
+      "B": "Azure DDoS Protection",
+      "C": "Azure Site Recovery",
+      "D": "Azure ExpressRoute"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Azure RBAC' (Role-Based Access Control)?",
+    "options": {
+      "A": "To speed up the deployment of VMs.",
+      "B": "To manage who has access to Azure resources, what they can do, and what areas they have access to.",
+      "C": "To encrypt files stored in a storage account.",
+      "D": "To monitor the temperature of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Reader' role in Azure RBAC allows a user to view resources but not make any changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they are in the same resource group",
+      "D": "Only for Virtual Machines"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'TDE' stand for in Azure SQL Database security?",
+    "options": {
+      "A": "Total Data Encryption",
+      "B": "Transparent Data Encryption",
+      "C": "Technical Database Entry",
+      "D": "Terminal Data Exchange"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service acts as a cloud-native SIEM (Security Information and Event Management) system?",
+    "options": {
+      "A": "Azure Monitor",
+      "B": "Microsoft Sentinel",
+      "C": "Azure Firewall",
+      "D": "Azure Advisor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Azure Bastion' allows you to securely connect to your VMs over SSL without exposing RDP or SSH ports to the public internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows VMs",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Principle of Least Privilege'?",
+    "options": {
+      "A": "Giving users as many roles as possible to ensure they can work.",
+      "B": "Providing users with the minimum level of access required to perform their specific job functions.",
+      "C": "Removing all access from all users at midnight.",
+      "D": "Only allowing the CEO to have a password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure component provides a 'Secure Score' to help you understand and improve your security posture?",
+    "options": {
+      "A": "Azure Billing",
+      "B": "Microsoft Defender for Cloud",
+      "C": "Azure App Service",
+      "D": "Azure Logic Apps"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Azure Storage Service Encryption (SSE) is enabled by default for all new and existing storage accounts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Premium SSDs",
+      "D": "Only if the user uploads via HTTPS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of an 'Azure Policy'?",
+    "options": {
+      "A": "To pay the cloud bill.",
+      "B": "To enforce organizational standards and assess compliance at scale.",
+      "C": "To write the application code.",
+      "D": "To monitor the CPU usage of a VM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service protects Azure web applications from common web-based attacks like SQL injection and cross-site scripting (XSS)?",
+    "options": {
+      "A": "Azure DDoS Protection",
+      "B": "Azure Web Application Firewall (WAF)",
+      "C": "Azure Traffic Manager",
+      "D": "Azure Load Balancer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Resource Group' can be used as a security boundary for assigning RBAC permissions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for storage accounts",
+      "D": "Only if the group is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Azure Disk Encryption' used for?",
+    "options": {
+      "A": "To encrypt data while it is moving over the network.",
+      "B": "To encrypt the OS and data disks of Azure Virtual Machines.",
+      "C": "To encrypt the physical server rack doors.",
+      "D": "To delete data from a disk permanently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Azure Information Protection' (AIP) service?",
+    "options": {
+      "A": "To provide high-speed internet to Azure users.",
+      "B": "To classify and protect documents and emails by applying labels.",
+      "C": "To monitor the uptime of Azure data centers.",
+      "D": "To register new user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: By default, a Network Security Group (NSG) allows all traffic between resources within the same Virtual Network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the ports are open",
+      "D": "Only for HTTP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Azure identity service is used to connect an on-premises Active Directory to Microsoft Entra ID?",
+    "options": {
+      "A": "Azure Bastion",
+      "B": "Microsoft Entra Connect",
+      "C": "Azure Arc",
+      "D": "Azure Front Door"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Just-In-Time' (JIT) VM access?",
+    "options": {
+      "A": "Access that only works for senior developers.",
+      "B": "A feature that allows you to open management ports on VMs only when needed and for a limited time.",
+      "C": "Access that is granted just before a server crashes.",
+      "D": "A way to log in without a password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Microsoft is responsible for the security of your data in the cloud under the SaaS model.",
+    "options": {
+      "A": "False (Data security is always the customer's responsibility).",
+      "B": "True",
+      "C": "Only for Microsoft 365",
+      "D": "Only if the data is encrypted by Microsoft"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Azure tool helps you identify 'Unused' or 'Orphaned' resources that could be a security risk?",
+    "options": {
+      "A": "Azure Cost Management",
+      "B": "Azure Advisor",
+      "C": "Azure DevOps",
+      "D": "Azure Functions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Private Endpoint' in Azure?",
+    "options": {
+      "A": "A special entrance for the data center.",
+      "B": "A network interface that uses a private IP address from your VNet to connect you privately to an Azure service.",
+      "C": "The end of a network cable.",
+      "D": "A password that only one person knows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should use the 'Contributor' role instead of 'Owner' for users who need to manage resources but shouldn't be able to grant access to others.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only in the production environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Azure Firewall'?",
+    "options": {
+      "A": "A physical device you install in your office.",
+      "B": "A managed, cloud-based network security service that protects your Azure Virtual Network resources.",
+      "C": "A tool that monitors the server room temperature.",
+      "D": "A specialized browser for security administrators."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service provides compliance reports such as SOC 2 and ISO 27001 for Azure services?",
+    "options": {
+      "A": "Azure Security Hub",
+      "B": "Azure Service Trust Portal / Azure Artifact",
+      "C": "Azure Monitor",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can apply MFA to all users in a tenant using 'Security Defaults'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for paid tenants",
+      "D": "Only for Global Admins"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Azure Blueprint'?",
+    "options": {
+      "A": "To draw a map of the data center.",
+      "B": "To define a repeatable set of Azure resources that implement and adhere to organizational standards and patterns.",
+      "C": "To create a 3D model of the application UI.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service would you use to prevent 'Brute Force' attacks on a VM's RDP port?",
+    "options": {
+      "A": "Azure Logic Apps",
+      "B": "Just-In-Time (JIT) VM Access",
+      "C": "Azure ExpressRoute",
+      "D": "Azure Table Storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Microsoft Defender for Cloud can monitor on-premises servers as well as Azure resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows Server 2022",
+      "D": "Only if using Azure Arc"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity Protection' in Microsoft Entra ID?",
+    "options": {
+      "A": "Protecting your driver's license from being lost.",
+      "B": "A tool that uses machine learning to detect and automate the response to identity-based risks like leaked credentials.",
+      "C": "A specialized way to encrypt usernames.",
+      "D": "Scanning a badge at the office door."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Resource Lock' used for?",
+    "options": {
+      "A": "To lock the server rack with a physical key.",
+      "B": "To prevent resources from being accidentally deleted or modified.",
+      "C": "To hide a resource from other users.",
+      "D": "To increase the encryption level of a resource."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: All inbound traffic to a new Azure Virtual Machine is blocked by default unless you create an NSG rule to allow it.",
+    "options": {
+      "A": "True (for external traffic not from the same VNet)",
+      "B": "False",
+      "C": "Only for Port 80",
+      "D": "Only if using a public IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption in Transit'?",
+    "options": {
+      "A": "Protecting data while it is stored in a backup.",
+      "B": "Protecting data while it is being moved across the network (e.g., using TLS/SSL).",
+      "C": "The speed at which data travels in the cloud.",
+      "D": "Encryption that only works for mobile devices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service would you use to centrally manage 'Secrets' like API keys and database passwords?",
+    "options": {
+      "A": "Azure SQL Database",
+      "B": "Azure Key Vault",
+      "C": "Azure Active Directory",
+      "D": "Azure Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Managed Identities' for Azure resources allows your code to connect to services without needing to store credentials in your source code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for App Service",
+      "D": "Only if the database is in the same region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Azure Dedicated Host'?",
+    "options": {
+      "A": "A server that is only used for high-speed gaming.",
+      "B": "A physical server dedicated to a single customer, providing hardware-level isolation.",
+      "C": "The primary administrator account for the tenant.",
+      "D": "A way to host websites for free."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compliance' in Azure security?",
+    "options": {
+      "A": "When all the servers are running the same version of software.",
+      "B": "Adhering to laws, regulations, and standards relevant to your industry (e.g., GDPR, HIPAA).",
+      "C": "Hiring a security guard for the office.",
+      "D": "The amount of storage used by security logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Microsoft Sentinel' to correlate security events across multiple cloud providers like AWS and Azure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Microsoft Entra ID",
+      "D": "Only for non-encrypted data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Classification'?",
+    "options": {
+      "A": "The speed at which data travels.",
+      "B": "Categorizing data based on its sensitivity (e.g., Public, Confidential) to apply the right security controls.",
+      "C": "Searching for data using a keyword.",
+      "D": "The history of data updates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service provides a 'Secure Score' for your identity configuration?",
+    "options": {
+      "A": "Microsoft Entra ID Protection",
+      "B": "Microsoft Entra ID Secure Score",
+      "C": "Azure Policy",
+      "D": "Azure Advisor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should always use a 'Common Password' for all your service accounts to simplify management.",
+    "options": {
+      "A": "False (Unique, complex passwords or managed identities should be used).",
+      "B": "True",
+      "C": "Only in the 'dev' environment",
+      "D": "Only if MFA is disabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Azure Advanced Threat Protection' (ATP) now part of?",
+    "options": {
+      "A": "Azure Monitor",
+      "B": "Microsoft Defender for Identity",
+      "C": "Azure Firewall",
+      "D": "Azure Front Door"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Azure DDoS Protection IP Protection'?",
+    "options": {
+      "A": "To hide your IP address from everyone.",
+      "B": "To provide enhanced DDoS mitigation for specific public IP addresses associated with resources like Load Balancers.",
+      "C": "To delete unauthorized IP addresses.",
+      "D": "To monitor the speed of network packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can set up 'Alerts' in Azure Monitor to notify you of unauthorized resource modifications.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for administrative users",
+      "D": "Only if using the mobile app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Activity Log' used for in Azure?",
+    "options": {
+      "A": "Recording the arrival and departure times of employees.",
+      "B": "A record of all management-level actions (e.g., create, update, delete) performed on resources in the subscription.",
+      "C": "A way to monitor the server room temperature.",
+      "D": "Counting the number of lines of code written."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service helps protect Azure Virtual Desktop sessions?",
+    "options": {
+      "A": "Azure Application Gateway",
+      "B": "Microsoft Defender for Endpoint",
+      "C": "Azure Firewall",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Soft Delete' in Azure Key Vault allows you to recover deleted vaults or objects for a set period.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for certificates",
+      "D": "Only if purge protection is disabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Microsoft Entra Privileged Identity Management' (PIM)?",
+    "options": {
+      "A": "Managing the identities of the company's CEO.",
+      "B": "A service that manages, controls, and monitors access to important resources in your organization with just-in-time access.",
+      "C": "A tool that makes the login screen look better.",
+      "D": "The process of deleting inactive user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should rotate your storage account access keys regularly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if you suspect a breach",
+      "D": "Only if the account has over 1TB of data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption at the Database Level' in Azure?",
+    "options": {
+      "A": "Encrypting the server's motherboard.",
+      "B": "Applying encryption specifically to database files or specific columns within a database (e.g., SQL TDE).",
+      "C": "Hiding the database icon.",
+      "D": "A way to backup the database source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service provides a 'Consolidated View' of all your Azure Policy compliance results?",
+    "options": {
+      "A": "Azure Advisor",
+      "B": "Azure Policy Compliance Dashboard",
+      "C": "Azure Monitor",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Deleting an Azure Resource Group will automatically delete all the resources inside it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the group is empty",
+      "D": "Only if using the portal"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of 'Security by Design'?",
+    "options": {
+      "A": "Making the security dashboard look pretty.",
+      "B": "Ensuring that security is integrated into a system from the earliest stages of its development.",
+      "C": "Buying only security products with a good logo.",
+      "D": "Hiring an architect to design the office building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Access Key' in Azure Storage?",
+    "options": {
+      "A": "A physical key for the data center door.",
+      "B": "Credentials used to authenticate applications making requests to the storage account.",
+      "C": "The password for the administrator account.",
+      "D": "A way to unlock a virtual machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'VNet Service Endpoint' allows you to secure your Azure service resources to only your virtual network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for storage accounts",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Azure Security Center' (now Microsoft Defender for Cloud)?",
+    "options": {
+      "A": "To set the physical temperature of the data center.",
+      "B": "To provide unified security management and advanced threat protection across hybrid workloads.",
+      "C": "To monitor the daily growth of the data center.",
+      "D": "To count the number of users in a tenant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for 'SOC 2' compliance?",
+    "options": {
+      "A": "Ensuring the organizational logo is correctly displayed.",
+      "B": "Implementing and auditing controls that meet specific Trust Services Criteria (e.g., Security, Confidentiality).",
+      "C": "Hiring a new CEO every year.",
+      "D": "Moving all data to a private cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VNet Peering' is a transitive connection, meaning if A is peered with B and B is peered with C, A can automatically talk to C.",
+    "options": {
+      "A": "False (VNet peering is non-transitive; you must create a direct peering between A and C).",
+      "B": "True",
+      "C": "Only if using ExpressRoute",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical benefit of using Application Security Groups (ASGs) in conjunction with Network Security Groups (NSGs)?",
+    "options": {
+      "A": "ASGs automatically encrypt all traffic between virtual machines.",
+      "B": "ASGs allow you to define network security policies based on logical application groups instead of individual IP addresses.",
+      "C": "ASGs provide a dedicated physical firewall for each application tier.",
+      "D": "ASGs replace the need for NSGs entirely in a multi-tier architecture."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: NSGs are stateful, meaning that return traffic for an allowed connection is automatically permitted without a corresponding rule.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for TCP traffic, not UDP",
+      "D": "Only if the NSG is applied to a subnet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Microsoft Entra ID Conditional Access, what is the 'Report-only' mode used for?",
+    "options": {
+      "A": "To generate a monthly billing report for security services.",
+      "B": "To evaluate the impact of a policy on users before enforcing it.",
+      "C": "To allow users to report suspicious login attempts.",
+      "D": "To send security logs to a third-party SIEM automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of Managed Identity is created as a standalone Azure resource and can be assigned to multiple Azure resources?",
+    "options": {
+      "A": "System-assigned Managed Identity",
+      "B": "User-assigned Managed Identity",
+      "C": "Service-assigned Managed Identity",
+      "D": "Resource-assigned Managed Identity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Azure Key Vault 'Purge Protection' ensures that a deleted vault cannot be permanently deleted until the retention period has passed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if 'Soft Delete' is disabled",
+      "D": "Only for Premium tier Key Vaults"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is required to enable 'Just-In-Time' (JIT) VM access in Microsoft Defender for Cloud?",
+    "options": {
+      "A": "A Basic Tier Azure subscription.",
+      "B": "Microsoft Defender for Servers Plan 2.",
+      "C": "A manual firewall installed on the guest OS.",
+      "D": "A third-party VPN client on the user's laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'Service Tag' in an NSG rule?",
+    "options": {
+      "A": "To label a VM for billing purposes.",
+      "B": "To represent a group of IP address prefixes from a specific Azure service (e.g., 'Storage' or 'SQL').",
+      "C": "To uniquely identify a physical network cable.",
+      "D": "To track the version of an application running on a VM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Azure RBAC, what is the difference between a 'Role Definition' and a 'Role Assignment'?",
+    "options": {
+      "A": "The definition lists the actions allowed; the assignment attaches that role to a specific user or group at a specific scope.",
+      "B": "The definition is for users; the assignment is for services.",
+      "C": "The definition is local; the assignment is global.",
+      "D": "They are the same thing."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A User-assigned Managed Identity is automatically deleted when the Azure resource it is attached to is deleted.",
+    "options": {
+      "A": "False (It is a standalone resource with its own lifecycle).",
+      "B": "True",
+      "C": "Only if it is the last identity attached to the resource",
+      "D": "Only in the 'standard' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Azure feature would you use to enforce that all data in a specific Storage Account must be encrypted using 'Customer-Managed Keys' (CMK)?",
+    "options": {
+      "A": "Azure Advisor",
+      "B": "Azure Policy",
+      "C": "Azure Blueprint",
+      "D": "Azure Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'PIM' (Privileged Identity Management) provide that standard RBAC does not?",
+    "options": {
+      "A": "More permissions than standard roles.",
+      "B": "Time-bound, just-in-time (JIT) role activation with approval workflows.",
+      "C": "Automatic encryption of user passwords.",
+      "D": "A way to log in without an internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure Key Vault permission model is now recommended by Microsoft for better integration with other Azure services?",
+    "options": {
+      "A": "Vault Access Policies (Legacy)",
+      "B": "Azure Role-Based Access Control (Azure RBAC)",
+      "C": "Network ACLs",
+      "D": "Storage Account Keys"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Microsoft Sentinel uses 'Playbooks' (based on Azure Logic Apps) to automate the response to security threats.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for physical server threats",
+      "D": "Only if using Microsoft Entra ID Protection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Azure Private Link' for cloud security?",
+    "options": {
+      "A": "To create a public website for internal users.",
+      "B": "To access Azure services privately from your VNet, ensuring traffic stays within the Microsoft network.",
+      "C": "To encrypt the physical fiber optic cables in the data center.",
+      "D": "To increase the speed of the public internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Microsoft Entra ID feature detects 'Impossible Travel' (e.g., signing in from two distant countries in 5 minutes)?",
+    "options": {
+      "A": "Conditional Access",
+      "B": "Identity Protection",
+      "C": "Azure Bastion",
+      "D": "Security Defaults"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an NSG, if two rules overlap, which one is applied first?",
+    "options": {
+      "A": "The rule with the highest priority number.",
+      "B": "The rule with the lowest priority number (e.g., 100 before 200).",
+      "C": "The rule that was created most recently.",
+      "D": "The rule that targets the largest IP range."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Managed Identities' eliminates the risk of hard-coded credentials in application source code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if the application is in a Docker container"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of an 'Azure Bastion' host?",
+    "options": {
+      "A": "To store backup images of VMs.",
+      "B": "To provide secure RDP/SSH access to VMs directly through the Azure portal via SSL.",
+      "C": "To act as a primary database server for the VPC.",
+      "D": "To monitor the electricity usage of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is primarily used by Azure Disk Encryption to protect the OS disk of a Windows VM?",
+    "options": {
+      "A": "DM-Crypt",
+      "B": "BitLocker",
+      "C": "LUKS",
+      "D": "AES-256 (hardware-only)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service would you use to centrally manage 'Certificates' and their automatic rotation?",
+    "options": {
+      "A": "Azure App Service",
+      "B": "Azure Key Vault",
+      "C": "Azure Storage Account",
+      "D": "Microsoft Entra Connect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Network Security Group (NSG) applied to a subnet takes priority over an NSG applied to an individual Network Interface (NIC).",
+    "options": {
+      "A": "False (NIC-level NSGs are evaluated after subnet-level for inbound traffic, but take priority for outbound).",
+      "B": "True",
+      "C": "Only in the US-West region",
+      "D": "Only for public-facing VMs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SAS' stand for in Azure Storage security?",
+    "options": {
+      "A": "Secure Application Socket",
+      "B": "Shared Access Signature",
+      "C": "System Access Script",
+      "D": "Storage Authorization Service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Azure SQL Database, which feature allows you to mask sensitive data from non-privileged users in the query results?",
+    "options": {
+      "A": "TDE",
+      "B": "Dynamic Data Masking (DDM)",
+      "C": "Always Encrypted",
+      "D": "VNet Service Endpoints"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool provides a 'Resource Graph' to help you query security configurations across all your Azure subscriptions?",
+    "options": {
+      "A": "Azure Advisor",
+      "B": "Azure Resource Graph",
+      "C": "Microsoft Defender for Cloud",
+      "D": "Azure Logic Apps"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Conditional Access' policies are evaluated after the first factor of authentication is completed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if MFA is already enabled",
+      "D": "Only for guest users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service would you use to protect against L7 (Application Layer) attacks like HTTP floods in a globally distributed app?",
+    "options": {
+      "A": "Azure Load Balancer",
+      "B": "Azure Front Door with WAF",
+      "C": "Azure ExpressRoute",
+      "D": "Azure Traffic Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Azure Advanced Threat Protection' (ATP) used for?",
+    "options": {
+      "A": "To speed up the internet.",
+      "B": "To monitor and identify suspicious activities and advanced attacks against on-premises Active Directory.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Soft Delete' in Azure Storage protects your data from being accidentally deleted for a specified retention period.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Premium storage",
+      "D": "Only if the files are encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary security goal of 'Azure Service Endpoints'?",
+    "options": {
+      "A": "To make a service public to the internet.",
+      "B": "To limit network access to a specific Azure service to only traffic from authorized subnets.",
+      "C": "To increase the storage capacity of a database.",
+      "D": "To monitor the uptime of a web application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role should you assign to a user who only needs to manage the 'Security' settings in Microsoft Defender for Cloud?",
+    "options": {
+      "A": "Owner",
+      "B": "Security Admin",
+      "C": "Contributor",
+      "D": "User Access Administrator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Microsoft Entra ID B2B' to allow external partners to access your Azure resources using their own existing identities.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they have a Microsoft account",
+      "D": "Only for organizations under 1,000 users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Infrastructure Encryption' in Azure Storage?",
+    "options": {
+      "A": "Encrypting the server racks.",
+      "B": "A second layer of encryption at the service level for data at rest, providing double encryption.",
+      "C": "Encrypting the data center's power supply.",
+      "D": "The password for the administrator dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure feature allows you to group multiple VMs into a single logical entity for easier NSG rule management?",
+    "options": {
+      "A": "Resource Group",
+      "B": "Application Security Group (ASG)",
+      "C": "Scale Set",
+      "D": "Availability Set"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Azure DDoS Protection Network Protection covers all resources in a Virtual Network, whereas 'IP Protection' targets specific Public IPs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the North Virginia region",
+      "D": "Only if the resources are in a private subnet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Break-glass' account in an Azure tenant?",
+    "options": {
+      "A": "An account used for routine daily updates.",
+      "B": "A highly privileged emergency access account that is excluded from Conditional Access policies.",
+      "C": "A fake account used to catch hackers.",
+      "D": "The account used by the CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service would you use to audit 'Who' accessed your Azure Key Vault and 'What' operations they performed?",
+    "options": {
+      "A": "Azure Monitor Logs (Diagnostic Settings)",
+      "B": "Azure Policy",
+      "C": "Azure Advisor",
+      "D": "Azure Billing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: NSGs can filter traffic based on fully qualified domain names (FQDNs).",
+    "options": {
+      "A": "False (NSGs filter by IP, Port, and Protocol; FQDN filtering requires Azure Firewall).",
+      "B": "True",
+      "C": "Only for outbound traffic",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Customer Lockbox' for Microsoft Azure?",
+    "options": {
+      "A": "A physical box to store keys.",
+      "B": "A service that gives you control over how Microsoft support engineers access your data during a support request.",
+      "C": "A way to backup your entire subscription to a physical drive.",
+      "D": "A tool that monitors the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Entra ID feature allows you to automatically reset a user's password if their credentials are found in a public data breach?",
+    "options": {
+      "A": "Conditional Access",
+      "B": "Identity Protection (Risk-based policies)",
+      "C": "Security Defaults",
+      "D": "Privileged Identity Management"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Azure Firewall Premium' includes IDPS (Intrusion Detection and Prevention System) capabilities.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the North Virginia region",
+      "D": "Only for HTTP/1.1 traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Scope' in an Azure RBAC assignment?",
+    "options": {
+      "A": "The level at which the access is granted (e.g., Management Group, Subscription, Resource Group, or Resource).",
+      "B": "The number of users in a group.",
+      "C": "The time of day a user can log in.",
+      "D": "The type of hard drive being accessed."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which feature of Azure SQL Database allows you to encrypt data in use, ensuring that it is never visible to the database engine as plaintext?",
+    "options": {
+      "A": "Transparent Data Encryption (TDE)",
+      "B": "Always Encrypted",
+      "C": "Dynamic Data Masking",
+      "D": "VNet Service Endpoints"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An NSG 'Default Rule' can be deleted by an administrator.",
+    "options": {
+      "A": "False (Default rules are permanent, but they have the lowest priority and can be overridden by new rules).",
+      "B": "True",
+      "C": "Only if MFA is enabled",
+      "D": "Only in the 'dev' subscription"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Azure Arc-enabled servers' role in security?",
+    "options": {
+      "A": "To increase the internet speed of on-premises servers.",
+      "B": "To project on-premises or other-cloud servers into Azure, allowing them to be managed with Azure security tools like Policy and Defender.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the data center's air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service helps identify resources that are not following security 'Best Practices' by providing an 'Advisor Score'?",
+    "options": {
+      "A": "Azure Policy",
+      "B": "Azure Advisor",
+      "C": "Azure Monitor",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Private Link' requires you to open your service to the public internet.",
+    "options": {
+      "A": "False (It allows the service to be accessed via a private IP, specifically to avoid public exposure).",
+      "B": "True",
+      "C": "Only for storage accounts",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity Governance'?",
+    "options": {
+      "A": "Telling a developer their real name.",
+      "B": "The process of ensuring the right people have the right access through features like Access Reviews and Entitlement Management.",
+      "C": "A specialized way to encrypt usernames.",
+      "D": "The history of user password changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature of Microsoft Entra ID provides a way to secure 'Machine-to-Machine' communication without using secrets?",
+    "options": {
+      "A": "Managed Identities",
+      "B": "Conditional Access",
+      "C": "Security Defaults",
+      "D": "Privileged Identity Management"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Azure Policy can 'Remediate' non-compliant resources automatically using a deploy-if-not-exists effect.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Virtual Machines",
+      "D": "Only in the 'standard' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Loss Prevention' (DLP) in Microsoft 365?",
+    "options": {
+      "A": "A tool that stops you from losing your laptop.",
+      "B": "A feature that helps prevent the accidental or intentional sharing of sensitive information outside the organization.",
+      "C": "A specialized way to backup the email server.",
+      "D": "A policy that deletes emails after 30 days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure Key Vault object type is used to store 'Secrets' like database connection strings?",
+    "options": {
+      "A": "Keys",
+      "B": "Secrets",
+      "C": "Certificates",
+      "D": "Labels"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Azure Web Application Firewall (WAF) can be configured to operate in either 'Detection' or 'Prevention' mode.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'premium' tier",
+      "D": "Only for SQL injection attacks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of 'Microsoft Entra Connect Health'?",
+    "options": {
+      "A": "To monitor the health of the developers.",
+      "B": "To provide monitoring and insights into the on-premises identity infrastructure used to sync with Entra ID.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Entra ID role is required to manage 'Conditional Access' policies?",
+    "options": {
+      "A": "Reader",
+      "B": "Conditional Access Administrator",
+      "C": "Contributor",
+      "D": "Billing Administrator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Azure, a 'VNet' is a regional resource and cannot span across multiple regions.",
+    "options": {
+      "A": "True (VNet Peering is used to connect VNets in different regions).",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only in the EU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Azure Confidential Computing'?",
+    "options": {
+      "A": "Keeping the monthly cloud bill a secret.",
+      "B": "Protecting data in use by performing computation in a hardware-based isolated environment (Enclaves).",
+      "C": "A specialized way to encrypt the server's power supply.",
+      "D": "The history of all data changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure feature would you use to enforce a 'Tagging' requirement for all new resources?",
+    "options": {
+      "A": "Azure Policy",
+      "B": "Azure Advisor",
+      "C": "Azure Resource Graph",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Service Principal' is an identity created for use with applications, hosted services, and automated tools.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only if MFA is enabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity Protection' user risk level?",
+    "options": {
+      "A": "The probability that a user's password is '123456'.",
+      "B": "A score calculated by Entra ID representing the likelihood that a user's identity has been compromised.",
+      "C": "The history of every time a user logged in.",
+      "D": "The encryption level of the user's login session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service helps you protect against 'Zero-day' threats in emails and documents using sandboxing technology?",
+    "options": {
+      "A": "Microsoft Defender for Office 365",
+      "B": "Azure Monitor",
+      "C": "Azure Firewall",
+      "D": "Azure Information Protection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Conditional Access policies can be set to 'Block' access for users connecting from specific unauthorized countries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for guest users",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Azure Dedicated HSM'?",
+    "options": {
+      "A": "A physical keyboard used by security admins.",
+      "B": "A single-tenant, high-performance hardware security module that meets FIPS 140-2 Level 3 standards.",
+      "C": "A way to backup your entire subscription to a physical drive.",
+      "D": "A tool that monitors the server room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure feature allows you to 'Trace' a packet through the network to identify which NSG rule is blocking it?",
+    "options": {
+      "A": "Azure Network Watcher (IP Flow Verify / NSG Diagnostics)",
+      "B": "Azure Resource Graph",
+      "C": "Azure Advisor",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'MFA' can be bypassed for users signing in from 'Trusted Locations' if configured in Conditional Access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Global Administrators",
+      "D": "Only if using the mobile app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Azure Information Protection' (AIP) scanner used for?",
+    "options": {
+      "A": "To scan physical ID cards at the front desk.",
+      "B": "To discover, classify, and protect sensitive data in on-premises file shares and SharePoint servers.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure component provides the 'Blueprints' used for governing environments at scale?",
+    "options": {
+      "A": "Azure Advisor",
+      "B": "Azure Blueprints",
+      "C": "Azure Monitor",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which KQL operator would you use in Microsoft Sentinel to combine 'SigninLogs' and 'AuditLogs' while ensuring only matching rows from both tables are returned?",
+    "options": {
+      "A": "union",
+      "B": "join kind=inner",
+      "C": "lookup",
+      "D": "externaldata"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a cross-tenant synchronization scenario, the target tenant has the ability to implement attribute-level filtering to block specific sensitive data from being synchronized from the source tenant.",
+    "options": {
+      "A": "False (The target tenant primarily consents to the sync; filtering is usually managed at the source).",
+      "B": "True",
+      "C": "Only if using Microsoft Entra ID P2 licenses",
+      "D": "Only if the tenants are in the same Azure region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary risk of enabling 'AutomaticUserConsent' in a cross-tenant access policy?",
+    "options": {
+      "A": "It doubles the latency of the login process.",
+      "B": "An attacker who compromises the source tenant could potentially redeem invitations automatically, establishing a persistent backdoor in the target tenant.",
+      "C": "It requires the target tenant to pay for the source tenant's licenses.",
+      "D": "It disables Multi-Factor Authentication (MFA) for all synced users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an AKS cluster, which specific component is responsible for enforcing security policies *before* a pod is created or updated in the etcd database?",
+    "options": {
+      "A": "Azure CNI",
+      "B": "Admission Controllers (Mutating/Validating)",
+      "C": "Kube-proxy",
+      "D": "CoreDNS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double Key Encryption' (DKE) in Azure Information Protection intended for?",
+    "options": {
+      "A": "To encrypt the server's power supply and CPU simultaneously.",
+      "B": "To ensure that highly sensitive data remains unreadable even by Microsoft, as it requires two keys: one in Azure and one under the customer's exclusive control.",
+      "C": "To allow two different users to open the same file at once.",
+      "D": "To speed up the encryption of large video files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Microsoft Sentinel KQL queries against the 'Data Lake' tier are generally more performant than queries run against the 'Analytics' tier.",
+    "options": {
+      "A": "False (The Analytics tier is optimized for high-performance alerting; the Data Lake is for long-term historical exploration).",
+      "B": "True",
+      "C": "Only if the query is run asynchronously",
+      "D": "Only if the data is under 1GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which KQL function would you use to parse a complex, nested JSON string within an AuditLog entry to extract a specific security property?",
+    "options": {
+      "A": "tostring()",
+      "B": "parse_json()",
+      "C": "split()",
+      "D": "substring()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a hardened AKS environment, why is it recommended to set 'allowPrivilegeEscalation: false' in the pod security context?",
+    "options": {
+      "A": "To prevent pods from using too much RAM.",
+      "B": "To prevent a process within a container from gaining more privileges than its parent process, mitigating potential container escape attacks.",
+      "C": "To ensure that pods are only scheduled on Linux nodes.",
+      "D": "To block all outbound internet traffic from the pod."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Microsoft Defender for Identity' requires the installation of a sensor on all on-premises domain controllers to monitor for suspicious lateral movement.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Azure Arc",
+      "D": "Only for Windows Server 2022"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the specific threat detected by a 'Time-series' KQL query that looks for a sudden spike in 'FailureCount' by IP address?",
+    "options": {
+      "A": "A hardware failure in the network router.",
+      "B": "A potential Brute Force or Password Spraying attack.",
+      "C": "A user forgetting their password.",
+      "D": "The expiration of a service principal's secret."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Entra ID role is required to configure 'Cross-tenant access settings' in the target tenant?",
+    "options": {
+      "A": "User Administrator",
+      "B": "Security Administrator or Global Administrator",
+      "C": "Billing Administrator",
+      "D": "Reports Reader"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Azure 'Private Link' encrypts data at the network layer using IPsec by default.",
+    "options": {
+      "A": "False (Private Link provides network isolation; encryption must still be handled by higher-level protocols like TLS).",
+      "B": "True",
+      "C": "Only if using ExpressRoute",
+      "D": "Only for data transfer between regions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Microsoft Sentinel, what is a 'Watchlist' used for?",
+    "options": {
+      "A": "To list the movies that security analysts like to watch.",
+      "B": "To correlate data from your logs with a custom list of high-value assets, known malicious IPs, or terminated employees.",
+      "C": "To track the expiration of SSL certificates.",
+      "D": "To monitor the uptime of the Azure portal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of the 'Azure Key Vault Crypto Service Encryption User' role?",
+    "options": {
+      "A": "To delete all keys in the vault.",
+      "B": "To perform cryptographic operations (encrypt/decrypt) using keys in the vault without having administrative access to the vault itself.",
+      "C": "To backup the vault to a physical drive.",
+      "D": "To change the name of the vault."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Managed Identities' with AKS allows you to avoid storing Azure service principal secrets in Kubernetes Secret objects.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for system-assigned identities",
+      "D": "Only if the AKS cluster is private"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Blast Radius' concern regarding over-privileged 'Global Administrator' accounts?",
+    "options": {
+      "A": "The account might use too much cloud storage.",
+      "B": "If compromised, an attacker has total control over the entire tenant, including the ability to delete all data and locks.",
+      "C": "The account might take too long to log in.",
+      "D": "The account name is visible to everyone in the organization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which KQL operator is used to extract specific columns from a dataset and potentially rename them for a report?",
+    "options": {
+      "A": "summarize",
+      "B": "project",
+      "C": "extend",
+      "D": "where"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Conditional Access' policies are non-transitive; they are evaluated every time a user requests a new token for a specific application.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for guest users",
+      "D": "Only if using the 'stable' policy tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of the 'Azure Security Benchmark' (ASB)?",
+    "options": {
+      "A": "To provide a physical map of Azure data centers.",
+      "B": "To provide a set of high-impact security recommendations and best practices for securing your Azure services.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the cloud provider's stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an NSG, what does the 'DenyAllInBound' default rule (priority 65500) perform?",
+    "options": {
+      "A": "It blocks all traffic from the internet.",
+      "B": "It blocks all inbound traffic that has not been explicitly allowed by a higher-priority rule.",
+      "C": "It deletes all unauthorized user accounts.",
+      "D": "It monitors the internet speed of the subnet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MFA' should be enforced for all users in an Azure tenant, not just the administrator.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for users with over 1 year of tenure",
+      "D": "Only for users accessing the cloud from outside the office"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption at the Application Layer' in Azure?",
+    "options": {
+      "A": "Encrypting the server's CPU instructions.",
+      "B": "Encrypting specific sensitive data fields within the application code before they are sent to the database.",
+      "C": "A specialized way to hide the application icon.",
+      "D": "A way to backup the application's source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Identity Federation' standard used by Azure?",
+    "options": {
+      "A": "HTML5",
+      "B": "SAML 2.0",
+      "C": "JSON",
+      "D": "CSS3"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Deleting a Network Security Group (NSG) automatically removes all of the rules associated with it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the group is empty",
+      "D": "Only in the Azure Portal"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty' in an Azure context?",
+    "options": {
+      "A": "The speed at which data travels.",
+      "B": "The principle that data is subject to the laws of the nation where it is physically located.",
+      "C": "A specialized way to encrypt government data.",
+      "D": "A database field that stores the user's country."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of 'Incident Response'?",
+    "options": {
+      "A": "To find out who caused the error and fire them.",
+      "B": "To detect, contain, and remediate security threats to minimize damage and restore normal operations.",
+      "C": "To write new features for the security software.",
+      "D": "To increase the company's insurance coverage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Azure 'Confidential Computing' VMs use hardware-based Enclaves to protect data while it is being processed in memory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows Server",
+      "D": "Only if using Premium Storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow IT' risk in an organization using Azure?",
+    "options": {
+      "A": "The risk of a server room being too dark.",
+      "B": "The risk that unmanaged systems or software could introduce vulnerabilities or compromise sensitive data.",
+      "C": "The risk of a cloud provider's name being too long.",
+      "D": "The risk of a developer using a personal email for work."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Access Key' in the context of Azure Storage?",
+    "options": {
+      "A": "A physical key for the data center door.",
+      "B": "A set of credentials (ID and Secret) used for programmatic access to storage services.",
+      "C": "The password for the administrator account.",
+      "D": "A way to unlock a virtual machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Virtual Network' (VNet) can be shared across multiple Azure regions.",
+    "options": {
+      "A": "False (A VNet is typically a regional resource; you connect them across regions using VNet Peering).",
+      "B": "True",
+      "C": "Only in Google Cloud",
+      "D": "Only if using the 'premium' network tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of an 'Azure Policy' definition?",
+    "options": {
+      "A": "To set the physical temperature of the data center.",
+      "B": "To define the rules for resource configurations and ensure they are followed across the environment.",
+      "C": "To monitor the daily growth of the data center.",
+      "D": "To count the number of users in a cloud account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for 'SOC 2' compliance?",
+    "options": {
+      "A": "Ensuring the organization's logo is correctly displayed.",
+      "B": "Implementing controls that meet the Trust Services Criteria (e.g., Security, Availability).",
+      "C": "Hiring a new CEO every year.",
+      "D": "Moving all data to a private cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VNet Peering' is a transitive connection, meaning if A is peered with B and B is peered with C, A can automatically talk to C.",
+    "options": {
+      "A": "False (VNet peering is non-transitive; a direct peering between A and C is required).",
+      "B": "True",
+      "C": "Only in Azure",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'IDS' (Intrusion Detection System)?",
+    "options": {
+      "A": "To block all incoming traffic from the internet.",
+      "B": "To monitor network or system activities for malicious activity or policy violations.",
+      "C": "To store the passwords of all authorized users.",
+      "D": "To scan the physical data center for intruders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MFA Fatigue'?",
+    "options": {
+      "A": "When a user gets tired of typing their password.",
+      "B": "An attack where the victim is bombarded with MFA prompts until they accidentally approve one.",
+      "C": "When the MFA device runs out of battery.",
+      "D": "A error where the MFA code doesn't work after 3 attempts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Brute Force' attack?",
+    "options": {
+      "A": "Physically attacking a server with a hammer.",
+      "B": "An attempt to guess a password or key by trying all possible combinations.",
+      "C": "A security attack targeting the server's power supply.",
+      "D": "A way to force a system to update."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which KQL operator is used to calculate the average latency of requests grouped by application name?",
+    "options": {
+      "A": "project",
+      "B": "summarize avg(Latency) by AppName",
+      "C": "extend",
+      "D": "where"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Microsoft Sentinel' can ingest logs from third-party firewalls and cloud platforms using standard Syslog or CEF connectors.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Microsoft Entra ID",
+      "D": "Only for non-encrypted data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cross-Tenant Synchronization' designed to simplify?",
+    "options": {
+      "A": "The speed of the network between tenants.",
+      "B": "The automated management of B2B users across multiple tenants in a multi-tenant organization.",
+      "C": "The payment of cloud bills for different tenants.",
+      "D": "The encryption of user emails between tenants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which KQL operator is used to add a new calculated column to the result set (e.g., converting a timestamp to a local time)?",
+    "options": {
+      "A": "project",
+      "B": "extend",
+      "C": "summarize",
+      "D": "union"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Validating Admission Controllers' allows you to reject pod requests that do not follow your organization's security standards (e.g., missing labels).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for pods running as root",
+      "D": "Only if using the Azure CLI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Loss Prevention' (DLP) risk in Microsoft 365?",
+    "options": {
+      "A": "The risk of losing a physical laptop.",
+      "B": "The risk that sensitive data (like credit card numbers) could be shared with unauthorized users via email or cloud storage.",
+      "C": "The risk that the server room is too hot.",
+      "D": "The risk that the internet connection is slow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which KQL operator is used to filter a dataset based on a specific criteria (e.g., only return errors)?",
+    "options": {
+      "A": "project",
+      "B": "where",
+      "C": "extend",
+      "D": "summarize"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Managed Identity' for Azure resources requires a client secret to be stored in the application configuration.",
+    "options": {
+      "A": "False (Managed Identity uses the resource's identity in Microsoft Entra ID, eliminating the need for secrets).",
+      "B": "True",
+      "C": "Only for system-assigned identities",
+      "D": "Only in the 'dev' subscription"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Azure Security Hub' (Microsoft Defender for Cloud)?",
+    "options": {
+      "A": "To act as a central firewall for the whole organization.",
+      "B": "To provide unified security management and advanced threat protection across your hybrid cloud workloads.",
+      "C": "To store the account root credentials.",
+      "D": "To monitor the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure feature allows you to 'Trace' a packet through the network to identify which rule is blocking it?",
+    "options": {
+      "A": "Azure Network Watcher (IP Flow Verify)",
+      "B": "Azure Resource Graph",
+      "C": "Azure Advisor",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Azure Bastion' provides secure and seamless RDP and SSH access to your virtual machines directly through the Azure portal.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a public IP",
+      "D": "Only for Windows VMs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Conditional Access' in Entra ID?",
+    "options": {
+      "A": "Access that only works when the user is online.",
+      "B": "A feature that uses signals like user location and device state to make automated access control decisions for applications.",
+      "C": "A specialized way to encrypt user passwords.",
+      "D": "The history of all data changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service provides 'Advanced Threat Protection' for your SQL databases to detect unusual activities like SQL injection?",
+    "options": {
+      "A": "Azure SQL Firewall",
+      "B": "Microsoft Defender for SQL",
+      "C": "Azure Monitor",
+      "D": "Azure Information Protection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Resource Locks' can be applied at the Subscription, Resource Group, or individual Resource level.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for production environments",
+      "D": "Only if MFA is enabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity Governance' maturity?",
+    "options": {
+      "A": "Telling a developer their real name.",
+      "B": "The process of managing user lifecycles and access rights across the organization using automation and regular reviews.",
+      "C": "A specialized way to encrypt usernames.",
+      "D": "The history of user password changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service helps you find 'Leaked Credentials' by monitoring public datasets for usernames and passwords that match your tenant's users?",
+    "options": {
+      "A": "Microsoft Entra ID Protection",
+      "B": "Azure Monitor",
+      "C": "Azure Firewall",
+      "D": "Azure Information Protection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Azure Blueprints' allow you to package a collection of Azure Resource Manager templates, policies, and role assignments for easy deployment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for storage accounts",
+      "D": "Only if using the portal"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption Envelope' in Azure Key Vault?",
+    "options": {
+      "A": "Putting a physical key in a paper envelope.",
+      "B": "A technique where you use a Key Encryption Key (KEK) in Key Vault to protect a Data Encryption Key (DEK) that is used to encrypt data.",
+      "C": "A specialized way to encrypt emails.",
+      "D": "A way to backup encryption keys to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure feature helps you detect 'Misconfigurations' that could lead to data breaches (e.g., publicly accessible storage)?",
+    "options": {
+      "A": "Azure Policy / Microsoft Defender for Cloud",
+      "B": "Azure Monitor",
+      "C": "Azure Firewall",
+      "D": "Azure Information Protection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'VNet Peering' provides high-bandwidth, low-latency communication between virtual networks without the need for a gateway.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the North Virginia region",
+      "D": "Only if the resources are in a private subnet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Role-Based Access Control' (RBAC)?",
+    "options": {
+      "A": "A system where access is granted based on the color of the user's ID card.",
+      "B": "A system where access is granted based on the roles and responsibilities assigned to users within an organization.",
+      "C": "The history of all data changes.",
+      "D": "A specialized way to encrypt user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service is a 'Cloud-Native' firewall that provide stateful inspection and URL filtering?",
+    "options": {
+      "A": "Azure NSG",
+      "B": "Azure Firewall",
+      "C": "Azure Load Balancer",
+      "D": "Azure Traffic Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Microsoft Defender for Cloud' provides a 'Secure Score' to help you improve your organization's security posture over time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Azure Blueprint' in an organization?",
+    "options": {
+      "A": "To define the physical structure of the data center.",
+      "B": "To ensure that environment set-up and governance follow a repeatable and standardized process across subscriptions.",
+      "C": "To create a 3D model of the user interface.",
+      "D": "To count the number of lines of code in a service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which KQL operator is used to 'join' two different tables (e.g., joining SigninLogs with AuditLogs)?",
+    "options": {
+      "A": "union",
+      "B": "join",
+      "C": "project",
+      "D": "extend"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Conditional Access' policies are mandatory for all Azure tenants.",
+    "options": {
+      "A": "False (They require a Microsoft Entra ID P1 or P2 license to be used).",
+      "B": "True",
+      "C": "Only if using the Azure Portal",
+      "D": "Only for administrative users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity Protection' risk detection?",
+    "options": {
+      "A": "Protecting your physical ID card.",
+      "B": "Identifying suspicious activities related to user identities using automated detection and response capabilities.",
+      "C": "A specialized way to encrypt usernames.",
+      "D": "Scanning a badge at the front door."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure service provides a central place to manage 'Encryption Keys' and their lifecycle?",
+    "options": {
+      "A": "Azure Monitor",
+      "B": "Azure Key Vault",
+      "C": "Azure Information Protection",
+      "D": "Microsoft Sentinel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Azure Information Protection' (AIP) can apply encryption to documents based on specific keywords (e.g., 'Confidential').",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the file is a PDF",
+      "D": "Only in the 'standard' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption in Use' protection in Azure?",
+    "options": {
+      "A": "Protecting data while it is stored in a database.",
+      "B": "Ensuring that data is encrypted while it is being processed in the system's memory.",
+      "C": "Using a password to login to a server.",
+      "D": "The speed at which data travels in the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MFA' is only effective against brute-force attacks and not phishing attacks.",
+    "options": {
+      "A": "False (MFA is a powerful defense against both phishing and unauthorized login attempts).",
+      "B": "True",
+      "C": "Only if using a 4096-bit key",
+      "D": "Only for guest users"
+    },
+    "answer": "A"
+  }
+  ]
+}

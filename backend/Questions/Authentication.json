@@ -1,0 +1,1983 @@
+{ 
+  "skill": "Authentication", 
+  "questions": [
+    {
+    "question": "What is the primary difference between Authentication and Authorization?",
+    "options": {
+      "A": "Authentication verifies who you are; Authorization verifies what you can do.",
+      "B": "Authentication is for admin users; Authorization is for regular users.",
+      "C": "They are exactly the same thing.",
+      "D": "Authentication happens after Authorization."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does MFA stand for?",
+    "options": {
+      "A": "Multiple Functional Access",
+      "B": "Multi-Factor Authentication",
+      "C": "Managed File Authentication",
+      "D": "Main Frame Authorization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is considered 'Something you know' in authentication?",
+    "options": {
+      "A": "A fingerprint",
+      "B": "A password",
+      "C": "A hardware token",
+      "D": "An iris scan"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a single password is considered Multi-Factor Authentication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an example of 'Something you are'?",
+    "options": {
+      "A": "An OTP sent via SMS",
+      "B": "A PIN",
+      "C": "Facial recognition",
+      "D": "A smart card"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Session' in web authentication?",
+    "options": {
+      "A": "A physical meeting between developers.",
+      "B": "A temporary interaction between a user and a server after logging in.",
+      "C": "A type of database table.",
+      "D": "The time it takes to download a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SSO'?",
+    "options": {
+      "A": "Single Sign-On",
+      "B": "Secure System Operation",
+      "C": "System Serial Output",
+      "D": "Secure Server Option"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Storing passwords in plain text is a safe practice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a common way to deliver a second factor for MFA?",
+    "options": {
+      "A": "SMS text message",
+      "B": "Authenticator App",
+      "C": "Email code",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Biometric' authentication?",
+    "options": {
+      "A": "Authentication using a physical key.",
+      "B": "Authentication using unique biological traits (fingerprint, face).",
+      "C": "Authentication using a complex password.",
+      "D": "Authentication using a GPS location."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does OTP stand for?",
+    "options": {
+      "A": "Official Test Protocol",
+      "B": "One-Time Password",
+      "C": "Open Token Process",
+      "D": "Over The Phone"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is 'Something you have'?",
+    "options": {
+      "A": "A secret question answer",
+      "B": "A physical security key (YubiKey)",
+      "C": "A retina scan",
+      "D": "Your birth date"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: CAPTCHA is a form of authentication for humans.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'Logout' button?",
+    "options": {
+      "A": "To delete the user's account.",
+      "B": "To terminate the current authenticated session.",
+      "C": "To change the user's password.",
+      "D": "To refresh the page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a weak password practice?",
+    "options": {
+      "A": "Using a phrase with numbers and symbols.",
+      "B": "Using 'password123'.",
+      "C": "Using a password manager.",
+      "D": "Enabling two-factor authentication."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Brute Force' attack?",
+    "options": {
+      "A": "Physically breaking a server.",
+      "B": "An attacker trying every possible combination of passwords to gain access.",
+      "C": "Asking a user for their password via email.",
+      "D": "Sending a virus through a PDF."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is '2FA'?",
+    "options": {
+      "A": "Second Functional Access",
+      "B": "Two-Factor Authentication",
+      "C": "Twice Formed Algorithm",
+      "D": "Total File Access"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Social media login (Login with Google/Facebook) is a form of SSO.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'Remember Me' checkbox usually do?",
+    "options": {
+      "A": "Sends your password to the admin.",
+      "B": "Stores a persistent cookie to keep you logged in after the browser closes.",
+      "C": "Changes your username.",
+      "D": "Disables MFA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is considered 'Something you do'?",
+    "options": {
+      "A": "Fingerprint",
+      "B": "Keystroke dynamics or gesture pattern",
+      "C": "Hardware token",
+      "D": "PIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Credential Stuffing'?",
+    "options": {
+      "A": "Filling out a form very fast.",
+      "B": "Using leaked pairs of usernames/passwords from one site to try and log into others.",
+      "C": "Writing passwords on a sticky note.",
+      "D": "Increasing the database size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is the standard for securing communication between a browser and a server?",
+    "options": {
+      "A": "HTTP",
+      "B": "HTTPS (TLS/SSL)",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An IP address is a reliable single factor for authentication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Identity Provider' (IdP)?",
+    "options": {
+      "A": "To host the web application code.",
+      "B": "To manage and verify user identities and issue security tokens.",
+      "C": "To store CSS files.",
+      "D": "To provide internet access."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "A way to catch computer bugs.",
+      "B": "Fraudulent attempts to obtain sensitive information by disguising as a trustworthy entity.",
+      "C": "Scanning a network for open ports.",
+      "D": "Encrypting a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Security Question'?",
+    "options": {
+      "A": "A question asked by a police officer.",
+      "B": "A fallback authentication method based on personal knowledge.",
+      "C": "A math problem for CAPTCHA.",
+      "D": "A question about the server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is the most secure way to store a password in a database?",
+    "options": {
+      "A": "Base64 encoding",
+      "B": "Cryptographic hashing (e.g., Argon2, bcrypt)",
+      "C": "MD5 without salt",
+      "D": "Excel spreadsheet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Lockout' policy?",
+    "options": {
+      "A": "Locking the office doors.",
+      "B": "Temporarily disabling an account after too many failed login attempts.",
+      "C": "Closing the website for maintenance.",
+      "D": "Preventing admins from logging in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Basic Authentication sends credentials in an unencrypted Base64 string.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Authenticator App'?",
+    "options": {
+      "A": "A social media app.",
+      "B": "An app that generates time-based codes (TOTP) for 2FA.",
+      "C": "An app to store photos.",
+      "D": "An app that types your password for you."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge-Based Authentication' (KBA)?",
+    "options": {
+      "A": "Reading a book.",
+      "B": "Authentication based on facts the user knows (e.g., mother's maiden name).",
+      "C": "Scanning a fingerprint.",
+      "D": "Using a USB key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these symbols is commonly used in 'complex' passwords?",
+    "options": {
+      "A": "Letters only",
+      "B": "Numbers only",
+      "C": "Special characters (!, @, #, $)",
+      "D": "Spaces only"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'AuthN' stand for in technical discussions?",
+    "options": {
+      "A": "Author Name",
+      "B": "Authentication",
+      "C": "Authorization",
+      "D": "Authority Network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'AuthZ' stand for in technical discussions?",
+    "options": {
+      "A": "Authentication Zone",
+      "B": "Authentication",
+      "C": "Authorization",
+      "D": "Authorized Zero"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Authentication is the process of granting access levels to a resource.",
+    "options": {
+      "A": "True",
+      "B": "False (That is Authorization)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Password Spraying'?",
+    "options": {
+      "A": "Cleaning a keyboard.",
+      "B": "Trying a single common password against many different accounts to avoid lockouts.",
+      "C": "Sending a password to all employees.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of using a Password Manager?",
+    "options": {
+      "A": "It makes your internet faster.",
+      "B": "It allows you to use unique, complex passwords for every site without memorizing them.",
+      "C": "It shares your passwords with friends.",
+      "D": "It disables the need for MFA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'In-Band' authentication?",
+    "options": {
+      "A": "Authentication through a different device.",
+      "B": "Authentication using the same channel as the primary interaction (e.g., a login form).",
+      "C": "Using a musical instrument.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Out-of-Band' (OOB) authentication?",
+    "options": {
+      "A": "Authentication using a secondary channel (e.g., getting a code on your phone while logging in on a PC).",
+      "B": "Logging in without an internet connection.",
+      "C": "Asking a colleague for help.",
+      "D": "Using a physical signature."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Something you know' twice (e.g., two different passwords) is true Multi-Factor Authentication.",
+    "options": {
+      "A": "True",
+      "B": "False (It must be factors from different categories)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive Authentication'?",
+    "options": {
+      "A": "Changing the password every hour.",
+      "B": "Adjusting the authentication requirements based on risk factors (e.g., new location or device).",
+      "C": "Translating the login page to different languages.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Possession' factor?",
+    "options": {
+      "A": "Your eye color",
+      "B": "Your smartphone",
+      "C": "Your first dog's name",
+      "D": "Your social security number"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Magic Link'?",
+    "options": {
+      "A": "A link that performs a card trick.",
+      "B": "An email-based authentication method where clicking a unique link logs the user in.",
+      "C": "A link that bypasses all security.",
+      "D": "A link to the help documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Risk-Based Authentication'?",
+    "options": {
+      "A": "Logging in while skydiving.",
+      "B": "An authentication system that calculates the probability of a fraudulent login.",
+      "C": "Using a password that is easy to guess.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SMS-based 2FA is considered the most secure form of Multi-Factor Authentication.",
+    "options": {
+      "A": "True",
+      "B": "False (It is vulnerable to SIM swapping and interception)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Certificate-Based Authentication'?",
+    "options": {
+      "A": "Using a paper diploma.",
+      "B": "Using digital certificates to identify a user or device.",
+      "C": "Authenticating only on weekends.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Token' in authentication?",
+    "options": {
+      "A": "A physical coin.",
+      "B": "A piece of data that proves the user's identity after they have logged in.",
+      "C": "A placeholder for a username.",
+      "D": "A system error code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Passwordless' authentication?",
+    "options": {
+      "A": "Allowing anyone to enter without credentials.",
+      "B": "Using factors like biometrics or hardware keys instead of a traditional password.",
+      "C": "Writing the password on the screen.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A user's birthday is a strong secret for authentication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shoulder Surfing'?",
+    "options": {
+      "A": "Browsing at the beach.",
+      "B": "Physically looking over someone's shoulder to see their password or PIN.",
+      "C": "Hackers working together.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Session Fixation'?",
+    "options": {
+      "A": "Repairing a broken server.",
+      "B": "An attack where an attacker tricks a user into using a known session ID.",
+      "C": "A session that never expires.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header is used for 'Bearer' tokens in web APIs?",
+    "options": {
+      "A": "Identity",
+      "B": "Authorization",
+      "C": "Authenticate",
+      "D": "Token-ID"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Step-Up Authentication'?",
+    "options": {
+      "A": "Standing up while typing.",
+      "B": "Triggering additional authentication factors for sensitive actions.",
+      "C": "Upgrading to a newer version of the software.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: MFA significantly reduces the risk of account takeover.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Social Engineering' in authentication?",
+    "options": {
+      "A": "Manipulating people into giving up their credentials.",
+      "B": "Building a social network.",
+      "C": "Coding in a group.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Hardware Security Key'?",
+    "options": {
+      "A": "A heavy metal key for a safe.",
+      "B": "A physical device (like a USB key) used as an authentication factor.",
+      "C": "A special part of the motherboard.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is 'Something you know'?",
+    "options": {
+      "A": "Retina scan",
+      "B": "Security PIN",
+      "C": "Bank card",
+      "D": "Facial geometry"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A PIN and a password are both the same authentication factor (Knowledge).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Time-Based One-Time Password' (TOTP)?",
+    "options": {
+      "A": "A password that expires after a set date.",
+      "B": "A temporary code that changes every 30-60 seconds.",
+      "C": "A password you can only use on Mondays.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Service Provider' (SP) in SSO?",
+    "options": {
+      "A": "An Internet Service Provider like Comcast.",
+      "B": "The application the user is trying to access.",
+      "C": "The company that makes the server hardware.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Federated Identity'?",
+    "options": {
+      "A": "A government-issued ID.",
+      "B": "Linking a user's identity across multiple independent security systems.",
+      "C": "Having a very long username.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT an authentication factor category?",
+    "options": {
+      "A": "Inherence (Something you are)",
+      "B": "Possession (Something you have)",
+      "C": "Knowledge (Something you know)",
+      "D": "Visibility (Something you see)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Using 'Remember Me' is more secure than logging in every time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Continuous Authentication'?",
+    "options": {
+      "A": "Typing your password constantly.",
+      "B": "A system that constantly verifies the user throughout the session.",
+      "C": "A session that never ends.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mutual Authentication'?",
+    "options": {
+      "A": "Two users logging in together.",
+      "B": "A process where both the client and the server verify each other's identity.",
+      "C": "Sharing a password with a friend.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of an 'Access Token'?",
+    "options": {
+      "A": "To change the user's settings.",
+      "B": "To inform the API that the bearer is authorized to access specific resources.",
+      "C": "To act as a secondary password.",
+      "D": "To show the user's avatar."
+    },
+    "answer": "B"
+  },
+{
+    "question": "What is the primary security benefit of using PKCE (Proof Key for Code Exchange) in OAuth 2.0?",
+    "options": {
+      "A": "It encrypts the entire user session.",
+      "B": "It prevents authorization code injection and interception attacks on public clients.",
+      "C": "It eliminates the need for a redirect URI.",
+      "D": "It replaces the client secret with a public key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of JWT security, what is a 'None' algorithm attack?",
+    "options": {
+      "A": "An attacker changes the header to alg: 'none', tricking the server into accepting a signature-less token.",
+      "B": "The server refuses to accept any tokens.",
+      "C": "A brute-force attack on the private key.",
+      "D": "A method to delete the payload of a token."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does 'Refresh Token Rotation' enhance security in a Single Page Application (SPA)?",
+    "options": {
+      "A": "It changes the token every time the user refreshes the page.",
+      "B": "It issues a new refresh token with every access token request, immediately invalidating the old one.",
+      "C": "It encrypts the refresh token using the user's password.",
+      "D": "It prevents the user from having more than one active session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'nonce' parameter in the OpenID Connect (OIDC) flow?",
+    "options": {
+      "A": "To specify the encryption algorithm.",
+      "B": "To prevent replay attacks by linking a client session to an ID Token.",
+      "C": "To store the user's local time.",
+      "D": "To determine the expiration time of the token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SAML, what does 'Identity Provider (IdP) Initiated SSO' mean?",
+    "options": {
+      "A": "The user logs into the app first and is redirected to the IdP.",
+      "B": "The user logs into the IdP dashboard and clicks a link to be signed into the Service Provider (SP).",
+      "C": "The server automatically logs the user in based on their IP.",
+      "D": "The user must provide a physical certificate to the IdP."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HS256' vs 'RS256' in JWT signing?",
+    "options": {
+      "A": "HS256 is asymmetric; RS256 is symmetric.",
+      "B": "HS256 uses a shared secret; RS256 uses a public/private key pair.",
+      "C": "HS256 is more secure for public clients.",
+      "D": "There is no difference in how they handle keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Side-Channel Attack' in the context of cryptographic authentication?",
+    "options": {
+      "A": "A direct attack on the server's database.",
+      "B": "An attack based on information gained from the physical implementation (e.g., timing, power consumption).",
+      "C": "Sending a malicious link through a chat channel.",
+      "D": "An attack that targets the browser's CSS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'aud' (Audience) claim in a JWT?",
+    "options": {
+      "A": "To list the user's name.",
+      "B": "To identify the recipients that the JWT is intended for, preventing token reuse at different APIs.",
+      "C": "To store the user's audio preferences.",
+      "D": "To track the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Zero Trust' architecture, once a user is authenticated, they are trusted to access all internal resources.",
+    "options": {
+      "A": "False (Trust is never assumed; every access request must be verified).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'FIDO2' primarily designed to achieve?",
+    "options": {
+      "A": "Faster database queries.",
+      "B": "Standardized, phishing-resistant, passwordless authentication using public-key cryptography.",
+      "C": "Automated social media logins.",
+      "D": "Encrypted file storage on the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Assertion Consumer Service' (ACS) in a SAML configuration?",
+    "options": {
+      "A": "The login page of the Identity Provider.",
+      "B": "The URL at the Service Provider where the IdP sends the SAML response.",
+      "C": "A tool that generates passwords.",
+      "D": "A help desk for user assertions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Token Shrinkage'?",
+    "options": {
+      "A": "Deleting old tokens.",
+      "B": "The process of reducing JWT payload size to fit within header limits or save bandwidth.",
+      "C": "Reducing the expiration time of a token.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cryptographic property ensures that an attacker cannot generate a valid signature even if they know the public key?",
+    "options": {
+      "A": "Symmetry",
+      "B": "Non-repudiation / Digital Signature integrity",
+      "C": "Obfuscation",
+      "D": "Compression"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'State' parameter used for in OAuth 2.0?",
+    "options": {
+      "A": "To specify the user's country.",
+      "B": "To prevent Cross-Site Request Forgery (CSRF) by validating the response against the request.",
+      "C": "To keep the user logged in forever.",
+      "D": "To store the application's CSS state."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Certificate Pinning'?",
+    "options": {
+      "A": "Adding a certificate to a user's profile.",
+      "B": "Hardcoding the expected server certificate or public key in the client to prevent MITM attacks.",
+      "C": "Deleting expired certificates.",
+      "D": "Printing a physical copy of a certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Mutual TLS' (mTLS) improve authentication security?",
+    "options": {
+      "A": "By requiring both the client and the server to present valid certificates to each other.",
+      "B": "By encrypting the database.",
+      "C": "By forcing users to change passwords every week.",
+      "D": "By using two different passwords."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bearer Token' leakage and how is it typically mitigated?",
+    "options": {
+      "A": "Tokens being stolen from the database; mitigated by encryption.",
+      "B": "Tokens being sent over insecure channels or stored in logs; mitigated by HTTPS and strict logging policies.",
+      "C": "Tokens becoming too large; mitigated by compression.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OpenID Connect, what is the 'Discovery Document' (.well-known/openid-configuration)?",
+    "options": {
+      "A": "A list of all users.",
+      "B": "A JSON document containing metadata about the provider's endpoints and supported features.",
+      "C": "A guide for new developers.",
+      "D": "A backup of the server's keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Session Hijacking' and which countermeasure is most effective?",
+    "options": {
+      "A": "Guessing a password; use MFA.",
+      "B": "Stealing a valid session ID; use HttpOnly/Secure cookies and session timeouts.",
+      "C": "Phishing; use antivirus.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive Multi-Factor Authentication'?",
+    "options": {
+      "A": "MFA that changes the code every second.",
+      "B": "A system that requests additional factors only when the risk level (location, device, time) changes.",
+      "C": "MFA that works on all browsers.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JWS' (JSON Web Signature)?",
+    "options": {
+      "A": "A way to encrypt JSON.",
+      "B": "The specification that defines how to represent signed content using JSON data structures.",
+      "C": "A JavaScript database.",
+      "D": "A new version of JWT."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JWE' (JSON Web Encryption)?",
+    "options": {
+      "A": "A way to sign JSON.",
+      "B": "The specification for representing encrypted content using JSON data structures (ensuring payload confidentiality).",
+      "C": "A file compression format.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'Key Derivation Functions' (KDFs) like PBKDF2?",
+    "options": {
+      "A": "To generate a random number.",
+      "B": "To turn a password into a high-entropy key by applying a slow, repeated hash function.",
+      "C": "To find a lost key.",
+      "D": "To speed up the login process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OAuth 2.0 is an authentication protocol.",
+    "options": {
+      "A": "False (It is an authorization framework; OpenID Connect is the authentication layer).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Back-channel Logout' in OpenID Connect?",
+    "options": {
+      "A": "Logging out by closing the browser.",
+      "B": "The IdP sending a direct server-to-server request to the client application to terminate a session.",
+      "C": "Unplugging the server.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the risk of using 'Implicit Flow' in modern web applications?",
+    "options": {
+      "A": "The access token is exposed in the URL, making it vulnerable to history logs and browser-based attacks.",
+      "B": "The server becomes too slow.",
+      "C": "It requires too much RAM.",
+      "D": "It doesn't support passwords."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DPoP' (Demonstrating Proof-of-Possession) for OAuth tokens?",
+    "options": {
+      "A": "A new type of biometric.",
+      "B": "A mechanism to sender-constrain tokens, preventing an attacker from using a stolen token.",
+      "C": "A way to print tokens.",
+      "D": "A logging system for tokens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Pepper' differ from 'Salt' in password storage?",
+    "options": {
+      "A": "Pepper is unique per user; Salt is global.",
+      "B": "Salt is unique per user; Pepper is a global secret stored outside the database (e.g., in an HSM).",
+      "C": "Salt is for numbers; Pepper is for letters.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'NBF' (Not Before) claim in a JWT used for?",
+    "options": {
+      "A": "To list the user's birthdate.",
+      "B": "To specify the time before which the token must not be accepted for processing.",
+      "C": "To count the number of log-ins.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Step-up Authentication' logic?",
+    "options": {
+      "A": "Upgrading the hardware.",
+      "B": "Requiring a user to re-authenticate with a stronger factor when accessing a specific high-value resource.",
+      "C": "Adding more users to a group.",
+      "D": "Increasing the password length."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Identity Brokering'?",
+    "options": {
+      "A": "Selling user data.",
+      "B": "A service that acts as an intermediary between multiple Service Providers and Identity Providers.",
+      "C": "A database repair tool.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the security risk of a 'JWT Secret' being too short?",
+    "options": {
+      "A": "The token expires too fast.",
+      "B": "It is vulnerable to offline brute-force or dictionary attacks to discover the key and forge tokens.",
+      "C": "The token payload becomes unreadable.",
+      "D": "The server will crash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the 'Introspection Endpoint' in OAuth2 allows a resource server to check if a token is still valid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'WebAuthn'?",
+    "options": {
+      "A": "A new web browser.",
+      "B": "A browser-based API for public-key cryptography to provide secure, biometric, or hardware-based authentication.",
+      "C": "A tool to design web forms.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'JWKS' (JSON Web Key Set)?",
+    "options": {
+      "A": "To store user passwords.",
+      "B": "A set of public keys used by clients to verify the signatures of JWTs issued by the server.",
+      "C": "To encrypt the database.",
+      "D": "To manage server logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SAML Metadata' used for?",
+    "options": {
+      "A": "To store the user's avatar.",
+      "B": "To exchange configuration details (endpoints, certificates) between the IdP and SP.",
+      "C": "To track website analytics.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Salt' prevent Rainbow Table attacks?",
+    "options": {
+      "A": "By making the password much longer.",
+      "B": "By ensuring that identical passwords result in different hashes, making pre-computed tables useless.",
+      "C": "By encrypting the hash.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Phantom Token' pattern?",
+    "options": {
+      "A": "A token that doesn't exist.",
+      "B": "An architecture where the client uses an opaque token, but the Gateway swaps it for a JWT for internal services.",
+      "C": "A token that works on any site.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Credential Roaming'?",
+    "options": {
+      "A": "Sharing passwords with friends.",
+      "B": "The ability to use the same security key or biometric credential across multiple devices.",
+      "C": "Logging in from different countries.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In OAuth 2.0, the 'Resource Server' and the 'Authorization Server' must always be the same server.",
+    "options": {
+      "A": "False (They are separate roles and often separate servers in enterprise environments).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Session Fixation' prevention logic?",
+    "options": {
+      "A": "Changing the password after login.",
+      "B": "Regenerating the session ID immediately after a successful authentication.",
+      "C": "Closing the browser.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Kid' header in a JWT?",
+    "options": {
+      "A": "The user's age.",
+      "B": "The Key ID, used to identify which specific key was used to sign the token (helpful for key rotation).",
+      "C": "A child element of the payload.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Risk-Based Authentication' (RBA)?",
+    "options": {
+      "A": "Authentication that always fails.",
+      "B": "A system that uses machine learning to assess the likelihood of a fraudulent login and challenges the user accordingly.",
+      "C": "Using a weak password.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Opaque Token'?",
+    "options": {
+      "A": "A token that is invisible.",
+      "B": "A token that contains no readable information to the client and requires an introspection call to validate.",
+      "C": "A token used for images.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you mitigate 'Timing Attacks' in password comparison code?",
+    "options": {
+      "A": "By making the code as fast as possible.",
+      "B": "By using constant-time comparison functions that always take the same amount of time regardless of match.",
+      "C": "By adding a random sleep timer.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Continuous Access Evaluation' (CAE)?",
+    "options": {
+      "A": "Checking the password every minute.",
+      "B": "A mechanism for an IdP to signal a Service Provider to terminate a session immediately if security conditions change.",
+      "C": "Measuring the speed of the user's typing.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Implicit Flow' is now officially deprecated in the OAuth 2.1 specification.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cross-Domain Single Sign-On'?",
+    "options": {
+      "A": "Logging in with two different names.",
+      "B": "The ability to maintain a signed-in state across different top-level domains (e.g., example.com and example.net).",
+      "C": "Using a VPN.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Proof-of-Possession' (PoP) tokens?",
+    "options": {
+      "A": "To prove the user owns a house.",
+      "B": "To ensure that a token can only be used by the specific client it was issued to by requiring a secret.",
+      "C": "To store the user's biometric data.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SAML Binding'?",
+    "options": {
+      "A": "The physical security of the server.",
+      "B": "The mechanism used to transport SAML messages (e.g., HTTP Redirect, HTTP POST).",
+      "C": "Connecting a user to a group.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JWT Claims-Based Authorization'?",
+    "options": {
+      "A": "The process of asking the admin for access.",
+      "B": "Using custom attributes inside the JWT payload (e.g., roles: ['admin']) to make access decisions.",
+      "C": "Writing a claim on the server.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Encoded Token'?",
+    "options": {
+      "A": "A token that writes itself.",
+      "B": "A token (like a JWT) that contains all necessary user information within itself, requiring no database lookup.",
+      "C": "A token that is encrypted with the user's ID.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the security implication of 'JWT Header' injection?",
+    "options": {
+      "A": "The token becomes too large.",
+      "B": "An attacker could manipulate the algorithm or key ID to bypass validation.",
+      "C": "The payload is deleted.",
+      "D": "The server restarts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OpenID Connect (OIDC) sits on top of the OAuth 2.0 framework.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Client Credentials Flow' used for?",
+    "options": {
+      "A": "Logging in as a human user.",
+      "B": "Machine-to-machine authentication where an application authenticates itself to an API.",
+      "C": "Social media login.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hardware-Backed Key Storage'?",
+    "options": {
+      "A": "Storing keys in an Excel file.",
+      "B": "Using a dedicated hardware module (TPM/HSM) to store and perform operations with cryptographic keys.",
+      "C": "Writing keys on a motherboard.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Trust-on-First-Use' (TOFU)?",
+    "options": {
+      "A": "Trusting everyone.",
+      "B": "A security model where a client trusts an identity or certificate the first time it is encountered without verification.",
+      "C": "Buying a server.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Consent Screen' in OAuth 2.0?",
+    "options": {
+      "A": "A screen that shows the server status.",
+      "B": "The interface where a user explicitly grants an application permission to access their data.",
+      "C": "A login form.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Argon2' improve upon older hashing algorithms like MD5?",
+    "options": {
+      "A": "It is much faster.",
+      "B": "It is memory-hard and time-hard, making it much more resistant to GPU-based cracking.",
+      "C": "It is shorter.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'JTI' (JWT ID) claim used for?",
+    "options": {
+      "A": "To store the user's name.",
+      "B": "To provide a unique identifier for the token, which can be used to prevent replay attacks by tracking used tokens.",
+      "C": "To identify the server location.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Brute Force Protection' via 'Exponential Backoff'?",
+    "options": {
+      "A": "Permanently locking an account.",
+      "B": "Increasing the delay between permitted login attempts after each failure to slow down attackers.",
+      "C": "Deleting the database.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Token Revocation List' (TRL)?",
+    "options": {
+      "A": "A list of active users.",
+      "B": "A list maintained by the server to track tokens that have been invalidated before their expiration.",
+      "C": "A backup of the tokens.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Salt' must be kept secret for it to be effective.",
+    "options": {
+      "A": "False (Salt can be stored in the database alongside the hash; only the 'Pepper' must be secret).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Federated Logout'?",
+    "options": {
+      "A": "Logging out of a single app.",
+      "B": "A process where logging out of one application automatically logs the user out of all related federated applications.",
+      "C": "Closing the computer.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attribute-Based Access Control' (ABAC)?",
+    "options": {
+      "A": "Access control based on user roles only.",
+      "B": "A fine-grained authorization model that uses attributes (user, resource, environment) to make access decisions.",
+      "C": "Using a password for every attribute.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Device Fingerprinting' in authentication?",
+    "options": {
+      "A": "Taking a picture of a phone.",
+      "B": "Collecting a unique set of information about a device (browser, OS, screen size) to help identify and verify it.",
+      "C": "Cleaning the screen.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Identity Governance'?",
+    "options": {
+      "A": "A government agency for IDs.",
+      "B": "The policy-based management of user identities and their access rights within an organization.",
+      "C": "Changing a username.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'exp' (Expiration) claim is mandatory in all JWT implementations.",
+    "options": {
+      "A": "False (It is optional, but highly recommended for security).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary security benefit of using PKCE (Proof Key for Code Exchange) in OAuth 2.0?",
+    "options": {
+      "A": "It encrypts the entire user session payload to prevent local inspection.",
+      "B": "It prevents authorization code injection and interception attacks on public clients.",
+      "C": "It eliminates the need for a pre-registered Redirect URI in the client config.",
+      "D": "It replaces the client secret with a rotating hardware-backed cryptographic key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of JWT security, what characterizes a 'None' algorithm attack?",
+    "options": {
+      "A": "An attacker changes the header to alg: 'none', tricking the server into accepting a signature-less token.",
+      "B": "The server refuses to accept any tokens unless they are signed with AES-GCM.",
+      "C": "A brute-force attack on the private key using a zero-byte dictionary file.",
+      "D": "A method to delete the entire payload while keeping the signature header intact."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does 'Refresh Token Rotation' enhance security in a Single Page Application (SPA)?",
+    "options": {
+      "A": "It changes the access token every time the user refreshes the browser tab.",
+      "B": "It encrypts the refresh token using a one-time salt stored in LocalStorage.",
+      "C": "It issues a new refresh token with every access token request, immediately invalidating the old one.",
+      "D": "It prevents the user from having more than one active session per unique IP address."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary role of the 'nonce' parameter in an OpenID Connect (OIDC) flow?",
+    "options": {
+      "A": "To specify the asymmetric encryption algorithm used for the ID Token header.",
+      "B": "To prevent replay attacks by linking a client session to a specific ID Token.",
+      "C": "To store the user's local timezone for server-side timestamping of log events.",
+      "D": "To determine the exact millisecond of the token's expiration during validation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SAML, what does 'Identity Provider (IdP) Initiated SSO' mean?",
+    "options": {
+      "A": "The user logs into the app first and is then redirected to the IdP for verification.",
+      "B": "The user logs into the IdP dashboard and clicks a link to be signed into the Service Provider.",
+      "C": "The server automatically logs the user in based on a hardcoded organizational IP whitelist.",
+      "D": "The user must provide a physical X.509 certificate directly to the target application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'HS256' and 'RS256' in JWT signing algorithms?",
+    "options": {
+      "A": "HS256 is asymmetric; RS256 is a symmetric shared secret algorithm.",
+      "B": "HS256 is recommended for SPAs, while RS256 is only for legacy mobile apps.",
+      "C": "RS256 is a legacy algorithm that has been replaced by HS256 in all OIDC providers.",
+      "D": "HS256 uses a shared secret; RS256 uses a public/private key pair."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which of the following describes a 'Side-Channel Attack' in cryptographic authentication?",
+    "options": {
+      "A": "A direct SQL injection attack on the server's primary identity database.",
+      "B": "Sending a malicious phishing link through a secondary internal chat channel.",
+      "C": "An attack based on information gained from the physical implementation like execution timing.",
+      "D": "An attack that targets the browser's CSS rendering engine to leak hidden tokens."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'aud' (Audience) claim in a JSON Web Token?",
+    "options": {
+      "A": "To identify the intended recipients of the JWT, preventing reuse at unintended APIs.",
+      "B": "To list the display name of the user for UI greeting components.",
+      "C": "To store the user's audio notification preferences for accessible interfaces.",
+      "D": "To track the total number of active listeners currently on a shared WebSocket."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a 'Zero Trust' architecture, how is user authentication treated?",
+    "options": {
+      "A": "Users are trusted once they pass the initial network perimeter firewall check.",
+      "B": "Multi-factor authentication is disabled for internal employees to increase operational speed.",
+      "C": "Trust is granted based primarily on the physical location of the user's office device.",
+      "D": "Authentication and authorization are verified continuously for every single request."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'FIDO2' primarily designed to achieve in modern security?",
+    "options": {
+      "A": "Faster database queries for session lookups in high-traffic environments.",
+      "B": "Standardized, phishing-resistant, passwordless authentication using public-key cryptography.",
+      "C": "Automated cross-posting for social media login providers across different domains.",
+      "D": "High-speed encrypted file storage for persistent session data on the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Assertion Consumer Service' (ACS) in a SAML 2.0 configuration?",
+    "options": {
+      "A": "The hidden login page used exclusively by the Identity Provider for admins.",
+      "B": "A background service that generates temporary passwords for legacy enterprise apps.",
+      "C": "The specific URL at the Service Provider where the IdP sends the SAML response.",
+      "D": "A third-party help desk service used for manual user identity verification."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the goal of 'Token Shrinkage' in advanced JWT implementations?",
+    "options": {
+      "A": "The process of automatically deleting tokens after exactly 5 minutes of inactivity.",
+      "B": "Reducing the JWT payload size to fit within strict HTTP header limits of load balancers.",
+      "C": "The automatic reduction of a token's expiration time based on dynamic risk scores.",
+      "D": "Compressing the database table that stores long-lived refresh tokens for storage efficiency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cryptographic property ensures an attacker cannot forge a signature even with the public key?",
+    "options": {
+      "A": "The computational hardness of the private key derivation in asymmetric systems.",
+      "B": "The use of standard symmetric encryption efficiency across all network nodes.",
+      "C": "The application of Base64 encoding on the signature header before transmission.",
+      "D": "The specific compression ratio of the token payload during the signing process."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'State' parameter used for in standard OAuth 2.0 flows?",
+    "options": {
+      "A": "To specify the user's current geographical state or region for GDPR compliance.",
+      "B": "To keep the user logged in without the use of a browser cookie or LocalStorage.",
+      "C": "To prevent CSRF by validating the response against the initial request state.",
+      "D": "To store the application's global Redux or State-management variables."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of 'Certificate Pinning' in mobile application authentication?",
+    "options": {
+      "A": "Pinning a digital certificate to a user's physical social profile for verification.",
+      "B": "Hardcoding the expected server public key in the client to prevent MITM attacks.",
+      "C": "A method to delete all expired certificates from the mobile OS system keychain.",
+      "D": "Printing a physical QR code containing the server's root certificate for manual scans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Mutual TLS' (mTLS) improve the security of API communications?",
+    "options": {
+      "A": "By requiring both the client and the server to present valid certificates to each other.",
+      "B": "By encrypting the database at rest using the user's personal digital certificate.",
+      "C": "By forcing users to rotate their certificates every 24 hours to prevent theft.",
+      "D": "By using two different passwords to generate a single session key for the channel."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describes 'Bearer Token' leakage and its most common mitigation?",
+    "options": {
+      "A": "Tokens stolen from the database; mitigated by row-level encryption of all fields.",
+      "B": "Tokens becoming too large for the network MTU; mitigated by standard GZIP compression.",
+      "C": "Tokens being used by multiple users simultaneously; mitigated by IP address binding.",
+      "D": "Tokens sent over insecure channels or stored in logs; mitigated by TLS and strict logging."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In OIDC, what is the purpose of the 'Discovery Document' (.well-known/openid-configuration)?",
+    "options": {
+      "A": "A public list of all registered users and their associated email addresses.",
+      "B": "A JSON document containing metadata about the provider's endpoints and features.",
+      "C": "A troubleshooting guide for developers new to the OIDC platform architecture.",
+      "D": "A backup file containing the server's private keys in an encrypted JSON format."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Session Hijacking' and which countermeasure is most effective in web apps?",
+    "options": {
+      "A": "Guessing a user's password; mitigated by using mandatory MFA.",
+      "B": "A phishing attack on the administrator; mitigated by using local antivirus software.",
+      "C": "Stealing a valid session ID; mitigated by using HttpOnly/Secure cookies and short timeouts.",
+      "D": "A hardware failure on the main server; mitigated by using a redundant server cluster."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What defines 'Adaptive Multi-Factor Authentication' in modern security systems?",
+    "options": {
+      "A": "MFA that rotates the required 6-digit TOTP code every single second of the day.",
+      "B": "A system that requests extra factors only when risk signals like device or location change.",
+      "C": "An MFA implementation that is fully compatible with all legacy web browsers from the 90s.",
+      "D": "A system that requires a different biometric (face, eye, finger) for every login attempt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JWS' (JSON Web Signature) in the context of the JOSE stack?",
+    "options": {
+      "A": "A method to encrypt JSON objects using the AES-GCM-256 algorithm.",
+      "B": "The specification defining how to represent signed content using JSON structures.",
+      "C": "A high-performance JavaScript database engine for storing tokens at the edge.",
+      "D": "The newest version of the JWT standard released for the 2026 security year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of 'JWE' (JSON Web Encryption)?",
+    "options": {
+      "A": "To sign JSON objects to ensure they were not tampered with during transit.",
+      "B": "To compress JSON payloads for faster mobile transmission over low-bandwidth networks.",
+      "C": "To map JSON keys to database columns automatically without custom mapping code.",
+      "D": "To provide confidentiality by representing encrypted content using JSON."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the role of 'Key Derivation Functions' (KDFs) like PBKDF2?",
+    "options": {
+      "A": "To generate a random 32-bit integer used as a salt for unique database keys.",
+      "B": "To turn a password into a high-entropy key via a slow, repeated hashing process.",
+      "C": "To find a lost encryption key within a memory dump of a running server process.",
+      "D": "To speed up the password verification process for high-traffic e-commerce sites."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Is OAuth 2.0 technically considered an authentication protocol?",
+    "options": {
+      "A": "Yes, it is the primary industry standard for verifying the identity of a human user.",
+      "B": "No, it is an authorization framework; OIDC provides the identity/authentication layer.",
+      "C": "Only when specifically used with the 'Resource Owner Password Credentials' flow.",
+      "D": "It was in version 1.0, but version 2.0 was redefined to handle only authorization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Back-channel Logout' in OpenID Connect?",
+    "options": {
+      "A": "Logging out of an application by closing the browser tab or the mobile app.",
+      "B": "A method to logout using an encrypted hardware button on a security key.",
+      "C": "The process of physically disconnecting the user's primary ethernet cable.",
+      "D": "A server-to-server request from the IdP to the client to terminate an active session."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a major security risk of the 'Implicit Flow' in web applications?",
+    "options": {
+      "A": "The server becomes exponentially slower as the number of active users increases.",
+      "B": "The access token is exposed in the URL fragment, making it vulnerable to log leaks.",
+      "C": "It requires significantly more RAM on the client than the modern Code flow.",
+      "D": "It does not support the use of standard passwords for user authentication."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DPoP' (Demonstrating Proof-of-Possession) used for?",
+    "options": {
+      "A": "A new type of biometric fingerprinting specifically for backend developers.",
+      "B": "A way to print physical backup tokens on a secure high-resolution printer.",
+      "C": "A mechanism to sender-constrain tokens, preventing use if the token is stolen.",
+      "D": "A logging system that tracks every time a token is touched by a user."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How does 'Pepper' differ from 'Salt' in password security?",
+    "options": {
+      "A": "Pepper is unique per user; Salt is a global application-wide constant.",
+      "B": "Salt is for numeric passwords; Pepper is for complex alphanumeric ones.",
+      "C": "There is no functional or technical difference between the two in modern crypto.",
+      "D": "Salt is unique per user; Pepper is a global secret stored outside the database."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'NBF' (Not Before) claim in a JWT used for by validators?",
+    "options": {
+      "A": "To list the exact birthdate and time of the authenticated user instance.",
+      "B": "To specify the time before which the token must not be accepted for processing.",
+      "C": "To count how many times the user successfully logged in before the current date.",
+      "D": "To define the minimum system security clearance level needed to read the token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What describes 'Step-up Authentication' logic in a secure app?",
+    "options": {
+      "A": "Upgrading the server's physical hardware during periods of peak user traffic.",
+      "B": "Adding more users to a specific administrative group to share the workload.",
+      "C": "Increasing the minimum required password length for all new user accounts.",
+      "D": "Requiring a stronger factor when a user performs a sensitive or high-value action."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What defines the process of 'Identity Brokering'?",
+    "options": {
+      "A": "An intermediary service that bridges multiple Service Providers and Identity Providers.",
+      "B": "Selling user identity data to third-party marketing firms for targeted ads.",
+      "C": "A database repair tool that fixes corrupted or duplicate identity records.",
+      "D": "The process of bidding on cloud server identities in a shared virtual environment."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary risk of a short 'JWT Secret' (e.g., under 32 characters)?",
+    "options": {
+      "A": "The token will expire much faster than the time intended by the developer.",
+      "B": "The token payload becomes unreadable to the target client application instance.",
+      "C": "The server will crash during the CPU-intensive signature verification phase.",
+      "D": "It is vulnerable to offline brute-force attacks to discover the key and forge tokens."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of an 'Introspection Endpoint' in OAuth2 architecture?",
+    "options": {
+      "A": "Allows a resource server to check if an opaque token is still valid and active.",
+      "B": "A page where users can view their own full login and activity history logs.",
+      "C": "A tool for frontend developers to inspect the schema of the Identity Provider.",
+      "D": "A security scan that checks the firewall for open ports on the identity server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'WebAuthn' in the context of modern authentication?",
+    "options": {
+      "A": "A new open-source secure web browser developed by the W3C and Google.",
+      "B": "A tool used by UI designers to build accessible and consistent web login forms.",
+      "C": "A browser API for secure, public-key-based biometric or hardware authentication.",
+      "D": "A specialized database protocol for storing web-based session credentials."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of 'JWKS' (JSON Web Key Set)?",
+    "options": {
+      "A": "A set of public keys used by clients to verify JWT signatures issued by the server.",
+      "B": "To store all user passwords in a standardized and portable JSON format.",
+      "C": "To encrypt the entire identity database for offsite backup to the cloud.",
+      "D": "To manage the server's internal system logs using an encrypted structure."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How is 'SAML Metadata' utilized between providers?",
+    "options": {
+      "A": "To store high-resolution profile pictures and avatars of the enterprise users.",
+      "B": "To track analytics on how often a specific user logs into a third-party site.",
+      "C": "To store the physical data center address of the primary identity provider.",
+      "D": "To exchange configuration details and public certificates between IdP and SP."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "How does 'Salt' technically prevent Rainbow Table attacks?",
+    "options": {
+      "A": "By making the password much longer than the standard dictionary character limit.",
+      "B": "By encrypting the hash result with a public RSA key before it is stored.",
+      "C": "By ensuring identical passwords result in unique hashes for every user record.",
+      "D": "By preventing the database from being exported to a CSV or Excel file format."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Phantom Token' architecture pattern?",
+    "options": {
+      "A": "A token that exists in server memory but is never sent over the network wire.",
+      "B": "A single token that can be used on any website on the internet without registration.",
+      "C": "A security vulnerability where a token is successfully used after it has been deleted.",
+      "D": "An API Gateway swapping an opaque token for a JWT for internal service use."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What characterizes the concept of 'Credential Roaming'?",
+    "options": {
+      "A": "The ability to use one security key or biometric credential across multiple devices.",
+      "B": "Sharing your personal password with friends located in different cities.",
+      "C": "Logging into an application from different countries in a single 24-hour period.",
+      "D": "The process of moving an entire identity database between different cloud providers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Can the 'Resource Server' and 'Authorization Server' be separate entities?",
+    "options": {
+      "A": "No, the official OAuth specification requires them to be the same physical machine.",
+      "B": "Yes, they are separate roles and are often distinct physical or virtual servers.",
+      "C": "Only when the application is using the legacy and deprecated SAML 1.1 protocol.",
+      "D": "Only if the user is using a mobile device for the primary authentication attempt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What logic defines 'Session Fixation' prevention?",
+    "options": {
+      "A": "Changing the user's password immediately after every successful login attempt.",
+      "B": "Closing the browser automatically if the user is idle for more than 60 seconds.",
+      "C": "Disallowing the use of the same password on two different devices at one time.",
+      "D": "Regenerating the session ID immediately after successful authentication."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Kid' header used for in a JWT?",
+    "options": {
+      "A": "A metadata field used to store the user's numerical age for age-gating.",
+      "B": "A child element used in complex and nested JSON payload data structures.",
+      "C": "A security flag indicating that the user is a minor and requires parental consent.",
+      "D": "The Key ID, used to identify which specific key was used to sign the token."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Risk-Based Authentication' (RBA)?",
+    "options": {
+      "A": "The practice of using the same weak password for all of your online accounts.",
+      "B": "An authentication process that always results in a failed login for testing purposes.",
+      "C": "A method to authenticate users during a complete network or database outage.",
+      "D": "A system assessing login fraud probability and challenging the user accordingly."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What characterizes an 'Opaque Token' in security design?",
+    "options": {
+      "A": "A token that is physically invisible to the user's graphical interface.",
+      "B": "A token with no client-readable info requiring a server introspection call.",
+      "C": "A token specifically optimized for transferring large high-resolution image files.",
+      "D": "A token that has had its payload removed to save network bandwidth space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How are 'Timing Attacks' mitigated in backend comparison code?",
+    "options": {
+      "A": "By making the code execute as fast as the server hardware physically allows.",
+      "B": "By adding a random sleep timer to every single line of the authentication code.",
+      "C": "By using constant-time functions that take the same time regardless of a match.",
+      "D": "By moving the comparison logic to a separate and dedicated comparison server."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the core function of 'Continuous Access Evaluation' (CAE)?",
+    "options": {
+      "A": "Checking the user's password every 60 seconds throughout an active session.",
+      "B": "Measuring how fast a user types their credentials into a standard web form.",
+      "C": "A mechanism to terminate user sessions immediately if security conditions change.",
+      "D": "Evaluating the local network speed before allowing a user to log into the site."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the status of the 'Implicit Flow' in the OAuth 2.1 update?",
+    "options": {
+      "A": "It has been renamed to 'Fast-Pass Flow' for better marketing and adoption.",
+      "B": "It is officially deprecated and removed from the modern OAuth 2.1 specification.",
+      "C": "It is the only recommended flow for modern React and Vue frontend applications.",
+      "D": "It is now mandatory for all applications that do not use a dedicated backend server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What defines 'Cross-Domain Single Sign-On'?",
+    "options": {
+      "A": "Logging in with two different and unique usernames on the same application site.",
+      "B": "Using a personal VPN to change your domain location for enhanced user security.",
+      "C": "Automatically sharing your password with a friend's domain for shared access.",
+      "D": "The ability to maintain signed-in state across different top-level domains."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Proof-of-Possession' (PoP) tokens?",
+    "options": {
+      "A": "To ensure a token can only be used by the specific client it was originally issued to.",
+      "B": "To prove the user is a legal owner of their primary physical residence or house.",
+      "C": "To store the user's high-resolution biometric iris data for futuristic scanning.",
+      "D": "To provide absolute proof that a developer has full access to the app source code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SAML Binding' in an enterprise identity context?",
+    "options": {
+      "A": "The physical security and locking of the server rack in the corporate data center.",
+      "B": "A logical link connecting a specific user to a designated organizational group.",
+      "C": "The mechanism used to transport SAML messages like the standard HTTP POST.",
+      "D": "A cryptographic method to bind two different users together for shared sessions."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What defines 'JWT Claims-Based Authorization'?",
+    "options": {
+      "A": "The process of manually asking the site administrator for specific access rights.",
+      "B": "Writing a formal support claim to the server when an access attempt is denied.",
+      "C": "A method to calculate the exact financial value of a security token on an exchange.",
+      "D": "Using custom attributes in the JWT payload to make fine-grained access decisions."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What characterizes a 'Self-Encoded Token'?",
+    "options": {
+      "A": "A token that automatically writes its own expiration and validation logic.",
+      "B": "A token that is encrypted using only the user's unique identification number.",
+      "C": "A token like a JWT that contains all necessary info without requiring a DB lookup.",
+      "D": "A token that is only readable by the specific administrator who created it."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the security implication of 'JWT Header' injection attacks?",
+    "options": {
+      "A": "An attacker could manipulate the alg or kid parameters to bypass validation logic.",
+      "B": "The token becomes too large to be sent over a standard 4G or 5G mobile network.",
+      "C": "The payload is completely and permanently deleted during the injection process.",
+      "D": "The server will reboot every time it encounters an injected or modified header."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How is OIDC related to the OAuth 2.0 framework?",
+    "options": {
+      "A": "No, they are two completely competing and incompatible standards for web security.",
+      "B": "OIDC is the older version of OAuth that is no longer used by major providers.",
+      "C": "Yes, the OpenID Connect layer sits directly on top of the OAuth 2.0 framework.",
+      "D": "OAuth 2.0 is a specialized sub-module within the OIDC identity library."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary use case for the 'Client Credentials Flow'?",
+    "options": {
+      "A": "Machine-to-machine authentication between an application and a protected API.",
+      "B": "Authenticating a human user via their public social media profile information.",
+      "C": "Allowing a user to login using only their email and no traditional password.",
+      "D": "The process of resetting a user's lost or compromised security credentials."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What characterizes 'Hardware-Backed Key Storage' in identity management?",
+    "options": {
+      "A": "Storing encryption keys in a password-protected Excel file on the admin's PC.",
+      "B": "Writing keys physically on the server's motherboard with a permanent marker.",
+      "C": "Using a TPM or HSM to store and perform sensitive cryptographic operations.",
+      "D": "Storing backup keys on a series of encrypted USB thumb drives in a physical safe."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What defines the 'Trust-on-First-Use' (TOFU) security model?",
+    "options": {
+      "A": "A model where a client trusts an identity the first time without immediate verification.",
+      "B": "Automatically trusting every new user who visits the site for the very first time.",
+      "C": "Buying a server from a new cloud vendor you have never worked with before.",
+      "D": "A security policy where user passwords only work on the very first login attempt."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Consent Screen' in the OAuth 2.0 user experience?",
+    "options": {
+      "A": "A dashboard that displays the current real-time health of the server cluster.",
+      "B": "The interface where a user explicitly grants an app specific data access permissions.",
+      "C": "A digital form used to collect a user's legal signature for a terms-of-service contract.",
+      "D": "A browser pop-up that appears when a user's active session is about to expire."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Why is 'Argon2' considered superior to legacy algorithms like MD5 or SHA-1?",
+    "options": {
+      "A": "It is significantly faster and uses much less CPU than MD5 for high-speed lookups.",
+      "B": "It produces much shorter hashes that significantly save database storage space.",
+      "C": "It is memory-hard and time-hard, resisting GPU-based brute-force cracking attacks.",
+      "D": "It allows the system administrator to see the user's original password if needed."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'JTI' (JWT ID) claim used for by security systems?",
+    "options": {
+      "A": "To provide a unique token identifier to prevent and detect replay attacks.",
+      "B": "To store the user's primary first and last name in a secure JSON format.",
+      "C": "To identify the physical data center and server rack location of the IdP.",
+      "D": "To track exactly how many minutes a user has been active on the site today."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Exponential Backoff' in the context of brute force protection?",
+    "options": {
+      "A": "Permanently locking a user's account after exactly three consecutive failures.",
+      "B": "Deleting the user's identity data if they fail to login correctly five times.",
+      "C": "Redirecting the user to a fake login page to trick and track potential attackers.",
+      "D": "Increasing the required delay between login attempts after each consecutive failure."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the function of a 'Token Revocation List' (TRL)?",
+    "options": {
+      "A": "A list of every single user currently signed into the application at this moment.",
+      "B": "A server-side list to track tokens that have been invalidated before their expiration.",
+      "C": "A daily backup of every unique security token issued in the last 24 hours.",
+      "D": "A list of forbidden words that cannot be included in any JWT payload claim."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Does a cryptographic 'Salt' need to be kept secret to be effective?",
+    "options": {
+      "A": "Yes, if an attacker sees the salt, the entire resulting hash becomes useless.",
+      "B": "No, it can be stored in the database alongside the resulting hash and still work.",
+      "C": "Only when the authenticated user is an administrator or has special privileges.",
+      "D": "Only when using the legacy and insecure SHA-1 algorithm for password storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What characterizes the process of 'Federated Logout'?",
+    "options": {
+      "A": "Logging out of one single mobile application on a user's smartphone.",
+      "B": "A process where logging out of one app logs the user out of all related federated apps.",
+      "C": "The act of physically turning off a user's computer or device to end a session.",
+      "D": "A security policy that only allows user logouts on the first day of every month."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attribute-Based Access Control' (ABAC)?",
+    "options": {
+      "A": "A model using user, resource, and environmental attributes for access decisions.",
+      "B": "Access control that is strictly and exclusively based on assigned user roles.",
+      "C": "The requirement of using a unique password for every individual data attribute.",
+      "D": "A system where access is granted solely based on the user's alphabetical name."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Device Fingerprinting' in the context of authentication security?",
+    "options": {
+      "A": "Taking a high-resolution physical photo of a user's smartphone for the database.",
+      "B": "Collecting unique device info like browser and OS version to help verify identity.",
+      "C": "The act of physically cleaning the screen of a biometric scanner for a clear read.",
+      "D": "A method to track how many times a user touches their phone screen per session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What defines the scope of 'Identity Governance'?",
+    "options": {
+      "A": "A governmental agency that manages digital IDs for all citizens of a country.",
+      "B": "The process of a user manually changing their own username in the user profile.",
+      "C": "A specialized database server designed solely for high-speed identity lookups.",
+      "D": "The policy-based management of user identities and their specific access rights."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Is the 'exp' (Expiration) claim mandatory in all JWT implementations?",
+    "options": {
+      "A": "Yes, the JWT specification requires every single token to have an expiration.",
+      "B": "No, it is technically optional, although it is strongly recommended for security.",
+      "C": "Only when the token is being sent over an unencrypted or public HTTP connection.",
+      "D": "Only when the payload contains sensitive personally identifiable information (PII)."
+    },
+    "answer": "B"
+  }
+  ]
+}

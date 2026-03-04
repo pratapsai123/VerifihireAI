@@ -1,0 +1,2505 @@
+{
+  "skill": "Angular",
+  "questions": [
+    {
+      "question": "What is the primary architectural pattern used by Angular?",
+      "options": {
+        "A": "Model-View-Controller (MVC)",
+        "B": "Component-Based Architecture",
+        "C": "Redux",
+        "D": "Flux"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to define a class as an Angular component?",
+      "options": {
+        "A": "@Directive",
+        "B": "@Component",
+        "C": "@Injectable",
+        "D": "@NgModule"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'NgModule' decorator?",
+      "options": {
+        "A": "To define a component's style",
+        "B": "To organize an application into cohesive blocks of functionality",
+        "C": "To handle HTTP requests",
+        "D": "To create a new database connection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Angular, which file is typically used to define the HTML structure of a component?",
+      "options": {
+        "A": "component.ts",
+        "B": "component.html",
+        "C": "component.css",
+        "D": "component.spec.ts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Interpolation' in Angular templates?",
+      "options": {
+        "A": "Defining a variable in TypeScript",
+        "B": "The {{ value }} syntax used to render text in HTML",
+        "C": "Passing data from a child to a parent",
+        "D": "A type of CSS animation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which syntax is used for 'Property Binding' in Angular?",
+      "options": {
+        "A": "{{ property }}",
+        "B": "[property]=\"value\"",
+        "C": "(event)=\"handler\"",
+        "D": "[(ngModel)]=\"value\""
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which syntax is used for 'Event Binding' in Angular?",
+      "options": {
+        "A": "[event]",
+        "B": "(event)=\"handler()\"",
+        "C": "{{ event }}",
+        "D": "#event"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does '[(ngModel)]' achieve in an Angular application?",
+      "options": {
+        "A": "One-way data binding (View to Source)",
+        "B": "Two-way data binding (View to Source and vice versa)",
+        "C": "Property binding only",
+        "D": "Event binding only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which directive is used to conditionally include or exclude an element from the DOM?",
+      "options": {
+        "A": "[ngStyle]",
+        "B": "*ngIf",
+        "C": "*ngFor",
+        "D": "[ngClass]"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which directive is used to iterate over a list and render an element for each item?",
+      "options": {
+        "A": "*ngIf",
+        "B": "*ngFor",
+        "C": "[ngSwitch]",
+        "D": "ng-repeat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'Service' in Angular?",
+      "options": {
+        "A": "To define the UI of the application",
+        "B": "To share data, logic, and functions across multiple components",
+        "C": "To handle routing only",
+        "D": "To compile the application"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to make a service available for Dependency Injection?",
+      "options": {
+        "A": "@Component",
+        "B": "@Injectable",
+        "C": "@Directive",
+        "D": "@Pipe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dependency Injection' (DI) in Angular?",
+      "options": {
+        "A": "A way to inject CSS into HTML",
+        "B": "A design pattern where a class requests dependencies from external sources rather than creating them",
+        "C": "A type of virus in the code",
+        "D": "A manual way to link files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'CLI' in the context of Angular?",
+      "options": {
+        "A": "Common Language Interface",
+        "B": "Command Line Interface",
+        "C": "Component Logic Integration",
+        "D": "Core Library Installer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to create a new Angular project?",
+      "options": {
+        "A": "npm start project",
+        "B": "ng new project-name",
+        "C": "ng generate project",
+        "D": "angular create"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to run the Angular development server?",
+      "options": {
+        "A": "ng build",
+        "B": "ng serve",
+        "C": "ng run",
+        "D": "npm test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Root Module' of an Angular application usually named?",
+      "options": {
+        "A": "RootModule",
+        "B": "AppModule",
+        "C": "MainModule",
+        "D": "IndexModule"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to pass data from a parent component to a child component?",
+      "options": {
+        "A": "@Output()",
+        "B": "@Input()",
+        "C": "@Inject()",
+        "D": "@ViewChild()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to emit an event from a child component to a parent component?",
+      "options": {
+        "A": "@Input()",
+        "B": "@Output()",
+        "C": "@Event()",
+        "D": "@HostListener()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'AOT' compilation in Angular?",
+      "options": {
+        "A": "Always On Time",
+        "B": "Ahead-of-Time compilation",
+        "C": "Automated Object Tracking",
+        "D": "Advanced Output Transformation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'TypeScript' in Angular?",
+      "options": {
+        "A": "To write database queries",
+        "B": "A superset of JavaScript that adds static typing and better tooling",
+        "C": "To style the components",
+        "D": "To replace HTML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which lifecycle hook is called after Angular first displays the data-bound properties?",
+      "options": {
+        "A": "ngOnDestroy",
+        "B": "ngOnInit",
+        "C": "ngOnChanges",
+        "D": "ngAfterViewInit"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Pipe' in Angular used for?",
+      "options": {
+        "A": "To connect the server to the browser",
+        "B": "To transform data in a template (e.g., formatting a date or currency)",
+        "C": "To handle routing logic",
+        "D": "To inject dependencies"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which built-in pipe is used to convert a string to uppercase in a template?",
+      "options": {
+        "A": "cap",
+        "B": "uppercase",
+        "C": "upper",
+        "D": "toUpper"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Lazy Loading' in Angular?",
+      "options": {
+        "A": "A way to make the developers work less",
+        "B": "A technique that loads feature modules only when they are needed (requested)",
+        "C": "A slow database query",
+        "D": "Loading images with low resolution"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Routing' in Angular?",
+      "options": {
+        "A": "To manage the physical hardware",
+        "B": "To enable navigation between different views/components in a Single Page Application (SPA)",
+        "C": "To connect to external APIs only",
+        "D": "To compile the project"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which directive acts as a placeholder that Angular dynamically fills based on the current router state?",
+      "options": {
+        "A": "<router-link>",
+        "B": "<router-outlet>",
+        "C": "<ng-template>",
+        "D": "<ng-content>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'RxJS' commonly used for in Angular?",
+      "options": {
+        "A": "Styling components",
+        "B": "Handling asynchronous data streams and events using Observables",
+        "C": "Managing the local file system",
+        "D": "Creating HTML forms"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Observable'?",
+      "options": {
+        "A": "A variable that can be seen by everyone",
+        "B": "A stream of data that can be observed over time",
+        "C": "A type of unit test",
+        "D": "A database table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to start receiving data from an Observable?",
+      "options": {
+        "A": "get()",
+        "B": "subscribe()",
+        "C": "start()",
+        "D": "listen()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Directives' in Angular?",
+      "options": {
+        "A": "To define the project folder structure",
+        "B": "To add behavior to elements in the DOM",
+        "C": "To store user passwords",
+        "D": "To manage the server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Structural Directive'?",
+      "options": {
+        "A": "A directive that changes the CSS of an element",
+        "B": "A directive that changes the DOM layout by adding or removing elements (e.g., *ngIf)",
+        "C": "A directive used for database structure",
+        "D": "A directive that only works on buttons"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Attribute Directive'?",
+      "options": {
+        "A": "A directive that adds new HTML tags",
+        "B": "A directive that changes the appearance or behavior of an existing element (e.g., ngModel)",
+        "C": "A directive that defines a new component",
+        "D": "A directive used for SEO"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which module must be imported to use 'ngModel' for two-way binding?",
+      "options": {
+        "A": "CommonModule",
+        "B": "FormsModule",
+        "C": "HttpClientModule",
+        "D": "RouterModule"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'main.ts' in an Angular project?",
+      "options": {
+        "A": "To write the main CSS",
+        "B": "The entry point for the application that bootstraps the root module",
+        "C": "To define the main navigation",
+        "D": "To store global constants"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Transclusion' (Content Projection) in Angular?",
+      "options": {
+        "A": "A way to translate the app into different languages",
+        "B": "Projecting content from a parent component into a designated spot in a child component using <ng-content>",
+        "C": "Injecting CSS into a template",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which file contains the configuration for the Angular CLI (e.g., build and test settings)?",
+      "options": {
+        "A": "package.json",
+        "B": "angular.json",
+        "C": "tsconfig.json",
+        "D": "editorconfig"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ViewEncapsulation' in Angular?",
+      "options": {
+        "A": "Hiding the code from the user",
+        "B": "A mechanism that determines how component styles are applied and scoped to the component",
+        "C": "A type of data binding",
+        "D": "A security feature for URLs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default 'ViewEncapsulation' mode in Angular?",
+      "options": {
+        "A": "None",
+        "B": "Emulated",
+        "C": "ShadowDom",
+        "D": "Native"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which lifecycle hook is called just before Angular destroys a component?",
+      "options": {
+        "A": "ngOnChanges",
+        "B": "ngOnDestroy",
+        "C": "ngAfterContentInit",
+        "D": "ngAfterViewInit"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Angular Universal' used for?",
+      "options": {
+        "A": "To create apps for space exploration",
+        "B": "Server-Side Rendering (SSR) for Angular applications",
+        "C": "To manage project dependencies",
+        "D": "A library for universal UI components"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator in RxJS is used to transform the data emitted by an Observable?",
+      "options": {
+        "A": "filter",
+        "B": "map",
+        "C": "tap",
+        "D": "switchMap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Subject' in RxJS?",
+      "options": {
+        "A": "The topic of a test",
+        "B": "A special type of Observable that allows values to be multicasted to many Observers",
+        "C": "A type of component",
+        "D": "A database field"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Environment' files (environment.ts)?",
+      "options": {
+        "A": "To save the planet",
+        "B": "To store configuration variables that differ between development and production",
+        "C": "To manage system hardware",
+        "D": "To define CSS themes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pipe is used to handle Observables directly in the template without manual subscription?",
+      "options": {
+        "A": "json",
+        "B": "async",
+        "C": "date",
+        "D": "slice"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Interceptors' in Angular HTTP?",
+      "options": {
+        "A": "A security team for the app",
+        "B": "A way to inspect and transform HTTP requests and responses globally",
+        "C": "A type of unit test",
+        "D": "A routing guard"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'TrackBy' used for in *ngFor?",
+      "options": {
+        "A": "To track the user's location",
+        "B": "To improve performance by helping Angular identify which items in a list have changed",
+        "C": "To count the number of items",
+        "D": "To sort the list"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to access a child component or DOM element from the parent class?",
+      "options": {
+        "A": "@Input()",
+        "B": "@ViewChild()",
+        "C": "@ContentChild()",
+        "D": "@Inject()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Safe Navigation Operator' (?.) in Angular templates?",
+      "options": {
+        "A": "A way to navigate between pages safely",
+        "B": "A way to prevent null or undefined errors when accessing nested properties",
+        "C": "A security feature for forms",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question of Batch 1: What is the primary purpose of 'index.html' in an Angular project?",
+      "options": {
+        "A": "To list all the files in the project",
+        "B": "The main HTML page that serves as the entry point for the single-page application",
+        "C": "To store the database connection string",
+        "D": "To define the project theme"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are the two types of forms supported by Angular?",
+      "options": {
+        "A": "Internal and External forms",
+        "B": "Template-driven and Reactive forms",
+        "C": "Static and Dynamic forms",
+        "D": "HTML and TypeScript forms"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which module must be imported to use Reactive Forms in Angular?",
+      "options": {
+        "A": "FormsModule",
+        "B": "ReactiveFormsModule",
+        "C": "CommonModule",
+        "D": "HttpModule"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Reactive Forms, which class is used to track the value and validation status of an individual form control?",
+      "options": {
+        "A": "FormGroup",
+        "B": "FormControl",
+        "C": "FormArray",
+        "D": "FormBuilder"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'Router Guard' in Angular?",
+      "options": {
+        "A": "To protect the application from viruses",
+        "B": "To control whether a user can navigate to or away from a specific route based on conditions",
+        "C": "To style the navigation bar",
+        "D": "To speed up the routing process"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which interface is implemented to create a guard that checks if a user can access a route?",
+      "options": {
+        "A": "CanDeactivate",
+        "B": "CanActivate",
+        "C": "Resolve",
+        "D": "CanLoad"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Change Detection' in Angular?",
+      "options": {
+        "A": "A security feature that detects code changes",
+        "B": "The process by which Angular synchronizes the state of the UI with the state of the data",
+        "C": "A manual way to update the DOM",
+        "D": "A database synchronization tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Change Detection strategy can be used to improve performance by only checking a component when its @Input properties change?",
+      "options": {
+        "A": "Default",
+        "B": "OnPush",
+        "C": "Manual",
+        "D": "CheckOnce"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'providedIn: root' property in an @Injectable decorator used for?",
+      "options": {
+        "A": "To make the service available only to the root component",
+        "B": "To create a singleton service available throughout the application and enable tree-shaking",
+        "C": "To connect the service to a root database",
+        "D": "To define the service's physical file path"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator allows a component to inherit the style of its parent?",
+      "options": {
+        "A": "@Parent",
+        "B": "None; styles are encapsulated by default unless ViewEncapsulation.None is used",
+        "C": "@InheritStyle",
+        "D": "@Host"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'AsyncPipe'?",
+      "options": {
+        "A": "To make the application run faster",
+        "B": "To automatically subscribe to an Observable or Promise and return the latest value",
+        "C": "To handle CSS animations",
+        "D": "To encrypt HTTP requests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Component DevTools' used for in Angular?",
+      "options": {
+        "A": "To write code",
+        "B": "A browser extension to inspect the component hierarchy and state of an Angular app",
+        "C": "To manage server-side logic",
+        "D": "To compile the project"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is used to dynamically create a component in Angular?",
+      "options": {
+        "A": "ComponentFactoryResolver",
+        "B": "ViewContainerRef",
+        "C": "DynamicComponentBuilder",
+        "D": "Both A and B (Note: Modern Angular uses ViewContainerRef.createComponent)"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of 'HostListener' in an Angular directive?",
+      "options": {
+        "A": "To listen to events on the server",
+        "B": "To subscribe to events emitted by the host DOM element",
+        "C": "To listen to changes in the database",
+        "D": "To manage global keyboard shortcuts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'HostBinding' used for?",
+      "options": {
+        "A": "To bind a host to a database",
+        "B": "To bind a host element property to a property in the directive/component",
+        "C": "To manage project hosting",
+        "D": "To style the main index.html"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pipe is used to transform an object into a string for debugging purposes in the template?",
+      "options": {
+        "A": "string",
+        "B": "json",
+        "C": "debug",
+        "D": "object"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Shadow DOM' in the context of Angular ViewEncapsulation?",
+      "options": {
+        "A": "A hidden version of the app",
+        "B": "A browser feature that provides style and DOM encapsulation",
+        "C": "A database backup",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the difference between a 'Component' and a 'Directive'?",
+      "options": {
+        "A": "They are the same",
+        "B": "A component is a directive with a template",
+        "C": "A directive is used for routing; a component for UI",
+        "D": "Components are only for mobile apps"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method in the 'HttpClient' class is used to send a DELETE request?",
+      "options": {
+        "A": "remove()",
+        "B": "delete()",
+        "C": "discard()",
+        "D": "drop()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Resolvers' in Angular Routing?",
+      "options": {
+        "A": "To fix bugs in the routes",
+        "B": "To pre-fetch data before a route is activated",
+        "C": "To resolve conflicts between components",
+        "D": "To handle 404 errors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to define a custom Pipe?",
+      "options": {
+        "A": "@Component",
+        "B": "@Pipe",
+        "C": "@Directive",
+        "D": "@Injectable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What interface must a custom Pipe implement?",
+      "options": {
+        "A": "OnInit",
+        "B": "PipeTransform",
+        "C": "DataChange",
+        "D": "TransformValue"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Tree Shaking' in Angular?",
+      "options": {
+        "A": "Removing trees from the code",
+        "B": "A build process that removes unused code from the final bundle",
+        "C": "A type of performance test",
+        "D": "A manual code review"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'entryComponents' array used for in older Angular versions?",
+      "options": {
+        "A": "To list the components for the login page",
+        "B": "To define components that are loaded dynamically rather than referenced in a template",
+        "C": "To store API keys",
+        "D": "To manage project entry points"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to manage libraries and dependencies in an Angular project?",
+      "options": {
+        "A": "npm (Node Package Manager)",
+        "B": "Angular CLI only",
+        "C": "Git",
+        "D": "Webpack only"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Angular Ivy'?",
+      "options": {
+        "A": "A new UI library",
+        "B": "The next-generation compilation and rendering engine for Angular",
+        "C": "A security module",
+        "D": "A routing strategy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Reactive Forms, how do you group multiple FormControls into a single object?",
+      "options": {
+        "A": "FormArray",
+        "B": "FormGroup",
+        "C": "FormObject",
+        "D": "FormSet"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'FormBuilder' service used for?",
+      "options": {
+        "A": "To build physical forms in the office",
+        "B": "A syntactic sugar that simplifies the creation of FormGroup and FormControl instances",
+        "C": "To manage database schemas",
+        "D": "To style forms"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Validators' in Angular Forms?",
+      "options": {
+        "A": "To check the user's ID",
+        "B": "To provide built-in functions for validating form input (e.g., required, email)",
+        "C": "To encrypt form data",
+        "D": "To send the form to the server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which guard is used to prevent a user from accidentally leaving a route (e.g., with unsaved changes)?",
+      "options": {
+        "A": "CanActivate",
+        "B": "CanDeactivate",
+        "C": "CanLoad",
+        "D": "Resolve"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Zone.js' used for in Angular?",
+      "options": {
+        "A": "To define time zones",
+        "B": "To intercept asynchronous tasks and notify Angular when to perform change detection",
+        "C": "To manage global security zones",
+        "D": "To style the background"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you provide a service only for a specific component and its children?",
+      "options": {
+        "A": "providedIn: 'root'",
+        "B": "By adding it to the 'providers' array of the component's @Component decorator",
+        "C": "By importing it in the component class",
+        "D": "It is not possible"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Optional' dependency injection?",
+      "options": {
+        "A": "A service that is not used",
+        "B": "Using the @Optional() decorator so that Angular doesn't throw an error if a provider is missing",
+        "C": "A manual way to link services",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Self' dependency injection?",
+      "options": {
+        "A": "Injecting the component into itself",
+        "B": "Using @Self() to tell Angular to look for the provider only on the local component",
+        "C": "A security feature",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'SkipSelf' dependency injection?",
+      "options": {
+        "A": "Ignoring the service",
+        "B": "Using @SkipSelf() to tell Angular to start looking for the provider in the parent injector",
+        "C": "A way to skip unit tests",
+        "D": "A database optimization"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to manually trigger change detection in a component?",
+      "options": {
+        "A": "detectChanges()",
+        "B": "refresh()",
+        "C": "update()",
+        "D": "sync()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'ViewChild' static property (static: true/false)?",
+      "options": {
+        "A": "Whether the child is a static image",
+        "B": "Whether the query should be resolved before (true) or after (false) change detection",
+        "C": "The visibility of the child",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ContentChild' used for?",
+      "options": {
+        "A": "To access children in the template",
+        "B": "To access projected content (from ng-content) within a component",
+        "C": "To manage website content",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RxJS operator is used to 'flatten' multiple Observables by cancelling previous ones and only subscribing to the latest?",
+      "options": {
+        "A": "mergeMap",
+        "B": "switchMap",
+        "C": "concatMap",
+        "D": "exhaustMap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ParamMap' in Angular Router?",
+      "options": {
+        "A": "A map of the server location",
+        "B": "An interface that provides access to the parameters of a route",
+        "C": "A type of data binding",
+        "D": "A security feature"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'RouterLinkActive' directive used for?",
+      "options": {
+        "A": "To make a link work",
+        "B": "To add a CSS class to an element when its associated route becomes active",
+        "C": "To track user clicks",
+        "D": "To style the index page"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Relative Navigation'?",
+      "options": {
+        "A": "Navigating with family members",
+        "B": "Navigating based on the current activated route rather than the root",
+        "C": "Navigating between different websites",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which module provides the 'DecimalPipe', 'DatePipe', and 'CurrencyPipe'?",
+      "options": {
+        "A": "CommonModule",
+        "B": "FormsModule",
+        "C": "RouterModule",
+        "D": "BrowserModule"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'ng-container'?",
+      "options": {
+        "A": "To style a section of the page",
+        "B": "A grouping element that doesn't interfere with styles or layout (doesn't render in the DOM)",
+        "C": "To contain database data",
+        "D": "To manage API endpoints"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'ng-template'?",
+      "options": {
+        "A": "To define the main project template",
+        "B": "To define an HTML snippet that is only rendered when explicitly instructed (e.g., via *ngIf else)",
+        "C": "To store CSS variables",
+        "D": "A type of component"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TestNG utility is used to mock HTTP requests in Angular unit tests?",
+      "options": {
+        "A": "HttpTester",
+        "B": "HttpTestingController",
+        "C": "MockHttp",
+        "D": "RequestScanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Karma' in the Angular ecosystem?",
+      "options": {
+        "A": "A reward for good coding",
+        "B": "A test runner that executes unit tests in a browser",
+        "C": "A specialized compiler",
+        "D": "A UI library"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Jasmine'?",
+      "options": {
+        "A": "A flower used in the office",
+        "B": "A behavior-driven development framework for testing JavaScript code",
+        "C": "A type of component",
+        "D": "A CSS theme"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'E2E' (End-to-End) testing?",
+      "options": {
+        "A": "Testing from start to end of a file",
+        "B": "Testing the entire application flow from the user's perspective (often using Protractor or Cypress)",
+        "C": "Testing the physical network",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to generate a new component using the CLI?",
+      "options": {
+        "A": "ng create component",
+        "B": "ng generate component <name>",
+        "C": "ng add component",
+        "D": "ng new component"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question: What is 'Angular Material'?",
+      "options": {
+        "A": "The physical parts of the computer",
+        "B": "A UI component library for Angular developers based on Material Design",
+        "C": "A database for storing materials",
+        "D": "A type of CSS preprocessor"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RxJS operator is used to 'combine' the latest values from multiple Observables into a single array?",
+      "options": {
+        "A": "merge",
+        "B": "combineLatest",
+        "C": "concat",
+        "D": "zip"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between a 'Cold Observable' and a 'Hot Observable'?",
+      "options": {
+        "A": "Cold Observables are slower",
+        "B": "Cold Observables start emitting data only when subscribed to; Hot Observables emit data regardless of subscriptions",
+        "C": "Hot Observables are used for HTTP only",
+        "D": "There is no difference"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In RxJS, what is a 'BehaviorSubject'?",
+      "options": {
+        "A": "A subject that tracks user behavior",
+        "B": "A type of Subject that requires an initial value and emits the current value to new subscribers",
+        "C": "A subject that only works in the background",
+        "D": "A database field"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RxJS operator is used to ignore values from an Observable until a second Observable emits a value?",
+      "options": {
+        "A": "skip",
+        "B": "skipUntil",
+        "C": "takeUntil",
+        "D": "delay"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'NgRx' in the Angular ecosystem?",
+      "options": {
+        "A": "A new version of Angular",
+        "B": "A reactive state management library inspired by Redux",
+        "C": "A tool for CSS styling",
+        "D": "A database driver"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In NgRx, what is an 'Action'?",
+      "options": {
+        "A": "A function that changes the UI",
+        "B": "A plain object that describes a unique event that happened in the application",
+        "C": "A mouse click",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In NgRx, what is a 'Reducer'?",
+      "options": {
+        "A": "A function that reduces the size of the app",
+        "B": "A pure function that takes the current state and an action, and returns a new state",
+        "C": "A tool to compress images",
+        "D": "A type of database query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In NgRx, what are 'Selectors' used for?",
+      "options": {
+        "A": "To select elements in the DOM",
+        "B": "To query and derive specific slices of state from the store efficiently",
+        "C": "To choose a CSS theme",
+        "D": "To select a user role"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'State' in an Angular application?",
+      "options": {
+        "A": "The physical location of the server",
+        "B": "The data that determines what the UI looks like at any given moment",
+        "C": "The version of Angular being used",
+        "D": "The number of lines of code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'NgRx Effects'?",
+      "options": {
+        "A": "To add visual effects to the UI",
+        "B": "To handle side effects like HTTP requests or data fetching asynchronously outside of components",
+        "C": "To manage CSS animations",
+        "D": "To monitor hardware performance"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Angular feature allows you to intercept navigation and potentially stop it?",
+      "options": {
+        "A": "Interceptors",
+        "B": "Guards",
+        "C": "Resolvers",
+        "D": "Pipes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Zone-less' Angular?",
+      "options": {
+        "A": "Angular without a time zone",
+        "B": "An experimental way to run Angular without Zone.js to improve performance",
+        "C": "Angular without any CSS",
+        "D": "A security-restricted version"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Pure Pipe' in Angular?",
+      "options": {
+        "A": "A pipe that never changes",
+        "B": "A pipe that is only executed when its input arguments change",
+        "C": "A pipe used for water",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Impure Pipe'?",
+      "options": {
+        "A": "A broken pipe",
+        "B": "A pipe that is executed on every change detection cycle, regardless of input changes",
+        "C": "A pipe for database queries",
+        "D": "A performance-optimized pipe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RxJS operator is used to 'flatten' an Observable but only emits from the most recently subscribed one?",
+      "options": {
+        "A": "mergeMap",
+        "B": "switchMap",
+        "C": "concatMap",
+        "D": "exhaustMap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'DebounceTime' operator used for?",
+      "options": {
+        "A": "To speed up the network",
+        "B": "To wait for a specified time of inactivity before emitting the latest value (e.g., search input)",
+        "C": "To count the number of emissions",
+        "D": "To delay the entire application"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'DistinctUntilChanged' used for?",
+      "options": {
+        "A": "To delete old data",
+        "B": "To only emit a value if it is different from the previous value",
+        "C": "To change the UI theme",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Angular CLI command generates a service?",
+      "options": {
+        "A": "ng create service <name>",
+        "B": "ng generate service <name>",
+        "C": "ng build service",
+        "D": "ng add service"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'ngDoCheck' lifecycle hook?",
+      "options": {
+        "A": "To check the project for errors",
+        "B": "To implement custom change detection logic that Angular's default algorithm might miss",
+        "C": "To check the database connection",
+        "D": "To validate HTML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dynamic Routing'?",
+      "options": {
+        "A": "Routing that changes based on the user's age",
+        "B": "Defining routes with parameters (e.g., /user/:id) to load content dynamically",
+        "C": "Routing that uses AI",
+        "D": "A type of performance test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'ActivatedRoute' service used for?",
+      "options": {
+        "A": "To activate the internet",
+        "B": "To access information about the current route, such as parameters and data",
+        "C": "To start the application",
+        "D": "To manage server-side routes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'NavigationExtras' in Angular routing?",
+      "options": {
+        "A": "Extra money for navigation",
+        "B": "Options like queryParams or fragments passed during navigation",
+        "C": "A type of browser plugin",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In RxJS, what does the 'take(1)' operator do?",
+      "options": {
+        "A": "Takes 1 second to execute",
+        "B": "Emits only the first value from an Observable and then completes",
+        "C": "Takes the first user in a list",
+        "D": "Restarts the stream once"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'CatchError' operator in RxJS?",
+      "options": {
+        "A": "To delete error messages",
+        "B": "To gracefully handle errors in an Observable stream and provide a fallback value or Observable",
+        "C": "To find bugs in the code",
+        "D": "A type of security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Retry' operator in RxJS?",
+      "options": {
+        "A": "To rewrite the code",
+        "B": "To automatically resubscribe to an Observable if it errors, up to a specified number of times",
+        "C": "To manual restart the server",
+        "D": "A performance test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Angular Schematics'?",
+      "options": {
+        "A": "Drawings of the app's architecture",
+        "B": "A template-based code generator used by the CLI to create and modify projects",
+        "C": "A database for blueprints",
+        "D": "A type of routing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Production Build' (ng build --configuration production) primarily doing?",
+      "options": {
+        "A": "Adding more features",
+        "B": "Optimizing the bundle size, enabling AOT, and minifying code for deployment",
+        "C": "Writing documentation",
+        "D": "Updating the version"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool does Angular use to bundle the application?",
+      "options": {
+        "A": "Webpack (or esbuild in newer versions)",
+        "B": "Gulp",
+        "C": "Grunt",
+        "D": "Parcel"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Budgets' in angular.json?",
+      "options": {
+        "A": "The financial plan for the project",
+        "B": "Thresholds that define limits for bundle sizes to prevent the app from getting too large",
+        "C": "A security setting",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Preloading Strategy' in Angular?",
+      "options": {
+        "A": "Loading the app before the user opens it",
+        "B": "A way to load lazy-loaded modules in the background after the app has started",
+        "C": "A slow loading technique",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'APP_INITIALIZER' token used for?",
+      "options": {
+        "A": "To name the application",
+        "B": "To execute a function when the application is initialized (e.g., loading config from a server)",
+        "C": "To style the main page",
+        "D": "To create a new user"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RxJS operator 'taps' into a stream to perform a side effect without modifying the data?",
+      "options": {
+        "A": "map",
+        "B": "tap",
+        "C": "filter",
+        "D": "subscribe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Virtual Scroll' in Angular CDK?",
+      "options": {
+        "A": "Scrolling on a VR headset",
+        "B": "A performance technique that only renders the items currently visible in the scrollable viewport",
+        "C": "A slow scrolling effect",
+        "D": "A type of routing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ChangeDetectorRef' used for?",
+      "options": {
+        "A": "To find bugs in change detection",
+        "B": "To manually trigger or detach change detection for a component",
+        "C": "To update the time zone",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Unsubscribe' important for in Angular components?",
+      "options": {
+        "A": "To save money",
+        "B": "To prevent memory leaks by cleaning up active subscriptions when a component is destroyed",
+        "C": "To stop the internet connection",
+        "D": "To delete the user account"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RxJS pattern is often used to automatically unsubscribe from multiple Observables using a Subject?",
+      "options": {
+        "A": "pipe(takeUntil(destroy$))",
+        "B": "subscribe().stop()",
+        "C": "unsubscribeAll()",
+        "D": "finish()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Hydration' in Angular Universal?",
+      "options": {
+        "A": "Giving water to the server",
+        "B": "The process of making a server-rendered HTML page interactive on the client side",
+        "C": "Scaling the hardware",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ControlValueAccessor' interface used for?",
+      "options": {
+        "A": "To access the database",
+        "B": "To create a bridge between an Angular form and a custom UI element (custom form control)",
+        "C": "To control user access",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In NgRx, what is the 'Store'?",
+      "options": {
+        "A": "A place to buy software",
+        "B": "A single, immutable data structure that holds the entire state of the application",
+        "C": "A database table",
+        "D": "A physical folder"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Memoization' in NgRx Selectors?",
+      "options": {
+        "A": "Memorizing the code",
+        "B": "An optimization technique where the results of a selector are cached based on the input",
+        "C": "A type of unit test",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Feature Store' in NgRx?",
+      "options": {
+        "A": "A store that sells features",
+        "B": "A slice of the global state managed by a specific feature module",
+        "C": "A backup for the main store",
+        "D": "A type of routing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to add NgRx to an Angular project?",
+      "options": {
+        "A": "ng install ngrx",
+        "B": "ng add @ngrx/store",
+        "C": "npm start ngrx",
+        "D": "ng new ngrx"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'DevTools' in NgRx used for?",
+      "options": {
+        "A": "To write code",
+        "B": "To debug state changes using 'time-travel' debugging (replaying actions)",
+        "C": "To monitor network speed",
+        "D": "A security module"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'NgZone'?",
+      "options": {
+        "A": "To define security zones",
+        "B": "To execute work inside or outside of Angular's change detection zone",
+        "C": "To manage multiple time zones",
+        "D": "To style the background"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Angular Elements'?",
+      "options": {
+        "A": "A physical part of the UI",
+        "B": "A way to package Angular components as custom Web Components that can be used in any HTML environment",
+        "C": "A library for chemistry data",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Signals' (Angular v16+) primarily designed for?",
+      "options": {
+        "A": "Sending signals to a tower",
+        "B": "A fine-grained reactivity system to track state changes and optimize rendering",
+        "C": "Handling HTTP requests",
+        "D": "Defining CSS variables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'WritableSignal'?",
+      "options": {
+        "A": "A signal that can be written on paper",
+        "B": "A signal whose value can be directly updated using .set() or .update()",
+        "C": "A read-only signal",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'computed()' function in Angular Signals?",
+      "options": {
+        "A": "To perform math",
+        "B": "To create a read-only signal that derives its value from other signals",
+        "C": "To start a timer",
+        "D": "To encrypt data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'effect()' in Angular Signals used for?",
+      "options": {
+        "A": "To add visual effects",
+        "B": "To run code automatically whenever one or more signals it depends on change",
+        "C": "To manage CSS animations",
+        "D": "A performance test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question: What is the primary benefit of 'Fine-grained Reactivity'?",
+      "options": {
+        "A": "It makes the code look cleaner",
+        "B": "It allows Angular to update only the specific parts of the UI that changed, rather than checking the whole tree",
+        "C": "It is faster for developers to write",
+        "D": "It replaces the need for HTML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are 'Standalone Components' introduced in Angular v14?",
+      "options": {
+        "A": "Components that don't need a template",
+        "B": "Components that do not require an @NgModule to be used, simplifying the mental model",
+        "C": "Components that run outside of the browser",
+        "D": "Components that cannot have dependencies"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property is set to 'true' in the decorator to make a component standalone?",
+      "options": {
+        "A": "independent: true",
+        "B": "standalone: true",
+        "C": "moduleLess: true",
+        "D": "root: true"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you import a standalone component into another standalone component?",
+      "options": {
+        "A": "Through the declarations array",
+        "B": "Through the imports array directly in the @Component decorator",
+        "C": "By using the @Inject decorator",
+        "D": "By adding it to the providers array"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'XSS' (Cross-Site Scripting) protection in Angular?",
+      "options": {
+        "A": "Angular automatically treats all values as untrusted and sanitizes them before rendering in templates",
+        "B": "Angular deletes all script tags in the code",
+        "C": "Angular requires an SSL certificate to run",
+        "D": "Angular only allows static HTML"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which service is used to manually trust a value that would otherwise be sanitized (e.g., a dynamic URL)?",
+      "options": {
+        "A": "SecurityService",
+        "B": "DomSanitizer",
+        "C": "TrustManager",
+        "D": "SafePipe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'CSRF' (Cross-Site Request Forgery) protection in Angular's HttpClient?",
+      "options": {
+        "A": "It automatically reads a token from a cookie and adds it to the HTTP header",
+        "B": "It blocks all requests to external domains",
+        "C": "It encrypts the request body",
+        "D": "It requires a password for every request"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Content Security Policy' (CSP) in an Angular app?",
+      "options": {
+        "A": "To style the content",
+        "B": "A security layer that helps detect and mitigate certain types of attacks, including XSS and data injection",
+        "C": "To manage project documentation",
+        "D": "To speed up the network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Micro-frontend' architecture in the context of Angular?",
+      "options": {
+        "A": "Building very small components",
+        "B": "An architectural style where a frontend app is delivered as a set of independent, small, and deployable apps",
+        "C": "A type of mobile app",
+        "D": "A database for small files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is commonly used to implement Micro-frontends with Angular using Module Federation?",
+      "options": {
+        "A": "Gulp",
+        "B": "Webpack 5",
+        "C": "Grunt",
+        "D": "Bower"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Module Federation'?",
+      "options": {
+        "A": "A group of Angular modules",
+        "B": "A feature that allows an application to dynamically load code from another application at runtime",
+        "C": "A type of unit test",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which lifecycle hook is unique to Directives and Components that use projected content?",
+      "options": {
+        "A": "ngOnInit",
+        "B": "ngAfterContentInit",
+        "C": "ngOnChanges",
+        "D": "ngAfterViewInit"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'ShadowRoot' in Angular ViewEncapsulation.ShadowDom?",
+      "options": {
+        "A": "The root of the database",
+        "B": "The hidden DOM tree attached to an element, providing strict style isolation",
+        "C": "A backup of the UI",
+        "D": "A type of routing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to listen to global events like 'window:resize' or 'document:click'?",
+      "options": {
+        "A": "@EventListener()",
+        "B": "@HostListener()",
+        "C": "@GlobalListener()",
+        "D": "@WindowObserver()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Angular CDK' (Component Dev Kit)?",
+      "options": {
+        "A": "A tool to compile code",
+        "B": "A set of tools that implement common interaction patterns (drag-and-drop, overlays) without being tied to a specific UI design",
+        "C": "A type of database",
+        "D": "A specialized version of the CLI"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Overlay' service in Angular CDK used for?",
+      "options": {
+        "A": "To layer CSS styles",
+        "B": "To create floating panels like modals, tooltips, or menus",
+        "C": "To backup the UI",
+        "D": "To monitor the network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'A11y' (Accessibility) in Angular?",
+      "options": {
+        "A": "A type of unit test",
+        "B": "Ensuring the application is usable by people with disabilities (e.g., using ARIA attributes)",
+        "C": "A security scan",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool in the Angular CLI helps identify accessibility issues?",
+      "options": {
+        "A": "ng build",
+        "B": "eslint-plugin-template (with accessibility rules)",
+        "C": "ng test",
+        "D": "ng lint"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Strict Mode' in Angular (ng new --strict)?",
+      "options": {
+        "A": "A mode where you cannot take breaks",
+        "B": "A configuration that enables strict type checking and bundle size restrictions to improve maintainability",
+        "C": "A security-only version of Angular",
+        "D": "A mode for small projects"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Barrel' in Angular/TypeScript?",
+      "options": {
+        "A": "A place to store physical servers",
+        "B": "A way to rollup exports from several modules into a single convenient module (index.ts)",
+        "C": "A type of unit test",
+        "D": "A security feature"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dynamic Import' syntax in the Router used for?",
+      "options": {
+        "A": "To import CSS",
+        "B": "To enable Lazy Loading of modules using the loadChildren: () => import(...) syntax",
+        "C": "To connect to the database",
+        "D": "To update the app version"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Angular Language Service'?",
+      "options": {
+        "A": "A translation tool",
+        "B": "An editor extension that provides completion, errors, and hints inside Angular templates",
+        "C": "A type of pipe",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Source Maps' in an Angular build?",
+      "options": {
+        "A": "Maps of the data center",
+        "B": "Files that map minified code back to the original source code for easier debugging in production",
+        "C": "A type of routing",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in the @Component decorator is used to add external CSS files?",
+      "options": {
+        "A": "css: []",
+        "B": "styleUrls: []",
+        "C": "styles: []",
+        "D": "externalStyle: []"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Content Child' vs 'View Child'?",
+      "options": {
+        "A": "Content Child is for internal HTML; View Child for external",
+        "B": "Content Child refers to projected content; View Child refers to elements in the component's own template",
+        "C": "They are identical",
+        "D": "View Child is for CSS only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Self' vs 'Host' decorator in DI?",
+      "options": {
+        "A": "@Self looks at the component; @Host looks at the component and its host (template context)",
+        "B": "They are the same",
+        "C": "@Host is for CSS only",
+        "D": "@Self is for database only"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Factory' in Dependency Injection?",
+      "options": {
+        "A": "A physical factory for hardware",
+        "B": "A provider that uses a function to create and return the dependency value dynamically",
+        "C": "A type of unit test",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'useValue' provider used for?",
+      "options": {
+        "A": "To use the user's value",
+        "B": "To provide a fixed, constant value (like a configuration object) as a dependency",
+        "C": "To update the database",
+        "D": "To change the UI color"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'useClass' provider used for?",
+      "options": {
+        "A": "To style a CSS class",
+        "B": "To provide a specific class implementation for a given token",
+        "C": "To manage project classes",
+        "D": "To create a new module"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'provideHttpClient' (v15+) in a standalone app?",
+      "options": {
+        "A": "To provide internet connection",
+        "B": "To configure and provide the HttpClient without needing to import HttpClientModule",
+        "C": "To style the network",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Angular Fire'?",
+      "options": {
+        "A": "A physical fire in the office",
+        "B": "The official Angular library for Firebase integration",
+        "C": "A security firewall",
+        "D": "A performance test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'State Transfer' in SSR?",
+      "options": {
+        "A": "Moving to another state",
+        "B": "Transferring the application state from the server to the client to avoid duplicate data fetching",
+        "C": "Scaling the hardware",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Prerendering'?",
+      "options": {
+        "A": "Rendering the app before it is built",
+        "B": "Generating static HTML for specific routes at build time rather than runtime",
+        "C": "A type of CSS animation",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RxJS operator is used to 'buffer' values and emit them after a period of time?",
+      "options": {
+        "A": "delay",
+        "B": "bufferTime",
+        "C": "wait",
+        "D": "pause"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'TestBed' in Angular testing?",
+      "options": {
+        "A": "A bed for testers to rest",
+        "B": "The primary API for configuring and initializing the environment for unit testing in Angular",
+        "C": "A type of component",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'fixture.detectChanges()' used for in unit tests?",
+      "options": {
+        "A": "To find bugs",
+        "B": "To manually trigger Angular's change detection within the test environment",
+        "C": "To update the time",
+        "D": "To clear the cache"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'DebugElement' in Angular testing?",
+      "options": {
+        "A": "A hidden element",
+        "B": "An Angular-specific wrapper around a native DOM element that provides additional testing utilities",
+        "C": "A type of unit test",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which CLI command is used to add a third-party library that supports Angular Schematics?",
+      "options": {
+        "A": "ng install <name>",
+        "B": "ng add <name>",
+        "C": "npm get <name>",
+        "D": "ng new <name>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Web Workers' support in Angular?",
+      "options": {
+        "A": "A way to manage employees",
+        "B": "Running CPU-intensive tasks in a background thread to keep the UI responsive",
+        "C": "A security feature",
+        "D": "A type of routing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Service Worker' in Angular PWA?",
+      "options": {
+        "A": "A person who fixes the server",
+        "B": "A script that runs in the background to handle caching and offline capabilities",
+        "C": "A type of service",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Manifest.json' in an Angular PWA?",
+      "options": {
+        "A": "A list of developers",
+        "B": "A file that provides metadata about the app (icons, theme color) to allow it to be installed on a device",
+        "C": "A database for JSON data",
+        "D": "A type of routing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Angular Flex-Layout' (deprecated in favor of CSS Grid/Flex)?",
+      "options": {
+        "A": "A gym for developers",
+        "B": "A sophisticated engine that provided an API for managing responsive layouts using HTML attributes",
+        "C": "A type of database",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator is used to 'combine' emissions from two Observables into pairs?",
+      "options": {
+        "A": "merge",
+        "B": "zip",
+        "C": "concat",
+        "D": "switch"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ContentChild' static property?",
+      "options": {
+        "A": "The visibility of the child",
+        "B": "Whether the query is resolved before or after change detection (similar to ViewChild)",
+        "C": "A type of unit test",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Injector' hierarchy in Angular?",
+      "options": {
+        "A": "A list of vaccines",
+        "B": "The structure (Module -> Component -> Child) that Angular follows to find and provide dependencies",
+        "C": "A type of database index",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Value Provider' (useValue)?",
+      "options": {
+        "A": "Giving value to the user",
+        "B": "Providing a static value as a dependency injection token",
+        "C": "A type of unit test",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to inject a specific dependency token that isn't a class?",
+      "options": {
+        "A": "@Inject()",
+        "B": "@Injectable()",
+        "C": "@Provide()",
+        "D": "@Value()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Component Harness' in Angular testing?",
+      "options": {
+        "A": "Safety equipment for components",
+        "B": "A test utility that allows interacting with a component using a high-level API, making tests more resilient to UI changes",
+        "C": "A type of unit test",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Zone.js' overhead?",
+      "options": {
+        "A": "The price of the library",
+        "B": "The performance cost of intercepting every asynchronous event, which is why Signal-based components are gaining popularity",
+        "C": "A type of unit test",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question: What is the primary focus of 'Modern Angular' development?",
+      "options": {
+        "A": "Making apps heavier",
+        "B": "Simplification (Standalone), Reactivity (Signals), and Performance (SSR/Hydration)",
+        "C": "Replacing HTML with Java",
+        "D": "Removing CSS entirely"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Angular optimization technique involves 'deferring' the loading of specific dependencies until they are actually needed by a component, reducing the initial bundle size without creating a full lazy-loaded route?",
+      "options": {
+        "A": "Tree Shaking",
+        "B": "Deferrable Views (@defer)",
+        "C": "Preload All Modules",
+        "D": "Ahead-of-Time (AOT) Compilation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Vue Router'?",
+      "options": {
+        "A": "A hardware device for internet",
+        "B": "The official router for Vue.js to build Single Page Applications",
+        "C": "A database management tool",
+        "D": "A CSS framework"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used as a placeholder to render the matched component for a given path?",
+      "options": {
+        "A": "<router-link>",
+        "B": "<router-view>",
+        "C": "<router-outlet>",
+        "D": "<view-port>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to create navigation links in a Vue Router enabled app?",
+      "options": {
+        "A": "<a href='...'>",
+        "B": "<router-link>",
+        "C": "<nav-item>",
+        "D": "<route-to>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dynamic Route Matching'?",
+      "options": {
+        "A": "Routes that change colors",
+        "B": "Mapping routes with parameters (e.g., /user/:id) to the same component",
+        "C": "Routes that use AI",
+        "D": "A type of performance test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you access route parameters inside a component?",
+      "options": {
+        "A": "this.$params",
+        "B": "this.$route.params",
+        "C": "this.router.getParams()",
+        "D": "this.$query.id"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Programmatic Navigation' in Vue Router?",
+      "options": {
+        "A": "Coding the routes manually",
+        "B": "Navigating to a different URL using JavaScript methods like router.push()",
+        "C": "Using HTML links only",
+        "D": "A security feature"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to navigate to a new URL and add an entry to the history stack?",
+      "options": {
+        "A": "router.go()",
+        "B": "router.push()",
+        "C": "router.replace()",
+        "D": "router.move()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Navigation Guards' used for?",
+      "options": {
+        "A": "To protect the hardware",
+        "B": "To control access to routes by redirecting or canceling navigation (e.g., authentication)",
+        "C": "To style the navbar",
+        "D": "To speed up the network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which guard is called globally before every navigation?",
+      "options": {
+        "A": "beforeRouteEnter",
+        "B": "router.beforeEach",
+        "C": "router.afterEach",
+        "D": "beforeResolve"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Vuex'?",
+      "options": {
+        "A": "A new version of Vue",
+        "B": "A state management pattern and library for Vue.js applications",
+        "C": "A database tool",
+        "D": "A specialized compiler"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are the four core concepts of a Vuex store?",
+      "options": {
+        "A": "Model, View, Controller, Logic",
+        "B": "State, Getters, Mutations, Actions",
+        "C": "Data, Methods, Watch, Compute",
+        "D": "Input, Output, Event, Prop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the only way to actually change state in a Vuex store?",
+      "options": {
+        "A": "Actions",
+        "B": "Mutations",
+        "C": "Getters",
+        "D": "Direct assignment"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why should Mutations be synchronous?",
+      "options": {
+        "A": "To make them faster",
+        "B": "To ensure that state changes are trackable and predictable by the devtools",
+        "C": "Because JavaScript doesn't support async",
+        "D": "Mutations can be asynchronous"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are 'Actions' in Vuex used for?",
+      "options": {
+        "A": "To change the state directly",
+        "B": "To handle asynchronous logic and commit mutations",
+        "C": "To filter data",
+        "D": "To manage the UI"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are 'Getters' in Vuex comparable to in a Vue component?",
+      "options": {
+        "A": "Methods",
+        "B": "Computed properties",
+        "C": "Data",
+        "D": "Watchers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Pinia'?",
+      "options": {
+        "A": "A type of fruit",
+        "B": "The modern, recommended state management library for Vue 3",
+        "C": "A CSS framework",
+        "D": "A routing tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does Pinia differ from Vuex?",
+      "options": {
+        "A": "It is much slower",
+        "B": "It removes Mutations and has better TypeScript support",
+        "C": "It only works with Vue 2",
+        "D": "It requires a paid license"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to apply enter/leave animations for a single element or component?",
+      "options": {
+        "A": "<animate>",
+        "B": "<transition>",
+        "C": "<move>",
+        "D": "<style>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to animate a list of items rendered with v-for?",
+      "options": {
+        "A": "<transition>",
+        "B": "<transition-group>",
+        "C": "<list-animate>",
+        "D": "<v-group>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Scoped Slots'?",
+      "options": {
+        "A": "Slots for cleaning the floor",
+        "B": "Slots that allow the child component to pass data back up to the parent’s slot content",
+        "C": "Slots that only work in the header",
+        "D": "A type of data binding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to add Vue Router to an existing project via the CLI?",
+      "options": {
+        "A": "npm install router",
+        "B": "vue add router",
+        "C": "vue get router",
+        "D": "git clone router"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Module' in Vuex?",
+      "options": {
+        "A": "A physical part of the computer",
+        "B": "A way to split the store into smaller pieces, each containing its own state, mutations, etc.",
+        "C": "A type of component",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'namespaced: true' option do in a Vuex module?",
+      "options": {
+        "A": "Makes the module public",
+        "B": "Encapsulates the module's getters, actions, and mutations under a specific path",
+        "C": "Deletes the module names",
+        "D": "Speeds up the store"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Lazy Loading Routes'?",
+      "options": {
+        "A": "Loading routes when the user is tired",
+        "B": "Splitting the application into chunks and only loading route components when the route is visited",
+        "C": "A slow routing speed",
+        "D": "A security certificate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which CSS class is applied by Vue while an element is being added to the DOM?",
+      "options": {
+        "A": ".v-leave",
+        "B": ".v-enter-active",
+        "C": ".v-hidden",
+        "D": ".v-show"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you define 'Props' in Vue 3 script setup?",
+      "options": {
+        "A": "props: { ... }",
+        "B": "defineProps({ ... })",
+        "C": "setProps({ ... })",
+        "D": "const props = data()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you define 'Emits' in Vue 3 script setup?",
+      "options": {
+        "A": "this.$emit",
+        "B": "defineEmits(['event'])",
+        "C": "setEvents(['event'])",
+        "D": "emit: ['event']"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'ref' in Vue 3 Composition API?",
+      "options": {
+        "A": "To reference a DOM element only",
+        "B": "To create a reactive reference for any data type (strings, numbers, etc.)",
+        "C": "To refresh the page",
+        "D": "To restart the server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'reactive' in Vue 3 Composition API?",
+      "options": {
+        "A": "To make the app faster",
+        "B": "To create a reactive state for objects (proxied versions of the original object)",
+        "C": "To track mouse clicks",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'toRefs' used for in Vue 3?",
+      "options": {
+        "A": "To delete all references",
+        "B": "To convert a reactive object into plain objects where each property is a 'ref'",
+        "C": "To link to the database",
+        "D": "To sort a list"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook in Vue 3 replaces 'beforeCreate' and 'created' from Vue 2?",
+      "options": {
+        "A": "onCreated",
+        "B": "setup",
+        "C": "onBeforeMount",
+        "D": "onStart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'provide' and 'inject' used for?",
+      "options": {
+        "A": "To manage the server",
+        "B": "To pass data deep into a component tree without 'prop drilling'",
+        "C": "To inject CSS into HTML",
+        "D": "To provide internet connection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Teleport' in Vue 3?",
+      "options": {
+        "A": "Moving the server to another country",
+        "B": "A component that allows 'teleporting' content to a different part of the DOM tree (e.g., modals)",
+        "C": "A type of routing",
+        "D": "A performance test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Suspense' in Vue 3?",
+      "options": {
+        "A": "A feature for thrillers",
+        "B": "A built-in component for orchestrating async dependencies (like async components)",
+        "C": "A type of unit test",
+        "D": "A security module"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which directive is used for 'Model Modifiers' (like .trim or .number)?",
+      "options": {
+        "A": "v-bind",
+        "B": "v-model",
+        "C": "v-on",
+        "D": "v-for"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Custom Directives'?",
+      "options": {
+        "A": "Directives that you write yourself to perform low-level DOM access",
+        "B": "Directives that are pre-installed",
+        "C": "A type of CSS animation",
+        "D": "A security certificate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'watchEffect' function in Vue 3?",
+      "options": {
+        "A": "To watch the clock",
+        "B": "A function that automatically tracks dependencies and re-runs when they change",
+        "C": "To watch for mouse clicks",
+        "D": "A type of unit test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Vue.use()' used for in Vue 2?",
+      "options": {
+        "A": "To use the app",
+        "B": "To install Vue.js plugins",
+        "C": "To update the database",
+        "D": "To restart the server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Functional Components'?",
+      "options": {
+        "A": "Components that work",
+        "B": "Components that have no state and no instance, rendering faster than normal components",
+        "C": "Components that only have functions",
+        "D": "A type of routing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Vue 3, how do you create a global app instance?",
+      "options": {
+        "A": "new Vue()",
+        "B": "createApp({})",
+        "C": "Vue.init()",
+        "D": "app.start()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows Vue 3 to support multiple root nodes in a single template?",
+      "options": {
+        "A": "Teleport",
+        "B": "Fragments",
+        "C": "Suspense",
+        "D": "Composition"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Async Components'?",
+      "options": {
+        "A": "Components that are never loaded",
+        "B": "Components that are only loaded from the server when they are actually needed",
+        "C": "Components that only work with async/await",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'v-is' directive used for (Vue 3)?",
+      "options": {
+        "A": "Checking if an element is visible",
+        "B": "Binding a dynamic component when using in-DOM templates to bypass browser parsing restrictions",
+        "C": "A logical 'if' statement",
+        "D": "A performance metric"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you pass multiple values to a slot in Vue 3?",
+      "options": {
+        "A": "Multiple slots",
+        "B": "Slot props (Scoped slots)",
+        "C": "It is not possible",
+        "D": "Using data attributes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'NextTick' in Vue?",
+      "options": {
+        "A": "The next second on the clock",
+        "B": "A method to defer a callback to be executed after the next DOM update cycle",
+        "C": "A performance test",
+        "D": "A security scanner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Vite'?",
+      "options": {
+        "A": "A new programming language",
+        "B": "A fast build tool and dev server often used with Vue 3",
+        "C": "A database for images",
+        "D": "A type of routing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Base URL' in Vue Router?",
+      "options": {
+        "A": "To name the server",
+        "B": "To define the base path for the application (e.g., if hosted in a sub-folder)",
+        "C": "To secure the URL",
+        "D": "To monitor traffic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Scroll Behavior' in Vue Router?",
+      "options": {
+        "A": "How fast the user scrolls",
+        "B": "A function that allows you to customize the scroll position when navigating to a new route",
+        "C": "A performance test",
+        "D": "A security scan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Devtools' support in Pinia?",
+      "options": {
+        "A": "To write code",
+        "B": "Pinia integrates with Vue Devtools to allow inspection of state and timeline of actions",
+        "C": "To restart the computer",
+        "D": "A security module"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Final question of Batch 2: Which function is used to access the router instance inside a Composition API setup function?",
+      "options": {
+        "A": "getRouter()",
+        "B": "useRouter()",
+        "C": "this.$router",
+        "D": "startRouter()"
+      },
+      "answer": "B"
+    }
+  ]
+}

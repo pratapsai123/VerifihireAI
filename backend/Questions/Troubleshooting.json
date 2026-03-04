@@ -1,0 +1,2011 @@
+{
+  "skill": "Troubleshooting",
+  "questions": [
+    {
+      "question": "What is the first step in a systematic troubleshooting process?",
+      "options": {
+        "A": "Changing the code immediately.",
+        "B": "Reproducing the issue consistently.",
+        "C": "Restarting the server.",
+        "D": "Deleting the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Rubber Duck Debugging' is a method where a developer explains their code line-by-line to an inanimate object to find logic errors.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO common benefits of using 'Version Control' (Git) for troubleshooting:",
+      "options": {
+        "A": "Using git bisect to find the specific commit that introduced a bug.",
+        "B": "Reverting to a known working state quickly.",
+        "C": "Automatically fixing syntax errors.",
+        "D": "Increasing the execution speed of the code."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary purpose of a 'Stack Trace'?",
+      "options": {
+        "A": "To list all variables in the program.",
+        "B": "To show the sequence of function calls that led to a specific error or crash.",
+        "C": "To speed up the database.",
+        "D": "To encrypt the log files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO strategies for 'Isolating' a bug:",
+      "options": {
+        "A": "Commenting out sections of code to find the failing part.",
+        "B": "Creating a 'Minimal Reproducible Example' (MRE).",
+        "C": "Running the entire application on a faster computer.",
+        "D": "Asking the user to try a different browser."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'Dry Running' code mean?",
+      "options": {
+        "A": "Running code without an internet connection.",
+        "B": "Manually tracing the logic of the code on paper or in your head without executing it.",
+        "C": "Running code on a server that is turned off.",
+        "D": "Compiling code without saving it."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Binary Search' debugging?",
+      "options": {
+        "A": "Searching for binary files in the system.",
+        "B": "Continually splitting the code in half to find which part contains the error.",
+        "C": "Using only zeros and ones to write code.",
+        "D": "Searching for errors in the BIOS."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Time-travel Debugging'?",
+      "options": {
+        "A": "A debugger that only works in different time zones.",
+        "B": "A feature that allows a developer to step backward through the execution of a program to see exactly what happened.",
+        "C": "A way to schedule bug fixes for the future.",
+        "D": "Deleting the history of the project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common sources of 'Intermittent' bugs:",
+      "options": {
+        "A": "Race conditions in multi-threaded code.",
+        "B": "Network instability or jitter.",
+        "C": "Syntax errors.",
+        "D": "Missing semicolons."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which tool is built into most browsers to help debug HTML, CSS, and JavaScript?",
+      "options": {
+        "A": "Browser Extensions",
+        "B": "Developer Tools (Inspect Element)",
+        "C": "Task Manager",
+        "D": "File Explorer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Breakpoint' in a debugger?",
+      "options": {
+        "A": "A point where the server crashes.",
+        "B": "An intentional stopping place in the code where the debugger pauses execution.",
+        "C": "The end of a loop.",
+        "D": "A keyboard shortcut to delete code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does a '500 Internal Server Error' usually signify?",
+      "options": {
+        "A": "The user entered the wrong password.",
+        "B": "An unhandled exception occurred on the backend server.",
+        "C": "The website is blocked by a firewall.",
+        "D": "The domain has expired."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO symptoms of a 'JavaScript Memory Leak' in the browser:",
+      "options": {
+        "A": "The page becomes increasingly slow over time.",
+        "B": "The browser tab's RAM usage continues to climb even when the page is idle.",
+        "C": "The text on the page becomes blurry.",
+        "D": "The URL changes automatically."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What command is used in Linux to view the last few lines of a log file in real-time?",
+      "options": {
+        "A": "cat -f",
+        "B": "tail -f",
+        "C": "view -live",
+        "D": "grep -now"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common causes of 'Database Connection Pool' exhaustion:",
+      "options": {
+        "A": "Not closing database connections properly after use.",
+        "B": "Sudden spikes in traffic exceeding the maximum pool size.",
+        "C": "Using a dark theme in the database manager.",
+        "D": "Writing SQL queries in all caps."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'OOM Killer' in Linux?",
+      "options": {
+        "A": "A type of computer virus.",
+        "B": "A kernel mechanism that kills processes when the system is dangerously low on memory.",
+        "C": "A tool to delete unused files.",
+        "D": "A networking protocol."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to see the real-time resource usage (CPU/Memory) of all running Docker containers?",
+      "options": {
+        "A": "docker ps",
+        "B": "docker stats",
+        "C": "docker inspect",
+        "D": "docker top"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Traceroute' used to identify?",
+      "options": {
+        "A": "The speed of the database.",
+        "B": "The specific network hop or router where a connection is failing or slowing down.",
+        "C": "The number of lines in a file.",
+        "D": "The name of the server owner."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Heisenbug'?",
+      "options": {
+        "A": "A bug named after a famous physicist.",
+        "B": "A bug that seems to disappear or change behavior when you attempt to study or debug it.",
+        "C": "A bug that only occurs in high-temperature environments.",
+        "D": "A bug that fixes itself automatically."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is the ultimate mindset for a successful troubleshooter?",
+      "options": {
+        "A": "Assuming the user is always lying.",
+        "B": "Being curious, logical, and evidence-driven.",
+        "C": "Trying things randomly until they work.",
+        "D": "Blaming other departments for all issues."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used in Linux to check the current system entropy, which can affect the speed of cryptographic operations like SSL key generation?",
+      "options": {
+        "A": "cat /proc/sys/kernel/random/entropy_avail",
+        "B": "cpuinfo --entropy",
+        "C": "ls -entropy",
+        "D": "random --check"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary benefit of 'Environment Parity' in troubleshooting?",
+      "options": {
+        "A": "It ensures every developer uses the same hardware.",
+        "B": "It minimizes 'it works on my machine' bugs by keeping Dev, Staging, and Prod environments identical.",
+        "C": "It reduces the cost of cloud hosting.",
+        "D": "It automatically generates unit tests."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Fork Bomb' is a type of denial-of-service attack where a process continually creates new processes until system resources are exhausted.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does a 'Steal Time' (st) metric in top/htop indicate on a virtualized server?",
+      "options": {
+        "A": "The CPU is being stolen by a hacker.",
+        "B": "The percentage of time a virtual CPU waits for a real CPU while the hypervisor is servicing another processor.",
+        "C": "The amount of time the database is idle.",
+        "D": "The time taken to encrypt a file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common indicators of a 'Resource Contention' issue in a multi-tenant environment:",
+      "options": {
+        "A": "High CPU Ready time (in virtualization).",
+        "B": "Increased I/O Wait times even with low local disk activity.",
+        "C": "Syntax errors in the application logs.",
+        "D": "A blue screen of death on the client machine."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Log Scrubbing' is the practice of removing personally identifiable information (PII) from logs before they are stored.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool would you use to find the 'Critical Path' of a request in a microservices architecture to identify high-latency services?",
+      "options": {
+        "A": "Distributed Tracing (e.g., Jaeger or Honeycomb)",
+        "B": "A local text editor",
+        "C": "The browser's bookmarks manager",
+        "D": "A physical stopwatch"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Cold Start' in the context of debugging Serverless (FaaS) performance?",
+      "options": {
+        "A": "The server room is too cold for the CPU to start.",
+        "B": "The latency seen when a function is invoked for the first time after being idle.",
+        "C": "A manual restart of the entire data center.",
+        "D": "A database query that hasn't been cached."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common reasons for 'SSL/TLS Handshake' failures:",
+      "options": {
+        "A": "Protocol version mismatch (e.g., client only supports TLS 1.0, server requires 1.3).",
+        "B": "Expired or untrusted SSL certificate.",
+        "C": "Incorrect CSS file path.",
+        "D": "High CPU usage on the client's mouse."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'TCP Dump' is a command-line packet analyzer that allows you to capture and inspect network traffic for deep troubleshooting.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Kubernetes command provides the most detail regarding why a specific 'Pod' failed to schedule?",
+      "options": {
+        "A": "kubectl logs",
+        "B": "kubectl describe pod [pod_name]",
+        "C": "kubectl get pods",
+        "D": "kubectl delete pod"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Zombie Process' and how does it affect the system?",
+      "options": {
+        "A": "It consumes 100% of the CPU.",
+        "B": "It occupies a slot in the process table but consumes no actual CPU or memory resources.",
+        "C": "It deletes files randomly.",
+        "D": "It encrypts the hard drive."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO causes of 'Database Deadlocks' during high-concurrency troubleshooting:",
+      "options": {
+        "A": "Two transactions waiting for each other to release locks on the same resources.",
+        "B": "Circular dependencies in the application's transaction logic.",
+        "C": "Using a dark-themed database GUI.",
+        "D": "Writing SQL queries in a non-standard font."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Chaos Engineering' is the discipline of experimenting on a system to build confidence in its capability to withstand turbulent conditions in production.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Root Cause Analysis' (RCA)?",
+      "options": {
+        "A": "A method to delete the root directory of a server.",
+        "B": "A systematic process for identifying the underlying cause of an incident to prevent recurrence.",
+        "C": "A tool to analyze the speed of an SSD.",
+        "D": "A security scan of the server BIOS."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which metric is the best indicator of an 'I/O Bound' system slowdown?",
+      "options": {
+        "A": "High CPU usage.",
+        "B": "High %iowait in system monitoring tools.",
+        "C": "Large number of installed apps.",
+        "D": "Low screen brightness."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'MTR' (My Traceroute) combines the functionality of ping and traceroute to provide a continuous view of network path performance.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Fuzzing' primarily used for in troubleshooting and security?",
+      "options": {
+        "A": "To make the user interface look more modern.",
+        "B": "To find software bugs and security vulnerabilities by providing random or invalid data as input.",
+        "C": "To clear the system cache.",
+        "D": "To speed up video rendering."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common symptoms of a 'Circular Dependency' in a software module:",
+      "options": {
+        "A": "Build failures or 'Maximum call stack size exceeded' errors.",
+        "B": "Memory leaks that grow until the system crashes.",
+        "C": "The mouse cursor disappearing.",
+        "D": "The server's physical power light turning red."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Log Rotation' prevents the server from running out of disk space by compressing and eventually deleting old log files.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'MTTR' stand for in the context of incident response?",
+      "options": {
+        "A": "Maximum Time To Restart",
+        "B": "Mean Time To Repair (or Resolve)",
+        "C": "Minimum Task To Run",
+        "D": "Main Technical Troubleshooting Rule"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Linux troubleshooting, which directory contains virtual files that provide a peek into the kernel's view of processes and hardware?",
+      "options": {
+        "A": "/etc",
+        "B": "/proc",
+        "C": "/bin",
+        "D": "/usr"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Post-Mortem' report should focus on blaming the individual who made the mistake to prevent future errors.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Thundering Herd' problem in system design and troubleshooting?",
+      "options": {
+        "A": "A large number of physical servers failing at once.",
+        "B": "When a large number of processes waiting for an event are all awoken at once, overwhelming the system.",
+        "C": "A type of network cable interference.",
+        "D": "When the database grows too large for the disk."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO benefits of 'Blameless Post-Mortems':",
+      "options": {
+        "A": "They encourage honest reporting of what happened without fear of punishment.",
+        "B": "They focus on systemic improvements rather than individual mistakes.",
+        "C": "They ensure the responsible person is fired.",
+        "D": "They reduce the cost of the cloud bill automatically."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'TCP Keepalive' is a mechanism to detect if a connection is still active and can help troubleshoot 'ghost' connections in a load balancer.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command would you use to find out which specific shared libraries a program is linked to?",
+      "options": {
+        "A": "ls -l",
+        "B": "ldd [executable_path]",
+        "C": "cat /etc/hosts",
+        "D": "ps -aux"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Drift' in the context of infrastructure troubleshooting?",
+      "options": {
+        "A": "A slow database query.",
+        "B": "When the actual configuration of a server deviates from the desired state defined in code (IaC).",
+        "C": "A physical movement of the server rack.",
+        "D": "The time it takes for a message to travel across the globe."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO indicators of 'High Disk Wait' (iowait):",
+      "options": {
+        "A": "The CPU is idle while the system waits for data to be read or written to disk.",
+        "B": "Application performance is slow despite low CPU and Memory usage.",
+        "C": "The user is typing too fast.",
+        "D": "The monitor is flickering."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Silent Corruption' is a failure where data is written incorrectly to disk but the system does not report an error immediately.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Runbook'?",
+      "options": {
+        "A": "A book about how to run a marathon.",
+        "B": "A set of standardized, documented procedures to resolve recurring technical issues.",
+        "C": "The physical manual for a motherboard.",
+        "D": "A list of all employees in the company."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool would you use to view the kernel ring buffer for hardware-related error messages?",
+      "options": {
+        "A": "top",
+        "B": "dmesg",
+        "C": "lsblk",
+        "D": "df -h"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Split-Brain' in a cluster occurs when a network partition causes two nodes to both believe they are the Master/Leader.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Backoff' (e.g., Exponential Backoff) used for in API troubleshooting?",
+      "options": {
+        "A": "To turn off the server during the night.",
+        "B": "To progressively increase the wait time between retries to avoid overwhelming a struggling service.",
+        "C": "To delete old code.",
+        "D": "To change the API version."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common causes of 'Heisenbugs':",
+      "options": {
+        "A": "Race conditions that change when timing is affected by a debugger.",
+        "B": "Memory corruption that behaves differently when extra logging is added.",
+        "C": "A missing semicolon in a static CSS file.",
+        "D": "The user's internet connection speed."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Failing Open' is a security-related failure where a system allows access if the authentication service is unreachable.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Egress Filtering' and why is it troubleshot?",
+      "options": {
+        "A": "Filtering air in the server room.",
+        "B": "Controlling data leaving a network; if misconfigured, it can prevent a server from calling external APIs.",
+        "C": "A type of database indexing.",
+        "D": "Checking for invalid user passwords."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a 'Five Nines' availability goal?",
+      "options": {
+        "A": "99.9%",
+        "B": "99.999%",
+        "C": "95.0%",
+        "D": "90.0%"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Core Dump' contains the recorded state of the working memory of a computer program at a specific time, generally when the program has crashed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary goal of 'Chaos Monkey'?",
+      "options": {
+        "A": "To play games on the server.",
+        "B": "To randomly terminate production instances to ensure the system is resilient to failures.",
+        "C": "To write code automatically.",
+        "D": "To monitor user traffic."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is commonly used to debug 'Infrastructure Drift' by comparing the current state of cloud resources against the defined configuration?",
+      "options": {
+        "A": "Terraform Plan",
+        "B": "Git Log",
+        "C": "Docker Inspect",
+        "D": "Nginx Reload"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary cause of a 'Flash of Unstyled Content' (FOUC) during web page loading?",
+      "options": {
+        "A": "The database is too slow.",
+        "B": "The browser renders the HTML before the external CSS files are fully loaded or applied.",
+        "C": "The user has disabled JavaScript.",
+        "D": "The server is using an outdated version of PHP."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'TCP Retransmission' is an indicator of network congestion or packet loss between the client and the server.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command would you use to check for 'Zombie' or 'Defunct' processes on a Linux system?",
+      "options": {
+        "A": "lsblk",
+        "B": "top (look for 'z' status) or ps aux | grep 'Z'",
+        "C": "df -h",
+        "D": "uptime"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common symptoms of a 'Broken Pipe' error in network programming:",
+      "options": {
+        "A": "The client attempted to write data to a socket that the server has already closed.",
+        "B": "A timeout occurred before the server could respond.",
+        "C": "The physical ethernet cable was disconnected.",
+        "D": "The database reached its storage limit."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Idempotency Keys' are used in API troubleshooting to ensure that retrying a failed request doesn't result in duplicate transactions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Jitter' represent in network diagnostics?",
+      "options": {
+        "A": "The total bandwidth available.",
+        "B": "The variation in time between arriving data packets.",
+        "C": "The number of users on the network.",
+        "D": "The speed of the CPU clock."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tab in Chrome DevTools is best for identifying 'Long Tasks' that block the main thread and cause UI jank?",
+      "options": {
+        "A": "Network",
+        "B": "Performance",
+        "C": "Application",
+        "D": "Security"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A '413 Payload Too Large' error is a client-side error that means the request body exceeds the server's configured limit.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'State Deserialization' failure?",
+      "options": {
+        "A": "The server running out of memory.",
+        "B": "An error occurring when a system fails to reconstruct an object from a saved bitstream (e.g., from a cache or database).",
+        "C": "A database index being deleted.",
+        "D": "A type of network firewall block."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO indicators of a 'Resource Leak' in a long-running background worker:",
+      "options": {
+        "A": "Steady, linear increase in memory usage (RAM) over several days.",
+        "B": "Growing number of open file descriptors or database connections that never close.",
+        "C": "Occasional syntax errors in the logs.",
+        "D": "The server's hostname changing automatically."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Pre-flight' (OPTIONS) request failures are often a sign of misconfigured CORS policies on the server.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of an 'LBS' (Load Balancer Stickiness) or 'Session Affinity' when troubleshooting login issues?",
+      "options": {
+        "A": "To encrypt the login password.",
+        "B": "To ensure a user stays connected to the same backend server where their session data resides.",
+        "C": "To redirect the user to a different website.",
+        "D": "To speed up the database connection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Linux utility is used to trace system calls (syscalls) made by a process, helping to find where a program is 'hanging'?",
+      "options": {
+        "A": "strace",
+        "B": "grep",
+        "C": "mkdir",
+        "D": "chmod"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO common causes of '504 Gateway Timeout' in a cloud-native environment:",
+      "options": {
+        "A": "The backend service is taking too long to process a heavy query.",
+        "B": "Network security groups are dropping packets between the gateway and the service.",
+        "C": "The user entered an invalid email address.",
+        "D": "The API documentation is missing."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Deadlock' occurs when two or more threads are stuck forever, each waiting for a resource held by the other.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Race Condition'?",
+      "options": {
+        "A": "A competition between developers to finish a task.",
+        "B": "A bug where the system's behavior depends on the sequence or timing of uncontrollable events.",
+        "C": "A type of high-speed network.",
+        "D": "A database query that runs too fast."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does a '429 Too Many Requests' error indicate to a developer?",
+      "options": {
+        "A": "The API key is expired.",
+        "B": "The client has exceeded the rate limit set by the API provider.",
+        "C": "The server is currently offline for maintenance.",
+        "D": "The request was successfully processed."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Log Levels' (DEBUG, INFO, WARN, ERROR) are used to filter the volume of information written to logs to help isolate critical issues.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of 'Smoke Testing' after a deployment?",
+      "options": {
+        "A": "To check for physical smoke in the data center.",
+        "B": "To verify that the most critical functions of the application work before performing deeper testing.",
+        "C": "To test the security of the firewall.",
+        "D": "To measure the server's temperature."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Kubernetes, what does the status 'CrashLoopBackOff' typically indicate?",
+      "options": {
+        "A": "The server hardware has failed.",
+        "B": "The pod is starting, crashing, and restarting repeatedly, often due to an application error or misconfiguration.",
+        "C": "The internet connection to the cluster is down.",
+        "D": "The pod has successfully completed its task."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Kubernetes command allows you to view the events of a namespace to find why a resource failed to be created?",
+      "options": {
+        "A": "kubectl get events",
+        "B": "kubectl logs",
+        "C": "kubectl delete events",
+        "D": "kubectl version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Liveness Probe' failure in Kubernetes will cause the container to be restarted by the kubelet.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of a 'Readiness Probe'?",
+      "options": {
+        "A": "To check if the container is physically on the disk.",
+        "B": "To determine if a container is ready to start accepting traffic; if it fails, the pod is removed from service endpoints.",
+        "C": "To check the developer's login status.",
+        "D": "To measure the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common causes for 'ImagePullBackOff' in a containerized environment:",
+      "options": {
+        "A": "The image name or tag is misspelled.",
+        "B": "The container registry requires authentication that has not been provided.",
+        "C": "The application code has a syntax error.",
+        "D": "The database is currently undergoing maintenance."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'OOMKilled' (Exit Code 137) means the container was terminated because it exceeded its defined memory limit.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Linux tool is used to troubleshoot network packet filtering and NAT rules in the kernel?",
+      "options": {
+        "A": "iptables (or nftables)",
+        "B": "ls",
+        "C": "mkdir",
+        "D": "grep"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'MTU Mismatch' often cause in a network?",
+      "options": {
+        "A": "The computer monitor to flicker.",
+        "B": "Intermittent connectivity issues or packets being dropped because they are larger than a network link can handle.",
+        "C": "The database to delete old records.",
+        "D": "A change in the user's password."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code is returned by a Load Balancer if the backend 'Target Group' has no healthy instances?",
+      "options": {
+        "A": "200 OK",
+        "B": "503 Service Unavailable",
+        "C": "404 Not Found",
+        "D": "301 Moved"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Log Aggregation'?",
+      "options": {
+        "A": "Deleting logs from all servers.",
+        "B": "The process of collecting, centralizing, and indexing logs from multiple sources for easier searching and analysis.",
+        "C": "A type of database indexing.",
+        "D": "A security encryption method."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO benefits of 'Distributed Tracing' (e.g., AWS X-Ray or Jaeger):",
+      "options": {
+        "A": "Visualizing the flow of a single request through multiple microservices.",
+        "B": "Identifying which service in a chain is responsible for high latency.",
+        "C": "Reducing the cost of the server hardware.",
+        "D": "Writing the application documentation automatically."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Sidecar' containers can be used for logging and monitoring without modifying the primary application code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Prometheus' primarily used for in a troubleshooting stack?",
+      "options": {
+        "A": "A text editor for writing code.",
+        "B": "An open-source monitoring and alerting toolkit designed for reliability and scalability.",
+        "C": "A type of high-speed network cable.",
+        "D": "A tool to manage user social media profiles."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command allows you to see the CPU and Memory usage of a specific Kubernetes Pod in real-time?",
+      "options": {
+        "A": "kubectl top pod [pod_name]",
+        "B": "kubectl get pod",
+        "C": "kubectl delete pod",
+        "D": "kubectl version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO common 'Cloud Security' misconfigurations that lead to troubleshooting incidents:",
+      "options": {
+        "A": "S3 buckets set to 'Public' by mistake.",
+        "B": "Security Groups allowing all traffic (0.0.0.0/0) on sensitive ports like 22 or 3306.",
+        "C": "Using a dark-themed console.",
+        "D": "Changing the server's time zone."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Horizontal Pod Autoscaler' (HPA) failures can lead to system outages if the cluster runs out of physical nodes to schedule new pods.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VPC Flow Logs' used for in network troubleshooting?",
+      "options": {
+        "A": "Recording the names of all developers.",
+        "B": "Capturing information about the IP traffic going to and from network interfaces in a Virtual Private Cloud.",
+        "C": "A type of database backup.",
+        "D": "Monitoring the server's power usage."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary function of 'Grafana' in a DevOps troubleshooting dashboard?",
+      "options": {
+        "A": "To write the application's source code.",
+        "B": "To visualize metrics and data from various sources like Prometheus or Elasticsearch.",
+        "C": "To act as a physical door to the data center.",
+        "D": "To store user credit card information."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Canary Deployments' help troubleshoot new releases by routing a small percentage of traffic to the new version to monitor for errors.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'MTBF' (Mean Time Between Failures)?",
+      "options": {
+        "A": "A measure of the average time a system provides service before a failure occurs.",
+        "B": "The total number of bugs in the code.",
+        "C": "The speed of the network.",
+        "D": "The cost of a bug fix."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Linux signal is sent by the kernel to a process when it attempts to access memory that has not been allocated to it, often resulting in a 'Segmentation Fault'?",
+      "options": {
+        "A": "SIGINT",
+        "B": "SIGSEGV",
+        "C": "SIGKILL",
+        "D": "SIGTERM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In database troubleshooting, what is the 'Lost Update' anomaly?",
+      "options": {
+        "A": "When a database row is physically deleted from the disk.",
+        "B": "When two transactions read the same data and then update it, with the second update overwriting the first without incorporating its changes.",
+        "C": "When a query takes more than 30 seconds to run.",
+        "D": "When the database log file becomes corrupted."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'First Input Delay' (FID) is a Core Web Vital that measures the time from when a user first interacts with a page to the time when the browser is actually able to begin processing event handlers in response.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does a 'Cumulative Layout Shift' (CLS) score of 0.25 or higher indicate in a Lighthouse report?",
+      "options": {
+        "A": "The server response time is excellent.",
+        "B": "The page is experiencing poor visual stability, where elements move around unexpectedly during loading.",
+        "C": "The website is fully optimized for mobile devices.",
+        "D": "The API is returning data in the wrong format."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common symptoms of 'B-Tree Index Fragmentation' in a relational database:",
+      "options": {
+        "A": "Query performance degrades over time as data is inserted and deleted.",
+        "B": "The index takes up significantly more disk space than the actual data it points to.",
+        "C": "The database password is no longer accepted.",
+        "D": "The CSS on the website stops loading."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Deadlock Detection' is a feature in most modern RDBMS that automatically kills one of the conflicting transactions to allow the others to proceed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which HTTP header can be used to troubleshoot 'Cache Miss' issues by indicating why a CDN did not serve a cached version of a resource?",
+      "options": {
+        "A": "X-Cache (e.g., X-Cache: MISS)",
+        "B": "Content-Type",
+        "C": "User-Agent",
+        "D": "Authorization"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Priority Inversion' in a multi-threaded system?",
+      "options": {
+        "A": "When a developer changes the priority of a task in Jira.",
+        "B": "A scenario where a low-priority task holds a resource needed by a high-priority task, effectively delaying the high-priority task.",
+        "C": "When the server restarts in reverse order.",
+        "D": "A type of database indexing error."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO ways to debug 'Memory Bloat' in a Ruby or Python background worker:",
+      "options": {
+        "A": "Using a memory profiler to find objects that are not being garbage collected.",
+        "B": "Checking for large datasets being loaded entirely into RAM instead of being processed in batches.",
+        "C": "Increasing the size of the computer's monitor.",
+        "D": "Deleting the .git folder."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'External Secrets Management' (like HashiCorp Vault) helps troubleshoot security issues by preventing developers from hardcoding API keys in the source code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Double Spend' problem in distributed ledger troubleshooting?",
+      "options": {
+        "A": "Buying the same server twice.",
+        "B": "A potential flaw where the same digital token can be spent more than once, requiring consensus to resolve.",
+        "C": "A billing error in a cloud provider.",
+        "D": "A type of network timeout."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Log Sampling' and why is it used in high-traffic systems?",
+      "options": {
+        "A": "Randomly deleting logs to save space.",
+        "B": "Recording only a representative percentage of logs (e.g., 10%) to reduce storage costs and performance overhead.",
+        "C": "Translating logs into different languages.",
+        "D": "A way to test the physical durability of hard drives."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Service Level Objectives' (SLOs) are specific target values for a service level, such as '99.9% of requests must complete in under 200ms'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command would you use to troubleshoot which process is holding a lock on a file in Linux?",
+      "options": {
+        "A": "lsof [file_name]",
+        "B": "mkdir",
+        "C": "ping",
+        "D": "tail"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO common 'Anti-patterns' in Error Handling:",
+      "options": {
+        "A": "Swallowing exceptions (Catching an error and doing nothing with it).",
+        "B": "Returning a generic 'Error occurred' message without any context or ID.",
+        "C": "Logging the stack trace to a secure file.",
+        "D": "Using structured JSON logging."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Blue-Green Deployment' failures can be troubleshot by simply routing traffic back to the 'Green' environment if the 'Blue' environment shows errors.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Phantom Read' in database transaction isolation troubleshooting?",
+      "options": {
+        "A": "A query that returns no results.",
+        "B": "When a transaction re-runs a query and finds new rows that were added by another committed transaction in the meantime.",
+        "C": "A ghost in the server room.",
+        "D": "A type of hardware memory error."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary role of 'Synthetic Monitoring' in troubleshooting?",
+      "options": {
+        "A": "Using real users to test the site.",
+        "B": "Using automated scripts to simulate user actions at regular intervals to ensure key paths are functional.",
+        "C": "A type of AI that writes code.",
+        "D": "Monitoring the chemical levels in a data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Time to First Byte' (TTFB) is a measurement used to troubleshoot the latency of the web server and the network connection.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Context Switching' overhead in the context of CPU troubleshooting?",
+      "options": {
+        "A": "Changing the language of the operating system.",
+        "B": "The time and resources lost when the CPU switches from one process/thread to another, which can spike during heavy multitasking.",
+        "C": "Moving a server from one rack to another.",
+        "D": "Deleting old user sessions."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cache Incoherence' in a distributed system?",
+      "options": {
+        "A": "When the cache is too small for the data",
+        "B": "A situation where different nodes in a cluster have different versions of the same cached data",
+        "C": "When the cache server is physically disconnected",
+        "D": "A type of database indexing error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Linux utility is best for troubleshooting 'Open File Descriptor' limits to prevent 'Too many open files' errors?",
+      "options": {
+        "A": "lsof",
+        "B": "mkdir",
+        "C": "ping",
+        "D": "uptime"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Kernel Panic' is a safety measure taken by an OS kernel upon detecting an internal fatal error from which it cannot safely recover.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Tail Latency' (P99) specifically help troubleshoot?",
+      "options": {
+        "A": "The average speed of all users",
+        "B": "The worst-case latency experienced by the 1% of users, often indicating systemic bottlenecks",
+        "C": "The time it takes to delete a file",
+        "D": "The physical length of a network cable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common causes of 'Jank' in a web application's UI:",
+      "options": {
+        "A": "Long-running JavaScript executing on the main thread",
+        "B": "Excessive DOM reflows and repaints during animations",
+        "C": "The user having too many browser extensions",
+        "D": "The server being located in a different country"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Horizontal Pod Autoscaler' (HPA) thrashing occurs when a pod rapidly scales up and down due to sensitive threshold settings.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Address Space Layout Randomization' (ASLR) troubleshot for in security debugging?",
+      "options": {
+        "A": "To speed up the boot process",
+        "B": "A memory protection process that randomizes the locations of executables in RAM to prevent buffer overflow attacks",
+        "C": "To organize files on the hard drive",
+        "D": "To change the IP address of the server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code signifies that a server, while acting as a gateway, did not receive a timely response from an upstream server?",
+      "options": {
+        "A": "500",
+        "B": "502",
+        "C": "504 Gateway Timeout",
+        "D": "408"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Identify TWO indicators of 'Entropy Starvation' in a Linux environment:",
+      "options": {
+        "A": "Slow generation of SSH keys or SSL certificates",
+        "B": "Blocking of processes that require random numbers (reading from /dev/random)",
+        "C": "The database running out of disk space",
+        "D": "High CPU usage on the graphics card"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Zero-Copy' is an optimization that reduces CPU overhead by allowing a NIC to move data directly from system memory without involve the CPU in copying.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Bus Error' (SIGBUS) typically indicative of?",
+      "options": {
+        "A": "A network timeout",
+        "B": "An attempt to access memory that the CPU cannot physically address, often due to alignment issues",
+        "C": "The server being too hot",
+        "D": "A database syntax error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Chaos Mesh' or 'Gremlin' in a troubleshooting workflow?",
+      "options": {
+        "A": "To clean up messy code",
+        "B": "To inject failures (like network latency or pod kills) into a system to test its resilience",
+        "C": "To organize developer meetings",
+        "D": "To monitor the temperature of the server room"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Log Levels' should be set to 'TRACE' in a production environment to ensure all details are captured.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool would you use to troubleshoot the 'Critical Rendering Path' of a website?",
+      "options": {
+        "A": "Chrome DevTools (Performance Tab)",
+        "B": "Microsoft Excel",
+        "C": "The 'ping' command",
+        "D": "A physical printer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO signs of 'Application Server Thread Exhaustion':",
+      "options": {
+        "A": "Incoming requests are queued or timed out even if CPU usage is low",
+        "B": "Stack traces showing many threads in a 'BLOCKED' or 'WAITING' state",
+        "C": "The website's font size changes automatically",
+        "D": "The server's hostname is deleted"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Failing Fast' involves a system stopping immediately when an error is detected to prevent the spread of corrupted data.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Memory Compaction' in Linux troubleshooting?",
+      "options": {
+        "A": "Deleting old files from the RAM",
+        "B": "A kernel process that moves allocated pages of memory to create larger blocks of free contiguous memory",
+        "C": "Compressing the size of the database",
+        "D": "Reducing the font size of the code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Race Condition' specifically in the context of a 'Check-then-Act' bug?",
+      "options": {
+        "A": "When a program runs faster than expected",
+        "B": "When a value is checked, but changed by another thread before the subsequent action is taken",
+        "C": "A competition between two developers",
+        "D": "A type of network loop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Rate Limiting' is a troubleshooting mitigation strategy to prevent a single client from crashing a service with too many requests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of an 'Incident Commander' (IC) during a major outage?",
+      "options": {
+        "A": "To write the code to fix the bug",
+        "B": "To coordinate the response, lead the troubleshooting call, and delegate tasks to specialized engineers",
+        "C": "To handle customer support tickets",
+        "D": "To order food for the team"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'NUMA (Non-Uniform Memory Access) Balancing' and why is it troubleshot in high-performance computing?",
+      "options": {
+        "A": "It is a way to clean the server's physical RAM.",
+        "B": "A kernel feature that moves processes closer to the memory they are accessing to reduce latency across CPU sockets.",
+        "C": "A type of database sharding strategy.",
+        "D": "A security protocol for encrypting memory."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'TCP Window Scaling' issues can lead to poor network throughput even on high-bandwidth connections by limiting the amount of unacknowledged data in flight.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Linux signal is sent to a process when a 'Pipe' it is writing to is broken (the reader has closed the connection)?",
+      "options": {
+        "A": "SIGPIPE",
+        "B": "SIGKILL",
+        "C": "SIGSTOP",
+        "D": "SIGALRM"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does a 'High Context Switch' rate typically indicate during CPU troubleshooting?",
+      "options": {
+        "A": "The CPU is running too many threads, causing the OS to spend more time switching between them than executing code.",
+        "B": "The server is currently being hacked.",
+        "C": "The database has run out of index space.",
+        "D": "The monitor refresh rate is too low."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO symptoms of 'Inode Exhaustion' on a Linux file system:",
+      "options": {
+        "A": "The system reports 'No space left on device' even though 'df' shows plenty of free disk space.",
+        "B": "New files cannot be created, but existing files can still be modified.",
+        "C": "The CPU usage spikes to 100% on all cores.",
+        "D": "The server's IP address changes automatically."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Cascading Failures' occur when a failure in one component triggers a chain reaction that crashes other healthy components in the system.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Bufferbloat' and how does it affect network troubleshooting?",
+      "options": {
+        "A": "The database cache being too large.",
+        "B": "High latency caused by excessive buffering of packets in network equipment, leading to slow response times.",
+        "C": "A type of memory leak in the browser.",
+        "D": "A security vulnerability in web forms."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which browser DevTools panel is used to troubleshoot 'Layout Thrashing' caused by repeated forced synchronous layouts?",
+      "options": {
+        "A": "Performance Tab",
+        "B": "Security Tab",
+        "C": "Application Tab",
+        "D": "Console Tab"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO indicators of an 'Unresponsive Main Thread' in a JavaScript application:",
+      "options": {
+        "A": "Animations appear jerky or 'janky'.",
+        "B": "The browser shows a 'Page Unresponsive' dialog box.",
+        "C": "The server returns a 502 Bad Gateway error.",
+        "D": "The CSS color properties stop working."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Exponential Backoff with Jitter' is a technique used to prevent many clients from retrying a failed request at the exact same time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Memory Overcommit' in Linux?",
+      "options": {
+        "A": "Allocating more memory to a process than it actually needs.",
+        "B": "The kernel allowing processes to allocate more memory than the system physically has, banking on them not using it all at once.",
+        "C": "Deleting unused RAM files.",
+        "D": "A way to increase the size of the swap file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary role of a 'Keepalived' or 'VRRP' setup in troubleshooting high availability?",
+      "options": {
+        "A": "To encrypt user data during transit.",
+        "B": "To provide a virtual IP that automatically fails over from a primary server to a standby server if the primary fails.",
+        "C": "To monitor the speed of the hard drive.",
+        "D": "To manage the server's cron jobs."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Swap Thrashing' occurs when the system spends more time moving data between RAM and Disk (Swap) than actually running applications.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool would you use to trace every network packet leaving a specific interface for low-level protocol debugging?",
+      "options": {
+        "A": "tcpdump",
+        "B": "ls -l",
+        "C": "htop",
+        "D": "df"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO signs of 'N+1 Query' bottlenecks discovered during database profiling:",
+      "options": {
+        "A": "A single page load triggering hundreds of small, similar SQL queries.",
+        "B": "High latency that scales linearly with the number of items being displayed.",
+        "C": "The database returning an 'Access Denied' error.",
+        "D": "The server disk being 100% full."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Garbage Collection (GC) Pressure' can cause an application to experience frequent, brief freezes or high CPU usage.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Write Amplification' and why is it a concern for SSD-based troubleshooting?",
+      "options": {
+        "A": "Making the font of the code larger.",
+        "B": "The process where the physical amount of data written to a flash drive is a multiple of the logical data written by the host.",
+        "C": "Increasing the volume of the system alerts.",
+        "D": "A type of database indexing error."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does a 'Segmentation Fault (Core Dumped)' message tell a developer?",
+      "options": {
+        "A": "The hard drive is full.",
+        "B": "The program crashed due to invalid memory access and a snapshot of the memory was saved for analysis.",
+        "C": "The internet connection was lost.",
+        "D": "The user entered an invalid password."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Resource Quotas' in Kubernetes help troubleshoot noisy neighbor problems by limiting the CPU and RAM any single team or project can consume.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary goal of 'Post-Mortem' analysis in an SRE culture?",
+      "options": {
+        "A": "To find out who is to blame for an outage.",
+        "B": "To understand the systemic causes of an incident and implement changes to prevent it from happening again.",
+        "C": "To write a user manual for the software.",
+        "D": "To delete old code from the repository."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Clock Skew' in a distributed system and how does it affect troubleshooting?",
+      "options": {
+        "A": "When the physical clock on the wall is wrong.",
+        "B": "The difference in time between the internal clocks of different nodes in a cluster, which can break timestamp-based logic.",
+        "C": "A type of network cable interference.",
+        "D": "When the CPU clock speed is too high."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Linux tool is used to troubleshoot disk I/O performance by showing per-device statistics like average wait time and service time?",
+      "options": {
+        "A": "iostat",
+        "B": "mkdir",
+        "C": "ls",
+        "D": "pwd"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Heapsnapshot' analysis in Chrome DevTools helps identify memory leaks by comparing the number and size of objects in memory at two different points in time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of 'NTP' (Network Time Protocol) in troubleshooting distributed systems?",
+      "options": {
+        "A": "To speed up the internet connection.",
+        "B": "To synchronize the clocks of computer systems over packet-switched, variable-latency data networks.",
+        "C": "To encrypt user data.",
+        "D": "To monitor the server's temperature."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common symptoms of 'TCP Port Exhaustion' on a high-traffic server:",
+      "options": {
+        "A": "New outgoing connections fail with 'Address already in use' or 'Cannot assign requested address'.",
+        "B": "System logs show many sockets stuck in the 'TIME_WAIT' state.",
+        "C": "The database password is rejected.",
+        "D": "The server's physical power light turns red."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Log Levels' (FATAL, ERROR, WARN, INFO, DEBUG) should be used to minimize log noise in production while still capturing critical failures.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Hydration Mismatch' in the context of debugging React/Next.js applications?",
+      "options": {
+        "A": "The server running out of memory.",
+        "B": "When the pre-rendered HTML from the server does not match the first render in the browser, causing UI flickers or errors.",
+        "C": "A database query taking too long.",
+        "D": "The user's internet connection being unstable."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Linux command displays all open network sockets and the processes using them, useful for finding 'ghost' services?",
+      "options": {
+        "A": "ss -tulnp",
+        "B": "ls",
+        "C": "df -h",
+        "D": "uptime"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO characteristics of 'Graceful Degradation' during a partial system outage:",
+      "options": {
+        "A": "Non-essential features (like recommendations) are disabled to save resources for core features (like checkout).",
+        "B": "The system provides a simplified, functional experience rather than a total crash.",
+        "C": "The entire website is replaced by a static maintenance page.",
+        "D": "All user data is immediately deleted for security."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'S.M.A.R.T.' (Self-Monitoring, Analysis, and Reporting Technology) is used to troubleshoot and predict physical hard drive failures.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Zombie Object' debugging in memory management?",
+      "options": {
+        "A": "Objects that are resurrected from the trash bin.",
+        "B": "Objects that have been deallocated but still have active pointers referencing them, potentially leading to crashes.",
+        "C": "A type of virus that affects JavaScript.",
+        "D": "Deleting unused code modules."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'MTTI' (Mean Time To Identify) measure in an incident response lifecycle?",
+      "options": {
+        "A": "The time taken to fix the bug.",
+        "B": "The average time it takes for a team to become aware of an incident after it has occurred.",
+        "C": "The cost of the infrastructure.",
+        "D": "The number of users affected by a crash."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Root Cause Analysis' (RCA) aims to find the single individual responsible for a system failure.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which browser DevTools tab would you use to find out why a network request is taking 5 seconds to respond?",
+      "options": {
+        "A": "Network (Timing tab)",
+        "B": "Sources",
+        "C": "Memory",
+        "D": "Security"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO common 'Anti-patterns' in Error Logging:",
+      "options": {
+        "A": "Logging full stack traces in high-frequency loops, causing disk I/O bottlenecks.",
+        "B": "Logging plain-text passwords or PII in cleartext logs.",
+        "C": "Using structured JSON logs.",
+        "D": "Sending logs to a centralized server like Elasticsearch."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'TCP Retransmissions' in network logs are a strong indicator of packet loss or poor network quality.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Thread Contention' and how does it impact application performance?",
+      "options": {
+        "A": "When threads compete for limited CPU time, often due to excessive locking or synchronization.",
+        "B": "A competition between developers to write the best thread.",
+        "C": "When the database has too many rows.",
+        "D": "A type of network loop."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary function of a 'Circuit Breaker' pattern in a microservices architecture?",
+      "options": {
+        "A": "To turn off the power in the server room.",
+        "B": "To prevent a failing service from causing a cascading failure by stopping requests to it after a threshold of errors is met.",
+        "C": "To encrypt all network traffic.",
+        "D": "To monitor the user's location."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Binary Search Debugging' involves splitting a large codebase in half repeatedly to isolate the specific line or module causing an error.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'OOM Killer' (Out of Memory Killer) in the Linux kernel?",
+      "options": {
+        "A": "A security tool to delete unused apps.",
+        "B": "A mechanism that kills processes when the system is dangerously low on memory to prevent a total system crash.",
+        "C": "A type of hard drive failure.",
+        "D": "A process that speeds up the RAM."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Split-Brain' problem in a high-availability cluster?",
+      "options": {
+        "A": "A developer working on two features simultaneously.",
+        "B": "A condition where two nodes in a cluster both believe they are the leader due to a network partition.",
+        "C": "A type of memory corruption in the CPU cache.",
+        "D": "When a database has two different schemas."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'eBPF' (Extended Berkeley Packet Filter) allows developers to run sandboxed programs in the Linux kernel to trace system calls and network traffic without changing kernel source code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which HTTP status code is most likely returned if a 'Web Application Firewall' (WAF) blocks a request due to a suspected SQL injection attack?",
+      "options": {
+        "A": "200 OK",
+        "B": "403 Forbidden",
+        "C": "404 Not Found",
+        "D": "500 Internal Server Error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common symptoms of 'Entropy Starvation' on a Linux server:",
+      "options": {
+        "A": "Very slow generation of SSH keys or SSL certificates.",
+        "B": "Processes waiting indefinitely for random numbers from /dev/random.",
+        "C": "The server running out of disk space.",
+        "D": "The CPU cooling fan spinning at maximum speed."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'Layout Thrashing' refer to in frontend performance debugging?",
+      "options": {
+        "A": "Deleting the CSS files by accident.",
+        "B": "A performance bottleneck caused by JavaScript repeatedly reading and writing to the DOM, forcing multiple synchronous layouts.",
+        "C": "Changing the website's font family.",
+        "D": "A type of network timeout."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Liveness Probe' failure in Kubernetes will result in the pod being restarted, while a 'Readiness Probe' failure simply removes the pod from the service traffic.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command would you use to find which process is listening on a specific TCP port (e.g., 8080) on a Linux system?",
+      "options": {
+        "A": "ls -p",
+        "B": "sudo lsof -i :8080",
+        "C": "df -h",
+        "D": "tail -f"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Priority Inversion' in a multi-threaded application?",
+      "options": {
+        "A": "When a low-priority thread holds a lock needed by a high-priority thread, effectively blocking the high-priority task.",
+        "B": "When the developer changes the sorting of a list.",
+        "C": "A type of database indexing error.",
+        "D": "When the CPU runs at a lower clock speed to save power."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO benefits of 'Distributed Tracing' in microservices:",
+      "options": {
+        "A": "Visualizing the 'Critical Path' of a single request across multiple services.",
+        "B": "Pinpointing which specific service is causing high latency in a call chain.",
+        "C": "Automatically fixing bugs in the source code.",
+        "D": "Reducing the monthly cost of the database."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Heisenbugs' are easier to fix than standard bugs because they only appear when you add extra logging.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool would you use to perform a live capture of network packets to troubleshoot an encrypted handshake failure at the binary level?",
+      "options": {
+        "A": "Postman",
+        "B": "Wireshark (or tcpdump)",
+        "C": "Sublime Text",
+        "D": "Google Chrome Bookmarks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'OOM Killer' (Out of Memory Killer) in the Linux kernel?",
+      "options": {
+        "A": "A security virus that deletes RAM.",
+        "B": "A mechanism that kills processes to free up memory when the system is under extreme memory pressure.",
+        "C": "A tool that compresses old log files.",
+        "D": "A hardware switch that turns off the server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Zombie' processes consume significant CPU resources and are usually the root cause of server slowdowns.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary function of 'Source Maps' in frontend debugging?",
+      "options": {
+        "A": "To provide a GPS map of the server location.",
+        "B": "To map minified and obfuscated production code back to the original source code for easier debugging.",
+        "C": "To compress images for faster loading.",
+        "D": "To encrypt the JavaScript files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Identify TWO common causes for a '504 Gateway Timeout' in a load-balanced environment:",
+      "options": {
+        "A": "The backend server took too long to respond to the proxy.",
+        "B": "A network security group is blocking the return traffic to the gateway.",
+        "C": "The user entered an invalid password.",
+        "D": "The website's favicon is missing."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Hot Reloading' allows developers to see changes in the UI without losing the current state of the application during the debugging process.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Linux signal is used to gracefully terminate a process, allowing it to perform cleanup before exiting?",
+      "options": {
+        "A": "SIGKILL (9)",
+        "B": "SIGTERM (15)",
+        "C": "SIGSTOP",
+        "D": "SIGCONT"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Layout Thrashing'?",
+      "options": {
+        "A": "A performance bottleneck caused by repeatedly reading and writing to the DOM, forcing the browser to recalculate styles and layout.",
+        "B": "Deleting the CSS file while the page is loading.",
+        "C": "A type of network attack on the web server.",
+        "D": "When the monitor refresh rate is too high."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Identify TWO benefits of 'Blameless Post-Mortems' in a DevOps culture:",
+      "options": {
+        "A": "Focusing on systemic improvements rather than individual mistakes.",
+        "B": "Encouraging engineers to be honest about what happened without fear of punishment.",
+        "C": "Ensuring the person who made the mistake is fired.",
+        "D": "Reducing the cost of the cloud bill."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does a '429 Too Many Requests' status code indicate?",
+      "options": {
+        "A": "The user is not logged in.",
+        "B": "The client has exceeded their allocated rate limit for the API.",
+        "C": "The server has crashed.",
+        "D": "The resource has been moved permanently."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Memory Compaction' in the context of Linux kernel troubleshooting?",
+      "options": {
+        "A": "Deleting old files from the RAM to save space.",
+        "B": "A process that rearranges used memory pages to create larger blocks of contiguous free memory, reducing external fragmentation.",
+        "C": "Compressing the size of the database on the hard drive.",
+        "D": "A way to increase the speed of the CPU clock."
+      },
+      "answer": "B"
+    }
+  ]
+}

@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Hive", 
+  "questions": [
+    {
+    "question": "What is Apache Hive primarily used for?",
+    "options": {
+      "A": "Real-time stream processing",
+      "B": "Operating system virtualization",
+      "C": "Data warehousing and SQL-like querying on large datasets in HDFS",
+      "D": "Physical hardware maintenance"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which language is used to write queries in Hive?",
+    "options": {
+      "A": "Python",
+      "B": "C++",
+      "C": "Java",
+      "D": "HiveQL (HQL)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Where does Hive store the metadata about tables and partitions?",
+    "options": {
+      "A": "In the HDFS data blocks",
+      "B": "In the local RAM of the user",
+      "C": "In a relational database called the Metastore",
+      "D": "In a text file on the NameNode"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is the default database in Hive?",
+    "options": {
+      "A": "master",
+      "B": "temp",
+      "C": "hive_db",
+      "D": "default"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which component of Hive is responsible for converting HiveQL into MapReduce or Spark jobs?",
+    "options": {
+      "A": "Hive Metastore",
+      "B": "SerDe",
+      "C": "The Query Compiler/Driver",
+      "D": "The HDFS DataNode"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What happens when you drop an 'Internal Table' in Hive?",
+    "options": {
+      "A": "Only the metadata is deleted",
+      "B": "Only the data is deleted",
+      "C": "Both the metadata and the actual data in HDFS are deleted",
+      "D": "The table is moved to the Trash directory"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary difference between an 'External Table' and an 'Internal Table'?",
+    "options": {
+      "A": "External tables are faster",
+      "B": "Internal tables cannot be queried using SQL",
+      "C": "Internal tables are only for small data",
+      "D": "Dropping an external table only deletes metadata, leaving data in HDFS intact"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which Hive command is used to view the structure of a table?",
+    "options": {
+      "A": "SHOW TABLE",
+      "B": "LIST TABLE",
+      "C": "DESCRIBE TABLE_NAME",
+      "D": "EXPLAIN TABLE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'SerDe' stand for in Hive?",
+    "options": {
+      "A": "Server-Deploy",
+      "B": "Search-Delete",
+      "C": "Series-Density",
+      "D": "Serializer/Deserializer"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which keyword is used to create a table that points to an existing directory in HDFS?",
+    "options": {
+      "A": "REMOTE",
+      "B": "HDFS",
+      "C": "EXTERNAL",
+      "D": "POINTER"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "By default, where does Hive store table data in HDFS?",
+    "options": {
+      "A": "/tmp/hive",
+      "B": "/user/hive/data",
+      "C": "/user/hive/warehouse",
+      "D": "/etc/hive/tables"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to load data from a local file into a Hive table?",
+    "options": {
+      "A": "INSERT LOCAL",
+      "B": "COPY FROM LOCAL",
+      "C": "PUT DATA",
+      "D": "LOAD DATA LOCAL INPATH"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Partitioning' in Hive used for?",
+    "options": {
+      "A": "To encrypt the data",
+      "B": "To compress the files",
+      "C": "To divide a table into logical parts to improve query performance",
+      "D": "To share data with other users"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a partitioned table, how is the data physically stored in HDFS?",
+    "options": {
+      "A": "As a single large file",
+      "B": "In an encrypted hidden folder",
+      "C": "In a flat list of files",
+      "D": "In sub-directories named after the partition keys"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Bucketing' in Hive?",
+    "options": {
+      "A": "To delete old data",
+      "B": "To backup the metadata",
+      "C": "To further divide partitions into smaller, fixed-size files based on a hash function",
+      "D": "To count the number of rows"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which operator is used in HiveQL to join two tables?",
+    "options": {
+      "A": "UNION",
+      "B": "COMBINE",
+      "C": "MERGE",
+      "D": "JOIN"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the default file format for Hive tables?",
+    "options": {
+      "A": "Parquet",
+      "B": "ORC",
+      "C": "TextFile",
+      "D": "Avro"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which Hive command lists all the databases present in the system?",
+    "options": {
+      "A": "LIST DATABASES",
+      "B": "VIEW DATABASES",
+      "C": "GET DATABASES",
+      "D": "SHOW DATABASES"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which of the following is a collection data type in Hive?",
+    "options": {
+      "A": "INT",
+      "B": "STRING",
+      "C": "STRUCT",
+      "D": "FLOAT"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you switch the current session to a different database?",
+    "options": {
+      "A": "CHANGE DATABASE db_name",
+      "B": "GOTO db_name",
+      "C": "SET DATABASE db_name",
+      "D": "USE db_name"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the role of the 'Hive Server2'?",
+    "options": {
+      "A": "To store the data on disk",
+      "B": "To manage HDFS replication",
+      "C": "To allow multiple clients to execute queries against Hive concurrently",
+      "D": "To monitor the cluster temperature"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to delete all rows from a table without dropping the table itself?",
+    "options": {
+      "A": "DELETE FROM table_name",
+      "B": "REMOVE FROM table_name",
+      "C": "CLEAR table_name",
+      "D": "TRUNCATE TABLE table_name"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'UDF' in Hive?",
+    "options": {
+      "A": "Unified Data File",
+      "B": "Universal Deployment Framework",
+      "C": "User Defined Function",
+      "D": "User Data Filter"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which tool provides an interactive shell for executing Hive queries?",
+    "options": {
+      "A": "Hadoop CLI",
+      "B": "Spark Shell",
+      "C": "Hive CLI / Beeline",
+      "D": "Sqoop"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'LIMIT' clause in HiveQL?",
+    "options": {
+      "A": "To increase query speed",
+      "B": "To encrypt the result",
+      "C": "To restrict the number of rows returned by the query",
+      "D": "To set the maximum file size"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which file format is highly optimized for read performance in Hive?",
+    "options": {
+      "A": "CSV",
+      "B": "JSON",
+      "C": "TEXT",
+      "D": "ORC (Optimized Row Columnar)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does the 'SHOW TABLES' command do?",
+    "options": {
+      "A": "Displays the data inside a table",
+      "B": "Shows the metadata of a specific table",
+      "C": "Lists all tables in the current database",
+      "D": "Creates a new table"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which keyword is used to avoid duplicate values in a SELECT statement?",
+    "options": {
+      "A": "UNIQUE",
+      "B": "SINGLE",
+      "C": "DIFFERENT",
+      "D": "DISTINCT"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In Hive, which command is used to remove a database?",
+    "options": {
+      "A": "DELETE DATABASE db_name",
+      "B": "REMOVE DATABASE db_name",
+      "C": "DROP DATABASE db_name",
+      "D": "ERASE DATABASE db_name"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'Managed Tables' in Hive?",
+    "options": {
+      "A": "To allow external systems to manage data",
+      "B": "To speed up Python scripts",
+      "C": "To allow Hive to have full control over the lifecycle of the data",
+      "D": "To bypass the Metastore"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which configuration file is used to set Hive properties?",
+    "options": {
+      "A": "core-site.xml",
+      "B": "hdfs-site.xml",
+      "C": "hive-site.xml",
+      "D": "mapred-site.xml"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command provides the execution plan of a Hive query?",
+    "options": {
+      "A": "SHOW PLAN",
+      "B": "DESCRIBE",
+      "C": "PLAN FOR",
+      "D": "EXPLAIN"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of the 'SORT BY' clause in Hive?",
+    "options": {
+      "A": "To sort the final output globally",
+      "B": "To sort the data on the Driver node only",
+      "C": "To sort the data within each reducer",
+      "D": "To sort the HDFS blocks"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function is used to find the number of rows in a table?",
+    "options": {
+      "A": "SUM()",
+      "B": "TOTAL()",
+      "C": "COUNT()",
+      "D": "LENGTH()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the effect of 'OVERWRITE' in the LOAD DATA command?",
+    "options": {
+      "A": "It appends data to the table",
+      "B": "It renames the table",
+      "C": "It deletes existing data in the table/partition before loading new data",
+      "D": "It encrypts the data during load"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Beeline' in the Hive ecosystem?",
+    "options": {
+      "A": "A data storage format",
+      "B": "A machine learning algorithm",
+      "C": "A JDBC client based on the SQLLine CLI for executing queries",
+      "D": "A backup tool for the Metastore"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is NOT a complex data type in Hive?",
+    "options": {
+      "A": "MAP",
+      "B": "ARRAY",
+      "C": "STRUCT",
+      "D": "VARCHAR"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which operator is used to filter records in HiveQL?",
+    "options": {
+      "A": "HAVING",
+      "B": "GROUP BY",
+      "C": "WHERE",
+      "D": "LIMIT"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'MSC K REPAIR TABLE' command?",
+    "options": {
+      "A": "To fix a corrupted table",
+      "B": "To delete empty files",
+      "C": "To synchronize metadata in the Metastore with the physical folders in HDFS",
+      "D": "To speed up the network"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which type of join returns all rows from the left table and matched rows from the right table?",
+    "options": {
+      "A": "INNER JOIN",
+      "B": "FULL OUTER JOIN",
+      "C": "LEFT OUTER JOIN",
+      "D": "RIGHT OUTER JOIN"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Hive, what does 'SCHEMA' refer to?",
+    "options": {
+      "A": "A specific file format",
+      "B": "The actual data blocks",
+      "C": "A synonym for 'DATABASE'",
+      "D": "The network topology"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which keyword is used to add a new column to an existing Hive table?",
+    "options": {
+      "A": "INSERT COLUMN",
+      "B": "APPEND COLUMN",
+      "C": "ADD COLUMNS",
+      "D": "NEW COLUMN"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'CLUSTER BY' clause perform in Hive?",
+    "options": {
+      "A": "Only Sorting",
+      "B": "Only Partitioning",
+      "C": "Both DISTRIBUTE BY and SORT BY on the same columns",
+      "D": "Data encryption across the cluster"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to show the partitions of a specific table?",
+    "options": {
+      "A": "LIST PARTITIONS table_name",
+      "B": "VIEW PARTITIONS table_name",
+      "C": "SHOW PARTITIONS table_name",
+      "D": "DESCRIBE PARTITIONS table_name"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Dynamic Partitioning' in Hive?",
+    "options": {
+      "A": "Changing the file size at runtime",
+      "B": "Adding more nodes to the cluster",
+      "C": "Automatically creating partitions based on the data values during insertion",
+      "D": "Deleting partitions that are not used"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function is used to convert a string to uppercase in Hive?",
+    "options": {
+      "A": "BIG()",
+      "B": "CAPS()",
+      "C": "UCASE()",
+      "D": "UPPER()"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Static Partitioning'?",
+    "options": {
+      "A": "Partitioning small tables only",
+      "B": "Encrypting partitions",
+      "C": "Manually specifying the partition values while loading data",
+      "D": "Allowing Hive to decide partitions"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which keyword is used to rename a Hive table?",
+    "options": {
+      "A": "CHANGE TO",
+      "B": "REPLACE WITH",
+      "C": "RENAME TO",
+      "D": "NEW NAME"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Map-Side Join' in Hive optimization?",
+    "options": {
+      "A": "Joining two massive tables",
+      "B": "Joining tables after the Reduce phase",
+      "C": "Performing a join in the Map phase for small tables that fit in memory",
+      "D": "Sorting data before joining"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to exit the Hive CLI?",
+    "options": {
+      "A": "CLOSE",
+      "B": "STOP",
+      "C": "EXIT",
+      "D": "QUIT"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Local Mode' in Hive?",
+    "options": {
+      "A": "Running queries on the user's mobile phone",
+      "B": "Running Hive without HDFS",
+      "C": "Executing small jobs on a single machine to avoid cluster overhead",
+      "D": "Managing local user permissions"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which Hive command displays the current database name?",
+    "options": {
+      "A": "SHOW DB",
+      "B": "CURRENT DATABASE",
+      "C": "SELECT current_database()",
+      "D": "SHOW CURRENT DATABASE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Skewed Data' in Hive?",
+    "options": {
+      "A": "Data that is perfectly balanced",
+      "B": "Data that is corrupted",
+      "C": "Data that is disproportionately distributed across keys, causing performance bottlenecks",
+      "D": "Encrypted data"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which clause is used to group data by one or more columns?",
+    "options": {
+      "A": "SORT BY",
+      "B": "ORDER BY",
+      "C": "GROUP BY",
+      "D": "DISTRIBUTE BY"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the role of the 'HCatalog' component?",
+    "options": {
+      "A": "To compress HDFS files",
+      "B": "To monitor network traffic",
+      "C": "To provide a table and storage management layer that makes Hive metadata accessible to other tools",
+      "D": "To manage user logins"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to list all the functions available in Hive?",
+    "options": {
+      "A": "LIST FUNCTIONS",
+      "B": "VIEW FUNCTIONS",
+      "C": "DESCRIBE FUNCTIONS",
+      "D": "SHOW FUNCTIONS"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Multi-Insert' in HiveQL?",
+    "options": {
+      "A": "Inserting data into a table from multiple users",
+      "B": "Inserting the same row multiple times",
+      "C": "Performing multiple INSERT operations into different tables from a single source query",
+      "D": "A way to speed up the network"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which Hive function is used to extract the current date?",
+    "options": {
+      "A": "GET_DATE()",
+      "B": "NOW()",
+      "C": "DATE_NOW()",
+      "D": "CURRENT_DATE"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Explode' function used for in Hive?",
+    "options": {
+      "A": "To delete a table",
+      "B": "To compress a column",
+      "C": "To transform a single row containing an array or map into multiple rows",
+      "D": "To encrypt the data"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to modify the properties of an existing table?",
+    "options": {
+      "A": "CHANGE TABLE",
+      "B": "UPDATE TABLE",
+      "C": "ALTER TABLE",
+      "D": "MODIFY TABLE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Strict Mode' in Hive?",
+    "options": {
+      "A": "A mode where queries run faster",
+      "B": "A mode for encrypted data only",
+      "C": "A configuration that prevents potentially dangerous queries (like full table scans on partitioned tables)",
+      "D": "A mode where only the admin can run queries"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which Hive function returns the first non-null value in a list of arguments?",
+    "options": {
+      "A": "FIRST()",
+      "B": "IFNULL()",
+      "C": "GET_NON_NULL()",
+      "D": "COALESCE()"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Vectorization' in Hive?",
+    "options": {
+      "A": "To draw graphs",
+      "B": "To convert HiveQL into Python",
+      "C": "To process a batch of rows at a time instead of one by one for improved performance",
+      "D": "To encrypt the HDFS blocks"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which operator is used to perform pattern matching in a WHERE clause?",
+    "options": {
+      "A": "MATCH",
+      "B": "EQUALS",
+      "C": "LIKE",
+      "D": "CONTAINS"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Predicate Pushdown'?",
+    "options": {
+      "A": "A way to delete filters",
+      "B": "Moving the filter to the end of the query",
+      "C": "Evaluating filter conditions as early as possible (at the storage layer) to reduce data reading",
+      "D": "A way to speed up the network"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function is used to calculate the average of a numeric column?",
+    "options": {
+      "A": "MEAN()",
+      "B": "TOTAL()",
+      "C": "AVG()",
+      "D": "SUM()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which Hive configuration property is used to enable Dynamic Partitioning?",
+    "options": {
+      "A": "hive.exec.dynamic.partition = true",
+      "B": "hive.partition.dynamic.enable = true",
+      "C": "hive.dynamic.partition.mode = true",
+      "D": "hive.exec.partitioning = dynamic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of setting 'hive.exec.dynamic.partition.mode' to 'nonstrict'?",
+    "options": {
+      "A": "To allow the first partition column to be static",
+      "B": "To allow all partitions to be dynamic during an insert",
+      "C": "To bypass the Metastore verification",
+      "D": "To speed up the MapReduce job execution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which join optimization involves reading the smaller table into memory on all mapper nodes?",
+    "options": {
+      "A": "Sort-Merge Join",
+      "B": "Bucket Join",
+      "C": "Map Join (Broadcast Join)",
+      "D": "Skewed Join"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'LATERAL VIEW' clause do in a Hive query?",
+    "options": {
+      "A": "It creates a temporary side-table for joins",
+      "B": "It is used in conjunction with UDTFs (like explode) to apply the function to each row",
+      "C": "It provides a 3D view of the data schema",
+      "D": "It flips the columns and rows of a table"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which format is an efficient, intermediate binary storage format that stores data in Key-Value pairs?",
+    "options": {
+      "A": "TextFile",
+      "B": "Avro",
+      "C": "JSONFile",
+      "D": "SequenceFile"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Tez' in the context of Hive?",
+    "options": {
+      "A": "A specialized Hive data type",
+      "B": "A high-performance execution engine that replaces MapReduce to reduce DAG overhead",
+      "C": "A tool for compressing HDFS blocks",
+      "D": "A security protocol for Hive Server2"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Hive command allows you to view the metadata without the actual schema details?",
+    "options": {
+      "A": "DESCRIBE EXTENDED",
+      "B": "DESCRIBE FORMATTED",
+      "C": "DESCRIBE SCHEMA",
+      "D": "SHOW CREATE TABLE"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the difference between 'ORDER BY' and 'SORT BY' in Hive?",
+    "options": {
+      "A": "ORDER BY guarantees total order; SORT BY orders data within each reducer",
+      "B": "SORT BY is faster because it uses the Driver node only",
+      "C": "ORDER BY only works on numeric columns",
+      "D": "There is no functional difference between them"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific SerDe is required to query JSON data natively in Hive?",
+    "options": {
+      "A": "org.apache.hadoop.hive.serde2.OpenCSVSerde",
+      "B": "org.apache.hive.hcatalog.data.JsonSerDe",
+      "C": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+      "D": "org.apache.hadoop.hive.serde2.RegexSerDe"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Bucketed Map Join'?",
+    "options": {
+      "A": "To join two large tables that are bucketed on the join columns",
+      "B": "To random-sample data from a bucket",
+      "C": "To encrypt data in specific buckets",
+      "D": "To avoid using the Map phase during a join"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'COLLECT_LIST' aggregate function do?",
+    "options": {
+      "A": "It returns a list of unique values",
+      "B": "It returns an array of all values for a group, including duplicates",
+      "C": "It counts the rows in a group",
+      "D": "It sums the values in a list"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration enables Hive to automatically convert a join into a Map Join based on file size?",
+    "options": {
+      "A": "hive.auto.convert.join = true",
+      "B": "hive.mapjoin.smalltable.filesize",
+      "C": "hive.exec.parallel = true",
+      "D": "hive.optimize.mapjoin = true"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Remote Metastore' configuration?",
+    "options": {
+      "A": "Storing metadata on a DataNode",
+      "B": "Running the metastore service in a separate JVM from the Hive Driver",
+      "C": "Connecting two HDFS clusters together",
+      "D": "Backing up the Hive table data to S3"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Window Function is used to get the value from a previous row in a result set?",
+    "options": {
+      "A": "LEAD()",
+      "B": "LAG()",
+      "C": "PREV()",
+      "D": "FIRST_VALUE()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What occurs when the 'hive.optimize.skewjoin' property is enabled?",
+    "options": {
+      "A": "Hive will automatically drop skewed rows",
+      "B": "Hive will split skewed keys into separate jobs to avoid reducer bottlenecks",
+      "C": "Hive will encrypt skewed data",
+      "D": "Hive will sort skewed data by the Driver"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HiveQL, how do you handle 'Schema on Read'?",
+    "options": {
+      "A": "By validating data during the LOAD DATA command",
+      "B": "By applying the schema to the data only when the query is executed",
+      "C": "By converting all data to binary during ingestion",
+      "D": "By requiring all files to be Parquet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Cost-Based Optimizer' (CBO) in Hive?",
+    "options": {
+      "A": "A tool to calculate the price of a query",
+      "B": "A feature that uses Calcite to generate the most efficient execution plan based on table statistics",
+      "C": "A way to limit the number of mappers based on cost",
+      "D": "A system for managing cloud billing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to add an external JAR file to the Hive session for a custom UDF?",
+    "options": {
+      "A": "IMPORT JAR 'path'",
+      "B": "SET JAR 'path'",
+      "C": "ADD JAR 'path'",
+      "D": "LOAD JAR 'path'"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the significance of the 'OVER' clause in Hive?",
+    "options": {
+      "A": "It marks the end of a query",
+      "B": "It is used to define a window of rows for windowing functions",
+      "C": "It overwrites existing table data",
+      "D": "It restarts the Hive session"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which table property is used to mark a table as 'Transactional' for ACID operations?",
+    "options": {
+      "A": "'transactional'='true'",
+      "B": "'acid'='enabled'",
+      "C": "'mode'='acid'",
+      "D": "'type'='managed_transactional'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Zookeeper' in a Hive HA (High Availability) setup?",
+    "options": {
+      "A": "Storing table data",
+      "B": "Managing service discovery and locking for HiveServer2 instances",
+      "C": "Compressing metadata",
+      "D": "Providing a web interface"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Hive function is used to get the length of an array?",
+    "options": {
+      "A": "LENGTH()",
+      "B": "COUNT()",
+      "C": "SIZE()",
+      "D": "ARRAY_LEN()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'DISTRIBUTE BY' clause ensure in Hive?",
+    "options": {
+      "A": "Data is globally sorted",
+      "B": "Rows with the same key are sent to the same reducer",
+      "C": "Data is replicated 3 times",
+      "D": "The query runs in parallel on the Driver"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which setting prevents a 'Cross Product' join from running unless explicitly allowed?",
+    "options": {
+      "A": "hive.mapred.mode = strict",
+      "B": "hive.limit.cross.product = true",
+      "C": "hive.exec.parallel = false",
+      "D": "hive.strict.checks.cartesian.product = true"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Hive LLAP' (Long Live and Process) feature?",
+    "options": {
+      "A": "A new language for Hive",
+      "B": "A persistent daemon that provides sub-second query latency via intelligent caching and pre-fetching",
+      "C": "A backup system for HDFS",
+      "D": "A way to delete data permanently"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to split a string into an array based on a delimiter?",
+    "options": {
+      "A": "DIVIDE()",
+      "B": "BREAK()",
+      "C": "SPLIT()",
+      "D": "ARRAY_CREATE()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'UDTF' in Hive?",
+    "options": {
+      "A": "User Defined Table-Generating Function",
+      "B": "User Data Transfer Format",
+      "C": "Unified Data Tuning Feature",
+      "D": "User Defined Timing Function"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to calculate the rank of a row without gaps in the ranking?",
+    "options": {
+      "A": "RANK()",
+      "B": "DENSE_RANK()",
+      "C": "ROW_NUMBER()",
+      "D": "PERCENT_RANK()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Table Sampling' using the TABLESAMPLE clause?",
+    "options": {
+      "A": "To check the hardware health",
+      "B": "To query a representative subset of data instead of the whole table",
+      "C": "To test for data corruption",
+      "D": "To verify the user's permissions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property controls the number of reducers Hive uses for a query?",
+    "options": {
+      "A": "hive.exec.reducers.max",
+      "B": "mapred.reduce.tasks",
+      "C": "hive.exec.reducers.bytes.per.reducer",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'ORC Indexing' used for?",
+    "options": {
+      "A": "To list the files in HDFS",
+      "B": "To allow skipping of row groups within a file that do not match the filter criteria",
+      "C": "To sort the tables in the Metastore",
+      "D": "To encrypt specific columns"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a 'Common Table Expression' (CTE) in Hive?",
+    "options": {
+      "A": "Using the FROM clause",
+      "B": "Using the WITH clause",
+      "C": "Using the CREATE TEMP clause",
+      "D": "Using the DEFINE clause"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Bloom Filters' in ORC files?",
+    "options": {
+      "A": "To compress data blocks",
+      "B": "To quickly check if a value exists in a column to avoid reading the data",
+      "C": "To encrypt the file metadata",
+      "D": "To color code the data results"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to check for values within a specific range?",
+    "options": {
+      "A": "IN",
+      "B": "BETWEEN",
+      "C": "RANGE",
+      "D": "LIMIT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'hive.exec.parallel' = true accomplish?",
+    "options": {
+      "A": "It allows independent stages of a query DAG to run at the same time",
+      "B": "It runs the query on two different clusters",
+      "C": "It allows two users to edit the same row",
+      "D": "It doubles the network speed"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Hive function is used to convert a timestamp to a formatted string?",
+    "options": {
+      "A": "TIME_FORMAT()",
+      "B": "DATE_FORMAT()",
+      "C": "TO_CHAR()",
+      "D": "STRING_DATE()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'STRUCT' data type?",
+    "options": {
+      "A": "To store a list of values of the same type",
+      "B": "To store a collection of named fields of different types",
+      "C": "To store Key-Value pairs",
+      "D": "To store binary images"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Hive clause is used to distribute data into buckets?",
+    "options": {
+      "A": "PARTITIONED BY",
+      "B": "CLUSTERED BY",
+      "C": "GROUPED BY",
+      "D": "SORTED BY"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when you use 'INSERT INTO' vs 'INSERT OVERWRITE'?",
+    "options": {
+      "A": "INTO appends data; OVERWRITE replaces existing data",
+      "B": "They are identical in modern Hive",
+      "C": "INTO is for internal tables; OVERWRITE is for external",
+      "D": "INTO is for small data; OVERWRITE is for big data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'hive.metastore.warehouse.dir' property?",
+    "options": {
+      "A": "To set the path for log files",
+      "B": "To define the default HDFS location for Managed tables",
+      "C": "To set the address of the NameNode",
+      "D": "To define the location of the JAR files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows you to use regular expressions to search for patterns?",
+    "options": {
+      "A": "SEARCH()",
+      "B": "REGEXP()",
+      "C": "MATCH()",
+      "D": "FIND_PATTERN()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vectorized Query Execution' 'batch size'?",
+    "options": {
+      "A": "The number of files read in parallel",
+      "B": "The default 1024-row batch processed at once by the CPU",
+      "C": "The size of the HDFS block",
+      "D": "The number of reducers per node"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you view all the set properties for the current Hive session?",
+    "options": {
+      "A": "SHOW CONF",
+      "B": "GET ALL",
+      "C": "SET -v",
+      "D": "VIEW PROPERTIES"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which Hive command is used to add data to a bucketed table?",
+    "options": {
+      "A": "LOAD DATA",
+      "B": "INSERT INTO",
+      "C": "Both A and B (but B is preferred to trigger the hashing)",
+      "D": "IMPORT DATA"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Embedded Metastore' mode?",
+    "options": {
+      "A": "Storing metadata in HDFS",
+      "B": "Running the Metastore using a local Derby database within the Hive Driver process",
+      "C": "Running Hive in the cloud",
+      "D": "A Metastore that cannot be updated"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to concatenate two or more strings in Hive?",
+    "options": {
+      "A": "ADD()",
+      "B": "JOIN_STR()",
+      "C": "CONCAT()",
+      "D": "APPEND()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the role of 'Hive on Spark'?",
+    "options": {
+      "A": "Running Spark inside Hive",
+      "B": "Using the Spark engine instead of MapReduce or Tez to execute Hive queries",
+      "C": "A way to convert HiveQL to Python",
+      "D": "A security feature for Spark users"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which clause is used to perform a join without a common column (Cartesian Join)?",
+    "options": {
+      "A": "JOIN",
+      "B": "OUTER JOIN",
+      "C": "CROSS JOIN",
+      "D": "INNER JOIN"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'SMB (Sort Merge Bucket) Join'?",
+    "options": {
+      "A": "A join for tables that are already bucketed and sorted on the join key",
+      "B": "A join that uses the Driver node only",
+      "C": "A join for encrypted data",
+      "D": "A join that deletes the data after finishing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you count the number of unique values in a column?",
+    "options": {
+      "A": "COUNT(UNIQUE col)",
+      "B": "TOTAL(DISTINCT col)",
+      "C": "COUNT(DISTINCT col)",
+      "D": "SUM(DISTINCT col)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'HCatalog' CLI used for?",
+    "options": {
+      "A": "To query data like Hive",
+      "B": "To perform DDL operations (like creating tables) outside of the Hive environment",
+      "C": "To compress data",
+      "D": "To monitor the NameNode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Hive function returns the current user?",
+    "options": {
+      "A": "USER()",
+      "B": "CURRENT_USER()",
+      "C": "GET_USER()",
+      "D": "LOGGED_USER()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'ANALYZE TABLE' command?",
+    "options": {
+      "A": "To find bugs in the code",
+      "B": "To collect statistics about the table for the Cost-Based Optimizer",
+      "C": "To delete old data",
+      "D": "To show the table schema"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property enables the 'Vectorized' execution in Hive?",
+    "options": {
+      "A": "hive.vectorized.execution.enabled",
+      "B": "hive.vectorize.query",
+      "C": "hive.exec.vectorized",
+      "D": "hive.optimize.vector"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'S3 Select' in the context of Hive?",
+    "options": {
+      "A": "A way to choose which S3 bucket to use",
+      "B": "An optimization that pushes the projection and filter down to S3 to reduce network traffic",
+      "C": "A way to encrypt S3 data",
+      "D": "A graphical tool for S3"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to handle Null values by providing a default?",
+    "options": {
+      "A": "IFNULL()",
+      "B": "NVL()",
+      "C": "COALESCE()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Multi-Column Partitioning'?",
+    "options": {
+      "A": "Creating multiple tables",
+      "B": "Partitioning a table based on more than one column (e.g., year and month)",
+      "C": "A way to sort columns",
+      "D": "Deleting columns"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to view the configuration details of a specific partition?",
+    "options": {
+      "A": "SHOW PARTITION DETAILS",
+      "B": "DESCRIBE EXTENDED table_name PARTITION (key=val)",
+      "C": "VIEW PARTITION",
+      "D": "GET PARTITION"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'parse_url' function do in Hive?",
+    "options": {
+      "A": "It opens a web browser",
+      "B": "It extracts specific parts (like HOST or PATH) from a URL string",
+      "C": "It checks if a URL is active",
+      "D": "It encrypts a URL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive Var' (hivevar)?",
+    "options": {
+      "A": "A new data type",
+      "B": "A user-defined variable used for parameterization in Hive scripts",
+      "C": "A configuration for RAM",
+      "D": "A security token"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration allows Hive to run multiple reducers per query?",
+    "options": {
+      "A": "hive.exec.reducers.max",
+      "B": "hive.exec.reducers.bytes.per.reducer",
+      "C": "mapreduce.job.reduces",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Partition Pruning'?",
+    "options": {
+      "A": "Deleting old partitions",
+      "B": "Skipping partitions that do not match the filter criteria to reduce I/O",
+      "C": "Renaming partitions",
+      "D": "A way to sort data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to extract the year from a date string?",
+    "options": {
+      "A": "GET_YEAR()",
+      "B": "EXTRACT(YEAR FROM col)",
+      "C": "YEAR()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Columnar Storage' optimization in ORC/Parquet?",
+    "options": {
+      "A": "Storing data by column to allow for better compression and skipping irrelevant columns",
+      "B": "Storing data vertically",
+      "C": "Limiting the number of columns",
+      "D": "Naming columns alphabetically"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you view the history of queries executed in the Hive CLI?",
+    "options": {
+      "A": "SHOW HISTORY",
+      "B": "Check the .hivehistory file in the user's home directory",
+      "C": "VIEW QUERIES",
+      "D": "Hive does not store history"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to concatenate columns with a separator?",
+    "options": {
+      "A": "CONCAT()",
+      "B": "CONCAT_WS()",
+      "C": "JOIN_WS()",
+      "D": "SPLIT_CONCAT()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific mechanism does Hive use to maintain ACID compliance when multiple 'Delta' files exist for a single table?",
+    "options": {
+      "A": "It merges all delta files into a single flat file during every read.",
+      "B": "It uses a Snapshot Isolation model where the reader sees a consistent view of the data based on the transaction ID.",
+      "C": "It locks the entire HDFS cluster during writes.",
+      "D": "It deletes the delta files immediately after a write succeeds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of the Hive 'Compactor' process?",
+    "options": {
+      "A": "To compress the Metastore database.",
+      "B": "To encrypt HDFS blocks at rest.",
+      "C": "To periodically merge small delta files into larger 'base' files to improve read performance.",
+      "D": "To delete unused table schemas."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Hive LLAP, what is the 'IO Elevator'?",
+    "options": {
+      "A": "A physical hardware upgrade for DataNodes.",
+      "B": "A feature that performs data de-compression and transformation (like ORC to Columnar) directly in the daemon before passing it to the executor.",
+      "C": "A network protocol for faster shuffles.",
+      "D": "A way to move metadata from HDFS to RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Bucket Map Join' differ technically from a standard 'Map Join'?",
+    "options": {
+      "A": "It requires both tables to be bucketed on the join key, allowing only corresponding buckets to be joined in memory rather than the whole table.",
+      "B": "It only works on the Driver node.",
+      "C": "It requires the data to be stored in JSON format.",
+      "D": "It disables the Reduce phase entirely for all future queries."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'hive.optimize.sort.dynamic.partition'?",
+    "options": {
+      "A": "To sort the data by user ID.",
+      "B": "To ensure that data for a specific partition is sorted before being written, preventing the creation of too many small files in dynamic partitioning.",
+      "C": "To bypass the MapReduce shuffle phase.",
+      "D": "To rename partitions alphabetically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Hive component handles the logical 'Split' calculation when 'hive.input.format' is set to 'CombineHiveInputFormat'?",
+    "options": {
+      "A": "The NameNode.",
+      "B": "The individual DataNodes.",
+      "C": "The Hive Driver/Query Compiler.",
+      "D": "The Resource Manager."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Semantic Analyzer' phase in the Hive Driver responsible for?",
+    "options": {
+      "A": "Checking the SQL syntax errors.",
+      "B": "Translating the Abstract Syntax Tree (AST) into an internal query representation (Query Block tree).",
+      "C": "Writing the final data to HDFS.",
+      "D": "Generating the MapReduce JAR file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'Skewed Tables', how does Hive store the values associated with skewed keys physically?",
+    "options": {
+      "A": "In a separate HDFS directory specifically created for those skewed values to avoid overhead during normal reads.",
+      "B": "In the same file but with high encryption.",
+      "C": "On the NameNode's local disk.",
+      "D": "They are deleted to improve performance."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical impact of a 'Vectorized' UDF compared to a standard UDF?",
+    "options": {
+      "A": "Vectorized UDFs operate on a block of 1024 rows in a single call, reducing the overhead of repeated method invocations.",
+      "B": "They can only be used with Python.",
+      "C": "They automatically sort the output.",
+      "D": "They require the use of GPUs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'CBO' (Cost-Based Optimizer) 'Join Reordering'?",
+    "options": {
+      "A": "Changing the order of columns in the result.",
+      "B": "The ability to analyze table statistics to determine the most efficient order to join multiple tables (e.g., joining smallest first).",
+      "C": "A way to rename tables during a join.",
+      "D": "A security feature that prevents unauthorized joins."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Tez' execution mode, what is a 'Vertex'?",
+    "options": {
+      "A": "A single data block.",
+      "B": "A logical grouping of tasks (like a Map stage or a Reduce stage) in the execution DAG.",
+      "C": "A connection between two nodes.",
+      "D": "The final output file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration property is used to control the maximum memory allocated for the 'Map Join' hash table?",
+    "options": {
+      "A": "hive.mapjoin.followby.gby.localtask.max.memory.usage",
+      "B": "hive.smalltable.memory.limit",
+      "C": "hive.auto.convert.join.noconditionaltask.size",
+      "D": "mapreduce.map.memory.mb"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Metastore' 'Schema Versioning' issue during an upgrade?",
+    "options": {
+      "A": "It means the data blocks are corrupted.",
+      "B": "An incompatibility between the Hive binary version and the RDBMS schema version in the Metastore database.",
+      "C": "It requires all tables to be renamed.",
+      "D": "It happens when the network is too slow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'hive.stats.autogather' do when set to true?",
+    "options": {
+      "A": "It automatically deletes old tables.",
+      "B": "It updates the table statistics in the Metastore automatically during INSERT or LOAD operations.",
+      "C": "It collects user login history.",
+      "D": "It monitors the temperature of the executors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Hive's 'Acid' implementation, what is the role of the 'Transaction Manager'?",
+    "options": {
+      "A": "Managing user payments.",
+      "B": "A component in the Hive Driver that interacts with the Metastore to obtain locks and manage the lifecycle of transactions.",
+      "C": "Sorting the data blocks.",
+      "D": "Compressing the base files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predicate Pushdown' limitation with 'External Tables'?",
+    "options": {
+      "A": "External tables do not support any filters.",
+      "B": "Pushdown may not work if the underlying file format (like a custom text format) doesn't support metadata filtering.",
+      "C": "External tables are too fast for pushdown.",
+      "D": "It only works if the table is partitioned by date."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Fetch Task' optimization in Hive?",
+    "options": {
+      "A": "Fetching data from a remote cluster.",
+      "B": "Converting a query into a simple HDFS file read when no complex transformations (like joins or aggregations) are required, bypassing MapReduce/Tez.",
+      "C": "A way to speed up user logins.",
+      "D": "Using a faster network cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which internal structure does 'Sort Merge Bucket (SMB) Join' use to avoid a shuffle?",
+    "options": {
+      "A": "A shared memory buffer on the Driver.",
+      "B": "It relies on the fact that data is already bucketed and sorted, so it can co-process corresponding buckets from both tables in a single Map task.",
+      "C": "An encrypted key-value store.",
+      "D": "A global index stored in the NameNode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'S3 Guard' in the context of Hive on AWS?",
+    "options": {
+      "A": "A security guard for the data center.",
+      "B": "A mechanism (using DynamoDB) to provide consistent file listings for S3, preventing 'Eventual Consistency' issues during Hive queries.",
+      "C": "A way to encrypt S3 buckets.",
+      "D": "A tool for choosing the cheapest S3 tier."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Window' specification defines a range from the previous 5 rows to the current row?",
+    "options": {
+      "A": "ROWS BETWEEN 5 PRECEDING AND CURRENT ROW",
+      "B": "RANGE 5",
+      "C": "PREV 5",
+      "D": "ROWS 5 BEFORE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive on LLAP' cache locality?",
+    "options": {
+      "A": "Caching data in the user's browser.",
+      "B": "Directly mapping cached data blocks to the specific LLAP daemon's memory where the tasks are scheduled, minimizing network transfer.",
+      "C": "Storing data on the local C: drive.",
+      "D": "Sharing a cache between different clusters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'OrcRecordUpdater' used for internally?",
+    "options": {
+      "A": "Updating the file names.",
+      "B": "The class responsible for managing the writing of row-level updates and deletes into Delta files for ACID tables.",
+      "C": "Sorting the ORC files.",
+      "D": "Encrypting the ORC headers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'HPL/SQL' (Hybrid Procedural SQL) tool in Hive?",
+    "options": {
+      "A": "A tool to write queries in Python.",
+      "B": "An extension to Hive that allows the execution of procedural SQL (like PL/SQL or T-SQL) including loops and variables.",
+      "C": "A way to compress SQL strings.",
+      "D": "A graphical UI for SQL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hive Streaming Data Ingestion', what is a 'Bucket' lock?",
+    "options": {
+      "A": "A lock on the entire database.",
+      "B": "A row-level lock used to prevent multiple concurrent writers from updating the same bucket in an ACID table.",
+      "C": "A way to prevent data from leaking.",
+      "D": "A network timeout."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'hive.optimize.index.filter' enable?",
+    "options": {
+      "A": "Sorting the index.",
+      "B": "The use of Hive 'Indexes' (deprecated in newer versions) to filter data before it is read.",
+      "C": "A search bar in the UI.",
+      "D": "Automatic deletion of unused indexes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Schema Evolution' in Parquet files with Hive?",
+    "options": {
+      "A": "The ability to add or rename columns in the underlying files while Hive adapts the query schema automatically via the Metastore.",
+      "B": "Changing the file from Parquet to CSV.",
+      "C": "Updating the OS of the node.",
+      "D": "A way to rename the database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property defines the number of rows processed in one 'Vectorized' batch?",
+    "options": {
+      "A": "hive.vectorized.batch.size",
+      "B": "hive.vectorize.row.count",
+      "C": "hive.exec.vector.size",
+      "D": "hive.batch.rows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Hive Lock Manager' 'Heartbeat'?",
+    "options": {
+      "A": "A physical light on the server.",
+      "B": "A periodic signal sent by the Hive client to the Lock Manager to prove it is still alive and prevent its locks from being released.",
+      "C": "A way to measure CPU speed.",
+      "D": "An alert system for full disks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Multiple Databases', what is the consequence of 'Cross-Database' joins?",
+    "options": {
+      "A": "They are forbidden in Hive.",
+      "B": "They work seamlessly as long as the user has permissions on both and uses fully qualified names (db.table).",
+      "C": "They are 10x slower than local joins.",
+      "D": "They require a separate Metastore."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive MetaStore' 'Direct SQL' optimization?",
+    "options": {
+      "A": "Writing SQL directly into the HDFS.",
+      "B": "Bypassing the DataNucleus ORM layer to execute raw SQL against the Metastore database for faster metadata retrieval.",
+      "C": "A way to query the RAM.",
+      "D": "A graphical SQL editor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when 'hive.mapred.mode' is set to 'strict' and a user tries to query a partitioned table without a WHERE clause?",
+    "options": {
+      "A": "The query runs normally.",
+      "B": "The query is rejected with an error to prevent a costly full table scan.",
+      "C": "The query is limited to the first 10 rows.",
+      "D": "The user's account is locked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Column Stats' vs 'Table Stats' for CBO?",
+    "options": {
+      "A": "Table stats track row count; Column stats track min/max/null-count/NDV (Number of Distinct Values) for better join estimation.",
+      "B": "They are the same.",
+      "C": "Column stats are only for strings.",
+      "D": "Table stats are only for partitioned tables."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive Metastore' 'Remote' mode transport protocol?",
+    "options": {
+      "A": "HTTP",
+      "B": "Thrift (Binary protocol)",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive LLAP' 'Cache Affinity'?",
+    "options": {
+      "A": "A user's preference for certain tables.",
+      "B": "The scheduler attempts to send tasks for the same data blocks to the same LLAP daemon to maximize cache hits.",
+      "C": "A network speed setting.",
+      "D": "A way to delete the cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'EXPLAIN DEPENDENCY' show in HiveQL?",
+    "options": {
+      "A": "The files in HDFS.",
+      "B": "The list of tables and partitions that the query depends on.",
+      "C": "The user permissions.",
+      "D": "The network diagram."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metastore' 'Notification Log'?",
+    "options": {
+      "A": "A log of error messages.",
+      "B": "A feature that records all DDL/DML events so external systems (like Spark or Atlas) can stay in sync with Hive.",
+      "C": "A list of user emails.",
+      "D": "A way to track data size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive ACID' 'Row Identifier' (ROW__ID)?",
+    "options": {
+      "A": "The name of the user.",
+      "B": "A virtual column that uniquely identifies a row based on transaction ID, bucket ID, and row offset.",
+      "C": "An encrypted password.",
+      "D": "The HDFS block number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bucket-level' sampling logic in Hive?",
+    "options": {
+      "A": "Picking random rows.",
+      "B": "Selecting specific buckets (e.g., 1 out of 4) based on the hash of a column for highly efficient sampling.",
+      "C": "Selecting data from different racks.",
+      "D": "A way to compress buckets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive LLAP' 'IO Elevator' 'Metadata Cache'?",
+    "options": {
+      "A": "Storing SQL queries in RAM.",
+      "B": "Caching the file footers and index structures of ORC files in memory to eliminate HDFS metadata overhead.",
+      "C": "A way to backup the Metastore.",
+      "D": "A way to hide files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration enables 'Skewed Join' optimization?",
+    "options": {
+      "A": "hive.optimize.skewjoin = true",
+      "B": "hive.skew.enable = true",
+      "C": "hive.join.skewed.values = 100",
+      "D": "Both A and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Hybrid Hybrid' (Grace Hash) Join in Hive?",
+    "options": {
+      "A": "A join for two very large tables that spill to disk when they exceed the 'noconditionaltask' size.",
+      "B": "A join that uses Python.",
+      "C": "A join that only works with CSV.",
+      "D": "A way to join Hive with a database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metastore' 'Pre-Event Listener'?",
+    "options": {
+      "A": "A way to listen to music while querying.",
+      "B": "A Java hook that can intercept and validate (or block) metadata changes before they are committed to the database.",
+      "C": "A network monitor.",
+      "D": "A performance timer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive' 'ObjectInspector' used for internally?",
+    "options": {
+      "A": "To inspect the hardware.",
+      "B": "An internal interface to access and manipulate data inside a SerDe without knowing the specific object type.",
+      "C": "To find bugs in the code.",
+      "D": "To monitor user logins."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Partition-level' stats 'NDV'?",
+    "options": {
+      "A": "Next Data Value.",
+      "B": "Number of Distinct Values, used by the optimizer to estimate the selectivity of a filter or join.",
+      "C": "New Database Version.",
+      "D": "Network Data Velocity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive LLAP' 'Sliding Window' memory management?",
+    "options": {
+      "A": "Resizing the browser window.",
+      "B": "An internal allocator that dynamically manages memory between the cache and the execution engine.",
+      "C": "A way to clear the RAM.",
+      "D": "A graphical UI feature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive ACID' 'Base' directory vs 'Delta' directory?",
+    "options": {
+      "A": "Base contains the full table snapshot; Delta contains only the incremental changes (Inserts/Updates/Deletes).",
+      "B": "Base is for metadata; Delta is for data.",
+      "C": "They are the same.",
+      "D": "Base is only for external tables."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'Sort Merge Join' 'Map-side' constraint?",
+    "options": {
+      "A": "It can only be used on strings.",
+      "B": "Both tables must have the same number of buckets (or a multiple) and be sorted on the join key.",
+      "C": "It requires 100GB of RAM.",
+      "D": "It only works with TextFiles."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive' 'Query Parallelism' (hive.exec.parallel)?",
+    "options": {
+      "A": "Running the same query 10 times.",
+      "B": "The ability to run independent stages of a single query's execution plan (DAG) simultaneously.",
+      "C": "Running queries from different users.",
+      "D": "Speeding up the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HCatalog' 'Table Discovery'?",
+    "options": {
+      "A": "Finding new files on the web.",
+      "B": "Allowing MapReduce, Pig, and Spark to find and read Hive tables without needing to know HDFS paths or formats.",
+      "C": "A way to search for users.",
+      "D": "A map of the cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive' 'Cost-Based Optimizer' 'Histogram'?",
+    "options": {
+      "A": "A chart of the query speed.",
+      "B": "Statistical data about the distribution of values in a column used to refine query selectivity estimates.",
+      "C": "A list of previous queries.",
+      "D": "A security log."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive' 'Vectorization' 'Scratch Columns'?",
+    "options": {
+      "A": "Columns that have errors.",
+      "B": "Internal temporary arrays used to store intermediate results during vectorized expression evaluation for high performance.",
+      "C": "Columns that the user can delete.",
+      "D": "Columns with zero data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive LLAP' 'Token-based' authentication?",
+    "options": {
+      "A": "A way to pay for queries.",
+      "B": "Using security tokens for fast, authenticated communication between the Hive Driver and the LLAP daemons.",
+      "C": "A physical hardware key.",
+      "D": "A password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metastore' 'Auto-creation' risk with Derby?",
+    "options": {
+      "A": "Derby might delete the table.",
+      "B": "It only allows one connection at a time, preventing multiple users or sessions from accessing Hive.",
+      "C": "It requires a supercomputer.",
+      "D": "It only works with CSV."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive' 'Bucket Pruning'?",
+    "options": {
+      "A": "Deleting buckets.",
+      "B": "An optimization that skips reading entire buckets of data if the query filter doesn't match the bucket hash.",
+      "C": "A way to rename buckets.",
+      "D": "A tool for cleaning buckets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive' 'Sort Merge Join' 'Total Ordering'?",
+    "options": {
+      "A": "Sorting by the file size.",
+      "B": "Ensuring the data is globally sorted across all buckets to enable high-speed merges.",
+      "C": "A way to name files.",
+      "D": "A security protocol."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive' 'SerDe' 'Lazy' implementation?",
+    "options": {
+      "A": "A SerDe that doesn't work.",
+      "B": "An optimization where individual fields in a row are only deserialized when they are actually accessed by the query.",
+      "C": "A way to skip columns.",
+      "D": "A slower SerDe for small data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive' 'MultipleInputFormat'?",
+    "options": {
+      "A": "A way to read multiple files.",
+      "B": "A feature that allows a single query to process data from tables stored in different file formats (e.g., joining Text with ORC).",
+      "C": "A way to use multiple users.",
+      "D": "A network protocol."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hive ACID' 'Lock Heartbeat' interval?",
+    "options": {
+      "A": "The frequency at which the client proves it still needs a lock (default 1 min).",
+      "B": "The speed of the CPU.",
+      "C": "The duration of the query.",
+      "D": "The interval between disk backups."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'Column-based Stats' 'High/Low Watermark'?",
+    "options": {
+      "A": "The Min and Max values of a numeric column used to skip files or row-groups during a read.",
+      "B": "The temperature of the node.",
+      "C": "The disk usage limit.",
+      "D": "A security level."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'Tez' 'Map-side' vs 'Reduce-side' aggregation?",
+    "options": {
+      "A": "Tez automatically decides where to aggregate based on data size to minimize network shuffle.",
+      "B": "They are identical.",
+      "C": "Reduce-side is always better.",
+      "D": "Map-side is only for small data."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'CBO' 'Bushy Tree' join?",
+    "options": {
+      "A": "A join plan that allows joining intermediate results of other joins to reduce the depth of the execution tree.",
+      "B": "A join for environmental data.",
+      "C": "A join that uses 3 tables.",
+      "D": "A way to name join tables."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'LLAP' 'Metadata' 'Pre-fetching'?",
+    "options": {
+      "A": "Loading file footers into RAM before the query even asks for them to hide HDFS latency.",
+      "B": "A way to find files on the web.",
+      "C": "A way to delete metadata.",
+      "D": "A security scan."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'Acid' 'Delete Delta' file?",
+    "options": {
+      "A": "A specialized delta file that only contains the identifiers of rows that have been deleted.",
+      "B": "A file that deletes the table.",
+      "C": "A way to skip rows.",
+      "D": "A backup of the base file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'Metastore' 'Schema Check' on startup?",
+    "options": {
+      "A": "Verifying that the RDBMS schema version matches the expected version of the Hive software.",
+      "B": "A physical hardware check.",
+      "C": "A check for user passwords.",
+      "D": "A check for network speed."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'SMB Join' 'Bucket mapping' requirement?",
+    "options": {
+      "A": "Bucket N of Table A must be joined only with Bucket N of Table B.",
+      "B": "All buckets must be in the same folder.",
+      "C": "Each bucket must be 1GB.",
+      "D": "The number of buckets must be odd."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'Query Re-planning' in LLAP?",
+    "options": {
+      "A": "Re-optimizing the execution plan at runtime based on the actual size of intermediate data.",
+      "B": "Renaming the query.",
+      "C": "Changing the user.",
+      "D": "A coding error."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'Cost-Based Optimizer' 'Selectivity'?",
+    "options": {
+      "A": "The estimated fraction of rows from a table that will satisfy a specific filter.",
+      "B": "The speed of the query.",
+      "C": "The user's preference.",
+      "D": "A security level."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive' 'Orc' 'Bloom Filter' 'False Positive'?",
+    "options": {
+      "A": "When the filter says a value exists but it doesn't, causing a small, unnecessary read.",
+      "B": "A software bug.",
+      "C": "An encrypted value.",
+      "D": "A missing file."
+    },
+    "answer": "A"
+  }
+  ]
+}

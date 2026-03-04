@@ -1,0 +1,2006 @@
+{ 
+  "skill": "Image Processing", 
+  "questions": [
+    {
+    "question": "What is the primary building block of a digital image?",
+    "options": {
+      "A": "A vector",
+      "B": "A pixel",
+      "C": "A coordinate",
+      "D": "A layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which color model is primarily used for printing photos on paper?",
+    "options": {
+      "A": "RGB",
+      "B": "Grayscale",
+      "C": "CMYK",
+      "D": "HSV"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a standard 8-bit grayscale image, how many unique intensity levels are possible?",
+    "options": {
+      "A": "2",
+      "B": "100",
+      "C": "256",
+      "D": "1024"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the result of converting a color image to 'Binary' format?",
+    "options": {
+      "A": "An image with only shades of gray.",
+      "B": "An image with only black and white pixels.",
+      "C": "An image with primary colors only.",
+      "D": "A high-definition video file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Image Resizing' involve?",
+    "options": {
+      "A": "Changing the color of the background.",
+      "B": "Scaling the dimensions of an image up or down.",
+      "C": "Deleting the image metadata.",
+      "D": "Rotating the image by 90 degrees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the value of a pure black pixel in a standard 8-bit grayscale image?",
+    "options": {
+      "A": "0",
+      "B": "128",
+      "C": "255",
+      "D": "1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Image Histogram'?",
+    "options": {
+      "A": "A list of every person who edited the image.",
+      "B": "A graph showing the distribution of pixel intensities.",
+      "C": "A physical map of where the photo was taken.",
+      "D": "A specialized lens for a digital camera."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is the most common format for lossy image compression?",
+    "options": {
+      "A": "PNG",
+      "B": "TIFF",
+      "C": "JPEG",
+      "D": "BMP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'PPI' stand for in the context of image quality?",
+    "options": {
+      "A": "Pixels Per Inch",
+      "B": "Primary Picture Interface",
+      "C": "Point Path Integration",
+      "D": "Photo Protocol Index"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of 'Image Cropping'?",
+    "options": {
+      "A": "To increase the brightness of the image.",
+      "B": "To remove unwanted outer portions of an image.",
+      "C": "To change the file extension from JPG to PNG.",
+      "D": "To count the number of pixels in a frame."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Brightness' in image processing?",
+    "options": {
+      "A": "The speed of the internet connection.",
+      "B": "The overall lightness or darkness of an image.",
+      "C": "The IQ level of the camera software.",
+      "D": "The number of hours the monitor has been on."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contrast'?",
+    "options": {
+      "A": "The total file size of the image.",
+      "B": "The difference in luminance or color that makes an object distinguishable.",
+      "C": "The physical weight of the camera lens.",
+      "D": "The speed of the camera's shutter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Saturation' in the context of color?",
+    "options": {
+      "A": "The intensity or purity of a color.",
+      "B": "The price of the digital image software.",
+      "C": "The total number of colors available in nature.",
+      "D": "The amount of data stored in a pixel."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'G' in the RGB color model stand for?",
+    "options": {
+      "A": "Gradient",
+      "B": "Green",
+      "C": "Gamma",
+      "D": "Grayscale"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Blurring'?",
+    "options": {
+      "A": "Sharpening the edges of an object.",
+      "B": "Reducing the level of detail and noise in an image.",
+      "C": "Deleting the image from the hard drive.",
+      "D": "Translating text inside a photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Rotation'?",
+    "options": {
+      "A": "Turning the camera upside down physically.",
+      "B": "Changing the orientation of an image by a specific angle.",
+      "C": "Scaling the image to a larger size.",
+      "D": "Changing the image from color to grayscale."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Thumbnail' image?",
+    "options": {
+      "A": "A high-resolution backup of an image.",
+      "B": "A small, reduced-size version of a larger image used for previews.",
+      "C": "An image that only shows a person's hand.",
+      "D": "A specialized security key for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resolution'?",
+    "options": {
+      "A": "The weight of the camera sensor.",
+      "B": "The total number of pixels contained in an image.",
+      "C": "The price of the professional camera.",
+      "D": "The time it takes to upload a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DPI'?",
+    "options": {
+      "A": "Dots Per Inch",
+      "B": "Digital Photo Interface",
+      "C": "Data Processing Index",
+      "D": "Density Per Image"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Grayscale Conversion'?",
+    "options": {
+      "A": "Adding more blue to an image.",
+      "B": "Transforming a color image into shades of gray.",
+      "C": "Deleting all dark pixels from an image.",
+      "D": "Hiding the image in a secret folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Flipping'?",
+    "options": {
+      "A": "Throwing a computer monitor into the air.",
+      "B": "Reversing an image horizontally or vertically.",
+      "C": "Changing the file format from BMP to JPG.",
+      "D": "Increasing the memory usage of an image viewer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Kernel' in image filtering?",
+    "options": {
+      "A": "The central part of the camera's battery.",
+      "B": "A small matrix used for operations like blurring and sharpening.",
+      "C": "The name of the lead image processing engineer.",
+      "D": "The power cord of the computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'Thresholding'?",
+    "options": {
+      "A": "To increase the brightness of a photo.",
+      "B": "To isolate objects by converting grayscale to binary based on a value.",
+      "C": "To record audio while taking a photo.",
+      "D": "To connect the camera to the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Negative' of an image?",
+    "options": {
+      "A": "An image that is blurry and out of focus.",
+      "B": "An image where light areas appear dark and dark areas appear light.",
+      "C": "An image that has been deleted from the cloud.",
+      "D": "An image containing only negative numbers in its code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Aspect Ratio'?",
+    "options": {
+      "A": "The price of an image divided by its width.",
+      "B": "The ratio of an image's width to its height.",
+      "C": "The number of colors used in a logo.",
+      "D": "The speed of the image processing script."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Lossless' image format?",
+    "options": {
+      "A": "JPEG",
+      "B": "PNG",
+      "C": "MP4",
+      "D": "GIF (High loss)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Noise' in a digital image?",
+    "options": {
+      "A": "Loud sounds from the camera's internal speaker.",
+      "B": "Random variations in brightness or color that degrade quality.",
+      "C": "The sound of someone typing while looking at a photo.",
+      "D": "A type of background music in a digital slideshow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Compression' primarily used for?",
+    "options": {
+      "A": "To make the image look more colorful.",
+      "B": "To reduce the file size for easier storage and transmission.",
+      "C": "To increase the number of pixels in an image.",
+      "D": "To rotate the image by 180 degrees automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pixelation'?",
+    "options": {
+      "A": "A high-speed way to process images.",
+      "B": "A visible effect where pixels are clearly seen, usually due to low resolution.",
+      "C": "The process of adding a digital filter to a face.",
+      "D": "Hiring a person to manually draw pixels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes the amount of detail an image holds?",
+    "options": {
+      "A": "Bandwidth",
+      "B": "Resolution",
+      "C": "Latency",
+      "D": "Throughput"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grayscale'?",
+    "options": {
+      "A": "A color model with 1,000 colors.",
+      "B": "A range of gray shades from white to black.",
+      "C": "A specialized software for drawing lines.",
+      "D": "A way to backup images on a physical disk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bit Depth'?",
+    "options": {
+      "A": "The physical depth of the camera sensor.",
+      "B": "The number of bits used to represent the color of a single pixel.",
+      "C": "The time it takes to process one bit of data.",
+      "D": "The number of bits in the user's password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gamma Correction'?",
+    "options": {
+      "A": "Correcting the grammar in an image caption.",
+      "B": "Adjusting the brightness of an image to match human vision characteristics.",
+      "C": "Deleting gamma rays from a digital file.",
+      "D": "A way to count the number of users viewing a site."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Metadata'?",
+    "options": {
+      "A": "The actual pixels that make up the photo.",
+      "B": "Hidden information about an image, like the camera used and the date taken.",
+      "C": "A specialized encryption for social media photos.",
+      "D": "A list of all the colors used in a painting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of 'Sharpening' an image?",
+    "options": {
+      "A": "To make the colors look warmer.",
+      "B": "To enhance the edges and fine details of an image.",
+      "C": "To decrease the file size of a JPG.",
+      "D": "To rotate the image horizontally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hue'?",
+    "options": {
+      "A": "The actual color itself (e.g., Red, Blue, Green).",
+      "B": "The brightness of a color.",
+      "C": "The weight of the digital file.",
+      "D": "The price of the color ink."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Alpha Channel' used for in image processing?",
+    "options": {
+      "A": "Storing the name of the author.",
+      "B": "Representing the transparency level of a pixel.",
+      "C": "Increasing the resolution of the image.",
+      "D": "A security certificate for digital files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'GIF' stand for?",
+    "options": {
+      "A": "Global Image Format",
+      "B": "Graphics Interchange Format",
+      "C": "General Index File",
+      "D": "Grid Icon Framework"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spatial Resolution'?",
+    "options": {
+      "A": "The speed of light in a vacuum.",
+      "B": "The number of pixels per unit length in an image.",
+      "C": "The distance between the camera and the sun.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sampling' in the context of digital images?",
+    "options": {
+      "A": "Taking a small piece of a physical photo for testing.",
+      "B": "Measuring the intensity of a continuous signal at discrete intervals.",
+      "C": "Buying a sample version of an expensive software.",
+      "D": "Naming the pixels in a specific order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantization'?",
+    "options": {
+      "A": "The process of counting how many pixels are in an image.",
+      "B": "The process of mapping a large set of input values to a smaller set of discrete levels.",
+      "C": "A specialized software for quantum physics.",
+      "D": "Hiring a mathematician to verify image data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayer Filter' primarily used in?",
+    "options": {
+      "A": "Image editing software.",
+      "B": "Digital camera sensors to capture color information.",
+      "C": "High-speed internet routers.",
+      "D": "Specialized computer monitors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Stitching'?",
+    "options": {
+      "A": "Sewing a physical photo onto a piece of clothing.",
+      "B": "Combining multiple images with overlapping fields of view to create a panorama.",
+      "C": "Deleting two similar photos to save space.",
+      "D": "A security feature that prevents image hacking."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Downsampling'?",
+    "options": {
+      "A": "Sampling water from a local river.",
+      "B": "Reducing the number of pixels in an image.",
+      "C": "Moving a server to a lower floor.",
+      "D": "Decreasing the volume of an audio file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Upsampling'?",
+    "options": {
+      "A": "Buying a more expensive computer.",
+      "B": "Increasing the number of pixels in an image, often through interpolation.",
+      "C": "Deleting the low-resolution version of a file.",
+      "D": "Taking a photo from a high-altitude plane."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Luminance'?",
+    "options": {
+      "A": "The weight of the lighting equipment.",
+      "B": "The measure of the light intensity emitted from a surface per unit area.",
+      "C": "A specialized unit of weight used in labs.",
+      "D": "The number of users connected to a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Chrominance'?",
+    "options": {
+      "A": "The brightness of an image.",
+      "B": "The color information of an image, separate from its brightness.",
+      "C": "A specialized type of high-speed cable.",
+      "D": "The age of a digital file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Aliasing'?",
+    "options": {
+      "A": "Hiring a person to use a fake name.",
+      "B": "An effect that causes different signals to become indistinguishable when sampled.",
+      "C": "A security scan for computer viruses.",
+      "D": "The process of naming a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Image Filter'?",
+    "options": {
+      "A": "A physical piece of glass placed over a monitor.",
+      "B": "A mathematical function applied to an image to achieve an effect.",
+      "C": "A tool used to sort files in a folder.",
+      "D": "A security firewall for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intensity'?",
+    "options": {
+      "A": "How hard a person is working.",
+      "B": "The numerical value of a pixel representing brightness or color level.",
+      "C": "The total number of pixels in a line.",
+      "D": "The speed of the network data flow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PNG' often used for because it supports transparency?",
+    "options": {
+      "A": "Text documents only.",
+      "B": "Logos and web graphics with clear backgrounds.",
+      "C": "Recording 4K video files.",
+      "D": "A specialized backup for SQL databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dithering'?",
+    "options": {
+      "A": "Being nervous about an image edit.",
+      "B": "A technique used to create the illusion of color depth in images with a limited color palette.",
+      "C": "A way to count the number of pixels.",
+      "D": "A specialized hardware for cooling."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Interpolation'?",
+    "options": {
+      "A": "Talking to an image through an interpreter.",
+      "B": "Estimating new pixel values when resizing an image.",
+      "C": "Hiring a translator for a global project.",
+      "D": "A way to backup the SQL schema."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bitmap' (BMP)?",
+    "options": {
+      "A": "A map showing where all the bits are stored.",
+      "B": "A simple, uncompressed image file format.",
+      "C": "A high-security encryption for text.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anti-aliasing' used for?",
+    "options": {
+      "A": "To make the image look like a cartoon.",
+      "B": "To smooth out jagged edges in a digital image.",
+      "C": "To delete all aliases from the user account.",
+      "D": "To increase the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Segmentation'?",
+    "options": {
+      "A": "Naming all the files on a computer.",
+      "B": "The process of partitioning a digital image into multiple sets of pixels.",
+      "C": "A way to backup video data.",
+      "D": "Increasing the volume of an audio file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Luminance' vs 'Brightness'?",
+    "options": {
+      "A": "They are exactly the same.",
+      "B": "Luminance is a physical measure; Brightness is the subjective perception.",
+      "C": "Brightness is for text; Luminance for images.",
+      "D": "Luminance is 100x faster than Brightness."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contrast Stretching'?",
+    "options": {
+      "A": "Physically pulling a printed photo to make it larger.",
+      "B": "Increasing the dynamic range of the gray levels in an image.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Point Processing'?",
+    "options": {
+      "A": "Processing only the sharpest points in an image.",
+      "B": "An operation where the output pixel value depends only on the corresponding input pixel value.",
+      "C": "A way to draw dots on the screen.",
+      "D": "Hiring a person to point at things in a photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Area Processing'?",
+    "options": {
+      "A": "Processing data from a specific city area.",
+      "B": "An operation where the output pixel value depends on the values of pixels in its neighborhood.",
+      "C": "A specialized software for real estate.",
+      "D": "Calculating the total square footage of a building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Linear Filtering'?",
+    "options": {
+      "A": "Filtering data in a single straight line.",
+      "B": "An operation where the output is a linear combination of the input pixel values.",
+      "C": "A specialized tool for plumbers.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-linear Filtering'?",
+    "options": {
+      "A": "A filter that is shaped like a circle.",
+      "B": "An operation where the output is not a linear combination of inputs (e.g., median filter).",
+      "C": "A filter used only for audio files.",
+      "D": "A specialized software for scientists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Smoothing' commonly used for?",
+    "options": {
+      "A": "Making a surface physically smooth.",
+      "B": "Removing noise and small details from an image.",
+      "C": "Hiring a person to fix bugs.",
+      "D": "A specialized tool for gardeners."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Threshold'?",
+    "options": {
+      "A": "The entrance to the office building.",
+      "B": "A value used to separate pixel intensities into groups.",
+      "C": "The price of the software license.",
+      "D": "The number of hours a lab was open."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Negative' of an image operation?",
+    "options": {
+      "A": "Subtracting 100 from every pixel value.",
+      "B": "Subtracting each pixel value from the maximum possible value (e.g., 255 - pixel).",
+      "C": "Deleting the image file.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Enhancement'?",
+    "options": {
+      "A": "Buying a new camera lens.",
+      "B": "Improving the visual quality or certain features of an image.",
+      "C": "Adding more people to the photo.",
+      "D": "Hiding the image from the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical difference between 'Correlation' and 'Convolution' in image filtering?",
+    "options": {
+      "A": "Correlation is used for blurring, while convolution is only for sharpening.",
+      "B": "Convolution involves flipping the kernel (rotating by 180 degrees) before the sliding sum-of-products.",
+      "C": "Correlation requires a GPU, whereas convolution can be performed on a CPU.",
+      "D": "Convolution is only applicable to binary images, while correlation works on color."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific noise type is a 'Median Filter' most effective at removing?",
+    "options": {
+      "A": "Gaussian Noise",
+      "B": "Salt-and-Pepper Noise",
+      "C": "Uniform Noise",
+      "D": "Quantization Noise"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the frequency domain, what does a 'High-pass Filter' achieve?",
+    "options": {
+      "A": "It blocks high-frequency details to smooth the image.",
+      "B": "It attenuates low-frequency components, effectively enhancing edges and fine details.",
+      "C": "It increases the overall brightness of the image by 50%.",
+      "D": "It removes all color information to produce a grayscale result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Sobel Operator' primarily used for in image processing?",
+    "options": {
+      "A": "To perform lossless image compression.",
+      "B": "To calculate the gradient of image intensity for edge detection.",
+      "C": "To rotate an image by an arbitrary degree using interpolation.",
+      "D": "To identify the names of faces in a crowd."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological Dilation' specifically designed to do to a binary image?",
+    "options": {
+      "A": "Thin out the objects in the foreground.",
+      "B": "Expand the boundaries of objects in the foreground, filling in small holes.",
+      "C": "Change the file extension of the image from PNG to TIFF.",
+      "D": "Subtract the background intensity from the foreground."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Fourier Transform' allow an engineer to analyze in an image?",
+    "options": {
+      "A": "The physical weight of the digital data.",
+      "B": "The spatial frequency components (patterns of intensity change) of the image.",
+      "C": "The history of every software tool used to edit the file.",
+      "D": "The GPS coordinates stored in the EXIF metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In image processing, what is 'Non-Maximum Suppression' used for during edge detection?",
+    "options": {
+      "A": "To increase the brightness of the darkest pixels.",
+      "B": "To thin out wide edges by keeping only the local maxima in the gradient direction.",
+      "C": "To prevent the computer from running out of VRAM.",
+      "D": "To delete all pixels that have a value of zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Histogram Matching' (or Specification)?",
+    "options": {
+      "A": "Finding two images with the exact same file size.",
+      "B": "The process of transforming an image so that its histogram matches a target reference histogram.",
+      "C": "A way to count the number of pixels in a specific color channel.",
+      "D": "Deleting duplicate images from a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a characteristic of a 'Gaussian Filter'?",
+    "options": {
+      "A": "It creates a sharp, blocky effect on the image.",
+      "B": "It is a weighted average where pixels closer to the center have higher weights, providing smooth blurring.",
+      "C": "It is used exclusively for detecting perfectly horizontal lines.",
+      "D": "It converts 24-bit color images into 1-bit binary images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Otsu's Method' commonly used for?",
+    "options": {
+      "A": "To detect the rotation angle of an object.",
+      "B": "To automatically determine an optimal threshold for binarization by maximizing inter-class variance.",
+      "C": "To compress video files using inter-frame prediction.",
+      "D": "To verify the identity of the person who took the photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'Bilinear Interpolation' when resizing an image?",
+    "options": {
+      "A": "It deletes every second pixel to save disk space.",
+      "B": "It calculates the new pixel value as a weighted average of the four nearest neighboring pixels.",
+      "C": "It rotates the image by 180 degrees during the scaling process.",
+      "D": "It identifies the edges of the image to prevent blurring."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Morphological Operations', what is an 'Opening'?",
+    "options": {
+      "A": "Creating a new file on the desktop.",
+      "B": "The process of erosion followed by dilation, used to remove small noise from the foreground.",
+      "C": "Increasing the aperture of the camera lens.",
+      "D": "Connecting the image processing software to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Laplacian of Gaussian' (LoG) operator used for?",
+    "options": {
+      "A": "To calculate the price of the image processing software.",
+      "B": "To detect edges by finding zero-crossings in the second derivative of the image.",
+      "C": "To rotate an image around its center point.",
+      "D": "To increase the saturation of the primary colors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global Thresholding' vs 'Adaptive Thresholding'?",
+    "options": {
+      "A": "Global is for the whole world; Adaptive is for local users.",
+      "B": "Global uses a single value for the whole image; Adaptive calculates thresholds for small regions.",
+      "C": "Adaptive is 100x faster than Global.",
+      "D": "Global is used for color; Adaptive is for grayscale only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unsharp Masking'?",
+    "options": {
+      "A": "A way to hide the face of a person in a photo.",
+      "B": "A technique to enhance edges by subtracting a blurred version of the image from the original.",
+      "C": "Deleting the sharpening filter from the processing pipeline.",
+      "D": "A specialized lens for nighttime photography."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a '2D Box Filter' (Average Filter) primarily result in?",
+    "options": {
+      "A": "Enhanced edge detail.",
+      "B": "Uniform blurring of the image where each pixel in the neighborhood has equal weight.",
+      "C": "A rainbow effect across the pixels.",
+      "D": "Separation of the background and foreground."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Aliasing' caused by in digital imaging?",
+    "options": {
+      "A": "Using too many colors in a small space.",
+      "B": "Sampling a signal at a rate below its Nyquist frequency.",
+      "C": "A software bug in the camera sensor.",
+      "D": "Having too much light in the room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Color Image Processing', what does the 'V' in HSV stand for?",
+    "options": {
+      "A": "Vector",
+      "B": "Value (Brightness)",
+      "C": "Vertical",
+      "D": "Volume"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological Erosion' primarily used to do?",
+    "options": {
+      "A": "Make the foreground objects thicker.",
+      "B": "Shrink foreground objects and remove thin connections or small protrusions.",
+      "C": "Increase the file size of a binary image.",
+      "D": "Add random noise to a clean image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is eliminated in 'Lossy Compression' like JPEG?",
+    "options": {
+      "A": "The metadata of the file.",
+      "B": "High-frequency information that is less perceptible to the human eye.",
+      "C": "The primary red channel of the image.",
+      "D": "All pixels with a value greater than 200."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Structure Element' in morphological operations?",
+    "options": {
+      "A": "The physical building where the image is stored.",
+      "B": "A small shape or template used to probe and transform the input image.",
+      "C": "The name of the main loop in the source code.",
+      "D": "A security certificate for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Homomorphic Filtering' used for?",
+    "options": {
+      "A": "To compress image data across multiple files.",
+      "B": "To correct non-uniform illumination by separating the image into reflectance and illumination components.",
+      "C": "To translate image files into a dead language.",
+      "D": "To count the number of users connected to a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Butterworth Filter' in frequency domain analysis?",
+    "options": {
+      "A": "A filter made of physical butter used to clean lenses.",
+      "B": "A type of signal processing filter designed to have as flat a frequency response as possible.",
+      "C": "A filter used only for audio files.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Separable Filter' mean in 2D convolution?",
+    "options": {
+      "A": "A filter that can be physically separated into two pieces.",
+      "B": "A 2D filter that can be expressed as the outer product of two 1D filters for efficiency.",
+      "C": "A filter that separates the colors from the grayscale.",
+      "D": "A filter that only works on certain days of the week."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intensity Transformation' (Gamma Correction) $gamma < 1$ intended to do?",
+    "options": {
+      "A": "Make the whole image darker.",
+      "B": "Expand the range of dark pixel values, effectively brightening the shadows.",
+      "C": "Increase the contrast of the highlights only.",
+      "D": "Remove the blue channel from the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Structuring Element' origin usually set to?",
+    "options": {
+      "A": "The top-left corner of the image.",
+      "B": "The center of the structuring element matrix.",
+      "C": "The physical location of the data center.",
+      "D": "The number of pixels in the frame."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Run-length Encoding' (RLE)?",
+    "options": {
+      "A": "The speed at which a script runs in the CPU.",
+      "B": "A simple form of lossless data compression that stores sequences of identical values as a single value and a count.",
+      "C": "A way to count the number of people in a photo.",
+      "D": "A security certificate for cloud data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Canny' Edge Detection 'Hysteresis Thresholding'?",
+    "options": {
+      "A": "A math error in the Canny algorithm.",
+      "B": "Using two thresholds to identify strong, weak, and non-edges to improve connectivity.",
+      "C": "A way to rotate the image by 5 degrees.",
+      "D": "Deleting the background of the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Processing', what is 'Padding'?",
+    "options": {
+      "A": "Adding extra glass to a camera lens.",
+      "B": "Adding extra pixels (usually zeros) to the border of an image before a convolution.",
+      "C": "Hiding an image in a secret folder.",
+      "D": "Storing images on a physical tablet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inverse Fourier Transform'?",
+    "options": {
+      "A": "Deleting the Fourier data permanently.",
+      "B": "Converting an image from the frequency domain back to the spatial domain.",
+      "C": "Rotating an image by exactly 180 degrees.",
+      "D": "Hiring a translator for image processing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological Closing'?",
+    "options": {
+      "A": "Closing the computer lid.",
+      "B": "The process of dilation followed by erosion, used to close small holes or gaps in objects.",
+      "C": "Turning off the camera software.",
+      "D": "Deleting the structuring element."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bit-plane Slicing'?",
+    "options": {
+      "A": "Cutting a physical computer board into slices.",
+      "B": "Highlighting the contribution made by specific bits to the total image appearance.",
+      "C": "A specialized software for airplane pilots.",
+      "D": "Increasing the memory usage of a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific filter is known as a 'Low-pass Filter' in the spatial domain?",
+    "options": {
+      "A": "Sobel Filter",
+      "B": "Averaging / Box Filter",
+      "C": "Laplacian Filter",
+      "D": "Prewitt Filter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contrast Stretching' primary goal?",
+    "options": {
+      "A": "To physically pull a printed photo to make it larger.",
+      "B": "To increase the dynamic range of the gray levels in the image being processed.",
+      "C": "To count the number of users viewing the file.",
+      "D": "To rotate the image horizontally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-crossings' in edge detection?",
+    "options": {
+      "A": "Crossing a street with zero traffic.",
+      "B": "The points where the value of a function (like the second derivative) changes sign, indicating an edge.",
+      "C": "Deleting zero values from the matrix.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Quantization'?",
+    "options": {
+      "A": "Counting how many images are on a drive.",
+      "B": "Reducing the number of discrete intensity levels used to represent an image.",
+      "C": "Using a quantum computer to edit photos.",
+      "D": "Hiring a mathematician to verify pixels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Processing', what is 'Salt' noise?",
+    "options": {
+      "A": "Physical salt falling on the keyboard.",
+      "B": "Randomly occurring high-intensity (white) pixels in an image.",
+      "C": "The price of the software license.",
+      "D": "The number of hours a lab was open."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pepper' noise?",
+    "options": {
+      "A": "Spices in the data center cafeteria.",
+      "B": "Randomly occurring low-intensity (black) pixels in an image.",
+      "C": "The speed of the network connection.",
+      "D": "A specialized software for botanists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ideal Low-pass Filter' (ILPF) drawback?",
+    "options": {
+      "A": "It is too expensive to use.",
+      "B": "It causes 'ringing' artifacts (Gibbs phenomenon) in the spatial domain.",
+      "C": "It only works on binary images.",
+      "D": "It deletes the center of the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spatial Filtering'?",
+    "options": {
+      "A": "Filtering images from outer space.",
+      "B": "Passing a filter mask over an image and performing a calculation at each pixel location.",
+      "C": "Hiring a person to clean a lens.",
+      "D": "A specialized software for astronauts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of a 'High-boost Filter'?",
+    "options": {
+      "A": "A completely black image.",
+      "B": "An image with emphasized high frequencies while retaining some of the original low frequencies.",
+      "C": "A video file that runs 2x faster.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Nearest Neighbor Interpolation'?",
+    "options": {
+      "A": "Talking to the person next to you in the office.",
+      "B": "A simple interpolation method that assigns the value of the closest pixel to the new location.",
+      "C": "A way to backup the SQL code.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Point Spread Function' (PSF)?",
+    "options": {
+      "A": "The way light spreads across a desk.",
+      "B": "A description of the response of an imaging system to a point source or point object.",
+      "C": "A way to draw dots on the screen.",
+      "D": "Identifying the author of a photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Restoration'?",
+    "options": {
+      "A": "Returning a camera to the store.",
+      "B": "The process of recovering an image that has been degraded by using a mathematical model of the degradation.",
+      "C": "Taking a break from editing photos.",
+      "D": "Deleting an image from the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Histogram' 'Bins'?",
+    "options": {
+      "A": "Physical trash bins in the office.",
+      "B": "The sub-intervals used to group pixel intensity values in a histogram.",
+      "C": "The price of the cloud storage.",
+      "D": "The number of users currently online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prewitt' Operator?",
+    "options": {
+      "A": "A person who works in the office.",
+      "B": "A discrete differentiation operator used for edge detection, similar to Sobel but with different weights.",
+      "C": "A way to name a database table.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Log Transformation' used for?",
+    "options": {
+      "A": "To count the number of logs in a fireplace.",
+      "B": "To expand the values of dark pixels in an image with a high dynamic range.",
+      "C": "To decrease the file size of a JPG.",
+      "D": "To rotate the image by 90 degrees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bit-plane' 'Slicing' 'MSB'?",
+    "options": {
+      "A": "The most sensitive bit.",
+      "B": "The Most Significant Bit, which contains the most visually important information in an image.",
+      "C": "A specialized software for pilots.",
+      "D": "A security certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Box Filter' kernel normalized by?",
+    "options": {
+      "A": "The number 100.",
+      "B": "The total number of pixels in the kernel (e.g., 1/9 for a 3x3).",
+      "C": "The price of the software.",
+      "D": "The amount of data stored in a pixel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spatial' 'Domain' vs 'Frequency' 'Domain'?",
+    "options": {
+      "A": "Spatial is for images; Frequency for text.",
+      "B": "Spatial refers to the image pixels themselves; Frequency refers to the rate of change of pixel values.",
+      "C": "They are the exact same thing.",
+      "D": "One is much faster than the other."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'Thresholding' 'Local'?",
+    "options": {
+      "A": "Hiring a person to use a fake name.",
+      "B": "Calculating different thresholds for different parts of an image to handle uneven lighting.",
+      "C": "A security scan for computer viruses.",
+      "D": "The process of naming a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gray-level' 'Co-occurrence' 'Matrix' (GLCM)?",
+    "options": {
+      "A": "A matrix that stores user passwords.",
+      "B": "A statistical method of examining texture that considers the spatial relationship of pixels.",
+      "C": "A way to count the number of characters.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological' 'Gradient'?",
+    "options": {
+      "A": "The physical slope of the data center floor.",
+      "B": "The difference between the dilation and erosion of an image, used to find object boundaries.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for gardening."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hit-or-Miss' Transformation?",
+    "options": {
+      "A": "A game played by developers.",
+      "B": "A morphological operation used to find specific patterns of foreground and background pixels.",
+      "C": "A software bug in the camera sensor.",
+      "D": "Identifying the author by their punctuation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gaussian' 'Noise' distribution?",
+    "options": {
+      "A": "A noise that is shaped like a square.",
+      "B": "A type of noise where values follow a normal distribution (bell curve).",
+      "C": "A noise that only works at night.",
+      "D": "A way to count the number of pixels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Wiener' 'Filtering'?",
+    "options": {
+      "A": "Filtering data based on the user's name.",
+      "B": "An optimal filtering method used to remove noise and restore blurred images.",
+      "C": "A way to name a database table.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Nyquist' 'Frequency' in sampling?",
+    "options": {
+      "A": "The price of the sampling hardware.",
+      "B": "The minimum rate at which a signal must be sampled to be accurately reconstructed.",
+      "C": "The total number of users.",
+      "D": "The speed of light in a vacuum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantization' 'Error'?",
+    "options": {
+      "A": "A math error made by a human.",
+      "B": "The difference between the actual intensity value and the quantized level assigned to a pixel.",
+      "C": "A bug in the software.",
+      "D": "The number of hours training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'Binarization'?",
+    "options": {
+      "A": "Converting an image into 0s and 1s physically.",
+      "B": "Converting a grayscale image into a black-and-white image.",
+      "C": "A specialized software for mathematicians.",
+      "D": "Hiring a translator for image processing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Laplacian' 'Filter' 'Kernel' typical property?",
+    "options": {
+      "A": "All elements are equal to zero.",
+      "B": "The sum of all coefficients in the kernel is equal to zero.",
+      "C": "The kernel is only used for images of nature.",
+      "D": "The kernel has zero output layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-padding' 'Effect' on Fourier Transform?",
+    "options": {
+      "A": "It removes all data.",
+      "B": "It increases the frequency resolution (interpolation) in the frequency domain.",
+      "C": "It makes the image look darker.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean' 'Filter' kernel?",
+    "options": {
+      "A": "A kernel that is mean to the user.",
+      "B": "A kernel where all weights are equal and sum to 1.",
+      "C": "A kernel used only for video files.",
+      "D": "Identifying the author by their unique use of semicolons."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Binary' 'Morphology' 'Dilation' property?",
+    "options": {
+      "A": "It always shrinks the image.",
+      "B": "It is an expansive operation that grows foreground regions.",
+      "C": "It removes all foreground pixels.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bit-depth' 'Increase' result?",
+    "options": {
+      "A": "A smaller file size.",
+      "B": "Better representation of subtle color or intensity changes.",
+      "C": "Faster internet upload speed.",
+      "D": "Deleting the image metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Structuring' 'Element' 'Reflection'?",
+    "options": {
+      "A": "Seeing the element in a mirror.",
+      "B": "Rotating the structuring element by 180 degrees around its origin.",
+      "C": "A way to count the number of users.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intensity' 'Level' 'Slicing'?",
+    "options": {
+      "A": "Cutting a printed photo into pieces.",
+      "B": "Highlighting a specific range of gray levels in an image.",
+      "C": "A way to count the number of rows.",
+      "D": "A specialized software for psychologists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical property of the 'Discrete Wavelet Transform' (DWT) makes it superior to the Fourier Transform for analyzing images with localized sharp transitions?",
+    "options": {
+      "A": "It uses 128-bit floating point precision for all coefficients.",
+      "B": "It provides simultaneous time and frequency localization (multi-resolution analysis).",
+      "C": "It eliminates the need for any kernel-based convolution operations.",
+      "D": "It only processes pixels that have a value of exactly 255."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Image Restoration', what is the primary technical challenge when using the 'Inverse Filter' in the presence of noise?",
+    "options": {
+      "A": "The filter makes the image too bright to view on standard monitors.",
+      "B": "The small values in the degradation function's frequency response cause massive noise amplification.",
+      "C": "The inverse filter requires a physical connection to the original camera hardware.",
+      "D": "It only works on images that have been compressed using lossy JPEG."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the specific role of the 'Regularization Parameter' ($lambda$) in a Constrained Least Squares (CLS) restoration filter?",
+    "options": {
+      "A": "To increase the saturation of the primary colors.",
+      "B": "To balance the trade-off between fidelity to the degraded data and smoothness of the result.",
+      "C": "To rotate the image into the frequency domain automatically.",
+      "D": "To count the number of high-frequency artifacts in the background."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which compression technique uses 'Arithmetic Coding' to achieve higher efficiency than Huffman coding by mapping a sequence of symbols to a single real number?",
+    "options": {
+      "A": "Run-length Encoding",
+      "B": "Context-Adaptive Binary Arithmetic Coding (CABAC)",
+      "C": "Simple Block Matching",
+      "D": "Standard Bit-plane Slicing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Watershed Transformation' utilize to perform image segmentation?",
+    "options": {
+      "A": "The physical movement of water across a computer screen.",
+      "B": "The concept of 'flooding' an intensity gradient map to find catchment basins and ridgelines.",
+      "C": "A linear regression model based on the RGB color channels.",
+      "D": "The number of times a user clicks on the center of an object."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Homomorphic Filtering', why is the 'Logarithm' of the image intensity taken before applying a high-pass filter?",
+    "options": {
+      "A": "To convert the image file into a text document.",
+      "B": "To separate the multiplicative components of illumination and reflectance into additive ones.",
+      "C": "To decrease the processing time of the Fourier Transform by 90%.",
+      "D": "To identify the names of the shadows in a photograph."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of the 'Scharr Operator' relative to the 'Sobel Operator'?",
+    "options": {
+      "A": "It is used for blurring images rather than detecting edges.",
+      "B": "It provides better rotational isotropy for calculating gradients in edge detection.",
+      "C": "It reduces the file size of the processed image.",
+      "D": "It can only be executed on a specialized hardware GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Blind Deconvolution' in image restoration?",
+    "options": {
+      "A": "Restoring an image while wearing a physical blindfold.",
+      "B": "Recovering an original image from a degraded one without knowing the Point Spread Function (PSF).",
+      "C": "Deleting the background of an image to reveal hidden data.",
+      "D": "Increasing the resolution of a photo using only color filters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What occurs during the 'Phase-only Reconstruction' of an image from its Fourier Transform?",
+    "options": {
+      "A": "The resulting image contains only the color information.",
+      "B": "The structural features and edges are preserved, but the contrast and brightness are lost.",
+      "C": "The image is perfectly reconstructed with zero error.",
+      "D": "The image file is converted into an audio waveform."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Color Image Processing', what does the 'Gamut' of a device represent?",
+    "options": {
+      "A": "The physical weight of the device.",
+      "B": "The entire range of colors that a device can accurately represent or produce.",
+      "C": "The number of hours the device can run on battery.",
+      "D": "The speed at which the device processes pixels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anisotropic Diffusion' (Perona-Malik) primarily used for?",
+    "options": {
+      "A": "To rotate an image in three dimensions.",
+      "B": "To reduce image noise while preserving significant edges and structural content.",
+      "C": "To increase the dynamic range of a grayscale image.",
+      "D": "To count the number of objects in a frame."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hough Transform' for circles, how many parameters are typically used in the accumulator space?",
+    "options": {
+      "A": "1 ($r$ only)",
+      "B": "2 ($x$, $y$)",
+      "C": "3 ($x$, $y$, $r$)",
+      "D": "4 ($x$, $y$, $r$, $\theta$)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which mathematical operation is used in 'Image Pyramid' construction to avoid aliasing during downsampling?",
+    "options": {
+      "A": "Thresholding",
+      "B": "Low-pass (Gaussian) pre-filtering",
+      "C": "High-pass filtering",
+      "D": "Linear Regression"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the specific purpose of the 'Gabor Filter' in texture analysis?",
+    "options": {
+      "A": "To delete all red pixels from an image.",
+      "B": "To detect patterns with specific orientations and spatial frequencies, similar to the human visual system.",
+      "C": "To compress video files using inter-frame prediction.",
+      "D": "To measure the room temperature of the laboratory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Radon Transform', what do the values in the resulting sinogram represent?",
+    "options": {
+      "A": "The color intensity of the pixels.",
+      "B": "The line integrals of the image intensity at different angles and offsets.",
+      "C": "The names of the objects detected in the scene.",
+      "D": "The time it takes to process one bit of data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Condition Number' of a degradation matrix significant for in image restoration?",
+    "options": {
+      "A": "The total number of pixels in the matrix.",
+      "B": "The sensitivity of the restoration process to noise and numerical instability.",
+      "C": "The brightness level of the resulting image.",
+      "D": "The file format used to save the restored image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technique is used to find 'Corner' points by analyzing the eigenvalues of a local auto-correlation matrix?",
+    "options": {
+      "A": "Otsu's Thresholding",
+      "B": "Harris Corner Detection",
+      "C": "Median Filtering",
+      "D": "Canny Edge Detection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Gibbs Phenomenon' observed in frequency domain filtering?",
+    "options": {
+      "A": "A sudden increase in the brightness of the center pixel.",
+      "B": "The ringing artifacts or oscillations that occur near sharp transitions when high frequencies are cut.",
+      "C": "A software bug that causes the computer to crash.",
+      "D": "The process of deleting duplicate image frames."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Steganography', what is the 'LSB' (Least Significant Bit) method used for?",
+    "options": {
+      "A": "Increasing the sharpness of an image.",
+      "B": "Hiding secret data within the lowest bits of the pixel values to avoid visual detection.",
+      "C": "Compressing the image to 10% of its original size.",
+      "D": "Counting the number of primary colors in a photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Wiener Filter' minimize in its mathematical objective function?",
+    "options": {
+      "A": "The file size of the output image.",
+      "B": "The Mean Square Error (MSE) between the estimated and the true uncorrupted image.",
+      "C": "The time required to perform the Fourier Transform.",
+      "D": "The total number of intensity levels in the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological Skeletonization'?",
+    "options": {
+      "A": "Drawing a skeleton on top of a person's photo.",
+      "B": "Reducing an object to a 1-pixel wide representation while preserving its topology.",
+      "C": "Deleting all dark pixels from a grayscale image.",
+      "D": "Hiring a professional artist to draw lines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Wavelet Decomposition', what do the 'Detail Coefficients' represent?",
+    "options": {
+      "A": "The average intensity of the image.",
+      "B": "The high-frequency horizontal, vertical, and diagonal components of the image.",
+      "C": "The metadata about the camera settings.",
+      "D": "The total number of pixels in the frame."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Region Growing' in the context of image segmentation?",
+    "options": {
+      "A": "Moving the camera closer to an object.",
+      "B": "An iterative process that groups neighboring pixels based on similarity criteria starting from seed points.",
+      "C": "Hiring more developers to work on a project.",
+      "D": "Increasing the file size of a JPG image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'DCT' and 'DFT' in image compression?",
+    "options": {
+      "A": "DCT only works on text; DFT for images.",
+      "B": "DCT uses only cosine functions and produces real-valued coefficients, which is more efficient for energy compaction.",
+      "C": "DFT is 100x faster than DCT on a standard CPU.",
+      "D": "DCT requires a high-security encryption key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bilateral Filtering'?",
+    "options": {
+      "A": "Filtering two images at the same time.",
+      "B": "An edge-preserving smoothing filter that considers both spatial distance and intensity difference.",
+      "C": "A specialized software for measuring the weight of a monitor.",
+      "D": "Rotating an image by exactly 180 degrees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Binary Morphology', what does the 'Top-hat' transformation highlight?",
+    "options": {
+      "A": "The most important person in a photograph.",
+      "B": "Small details or objects that are brighter than their surroundings in a non-uniform background.",
+      "C": "The physical top of a digital image file.",
+      "D": "The names of the developers in the metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Iterative Back-Projection' used for in super-resolution?",
+    "options": {
+      "A": "Moving a projector backward in a room.",
+      "B": "Refining a high-resolution estimate by minimizing the error between simulated and actual low-resolution observations.",
+      "C": "Counting the number of pixels in a frame.",
+      "D": "Deleting duplicate images from a drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a characteristic of 'Lossless' Predictive Coding?",
+    "options": {
+      "A": "It removes high-frequency information permanently.",
+      "B": "It only transmits the difference (error) between the actual pixel value and a predicted value.",
+      "C": "It increases the file size of the original image.",
+      "D": "It requires the user to log in every 5 seconds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Modulation Transfer Function' (MTF) used to characterize?",
+    "options": {
+      "A": "The internet speed of the data center.",
+      "B": "The spatial frequency response and contrast-reduction capabilities of an imaging system.",
+      "C": "The price of the camera lens.",
+      "D": "The number of users connected to a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological Reconstruction'?",
+    "options": {
+      "A": "Fixing a broken camera with glue.",
+      "B": "A transformation involving a 'marker' and a 'mask' image that preserves shapes better than standard dilation.",
+      "C": "A way to backup the SQL schema.",
+      "D": "Hiring a person to manually draw pixels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Frequency Domain Analysis', what is the 'Transfer Function' $H(u,v)$?",
+    "options": {
+      "A": "A document used to transfer data between offices.",
+      "B": "The mathematical representation of a filter in the frequency domain.",
+      "C": "A way to name a database table.",
+      "D": "The speed of the network data flow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quadtree Decomposition' used for in segmentation?",
+    "options": {
+      "A": "Planting four trees in front of the lab.",
+      "B": "An image partitioning algorithm that recursively divides an image into four quadrants based on a homogeneity criterion.",
+      "C": "A way to rotate the image by 45 degrees.",
+      "D": "Counting the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Wavelet' is the simplest and uses a step-function basis?",
+    "options": {
+      "A": "Daubechies Wavelet",
+      "B": "Haar Wavelet",
+      "C": "Morlet Wavelet",
+      "D": "Mexican Hat Wavelet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Energy Compaction' in the context of image transforms?",
+    "options": {
+      "A": "The physical compression of the CPU.",
+      "B": "The ability of a transform to concentrate the image information into a small number of coefficients.",
+      "C": "The price of the electricity used to train AI.",
+      "D": "A specialized software for nuclear researchers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deconvolution' technically reversing?",
+    "options": {
+      "A": "The rotation of an image.",
+      "B": "The effect of a convolution (blurring) that has degraded the original image signal.",
+      "C": "The compression of a JPEG file.",
+      "D": "The encryption of a secret photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Processing', what is the 'PSNR' (Peak Signal-to-Noise Ratio) used to evaluate?",
+    "options": {
+      "A": "The speed of the camera sensor.",
+      "B": "The quality of reconstruction or compression compared to the original image.",
+      "C": "The brightness level of the monitor.",
+      "D": "The number of high-resolution files on a drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Structuring Element' Decomposition?",
+    "options": {
+      "A": "Breaking a building into pieces.",
+      "B": "Representing a large structuring element as a sequence of smaller ones for computational efficiency.",
+      "C": "A specialized software for architects.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Histogram Equalization' global vs local?",
+    "options": {
+      "A": "Global is for text; local for images.",
+      "B": "Global applies one transformation to the whole image; local calculates transformations based on small windows.",
+      "C": "They are identical in modern software.",
+      "D": "Local is 100x faster than Global."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Separable convolution' reduce the complexity of a $K \times K$ kernel to?",
+    "options": {
+      "A": "From $O(K^2)$ to $O(2K)$ operations per pixel.",
+      "B": "From $O(K)$ to $O(1)$.",
+      "C": "From $O(N)$ to $O(log N)$.",
+      "D": "From 100% to 50% complexity."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Periodic Noise' removal usually performed with?",
+    "options": {
+      "A": "A hammer and screwdriver.",
+      "B": "Notch filters in the frequency domain to target specific spikes.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the volume of the audio file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Subband Coding'?",
+    "options": {
+      "A": "Coding while listening to a musical band.",
+      "B": "Decomposing an image into different frequency bands and coding each separately based on its importance.",
+      "C": "A specialized tool for managing radio bands.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inverse' 'Filtering' 'Ill-posed' problem?",
+    "options": {
+      "A": "A problem where the camera is not standing straight.",
+      "B": "The mathematical situation where small changes in data lead to arbitrarily large changes in the output.",
+      "C": "A problem with too many users.",
+      "D": "A bug in the SQL query logic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'K-means' clustering in image segmentation?",
+    "options": {
+      "A": "Clustering based on the user's name.",
+      "B": "An unsupervised algorithm that partitions pixels into $K$ clusters based on color or intensity similarity.",
+      "C": "A specialized software for architects.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'Restoration' 'L-curve' method?",
+    "options": {
+      "A": "Drawing an 'L' on the screen.",
+      "B": "A graphical method to find the optimal regularization parameter by plotting residual vs. solution norm.",
+      "C": "A way to count the number of pixels.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intensity' 'Slicing' 'Binary'?",
+    "options": {
+      "A": "Cutting a photo into two pieces.",
+      "B": "A specific transformation where a range of gray levels is mapped to white and all others to black.",
+      "C": "A specialized software for psychologists.",
+      "D": "Increasing the file size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Discrete' 'Cosine' 'Transform' (DCT) 'Energy' 'Compaction'?",
+    "options": {
+      "A": "Compacting physical batteries.",
+      "B": "The property where most of the image information is packed into a few low-frequency coefficients.",
+      "C": "A way to count the number of users.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Frequency' 'Domain' 'Smoothing' 'Filter'?",
+    "options": {
+      "A": "A filter used to clean the office floor.",
+      "B": "A low-pass filter that attenuates high frequencies to reduce noise.",
+      "C": "A filter used only for audio files.",
+      "D": "Identifying the author by their punctuation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Processing', what is 'Salt and Pepper' noise model?",
+    "options": {
+      "A": "Food particles on the camera sensor.",
+      "B": "An impulse noise model where pixels take on either maximum or minimum possible values.",
+      "C": "A specific type of filter used to sharpen edges.",
+      "D": "The color of the office walls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean' 'Filter' 'Arithmetic'?",
+    "options": {
+      "A": "A filter that is mean to the user.",
+      "B": "The simplest smoothing filter which computes the average value of the pixels in the neighborhood.",
+      "C": "A kernel used only for video files.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'De-noising' 'Wavelet' 'Thresholding'?",
+    "options": {
+      "A": "Hiring a person to clean a lens.",
+      "B": "Zeroing out wavelet coefficients that are smaller than a threshold to remove noise.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hough' 'Transform' 'Line' 'Detection' 'Polar' 'Coordinates'?",
+    "options": {
+      "A": "Detecting lines in Antarctica.",
+      "B": "Using $\rho$ and $\theta$ to represent lines to avoid the problem of infinite slopes in $y=mx+c$.",
+      "C": "A way to rotate the image by 90 degrees.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological' 'Thinning'?",
+    "options": {
+      "A": "Making an image physically thinner.",
+      "B": "An iterative process of removing boundary pixels that do not break connectivity, often used for character recognition.",
+      "C": "A specialized software for gardeners.",
+      "D": "Deleting the image metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global' 'Thresholding' 'Basic' algorithm?",
+    "options": {
+      "A": "A secret plan for hacking.",
+      "B": "An iterative process to find a threshold that separates an image into background and foreground based on average intensities.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for mathematicians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intensity' 'Quantization' 'Bits'?",
+    "options": {
+      "A": "Counting the bits in a drill.",
+      "B": "The process of reducing the number of discrete levels used to represent pixel intensities.",
+      "C": "A way to speed up the network.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Histogram' 'Expansion'?",
+    "options": {
+      "A": "Expanding the history of the company.",
+      "B": "A technique to increase the dynamic range of an image by mapping the existing range to the full available range.",
+      "C": "A specialized software for historians.",
+      "D": "Deleting the image file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Region' 'Splitting' and 'Merging'?",
+    "options": {
+      "A": "Splitting a group of people into two rooms.",
+      "B": "A segmentation algorithm that divides an image into quadrants and merges similar neighboring regions.",
+      "C": "A way to backup the SQL code.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Frequency' 'Domain', what is 'Ideal' 'High-pass' 'Filter'?",
+    "options": {
+      "A": "A filter that is perfect for audio.",
+      "B": "A filter that cuts all frequencies below a certain radius and passes all others with zero attenuation.",
+      "C": "A specialized software for pilots.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spatial' 'Filtering' 'Non-linear' example?",
+    "options": {
+      "A": "Filtering data in a straight line.",
+      "B": "A median filter, where the output is determined by sorting neighbor values.",
+      "C": "A way to count the number of characters.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intensity' 'Transformation' 'S-curve'?",
+    "options": {
+      "A": "A curve on a physical road.",
+      "B": "A mapping function that increases contrast in the mid-tones while compressing the shadows and highlights.",
+      "C": "A specialized software for psychologists.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'Restoration' 'Degradation' 'Function'?",
+    "options": {
+      "A": "A function that makes the developer angry.",
+      "B": "A mathematical model $H$ that represents the process (like blur or motion) that corrupted the original image.",
+      "C": "A way to name a database table.",
+      "D": "A security scan for computer viruses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological' 'Closing' 'Property'?",
+    "options": {
+      "A": "It always shrinks objects.",
+      "B": "It is an idempotent operation that fills small gaps and joins nearby objects.",
+      "C": "It deletes the center of the image.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fourier' 'Spectrum'?",
+    "options": {
+      "A": "A type of physical ghost.",
+      "B": "The magnitude component of the Fourier Transform, showing the strength of each frequency component.",
+      "C": "A way to count the number of pixels.",
+      "D": "A specialized tool for managing radio bands."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Discrete' 'Wavelet' 'Transform' 'Multi-resolution'?",
+    "options": {
+      "A": "Making a resolution to work harder.",
+      "B": "Analyzing an image at multiple scales or levels of detail to capture different features.",
+      "C": "A way to speed up the internet.",
+      "D": "Hiring a translator for image processing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'Compression' 'Redundancy' 'Inter-pixel'?",
+    "options": {
+      "A": "Having too many pixels in a frame.",
+      "B": "The statistical correlation between neighboring pixels that can be exploited to reduce data size.",
+      "C": "A bug in the camera sensor.",
+      "D": "A security firewall for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Processing', what is 'Spatial' 'Aliasing'?",
+    "options": {
+      "A": "Using a fake name in the data center.",
+      "B": "The distortion caused by under-sampling, leading to false patterns like Moire fringes.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized hardware for cooling."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient' 'Magnitude' in edge detection?",
+    "options": {
+      "A": "The physical size of a lens.",
+      "B": "A measure of the strength or steepness of the intensity change at a specific pixel.",
+      "C": "A way to name a database table.",
+      "D": "The number of hours a lab was open."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Laplacian' 'of' 'Gaussian' (LoG) 'Marr-Hildreth' filter?",
+    "options": {
+      "A": "A filter named after two explorers.",
+      "B": "An edge detector that combines Gaussian smoothing with the Laplacian to find zero-crossings across scales.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'Binarization' 'Otsu' 'Variance'?",
+    "options": {
+      "A": "A measure of how angry the software is.",
+      "B": "The value that Otsu's method maximizes to find the best threshold between two pixel classes.",
+      "C": "A way to count the number of characters.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  }
+
+  ]
+}

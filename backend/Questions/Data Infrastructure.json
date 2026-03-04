@@ -1,0 +1,2007 @@
+{ 
+  "skill": "Data Infrastructure ", 
+  "questions": [
+    {
+    "question": "What is the primary role of 'Data Infrastructure' in an organization?",
+    "options": {
+      "A": "To design the marketing posters for new products.",
+      "B": "To provide the underlying systems and services for data storage, processing, and transport.",
+      "C": "To physically manage the company's human resources department.",
+      "D": "To replace all digital databases with paper-based filing systems."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a physical piece of hardware used to store data in a data center?",
+    "options": {
+      "A": "RAM",
+      "B": "Solid State Drive (SSD)",
+      "C": "Monitor",
+      "D": "Kernel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CPU' stand for in the context of data infrastructure?",
+    "options": {
+      "A": "Cloud Processing Utility",
+      "B": "Central Processing Unit",
+      "C": "Core Power Unit",
+      "D": "Computer Protocol User"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Cloud Computing' over traditional 'On-Premises' infrastructure?",
+    "options": {
+      "A": "It requires the company to build its own physical power plant.",
+      "B": "It offers scalability and reduces the need for upfront hardware investment.",
+      "C": "It ensures that the internet never goes down.",
+      "D": "It makes the computer hardware physically heavier."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Server'?",
+    "options": {
+      "A": "A person who delivers food to employees.",
+      "B": "A computer program or device that provides functionality to other programs or devices (clients).",
+      "C": "A specialized tool for cleaning high-speed data cables.",
+      "D": "The power button on the back of a laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes the amount of data that can be transferred over a network in a specific amount of time?",
+    "options": {
+      "A": "Latency",
+      "B": "Bandwidth",
+      "C": "Resolution",
+      "D": "Storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latency' in the context of networking?",
+    "options": {
+      "A": "The physical width of a server rack.",
+      "B": "The time delay before a component of data begins a transition following an instruction.",
+      "C": "The total number of files stored on a hard drive.",
+      "D": "The brightness level of a data center monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NAS' in data storage infrastructure?",
+    "options": {
+      "A": "Network Attached Storage",
+      "B": "Node Access System",
+      "C": "National Archive Server",
+      "D": "Numerical Analysis Software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a 'Redundancy' measure in a data center?",
+    "options": {
+      "A": "Using only one single hard drive for all data.",
+      "B": "Having backup power supplies (UPS) and multiple internet providers.",
+      "C": "Deleting old data once every ten years.",
+      "D": "Hiring a security guard who only speaks one language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'Database'?",
+    "options": {
+      "A": "To create 3D animations of data.",
+      "B": "To store, manage, and retrieve structured data efficiently.",
+      "C": "To act as a physical cooling system for the server room.",
+      "D": "To record the audio of every employee meeting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SaaS' stand for?",
+    "options": {
+      "A": "System as a Source",
+      "B": "Software as a Service",
+      "C": "Security as a System",
+      "D": "Server as a Standard"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Data Center'?",
+    "options": {
+      "A": "The room in the office where the CEO sits.",
+      "B": "A large group of networked computer servers typically used for the remote storage and processing of data.",
+      "C": "A website for buying computer parts.",
+      "D": "A list of all the phone numbers of the tech support team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cold Storage' used for in data infrastructure?",
+    "options": {
+      "A": "Storing food for the data center staff.",
+      "B": "Storing data that is rarely accessed and does not require immediate retrieval.",
+      "C": "Cooling down a server that has overheated.",
+      "D": "A high-security database located in Antarctica."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of a 'Router'?",
+    "options": {
+      "A": "To print physical labels for the server racks.",
+      "B": "To forward data packets between computer networks.",
+      "C": "To count the number of users on the network.",
+      "D": "To increase the storage capacity of a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Virtualization'?",
+    "options": {
+      "A": "Putting on a VR headset to view server statistics.",
+      "B": "Creating a virtual (rather than actual) version of something, such as a server or storage device.",
+      "C": "Designing a completely fake data center for training purposes.",
+      "D": "Upgrading a computer's physical RAM by hand."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Public Cloud' provider?",
+    "options": {
+      "A": "Snowflake (only)",
+      "B": "Amazon Web Services (AWS)",
+      "C": "Adobe Creative Cloud",
+      "D": "Spotify"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Backup' in data infrastructure?",
+    "options": {
+      "A": "Moving a server out of the building.",
+      "B": "A copy of data intended to be used for restoration if the original is lost.",
+      "C": "A secondary computer that is used only for checking email.",
+      "D": "Reversing the order of a list of employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'RAM' stand for?",
+    "options": {
+      "A": "Random Access Memory",
+      "B": "Read Advanced Mode",
+      "C": "Rapid Archive Management",
+      "D": "Remote Access Monitor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Disaster Recovery' (DR)?",
+    "options": {
+      "A": "Hiring a team to clean up after a physical fire.",
+      "B": "The process and policies for regaining access to infrastructure after a natural or human-induced disaster.",
+      "C": "Predicting when the next power outage will happen using AI.",
+      "D": "Buying insurance for the company's delivery vans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scalability'?",
+    "options": {
+      "A": "The weight of a server on a physical scale.",
+      "B": "The ability of a system to increase or decrease in size and power to meet demand.",
+      "C": "The number of stairs in a data center.",
+      "D": "The speed at which a hard drive spins."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In networking, what is an 'IP Address'?",
+    "options": {
+      "A": "The physical address of the company headquarters.",
+      "B": "A unique numerical label assigned to each device connected to a computer network.",
+      "C": "A password used to access the cloud console.",
+      "D": "A way to measure the speed of light in a cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Firewall'?",
+    "options": {
+      "A": "A physical wall made of fire to protect the office.",
+      "B": "A security system that monitors and controls incoming and outgoing network traffic.",
+      "C": "A software for designing 3D models of fire extinguishers.",
+      "D": "The process of deleting duplicate image files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'On-Premises' infrastructure?",
+    "options": {
+      "A": "Infrastructure that is physically located on the moon.",
+      "B": "Infrastructure that is hosted and managed within an organization's own physical office or building.",
+      "C": "A subscription to a cloud service like AWS.",
+      "D": "Software that only works when a person is physically present."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encryption'?",
+    "options": {
+      "A": "The process of deleting data permanently.",
+      "B": "The process of converting data into a code to prevent unauthorized access.",
+      "C": "Increasing the font size of a text document.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is considered 'Big Data'?",
+    "options": {
+      "A": "A single text file that is 1KB in size.",
+      "B": "Datasets that are too large or complex to be dealt with by traditional data-processing software.",
+      "C": "A document written in a very large font size.",
+      "D": "Information stored on a physically large computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Load Balancing'?",
+    "options": {
+      "A": "Distributing tasks across multiple resources to ensure no single resource is overwhelmed.",
+      "B": "Weighing the physical servers to make sure they are even.",
+      "C": "Ensuring every employee has the same amount of vacation days.",
+      "D": "Counting the number of people in the office elevator."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Rack' in a data center?",
+    "options": {
+      "A": "A physical frame used for mounting and organizing computer servers.",
+      "B": "A shelf for storing employees' personal items.",
+      "C": "A security system that tracks the movement of mice.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Downtime'?",
+    "options": {
+      "A": "The time spent sitting on the floor in the office.",
+      "B": "The period during which a system or network is unavailable.",
+      "C": "The time it takes for a file to download.",
+      "D": "The number of hours the office is closed on weekends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'IaaS' stand for?",
+    "options": {
+      "A": "Image as a Source",
+      "B": "Infrastructure as a Service",
+      "C": "Internet as a Standard",
+      "D": "Internal Access System"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The computer 'eating' or deleting data.",
+      "B": "The process of obtaining and importing data for immediate use or storage in a database.",
+      "C": "Reading a book about how to build servers.",
+      "D": "Sharing a document on social media."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Storage Capacity'?",
+    "options": {
+      "A": "The physical size of the room the server is in.",
+      "B": "The total amount of data a device can store.",
+      "C": "The number of people who work in the IT department.",
+      "D": "The weight of the hard drive in grams."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Integrity'?",
+    "options": {
+      "A": "The honesty of the data center manager.",
+      "B": "The accuracy, completeness, and consistency of data throughout its entire lifecycle.",
+      "C": "The price of the database software.",
+      "D": "A way to count the number of users in a system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'High Availability'?",
+    "options": {
+      "A": "A system that is only available during business hours.",
+      "B": "A system design that ensures a prearranged level of operational performance (usually uptime) for a duration.",
+      "C": "Hiring a developer who is very tall.",
+      "D": "A system that costs more than 1 million dollars."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Object Storage'?",
+    "options": {
+      "A": "Storing physical objects like chairs in a warehouse.",
+      "B": "A data storage architecture that manages data as objects (e.g., photos or videos).",
+      "C": "A list of all the objects currently missing from the office.",
+      "D": "A way to hide files from the operating system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Data Lake'?",
+    "options": {
+      "A": "A large body of water used to cool servers.",
+      "B": "A centralized repository that allows you to store all your structured and unstructured data at any scale.",
+      "C": "A specialized software for boat owners.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hybrid Cloud'?",
+    "options": {
+      "A": "A cloud that uses both gas and electricity.",
+      "B": "A computing environment that combines a public cloud and a private cloud.",
+      "C": "A cloud that only works when it is raining.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Network Topology'?",
+    "options": {
+      "A": "The study of top hats using AI.",
+      "B": "The arrangement of the elements (links, nodes, etc.) of a communication network.",
+      "C": "The physical layout of the server room furniture.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Packet Switching'?",
+    "options": {
+      "A": "Switching your internet provider every month.",
+      "B": "A method of grouping data into packets that are transmitted over a digital network.",
+      "C": "A physical switch on the front of a server.",
+      "D": "Deleting data packets that are too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput'?",
+    "options": {
+      "A": "The number of hours a developer works.",
+      "B": "The rate of production or the rate at which something is processed.",
+      "C": "The total capacity of a hard drive.",
+      "D": "The price of the cloud storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Mainframe'?",
+    "options": {
+      "A": "The physical frame of the office building.",
+      "B": "A high-performance computer used by large organizations for bulk data processing.",
+      "C": "A specialized software for designing glasses frames.",
+      "D": "The name of the company's first website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Colocation'?",
+    "options": {
+      "A": "Moving two servers to the same location.",
+      "B": "Renting space for your servers in a third-party data center.",
+      "C": "A specialized software for GPS tracking.",
+      "D": "Hiring two people to work on the same computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UPS' in the context of data infrastructure?",
+    "options": {
+      "A": "Uninterruptible Power Supply",
+      "B": "United Pixel Source",
+      "C": "Universal Processing System",
+      "D": "User Password Security"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Failover'?",
+    "options": {
+      "A": "A system that has failed permanently.",
+      "B": "The automatic switching to a redundant or standby computer server or network upon the failure of the first.",
+      "C": "Tripping over a cable in the data center.",
+      "D": "Deleting the secondary server to save money."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bare Metal' server?",
+    "options": {
+      "A": "A server that has no physical casing.",
+      "B": "A physical computer server that is used by only one consumer.",
+      "C": "A server made of physical gold.",
+      "D": "A server that has zero software installed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Edge Computing'?",
+    "options": {
+      "A": "Computing that only works on the edge of a desk.",
+      "B": "Processing data near the source of the data (the 'edge' of the network) rather than in a centralized cloud.",
+      "C": "A high-risk way to train AI models.",
+      "D": "Measuring the width of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Provisioning'?",
+    "options": {
+      "A": "Buying food for the office.",
+      "B": "The process of setting up IT infrastructure.",
+      "C": "Managing the company's budget.",
+      "D": "A specialized software for accounting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Migration'?",
+    "options": {
+      "A": "Moving data between different countries only.",
+      "B": "The process of moving data from one location to another, one format to another, or one application to another.",
+      "C": "Hiring a team of developers from another country.",
+      "D": "Deleting data after it has been used."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Hardware' component?",
+    "options": {
+      "A": "Operating System",
+      "B": "Network Switch",
+      "C": "SQL Query",
+      "D": "Excel Spreadsheet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Virtual Machine' (VM)?",
+    "options": {
+      "A": "A robot that looks like a human.",
+      "B": "An emulation of a computer system.",
+      "C": "A specialized software for 3D modeling.",
+      "D": "A backup drive for passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dark Fiber'?",
+    "options": {
+      "A": "Cables that only work at night.",
+      "B": "Underutilized or unlit fiber-optic cable that has been laid but is not in use.",
+      "C": "A secret type of internet connection for hackers.",
+      "D": "Cables that are painted black for aesthetics."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Network Latency'?",
+    "options": {
+      "A": "The speed of the internet connection.",
+      "B": "The time it takes for data to travel from one point to another.",
+      "C": "The total number of users on the network.",
+      "D": "The weight of the networking cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Storage Area Network' (SAN)?",
+    "options": {
+      "A": "A social network for data engineers.",
+      "B": "A specialized, high-speed network that provides block-level network access to storage.",
+      "C": "A specialized software for architects.",
+      "D": "A list of all the storage drives in the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hot Storage'?",
+    "options": {
+      "A": "Storing servers in a very warm room.",
+      "B": "Storage for data that needs to be accessed frequently and quickly.",
+      "C": "A high-speed hard drive that is hot to the touch.",
+      "D": "Deleting data that is not active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Archiving'?",
+    "options": {
+      "A": "Deleting data permanently.",
+      "B": "The process of moving data that is no longer actively used to a separate storage device for long-term retention.",
+      "C": "Hiring a librarian to manage files.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cold Data'?",
+    "options": {
+      "A": "Data that is stored at zero degrees.",
+      "B": "Data that is rarely accessed.",
+      "C": "Data that only works during the winter.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Serverless Computing'?",
+    "options": {
+      "A": "Computing that doesn't use any computers.",
+      "B": "A cloud computing model where the provider manages the allocation of machine resources.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-tenancy'?",
+    "options": {
+      "A": "Hiring 10 people to share one office.",
+      "B": "An architecture where a single instance of a software application serves multiple customers.",
+      "C": "A specialized software for boat owners.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Elasticity' in cloud infrastructure?",
+    "options": {
+      "A": "The ability of the power cable to stretch.",
+      "B": "The ability to scale resources up and down easily as needed.",
+      "C": "The price of the cloud subscription.",
+      "D": "The weight of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Availability Zone' (AZ)?",
+    "options": {
+      "A": "A room where employees can take a break.",
+      "B": "An isolated location within a data center region from which public cloud services originate and operate.",
+      "C": "A list of all users who are currently online.",
+      "D": "A security certificate for cloud data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compute Power'?",
+    "options": {
+      "A": "The total amount of electricity used by the office.",
+      "B": "The ability of a computer to process data.",
+      "C": "The number of hours a developer works.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bandwidth Throttling'?",
+    "options": {
+      "A": "Increasing the internet speed manually.",
+      "B": "The intentional slowing of internet service by an ISP or a system admin.",
+      "C": "A way to count the number of users in a queue.",
+      "D": "Deleting data packets that are too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cache'?",
+    "options": {
+      "A": "Physical money stored in the office.",
+      "B": "A hardware or software component that stores data so that future requests for that data can be served faster.",
+      "C": "A specialized tool for cleaning monitors.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Redundant Array of Independent Disks' (RAID)?",
+    "options": {
+      "A": "A way to increase the speed of a single hard drive.",
+      "B": "A technology used to increase the performance and/or reliability of data storage by using multiple drives.",
+      "C": "A specialized software for architects.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Port' in networking?",
+    "options": {
+      "A": "A place where physical ships arrive.",
+      "B": "A virtual point where network connections start and end.",
+      "C": "A specialized keyboard for faster typing.",
+      "D": "The name of the company's first website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DNS'?",
+    "options": {
+      "A": "Data Network System",
+      "B": "Domain Name System",
+      "C": "Digital Node Source",
+      "D": "Desktop Navigation Standard"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SQL' in data management?",
+    "options": {
+      "A": "Simple Quality Logic",
+      "B": "Structured Query Language",
+      "C": "Standard Query Layer",
+      "D": "System Queue Loader"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical difference between 'Vertical Scaling' and 'Horizontal Scaling'?",
+    "options": {
+      "A": "Vertical scaling involves adding more servers to a cluster; horizontal involves adding more CPU to one server.",
+      "B": "Vertical scaling increases the power of a single machine; horizontal scaling adds more machines to the pool.",
+      "C": "Vertical scaling is only for cloud databases; horizontal scaling is for on-premises storage.",
+      "D": "There is no difference; they are interchangeable terms in infrastructure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which networking protocol is most commonly used for block-level storage access in a Storage Area Network (SAN)?",
+    "options": {
+      "A": "HTTP/S",
+      "B": "iSCSI",
+      "C": "SMTP",
+      "D": "FTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a high-availability setup, what is the role of a 'Quorum'?",
+    "options": {
+      "A": "To encrypt the data before it is replicated to the secondary node.",
+      "B": "To serve as a tie-breaker and ensure a cluster can determine which node should be active during a failure.",
+      "C": "To provide a physical backup of the BIOS settings on a local drive.",
+      "D": "To increase the speed of the internet connection between data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Data Sovereignty' refer to in cloud infrastructure management?",
+    "options": {
+      "A": "The speed at which data is processed by the CPU.",
+      "B": "The legal requirement that data is subject to the laws of the country where it is physically located.",
+      "C": "The ability of a database to recover from a total power failure.",
+      "D": "The number of users who have administrative access to the data lake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a characteristic of 'Object Storage' compared to 'Block Storage'?",
+    "options": {
+      "A": "It is much faster for running operating systems.",
+      "B": "It uses a flat address space and identifies data by unique IDs and metadata.",
+      "C": "It requires data to be organized into fixed-size sectors and tracks.",
+      "D": "It can only store text files and cannot handle video or audio."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Content Delivery Network' (CDN) primarily used for?",
+    "options": {
+      "A": "To backup the entire corporate database in a single central location.",
+      "B": "To distribute content geographically closer to users to reduce latency.",
+      "C": "To translate website content into multiple languages automatically.",
+      "D": "To manage the payroll and HR records of a global company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Infrastructure as Code' (IaC), what is 'Idempotency'?",
+    "options": {
+      "A": "The ability to run a script 100 times and get a different result every time.",
+      "B": "The property where applying an operation multiple times has the same result as applying it once.",
+      "C": "A security feature that prevents code from being edited after deployment.",
+      "D": "A way to measure the total power consumption of a cloud region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Database Sharding'?",
+    "options": {
+      "A": "Deleting small parts of the database to save space.",
+      "B": "A type of horizontal partitioning that splits large databases into smaller, faster, more easily managed parts.",
+      "C": "Moving the database from a HDD to an SSD physically.",
+      "D": "Encrypting the database with multiple distinct keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OSI model layer is responsible for routing data packets based on IP addresses?",
+    "options": {
+      "A": "Layer 2 (Data Link)",
+      "B": "Layer 3 (Network)",
+      "C": "Layer 4 (Transport)",
+      "D": "Layer 7 (Application)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'Hypervisor'?",
+    "options": {
+      "A": "To increase the cooling efficiency of the data center.",
+      "B": "To create and run virtual machines by isolating the OS from the underlying hardware.",
+      "C": "To manage the security badges of employees entering the building.",
+      "D": "To act as a high-speed printer for server logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cold Standby' in disaster recovery?",
+    "options": {
+      "A": "A backup server that is kept at zero degrees Celsius.",
+      "B": "A redundant system that is not powered on and requires manual configuration during a failover.",
+      "C": "A system that is only used during the winter months.",
+      "D": "A backup that is stored on a physical tape drive in another city."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In networking, what is 'BGP' (Border Gateway Protocol) used for?",
+    "options": {
+      "A": "To manage the internal WiFi of an office building.",
+      "B": "To exchange routing information between different autonomous systems on the internet.",
+      "C": "To encrypt emails sent between different departments.",
+      "D": "To count the number of users on a local area network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Read Replica' primarily used for in database infrastructure?",
+    "options": {
+      "A": "To serve as the primary destination for all data writes.",
+      "B": "To offload query traffic from the primary database to improve performance.",
+      "C": "To encrypt data before it is read by the user.",
+      "D": "To backup the database schema without saving any actual data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Stateless' infrastructure component?",
+    "options": {
+      "A": "A relational SQL database.",
+      "B": "An HTTP Load Balancer.",
+      "C": "A distributed file system.",
+      "D": "A persistent block storage volume."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Reverse Proxy'?",
+    "options": {
+      "A": "To hide the user's IP address from the internet.",
+      "B": "To act as an intermediary for servers to handle requests from clients, providing security and load balancing.",
+      "C": "To reverse the order of data in a SQL table.",
+      "D": "To speed up the upload speed of a local computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In cloud billing, what is 'Egress' traffic?",
+    "options": {
+      "A": "Data moving into the cloud from a local source.",
+      "B": "Data moving out of a cloud provider's network to the internet or another region.",
+      "C": "The number of users currently logged into the console.",
+      "D": "The amount of electricity used by a virtual machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Immutable Infrastructure'?",
+    "options": {
+      "A": "Infrastructure that is made of physical stone.",
+      "B": "A practice where servers are replaced rather than modified when a change is needed.",
+      "C": "A system that can never be turned off.",
+      "D": "A security setting that prevents anyone from seeing the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'ACID' compliance ensure in a database system?",
+    "options": {
+      "A": "The database can handle millions of images per second.",
+      "B": "Reliability and predictability of transactions, even in the event of errors or power failure.",
+      "C": "The physical durability of the hard drives against chemical spills.",
+      "D": "The ability to translate SQL into natural language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an example of 'Unstructured' data?",
+    "options": {
+      "A": "A CSV file with fixed headers.",
+      "B": "A raw video file.",
+      "C": "A SQL table with 10 columns.",
+      "D": "A JSON file with a strictly enforced schema."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Container Orchestration' (e.g., Kubernetes) used for?",
+    "options": {
+      "A": "To play music while developers are working.",
+      "B": "To automate the deployment, scaling, and management of containerized applications.",
+      "C": "To physically organize shipping containers in a port.",
+      "D": "To record the audio of every system event."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput' in the context of a data pipeline?",
+    "options": {
+      "A": "The time it takes for a single bit to travel across the cable.",
+      "B": "The volume of data that can be processed or moved in a given time period.",
+      "C": "The price of the cloud storage per month.",
+      "D": "The number of errors found in the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Blue-Green Deployment'?",
+    "options": {
+      "A": "A way to color-code server racks for organization.",
+      "B": "A technique that uses two identical production environments to minimize downtime during updates.",
+      "C": "Hiring two teams to work on the same project in parallel.",
+      "D": "A specialized software for measuring water quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'RAID 10' (1+0), what are the two primary techniques combined?",
+    "options": {
+      "A": "Compression and Encryption",
+      "B": "Mirroring and Striping",
+      "C": "Deduplication and Archiving",
+      "D": "Vertical and Horizontal scaling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Bastion Host' (Jump Box)?",
+    "options": {
+      "A": "The fastest server in the data center cluster.",
+      "B": "A secure server that acts as a single point of entry to a private network.",
+      "C": "A backup server that only starts when others fail.",
+      "D": "A device used to physically jump-start a generator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific protocol is used to synchronize the clocks of computer systems over a network?",
+    "options": {
+      "A": "DNS",
+      "B": "NTP",
+      "C": "DHCP",
+      "D": "ICMP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Dead Letter Queue' (DLQ)?",
+    "options": {
+      "A": "To store emails that were never opened by the recipient.",
+      "B": "To hold messages that could not be processed correctly by an automated system for later analysis.",
+      "C": "To backup the system's BIOS settings.",
+      "D": "To increase the speed of the message delivery."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Deduplication'?",
+    "options": {
+      "A": "Copying data twice to ensure it is safe.",
+      "B": "A specialized technique for eliminating duplicate copies of repeating data to save storage space.",
+      "C": "A way to count the number of files in a folder.",
+      "D": "Naming two tables with the same name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Dark Fiber'?",
+    "options": {
+      "A": "Cables that only work at night.",
+      "B": "Optical fiber infrastructure that is currently unused and unlit.",
+      "C": "A secret type of internet connection used by hackers.",
+      "D": "Cables that are painted black to hide them from view."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latency' vs 'Bandwidth'?",
+    "options": {
+      "A": "They are identical terms in networking.",
+      "B": "Latency is the time delay; bandwidth is the capacity or width of the data pipe.",
+      "C": "Latency is the cost; bandwidth is the speed.",
+      "D": "Bandwidth is for text; latency is for images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Microsegmentation' in network security?",
+    "options": {
+      "A": "Using very small servers to save power.",
+      "B": "Dividing a data center into small, isolated security zones to control traffic between individual workloads.",
+      "C": "The process of deleting small files automatically.",
+      "D": "Hiring a team of specialists to work on small bugs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Server Hardening'?",
+    "options": {
+      "A": "Physically reinforcing the server's metal casing.",
+      "B": "The process of securing a system by reducing its surface of vulnerability through configuration changes.",
+      "C": "Increasing the voltage of the server's power supply.",
+      "D": "Adding more RAM to the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'VPC' (Virtual Private Cloud)?",
+    "options": {
+      "A": "A cloud that only works for one person.",
+      "B": "A private, isolated section of a public cloud where you can launch resources in a virtual network.",
+      "C": "A specialized software for airplane pilots.",
+      "D": "A way to backup data on a physical USB drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for translating a domain name (like google.com) into an IP address?",
+    "options": {
+      "A": "DHCP Server",
+      "B": "DNS Server",
+      "C": "Proxy Server",
+      "D": "VPN Server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Provisioning' in infrastructure management?",
+    "options": {
+      "A": "Buying food for the IT department.",
+      "B": "The process of setting up and configuring IT infrastructure to make it available for use.",
+      "C": "Managing the company's financial budget.",
+      "D": "Writing a blog post about data science."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ephemeral Storage'?",
+    "options": {
+      "A": "Storage that is only used by executive level employees.",
+      "B": "Temporary storage that is wiped when a virtual machine is stopped or deleted.",
+      "C": "A high-security database located underground.",
+      "D": "A specialized drive for storing old photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Cold Storage' (Archive Tier)?",
+    "options": {
+      "A": "It provides the fastest access speeds in the industry.",
+      "B": "It offers significantly lower costs for data that is rarely accessed.",
+      "C": "It prevents the data from being edited or changed.",
+      "D": "It keeps the data center at a comfortable temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-factor Authentication' (MFA)?",
+    "options": {
+      "A": "Using multiple different names to log in.",
+      "B": "A security system that requires more than one method of authentication from independent categories.",
+      "C": "Hiring a team of people to verify every login.",
+      "D": "Recording the user's face and voice at the same time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Encryption at Rest'?",
+    "options": {
+      "A": "Encrypting data while the analyst is sleeping.",
+      "B": "The protection of data that is physically stored on digital media (HDDs, SSDs).",
+      "C": "A way to speed up the internet connection.",
+      "D": "Deleting data that has not been accessed for 30 days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Encryption in Transit'?",
+    "options": {
+      "A": "Encrypting data while it is being moved on a physical truck.",
+      "B": "The protection of data as it moves between a client and a server or between internal systems.",
+      "C": "A way to count the number of users on a network.",
+      "D": "A security certificate used only for bank databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'RAID 5', how is data protection achieved?",
+    "options": {
+      "A": "By keeping five identical copies of every file.",
+      "B": "By using block-level striping with distributed parity.",
+      "C": "By deleting all data that is older than five years.",
+      "D": "By using five different brands of hard drives."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Zombie Server' in a data center?",
+    "options": {
+      "A": "A server that has zero software installed.",
+      "B": "An idle or underutilized server that consumes power but performs no useful work.",
+      "C": "A server that was physically damaged in a fire.",
+      "D": "A specialized software for horror games."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure Monitoring'?",
+    "options": {
+      "A": "A person sitting and watching a screen forever.",
+      "B": "The automated process of collecting and analyzing data about the health and performance of IT systems.",
+      "C": "A specialized software for bird watching.",
+      "D": "Recording the sound of the office 24/7."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shadow IT'?",
+    "options": {
+      "A": "IT infrastructure built in dark rooms.",
+      "B": "IT systems and software used within an organization without explicit organizational approval.",
+      "C": "A secret password for high-security databases.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'High Availability' (HA) cluster?",
+    "options": {
+      "A": "A cluster of servers that are all over 6 feet tall.",
+      "B": "A group of servers that provide continuous service by minimizing downtime during hardware or software failure.",
+      "C": "A cluster that only works on weekends.",
+      "D": "A way to backup data in three lines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'System Fault Tolerance'?",
+    "options": {
+      "A": "Accepting that a developer is wrong.",
+      "B": "The ability of a system to continue operating without interruption even if one or more components fail.",
+      "C": "A specialized software for historians.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component manages the 'IP Address' assignments for devices on a local network automatically?",
+    "options": {
+      "A": "DNS",
+      "B": "DHCP",
+      "C": "SMTP",
+      "D": "HTTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Edge Computing' 'Gateway'?",
+    "options": {
+      "A": "A physical gate at the entrance to the office.",
+      "B": "A device that provides a link between the local edge network and the central cloud.",
+      "C": "A specialized software for airline pilots.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cold Standby' vs 'Hot Standby'?",
+    "options": {
+      "A": "Hot is for summer; Cold for winter.",
+      "B": "Hot is powered on and ready for immediate takeover; Cold is powered off and requires setup.",
+      "C": "Hot standby is 100x faster.",
+      "D": "They are the same thing and are used interchangeably."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Automated Invoicing' in infrastructure SaaS?",
+    "options": {
+      "A": "A person manually writing checks.",
+      "B": "Using software to generate and send bills to customers automatically based on usage data.",
+      "C": "A way to count the number of products in a store.",
+      "D": "Hiring an accountant for the team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Task Mining' in data operations?",
+    "options": {
+      "A": "Digging for coal in a task mine.",
+      "B": "The process of collecting data on how infrastructure tasks are performed to identify automation opportunities.",
+      "C": "A specialized tool for managing chores.",
+      "D": "Recording the sound of a person working."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'System Integration' in a data context?",
+    "options": {
+      "A": "Separating different systems into different buildings.",
+      "B": "Connecting different data systems and software to work together as a unified whole.",
+      "C": "Deleting one system to save space.",
+      "D": "A way to count the number of computers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Manual Testing' vs 'Automated Testing'?",
+    "options": {
+      "A": "Manual uses zero software.",
+      "B": "Manual is performed by humans; automated uses scripts and tools.",
+      "C": "Automated is for experts; Manual for beginners.",
+      "D": "Manual is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Validation' in an infrastructure pipeline?",
+    "options": {
+      "A": "Checking if the computer is turned on.",
+      "B": "Ensuring the accuracy and quality of data as it moves through the infrastructure.",
+      "C": "A way to name a database table.",
+      "D": "Increasing the memory usage of a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Automation Framework'?",
+    "options": {
+      "A": "The physical frame of the computer monitor.",
+      "B": "A set of guidelines and tools used for creating and designing infrastructure automation scripts.",
+      "C": "A way to backup the SQL code.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Infrastructure Vendor Lock-in'?",
+    "options": {
+      "A": "Locking the software with a physical key.",
+      "B": "The risk of becoming overly dependent on a single vendor's proprietary technology, making migration difficult.",
+      "C": "A security feature that prevents hacking.",
+      "D": "Paying for a lifetime software license."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Network Latency' measured in?",
+    "options": {
+      "A": "Grams",
+      "B": "Milliseconds (ms)",
+      "C": "Inches",
+      "D": "Litres"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Persistent Storage'?",
+    "options": {
+      "A": "Storage that asks the same question repeatedly.",
+      "B": "Storage that retains data even when the device is powered off.",
+      "C": "A specialized software for psychologists.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shared Nothing' architecture?",
+    "options": {
+      "A": "A system where everyone shares everything.",
+      "B": "A distributed computing architecture where each node is independent and self-sufficient.",
+      "C": "A system that has zero users.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Automation', what is a 'Race Condition'?",
+    "options": {
+      "A": "A race between two developers.",
+      "B": "When the timing of events causes unexpected behavior or errors.",
+      "C": "A specialized software for car racing.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Log Rotation'?",
+    "options": {
+      "A": "Rotating wooden logs in a fireplace.",
+      "B": "The process of automatically archiving and deleting old log files to save space.",
+      "C": "A specialized software for forestry.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Loss Prevention' (DLP)?",
+    "options": {
+      "A": "Asking everyone to be careful with their USB drives.",
+      "B": "A set of tools and processes used to ensure that sensitive data is not lost, misused, or accessed by unauthorized users.",
+      "C": "A specialized software for insurance companies.",
+      "D": "A way to backup data in three lines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Provisioning' 'Compute'?",
+    "options": {
+      "A": "Buying food for the computers.",
+      "B": "Allocating and configuring processing power (CPU/RAM) for a workload.",
+      "C": "Deleting user data.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Workflow' 'Persistence'?",
+    "options": {
+      "A": "An employee who refuses to quit.",
+      "B": "The ability of an infrastructure process to save its state so it can resume after a system failure.",
+      "C": "A specialized software for plumbers.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API' 'Rate' 'Limit'?",
+    "options": {
+      "A": "Calculating the total rating of an API from 1 to 5 stars.",
+      "B": "Restricting the number of requests to an API to ensure system stability.",
+      "C": "A specialized software for designing fonts.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Checksum'?",
+    "options": {
+      "A": "Checking a physical check for security.",
+      "B": "A mathematical value used to verify that data has not been corrupted during transmission.",
+      "C": "A specialized software for mathematicians.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Continuous' 'Integration'?",
+    "options": {
+      "A": "An employee who works 24 hours a day.",
+      "B": "The practice of automatically building and testing code every time a change is made.",
+      "C": "A way to backup the storage layer.",
+      "D": "Hiring multiple people to read code."
+    },
+    "answer": "B"
+  },
+  
+  {
+    "question": "According to the CAP theorem, in the event of a 'Network Partition' (P), a distributed data system must choose between which two properties?",
+    "options": {
+      "A": "Scalability and Durability",
+      "B": "Consistency (C) and Availability (A)",
+      "C": "Security and Performance",
+      "D": "Throughput and Latency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical advantage of using 'Anycast' routing for a global Data Infrastructure?",
+    "options": {
+      "A": "It ensures that data is only stored in one physical location for security.",
+      "B": "It allows multiple servers to share the same IP address, directing users to the nearest available node to reduce latency.",
+      "C": "It prevents the CPU from reaching temperatures higher than 50 degrees Celsius.",
+      "D": "It doubles the bandwidth of a single fiber optic cable using light refraction."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Log-Structured Merge-trees' (LSM-trees), what is the purpose of the 'MemTable'?",
+    "options": {
+      "A": "To store a permanent backup of the database schema.",
+      "B": "To act as an in-memory buffer that stores writes before they are flushed to disk as SSTables.",
+      "C": "To provide a physical table for developers to sit at in the data center.",
+      "D": "To encrypt data packets before they are sent over the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Consistency Model' provides the strongest guarantee that a read will return the result of the most recent write, regardless of which node is queried?",
+    "options": {
+      "A": "Eventual Consistency",
+      "B": "Causal Consistency",
+      "C": "Linearizability (Strong Consistency)",
+      "D": "Session Consistency"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of a 'Bloom Filter' in a high-performance database storage engine?",
+    "options": {
+      "A": "To filter out dust particles from the physical server fans.",
+      "B": "A space-efficient probabilistic data structure used to test whether an element is a member of a set, reducing unnecessary disk I/O.",
+      "C": "To rotate the logs of the database every 24 hours automatically.",
+      "D": "To provide a visual chart of the most active users in the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Write-Ahead Logging' (WAL) specifically designed to ensure in a database infrastructure?",
+    "options": {
+      "A": "That the database can handle 1 million images per second.",
+      "B": "Atomicity and Durability by recording changes to a log before they are applied to the data files.",
+      "C": "That the SQL query is written in a human-readable format.",
+      "D": "That the physical hard drive is always spinning at a constant speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Erasure Coding' (e.g., Reed-Solomon), what is the technical benefit over standard 'RAID Mirroring'?",
+    "options": {
+      "A": "It is much easier for junior admins to configure manually.",
+      "B": "It provides similar data durability with significantly less storage overhead.",
+      "C": "It ensures that data is encrypted with a 1024-bit key by default.",
+      "D": "It allows the server to run without any cooling system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Paxos' or 'Raft' consensus algorithm solve in a distributed system?",
+    "options": {
+      "A": "It solves the problem of slow internet speeds between different countries.",
+      "B": "It allows a collection of connected processors to agree on a single data value or state, even if some nodes fail.",
+      "C": "It provides a way to compress text files into a much smaller format.",
+      "D": "It ensures that the CEO has the final vote on all code changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BGP Hijacking' in the context of network infrastructure security?",
+    "options": {
+      "A": "Stealing a physical router from a data center building.",
+      "B": "The illegitimate takeover of IP addresses by corrupting internet routing tables.",
+      "C": "A virus that deletes the operating system of a network switch.",
+      "D": "Hiring a developer to write malicious SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Non-Volatile Memory Express' (NVMe) architecture, what is the primary benefit of the 'Submission Queue'?",
+    "options": {
+      "A": "It allows users to submit their feedback to the cloud provider.",
+      "B": "It supports massive parallelism by allowing the CPU to send thousands of commands simultaneously to the SSD.",
+      "C": "It ensures that only one person can access the drive at a time for security.",
+      "D": "It provides a way to backup data onto a physical DVD."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Sprawl' in an enterprise infrastructure?",
+    "options": {
+      "A": "When the data center building is physically too large.",
+      "B": "The unmanaged accumulation of data across multiple different silos and platforms, leading to security and cost issues.",
+      "C": "A bug that causes data to be printed in a very large font.",
+      "D": "A network delay that occurs during a full moon."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Vector Clock' used for in distributed databases?",
+    "options": {
+      "A": "To measure the physical speed of the CPU clock.",
+      "B": "To capture the partial ordering of events and detect causality violations in a distributed system.",
+      "C": "To provide a countdown timer for the next system update.",
+      "D": "To show the time in three different time zones simultaneously."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Zookeeper' (or etcd) in a distributed data cluster?",
+    "options": {
+      "A": "To feed the animals in a research facility.",
+      "B": "To provide a centralized service for maintaining configuration information, naming, and providing group services.",
+      "C": "To clean the physical glass of the server racks.",
+      "D": "To record the names of every person who enters the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Microservices' infrastructure, what does the 'Circuit Breaker' pattern prevent?",
+    "options": {
+      "A": "A physical electrical fire in the power supply.",
+      "B": "Cascading failures where a single failing service overwhelms other services in the network.",
+      "C": "A developer from writing too many lines of code in one day.",
+      "D": "The SQL database from reaching its maximum row limit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cold Start' latency in 'Serverless' infrastructure (FaaS)?",
+    "options": {
+      "A": "The time it takes to start a computer in a cold room.",
+      "B": "The delay that occurs when a function is triggered after being idle, requiring the provider to initialize a new container.",
+      "C": "The time it takes to download a file from a server in Antarctica.",
+      "D": "A specialized software for measuring the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Database Normalization' up to the 5th Normal Form (5NF)?",
+    "options": {
+      "A": "To make the database act 'normal' and stop crashing.",
+      "B": "To eliminate every possible redundancy and ensure data integrity by decomposing tables into their smallest logical parts.",
+      "C": "To hide the data from anyone who is not an administrator.",
+      "D": "To increase the total file size of the database by 500%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technology is used in 'Zero Trust' infrastructure to ensure that only authorized devices can connect to a network?",
+    "options": {
+      "A": "A physical lock on the WiFi router.",
+      "B": "mTLS (Mutual Transport Layer Security) with certificate-based identity verification.",
+      "C": "A specialized software for measuring the weight of a laptop.",
+      "D": "A security guard who checks everyone's driver's license."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Write Amplification' in SSD infrastructure?",
+    "options": {
+      "A": "Using a microphone to record the sound of writing code.",
+      "B": "The phenomenon where the actual amount of data physically written to the flash memory is a multiple of the data requested by the OS.",
+      "C": "A bug that causes the font size to increase automatically.",
+      "D": "A specialized software for increasing the volume of a podcast."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical benefit of 'NVMe-over-Fabrics' (NVMe-oF)?",
+    "options": {
+      "A": "It allows servers to be made out of physical cloth to save money.",
+      "B": "It enables high-speed storage traffic to travel over network fabrics (like RDMA or TCP) with extremely low latency.",
+      "C": "It ensures that only one person can use a network at a time.",
+      "D": "It provides a way to backup data onto a physical cassette tape."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Request Tracing' (e.g., Jaeger or Zipkin) designed to solve?",
+    "options": {
+      "A": "Finding a lost physical hard drive in a data center.",
+      "B": "The difficulty of debugging and monitoring requests as they flow through hundreds of microservices.",
+      "C": "A way to count the number of users on a social media site.",
+      "D": "Identifying which employee wrote each line of code in a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Infrastructure', what is the 'Two-Phase Commit' (2PC) protocol used for?",
+    "options": {
+      "A": "To ensure that two different developers agree on a change.",
+      "B": "To ensure that a transaction is either committed on all participating nodes or rolled back on all nodes.",
+      "C": "To backup the system configuration in two different cities.",
+      "D": "To increase the speed of the internet connection by 2x."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Database Replication' 'Synchronous' vs 'Asynchronous'?",
+    "options": {
+      "A": "Synchronous is for text; Asynchronous for images.",
+      "B": "Synchronous waits for the replica to acknowledge the write; Asynchronous returns success immediately after the primary write.",
+      "C": "Asynchronous is 100x faster and more secure.",
+      "D": "There is no difference; they are the same thing in the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tiered Storage' infrastructure?",
+    "options": {
+      "A": "Storing data in a building with many floors.",
+      "B": "Automatically moving data between different types of storage (e.g., SSD, HDD, Tape) based on performance and cost requirements.",
+      "C": "Hiring a team of experts with different skill levels.",
+      "D": "A specialized software for measuring the height of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Blue-Green' 'Deployment' 'Traffic' 'Shifting'?",
+    "options": {
+      "A": "Using blue and green lights to guide traffic in the office.",
+      "B": "The process of routing a small percentage of users to a new version of an app before a full rollout.",
+      "C": "Hiring two teams to work on the same project in parallel.",
+      "D": "A way to count the number of users in a system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Infrastructure', what is 'Dark' 'Data'?",
+    "options": {
+      "A": "Data that is stored in a room with no lights.",
+      "B": "Information assets an organization collects, processes, and stores but generally fails to use for other purposes.",
+      "C": "Data that has been encrypted so many times it is invisible.",
+      "D": "Information about the company's secret plans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global' 'Server' 'Load' 'Balancing' (GSLB)?",
+    "options": {
+      "A": "Balancing the weight of servers all over the world.",
+      "B": "Directing user requests to the best performing or closest data center based on geographic location.",
+      "C": "Hiring a manager to travel to every data center.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Immutable' 'Log' 'Storage'?",
+    "options": {
+      "A": "Logs made of physical stone.",
+      "B": "Storage that ensures logs cannot be modified or deleted after they are written, essential for compliance.",
+      "C": "Logs that can only be read at night.",
+      "D": "A specialized software for forestry."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Networking', what is 'SD-WAN'?",
+    "options": {
+      "A": "A new brand of computer hardware.",
+      "B": "Software-Defined Wide Area Network: a way to manage and optimize connections across multiple physical locations.",
+      "C": "A specialized tool for measuring the speed of light.",
+      "D": "A security certificate for high-speed data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Pipeline' 'Backpressure'?",
+    "options": {
+      "A": "Water flowing backward in a pipe.",
+      "B": "When a downstream system cannot keep up with the incoming data flow, causing the upstream system to slow down.",
+      "C": "A bug in the SQL query logic.",
+      "D": "Hiring more people to enter data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shadow' 'DB' in infrastructure management?",
+    "options": {
+      "A": "A database built in a dark room.",
+      "B": "An unauthorized or unmanaged database created by an employee without IT approval.",
+      "C": "A secret password for high-security databases.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure' 'Observability' 'Three' 'Pillars'?",
+    "options": {
+      "A": "The three physical pillars holding up the data center.",
+      "B": "Logs, Metrics, and Traces: the three data types needed to understand a system's internal state.",
+      "C": "The CEO, the CTO, and the CFO.",
+      "D": "Hiring three different security guards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Storage', what is 'Deduplication' 'Ratio'?",
+    "options": {
+      "A": "The ratio of red pixels to blue pixels in an image.",
+      "B": "The measurement of how much storage space is saved by removing duplicate data.",
+      "C": "The number of users who have duplicate names.",
+      "D": "The speed of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cloud' 'Native' 'Architecture'?",
+    "options": {
+      "A": "Architecture that only works in one country.",
+      "B": "Designing applications and infrastructure specifically to leverage cloud computing features like microservices and containers.",
+      "C": "A way to backup data in the sky.",
+      "D": "Hiring local developers to build servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Residency' 'Requirement'?",
+    "options": {
+      "A": "Requiring employees to live in the data center.",
+      "B": "The physical or geographic location where an organization specifies that its data must be stored.",
+      "C": "A specialized software for apartment managers.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Networking', what is 'VPC' 'Peering'?",
+    "options": {
+      "A": "Peeking into someone else's server rack.",
+      "B": "Connecting two Virtual Private Clouds so they can communicate as if they were on the same network.",
+      "C": "A way to speed up the internet.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Automated' 'Infrastructure' 'Patching'?",
+    "options": {
+      "A": "A robot sewing a hole in a server casing.",
+      "B": "The process of automatically scanning and updating operating systems and software across a fleet of servers.",
+      "C": "A specialized software for gardening.",
+      "D": "Adding a sticker to a laptop automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Warehouse'?",
+    "options": {
+      "A": "A warehouse that only works when it makes sense.",
+      "B": "An architecture that uses data virtualization to provide a single view of data across multiple physical sources.",
+      "C": "A specialized software for philosophers.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed' 'Storage' 'Sharding'?",
+    "options": {
+      "A": "Breaking a physical hard drive into pieces.",
+      "B": "The practice of partitioning a large dataset across multiple independent storage nodes to improve performance and capacity.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'API' 'Gateway' 'Throttling' 'Strategy'?",
+    "options": {
+      "A": "A physical part of a car engine.",
+      "B": "Intentionally slowing down or rejecting API requests to protect the underlying infrastructure from being overwhelmed.",
+      "C": "A specialized software for pilots.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Distributed' 'Systems', what is 'Eventual' 'Consistency'?",
+    "options": {
+      "A": "Consistency that only happens on weekends.",
+      "B": "A model that guarantees that if no new updates are made, all reads will eventually return the last updated value.",
+      "C": "Consistency that is 100% accurate at every second.",
+      "D": "A specialized software for psychologists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure' 'Governance' 'Policy' 'as' 'Code'?",
+    "options": {
+      "A": "Writing a law on a computer.",
+      "B": "The practice of managing security and compliance rules using machine-readable configuration files.",
+      "C": "A specialized software for lawyers.",
+      "D": "Hiring a CEO to write code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hot' 'Swap' hardware?",
+    "options": {
+      "A": "Hardware that is very hot to touch.",
+      "B": "Components (like hard drives or power supplies) that can be replaced while the system is still running.",
+      "C": "A specialized software for summer sports.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cold' 'Backup' vs 'Hot' 'Backup'?",
+    "options": {
+      "A": "Hot is for summer; Cold for winter.",
+      "B": "Hot backup happens while the system is running; Cold backup requires the system to be shut down.",
+      "C": "Hot backup is 100x more expensive.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Storage' 'Latency' 'I/O' 'Wait'?",
+    "options": {
+      "A": "The time it takes to say 'hello'.",
+      "B": "The time the CPU spends waiting for the storage system to respond to a read or write request.",
+      "C": "The weight of the hard drive.",
+      "D": "The number of files in a folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Encryption' 'at' 'the' 'Edge'?",
+    "options": {
+      "A": "Encrypting data on the edge of a desk.",
+      "B": "Protecting data as it is processed on local devices before it is sent to the central cloud.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Networking', what is 'Layer' '7' 'Filtering'?",
+    "options": {
+      "A": "A filter for coffee machines.",
+      "B": "Security filtering that inspects the actual application-level data (e.g., HTTP headers) rather than just IP addresses.",
+      "C": "Hiring 7 different security guards.",
+      "D": "A way to speed up the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure' 'Drift'?",
+    "options": {
+      "A": "The data center physically moving on the earth's crust.",
+      "B": "When the manual changes made to a server cause it to deviate from its original code-defined configuration.",
+      "C": "A specialized software for racing cars.",
+      "D": "A way to count the number of files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global' 'Content' 'Caching'?",
+    "options": {
+      "A": "Hiring a person to remember every website in the world.",
+      "B": "Using distributed nodes around the globe to store copies of static content for faster user access.",
+      "C": "A specialized software for historians.",
+      "D": "A way to backup the entire internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data' 'Infrastructure', what is 'Resiliency'?",
+    "options": {
+      "A": "The speed at which a server can move.",
+      "B": "The ability of a system to recover quickly from difficulties or failures.",
+      "C": "The physical durability of the computer case.",
+      "D": "The number of hours a system has been online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hybrid' 'Infrastructure' 'Management'?",
+    "options": {
+      "A": "Managing a fleet of hybrid cars.",
+      "B": "The unified management of both on-premises data centers and public cloud resources.",
+      "C": "A specialized software for gardeners.",
+      "D": "A way to count the number of servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-cloud' 'Strategy'?",
+    "options": {
+      "A": "Watching many clouds in the sky.",
+      "B": "Using multiple different cloud providers (e.g., AWS and Azure) to avoid vendor lock-in and improve reliability.",
+      "C": "A specialized software for meteorologists.",
+      "D": "Hiring many people named Cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Pipeline' 'Throughput'?",
+    "options": {
+      "A": "The speed of light in a vacuum.",
+      "B": "The total amount of data that can be moved from source to destination in a given time period.",
+      "C": "The price of the internet connection.",
+      "D": "The number of errors in the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Networking', what is 'Packet' 'Loss'?",
+    "options": {
+      "A": "Losing a physical package in the mail.",
+      "B": "When data packets traveling across a network fail to reach their destination.",
+      "C": "A specialized software for delivery companies.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Database' 'Connection' 'Pooling'?",
+    "options": {
+      "A": "Building a swimming pool in the data center.",
+      "B": "A cache of database connections maintained so that they can be reused when new requests arrive.",
+      "C": "Hiring multiple people to use one database.",
+      "D": "A way to backup the SQL schema."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cloud' 'Region' vs 'Availability' 'Zone'?",
+    "options": {
+      "A": "They are the exact same thing.",
+      "B": "A Region is a geographic area; an Availability Zone is a specific data center within that region.",
+      "C": "Availability Zone is for text; Region for images.",
+      "D": "Region is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure' 'Provisioning' 'Terraform'?",
+    "options": {
+      "A": "Growing plants in the office.",
+      "B": "A tool used to define and provide data center infrastructure using a declarative configuration language.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data' 'Infrastructure', what is 'Compliance'?",
+    "options": {
+      "A": "Hiring a person who is very polite.",
+      "B": "Ensuring that the infrastructure and data management meet legal and industry standards (e.g., HIPAA, SOC2).",
+      "C": "A specialized software for lawyers.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Automated' 'Scaling' 'Horizontal'?",
+    "options": {
+      "A": "Scaling a building horizontally.",
+      "B": "Automatically adding more server nodes to a cluster based on real-time traffic demand.",
+      "C": "Hiring more people to work on a project.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Warehouse' 'ETL' 'Pipeline'?",
+    "options": {
+      "A": "A physical pipe for data.",
+      "B": "The automated process of extracting data from sources, transforming it, and loading it into a warehouse.",
+      "C": "A specialized software for plumbers.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Storage', what is 'Block' 'vs' 'Object' 'vs' 'File'?",
+    "options": {
+      "A": "They are identical storage methods.",
+      "B": "Block is for high-speed OS/DB access; File is for shared folders; Object is for massive unstructured data (photos/videos).",
+      "C": "Object is for text; Block for images.",
+      "D": "File is 100x faster than Block."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Continuous' 'Deployment' 'Pipeline'?",
+    "options": {
+      "A": "An employee who refuses to stop working.",
+      "B": "The automated process where code changes are automatically tested and released to production.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Ingestion' 'Real-time'?",
+    "options": {
+      "A": "Watching a video of data center.",
+      "B": "The process of moving data into a system as soon as it is generated, without any delay.",
+      "C": "Hiring a live person to enter data 24/7.",
+      "D": "A way to speed up the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Networking', what is 'VPN' 'Tunneling'?",
+    "options": {
+      "A": "Digging a physical hole for cables.",
+      "B": "Encapsulating one network protocol within another to create a secure, encrypted connection over a public network.",
+      "C": "A specialized software for miners.",
+      "D": "A way to backup the internet history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cloud' 'Cost' 'Optimization'?",
+    "options": {
+      "A": "Making the cloud as expensive as possible.",
+      "B": "The process of reducing overall cloud spend by rightsizing resources and deleting unused assets.",
+      "C": "A specialized software for accountants.",
+      "D": "Hiring a new manager to spend money."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure' 'Monitoring' 'Alerting'?",
+    "options": {
+      "A": "A loud noise in the office.",
+      "B": "Automatically notifying IT staff when a system performance metric falls outside of a normal range.",
+      "C": "A specialized software for bird watching.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Distributed' 'Databases', what is 'Quorum'?",
+    "options": {
+      "A": "The minimum number of votes needed to pass a law.",
+      "B": "The minimum number of nodes that must agree on a read or write operation to ensure consistency.",
+      "C": "A specialized software for politicians.",
+      "D": "A way to count the number of rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Infrastructure' 'High' 'Availability' 'Uptime'?",
+    "options": {
+      "A": "How tall the server rack is.",
+      "B": "The percentage of time a system is fully operational and accessible to users.",
+      "C": "The price of the cloud storage.",
+      "D": "The number of users online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Automated' 'Failover' 'Testing'?",
+    "options": {
+      "A": "Tripping over a cable on purpose.",
+      "B": "The process of deliberately inducing a failure to verify that the system automatically switches to a backup node.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  }
+
+  ]
+}

@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Operations", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of a 'Ticketing System' in IT operations?",
+    "options": {
+      "A": "To sell tickets for company events.",
+      "B": "To document, track, and manage user requests and technical issues.",
+      "C": "To increase the speed of the server's CPU.",
+      "D": "To encrypt the physical hardware of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Uptime' refers to the amount of time a system or service has been operational and available.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web servers",
+      "D": "Only if the system is under heavy load"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Key Performance Indicator' (KPI) for a help desk team?",
+    "options": {
+      "A": "The physical weight of the laptops.",
+      "B": "Mean Time to Resolve (MTTR).",
+      "C": "The number of coffee machines in the office.",
+      "D": "The brand of the server racks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CPU' stand for?",
+    "options": {
+      "A": "Central Processing Unit",
+      "B": "Computer Power User",
+      "C": "Control Path Utility",
+      "D": "Core Protocol Unit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component is considered the 'Short-term memory' of a computer?",
+    "options": {
+      "A": "Hard Drive (HDD)",
+      "B": "RAM (Random Access Memory)",
+      "C": "Power Supply (PSU)",
+      "D": "Graphics Card (GPU)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Linux, the 'root' user has the highest level of administrative privileges.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Ubuntu",
+      "D": "Only if using a GUI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an Operating System (OS)?",
+    "options": {
+      "A": "To provide a physical case for the hardware.",
+      "B": "To manage computer hardware resources and provide common services for software.",
+      "C": "To browse the internet for the user.",
+      "D": "To backup files to an external drive automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common tool used for 'Remote Desktop' support?",
+    "options": {
+      "A": "Microsoft Paint",
+      "B": "TeamViewer / RDP",
+      "C": "Adobe Acrobat",
+      "D": "Notepad++"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Cold Boot' involves restarting a computer that is already powered on.",
+    "options": {
+      "A": "False (A Cold Boot is starting a computer that is completely powered off).",
+      "B": "True",
+      "C": "Only for servers",
+      "D": "Only if using a BIOS password"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Kernel' in an operating system?",
+    "options": {
+      "A": "The physical outer shell of the computer.",
+      "B": "The core part of the OS that manages system resources and communication between hardware and software.",
+      "C": "A specialized tool for cleaning the keyboard.",
+      "D": "A list of all users on the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Input Device'?",
+    "options": {
+      "A": "Monitor",
+      "B": "Keyboard",
+      "C": "Printer",
+      "D": "Speakers"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Device Driver'?",
+    "options": {
+      "A": "To drive a technician to the data center.",
+      "B": "Software that allows the OS to communicate with a specific piece of hardware.",
+      "C": "To encrypt the user's password.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SSDs (Solid State Drives) are generally faster than traditional HDDs (Hard Disk Drives).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for laptop users",
+      "D": "Only if the disk is under 500GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used on Windows to see a list of running processes?",
+    "options": {
+      "A": "ls",
+      "B": "tasklist",
+      "C": "ps -ef",
+      "D": "dir"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Toil' in the context of operations?",
+    "options": {
+      "A": "The physical effort of carrying a server.",
+      "B": "Repetitive, manual work that could be automated and provides no long-term value.",
+      "C": "The time spent learning a new skill.",
+      "D": "The salary of a junior administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Virtualization' allows multiple operating systems to run on a single physical machine simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux systems",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLA' stand for?",
+    "options": {
+      "A": "System Loss Assessment",
+      "B": "Service Level Agreement",
+      "C": "Standard Logic Array",
+      "D": "Security Layer Access"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Output Device'?",
+    "options": {
+      "A": "Mouse",
+      "B": "Monitor",
+      "C": "Scanner",
+      "D": "Microphone"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Power Supply Unit' (PSU)?",
+    "options": {
+      "A": "To calculate math problems.",
+      "B": "To convert AC power from the wall outlet into regulated DC power for the computer components.",
+      "C": "To store the computer's files.",
+      "D": "To display the image on the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Blue Screen of Death' (BSOD) is a critical error screen displayed by Windows when the system encounters a fatal error.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for network errors",
+      "D": "Only in version 3.1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Patching' a system?",
+    "options": {
+      "A": "To add physical tape to a broken cable.",
+      "B": "To update software to fix bugs, improve performance, or close security vulnerabilities.",
+      "C": "To increase the screen brightness.",
+      "D": "To delete old user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'CLI' (Command Line Interface)?",
+    "options": {
+      "A": "Windows Desktop",
+      "B": "Bash Shell",
+      "C": "Google Chrome",
+      "D": "Microsoft Word"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ping' is used to test the reachability of a host on an Internet Protocol (IP) network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local websites",
+      "D": "Only if using a Mac"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Multitasking' in an operating system?",
+    "options": {
+      "A": "Hiring multiple people to work on one computer.",
+      "B": "The ability of the OS to run more than one program at a time.",
+      "C": "Using two monitors at once.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular Linux distribution?",
+    "options": {
+      "A": "Windows 11",
+      "B": "Ubuntu",
+      "C": "macOS Monterey",
+      "D": "iOS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Motherboard'?",
+    "options": {
+      "A": "To store the physical key to the building.",
+      "B": "To act as the main printed circuit board that connects all components of a computer.",
+      "C": "To display high-definition videos.",
+      "D": "To provide backup power."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'BIOS' (Basic Input/Output System) is the first software that runs when a computer starts up.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows servers",
+      "D": "Only if the computer has no hard drive"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Daemon' in a Linux environment?",
+    "options": {
+      "A": "A computer virus.",
+      "B": "A background process that runs without direct user interaction.",
+      "C": "A user with administrator rights.",
+      "D": "A physical server located in a basement."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to 'unzip' a compressed file in Windows?",
+    "options": {
+      "A": "File Explorer",
+      "B": "Task Manager",
+      "C": "Disk Management",
+      "D": "Event Viewer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Standard Operating Procedures' (SOPs) are step-by-step instructions compiled by an organization to help workers carry out routine operations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for military use",
+      "D": "Only for non-technical staff"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Logging' in system operations?",
+    "options": {
+      "A": "To chop wood for a fire.",
+      "B": "To record events, errors, and status information for auditing and troubleshooting.",
+      "C": "To increase the speed of the hard drive.",
+      "D": "To change the background of the desktop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Metric' used to monitor server health?",
+    "options": {
+      "A": "The color of the server case.",
+      "B": "CPU Utilization percentage.",
+      "C": "The name of the manufacturer.",
+      "D": "The number of keys on the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Malware' is a general term for any software intentionally designed to cause damage to a computer, server, client, or computer network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for ransomware",
+      "D": "Only for phishing emails"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Inventory' in IT operations?",
+    "options": {
+      "A": "A list of all the books in the office library.",
+      "B": "A detailed list of all hardware and software assets owned by the organization.",
+      "C": "A way to backup the whole database.",
+      "D": "The process of hiring new employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Server Rack'?",
+    "options": {
+      "A": "A specialized computer for gaming.",
+      "B": "A standardized frame or enclosure for mounting multiple electronic equipment modules.",
+      "C": "A tool for cleaning the data center floors.",
+      "D": "A way to measure network speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Root Cause Analysis' (RCA) is a method of problem-solving used for identifying the root causes of faults or problems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for hardware failures",
+      "D": "Only for social engineering attacks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bandwidth'?",
+    "options": {
+      "A": "The physical width of a computer monitor.",
+      "B": "The maximum rate of data transfer across a given path.",
+      "C": "The number of bands in a music library.",
+      "D": "The thickness of an Ethernet cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used in Linux to see the current working directory?",
+    "options": {
+      "A": "dir",
+      "B": "pwd",
+      "C": "cd",
+      "D": "ls"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Safe Removal' of a USB drive ensures that all data has finished writing to the drive before it is disconnected.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Apple computers",
+      "D": "Only if the file is over 1GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of an 'Antivirus' software?",
+    "options": {
+      "A": "To clean the computer screen.",
+      "B": "To detect and remove malicious software.",
+      "C": "To speed up the internet connection.",
+      "D": "To update the computer's clock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Snapshot' in the context of virtual machines?",
+    "options": {
+      "A": "A physical photo of the server.",
+      "B": "A record of the state of a virtual machine at a specific point in time.",
+      "C": "A way to delete a virtual machine.",
+      "D": "The history of every time a user logged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Change Management' is the process of requesting, determining the impact, and approving changes to the IT environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small updates",
+      "D": "Only if using a spreadsheet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'RAM' stand for?",
+    "options": {
+      "A": "Rapid Access Module",
+      "B": "Random Access Memory",
+      "C": "Read Always Memory",
+      "D": "Remote Access Management"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Troubleshooting' step when a website won't load?",
+    "options": {
+      "A": "Buying a new monitor.",
+      "B": "Clearing the browser cache.",
+      "C": "Updating the printer driver.",
+      "D": "Changing the server room lightbulb."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'End-of-Life' (EOL) refers to the date when a vendor will no longer provide support or updates for a product.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile phones",
+      "D": "Only for open-source software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Disk Defragmentation' (mostly for HDDs)?",
+    "options": {
+      "A": "To delete old files.",
+      "B": "To reorganize data on a disk so that files are stored in contiguous blocks, improving access speed.",
+      "C": "To encrypt the whole drive.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Alert' in system monitoring?",
+    "options": {
+      "A": "A loud sound that never stops.",
+      "B": "An automated notification when a metric exceeds a predefined threshold (e.g., CPU > 95%).",
+      "C": "A message from a coworker on Slack.",
+      "D": "A way to backup the server logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Knowledge Base' (KB) articles are documents that provide solutions to common technical problems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for senior managers",
+      "D": "Only if written in HTML"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'System Administrator'?",
+    "options": {
+      "A": "To write the application's source code all day.",
+      "B": "To maintain, configure, and ensure the reliable operation of computer systems and servers.",
+      "C": "To handle all of the company's financial accounting.",
+      "D": "To design the company's marketing logo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to 'SSH' into a remote Linux server from Windows?",
+    "options": {
+      "A": "PuTTY",
+      "B": "Microsoft Word",
+      "C": "VLC Media Player",
+      "D": "Calculator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Workgroup' and 'Domain' are two ways to organize computers in a Windows network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 10",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage' in a computer context?",
+    "options": {
+      "A": "A place to put old keyboards.",
+      "B": "The component that keeps data permanently, even when the power is off (e.g., HDD, SSD).",
+      "C": "The time it takes to download a file.",
+      "D": "The number of users logged into a system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a symptom of 'Low Disk Space'?",
+    "options": {
+      "A": "The mouse moves slowly.",
+      "B": "The computer is unable to save new files or install updates.",
+      "C": "The keyboard light is flashing.",
+      "D": "The internet connection is disconnected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MFA' stands for Multi-Factor Authentication.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google services",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'On-Call' rotation?",
+    "options": {
+      "A": "Working in a circular office.",
+      "B": "A schedule where specific team members are available to handle urgent issues outside of normal business hours.",
+      "C": "The speed at which a hard drive rotates.",
+      "D": "The time it takes to hire a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'BIOS' password?",
+    "options": {
+      "A": "To encrypt the whole hard drive.",
+      "B": "To prevent unauthorized users from changing system settings or booting from unauthorized devices.",
+      "C": "To speed up the boot process.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'PowerShell' is a task automation and configuration management framework from Microsoft.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 7",
+      "D": "Only for mobile devices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Environment' for running software?",
+    "options": {
+      "A": "Development (Dev)",
+      "B": "Staging",
+      "C": "Production (Prod)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Escalation' in the context of a help desk?",
+    "options": {
+      "A": "Climbing the stairs to the data center.",
+      "B": "Passing a complex or high-priority issue to a more experienced technician or a different department.",
+      "C": "Increasing the price of the software.",
+      "D": "The process of deleting old logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Safe Mode' allows a user to fix problems with the OS when it won't start normally.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux",
+      "D": "Only for laptops"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of an 'Uninterruptible Power Supply' (UPS)?",
+    "options": {
+      "A": "To provide high-speed internet during a storm.",
+      "B": "To provide emergency power to a load when the input power source fails.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used in Linux to see a list of files in the current directory?",
+    "options": {
+      "A": "dir",
+      "B": "ls",
+      "C": "ps",
+      "D": "cat"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Redundancy' involves having extra components that are not strictly necessary to functioning but are in case of failure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking servers",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' in a system context?",
+    "options": {
+      "A": "The physical weight of the server cables.",
+      "B": "The delay or time it takes for a data packet to travel from source to destination.",
+      "C": "The number of users active at once.",
+      "D": "The size of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Disk Mirroring'?",
+    "options": {
+      "A": "To make the hard drive look shiny.",
+      "B": "To write data to two disks simultaneously to provide data redundancy.",
+      "C": "To delete all duplicate files automatically.",
+      "D": "To increase the capacity of one disk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'System Hardening' is the process of securing a system by reducing its surface of vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux servers",
+      "D": "Only for non-technical users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which RAID level provides no redundancy but offers the best performance by striping data across multiple disks?",
+    "options": {
+      "A": "RAID 0",
+      "B": "RAID 1",
+      "C": "RAID 5",
+      "D": "RAID 10"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Linux environment, which command is used to manage system services and check the status of a daemon?",
+    "options": {
+      "A": "service --list",
+      "B": "systemctl",
+      "C": "ps -aux",
+      "D": "chkconfig"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the minimum number of disks required to implement a RAID 5 array?",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When combining 'Share' permissions and 'NTFS' permissions on a Windows file server, which permission level takes precedence?",
+    "options": {
+      "A": "Share permissions",
+      "B": "NTFS permissions",
+      "C": "The most restrictive of the two",
+      "D": "The least restrictive of the two"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In Linux, a 'Symbolic Link' (symlink) is a file that points to another file or directory, similar to a shortcut in Windows.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the file is an executable",
+      "D": "Only within the same filesystem"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DHCP message is sent by a client to formally request an IP address from a specific server?",
+    "options": {
+      "A": "DHCPDISCOVER",
+      "B": "DHCPOFFER",
+      "C": "DHCPREQUEST",
+      "D": "DHCPACK"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'chmod 755' command in Linux?",
+    "options": {
+      "A": "Gives the owner full access, and others read/execute access.",
+      "B": "Gives everyone full administrative access.",
+      "C": "Makes the file private to the owner only.",
+      "D": "Changes the file owner to the root user."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'Recursive' DNS query perform?",
+    "options": {
+      "A": "It asks the client to find the IP themselves.",
+      "B": "The DNS server takes full responsibility for finding the IP, querying other servers if necessary.",
+      "C": "It only checks the local host file.",
+      "D": "It deletes the DNS cache automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hard Link' in Linux can point to a file on a different physical hard drive.",
+    "options": {
+      "A": "False (Hard links must stay within the same filesystem/partition).",
+      "B": "True",
+      "C": "Only if using the ext4 filesystem",
+      "D": "Only for directories"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which RAID level is known as a 'Stripe of Mirrors' and requires at least four disks?",
+    "options": {
+      "A": "RAID 01",
+      "B": "RAID 5",
+      "C": "RAID 6",
+      "D": "RAID 10"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which Windows tool allows an administrator to view 'Resultant Set of Policy' (RSOP) to see which Group Policies are applied to a user?",
+    "options": {
+      "A": "gpedit.msc",
+      "B": "rsop.msc",
+      "C": "gpmc.msc",
+      "D": "taskmgr.exe"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'SWAP' space in a Linux system?",
+    "options": {
+      "A": "To swap files between different users.",
+      "B": "To provide overflow space on the hard drive when physical RAM is full.",
+      "C": "To encrypt the internet traffic.",
+      "D": "To increase the speed of the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Full Backup' resets the archive bit on files, indicating they have been backed up.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Linux",
+      "D": "Only if using tape drives"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to display the last 10 lines of a log file in real-time as it updates in Linux?",
+    "options": {
+      "A": "cat -f log.txt",
+      "B": "tail -f log.txt",
+      "C": "head -n 10 log.txt",
+      "D": "watch log.txt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DORA' in the context of DHCP?",
+    "options": {
+      "A": "A specialized encryption algorithm.",
+      "B": "The sequence of messages: Discover, Offer, Request, Acknowledge.",
+      "C": "A database of all world IP addresses.",
+      "D": "A tool for mapping network topologies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Port' for the Secure Shell (SSH) protocol?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "25"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Incremental Backup' only backs up files that have changed since the last full backup or last incremental backup.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the '/etc/fstab' file in Linux?",
+    "options": {
+      "A": "To store the user's encrypted passwords.",
+      "B": "To define how disk partitions and remote filesystems are mounted at boot.",
+      "C": "To list all installed software packages.",
+      "D": "To configure the graphical desktop environment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to find the path (hops) a packet takes to reach a destination in a Linux terminal?",
+    "options": {
+      "A": "ping",
+      "B": "traceroute",
+      "C": "netstat",
+      "D": "dig"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Windows, what is the 'Registry'?",
+    "options": {
+      "A": "A list of all employees in the company.",
+      "B": "A hierarchical database that stores low-level settings for the OS and applications.",
+      "C": "A specialized tool for cleaning the hardware.",
+      "D": "A backup of the internet history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hot Swapping' allows you to replace a hardware component (like a hard drive) without shutting down the system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for keyboards",
+      "D": "Only on desktop computers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used by the 'nslookup' and 'dig' commands?",
+    "options": {
+      "A": "HTTP",
+      "B": "DNS",
+      "C": "DHCP",
+      "D": "SNMP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Load Balancing' in a server environment?",
+    "options": {
+      "A": "Measuring the physical weight of the servers.",
+      "B": "Distributing incoming network traffic across a group of backend servers to ensure availability.",
+      "C": "Calculating the daily electricity cost.",
+      "D": "The process of installing more RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these RAID levels can survive the failure of TWO drives simultaneously?",
+    "options": {
+      "A": "RAID 0",
+      "B": "RAID 5",
+      "C": "RAID 6",
+      "D": "RAID 1"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The 'grep' command in Linux is used to search for text patterns within files.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for system configuration files",
+      "D": "Only if using the root user"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Group Policy' in a Windows Domain?",
+    "options": {
+      "A": "To create a group chat for the IT team.",
+      "B": "To centrally manage and configure settings for users and computers.",
+      "C": "To encrypt all network folders.",
+      "D": "To monitor the server's room humidity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to change the owner of a file in Linux?",
+    "options": {
+      "A": "chmod",
+      "B": "chown",
+      "C": "chgrp",
+      "D": "usermod"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Zombie Process' in Linux?",
+    "options": {
+      "A": "A process that has been infected with a virus.",
+      "B": "A process that has completed execution but still has an entry in the process table.",
+      "C": "A process that runs only at night.",
+      "D": "A process that consumes 100% of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DNS uses Port 53 for its standard queries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for secure DNS (DNSSEC)",
+      "D": "Only for IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which PowerShell cmdlet is used to get information about the system's active network adapters?",
+    "options": {
+      "A": "Get-NetIPAddress",
+      "B": "Get-NetAdapter",
+      "C": "Show-Network",
+      "D": "Test-Connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latency' in the context of system storage?",
+    "options": {
+      "A": "The physical thickness of the disk platter.",
+      "B": "The time it takes for the storage controller to respond to a request for data.",
+      "C": "The total amount of data a disk can hold.",
+      "D": "The number of files currently open."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file in Linux contains a list of local users and their basic account information?",
+    "options": {
+      "A": "/etc/shadow",
+      "B": "/etc/passwd",
+      "C": "/etc/users",
+      "D": "/etc/group"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Differential Backup' backs up all changes made since the last FULL backup.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for virtual machines",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to check for disk errors and repair the filesystem in Windows?",
+    "options": {
+      "A": "sfc /scannow",
+      "B": "chkdsk",
+      "C": "diskpart",
+      "D": "format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Default Gateway'?",
+    "options": {
+      "A": "To provide the password for the Wi-Fi.",
+      "B": "To act as the exit point for traffic leaving the local subnet to reach other networks.",
+      "C": "To act as a primary DNS server.",
+      "D": "To monitor the data center's air conditioning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Linux, which directory typically contains system configuration files?",
+    "options": {
+      "A": "/bin",
+      "B": "/etc",
+      "C": "/var",
+      "D": "/home"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MFA' (Multi-Factor Authentication) can be bypassed if the user has a strong enough password.",
+    "options": {
+      "A": "False (MFA requires at least two independent factors regardless of password strength).",
+      "B": "True",
+      "C": "Only for administrative accounts",
+      "D": "Only in the 'dev' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which RAID level uses parity and provides a good balance between performance and redundancy with at least 3 disks?",
+    "options": {
+      "A": "RAID 0",
+      "B": "RAID 1",
+      "C": "RAID 5",
+      "D": "RAID 10"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'SFC' (System File Checker) tool do in Windows?",
+    "options": {
+      "A": "Calculates the speed of the CPU.",
+      "B": "Scans and repairs corrupted or missing Windows system files.",
+      "C": "Deletes the internet history.",
+      "D": "Updates the printer drivers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to view the current routing table in a Linux terminal?",
+    "options": {
+      "A": "route -n",
+      "B": "ip route show",
+      "C": "netstat -r",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'Static IP' is less reliable than a 'DHCP' assigned IP for a production server.",
+    "options": {
+      "A": "False (Static IPs are preferred for servers to ensure they are always reachable at the same address).",
+      "B": "True",
+      "C": "Only for virtual servers",
+      "D": "Only if the DHCP lease is long"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'ping -t' command in Windows?",
+    "options": {
+      "A": "To ping the server twice.",
+      "B": "To ping the specified host continuously until manually stopped.",
+      "C": "To ping the host with a timestamp.",
+      "D": "To show the temperature of the target host."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Hypervisor' used for enterprise virtualization?",
+    "options": {
+      "A": "Microsoft Word",
+      "B": "VMware ESXi / Hyper-V",
+      "C": "Google Chrome",
+      "D": "Notepad++"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'A Record' in DNS?",
+    "options": {
+      "A": "To store the name of the administrator.",
+      "B": "To map a hostname to an IPv4 address.",
+      "C": "To map a hostname to an IPv6 address.",
+      "D": "To create a backup of the zone file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Linux, the 'sudo' command allows a user to run a single command with root privileges without logging in as root.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Debian systems",
+      "D": "Only if the user is in the 'admin' group"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'IOPS' measure in storage performance?",
+    "options": {
+      "A": "Internal Operating Power System",
+      "B": "Input/Output Operations Per Second",
+      "C": "Integrated Optical Port Speed",
+      "D": "Input Only Port Status"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Linux command is used to see the amount of free and used memory in the system?",
+    "options": {
+      "A": "mem",
+      "B": "free -h",
+      "C": "ramstat",
+      "D": "top -m"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Disk Partitions'?",
+    "options": {
+      "A": "To make the hard drive look larger.",
+      "B": "To logically divide a single physical disk into multiple isolated sections.",
+      "C": "To encrypt specific folders.",
+      "D": "To clean the dust off the disk platter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'DHCP Reservations' ensures a specific device always receives the same IP address from the DHCP server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for wireless printers",
+      "D": "Only on Cisco hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use on Windows to see which user accounts are currently logged in?",
+    "options": {
+      "A": "Resource Monitor",
+      "B": "Task Manager (Users tab)",
+      "C": "Registry Editor",
+      "D": "Disk Management"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NIC Teaming'?",
+    "options": {
+      "A": "Giving names to network adapters.",
+      "B": "Grouping multiple physical network adapters into a single logical interface for redundancy and performance.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a team of network engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'SSL Certificate' is used to encrypt communication between a client and a server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banks",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Syslog' severity level?",
+    "options": {
+      "A": "High",
+      "B": "Critical",
+      "C": "Warning",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Task Manager' in Windows?",
+    "options": {
+      "A": "To write a to-do list.",
+      "B": "To monitor system performance and manage running applications and processes.",
+      "C": "To update the BIOS.",
+      "D": "To change the screen resolution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Default Route' is used when a router doesn't have a specific path to a network in its routing table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for internet traffic",
+      "D": "Only in IPv4"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to list the contents of a directory in a long format in Linux?",
+    "options": {
+      "A": "ls -a",
+      "B": "ls -l",
+      "C": "dir /w",
+      "D": "list -long"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MTU' in networking?",
+    "options": {
+      "A": "Minimum Transfer Unit",
+      "B": "Maximum Transmission Unit",
+      "C": "Managed Transport Utility",
+      "D": "Multi-Tier Upgrade"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'root' directory in Linux is represented by a single forward slash ( / ).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the terminal",
+      "D": "Only for system files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common Windows 'Command Prompt' command to see the network routing table?",
+    "options": {
+      "A": "show route",
+      "B": "route print",
+      "C": "net route",
+      "D": "ipconfig /routes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput' in a system context?",
+    "options": {
+      "A": "The time it takes to reboot the server.",
+      "B": "The actual amount of data successfully transferred over a specific period.",
+      "C": "The physical speed of the light in a fiber cable.",
+      "D": "The number of users active at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these RAID levels requires at least 4 disks and combines mirroring and striping?",
+    "options": {
+      "A": "RAID 0",
+      "B": "RAID 1",
+      "C": "RAID 5",
+      "D": "RAID 10"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'DNS Forwarder' is a DNS server that sends queries for external names to another DNS server outside the local network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for .com websites",
+      "D": "Only if using Google Chrome"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' (Virtual Local Area Network)?",
+    "options": {
+      "A": "A network that only exists at night.",
+      "B": "A logical grouping of devices that appear to be on the same LAN even if they are physically on different segments.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command in Windows shows the 'Active Directory' domain information for the current user?",
+    "options": {
+      "A": "net config workstation",
+      "B": "whoami /user",
+      "C": "whoami /fqdn",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: The 'uptime' command in Linux shows how long the system has been running since the last reboot.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for servers",
+      "D": "Only if the system is under heavy load"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Linux kernel parameter would you tune to reduce the frequency of data being swapped from physical memory to disk, thereby improving performance for memory-intensive applications?",
+    "options": {
+      "A": "vm.vfs_cache_pressure",
+      "B": "vm.swappiness",
+      "C": "kernel.shmmax",
+      "D": "net.core.wmem_max"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a high-availability 'Active-Passive' cluster, both nodes actively process incoming traffic simultaneously to maximize throughput.",
+    "options": {
+      "A": "False (Only the 'Active' node processes traffic; the 'Passive' node remains on standby for failover).",
+      "B": "True",
+      "C": "Only if using Round-Robin DNS",
+      "D": "Only if the passive node is virtualized"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary architectural advantage of a 'Storage Area Network' (SAN) over 'Network Attached Storage' (NAS) in a large data center?",
+    "options": {
+      "A": "SAN is cheaper to implement.",
+      "B": "SAN provides block-level access to storage, making it appear as a local drive to the server, which is better for databases.",
+      "C": "NAS supports fiber optics while SAN does not.",
+      "D": "SAN is exclusively for Windows environments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a disaster recovery plan, what is the 'Recovery Point Objective' (RPO)?",
+    "options": {
+      "A": "The maximum time allowed to restore services after an outage.",
+      "B": "The maximum age of files that must be recovered from backup storage for operations to resume (maximum tolerable data loss).",
+      "C": "The physical location where the backups are stored.",
+      "D": "The total cost of the recovery operation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inodes' exhaustion scenario occurs in a Linux filesystem even when there is still plenty of gigabytes of disk space available?",
+    "options": {
+      "A": "When the kernel is too old.",
+      "B": "When a directory contains millions of extremely small files, using up all available pointers in the filesystem metadata.",
+      "C": "When the CPU usage hits 100%.",
+      "D": "When the swap space is disabled."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Chroot' in Linux provides a complete, secure sandbox that prevents a process from ever accessing the host kernel or escaping to the root filesystem.",
+    "options": {
+      "A": "False (Chroot only changes the root directory for a process; it is not a secure isolation barrier like Namespaces or Cgroups).",
+      "B": "True",
+      "C": "Only for non-root users",
+      "D": "Only on CentOS systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'Load Average' of 4.0 on a Linux system with only 2 CPU cores typically indicate?",
+    "options": {
+      "A": "The system is running at 50% capacity.",
+      "B": "The system is overloaded, with processes waiting for CPU time (roughly 200% utilization).",
+      "C": "The system has encountered a memory leak.",
+      "D": "The system is performing a background disk backup."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is primarily used by a 'Jump Box' or 'Bastion Host' to provide secure administrative access to a private network?",
+    "options": {
+      "A": "HTTP",
+      "B": "SSH",
+      "C": "FTP",
+      "D": "Telnet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Log Rotation' (using tools like logrotate) is critical in operations to prevent log files from growing indefinitely and consuming all available disk space.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web server logs",
+      "D": "Only if using the /var/log directory"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the 'Five Nines' reliability standard (99.999% uptime), what is the maximum amount of allowed downtime per year?",
+    "options": {
+      "A": "Approximately 5 minutes.",
+      "B": "Approximately 52 minutes.",
+      "C": "Approximately 8 hours.",
+      "D": "Approximately 3 days."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Sticky Bit' on a Linux directory like /tmp?",
+    "options": {
+      "A": "It makes the directory impossible to delete.",
+      "B": "It ensures that only the owner of a file (or root) can delete or rename that file within the directory.",
+      "C": "It speeds up file access.",
+      "D": "It encrypts all files automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Infrastructure as Code' (IaC) allows operations teams to treat server configurations like application code, including versioning and automated testing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native companies",
+      "D": "Only for Python developers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Runlevel' (or Systemd Target) represents a multi-user environment with a Graphical User Interface in standard Linux distributions?",
+    "options": {
+      "A": "Runlevel 1 / rescue.target",
+      "B": "Runlevel 3 / multi-user.target",
+      "C": "Runlevel 5 / graphical.target",
+      "D": "Runlevel 6 / reboot.target"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Split-Brain' in a cluster environment?",
+    "options": {
+      "A": "When a server has two separate CPUs.",
+      "B": "When a communication failure causes both nodes to believe the other has failed, leading both to attempt to take control of shared resources simultaneously.",
+      "C": "A database synchronization error.",
+      "D": "The process of splitting a hard drive into two partitions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Blue-Green Deployment' is an operations strategy where two identical production environments exist, and traffic is swapped to the new version (Green) after it is fully tested.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if using Kubernetes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which RAID level provides the best balance between write performance and high redundancy for a database server, assuming budget is not an issue?",
+    "options": {
+      "A": "RAID 5",
+      "B": "RAID 10 (1+0)",
+      "C": "RAID 6",
+      "D": "RAID 0"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'OOM Killer' (Out Of Memory Killer) in the Linux kernel?",
+    "options": {
+      "A": "A virus that deletes system memory.",
+      "B": "A kernel feature that terminates processes to free up memory when the system is critically low on RAM.",
+      "C": "A tool used to benchmark memory speed.",
+      "D": "A specialized firewall for RAM protection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Stateful' firewall tracks the state of active connections and determines which network packets to allow based on the context of the traffic flow.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Windows Server troubleshooting, what does 'DCDIAG' test?",
+    "options": {
+      "A": "The speed of the network card.",
+      "B": "The health and connectivity of an Active Directory Domain Controller.",
+      "C": "The integrity of a SQL database.",
+      "D": "The physical temperature of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Horizontal Scaling' (Scaling Out)?",
+    "options": {
+      "A": "Adding more RAM and CPU to an existing server.",
+      "B": "Adding more server instances to a cluster to handle increased load.",
+      "C": "Rotating the server rack 90 degrees.",
+      "D": "The process of moving servers to a lower floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' in configuration management means that running a script multiple times will always result in the same system state without redundant changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Ansible",
+      "D": "Only if the server is virtualized"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command would you use to find which process is listening on Port 80 in a Linux environment?",
+    "options": {
+      "A": "ps -ef | grep 80",
+      "B": "netstat -tulpn | grep :80",
+      "C": "ls -p 80",
+      "D": "cat /proc/net/80"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prometheus' primarily used for in modern operations?",
+    "options": {
+      "A": "As a primary database for user profiles.",
+      "B": "As an open-source monitoring and alerting toolkit for time-series data.",
+      "C": "To encrypt the CI/CD pipeline.",
+      "D": "To manage the server's BIOS updates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hardening' a system involves enabling as many features and services as possible to ensure maximum compatibility.",
+    "options": {
+      "A": "False (Hardening involves disabling unnecessary services and features to reduce the attack surface).",
+      "B": "True",
+      "C": "Only for web servers",
+      "D": "Only if using a firewall"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric from the 'GOLDEN SIGNALS' of SRE monitors the degree to which a service is failing to handle requests?",
+    "options": {
+      "A": "Latency",
+      "B": "Traffic",
+      "C": "Errors",
+      "D": "Saturation"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'iSCSI'?",
+    "options": {
+      "A": "A specialized way to encrypt SCSI cables.",
+      "B": "A protocol that allows SCSI commands to be sent over IP networks, enabling servers to access block-level storage on a SAN.",
+      "C": "A newer version of the Apple iPhone connection.",
+      "D": "The name of a popular Linux distribution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Post-Mortem' is a document written after an incident to blame the person who caused the error.",
+    "options": {
+      "A": "False (Post-mortems should be 'blameless' and focus on identifying technical and process improvements to prevent recurrence).",
+      "B": "True",
+      "C": "Only for senior management",
+      "D": "Only if the outage lasted more than 4 hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to 'trace' the system calls made by a process in Linux to troubleshoot a crash?",
+    "options": {
+      "A": "top",
+      "B": "strace",
+      "C": "lsmod",
+      "D": "journalctl"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Reverse Proxy' like Nginx?",
+    "options": {
+      "A": "To backup the server's hard drive.",
+      "B": "To act as an intermediary for servers to handle client requests, providing load balancing and SSL termination.",
+      "C": "To encrypt the physical server rack.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'ZFS' is a combined file system and logical volume manager that provides features like snapshots and self-healing data integrity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Solaris systems",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'SRE' metric measures how full a service's resources are, such as the percentage of CPU or memory being used?",
+    "options": {
+      "A": "Latency",
+      "B": "Traffic",
+      "C": "Errors",
+      "D": "Saturation"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Configuration Drift'?",
+    "options": {
+      "A": "Moving a server across the room.",
+      "B": "The phenomenon where environments (Dev/Test/Prod) become inconsistent over time due to manual changes.",
+      "C": "The gradual decrease in internet speed.",
+      "D": "A way to backup the server's metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MTR' (My Traceroute) combines the functionality of both ping and traceroute into a single diagnostic tool.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 10",
+      "D": "Only for IPv6 networks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'SetUID' permission on a Linux executable?",
+    "options": {
+      "A": "To hide the file from other users.",
+      "B": "To allow a user to run the executable with the permissions of the file's owner (often root).",
+      "C": "To encrypt the file's binary code.",
+      "D": "To set the user's ID to a random number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific risk does 'Air Gapping' a system protect against?",
+    "options": {
+      "A": "Hardware failures.",
+      "B": "Remote network-based attacks by physically isolating the system from all external networks.",
+      "C": "High electricity usage.",
+      "D": "Deleting files accidentally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemd' has replaced the legacy 'SysV Init' system in most modern Linux distributions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Fedora",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed File System' (DFS) used for in a Windows environment?",
+    "options": {
+      "A": "To increase the speed of a single hard drive.",
+      "B": "To group shared folders on different servers into one logical namespace for users.",
+      "C": "To backup the Active Directory database.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is used for 'Log Aggregation' in the ELK stack?",
+    "options": {
+      "A": "Elasticsearch",
+      "B": "Logstash",
+      "C": "Kibana",
+      "D": "Docker"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Error Budget' is the amount of allowed downtime a service can have without violating its SLO.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Multipathing' in storage connectivity?",
+    "options": {
+      "A": "To create multiple partitions on a disk.",
+      "B": "To provide multiple physical paths between a server and its storage for redundancy and load balancing.",
+      "C": "To encrypt the SCSI connection.",
+      "D": "To increase the speed of the fiber optic light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Linux command would you use to change the priority of a process that is ALREADY running?",
+    "options": {
+      "A": "nice",
+      "B": "renice",
+      "C": "top -p",
+      "D": "kill -15"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cold Storage' refers to data that is accessed frequently and must be available in milliseconds.",
+    "options": {
+      "A": "False (Cold storage is for infrequently accessed data where high latency is acceptable in exchange for low cost).",
+      "B": "True",
+      "C": "Only for backup tapes",
+      "D": "Only if stored in a literal refrigerator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Observability' vs 'Monitoring'?",
+    "options": {
+      "A": "They are identical.",
+      "B": "Monitoring tells you when a system is down; Observability helps you understand *why* it happened by analyzing internal states.",
+      "C": "Monitoring is for hardware; Observability is for software.",
+      "D": "Observability is paid; Monitoring is free."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DNS record type is used for 'Reverse DNS' lookups to map an IP address back to a hostname?",
+    "options": {
+      "A": "A",
+      "B": "PTR (Pointer)",
+      "C": "CNAME",
+      "D": "MX"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shadow Copies' (VSS) allow users to recover previous versions of files from a Windows server without restoring from tape or cloud backups.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Azure",
+      "D": "Only if the files were deleted by root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Runbook' in an operations team?",
+    "options": {
+      "A": "A novel about a system administrator.",
+      "B": "A compilation of routine procedures and operations that the system administrator or operator carries out.",
+      "C": "A specialized tool for cleaning the hardware.",
+      "D": "A list of all users on the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Incident Response' phase involves stopping the spread of the issue and preventing further damage?",
+    "options": {
+      "A": "Preparation",
+      "B": "Containment",
+      "C": "Eradication",
+      "D": "Recovery"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Canary Deployment' involves rolling out a new version of a service to all users simultaneously after business hours.",
+    "options": {
+      "A": "False (It involves rolling out to a small subset of users first to test for issues).",
+      "B": "True",
+      "C": "Only for mobile applications",
+      "D": "Only if using a load balancer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NIC Teaming' (or Bonding) used for?",
+    "options": {
+      "A": "Giving names to network adapters.",
+      "B": "Aggregating multiple physical network links into one logical link for redundancy and bandwidth.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a team of network engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Linux tool would you use to monitor disk I/O performance in real-time?",
+    "options": {
+      "A": "top",
+      "B": "iostat",
+      "C": "df -h",
+      "D": "lsblk"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'RAID 10' provides the performance of striping and the redundancy of mirroring.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only for SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The time it takes to fix a server.",
+      "B": "The predicted elapsed time between inherent failures of a mechanical or electronic system during normal system operation.",
+      "C": "The distance between two servers in a rack.",
+      "D": "The salary of a reliability engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Hot Site' in disaster recovery?",
+    "options": {
+      "A": "A server room with no air conditioning.",
+      "B": "A fully functional backup data center with mirrored data that can take over operations almost immediately.",
+      "C": "A backup located in a literal desert.",
+      "D": "A way to backup the power grid."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ansible' is an agentless automation tool that uses SSH to push configuration changes to remote servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows targets",
+      "D": "Only if the servers have a public IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Fencing' in a high-availability cluster?",
+    "options": {
+      "A": "Building a physical wall around the data center.",
+      "B": "The process of isolating a failed or unresponsive node to prevent it from corrupting shared resources (like storage).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Systemd' command is used to see the logs for a specific service?",
+    "options": {
+      "A": "cat /var/log/syslog",
+      "B": "journalctl -u service_name",
+      "C": "systemctl status service_name --logs",
+      "D": "tail -f /var/log/service.log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hard Link' shares the same Inode number as the original file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on the ext3 filesystem",
+      "D": "Only for symbolic files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Chaos Engineering' in operations?",
+    "options": {
+      "A": "Letting the servers run without any monitoring.",
+      "B": "The practice of intentionally experimenting on a system by injecting failures to build confidence in its resilience.",
+      "C": "A period of time when the data center is messy.",
+      "D": "Using randomized variable names in scripts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command would you use to view the current system 'Entropy' level in Linux?",
+    "options": {
+      "A": "cat /proc/sys/kernel/random/entropy_avail",
+      "B": "entropy -show",
+      "C": "grep entropy /var/log/syslog",
+      "D": "top -e"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Quorum' in a cluster is the minimum number of votes required to make decisions and keep resources online.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL clusters",
+      "D": "Only if using fiber channel"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Traffic' in the context of the SRE Golden Signals?",
+    "options": {
+      "A": "The speed of the cars in the office parking lot.",
+      "B": "A measure of how much demand is being placed on your system (e.g., HTTP requests per second).",
+      "C": "The physical movement of data packets.",
+      "D": "The number of users active during the day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific tool is used to 'limit' the resources (CPU, Memory) a group of processes can use in Linux?",
+    "options": {
+      "A": "iptables",
+      "B": "cgroups (Control Groups)",
+      "C": "systemctl",
+      "D": "nice"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Root Cause Analysis' should identify a single person to hold accountable for every major system outage.",
+    "options": {
+      "A": "False (RCA should focus on systemic failures and process improvements).",
+      "B": "True",
+      "C": "Only in corporate environments",
+      "D": "Only for security breaches"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'MTTR'?",
+    "options": {
+      "A": "Mean Time To Resolve (or Repair).",
+      "B": "Maximum Time To Reboot.",
+      "C": "Minimum Task Transfer Rate.",
+      "D": "Measured Total Resource Requirement."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which element in a 'Disaster Recovery' plan defines the target time to restore a business process after a failure?",
+    "options": {
+      "A": "RPO",
+      "B": "RTO (Recovery Time Objective)",
+      "C": "SLA",
+      "D": "MTBF"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Multiplexing' allows multiple signals or streams to be transmitted over a single physical channel.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optics",
+      "D": "Only for analog signals"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of 'Udev' in a Linux system?",
+    "options": {
+      "A": "To backup user data to the cloud.",
+      "B": "The device manager for the Linux kernel, responsible for dynamically managing device nodes in /dev.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Linux command displays the amount of time the CPU has spent in 'Steal Time' (latency due to the hypervisor)?",
+    "options": {
+      "A": "top",
+      "B": "vmstat",
+      "C": "iostat",
+      "D": "all of the above"
+    },
+    "answer": "D"
+  }
+  ]
+}

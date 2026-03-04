@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Data Analysis", 
+  "questions": [
+    {
+    "question": "What is the primary goal of data cleaning (wrangling)?",
+    "options": {
+      "A": "To create complex machine learning models.",
+      "B": "To increase the file size of the dataset.",
+      "C": "To identify and fix errors, duplicates, and missing values in a dataset.",
+      "D": "To change the font style of the data reports."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is a common software tool used specifically for statistical data analysis and visualization?",
+    "options": {
+      "A": "Adobe Premiere Pro",
+      "B": "Tableau",
+      "C": "Microsoft Outlook",
+      "D": "Discord"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Mean' of a set of numbers?",
+    "options": {
+      "A": "The arithmetic average of the values.",
+      "B": "The middle value in an ordered list.",
+      "C": "The difference between the highest and lowest values.",
+      "D": "The most frequently occurring number."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a spreadsheet, what does a 'Cell' represent?",
+    "options": {
+      "A": "A physical battery for the computer.",
+      "B": "The intersection of a row and a column.",
+      "C": "The entire hard drive storage.",
+      "D": "A folder containing multiple files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Qualitative Data'?",
+    "options": {
+      "A": "Data that can be measured with a ruler.",
+      "B": "Numerical values used for math.",
+      "C": "Data only used by computer scientists.",
+      "D": "Descriptive information that is non-numerical (e.g., colors, names)."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which chart is most effective for showing trends over a period of time?",
+    "options": {
+      "A": "Pie Chart",
+      "B": "Line Graph",
+      "C": "Scatter Plot",
+      "D": "Box Plot"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SQL' stand for in the context of data analysis?",
+    "options": {
+      "A": "Structured Query Language",
+      "B": "Simple Quick Logic",
+      "C": "Sequential Queue List",
+      "D": "Systematic Quantitative Layout"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Outlier' in a dataset?",
+    "options": {
+      "A": "The title of the dataset.",
+      "B": "A data point that is very similar to all others.",
+      "C": "A data point that differs significantly from other observations.",
+      "D": "The first row of a spreadsheet."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function in Excel is used to add together a range of numbers?",
+    "options": {
+      "A": "COUNT()",
+      "B": "ADD()",
+      "C": "SUM()",
+      "D": "TOTAL()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Metadata'?",
+    "options": {
+      "A": "Data about data (e.g., file size, author, creation date).",
+      "B": "Data that has been deleted.",
+      "C": "Encrypted passwords.",
+      "D": "The physical hardware of a server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a 'Quantitative' variable?",
+    "options": {
+      "A": "Home Address",
+      "B": "Favorite Food",
+      "C": "Employee ID Number",
+      "D": "Monthly Salary"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of a 'Pie Chart'?",
+    "options": {
+      "A": "To show the relationship between two variables.",
+      "B": "To show the distribution of parts of a whole.",
+      "C": "To track changes over a decade.",
+      "D": "To calculate the square root of data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Correlation' of 0 between two variables indicate?",
+    "options": {
+      "A": "A perfect positive relationship.",
+      "B": "No linear relationship between the variables.",
+      "C": "A perfect negative relationship.",
+      "D": "The variables are identical."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a database, what is a 'Primary Key'?",
+    "options": {
+      "A": "A unique identifier for each record in a table.",
+      "B": "The password used to open the database.",
+      "C": "A key used to encrypt the data.",
+      "D": "The first column in every spreadsheet."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Visualization'?",
+    "options": {
+      "A": "Writing code without looking at the screen.",
+      "B": "Printing data on paper.",
+      "C": "The graphical representation of information and data.",
+      "D": "Deleting data to make it easier to see."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these file formats is most commonly used for storing tabular data in a plain-text format?",
+    "options": {
+      "A": "MP3",
+      "B": "CSV (Comma-Separated Values)",
+      "C": "JPEG",
+      "D": "EXE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Median' of this set: {2, 4, 6, 8, 10}?",
+    "options": {
+      "A": "10",
+      "B": "30",
+      "C": "6",
+      "D": "5"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Big Data'?",
+    "options": {
+      "A": "Data that is written in a large font.",
+      "B": "Extremely large datasets that may be analyzed computationally to reveal patterns.",
+      "C": "A single file that is 1 Gigabyte in size.",
+      "D": "Data stored on a very large computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL keyword is used to retrieve data from a database?",
+    "options": {
+      "A": "GET",
+      "B": "FIND",
+      "C": "SELECT",
+      "D": "EXTRACT"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Pivot Table' used for?",
+    "options": {
+      "A": "To rotate the physical computer monitor.",
+      "B": "To summarize, sort, and group data automatically in a spreadsheet.",
+      "C": "To create 3D animations.",
+      "D": "To delete old rows from a table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predictive Analytics'?",
+    "options": {
+      "A": "Analyzing what happened 10 years ago.",
+      "B": "The use of data, algorithms, and machine learning to identify the likelihood of future outcomes.",
+      "C": "Guessing the results without looking at data.",
+      "D": "A way to hide data from users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which variable is also known as the 'Output' or 'Response' variable?",
+    "options": {
+      "A": "Independent Variable",
+      "B": "Control Variable",
+      "C": "Dependent Variable",
+      "D": "Fixed Variable"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Sample' in statistics?",
+    "options": {
+      "A": "The entire population under study.",
+      "B": "A small part or quantity intended to show what the whole is like.",
+      "C": "A free trial of a software.",
+      "D": "A lab report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Mode' of a dataset?",
+    "options": {
+      "A": "The average value.",
+      "B": "The difference between the max and min.",
+      "C": "The value that appears most frequently.",
+      "D": "The sum of all values."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary use of a 'Histogram'?",
+    "options": {
+      "A": "To show the distribution of a continuous variable.",
+      "B": "To compare two categorical variables.",
+      "C": "To show a timeline of events.",
+      "D": "To list the names of employees."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Mining'?",
+    "options": {
+      "A": "Digging for coal in a digital environment.",
+      "B": "The process of discovering patterns in large data sets.",
+      "C": "Deleting data to save disk space.",
+      "D": "Manually typing data into a computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In data analysis, what does 'A/B Testing' usually compare?",
+    "options": {
+      "A": "The first and last names of users.",
+      "B": "Two different versions of a variable to see which performs better.",
+      "C": "The speed of two different keyboards.",
+      "D": "Two different colors in a logo only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Boolean' value?",
+    "options": {
+      "A": "15.5",
+      "B": "True",
+      "C": "Hello World",
+      "D": "2026-03-03"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Descriptive Analytics'?",
+    "options": {
+      "A": "Predicting the future.",
+      "B": "Answering the question 'What happened?' by summarizing past data.",
+      "C": "Creating a fake dataset for testing.",
+      "D": "Describing the physical appearance of the data analyst."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Range' of the following set: {10, 2, 38, 14}?",
+    "options": {
+      "A": "10",
+      "B": "36",
+      "C": "4",
+      "D": "38"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a box plot, what does the line inside the box represent?",
+    "options": {
+      "A": "The Mean",
+      "B": "The Range",
+      "C": "The Median",
+      "D": "The Standard Deviation"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Data Ethics'?",
+    "options": {
+      "A": "The speed at which data is processed.",
+      "B": "The study of the moral problems related to data, including its collection and use.",
+      "C": "A type of programming language.",
+      "D": "A mathematical formula for accuracy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Python library is most famous for data manipulation and analysis?",
+    "options": {
+      "A": "Django",
+      "B": "Pandas",
+      "C": "Flask",
+      "D": "PyGame"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Filtering' data?",
+    "options": {
+      "A": "To narrow down a dataset to only relevant information based on specific criteria.",
+      "B": "To change the color of the data.",
+      "C": "To encrypt the data for security.",
+      "D": "To duplicate every row in the table."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Bar Chart' best used for?",
+    "options": {
+      "A": "Showing parts of a whole.",
+      "B": "Comparing different categories of data.",
+      "C": "Showing a trend over 100 years.",
+      "D": "Predicting the stock market."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exploratory Data Analysis' (EDA)?",
+    "options": {
+      "A": "The final stage of data publishing.",
+      "B": "Analyzing datasets to summarize their main characteristics, often with visual methods.",
+      "C": "A way to explore new planets using data.",
+      "D": "Deleting data you don't understand."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Null' represent in a database?",
+    "options": {
+      "A": "A value of zero.",
+      "B": "An empty space or missing value.",
+      "C": "A negative number.",
+      "D": "A secret code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Categorical Data'?",
+    "options": {
+      "A": "Numerical data that can be added together.",
+      "B": "Data that can be divided into groups (e.g., Gender, Marital Status).",
+      "C": "Data about cats.",
+      "D": "The time it takes to finish a task."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Discrete' variable?",
+    "options": {
+      "A": "Height",
+      "B": "Temperature",
+      "C": "Number of cars in a parking lot",
+      "D": "Weight"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of a 'Scatter Plot'?",
+    "options": {
+      "A": "To list categories in order.",
+      "B": "To show the relationship between two numerical variables.",
+      "C": "To show a single value over time.",
+      "D": "To calculate the average of a group."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Integrity'?",
+    "options": {
+      "A": "The accuracy and consistency of data over its entire lifecycle.",
+      "B": "The honesty of the data analyst.",
+      "C": "The price of the data storage.",
+      "D": "The number of users who can see the data."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Data Warehouse'?",
+    "options": {
+      "A": "A physical building where hard drives are stored.",
+      "B": "A central repository for integrated data from one or more disparate sources.",
+      "C": "A trash can for old data.",
+      "D": "A type of spreadsheet software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL clause is used to filter results based on a condition?",
+    "options": {
+      "A": "FILTER",
+      "B": "IF",
+      "C": "WHERE",
+      "D": "HAVING"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Bias' in data analysis?",
+    "options": {
+      "A": "A mathematical error in calculation.",
+      "B": "A prejudice in favor of or against one thing, person, or group compared with another.",
+      "C": "The speed of data processing.",
+      "D": "The font style of the chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Nominal' scale of measurement?",
+    "options": {
+      "A": "Temperature in Fahrenheit",
+      "B": "Exam scores (0-100)",
+      "C": "Types of pets (Dog, Cat, Bird)",
+      "D": "Height in inches"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Data Governance'?",
+    "options": {
+      "A": "The laws made by the government about the internet.",
+      "B": "The overall management of data availability, relevancy, usability, integrity, and security in an organization.",
+      "C": "Hiring a data analyst.",
+      "D": "Creating a backup of your data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Excel, what happens if you use the 'Fill Handle' (small square at the corner of a cell)?",
+    "options": {
+      "A": "It deletes the data.",
+      "B": "It copies content or continues a series (like dates) into adjacent cells.",
+      "C": "It changes the color of the cell.",
+      "D": "It opens a new spreadsheet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time Series' data?",
+    "options": {
+      "A": "Data collected at a single point in time.",
+      "B": "Data points indexed or listed in chronological order.",
+      "C": "A list of movies about time travel.",
+      "D": "The speed of a computer clock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Standardization' in data?",
+    "options": {
+      "A": "To make all numbers the same.",
+      "B": "To scale data to a common range for better comparison.",
+      "C": "To delete data that isn't standard.",
+      "D": "To use only standard English in reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Heat Map' represent?",
+    "options": {
+      "A": "The temperature of the servers.",
+      "B": "A graphical representation of data where values are depicted by color.",
+      "C": "A map of the best places for summer vacation.",
+      "D": "A timeline of fires."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Imputation' in data analysis?",
+    "options": {
+      "A": "Accusing someone of deleting data.",
+      "B": "The process of replacing missing data with substituted values.",
+      "C": "Calculating the total sum of a column.",
+      "D": "Writing a summary of a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dashboarding'?",
+    "options": {
+      "A": "A tool used in cars.",
+      "B": "Creating an easy-to-read, often real-time, user interface that shows a graphical presentation of current status and historical trends.",
+      "C": "Cleaning the dashboard of a computer.",
+      "D": "A way to run as fast as possible."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Ratio' scale of measurement?",
+    "options": {
+      "A": "Hair Color",
+      "B": "Weight (e.g., 50 kg is twice 25 kg)",
+      "C": "Social Security Number",
+      "D": "Likert Scale (1 to 5)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Raw Data'?",
+    "options": {
+      "A": "Data that has been fully processed and graphed.",
+      "B": "Unprocessed information collected from a source.",
+      "C": "Data that is corrupted.",
+      "D": "A list of definitions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Python function is used to view the first few rows of a DataFrame?",
+    "options": {
+      "A": "tail()",
+      "B": "head()",
+      "C": "show()",
+      "D": "view()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Web Scraping'?",
+    "options": {
+      "A": "Deleting websites you don't like.",
+      "B": "Automated extraction of data from websites.",
+      "C": "A type of internet virus.",
+      "D": "Creating a new website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of moving data from one or more sources to a target site for storage and analysis.",
+      "B": "The computer 'eating' or deleting data.",
+      "C": "Reading a book about data.",
+      "D": "Sharing data on social media."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Statistical Significance'?",
+    "options": {
+      "A": "How important the data is to the company.",
+      "B": "The likelihood that a result or relationship is caused by something other than mere chance.",
+      "C": "The size of the font in a chart.",
+      "D": "The number of digits in a result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which chart is best for showing frequency distribution?",
+    "options": {
+      "A": "Histogram",
+      "B": "Line Chart",
+      "C": "Pie Chart",
+      "D": "Gantt Chart"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Aggregation'?",
+    "options": {
+      "A": "Being angry at the data results.",
+      "B": "The process of gathering data and presenting it in a summarized format.",
+      "C": "Deleting data to make it look cleaner.",
+      "D": "Dividing data into 1000 different files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-tabulation'?",
+    "options": {
+      "A": "A quantitative method to analyze the relationship between multiple variables.",
+      "B": "Crossing out data that you don't need.",
+      "C": "Adding a tab to a spreadsheet.",
+      "D": "A type of data encryption."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a 'Continuous' variable?",
+    "options": {
+      "A": "Number of children",
+      "B": "Number of languages spoken",
+      "C": "Weight in kilograms",
+      "D": "Number of books on a shelf"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'Data Profiling'?",
+    "options": {
+      "A": "Creating a social media profile for the data.",
+      "B": "The process of examining the data available from an existing information source and collecting statistics or informative summaries about that data.",
+      "C": "Hiring a new data analyst based on their profile.",
+      "D": "Hiding the data from other employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Standard Deviation' measure?",
+    "options": {
+      "A": "The distance from one city to another.",
+      "B": "A measure of how spread out numbers are from the mean.",
+      "C": "The arithmetic average of a dataset.",
+      "D": "The total count of items in a list."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Storytelling'?",
+    "options": {
+      "A": "Writing a fictional book about a computer.",
+      "B": "The practice of building a narrative around a set of data and its accompanying visualizations.",
+      "C": "Lying about the data results.",
+      "D": "Reading the data out loud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Flat File'?",
+    "options": {
+      "A": "A file that is very thin.",
+      "B": "A dataset that contains only one table of data.",
+      "C": "A file stored on a horizontal server.",
+      "D": "A database with many linked tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which statistical measure is most affected by extreme outliers in a dataset?",
+    "options": {
+      "A": "Median",
+      "B": "Mode",
+      "C": "Mean",
+      "D": "Interquartile Range"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a 'Join' operation between two tables, what is the result of a 'Left Join'?",
+    "options": {
+      "A": "Only the records that have matching values in both tables.",
+      "B": "All records from the left table, and matched records from the right table.",
+      "C": "Only the records from the left table that do NOT match the right table.",
+      "D": "All records from both tables regardless of matches."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'P-value' of 0.03 typically imply in a hypothesis test with an alpha of 0.05?",
+    "options": {
+      "A": "The null hypothesis is true.",
+      "B": "The result is not statistically significant.",
+      "C": "The data is corrupted.",
+      "D": "The result is statistically significant, and we reject the null hypothesis."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of 'Standardization' (Z-score normalization)?",
+    "options": {
+      "A": "To shift the mean to 0 and the standard deviation to 1.",
+      "B": "To ensure all data points are positive numbers.",
+      "C": "To remove all outliers from the dataset.",
+      "D": "To convert qualitative data into numerical codes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which chart type is best suited for identifying the correlation between two continuous variables?",
+    "options": {
+      "A": "Bar Chart",
+      "B": "Scatter Plot",
+      "C": "Pie Chart",
+      "D": "Gantt Chart"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Interquartile Range' (IQR)?",
+    "options": {
+      "A": "The difference between the maximum and minimum values.",
+      "B": "The average of the first and last quartiles.",
+      "C": "The difference between the third quartile (Q3) and the first quartile (Q1).",
+      "D": "The sum of all values divided by four."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Simpson’s Paradox' describe in data analysis?",
+    "options": {
+      "A": "A trend that appears in different groups of data but disappears or reverses when the groups are combined.",
+      "B": "An error that occurs when the sample size is too large.",
+      "C": "The phenomenon where the mean and median are always identical.",
+      "D": "A bug in SQL that prevents joins."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a common method used to handle missing categorical data?",
+    "options": {
+      "A": "Linear Interpolation",
+      "B": "Calculating the Mean",
+      "C": "Mode Imputation",
+      "D": "Logarithmic Transformation"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a Normal Distribution, approximately what percentage of data falls within two standard deviations of the mean?",
+    "options": {
+      "A": "50%",
+      "B": "68%",
+      "C": "99.7%",
+      "D": "95%"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Diagnostic Analytics' primarily concerned with?",
+    "options": {
+      "A": "Predicting future trends.",
+      "B": "Describing what happened in the past.",
+      "C": "Understanding the reasons why something happened.",
+      "D": "Determining the best course of action."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which SQL keyword is used to group rows that have the same values into summary rows?",
+    "options": {
+      "A": "ORDER BY",
+      "B": "GROUP BY",
+      "C": "SORT BY",
+      "D": "CLUSTER BY"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Overfitting' in the context of predictive modeling?",
+    "options": {
+      "A": "When a model is too simple to capture the underlying trend.",
+      "B": "When a model is too small for the dataset.",
+      "C": "When a model performs perfectly on training data but fails to generalize to new data.",
+      "D": "When the model takes too long to run."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Coefficient of Determination' (R-squared)?",
+    "options": {
+      "A": "The probability that the results are due to chance.",
+      "B": "A measure of how well the regression model fits the observed data.",
+      "C": "The slope of the regression line.",
+      "D": "The average error of the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Wide' data format characteristic?",
+    "options": {
+      "A": "Each subject has a single row with multiple columns for each time point/variable.",
+      "B": "Each subject has multiple rows for different time points.",
+      "C": "The data is stored in a single column.",
+      "D": "The data only contains string values."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'Pareto Chart'?",
+    "options": {
+      "A": "To show the 80/20 rule (identifying the most significant factors in a dataset).",
+      "B": "To track stock market prices.",
+      "C": "To show the geographical distribution of data.",
+      "D": "To visualize 3D data points."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a dataset, what is 'Cardinality'?",
+    "options": {
+      "A": "The number of rows in a table.",
+      "B": "The number of unique values in a particular column.",
+      "C": "The total file size in Kilobytes.",
+      "D": "The number of users who can access the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Deduplication'?",
+    "options": {
+      "A": "Creating a backup of the data.",
+      "B": "The process of identifying and removing identical copies of data.",
+      "C": "Encrypting the data twice.",
+      "D": "Converting numbers to text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of bias occurs when certain members of a population are less likely to be included in a study?",
+    "options": {
+      "A": "Confirmation Bias",
+      "B": "Selection Bias",
+      "C": "Measurement Bias",
+      "D": "Cognitive Bias"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Negative Correlation' between Variable X and Variable Y mean?",
+    "options": {
+      "A": "As X increases, Y also increases.",
+      "B": "X and Y are not related.",
+      "C": "As X increases, Y decreases.",
+      "D": "Both X and Y are negative numbers."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of the 'HAVING' clause in SQL?",
+    "options": {
+      "A": "To filter individual rows before grouping.",
+      "B": "To filter groups based on a condition after the GROUP BY clause.",
+      "C": "To sort the groups in descending order.",
+      "D": "To create a new table from the groups."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Long' data format?",
+    "options": {
+      "A": "A dataset with 100 or more columns.",
+      "B": "A format where each row represents a single observation for a variable/time point.",
+      "C": "Data stored in a vertical line.",
+      "D": "A format used only for long-term projects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature Engineering'?",
+    "options": {
+      "A": "Repairing the hardware of a computer.",
+      "B": "The process of using domain knowledge to create new variables (features) from raw data.",
+      "C": "Designing the UI of a data dashboard.",
+      "D": "The process of deleting features that are too complex."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Tidy Data' principle?",
+    "options": {
+      "A": "Each column is a variable, and each row is an observation.",
+      "B": "The data is sorted alphabetically.",
+      "C": "There are no empty cells in the spreadsheet.",
+      "D": "All numbers are rounded to the nearest whole number."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between 'Parametric' and 'Non-parametric' tests?",
+    "options": {
+      "A": "Parametric tests are only for small samples.",
+      "B": "Non-parametric tests do not assume a specific underlying distribution (like Normal distribution).",
+      "C": "Parametric tests use only qualitative data.",
+      "D": "Non-parametric tests are 100% accurate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Kurtosis' measure in a distribution?",
+    "options": {
+      "A": "The direction of the tail.",
+      "B": "The average value of the data.",
+      "C": "The 'tailedness' or peakedness of the distribution.",
+      "D": "The range between the max and min."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Data Normalization' in the context of databases?",
+    "options": {
+      "A": "Calculating the Z-score for every column.",
+      "B": "The process of organizing data to reduce redundancy and improve data integrity.",
+      "C": "Making sure the data looks normal to the user.",
+      "D": "Deleting all non-numeric columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which visualization is best for showing the distribution and outliers of a numerical variable?",
+    "options": {
+      "A": "Box Plot",
+      "B": "Stacked Bar Chart",
+      "C": "Area Chart",
+      "D": "Donut Chart"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cohort Analysis'?",
+    "options": {
+      "A": "Analyzing data from a single person over time.",
+      "B": "Comparing the behavior of groups that share a common characteristic over a set time period.",
+      "C": "A study on the weather in different cities.",
+      "D": "Analyzing the average age of the data team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Type II Error'?",
+    "options": {
+      "A": "Rejecting a true null hypothesis.",
+      "B": "Accepting a false null hypothesis (False Negative).",
+      "C": "A calculation error in a spreadsheet.",
+      "D": "A failure to collect enough data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exploratory' vs 'Explanatory' analysis?",
+    "options": {
+      "A": "Exploratory is for discovering insights; Explanatory is for communicating specific findings to an audience.",
+      "B": "They are the same thing.",
+      "C": "Exploratory uses only numbers; Explanatory uses only text.",
+      "D": "Exploratory is for beginners; Explanatory for experts."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Multivariate Analysis'?",
+    "options": {
+      "A": "Analyzing one variable at a time.",
+      "B": "Analyzing two variables only.",
+      "C": "The simultaneous analysis of three or more variables.",
+      "D": "Analyzing data from multiple countries."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which method is used to estimate the relationship between a dependent variable and one or more independent variables?",
+    "options": {
+      "A": "Standard Deviation",
+      "B": "Regression Analysis",
+      "C": "Clustering",
+      "D": "Imputation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Central Limit Theorem'?",
+    "options": {
+      "A": "The idea that data always stays near the center.",
+      "B": "As sample size increases, the distribution of the sample mean approaches a Normal Distribution.",
+      "C": "The average is the most important number in any dataset.",
+      "D": "There is a limit to how much data a computer can process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Violin Plot'?",
+    "options": {
+      "A": "A plot about musical instruments.",
+      "B": "A combination of a box plot and a kernel density plot.",
+      "C": "A plot that only shows outliers.",
+      "D": "A way to visualize 3D geographic data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Python (Pandas), what does the 'merge()' function do?",
+    "options": {
+      "A": "It combines two DataFrames along a specific column (similar to SQL Join).",
+      "B": "It deletes duplicate rows.",
+      "C": "It calculates the sum of two columns.",
+      "D": "It renames the columns of a DataFrame."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Prescriptive Analytics'?",
+    "options": {
+      "A": "Describing what happened in the past.",
+      "B": "Understand why something happened.",
+      "C": "Predicting what will happen.",
+      "D": "Suggesting specific actions to achieve a desired outcome."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Data is subject to the laws of the country in which it is physically located.",
+      "B": "The data analyst has total power over the data.",
+      "C": "A type of data encryption used by kings.",
+      "D": "The belief that data should never be shared."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which term describes the process of converting raw data into a more usable format for analysis?",
+    "options": {
+      "A": "Data Visualization",
+      "B": "Data Wrangling / Transformation",
+      "C": "Data Storage",
+      "D": "Data Auditing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Likert Scale' typically used for?",
+    "options": {
+      "A": "Measuring the weight of physical samples.",
+      "B": "Measuring attitudes or opinions (e.g., 1-5 scale from Strongly Disagree to Strongly Agree).",
+      "C": "Calculating the distance between two nodes.",
+      "D": "Measuring the heat of a server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bonferroni Correction' used for?",
+    "options": {
+      "A": "Correcting a typo in a report.",
+      "B": "Adjusting p-values when performing multiple statistical tests to reduce Type I errors.",
+      "C": "Increasing the speed of a SQL query.",
+      "D": "Fixing an outlier in a dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Skewed' distribution, where the tail is on the right, which is typically true?",
+    "options": {
+      "A": "Mean < Median",
+      "B": "Mean > Median",
+      "C": "Mean = Median",
+      "D": "Median = Mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resampling' in data analysis?",
+    "options": {
+      "A": "Deleting the sample and starting over.",
+      "B": "Repeatedly drawing samples from the original data to estimate the precision of a statistic.",
+      "C": "Asking the same people the same questions again.",
+      "D": "A way to increase the file resolution of a chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which visualization is best for showing the relationship between three variables (X, Y, and Size)?",
+    "options": {
+      "A": "Bubble Chart",
+      "B": "Line Chart",
+      "C": "Heat Map",
+      "D": "Histogram"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Silo'?",
+    "options": {
+      "A": "A large building for storing hard drives.",
+      "B": "A collection of data held by one group that is not easily accessible by other groups in the same organization.",
+      "C": "An encrypted folder for sensitive data.",
+      "D": "A backup server located in a different city."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Standard Error' measure?",
+    "options": {
+      "A": "The average mistake made by a data analyst.",
+      "B": "The precision of the sample mean as an estimate of the population mean.",
+      "C": "The difference between the max and min values.",
+      "D": "The number of outliers in a dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Cross-Validation'?",
+    "options": {
+      "A": "To check if two analysts agree on the results.",
+      "B": "To evaluate how the results of a statistical analysis will generalize to an independent dataset.",
+      "C": "To translate the data into multiple languages.",
+      "D": "To verify the security of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Non-Parametric' equivalent of the Independent T-test?",
+    "options": {
+      "A": "ANOVA",
+      "B": "Mann-Whitney U Test",
+      "C": "Chi-Square Test",
+      "D": "Pearson Correlation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lasso Regression' used for?",
+    "options": {
+      "A": "A type of visualization using ropes.",
+      "B": "A regression that performs both variable selection and regularization to enhance prediction accuracy.",
+      "C": "A way to delete all independent variables.",
+      "D": "A regression for very small datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time Series' 'Seasonality'?",
+    "options": {
+      "A": "The impact of the weather on data collection.",
+      "B": "Repeating patterns or cycles that occur at regular intervals in time series data.",
+      "C": "A list of holidays in a dataset.",
+      "D": "The total duration of a research project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata' 'Provenance'?",
+    "options": {
+      "A": "The cost of the metadata.",
+      "B": "The record of the origin and history of a piece of data.",
+      "C": "The encryption key for the metadata.",
+      "D": "The name of the computer that created the metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Supervised' machine learning task commonly used in data analysis?",
+    "options": {
+      "A": "Clustering",
+      "B": "Classification",
+      "C": "Dimensionality Reduction",
+      "D": "Association Rule Mining"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'VLOOKUP' used for in Excel?",
+    "options": {
+      "A": "To search for a value in the first column of a range and return a value in the same row from another column.",
+      "B": "To visualize data in a 3D view.",
+      "C": "To delete all data in a column.",
+      "D": "To encrypt a spreadsheet."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Law of Large Numbers'?",
+    "options": {
+      "A": "Large numbers are more important than small ones.",
+      "B": "As the number of trials increases, the actual results will converge to the expected value.",
+      "C": "A computer will crash if it processes a number larger than 1 billion.",
+      "D": "The sum of all numbers in a dataset is always a large number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'ETL' stand for?",
+    "options": {
+      "A": "Enter, Total, List",
+      "B": "Extract, Transform, Load",
+      "C": "Encryption, Transfer, Logic",
+      "D": "Estimate, Target, Level"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Survival Analysis' used for?",
+    "options": {
+      "A": "Predicting the survival of an animal in the wild.",
+      "B": "Analyzing the expected duration of time until one or more events happen (e.g., customer churn).",
+      "C": "Analyzing the battery life of a laptop.",
+      "D": "A study conducted in a dangerous environment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In visualization, what is 'Color Blind' safe design?",
+    "options": {
+      "A": "Using only black and white colors.",
+      "B": "Choosing color palettes that are distinguishable by people with various types of color vision deficiencies.",
+      "C": "Hiding all colors from the user.",
+      "D": "Using a single color for the whole chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dimensionality Reduction'?",
+    "options": {
+      "A": "Making a 3D chart into a 2D chart.",
+      "B": "The process of reducing the number of random variables under consideration by obtaining a set of principal variables.",
+      "C": "Deleting half of the rows in a table.",
+      "D": "The process of making a file size smaller."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Treemap' used for?",
+    "options": {
+      "A": "Showing a map of trees in a forest.",
+      "B": "Displaying hierarchical data as a set of nested rectangles.",
+      "C": "Tracking the growth of a project over time.",
+      "D": "Showing the connection between different servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bias-Variance Tradeoff'?",
+    "options": {
+      "A": "Trading data with a different analyst.",
+      "B": "The conflict in trying to simultaneously minimize two sources of error that prevent supervised learning algorithms from generalizing.",
+      "C": "The difference between the max and min variance.",
+      "D": "A way to buy more accuracy using money."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Propensity Score Matching'?",
+    "options": {
+      "A": "Matching a user's name to their ID.",
+      "B": "A statistical technique that attempts to estimate the effect of a treatment by accounting for the covariates that predict receiving the treatment.",
+      "C": "Matching the font size of two different charts.",
+      "D": "A way to find identical data points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Python library is used for statistical modeling and hypothesis testing?",
+    "options": {
+      "A": "NumPy",
+      "B": "Statsmodels",
+      "C": "Matplotlib",
+      "D": "OpenCV"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exploratory' Data Analysis (EDA) 'Data Profiling'?",
+    "options": {
+      "A": "Creating a social media profile for the data.",
+      "B": "Generating summary statistics and distributions to understand the underlying structure of a new dataset.",
+      "C": "Hiring a new data analyst based on their profile.",
+      "D": "A way to hide data from users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Correlation' vs 'Regression'?",
+    "options": {
+      "A": "Correlation measures the strength of a relationship; Regression quantifies the nature of that relationship (prediction).",
+      "B": "They are the same thing.",
+      "C": "Correlation is for numbers; Regression is for words.",
+      "D": "Correlation is for small data; Regression is for big data."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Log Transformation' help with in a dataset?",
+    "options": {
+      "A": "Making all numbers into integers.",
+      "B": "Handling highly skewed data and making it more closely follow a Normal distribution.",
+      "C": "Deleting negative numbers.",
+      "D": "Changing the font of the numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Testing' 'Confidence Level'?",
+    "options": {
+      "A": "How confident the researcher feels.",
+      "B": "The probability that the observed difference between A and B is not due to chance.",
+      "C": "The number of people in the study.",
+      "D": "The total duration of the test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes a database that stores data in columns rather than rows?",
+    "options": {
+      "A": "Relational Database",
+      "B": "Columnar Database",
+      "C": "Graph Database",
+      "D": "Flat File"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific phenomenon occurs when adding more independent variables to a regression model increases the R-squared value but decreases the model's predictive power on new data?",
+    "options": {
+      "A": "Multicollinearity",
+      "B": "Underfitting",
+      "C": "Overfitting",
+      "D": "Heteroscedasticity"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In the context of 'Principal Component Analysis' (PCA), what do the 'Eigenvalues' represent?",
+    "options": {
+      "A": "The amount of variance explained by each principal component.",
+      "B": "The number of original features in the dataset.",
+      "C": "The correlation coefficient between variables.",
+      "D": "The speed of the matrix decomposition algorithm."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Kernel Trick' primarily used for in Support Vector Machines (SVM)?",
+    "options": {
+      "A": "To compress the training data to save RAM.",
+      "B": "To transform data into a higher-dimensional space to find a linear separator for non-linear data.",
+      "C": "To automatically delete outliers from the dataset.",
+      "D": "To speed up the calculation of the mean and median."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a key assumption of the 'Gauss-Markov Theorem' in linear regression?",
+    "options": {
+      "A": "The errors have a non-constant variance.",
+      "B": "The relationship between X and Y is exponential.",
+      "C": "The errors are uncorrelated and have a mean of zero.",
+      "D": "The dependent variable must be categorical."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Bayesian Inference', what does the 'Posterior Probability' represent?",
+    "options": {
+      "A": "The initial belief about a parameter before seeing the data.",
+      "B": "The probability of the data given the hypothesis.",
+      "C": "The total probability of all possible outcomes.",
+      "D": "The updated belief about a parameter after observing the data."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Heteroscedasticity' and how does it affect a regression model?",
+    "options": {
+      "A": "It means the errors are normally distributed.",
+      "B": "It refers to the unequal variance of residuals, leading to inefficient estimates and biased standard errors.",
+      "C": "It indicates a perfect linear relationship between independent variables.",
+      "D": "It is a technique used to increase the R-squared value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'Random Forest' for analysis, what does 'OOB' (Out-of-Bag) error estimate represent?",
+    "options": {
+      "A": "The error rate of the model on the training set.",
+      "B": "A method of cross-validation where each tree is tested on data points not used in its training.",
+      "C": "The total number of trees that failed to grow.",
+      "D": "The error caused by having too many features in the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Curse of Dimensionality' in high-dimensional data analysis?",
+    "options": {
+      "A": "The dataset becomes too large to fit on a standard hard drive.",
+      "B": "The volume of the space increases so fast that the available data becomes sparse, making it hard to find patterns.",
+      "C": "The data is automatically encrypted by the OS.",
+      "D": "Analytical tools only work in three dimensions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Time Series' analysis, what is the 'Augmented Dickey-Fuller' (ADF) test used for?",
+    "options": {
+      "A": "To predict the price of a stock next month.",
+      "B": "To determine if a time series is stationary or contains a unit root.",
+      "C": "To find the average value of a series over 10 years.",
+      "D": "To visualize the seasonality of the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Testing' 'Interference' (or Spillover Effect)?",
+    "options": {
+      "A": "When the internet connection fails during the test.",
+      "B": "When the treatment given to group A affects the behavior of participants in group B.",
+      "C": "When a participant takes both test A and test B.",
+      "D": "When the analyst manually changes the results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loss function is specifically designed to handle outliers by being less sensitive to them than the Mean Squared Error (MSE)?",
+    "options": {
+      "A": "Log Loss",
+      "B": "Huber Loss",
+      "C": "Hinge Loss",
+      "D": "Cross-Entropy Loss"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'Propensity Score Matching' in observational studies?",
+    "options": {
+      "A": "To match the names of participants to their social security numbers.",
+      "B": "To reduce selection bias by equating groups based on the probability of receiving a treatment.",
+      "C": "To calculate the total funding needed for a project.",
+      "D": "To find duplicate records in a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hierarchical Clustering', what does a 'Dendrogram' visualize?",
+    "options": {
+      "A": "The frequency of words in a text corpus.",
+      "B": "The nested grouping of objects and the similarity levels at which they are merged.",
+      "C": "The correlation matrix between 100 variables.",
+      "D": "The physical layout of a data warehouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'VIF' (Variance Inflation Factor) used to detect in a regression model?",
+    "options": {
+      "A": "The presence of outliers.",
+      "B": "The degree of multicollinearity among independent variables.",
+      "C": "The accuracy of the P-value.",
+      "D": "The amount of missing data in a column."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Exploding Gradient' problem in deep learning analysis?",
+    "options": {
+      "A": "The computer physically overheats and shuts down.",
+      "B": "Large error gradients accumulate and result in very large updates to neural network weights, making the model unstable.",
+      "C": "The dataset is too large for the network to process.",
+      "D": "The model deletes its own training data by mistake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'F1-Score' and why is it used instead of accuracy?",
+    "options": {
+      "A": "It is faster to calculate than accuracy.",
+      "B": "It provides a harmonic mean of precision and recall, which is better for evaluating imbalanced datasets.",
+      "C": "It is a metric used only for financial data.",
+      "D": "It represents the number of features divided by the number of rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cook’s Distance' used for in diagnostic analytics?",
+    "options": {
+      "A": "Measuring the distance between two data nodes.",
+      "B": "Identifying influential data points that have a large effect on the regression coefficients.",
+      "C": "Calculating the time it takes to process a query.",
+      "D": "A way to measure the heat emitted by a CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing' (NLP), what does 'TF-IDF' measure?",
+    "options": {
+      "A": "The total number of words in a document.",
+      "B": "The importance of a word in a document relative to its frequency in a collection of documents.",
+      "C": "The speed of a text-to-speech engine.",
+      "D": "The grammar and spelling accuracy of a text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'L1 Regularization' (Lasso) vs 'L2 Regularization' (Ridge)?",
+    "options": {
+      "A": "L1 is for large data; L2 is for small data.",
+      "B": "L1 can shrink coefficients to zero (feature selection); L2 shrinks them towards zero but keeps them all.",
+      "C": "L1 uses Python; L2 uses Java.",
+      "D": "There is no difference between them."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kolmogorov-Smirnov' (K-S) test designed to check?",
+    "options": {
+      "A": "The speed of the network connection.",
+      "B": "Whether a sample follows a specific distribution or whether two samples come from the same distribution.",
+      "C": "The number of users in a database.",
+      "D": "The file format of the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Market Basket Analysis' primarily based on?",
+    "options": {
+      "A": "The physical size of a shopping cart.",
+      "B": "Association rule mining to find items that frequently co-occur in transactions.",
+      "C": "The total amount of money spent by a customer.",
+      "D": "A survey of customer satisfaction."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Logistic Regression', what is the 'Logit' function?",
+    "options": {
+      "A": "The logarithm of the independent variable.",
+      "B": "The natural log of the odds of a binary outcome.",
+      "C": "A tool used for log file analysis.",
+      "D": "The derivative of the regression line."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Leakage' in machine learning?",
+    "options": {
+      "A": "A security breach where data is stolen.",
+      "B": "When information from outside the training dataset is used to create the model, leading to unrealistic performance.",
+      "C": "Data physically leaking from a broken hard drive.",
+      "D": "When the analyst shares the results on social media."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stepwise Regression' and why is it often criticized?",
+    "options": {
+      "A": "It is criticized for being too slow.",
+      "B": "It can lead to biased estimates and inflated R-squared because it chooses variables based solely on statistical significance.",
+      "C": "It only works with one independent variable.",
+      "D": "It requires the use of expensive hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'ROC Curve' (Receiver Operating Characteristic) plot?",
+    "options": {
+      "A": "The mean versus the median.",
+      "B": "The True Positive Rate versus the False Positive Rate at various threshold settings.",
+      "C": "The cost of the model versus the accuracy.",
+      "D": "The number of rows versus the number of columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multivariate Analysis of Covariance' (MANCOVA)?",
+    "options": {
+      "A": "An analysis of how many people use a database.",
+      "B": "An extension of ANOVA that accounts for multiple dependent variables and controls for covariates.",
+      "C": "A way to count the number of variables in a CSV.",
+      "D": "A tool for visualizing 3D data points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Markov Chain Monte Carlo' (MCMC) method used for?",
+    "options": {
+      "A": "To play games on a supercomputer.",
+      "B": "To sample from complex probability distributions to estimate posterior distributions in Bayesian analysis.",
+      "C": "To find the shortest path between two points on a map.",
+      "D": "To encrypt data for long-term storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Factor Analysis', what is 'Rotation' used for?",
+    "options": {
+      "A": "To physically rotate the graphs on the screen.",
+      "B": "To achieve a simpler and more interpretable structure of factor loadings.",
+      "C": "To change the order of the columns in the dataset.",
+      "D": "To increase the number of factors automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Survival Analysis' 'Hazard Function'?",
+    "options": {
+      "A": "The probability that a computer will catch fire.",
+      "B": "The instantaneous rate at which events occur, given that the individual has survived up to that time.",
+      "C": "A warning label on a dangerous chemical.",
+      "D": "The speed at which a participant leaves a study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Central Limit Theorem' (CLT) 'n=30' rule of thumb?",
+    "options": {
+      "A": "A dataset must have exactly 30 rows.",
+      "B": "The assumption that a sample size of at least 30 is usually sufficient for the sample mean to be normally distributed.",
+      "C": "The total number of analysts allowed on one project.",
+      "D": "The price of the data analysis software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'SQL', what is a 'Window Function'?",
+    "options": {
+      "A": "A function that only works on the Windows OS.",
+      "B": "A function that performs a calculation across a set of table rows that are related to the current row.",
+      "C": "A function for opening new windows in a browser.",
+      "D": "A way to view the code in a small window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gini Impurity' in decision tree analysis?",
+    "options": {
+      "A": "The amount of dust on the server.",
+      "B": "A measure of how often a randomly chosen element from the set would be incorrectly labeled.",
+      "C": "A type of internet virus.",
+      "D": "The percentage of missing values in a table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Durbin-Watson' statistic used to test for?",
+    "options": {
+      "A": "The presence of outliers.",
+      "B": "The presence of autocorrelation in the residuals from a regression analysis.",
+      "C": "The speed of the CPU.",
+      "D": "The accuracy of the mean calculation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Box-Cox Transformation'?",
+    "options": {
+      "A": "Moving data from one box to another.",
+      "B": "A power transformation used to stabilize variance and make data more closely follow a normal distribution.",
+      "C": "Designing a 3D box for a report.",
+      "D": "A way to delete all non-numeric columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Clustering', what does 'Silhouette Score' measure?",
+    "options": {
+      "A": "The color of the data points.",
+      "B": "How similar an object is to its own cluster compared to other clusters.",
+      "C": "The total number of clusters in the dataset.",
+      "D": "The speed of the clustering algorithm."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Simpson’s Paradox' and why is it dangerous for analysts?",
+    "options": {
+      "A": "It is a virus that deletes SQL tables.",
+      "B": "It can lead to wrong conclusions because a trend in different groups can reverse when those groups are combined.",
+      "C": "It is an error that only happens in Python.",
+      "D": "It means the data analyst is being biased."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bias-Variance' 'Tradeoff'?",
+    "options": {
+      "A": "Trading data with a different company.",
+      "B": "The property of a model where lower bias leads to higher variance, and vice versa.",
+      "C": "The difference between the max and min bias.",
+      "D": "A way to buy more accuracy with money."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mahalanobis Distance' used for in multivariate analysis?",
+    "options": {
+      "A": "Measuring the distance from the lab to the server room.",
+      "B": "Measuring the distance between a point and a distribution to identify multivariate outliers.",
+      "C": "Calculating the time it takes to travel between two data centers.",
+      "D": "Finding the average of 100 different variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Neural Networks', what is 'Backpropagation'?",
+    "options": {
+      "A": "Deleting the last layer of the network.",
+      "B": "The algorithm used to calculate the gradient of the loss function with respect to the weights.",
+      "C": "A way to send data back to the source.",
+      "D": "A physical backup of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stationarity' in time series data?",
+    "options": {
+      "A": "Data that never changes.",
+      "B": "When the statistical properties of a process (mean, variance) do not change over time.",
+      "C": "Storing data on a station server.",
+      "D": "The speed of data collection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'AIC' (Akaike Information Criterion) used for?",
+    "options": {
+      "A": "Measuring the heat of the computer.",
+      "B": "Evaluating the relative quality of statistical models for a given set of data.",
+      "C": "Counting the number of rows in a table.",
+      "D": "Identifying the name of the author."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning', what is the 'Exploration-Exploitation' dilemma?",
+    "options": {
+      "A": "Choosing between Python and R.",
+      "B": "The choice between trying new actions to find better rewards or repeating known actions that provide rewards.",
+      "C": "A dilemma about the cost of the hardware.",
+      "D": "The choice between deleting data or saving it."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ensemble Learning'?",
+    "options": {
+      "A": "Hiring a group of analysts to work together.",
+      "B": "Combining multiple models to improve the overall performance and robustness of the analysis.",
+      "C": "Using only one very complex model.",
+      "D": "Learning how to use 10 different softwares."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Causal Inference' and how does it differ from correlation?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "It focuses on determining whether a change in one variable actually causes a change in another.",
+      "C": "It is only used in medical research.",
+      "D": "It uses only qualitative data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Principal Component' 'Orthogonality'?",
+    "options": {
+      "A": "The components being in alphabetical order.",
+      "B": "The property that each principal component is uncorrelated with the others.",
+      "C": "The components having the same weight.",
+      "D": "A security feature for the components."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SMOTE' (Synthetic Minority Over-sampling Technique) used for?",
+    "options": {
+      "A": "Deleting all minority data points.",
+      "B": "Generating synthetic examples for the minority class to handle imbalanced datasets.",
+      "C": "Calculating the total size of the database.",
+      "D": "A way to encrypt small files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-correlation' 'Lag'?",
+    "options": {
+      "A": "A network delay in the SQL query.",
+      "B": "The relationship between a variable's current value and its past values at specific time intervals.",
+      "C": "The time it takes to save a file.",
+      "D": "A bug in the time series model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-Entropy' loss used for?",
+    "options": {
+      "A": "Measuring the distance between two clusters.",
+      "B": "Measuring the performance of a classification model whose output is a probability value.",
+      "C": "Calculating the average of a group.",
+      "D": "A way to find errors in a spreadsheet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Architecture', what is a 'Star Schema'?",
+    "options": {
+      "A": "A database designed like a solar system.",
+      "B": "A mature data model consisting of one or more large fact tables referencing any number of dimension tables.",
+      "C": "A way to rate data using stars.",
+      "D": "A security protocol for HDFS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Virtualization'?",
+    "options": {
+      "A": "Creating a fake dataset for testing.",
+      "B": "An approach that allows applications to retrieve and manipulate data without requiring technical details about its source.",
+      "C": "Using a VR headset to see data.",
+      "D": "Deleting the physical database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Shapiro-Wilk' test specifically used for?",
+    "options": {
+      "A": "Testing the speed of a computer.",
+      "B": "Testing the null hypothesis that a sample comes from a normally distributed population.",
+      "C": "Calculating the total number of users.",
+      "D": "Identifying the author of a dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Clustering', what is the 'Elbow Method' used for?",
+    "options": {
+      "A": "To measure the height of the analyst.",
+      "B": "To determine the optimal number of clusters by looking at the variance explained as a function of the number of clusters.",
+      "C": "To find outliers in a 3D scatter plot.",
+      "D": "A way to sort clusters by size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ridge Regression' 'Alpha' (or Lambda) parameter?",
+    "options": {
+      "A": "The first letter of the model name.",
+      "B": "The regularization parameter that controls the penalty strength on the size of the coefficients.",
+      "C": "The accuracy of the model.",
+      "D": "The number of independent variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Logarithmic' 'Smoothing'?",
+    "options": {
+      "A": "Deleting small numbers from the dataset.",
+      "B": "A technique used to reduce the volatility of data and make long-term trends more apparent.",
+      "C": "Changing the font of a report.",
+      "D": "A way to encrypt log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dimensionality' 'Reduction' 't-SNE'?",
+    "options": {
+      "A": "A new programming language.",
+      "B": "A non-linear technique for dimensionality reduction that is particularly well-suited for the visualization of high-dimensional datasets.",
+      "C": "A way to delete half of the columns.",
+      "D": "A network speed test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis Testing', what is a 'Type I Error' (Alpha)?",
+    "options": {
+      "A": "A math error in the calculation.",
+      "B": "The probability of rejecting a true null hypothesis.",
+      "C": "Accepting a false null hypothesis.",
+      "D": "Failing to collect enough data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature' 'Scaling' 'Min-Max Scaling'?",
+    "options": {
+      "A": "Choosing the largest features only.",
+      "B": "Transforming data into a fixed range, typically 0 to 1.",
+      "C": "The price of the data storage.",
+      "D": "Deleting the smallest features."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multivariate' 'Regression'?",
+    "options": {
+      "A": "A regression with only one variable.",
+      "B": "A regression model with more than one dependent variable.",
+      "C": "A regression performed by multiple people.",
+      "D": "A regression that uses only categorical data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Normalization' 'Decimal Scaling'?",
+    "options": {
+      "A": "Rounding numbers to the nearest zero.",
+      "B": "Moving the decimal point of values in a column to make the maximum absolute value less than 1.",
+      "C": "Deleting all decimals from the dataset.",
+      "D": "A way to encrypt numeric data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Analysis', what is 'Survivor Bias'?",
+    "options": {
+      "A": "Bias toward participants who are alive.",
+      "B": "The error of focusing on people or things that made it past some selection process and overlooking those that did not.",
+      "C": "A type of insurance for analysts.",
+      "D": "Hiring only analysts who have never made a mistake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Propensity' 'Matching' 'Exact Matching'?",
+    "options": {
+      "A": "Matching a user to their twin.",
+      "B": "A technique where treated units are matched with control units that have identical values for all covariates.",
+      "C": "Matching the color of two different charts.",
+      "D": "Finding identical files in HDFS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time Series' 'Autoregressive' (AR) model?",
+    "options": {
+      "A": "A model that runs automatically.",
+      "B": "A model that uses the dependent relationship between an observation and some number of lagged observations.",
+      "C": "A model for cars.",
+      "D": "A way to delete old data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient' 'Descent' algorithm?",
+    "options": {
+      "A": "A way to walk down a hill physically.",
+      "B": "An optimization algorithm used to minimize a function by iteratively moving in the direction of the steepest descent.",
+      "C": "A way to sort data alphabetically.",
+      "D": "A system for cooling the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Analysis', what is 'Confounding'?",
+    "options": {
+      "A": "Finding something very confusing.",
+      "B": "A situation where an outside variable affects both the independent and dependent variables, potentially leading to a false correlation.",
+      "C": "When the data team disagrees on the results.",
+      "D": "A network error during data ingestion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Robust' 'Regression' used for?",
+    "options": {
+      "A": "A regression performed by a robot.",
+      "B": "A form of regression analysis designed to be less sensitive to outliers than ordinary least squares.",
+      "C": "A regression that is 100% accurate.",
+      "D": "A regression for very large datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hierarchical' 'Linear' 'Modeling' (HLM) 'Nested' data?",
+    "options": {
+      "A": "Data stored in a bird's nest.",
+      "B": "Data that is organized at more than one level (e.g., students within classes within schools).",
+      "C": "Data stored in many different folders.",
+      "D": "A way to hide data from users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayesian' 'Prior' probability?",
+    "options": {
+      "A": "The probability of an event after it happens.",
+      "B": "The probability distribution that represents the uncertainty about a parameter before the data is considered.",
+      "C": "The price of the research before it starts.",
+      "D": "The number of hours the lab was open."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sensitivity' vs 'Specificity'?",
+    "options": {
+      "A": "Sensitivity is for emotions; Specificity is for details.",
+      "B": "Sensitivity is the True Positive Rate; Specificity is the True Negative Rate.",
+      "C": "Sensitivity is for small data; Specificity is for big data.",
+      "D": "They are the same thing."
+    },
+    "answer": "B"
+  }
+  ]
+}

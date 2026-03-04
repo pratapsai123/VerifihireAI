@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Platform Engineering", 
+  "questions": [
+    {
+    "question": "What is the primary goal of Platform Engineering?",
+    "options": {
+      "A": "To replace all developers with AI bots.",
+      "B": "To reduce cognitive load for developers by providing self-service capabilities and automated infrastructure.",
+      "C": "To increase the number of manual approvals required for a deployment.",
+      "D": "To move all company data to a single physical hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Platform Engineering, the 'Platform' should be treated as a product where the developers are the customers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in startup companies",
+      "D": "Only if the platform is built using Kubernetes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'IDP' stand for in the context of Platform Engineering?",
+    "options": {
+      "A": "Integrated Development Process",
+      "B": "Internal Developer Platform",
+      "C": "Intelligent Data Partitioning",
+      "D": "Internet Deployment Protocol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Service' infrastructure?",
+    "options": {
+      "A": "When developers have to build their own physical servers.",
+      "B": "An environment where developers can provision resources (like databases or clusters) without waiting for manual tickets.",
+      "C": "A system where the cloud provider fixes bugs for free.",
+      "D": "Using a credit card to buy cloud credits."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a key benefit of a 'Developer Portal' like Backstage?",
+    "options": {
+      "A": "It makes the code compile 2x faster.",
+      "B": "It provides a centralized catalog for software components, documentation, and infrastructure tools.",
+      "C": "It replaces the need for a version control system like Git.",
+      "D": "It monitors the physical temperature of the developer's laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Platform Engineering is intended to eliminate the need for DevOps entirely.",
+    "options": {
+      "A": "False (It is an evolution of DevOps that focuses on scaling those practices through a platform).",
+      "B": "True",
+      "C": "Only for cloud-native organizations",
+      "D": "Only if using serverless architecture"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive Load' in the context of software development?",
+    "options": {
+      "A": "The physical weight of a computer.",
+      "B": "The amount of mental effort required for a developer to perform their tasks and understand the system.",
+      "C": "The speed of the internet connection.",
+      "D": "The total number of lines of code in a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used as the 'orchestration' layer for containerized applications in a platform?",
+    "options": {
+      "A": "Docker Swarm",
+      "B": "Kubernetes",
+      "C": "VirtualBox",
+      "D": "VMware"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Golden Paths' (or Paved Roads)?",
+    "options": {
+      "A": "A physical road leading to the data center.",
+      "B": "A set of supported, automated patterns for deploying applications that are known to be secure and compliant.",
+      "C": "The fastest route for a network packet.",
+      "D": "A way to earn rewards for writing bug-free code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Infrastructure as Code (IaC) is a foundational component of modern Platform Engineering.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Platform Product Manager'?",
+    "options": {
+      "A": "To fix hardware errors in the server rack.",
+      "B": "To define the roadmap of the internal platform based on the needs of the developers.",
+      "C": "To write the front-end code for the company's website.",
+      "D": "To monitor the daily stock price of the company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of 'Provisioning'?",
+    "options": {
+      "A": "Deleting an old user account.",
+      "B": "Creating and setting up a new virtual machine or database in the cloud.",
+      "C": "Writing a unit test for a React component.",
+      "D": "Checking the weather forecast for the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Platform Engineering teams should prioritize building everything from scratch rather than using existing cloud services.",
+    "options": {
+      "A": "False (The goal is to provide value; often by wrapping existing services in a simpler interface).",
+      "B": "True",
+      "C": "Only if the company has over 5,000 employees",
+      "D": "Only if using open-source software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'GitOps'?",
+    "options": {
+      "A": "Using Git to send emails to the team.",
+      "B": "A practice where the state of the infrastructure and applications is defined in Git and automatically synchronized.",
+      "C": "A way to backup the server's hard drive to GitHub.",
+      "D": "A social network for developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is often used for 'Infrastructure as Code' to define resources across multiple cloud providers?",
+    "options": {
+      "A": "Ansible",
+      "B": "Terraform",
+      "C": "Jenkins",
+      "D": "Slack"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A successful platform should allow developers to 'opt-out' of the golden path if they have a highly specialized requirement.",
+    "options": {
+      "A": "True (To avoid being a bottleneck, while still providing the easiest path for the 90%).",
+      "B": "False",
+      "C": "Only in financial industries",
+      "D": "Only for junior developers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Environment as a Service' (EaaS)?",
+    "options": {
+      "A": "Hiring a company to clean the office environment.",
+      "B": "The ability to spin up a complete, isolated application environment (Dev/Test) automatically.",
+      "C": "A way to monitor the server room air quality.",
+      "D": "Providing free coffee in the developer environment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Abstraction' mean in Platform Engineering?",
+    "options": {
+      "A": "Making the code more difficult to read.",
+      "B": "Hiding the complexity of underlying infrastructure and presenting a simpler interface to the user.",
+      "C": "Deleting unused server instances.",
+      "D": "Writing a summary of a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standardizing toolsets across an organization is a core activity of a Platform team.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python developers",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Internal Developer Portal' project?",
+    "options": {
+      "A": "Backstage (Spotify)",
+      "B": "Netflix",
+      "C": "Amazon.com",
+      "D": "LinkedIn"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Developer Experience' (DevEx)?",
+    "options": {
+      "A": "How many years a developer has been working.",
+      "B": "The overall ease and satisfaction a developer has when interacting with the tools and processes of an organization.",
+      "C": "The number of programming languages a developer knows.",
+      "D": "The salary of a senior software engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Monitoring and Observability are 'Day 2' operations that the platform should provide by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for production environments",
+      "D": "Only if using Microservices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'CI/CD' in a platform?",
+    "options": {
+      "A": "To calculate the monthly budget.",
+      "B": "To automate the building, testing, and deployment of software changes.",
+      "C": "To encrypt user passwords.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Toil' in the context of platform operations?",
+    "options": {
+      "A": "The physical labor of typing.",
+      "B": "Manual, repetitive work that provides no long-term value and could be automated.",
+      "C": "The time spent in creative brainstorming.",
+      "D": "The total number of lines of code written."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Service Catalog' should include information about who owns a specific microservice.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for services with over 1,000 users",
+      "D": "Only if the service is written in Go"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describes a 'Container'?",
+    "options": {
+      "A": "A large physical box for shipping servers.",
+      "B": "A lightweight, standalone package of software that includes everything needed to run it.",
+      "C": "A specialized database for storing binary files.",
+      "D": "A folder on a user's desktop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure Drift'?",
+    "options": {
+      "A": "Moving a data center to a new continent.",
+      "B": "When the actual state of a cloud resource becomes different from the state defined in the code (IaC).",
+      "C": "The server's physical position changing slightly over time.",
+      "D": "The change in the price of cloud services."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Helm is a package manager for Kubernetes that helps define, install, and upgrade complex applications.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python apps",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'RBAC' (Role-Based Access Control) in a platform?",
+    "options": {
+      "A": "To track the weight of the server racks.",
+      "B": "To manage permissions by assigning roles to users instead of individual access rights.",
+      "C": "To restart the server automatically.",
+      "D": "To encrypt the Wi-Fi connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Immutable Infrastructure'?",
+    "options": {
+      "A": "Servers can be changed manually at any time.",
+      "B": "Infrastructure is never modified after deployment; it is replaced by a new version, ensuring consistency.",
+      "C": "Infrastructure is made of physical metal that doesn't rust.",
+      "D": "Infrastructure only works for a single user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Secret Management tools (like HashiCorp Vault) are used to securely store and control access to API keys and passwords.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking applications",
+      "D": "Only if using encryption"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shift Left' security?",
+    "options": {
+      "A": "Moving the physical servers to the left side of the room.",
+      "B": "Integrating security practices and testing earlier in the software development lifecycle.",
+      "C": "Giving the security team the left-most desks in the office.",
+      "D": "Changing the security password every hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Service Level Objectives' (SLOs)?",
+    "options": {
+      "A": "The speed of the network between servers.",
+      "B": "Specific target values for the reliability of a service that the platform team aims to meet.",
+      "C": "The total number of developers in the company.",
+      "D": "The salary of a reliability engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a platform should make it easier for a developer to follow the company's compliance and security standards.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public companies",
+      "D": "Only if using the 'premium' tier of the platform"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ephemeral' infrastructure?",
+    "options": {
+      "A": "Infrastructure that is very expensive.",
+      "B": "Infrastructure that is temporary and designed to be created and destroyed quickly (e.g., test environments).",
+      "C": "Infrastructure that only exists in the cloud.",
+      "D": "Infrastructure made of physical stone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Deployment Pipeline'?",
+    "options": {
+      "A": "A physical pipe used to cool the servers.",
+      "B": "An automated set of steps to take code from a repository to a production environment.",
+      "C": "A way to transfer money to the cloud provider.",
+      "D": "A list of developers who are currently working."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Platform Team' is responsible for providing the tools, while the 'Application Team' is responsible for running their own code on those tools.",
+    "options": {
+      "A": "True (Shared Responsibility Model).",
+      "B": "False",
+      "C": "Only in European companies",
+      "D": "Only for non-profit organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Logging' in a platform?",
+    "options": {
+      "A": "Chopping wood for the data center heater.",
+      "B": "Recording events and errors from applications and infrastructure to help with troubleshooting.",
+      "C": "A list of all previous user passwords.",
+      "D": "The process of moving files to a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Microservices'?",
+    "options": {
+      "A": "It makes the application much smaller in file size.",
+      "B": "It allows different parts of an application to be developed, deployed, and scaled independently.",
+      "C": "It removes the need for any database.",
+      "D": "It automatically fixes bugs in the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Declarative' configuration means you describe the 'what' (desired state) rather than the 'how' (step-by-step commands).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Kubernetes",
+      "D": "Only for shell scripts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Developer Onboarding' in Platform Engineering?",
+    "options": {
+      "A": "Hiring a developer and giving them a physical desk.",
+      "B": "The process of getting a new developer set up with the tools and access they need to start contributing code.",
+      "C": "Providing a free lunch on the first day.",
+      "D": "Teaching a developer how to use a keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Configuration Management'?",
+    "options": {
+      "A": "Managing the physical configuration of the office chairs.",
+      "B": "The process of maintaining the settings and state of software and infrastructure in a consistent way.",
+      "C": "Changing the screen resolution of a laptop.",
+      "D": "The process of hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus is a popular open-source tool used for monitoring and alerting in platform ecosystems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on AWS",
+      "D": "Only if using Docker"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Load Balancer'?",
+    "options": {
+      "A": "A machine that measures the weight of the servers.",
+      "B": "A device or service that distributes incoming network traffic across multiple backend servers.",
+      "C": "A specialized way to encrypt network packets.",
+      "D": "A way to backup the whole network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Serverless' for a developer?",
+    "options": {
+      "A": "It runs code for free forever.",
+      "B": "It allows the developer to focus on code without having to manage the underlying server infrastructure.",
+      "C": "It makes the code impossible to hack.",
+      "D": "It removes the need for an internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Polyglot' organization, the platform must support multiple different programming languages.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the company is global",
+      "D": "Only if using Java"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API-First' design?",
+    "options": {
+      "A": "Designing the logo before the code.",
+      "B": "The practice of designing the application programming interfaces before implementing the application logic.",
+      "C": "Buying only software that has an API.",
+      "D": "Naming all variables 'API'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Continuous Deployment'?",
+    "options": {
+      "A": "Code is only deployed once a year.",
+      "B": "Changes that pass automated tests are automatically deployed to production, increasing speed and reducing risk.",
+      "C": "It removes the need for any developers.",
+      "D": "It automatically applies for cloud discounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Manifest' file in Kubernetes (YAML) describes the desired state of a resource.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for services",
+      "D": "Only in version 1.25+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cost Observability'?",
+    "options": {
+      "A": "Being able to see the physical money.",
+      "B": "Gaining real-time visibility into cloud spending to ensure it remains within budget and is being used efficiently.",
+      "C": "Telling everyone in the company their salary.",
+      "D": "The process of paying the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standardization'?",
+    "options": {
+      "A": "The process of making everything look the same.",
+      "B": "Ensuring that the same tools, languages, and patterns are used across an organization to reduce complexity.",
+      "C": "Hiring only people with the same name.",
+      "D": "Moving all servers to the same data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Argo CD is a popular GitOps continuous delivery tool for Kubernetes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS EKS",
+      "D": "Only if using Jenkins"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Quota'?",
+    "options": {
+      "A": "The total number of people in the company.",
+      "B": "A limit on the amount of resources (like CPU or memory) that a specific team or project can use.",
+      "C": "The price of a single server.",
+      "D": "The number of hours in a work day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Automation'?",
+    "options": {
+      "A": "Replacing humans with physical robots.",
+      "B": "The use of technology to perform tasks with reduced human intervention.",
+      "C": "The process of writing code manually.",
+      "D": "The history of mechanical inventions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Platform Engineer' needs to have strong communication skills to understand the needs of the developers they support.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in large teams",
+      "D": "Only if working remotely"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Documentation as Code'?",
+    "options": {
+      "A": "Writing documentation on paper.",
+      "B": "Managing documentation using the same tools and processes as software code (e.g., Markdown in a Git repo).",
+      "C": "Using AI to write all documentation.",
+      "D": "Encrypting the documentation file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Centralized Logging'?",
+    "options": {
+      "A": "It makes the logs much heavier.",
+      "B": "It allows logs from all services to be searched and analyzed from a single location.",
+      "C": "It removes the need for any error reporting.",
+      "D": "It automatically fixes bugs found in logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Terraform 'Modules' are used to create reusable, standardized pieces of infrastructure configuration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS",
+      "D": "Only if using version 0.12"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'High Availability'?",
+    "options": {
+      "A": "The salary of a senior engineer.",
+      "B": "A system design that ensures a service remains operational for a high percentage of time (e.g., 99.9%).",
+      "C": "The physical height of a server rack.",
+      "D": "The number of users active at 12 PM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Sidecar' in container architecture?",
+    "options": {
+      "A": "A physical motorcycle attached to a server.",
+      "B": "A secondary container that runs alongside a main application container to provide extra features (like logging or security).",
+      "C": "A backup server located in another region.",
+      "D": "The name of a popular programming language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Infrastructure as Code' allows you to version control your infrastructure just like your application code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux systems",
+      "D": "Only if using GitHub"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scaling'?",
+    "options": {
+      "A": "Measuring the weight of a computer.",
+      "B": "The process of adding or removing resources to handle changes in demand.",
+      "C": "The resolution of the laptop screen.",
+      "D": "The process of moving to a new office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Health Checks'?",
+    "options": {
+      "A": "To give the developers a physical exam.",
+      "B": "To automatically determine if a service is healthy and able to receive traffic.",
+      "C": "To check for viruses in the code.",
+      "D": "To monitor the data center's humidity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Platform as a Service' (PaaS) provides a higher level of abstraction than 'Infrastructure as a Service' (IaaS).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Azure cloud",
+      "D": "Only for database services"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Software Bill of Materials' (SBOM)?",
+    "options": {
+      "A": "A list of all employees working on a project.",
+      "B": "A formal, structured record containing the details and supply chain relationships of various components used in building software.",
+      "C": "The physical invoice for the cloud services.",
+      "D": "A map of the application's user interface."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'GitOps'?",
+    "options": {
+      "A": "It removes the need for any security.",
+      "B": "It provides a clear audit trail of all changes made to the system and enables easy rollbacks.",
+      "C": "It makes the developers work 12 hours a day.",
+      "D": "It automatically buys cloud credits."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Blue-Green' deployment strategy, what is the primary benefit of maintaining two identical production environments?",
+    "options": {
+      "A": "It doubles the server capacity for high-traffic events.",
+      "B": "It allows for near-zero downtime and instant rollback by simply switching the traffic router.",
+      "C": "It ensures that both environments are always running different versions of the code.",
+      "D": "It reduces the cloud billing costs by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Canary' deployment involves rolling out a new version of software to a small subset of users before making it available to the entire population.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a Service Mesh",
+      "D": "Only for mobile applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Internal Developer Platform' (IDP) 'Scorecard'?",
+    "options": {
+      "A": "To track the individual performance of developers for salary reviews.",
+      "B": "To measure and visualize the health, quality, and compliance of services against organizational standards.",
+      "C": "To count the number of bugs fixed per week.",
+      "D": "To monitor the physical electricity usage of the server clusters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kubernetes, what is a 'Custom Resource Definition' (CRD) used for?",
+    "options": {
+      "A": "To change the default color of the Kubernetes dashboard.",
+      "B": "To extend the Kubernetes API by creating new, custom resource types specific to your platform.",
+      "C": "To delete built-in resources like Pods and Services.",
+      "D": "To increase the storage capacity of the etcd database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC) 'State' management?",
+    "options": {
+      "A": "Choosing which US state to host your servers in.",
+      "B": "The process of tracking the current metadata and mapping of real-world resources to your configuration file.",
+      "C": "A way to backup the source code of the infrastructure.",
+      "D": "The history of every time a developer logged into the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Service Mesh' (like Istio) provides capabilities like mutual TLS (mTLS), traffic splitting, and observability without requiring changes to the application code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for applications written in Go",
+      "D": "Only if the application is running on bare metal"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component is responsible for 'reconciling' the desired state with the actual state in a Kubernetes-native platform?",
+    "options": {
+      "A": "The API Server",
+      "B": "The Controller Manager (and Operators)",
+      "C": "The Kubelet",
+      "D": "The Container Runtime"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Policy as Code' (PaC)?",
+    "options": {
+      "A": "Writing the company's employee handbook in Python.",
+      "B": "Defining and managing security and compliance rules using code that can be automatically enforced (e.g., using OPA or Kyverno).",
+      "C": "A way to encrypt all legal documents in the cloud.",
+      "D": "Naming your server instances after famous politicians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Crossplane' is a tool that allows you to manage cloud infrastructure and services using the Kubernetes API and YAML manifests.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS resources",
+      "D": "Only if using the 'stable' release"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical difference between 'Continuous Integration' (CI) and 'Continuous Delivery' (CD)?",
+    "options": {
+      "A": "CI is for frontend; CD is for backend.",
+      "B": "CI focus on merging and testing code; CD focuses on ensuring the code is always in a deployable state to a target environment.",
+      "C": "CI requires manual approval; CD is always fully automated.",
+      "D": "CI uses Git; CD uses physical hard drives."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Platform Engineering, what does it mean to 'Lower the Floor and Raise the Ceiling'?",
+    "options": {
+      "A": "Renovating the physical data center office.",
+      "B": "Making it easier for beginners to get started (lowering the floor) while allowing experts to perform complex tasks (raising the ceiling).",
+      "C": "Reducing the minimum server specs while increasing the maximum.",
+      "D": "Lowering the developers' salaries while raising the platform's cost."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Control Plane' activity in a modern platform?",
+    "options": {
+      "A": "Running the application's business logic.",
+      "B": "Managing the lifecycle and configuration of infrastructure and application resources.",
+      "C": "Serving static images from a CDN.",
+      "D": "Encrypting the user's browser session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'GitOps' requires the 'Desired State' to be stored in a version control system like Git, acting as the single source of truth.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Argo CD",
+      "D": "Only for private repositories"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Operator' in the context of Kubernetes?",
+    "options": {
+      "A": "A person who works in a data center.",
+      "B": "A method of packaging, deploying, and managing a Kubernetes application using a custom controller and CRDs.",
+      "C": "A specialized keyboard for managing clusters.",
+      "D": "A way to connect two different Kubernetes clusters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Tracing' used for in a microservices platform?",
+    "options": {
+      "A": "To track the physical location of servers around the world.",
+      "B": "To follow the path of a single request as it moves through multiple interconnected services to identify performance bottlenecks.",
+      "C": "To find a lost file in the cloud storage.",
+      "D": "To trace the history of who edited a line of code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Terraform Cloud' or 'Scalr' provide remote state management and collaboration features for IaC teams.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS Enterprise customers",
+      "D": "Only if using the 'Enterprise' edition"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secret Injection'?",
+    "options": {
+      "A": "Adding a secret ingredient to a recipe.",
+      "B": "The process of dynamically providing sensitive data (like API keys) to an application at runtime without storing them in the image.",
+      "C": "A specialized way to encrypt a server's BIOS.",
+      "D": "Telling a secret to another developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to visualize metrics collected by Prometheus?",
+    "options": {
+      "A": "Grafana",
+      "B": "Adobe Photoshop",
+      "C": "Microsoft Excel",
+      "D": "Jira"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Platform Engineering' team should be measured by 'Developer Productivity' and 'Time to Market' metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in financial companies",
+      "D": "Only if the team is over 10 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Observability' vs. 'Monitoring'?",
+    "options": {
+      "A": "They are identical.",
+      "B": "Monitoring tells you if a system is broken; Observability helps you understand *why* it is broken by analyzing internal states (logs, metrics, traces).",
+      "C": "Monitoring is for hardware; Observability is for software.",
+      "D": "Observability is only for cloud-native apps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Canary' deployment, how is traffic usually split between versions?",
+    "options": {
+      "A": "Based on the time of day.",
+      "B": "Using a load balancer or service mesh to send a small percentage (e.g., 5%) of traffic to the new version.",
+      "C": "By asking users to choose which version they want.",
+      "D": "By restarting the server every hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cloud Custodian' is a tool that allows you to manage cloud resources using YAML-based policies for cost and security compliance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS",
+      "D": "Only for storage accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workload Identity'?",
+    "options": {
+      "A": "Checking the ID badge of a developer.",
+      "B": "Giving an application or service its own identity (e.g., IAM role) to securely access cloud resources without using long-lived secrets.",
+      "C": "A specialized way to encrypt user passwords.",
+      "D": "The name of the application in the service catalog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Taint' and 'Toleration' do in Kubernetes?",
+    "options": {
+      "A": "It cleans the server's hard drive.",
+      "B": "It allows a node to 'repel' certain pods unless those pods have a matching toleration, helping with workload isolation.",
+      "C": "It increases the network speed between nodes.",
+      "D": "It monitors the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Backstage' requires developers to learn a new programming language.",
+    "options": {
+      "A": "False (It is a portal that integrates existing tools; developers interact with it via a UI or YAML templates).",
+      "B": "True",
+      "C": "Only if building custom plugins",
+      "D": "Only if the company uses AWS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Feature Flagging' (or Feature Toggles)?",
+    "options": {
+      "A": "Putting a physical flag on the server rack.",
+      "B": "A technique that allows teams to turn features on or off in a live environment without deploying new code.",
+      "C": "A way to mark a bug as 'critical' in Jira.",
+      "D": "Naming a variable 'FLAG'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Service Discovery'?",
+    "options": {
+      "A": "It helps you find a lost server in a global network.",
+      "B": "It allows microservices to automatically find and communicate with each other as they scale and move.",
+      "C": "It removes the need for any IP addresses.",
+      "D": "It automatically encrypts all network traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pulumi' is an IaC tool that allows you to define infrastructure using general-purpose programming languages like TypeScript, Python, or Go.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Kubernetes resources",
+      "D": "Only in the 'standard' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Sidecar' pattern used for in a Service Mesh?",
+    "options": {
+      "A": "To provide extra storage for a container.",
+      "B": "To run a proxy container alongside the application container to handle network communication, security, and metrics.",
+      "C": "To act as a backup for the main container.",
+      "D": "To increase the CPU of the pod."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resource Limits' in Kubernetes?",
+    "options": {
+      "A": "The maximum number of people in the office.",
+      "B": "A configuration that prevents a container from using more than a specified amount of CPU or memory.",
+      "C": "The price of the cloud subscription.",
+      "D": "The number of hours a pod can run."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Manifest' file in Kubernetes should be treated as the 'Desired State' of a resource.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for deployments",
+      "D": "Only if using YAML format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Autoscaling' in a platform?",
+    "options": {
+      "A": "Measuring the weight of the servers automatically.",
+      "B": "The process of automatically adjusting the number of running instances based on the current load.",
+      "C": "Automatically updating the server's firmware.",
+      "D": "Calculating the cloud bill every day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a core value of 'Platform as a Product'?",
+    "options": {
+      "A": "Building as many features as possible as quickly as possible.",
+      "B": "Engaging with developers to understand their needs and using feedback to improve the platform experience.",
+      "C": "Making the platform as complex as possible to show expertise.",
+      "D": "Charging other teams to use the platform."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'OIDC' (OpenID Connect) can be used to provide secure authentication for developers logging into a portal.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google users",
+      "D": "Only in the North American region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Chaos Engineering' in a platform context?",
+    "options": {
+      "A": "Letting developers do whatever they want with the infrastructure.",
+      "B": "The practice of intentionally injecting failures into a system to test its resilience and improve its reliability.",
+      "C": "A period of time when the platform is intentionally offline.",
+      "D": "Using randomized variable names in the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Service Level Agreement' (SLA)?",
+    "options": {
+      "A": "A contract between the platform team and its users that defines the expected level of service and penalties for failing to meet it.",
+      "B": "A list of all the servers in the cluster.",
+      "C": "The password for the administrator dashboard.",
+      "D": "A way to backup the whole database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'GitOps' workflow, manual changes made to a cluster (via kubectl) should be automatically overwritten by the state defined in Git.",
+    "options": {
+      "A": "True (Self-healing/Drift detection).",
+      "B": "False",
+      "C": "Only in production environments",
+      "D": "Only if the user is not root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Centralized Monitoring' in a platform?",
+    "options": {
+      "A": "To make the dashboard look heavier.",
+      "B": "To collect and analyze metrics from all parts of the system in one place to detect issues early.",
+      "C": "To store the account passwords for the whole company.",
+      "D": "To increase the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Multi-Tenancy' in a platform?",
+    "options": {
+      "A": "Having multiple people in the same office building.",
+      "B": "A system architecture where a single instance of a platform serves multiple independent groups of users (tenants).",
+      "C": "Renting a server to multiple different cloud providers.",
+      "D": "Having more than ten servers in a cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vulnerability Scanning' should be an automated part of the CI/CD pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public-facing apps",
+      "D": "Only if using the 'enterprise' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Self-Healing' infrastructure?",
+    "options": {
+      "A": "Infrastructure that repairs itself using physical tools.",
+      "B": "A system that automatically detects and resolves common failures (e.g., restarting a failed container).",
+      "C": "A way to backup the server configuration to a physical drive.",
+      "D": "A server that never gets a virus."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Gateway' in an API-driven platform?",
+    "options": {
+      "A": "To act as a physical door to the data center.",
+      "B": "To manage, secure, and monitor incoming API traffic before it reaches the backend services.",
+      "C": "To count the number of users in a system.",
+      "D": "To increase the internet speed of the platform."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Kubernetes Namespaces' provides a way to logically divide cluster resources between different teams or projects.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in AWS EKS",
+      "D": "Only if using version 1.20+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Infrastructure Compliance'?",
+    "options": {
+      "A": "Following the rules for building a physical office.",
+      "B": "Ensuring that the infrastructure meets specific regulatory and security standards (e.g., SOC2, HIPAA).",
+      "C": "Hiring a security guard for the server room.",
+      "D": "The amount of storage used by the security logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Declarative' infrastructure?",
+    "options": {
+      "A": "It is much faster than imperative.",
+      "B": "It makes it easier to understand the desired end-state and facilitates automated synchronization.",
+      "C": "It removes the need for any code.",
+      "D": "It automatically buys cloud credits."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'External Secrets Operator' (ESO) is a Kubernetes operator that syncs secrets from external secret managers (like AWS Secrets Manager) into Kubernetes Secrets.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Azure users",
+      "D": "Only if using the 'premium' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Capacity Planning' in a platform team?",
+    "options": {
+      "A": "Deciding how many people can fit in the office.",
+      "B": "The process of estimating and ensuring there are enough resources to meet the current and future needs of the applications.",
+      "C": "The price of the cloud service per hour.",
+      "D": "The total number of servers in a region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Deployment' resource in Kubernetes?",
+    "options": {
+      "A": "A list of all developers currently working.",
+      "B": "An object that provides declarative updates for Pods and ReplicaSets.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The process of moving files to a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Platform Engineering teams should focus on 'Automating the Common Case' to provide the most value to the largest number of developers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in small companies",
+      "D": "Only for frontend developers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Aggregation'?",
+    "options": {
+      "A": "Making the logs much heavier.",
+      "B": "The process of collecting and centralizing logs from various sources into a single searchable location.",
+      "C": "Deleting duplicate log entries.",
+      "D": "A way to backup the logs to a physical drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Metric' used to measure the success of a platform?",
+    "options": {
+      "A": "Developer Net Promoter Score (NPS)",
+      "B": "Time to provision a new service",
+      "C": "Deployment frequency",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Role-Based Access Control' (RBAC) should be used to provide the minimum necessary permissions for users and services in the platform.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only if MFA is enabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shift-Down' in Platform Engineering?",
+    "options": {
+      "A": "Moving the physical servers to a lower floor.",
+      "B": "Moving operational complexities away from developers and onto the automated platform.",
+      "C": "Reducing the priority of a task in Jira.",
+      "D": "Lowering the developers' salaries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Audit Logs' in a platform?",
+    "options": {
+      "A": "Recording every line of code written.",
+      "B": "Providing a chronological record of who did what and when across the platform for security and compliance.",
+      "C": "A list of all previous system errors.",
+      "D": "The process of moving logs to a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Level Indicators' (SLIs) are the actual quantitative measures used to track compliance with SLOs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Google Cloud",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Standardization' of the software stack?",
+    "options": {
+      "A": "Making every application look the same.",
+      "B": "Limiting the number of supported languages and tools to reduce complexity and improve platform supportability.",
+      "C": "Hiring only people with the same name.",
+      "D": "Moving all servers to the same data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Centralized Configuration Management'?",
+    "options": {
+      "A": "It makes the configuration files much heavier.",
+      "B": "It ensures that configuration settings are consistent across all environments and can be updated from a single location.",
+      "C": "It removes the need for any configuration files.",
+      "D": "It automatically fixes bugs found in configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Opa' (Open Policy Agent) is a general-purpose policy engine that can be used to enforce rules across the entire stack.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Kubernetes",
+      "D": "Only in version 0.40+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Developer Productivity'?",
+    "options": {
+      "A": "The total number of lines of code written per day.",
+      "B": "A measure of how efficiently developers can build and deliver value through the software development process.",
+      "C": "The salary of a senior software engineer.",
+      "D": "The number of programming languages a developer knows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Health Checks' for a service?",
+    "options": {
+      "A": "It makes the service much faster.",
+      "B": "It allows the platform to automatically detect and stop sending traffic to unhealthy instances.",
+      "C": "It removes the need for any monitoring.",
+      "D": "It automatically fixes bugs found in the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Crossplane' uses a 'Provider' architecture to interact with various cloud and non-cloud APIs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS",
+      "D": "Only if using the 'stable' release"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cost Optimization' in a platform team?",
+    "options": {
+      "A": "Buying as many servers as possible.",
+      "B": "The ongoing process of ensuring cloud resources are used efficiently to minimize waste and reduce costs.",
+      "C": "Telling everyone in the company their salary.",
+      "D": "Calculating the cloud bill every day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Multi-Tenancy' in a cloud platform?",
+    "options": {
+      "A": "Renting a server to multiple different cloud providers.",
+      "B": "A system architecture where a single instance of a platform serves multiple independent groups of users.",
+      "C": "Having more than ten servers in a cluster.",
+      "D": "Having multiple people in the same office building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Argo CD' uses a 'Pull' model to synchronize the state of the cluster with the state defined in Git.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS EKS",
+      "D": "Only if using Jenkins"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workload Identity' in a platform?",
+    "options": {
+      "A": "Checking the ID badge of an application.",
+      "B": "Giving an application its own identity (e.g., IAM role) to securely access cloud resources without secrets.",
+      "C": "A specialized way to encrypt user passwords.",
+      "D": "The name of the application in the service catalog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Resource Quota' in Kubernetes?",
+    "options": {
+      "A": "To limit the total number of people in the company.",
+      "B": "To set limits on the amount of CPU, memory, and other resources that can be used by a specific namespace.",
+      "C": "To increase the network speed of the cluster.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When designing a Kubernetes Operator using the 'Operator SDK', what is the primary purpose of the 'Reconcile' loop's Idempotency?",
+    "options": {
+      "A": "To ensure that the operator only runs once per hour to save CPU.",
+      "B": "To ensure that the result of the operation is the same regardless of how many times the loop is executed with the same state.",
+      "C": "To prevent the operator from ever deleting a resource.",
+      "D": "To force the API server to ignore manual changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using eBPF (Extended Berkeley Packet Filter) allows a platform to achieve high-performance observability by running sandboxed programs in the Linux kernel without context switching.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Docker containers",
+      "D": "Only on ARM-based architectures"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Envoy proxy filter would you configure to implement 'Circuit Breaking' at the network level in a Service Mesh?",
+    "options": {
+      "A": "HTTP Connection Manager",
+      "B": "Outlier Detection / Cluster Manager",
+      "C": "RBAC Filter",
+      "D": "Lua Filter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Platform as a Product' maturity level 4 usually characterized by?",
+    "options": {
+      "A": "Building tools only when requested by management.",
+      "B": "Measuring success via developer productivity metrics, NPS, and treating the IDP as a standalone internal business unit.",
+      "C": "Moving all infrastructure to a single cloud provider.",
+      "D": "Automating only the deployment of frontend applications."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Multi-Cluster Federation' scenario, what is the primary role of a 'Service Export' in the context of the Multi-Cluster Services (MCS) API?",
+    "options": {
+      "A": "To backup the service configuration to S3.",
+      "B": "To explicitly mark a service as available to be discovered and accessed by other clusters in the same cluster set.",
+      "C": "To move the service's physical pods to another cluster.",
+      "D": "To encrypt the service's DNS name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Crossplane' Compositions allow platform engineers to define an abstract 'XRC' (Composite Resource) that maps a single developer request to multiple underlying cloud resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS RDS instances",
+      "D": "Only if the developer knows Go"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which architectural pattern describes moving common operational concerns (like AuthN/AuthZ) from the application into a 'Sidecar' or 'Gateway'?",
+    "options": {
+      "A": "Monolith-to-Microservices",
+      "B": "Ambient Mesh / Sidecar-less",
+      "C": "Offloading / Ambassador Pattern",
+      "D": "Data-Sharding"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'Finalizer' field in a Kubernetes resource manifest prevent?",
+    "options": {
+      "A": "The resource from being edited.",
+      "B": "The resource from being deleted until the controller has performed specific cleanup actions.",
+      "C": "The resource from using more than 1GB of RAM.",
+      "D": "The resource from being moved to a different namespace."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Istio Ambient Mesh' removes the need for sidecar proxies by using a shared 'ztunnel' per node and a separate 'Waypoint' proxy for Layer 7 processing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.5",
+      "D": "Only if using Google Anthos"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary risk of 'Abstraction' in Platform Engineering if it becomes 'Too Leaky'?",
+    "options": {
+      "A": "The platform becomes too easy to use.",
+      "B": "Developers lose the ability to troubleshoot underlying issues when the abstraction fails or behaves unexpectedly.",
+      "C": "The cloud bill becomes too small.",
+      "D": "The security team has nothing to do."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric from the 'DORA' framework measures the time it takes for a commit to reach production?",
+    "options": {
+      "A": "Deployment Frequency",
+      "B": "Lead Time for Changes",
+      "C": "Change Failure Rate",
+      "D": "Mean Time to Recovery (MTTR)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Argo CD' with the 'App-of-Apps' pattern allows you to manage the entire platform infrastructure as a recursive hierarchy of GitOps applications.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production clusters",
+      "D": "Only if using the Helm provider"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Open Policy Agent (OPA), what is the purpose of the 'Rego' language?",
+    "options": {
+      "A": "To write high-performance frontend components.",
+      "B": "To define logic-based policies that can be queried to make authorization and admission control decisions.",
+      "C": "To encrypt the physical server disks.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'In-Toto' in the context of a secure software supply chain?",
+    "options": {
+      "A": "A popular testing framework for Python.",
+      "B": "A framework to provide cryptographic assurance of the integrity of the entire software supply chain from code to deployment.",
+      "C": "A specialized way to compress container images.",
+      "D": "The name of a new cloud-native database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Level Objectives' (SLOs) should be based on user-facing symptoms rather than internal system metrics.",
+    "options": {
+      "A": "True (Focus on what the user experiences).",
+      "B": "False",
+      "C": "Only for backend services",
+      "D": "Only in the first 6 months of a service"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Kubernetes resource would you use to ensure that exactly one pod runs on every node in a cluster?",
+    "options": {
+      "A": "Deployment",
+      "B": "StatefulSet",
+      "C": "DaemonSet",
+      "D": "ReplicaSet"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Shift-Down' in Platform Engineering architecture?",
+    "options": {
+      "A": "Lowering the physical height of server racks.",
+      "B": "Abstracting complex operational tasks into the platform layer so developers don't have to manage them.",
+      "C": "Reducing the salaries of the operations team.",
+      "D": "Moving the database to a slower storage tier."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Prometheus' uses a 'Push' model for collecting metrics from all targets.",
+    "options": {
+      "A": "False (It primarily uses a 'Pull' model, though a Pushgateway can be used for short-lived jobs).",
+      "B": "True",
+      "C": "Only for Kubernetes metrics",
+      "D": "Only if using the 'Grafana' plugin"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which phenomenon describes the situation where an Internal Developer Platform is built but never adopted because it doesn't solve real developer pain points?",
+    "options": {
+      "A": "Golden Path Fatigue",
+      "B": "The Build-it-and-they-will-come Fallacy",
+      "C": "Cognitive Overload",
+      "D": "Toolchain Proliferation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Argo CD', what does 'Self-Healing' (auto-sync) specifically do when a manual change is made in the cluster via kubectl?",
+    "options": {
+      "A": "It alerts the security team.",
+      "B": "It automatically reverts the cluster state to match what is defined in the Git repository.",
+      "C": "It updates the Git repository to match the cluster.",
+      "D": "It stops the cluster to prevent further changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'OIDC' (OpenID Connect) allows the platform to use existing corporate identity providers (like Okta) for securing access to internal developer tools.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using SAML 2.0",
+      "D": "Only on AWS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of 'Backstage' plugins for a platform team?",
+    "options": {
+      "A": "They increase the speed of the browser.",
+      "B": "They allow for the integration of third-party tools (like GitHub, Jira, or Sentry) directly into the developer portal UI.",
+      "C": "They automatically encrypt all developer emails.",
+      "D": "They replace the need for any backend code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Infrastructure as Code', what is 'Configuration Drift'?",
+    "options": {
+      "A": "Moving a server to a different floor.",
+      "B": "When the real-world state of a resource deviates from the state defined in the code, often due to manual changes.",
+      "C": "The process of updating a server's OS.",
+      "D": "The change in the price of cloud resources."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Kubernetes Admission Controllers' can be used to automatically inject sidecar containers into pods upon creation.",
+    "options": {
+      "A": "True (Mutating Admission Webhooks).",
+      "B": "False",
+      "C": "Only for security containers",
+      "D": "Only in the 'default' namespace"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' Sampling Rate used for?",
+    "options": {
+      "A": "To determine how many developers are working.",
+      "B": "To control the overhead of tracing by only recording a percentage of total requests.",
+      "C": "To measure the weight of the data packets.",
+      "D": "To set the speed of the tracing tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to manage 'Secret' lifecycles, including dynamic generation and automatic rotation, in a mature platform?",
+    "options": {
+      "A": "Kubernetes Secrets",
+      "B": "HashiCorp Vault",
+      "C": "AWS S3",
+      "D": "Jenkins Credentials"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Platform Engineering' should prioritize 'Developer Autonomy' over 'Standardization' in all cases.",
+    "options": {
+      "A": "False (A balance is required; standardization provides efficiency, while autonomy allows for specialized innovation).",
+      "B": "True",
+      "C": "Only in startups",
+      "D": "Only if using Microservices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cell-based Architecture' in the context of platform scalability?",
+    "options": {
+      "A": "Using a single large server to host everything.",
+      "B": "Dividing the platform and services into isolated, independent 'cells' to limit the blast radius of failures.",
+      "C": "A specialized way to encrypt data on mobile devices.",
+      "D": "Naming your servers after biology terms."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'ExternalDNS' in a Kubernetes-based platform?",
+    "options": {
+      "A": "To speed up the internet connection.",
+      "B": "To automatically synchronize Kubernetes Ingresses and Services with external DNS providers (like Route53 or Cloudflare).",
+      "C": "To encrypt internal DNS traffic.",
+      "D": "To monitor the physical location of DNS servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'GitOps' is restricted to Kubernetes and cannot be used for managing cloud resources like RDS or S3.",
+    "options": {
+      "A": "False (Tools like Crossplane or Terraform controllers allow GitOps for all cloud resources).",
+      "B": "True",
+      "C": "Only if using GitLab",
+      "D": "Only in production"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Envoy proxy concept allows for the grouping of multiple backend instances that perform the same function?",
+    "options": {
+      "A": "Listener",
+      "B": "Cluster",
+      "C": "Route",
+      "D": "Endpoint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Developer Self-Service' success primarily measured by?",
+    "options": {
+      "A": "The number of Jira tickets created per day.",
+      "B": "The reduction in 'Lead Time' for provisioning resources and the decrease in manual intervention by the platform team.",
+      "C": "The total number of developers in the company.",
+      "D": "The physical size of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Helm' manages the lifecycle of a Kubernetes application using 'Releases', allowing for easy rollbacks to previous versions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using version 2.0",
+      "D": "Only for stateless applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud-Native' computing?",
+    "options": {
+      "A": "Buying computers directly from the cloud provider.",
+      "B": "An approach to building and running applications that exploits the advantages of the cloud computing delivery model (e.g., containers, microservices, dynamic orchestration).",
+      "C": "A way to use the cloud without an internet connection.",
+      "D": "Telling the cloud provider where you were born."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Observability' pillar is best for understanding the frequency and magnitude of errors over time?",
+    "options": {
+      "A": "Logs",
+      "B": "Metrics",
+      "C": "Traces",
+      "D": "Profiles"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Mesh' is always the best solution for every microservices architecture, regardless of scale.",
+    "options": {
+      "A": "False (It adds significant operational complexity and overhead; it is best for large-scale, complex environments).",
+      "B": "True",
+      "C": "Only if using Java",
+      "D": "Only if the network is slow"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of a 'Controller Runtime' in a Kubernetes Operator?",
+    "options": {
+      "A": "To speed up the code execution.",
+      "B": "To provide a set of libraries for building controllers that follow Kubernetes best practices (e.g., handling watches, cues, and reconciliation).",
+      "C": "To encrypt the etcd database.",
+      "D": "To monitor the cluster's power usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature Flagging' risk management?",
+    "options": {
+      "A": "Marking flags with a security code.",
+      "B": "Using toggles to decouple code deployment from feature release, allowing for gradual rollouts and immediate 'kill-switches' for buggy features.",
+      "C": "A way to backup the code.",
+      "D": "Naming variables 'FLAG_RISK'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Backstage' Software Templates allow developers to 'Scaffold' new microservices with standardized boilerplate code, CI/CD, and infrastructure in minutes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for JavaScript apps",
+      "D": "Only in version 1.15+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Immutable Infrastructure' for security?",
+    "options": {
+      "A": "Infrastructure that is impossible to hack.",
+      "B": "Infrastructure that is never patched in place; any change results in a new deployment from a hardened image, reducing the 'Attack Surface' and configuration drift.",
+      "C": "Infrastructure that only works for root users.",
+      "D": "Using physical locks on the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Kubernetes resource is used to provide an IP address and a single DNS name for a set of Pods?",
+    "options": {
+      "A": "Ingress",
+      "B": "Service",
+      "C": "Endpoint",
+      "D": "ConfigMap"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cost Observability' should be provided to developers so they can see the direct impact of their infrastructure choices on the company's budget.",
+    "options": {
+      "A": "True (FinOps culture).",
+      "B": "False",
+      "C": "Only if they are over budget",
+      "D": "Only for senior managers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Blue-Green' deployment rollback speed?",
+    "options": {
+      "A": "It takes several hours.",
+      "B": "It is nearly instantaneous, as it only requires switching traffic back to the 'Blue' environment.",
+      "C": "It depends on the size of the database.",
+      "D": "It requires a full code re-compile."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a symptom of a 'Bottleneck' in a platform team?",
+    "options": {
+      "A": "Developers have to wait for manual approvals or tickets for every minor resource request.",
+      "B": "The platform is too easy to use.",
+      "C": "The server room is getting too cold.",
+      "D": "The CI/CD pipeline is running too fast."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Declarative' infrastructure allows the platform to automatically detect and correct 'Infrastructure Drift'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Terraform",
+      "D": "Only if the drift is over 10%"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Self-Healing' Pod behavior in Kubernetes?",
+    "options": {
+      "A": "Pods that fix their own source code.",
+      "B": "If a pod fails or its node dies, the controller automatically schedules a replacement pod to maintain the desired state.",
+      "C": "A way to backup the pod's logs.",
+      "D": "A pod that never runs out of memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used as a 'Policy Engine' for Kubernetes to enforce rules like 'All pods must have labels'?",
+    "options": {
+      "A": "Kyverno / OPA Gatekeeper",
+      "B": "Prometheus",
+      "C": "Helm",
+      "D": "Argo CD"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'DORA' metrics are primarily used to measure the individual performance of the platform engineers.",
+    "options": {
+      "A": "False (They measure the overall software delivery performance of the organization).",
+      "B": "True",
+      "C": "Only in Agile environments",
+      "D": "Only if the team uses Jira"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API-First' design for a platform?",
+    "options": {
+      "A": "Naming the platform 'API'." ,
+      "B": "Designing the platform's capabilities as stable, versioned APIs that can be consumed by other tools and services.",
+      "C": "Buying only tools that have a mobile app.",
+      "D": "Writing the documentation after the code is deployed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific risk does 'S3 Block Public Access' at the ACCOUNT level prevent in a platform?",
+    "options": {
+      "A": "The cloud provider from seeing your data.",
+      "B": "Any bucket in the account from being made public, regardless of individual bucket policies, serving as a global guardrail.",
+      "C": "Hackers from deleting your account.",
+      "D": "The account from going over budget."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Crossplane' uses 'Composition' to allow platform engineers to define custom infrastructure APIs for their developers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database resources",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Configuration as Data'?",
+    "options": {
+      "A": "Treating configuration files like static text.",
+      "B": "Representing configuration in a structured, machine-readable format (like YAML or JSON) that can be easily manipulated and validated by tools.",
+      "C": "Encrypting all configuration files.",
+      "D": "A specialized way to backup the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Centralized Identity' (SSO) for a platform?",
+    "options": {
+      "A": "It makes the login screen look better.",
+      "B": "It provides a single place to manage user access and security policies across all platform tools.",
+      "C": "It removes the need for any passwords.",
+      "D": "It automatically updates the user's LinkedIn profile."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pulumi' uses 'Providers' to interact with various cloud and non-cloud APIs, similar to Terraform.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Azure",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Quota' in Kubernetes used for?",
+    "options": {
+      "A": "To limit the total number of people in the company.",
+      "B": "To set limits on the amount of CPU, memory, and other resources that can be used by a specific namespace.",
+      "C": "To increase the network speed of the cluster.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Argo CD' uses a 'Pull' model to synchronize the state of the cluster with the state defined in Git.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS EKS",
+      "D": "Only if using Jenkins"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workload Identity' in a platform?",
+    "options": {
+      "A": "Checking the ID badge of an application.",
+      "B": "Giving an application its own identity (e.g., IAM role) to securely access cloud resources without secrets.",
+      "C": "A specialized way to encrypt user passwords.",
+      "D": "The name of the application in the service catalog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Service Catalog' metadata primarily used for?",
+    "options": {
+      "A": "To calculate the salary of the developer.",
+      "B": "To provide context about a service, such as its owner, documentation, and operational status.",
+      "C": "To encrypt the service's source code.",
+      "D": "To monitor the data center's air conditioning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Terraform' is considered an 'Imperative' IaC tool.",
+    "options": {
+      "A": "False (It is a 'Declarative' tool).",
+      "B": "True",
+      "C": "Only for non-AWS resources",
+      "D": "Only if using version 0.11"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Internal Developer Portal' (IDP)?",
+    "options": {
+      "A": "To act as a social network for developers.",
+      "B": "To provide a centralized, self-service UI for developers to interact with the platform's tools and services.",
+      "C": "To write the application code automatically.",
+      "D": "To monitor the physical power usage of the server clusters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shadow IT' risk in Platform Engineering?",
+    "options": {
+      "A": "The risk of the server room being too dark.",
+      "B": "The risk that developers will bypass the official platform to use unauthorized tools or cloud accounts.",
+      "C": "The risk of a developer using a personal email for work.",
+      "D": "A specialized way to encrypt network signals."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cloud Custodian' is a tool that allows you to manage cloud resources using YAML-based policies for cost and security compliance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS",
+      "D": "Only for storage accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workload Identity'?",
+    "options": {
+      "A": "Checking the ID badge of a developer.",
+      "B": "Giving an application or service its own identity (e.g., IAM role) to securely access cloud resources without using long-lived secrets.",
+      "C": "A specialized way to encrypt user passwords.",
+      "D": "The name of the application in the service catalog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon describes the situation where an Internal Developer Platform is built but never adopted because it doesn't solve real developer pain points?",
+    "options": {
+      "A": "Golden Path Fatigue",
+      "B": "The Build-it-and-they-will-come Fallacy",
+      "C": "Cognitive Overload",
+      "D": "Toolchain Proliferation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Controller Runtime' in a Kubernetes Operator?",
+    "options": {
+      "A": "To speed up the code execution.",
+      "B": "To provide a set of libraries for building controllers that follow Kubernetes best practices (e.g., handling watches, cues, and reconciliation).",
+      "C": "To encrypt the etcd database.",
+      "D": "To monitor the cluster's power usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cell-based Architecture' in the context of platform scalability?",
+    "options": {
+      "A": "Using a single large server to host everything.",
+      "B": "Dividing the platform and services into isolated, independent 'cells' to limit the blast radius of failures.",
+      "C": "A specialized way to encrypt data on mobile devices.",
+      "D": "Naming your servers after biology terms."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Finalizer' in Kubernetes?",
+    "options": {
+      "A": "To end the script execution.",
+      "B": "To allow the controller to clean up external resources before the Kubernetes object is officially deleted from the API.",
+      "C": "To increase the encryption of the resource.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Observability' pillar is best for understanding the frequency and magnitude of errors over time?",
+    "options": {
+      "A": "Logs",
+      "B": "Metrics",
+      "C": "Traces",
+      "D": "Profiles"
+    },
+    "answer": "B"
+  }
+  ]
+}

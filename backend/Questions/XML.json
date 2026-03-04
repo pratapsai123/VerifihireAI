@@ -1,0 +1,1903 @@
+{ 
+  "skill": "XML", 
+  "questions": [
+    {
+    "question": "What does XML stand for?",
+    "options": {
+      "A": "eXtra Modern Linux",
+      "B": "eXtensible Markup Language",
+      "C": "eXample Markup Language",
+      "D": "eXecutable Multiple Language"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a requirement for an XML document to be 'Well-Formed'?",
+    "options": {
+      "A": "It must contain at least one attribute per element.",
+      "B": "It must have a single root element that contains all other elements.",
+      "C": "It must be linked to a CSS stylesheet.",
+      "D": "It must use only uppercase tags."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: XML tags are case-sensitive.",
+    "options": {
+      "A": "True (<Tag> is different from <tag>).",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you correctly write a comment in XML?",
+    "options": {
+      "A": "// This is a comment",
+      "B": "",
+      "C": "' This is a comment",
+      "D": "/* This is a comment */"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character is used to indicate the end of an XML tag?",
+    "options": {
+      "A": "^",
+      "B": "*",
+      "C": "/",
+      "D": "!"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In XML, attribute values must always be enclosed in quotes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following characters must be escaped (using entities) if used inside XML element content?",
+    "options": {
+      "A": "The ampersand (&)",
+      "B": "The underscore (_)",
+      "C": "The hyphen (-)",
+      "D": "The exclamation mark (!)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of XML Namespaces?",
+    "options": {
+      "A": "To compress the XML file size.",
+      "B": "To avoid element name conflicts when combining different XML documents.",
+      "C": "To encrypt sensitive data within tags.",
+      "D": "To speed up the parsing of the root element."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a DTD, what does the '+' symbol mean when applied to an element?",
+    "options": {
+      "A": "The element is optional (0 or 1 time).",
+      "B": "The element must appear one or more times.",
+      "C": "The element is a numeric value.",
+      "D": "The element must appear exactly once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technology is used to define the structure, data types, and constraints of an XML document more powerfully than DTD?",
+    "options": {
+      "A": "XPath",
+      "B": "XML Schema (XSD)",
+      "C": "XLink",
+      "D": "XPointer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Valid' XML document?",
+    "options": {
+      "A": "A document that follows basic XML syntax rules.",
+      "B": "A document that is well-formed AND conforms to a defined DTD or Schema.",
+      "C": "A document that has been successfully sent over HTTP.",
+      "D": "A document that contains only text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: CDATA sections are used to tell the parser to ignore markup characters and treat the content as raw text.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XML parser loads the entire XML document into memory and creates a tree structure?",
+    "options": {
+      "A": "SAX (Simple API for XML)",
+      "B": "DOM (Document Object Model)",
+      "C": "StAX (Streaming API for XML)",
+      "D": "Pull Parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In XPath, what does the expression '//author[last()]' retrieve?",
+    "options": {
+      "A": "The first author element in the document.",
+      "B": "The last author element in the document.",
+      "C": "The last name of every author.",
+      "D": "An error, as last() is not an XPath function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which XSLT element is used to iterate through a set of nodes and apply a template to each?",
+    "options": {
+      "A": "<xsl:for-each>",
+      "B": "<xsl:loop>",
+      "C": "<xsl:iterate>",
+      "D": "<xsl:repeat>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between an 'Attribute' and an 'Element' in an XML Schema (XSD)?",
+    "options": {
+      "A": "Attributes can contain child elements, but elements cannot.",
+      "B": "Elements can have complex types and children; attributes are simple types and contain only data.",
+      "C": "Attributes are always mandatory; elements are always optional.",
+      "D": "There is no functional difference in XSD."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which XPath axis includes all nodes that have the same parent as the current node and appear before it in the document?",
+    "options": {
+      "A": "following-sibling",
+      "B": "preceding-sibling",
+      "C": "ancestor",
+      "D": "descendant-or-self"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SAX parsers are generally more memory-efficient than DOM parsers for very large XML files.",
+    "options": {
+      "A": "True (SAX is event-driven and does not load the whole tree).",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'restriction' in an XSD simpleType?",
+    "options": {
+      "A": "To prevent the element from being used in the document.",
+      "B": "To limit the values of an element (e.g., using a range or a regex pattern).",
+      "C": "To hide the element from certain namespaces.",
+      "D": "To require a password to view the element."
+    },
+    "answer": "B"
+  },
+{
+    "question": "Which of the following is the correct way to close an XML element named <Price>?",
+    "options": {
+      "A": "</price>",
+      "B": "</Price>",
+      "C": "<Price/>",
+      "D": "<\\Price>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An XML document must have exactly one root element.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character is used to escape the 'less than' symbol in XML content?",
+    "options": {
+      "A": "&lt;",
+      "B": "&less;",
+      "C": "<!",
+      "D": "&#lt;"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the correct syntax for an XML declaration?",
+    "options": {
+      "A": "<xml version='1.0' ?>",
+      "B": "<?xml version='1.0'?>",
+      "C": "<!xml version='1.0'!>",
+      "D": "<?xml-version='1.0'?>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you represent a 'null' or empty element in a shorthand way in XML?",
+    "options": {
+      "A": "<tag></tag>",
+      "B": "<tag />",
+      "C": "<tag !>",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which of the following is a valid XML element name?",
+    "options": {
+      "A": "<1stPlace>",
+      "B": "<First Name>",
+      "C": "<_score>",
+      "D": "<XML_Data>"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: XML preserves white space by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which entity is used to represent the double quote character within an attribute value?",
+    "options": {
+      "A": "&quote;",
+      "B": "&dq;",
+      "C": "&quot;",
+      "D": "&apos;"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What happens if tags are not nested properly (e.g., <a><b></a></b>)?",
+    "options": {
+      "A": "The document is considered invalid but well-formed.",
+      "B": "The document is not well-formed and will fail to parse.",
+      "C": "The parser will automatically fix the order.",
+      "D": "It is only an error in HTML, not XML."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is NOT a reserved entity in XML?",
+    "options": {
+      "A": "&amp;",
+      "B": "&gt;",
+      "C": "&apos;",
+      "D": "&copy;"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Where must the XML declaration appear in an XML document?",
+    "options": {
+      "A": "At the very end.",
+      "B": "Inside the root element.",
+      "C": "On the very first line of the document.",
+      "D": "Anywhere before the first attribute."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: XML attribute values must always be enclosed in either single or double quotes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'encoding' attribute in the XML declaration?",
+    "options": {
+      "A": "To encrypt the file content.",
+      "B": "To specify the character set used (e.g., UTF-8).",
+      "C": "To compress the XML data.",
+      "D": "To define the DTD version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these characters starts a comment in XML?",
+    "options": {
+      "A": "/*",
+      "B": "//",
+      "C": "",
+      "D": "<text> ... </text>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The name 'xml' (in any case) is reserved for the system and cannot be used as a custom tag name.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What character denotes a numeric entity reference?",
+    "options": {
+      "A": "&",
+      "B": "#",
+      "C": "%",
+      "D": "@"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Well-formed' XML?",
+    "options": {
+      "A": "It has been validated against a schema.",
+      "B": "It follows all the syntactic rules of XML.",
+      "C": "It contains only numeric data.",
+      "D": "It uses CSS for formatting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: XML tags must be closed in the reverse order they were opened.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which part of XML specifies the document's version?",
+    "options": {
+      "A": "Prolog",
+      "B": "Root",
+      "C": "Attributes",
+      "D": "Footer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is used to define the structure of XML data?",
+    "options": {
+      "A": "XSLT",
+      "B": "DTD",
+      "C": "XPath",
+      "D": "XQuery"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Attribute names in XML can contain spaces.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard encoding used in most XML documents?",
+    "options": {
+      "A": "ASCII",
+      "B": "UTF-8",
+      "C": "ISO-8859-1",
+      "D": "UTF-16"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character follows the ampersand in an entity reference?",
+    "options": {
+      "A": "The entity name",
+      "B": "A space",
+      "C": "A dot",
+      "D": "A slash"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XML is widely used for data exchange between heterogeneous systems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the root element in this snippet: <Root><Child/></Root>?",
+    "options": {
+      "A": "Child",
+      "B": "Root",
+      "C": "XML",
+      "D": "None"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT allowed in an XML element name?",
+    "options": {
+      "A": "Underscore",
+      "B": "Hyphen",
+      "C": "Semicolon",
+      "D": "Period"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: XML elements can be empty.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What entity represents 'greater than'?",
+    "options": {
+      "A": "&gt;",
+      "B": "&gt-than;",
+      "C": "&greater;",
+      "D": "&gr;"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you define a version in the XML declaration?",
+    "options": {
+      "A": "v='1.0'",
+      "B": "version='1.0'",
+      "C": "ver='1.0'",
+      "D": "rev='1.0'"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: XML comments can be nested inside other comments.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these characters can start an XML element name?",
+    "options": {
+      "A": "Number",
+      "B": "Letter",
+      "C": "Hyphen",
+      "D": "Dot"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the extension for an XML Schema file?",
+    "options": {
+      "A": ".xml",
+      "B": ".xsd",
+      "C": ".dtd",
+      "D": ".xsl"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: XML is a case-sensitive language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of XML?",
+    "options": {
+      "A": "To display web pages.",
+      "B": "To store and transport data.",
+      "C": "To create database tables.",
+      "D": "To style text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which character ends a comment?",
+    "options": {
+      "A": "-->",
+      "B": "/>",
+      "C": "*/",
+      "D": "?>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XML documents must be valid before they are well-formed.",
+    "options": {
+      "A": "False (They must be well-formed first; validity is optional).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which element must contain all other elements in a document?",
+    "options": {
+      "A": "Child",
+      "B": "Root",
+      "C": "Prolog",
+      "D": "Attribute"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What character starts an entity reference?",
+    "options": {
+      "A": "&",
+      "B": "<",
+      "C": "?",
+      "D": "!"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XML tags can be in any language supported by the encoding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a slash at the end of a tag (e.g., <br/>) indicate?",
+    "options": {
+      "A": "A processing instruction.",
+      "B": "A self-closing/empty element.",
+      "C": "A comment.",
+      "D": "A root element."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is NOT a rule for XML element names?",
+    "options": {
+      "A": "Names can contain letters, numbers, and other characters.",
+      "B": "Names can start with a number.",
+      "C": "Names cannot contain spaces.",
+      "D": "Names cannot start with 'xml'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Single quotes and double quotes can be used interchangeably for attributes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What component is used to link an XML file to a stylesheet?",
+    "options": {
+      "A": "Processing Instruction",
+      "B": "Root element",
+      "C": "Entity",
+      "D": "Attribute"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of using XML Schema (XSD) over DTD?",
+    "options": {
+      "A": "XSD is written in XML syntax and supports complex data types.",
+      "B": "XSD is much faster to parse than DTD.",
+      "C": "XSD allows for the use of spaces in element names.",
+      "D": "XSD does not require a root element."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a DTD, which keyword is used to define an element that can contain any combination of text and other elements?",
+    "options": {
+      "A": "ANY",
+      "B": "MIXED",
+      "C": "ALL",
+      "D": "OPEN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'xmlns' attribute define in an XML tag?",
+    "options": {
+      "A": "A new XML version.",
+      "B": "An XML Namespace to prevent element name conflicts.",
+      "C": "The location of the XSLT stylesheet.",
+      "D": "The character encoding of the file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DTD declaration defines an element 'Note' that must contain 'To', 'From', and 'Heading' in that specific order?",
+    "options": {
+      "A": "<!ELEMENT Note (To, From, Heading)>",
+      "B": "<!ELEMENT Note (To | From | Heading)>",
+      "C": "<!ELEMENT Note (To & From & Heading)>",
+      "D": "<!ELEMENT Note (To+ From+ Heading+)>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A well-formed XML document is always a valid XML document.",
+    "options": {
+      "A": "False (A document must be well-formed to be valid, but validity requires a DTD or Schema).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XML parser is 'event-driven' and does not load the entire document into memory?",
+    "options": {
+      "A": "DOM",
+      "B": "SAX",
+      "C": "XPath",
+      "D": "XSLT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In XSD, which component is used to define an element that contains other elements or attributes?",
+    "options": {
+      "A": "simpleType",
+      "B": "complexType",
+      "C": "mixedType",
+      "D": "groupType"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'PCDATA' keyword in a DTD?",
+    "options": {
+      "A": "It represents 'Parsed Character Data' (text that will be parsed).",
+      "B": "It represents 'Private Character Data' (encrypted text).",
+      "C": "It marks the element as a parent of all other tags.",
+      "D": "It identifies an external binary file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XML Namespaces can be applied to both elements and attributes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD symbol indicates that an element can appear zero or one time (optional)?",
+    "options": {
+      "A": "*",
+      "B": "+",
+      "C": "?",
+      "D": "|"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is an 'Internal DTD'?",
+    "options": {
+      "A": "A DTD that is stored in a separate .dtd file.",
+      "B": "A DTD that is defined within the XML document's DOCTYPE declaration.",
+      "C": "A DTD provided by the W3C consortium.",
+      "D": "A DTD that only validates numeric data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which XSD data type would be most appropriate for a birth date?",
+    "options": {
+      "A": "xs:string",
+      "B": "xs:date",
+      "C": "xs:time",
+      "D": "xs:gDay"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a DTD, the pipe symbol (|) is used to indicate an 'OR' choice between elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD attribute is used to provide a default value for an element if none is provided in the XML?",
+    "options": {
+      "A": "fixed",
+      "B": "default",
+      "C": "value",
+      "D": "init"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main drawback of the DOM parser for large XML files?",
+    "options": {
+      "A": "It cannot handle namespaces.",
+      "B": "It consumes a lot of memory because it loads the entire tree into RAM.",
+      "C": "It is not compatible with Java.",
+      "D": "It only reads the first 100 lines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In XML Schema, what does the 'minOccurs=\"0\"' attribute signify?",
+    "options": {
+      "A": "The element is mandatory.",
+      "B": "The element is optional.",
+      "C": "The element cannot be used.",
+      "D": "The element must appear exactly zero times."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A namespace prefix can be any name except for 'xml'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD declaration defines a constant string that can be reused throughout the XML document?",
+    "options": {
+      "A": "<!ELEMENT ...>",
+      "B": "<!ENTITY ...>",
+      "C": "<!ATTLIST ...>",
+      "D": "<!NOTATION ...>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the correct syntax for declaring a default namespace?",
+    "options": {
+      "A": "xmlns=\"http://example.com\"",
+      "B": "xmlns:def=\"http://example.com\"",
+      "C": "namespace=\"http://example.com\"",
+      "D": "xml:ns=\"http://example.com\""
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In an XSD, 'xs:integer' is a simpleType.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD keyword indicates that an element cannot contain any content?",
+    "options": {
+      "A": "EMPTY",
+      "B": "NULL",
+      "C": "VOID",
+      "D": "NONE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSD, which element is used to define a list of specific allowed values for an element?",
+    "options": {
+      "A": "xs:list",
+      "B": "xs:enumeration",
+      "C": "xs:choice",
+      "D": "xs:sequence"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the DOM method 'getElementsByTagName()' return?",
+    "options": {
+      "A": "A single element.",
+      "B": "A list (NodeList) of all elements with that specific tag name.",
+      "C": "The value of the first tag found.",
+      "D": "The parent node of the tag."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A SAX parser allows for random access to different parts of the XML document.",
+    "options": {
+      "A": "False (SAX is read-only and forward-only; DOM allows random access).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD attribute type is used to ensure an attribute value is unique within the document?",
+    "options": {
+      "A": "CDATA",
+      "B": "ID",
+      "C": "IDREF",
+      "D": "NMTOKEN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an XSD, 'use=\"required\"' is applied to what?",
+    "options": {
+      "A": "Elements",
+      "B": "Attributes",
+      "C": "Namespaces",
+      "D": "The XML Declaration"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: XML Namespaces use URIs as unique identifiers, but the URI does not need to point to a real webpage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD symbol indicates that an element can appear zero or more times?",
+    "options": {
+      "A": "*",
+      "B": "+",
+      "C": "?",
+      "D": "!"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'xs:sequence' in an XSD complexType?",
+    "options": {
+      "A": "It allows child elements to appear in any order.",
+      "B": "It requires child elements to appear in the exact order specified.",
+      "C": "It indicates that only one of the child elements can appear.",
+      "D": "It creates a loop in the data structure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A SAX parser is usually faster than a DOM parser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a DTD, what is '#REQUIRED' used for?",
+    "options": {
+      "A": "To specify that an element is mandatory.",
+      "B": "To specify that an attribute is mandatory.",
+      "C": "To specify that a namespace is required.",
+      "D": "To require a password for the XML file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to define an XSD simpleType that is a variation of an existing type (like a string with length limits)?",
+    "options": {
+      "A": "Extension",
+      "B": "Restriction",
+      "C": "Union",
+      "D": "List"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Entity' in a DTD?",
+    "options": {
+      "A": "An entity whose value is defined in a separate file or URI.",
+      "B": "An entity that can only be used by other DTDs.",
+      "C": "A tag that is not part of the XML standard.",
+      "D": "A variable used for mathematical calculations."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In XSD, 'xs:boolean' values can be represented as 'true', 'false', '1', or '0'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD declaration defines the valid attributes for an element?",
+    "options": {
+      "A": "<!ATTR ...>",
+      "B": "<!ATTLIST ...>",
+      "C": "<!ELEMENT ...>",
+      "D": "<!LIST ...>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the DOM, what is the 'Document' node?",
+    "options": {
+      "A": "The root element of the XML.",
+      "B": "The root node of the entire tree, representing the document itself.",
+      "C": "A specialized node for CSS info.",
+      "D": "The XML prolog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DTDs support XML Namespaces natively.",
+    "options": {
+      "A": "False (DTDs are older and do not truly 'understand' namespaces; prefixes are just part of the element name).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD component allows for one and only one of the contained elements to appear?",
+    "options": {
+      "A": "xs:sequence",
+      "B": "xs:choice",
+      "C": "xs:all",
+      "D": "xs:any"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a DTD, '#IMPLIED' means what for an attribute?",
+    "options": {
+      "A": "The attribute is mandatory.",
+      "B": "The attribute is optional and has no default value.",
+      "C": "The attribute has a fixed value.",
+      "D": "The attribute is ignored by the parser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which XSD data type is used for a string that contains no line breaks or tabs?",
+    "options": {
+      "A": "xs:string",
+      "B": "xs:normalizedString",
+      "C": "xs:token",
+      "D": "xs:plainText"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An XML document can be validated against multiple Schemas.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD symbol indicates that an element must appear at least once?",
+    "options": {
+      "A": "*",
+      "B": "+",
+      "C": "?",
+      "D": "!"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'targetNamespace' in an XSD?",
+    "options": {
+      "A": "To specify the namespace that the schema is defining elements for.",
+      "B": "To specify where the XML file is stored.",
+      "C": "To set the default language of the document.",
+      "D": "To encrypt the tags in that namespace."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XSD is an industry standard maintained by the W3C.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a DTD, which keyword is used to represent an attribute value that should be an ID of another element?",
+    "options": {
+      "A": "ID",
+      "B": "IDREF",
+      "C": "REF",
+      "D": "LINK"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the SAX 'startElement' method provide?",
+    "options": {
+      "A": "The value of the element.",
+      "B": "The name of the element and its attributes.",
+      "C": "The parent of the element.",
+      "D": "The closing tag name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elements declared in an XSD as 'xs:all' can appear in any order but must appear zero or one time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character is used to separate a namespace prefix from a local name in an XSD selector?",
+    "options": {
+      "A": ".",
+      "B": ":",
+      "C": "#",
+      "D": "|"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a DTD, '#FIXED' followed by a value means what?",
+    "options": {
+      "A": "The attribute must have that specific value if it is present.",
+      "B": "The attribute cannot be changed by the user.",
+      "C": "The attribute is numeric.",
+      "D": "The attribute name is fixed."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XML Schemas (XSD) support the use of Regular Expressions for validation.",
+    "options": {
+      "A": "True (via the xs:pattern facet).",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD data type is used for positive whole numbers?",
+    "options": {
+      "A": "xs:int",
+      "B": "xs:positiveInteger",
+      "C": "xs:unsignedInt",
+      "D": "xs:number"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of using a Namespace in an XML document without declaring it?",
+    "options": {
+      "A": "The document is well-formed but invalid.",
+      "B": "The document is not well-formed (Namespace error).",
+      "C": "The parser ignores the prefix.",
+      "D": "The prefix is treated as part of the tag name without a namespace."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the DOM, what is a 'NodeList'?",
+    "options": {
+      "A": "A list of all unique tag names.",
+      "B": "An ordered collection of nodes, usually returned by 'childNodes' or 'getElementsByTagName'.",
+      "C": "A set of all attributes in the document.",
+      "D": "A map of namespaces."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A DTD can be defined both internally and externally for the same XML document.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD facet is used to limit the number of characters in a string?",
+    "options": {
+      "A": "xs:limit",
+      "B": "xs:maxLength",
+      "C": "xs:size",
+      "D": "xs:bound"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Namespace Scoping' in XML?",
+    "options": {
+      "A": "Namespaces are only valid for the element where they are declared and its children.",
+      "B": "Namespaces are valid for the whole document once declared.",
+      "C": "Namespaces are only valid for attributes.",
+      "D": "Namespaces only apply to the root element."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XSD 'xs:decimal' and 'xs:double' are exactly the same data type.",
+    "options": {
+      "A": "False (decimal is for exact decimal values like currency; double is for floating-point numbers).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD declaration type is used for binary data references (like images)?",
+    "options": {
+      "A": "ENTITY",
+      "B": "NOTATION",
+      "C": "CDATA",
+      "D": "NDATA"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the DOM, what is the 'parentNode' property used for?",
+    "options": {
+      "A": "To find the root element.",
+      "B": "To navigate up the tree to the immediate container of the current node.",
+      "C": "To find the first child of the current node.",
+      "D": "To get the name of the tag."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The SAX parser allows you to modify the XML document while parsing.",
+    "options": {
+      "A": "False (SAX is strictly for reading/parsing; DOM allows for tree manipulation).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XPath axis contains all nodes that have the same parent as the context node and appear before the context node in document order?",
+    "options": {
+      "A": "preceding",
+      "B": "preceding-sibling",
+      "C": "ancestor",
+      "D": "previous-sibling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In XSLT, what is the primary difference between the 'match' and 'select' attributes?",
+    "options": {
+      "A": "Match defines a pattern for a template; Select picks nodes for processing or extraction.",
+      "B": "Match is used for attributes; Select is used for elements.",
+      "C": "Match is only for XSLT 1.0; Select is for XSLT 3.0.",
+      "D": "There is no difference; they are interchangeable."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XML Schema (XSD), how does 'extension' differ from 'restriction' when creating a new complexType?",
+    "options": {
+      "A": "Extension adds new elements/attributes; Restriction limits the values or occurrences of existing ones.",
+      "B": "Extension is for simpleTypes only.",
+      "C": "Restriction allows for namespaces, while Extension does not.",
+      "D": "Extension is a DTD concept; Restriction is an XSD concept."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of the XPath expression: //book[price > 35]/title?",
+    "options": {
+      "A": "The title of every book in the document that has a price child greater than 35.",
+      "B": "The price of every book with a title.",
+      "C": "A boolean true if any book costs more than 35.",
+      "D": "The number of books costing more than 35."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSLT element provides functionality similar to a 'switch' or 'if-else' statement in programming?",
+    "options": {
+      "A": "<xsl:if>",
+      "B": "<xsl:choose>",
+      "C": "<xsl:switch>",
+      "D": "<xsl:when>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In XPath, the expression 'self::*' refers only to the context node if it is an element.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'xs:any' element in an XML Schema?",
+    "options": {
+      "A": "To allow any element from a specified namespace to appear at that location.",
+      "B": "To mark a field as mandatory.",
+      "C": "To create a loop in the XML structure.",
+      "D": "To disable validation for the entire document."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSLT, which function is used to access data from an external XML file during transformation?",
+    "options": {
+      "A": "external()",
+      "B": "document()",
+      "C": "get-xml()",
+      "D": "load()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which XPath axis includes the context node itself and all nodes that are below it in the hierarchy?",
+    "options": {
+      "A": "descendant",
+      "B": "descendant-or-self",
+      "C": "child",
+      "D": "following"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Canonical XML' primarily used for?",
+    "options": {
+      "A": "To speed up parsing speed.",
+      "B": "To ensure that two XML documents are physically identical for digital signature verification.",
+      "C": "To convert XML to JSON.",
+      "D": "To remove all attributes from a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: XPath 2.0 and later support 'if-then-else' expressions directly within the path string.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSD, what is the 'mixed' attribute used for in a complexType definition?",
+    "options": {
+      "A": "To allow an element to contain both text and other sub-elements.",
+      "B": "To allow both numbers and strings in an attribute.",
+      "C": "To combine multiple namespaces.",
+      "D": "To encrypt the element content."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSLT element is used to define a named piece of code that can be reused via 'xsl:call-template'?",
+    "options": {
+      "A": "<xsl:template name=\"...\">",
+      "B": "<xsl:function>",
+      "C": "<xsl:define-block>",
+      "D": "<xsl:macro>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the XPath expression 'ancestor::book' return?",
+    "options": {
+      "A": "The parent, grandparent, etc., of the context node, provided they are named 'book'.",
+      "B": "All 'book' elements that appear before the current node.",
+      "C": "All children of the 'book' element.",
+      "D": "The root element if it is named 'book'."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The SAX parser is generally better than DOM for scenarios where you only need to extract a small piece of data from a huge file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSLT command is used to output the text value of a specific node or expression?",
+    "options": {
+      "A": "<xsl:get-value>",
+      "B": "<xsl:value-of>",
+      "C": "<xsl:text>",
+      "D": "<xsl:print>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an XSD, which facet is used to enforce a specific pattern using a regular expression?",
+    "options": {
+      "A": "xs:regex",
+      "B": "xs:pattern",
+      "C": "xs:match",
+      "D": "xs:format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Entity Resolver' in XML parsing?",
+    "options": {
+      "A": "To provide a way for the application to redirect external DTD or entity references to local copies.",
+      "B": "To convert attributes into elements.",
+      "C": "To check if the XML is well-formed.",
+      "D": "To calculate the checksum of the file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An XSLT stylesheet is itself a well-formed XML document.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XPath axis contains all nodes that follow the context node in document order, excluding any descendants, attributes, or namespace nodes?",
+    "options": {
+      "A": "following",
+      "B": "following-sibling",
+      "C": "after",
+      "D": "descendant"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSD, what does 'abstract=\"true\"' mean for an element or complexType?",
+    "options": {
+      "A": "The element cannot appear in the XML instance; only its derived types (substitutions) can.",
+      "B": "The element has no value.",
+      "C": "The element is not validated.",
+      "D": "The element is encrypted."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'xsl:sort' in XSLT?",
+    "options": {
+      "A": "To rearrange the physical order of the source XML.",
+      "B": "To define the order in which nodes are processed by for-each or apply-templates.",
+      "C": "To remove duplicate nodes.",
+      "D": "To group nodes by their attribute values."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The DOM level 3 'Load and Save' module allows for filtering which nodes are loaded into the memory tree.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XPath function is used to find the name of the context node?",
+    "options": {
+      "A": "name()",
+      "B": "tag-name()",
+      "C": "get-name()",
+      "D": "local-name()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'ID/IDREF' relationship in a DTD primarily used for?",
+    "options": {
+      "A": "Creating cross-references/links between different elements within the same document.",
+      "B": "Encoding binary data.",
+      "C": "Defining namespaces.",
+      "D": "Setting the XML version."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSLT, how do you pass a value into a template to be used as a local variable?",
+    "options": {
+      "A": "Using <xsl:with-param> in the caller and <xsl:param> in the template.",
+      "B": "Using <xsl:variable> inside the template.",
+      "C": "By setting a global constant.",
+      "D": "By adding an attribute to the source XML."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XPath 1.0 does not support date or time data types natively.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD component is used to define an attribute that can belong to any namespace?",
+    "options": {
+      "A": "xs:anyAttribute",
+      "B": "xs:allAttributes",
+      "C": "xs:attributeGroup",
+      "D": "xs:mixedAttribute"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the DOM, what is the 'ownerDocument' property for?",
+    "options": {
+      "A": "It returns the Document object associated with a node.",
+      "B": "It shows the creator of the XML file.",
+      "C": "It points to the parent of the root element.",
+      "D": "It identifies the DTD file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSLT element is used to dynamically create an element name that is not known until runtime?",
+    "options": {
+      "A": "<xsl:element>",
+      "B": "<xsl:tag>",
+      "C": "<xsl:create-node>",
+      "D": "<xsl:new>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the XPath expression 'child::node()' include that 'child::*' does not?",
+    "options": {
+      "A": "Text nodes, comments, and processing instructions.",
+      "B": "Attributes.",
+      "C": "Namespaces.",
+      "D": "Parent nodes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XML Schemas allow for 'substitution groups', enabling one element to be replaced by another throughout the document.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DTD declaration is used to skip the parsing of an external binary file like an image?",
+    "options": {
+      "A": "NDATA",
+      "B": "BINARY",
+      "C": "SKIP",
+      "D": "RAW"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'xsl:key' and the 'key()' function in XSLT?",
+    "options": {
+      "A": "To provide high-performance indexed access to nodes, similar to a database index.",
+      "B": "To encrypt the transformation output.",
+      "C": "To create a secret password for the stylesheet.",
+      "D": "To sort the output in descending order."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XPath, what does the 'preceding' axis exclude that 'preceding-sibling' includes?",
+    "options": {
+      "A": "Actually, 'preceding' includes 'preceding-sibling' but also adds their descendants and nodes outside the parent.",
+      "B": "Attributes.",
+      "C": "The root element.",
+      "D": "The parent node."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A DOM 'Attr' node is considered a child of the element it belongs to.",
+    "options": {
+      "A": "False (Attributes are associated with elements but are not part of the child node list).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD element allows a choice of 'zero or more' sequences of child elements?",
+    "options": {
+      "A": "<xs:choice maxOccurs=\"unbounded\">",
+      "B": "<xs:all>",
+      "C": "<xs:any>",
+      "D": "<xs:sequence minOccurs=\"0\">"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'XInclude' used for in XML development?",
+    "options": {
+      "A": "To merge different XML documents into one at the parsing level.",
+      "B": "To include CSS styles.",
+      "C": "To include JavaScript in XML.",
+      "D": "To export XML to Excel."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An XSLT template with a higher 'priority' attribute will override a template with a lower priority if both match the same node.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSD, what is the 'block' attribute used for?",
+    "options": {
+      "A": "To prevent specific types of derivation (extension or restriction) or substitution for an element.",
+      "B": "To hide a part of the XML from the user.",
+      "C": "To group elements into a block.",
+      "D": "To define a block of code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XPath axis contains the parent of the context node?",
+    "options": {
+      "A": "parent",
+      "B": "ancestor",
+      "C": "up",
+      "D": "following-sibling"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Namespace Normalization' in the context of XML DOM?",
+    "options": {
+      "A": "It ensures all nodes have the correct namespace URI based on their prefixes and the scope of xmlns declarations.",
+      "B": "It removes all namespaces from the document.",
+      "C": "It renames prefixes to p1, p2, etc.",
+      "D": "It compresses the namespace URIs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SAX parsing is 'push-based', whereas StAX parsing is 'pull-based'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSLT element is used to copy the current node exactly as it is to the output?",
+    "options": {
+      "A": "<xsl:copy>",
+      "B": "<xsl:copy-of>",
+      "C": "<xsl:duplicate>",
+      "D": "<xsl:clone>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSD, what is the difference between 'simpleContent' and 'complexContent'?",
+    "options": {
+      "A": "simpleContent is for elements with text and attributes; complexContent is for elements with other sub-elements.",
+      "B": "simpleContent is for attributes only.",
+      "C": "complexContent is only for DTDs.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'xsl:message' element in XSLT?",
+    "options": {
+      "A": "To send a message to the XSLT processor's error listener (often for debugging or reporting errors).",
+      "B": "To display a popup to the user.",
+      "C": "To add a comment to the output XML.",
+      "D": "To email the XML file to a recipient."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A DTD can define 'Parameter Entities' that are only available within the DTD itself and not the XML document.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XPath expression finds all 'price' elements regardless of where they are in the document?",
+    "options": {
+      "A": "//price",
+      "B": "/price",
+      "C": "*/price",
+      "D": "descendant::price"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Validation Hint' in an XML document?",
+    "options": {
+      "A": "Attributes like 'xsi:schemaLocation' that tell the parser where to find the schema for a specific namespace.",
+      "B": "A comment left by a developer.",
+      "C": "A specific error message from the parser.",
+      "D": "The XML declaration."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'xsl:attribute' element must be placed inside the element it is meant to be an attribute of before any child elements are created.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD data type supports time zone offsets?",
+    "options": {
+      "A": "xs:dateTime",
+      "B": "xs:time",
+      "C": "xs:date",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does the 'position()' function in XPath return?",
+    "options": {
+      "A": "The index of the context node within the current node-set being processed.",
+      "B": "The line number of the tag in the file.",
+      "C": "The depth of the node in the tree.",
+      "D": "The physical offset in bytes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSLT, what is 'attribute-value templates' (using {})?",
+    "options": {
+      "A": "A way to put an XPath expression inside an attribute value of a literal result element.",
+      "B": "A way to define global variables.",
+      "C": "A method to compress attributes.",
+      "D": "A tool for mathematical calculations."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In XML, a 'Processing Instruction' can contain characters like '<' and '&' without escaping them.",
+    "options": {
+      "A": "True (Except for the sequence '?>').",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD component is used to define a reusable set of attributes?",
+    "options": {
+      "A": "xs:attributeGroup",
+      "B": "xs:complexType",
+      "C": "xs:list",
+      "D": "xs:union"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'xsl:apply-imports' in XSLT?",
+    "options": {
+      "A": "To call a template from an imported stylesheet that has been overridden by the current stylesheet.",
+      "B": "To import a new XML file.",
+      "C": "To apply a CSS style.",
+      "D": "To restart the transformation."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the DOM, what happens when you use 'importNode()'?",
+    "options": {
+      "A": "It creates a copy of a node from another document that is suitable for insertion into the current document.",
+      "B": "It links two XML files.",
+      "C": "It downloads a file from the internet.",
+      "D": "It deletes a node from the tree."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XPath 1.0 does not have a native way to perform case-insensitive string comparisons.",
+    "options": {
+      "A": "True (You must use the 'translate()' function as a workaround).",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XSD element is used to group several elements so they can be reused together in multiple complexTypes?",
+    "options": {
+      "A": "xs:group",
+      "B": "xs:sequence",
+      "C": "xs:all",
+      "D": "xs:complexType"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of '<xsl:value-of select=\"//book[1]\"/>'?",
+    "options": {
+      "A": "The text content of the first 'book' element in the document.",
+      "B": "The entire XML of the first book.",
+      "C": "Only the attributes of the first book.",
+      "D": "The number 1."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSD, which facet is used to specify that a value must be one of a specific list of choices?",
+    "options": {
+      "A": "xs:enumeration",
+      "B": "xs:list",
+      "C": "xs:choice",
+      "D": "xs:pattern"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XPath axis contains all nodes that are descendants of the parent of the context node, but are not the context node itself or its own descendants?",
+    "options": {
+      "A": "preceding",
+      "B": "following-sibling and preceding-sibling",
+      "C": "ancestor",
+      "D": "descendant-or-self"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In XSLT, what is the 'Muenchian Grouping' technique primarily used for?",
+    "options": {
+      "A": "To efficiently group and index nodes using xsl:key and the key() function, especially in XSLT 1.0.",
+      "B": "To encrypt XML data for secure transport.",
+      "C": "To sort nodes alphabetically based on their local name.",
+      "D": "To merge two different XSLT stylesheets into a single processing instruction."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens when an XSD uses 'substitutionGroup' for an element?",
+    "options": {
+      "A": "It allows one element to be used in place of another element that is the head of the substitution group.",
+      "B": "It replaces all attributes with elements in the final XML output.",
+      "C": "It renames the root element at runtime during the parsing phase.",
+      "D": "It disables DTD verification for that specific namespace."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XPath function would you use to retrieve the namespace URI associated with a specific node?",
+    "options": {
+      "A": "namespace-uri()",
+      "B": "local-name()",
+      "C": "get-ns()",
+      "D": "uri-reference()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In XSLT 2.0 and later, you can use the 'xsl:function' element to define custom, reusable XPath functions in your stylesheet.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between a 'Simple Type' and a 'Complex Type' in an XML Schema (XSD)?",
+    "options": {
+      "A": "Simple types cannot contain sub-elements or attributes; Complex types can contain both.",
+      "B": "Simple types are only for numbers; Complex types are for strings.",
+      "C": "Complex types are deprecated in favor of JSON-like structures.",
+      "D": "Simple types are defined in DTDs, while Complex types are only in XSD."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which XPath 2.0+ operator allows you to perform an operation on every item in a sequence (similar to a for-loop)?",
+    "options": {
+      "A": "for ... in ... return",
+      "B": "foreach",
+      "C": "iterate",
+      "D": "map"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSLT, what does the 'xsl:output' element's 'indent' attribute do?",
+    "options": {
+      "A": "It specifies if the processor should add extra white space to pretty-print the result.",
+      "B": "It sets the margin size of the resulting document.",
+      "C": "It determines the encryption padding level.",
+      "D": "It forces the root element to be at the top level."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'XLink' in the context of XML technologies?",
+    "options": {
+      "A": "A language used to create internal and external hyperlinks between XML documents.",
+      "B": "A tool to convert XML to binary format.",
+      "C": "A specific type of XML parser for mobile devices.",
+      "D": "The standard used to define XML namespaces."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XML Namespaces are considered 'Well-formed' if the URI provided is a dead link.",
+    "options": {
+      "A": "True (The URI is just a unique string identifier, not a functional web link).",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DOM method would you use to add a new child node to the end of a parent node's list of children?",
+    "options": {
+      "A": "appendChild()",
+      "B": "insertAfter()",
+      "C": "addNode()",
+      "D": "pushChild()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XSD, which facet is used to limit the total number of digits allowed in a numeric value?",
+    "options": {
+      "A": "xs:totalDigits",
+      "B": "xs:length",
+      "C": "xs:digitLimit",
+      "D": "xs:maxDigits"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'XQuery' relative to XML?",
+    "options": {
+      "A": "It is a functional query language designed to extract and manipulate data from XML documents and databases.",
+      "B": "It is used to style XML for display in browsers.",
+      "C": "It is a faster version of the SAX parser.",
+      "D": "It is a tool for validating DTDs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a 'Streaming' XML parser that allows for both reading and writing (Pull-based)?",
+    "options": {
+      "A": "StAX (Streaming API for XML)",
+      "B": "DOM",
+      "C": "SAX",
+      "D": "XPath"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In XSLT, variables defined with 'xsl:variable' are immutable; their value cannot be changed once set.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'token' data type in XSD represent?",
+    "options": {
+      "A": "A string where all line breaks, carriage returns, and tabs are replaced with spaces, and multiple spaces are collapsed.",
+      "B": "A unique identifier for a database key.",
+      "C": "A cryptographic security token.",
+      "D": "A placeholder for a namespace URI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In XPath, how do you select an attribute named 'id' from the current node?",
+    "options": {
+      "A": "@id",
+      "B": "attr:id",
+      "C": ".id",
+      "D": "child::id"
+    },
+    "answer": "A"
+  }
+  ]
+}
