@@ -188,89 +188,91 @@ export default function LiveInterviewList() {
           <div className="card">No interview candidates found.</div>
         ) : (
           <div className="table-card">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Candidate</th>
-                  <th>Interviewer</th>
-                  <th>Interview</th>
-                  <th>Status</th>
-                  <th>Rating</th>
-                  <th>Scheduled Start</th>
-                  <th>Scheduled End</th>
-                  <th>Created</th>
-                  <th style={{ textAlign: 'right' }}>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pageItems.map((inv) => (
-                  <tr key={inv.id}>
-                    <td>
-                      <div className="cell-title">{inv.name || '-'}</div>
-                      <div className="cell-sub">{inv.email || '-'}</div>
-                      {inv.phone && <div className="cell-sub" style={{ fontSize: '12px', color: '#64748b' }}>{inv.phone}</div>}
-                    </td>
-                    <td>
-                      <div className="cell-title">{inv.interviewer_name || '-'}</div>
-                      <div className="cell-sub">{inv.interviewer_email || '-'}</div>
-                    </td>
-                    <td>{inv.interview?.name || '-'}</td>
-                    <td>
-                      <span className={`pill ${getStatusClass(inv.status)}`}>
-                        {getStatusLabel(inv.status)}
-                      </span>
-                    </td>
-                    <td>
-                      {inv.feedback ? (
-                        <div>
-                          {renderStars(inv.feedback.interviewer_average_rating || inv.feedback.interviewer_rating)}
-                          <button
-                            className="btn-secondary"
-                            style={{ padding: '2px 8px', fontSize: '12px', marginTop: '4px' }}
-                            onClick={() => navigate('/feedback-details', { state: { inv } })}
-                          >
-                            View Details
-                          </button>
-                        </div>
-                      ) : (
-                        <span style={{ color: '#94a3b8' }}>-</span>
-                      )}
-                    </td>
-                    <td>
-                      {inv.start_time ? (
-                        <>
-                          <div>{fmtDateOnly(inv.start_time)}</div>
-                          <div className="cell-sub">{fmtTime(inv.start_time)}</div>
-                        </>
-                      ) : (
-                        '-'
-                      )}
-                    </td>
-                    <td>
-                      {inv.end_time ? (
-                        <>
-                          <div>{fmtDateOnly(inv.end_time)}</div>
-                          <div className="cell-sub">{fmtTime(inv.end_time)}</div>
-                        </>
-                      ) : (
-                        '-'
-                      )}
-                    </td>
-                    <td>{fmtDate(inv.created_at)}</td>
-                    <td style={{ textAlign: 'right' }}>
-                      <button
-                        className={inv.status === 'completed' || inv.status === 'submitted' ? 'btn-secondary' : 'btn-primary'}
-                        type="button"
-                        onClick={() => handleStartInterview(inv.token)}
-                        disabled={inv.status === 'failed' || inv.status === 'completed' || inv.status === 'submitted'}
-                      >
-                        {inv.status === 'completed' || inv.status === 'submitted' ? 'Completed' : 'Start Interview'}
-                      </button>
-                    </td>
+            <div className="table-responsive">
+              <table className="table">
+                <thead>
+                  <tr>
+                    <th>Candidate</th>
+                    <th>Interviewer</th>
+                    <th>Interview</th>
+                    <th>Status</th>
+                    <th>Rating</th>
+                    <th>Scheduled Start</th>
+                    <th>Scheduled End</th>
+                    <th>Created</th>
+                    <th style={{ textAlign: 'right' }}>Action</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {pageItems.map((inv) => (
+                    <tr key={inv.id}>
+                      <td>
+                        <div className="cell-title">{inv.name || '-'}</div>
+                        <div className="cell-sub">{inv.email || '-'}</div>
+                        {inv.phone && <div className="cell-sub" style={{ fontSize: '12px', color: '#64748b' }}>{inv.phone}</div>}
+                      </td>
+                      <td>
+                        <div className="cell-title">{inv.interviewer_name || '-'}</div>
+                        <div className="cell-sub">{inv.interviewer_email || '-'}</div>
+                      </td>
+                      <td>{inv.interview?.name || '-'}</td>
+                      <td>
+                        <span className={`pill ${getStatusClass(inv.status)}`}>
+                          {getStatusLabel(inv.status)}
+                        </span>
+                      </td>
+                      <td>
+                        {inv.feedback ? (
+                          <div>
+                            {renderStars(inv.feedback.interviewer_average_rating || inv.feedback.interviewer_rating)}
+                            <button
+                              className="btn-secondary"
+                              style={{ padding: '2px 8px', fontSize: '12px', marginTop: '4px' }}
+                              onClick={() => navigate('/feedback-details', { state: { inv } })}
+                            >
+                              View Details
+                            </button>
+                          </div>
+                        ) : (
+                          <span style={{ color: '#94a3b8' }}>-</span>
+                        )}
+                      </td>
+                      <td>
+                        {inv.start_time ? (
+                          <>
+                            <div>{fmtDateOnly(inv.start_time)}</div>
+                            <div className="cell-sub">{fmtTime(inv.start_time)}</div>
+                          </>
+                        ) : (
+                          '-'
+                        )}
+                      </td>
+                      <td>
+                        {inv.end_time ? (
+                          <>
+                            <div>{fmtDateOnly(inv.end_time)}</div>
+                            <div className="cell-sub">{fmtTime(inv.end_time)}</div>
+                          </>
+                        ) : (
+                          '-'
+                        )}
+                      </td>
+                      <td>{fmtDate(inv.created_at)}</td>
+                      <td style={{ textAlign: 'right' }}>
+                        <button
+                          className={inv.status === 'completed' || inv.status === 'submitted' ? 'btn-secondary' : 'btn-primary'}
+                          type="button"
+                          onClick={() => handleStartInterview(inv.token)}
+                          disabled={inv.status === 'failed' || inv.status === 'completed' || inv.status === 'submitted'}
+                        >
+                          {inv.status === 'completed' || inv.status === 'submitted' ? 'Completed' : 'Start Interview'}
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
             <div className="pager">
               <div className="pager-left">

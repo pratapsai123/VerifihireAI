@@ -57,6 +57,14 @@ def create_interview_invitations_and_send_email_view(request):
         if not isinstance(draft_ids, list) or len(draft_ids) == 0:
             return Response({'error': 'draft_ids must be a non-empty array of IDs.'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Retrieve global schedule settings if provided
+        global_start_time_raw = data.get('start_time')
+        global_end_time_raw = data.get('end_time')
+        global_time_zone = data.get('time_zone')
+        global_start_grace_minutes = data.get('start_grace_minutes', 0)
+        
+        from django.utils.dateparse import parse_datetime
+
         # Get or create a default interview (or create one per batch)
         # For simplicity, we'll create one interview per batch of invites
         interview = Interview.objects.create(
@@ -75,6 +83,18 @@ def create_interview_invitations_and_send_email_view(request):
         for invitation in drafts:
             # Associate the draft with this new interview
             invitation.interview = interview
+            
+            if global_start_time_raw:
+                invitation.start_time = parse_datetime(global_start_time_raw)
+            if global_end_time_raw:
+                invitation.end_time = parse_datetime(global_end_time_raw)
+            if global_time_zone:
+                invitation.time_zone = global_time_zone
+            invitation.start_grace_minutes = int(global_start_grace_minutes)
+
+            invitation.status = 'sent'
+            invitation.save()
+
             name = invitation.name
             email = invitation.email
             interviewer_name = invitation.interviewer_name

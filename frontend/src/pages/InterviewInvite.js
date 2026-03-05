@@ -470,6 +470,11 @@ export default function InterviewInvite() {
       const resp = await axios.post(`${API_BASE_URL}/interviews/invite/`, {
         draft_ids: candidates.map(c => c.id),
         interview_name: 'Interview Invitation',
+        start_time: sched.start_time,
+        end_time: sched.end_time,
+        time_zone: tz,
+        validity_mode: validityMode,
+        start_grace_minutes: validityMode === 'exact_window' ? (sched.start_grace_minutes || 0) : 0,
       });
 
       const { sent, failed, results } = resp.data || {};

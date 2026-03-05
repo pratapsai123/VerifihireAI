@@ -66,10 +66,18 @@
   border: 1px solid #e2e8f0;
   border-radius: 14px;
   overflow: hidden;
+  width: 100%;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .table {
   width: 100%;
+  min-width: 1000px;
   border-collapse: collapse;
 }
 
