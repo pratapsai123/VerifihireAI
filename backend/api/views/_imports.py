@@ -43,6 +43,7 @@ from ..models import (
     InterviewInvitation,
     LiveInterviewFeedback,
     JobRole,
+    CandidateIntegrity,
 )
 from ..ocr_utils import extract_text_from_image
 from ..report_utils import generate_candidate_report

@@ -670,8 +670,28 @@ class CandidateSubmission(models.Model):
         verbose_name_plural = "Candidate Submissions"
         ordering = ['-submitted_at']
 
+class CandidateIntegrity(models.Model):
+    """
+    Integrity tracking for standard assessments via CandidateInvitation.
+    """
+    invitation = models.OneToOneField(
+        CandidateInvitation,
+        on_delete=models.CASCADE,
+        related_name='integrity',
+    )
+    tab_switches = models.IntegerField(default=0)
+    phone_detections = models.IntegerField(default=0)
+    multiface_detections = models.IntegerField(default=0)
+    no_face_detections = models.IntegerField(default=0)
+    integrity_score = models.FloatField(default=100.0)
+    warning_logs = models.JSONField(default=list, blank=True, help_text="Stores the first 3 violations as grace warnings")
+    last_updated = models.DateTimeField(auto_now=True)
+    class Meta:
+        db_table = 'api_candidate_integrity'
+        verbose_name = "Candidate Integrity"
+        verbose_name_plural = "Candidate Integrities"
     def __str__(self):
-        return f"Submission #{self.id} - Invitation {self.invitation_id}"
+        return f"Integrity: {self.invitation.email} ({self.integrity_score}%)"
 
 
 # =========================

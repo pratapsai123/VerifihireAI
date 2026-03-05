@@ -19,15 +19,21 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.units import inch
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle,
-    Image, PageBreak, HRFlowable, Preformatted,
+    Image, PageBreak, HRFlowable, Preformatted, XPreformatted
 )
 from reportlab.lib.utils import ImageReader
+
+from pygments import lex
+from pygments.lexers import get_lexer_by_name
+from pygments.styles import get_style_by_name
+import xml.sax.saxutils as saxutils
 
 from django.http import HttpResponse
 
 from .models import (
     CandidateSubmission, CandidateInvitation, CandidateDetails,
     AssessmentQuestion, AssessmentCodingQuestion, CodingTestCase,
+    CandidateIntegrity
 )
 
 MAX_PAGES = 20
@@ -62,6 +68,12 @@ def _build_styles():
         borderWidth=1, borderColor=colors.HexColor('#e2e8f0'), borderPadding=6,
     ))
     styles.add(ParagraphStyle(
+        'CodeBlockDark', parent=styles['Code'],
+        fontSize=8, leading=10, textColor=colors.HexColor('#f8f8f2'),
+        backColor=colors.HexColor('#272822'),
+        borderWidth=1, borderColor=colors.HexColor('#000000'), borderPadding=6,
+    ))
+    styles.add(ParagraphStyle(
         'QualifiedBadge', parent=styles['Normal'],
         fontSize=12, fontName='Helvetica-Bold', textColor=colors.HexColor('#16a34a'),
     ))
@@ -73,6 +85,35 @@ def _build_styles():
 
 
 # ─── Helpers ─────────────────────────────────────────────────────────────────
+
+def highlight_for_reportlab(code, language, style_name='monokai'):
+    try:
+        lexer = get_lexer_by_name(language, stripall=True)
+    except Exception:
+        lexer = get_lexer_by_name('text', stripall=True)
+        
+    try:
+        style = get_style_by_name(style_name)
+    except Exception:
+        style = get_style_by_name('monokai')
+    
+    html_parts = []
+    for token_type, value in lex(code, lexer):
+        escaped_value = saxutils.escape(value)
+        token_style = style.style_for_token(token_type)
+        color = token_style.get('color')
+        
+        part = escaped_value
+        if token_style.get('bold'):
+            part = f'<b>{part}</b>'
+        if token_style.get('italic'):
+            part = f'<i>{part}</i>'
+        if color:
+            part = f'<font color="#{color}">{part}</font>'
+
+        html_parts.append(part)
+            
+    return ''.join(html_parts)
 
 def _info_row(label, value, styles):
     return [
@@ -586,14 +627,15 @@ def generate_candidate_report(submission_id):
                 f'<b>{idx}. {_safe(title)}</b>  |  Language: {_safe(language)}  |  Tests Passed: {passed}/{total_tests}',
                 styles['Normal'],
             ))
-            story.append(Spacer(1, 4))
+            story.append(Spacer(1, 16))
 
             # Code block
             if submitted_code:
                 code_display = submitted_code[:3000]
                 if len(submitted_code) > 3000:
                     code_display += '\n\n... (code truncated) ...'
-                story.append(Preformatted(code_display, styles['CodeBlock']))
+                formatted_code = highlight_for_reportlab(code_display, language)
+                story.append(XPreformatted(formatted_code, styles['CodeBlockDark']))
             else:
                 story.append(Paragraph('<i>No code submitted</i>', styles['Normal']))
 
@@ -811,6 +853,25 @@ def generate_candidate_report(submission_id):
         [Paragraph('Status', styles['InfoLabel']), Paragraph(status_text, status_style)],
         _info_row('Result', submission.result or '-', styles),
     ]
+
+    # Add Integrity Score if available
+    try:
+        integrity = CandidateIntegrity.objects.get(invitation=inv)
+        
+        # Color coding the integrity score based on value (e.g. < 70 is warning)
+        int_score = integrity.integrity_score
+        int_color = colors.HexColor('#16a34a') if int_score >= 80 else (colors.HexColor('#eab308') if int_score >= 50 else colors.HexColor('#dc2626'))
+        
+        # Formatting total violations
+        violations = integrity.tab_switches + integrity.phone_detections + integrity.multiface_detections + integrity.no_face_detections
+        
+        results_data.append([
+            Paragraph('Integrity Score', styles['InfoLabel']),
+            Paragraph(f'<font color="{int_color}">{int_score:.1f}%</font> ({violations} Violations)', styles['InfoValue'])
+        ])
+    except CandidateIntegrity.DoesNotExist:
+        pass
+
     story.append(_kv_table(results_data, styles))
     story.append(Spacer(1, 12))
 

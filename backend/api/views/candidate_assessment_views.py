@@ -778,6 +778,69 @@ def submit_invitation_answers_view(request, token):
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while submitting: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def update_standard_integrity_view(request, token):
+    """
+    Candidate sends video/audio violation events directly.
+    """
+    try:
+        inv = CandidateInvitation.objects.get(token=token)
+        
+        # Don't penalize if exam is already submitted
+        if inv.status == 'submitted':
+            return Response({'message': 'Exam already submitted'}, status=status.HTTP_200_OK)
+        data = request.data or {}
+        event_type = data.get('event_type')
+        timestamp = data.get('timestamp') or timezone.now().isoformat()
+        if not event_type:
+            return Response({'error': 'Event type required'}, status=status.HTTP_400_BAD_REQUEST)
+        integrity, _ = CandidateIntegrity.objects.get_or_create(invitation=inv)
+        penalty = 0
+        if event_type == 'tab_switch':
+            integrity.tab_switches += 1
+            penalty = 10
+        elif event_type == 'phone_detection':
+            integrity.phone_detections += 1
+            penalty = 30
+        elif event_type == 'multiface_detection':
+            integrity.multiface_detections += 1
+            penalty = 15
+        elif event_type in ['no_face_detection', 'face_detection_lost']:
+            integrity.no_face_detections += 1
+            penalty = 5
+        else:
+            return Response({'error': 'Unknown event type'}, status=status.HTTP_400_BAD_REQUEST)
+        # Grace system: first 3 warnings are logged but forgiven
+        logs = integrity.warning_logs if isinstance(integrity.warning_logs, list) else []
+        logs.append({
+            'event_type': event_type,
+            'timestamp': timestamp,
+            'penalty_applied': penalty
+        })
+        integrity.warning_logs = logs
+        if len(logs) <= 3:
+            # Forgive penalty for first three violations
+            penalty = 0
+        if penalty > 0:
+            integrity.integrity_score = max(0.0, integrity.integrity_score - penalty)
+        
+        integrity.save()
+        
+        return Response({
+            'message': 'Integrity logged',
+            'integrity_score': integrity.integrity_score,
+            'warnings_used': len(logs)
+        }, status=status.HTTP_200_OK)
+    except CandidateInvitation.DoesNotExist:
+        return Response({'error': 'Invitation not found'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        import traceback
+        print("Integrity Error:", traceback.format_exc())
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
 
 def _update_submission_scoring_logic(submission):
     """
@@ -1338,6 +1401,10 @@ def get_invitation_result_view(request, token):
                     'rating': getattr(submission, 'rating', None),
                     'feedback': getattr(submission, 'feedback', None),
                 },
+                'integrity': {
+                    'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
+                    'warning_logs': getattr(inv.integrity, 'warning_logs', []) if hasattr(inv, 'integrity') else []
+                }
             },
             status=status.HTTP_200_OK
         )
@@ -1408,6 +1475,10 @@ def results_overview_view(request):
                     'coding_percentage': s.coding_percentage,
 
                     'status': s.result,
+                    'integrity': {
+                        'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
+                        'warning_logs': getattr(inv.integrity, 'warning_logs', []) if hasattr(inv, 'integrity') else []
+                    }
                 }
             )
 

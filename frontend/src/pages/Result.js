@@ -292,6 +292,7 @@ export default function Result() {
                                     <th>Objective</th>
                                     <th>Coding</th>
                                     <th>Final Score</th>
+                                    <th>Integrity Score</th>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -324,6 +325,16 @@ export default function Result() {
                                         <td>
                                             <div className="cell-title" style={{ fontWeight: 'bold' }}>{fmtPercent(r.percentage)}</div>
                                             <div className="cell-sub">Weighted</div>
+                                        </td>
+                                        <td>
+                                            <div className="cell-title" style={{ fontWeight: 'bold' }}>
+                                                {r.integrity?.integrity_score !== undefined ? `${r.integrity.integrity_score}%` : '100%'}
+                                            </div>
+                                            {r.integrity?.warning_logs?.length > 0 && (
+                                                <div className="cell-sub" style={{ color: '#ef4444' }}>
+                                                    {r.integrity.warning_logs.length} Warnings
+                                                </div>
+                                            )}
                                         </td>
                                         <td>
                                             <span className={`pill ${r.status === 'selected' ? 'ok' : 'bad'}`}>

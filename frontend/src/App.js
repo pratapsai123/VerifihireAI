@@ -112,6 +112,7 @@ function AppContent() {
     location.pathname.startsWith('/take-assessment/') ||
     location.pathname.startsWith('/take-ai-assessment/') ||
     location.pathname.startsWith('/ai-interview-session/') ||
+    location.pathname.startsWith('/result/') ||
     location.pathname.endsWith('/attempt');
 
   return (

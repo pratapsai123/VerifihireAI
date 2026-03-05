@@ -55,6 +55,7 @@ from .candidate_assessment_views import (
     submit_objective_section,
     save_candidate_details_view,
     _acq_merge_code,
+    update_standard_integrity_view,
 )
 
 from .live_interview_views import (

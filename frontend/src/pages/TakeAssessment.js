@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -312,6 +312,11 @@ export default function TakeAssessment() {
   const [showResultPanel, setShowResultPanel] = useState(true);
   const [resultHeightPct, setResultHeightPct] = useState(30);
   const [isResultDragging, setIsResultDragging] = useState(false);
+  const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
+  const videoRef = useRef(null);
+  const streamRef = useRef(null);
+  const detectorRef = useRef(null);
+  const lastDetectionTimeRef = useRef(0);
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
@@ -910,6 +915,86 @@ export default function TakeAssessment() {
     return () => document.removeEventListener('fullscreenchange', update);
   }, []);
 
+  // Integrity Tracking: Tab Switches / Leaving Window & Camera
+  const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
+    setAiToast({ active: true, text, urgent });
+    setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
+
+    if (!eventType || !token || submitted || assessmentStage === 'loading' || assessmentStage === 'completed') {
+      console.log('Skipping API call due to:', { eventType, token, submitted, assessmentStage });
+      return;
+    }
+    try {
+      console.log('Posting integrity event to:', `${API_BASE_URL}/invitations/public/${token}/integrity/`);
+      const resp = await axios.post(`${API_BASE_URL}/invitations/public/${token}/integrity/`, {
+        event_type: eventType,
+        timestamp: new Date().toISOString()
+      });
+      console.log('Integrity API Response:', resp.data);
+    } catch (err) {
+      console.error('Failed to log integrity event', err.response?.data || err.message);
+    }
+  }, [token, submitted, assessmentStage]);
+
+  const startCamera = useCallback(async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+      if (videoRef.current) { videoRef.current.srcObject = stream; videoRef.current.play().catch(() => { }); }
+      streamRef.current = stream;
+    } catch { showAiEvent('Camera Denied', true); }
+  }, [showAiEvent]);
+
+  const stopCamera = useCallback(() => {
+    if (streamRef.current) { streamRef.current.getTracks().forEach(t => t.stop()); streamRef.current = null; }
+  }, []);
+
+  useEffect(() => {
+    if (submitted || assessmentStage === 'loading' || assessmentStage === 'completed') return;
+
+    startCamera();
+
+    let detectInterval;
+    const initMonitoring = async () => {
+      if (window.cocoSsd) {
+        detectorRef.current = await window.cocoSsd.load();
+        detectInterval = setInterval(async () => {
+          if (videoRef.current && detectorRef.current && videoRef.current.readyState === 4) {
+            const now = Date.now();
+            if (now - lastDetectionTimeRef.current > 2000) {
+              lastDetectionTimeRef.current = now;
+              const preds = await detectorRef.current.detect(videoRef.current);
+              if (preds.find(p => p.class === 'cell phone')) showAiEvent('PHONE DETECTED', true, 'phone_detection');
+              const people = preds.filter(p => p.class === 'person');
+              if (people.length > 1) showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
+              else if (people.length === 0) showAiEvent('FACE NOT DETECTED', true, 'no_face_detection');
+            }
+          }
+        }, 1000);
+      }
+    };
+    initMonitoring();
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        showAiEvent('TAB SWITCHED', true, 'tab_switch');
+      }
+    };
+
+    const handleBlur = () => {
+      showAiEvent('WINDOW BLURRED', true, 'tab_switch');
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('blur', handleBlur);
+
+    return () => {
+      clearInterval(detectInterval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('blur', handleBlur);
+      stopCamera();
+    };
+  }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage]);
+
   const requestFullscreen = async () => {
     try {
       setFsError('');
@@ -1280,6 +1365,12 @@ export default function TakeAssessment() {
 
   return (
     <div className="take-page take-exam-mode">
+      {aiToast.active && (
+        <div style={{ position: 'fixed', top: 100, left: '50%', transform: 'translateX(-50%)', zIndex: 99999, background: aiToast.urgent ? '#dc2626' : '#1d4ed8', color: 'white', padding: '10px 24px', borderRadius: 25, fontWeight: 700, fontSize: '0.82rem', boxShadow: '0 6px 24px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: 8, letterSpacing: 0.5 }}>
+          <span style={{ fontSize: '1rem' }}>{aiToast.urgent ? '⚠️' : 'ℹ️'}</span>
+          {aiToast.text}
+        </div>
+      )}
       <div className="take-shell-exam">
         {!isFullscreen && !submitted ? (
           <div className="fs-gate" role="dialog" aria-label="Enter full screen">
@@ -1337,7 +1428,12 @@ export default function TakeAssessment() {
 
         <div className="take-header">
           <div className="take-title">{assessment?.display_name || assessment?.name || 'Assessment'}</div>
-          {!isFullscreen ? <div className="take-note"><span className="fs-badge">Fullscreen required</span></div> : null}
+          {(!submitted && assessmentStage !== 'loading' && assessmentStage !== 'completed') && (
+            <div style={{ width: 44, height: 44, borderRadius: '50%', backgroundColor: '#1e293b', overflow: 'hidden', marginLeft: 'auto', marginRight: 15, border: '2px solid #e2e8f0', flexShrink: 0 }}>
+              <video ref={videoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+            </div>
+          )}
+          {!isFullscreen ? <div className="take-note" style={{ marginLeft: submitted || assessmentStage === 'loading' ? 'auto' : 0 }}><span className="fs-badge">Fullscreen required</span></div> : null}
         </div>
 
         {submitted ? (
