@@ -33,11 +33,16 @@ const FloatingInput = ({ label, value, onChange, errorEmpty, type = "text", fiel
         type={type}
         value={value}
         placeholder={label}
-        maxLength={field === "pan" ? 10 : undefined}
+        maxLength={
+          field === "pan" ? 10 :
+            (field === "firstName" || field === "lastName" || field === "email") ? 50 : undefined
+        }
         onChange={(e) => {
           let val = e.target.value;
 
-          if (field === "phone") {
+          if (field === "firstName" || field === "lastName") {
+            val = val.replace(/[^a-zA-Z]/g, '');
+          } else if (field === "phone") {
             val = val.replace(/[^0-9]/g, "").slice(0, 10);
           } else if (field === "pan") {
             val = val.toUpperCase();
@@ -672,6 +677,7 @@ const CandidateDetails = ({ token, onComplete }) => {
                 <input
                   type="file"
                   accept=".png,.jpg,.jpeg,.pdf"
+                  disabled={!data.pan || data.pan.trim().length !== 10}
                   className={`candidate-input ${submitted && !data.panFile ? 'candidate-input-error' : ''}`}
                   onChange={(e) => {
                     const file = e.target.files?.[0] || null;

@@ -257,6 +257,9 @@ export default function TakeAssessment() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [scheduleInfo, setScheduleInfo] = useState(null);
+  // Pre-check: time window error shown BEFORE the candidate details form
+  const [windowError, setWindowError] = useState('');
+  const [windowSchedule, setWindowSchedule] = useState(null);
   const [assessment, setAssessment] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [codingQuestions, setCodingQuestions] = useState([]);
@@ -796,6 +799,32 @@ export default function TakeAssessment() {
     }
   }, [token]);
 
+  // Pre-check the assessment window as soon as the token is available.
+  // This runs BEFORE showing the candidate details form so the candidate
+  // doesn't waste time filling in details when the window is expired/not open.
+  useEffect(() => {
+    if (!token) return;
+    axios.get(`${API_BASE_URL}/invitations/public/${token}/?check_only=1`)
+      .then(() => {
+        // Window is open — clear any prior error
+        setWindowError('');
+        setWindowSchedule(null);
+      })
+      .catch((err) => {
+        const status = err?.response?.status;
+        // 403 = not started yet, 410 = expired / window closed, 404 = invalid link
+        if (status === 403 || status === 410 || status === 404) {
+          setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
+          setWindowSchedule(err?.response?.data?.schedule || null);
+        }
+        // 409 = already submitted — redirect to result
+        if (status === 409) {
+          navigate(`/result/${token}`, { replace: true });
+        }
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token]);
+
   useEffect(() => {
     const load = async () => {
       setLoading(true);
@@ -949,7 +978,7 @@ export default function TakeAssessment() {
   }, []);
 
   useEffect(() => {
-    if (submitted || assessmentStage === 'loading' || assessmentStage === 'completed') return;
+    if (submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
 
     startCamera();
 
@@ -1227,6 +1256,54 @@ export default function TakeAssessment() {
   const resultPaneStyle = showResultPanel && activeRunResult
     ? { flex: `0 0 ${resultHeightPct}%`, maxHeight: '70vh' }
     : { display: 'none' };
+
+  // Show window error BEFORE the candidate details form
+  if (windowError) {
+    const isNotStarted = windowError.toLowerCase().includes('not started yet');
+    const isExpired = windowError.toLowerCase().includes('expired') || windowError.toLowerCase().includes('start window');
+    const scheduleData = windowSchedule;
+    return (
+      <div className="take-page">
+        <div className="take-shell">
+          <div className="take-card" style={{ maxWidth: 600, margin: '60px auto', padding: '40px 36px', borderRadius: 16, background: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+            <div style={{ textAlign: 'center', marginBottom: 28 }}>
+              <span style={{ fontSize: 48 }}>{isNotStarted ? '⏳' : '🔒'}</span>
+              <h2 style={{ margin: '16px 0 8px', fontSize: 22, color: '#1e293b' }}>
+                {isNotStarted ? 'Your Assessment Is Scheduled' : 'Assessment Window Closed'}
+              </h2>
+              <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>{windowError}</p>
+            </div>
+            {scheduleData && (
+              <div style={{ background: '#f8fafc', borderRadius: 10, padding: '18px 20px', marginTop: 16 }}>
+                {scheduleData.start_date && (
+                  <div style={{ display: 'flex', gap: 12, marginBottom: 8 }}>
+                    <span style={{ color: '#64748b', minWidth: 90 }}>📅 Start</span>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>
+                      {scheduleData.start_date}{scheduleData.start_time_display ? ` at ${scheduleData.start_time_display}` : ''}
+                    </span>
+                  </div>
+                )}
+                {scheduleData.end_date && (
+                  <div style={{ display: 'flex', gap: 12, marginBottom: 8 }}>
+                    <span style={{ color: '#64748b', minWidth: 90 }}>🏁 End</span>
+                    <span style={{ color: '#1e293b', fontWeight: 600 }}>
+                      {scheduleData.end_date}{scheduleData.end_time_display ? ` at ${scheduleData.end_time_display}` : ''}
+                    </span>
+                  </div>
+                )}
+                {scheduleData.time_zone && (
+                  <div style={{ display: 'flex', gap: 12 }}>
+                    <span style={{ color: '#64748b', minWidth: 90 }}>🌐 Zone</span>
+                    <span style={{ color: '#1e293b' }}>{scheduleData.time_zone}</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Show candidate details form if not completed
   if (!candidateDetailsCompleted) {

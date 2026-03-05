@@ -429,6 +429,9 @@ export default function InviteCandidates() {
       if (!scheduleDate || !startTime) return { ok: false, error: 'Please select date and start time.' };
       const startIso = toISOFromLocal(scheduleDate, startTime);
       if (!startIso) return { ok: false, error: 'Invalid start time.' };
+      if (new Date(startIso).getTime() < Date.now()) {
+        return { ok: false, error: 'Start time cannot be in the past.' };
+      }
 
       const durationSeconds = parseHHMMSSSeconds(assessment?.total_time);
       if (!durationSeconds) return { ok: false, error: 'Assessment total time is missing. Please set exam duration first.' };
@@ -551,12 +554,22 @@ export default function InviteCandidates() {
             </div>
             <div className="field">
               <label>Start Date</label>
-              <input type="date" value={scheduleDate} onChange={(e) => setScheduleDate(e.target.value)} />
+              <input
+                type="date"
+                value={scheduleDate}
+                min={new Date().toISOString().split('T')[0]}
+                onChange={(e) => setScheduleDate(e.target.value)}
+              />
             </div>
             {validityMode === 'date_anytime' ? (
               <div className="field">
                 <label>End Date (optional)</label>
-                <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                <input
+                  type="date"
+                  value={endDate}
+                  min={scheduleDate || new Date().toISOString().split('T')[0]}
+                  onChange={(e) => setEndDate(e.target.value)}
+                />
                 <div className="hint">Leave empty to allow only the start date.</div>
               </div>
             ) : validityMode === 'one_week' ? (
@@ -579,35 +592,31 @@ export default function InviteCandidates() {
                 <div className="field">
                   <label>Start Time</label>
                   <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
-                  <div className="hint">Grace period is automatically applied.</div>
                 </div>
                 <div className="field">
-                  <label>End Time (auto)</label>
+                  <label>Start Window (auto)</label>
                   <input
                     type="text"
                     value={(() => {
-                      const durationSeconds = (() => {
-                        try {
-                          const parts = String(assessment?.total_time || '').split(':').map((x) => Number(x));
-                          if (parts.length === 2) return Math.max(0, (parts[0] || 0) * 60 + (parts[1] || 0));
-                          if (parts.length === 3) return Math.max(0, (parts[0] || 0) * 3600 + (parts[1] || 0) * 60 + (parts[2] || 0));
-                          return 0;
-                        } catch {
-                          return 0;
-                        }
-                      })();
-                      if (!scheduleDate || !startTime || !durationSeconds) return '';
+                      if (!scheduleDate || !startTime) return '';
                       const start = new Date(`${scheduleDate}T${startTime}:00`);
                       if (Number.isNaN(start.getTime())) return '';
-                      const end = new Date(start.getTime() + durationSeconds * 1000);
-                      const hh = String(end.getHours()).padStart(2, '0');
-                      const mm = String(end.getMinutes()).padStart(2, '0');
-                      return `${hh}:${mm}`;
+
+                      const fmt = (d) => {
+                        const h = d.getHours();
+                        const m = String(d.getMinutes()).padStart(2, '0');
+                        const ampm = h >= 12 ? 'PM' : 'AM';
+                        const hm = String(h % 12 || 12).padStart(2, '0');
+                        return `${hm}:${m} ${ampm}`;
+                      };
+
+                      const end = new Date(start.getTime() + 30 * 60000); // 30 min grace
+                      return `${fmt(start)} - ${fmt(end)}`;
                     })()}
                     readOnly
                     placeholder="Auto"
                   />
-                  <div className="hint">Calculated using exam duration: <span className="mono">{assessment?.total_time || '-'}</span></div>
+                  <div className="hint">Candidates can start any time within this 30-min window.</div>
                 </div>
               </>
             )}

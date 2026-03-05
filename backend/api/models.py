@@ -654,7 +654,7 @@ class CandidateSubmission(models.Model):
     result = models.CharField(max_length=20, default='rejected')  # selected | rejected
     rating = models.IntegerField(blank=True, null=True)  # 1-5 stars
     feedback = models.TextField(blank=True, null=True)
-    submitted_at = models.DateTimeField(auto_now_add=True)
+    submitted_at = models.DateTimeField(default=timezone.now, help_text="Final submission time; updated on coding finalization for mixed assessments")
 
     # Detailed score breakdown
     objective_score = models.IntegerField(default=0)

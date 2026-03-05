@@ -102,24 +102,39 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
 
             # Build schedule blocks based on validity mode
             if validity_mode == 'exact_window':
-                # Show: Date, Start Time, End Time, Time Zone
-                display_date = local_start.strftime('%B %d, %Y') if local_start else ''
-                display_start_time = local_start.strftime('%I:%M %p') if local_start else ''
-                display_end_time = local_end.strftime('%I:%M %p') if local_end else ''
+                # Show: Date, Start Window (start to last valid start), End Time (extended deadline)
+                # entry_deadline = start_time + grace_minutes  -> last moment candidate can start
+                # actual_end    = end_time + grace_minutes     -> absolute hard stop
+                try:
+                    entry_deadline_local = (local_start + timedelta(minutes=start_grace_minutes)) if local_start and start_grace_minutes > 0 else local_end
+                    actual_end_local     = (local_end + timedelta(minutes=start_grace_minutes))   if local_end and start_grace_minutes > 0 else local_end
+                except Exception:
+                    entry_deadline_local = local_end
+                    actual_end_local     = local_end
 
+                display_date       = local_start.strftime('%B %d, %Y') if local_start else ''
+                display_start_from = local_start.strftime('%I:%M %p').lstrip('0') if local_start else ''
+                display_start_to   = entry_deadline_local.strftime('%I:%M %p').lstrip('0') if entry_deadline_local else ''
+                display_duration   = getattr(assessment, 'total_time', None)
+
+                # Plain-text body
                 schedule_text = ''
                 if display_date:
                     schedule_text = (
                         "Assessment Schedule:\n"
                         f"  Date: {display_date}\n"
-                        f"  Start Time: {display_start_time}\n"
                     )
-                    if display_end_time:
-                        schedule_text += f"  End Time: {display_end_time}\n"
+                    if start_grace_minutes > 0:
+                        schedule_text += f"  Start Window: {display_start_from} \u2013 {display_start_to}\n"
+                    else:
+                        schedule_text += f"  Start Time: {display_start_from}\n"
+                    if display_duration:
+                        schedule_text += f"  Duration: {display_duration}\n"
                     if display_tz:
                         schedule_text += f"  Time Zone: {display_tz}\n"
                     schedule_text += "\n"
 
+                # HTML body
                 schedule_html = ''
                 if display_date:
                     schedule_html = '<table style="border-collapse:collapse;margin:16px 0;">'
@@ -128,16 +143,26 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
                         '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">📅 Date</td>'
                         f'<td style="padding:6px 0;">{display_date}</td>'
                         '</tr>'
-                        '<tr>'
-                        '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Start Time</td>'
-                        f'<td style="padding:6px 0;">{display_start_time}</td>'
-                        '</tr>'
                     )
-                    if display_end_time:
+                    if start_grace_minutes > 0:
                         schedule_html += (
                             '<tr>'
-                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 End Time</td>'
-                            f'<td style="padding:6px 0;">{display_end_time}</td>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Start Window</td>'
+                            f'<td style="padding:6px 0;">{display_start_from} &ndash; {display_start_to}</td>'
+                            '</tr>'
+                        )
+                    else:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">🕐 Start Time</td>'
+                            f'<td style="padding:6px 0;">{display_start_from}</td>'
+                            '</tr>'
+                        )
+                    if display_duration:
+                        schedule_html += (
+                            '<tr>'
+                            '<td style="padding:6px 16px 6px 0;color:#475569;font-weight:600;">⏳ Duration</td>'
+                            f'<td style="padding:6px 0;">{display_duration}</td>'
                             '</tr>'
                         )
                     if display_tz:
@@ -355,34 +380,66 @@ def get_invitation_public_view(request, token):
             if _tz:
                 _schedule_info['time_zone'] = _tz
 
+            # Compute the extended deadline: end_time + grace_minutes.
+            # last_valid_start = extended_deadline - assessment_duration.
+            # Only candidates who arrive before last_valid_start can get the full duration.
+            # Anyone arriving after last_valid_start is blocked entirely.
+            extended_deadline = (end_time + timedelta(minutes=grace_minutes)) if end_time and grace_minutes > 0 else end_time
+
+            # Compute the assessment duration for the cutoff check
+            _entry_duration = _hhmmss_to_seconds(getattr(assessment, 'total_time', '') or '')
+            if extended_deadline and _entry_duration > 0:
+                # Last moment a candidate can start and still get the full duration
+                last_valid_start = extended_deadline - timedelta(seconds=_entry_duration)
+            else:
+                last_valid_start = extended_deadline
+
             if start_time and now < start_time:
                 return Response({'error': 'This exam has not started yet.', 'schedule': _schedule_info}, status=status.HTTP_403_FORBIDDEN)
-            if start_time and grace_minutes > 0 and now > (start_time + timedelta(minutes=grace_minutes)):
+            # Block if they can no longer get the full assessment duration
+            if last_valid_start and now > last_valid_start:
                 return Response({'error': 'The start window for this exam has expired.', 'schedule': _schedule_info}, status=status.HTTP_410_GONE)
-            if end_time and now >= end_time:
+            # Also block if there is no grace and we are past end_time
+            if end_time and not grace_minutes and now >= end_time:
                 return Response({'error': 'This assessment link has expired.', 'schedule': _schedule_info}, status=status.HTTP_410_GONE)
 
-        # Start timer on first access (persisted). Also cap by the scheduled end_time if provided.
+        # Compute the extended deadline (end_time + grace) used to cap expires_at.
+        # This allows late starters (within grace window) to still use full assessment
+        # duration, but hard-stops anyone at the extended deadline.
+        _raw_end_time = getattr(inv, 'end_time', None)
+        _raw_end_time = _make_aware_if_needed(_raw_end_time)
+        _grace = max(0, int(getattr(inv, 'start_grace_minutes', 0) or 0))
+        extended_deadline = (_raw_end_time + timedelta(minutes=_grace)) if _raw_end_time and _grace > 0 else _raw_end_time
+
+        # Start timer on first access (persisted). Cap by the extended deadline.
         now = timezone.now()
         duration_seconds = _hhmmss_to_seconds(getattr(assessment, 'total_time', '') or '')
         if duration_seconds <= 0:
             duration_seconds = 0
 
-        newly_started = False
-        if inv.started_at is None:
-            newly_started = True
-            inv.started_at = now
-            expires_at = now + timedelta(seconds=duration_seconds) if duration_seconds else None
-            if end_time:
-                expires_at = min(expires_at, end_time) if expires_at else end_time
-            inv.expires_at = expires_at
-        else:
-            # Ensure existing expires_at is capped by end_time (in case schedule was set after start)
-            if end_time:
-                if inv.expires_at and inv.expires_at > end_time:
-                    inv.expires_at = end_time
-                elif inv.expires_at is None:
-                    inv.expires_at = end_time
+        # --- PRE-CHECK ONLY: Skip starting the timer and generating permutations ---
+        check_only = request.GET.get('check_only', 'false').lower() in ('true', '1', 'yes')
+
+        if not check_only:
+            newly_started = False
+            if inv.started_at is None:
+                newly_started = True
+                inv.started_at = now
+                expires_at = now + timedelta(seconds=duration_seconds) if duration_seconds else None
+                # All candidates who reach here have enough time for the full duration.
+                # Cap by the extended deadline as a safety net (should equal now + duration for valid starters).
+                # Example: window 2:30-2:50, grace 30min -> extended deadline = 3:20.
+                # - Start at 2:30 -> expires at 2:50 (20 min). Start at 3:00 -> expires at 3:20 (20 min).
+                if extended_deadline:
+                    expires_at = min(expires_at, extended_deadline) if expires_at else extended_deadline
+                inv.expires_at = expires_at
+            else:
+                # Ensure existing expires_at is capped by extended deadline (in case schedule changed after start)
+                if extended_deadline:
+                    if inv.expires_at and inv.expires_at > extended_deadline:
+                        inv.expires_at = extended_deadline
+                    elif inv.expires_at is None:
+                        inv.expires_at = extended_deadline
 
         # If expired, block access
         # NOTE: Since the frontend implements a "transition" stage where the timer is paused between objective and coding, 
@@ -401,13 +458,14 @@ def get_invitation_public_view(request, token):
         aq_list = list(aq_qs)
         aq_by_id = {aq.id: aq for aq in aq_list}
 
-        if not inv.question_order:
-            ids = [aq.id for aq in aq_list]
-            random.shuffle(ids)
-            inv.question_order = ids
+        if not check_only:
+            if not inv.question_order:
+                ids = [aq.id for aq in aq_list]
+                random.shuffle(ids)
+                inv.question_order = ids
 
-        if not isinstance(inv.option_map, dict) or not inv.option_map:
-            inv.option_map = {}
+            if not isinstance(inv.option_map, dict) or not inv.option_map:
+                inv.option_map = {}
 
         def _build_shuffled_options(aq: AssessmentQuestion):
             qtype = (aq.question_type or '').strip().upper()
@@ -499,7 +557,7 @@ def get_invitation_public_view(request, token):
                 }
             )
 
-        if changed or newly_started:
+        if not check_only and (changed or newly_started):
             inv.save(update_fields=['started_at', 'expires_at', 'question_order', 'option_map', 'updated_at'])
 
         # Fetch existing partial submission
@@ -599,12 +657,18 @@ def submit_invitation_answers_view(request, token):
         if inv.started_at is None:
             return Response({'error': 'Exam has not been started.'}, status=status.HTTP_403_FORBIDDEN)
 
-        # Cap by expires_at (with grace) and/or scheduled end_time
-        # Allow 2 minutes grace for auto-submit delays / network skew
+        # Compute extended deadline for submit check (end_time + grace_minutes).
+        try:
+            _submit_grace = max(0, int(getattr(inv, 'start_grace_minutes', 0) or 0))
+        except Exception:
+            _submit_grace = 0
+        extended_deadline_submit = (end_time + timedelta(minutes=_submit_grace)) if end_time and _submit_grace > 0 else end_time
+
+        # Allow 2 minutes network skew grace on top of expires_at
         if inv.expires_at and now > (inv.expires_at + timedelta(minutes=2)):
             return Response({'error': 'Time is over. Submission is closed.'}, status=status.HTTP_410_GONE)
-        if end_time and now >= end_time:
-            # Hard stop for scheduled end time
+        # Hard stop at extended deadline (end_time + grace_minutes)
+        if extended_deadline_submit and now > (extended_deadline_submit + timedelta(minutes=2)):
             return Response({'error': 'Time is over. Submission is closed.'}, status=status.HTTP_410_GONE)
 
         data = request.data or {}
@@ -778,6 +842,7 @@ def submit_invitation_answers_view(request, token):
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while submitting: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -791,12 +856,16 @@ def update_standard_integrity_view(request, token):
         # Don't penalize if exam is already submitted
         if inv.status == 'submitted':
             return Response({'message': 'Exam already submitted'}, status=status.HTTP_200_OK)
+
         data = request.data or {}
         event_type = data.get('event_type')
         timestamp = data.get('timestamp') or timezone.now().isoformat()
+
         if not event_type:
             return Response({'error': 'Event type required'}, status=status.HTTP_400_BAD_REQUEST)
+
         integrity, _ = CandidateIntegrity.objects.get_or_create(invitation=inv)
+
         penalty = 0
         if event_type == 'tab_switch':
             integrity.tab_switches += 1
@@ -812,6 +881,7 @@ def update_standard_integrity_view(request, token):
             penalty = 5
         else:
             return Response({'error': 'Unknown event type'}, status=status.HTTP_400_BAD_REQUEST)
+
         # Grace system: first 3 warnings are logged but forgiven
         logs = integrity.warning_logs if isinstance(integrity.warning_logs, list) else []
         logs.append({
@@ -820,9 +890,11 @@ def update_standard_integrity_view(request, token):
             'penalty_applied': penalty
         })
         integrity.warning_logs = logs
+
         if len(logs) <= 3:
             # Forgive penalty for first three violations
             penalty = 0
+
         if penalty > 0:
             integrity.integrity_score = max(0.0, integrity.integrity_score - penalty)
         
@@ -833,13 +905,13 @@ def update_standard_integrity_view(request, token):
             'integrity_score': integrity.integrity_score,
             'warnings_used': len(logs)
         }, status=status.HTTP_200_OK)
+
     except CandidateInvitation.DoesNotExist:
         return Response({'error': 'Invitation not found'}, status=status.HTTP_404_NOT_FOUND)
     except Exception as e:
         import traceback
         print("Integrity Error:", traceback.format_exc())
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 
 def _update_submission_scoring_logic(submission):
@@ -1253,10 +1325,17 @@ def invitation_coding_finalize_view(request, token):
         if inv.started_at is None:
             return Response({'error': 'Exam has not been started.'}, status=status.HTTP_403_FORBIDDEN)
         
+        # Use extended deadline (end_time + grace_minutes) for hard stop
+        try:
+            _finalize_grace = max(0, int(getattr(inv, 'start_grace_minutes', 0) or 0))
+        except Exception:
+            _finalize_grace = 0
+        extended_deadline_finalize = (end_time + timedelta(minutes=_finalize_grace)) if end_time and _finalize_grace > 0 else end_time
+
         # Allow 2 minutes grace period for auto-submit delays / network skew
         if inv.expires_at and now > (inv.expires_at + timedelta(minutes=2)):
             return Response({'error': 'Time is over. Submission is closed.'}, status=status.HTTP_410_GONE)
-        if end_time and now >= end_time:
+        if extended_deadline_finalize and now > (extended_deadline_finalize + timedelta(minutes=2)):
             return Response({'error': 'Time is over. Submission is closed.'}, status=status.HTTP_410_GONE)
 
         # Get or create submission (it might exist from per-question submits)
@@ -1334,8 +1413,15 @@ def invitation_coding_finalize_view(request, token):
             pass
         
         # Mark invitation as submitted
-        inv.status = 'submitted' # CodingInvite.STATUS_SUBMITTED
+        inv.status = 'submitted'
         inv.save(update_fields=['status'])
+
+        # Update submitted_at to the true final submission time (coding finalized)
+        # For mixed assessments, the submission record was created during objective submit
+        # so submitted_at was set then. We update it now to reflect the real end time.
+        from django.utils import timezone as tz_now
+        submission.submitted_at = tz_now.now()
+        submission.save(update_fields=['submitted_at'])
 
         return Response({'ok': True, 'submission_id': submission.id}, status=status.HTTP_200_OK)
     except Exception as e:
