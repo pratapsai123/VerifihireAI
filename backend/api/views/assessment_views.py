@@ -25,8 +25,21 @@ def get_questions_view(request):
         limit = request.GET.get('limit', None)
         visibility = request.GET.get('visibility', 'GLOBAL').strip()
         
-        # Start with all GLOBAL questions
-        questions = Question.objects.filter(visibility='GLOBAL', company_id__isnull=True)
+        # Start with GLOBAL questions or questions belonging to the user's company
+        company_id = None
+        if hasattr(request, 'user') and request.user.is_authenticated:
+            # Note: We use auth_views strategy to safely check profile
+            user_profile = getattr(request.user, 'profile', None)
+            if user_profile and user_profile.company:
+                company_id = user_profile.company.id
+
+        if company_id:
+            questions = Question.objects.filter(
+                models.Q(visibility='GLOBAL', company_id__isnull=True) |
+                models.Q(company_id=company_id)
+            )
+        else:
+            questions = Question.objects.filter(visibility='GLOBAL', company_id__isnull=True)
         
         # Apply filters
         if topic:
@@ -374,6 +387,18 @@ def get_manual_questions_view(request):
             caid = int(custom_assessment_id)
         except (TypeError, ValueError):
             return Response({'error': 'custom_assessment_id must be an integer.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Verify CustomAssessment belongs to user's company
+        try:
+            ca = _db_call_with_retry(lambda: CustomAssessment.objects.select_related('user_profile__company').get(id=caid), retries=1)
+        except CustomAssessment.DoesNotExist:
+            return Response({'error': f'CustomAssessment with id {caid} not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        user_profile = getattr(request.user, 'profile', None)
+        if hasattr(request, 'user') and request.user.is_authenticated:
+             if user_profile and ca.user_profile and ca.user_profile.company:
+                  if user_profile.company != ca.user_profile.company:
+                       return Response({'error': 'Not authorized to view questions for this CustomAssessment.'}, status=status.HTTP_403_FORBIDDEN)
 
         qs = (
             Question.objects.filter(custom_assessment_id=caid)
@@ -892,16 +917,31 @@ def get_questions_by_skills_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
         
+        # Determine user's company
+        company_id = None
+        if hasattr(request, 'user') and request.user.is_authenticated:
+            user_profile = getattr(request.user, 'profile', None)
+            if user_profile and user_profile.company:
+                company_id = user_profile.company.id
+
         # Get questions for each skill
         questions_by_topic = {}
         total_count = 0
         
         for skill in skills:
             # Try exact match first, then case-insensitive contains
-            questions = Question.objects.filter(
-                visibility='GLOBAL',
-                company_id__isnull=True
-            ).filter(
+            if company_id:
+                questions_base = Question.objects.filter(
+                    models.Q(visibility='GLOBAL', company_id__isnull=True) |
+                    models.Q(company_id=company_id)
+                )
+            else:
+                questions_base = Question.objects.filter(
+                    visibility='GLOBAL',
+                    company_id__isnull=True
+                )
+            
+            questions = questions_base.filter(
                 models.Q(topic__iexact=skill) | models.Q(topic__icontains=skill)
             )
             
@@ -1037,7 +1077,7 @@ def create_custom_assessment_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Find linked UserProfile if possible (by email)
+        # Find linked UserProfile - first try from request body email, then fall back to the authenticated user
         email = (user_data.get('email') or '').strip().lower() or None
         user_profile = None
         if email:
@@ -1045,6 +1085,10 @@ def create_custom_assessment_view(request):
                 user_profile = UserProfile.objects.get(email=email)
             except UserProfile.DoesNotExist:
                 user_profile = None
+        
+        # Always fall back to the authenticated user's profile (ensures company isolation works)
+        if user_profile is None and hasattr(request, 'user') and request.user.is_authenticated:
+            user_profile = getattr(request.user, 'profile', None)
 
         weights = assessment_data.get('weights', {}) or {}
 
@@ -1120,9 +1164,16 @@ def get_custom_assessment_view(request, custom_assessment_id: int):
             return Response({'error': 'custom_assessment_id must be an integer.'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            ca = _db_call_with_retry(lambda: CustomAssessment.objects.get(id=caid), retries=1)
+            ca = _db_call_with_retry(lambda: CustomAssessment.objects.select_related('user_profile__company').get(id=caid), retries=1)
         except CustomAssessment.DoesNotExist:
             return Response({'error': f'CustomAssessment with id {caid} not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Basic permission check: users from the same company can access
+        user_profile = getattr(request.user, 'profile', None)
+        if hasattr(request, 'user') and request.user.is_authenticated:
+            if user_profile and ca.user_profile and ca.user_profile.company:
+                 if user_profile.company != ca.user_profile.company:
+                      return Response({'error': 'Not authorized to view this CustomAssessment.'}, status=status.HTTP_403_FORBIDDEN)
 
         return Response(
             {
@@ -1180,7 +1231,12 @@ def create_assessment_view(request):
     try:
         # GET: list assessments (simple dashboard feed)
         if request.method == 'GET':
-            qs = Assessment.objects.all().order_by('-created_at')
+            user_profile = getattr(request.user, 'profile', None)
+            if user_profile and user_profile.company:
+                qs = Assessment.objects.filter(user_profile__company=user_profile.company).order_by('-created_at')
+            else:
+                 # If no company, return nothing or only global
+                qs = Assessment.objects.none()
 
             # Date filtering
             start_date = request.GET.get('start_date')
@@ -1231,7 +1287,12 @@ def create_assessment_view(request):
             # DB connections to Supabase can be flaky in dev; retry once on OperationalError
             for attempt in range(2):
                 try:
-                    custom_assessment = CustomAssessment.objects.get(id=custom_assessment_id)
+                    custom_assessment = CustomAssessment.objects.select_related('user_profile__company').get(id=custom_assessment_id)
+                    # Verify the custom assessment belongs to the same company
+                    user_profile = getattr(request.user, 'profile', None)
+                    if custom_assessment.user_profile and custom_assessment.user_profile.company:
+                        if not user_profile or user_profile.company != custom_assessment.user_profile.company:
+                             return Response({'error': 'Not authorized to use this CustomAssessment.'}, status=status.HTTP_403_FORBIDDEN)
                     break
                 except CustomAssessment.DoesNotExist:
                     return Response(
@@ -1373,9 +1434,14 @@ def create_assessment_view(request):
         weightage_objective = int(request.data.get('weightage_objective') or 0)
         weightage_coding = int(request.data.get('weightage_coding') or 100)
 
+        # Use the custom_assessment's user_profile, fall back to the requesting user's profile
+        # This ensures the Assessment is always linked to a company (for dashboard filtering)
+        req_user_profile = getattr(request.user, 'profile', None)
+        assessment_owner = (custom_assessment.user_profile if custom_assessment else None) or req_user_profile
+
         # Create Assessment
         assessment = Assessment.objects.create(
-            user_profile=custom_assessment.user_profile if custom_assessment else None,
+            user_profile=assessment_owner,
             custom_assessment=custom_assessment,
             role=explicit_role or (custom_assessment.role if custom_assessment else None),
             experience_level=explicit_experience_level or (custom_assessment.experience_level if custom_assessment else None),

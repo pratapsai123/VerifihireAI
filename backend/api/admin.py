@@ -54,10 +54,11 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'domain', 'created_at')
+    list_display = ('name', 'domain', 'approval_status', 'created_at', 'approved_at')
+    list_filter = ('approval_status', 'created_at')
     search_fields = ('name', 'domain')
-    readonly_fields = ('created_at',)
-    ordering = ['name']
+    readonly_fields = ('created_at', 'approved_at')
+    ordering = ['-created_at']
 
 
 @admin.register(ApplicationAdmin)

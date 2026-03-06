@@ -110,9 +110,33 @@ class Company(models.Model):
     """
     Stores unique company/organization names so we can map to a stable numeric company_id.
     """
+    APPROVAL_PENDING = 'pending'
+    APPROVAL_APPROVED = 'approved'
+    APPROVAL_REJECTED = 'rejected'
+
+    APPROVAL_STATUS_CHOICES = [
+        (APPROVAL_PENDING, 'Pending'),
+        (APPROVAL_APPROVED, 'Approved'),
+        (APPROVAL_REJECTED, 'Rejected'),
+    ]
+
     name = models.CharField(max_length=255, unique=True)
     domain = models.CharField(max_length=255, unique=True, blank=True, null=True, help_text="Primary email domain for this tenant/company")
     created_at = models.DateTimeField(auto_now_add=True)
+
+    # Superuser approval workflow
+    approval_status = models.CharField(
+        max_length=20,
+        choices=APPROVAL_STATUS_CHOICES,
+        default=APPROVAL_PENDING,
+        help_text="Platform superadmin must approve a company before its users can log in",
+    )
+    rejected_reason = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Optional reason provided when rejecting a company registration",
+    )
+    approved_at = models.DateTimeField(blank=True, null=True, help_text="When the company was approved")
 
     class Meta:
         verbose_name = "Company"

@@ -71,5 +71,11 @@ urlpatterns = [
     path('submit-interview-feedback/', views.submit_interview_feedback, name='submit_interview_feedback'),
     path('job-roles/', views.job_role_list_create_view, name='job_role_list_create'),
     path('job-roles/<int:pk>/', views.job_role_delete_view, name='job_role_delete'),
+
+    # Superadmin (Platform ApplicationAdmin) endpoints
+    path('superadmin/companies/', views.superadmin_companies_view, name='superadmin_companies'),
+    path('superadmin/companies/<int:company_id>/approve/', views.superadmin_approve_company_view, name='superadmin_approve_company'),
+    path('superadmin/companies/<int:company_id>/reject/', views.superadmin_reject_company_view, name='superadmin_reject_company'),
+    path('superadmin/companies/<int:company_id>/impersonate/', views.superadmin_impersonate_company_view, name='superadmin_impersonate_company'),
 ]
 

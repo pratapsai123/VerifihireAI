@@ -1509,7 +1509,13 @@ def results_overview_view(request):
     Recruiter overview: list recent results (submissions).
     """
     try:
-        qs = CandidateSubmission.objects.select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
+        user_profile = getattr(request.user, 'profile', None)
+        company_id = user_profile.company_id if user_profile and user_profile.company else None
+
+        if company_id:
+            qs = CandidateSubmission.objects.filter(invitation__assessment__user_profile__company_id=company_id).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
+        else:
+            qs = CandidateSubmission.objects.none()
 
         # Date filtering
         start_date = request.GET.get('start_date')
@@ -1640,8 +1646,15 @@ def candidates_overview_view(request):
       - assessment_id: optional
     """
     try:
+        user_profile = getattr(request.user, 'profile', None)
+        company_id = user_profile.company_id if user_profile and user_profile.company else None
+
         assessment_id = request.GET.get('assessment_id', None)
-        qs = CandidateInvitation.objects.select_related('assessment').order_by('-created_at')
+        
+        if company_id:
+            qs = CandidateInvitation.objects.filter(assessment__user_profile__company_id=company_id).select_related('assessment').order_by('-created_at')
+        else:
+            qs = CandidateInvitation.objects.none()
 
         # Date filtering
         start_date = request.GET.get('start_date')

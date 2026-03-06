@@ -123,7 +123,7 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'user',
+        'NAME': 'react_user1',
         'USER': 'postgres',
         'PASSWORD': '12345',
         'HOST': '127.0.0.1',

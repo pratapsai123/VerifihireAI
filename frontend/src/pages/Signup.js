@@ -97,7 +97,7 @@ function Signup() {
       if (error.response) {
         const errorData = error.response.data;
         const newFieldErrors = {};
-        
+
         // Helper to map backend keys to frontend state keys
         const keyMap = {
           'email': 'businessEmail',
@@ -199,15 +199,20 @@ function Signup() {
     setSignupLoading(true);
 
     try {
-      await axios.post(`${API_BASE_URL}/register/`, {
+      const response = await axios.post(`${API_BASE_URL}/register/`, {
         full_name: fullName,
         email: businessEmail,
         organization_name: organizationName,
         password: password,
       });
 
-      // Success
-      setSignupSuccess('Account created successfully! Redirecting to login...');
+      // Success - check if pending approval
+      const isPending = response.data.pending_approval;
+      if (isPending) {
+        setSignupSuccess('✅ Registration submitted! Your company account is pending review by the platform administrator. You will receive an email once your account is approved.');
+      } else {
+        setSignupSuccess('Account created successfully! Redirecting to login...');
+      }
       // Clear form
       setFullName('');
       setBusinessEmail('');
@@ -218,10 +223,12 @@ function Signup() {
       setOtp('');
       setOtpSent(false);
 
-      // Redirect to login page after 2 seconds
-      setTimeout(() => {
-        navigate('/login');
-      }, 2000);
+      // Only auto-redirect if not pending approval
+      if (!isPending) {
+        setTimeout(() => {
+          navigate('/login');
+        }, 2000);
+      }
 
     } catch (error) {
       // Handle error

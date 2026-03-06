@@ -67,9 +67,12 @@ def create_interview_invitations_and_send_email_view(request):
 
         # Get or create a default interview (or create one per batch)
         # For simplicity, we'll create one interview per batch of invites
+        req_user_profile = getattr(request.user, 'profile', None) if hasattr(request, 'user') and request.user.is_authenticated else None
         interview = Interview.objects.create(
             name=interview_name,
             description=f'Interview created on {timezone.now().strftime("%Y-%m-%d %H:%M:%S")}',
+            company=req_user_profile.company if req_user_profile else None,
+            created_by=req_user_profile,
         )
 
         frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
@@ -361,8 +364,19 @@ def interview_invitations_overview_view(request):
       - interview_id: optional filter by interview
     """
     try:
+        user_profile = getattr(request.user, 'profile', None)
+        company_id = user_profile.company_id if user_profile and user_profile.company else None
+
         interview_id = request.GET.get('interview_id', None)
-        qs = InterviewInvitation.objects.select_related('interview').order_by('-created_at')
+        if company_id:
+             # Filter by company via the Interview's company field.
+             # Also include legacy invitations where interview.created_by belongs to the same company.
+             qs = InterviewInvitation.objects.filter(
+                 models.Q(interview__company_id=company_id) |
+                 models.Q(interview__created_by__company_id=company_id)
+             ).select_related('interview').order_by('-created_at').distinct()
+        else:
+             qs = InterviewInvitation.objects.none()
         if interview_id:
             try:
                 qs = qs.filter(interview_id=int(interview_id))
@@ -907,8 +921,23 @@ def draft_interview_invitations_view(request, draft_id=None):
     CRUD endpoint for Draft Candidate Invitations.
     """
     try:
+        user_profile = getattr(request.user, 'profile', None)
+        company_id = user_profile.company_id if user_profile and user_profile.company else None
+
         if request.method == 'GET':
-            qs = InterviewInvitation.objects.filter(status='draft').order_by('-created_at')
+            if company_id:
+                # InterviewInvitation has no company field; isolate via the Interview's company.
+                # Also cover legacy data where interview.created_by is in this company.
+                qs = InterviewInvitation.objects.filter(
+                    models.Q(status='draft') &
+                    (
+                        models.Q(interview__company_id=company_id) |
+                        models.Q(interview__created_by__company_id=company_id) |
+                        models.Q(interview__isnull=True)  # truly orphan drafts
+                    )
+                ).order_by('-created_at')
+            else:
+                qs = InterviewInvitation.objects.none()
             results = []
             for inv in qs:
                 results.append(
@@ -968,6 +997,8 @@ def draft_interview_invitations_view(request, draft_id=None):
                     time_zone=time_zone,
                     start_grace_minutes=max(0, start_grace_minutes),
                     status='draft',
+                    # Note: InterviewInvitation has no company field directly;
+                    # company isolation is via interview__company_id
                 )
                 
                 created_drafts.append({
@@ -988,7 +1019,7 @@ def draft_interview_invitations_view(request, draft_id=None):
             if draft_id is None:
                 return Response({'error': 'Draft ID is required for deletion'}, status=status.HTTP_400_BAD_REQUEST)
                 
-            draft = InterviewInvitation.objects.filter(id=draft_id, status='draft').first()
+            draft = InterviewInvitation.objects.filter(id=draft_id, status='draft', interview__company_id=company_id).first()
             if not draft:
                 return Response({'error': 'Draft not found'}, status=status.HTTP_404_NOT_FOUND)
                 

@@ -83,7 +83,7 @@ def _email_domain(email: str) -> str:
 
 def _free_email_domains() -> set:
     default = {
-        'gmail.com', 'googlemail.com', 'yahoo.com', 'yahoo.in',
+        'yahoo.com', 'yahoo.in',
         'outlook.com', 'hotmail.com', 'live.com', 'icloud.com',
         'aol.com', 'proton.me', 'protonmail.com', 'zoho.com',
     }

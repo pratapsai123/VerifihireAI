@@ -456,9 +456,32 @@ def register_view(request):
             user=user,
         )
 
+        # Notify platform admin about the new company registration
+        try:
+            admin_email_list = list(
+                User.objects.filter(application_admin_profile__isnull=False).values_list('email', flat=True)
+            )
+            if admin_email_list:
+                send_mail(
+                    subject='VeriFiHire - New Company Registration Pending Approval',
+                    message=(
+                        f'A new company has registered and is pending your approval.\n\n'
+                        f'Company: {organization_name}\n'
+                        f'Admin: {first_name} {last_name}\n'
+                        f'Email: {email}\n\n'
+                        f'Please log in to the platform admin dashboard to review and approve or reject this registration.'
+                    ),
+                    from_email=settings.DEFAULT_FROM_EMAIL,
+                    recipient_list=admin_email_list,
+                    fail_silently=True,
+                )
+        except Exception as notify_err:
+            print(f'Admin notification email failed: {notify_err}')
+
         return Response(
             {
-                'message': 'Account created successfully!',
+                'message': 'Registration submitted! Your company account is pending approval by the platform administrator. You will receive an email once your account is approved.',
+                'pending_approval': True,
                 'user': {
                     'id': user_profile.id,
                     'first_name': user_profile.first_name,
@@ -508,7 +531,7 @@ def login_view(request):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        user_profile = UserProfile.objects.filter(email=email).first()
+        user_profile = UserProfile.objects.filter(email=email).select_related('company').first()
 
         # Company users (UserProfile)
         if user_profile:
@@ -534,6 +557,22 @@ def login_view(request):
                     user_profile.save(update_fields=['user', 'old_password', 'password', 'updated_at'])
                 except Exception:
                     pass
+
+            # Check company approval status before allowing login
+            if user_profile.company:
+                approval_status = user_profile.company.approval_status
+                if approval_status == Company.APPROVAL_PENDING:
+                    return Response(
+                        {'error': 'Your company registration is pending approval by the platform administrator. You will receive an email once your account is approved.'},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
+                elif approval_status == Company.APPROVAL_REJECTED:
+                    reason = user_profile.company.rejected_reason
+                    msg = 'Your company registration has been rejected by the platform administrator.'
+                    if reason:
+                        msg += f' Reason: {reason}'
+                    msg += ' Please contact support for more information.'
+                    return Response({'error': msg}, status=status.HTTP_403_FORBIDDEN)
         else:
             # Application Admin users (no UserProfile): must exist in ApplicationAdmin table
             auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()

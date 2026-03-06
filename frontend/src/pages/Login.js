@@ -89,7 +89,10 @@ function Login() {
       if (error.response) {
         // Server responded with error
         const errorData = error.response.data;
-        if (errorData.email) {
+        // 403 = company pending/rejected
+        if (error.response.status === 403) {
+          setLoginError(errorData.error || 'Your account is not authorized to log in at this time.');
+        } else if (errorData.email) {
           setFieldErrors(prev => ({ ...prev, email: errorData.email[0] }));
         } else if (errorData.password) {
           setFieldErrors(prev => ({ ...prev, password: errorData.password[0] }));
@@ -145,8 +148,13 @@ function Login() {
         localStorage.setItem('user', JSON.stringify(response.data.user));
       }
 
-      // Redirect to dashboard after successful login
-      navigate('/dashboard');
+      // Redirect based on role
+      const userRole = response.data.user?.role;
+      if (userRole === 'application_admin') {
+        navigate('/superadmin');
+      } else {
+        navigate('/dashboard');
+      }
 
     } catch (error) {
       if (error.response) {
@@ -241,73 +249,73 @@ function Login() {
                 <form className="auth-form" onSubmit={handleLogin}>
 
 
-                    <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
-                      <i className="fas fa-envelope auth-input-icon"></i>
-                      <input
-                        type="email"
-                        className="auth-input-with-icon"
-                        placeholder=" "
-                        value={loginEmail}
-                        onChange={(e) => setLoginEmail(e.target.value)}
-                        onFocus={() => setLoginEmailFocused(true)}
-                        onBlur={() => setLoginEmailFocused(false)}
-                        required
-                        maxLength={100}
-                        disabled={loginLoading}
-                      />
-                      <label className="auth-floating-label">Email *</label>
-                    </div>
-                    {fieldErrors.email && (
-                      <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.email}</div>
-                    )}
-                    <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
-                      <i className="fas fa-lock auth-input-icon"></i>
-                      <input
-                        type={showPassword ? "text" : "password"}
-                        className="auth-input-with-icon"
-                        placeholder=" "
-                        value={loginPassword}
-                        onChange={(e) => setLoginPassword(e.target.value)}
-                        onFocus={() => setLoginPasswordFocused(true)}
-                        onBlur={() => setLoginPasswordFocused(false)}
-                        required
-                        maxLength={64}
-                        disabled={loginLoading}
-                        style={{ paddingRight: '2.5rem' }}
-                      />
-                      <label className="auth-floating-label">Password *</label>
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        style={{
-                          position: 'absolute',
-                          right: '0.75rem',
-                          top: '50%',
-                          transform: 'translateY(-50%)',
-                          background: 'none',
-                          border: 'none',
-                          cursor: 'pointer',
-                          color: '#6b7280',
-                          zIndex: 3,
-                          padding: 0,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          height: '1.5rem',
-                          width: '1.5rem',
-                        }}
-                        tabIndex="-1"
-                      >
-                        <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
-                      </button>
-                    </div>
-                    {fieldErrors.password && (
-                      <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.password}</div>
-                    )}
-                    
-                    {loginError && (
-                      <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{loginError}</div>
-                    )}
+                  <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
+                    <i className="fas fa-envelope auth-input-icon"></i>
+                    <input
+                      type="email"
+                      className="auth-input-with-icon"
+                      placeholder=" "
+                      value={loginEmail}
+                      onChange={(e) => setLoginEmail(e.target.value)}
+                      onFocus={() => setLoginEmailFocused(true)}
+                      onBlur={() => setLoginEmailFocused(false)}
+                      required
+                      maxLength={100}
+                      disabled={loginLoading}
+                    />
+                    <label className="auth-floating-label">Email *</label>
+                  </div>
+                  {fieldErrors.email && (
+                    <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.email}</div>
+                  )}
+                  <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword ? 'focused has-value' : ''}`} style={{ marginBottom: '0.35rem' }}>
+                    <i className="fas fa-lock auth-input-icon"></i>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="auth-input-with-icon"
+                      placeholder=" "
+                      value={loginPassword}
+                      onChange={(e) => setLoginPassword(e.target.value)}
+                      onFocus={() => setLoginPasswordFocused(true)}
+                      onBlur={() => setLoginPasswordFocused(false)}
+                      required
+                      maxLength={64}
+                      disabled={loginLoading}
+                      style={{ paddingRight: '2.5rem' }}
+                    />
+                    <label className="auth-floating-label">Password *</label>
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{
+                        position: 'absolute',
+                        right: '0.75rem',
+                        top: '50%',
+                        transform: 'translateY(-50%)',
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: '#6b7280',
+                        zIndex: 3,
+                        padding: 0,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: '1.5rem',
+                        width: '1.5rem',
+                      }}
+                      tabIndex="-1"
+                    >
+                      <i className={`fas ${showPassword ? 'fa-eye-slash' : 'fa-eye'}`}></i>
+                    </button>
+                  </div>
+                  {fieldErrors.password && (
+                    <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.password}</div>
+                  )}
+
+                  {loginError && (
+                    <div className="field-error-text" style={{ marginTop: '-0.2rem', marginBottom: '0.5rem' }}>{loginError}</div>
+                  )}
 
                   <button
                     type="submit"
