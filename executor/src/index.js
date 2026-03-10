@@ -241,7 +241,7 @@ function languageSpec(language, sourceCode, dbEngine) {
         image: "local-kotlin",
         workdir: "/tmp",
         files: [{ name: "Main.kt", contentName: "source_code" }],
-        cmd: ["sh", "-c", "kotlinc /tmp/Main.kt -include-runtime -d /tmp/main.jar 2>&1 && java -Djava.io.tmpdir=/tmp -jar /tmp/main.jar 2>&1"],
+        cmd: ["sh", "-c", "kotlinc -J-Xmx512m /tmp/Main.kt -include-runtime -d /tmp/main.jar 2>&1 && java -Xmx256m -Djava.io.tmpdir=/tmp -jar /tmp/main.jar 2>&1"],
       };
     case "swift":
       return {
@@ -388,7 +388,7 @@ function languageSpec(language, sourceCode, dbEngine) {
           { name: "query.sql", contentName: "source_code" },
           { name: "schema.sql", contentName: "schema_sql" },
         ],
-        cmd: ["sh", "-c", "cat > /tmp/data.sql && sqlite3 /tmp/db.sqlite < /tmp/schema.sql && sqlite3 /tmp/db.sqlite < /tmp/data.sql && sqlite3 -header -column /tmp/db.sqlite < /tmp/query.sql"],
+        cmd: ["sh", "-c", "sqlite3 /tmp/db.sqlite < /tmp/query.sql"],
       };
     default:
       return null;
@@ -509,7 +509,13 @@ ENV PATH /tmp/node_modules/.bin:$PATH
 async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, schema_sql }) {
   const id = uuidv4();
   const tl = Math.max(1000, toInt(time_limit_ms, 3000));
-  const mem = Math.max(128, toInt(memory_mb, 512));
+  let mem = Math.max(128, toInt(memory_mb, 512));
+
+  // Kotlin/Scala/C# compilers are memory-hungry; enforce a minimum of 1536 MB
+  const heavyLangs = ['local-kotlin', 'sbtscala/scala-sbt', 'mcr.microsoft.com/dotnet/sdk'];
+  if (heavyLangs.some(prefix => spec.image.startsWith(prefix))) {
+    mem = Math.max(mem, 1536);
+  }
 
   let container = null;
   let timedOut = false;
@@ -518,15 +524,23 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
   try {
     await ensureImage(spec.image);
 
+    // Build the command that pipes stdin from file
+    const hasStdin = stdin && stdin.trim().length > 0;
+    let finalCmd = spec.cmd;
+    if (hasStdin && Array.isArray(spec.cmd) && spec.cmd.length >= 3 && spec.cmd[0] === 'sh') {
+      // Wrap the original command to pipe stdin from file
+      const origScript = spec.cmd[spec.cmd.length - 1];
+      finalCmd = ['sh', spec.cmd[1], `${origScript} < /tmp/stdin.txt`];
+    }
+
     container = await docker.createContainer({
       Image: spec.image,
       WorkingDir: spec.workdir,
-      Cmd: spec.cmd,
+      Cmd: finalCmd,
       Env: spec.env || [],
       User: spec.user,
-      OpenStdin: true,
-      StdinOnce: true,
-      AttachStdin: true,
+      OpenStdin: false,
+      AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: false,
@@ -553,22 +567,20 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
       return { name: f.name, content: "" };
     });
 
+    // Add stdin as a file in the archive
+    if (hasStdin) {
+      const stdinContent = normalizeNewlines(stdin);
+      filesToWrite.push({ name: 'stdin.txt', content: stdinContent.endsWith('\n') ? stdinContent : stdinContent + '\n' });
+    }
+
     const tarBuffer = await buildTarFiles(filesToWrite);
     await container.putArchive(Readable.from([tarBuffer]), { path: spec.workdir });
-
-    // Stream setup
-    const attach = await container.attach({ stream: true, stdin: true, stdout: true, stderr: true });
 
     let stdout = "";
     let stderr = "";
     let tStart = Date.now();
 
     await container.start();
-
-    // Write input
-    const input = normalizeNewlines(stdin);
-    if (input) attach.write(input);
-    attach.end();
 
     // Timeout kill
     timeout = setTimeout(async () => {

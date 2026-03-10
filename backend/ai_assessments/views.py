@@ -276,6 +276,12 @@ class GenerateAssessmentView(APIView):
         except Exception as e:
             tb = traceback.format_exc()
             raw_resp = locals().get('raw_text', 'No response received')
+            
+            # Log to terminal-like file for easy debugging
+            error_log = f"\n[{timezone.now()}] ERROR in GenerateAssessmentView: {str(e)}\n{tb}\nRAW: {raw_resp}\n"
+            with open('api_debug.txt', 'a') as f:
+                f.write(error_log)
+            
             logger.error(f"ERROR in GenerateAssessmentView: {str(e)}\n{tb}\nRAW: {raw_resp}")
             if 'assessment' in locals() and assessment:
                 assessment.status = 'FAILED'
@@ -735,66 +741,44 @@ class ProxyCodeExecuteView(APIView):
             files = request.data.get('files', [])
             stdin = request.data.get('stdin', '')
             code = files[0]['content'] if files else ''
-
-            # Specific Auto-fix for Java unnamed class error (preview feature)
-            if language == 'java':
-                # Automatically add util imports
-                if "import java.util" not in code:
-                    code = "import java.util.*;\nimport java.io.*;\n" + code
-
-                # If no class declaration exists but methods are present
-                if "class " not in code:
-                    # Check for main method, if not present, try to add a dummy runner
-                    runner = ""
-                    if "public static void main" not in code:
-                       # Try to find a method to call - naive approach
-                       # better approach: just wrap it and let user define main or use JShell mode if supported (Wandbox doesn't support JShell easily)
-                       # For now, we wrap the code in a class. The user MUST have a main method or we add one that does nothing to at least compile.
-                       runner = "\n    public static void main(String[] args) { \n        // Test your method here \n    }"
-                    
-                    code = f"public class Main {{\n{code}\n{runner}\n}}"
             
-            # Map to Wandbox compilers
-            compiler = 'gcc-head' # Default
-            if language == 'python':
-                compiler = 'cpython-3.10.15'
-            elif language == 'java':
-                compiler = 'openjdk-jdk-21+35'
-            elif language == 'javascript':
-                compiler = 'nodejs-20.17.0'
-            elif language in ['cpp', 'c++']:
-                compiler = 'gcc-10.5.0'
-
+            # Get executor URL from environment or fallback to localhost:4000
+            executor_base_url = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000").rstrip("/")
+            
+            # Prepare payload for internal executor
             payload = {
-                "compiler": compiler,
-                "code": code,
+                "language": language,
+                "source_code": code,
                 "stdin": stdin,
-                "save": False
+                "time_limit_ms": 30000,
+                "memory_mb": 2048,
             }
 
-            # Wandbox API
-            wb_url = 'https://wandbox.org/api/compile.json'
-            response = requests.post(wb_url, json=payload, timeout=15)
-            wb_data = response.json()
-            
-            # Map Wandbox response to Piston format for frontend compatibility
-            # Wandbox returns: status (str), program_message (stdout), program_error (stderr), compiler_error
-            
-            stdout = wb_data.get('program_message', '') or wb_data.get('program_output', '')
-            stderr = wb_data.get('program_error', '') or wb_data.get('compiler_error', '')
-            status_code = wb_data.get('status', '1')
-            
-            try:
-                exit_code = int(status_code)
-            except:
-                exit_code = 1
+            # Special handling for SQL (default to sqlite for AI assessments)
+            if language == 'sql':
+                payload["database_engine"] = "sqlite"
 
+            # Call internal executor
+            response = requests.post(f"{executor_base_url}/execute", json=payload, timeout=120)
+            result = response.json()
+
+            if not result.get('ok'):
+                return Response({
+                    "run": {
+                        "stdout": "",
+                        "stderr": result.get('error', 'Executor Error'),
+                        "code": 1,
+                        "output": result.get('error', 'Executor Error')
+                    }
+                }, status=status.HTTP_200_OK)
+
+            # Map executor response to the format expected by the frontend
             piston_response = {
                 "run": {
-                    "stdout": stdout,
-                    "stderr": stderr,
-                    "code": exit_code,
-                    "output": stdout + stderr
+                    "stdout": result.get('stdout', ''),
+                    "stderr": result.get('stderr', ''),
+                    "code": result.get('exit_code', 0),
+                    "output": result.get('stdout', '') + result.get('stderr', '')
                 }
             }
 
@@ -808,7 +792,7 @@ class ProxyCodeExecuteView(APIView):
                     "stderr": f"Execution Error: {str(e)}",
                     "code": 1
                 }
-            }, status=status.HTTP_200_OK) # Return 200 so frontend parses the error in 'run'
+            }, status=status.HTTP_200_OK)
 
 class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
     queryset = AIAssessmentSubmission.objects.all()
