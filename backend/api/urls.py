@@ -76,6 +76,5 @@ urlpatterns = [
     path('superadmin/companies/', views.superadmin_companies_view, name='superadmin_companies'),
     path('superadmin/companies/<int:company_id>/approve/', views.superadmin_approve_company_view, name='superadmin_approve_company'),
     path('superadmin/companies/<int:company_id>/reject/', views.superadmin_reject_company_view, name='superadmin_reject_company'),
-    path('superadmin/companies/<int:company_id>/impersonate/', views.superadmin_impersonate_company_view, name='superadmin_impersonate_company'),
 ]
 

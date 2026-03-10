@@ -292,6 +292,14 @@ class ResumeMatchView(APIView):
                     candidate.resume_text = resume_text
                     candidate.save()
 
+            # --- Validation for Empty or Short Text ---
+            if not resume_text or len(resume_text.strip()) < 50:
+                 return Response({
+                     "error": "Could not extract sufficient text from the resume. Please ensure it's a text-based PDF (not a scanned image) or try a different file.",
+                     "hallucination_prevented": True
+                 }, status=status.HTTP_400_BAD_REQUEST)
+            # -------------------------------------------
+
             prompt = f"""
             Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description.
             
@@ -320,7 +328,8 @@ class ResumeMatchView(APIView):
             response = local_groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
-                response_format={"type": "json_object"}
+                response_format={"type": "json_object"},
+                temperature=0.1 # Lower temperature for stable, reproducible scoring
             )
             raw_text = response.choices[0].message.content
             match_result = extract_json(raw_text)
