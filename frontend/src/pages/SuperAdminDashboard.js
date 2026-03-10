@@ -102,11 +102,9 @@ function RejectModal({ company, onConfirm, onCancel }) {
     );
 }
 
-function CompanyCard({ company, onApprove, onReject, onImpersonate, actionLoading, impersonateLoading }) {
+function CompanyCard({ company, onApprove, onReject, actionLoading }) {
     const admin = company.primary_admin;
     const isLoading = actionLoading === company.id;
-    const isImpersonating = impersonateLoading === company.id;
-    const canImpersonate = company.approval_status === 'approved';
 
     return (
         <div style={{
@@ -136,27 +134,7 @@ function CompanyCard({ company, onApprove, onReject, onImpersonate, actionLoadin
             {/* Company Info */}
             <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                    {/* Clickable company name triggers impersonation */}
-                    <button
-                        onClick={() => canImpersonate && onImpersonate(company)}
-                        disabled={!canImpersonate || isImpersonating}
-                        title={canImpersonate ? `View all data for ${company.name}` : 'Approve company first to view its data'}
-                        style={{
-                            background: 'none', border: 'none', padding: 0, margin: 0,
-                            fontWeight: 700, fontSize: '1rem',
-                            color: canImpersonate ? '#4f46e5' : '#111827',
-                            cursor: canImpersonate && !isImpersonating ? 'pointer' : 'not-allowed',
-                            textDecoration: canImpersonate ? 'underline' : 'none',
-                            textDecorationStyle: 'dotted',
-                            opacity: (!canImpersonate) ? 0.7 : 1,
-                            display: 'flex', alignItems: 'center', gap: 5,
-                        }}
-                    >
-                        {isImpersonating ? '⏳ Opening...' : company.name}
-                        {canImpersonate && !isImpersonating && (
-                            <span style={{ fontSize: '0.7rem', color: '#7c3aed', fontWeight: 900 }}>↗</span>
-                        )}
-                    </button>
+                    <span style={{ fontWeight: 700, fontSize: '1rem', color: '#111827' }}>{company.name}</span>
                     <StatusBadge status={company.approval_status} />
                 </div>
                 {company.domain && (
@@ -231,8 +209,7 @@ function SuperAdminDashboard() {
     const [activeTab, setActiveTab] = useState('pending');
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [actionLoading, setActionLoading] = useState(null);
-    const [impersonateLoading, setImpersonateLoading] = useState(null);
+    const [actionLoading, setActionLoading] = useState(null); // company id being actioned
     const [rejectTarget, setRejectTarget] = useState(null);
     const [toast, setToast] = useState(null);
     const [search, setSearch] = useState('');
@@ -289,33 +266,6 @@ function SuperAdminDashboard() {
     const handleLogout = () => {
         localStorage.clear();
         window.location.href = '/login';
-    };
-
-    const handleImpersonate = async (company) => {
-        setImpersonateLoading(company.id);
-        try {
-            const res = await axios.post(`${API_BASE_URL}/superadmin/companies/${company.id}/impersonate/`);
-            const { token, refresh, impersonated_user } = res.data;
-
-            // Save superadmin's original session
-            localStorage.setItem('superadmin_token', localStorage.getItem('authToken') || '');
-            localStorage.setItem('superadmin_user', localStorage.getItem('user') || '{}');
-
-            // Set impersonation flag and company info
-            localStorage.setItem('impersonation_active', 'true');
-            localStorage.setItem('impersonation_company', JSON.stringify({ id: company.id, name: company.name }));
-
-            // Swap to company admin's token
-            localStorage.setItem('authToken', token);
-            if (refresh) localStorage.setItem('refreshToken', refresh);
-            localStorage.setItem('user', JSON.stringify(impersonated_user));
-
-            // Hard reload so ImpersonationBanner detects the flag immediately on mount
-            window.location.href = '/dashboard';
-        } catch (err) {
-            setToast({ type: 'error', message: err.response?.data?.error || 'Failed to open company view.' });
-            setImpersonateLoading(null);
-        }
     };
 
     const filtered = companies.filter(c =>
@@ -509,9 +459,7 @@ function SuperAdminDashboard() {
                                 company={company}
                                 onApprove={handleApprove}
                                 onReject={setRejectTarget}
-                                onImpersonate={handleImpersonate}
                                 actionLoading={actionLoading}
-                                impersonateLoading={impersonateLoading}
                             />
                         ))}
                     </div>
