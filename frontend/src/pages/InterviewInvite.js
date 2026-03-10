@@ -84,9 +84,6 @@ function downloadTextFile(filename, text) {
 export default function InterviewInvite() {
   const navigate = useNavigate();
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [interviewerName, setInterviewerName] = useState('');
@@ -96,7 +93,6 @@ export default function InterviewInvite() {
 
   const [candidates, setCandidates] = useState([]);
   const [sending, setSending] = useState(false);
-  const [hydrated, setHydrated] = useState(false);
   const [importMsg, setImportMsg] = useState('');
   const fileRef = useRef(null);
 
@@ -151,8 +147,15 @@ export default function InterviewInvite() {
     if (!isValidEmail(intE)) return false;
     if (!intN) return false;
     if (!isValidPAN(p)) return false;
+
+    if (validityMode === 'exact_window') {
+      if (!scheduleDate || !startTime) return false;
+    } else {
+      if (!scheduleDate) return false;
+    }
+
     return true;
-  }, [name, email, interviewerName, interviewerEmail, pan]);
+  }, [name, email, interviewerName, interviewerEmail, pan, validityMode, scheduleDate, startTime]);
 
   const userDomain = useMemo(() => {
     if (!userProfile?.email) return '';
@@ -178,7 +181,7 @@ export default function InterviewInvite() {
     } catch (err) {
       console.error('Failed to load profile or drafts', err);
     } finally {
-      setHydrated(true);
+      // hydration complete
     }
   };
 
@@ -393,23 +396,6 @@ export default function InterviewInvite() {
       return d.toISOString();
     };
 
-    const parseHHMMSSSeconds = (value) => {
-      try {
-        const parts = String(value || '').split(':').map((x) => Number(x));
-        if (parts.length === 2) {
-          const [m, s] = parts;
-          return Math.max(0, (m || 0) * 60 + (s || 0));
-        }
-        if (parts.length === 3) {
-          const [h, m, s] = parts;
-          return Math.max(0, (h || 0) * 3600 + (m || 0) * 60 + (s || 0));
-        }
-        return 0;
-      } catch {
-        return 0;
-      }
-    };
-
     const buildSchedule = () => {
       setScheduleError('');
       if (validityMode === 'date_anytime') {
@@ -455,17 +441,7 @@ export default function InterviewInvite() {
       return;
     }
 
-    const payloadCandidates = candidates.map((c) => ({
-      ...c,
-      start_time: sched.start_time,
-      end_time: sched.end_time,
-      time_zone: tz,
-      validity_mode: validityMode,
-      start_grace_minutes: validityMode === 'exact_window' ? (sched.start_grace_minutes || 0) : 0,
-    }));
-
     setSending(true);
-    setError('');
     try {
       const resp = await axios.post(`${API_BASE_URL}/interviews/invite/`, {
         draft_ids: candidates.map(c => c.id),
@@ -504,7 +480,6 @@ export default function InterviewInvite() {
       setStartTime('');
     } catch (e) {
       const errorMsg = e?.response?.data?.error || e?.message || 'Failed to send interview invites';
-      setError(errorMsg);
       alert(errorMsg);
     } finally {
       setSending(false);
@@ -635,12 +610,16 @@ export default function InterviewInvite() {
           {importMsg ? <div className="hint">{importMsg}</div> : null}
           <div className="form-grid add-inline">
             <div className="field">
-              <label>Name *</label>
+              <label>Candidate Name *</label>
               <input value={name} onChange={(e) => { if (/^[a-zA-Z\s]*$/.test(e.target.value)) setName(e.target.value); }} placeholder="Candidate name" maxLength={100} />
             </div>
             <div className="field">
-              <label>Email *</label>
+              <label>Candidate Email *</label>
               <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Candidate email" maxLength={100} />
+            </div>
+            <div className="field">
+              <label>Candidate Phone (Optional)</label>
+              <input value={phone} onChange={handlePhoneChange} placeholder="1234567890" maxLength={10} />
             </div>
             <div className="field">
               <label>Interviewer Name *</label>
@@ -651,20 +630,15 @@ export default function InterviewInvite() {
               <input value={interviewerEmail} onChange={(e) => setInterviewerEmail(e.target.value)} placeholder={`e.g. user@${userDomain || 'company.com'}`} maxLength={100} />
             </div>
             <div className="field">
-              <label>PAN Number (Optional)</label>
+              <label>Candidate PAN (Optional)</label>
               <input value={pan} onChange={handlePanChange} placeholder="ABCDE1234F" maxLength={10} />
               {pan && !isValidPAN(pan) ? <div className="hint error-text">Invalid PAN format.</div> : null}
             </div>
-            <div className="field">
-              <label>Phone Number (Optional)</label>
-              <input value={phone} onChange={handlePhoneChange} placeholder="1234567890" maxLength={10} />
-            </div>
-            <div className="field add-btn-cell">
-              <label>&nbsp;</label>
-              <button className="btn-tertiary add-btn" type="button" onClick={addCandidate} disabled={!canAdd}>
-                Add
-              </button>
-            </div>
+          </div>
+          <div className="add-action-row">
+            <button className="btn-primary" type="button" onClick={addCandidate} disabled={!canAdd} style={{ padding: '0.75rem 2.5rem', fontSize: '1rem', marginTop: '1.5rem' }}>
+              Add Candidate
+            </button>
           </div>
         </div>
 
