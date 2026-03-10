@@ -160,17 +160,17 @@ const ResumeMatcher = () => {
 
             setResults(Array.isArray(data) ? data : [data]);
         } catch (error) {
-            console.error('Error:', error);
-            alert(`Failed to analyze: ${error.response?.data?.detail || error.message || 'Analysis failed'}`);
+            const errorMsg = error.response?.data?.error || error.response?.data?.detail || error.message || 'Analysis failed';
+            alert(`Failed to analyze: ${errorMsg}`);
         } finally {
             setIsAnalyzing(false);
         }
     };
 
-    const getProgressColor = (percentage) => {
-        if (percentage >= 70) return '#10B981';
-        if (percentage >= 40) return '#F59E0B';
-        return '#EF4444';
+    const getProgressColor = (percentage, isEligible) => {
+        if (isEligible) return '#10B981'; // Green for meeting threshold
+        if (percentage >= 40) return '#F59E0B'; // Orange for moderate matches that missed threshold
+        return '#EF4444'; // Red for poor matches
     };
 
     return (
@@ -523,7 +523,7 @@ const ResumeMatcher = () => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                             {results.map((data, index) => {
                                 const percentage = data.match_percentage || 0;
-                                const progressColor = getProgressColor(percentage);
+                                const progressColor = getProgressColor(percentage, data.is_eligible);
                                 return (
                                     <div key={index} className="glass-card result-card">
                                         <div className="score-circle" style={{ background: `conic-gradient(${progressColor} ${percentage * 3.6}deg, #f1f5f9 0deg)` }}>

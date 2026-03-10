@@ -228,7 +228,12 @@ class ResumeMatchView(APIView):
             threshold = 70
 
         if (not resume_file and not candidate) or not job_description:
-            return Response({"error": "Job description and either resume or candidate_id are required"}, status=status.HTTP_400_BAD_REQUEST)
+            missing = []
+            if not resume_file and not candidate: missing.append("resume/candidate_id")
+            if not job_description: missing.append("job_description")
+            error_msg = f"Missing required fields: {', '.join(missing)}"
+            logger.error(f"400 Bad Request: {error_msg}")
+            return Response({"error": error_msg}, status=status.HTTP_400_BAD_REQUEST)
 
         # --- Interview Time Lock Check ---
         if candidate:
@@ -294,9 +299,14 @@ class ResumeMatchView(APIView):
 
             # --- Validation for Empty or Short Text ---
             if not resume_text or len(resume_text.strip()) < 50:
+                 error_msg = "Could not extract sufficient text from the resume. Please ensure it's a text-based PDF (not a scanned image) or try a different file."
+                 if not resume_text:
+                     error_msg = "The PDF file appears to be empty or an unreadable scanned image. No text could be extracted."
+                 logger.error(f"400 Bad Request: {error_msg} (Extracted length: {len(resume_text) if resume_text else 0})")
                  return Response({
-                     "error": "Could not extract sufficient text from the resume. Please ensure it's a text-based PDF (not a scanned image) or try a different file.",
-                     "hallucination_prevented": True
+                     "error": error_msg,
+                     "hallucination_prevented": True,
+                     "extracted_length": len(resume_text) if resume_text else 0
                  }, status=status.HTTP_400_BAD_REQUEST)
             # -------------------------------------------
 
@@ -348,8 +358,20 @@ class ResumeMatchView(APIView):
                 candidate.email = extracted_email
                 
                 percentage = match_result.get('match_percentage', 0)
-                candidate.resume_score = int(percentage) if str(percentage).isdigit() else 0
-                candidate.status = 'Resume Passed' if candidate.resume_score >= threshold else 'Resume Failed'
+                try:
+                    # AI might return string or float, convert to int safely
+                    num_percentage = int(float(percentage))
+                except (ValueError, TypeError):
+                    num_percentage = 0
+                
+                candidate.resume_score = num_percentage
+                
+                # RECENT FIX: Enforce consistency between score and eligibility
+                # Sometimes AI says "Gap Detected" but the score is technically above the user's lowered threshold (e.g. 5%)
+                is_eligible = (num_percentage >= threshold)
+                match_result['is_eligible'] = is_eligible
+                
+                candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
                 
                 if request.data.get('is_fully_automatic'):
                     coding_count = request.data.get('coding_count')
