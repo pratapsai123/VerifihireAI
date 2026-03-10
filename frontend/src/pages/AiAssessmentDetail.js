@@ -237,12 +237,38 @@ const AiAssessmentDetail = () => {
                                                         </span>
                                                     </td>
                                                     <td style={{ padding: '1rem' }}>
-                                                        <button
-                                                            onClick={() => setSelectedSubmission(sub)}
-                                                            style={{ background: '#4318FF', color: 'white', border: 'none', padding: '0.6rem 1.2rem', borderRadius: '12px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', boxShadow: '0 4px 10px rgba(67, 24, 255, 0.2)' }}
-                                                        >
-                                                            View Details
-                                                        </button>
+                                                        <div style={{ display: 'flex', gap: '8px' }}>
+                                                            <button
+                                                                onClick={() => {
+                                                                    const link = `${window.location.origin}/take-ai-assessment/${assessment.share_token}?name=${encodeURIComponent(sub.candidate_name)}&email=${encodeURIComponent(sub.candidate_email)}`;
+                                                                    navigator.clipboard.writeText(link);
+                                                                    alert('Test link copied!');
+                                                                }}
+                                                                style={{ background: '#F4F7FE', color: '#4318FF', border: 'none', padding: '0.6rem 0.8rem', borderRadius: '10px', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer' }}
+                                                                title="Copy Test Link"
+                                                            >
+                                                                <i className="fa-solid fa-link"></i>
+                                                            </button>
+                                                            {sub.status === 'selected' || sub.status === 'rejected' ? (
+                                                                <button
+                                                                    onClick={() => {
+                                                                        const link = `${window.location.origin}/result/${assessment.share_token}?email=${encodeURIComponent(sub.candidate_email)}&is_ai=true`;
+                                                                        navigator.clipboard.writeText(link);
+                                                                        alert('Result link copied!');
+                                                                    }}
+                                                                    style={{ background: '#E6FBF5', color: '#05CD99', border: 'none', padding: '0.6rem 0.8rem', borderRadius: '10px', fontSize: '0.75rem', fontWeight: '800', cursor: 'pointer' }}
+                                                                    title="Copy Result Link"
+                                                                >
+                                                                    <i className="fa-solid fa-share-nodes"></i>
+                                                                </button>
+                                                            ) : null}
+                                                            <button
+                                                                onClick={() => setSelectedSubmission(sub)}
+                                                                style={{ background: '#4318FF', color: 'white', border: 'none', padding: '0.6rem 1rem', borderRadius: '10px', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer' }}
+                                                            >
+                                                                View Details
+                                                            </button>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             ))}

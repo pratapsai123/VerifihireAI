@@ -138,7 +138,10 @@ export default function Result() {
                             <div className="title">Assessment not submitted</div>
                             <div className="sub">{error}</div>
                             <div style={{ marginTop: 12 }}>
-                                <button className="btn-secondary" type="button" onClick={() => navigate(`/take-assessment/${token}`)}>
+                                <button className="btn-secondary" type="button" onClick={() => {
+                                    const isAITest = candidateResult?.assessment?.is_ai || window.location.search.includes('is_ai=true');
+                                    navigate(isAITest ? `/take-ai-assessment/${token}` : `/take-assessment/${token}`);
+                                }}>
                                     Go to Assessment
                                 </button>
                             </div>

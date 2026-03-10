@@ -497,8 +497,16 @@ const AiTakeAssessment = () => {
     if (error) return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins', background: '#F4F7FE' }}>
             <div style={{ textAlign: 'center', padding: '3rem', background: 'white', borderRadius: '20px', boxShadow: '0 4px 20px rgba(0,0,0,0.06)' }}>
-                <h2 style={{ color: '#1B254B' }}>Link Error</h2>
-                <p style={{ color: '#A3AED0' }}>{error}</p>
+                <h2 style={{ color: '#1B254B' }}>{error.includes('already completed') ? 'Assessment Completed' : 'Link Error'}</h2>
+                <p style={{ color: '#A3AED0', marginBottom: '1.5rem' }}>{error}</p>
+                {error.includes('already completed') && (
+                    <button
+                        onClick={() => navigate(`/result/${token}${candidateEmail ? `?email=${encodeURIComponent(candidateEmail)}` : ''}`)}
+                        style={{ padding: '0.8rem 1.5rem', background: '#4318FF', color: 'white', border: 'none', borderRadius: '12px', fontWeight: 700, cursor: 'pointer' }}
+                    >
+                        View My Result
+                    </button>
+                )}
             </div>
         </div>
     );
