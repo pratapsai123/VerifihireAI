@@ -15,11 +15,10 @@ const AiAssessments = () => {
     // Modal States
     const [showInviteModal, setShowInviteModal] = useState(false);
     const [selectedAssessment, setSelectedAssessment] = useState(null);
-    const [inviteType, setInviteType] = useState('public');
+    const [inviteType, setInviteType] = useState('individual');
     const [inviteData, setInviteData] = useState({ name: '', email: '' });
     const [inviteFile, setInviteFile] = useState(null);
     const [inviting, setInviting] = useState(false);
-    const [assessmentSubmissions, setAssessmentSubmissions] = useState([]);
 
     useEffect(() => {
         const fetchAssessments = async () => {
@@ -48,20 +47,9 @@ const AiAssessments = () => {
     const currentAssessments = filteredAssessments.slice(indexOfFirstItem, indexOfLastItem);
     const totalPages = Math.ceil(filteredAssessments.length / 10);
 
-    const shareAssessment = async (assessment) => {
+    const shareAssessment = (assessment) => {
         setSelectedAssessment(assessment);
-        setInviteType('public');
         setShowInviteModal(true);
-
-        // Fetch candidates for this assessment to show in the modal
-        try {
-            const response = await axios.get(`${API_BASE_URL}/ai/${assessment.id}/`);
-            if (response.data && response.data.submissions) {
-                setAssessmentSubmissions(response.data.submissions);
-            }
-        } catch (err) {
-            console.error('Error fetching submissions for share modal:', err);
-        }
     };
 
     const deleteAssessment = async (id) => {
@@ -114,6 +102,14 @@ const AiAssessments = () => {
         }
     };
 
+
+    const isAssessmentExpired = (assessment) => {
+        if (assessment.candidate_count > 0) return true;
+        if (assessment.available_until) {
+            return new Date(assessment.available_until) < new Date();
+        }
+        return false;
+    };
 
     return (
         <div className="dashboard-container" style={{ paddingTop: 0 }}>
@@ -253,13 +249,30 @@ const AiAssessments = () => {
                                                         onClick={() => navigate(`/ai-assessments/${assessment.id}?tab=questions`)}
                                                         style={{ background: '#F4F7FE', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', color: '#4318FF', cursor: 'pointer' }}
                                                     >View</button>
-                                                    <button
-                                                        className="action-btn btn-share"
-                                                        onClick={() => shareAssessment(assessment)}
-                                                        style={{ background: '#10b981', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
-                                                    >
-                                                        <i className="fa-solid fa-link"></i> Share
-                                                    </button>
+                                                    {isAssessmentExpired(assessment) ? (
+                                                        <div style={{
+                                                            background: '#FFF5F5',
+                                                            color: '#EE5D50',
+                                                            padding: '0.5rem 1rem',
+                                                            borderRadius: '8px',
+                                                            fontWeight: '700',
+                                                            fontSize: '0.85rem',
+                                                            display: 'flex',
+                                                            alignItems: 'center',
+                                                            gap: '0.4rem',
+                                                            border: '1px solid #FED7D7'
+                                                        }}>
+                                                            <i className="fa-solid fa-clock-rotate-left"></i> Expired
+                                                        </div>
+                                                    ) : (
+                                                        <button
+                                                            className="action-btn btn-share"
+                                                            onClick={() => shareAssessment(assessment)}
+                                                            style={{ background: '#10b981', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                                                        >
+                                                            <i className="fa-solid fa-link"></i> Share
+                                                        </button>
+                                                    )}
                                                     <button
                                                         className="action-btn"
                                                         onClick={() => deleteAssessment(assessment.id)}
@@ -323,151 +336,82 @@ const AiAssessments = () => {
                             style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: 'none', border: 'none', fontSize: '1.2rem', cursor: 'pointer', color: '#A3AED0' }}
                         ><i className="fa-solid fa-xmark"></i></button>
 
-                        <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#1B254B', marginBottom: '0.5rem' }}>Assessment Access</h2>
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#1B254B', marginBottom: '0.5rem' }}>Invite Candidates</h2>
                         <p style={{ color: '#707EAE', fontSize: '0.9rem', marginBottom: '1.5rem' }}>
-                            {selectedAssessment?.required_skills} ({selectedAssessment?.duration_minutes} mins)
+                            {selectedAssessment?.job_description?.substring(0, 40)}...
                         </p>
 
-                        <div style={{ display: 'flex', gap: '0.4rem', marginBottom: '1.5rem', background: '#F4F7FE', padding: '0.3rem', borderRadius: '12px', overflowX: 'auto' }}>
-                            {['public', 'individual', 'bulk', 'candidates'].map(type => (
-                                <button
-                                    key={type}
-                                    onClick={() => setInviteType(type)}
-                                    style={{
-                                        flex: 1, padding: '0.5rem', border: 'none', borderRadius: '10px', fontSize: '0.75rem', fontWeight: '700',
-                                        background: inviteType === type ? 'white' : 'transparent',
-                                        color: inviteType === type ? '#4318FF' : '#A3AED0',
-                                        boxShadow: inviteType === type ? '0 4px 10px rgba(0,0,0,0.05)' : 'none',
-                                        cursor: 'pointer', whiteSpace: 'nowrap'
-                                    }}
-                                >
-                                    {type === 'public' ? 'Public link' :
-                                        type === 'individual' ? 'Invite' :
-                                            type === 'bulk' ? 'Bulk' : 'Submissions'}
-                                </button>
-                            ))}
+                        <div style={{ display: 'flex', gap: '1rem', marginBottom: '1.5rem', background: '#F4F7FE', padding: '0.3rem', borderRadius: '12px' }}>
+                            <button
+                                onClick={() => setInviteType('individual')}
+                                style={{
+                                    flex: 1, padding: '0.6rem', border: 'none', borderRadius: '10px', fontSize: '0.85rem', fontWeight: '700',
+                                    background: inviteType === 'individual' ? 'white' : 'transparent',
+                                    color: inviteType === 'individual' ? '#4318FF' : '#A3AED0',
+                                    boxShadow: inviteType === 'individual' ? '0 4px 10px rgba(0,0,0,0.05)' : 'none',
+                                    cursor: 'pointer'
+                                }}
+                            >Individual</button>
+                            <button
+                                onClick={() => setInviteType('bulk')}
+                                style={{
+                                    flex: 1, padding: '0.6rem', border: 'none', borderRadius: '10px', fontSize: '0.85rem', fontWeight: '700',
+                                    background: inviteType === 'bulk' ? 'white' : 'transparent',
+                                    color: inviteType === 'bulk' ? '#4318FF' : '#A3AED0',
+                                    boxShadow: inviteType === 'bulk' ? '0 4px 10px rgba(0,0,0,0.05)' : 'none',
+                                    cursor: 'pointer'
+                                }}
+                            >Bulk (CSV/Excel)</button>
                         </div>
 
-                        {inviteType === 'public' && (
-                            <div style={{ paddingBottom: '1rem' }}>
-                                <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1B254B', marginBottom: '0.6rem' }}>Public Assessment URL</label>
-                                <div style={{ display: 'flex', gap: '8px' }}>
-                                    <input
-                                        readOnly
-                                        value={`${window.location.origin}/take-ai-assessment/${selectedAssessment?.share_token}`}
-                                        style={{ flex: 1, padding: '0.8rem', borderRadius: '12px', border: '1px solid #E0E5F2', fontSize: '0.8rem', background: '#F8F9FF' }}
-                                    />
-                                    <button
-                                        onClick={() => {
-                                            navigator.clipboard.writeText(`${window.location.origin}/take-ai-assessment/${selectedAssessment?.share_token}`);
-                                            alert('Link copied to clipboard!');
-                                        }}
-                                        style={{ padding: '0.8rem 1.2rem', background: '#4318FF', color: 'white', border: 'none', borderRadius: '12px', fontWeight: '700', cursor: 'pointer' }}
-                                    >Copy</button>
-                                </div>
-                                <p style={{ fontSize: '0.75rem', color: '#707EAE', marginTop: '0.8rem' }}>
-                                    <i className="fa-solid fa-circle-info" style={{ marginRight: '5px' }}></i>
-                                    Anyone with this link will be asked to register their details before starting.
-                                </p>
-                            </div>
-                        )}
-
-                        {inviteType === 'candidates' && (
-                            <div style={{ maxHeight: '300px', overflowY: 'auto', marginBottom: '1rem' }}>
-                                {assessmentSubmissions.length === 0 ? (
-                                    <p style={{ textAlign: 'center', color: '#A3AED0', padding: '1rem' }}>No candidates have started yet.</p>
-                                ) : (
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                                        {assessmentSubmissions.map((sub, idx) => (
-                                            <div key={idx} style={{ padding: '0.8rem', background: '#F8F9FF', borderRadius: '12px', border: '1px solid #E0E5F2' }}>
-                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                                                    <div>
-                                                        <div style={{ fontWeight: '700', fontSize: '0.85rem', color: '#1B254B' }}>{sub.candidate_name}</div>
-                                                        <div style={{ fontSize: '0.75rem', color: '#707EAE' }}>{sub.candidate_email}</div>
-                                                    </div>
-                                                    <div style={{ fontSize: '0.75rem', fontWeight: '700', color: sub.submitted_at ? '#05CD99' : '#4318FF' }}>
-                                                        {sub.submitted_at ? 'Completed' : 'Started'}
-                                                    </div>
-                                                </div>
-                                                <div style={{ display: 'flex', gap: '6px', marginTop: '8px' }}>
-                                                    {!sub.submitted_at && (
-                                                        <button
-                                                            onClick={() => {
-                                                                const link = `${window.location.origin}/take-ai-assessment/${selectedAssessment.share_token}?name=${encodeURIComponent(sub.candidate_name)}&email=${encodeURIComponent(sub.candidate_email)}`;
-                                                                navigator.clipboard.writeText(link);
-                                                                alert('Invite link copied!');
-                                                            }}
-                                                            style={{ flex: 1, padding: '0.4rem', background: 'white', border: '1px solid #E0E5F2', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '700', color: '#4318FF', cursor: 'pointer' }}
-                                                        >Copy Test Link</button>
-                                                    )}
-                                                    {sub.submitted_at && (
-                                                        <button
-                                                            onClick={() => {
-                                                                const link = `${window.location.origin}/result/${selectedAssessment.share_token}?email=${encodeURIComponent(sub.candidate_email)}`;
-                                                                navigator.clipboard.writeText(link);
-                                                                alert('Result link copied!');
-                                                            }}
-                                                            style={{ flex: 1, padding: '0.4rem', background: 'white', border: '1px solid #E0E5F2', borderRadius: '8px', fontSize: '0.7rem', fontWeight: '700', color: '#05CD99', cursor: 'pointer' }}
-                                                        >Copy Result</button>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        )}
-
-                        {(inviteType === 'individual' || inviteType === 'bulk') && (
-                            <form onSubmit={handleInvite}>
-                                {inviteType === 'individual' ? (
-                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                        <div>
-                                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1B254B', marginBottom: '0.4rem' }}>Candidate Name</label>
-                                            <input
-                                                type="text" required placeholder="Enter full name"
-                                                value={inviteData.name} onChange={(e) => setInviteData({ ...inviteData, name: e.target.value })}
-                                                style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '12px', border: '1px solid #E0E5F2', fontSize: '0.9rem', outline: 'none' }}
-                                            />
-                                        </div>
-                                        <div>
-                                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1B254B', marginBottom: '0.4rem' }}>Email Address</label>
-                                            <input
-                                                type="email" required placeholder="Enter email address"
-                                                value={inviteData.email} onChange={(e) => setInviteData({ ...inviteData, email: e.target.value })}
-                                                style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '12px', border: '1px solid #E0E5F2', fontSize: '0.9rem', outline: 'none' }}
-                                            />
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <div style={{
-                                        border: '2px dashed #E0E5F2', borderRadius: '16px', padding: '2rem', textAlign: 'center',
-                                        background: '#F8F9FF', cursor: 'pointer'
-                                    }} onClick={() => document.getElementById('bulk-file').click()}>
-                                        <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '2rem', color: '#4318FF', marginBottom: '1rem' }}></i>
-                                        <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.9rem', margin: 0 }}>
-                                            {inviteFile ? inviteFile.name : 'Click to upload CSV or Excel'}
-                                        </p>
-                                        <p style={{ color: '#A3AED0', fontSize: '0.75rem', marginTop: '0.4rem' }}>Must contain 'name' and 'email' columns</p>
+                        <form onSubmit={handleInvite}>
+                            {inviteType === 'individual' ? (
+                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1B254B', marginBottom: '0.4rem' }}>Candidate Name</label>
                                         <input
-                                            type="file" id="bulk-file" hidden accept=".csv,.xlsx,.xls"
-                                            onChange={(e) => setInviteFile(e.target.files[0])}
+                                            type="text" required placeholder="Enter full name"
+                                            value={inviteData.name} onChange={(e) => setInviteData({ ...inviteData, name: e.target.value })}
+                                            style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '12px', border: '1px solid #E0E5F2', fontSize: '0.9rem', outline: 'none' }}
                                         />
                                     </div>
-                                )}
+                                    <div>
+                                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: '700', color: '#1B254B', marginBottom: '0.4rem' }}>Email Address</label>
+                                        <input
+                                            type="email" required placeholder="Enter email address"
+                                            value={inviteData.email} onChange={(e) => setInviteData({ ...inviteData, email: e.target.value })}
+                                            style={{ width: '100%', padding: '0.8rem 1rem', borderRadius: '12px', border: '1px solid #E0E5F2', fontSize: '0.9rem', outline: 'none' }}
+                                        />
+                                    </div>
+                                </div>
+                            ) : (
+                                <div style={{
+                                    border: '2px dashed #E0E5F2', borderRadius: '16px', padding: '2rem', textAlign: 'center',
+                                    background: '#F8F9FF', cursor: 'pointer'
+                                }} onClick={() => document.getElementById('bulk-file').click()}>
+                                    <i className="fa-solid fa-cloud-arrow-up" style={{ fontSize: '2rem', color: '#4318FF', marginBottom: '1rem' }}></i>
+                                    <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '0.9rem', margin: 0 }}>
+                                        {inviteFile ? inviteFile.name : 'Click to upload CSV or Excel'}
+                                    </p>
+                                    <p style={{ color: '#A3AED0', fontSize: '0.75rem', marginTop: '0.4rem' }}>Must contain 'name' and 'email' columns</p>
+                                    <input
+                                        type="file" id="bulk-file" hidden accept=".csv,.xlsx,.xls"
+                                        onChange={(e) => setInviteFile(e.target.files[0])}
+                                    />
+                                </div>
+                            )}
 
-                                <button
-                                    type="submit" disabled={inviting}
-                                    style={{
-                                        width: '100%', marginTop: '2rem', padding: '1rem', background: '#4318FF', color: 'white',
-                                        border: 'none', borderRadius: '16px', fontWeight: '700', cursor: inviting ? 'not-allowed' : 'pointer',
-                                        boxShadow: '0 10px 20px rgba(67, 24, 255, 0.2)', opacity: inviting ? 0.7 : 1
-                                    }}
-                                >
-                                    {inviting ? 'Sending Invites...' : 'Send Invitations'}
-                                </button>
-                            </form>
-                        )}
+                            <button
+                                type="submit" disabled={inviting}
+                                style={{
+                                    width: '100%', marginTop: '2rem', padding: '1rem', background: '#4318FF', color: 'white',
+                                    border: 'none', borderRadius: '16px', fontWeight: '700', cursor: inviting ? 'not-allowed' : 'pointer',
+                                    boxShadow: '0 10px 20px rgba(67, 24, 255, 0.2)', opacity: inviting ? 0.7 : 1
+                                }}
+                            >
+                                {inviting ? 'Sending Invites...' : 'Send Invitations'}
+                            </button>
+                        </form>
                     </div>
                 </div>
             )}
