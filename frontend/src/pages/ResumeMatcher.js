@@ -186,387 +186,377 @@ const ResumeMatcher = () => {
                 </header>
 
                 <div className="form-stack">
-                    {!results ? (
-                        <>
-                            <div className="section-container">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
-                                        <i className="fa-solid fa-file-contract"></i>
+                    <div className="section-container">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                            <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                <i className="fa-solid fa-file-contract"></i>
+                            </div>
+                            <div>
+                                <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Job Description</h3>
+                                <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Define the benchmark for comparison.</p>
+                            </div>
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                            <select
+                                className="modern-input"
+                                value={selectedRoleId}
+                                onChange={(e) => {
+                                    const roleId = e.target.value;
+                                    setSelectedRoleId(roleId);
+                                    const role = jobRoles.find(r => r.id.toString() === roleId);
+                                    if (role) {
+                                        setJobDescription(role.description);
+                                    } else {
+                                        setJobDescription('');
+                                    }
+                                }}
+                                style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none', background: '#F8FAFC' }}
+                            >
+                                <option value="">-- Select a Saved Role --</option>
+                                {jobRoles.map(r => (
+                                    <option key={r.id} value={r.id}>{r.title}</option>
+                                ))}
+                                <option value="custom">Custom (Type Manually)</option>
+                            </select>
+
+                            {selectedRoleId === 'custom' && (
+                                <input
+                                    type="text"
+                                    value={customRoleTitle}
+                                    onChange={(e) => setCustomRoleTitle(e.target.value)}
+                                    placeholder="Enter Role Title (e.g. Senior Frontend Developer)"
+                                    className="modern-input"
+                                    style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none' }}
+                                />
+                            )}
+
+                            {selectedRoleId === 'custom' && (
+                                <textarea
+                                    value={jobDescription}
+                                    onChange={(e) => setJobDescription(e.target.value)}
+                                    placeholder="Paste the job requirements, responsibilities, and qualifications..."
+                                    className="modern-textarea"
+                                />
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="section-container">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                            <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                <i className="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div>
+                                <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Candidate Resumes</h3>
+                                <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Match multiple candidates at once.</p>
+                            </div>
+                        </div>
+
+                        <div
+                            onDrop={handleDrop}
+                            onDragOver={handleDragOver}
+                            onClick={() => document.getElementById('resumeFile').click()}
+                            className="upload-zone"
+                        >
+                            <input type="file" id="resumeFile" accept=".pdf" multiple style={{ display: 'none' }} onChange={handleFileChange} />
+
+                            {files.length === 0 ? (
+                                <>
+                                    <div style={{
+                                        width: '56px', height: '56px', background: 'white', color: '#6366F1',
+                                        borderRadius: '16px', display: 'flex', alignItems: 'center',
+                                        justifyContent: 'center', marginBottom: '1.5rem', fontSize: '1.5rem',
+                                        boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.05)'
+                                    }}>
+                                        <i className="fa-solid fa-cloud-arrow-up"></i>
                                     </div>
-                                    <div>
-                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Job Description</h3>
-                                        <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Define the benchmark for comparison.</p>
+                                    <p style={{ fontSize: '1rem', fontWeight: '500', color: '#1E293B', marginBottom: '0.5rem' }}>Select Resumes</p>
+                                    <p style={{ fontSize: '0.85rem', color: '#94A3B8' }}>Click or drag PDF files here</p>
+                                </>
+                            ) : (
+                                <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
+                                    {files.map((file, idx) => (
+                                        <div key={idx} style={{
+                                            background: 'white', padding: '1rem', borderRadius: '16px', border: '1px solid #E2E8F0',
+                                            display: 'flex', alignItems: 'center', gap: '0.75rem', position: 'relative'
+                                        }}>
+                                            <i className="fa-solid fa-file-pdf" style={{ color: '#EF4444' }}></i>
+                                            <span style={{ fontSize: '0.85rem', fontWeight: '600', color: '#1E293B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                                {file.name}
+                                            </span>
+                                            <button
+                                                onClick={(e) => { e.stopPropagation(); removeFile(idx); }}
+                                                style={{
+                                                    position: 'absolute', top: '-10px', right: '-10px', background: '#EF4444', color: 'white',
+                                                    border: 'none', borderRadius: '50%', width: '22px', height: '22px', fontSize: '12px', cursor: 'pointer',
+                                                    display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(239, 68, 68, 0.3)'
+                                                }}
+                                            >
+                                                <i className="fa-solid fa-xmark"></i>
+                                            </button>
+                                        </div>
+                                    ))}
+                                    <div style={{
+                                        border: '2px dashed #6366F1', borderRadius: '16px', padding: '1rem',
+                                        display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366F1', fontSize: '0.8rem', fontWeight: '700',
+                                        background: 'rgba(99, 102, 241, 0.05)'
+                                    }}>
+                                        <i className="fa-solid fa-plus" style={{ marginRight: '6px' }}></i> Add More
                                     </div>
                                 </div>
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                                    <select
-                                        className="modern-input"
-                                        value={selectedRoleId}
-                                        onChange={(e) => {
-                                            const roleId = e.target.value;
-                                            setSelectedRoleId(roleId);
-                                            const role = jobRoles.find(r => r.id.toString() === roleId);
-                                            if (role) {
-                                                setJobDescription(role.description);
-                                            } else {
-                                                setJobDescription('');
-                                            }
-                                        }}
-                                        style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none', background: '#F8FAFC' }}
-                                    >
-                                        <option value="">-- Select a Saved Role --</option>
-                                        {jobRoles.map(r => (
-                                            <option key={r.id} value={r.id}>{r.title}</option>
+                            )}
+                        </div>
+                    </div>
+
+                    <div className="section-container">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                            <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                <i className="fa-solid fa-percent"></i>
+                            </div>
+                            <div>
+                                <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Sensitivity Settings</h3>
+                                <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Set the minimum match score for qualification.</p>
+                            </div>
+                        </div>
+                        <div className="threshold-container">
+                            <div style={{ flex: 1 }}>
+                                <input
+                                    type="range" min="0" max="100" value={threshold}
+                                    onChange={(e) => setThreshold(e.target.value)}
+                                    style={{ width: '100%', accentColor: '#6366F1', height: '6px', cursor: 'pointer' }}
+                                />
+                                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', color: '#94A3B8', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>
+                                    <span>LENIENT</span>
+                                    <span>STRICT</span>
+                                </div>
+                            </div>
+                            <div className="threshold-display">
+                                <div style={{ fontSize: '0.65rem', color: '#6366F1', fontWeight: '500', textTransform: 'uppercase', marginBottom: '2px' }}>THRESHOLD</div>
+                                <div style={{ fontSize: '1.25rem', fontWeight: '500', color: '#1E293B' }}>{threshold}%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="section-container mode-toggle-card">
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                            <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                <i className="fa-solid fa-sliders"></i>
+                            </div>
+                            <div>
+                                <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Matching Mode</h3>
+                                <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Choose between AI automation or manual review.</p>
+                            </div>
+                        </div>
+                        <div className="toggle-container">
+                            <button
+                                type="button"
+                                className={`toggle-option ${matchMode === 'automatic' ? 'active' : ''}`}
+                                onClick={() => setMatchMode('automatic')}
+                            >
+                                <i className="fa-solid fa-bolt"></i>
+                                <span>Fully-Automatic</span>
+                            </button>
+                            <button
+                                type="button"
+                                className={`toggle-option ${matchMode === 'manual' ? 'active' : ''}`}
+                                onClick={() => setMatchMode('manual')}
+                            >
+                                <i className="fa-solid fa-hand"></i>
+                                <span>Manual Review</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    {matchMode === 'automatic' && (
+                        <div className="section-container automation-settings-card">
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
+                                    <i className="fa-solid fa-gear"></i>
+                                </div>
+                                <div>
+                                    <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Automation Settings</h3>
+                                    <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Configure the assessment that will be sent to candidates.</p>
+                                </div>
+                            </div>
+
+                            {/* Row 1: MCQ, Coding Tasks, Total Time */}
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                                <div className="setting-item">
+                                    <label>MCQ Questions</label>
+                                    <input type="number" value={mcqCount} onChange={(e) => setMcqCount(parseInt(e.target.value) || 0)} className="modern-input" min="0" max="30" />
+                                </div>
+                                <div className="setting-item">
+                                    <label>Coding Tasks</label>
+                                    <input type="number" value={codingCount} onChange={(e) => handleCodingCountChange(e.target.value)} className="modern-input" min="0" max="5" />
+                                </div>
+                                <div className="setting-item">
+                                    <label>Total Time (Mins)</label>
+                                    <input type="number" value={duration} onChange={(e) => setDuration(parseInt(e.target.value) || 60)} className="modern-input" min="15" max="180" />
+                                </div>
+                            </div>
+
+                            {/* Per-task coding difficulty — only if tasks > 0 */}
+                            {codingCount > 0 && (
+                                <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.25rem', marginBottom: '1.5rem' }}>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                                        <span style={{ fontWeight: '500', color: '#1B254B', fontSize: '0.95rem' }}>Customize Coding Complexity</span>
+                                        <span style={{ fontSize: '0.85rem', color: '#4f46e5', fontWeight: '500' }}>Points: {calculateTotalPoints()}</span>
+                                    </div>
+                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                                        {codingChallenges.map((c, idx) => (
+                                            <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#F8F9FF', padding: '0.6rem 1rem', borderRadius: '12px', border: '1px solid #e0e7ff' }}>
+                                                <span style={{ color: '#4318FF', fontWeight: '500', fontSize: '0.85rem' }}>Q{idx + 1}</span>
+                                                <select
+                                                    value={c.difficulty}
+                                                    onChange={(e) => updateCodingDiff(c.id, e.target.value)}
+                                                    style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '500', color: '#1B254B', cursor: 'pointer' }}
+                                                >
+                                                    <option value="Easy">Easy</option>
+                                                    <option value="Medium">Medium</option>
+                                                    <option value="Hard">Hard</option>
+                                                </select>
+                                            </div>
                                         ))}
-                                        <option value="custom">Custom (Type Manually)</option>
-                                    </select>
-
-                                    {selectedRoleId === 'custom' && (
-                                        <input
-                                            type="text"
-                                            value={customRoleTitle}
-                                            onChange={(e) => setCustomRoleTitle(e.target.value)}
-                                            placeholder="Enter Role Title (e.g. Senior Frontend Developer)"
-                                            className="modern-input"
-                                            style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none' }}
-                                        />
-                                    )}
-
-                                    {selectedRoleId === 'custom' && (
-                                        <textarea
-                                            value={jobDescription}
-                                            onChange={(e) => setJobDescription(e.target.value)}
-                                            placeholder="Paste the job requirements, responsibilities, and qualifications..."
-                                            className="modern-textarea"
-                                        />
-                                    )}
-                                </div>
-                            </div>
-
-                            <div className="section-container">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
-                                        <i className="fa-solid fa-file-pdf"></i>
                                     </div>
-                                    <div>
-                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Candidate Resumes</h3>
-                                        <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Match multiple candidates at once.</p>
-                                    </div>
-                                </div>
-
-                                <div
-                                    onDrop={handleDrop}
-                                    onDragOver={handleDragOver}
-                                    onClick={() => document.getElementById('resumeFile').click()}
-                                    className="upload-zone"
-                                >
-                                    <input type="file" id="resumeFile" accept=".pdf" multiple style={{ display: 'none' }} onChange={handleFileChange} />
-
-                                    {files.length === 0 ? (
-                                        <>
-                                            <div style={{
-                                                width: '56px', height: '56px', background: 'white', color: '#6366F1',
-                                                borderRadius: '16px', display: 'flex', alignItems: 'center',
-                                                justifyContent: 'center', marginBottom: '1.5rem', fontSize: '1.5rem',
-                                                boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.05)'
-                                            }}>
-                                                <i className="fa-solid fa-cloud-arrow-up"></i>
-                                            </div>
-                                            <p style={{ fontSize: '1rem', fontWeight: '500', color: '#1E293B', marginBottom: '0.5rem' }}>Select Resumes</p>
-                                            <p style={{ fontSize: '0.85rem', color: '#94A3B8' }}>Click or drag PDF files here</p>
-                                        </>
-                                    ) : (
-                                        <div style={{ width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '1rem' }}>
-                                            {files.map((file, idx) => (
-                                                <div key={idx} style={{
-                                                    background: 'white', padding: '1rem', borderRadius: '16px', border: '1px solid #E2E8F0',
-                                                    display: 'flex', alignItems: 'center', gap: '0.75rem', position: 'relative'
-                                                }}>
-                                                    <i className="fa-solid fa-file-pdf" style={{ color: '#EF4444' }}></i>
-                                                    <span style={{ fontSize: '0.85rem', fontWeight: '600', color: '#1E293B', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                                                        {file.name}
-                                                    </span>
-                                                    <button
-                                                        onClick={(e) => { e.stopPropagation(); removeFile(idx); }}
-                                                        style={{
-                                                            position: 'absolute', top: '-10px', right: '-10px', background: '#EF4444', color: 'white',
-                                                            border: 'none', borderRadius: '50%', width: '22px', height: '22px', fontSize: '12px', cursor: 'pointer',
-                                                            display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 8px rgba(239, 68, 68, 0.3)'
-                                                        }}
-                                                    >
-                                                        <i className="fa-solid fa-xmark"></i>
-                                                    </button>
-                                                </div>
-                                            ))}
-                                            <div style={{
-                                                border: '2px dashed #6366F1', borderRadius: '16px', padding: '1rem',
-                                                display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#6366F1', fontSize: '0.8rem', fontWeight: '700',
-                                                background: 'rgba(99, 102, 241, 0.05)'
-                                            }}>
-                                                <i className="fa-solid fa-plus" style={{ marginRight: '6px' }}></i> Add More
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-
-                            <div className="section-container">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
-                                        <i className="fa-solid fa-percent"></i>
-                                    </div>
-                                    <div>
-                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Sensitivity Settings</h3>
-                                        <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Set the minimum match score for qualification.</p>
-                                    </div>
-                                </div>
-                                <div className="threshold-container">
-                                    <div style={{ flex: 1 }}>
-                                        <input
-                                            type="range" min="0" max="100" value={threshold}
-                                            onChange={(e) => setThreshold(e.target.value)}
-                                            style={{ width: '100%', accentColor: '#6366F1', height: '6px', cursor: 'pointer' }}
-                                        />
-                                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', color: '#94A3B8', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>
-                                            <span>LENIENT</span>
-                                            <span>STRICT</span>
-                                        </div>
-                                    </div>
-                                    <div className="threshold-display">
-                                        <div style={{ fontSize: '0.65rem', color: '#6366F1', fontWeight: '500', textTransform: 'uppercase', marginBottom: '2px' }}>THRESHOLD</div>
-                                        <div style={{ fontSize: '1.25rem', fontWeight: '500', color: '#1E293B' }}>{threshold}%</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="section-container mode-toggle-card">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                    <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
-                                        <i className="fa-solid fa-sliders"></i>
-                                    </div>
-                                    <div>
-                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Matching Mode</h3>
-                                        <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Choose between AI automation or manual review.</p>
-                                    </div>
-                                </div>
-                                <div className="toggle-container">
-                                    <button
-                                        type="button"
-                                        className={`toggle-option ${matchMode === 'automatic' ? 'active' : ''}`}
-                                        onClick={() => setMatchMode('automatic')}
-                                    >
-                                        <i className="fa-solid fa-bolt"></i>
-                                        <span>Fully-Automatic</span>
-                                    </button>
-                                    <button
-                                        type="button"
-                                        className={`toggle-option ${matchMode === 'manual' ? 'active' : ''}`}
-                                        onClick={() => setMatchMode('manual')}
-                                    >
-                                        <i className="fa-solid fa-hand"></i>
-                                        <span>Manual Review</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            {matchMode === 'automatic' && (
-                                <div className="section-container automation-settings-card">
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                        <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px' }}>
-                                            <i className="fa-solid fa-gear"></i>
-                                        </div>
-                                        <div>
-                                            <h3 style={{ fontSize: '1.1rem', fontWeight: '500', color: '#111827', margin: 0 }}>Automation Settings</h3>
-                                            <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Configure the assessment that will be sent to candidates.</p>
-                                        </div>
-                                    </div>
-
-                                    {/* Row 1: MCQ, Coding Tasks, Total Time */}
-                                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                                        <div className="setting-item">
-                                            <label>MCQ Questions</label>
-                                            <input type="number" value={mcqCount} onChange={(e) => setMcqCount(parseInt(e.target.value) || 0)} className="modern-input" min="0" max="30" />
-                                        </div>
-                                        <div className="setting-item">
-                                            <label>Coding Tasks</label>
-                                            <input type="number" value={codingCount} onChange={(e) => handleCodingCountChange(e.target.value)} className="modern-input" min="0" max="5" />
-                                        </div>
-                                        <div className="setting-item">
-                                            <label>Total Time (Mins)</label>
-                                            <input type="number" value={duration} onChange={(e) => setDuration(parseInt(e.target.value) || 60)} className="modern-input" min="15" max="180" />
-                                        </div>
-                                    </div>
-
-                                    {/* Per-task coding difficulty — only if tasks > 0 */}
-                                    {codingCount > 0 && (
-                                        <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.25rem', marginBottom: '1.5rem' }}>
-                                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                                <span style={{ fontWeight: '500', color: '#1B254B', fontSize: '0.95rem' }}>Customize Coding Complexity</span>
-                                                <span style={{ fontSize: '0.85rem', color: '#4f46e5', fontWeight: '500' }}>Points: {calculateTotalPoints()}</span>
-                                            </div>
-                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-                                                {codingChallenges.map((c, idx) => (
-                                                    <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#F8F9FF', padding: '0.6rem 1rem', borderRadius: '12px', border: '1px solid #e0e7ff' }}>
-                                                        <span style={{ color: '#4318FF', fontWeight: '500', fontSize: '0.85rem' }}>Q{idx + 1}</span>
-                                                        <select
-                                                            value={c.difficulty}
-                                                            onChange={(e) => updateCodingDiff(c.id, e.target.value)}
-                                                            style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '500', color: '#1B254B', cursor: 'pointer' }}
-                                                        >
-                                                            <option value="Easy">Easy</option>
-                                                            <option value="Medium">Medium</option>
-                                                            <option value="Hard">Hard</option>
-                                                        </select>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-
-                                    {/* Pass Threshold */}
-                                    <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
-                                        <label>Assessment Pass Threshold ({passThreshold}%)</label>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                            <input
-                                                type="range" min="0" max="100" value={passThreshold}
-                                                onChange={(e) => setPassThreshold(e.target.value)}
-                                                style={{ flex: 1, accentColor: '#6366F1' }}
-                                            />
-                                            <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{passThreshold}%</span>
-                                        </div>
-                                        <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
-                                    </div>
-
-                                    {/* Date & Time Selection Range */}
-                                    <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-                                            <div className="module-icon-wrapper teal-glow" style={{ width: '32px', height: '32px', borderRadius: '8px' }}>
-                                                <i className="fa-solid fa-clock"></i>
-                                            </div>
-                                            <h4 style={{ margin: 0, color: '#1B254B', fontSize: '0.95rem', fontWeight: '500' }}>Schedule Delivery</h4>
-                                        </div>
-
-                                        <p style={{ margin: '0 0 1rem', fontSize: '0.85rem', color: '#64748B', fontWeight: '700' }}>ASSESSMENT WINDOW</p>
-                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                                                <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
-                                                    <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
-                                                    Available From
-                                                </label>
-                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                                    <input type="date" value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                                    <input type="time" value={assessmentStartTime} onChange={(e) => setAssessmentStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                                </div>
-                                            </div>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                                                <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
-                                                    <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
-                                                    Available Until
-                                                </label>
-                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                                    <input type="date" value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                                    <input type="time" value={assessmentEndTime} onChange={(e) => setAssessmentEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <p style={{ margin: '0 0 1rem', fontSize: '0.85rem', color: '#64748B', fontWeight: '700' }}>INTERVIEW WINDOW</p>
-                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                                                <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
-                                                    <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
-                                                    Available From
-                                                </label>
-                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                                    <input type="date" value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                                    <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                                </div>
-                                            </div>
-                                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
-                                                <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
-                                                    <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
-                                                    Available Until
-                                                </label>
-                                                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                                    <input type="date" value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                                    <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
                                 </div>
                             )}
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
-                                <button
-                                    onClick={handleMatch}
-                                    disabled={isAnalyzing}
-                                    className="generate-btn"
-                                >
-                                    {isAnalyzing ? (
-                                        <><i className="fa-solid fa-atom fa-spin"></i> Analyzing Candidate Profiles...</>
-                                    ) : (
-                                        <>
-                                            <i className="fa-solid fa-wand-magic-sparkles"></i>
-                                            {matchMode === 'automatic' ? ' Start' : ' Check Resume'}
-                                        </>
-                                    )}
-                                </button>
-                            </div>
-                        </>
-                    ) : (
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-                            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                                <h2 style={{ fontSize: '1.5rem', fontWeight: '500', color: '#1e293b', letterSpacing: '-0.02em' }}>Match <span style={{ color: '#6366F1' }}>Insights</span></h2>
-                                <button onClick={() => setResults(null)} className="view-details-btn">
-                                    <i className="fa-solid fa-chevron-left" style={{ marginRight: '0.5rem' }}></i> New Analysis
-                                </button>
+                            {/* Pass Threshold */}
+                            <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
+                                <label>Assessment Pass Threshold ({passThreshold}%)</label>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                                    <input
+                                        type="range" min="0" max="100" value={passThreshold}
+                                        onChange={(e) => setPassThreshold(e.target.value)}
+                                        style={{ flex: 1, accentColor: '#6366F1' }}
+                                    />
+                                    <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{passThreshold}%</span>
+                                </div>
+                                <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
                             </div>
 
-                            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-                                {results.map((data, index) => {
-                                    const percentage = data.match_percentage || 0;
-                                    const progressColor = getProgressColor(percentage);
-                                    return (
-                                        <div key={index} className="glass-card result-card">
-                                            <div className="score-circle" style={{ background: `conic-gradient(${progressColor} ${percentage * 3.6}deg, #f1f5f9 0deg)` }}>
-                                                <div className="score-inner">
-                                                    <span className="score-value" style={{ color: progressColor }}>{percentage}%</span>
-                                                    <span className="score-label">MATCH</span>
-                                                </div>
-                                            </div>
+                            {/* Date & Time Selection Range */}
+                            <div style={{ borderTop: '1px solid #e2e8f0', paddingTop: '1.5rem', marginBottom: '1.5rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                                    <div className="module-icon-wrapper teal-glow" style={{ width: '32px', height: '32px', borderRadius: '8px' }}>
+                                        <i className="fa-solid fa-clock"></i>
+                                    </div>
+                                    <h4 style={{ margin: 0, color: '#1B254B', fontSize: '0.95rem', fontWeight: '500' }}>Schedule Delivery</h4>
+                                </div>
 
-                                            <div>
-                                                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                                                    <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '500', color: '#1e293b' }}>{data.filename || 'Untitled Resume'}</h4>
-                                                    <span className="status-tag" style={{
-                                                        background: data.is_eligible ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
-                                                        color: data.is_eligible ? '#059669' : '#dc2626'
-                                                    }}>
-                                                        {data.is_eligible ? 'ELIGIBLE' : 'GAP DETECTED'}
-                                                    </span>
-                                                </div>
-                                                <p style={{ margin: 0, color: '#64748b', fontSize: '1rem', lineHeight: '1.6', display: '-webkit-box', WebkitLineClamp: '2', WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                                                    {data.summary || 'AI has analyzed this profile against role expectations.'}
-                                                </p>
-                                            </div>
-
-                                            <div style={{ textAlign: 'right' }}>
-                                                <button className="view-details-btn">
-                                                    View Details
-                                                </button>
-                                            </div>
+                                <p style={{ margin: '0 0 1rem', fontSize: '0.85rem', color: '#64748B', fontWeight: '700' }}>ASSESSMENT WINDOW</p>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                                        <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
+                                            <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
+                                            Available From
+                                        </label>
+                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                            <input type="date" value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={assessmentStartTime} onChange={(e) => setAssessmentStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
-                                    );
-                                })}
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                                        <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
+                                            <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
+                                            Available Until
+                                        </label>
+                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                            <input type="date" value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={assessmentEndTime} onChange={(e) => setAssessmentEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <p style={{ margin: '0 0 1rem', fontSize: '0.85rem', color: '#64748B', fontWeight: '700' }}>INTERVIEW WINDOW</p>
+                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                                        <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
+                                            <i className="fa-regular fa-calendar-check" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
+                                            Available From
+                                        </label>
+                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                            <input type="date" value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
+                                        <label style={{ fontSize: '0.8rem', fontWeight: '700', color: '#374151' }}>
+                                            <i className="fa-regular fa-calendar-xmark" style={{ marginRight: '0.4rem', color: '#EF4444' }}></i>
+                                            Available Until
+                                        </label>
+                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                            <input type="date" value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                     )}
+
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+                        <button
+                            onClick={handleMatch}
+                            disabled={isAnalyzing}
+                            className="generate-btn"
+                        >
+                            {isAnalyzing ? (
+                                <><i className="fa-solid fa-atom fa-spin"></i> Analyzing Candidate Profiles...</>
+                            ) : (
+                                <>
+                                    <i className="fa-solid fa-wand-magic-sparkles"></i>
+                                    {matchMode === 'automatic' ? ' Start' : ' Check Resume'}
+                                </>
+                            )}
+                        </button>
+                    </div>
                 </div>
+
+                {results && (
+                    <div className="results-wrapper" style={{ marginTop: '2.5rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                            <h2 style={{ fontSize: '1.5rem', fontWeight: '500', color: '#1e293b', letterSpacing: '-0.02em' }}>Match <span style={{ color: '#6366F1' }}>Insights</span></h2>
+                        </div>
+
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                            {results.map((data, index) => {
+                                const percentage = data.match_percentage || 0;
+                                const progressColor = getProgressColor(percentage);
+                                return (
+                                    <div key={index} className="glass-card result-card">
+                                        <div className="score-circle" style={{ background: `conic-gradient(${progressColor} ${percentage * 3.6}deg, #f1f5f9 0deg)` }}>
+                                            <div className="score-inner">
+                                                <span className="score-value" style={{ color: progressColor }}>{percentage}%</span>
+                                                <span className="score-label">MATCH</span>
+                                            </div>
+                                        </div>
+
+                                        <div style={{ flex: 1 }}>
+                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
+                                                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '500', color: '#1e293b' }}>{data.filename || 'Untitled Resume'}</h4>
+                                                <span className="status-tag" style={{
+                                                    background: data.is_eligible ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
+                                                    color: data.is_eligible ? '#059669' : '#dc2626'
+                                                }}>
+                                                    {data.is_eligible ? 'ELIGIBLE' : 'GAP DETECTED'}
+                                                </span>
+                                            </div>
+                                            <p style={{ margin: 0, color: '#64748b', fontSize: '1rem', lineHeight: '1.6', whiteSpace: 'pre-line' }}>
+                                                {data.summary || 'AI has analyzed this profile against role expectations.'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
 };
 
 export default ResumeMatcher;
+
