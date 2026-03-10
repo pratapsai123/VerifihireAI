@@ -116,12 +116,13 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [resultsRes, candidatesRes, interviewsRes, aiAssessmentsRes, customAssessmentsRes] = await Promise.all([
+        const [resultsRes, candidatesRes, interviewsRes, aiAssessmentsRes, customAssessmentsRes, aiCandidatesRes] = await Promise.all([
           axios.get(`${API_BASE_URL}/results/`),
           axios.get(`${API_BASE_URL}/candidates/`),
           axios.get(`${API_BASE_URL}/interviews/invitations/`),
           axios.get(`${API_BASE_URL}/ai/`),
-          axios.get(`${API_BASE_URL}/assessments/`)
+          axios.get(`${API_BASE_URL}/assessments/`),
+          axios.get(`${API_BASE_URL}/ai-candidates/`)
         ]);
 
         const results = resultsRes.data.results || [];
@@ -129,6 +130,7 @@ const Dashboard = () => {
         const interviews = interviewsRes.data.results || [];
         const aiAssessmentsCount = (aiAssessmentsRes.data || []).length;
         const customAssessmentsCount = (customAssessmentsRes.data?.results || []).length;
+        const aiCandidates = aiCandidatesRes.data || [];
 
         // Calculate Stats
         const today = new Date().toISOString().split('T')[0];
@@ -146,6 +148,11 @@ const Dashboard = () => {
 
         const scoresCustom = resultsCustom.map(r => r.percentage || 0).filter(s => s > 0);
         const avgScoreCustom = scoresCustom.length > 0 ? (scoresCustom.reduce((a, b) => a + b, 0) / scoresCustom.length).toFixed(1) : 0;
+
+        // Calculate AI Interviews (Candidates invited to or completed an AI session)
+        const aiInterviewsCount = aiCandidates.filter(c =>
+          ['Invited', 'Interview', 'Completed', 'Review', 'Rejected', 'Hired'].includes(c.status)
+        ).length;
 
         // Group trends by month
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -211,7 +218,8 @@ const Dashboard = () => {
             resumesToday: resumesTodayCount,
             activeTestsAi: aiAssessmentsCount,
             activeTestsCustom: customAssessmentsCount,
-            scheduledInterviews: interviews.length
+            scheduledInterviews: interviews.length,
+            aiInterviewsCount: aiInterviewsCount
           },
           trendsTotal: trendsTotalData,
           successRate: successData
@@ -547,7 +555,7 @@ const Dashboard = () => {
               <div className="card-stat-row">
                 <div className="stat-item">
                   <span className="stat-label">Scheduled Sessions</span>
-                  <span className="stat-value">{data.stats.scheduledInterviews}</span>
+                  <span className="stat-value">{data.stats.aiInterviewsCount}</span>
                 </div>
               </div>
               <div className="card-actions">
@@ -674,8 +682,12 @@ const Dashboard = () => {
                     <span style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 700 }}>{data.stats.hired}</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Total Interviews</span>
+                    <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Live Interviews</span>
                     <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.scheduledInterviews}</span>
+                  </div>
+                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <span style={{ fontSize: '0.8rem', color: '#64748b' }}>AI Interviews</span>
+                    <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.aiInterviewsCount}</span>
                   </div>
                 </div>
               </div>

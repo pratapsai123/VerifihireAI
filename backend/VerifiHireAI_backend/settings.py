@@ -123,9 +123,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'user',
+        'NAME': 'verifihire_db',
         'USER': 'postgres',
-        'PASSWORD': '1234',
+        'PASSWORD': 'root',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         **({'OPTIONS': db_options} if db_options else {}),

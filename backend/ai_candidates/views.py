@@ -271,7 +271,7 @@ class ResumeMatchView(APIView):
 
                 candidate = Candidate.objects.create(
                     full_name=resume_file.name.replace('.pdf', ''),
-                    email="pending@example.com",
+                    email="Extraction Failed",
                     job_title=job_title or "Applicant",
                     resume=resume_file,
                     resume_text=resume_text,
@@ -302,8 +302,8 @@ class ResumeMatchView(APIView):
             {job_description}
             
             Please provide:
-            1. The candidate's full name (Scan the top of the resume, usually the largest text. If not found, use "Applicant").
-            2. The candidate's email address (Look for '@' symbol patterns. If not found, use "social@verifihire.com").
+            1. The candidate's full name (Scan the top of the resume, usually the largest text. If not found, use "Extraction Failed").
+            2. The candidate's email address (Look for '@' symbol patterns. If not found, use "Extraction Failed").
             3. A match percentage (0-100).
             4. Eligibility status (True if match percentage >= {threshold}, otherwise False).
             5. A brief 2-3 sentence summary of the fit.
@@ -332,8 +332,8 @@ class ResumeMatchView(APIView):
             # --- Save scores and EXTRACTED data ---
             if candidate and match_result:
                 # Key-agnostic fallbacks in case AI changes keys
-                extracted_name = match_result.get('candidate_name') or match_result.get('name') or candidate.full_name
-                extracted_email = match_result.get('candidate_email') or match_result.get('email') or candidate.email
+                extracted_name = match_result.get('candidate_name') or match_result.get('name') or "Extraction Failed"
+                extracted_email = match_result.get('candidate_email') or match_result.get('email') or "Extraction Failed"
                 
                 candidate.full_name = extracted_name
                 candidate.email = extracted_email

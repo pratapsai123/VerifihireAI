@@ -139,6 +139,7 @@ const ResultsAI = () => {
         if (s === 'selected' || s === 'resume passed') return { background: '#E6FBF5', color: '#05CD99' };
         if (s === 'rejected' || s === 'resume failed') return { background: '#FFF5F5', color: '#EE5D50' };
         if (s === 'completed' || s === 'hired') return { background: '#E6FBF5', color: '#05CD99' };
+        if (s === 'extraction failed') return { background: '#FFF5F5', color: '#EE5D50' };
         return { background: '#F4F7FE', color: '#A3AED0' };
     };
 
@@ -482,8 +483,12 @@ const ResultsAI = () => {
                                                             <input type="checkbox" checked={isSelected} onChange={() => toggleSelect(r._deleteKey)} />
                                                         </td>
                                                         <td>
-                                                            <div style={{ fontWeight: '800' }}>{r.full_name || r.candidate?.name}</div>
-                                                            <div style={{ fontSize: '0.8rem', color: '#64748b' }}>{r.email || r.candidate?.email}</div>
+                                                            <div style={{ fontWeight: '800', color: (r.full_name === 'Extraction Failed' || r.candidate?.name === 'Extraction Failed') ? '#EE5D50' : 'inherit' }}>
+                                                                {r.full_name || r.candidate?.name || 'Extraction Failed'}
+                                                            </div>
+                                                            <div style={{ fontSize: '0.8rem', color: (r.email === 'Extraction Failed' || r.candidate?.email === 'Extraction Failed') ? '#EE5D50' : '#64748b' }}>
+                                                                {r.email || r.candidate?.email || 'Extraction Failed'}
+                                                            </div>
                                                         </td>
                                                         <td>
                                                             {activeTab === 'resume' ? `${r.resume_score || 0}% Match` :

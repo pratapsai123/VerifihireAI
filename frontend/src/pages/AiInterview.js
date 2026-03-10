@@ -153,13 +153,13 @@ const AiInterview = () => {
                                                 <div style={{ color: '#64748B', fontSize: '0.85rem' }}>{c.email}</div>
                                             </div>
                                         </div>
-                                        <a href={c.link} target="_blank" rel="noopener noreferrer" style={{
+                                        <div style={{
                                             color: '#6366f1', fontWeight: '700', fontSize: '0.85rem', textDecoration: 'none',
                                             padding: '0.6rem 1.25rem', background: '#EEF2FF', borderRadius: '12px',
-                                            transition: 'all 0.2s'
+                                            transition: 'all 0.2s', opacity: 0.7
                                         }}>
-                                            Launch Session
-                                        </a>
+                                            Invite Sent
+                                        </div>
                                     </div>
                                 ))}
                             </div>

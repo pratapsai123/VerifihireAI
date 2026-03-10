@@ -535,7 +535,7 @@ const ResumeMatcher = () => {
 
                                         <div style={{ flex: 1 }}>
                                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '0.75rem' }}>
-                                                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '500', color: '#1e293b' }}>{data.filename || 'Untitled Resume'}</h4>
+                                                <h4 style={{ margin: 0, fontSize: '1.1rem', fontWeight: '500', color: '#1e293b' }}>{data.candidate_name || 'Extraction Failed'}</h4>
                                                 <span className="status-tag" style={{
                                                     background: data.is_eligible ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)',
                                                     color: data.is_eligible ? '#059669' : '#dc2626'
