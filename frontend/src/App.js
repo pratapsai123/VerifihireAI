@@ -41,7 +41,6 @@ import FeedbackPage from './pages/FeedbackPage';
 import FeedbackDetails from './pages/FeedbackDetails';
 import SuperAdminDashboard from './pages/SuperAdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
-import ImpersonationBanner from './components/ImpersonationBanner';
 import './App.css';
 
 import Header from './components/Header';
@@ -120,7 +119,6 @@ function AppContent() {
 
   return (
     <div className="app-container">
-      <ImpersonationBanner />
       {!isFullScreenPage && <Header />}
       <div className="app-scroll" style={isFullScreenPage ? { top: 0, height: '100vh' } : {}}>
         <Routes>

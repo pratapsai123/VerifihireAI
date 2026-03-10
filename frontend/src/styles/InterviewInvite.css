@@ -70,10 +70,17 @@
 
 .form-grid.add-inline {
   display: grid;
-  grid-template-columns: 2fr 2fr 1.5fr 1.5fr auto;
-  /* Adjusted for Add button at end */
-  align-items: flex-end;
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.add-action-row {
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px dashed #E5E7EB;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
 }
 
 .field {
@@ -167,21 +174,9 @@
 
 .add-btn {
   background-color: #111827;
-  /* Dark for contrast */
   color: white;
   white-space: nowrap;
   padding: 0.625rem 1.75rem;
-}
-
-.add-btn:hover:not(:disabled) {
-  background-color: #1F2937;
-  transform: translateY(-1px);
-}
-
-.add-btn:disabled {
-  background-color: #9CA3AF;
-  cursor: not-allowed;
-  transform: none;
 }
 
 .btn-danger {
@@ -275,16 +270,7 @@
 /* Responsive */
 @media (max-width: 1024px) {
   .form-grid.add-inline {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .add-btn-cell {
-    grid-column: span 2;
-    margin-top: 0.5rem;
-  }
-
-  .add-btn {
-    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -297,8 +283,8 @@
     grid-template-columns: 1fr;
   }
 
-  .add-btn-cell {
-    grid-column: span 1;
+  .add-action-row {
+    justify-content: center;
   }
 
   .interview-invite-top {

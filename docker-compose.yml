@@ -1,8 +1,9 @@
-# version: '3.8'
+# docker-compose.yml
+version: '3.8'
 
 services:
   # nginx:
-  #   image: nginx:1.25-alpine
+  #   image: public.ecr.aws/docker/library/nginx:1.25-alpine
   #   container_name: verifyhire_nginx
   #   ports:
   #     - "80:80"
@@ -30,7 +31,7 @@ services:
   #   entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   redis:
-    image: redis:7-alpine
+    image: public.ecr.aws/docker/library/redis:7-alpine
     container_name: verifyhire_redis
     ports:
       - "6379:6379" # Exposed for local backend
@@ -62,7 +63,7 @@ services:
     volumes:
       - dind_data:/var/lib/docker
   # db:
-  #   image: postgres:15-alpine
+  #   image: public.ecr.aws/docker/library/postgres:15-alpine
   #   container_name: verifyhire_db
   #   restart: unless-stopped
   #   environment:
