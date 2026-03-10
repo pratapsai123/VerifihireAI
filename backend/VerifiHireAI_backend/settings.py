@@ -31,7 +31,7 @@ DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
 
 ALLOWED_HOSTS = ["*"]
 
-FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "https://verifyhire.duckdns.org")
+FRONTEND_BASE_URL = os.environ.get("FRONTEND_BASE_URL", "http://localhost:3000")
 
 
 # Application definition
@@ -123,9 +123,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'react_user1',
+        'NAME': 'user',
         'USER': 'postgres',
-        'PASSWORD': '12345',
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         **({'OPTIONS': db_options} if db_options else {}),
@@ -198,10 +198,10 @@ REST_FRAMEWORK = {
 }
 
 default_cors_origins = [
-    "https://verifyhire.duckdns.org",
-    "https://verifyhire.duckdns.org",
-    "https://verifyhire.duckdns.org",
-    "https://verifyhire.duckdns.org",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

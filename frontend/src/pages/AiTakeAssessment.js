@@ -31,6 +31,7 @@ const AiTakeAssessment = () => {
 
     // Monitoring
     const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
+    const [isFullscreen, setIsFullscreen] = useState(false);
 
     // IDE
     const [codeOutput, setCodeOutput] = useState([]);
@@ -172,6 +173,17 @@ const AiTakeAssessment = () => {
             // Sync timer
             setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
 
+            // Trigger Full Screen
+            try {
+                const doc = document.documentElement;
+                if (doc.requestFullscreen) await doc.requestFullscreen();
+                else if (doc.mozRequestFullScreen) await doc.mozRequestFullScreen();
+                else if (doc.webkitRequestFullscreen) await doc.webkitRequestFullscreen();
+                else if (doc.msRequestFullscreen) await doc.msRequestFullscreen();
+            } catch (err) {
+                console.error("Fullscreen request failed", err);
+            }
+
             await startCamera();
         } catch (err) {
             const msg = err.response?.data?.error || 'Failed to start assessment.';
@@ -282,14 +294,45 @@ const AiTakeAssessment = () => {
         const onBlur = () => showAiEvent('WINDOW BLURRED', true, 'tab_switch');
         document.addEventListener('visibilitychange', onHide);
         window.addEventListener('blur', onBlur);
+
+        // Fullscreen listener
+        const handleFsChange = () => {
+            setIsFullscreen(!!document.fullscreenElement);
+            if (!document.fullscreenElement && isStarted && !submitted) {
+                showAiEvent('FULLSCREEN EXITED', true, 'fullscreen_exit');
+            }
+        };
+        document.addEventListener('fullscreenchange', handleFsChange);
+        document.addEventListener('webkitfullscreenchange', handleFsChange);
+        document.addEventListener('mozfullscreenchange', handleFsChange);
+        document.addEventListener('MSFullscreenChange', handleFsChange);
+
+        // Disable Copy/Paste/Right-click
+        const preventAction = (e) => {
+            e.preventDefault();
+            showAiEvent('ACTION PROHIBITED', true);
+        };
+        document.addEventListener('copy', preventAction);
+        document.addEventListener('cut', preventAction);
+        document.addEventListener('paste', preventAction);
+        document.addEventListener('contextmenu', preventAction);
+
         initMonitoring();
         return () => {
             clearInterval(detectInterval);
             document.removeEventListener('visibilitychange', onHide);
             window.removeEventListener('blur', onBlur);
+            document.removeEventListener('fullscreenchange', handleFsChange);
+            document.removeEventListener('webkitfullscreenchange', handleFsChange);
+            document.removeEventListener('mozfullscreenchange', handleFsChange);
+            document.removeEventListener('MSFullscreenChange', handleFsChange);
+            document.removeEventListener('copy', preventAction);
+            document.removeEventListener('cut', preventAction);
+            document.removeEventListener('paste', preventAction);
+            document.removeEventListener('contextmenu', preventAction);
             stopCamera();
         };
-    }, [isStarted, submissionId]);
+    }, [isStarted, submissionId, submitted]);
 
     // Save progress periodically (debounced)
     // Also exposes saveProgress via ref so beforeunload can call it synchronously
@@ -570,7 +613,65 @@ const AiTakeAssessment = () => {
     };
 
     return (
-        <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: '#f0fdf4', display: 'flex', flexDirection: 'column', overflow: 'hidden', fontFamily: 'Poppins' }}>
+        <div style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: '#f0fdf4',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+            fontFamily: 'Poppins',
+            userSelect: 'none',
+            WebkitUserSelect: 'none',
+            MozUserSelect: 'none',
+            msUserSelect: 'none'
+        }}>
+
+            {!isFullscreen && isStarted && !submitted && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: 'rgba(0,0,0,0.95)',
+                    zIndex: 100000,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    color: 'white',
+                    textAlign: 'center',
+                    padding: '2rem'
+                }}>
+                    <h1 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>⚠️ Full Screen Required</h1>
+                    <p style={{ fontSize: '1.2rem', color: '#A3AED0', maxWidth: '600px', marginBottom: '2rem' }}>
+                        To maintain assessment integrity, you must be in full screen mode. This event has been logged.
+                    </p>
+                    <button
+                        onClick={() => {
+                            const doc = document.documentElement;
+                            if (doc.requestFullscreen) doc.requestFullscreen();
+                            else if (doc.webkitRequestFullscreen) doc.webkitRequestFullscreen();
+                        }}
+                        style={{
+                            padding: '1rem 2rem',
+                            background: '#4318FF',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '12px',
+                            fontSize: '1.1rem',
+                            fontWeight: 700,
+                            cursor: 'pointer'
+                        }}
+                    >
+                        Re-enter Full Screen
+                    </button>
+                </div>
+            )}
 
             {aiToast.active && (
                 <div style={{ position: 'fixed', top: 100, left: '50%', transform: 'translateX(-50%)', zIndex: 99999, background: aiToast.urgent ? '#dc2626' : '#1d4ed8', color: 'white', padding: '10px 24px', borderRadius: 25, fontWeight: 700, fontSize: '0.82rem', boxShadow: '0 6px 24px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: 8, letterSpacing: 0.5 }}>
