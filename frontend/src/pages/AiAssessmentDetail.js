@@ -155,7 +155,9 @@ const AiAssessmentDetail = () => {
                                                 <p style={{ fontWeight: '700', color: '#1B254B', fontSize: '1.1rem', marginBottom: '0.5rem' }}>{c.title}</p>
                                                 <p style={{ color: '#707EAE', fontSize: '0.95rem', marginBottom: '1rem' }}>{c.problem_statement}</p>
                                                 <div style={{ background: '#1B254B', color: '#05CD99', padding: '1rem', borderRadius: '12px', fontFamily: 'monospace', fontSize: '0.85rem' }}>
-                                                    {c.starter_code || '// Starter code not provided'}
+                                                    {typeof c.starter_code === 'object' && c.starter_code
+                                                        ? (c.starter_code.python || c.starter_code.javascript || '// Multiple language snippets available')
+                                                        : (c.starter_code || '// Starter code not provided')}
                                                 </div>
                                             </div>
                                         ))}

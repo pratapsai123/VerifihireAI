@@ -297,6 +297,7 @@ export default function TakeAssessment() {
       const saved = localStorage.getItem(`take_assessment_progress_${token}`);
       if (saved) {
         const parsed = JSON.parse(saved);
+        initialState.submittedIds = parsed.submittedIds || {};
         initialState.codeById = parsed.codeById || {};
         initialState.languageById = parsed.languageById || {};
       }

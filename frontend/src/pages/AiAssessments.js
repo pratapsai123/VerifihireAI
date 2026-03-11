@@ -103,12 +103,36 @@ const AiAssessments = () => {
     };
 
 
-    const isAssessmentExpired = (assessment) => {
-        if (assessment.candidate_count > 0) return true;
-        if (assessment.available_until) {
-            return new Date(assessment.available_until) < new Date();
+    const getStatusInfo = (assessment) => {
+        const now = new Date();
+        const until = assessment.available_until ? new Date(assessment.available_until) : null;
+        const invited = assessment.invited_count || 0;
+        const completed = assessment.completed_count || 0;
+        const started = assessment.candidate_count || 0;
+        const isBulk = invited > 1;
+        
+        // 1. Time-based Expiry (Absolute deadline)
+        if (until && now > until) {
+            return { label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-clock-rotate-left' };
         }
-        return false;
+
+        // 2. Completion-based
+        // If it's bulk (e.g., 3 people), wait for all to complete.
+        // If it's a single invite or manual link (invited <= 1), expire on the first completion.
+        if (completed > 0) {
+            if (!isBulk || completed >= invited) {
+                return { label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-calendar-xmark' };
+            }
+        }
+
+        // 3. Activity-based (Someone has started)
+        if (started > 0) {
+            const label = isBulk ? `Ongoing (${completed}/${invited})` : 'Ongoing';
+            return { label, isExpired: true, color: '#4318FF', bg: '#F4F7FE', icon: 'fa-spinner fa-spin', isOngoing: true };
+        }
+
+        // 4. Default State (Fresh link)
+        return { label: 'Share', isExpired: false, color: 'white', bg: '#10b981', icon: 'fa-link' };
     };
 
     return (
@@ -249,30 +273,39 @@ const AiAssessments = () => {
                                                         onClick={() => navigate(`/ai-assessments/${assessment.id}?tab=questions`)}
                                                         style={{ background: '#F4F7FE', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', color: '#4318FF', cursor: 'pointer' }}
                                                     >View</button>
-                                                    {isAssessmentExpired(assessment) ? (
-                                                        <div style={{
-                                                            background: '#FFF5F5',
-                                                            color: '#EE5D50',
-                                                            padding: '0.5rem 1rem',
-                                                            borderRadius: '8px',
-                                                            fontWeight: '700',
-                                                            fontSize: '0.85rem',
-                                                            display: 'flex',
-                                                            alignItems: 'center',
-                                                            gap: '0.4rem',
-                                                            border: '1px solid #FED7D7'
-                                                        }}>
-                                                            <i className="fa-solid fa-clock-rotate-left"></i> Expired
-                                                        </div>
-                                                    ) : (
-                                                        <button
-                                                            className="action-btn btn-share"
-                                                            onClick={() => shareAssessment(assessment)}
-                                                            style={{ background: '#10b981', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
-                                                        >
-                                                            <i className="fa-solid fa-link"></i> Share
-                                                        </button>
-                                                    )}
+                                                    {(() => {
+                                                        const status = getStatusInfo(assessment);
+                                                        // If it's Expired or Ongoing, we hide the Share button and show the Badge
+                                                        if (status.isExpired || status.isOngoing) {
+                                                            return (
+                                                                <div style={{
+                                                                    background: status.bg,
+                                                                    color: status.color,
+                                                                    padding: '0.5rem 1rem',
+                                                                    borderRadius: '8px',
+                                                                    fontWeight: '700',
+                                                                    fontSize: '0.85rem',
+                                                                    display: 'flex',
+                                                                    alignItems: 'center',
+                                                                    gap: '0.4rem',
+                                                                    border: `1px solid ${status.color}${status.isOngoing ? '20' : '40'}`
+                                                                }}>
+                                                                    <i className={`fa-solid ${status.icon}`}></i> {status.label}
+                                                                </div>
+                                                            );
+                                                        }
+                                                        
+                                                        // Otherwise, show the Share button
+                                                        return (
+                                                            <button
+                                                                className="action-btn btn-share"
+                                                                onClick={() => shareAssessment(assessment)}
+                                                                style={{ background: '#10b981', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                                                            >
+                                                                <i className="fa-solid fa-link"></i> Share
+                                                            </button>
+                                                        );
+                                                    })()}
                                                     <button
                                                         className="action-btn"
                                                         onClick={() => deleteAssessment(assessment.id)}
