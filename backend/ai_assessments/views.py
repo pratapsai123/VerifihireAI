@@ -92,7 +92,8 @@ class SubmitAssessmentView(APIView):
                 weight = 20
                 possible_mcq_points += weight
                 
-                correct_ans = str(mcq.get('answer') or '').strip().upper()
+                # Check both 'answer' and 'correct_answer' for robustness
+                correct_ans = str(mcq.get('answer') or mcq.get('correct_answer') or '').strip().upper()
                 candidate_ans = str(answers.get(f'mcq_{i}') or '').strip().upper()
                 
                 if correct_ans and candidate_ans == correct_ans:
@@ -107,8 +108,8 @@ class SubmitAssessmentView(APIView):
                 res = coding_results.get(str(i))
                 if res:
                     passed = res.get('passed', 0)
-                    total_tc = res.get('total', 1)
-                    if total_tc > 0:
+                    total_tc = res.get('total', 0) # Changed default to 0 for explicit division by zero guard
+                    if total_tc > 0: # Guard against division by zero
                         score_fraction = passed / total_tc
                         candidate_coding_points += (score_fraction * weight)
 
@@ -218,7 +219,11 @@ class GenerateAssessmentView(APIView):
                 coding_prompt = f"TASK 2: Generate {coding_count} Coding Challenges.\n"
                 for i, diff in enumerate(coding_tasks):
                     coding_prompt += f"- Challenge {i+1}: {diff} difficulty\n"
-                coding_prompt += "Each challenge object must have: 'title', 'problem_statement' (detailed), 'input_format', 'output_format', 'constraints', 'example_input', 'example_output', 'explanation', 'starter_code_java', 'starter_code_python', 'difficulty' (must match requested), and 'test_cases' (list of 5 objects)."
+                coding_prompt += "Each challenge object must have: 'title', 'problem_statement' (detailed), 'input_format', 'output_format', 'constraints', 'example_input', 'example_output', 'explanation', 'starter_code', 'difficulty' (must match requested), and 'test_cases' (list of 5 objects).\n"
+                coding_prompt += "CRITICAL: 'starter_code' MUST be a JSON object mapping these exact keys: python, java, javascript, cpp, csharp, kotlin, swift, sql to their respective starter code snippets.\n"
+                coding_prompt += "CRITICAL: The starter code snippets MUST ONLY be the function or class signatures with empty bodies or TODO comments. DO NOT provide the actual solution or implementation logic. The candidate must write the logic themselves.\n"
+                coding_prompt += "CRITICAL: The 'starter_code' dictionary MUST contain valid JSON strings. Do not use Python-style triple quotes (\"\"\"). Use standard double quotes (\") and escape newlines with \\n."
+                coding_prompt += "IMPORTANT: For test_cases inside coding_challenges, you MUST use the keys \"input\" and \"output\" exactly."
                 keys_expected = '"mcqs", "coding_challenges"'
 
             prompt = f"""
@@ -243,7 +248,8 @@ class GenerateAssessmentView(APIView):
             response = local_groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
                 messages=[{"role": "user", "content": prompt}],
-                response_format={"type": "json_object"}
+                response_format={"type": "json_object"},
+                temperature=0.8
             )
             raw_text = response.choices[0].message.content
             
@@ -346,7 +352,9 @@ class CreateSubmissionView(APIView):
                 "status": "success",
                 "time_left": time_left,
                 "answers": submission.answers,
-                "current_question_index": submission.current_question_index
+                "current_question_index": submission.current_question_index,
+                "codingResults": (submission.results_breakdown or {}).get('coding_progress', {}),
+                "codeDrafts": (submission.results_breakdown or {}).get('code_drafts', {})
             }, status=status.HTTP_201_CREATED)
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
@@ -409,11 +417,21 @@ class SaveAssessmentProgressView(APIView):
             
             answers = request.data.get('answers')
             index = request.data.get('current_question_index')
+            coding_results = request.data.get('codingResults')
+            code_drafts = request.data.get('codeDrafts')
             
             if answers is not None:
                 submission.answers = answers
             if index is not None:
                 submission.current_question_index = index
+            
+            if not submission.results_breakdown:
+                submission.results_breakdown = {}
+                
+            if coding_results is not None:
+                submission.results_breakdown['coding_progress'] = coding_results
+            if code_drafts is not None:
+                submission.results_breakdown['code_drafts'] = code_drafts
             
             submission.save()
             return Response({"status": "progress saved"})
@@ -740,6 +758,8 @@ class ProxyCodeExecuteView(APIView):
             language = request.data.get('language')
             files = request.data.get('files', [])
             stdin = request.data.get('stdin', '')
+            if stdin and stdin.strip() == "None":
+                stdin = ""
             code = files[0]['content'] if files else ''
             
             # Get executor URL from environment or fallback to localhost:4000

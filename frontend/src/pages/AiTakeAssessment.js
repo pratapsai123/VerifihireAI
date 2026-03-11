@@ -36,7 +36,35 @@ const AiTakeAssessment = () => {
     // IDE
     const [codeOutput, setCodeOutput] = useState([]);
     const [isExecuting, setIsExecuting] = useState(false);
-    const [selectedLanguage, setSelectedLanguage] = useState('javascript');
+    const [selectedLanguage, _setSelectedLanguage] = useState('python');
+    const [codeDrafts, setCodeDrafts] = useState({});
+
+    const setSelectedLanguage = (lang) => {
+        const currentLang = selectedLanguage;
+        const qKey = currentAnswerKey;
+
+        if (qKey && qKey.startsWith('coding_')) {
+            // 1. Ensure current code is saved to its draft
+            const currentCode = answers[qKey] || '';
+            setCodeDrafts(prev => ({ ...prev, [`${qKey}_${currentLang}`]: currentCode }));
+
+            // 2. Load the draft for the new language
+            const nextDraftKey = `${qKey}_${lang}`;
+            const nextDraft = codeDrafts[nextDraftKey];
+            
+            // If draft exists, use it. Otherwise, handleAnswerChange will stay as is 
+            // and the bootstrapped drafts (or fallback logic) will take over.
+            if (nextDraft !== undefined) {
+                handleAnswerChange(qKey, nextDraft);
+            } else {
+                // If no draft exists yet (should be rare with bootstrapping), 
+                // we clear it so the Editor fallback logic handles it.
+                handleAnswerChange(qKey, '');
+            }
+        }
+
+        _setSelectedLanguage(lang);
+    };
     const [customInput, setCustomInput] = useState('');
     const [executionResult, setExecutionResult] = useState(null);
     const [codingResults, setCodingResults] = useState({}); // { qId: { passed, total } }
@@ -45,7 +73,11 @@ const AiTakeAssessment = () => {
         { id: 'javascript', name: 'JavaScript', version: '18.15.0' },
         { id: 'python', name: 'Python', version: '3.10.0' },
         { id: 'cpp', name: 'C++', version: '10.2.0' },
-        { id: 'java', name: 'Java', version: '15.0.2' }
+        { id: 'java', name: 'Java', version: '15.0.2' },
+        { id: 'sql', name: 'SQL (SQLite)', version: '3.42.0' },
+        { id: 'csharp', name: 'C#', version: '8.0' },
+        { id: 'kotlin', name: 'Kotlin', version: '1.9.23' },
+        { id: 'swift', name: 'Swift', version: '5.10' }
     ];
 
     const formatText = (text) => {
@@ -59,6 +91,16 @@ const AiTakeAssessment = () => {
     const lastDetectionTimeRef = useRef(0);
     const timerRef = useRef(null);
     const handleSubmitRef = useRef(null); // always points to latest handleSubmit
+    const mcqSection = React.useMemo(() => assessment?.generated_content?.mcqs || [], [assessment]);
+    const codingSection = React.useMemo(() => assessment?.generated_content?.coding_challenges || [], [assessment]);
+    const allQs = React.useMemo(() => [
+        ...mcqSection.map((q, i) => ({ ...q, type: 'mcq', id: i })),
+        ...codingSection.map((c, i) => ({ ...c, type: 'coding', id: i }))
+    ], [mcqSection, codingSection]);
+
+    const currentQ = allQs[currentQuestionIdx] || allQs[0];
+    const currentAnswerKey = currentQ?.type === 'mcq' ? `mcq_${currentQ?.id}` : `coding_${currentQ?.id}`;
+    const isLastQ = currentQuestionIdx === allQs.length - 1;
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -115,6 +157,12 @@ const AiTakeAssessment = () => {
 
     const handleAnswerChange = (key, val) => {
         setAnswers(prev => ({ ...prev, [key]: val }));
+
+        // Also update draft if this is a coding question
+        if (key.startsWith('coding_')) {
+            setCodeDrafts(prev => ({ ...prev, [`${key}_${selectedLanguage}`]: val }));
+        }
+
         setAnsweredQs(prev => new Set([...prev, currentQuestionIdx]));
     };
 
@@ -124,9 +172,11 @@ const AiTakeAssessment = () => {
             const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, {
                 share_token: token, candidate_name: candidateName, candidate_email: candidateEmail
             });
-            const { submission_id, time_left, answers: savedAnswers, current_question_index } = res.data;
+            const { submission_id, time_left, answers: savedAnswers, current_question_index, codingResults: savedResults, codeDrafts: savedDrafts } = res.data;
 
             setSubmissionId(submission_id);
+            if (savedResults) setCodingResults(savedResults);
+            if (savedDrafts) setCodeDrafts(savedDrafts);
             setIsStarted(true);
 
             // Restore session if resumed
@@ -135,9 +185,7 @@ const AiTakeAssessment = () => {
 
                 // Rebuild answeredQs and visitedQs from saved answer keys
                 // Keys are like 'mcq_0', 'mcq_3', 'coding_0' — extract the index from the key
-                const mcqsArr = assessment?.generated_content?.mcqs || [];
-                const codingArr = assessment?.generated_content?.coding_challenges || [];
-                const totalMcqs = mcqsArr.length;
+                const totalMcqs = mcqSection.length;
 
                 const restoredAnswered = new Set();
                 const restoredVisited = new Set();
@@ -195,21 +243,24 @@ const AiTakeAssessment = () => {
         if (isTestRun && currentQ?.test_cases?.length > 0) {
             const results = [];
             let passedCount = 0;
-            for (const tc of currentQ.test_cases) {
+            for (const tc of (currentQ.test_cases || [])) {
+                const tcInput = tc.input || tc.input_data || tc.stdin || '';
+                const tcOutput = tc.output || tc.expected_output || tc.stdout || '';
+
                 try {
                     const r = await axios.post(`${API_BASE_URL}/ai/execute/`, {
                         language: selectedLanguage, version: langData.version,
-                        files: [{ content: code }], stdin: tc.input
+                        files: [{ content: code }], stdin: tcInput
                     });
                     const out = String(r.data.run.stdout || r.data.run.stderr || '').trim();
-                    const exp = String(tc.output || '').trim();
+                    const exp = String(tcOutput).trim();
                     const passed = out === exp;
                     if (passed) passedCount++;
-                    results.push({ input: tc.input, expected: exp, actual: out, passed });
-                } catch { results.push({ input: tc.input, expected: tc.output || '', actual: 'Error', passed: false }); }
+                    results.push({ input: tcInput, expected: exp, actual: out, passed });
+                } catch { results.push({ input: tcInput, expected: tcOutput, actual: 'Error', passed: false }); }
             }
-            setExecutionResult({ type: 'test_cases', results, score: passedCount, total: currentQ.test_cases.length });
-            setCodingResults(prev => ({ ...prev, [qId]: { passed: passedCount, total: currentQ.test_cases.length } }));
+            setExecutionResult({ type: 'test_cases', results, score: passedCount, total: (currentQ.test_cases || []).length });
+            setCodingResults(prev => ({ ...prev, [qId]: { passed: passedCount, total: (currentQ.test_cases || []).length } }));
             setIsExecuting(false);
             return;
         }
@@ -229,7 +280,11 @@ const AiTakeAssessment = () => {
             const logs = [];
             if (run.stdout) logs.push({ type: 'log', content: run.stdout });
             if (run.stderr) logs.push({ type: 'error', content: run.stderr });
-            logs.push({ type: run.code === 0 && !run.stderr ? 'success' : 'error', content: `Exit code: ${run.code}` });
+            const isSuccess = run.code === 0 && !run.stderr;
+            logs.push({ 
+                type: isSuccess ? 'success' : 'error', 
+                content: isSuccess ? '✅ Execution Successful' : `❌ Execution Failed (Exit code: ${run.code})` 
+            });
             setCodeOutput(logs);
         } catch { setCodeOutput([{ type: 'error', content: 'Connection error.' }]); }
         finally { setIsExecuting(false); }
@@ -303,7 +358,9 @@ const AiTakeAssessment = () => {
             try {
                 await axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
                     answers,
-                    current_question_index: currentQuestionIdx
+                    current_question_index: currentQuestionIdx,
+                    codingResults: codingResults,
+                    codeDrafts: codeDrafts
                 });
             } catch (err) {
                 console.error("Failed to save progress", err);
@@ -311,7 +368,7 @@ const AiTakeAssessment = () => {
         };
 
         // Store reference so unload handler can call it
-        saveProgressRef.current = { answers, currentQuestionIdx, submissionId };
+        saveProgressRef.current = { answers, currentQuestionIdx, submissionId, codingResults };
 
         const timer = setTimeout(saveProgress, 1000); // 1-second debounce (reduced from 3s)
         return () => clearTimeout(timer);
@@ -327,7 +384,9 @@ const AiTakeAssessment = () => {
             // navigator.sendBeacon works even when the page is unloading
             const payload = JSON.stringify({
                 answers: ctx.answers,
-                current_question_index: ctx.currentQuestionIdx
+                current_question_index: ctx.currentQuestionIdx,
+                codingResults: ctx.codingResults,
+                codeDrafts: ctx.codeDrafts
             });
             navigator.sendBeacon(
                 `${API_BASE_URL}/ai/submission/${ctx.submissionId}/progress/`,
@@ -355,9 +414,6 @@ const AiTakeAssessment = () => {
         setExecutionResult(null);
 
         // Auto-populate custom input with sample case for coding challenges
-        const mcqs = assessment?.generated_content?.mcqs || [];
-        const coding = assessment?.generated_content?.coding_challenges || [];
-        const allQs = [...mcqs.map((q, i) => ({ ...q, type: 'mcq', id: i })), ...coding.map((c, i) => ({ ...c, type: 'coding', id: i }))];
         const cQ = allQs[currentQuestionIdx];
 
         if (cQ?.type === 'coding') {
@@ -368,6 +424,43 @@ const AiTakeAssessment = () => {
         }
     }, [currentQuestionIdx, assessment]);
 
+    // Bootstrap code drafts from starter code for all languages
+    useEffect(() => {
+        if (!isStarted || allQs.length === 0) return;
+
+        setCodeDrafts(prev => {
+            const nextDrafts = { ...prev };
+            let changed = false;
+
+            allQs.forEach(q => {
+                if (q.type === 'coding' && q.starter_code && typeof q.starter_code === 'object') {
+                    const qKey = `coding_${q.id}`;
+                    Object.entries(q.starter_code).forEach(([lang, code]) => {
+                        const dKey = `${qKey}_${lang.toLowerCase()}`;
+                        if (nextDrafts[dKey] === undefined && code) {
+                            nextDrafts[dKey] = code;
+                            changed = true;
+                        }
+                    });
+                }
+            });
+
+            return changed ? nextDrafts : prev;
+        });
+    }, [isStarted, allQs]);
+
+    // Track question switch to ensure answers sync with selected language draft
+    useEffect(() => {
+        if (!isStarted || !currentAnswerKey || !currentAnswerKey.startsWith('coding_')) return;
+
+        const draftKey = `${currentAnswerKey}_${selectedLanguage}`;
+        const draft = codeDrafts[draftKey];
+
+        // If the answer in state doesn't match the draft for this lang/question, update it
+        if (draft !== undefined && answers[currentAnswerKey] !== draft) {
+            setAnswers(prev => ({ ...prev, [currentAnswerKey]: draft }));
+        }
+    }, [currentQuestionIdx, selectedLanguage, isStarted, codeDrafts]);
     // Lock page scroll while assessment is running
     useEffect(() => {
         document.body.style.margin = '0';
@@ -384,7 +477,9 @@ const AiTakeAssessment = () => {
         if (isStarted && submissionId && !submitted) {
             axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/progress/`, {
                 answers,
-                current_question_index: idx
+                current_question_index: idx,
+                codingResults: codingResults,
+                codeDrafts: codeDrafts
             }).catch(() => { });
         }
         setCurrentQuestionIdx(idx);
@@ -523,13 +618,6 @@ const AiTakeAssessment = () => {
         </div>
     );
 
-    const mcqs = assessment?.generated_content?.mcqs || [];
-    const codingChallenges = assessment?.generated_content?.coding_challenges || [];
-    const allQs = [
-        ...mcqs.map((q, i) => ({ ...q, type: 'mcq', id: i })),
-        ...codingChallenges.map((c, i) => ({ ...c, type: 'coding', id: i }))
-    ];
-
     if (allQs.length === 0) {
         return (
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh', background: '#f8f9ff', fontFamily: 'Poppins' }}>
@@ -544,12 +632,11 @@ const AiTakeAssessment = () => {
         );
     }
 
-    const currentQ = allQs[currentQuestionIdx] || allQs[0];
-    const isLastQ = currentQuestionIdx === allQs.length - 1;
-    const currentAnswerKey = currentQ?.type === 'mcq' ? `mcq_${currentQ?.id}` : `coding_${currentQ?.id}`;
+    const isLastQ_old = currentQuestionIdx === allQs.length - 1;
+    // const currentAnswerKey = currentQ?.type === 'mcq' ? `mcq_${currentQ?.id}` : `coding_${currentQ?.id}`;
 
-    const mcqSection = allQs.filter(q => q.type === 'mcq');
-    const codingSection = allQs.filter(q => q.type === 'coding');
+    // const mcqSection = allQs.filter(q => q.type === 'mcq');
+    // const codingSection = allQs.filter(q => q.type === 'coding');
 
     const getQStatus = (idx) => {
         if (idx === currentQuestionIdx) return 'current';
@@ -772,12 +859,30 @@ const AiTakeAssessment = () => {
                                     </div>
                                     <div style={{ flex: 1, overflow: 'hidden' }}>
                                         <Editor height="100%" language={selectedLanguage} theme="vs-dark"
-                                            value={answers[currentAnswerKey] || currentQ[`starter_code_${selectedLanguage}`] || (() => {
-                                                const defaultComments = { python: '# Write your code here\n', java: '// Write your code here\n', cpp: '// Write your code here\n', javascript: '// Write your code here\n' };
+                                            value={answers[currentAnswerKey] || (() => {
                                                 const raw = currentQ.starter_code;
-                                                // If backend starter code is just a JS-style placeholder comment, replace with language-correct one
-                                                if (!raw || String(raw).trim() === '// Write your code here') return defaultComments[selectedLanguage] || '# Write your code here\n';
-                                                return raw;
+                                                // New format: raw is an object mapping languages to starter code
+                                                if (raw && typeof raw === 'object' && raw[selectedLanguage]) {
+                                                    return raw[selectedLanguage];
+                                                }
+                                                // Old format: flat keys like starter_code_python
+                                                if (currentQ[`starter_code_${selectedLanguage}`]) {
+                                                    return currentQ[`starter_code_${selectedLanguage}`];
+                                                }
+                                                // Fallback to default comments if no specific starter code is provided
+                                                const defaultComments = {
+                                                    python: '# Write your code here\n',
+                                                    java: '// Write your code here\n',
+                                                    cpp: '// Write your code here\n',
+                                                    javascript: '// Write your code here\n',
+                                                    kotlin: '// Write your code here (Kotlin)\n',
+                                                    swift: '// Write your code here (Swift)\n',
+                                                    csharp: '// Write your code here (C#)\n',
+                                                    sql: '-- Write your query here (SQLite)\nSELECT * FROM table_name;\n'
+                                                };
+                                                const isGeneric = !raw || typeof raw !== 'object' && ['// Write your code here', '# Write your code here'].includes(String(raw).trim());
+                                                if (isGeneric) return defaultComments[selectedLanguage] || '# Write your code here\n';
+                                                return typeof raw === 'string' ? raw : defaultComments[selectedLanguage] || '# Write your code here\n';
                                             })()}
                                             onChange={val => handleAnswerChange(currentAnswerKey, val)}
                                             options={{ fontSize: 13, minimap: { enabled: false }, scrollBeyondLastLine: false, automaticLayout: true, padding: { top: 10 }, lineNumbers: 'on' }} />
@@ -788,7 +893,7 @@ const AiTakeAssessment = () => {
                                             {executionResult?.type === 'test_cases' ? (
                                                 <div>
                                                     <div style={{ fontWeight: 800, color: executionResult.score === executionResult.total ? '#22c55e' : '#ef4444', marginBottom: 4 }}>
-                                                        {executionResult.score}/{executionResult.total} test cases passed
+                                                        {executionResult.score}{'/'}{executionResult.total} test cases passed
                                                     </div>
                                                     {executionResult.results.map((r, i) => (
                                                         <div key={i} style={{ fontSize: '0.72rem', color: r.passed ? '#22c55e' : '#ef4444', marginBottom: 1 }}>
