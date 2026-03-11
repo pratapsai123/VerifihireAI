@@ -1,21 +1,78 @@
 import os
+import uuid
+import json
+import random
+import logging
+import traceback
+import copy
+from datetime import datetime, timedelta
 from groq import Groq
+from django.conf import settings
+from django.core.mail import send_mail
+from django.utils import timezone
+from django.db import models
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
-from rest_framework.permissions import AllowAny
-import uuid
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from .models import Assessment, AIAssessmentSubmission
 from ai_candidates.views import extract_json
-import traceback
+from api.views import ensure_role_exists
 
-from django.conf import settings
-from django.core.mail import send_mail
-from datetime import timedelta
-from django.utils import timezone
-import logging
+def pick_random_subset(assessment, pool, seed=None):
+    """Randomly selects a subset of questions from the pool based on assessment targets."""
+    if not pool:
+        return {}
+        
+    local_random = random.Random(seed) if seed else random.Random()
+    
+    subset = {"mcqs": [], "coding_challenges": []}
+    
+    pool_mcqs = pool.get('mcqs', [])
+    # AI sometimes returns coding_tasks instead of coding_challenges
+    pool_coding = pool.get('coding_challenges', []) or pool.get('coding_tasks', [])
+    
+    # Work on a copy to avoid mutating the original pool
+    import copy
+    pool_coding = copy.deepcopy(pool_coding)
+    
+    # 1. Select MCQs by difficulty
+    # If target counts are zero (legacy), use the pool logic
+    target_mcqs = [
+        ('Easy', getattr(assessment, 'mcq_easy', 5)), 
+        ('Medium', getattr(assessment, 'mcq_medium', 3)), 
+        ('Hard', getattr(assessment, 'mcq_hard', 2))
+    ]
+    
+    for diff, target in target_mcqs:
+        diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff]
+        if not diff_pool: # Fallback if AI didn't label correctly
+            diff_pool = [q for q in pool_mcqs if q.get('difficulty') is None]
+        
+        if diff_pool:
+            sample_size = min(len(diff_pool), target)
+            subset['mcqs'].extend(local_random.sample(diff_pool, sample_size))
+    
+    # 2. Select Coding Challenges
+    # Use target list if available, else fallback to coding_count
+    targets = getattr(assessment, 'coding_difficulty_list', None) or ['Medium'] * assessment.coding_count
+    for diff in targets:
+        diff_pool = [c for c in pool_coding if c.get('difficulty') == diff]
+        if not diff_pool and pool_coding:
+            diff_pool = pool_coding # Fallback
+            
+        if diff_pool:
+            choice = local_random.choice(diff_pool)
+            subset['coding_challenges'].append(choice)
+            # Remove chosen to avoid duplicates in the same set
+            if choice in diff_pool:
+                pool_coding.remove(choice)
+    
+    # 3. Final Shuffle of MCQs so difficulty isn't ordered
+    local_random.shuffle(subset['mcqs'])
+    
+    return subset
 
-# Setup Logger
 logger = logging.getLogger(__name__)
 
 from api.views import ensure_role_exists
@@ -198,7 +255,11 @@ class GenerateAssessmentView(APIView):
                 job_description=job_description,
                 required_skills=required_skills,
                 mcq_count=mcq_count,
+                mcq_easy=mcq_easy,
+                mcq_medium=mcq_medium,
+                mcq_hard=mcq_hard,
                 coding_count=coding_count,
+                coding_difficulty_list=coding_tasks,
                 duration_minutes=duration,
                 total_points=total_possible_points,
                 available_from=data.get('available_from'),
@@ -206,18 +267,28 @@ class GenerateAssessmentView(APIView):
                 pass_threshold=data.get('pass_threshold', 60)
             )
 
-            # Build a very specific prompt based on the granular breakdown
-            mcq_prompt = f"TASK 1: Generate {mcq_count} Multiple Choice Questions (MCQs).\n"
-            mcq_prompt += f"- {mcq_easy} Easy questions\n"
-            mcq_prompt += f"- {mcq_medium} Medium questions\n"
-            mcq_prompt += f"- {mcq_hard} Hard questions\n"
+            # Pool multipliers - generate 2x the requested amount for randomization
+            pool_easy = mcq_easy * 2
+            pool_medium = mcq_medium * 2
+            pool_hard = mcq_hard * 2
+            pool_mcq_total = pool_easy + pool_medium + pool_hard
+            pool_coding_total = coding_count * 2
+
+            # Build a very specific prompt based on the granular breakdown for a POOL
+            mcq_prompt = f"TASK 1: Generate a POOL of {pool_mcq_total} Multiple Choice Questions (MCQs).\n"
+            mcq_prompt += f"- {pool_easy} Easy questions\n"
+            mcq_prompt += f"- {pool_medium} Medium questions\n"
+            mcq_prompt += f"- {pool_hard} Hard questions\n"
+            mcq_prompt += "MIX the sequence of topics and difficulty levels throughout the list. "
             mcq_prompt += "Each MCQ object must have: 'question', 'options' (list of 4), 'answer', and 'difficulty' (Easy/Medium/Hard)."
 
             coding_prompt = ""
             keys_expected = '"mcqs"'
             if coding_count > 0:
-                coding_prompt = f"TASK 2: Generate {coding_count} Coding Challenges.\n"
-                for i, diff in enumerate(coding_tasks):
+                coding_prompt = f"TASK 2: Generate a POOL of {pool_coding_total} Coding Challenges.\n"
+                # Duplicate the difficulty list for the pool
+                pool_coding_tasks = coding_tasks * 2
+                for i, diff in enumerate(pool_coding_tasks):
                     coding_prompt += f"- Challenge {i+1}: {diff} difficulty\n"
                 
                 coding_prompt += (
@@ -278,14 +349,14 @@ class GenerateAssessmentView(APIView):
             if not generated_data:
                 raise Exception("The AI generated a response but the structure was invalid.")
 
-            # === ENFORCE EXACT COUNTS - AI sometimes over-generates ===
-            if 'mcqs' in generated_data and len(generated_data['mcqs']) > mcq_count:
-                logger.warning(f"AI over-generated {len(generated_data['mcqs'])} MCQs, truncating to {mcq_count}")
-                generated_data['mcqs'] = generated_data['mcqs'][:mcq_count]
+            # === ENFORCE POOL LIMITS - AI sometimes over-generates ===
+            if 'mcqs' in generated_data and len(generated_data['mcqs']) > pool_mcq_total:
+                logger.warning(f"AI over-generated {len(generated_data['mcqs'])} MCQs, truncating to {pool_mcq_total}")
+                generated_data['mcqs'] = generated_data['mcqs'][:pool_mcq_total]
 
-            if 'coding_challenges' in generated_data and len(generated_data['coding_challenges']) > coding_count:
-                logger.warning(f"AI over-generated {len(generated_data['coding_challenges'])} coding challenges, truncating to {coding_count}")
-                generated_data['coding_challenges'] = generated_data['coding_challenges'][:coding_count]
+            if 'coding_challenges' in generated_data and len(generated_data['coding_challenges']) > pool_coding_total:
+                logger.warning(f"AI over-generated {len(generated_data['coding_challenges'])} coding challenges, truncating to {pool_coding_total}")
+                generated_data['coding_challenges'] = generated_data['coding_challenges'][:pool_coding_total]
 
             assessment.generated_content = generated_data
             assessment.status = 'SCHEDULED'
@@ -356,6 +427,25 @@ class CreateSubmissionView(APIView):
                     candidate_email=email,
                     status='ONGOING'
                 )
+                
+                # Lock in randomized questions upon first creation
+                if not submission.candidate_questions:
+                    gen_content = assessment.generated_content or {}
+                    if isinstance(gen_content, str):
+                        try:
+                            gen_content = json.loads(gen_content)
+                        except:
+                            pass
+                    
+                    # Unwrap if nested
+                    if isinstance(gen_content, dict) and 'mcqs' not in gen_content and 'coding_challenges' not in gen_content:
+                        for val in gen_content.values():
+                            if isinstance(val, dict) and ('mcqs' in val or 'coding_challenges' in val):
+                                gen_content = val
+                                break
+
+                    submission.candidate_questions = pick_random_subset(assessment, gen_content, seed=email)
+                    submission.save(update_fields=['candidate_questions'])
              
             # Calculate time left
             elapsed = timezone.now() - submission.started_at
@@ -462,6 +552,7 @@ class AssessmentListView(APIView):
         data = []
         for assessment in assessments:
             count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
+            completed_count = AIAssessmentSubmission.objects.filter(assessment=assessment, submitted_at__isnull=False).count()
             # Use available_until as expiry if present, else fallback to 7 days
             if assessment.available_until:
                 expiry_at = assessment.available_until
@@ -481,6 +572,8 @@ class AssessmentListView(APIView):
                 "status": assessment.status,
                 "share_token": str(assessment.share_token),
                 "candidate_count": count,
+                "completed_count": completed_count,
+                "invited_count": assessment.invited_count,
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None
             })
@@ -539,6 +632,9 @@ class AssessmentDetailView(APIView):
         except Assessment.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    def pick_random_subset(self, assessment, pool):
+        return pick_random_subset(assessment, pool)
+
 class PublicAssessmentView(APIView):
     def get(self, request, token):
         with open('api_debug.txt', 'a') as f:
@@ -573,16 +669,41 @@ class PublicAssessmentView(APIView):
                 except:
                     pass
 
-            # Check if this specific user email has already completed it (if passed via query param)
+            # 1. Handle Candidate-Specific Randomized Content
             email_param = request.query_params.get('email', '').strip().lower()
+            name_param = request.query_params.get('name', '').strip()
+            
+            final_content = gen_content
             already_completed = False
+            
             if email_param:
                 from .models import AIAssessmentSubmission
-                already_completed = AIAssessmentSubmission.objects.filter(
+                import random
+
+                # Check for existing submission
+                submission = AIAssessmentSubmission.objects.filter(
                     assessment=assessment,
-                    candidate_email__iexact=email_param,
-                    submitted_at__isnull=False
-                ).exists()
+                    candidate_email__iexact=email_param
+                ).first()
+
+                if submission:
+                    already_completed = submission.submitted_at is not None
+                    # If we already have locked-in questions, use them
+                    if submission.candidate_questions:
+                        final_content = submission.candidate_questions
+                    else:
+                        # Case: Submission exists but no questions locked yet (e.g. legacy/error)
+                        # Pick a subset now and lock it
+                        final_content = pick_random_subset(assessment, gen_content, seed=email_param)
+                        submission.candidate_questions = final_content
+                        submission.save(update_fields=['candidate_questions'])
+                else:
+                    # No submission yet, but we have an email. 
+                    # We can pick the set now so it's consistent even before they "start"
+                    final_content = pick_random_subset(assessment, gen_content, seed=email_param)
+                    # We don't create the submission here to keep CreateSubmissionView as the source of truth for "Starting"
+                    # However, we need to ensure CreateSubmissionView also locks it in or reuses this logic.
+                    # BETTER: Always use a helper to get/create consistent set.
 
             data = {
                 "id": assessment.id,
@@ -592,7 +713,7 @@ class PublicAssessmentView(APIView):
                 "coding_count": assessment.coding_count,
                 "duration_minutes": assessment.duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
-                "generated_content": gen_content,
+                "generated_content": final_content,
                 "status": assessment.status,
                 "already_completed": already_completed,
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
@@ -635,6 +756,10 @@ class InviteAssessmentCandidatesView(APIView):
             encoded_name = urllib.parse.quote(name)
             encoded_email = urllib.parse.quote(email)
             link = f"{base_link}?name={encoded_name}&email={encoded_email}"
+            
+            # Increment invited count
+            assessment.invited_count += 1
+            assessment.save(update_fields=['invited_count'])
             
             invited_candidates.append({"name": name, "email": email, "link": link})
             
@@ -704,6 +829,9 @@ class InviteAssessmentCandidatesView(APIView):
                 df.columns = df.columns.str.lower().str.strip()
                 if 'name' not in df.columns or 'email' not in df.columns:
                     return Response({"error": "File must have 'name' and 'email' columns"}, status=status.HTTP_400_BAD_REQUEST)
+
+                assessment.invited_count += len(df)
+                assessment.save(update_fields=['invited_count'])
 
                 for _, row in df.iterrows():
                     name = str(row['name']).strip()

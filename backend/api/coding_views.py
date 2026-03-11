@@ -108,14 +108,21 @@ def _merge_code(question: CodingQuestion, user_code: str, language: str = "") ->
 
 
 def _call_executor(*, language: str, source_code: str, stdin: str | None, time_limit_ms: int, memory_mb: int, testcases: list | None = None, schema_sql: str | None = None, database_engine: str | None = None) -> dict:
+    clean_stdin = stdin or ""
+    if clean_stdin.strip() == "None":
+        clean_stdin = ""
+
     payload = {
         "language": language,
         "source_code": source_code,
-        "stdin": stdin or "",
+        "stdin": clean_stdin,
         "time_limit_ms": time_limit_ms,
         "memory_mb": memory_mb,
     }
     if testcases:
+        for tc in testcases:
+            if tc.get("stdin") and str(tc["stdin"]).strip() == "None":
+                tc["stdin"] = ""
         payload["testcases"] = testcases
     if schema_sql:
         payload["schema_sql"] = schema_sql

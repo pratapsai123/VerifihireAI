@@ -711,9 +711,6 @@ class ProcessAnswerView(APIView):
                 f.write(f"PROCESS ERROR: {str(e)}\n")
                 f.write(traceback.format_exc())
             
-            fallback_q = remaining_questions[0] if remaining_questions else "Tell me more about your technical background."
             return Response({
-                "feedback": "I appreciate you sharing that. It gives me a better sense of your approach.",
-                "refined_next_question": fallback_q,
-                "score": 0
-            }, status=status.HTTP_200_OK)
+                "error": "AI is temporarily unavailable. Please try again or contact support."
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

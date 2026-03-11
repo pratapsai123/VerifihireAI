@@ -13,7 +13,11 @@ class Assessment(models.Model):
     job_description = models.TextField()
     required_skills = models.CharField(max_length=500)
     mcq_count = models.IntegerField(default=10)
+    mcq_easy = models.IntegerField(default=5)
+    mcq_medium = models.IntegerField(default=3)
+    mcq_hard = models.IntegerField(default=2)
     coding_count = models.IntegerField(default=2)
+    coding_difficulty_list = models.JSONField(default=list, blank=True) # e.g. ['Easy', 'Medium']
     duration_minutes = models.IntegerField(default=60)
     difficulty_level = models.CharField(max_length=20, default='Medium', choices=[('Easy', 'Easy'), ('Medium', 'Medium'), ('Hard', 'Hard')])
     generated_content = models.JSONField(blank=True, null=True)  # Store the AI response here
@@ -26,6 +30,7 @@ class Assessment(models.Model):
     share_token = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     available_from = models.DateTimeField(blank=True, null=True)
     available_until = models.DateTimeField(blank=True, null=True)
+    invited_count = models.IntegerField(default=0)
 
     def __str__(self):
         return f"Assessment for {self.required_skills} - {self.total_points} pts"
@@ -53,6 +58,7 @@ class AIAssessmentSubmission(models.Model):
     warning_logs = models.JSONField(default=list, blank=True, help_text="Stores the first 3 violations as grace warnings")
     monitoring_logs = models.JSONField(default=list, blank=True)
     results_breakdown = models.JSONField(default=dict, blank=True) # Detailed scoring info
+    candidate_questions = models.JSONField(default=dict, blank=True) # Locked-in randomized subset
 
     started_at = models.DateTimeField(default=timezone.now)
     submitted_at = models.DateTimeField(blank=True, null=True)

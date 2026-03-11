@@ -426,29 +426,12 @@ const AiInterviewSession = () => {
             console.error("Submission error:", err.code === 'ECONNABORTED' ? "AI Timeout (35s)" : err.message);
             if (err.response?.status === 429) setShowQuotaWarning(true);
 
-            // AUTOMATIC RECOVERY: If the AI engine times out or fails (e.g. Groq is slow), 
-            // don't get stuck. Just move to the next question manually.
-            const nextIdx = currentQuestionIndex + 1;
-            const fallbacks = [
-                "Understood. Moving along, let's explore another area.",
-                "I see where you're coming from. Let's pivot slightly.",
-                "Thanks for that input. Let's touch upon a different technical topic.",
-                "Got it. Switching gears, I have a question about your project work."
-            ];
-            const fallbackMsg = fallbacks[Math.floor(Math.random() * fallbacks.length)];
-            const fallbackNextQ = questions[nextIdx] || "Could you tell me more about your overall professional journey?";
+            // Show AI failure popup instead of static data
+            const errorMessage = err.response?.data?.error || err.message || "Unknown error";
+            alert(`AI is not working. Please try again later.\nError: ${errorMessage}`);
 
-            addMessage('ai', fallbackMsg);
-
-            if (nextIdx < questions.length || (typeof fallbackNextQ === 'string' && fallbackNextQ.length > 5)) {
-                addMessage('ai', fallbackNextQ);
-                await speak(fallbackMsg + " " + fallbackNextQ);
-                setCurrentQuestionIndex(nextIdx);
-                setProgress((nextIdx / MAX_QUESTIONS) * 100);
-            } else {
-                await speak(fallbackMsg);
-                completeInterview();
-            }
+            // Optionally notify user
+            setAiToast({ active: true, text: 'AI processing failed', urgent: true });
 
             setIsProcessing(false);
             setAiStatus("AI Interviewer Online");
