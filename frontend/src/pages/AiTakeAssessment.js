@@ -39,28 +39,65 @@ const AiTakeAssessment = () => {
     const [selectedLanguage, _setSelectedLanguage] = useState('python');
     const [codeDrafts, setCodeDrafts] = useState({});
 
+    const DEFAULT_BOILERPLATES = {
+        python: 'import sys\n\ndef main():\n    # Write your code here\n    pass\n\nif __name__ == "__main__":\n    main()\n',
+        java: 'import java.util.*;\nimport java.io.*;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        // Write your code here\n    }\n}\n',
+        cpp: '#include <iostream>\nusing namespace std;\n\nint main() {\n    // Write your code here\n    return 0;\n}\n',
+        javascript: 'const fs = require("fs");\n\nfunction main() {\n    // Read input from stdin\n    // const input = fs.readFileSync(0, "utf8");\n    \n    // Write your code here\n}\n\nmain();\n',
+        sql: '-- SQLite\n-- Create tables and insert data if needed\n-- SELECT * FROM ...\n',
+        csharp: 'using System;\n\nclass Program {\n    static void Main() {\n        // Write your code here\n    }\n}\n',
+        kotlin: 'import java.util.Scanner\n\nfun main() {\n    val sc = Scanner(System.`in`)\n    // Write your code here\n}\n',
+        swift: 'import Foundation\n\nfunc main() {\n    // Write your code here\n}\n\nmain()\n'
+    };
+
+    const formatCode = (codeStr) => {
+        if (!codeStr || typeof codeStr !== 'string') return codeStr;
+        // AI models often escape newlines when generating JSON, producing literal "\\n" and "\\t". 
+        // We need to convert them to actual newlines for the code editor.
+        return codeStr.replace(/\\n/g, '\n')
+                      .replace(/\\t/g, '\t')
+                      .replace(/\\"/g, '"')
+                      .replace(/\\\\n/g, '\n') // Handle double escaped
+                      .replace(/\\\\"/g, '"');
+    };
+
     const setSelectedLanguage = (lang) => {
         const currentLang = selectedLanguage;
         const qKey = currentAnswerKey;
 
         if (qKey && qKey.startsWith('coding_')) {
-            // 1. Ensure current code is saved to its draft
+            // 1. Save current code to draft BEFORE switching
             const currentCode = answers[qKey] || '';
-            setCodeDrafts(prev => ({ ...prev, [`${qKey}_${currentLang}`]: currentCode }));
-
-            // 2. Load the draft for the new language
-            const nextDraftKey = `${qKey}_${lang}`;
-            const nextDraft = codeDrafts[nextDraftKey];
+            const draftKeyForOldLang = `${qKey}_${currentLang}`;
             
-            // If draft exists, use it. Otherwise, handleAnswerChange will stay as is 
-            // and the bootstrapped drafts (or fallback logic) will take over.
-            if (nextDraft !== undefined) {
-                handleAnswerChange(qKey, nextDraft);
-            } else {
-                // If no draft exists yet (should be rare with bootstrapping), 
-                // we clear it so the Editor fallback logic handles it.
-                handleAnswerChange(qKey, '');
+            // 2. Determine what code should be in the editor for the NEW language
+            const nextDraftKey = `${qKey}_${lang}`;
+            let nextCode = codeDrafts[nextDraftKey];
+
+            if (nextCode === undefined) {
+                // If no draft exists, check starter_code or fallbacks
+                const qIdx = parseInt(qKey.replace('coding_', ''), 10);
+                const q = assessment?.generated_content?.coding_challenges?.[qIdx];
+                if (q) {
+                    if (q.starter_code && typeof q.starter_code === 'object' && q.starter_code[lang]) {
+                        nextCode = formatCode(q.starter_code[lang]);
+                    } else if (q[`starter_code_${lang}`]) {
+                        nextCode = formatCode(q[`starter_code_${lang}`]);
+                    } else {
+                        nextCode = DEFAULT_BOILERPLATES[lang] || '# Write logic here\n';
+                    }
+                } else {
+                    nextCode = DEFAULT_BOILERPLATES[lang] || '# Write logic here\n';
+                }
             }
+
+            // Update everything together to avoid race conditions
+            setAnswers(prev => ({ ...prev, [qKey]: nextCode }));
+            setCodeDrafts(prev => ({ 
+                ...prev, 
+                [draftKeyForOldLang]: currentCode,
+                [nextDraftKey]: nextCode // Ensure the draft is also initialized so we don't reload starter next time
+            }));
         }
 
         _setSelectedLanguage(lang);
@@ -241,26 +278,55 @@ const AiTakeAssessment = () => {
         const langData = supportedLanguages.find(l => l.id === selectedLanguage);
 
         if (isTestRun && currentQ?.test_cases?.length > 0) {
-            const results = [];
-            let passedCount = 0;
-            for (const tc of (currentQ.test_cases || [])) {
-                const tcInput = tc.input || tc.input_data || tc.stdin || '';
-                const tcOutput = tc.output || tc.expected_output || tc.stdout || '';
+            try {
+                const results = await Promise.all((currentQ.test_cases || []).map(async (tc, index) => {
+                    const tcInput = tc.input || tc.input_data || tc.stdin || '';
+                    const tcOutput = tc.output || tc.expected_output || tc.stdout || '';
+                    const isHidden = index >= 2;
 
-                try {
-                    const r = await axios.post(`${API_BASE_URL}/ai/execute/`, {
-                        language: selectedLanguage, version: langData.version,
-                        files: [{ content: code }], stdin: tcInput
-                    });
-                    const out = String(r.data.run.stdout || r.data.run.stderr || '').trim();
-                    const exp = String(tcOutput).trim();
-                    const passed = out === exp;
-                    if (passed) passedCount++;
-                    results.push({ input: tcInput, expected: exp, actual: out, passed });
-                } catch { results.push({ input: tcInput, expected: tcOutput, actual: 'Error', passed: false }); }
+                    try {
+                        const r = await axios.post(`${API_BASE_URL}/ai/execute/`, {
+                            language: selectedLanguage, 
+                            version: langData.version,
+                            files: [{ content: code }], 
+                            stdin: tcInput
+                        });
+                        const out = String(r.data.run.stdout || r.data.run.stderr || '').trim();
+                        const exp = String(tcOutput).trim();
+                        const passed = out === exp;
+                        return { 
+                            input: tcInput, 
+                            expected: exp, 
+                            actual: out, 
+                            passed,
+                            isHidden
+                        };
+                    } catch (err) {
+                        return { 
+                            input: tcInput, 
+                            expected: tcOutput, 
+                            actual: 'Error: ' + (err.message || 'Unknown'), 
+                            passed: false,
+                            isHidden
+                        };
+                    }
+                }));
+
+                const passedCount = results.filter(r => r.passed).length;
+                setExecutionResult({ 
+                    type: 'test_cases', 
+                    results, 
+                    score: passedCount, 
+                    total: results.length 
+                });
+                setCodingResults(prev => ({ 
+                    ...prev, 
+                    [qId]: { passed: passedCount, total: results.length } 
+                }));
+            } catch (err) {
+                console.error("Test execution failed", err);
+                setCodeOutput(prev => [...prev, { type: 'error', content: 'Internal test execution error.' }]);
             }
-            setExecutionResult({ type: 'test_cases', results, score: passedCount, total: (currentQ.test_cases || []).length });
-            setCodingResults(prev => ({ ...prev, [qId]: { passed: passedCount, total: (currentQ.test_cases || []).length } }));
             setIsExecuting(false);
             return;
         }
@@ -417,7 +483,8 @@ const AiTakeAssessment = () => {
         const cQ = allQs[currentQuestionIdx];
 
         if (cQ?.type === 'coding') {
-            const sampleInput = cQ.example_input || cQ.examples?.[0]?.input || '';
+            let sampleInput = cQ.example_input || cQ.examples?.[0]?.input || '';
+            if (typeof sampleInput === 'object') sampleInput = JSON.stringify(sampleInput);
             setCustomInput(String(sampleInput).trim());
         } else {
             setCustomInput('');
@@ -426,28 +493,37 @@ const AiTakeAssessment = () => {
 
     // Bootstrap code drafts from starter code for all languages
     useEffect(() => {
-        if (!isStarted || allQs.length === 0) return;
+        if (!isStarted || !assessment?.generated_content?.coding_challenges) return;
 
         setCodeDrafts(prev => {
             const nextDrafts = { ...prev };
             let changed = false;
 
-            allQs.forEach(q => {
-                if (q.type === 'coding' && q.starter_code && typeof q.starter_code === 'object') {
-                    const qKey = `coding_${q.id}`;
+            assessment.generated_content.coding_challenges.forEach((q, idx) => {
+                const qKey = `coding_${idx}`;
+                if (q.starter_code && typeof q.starter_code === 'object') {
                     Object.entries(q.starter_code).forEach(([lang, code]) => {
                         const dKey = `${qKey}_${lang.toLowerCase()}`;
                         if (nextDrafts[dKey] === undefined && code) {
-                            nextDrafts[dKey] = code;
+                            nextDrafts[dKey] = formatCode(code);
                             changed = true;
                         }
                     });
                 }
+                // Also check old format
+                supportedLanguages.forEach(sl => {
+                    const dKey = `${qKey}_${sl.id}`;
+                    const oldKey = `starter_code_${sl.id}`;
+                    if (nextDrafts[dKey] === undefined && q[oldKey]) {
+                        nextDrafts[dKey] = formatCode(q[oldKey]);
+                        changed = true;
+                    }
+                });
             });
 
             return changed ? nextDrafts : prev;
         });
-    }, [isStarted, allQs]);
+    }, [isStarted, assessment]);
 
     // Track question switch to ensure answers sync with selected language draft
     useEffect(() => {
@@ -456,11 +532,12 @@ const AiTakeAssessment = () => {
         const draftKey = `${currentAnswerKey}_${selectedLanguage}`;
         const draft = codeDrafts[draftKey];
 
-        // If the answer in state doesn't match the draft for this lang/question, update it
-        if (draft !== undefined && answers[currentAnswerKey] !== draft) {
-            setAnswers(prev => ({ ...prev, [currentAnswerKey]: draft }));
+        // If a draft exists and we don't have an answer for this coding question yet, load it.
+        // But DON'T force sync if we already have an answer, to avoid fighting with setSelectedLanguage.
+        if (draft !== undefined && !answers[currentAnswerKey]) {
+             setAnswers(prev => ({ ...prev, [currentAnswerKey]: draft }));
         }
-    }, [currentQuestionIdx, selectedLanguage, isStarted, codeDrafts]);
+    }, [currentQuestionIdx, isStarted, codeDrafts]);
     // Lock page scroll while assessment is running
     useEffect(() => {
         document.body.style.margin = '0';
@@ -810,24 +887,31 @@ const AiTakeAssessment = () => {
                                                 </ul>
                                             </div>
                                         )}
-                                        {(currentQ.example_input || currentQ.examples?.length > 0) && (
-                                            <div>
-                                                <div style={{ fontSize: '0.62rem', fontWeight: 800, textTransform: 'uppercase', color: '#374151', marginBottom: 5 }}>Sample Case</div>
-                                                <div style={{ border: '1px solid #e5e7eb', borderRadius: 8, overflow: 'hidden', background: '#f9fafb' }}>
-                                                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-                                                        <div style={{ padding: '6px 8px', borderRight: '1px solid #e5e7eb' }}>
-                                                            <div style={{ fontSize: '0.6rem', color: '#1d4ed8', fontWeight: 700, marginBottom: 2 }}>INPUT</div>
-                                                            <pre style={{ margin: 0, fontSize: '0.75rem', fontFamily: 'monospace', color: '#111827', whiteSpace: 'pre-wrap' }}>
-                                                                {currentQ.example_input || currentQ.examples?.[0]?.input}
-                                                            </pre>
+                                        {(currentQ.test_cases?.length > 0 || currentQ.example_input) && (
+                                            <div style={{ marginBottom: '1rem' }}>
+                                                <div style={{ fontSize: '0.62rem', fontWeight: 800, textTransform: 'uppercase', color: '#374151', marginBottom: 8 }}>Sample Cases</div>
+                                                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                                                    {((currentQ.test_cases && currentQ.test_cases.length > 0) ? currentQ.test_cases.slice(0, 2) : 
+                                                      (currentQ.example_input ? [{input: currentQ.example_input, output: currentQ.example_output}] : [])
+                                                     ).map((tc, idx) => (
+                                                        <div key={idx} style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: 8, padding: '10px' }}>
+                                                            <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#1d4ed8', marginBottom: 6, textTransform: 'uppercase' }}>Case {idx + 1}</div>
+                                                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 15 }}>
+                                                                <div>
+                                                                    <div style={{ fontSize: '0.55rem', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', marginBottom: 2 }}>Input</div>
+                                                                    <pre style={{ margin: 0, fontSize: '0.72rem', color: '#334155', whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
+                                                                        {typeof tc.input === 'object' ? JSON.stringify(tc.input, null, 2) : String(tc.input || tc.input_data || '').trim()}
+                                                                    </pre>
+                                                                </div>
+                                                                <div>
+                                                                    <div style={{ fontSize: '0.55rem', fontWeight: 800, color: '#94a3b8', textTransform: 'uppercase', marginBottom: 2 }}>Output</div>
+                                                                    <pre style={{ margin: 0, fontSize: '0.72rem', color: '#334155', whiteSpace: 'pre-wrap', fontFamily: 'monospace' }}>
+                                                                        {typeof tc.output === 'object' ? JSON.stringify(tc.output, null, 2) : String(tc.output || tc.expected_output || '').trim()}
+                                                                    </pre>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div style={{ padding: '6px 8px' }}>
-                                                            <div style={{ fontSize: '0.6rem', color: '#16a34a', fontWeight: 700, marginBottom: 2 }}>OUTPUT</div>
-                                                            <pre style={{ margin: 0, fontSize: '0.75rem', fontFamily: 'monospace', color: '#111827', whiteSpace: 'pre-wrap' }}>
-                                                                {currentQ.example_output || currentQ.examples?.[0]?.output}
-                                                            </pre>
-                                                        </div>
-                                                    </div>
+                                                    ))}
                                                 </div>
                                             </div>
                                         )}
@@ -858,32 +942,10 @@ const AiTakeAssessment = () => {
                                         </div>
                                     </div>
                                     <div style={{ flex: 1, overflow: 'hidden' }}>
-                                        <Editor height="100%" language={selectedLanguage} theme="vs-dark"
-                                            value={answers[currentAnswerKey] || (() => {
-                                                const raw = currentQ.starter_code;
-                                                // New format: raw is an object mapping languages to starter code
-                                                if (raw && typeof raw === 'object' && raw[selectedLanguage]) {
-                                                    return raw[selectedLanguage];
-                                                }
-                                                // Old format: flat keys like starter_code_python
-                                                if (currentQ[`starter_code_${selectedLanguage}`]) {
-                                                    return currentQ[`starter_code_${selectedLanguage}`];
-                                                }
-                                                // Fallback to default comments if no specific starter code is provided
-                                                const defaultComments = {
-                                                    python: '# Write your code here\n',
-                                                    java: '// Write your code here\n',
-                                                    cpp: '// Write your code here\n',
-                                                    javascript: '// Write your code here\n',
-                                                    kotlin: '// Write your code here (Kotlin)\n',
-                                                    swift: '// Write your code here (Swift)\n',
-                                                    csharp: '// Write your code here (C#)\n',
-                                                    sql: '-- Write your query here (SQLite)\nSELECT * FROM table_name;\n'
-                                                };
-                                                const isGeneric = !raw || typeof raw !== 'object' && ['// Write your code here', '# Write your code here'].includes(String(raw).trim());
-                                                if (isGeneric) return defaultComments[selectedLanguage] || '# Write your code here\n';
-                                                return typeof raw === 'string' ? raw : defaultComments[selectedLanguage] || '# Write your code here\n';
-                                            })()}
+                                        <Editor 
+                                            key={`${currentAnswerKey}_${selectedLanguage}`}
+                                            height="100%" language={selectedLanguage} theme="vs-dark"
+                                            value={answers[currentAnswerKey] || ""}
                                             onChange={val => handleAnswerChange(currentAnswerKey, val)}
                                             options={{ fontSize: 13, minimap: { enabled: false }, scrollBeyondLastLine: false, automaticLayout: true, padding: { top: 10 }, lineNumbers: 'on' }} />
                                     </div>
@@ -897,8 +959,8 @@ const AiTakeAssessment = () => {
                                                     </div>
                                                     {executionResult.results.map((r, i) => (
                                                         <div key={i} style={{ fontSize: '0.72rem', color: r.passed ? '#22c55e' : '#ef4444', marginBottom: 1 }}>
-                                                            {r.passed ? 'PASS' : 'FAIL'} TC{i + 1}
-                                                            {!r.passed && <span style={{ color: '#888' }}> expected: {String(r.expected || '').substring(0, 30)} got: {String(r.actual || '').substring(0, 30)}</span>}
+                                                            {r.passed ? 'PASS' : 'FAIL'} {r.isHidden ? 'Hidden' : 'Sample'} Case {i + 1}
+                                                            {!r.passed && <span style={{ color: '#888' }}> exp: "{String(r.expected || '').substring(0, 30)}" got: "{String(r.actual || '').substring(0, 30)}"</span>}
                                                         </div>
                                                     ))}
                                                 </div>

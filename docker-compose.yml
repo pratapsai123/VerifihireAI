@@ -54,7 +54,7 @@ services:
       - dind
 
   dind:
-    image: public.ecr.aws/docker/library/docker:24-dind
+    image: docker:24-dind
     container_name: verifyhire_dind
     privileged: true
     restart: unless-stopped

@@ -219,11 +219,28 @@ class GenerateAssessmentView(APIView):
                 coding_prompt = f"TASK 2: Generate {coding_count} Coding Challenges.\n"
                 for i, diff in enumerate(coding_tasks):
                     coding_prompt += f"- Challenge {i+1}: {diff} difficulty\n"
-                coding_prompt += "Each challenge object must have: 'title', 'problem_statement' (detailed), 'input_format', 'output_format', 'constraints', 'example_input', 'example_output', 'explanation', 'starter_code', 'difficulty' (must match requested), and 'test_cases' (list of 5 objects).\n"
-                coding_prompt += "CRITICAL: 'starter_code' MUST be a JSON object mapping these exact keys: python, java, javascript, cpp, csharp, kotlin, swift, sql to their respective starter code snippets.\n"
-                coding_prompt += "CRITICAL: The starter code snippets MUST ONLY be the function or class signatures with empty bodies or TODO comments. DO NOT provide the actual solution or implementation logic. The candidate must write the logic themselves.\n"
-                coding_prompt += "CRITICAL: The 'starter_code' dictionary MUST contain valid JSON strings. Do not use Python-style triple quotes (\"\"\"). Use standard double quotes (\") and escape newlines with \\n."
-                coding_prompt += "IMPORTANT: For test_cases inside coding_challenges, you MUST use the keys \"input\" and \"output\" exactly."
+                
+                coding_prompt += (
+                    "Each challenge object must have: 'title', 'problem_statement' (detailed), 'input_format', 'output_format', "
+                    "'constraints', 'example_input', 'example_output', 'explanation', 'starter_code', 'difficulty', and 'test_cases'.\n"
+                )
+                coding_prompt += "CRITICAL: The 'problem_statement' MUST BE ALGORITHMIC or LOGIC-BASED (e.g., Array manipulation, String processing, Math, Data Structures). DO NOT generate UI or React-specific questions. All problems must be solvable using standard input/output (stdin/stdout).\n"
+                coding_prompt += "CRITICAL: The 'problem_statement' MUST BE LANGUAGE-AGNOSTIC. Do not mention specific language names.\n"
+                coding_prompt += "CRITICAL: 'starter_code' MUST be a JSON object mapping these exact keys: python, java, javascript, cpp, csharp, kotlin, swift, sql.\n"
+                coding_prompt += "CRITICAL - PROVIDE ONLY BOILERPLATE: The 'starter_code' snippets MUST NOT contain any solution logic. The function body or main block MUST BE EMPTY except for a single line comment like '// TODO: Write logic here'.\n"
+                coding_prompt += "CRITICAL: The starter code MUST include all necessary imports and the basic input/output (stdin/stdout) handling logic. The part where the problem is solved MUST BE LEFT BLANK.\n"
+                coding_prompt += (
+                    "CRITICAL: Generate EXACTLY 10 test_cases for each challenge. "
+                    "The first 2 should be 'Sample' cases (provided in the description), and the remaining 8 should be 'Hidden' cases including edge cases (empty inputs, large numbers, boundary conditions).\n"
+                )
+                coding_prompt += "NOTE: Use '# ' for Python comments and '// ' for Java/C++/JS comments.\n"
+                coding_prompt += "CRITICAL: The 'starter_code' dictionary MUST contain valid JSON strings. Escape newlines with \\n and tabs with \\t.\n"
+                coding_prompt += (
+                    "CRITICAL - TEST CASE FORMAT: Each test_case MUST be an object with \"input\" and \"output\" keys. "
+                    "The \"output\" value MUST BE THE RAW RESULT. DO NOT wrap it in literal quotes. DO NOT double-escape characters. "
+                    "Example: If the reversed string is 'abc', write \"output\": \"abc\", NOT \"output\": \"\\\"abc\\\"\". "
+                    "Ensure test inputs and outputs use standard alphanumeric characters to avoid JSON parsing typos."
+                )
                 keys_expected = '"mcqs", "coding_challenges"'
 
             prompt = f"""
@@ -247,9 +264,10 @@ class GenerateAssessmentView(APIView):
             
             response = local_groq_client.chat.completions.create(
                 model="llama-3.1-8b-instant",
-                messages=[{"role": "user", "content": prompt}],
+                messages=[{"role": "system", "content": "You are a professional assessment generator. You MUST output valid JSON only."}, 
+                          {"role": "user", "content": prompt}],
                 response_format={"type": "json_object"},
-                temperature=0.8
+                temperature=0.1
             )
             raw_text = response.choices[0].message.content
             
@@ -758,7 +776,7 @@ class ProxyCodeExecuteView(APIView):
             language = request.data.get('language')
             files = request.data.get('files', [])
             stdin = request.data.get('stdin', '')
-            if stdin and stdin.strip() == "None":
+            if stdin is None or (isinstance(stdin, str) and stdin.strip().lower() in ["none", "null"]):
                 stdin = ""
             code = files[0]['content'] if files else ''
             
