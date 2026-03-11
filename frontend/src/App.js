@@ -39,7 +39,6 @@ import AiAssessmentDetail from './pages/AiAssessmentDetail';
 import ResultsAI from './pages/ResultsAI';
 import FeedbackPage from './pages/FeedbackPage';
 import FeedbackDetails from './pages/FeedbackDetails';
-import SuperAdminDashboard from './pages/SuperAdminDashboard';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -105,7 +104,6 @@ function AppContent() {
     '/accept-invite',
     '/feedback-page',
     '/results',
-    '/superadmin',                 // superadmin has its own header
   ];
 
   const isFullScreenPage =
@@ -158,7 +156,6 @@ function AppContent() {
             <Route path="/feedback-page" element={<FeedbackPage />} />
             <Route path="/feedback-details" element={<FeedbackDetails />} />
             <Route path="/results" element={<Result />} />
-            <Route path="/superadmin" element={<SuperAdminDashboard />} />
           </Route>
 
           {/* Public / Candidate Routes */}

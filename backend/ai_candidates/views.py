@@ -114,7 +114,7 @@ class BulkInviteView(APIView):
                     job_description=job_description,
                     status='Invited'
                 )
-                link = f"https://verifyhire.duckdns.org/interview-start/{candidate.id}"
+                link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
                 # Format time info for email
                 time_range_info = ""
