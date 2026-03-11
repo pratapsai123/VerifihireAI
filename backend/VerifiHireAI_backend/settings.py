@@ -199,9 +199,8 @@ REST_FRAMEWORK = {
 
 default_cors_origins = [
     "http://localhost:3000",
-    "http://localhost:3000",
-    "http://localhost:3000",
-    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:5174",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
