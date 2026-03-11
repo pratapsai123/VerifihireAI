@@ -20,56 +20,91 @@ from ai_candidates.views import extract_json
 from api.views import ensure_role_exists
 
 def pick_random_subset(assessment, pool, seed=None):
-    """Randomly selects a subset of questions from the pool based on assessment targets."""
+    """Randomly selects a subset of questions from the pool based on assessment targets.
+    GUARANTEES: The applicant receives exactly mcq_count MCQs and coding_count coding challenges.
+    """
     if not pool:
         return {}
         
+    import copy
     local_random = random.Random(seed) if seed else random.Random()
     
     subset = {"mcqs": [], "coding_challenges": []}
     
-    pool_mcqs = pool.get('mcqs', [])
+    pool_mcqs = list(pool.get('mcqs', []))
     # AI sometimes returns coding_tasks instead of coding_challenges
-    pool_coding = pool.get('coding_challenges', []) or pool.get('coding_tasks', [])
+    pool_coding = copy.deepcopy(pool.get('coding_challenges', []) or pool.get('coding_tasks', []))
     
-    # Work on a copy to avoid mutating the original pool
-    import copy
-    pool_coding = copy.deepcopy(pool_coding)
-    
-    # 1. Select MCQs by difficulty
-    # If target counts are zero (legacy), use the pool logic
+    # --- Normalize difficulty labels (case-insensitive) ---
+    for q in pool_mcqs:
+        d = q.get('difficulty', '')
+        if isinstance(d, str):
+            q['difficulty'] = d.strip().capitalize()  # "easy" -> "Easy", "MEDIUM" -> "Medium"
+    for c in pool_coding:
+        d = c.get('difficulty', '')
+        if isinstance(d, str):
+            c['difficulty'] = d.strip().capitalize()
+
+    # === 1. Select MCQs by difficulty, then fill up to mcq_count ===
+    target_mcq_count = getattr(assessment, 'mcq_count', 10)
     target_mcqs = [
-        ('Easy', getattr(assessment, 'mcq_easy', 5)), 
-        ('Medium', getattr(assessment, 'mcq_medium', 3)), 
-        ('Hard', getattr(assessment, 'mcq_hard', 2))
+        ('Easy', getattr(assessment, 'mcq_easy', 0)), 
+        ('Medium', getattr(assessment, 'mcq_medium', 0)), 
+        ('Hard', getattr(assessment, 'mcq_hard', 0))
     ]
     
+    # If granular targets sum to 0, distribute the total count evenly
+    if sum(t for _, t in target_mcqs) == 0:
+        target_mcqs = [
+            ('Easy', target_mcq_count // 2),
+            ('Medium', (target_mcq_count * 3) // 10),
+            ('Hard', max(0, target_mcq_count - target_mcq_count // 2 - (target_mcq_count * 3) // 10))
+        ]
+
+    selected_mcq_ids = set()
+    
     for diff, target in target_mcqs:
-        diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff]
-        if not diff_pool: # Fallback if AI didn't label correctly
-            diff_pool = [q for q in pool_mcqs if q.get('difficulty') is None]
-        
+        diff_pool = [q for q in pool_mcqs if q.get('difficulty') == diff and id(q) not in selected_mcq_ids]
         if diff_pool:
             sample_size = min(len(diff_pool), target)
-            subset['mcqs'].extend(local_random.sample(diff_pool, sample_size))
+            chosen = local_random.sample(diff_pool, sample_size)
+            subset['mcqs'].extend(chosen)
+            selected_mcq_ids.update(id(q) for q in chosen)
     
-    # 2. Select Coding Challenges
-    # Use target list if available, else fallback to coding_count
-    targets = getattr(assessment, 'coding_difficulty_list', None) or ['Medium'] * assessment.coding_count
+    # FILL-UP: If we still don't have enough MCQs, grab from remaining pool
+    if len(subset['mcqs']) < target_mcq_count:
+        remaining = [q for q in pool_mcqs if id(q) not in selected_mcq_ids]
+        needed = target_mcq_count - len(subset['mcqs'])
+        if remaining:
+            fill = local_random.sample(remaining, min(len(remaining), needed))
+            subset['mcqs'].extend(fill)
+
+    # === 2. Select Coding Challenges, then fill up to coding_count ===
+    target_coding_count = getattr(assessment, 'coding_count', 2)
+    targets = getattr(assessment, 'coding_difficulty_list', None) or ['Medium'] * target_coding_count
+    
     for diff in targets:
         diff_pool = [c for c in pool_coding if c.get('difficulty') == diff]
         if not diff_pool and pool_coding:
-            diff_pool = pool_coding # Fallback
+            diff_pool = list(pool_coding)  # Fallback: use any remaining
             
         if diff_pool:
             choice = local_random.choice(diff_pool)
             subset['coding_challenges'].append(choice)
-            # Remove chosen to avoid duplicates in the same set
-            if choice in diff_pool:
+            if choice in pool_coding:
                 pool_coding.remove(choice)
     
-    # 3. Final Shuffle of MCQs so difficulty isn't ordered
+    # FILL-UP: If we still don't have enough coding challenges, grab from remaining pool
+    if len(subset['coding_challenges']) < target_coding_count:
+        needed = target_coding_count - len(subset['coding_challenges'])
+        if pool_coding:
+            fill = local_random.sample(pool_coding, min(len(pool_coding), needed))
+            subset['coding_challenges'].extend(fill)
+
+    # === 3. Final Shuffle so difficulty isn't ordered ===
     local_random.shuffle(subset['mcqs'])
+    
+    logger.info(f"pick_random_subset: Selected {len(subset['mcqs'])}/{target_mcq_count} MCQs, {len(subset['coding_challenges'])}/{target_coding_count} Coding")
     
     return subset
 
@@ -227,16 +262,57 @@ class GenerateAssessmentView(APIView):
         job_description = data.get('job_description')
         required_skills = data.get('required_skills')
         
-        # Granular inputs from new UI
-        mcq_easy = int(data.get('mcq_easy', 5))
-        mcq_medium = int(data.get('mcq_medium', 3))
-        mcq_hard = int(data.get('mcq_hard', 2))
-        coding_tasks = data.get('coding_tasks', ['Medium']) # List of difficulties
+        # Robust Question Count Extraction
+        # 1. MCQs: Priority to Granular (if they have non-zero sum) > Total count
+        input_mcq_total = int(data.get('mcq_count', 0))
+        input_easy = int(data.get('mcq_easy', 0))
+        input_medium = int(data.get('mcq_medium', 0))
+        input_hard = int(data.get('mcq_hard', 0))
+        
+        granular_sum = input_easy + input_medium + input_hard
+        
+        if granular_sum > 0:
+            mcq_count = granular_sum
+            mcq_easy = input_easy
+            mcq_medium = input_medium
+            mcq_hard = input_hard
+        elif input_mcq_total > 0:
+            mcq_count = input_mcq_total
+            mcq_easy = mcq_count // 2
+            mcq_medium = (mcq_count * 3) // 10
+            mcq_hard = max(0, mcq_count - mcq_easy - mcq_medium)
+        else:
+            # Absolute default fallback
+            mcq_count = 10
+            mcq_easy = 5
+            mcq_medium = 3
+            mcq_hard = 2
+
+        # 2. Coding Challenges: Priority to Non-Empty coding_tasks > coding_count
+        input_coding_count = int(data.get('coding_count', 0))
+        coding_tasks = data.get('coding_tasks', [])
+        
+        if isinstance(coding_tasks, str) and coding_tasks:
+            try:
+                coding_tasks = json.loads(coding_tasks)
+            except:
+                coding_tasks = []
+
+        if isinstance(coding_tasks, list) and len(coding_tasks) > 0:
+            coding_count = len(coding_tasks)
+        elif input_coding_count > 0:
+            coding_count = input_coding_count
+            coding_tasks = ['Medium'] * coding_count
+        else:
+            # Absolute default fallback
+            coding_count = 2
+            coding_tasks = ['Medium', 'Hard']
+
+        # Log for debugging
+        logger.info(f"Generated Assessment Config: MCQs={mcq_count} ({mcq_easy}/{mcq_medium}/{mcq_hard}), Coding={coding_count} ({coding_tasks})")
+        
         duration = int(data.get('duration', 60))
         total_possible_points = int(data.get('total_possible_points', 1000))
-        
-        mcq_count = mcq_easy + mcq_medium + mcq_hard
-        coding_count = len(coding_tasks)
 
         if not job_description or not required_skills:
             return Response({
@@ -333,29 +409,64 @@ class GenerateAssessmentView(APIView):
             local_api_key = getattr(settings, 'GROQ_API_KEY', None)
             local_groq_client = Groq(api_key=local_api_key)
             
-            response = local_groq_client.chat.completions.create(
-                model="llama-3.1-8b-instant",
-                messages=[{"role": "system", "content": "You are a professional assessment generator. You MUST output valid JSON only."}, 
-                          {"role": "user", "content": prompt}],
-                response_format={"type": "json_object"},
-                temperature=0.1
-            )
-            raw_text = response.choices[0].message.content
-            
-            if not raw_text:
-                raise Exception("Empty response from AI engine")
+            attempts = 0
+            max_attempts = 3
+            current_prompt = prompt
+            generated_data = {}
+            raw_text = ""
 
-            generated_data = extract_json(raw_text)
+            while attempts < max_attempts:
+                attempts += 1
+                logger.info(f"AI Generation Attempt {attempts}/{max_attempts}")
+                
+                response = local_groq_client.chat.completions.create(
+                    model="llama-3.1-8b-instant",
+                    messages=[
+                        {"role": "system", "content": "You are a professional assessment generator. You MUST output valid JSON only. ALWAYS provide the EXACT counts requested."}, 
+                        {"role": "user", "content": current_prompt}
+                    ],
+                    response_format={"type": "json_object"},
+                    temperature=0.1 if attempts == 1 else 0.2
+                )
+                raw_text = response.choices[0].message.content
+                if not raw_text: continue
+
+                generated_data = extract_json(raw_text)
+                if not generated_data: continue
+
+                # Count Validation
+                mcqs = generated_data.get('mcqs', [])
+                actual_mcqs = len(mcqs)
+                coding = generated_data.get('coding_challenges', []) or generated_data.get('coding_tasks', [])
+                actual_coding = len(coding)
+                
+                # Check for difficulty distribution sufficiency
+                easy_count = len([q for q in mcqs if q.get('difficulty') == 'Easy'])
+                medium_count = len([q for q in mcqs if q.get('difficulty') == 'Medium'])
+                hard_count = len([q for q in mcqs if q.get('difficulty') == 'Hard'])
+                
+                mcq_satisfied = (actual_mcqs >= pool_mcq_total) and (easy_count >= pool_easy) and (medium_count >= pool_medium) and (hard_count >= pool_hard)
+                coding_satisfied = (actual_coding >= pool_coding_total)
+
+                if mcq_satisfied and coding_satisfied:
+                    logger.info(f"AI Success on attempt {attempts}: Full pool generated with correct difficulties.")
+                    break
+                else:
+                    # Provide corrective feedback
+                    error_msg = f"In the last attempt, you generated {actual_mcqs} MCQs ({easy_count} Easy, {medium_count} Medium, {hard_count} Hard) and {actual_coding} coding challenges. "
+                    error_msg += f"I explicitly requested a POOL of {pool_mcq_total} MCQs (Easy:{pool_easy}, Medium:{pool_medium}, Hard:{pool_hard}) and {pool_coding_total} coding challenges. "
+                    error_msg += "PLEASE REDO THIS and ensure you provide the full requested quantity and correct 'difficulty' labels for EACH object."
+                    current_prompt = prompt + "\n\nCORRECTION FROM PREVIOUS ATTEMPT:\n" + error_msg
+                    logger.warning(f"AI under-generated on attempt {attempts}. Retrying with feedback.")
+
             if not generated_data:
-                raise Exception("The AI generated a response but the structure was invalid.")
+                raise Exception("The AI failed to generate a valid response after multiple attempts.")
 
             # === ENFORCE POOL LIMITS - AI sometimes over-generates ===
             if 'mcqs' in generated_data and len(generated_data['mcqs']) > pool_mcq_total:
-                logger.warning(f"AI over-generated {len(generated_data['mcqs'])} MCQs, truncating to {pool_mcq_total}")
                 generated_data['mcqs'] = generated_data['mcqs'][:pool_mcq_total]
 
             if 'coding_challenges' in generated_data and len(generated_data['coding_challenges']) > pool_coding_total:
-                logger.warning(f"AI over-generated {len(generated_data['coding_challenges'])} coding challenges, truncating to {pool_coding_total}")
                 generated_data['coding_challenges'] = generated_data['coding_challenges'][:pool_coding_total]
 
             assessment.generated_content = generated_data
