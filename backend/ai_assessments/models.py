@@ -31,6 +31,13 @@ class Assessment(models.Model):
     available_from = models.DateTimeField(blank=True, null=True)
     available_until = models.DateTimeField(blank=True, null=True)
     invited_count = models.IntegerField(default=0)
+    company = models.ForeignKey(
+        'api.Company', 
+        on_delete=models.CASCADE, 
+        related_name='ai_assessments', 
+        null=True, 
+        blank=True
+    )
 
     def __str__(self):
         return f"Assessment for {self.required_skills} - {self.total_points} pts"

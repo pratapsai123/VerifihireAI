@@ -672,6 +672,9 @@ class GenerateAssessmentView(APIView):
             job_title = data.get('job_title') or data.get('role_title') or required_skills
             if job_title:
                 ensure_role_exists(job_title, job_description, user=request.user)
+            
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
 
             assessment = Assessment.objects.create(
                 job_description=job_description,
@@ -686,7 +689,8 @@ class GenerateAssessmentView(APIView):
                 total_points=total_possible_points,
                 available_from=data.get('available_from'),
                 available_until=data.get('available_until'),
-                pass_threshold=data.get('pass_threshold', 60)
+                pass_threshold=data.get('pass_threshold', 60),
+                company=company
             )
 
             # Pool multipliers - generate 2x the requested amount for randomization
@@ -1131,8 +1135,17 @@ class SaveAssessmentProgressView(APIView):
             return Response({"error": "Submission not found"}, status=status.HTTP_404_NOT_FOUND)
 
 class AssessmentListView(APIView):
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
-        assessments = Assessment.objects.all().order_by('-created_at')
+        user_profile = getattr(request.user, 'profile', None)
+        company = user_profile.company if user_profile else None
+        
+        if not company:
+            return Response([], status=status.HTTP_200_OK)
+
+        assessments = Assessment.objects.filter(company=company).order_by('-created_at')
         data = []
         for assessment in assessments:
             count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
@@ -1164,9 +1177,15 @@ class AssessmentListView(APIView):
         return Response(data, status=status.HTTP_200_OK)
 
 class AssessmentDetailView(APIView):
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk):
         try:
-            assessment = Assessment.objects.get(pk=pk)
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
+            
+            assessment = Assessment.objects.get(pk=pk, company=company)
             submissions = AIAssessmentSubmission.objects.filter(assessment=assessment).order_by('-submitted_at')
             
             submission_data = []
@@ -1210,7 +1229,10 @@ class AssessmentDetailView(APIView):
 
     def delete(self, request, pk):
         try:
-            assessment = Assessment.objects.get(pk=pk)
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
+            
+            assessment = Assessment.objects.get(pk=pk, company=company)
             assessment.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Assessment.DoesNotExist:
@@ -1316,10 +1338,16 @@ class PublicAssessmentView(APIView):
              logger.error(f"PublicAssessmentView Error: {str(e)}\n{traceback.format_exc()}")
              return Response({"error": "Invalid token or data structure"}, status=status.HTTP_400_BAD_REQUEST)
 class InviteAssessmentCandidatesView(APIView):
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         assessment_id = request.data.get('assessment_id')
         try:
-            assessment = Assessment.objects.get(pk=assessment_id)
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
+            
+            assessment = Assessment.objects.get(pk=assessment_id, company=company)
         except Assessment.DoesNotExist:
             return Response({"error": "Assessment not found"}, status=status.HTTP_404_NOT_FOUND)
 
@@ -1546,6 +1574,18 @@ class ProxyCodeExecuteView(APIView):
             }, status=status.HTTP_200_OK)
 
 class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
-    queryset = AIAssessmentSubmission.objects.all()
-    # serializer_class = ... # Not strictly needed for simple delete, but good practice
-    permission_classes = [AllowAny]
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+    
+    def get_queryset(self):
+        user_profile = getattr(self.request.user, 'profile', None)
+        company = user_profile.company if user_profile and user_profile.company else None
+        if not company:
+            return AIAssessmentSubmission.objects.none()
+        return AIAssessmentSubmission.objects.filter(assessment__company=company)
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)

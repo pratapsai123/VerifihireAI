@@ -61,6 +61,9 @@ def extract_json(text):
         return None
 
 class BulkInviteView(APIView):
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         file = request.FILES.get('file')
         job_description = request.data.get('job_description')
@@ -105,6 +108,9 @@ class BulkInviteView(APIView):
                 if job_title:
                     ensure_role_exists(job_title, job_description, user=request.user)
 
+                user_profile = getattr(request.user, 'profile', None)
+                company = user_profile.company if user_profile else None
+
                 candidate = Candidate.objects.create(
                     full_name=name,
                     email=email,
@@ -113,7 +119,8 @@ class BulkInviteView(APIView):
                     available_from=available_from if available_from else None,
                     available_until=available_until if available_until else None,
                     job_description=job_description,
-                    status='Invited'
+                    status='Invited',
+                    company=company
                 )
                 link = f"http://localhost:3000/interview-start/{candidate.id}"
                 
@@ -208,6 +215,9 @@ class BulkInviteView(APIView):
 
 
 class ResumeMatchView(APIView):
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         resume_file = request.FILES.get('resume')
         candidate_id = request.data.get('candidate_id')
@@ -275,14 +285,18 @@ class ResumeMatchView(APIView):
                 if job_title:
                     ensure_role_exists(job_title, job_description, user=request.user)
 
+                user_profile = getattr(request.user, 'profile', None)
+                company = user_profile.company if user_profile else None
+                
                 candidate = Candidate.objects.create(
                     full_name=resume_file.name.replace('.pdf', ''),
-                    email="Extraction Failed",
+                    email="pending@example.com",
                     job_title=job_title or "Applicant",
                     resume=resume_file,
                     resume_text=resume_text,
                     status='New',
-                    job_description=job_description
+                    job_description=job_description,
+                    company=company
                 )
                 candidate_id = candidate.id
             elif candidate and not resume_file:
@@ -415,14 +429,34 @@ class ResumeMatchView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class CandidateListCreateView(generics.ListCreateAPIView):
-    queryset = Candidate.objects.all().order_by('-created_at')
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
     serializer_class = CandidateSerializer
+
+    def get_queryset(self):
+        user_profile = getattr(self.request.user, 'profile', None)
+        company = user_profile.company if user_profile and user_profile.company else None
+        if not company:
+            return Candidate.objects.none()
+        return Candidate.objects.filter(company=company).order_by('-created_at')
+
+    def perform_create(self, serializer):
+        user_profile = getattr(self.request.user, 'profile', None)
+        company = user_profile.company if user_profile else None
+        serializer.save(company=company)
 
 INTERVIEW_LINK_TTL_MINUTES = 60
 
 class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            user_profile = getattr(self.request.user, 'profile', None)
+            company = user_profile.company if user_profile and user_profile.company else None
+            if company:
+                return Candidate.objects.filter(company=company)
+        return Candidate.objects.all()
 
     def get(self, request, *args, **kwargs):
         candidate = self.get_object()
@@ -460,7 +494,17 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 class CandidateStatusUpdateView(APIView):
     def patch(self, request, pk):
         try:
-            candidate = Candidate.objects.get(pk=pk)
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile and user_profile.company else None
+            
+            # If recruiter, filter by company. If candidate (not auth), AllowAny might be needed?
+            # Existing code didn't have permission_classes, so it was public.
+            # We'll allow status updates if either recruiter from same company or AllowAny (for backward compat)
+            if request.user.is_authenticated and company:
+                candidate = Candidate.objects.get(pk=pk, company=company)
+            else:
+                candidate = Candidate.objects.get(pk=pk)
+            
             new_status = request.data.get('status')
             if new_status in dict(Candidate.STATUS_CHOICES):
                 candidate.status = new_status

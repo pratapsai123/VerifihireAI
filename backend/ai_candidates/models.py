@@ -26,6 +26,13 @@ class Candidate(models.Model):
     available_until = models.DateTimeField(blank=True, null=True)
     job_description = models.TextField(blank=True, null=True)
     status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='New')
+    company = models.ForeignKey(
+        'api.Company', 
+        on_delete=models.CASCADE, 
+        related_name='ai_candidates', 
+        null=True, 
+        blank=True
+    )
     score = models.IntegerField(default=0)
     resume_score = models.IntegerField(default=0, help_text="Resume match percentage from AI screening")
     total_questions = models.IntegerField(default=0)
