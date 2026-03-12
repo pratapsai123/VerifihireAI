@@ -69,3 +69,16 @@ class AIAssessmentSubmission(models.Model):
 
     class Meta:
         db_table = 'ai_assessment_submission'
+
+class AIAssessmentIntegrityScreenshot(models.Model):
+    submission = models.ForeignKey(AIAssessmentSubmission, on_delete=models.CASCADE, related_name='screenshots')
+    event_type = models.CharField(max_length=50)
+    screenshot = models.ImageField(upload_to='ai_integrity_screenshots/', blank=True, null=True)
+    webcam_screenshot = models.ImageField(upload_to='ai_integrity_screenshots/webcam/', blank=True, null=True)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f"AI Screenshot - {self.event_type} at {self.timestamp}"
+    
+    class Meta:
+        db_table = 'ai_assessment_integrity_screenshot'

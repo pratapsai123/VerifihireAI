@@ -33,7 +33,7 @@ from django.http import HttpResponse
 from .models import (
     CandidateSubmission, CandidateInvitation, CandidateDetails,
     AssessmentQuestion, AssessmentCodingQuestion, CodingTestCase,
-    CandidateIntegrity
+    CandidateIntegrity, IntegrityScreenshot
 )
 
 MAX_PAGES = 20
@@ -893,6 +893,72 @@ def generate_candidate_report(submission_id):
             ])
         story.append(_kv_table(fb_data, styles))
         story.append(Spacer(1, 12))
+
+    # ════════════════════════════════════════════════════════════════════════
+    # 6. INTEGRITY VIOLATIONS LOG
+    # ════════════════════════════════════════════════════════════════════════
+    try:
+        integrity_screenshots = list(IntegrityScreenshot.objects.filter(invitation=inv).order_by('timestamp'))
+        if integrity_screenshots:
+            story.append(PageBreak())
+            story.append(Paragraph('Integrity Violations Log', styles['SectionHeader']))
+            story.append(Paragraph('The following screenshots were captured automatically when integrity warnings were triggered.', styles['Normal']))
+            story.append(Spacer(1, 12))
+
+            for snap in integrity_screenshots:
+                evt_type = str(snap.event_type).replace('_', ' ').title()
+                ts_str = snap.timestamp.strftime('%d %b %Y, %I:%M:%S %p')
+                
+                story.append(Paragraph(f"<b>Warning: {evt_type}</b>", styles['InfoValue']))
+                story.append(Paragraph(f"<font color='#64748b'>Time: {ts_str}</font>", styles['Normal']))
+                story.append(Spacer(1, 6))
+
+                # Build images row
+                img_row = []
+                # 1. Screen capture
+                if snap.screenshot and snap.screenshot.name:
+                    try:
+                        path = snap.screenshot.path
+                        if os.path.exists(path):
+                            screen_img = _make_rl_image(path, 3.5 * inch, 2.0 * inch)
+                            if screen_img:
+                                img_row.append([Paragraph("<b>Screen View</b>", styles['InfoLabel']), screen_img])
+                    except Exception as e:
+                        print(f"Failed to load screen snap: {e}")
+
+                # 2. Webcam capture
+                if snap.webcam_screenshot and snap.webcam_screenshot.name:
+                    try:
+                        path = snap.webcam_screenshot.path
+                        if os.path.exists(path):
+                            cam_img = _make_rl_image(path, 2.5 * inch, 2.0 * inch)
+                            if cam_img:
+                                img_row.append([Paragraph("<b>Webcam View</b>", styles['InfoLabel']), cam_img])
+                    except Exception as e:
+                        print(f"Failed to load webcam snap: {e}")
+
+                if img_row:
+                    # Flatten into a layout table
+                    tbl_data = [[item[0] for item in img_row], [item[1] for item in img_row]]
+                    col_widths = [3.6 * inch, 2.6 * inch] if len(img_row) == 2 else [4.0 * inch]
+                    snap_tbl = Table(tbl_data, colWidths=col_widths)
+                    snap_tbl.setStyle(TableStyle([
+                        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
+                        ('TOPPADDING', (0, 0), (-1, -1), 4),
+                    ]))
+                    story.append(snap_tbl)
+                else:
+                    story.append(Paragraph('<i>Images not available</i>', styles['InfoLabel']))
+
+                story.append(Spacer(1, 12))
+                story.append(HRFlowable(width='100%', thickness=0.5, color=colors.HexColor('#e2e8f0'), spaceAfter=12))
+                
+    except Exception as e:
+        print(f"Error fetching integrity screenshots for report: {e}")
+        import traceback
+        traceback.print_exc()
 
     # ── Build PDF with page limit ──
     doc.build(story, onFirstPage=page_counter.on_page, onLaterPages=page_counter.on_page)

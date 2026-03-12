@@ -321,6 +321,9 @@ export default function TakeAssessment() {
   const streamRef = useRef(null);
   const detectorRef = useRef(null);
   const lastDetectionTimeRef = useRef(0);
+  const screenStreamRef = useRef(null);
+  const screenCanvasRef = useRef(null);
+  const [screenShareError, setScreenShareError] = useState('');
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
@@ -954,11 +957,68 @@ export default function TakeAssessment() {
       console.log('Skipping API call due to:', { eventType, token, submitted, assessmentStage });
       return;
     }
+
+    let screenshot = null;
+    if (['tab_switch', 'window_blur', 'window_switch'].includes(eventType) && screenStreamRef.current && screenCanvasRef.current) {
+      try {
+        const video = document.createElement('video');
+        video.srcObject = screenStreamRef.current;
+        video.muted = true;
+        video.playsInline = true;
+
+        // Wait for video metadata to load and video to start playing
+        await new Promise((resolve, reject) => {
+          video.onloadedmetadata = () => {
+            video.play()
+              .then(() => {
+                // Force a small delay (100ms) to ensure browser paints the frame
+                // especially critical during 'blur' or 'visibilitychange' events
+                setTimeout(resolve, 100);
+              })
+              .catch(reject);
+          };
+          video.onerror = reject;
+        });
+
+        const canvas = screenCanvasRef.current;
+        const ctx = canvas.getContext('2d');
+
+        // Match canvas to actual video dimensions
+        canvas.width = video.videoWidth || 1280;
+        canvas.height = video.videoHeight || 720;
+
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        screenshot = canvas.toDataURL('image/jpeg', 0.5); // JPEG with 50% quality
+
+        // Cleanup
+        video.pause();
+        video.srcObject = null;
+      } catch (e) {
+        console.error('Failed to capture integrity snapshot', e);
+      }
+    }
+
+    let webcamScreenshot = null;
+    if (['multiface_detection', 'phone_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+      try {
+        const camCanvas = document.createElement('canvas');
+        camCanvas.width = videoRef.current.videoWidth || 640;
+        camCanvas.height = videoRef.current.videoHeight || 480;
+        const ctx = camCanvas.getContext('2d');
+        ctx.drawImage(videoRef.current, 0, 0, camCanvas.width, camCanvas.height);
+        webcamScreenshot = camCanvas.toDataURL('image/jpeg', 0.5);
+      } catch (e) {
+        console.error('Failed to capture webcam snapshot', e);
+      }
+    }
+
     try {
       console.log('Posting integrity event to:', `${API_BASE_URL}/invitations/public/${token}/integrity/`);
       const resp = await axios.post(`${API_BASE_URL}/invitations/public/${token}/integrity/`, {
         event_type: eventType,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        screenshot: screenshot,
+        webcam_screenshot: webcamScreenshot
       });
       console.log('Integrity API Response:', resp.data);
     } catch (err) {
@@ -975,7 +1035,14 @@ export default function TakeAssessment() {
   }, [showAiEvent]);
 
   const stopCamera = useCallback(() => {
-    if (streamRef.current) { streamRef.current.getTracks().forEach(t => t.stop()); streamRef.current = null; }
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(t => t.stop());
+      streamRef.current = null;
+    }
+    if (screenStreamRef.current) {
+      screenStreamRef.current.getTracks().forEach(t => t.stop());
+      screenStreamRef.current = null;
+    }
   }, []);
 
   useEffect(() => {
@@ -1035,13 +1102,58 @@ export default function TakeAssessment() {
     };
   }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage]);
 
+  const startScreenShare = useCallback(async () => {
+    try {
+      setFsError('');
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: { displaySurface: 'monitor' },
+        audio: false
+      });
+
+      const track = stream.getVideoTracks()[0];
+      const settings = track.getSettings();
+
+      // Enforce "Entire Screen" (monitor)
+      if (settings.displaySurface !== 'monitor') {
+        track.stop();
+        setFsError('Please share your "Entire Screen" to proceed. Tab or Individual Window sharing is not allowed for security.');
+        return false;
+      }
+
+      screenStreamRef.current = stream;
+
+      // If user stops sharing manually
+      track.onended = () => {
+        showAiEvent('SCREEN SHARING STOPPED', true, 'tab_switch');
+        // Force them back to the start gate
+        if (document.exitFullscreen) document.exitFullscreen().catch(() => { });
+        setIsFullscreen(false);
+      };
+
+      return true;
+    } catch (err) {
+      console.error('Screen share error:', err);
+      setFsError('Screen sharing permission (Entire Screen) is mandatory to take this assessment.');
+      return false;
+    }
+  }, [showAiEvent]);
+
   const requestFullscreen = async () => {
     try {
       setFsError('');
+
+      // 1. Mandatory Screen Share
+      if (!screenStreamRef.current || !screenStreamRef.current.active) {
+        const success = await startScreenShare();
+        if (!success) return;
+      }
+
+      // 2. Fullscreen
       const root = document.documentElement;
       if (root.requestFullscreen) await root.requestFullscreen();
-    } catch {
-      setFsError('Fullscreen permission is required to start the exam. Please click "Enter Full Screen".');
+    } catch (err) {
+      console.error('Fullscreen error:', err);
+      setFsError('Fullscreen permission is required to start the exam.');
     }
   };
 
@@ -1497,6 +1609,7 @@ export default function TakeAssessment() {
           {aiToast.text}
         </div>
       )}
+      <canvas ref={screenCanvasRef} style={{ display: 'none' }} width="1280" height="720" />
       <div className="take-shell-exam">
         {!isFullscreen && !submitted ? (
           <div className="fs-gate" role="dialog" aria-label="Enter full screen">

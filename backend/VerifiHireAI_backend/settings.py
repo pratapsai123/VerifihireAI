@@ -123,9 +123,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'verifihire_db',
+        'NAME': 'user',
         'USER': 'postgres',
-        'PASSWORD': 'root',
+        'PASSWORD': '12345',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         **({'OPTIONS': db_options} if db_options else {}),
@@ -201,6 +201,9 @@ default_cors_origins = [
     "http://localhost:3000",
     "http://localhost:5173",
     "http://localhost:5174",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3000",
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

@@ -718,6 +718,30 @@ class CandidateIntegrity(models.Model):
         return f"Integrity: {self.invitation.email} ({self.integrity_score}%)"
 
 
+class IntegrityScreenshot(models.Model):
+    """
+    Stores screenshots captured during integrity violations.
+    """
+    invitation = models.ForeignKey(
+        CandidateInvitation,
+        on_delete=models.CASCADE,
+        related_name='integrity_screenshots',
+    )
+    event_type = models.CharField(max_length=50)
+    screenshot = models.ImageField(upload_to='integrity_screenshots/%Y/%m/%d/', blank=True, null=True)
+    webcam_screenshot = models.ImageField(upload_to='integrity_screenshots/webcam/%Y/%m/%d/', blank=True, null=True)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        db_table = 'api_integrity_screenshot'
+        verbose_name = "Integrity Screenshot"
+        verbose_name_plural = "Integrity Screenshots"
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return f"Screenshot: {self.invitation.email} - {self.event_type} ({self.timestamp})"
+
+
 # =========================
 # Coding Platform (Isolated)
 # =========================

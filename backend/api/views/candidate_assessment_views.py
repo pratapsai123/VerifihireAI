@@ -898,6 +898,49 @@ def update_standard_integrity_view(request, token):
         if penalty > 0:
             integrity.integrity_score = max(0.0, integrity.integrity_score - penalty)
         
+        # Handle Screenshot if provided
+        screenshot_b64 = data.get('screenshot')
+        webcam_b64 = data.get('webcam_screenshot')
+        
+        if screenshot_b64 or webcam_b64:
+            try:
+                integrity_snap = IntegrityScreenshot(
+                    invitation=inv,
+                    event_type=event_type,
+                    timestamp=timezone.now()
+                )
+                
+                # Remove header if present (data:image/png;base64,...)
+                if screenshot_b64:
+                    if ';' in screenshot_b64 and 'base64,' in screenshot_b64:
+                        header, imgstr = screenshot_b64.split(';base64,')
+                        ext = header.split('/')[-1]
+                    else:
+                        imgstr = screenshot_b64
+                        ext = 'png'
+
+                    img_data = base64.b64decode(imgstr)
+                    fname = f"integrity_{inv.id}_{event_type}_{int(timezone.now().timestamp())}.{ext}"
+                    integrity_snap.screenshot.save(fname, ContentFile(img_data), save=False)
+                    
+                if webcam_b64:
+                    if ';' in webcam_b64 and 'base64,' in webcam_b64:
+                        header, imgstr = webcam_b64.split(';base64,')
+                        ext = header.split('/')[-1]
+                    else:
+                        imgstr = webcam_b64
+                        ext = 'png'
+
+                    webcam_data = base64.b64decode(imgstr)
+                    cname = f"cam_{inv.id}_{event_type}_{int(timezone.now().timestamp())}.{ext}"
+                    integrity_snap.webcam_screenshot.save(cname, ContentFile(webcam_data), save=False)
+
+                integrity_snap.save()
+            except Exception as se:
+                import traceback
+                print(f"Failed to save screenshot: {str(se)}")
+                print(traceback.format_exc())
+
         integrity.save()
         
         return Response({

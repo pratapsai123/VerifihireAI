@@ -62,18 +62,18 @@ services:
       DOCKER_TLS_CERTDIR: ""
     volumes:
       - dind_data:/var/lib/docker
-  # db:
-  #   image: public.ecr.aws/docker/library/postgres:15-alpine
-  #   container_name: verifyhire_db
-  #   restart: unless-stopped
-  #   environment:
-  #     POSTGRES_DB: user
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: "12345"
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - verifihireai_pgdata:/var/lib/postgresql/data
+  db:
+    image: public.ecr.aws/docker/library/postgres:15-alpine
+    container_name: verifyhire_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: user
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "12345"
+    ports:
+      - "5432:5432"
+    volumes:
+      - verifihireai_pgdata:/var/lib/postgresql/data
 
 volumes:
   verifihireai_media:

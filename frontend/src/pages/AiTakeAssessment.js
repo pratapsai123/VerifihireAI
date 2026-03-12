@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Editor from "@monaco-editor/react";
@@ -55,10 +55,10 @@ const AiTakeAssessment = () => {
         // AI models often escape newlines when generating JSON, producing literal "\\n" and "\\t". 
         // We need to convert them to actual newlines for the code editor.
         return codeStr.replace(/\\n/g, '\n')
-                      .replace(/\\t/g, '\t')
-                      .replace(/\\"/g, '"')
-                      .replace(/\\\\n/g, '\n') // Handle double escaped
-                      .replace(/\\\\"/g, '"');
+            .replace(/\\t/g, '\t')
+            .replace(/\\"/g, '"')
+            .replace(/\\\\n/g, '\n') // Handle double escaped
+            .replace(/\\\\"/g, '"');
     };
 
     const setSelectedLanguage = (lang) => {
@@ -69,7 +69,7 @@ const AiTakeAssessment = () => {
             // 1. Save current code to draft BEFORE switching
             const currentCode = answers[qKey] || '';
             const draftKeyForOldLang = `${qKey}_${currentLang}`;
-            
+
             // 2. Determine what code should be in the editor for the NEW language
             const nextDraftKey = `${qKey}_${lang}`;
             let nextCode = codeDrafts[nextDraftKey];
@@ -93,8 +93,8 @@ const AiTakeAssessment = () => {
 
             // Update everything together to avoid race conditions
             setAnswers(prev => ({ ...prev, [qKey]: nextCode }));
-            setCodeDrafts(prev => ({ 
-                ...prev, 
+            setCodeDrafts(prev => ({
+                ...prev,
                 [draftKeyForOldLang]: currentCode,
                 [nextDraftKey]: nextCode // Ensure the draft is also initialized so we don't reload starter next time
             }));
@@ -126,6 +126,8 @@ const AiTakeAssessment = () => {
     const streamRef = useRef(null);
     const detectorRef = useRef(null);
     const lastDetectionTimeRef = useRef(0);
+    const screenStreamRef = useRef(null);
+    const screenCanvasRef = useRef(null);
     const timerRef = useRef(null);
     const handleSubmitRef = useRef(null); // always points to latest handleSubmit
     const mcqSection = React.useMemo(() => assessment?.generated_content?.mcqs || [], [assessment]);
@@ -222,7 +224,8 @@ const AiTakeAssessment = () => {
 
                 // Rebuild answeredQs and visitedQs from saved answer keys
                 // Keys are like 'mcq_0', 'mcq_3', 'coding_0' — extract the index from the key
-                const totalMcqs = mcqSection.length;
+                const mcqsArr = assessment?.generated_content?.mcqs || [];
+                const totalMcqs = mcqsArr.length;
 
                 const restoredAnswered = new Set();
                 const restoredVisited = new Set();
@@ -258,6 +261,13 @@ const AiTakeAssessment = () => {
             // Sync timer
             setTimeLeft(time_left !== undefined ? time_left : assessment.duration_minutes * 60);
 
+            // Mandatory Screen Share
+            const success = await startScreenShare();
+            if (!success) {
+                setIsStarted(false);
+                return;
+            }
+
             await startCamera();
         } catch (err) {
             const msg = err.response?.data?.error || 'Failed to start assessment.';
@@ -265,6 +275,30 @@ const AiTakeAssessment = () => {
             if (msg.includes('already completed')) {
                 navigate('/');
             }
+        }
+    };
+
+    const startScreenShare = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getDisplayMedia({
+                video: { displaySurface: 'monitor' },
+                audio: false
+            });
+            const track = stream.getVideoTracks()[0];
+            if (track.getSettings().displaySurface !== 'monitor') {
+                track.stop();
+                alert('Please share your "Entire Screen" to proceed. Tab/Window sharing is prohibited.');
+                return false;
+            }
+            screenStreamRef.current = stream;
+            track.onended = () => {
+                showAiEvent('SCREEN SHARING STOPPED', true, 'tab_switch');
+                setIsStarted(false); // End session or force re-auth
+            };
+            return true;
+        } catch (err) {
+            alert('Screen sharing (Entire Screen) is required to start the test.');
+            return false;
         }
     };
 
@@ -286,26 +320,26 @@ const AiTakeAssessment = () => {
 
                     try {
                         const r = await axios.post(`${API_BASE_URL}/ai/execute/`, {
-                            language: selectedLanguage, 
+                            language: selectedLanguage,
                             version: langData.version,
-                            files: [{ content: code }], 
+                            files: [{ content: code }],
                             stdin: tcInput
                         });
                         const out = String(r.data.run.stdout || r.data.run.stderr || '').trim();
                         const exp = String(tcOutput).trim();
                         const passed = out === exp;
-                        return { 
-                            input: tcInput, 
-                            expected: exp, 
-                            actual: out, 
+                        return {
+                            input: tcInput,
+                            expected: exp,
+                            actual: out,
                             passed,
                             isHidden
                         };
                     } catch (err) {
-                        return { 
-                            input: tcInput, 
-                            expected: tcOutput, 
-                            actual: 'Error: ' + (err.message || 'Unknown'), 
+                        return {
+                            input: tcInput,
+                            expected: tcOutput,
+                            actual: 'Error: ' + (err.message || 'Unknown'),
                             passed: false,
                             isHidden
                         };
@@ -313,15 +347,15 @@ const AiTakeAssessment = () => {
                 }));
 
                 const passedCount = results.filter(r => r.passed).length;
-                setExecutionResult({ 
-                    type: 'test_cases', 
-                    results, 
-                    score: passedCount, 
-                    total: results.length 
+                setExecutionResult({
+                    type: 'test_cases',
+                    results,
+                    score: passedCount,
+                    total: results.length
                 });
-                setCodingResults(prev => ({ 
-                    ...prev, 
-                    [qId]: { passed: passedCount, total: results.length } 
+                setCodingResults(prev => ({
+                    ...prev,
+                    [qId]: { passed: passedCount, total: results.length }
                 }));
             } catch (err) {
                 console.error("Test execution failed", err);
@@ -347,9 +381,9 @@ const AiTakeAssessment = () => {
             if (run.stdout) logs.push({ type: 'log', content: run.stdout });
             if (run.stderr) logs.push({ type: 'error', content: run.stderr });
             const isSuccess = run.code === 0 && !run.stderr;
-            logs.push({ 
-                type: isSuccess ? 'success' : 'error', 
-                content: isSuccess ? '✅ Execution Successful' : `❌ Execution Failed (Exit code: ${run.code})` 
+            logs.push({
+                type: isSuccess ? 'success' : 'error',
+                content: isSuccess ? '✅ Execution Successful' : `❌ Execution Failed (Exit code: ${run.code})`
             });
             setCodeOutput(logs);
         } catch { setCodeOutput([{ type: 'error', content: 'Connection error.' }]); }
@@ -368,16 +402,76 @@ const AiTakeAssessment = () => {
         if (streamRef.current) { streamRef.current.getTracks().forEach(t => t.stop()); streamRef.current = null; }
     };
 
-    const reportViolation = async (eventType) => {
+    const reportViolation = useCallback(async (eventType, screenshot = null, webcamScreenshot = null) => {
         if (!submissionId) return;
-        try { await axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/integrity/`, { event_type: eventType }); } catch { }
-    };
+        try {
+            await axios.post(`${API_BASE_URL}/ai/submission/${submissionId}/integrity/`, {
+                event_type: eventType,
+                screenshot: screenshot,
+                webcam_screenshot: webcamScreenshot
+            });
+        } catch { }
+    }, [submissionId]);
 
-    const showAiEvent = (text, urgent = false, eventType = null) => {
+    const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
         setAiToast({ active: true, text, urgent });
-        if (eventType) reportViolation(eventType);
+
+        let screenshot = null;
+        let webcamScreenshot = null;
+
+        if (eventType) {
+            // Capture Screen
+            if (['tab_switch', 'window_blur', 'window_switch'].includes(eventType) && screenStreamRef.current && screenCanvasRef.current) {
+                try {
+                    const video = document.createElement('video');
+                    video.srcObject = screenStreamRef.current;
+                    video.muted = true;
+                    video.playsInline = true;
+
+                    await new Promise((resolve, reject) => {
+                        video.onloadedmetadata = () => {
+                            video.play()
+                                .then(() => {
+                                    setTimeout(resolve, 100);
+                                })
+                                .catch(reject);
+                        };
+                        video.onerror = reject;
+                    });
+
+                    const canvas = screenCanvasRef.current;
+                    const ctx = canvas.getContext('2d');
+                    canvas.width = video.videoWidth || 1280;
+                    canvas.height = video.videoHeight || 720;
+                    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                    screenshot = canvas.toDataURL('image/jpeg', 0.5);
+
+                    video.pause();
+                    video.srcObject = null;
+                } catch (e) {
+                    console.error('Failed to capture AI integrity snapshot', e);
+                }
+            }
+
+            // Capture Webcam
+            if (['multiface_detection', 'phone_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+                try {
+                    const camCanvas = document.createElement('canvas');
+                    camCanvas.width = videoRef.current.videoWidth || 640;
+                    camCanvas.height = videoRef.current.videoHeight || 480;
+                    const ctx = camCanvas.getContext('2d');
+                    ctx.drawImage(videoRef.current, 0, 0, camCanvas.width, camCanvas.height);
+                    webcamScreenshot = camCanvas.toDataURL('image/jpeg', 0.5);
+                } catch (e) {
+                    console.error('Failed to capture AI webcam snapshot', e);
+                }
+            }
+
+            reportViolation(eventType, screenshot, webcamScreenshot);
+        }
+
         setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
-    };
+    }, [reportViolation]);
 
     useEffect(() => {
         if (!isStarted || !submissionId) return;
@@ -412,7 +506,7 @@ const AiTakeAssessment = () => {
             window.removeEventListener('blur', onBlur);
             stopCamera();
         };
-    }, [isStarted, submissionId, submitted]);
+    }, [isStarted, submissionId, showAiEvent]);
 
     // Save progress periodically (debounced)
     // Also exposes saveProgress via ref so beforeunload can call it synchronously
@@ -535,7 +629,7 @@ const AiTakeAssessment = () => {
         // If a draft exists and we don't have an answer for this coding question yet, load it.
         // But DON'T force sync if we already have an answer, to avoid fighting with setSelectedLanguage.
         if (draft !== undefined && !answers[currentAnswerKey]) {
-             setAnswers(prev => ({ ...prev, [currentAnswerKey]: draft }));
+            setAnswers(prev => ({ ...prev, [currentAnswerKey]: draft }));
         }
     }, [currentQuestionIdx, isStarted, codeDrafts]);
     // Lock page scroll while assessment is running
@@ -603,6 +697,10 @@ const AiTakeAssessment = () => {
             localStorage.setItem(`assessment_completed_${token}`, 'true');
             setSubmitted(true);
             stopCamera();
+            if (screenStreamRef.current) {
+                screenStreamRef.current.getTracks().forEach(t => t.stop());
+                screenStreamRef.current = null;
+            }
         } catch { alert('Failed to submit.'); }
         finally { setIsSubmitting(false); }
     };
@@ -756,6 +854,7 @@ const AiTakeAssessment = () => {
                     {aiToast.text}
                 </div>
             )}
+            <canvas ref={screenCanvasRef} style={{ display: 'none' }} width="1280" height="720" />
 
             {/* TOP HEADER */}
             <div style={{ flexShrink: 0, background: 'white', borderBottom: '1px solid #e5e7eb', padding: '0 1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 52 }}>
@@ -891,9 +990,9 @@ const AiTakeAssessment = () => {
                                             <div style={{ marginBottom: '1rem' }}>
                                                 <div style={{ fontSize: '0.62rem', fontWeight: 800, textTransform: 'uppercase', color: '#374151', marginBottom: 8 }}>Sample Cases</div>
                                                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                                                    {((currentQ.test_cases && currentQ.test_cases.length > 0) ? currentQ.test_cases.slice(0, 2) : 
-                                                      (currentQ.example_input ? [{input: currentQ.example_input, output: currentQ.example_output}] : [])
-                                                     ).map((tc, idx) => (
+                                                    {((currentQ.test_cases && currentQ.test_cases.length > 0) ? currentQ.test_cases.slice(0, 2) :
+                                                        (currentQ.example_input ? [{ input: currentQ.example_input, output: currentQ.example_output }] : [])
+                                                    ).map((tc, idx) => (
                                                         <div key={idx} style={{ background: '#f9fafb', border: '1px solid #e5e7eb', borderRadius: 8, padding: '10px' }}>
                                                             <div style={{ fontSize: '0.65rem', fontWeight: 700, color: '#1d4ed8', marginBottom: 6, textTransform: 'uppercase' }}>Case {idx + 1}</div>
                                                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 15 }}>
@@ -942,7 +1041,7 @@ const AiTakeAssessment = () => {
                                         </div>
                                     </div>
                                     <div style={{ flex: 1, overflow: 'hidden' }}>
-                                        <Editor 
+                                        <Editor
                                             key={`${currentAnswerKey}_${selectedLanguage}`}
                                             height="100%" language={selectedLanguage} theme="vs-dark"
                                             value={answers[currentAnswerKey] || ""}

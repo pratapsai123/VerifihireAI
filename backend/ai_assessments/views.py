@@ -14,10 +14,13 @@ from django.db import models
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
-from rest_framework.permissions import AllowAny, IsAuthenticated
-from .models import Assessment, AIAssessmentSubmission
+from rest_framework.permissions import AllowAny
+import uuid
+from .models import Assessment, AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
 from ai_candidates.views import extract_json
-from api.views import ensure_role_exists
+import traceback
+import base64
+from django.core.files.base import ContentFile
 
 
 def _normalize_difficulty_label(value, *, default='Medium'):
@@ -1046,6 +1049,48 @@ class UpdateAssessmentIntegrityView(APIView):
             free_penalty = sum(weights.get(w, 0) for w in submission.warning_logs)
 
             submission.integrity_score = max(0, 100 - (total_raw_penalty - free_penalty))
+            
+            # Handle Screenshot
+            screenshot_b64 = request.data.get('screenshot')
+            webcam_b64 = request.data.get('webcam_screenshot')
+            
+            if screenshot_b64 or webcam_b64:
+                try:
+                    integrity_snap = AIAssessmentIntegrityScreenshot(
+                        submission=submission,
+                        event_type=event_type,
+                        timestamp=timezone.now()
+                    )
+                    
+                    if screenshot_b64:
+                        if ';' in screenshot_b64 and 'base64,' in screenshot_b64:
+                            header, imgstr = screenshot_b64.split(';base64,')
+                            ext = header.split('/')[-1]
+                        else:
+                            imgstr = screenshot_b64
+                            ext = 'png'
+                        
+                        img_data = base64.b64decode(imgstr)
+                        fname = f"ai_integrity_{submission.id}_{event_type}_{int(timezone.now().timestamp())}.{ext}"
+                        integrity_snap.screenshot.save(fname, ContentFile(img_data), save=False)
+
+                    if webcam_b64:
+                        if ';' in webcam_b64 and 'base64,' in webcam_b64:
+                            header, imgstr = webcam_b64.split(';base64,')
+                            ext = header.split('/')[-1]
+                        else:
+                            imgstr = webcam_b64
+                            ext = 'png'
+                        
+                        webcam_data = base64.b64decode(imgstr)
+                        cname = f"ai_cam_{submission.id}_{event_type}_{int(timezone.now().timestamp())}.{ext}"
+                        integrity_snap.webcam_screenshot.save(cname, ContentFile(webcam_data), save=False)
+
+                    integrity_snap.save()
+
+                except Exception as se:
+                    logger.error(f"Failed to save AI integrity screenshot: {str(se)}")
+
             submission.save()
             
             return Response({

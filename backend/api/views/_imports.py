@@ -18,6 +18,7 @@ from datetime import timedelta
 from django.db import models, close_old_connections
 from django.db.utils import OperationalError
 from django.core.mail import EmailMultiAlternatives
+from django.core.files.base import ContentFile
 from django.utils.dateparse import parse_datetime
 from django.utils import timezone
 from ai_candidates.models import Candidate
@@ -44,6 +45,7 @@ from ..models import (
     LiveInterviewFeedback,
     JobRole,
     CandidateIntegrity,
+    IntegrityScreenshot,
 )
 from ..ocr_utils import extract_text_from_image
 from ..report_utils import generate_candidate_report
@@ -53,6 +55,7 @@ import os
 import random
 import json
 import io
+import base64
 import PyPDF2
 import requests
 from docx import Document
