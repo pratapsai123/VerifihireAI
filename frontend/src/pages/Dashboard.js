@@ -430,12 +430,7 @@ const Dashboard = () => {
             </div>
           ))}
         </nav>
-        <div className="sidebar-footer">
-          <div className="nav-item" onClick={() => navigate('/login')}>
-            <Clock size={20} />
-            <span>Switch Role</span>
-          </div>
-        </div>
+
       </aside>
 
       {/* Main Content */}
