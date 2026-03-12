@@ -4,6 +4,8 @@ import { API_BASE_URL } from '../apiConfig';
 import '../styles/Dashboard.css';
 import '../styles/ResumeMatcher.css';
 
+const MAX_CODING_TASKS = 50;
+
 const ResumeMatcher = () => {
     const [files, setFiles] = useState([]);
     const [jobDescription, setJobDescription] = useState('');
@@ -47,7 +49,7 @@ const ResumeMatcher = () => {
     const [interviewEndTime, setInterviewEndTime] = useState('');
 
     const handleCodingCountChange = (val) => {
-        const count = Math.min(Math.max(parseInt(val) || 0, 0), 5);
+        const count = Math.min(Math.max(parseInt(val) || 0, 0), MAX_CODING_TASKS);
         let updated = [...codingChallenges];
         if (count > updated.length) {
             for (let i = updated.length; i < count; i++) {
@@ -387,7 +389,7 @@ const ResumeMatcher = () => {
                                 </div>
                                 <div className="setting-item">
                                     <label>Coding Tasks</label>
-                                    <input type="number" value={codingCount} onChange={(e) => handleCodingCountChange(e.target.value)} className="modern-input" min="0" max="5" />
+                                    <input type="number" value={codingCount} onChange={(e) => handleCodingCountChange(e.target.value)} className="modern-input" min="0" max={MAX_CODING_TASKS} />
                                 </div>
                                 <div className="setting-item">
                                     <label>Total Time (Mins)</label>

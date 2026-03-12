@@ -24,6 +24,7 @@ import pandas as pd
 
 # Setup Logger
 logger = logging.getLogger(__name__)
+MAX_CODING_TASKS = 50
 
 from api.views import ensure_role_exists
 
@@ -384,6 +385,8 @@ class ResumeMatchView(APIView):
                             c_count = len(coding_tasks)
                         except:
                             c_count = 1
+
+                    c_count = max(0, min(c_count, MAX_CODING_TASKS))
 
                     candidate.automation_settings = {
                         'difficulty': request.data.get('difficulty', 'Medium'),

@@ -4,6 +4,8 @@ import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/CreateAssessment.css';
 
+const MAX_CODING_TASKS = 50;
+
 const CreateAssessment = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -41,7 +43,7 @@ const CreateAssessment = () => {
     const handleChange = (id, value) => {
         if (id === 'num_coding') {
             const count = parseInt(value) || 0;
-            const limitedCount = Math.min(Math.max(count, 0), 5); // Limit to 5 tasks
+            const limitedCount = Math.min(Math.max(count, 0), MAX_CODING_TASKS);
 
             setFormData(prev => {
                 let newChallenges = [...prev.coding_challenges];
@@ -232,7 +234,7 @@ const CreateAssessment = () => {
                             <label>Coding Tasks</label>
                             <div className="input-with-marker">
                                 <input
-                                    type="number" min="0" max="5"
+                                    type="number" min="0" max={MAX_CODING_TASKS}
                                     value={formData.num_coding}
                                     onChange={(e) => handleChange('num_coding', e.target.value)}
                                 />

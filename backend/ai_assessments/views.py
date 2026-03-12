@@ -19,6 +19,353 @@ from .models import Assessment, AIAssessmentSubmission
 from ai_candidates.views import extract_json
 from api.views import ensure_role_exists
 
+
+def _normalize_difficulty_label(value, *, default='Medium'):
+    if not isinstance(value, str):
+        return default
+    clean = value.strip().capitalize()
+    if clean in ('Easy', 'Medium', 'Hard'):
+        return clean
+    return default
+
+
+def _normalize_generated_pool(payload):
+    """Normalize model output into a stable structure used by frontend/backend."""
+    if not isinstance(payload, dict):
+        return {"mcqs": [], "coding_challenges": []}
+
+    # Unwrap nested wrappers like {"assessment": {"mcqs": [...], ...}}
+    if 'mcqs' not in payload and 'coding_challenges' not in payload and 'coding_tasks' not in payload:
+        for val in payload.values():
+            if isinstance(val, dict) and ('mcqs' in val or 'coding_challenges' in val or 'coding_tasks' in val):
+                payload = val
+                break
+
+    mcqs = payload.get('mcqs', [])
+    coding = payload.get('coding_challenges', []) or payload.get('coding_tasks', [])
+
+    if not isinstance(mcqs, list):
+        mcqs = []
+    if not isinstance(coding, list):
+        coding = []
+
+    normalized_mcqs = []
+    for q in mcqs:
+        if not isinstance(q, dict):
+            continue
+        item = copy.deepcopy(q)
+        item['difficulty'] = _normalize_difficulty_label(item.get('difficulty'), default='Medium')
+        normalized_mcqs.append(item)
+
+    normalized_coding = []
+    for c in coding:
+        if not isinstance(c, dict):
+            continue
+        item = copy.deepcopy(c)
+        item['difficulty'] = _normalize_difficulty_label(item.get('difficulty'), default='Medium')
+        normalized_coding.append(item)
+
+    return {
+        "mcqs": normalized_mcqs,
+        "coding_challenges": normalized_coding,
+    }
+
+
+def _mcq_difficulty_counts(mcqs):
+    easy = 0
+    medium = 0
+    hard = 0
+    for q in mcqs:
+        diff = _normalize_difficulty_label(q.get('difficulty'), default='Medium')
+        if diff == 'Easy':
+            easy += 1
+        elif diff == 'Medium':
+            medium += 1
+        elif diff == 'Hard':
+            hard += 1
+    return easy, medium, hard
+
+
+def _rebalance_mcq_difficulties(mcqs, *, easy_required, medium_required, hard_required):
+    """Reassign difficulty labels on AI-generated MCQs to satisfy required split exactly."""
+    target_total = int(easy_required) + int(medium_required) + int(hard_required)
+    if target_total <= 0:
+        return []
+
+    pool = [copy.deepcopy(q) for q in (mcqs or []) if isinstance(q, dict)]
+    if len(pool) < target_total:
+        return pool
+
+    labels = (['Easy'] * int(easy_required)) + (['Medium'] * int(medium_required)) + (['Hard'] * int(hard_required))
+
+    # Shuffle to avoid all labels clustered while keeping deterministic behavior for same input size.
+    random.shuffle(pool)
+
+    balanced = pool[:target_total]
+    for idx, q in enumerate(balanced):
+        q['difficulty'] = labels[idx]
+    return balanced
+
+
+def _repair_pool_shortfall(
+    *,
+    groq_client,
+    job_description,
+    required_skills,
+    pool,
+    pool_easy,
+    pool_medium,
+    pool_hard,
+    pool_coding_total,
+    coding_tasks,
+    max_attempts=5,
+):
+    """Top up missing MCQ/coding items when model under-generates in initial pass."""
+    repaired = _normalize_generated_pool(pool)
+
+    for attempt in range(max_attempts):
+        easy_count, medium_count, hard_count = _mcq_difficulty_counts(repaired.get('mcqs', []))
+        current_coding = len(repaired.get('coding_challenges', []))
+
+        missing_easy = max(0, pool_easy - easy_count)
+        missing_medium = max(0, pool_medium - medium_count)
+        missing_hard = max(0, pool_hard - hard_count)
+        missing_coding = max(0, pool_coding_total - current_coding)
+
+        if (missing_easy + missing_medium + missing_hard + missing_coding) == 0:
+            break
+
+        repair_prompt_parts = []
+
+        missing_mcqs = missing_easy + missing_medium + missing_hard
+        if missing_mcqs > 0:
+            repair_prompt_parts.append(
+                "Generate ONLY missing MCQs as JSON objects with keys: "
+                "question, options (4), answer, difficulty. "
+                f"Required missing MCQs: Easy={missing_easy}, Medium={missing_medium}, Hard={missing_hard}."
+            )
+
+        if missing_coding > 0:
+            if coding_tasks:
+                needed_diffs = [
+                    _normalize_difficulty_label(coding_tasks[i % len(coding_tasks)], default='Medium')
+                    for i in range(missing_coding)
+                ]
+            else:
+                needed_diffs = ['Medium'] * missing_coding
+            repair_prompt_parts.append(
+                "Generate ONLY missing coding challenges. "
+                f"Required missing coding count={missing_coding}, difficulties={needed_diffs}. "
+                "Each coding challenge must include: title, problem_statement, input_format, output_format, "
+                "constraints, example_input, example_output, explanation, starter_code, difficulty, test_cases. "
+                "CRITICAL: Do not return an empty coding_challenges list when missing_coding > 0."
+            )
+
+        repair_prompt = f"""
+        You are repairing an under-generated technical assessment pool.
+        Job Description: {job_description}
+        Required Skills: {required_skills}
+
+        {" ".join(repair_prompt_parts)}
+
+        Return ONLY valid JSON with root keys exactly:
+        - mcqs (list)
+        - coding_challenges (list)
+        Include only newly generated items. Do not repeat previous items.
+        """
+
+        try:
+            repair_response = groq_client.chat.completions.create(
+                model="llama-3.1-8b-instant",
+                messages=[
+                    {"role": "system", "content": "Output strict JSON only."},
+                    {"role": "user", "content": repair_prompt},
+                ],
+                response_format={"type": "json_object"},
+                temperature=0.2,
+            )
+            repair_text = repair_response.choices[0].message.content or ""
+            repair_data = _normalize_generated_pool(extract_json(repair_text) or {})
+
+            if repair_data.get('mcqs'):
+                repaired['mcqs'].extend(repair_data['mcqs'])
+            if repair_data.get('coding_challenges'):
+                repaired['coding_challenges'].extend(repair_data['coding_challenges'])
+
+        except Exception as repair_err:
+            logger.warning(f"Repair attempt {attempt + 1}/{max_attempts} failed: {repair_err}")
+            continue
+
+    # Trim to exact pool size after repair.
+    target_mcq_total = pool_easy + pool_medium + pool_hard
+    repaired['mcqs'] = repaired.get('mcqs', [])[:target_mcq_total]
+    repaired['coding_challenges'] = repaired.get('coding_challenges', [])[:pool_coding_total]
+
+    return repaired
+
+
+def _generate_coding_pool_ai_only(
+    *,
+    groq_client,
+    job_description,
+    required_skills,
+    difficulties,
+    total_required,
+    batch_size=2,
+    attempts_per_batch=4,
+):
+    """Generate coding challenges via dedicated AI-only batched calls."""
+    if total_required <= 0:
+        return []
+
+    desired = list(difficulties or [])
+    if len(desired) < total_required:
+        desired.extend(['Medium'] * (total_required - len(desired)))
+    desired = desired[:total_required]
+
+    generated = []
+    idx = 0
+
+    while idx < total_required:
+        batch_diffs = desired[idx: idx + batch_size]
+        batch_count = len(batch_diffs)
+
+        base_prompt = f"""
+        Act as an expert technical recruiter and generate coding challenges only.
+        Job Description: {job_description}
+        Required Skills: {required_skills}
+
+        TASK: Generate EXACTLY {batch_count} coding challenges.
+        Required difficulties in order: {batch_diffs}
+
+        Each challenge object must include keys:
+        title, problem_statement, input_format, output_format, constraints,
+        example_input, example_output, explanation, starter_code, difficulty, test_cases.
+
+        CRITICAL:
+        - problem_statement must be algorithmic/logic-based and language-agnostic.
+        - starter_code must be an object with keys: python, java, javascript, cpp, csharp, kotlin, swift, sql.
+        - starter_code must be boilerplate only (no solution logic).
+        - Generate exactly 10 test_cases per challenge.
+        - Return JSON only with root key: coding_challenges.
+        """
+
+        batch_data = None
+        prompt = base_prompt
+
+        for attempt in range(attempts_per_batch):
+            response = groq_client.chat.completions.create(
+                model="llama-3.1-8b-instant",
+                messages=[
+                    {"role": "system", "content": "You output valid JSON only."},
+                    {"role": "user", "content": prompt},
+                ],
+                response_format={"type": "json_object"},
+                temperature=0.2,
+            )
+            raw = response.choices[0].message.content or ""
+            parsed = _normalize_generated_pool(extract_json(raw) or {})
+            coding = parsed.get('coding_challenges', [])
+
+            if len(coding) >= batch_count:
+                batch_data = coding[:batch_count]
+                break
+
+            prompt = (
+                base_prompt
+                + "\n\nCORRECTION: Previous attempt returned insufficient coding_challenges. "
+                + f"Expected {batch_count}, got {len(coding)}. Regenerate and return full count."
+            )
+
+        if not batch_data:
+            # Stop early; caller will raise with clear count mismatch.
+            break
+
+        # Ensure requested difficulty sequence is retained for downstream selection logic.
+        for i, item in enumerate(batch_data):
+            item['difficulty'] = _normalize_difficulty_label(batch_diffs[i], default='Medium')
+
+        generated.extend(batch_data)
+        idx += batch_count
+
+    return generated[:total_required]
+
+
+def _generate_mcq_pool_ai_only(
+    *,
+    groq_client,
+    job_description,
+    required_skills,
+    easy_required,
+    medium_required,
+    hard_required,
+    attempts_per_batch=4,
+):
+    """Generate MCQs via dedicated AI-only calls per difficulty to satisfy strict split."""
+    requirements = [
+        ('Easy', max(0, int(easy_required))),
+        ('Medium', max(0, int(medium_required))),
+        ('Hard', max(0, int(hard_required))),
+    ]
+
+    generated = []
+
+    for difficulty, count in requirements:
+        if count <= 0:
+            continue
+
+        base_prompt = f"""
+        Act as an expert technical recruiter and generate MCQs only.
+        Job Description: {job_description}
+        Required Skills: {required_skills}
+
+        TASK: Generate EXACTLY {count} {difficulty} MCQs.
+        Each MCQ object must include keys:
+        - question
+        - options (list of exactly 4 strings)
+        - answer (must match one option exactly)
+        - difficulty (must be exactly \"{difficulty}\")
+
+        Return JSON only with root key: mcqs.
+        """
+
+        batch_mcqs = None
+        prompt = base_prompt
+
+        for attempt in range(attempts_per_batch):
+            response = groq_client.chat.completions.create(
+                model="llama-3.1-8b-instant",
+                messages=[
+                    {"role": "system", "content": "You output valid JSON only."},
+                    {"role": "user", "content": prompt},
+                ],
+                response_format={"type": "json_object"},
+                temperature=0.2,
+            )
+            raw = response.choices[0].message.content or ""
+            parsed = _normalize_generated_pool(extract_json(raw) or {})
+            mcqs = parsed.get('mcqs', [])
+            same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
+
+            if len(same_diff) >= count:
+                batch_mcqs = same_diff[:count]
+                break
+
+            prompt = (
+                base_prompt
+                + "\n\nCORRECTION: Previous attempt had wrong count or difficulty labels. "
+                + f"Expected {count} MCQs with difficulty {difficulty}, got {len(same_diff)}. Regenerate correctly."
+            )
+
+        if not batch_mcqs:
+            break
+
+        for q in batch_mcqs:
+            q['difficulty'] = difficulty
+        generated.extend(batch_mcqs)
+
+    return generated
+
 def pick_random_subset(assessment, pool, seed=None):
     """Randomly selects a subset of questions from the pool based on assessment targets.
     GUARANTEES: The applicant receives exactly mcq_count MCQs and coding_count coding challenges.
@@ -31,20 +378,10 @@ def pick_random_subset(assessment, pool, seed=None):
     
     subset = {"mcqs": [], "coding_challenges": []}
     
-    pool_mcqs = list(pool.get('mcqs', []))
-    # AI sometimes returns coding_tasks instead of coding_challenges
-    pool_coding = copy.deepcopy(pool.get('coding_challenges', []) or pool.get('coding_tasks', []))
+    normalized_pool = _normalize_generated_pool(pool)
+    pool_mcqs = list(normalized_pool.get('mcqs', []))
+    pool_coding = copy.deepcopy(normalized_pool.get('coding_challenges', []))
     
-    # --- Normalize difficulty labels (case-insensitive) ---
-    for q in pool_mcqs:
-        d = q.get('difficulty', '')
-        if isinstance(d, str):
-            q['difficulty'] = d.strip().capitalize()  # "easy" -> "Easy", "MEDIUM" -> "Medium"
-    for c in pool_coding:
-        d = c.get('difficulty', '')
-        if isinstance(d, str):
-            c['difficulty'] = d.strip().capitalize()
-
     # === 1. Select MCQs by difficulty, then fill up to mcq_count ===
     target_mcq_count = getattr(assessment, 'mcq_count', 10)
     target_mcqs = [
@@ -109,6 +446,7 @@ def pick_random_subset(assessment, pool, seed=None):
     return subset
 
 logger = logging.getLogger(__name__)
+MAX_CODING_TASKS = 50
 
 from api.views import ensure_role_exists
 
@@ -167,6 +505,7 @@ class SubmitAssessmentView(APIView):
                         generated_content = val
                         break
 
+            generated_content = _normalize_generated_pool(generated_content)
             mcqs = generated_content.get('mcqs', [])
             coding_challenges = generated_content.get('coding_challenges', [])
             
@@ -290,6 +629,7 @@ class GenerateAssessmentView(APIView):
 
         # 2. Coding Challenges: Priority to Non-Empty coding_tasks > coding_count
         input_coding_count = int(data.get('coding_count', 0))
+        input_coding_count = max(0, min(input_coding_count, MAX_CODING_TASKS))
         coding_tasks = data.get('coding_tasks', [])
         
         if isinstance(coding_tasks, str) and coding_tasks:
@@ -297,6 +637,9 @@ class GenerateAssessmentView(APIView):
                 coding_tasks = json.loads(coding_tasks)
             except:
                 coding_tasks = []
+
+        if isinstance(coding_tasks, list):
+            coding_tasks = coding_tasks[:MAX_CODING_TASKS]
 
         if isinstance(coding_tasks, list) and len(coding_tasks) > 0:
             coding_count = len(coding_tasks)
@@ -348,7 +691,8 @@ class GenerateAssessmentView(APIView):
             pool_medium = mcq_medium * 2
             pool_hard = mcq_hard * 2
             pool_mcq_total = pool_easy + pool_medium + pool_hard
-            pool_coding_total = coding_count * 2
+            coding_pool_multiplier = 1 if coding_count > 10 else 2
+            pool_coding_total = coding_count * coding_pool_multiplier
 
             # Build a very specific prompt based on the granular breakdown for a POOL
             mcq_prompt = f"TASK 1: Generate a POOL of {pool_mcq_total} Multiple Choice Questions (MCQs).\n"
@@ -360,10 +704,11 @@ class GenerateAssessmentView(APIView):
 
             coding_prompt = ""
             keys_expected = '"mcqs"'
+            pool_coding_tasks = []
             if coding_count > 0:
                 coding_prompt = f"TASK 2: Generate a POOL of {pool_coding_total} Coding Challenges.\n"
                 # Duplicate the difficulty list for the pool
-                pool_coding_tasks = coding_tasks * 2
+                pool_coding_tasks = coding_tasks * coding_pool_multiplier
                 for i, diff in enumerate(pool_coding_tasks):
                     coding_prompt += f"- Challenge {i+1}: {diff} difficulty\n"
                 
@@ -431,19 +776,17 @@ class GenerateAssessmentView(APIView):
                 raw_text = response.choices[0].message.content
                 if not raw_text: continue
 
-                generated_data = extract_json(raw_text)
+                generated_data = _normalize_generated_pool(extract_json(raw_text) or {})
                 if not generated_data: continue
 
                 # Count Validation
                 mcqs = generated_data.get('mcqs', [])
                 actual_mcqs = len(mcqs)
-                coding = generated_data.get('coding_challenges', []) or generated_data.get('coding_tasks', [])
+                coding = generated_data.get('coding_challenges', [])
                 actual_coding = len(coding)
                 
                 # Check for difficulty distribution sufficiency
-                easy_count = len([q for q in mcqs if q.get('difficulty') == 'Easy'])
-                medium_count = len([q for q in mcqs if q.get('difficulty') == 'Medium'])
-                hard_count = len([q for q in mcqs if q.get('difficulty') == 'Hard'])
+                easy_count, medium_count, hard_count = _mcq_difficulty_counts(mcqs)
                 
                 mcq_satisfied = (actual_mcqs >= pool_mcq_total) and (easy_count >= pool_easy) and (medium_count >= pool_medium) and (hard_count >= pool_hard)
                 coding_satisfied = (actual_coding >= pool_coding_total)
@@ -462,12 +805,97 @@ class GenerateAssessmentView(APIView):
             if not generated_data:
                 raise Exception("The AI failed to generate a valid response after multiple attempts.")
 
+            # Normalize/repair missing items so saved content always follows expected keys and counts.
+            generated_data = _repair_pool_shortfall(
+                groq_client=local_groq_client,
+                job_description=job_description,
+                required_skills=required_skills,
+                pool=generated_data,
+                pool_easy=pool_easy,
+                pool_medium=pool_medium,
+                pool_hard=pool_hard,
+                pool_coding_total=pool_coding_total,
+                coding_tasks=coding_tasks,
+                max_attempts=5,
+            )
+
             # === ENFORCE POOL LIMITS - AI sometimes over-generates ===
             if 'mcqs' in generated_data and len(generated_data['mcqs']) > pool_mcq_total:
                 generated_data['mcqs'] = generated_data['mcqs'][:pool_mcq_total]
 
             if 'coding_challenges' in generated_data and len(generated_data['coding_challenges']) > pool_coding_total:
                 generated_data['coding_challenges'] = generated_data['coding_challenges'][:pool_coding_total]
+
+            final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+            final_mcqs = len(generated_data.get('mcqs', []))
+            final_coding = len(generated_data.get('coding_challenges', []))
+
+            # AI-only recovery path for coding: when combined prompt under-delivers, generate coding in small dedicated batches.
+            if coding_count > 0 and final_coding < pool_coding_total:
+                missing = pool_coding_total - final_coding
+                remaining_diffs = pool_coding_tasks[final_coding:final_coding + missing] if pool_coding_tasks else (['Medium'] * missing)
+                logger.warning(
+                    f"Combined prompt under-generated coding ({final_coding}/{pool_coding_total}). "
+                    f"Running dedicated coding generation for remaining {missing}."
+                )
+                extra_coding = _generate_coding_pool_ai_only(
+                    groq_client=local_groq_client,
+                    job_description=job_description,
+                    required_skills=required_skills,
+                    difficulties=remaining_diffs,
+                    total_required=missing,
+                    batch_size=2,
+                    attempts_per_batch=4,
+                )
+                if extra_coding:
+                    generated_data['coding_challenges'] = (generated_data.get('coding_challenges', []) + extra_coding)[:pool_coding_total]
+                    final_coding = len(generated_data.get('coding_challenges', []))
+
+            # AI-only recovery path for MCQ difficulty split: regenerate dedicated MCQ pool if split is not satisfied.
+            if final_mcqs >= pool_mcq_total and (final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+                logger.warning(
+                    f"Combined prompt under-generated MCQ split (got {final_easy}/{final_medium}/{final_hard}, "
+                    f"need {pool_easy}/{pool_medium}/{pool_hard}). Running dedicated MCQ generation."
+                )
+                recovered_mcqs = _generate_mcq_pool_ai_only(
+                    groq_client=local_groq_client,
+                    job_description=job_description,
+                    required_skills=required_skills,
+                    easy_required=pool_easy,
+                    medium_required=pool_medium,
+                    hard_required=pool_hard,
+                    attempts_per_batch=4,
+                )
+                if recovered_mcqs and len(recovered_mcqs) >= pool_mcq_total:
+                    generated_data['mcqs'] = recovered_mcqs[:pool_mcq_total]
+                    final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+                    final_mcqs = len(generated_data.get('mcqs', []))
+
+            # If MCQ count is enough but labels are still skewed, rebalance labels over AI-generated MCQs.
+            if final_mcqs >= pool_mcq_total and (final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard):
+                logger.warning(
+                    f"Dedicated MCQ generation still skewed (got {final_easy}/{final_medium}/{final_hard}). "
+                    "Rebalancing difficulty labels on AI-generated MCQs to match requested split."
+                )
+                generated_data['mcqs'] = _rebalance_mcq_difficulties(
+                    generated_data.get('mcqs', []),
+                    easy_required=pool_easy,
+                    medium_required=pool_medium,
+                    hard_required=pool_hard,
+                )
+                final_easy, final_medium, final_hard = _mcq_difficulty_counts(generated_data.get('mcqs', []))
+                final_mcqs = len(generated_data.get('mcqs', []))
+
+            if final_mcqs < pool_mcq_total or final_coding < pool_coding_total:
+                raise Exception(
+                    f"AI could not satisfy requested counts. Expected pool MCQs={pool_mcq_total}, coding={pool_coding_total}; "
+                    f"got MCQs={final_mcqs}, coding={final_coding}."
+                )
+            if final_easy < pool_easy or final_medium < pool_medium or final_hard < pool_hard:
+                raise Exception(
+                    f"AI could not satisfy requested MCQ difficulty split. Expected Easy/Medium/Hard="
+                    f"{pool_easy}/{pool_medium}/{pool_hard}; got {final_easy}/{final_medium}/{final_hard}."
+                )
 
             assessment.generated_content = generated_data
             assessment.status = 'SCHEDULED'
@@ -679,7 +1107,7 @@ class AssessmentListView(APIView):
                 "duration_minutes": assessment.duration_minutes,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
                 "expiry_at": expiry_at.strftime("%Y-%m-%d %H:%M"),
-                "generated_content": assessment.generated_content,
+                "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                 "status": assessment.status,
                 "share_token": str(assessment.share_token),
                 "candidate_count": count,
@@ -724,7 +1152,7 @@ class AssessmentDetailView(APIView):
                 "difficulty_level": assessment.difficulty_level,
                 "total_points": assessment.total_points,
                 "created_at": assessment.created_at.strftime("%Y-%m-%d %H:%M"),
-                "generated_content": assessment.generated_content,
+                "generated_content": _normalize_generated_pool(assessment.generated_content or {}),
                 "status": assessment.status,
                 "share_token": str(assessment.share_token),
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
@@ -784,6 +1212,7 @@ class PublicAssessmentView(APIView):
             email_param = request.query_params.get('email', '').strip().lower()
             name_param = request.query_params.get('name', '').strip()
             
+            gen_content = _normalize_generated_pool(gen_content)
             final_content = gen_content
             already_completed = False
             
