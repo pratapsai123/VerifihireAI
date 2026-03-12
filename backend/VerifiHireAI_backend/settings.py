@@ -253,7 +253,7 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.co
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
 DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
 # AI Configuration
-GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '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')
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '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')
 
 from datetime import timedelta
 SIMPLE_JWT = {
