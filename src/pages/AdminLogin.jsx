@@ -12,16 +12,26 @@ function AdminLogin() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [message, setMessage] = useState('');
+    const [timer, setTimer] = useState(120);
+    const [canResend, setCanResend] = useState(false);
+    const [isExpired, setIsExpired] = useState(false);
+    const [resending, setResending] = useState(false);
 
     const handleLogin = async (e) => {
-        e.preventDefault();
+        if (e) e.preventDefault();
         setError('');
+        setMessage('');
+        setIsExpired(false);
         setLoading(true);
         try {
             const res = await axios.post(`${API_BASE_URL}/login/`, { email, password });
             if (res.data.otp_required) {
                 setStep('otp');
-                setMessage(res.data.message || 'OTP sent to email. Check console for development OTP if any.');
+                const expiry = res.data.expires_in || 120;
+                setTimer(expiry);
+                setCanResend(false);
+                setIsExpired(false);
+                setMessage(res.data.message || 'OTP sent to email.');
                 if (res.data.otp) {
                     setMessage(`OTP Sent! Your OTP for dev: ${res.data.otp}`);
                 }
@@ -29,9 +39,50 @@ function AdminLogin() {
                 saveDataAndGo(res.data);
             }
         } catch (err) {
-            setError(err.response?.data?.error || err.response?.data?.message || 'Login failed.');
+            const backendError = err.response?.data?.error || err.response?.data?.message || err.response?.data?.email?.[0] || 'Login failed.';
+            setError(backendError);
         } finally {
             setLoading(false);
+        }
+    };
+
+    React.useEffect(() => {
+        let interval;
+        if (step === 'otp') {
+            interval = setInterval(() => {
+                setTimer((prev) => {
+                    if (prev <= 1) {
+                        setIsExpired(true);
+                        setCanResend(true);
+                        setMessage(''); // Clear success message when OTP expires
+                        return 0;
+                    }
+                    return prev - 1;
+                });
+            }, 1000);
+        }
+        return () => clearInterval(interval);
+    }, [step]);
+
+    const handleResendOtp = async () => {
+        setIsExpired(false);
+        setCanResend(false);
+        setError('');
+        setMessage('');
+        setResending(true);
+        try {
+            const res = await axios.post(`${API_BASE_URL}/send-otp/`, { email, context: 'login' });
+            const expiry = res.data.expires_in || 120;
+            setMessage(res.data.message || 'New OTP sent!');
+            if (res.data.otp) {
+                setMessage(`New OTP Sent! Your OTP for dev: ${res.data.otp}`);
+            }
+            setTimer(expiry);
+        } catch (err) {
+            setError(err.response?.data?.error || 'Failed to resend OTP.');
+            setCanResend(true);
+        } finally {
+            setResending(false);
         }
     };
 
@@ -77,6 +128,7 @@ function AdminLogin() {
 
                 {error && <div style={{ background: '#fee2e2', color: '#991b1b', padding: '10px', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</div>}
                 {message && <div style={{ background: '#d1fae5', color: '#065f46', padding: '10px', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>{message}</div>}
+                {isExpired && !error && <div style={{ background: '#fee2e2', color: '#991b1b', padding: '10px', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>OTP has expired. Please resend or login again.</div>}
 
                 {step === 'login' ? (
                     <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
@@ -111,12 +163,56 @@ function AdminLogin() {
                                 style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #d1d5db', boxSizing: 'border-box', textAlign: 'center', fontSize: '1.25rem', letterSpacing: '4px' }}
                             />
                         </div>
-                        <button type="submit" disabled={loading || otp.length !== 6} style={{
-                            padding: '12px', borderRadius: '8px', border: 'none', background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-                            color: '#fff', fontWeight: 600, cursor: loading ? 'wait' : 'pointer', marginTop: '0.5rem'
+                        <button type="submit" disabled={loading || otp.length !== 6 || isExpired} style={{
+                            padding: '12px', borderRadius: '8px', border: 'none',
+                            background: (loading || otp.length !== 6 || isExpired) ? '#9ca3af' : 'linear-gradient(135deg, #7c3aed, #4f46e5)',
+                            color: '#fff', fontWeight: 600,
+                            cursor: (loading || otp.length !== 6 || isExpired) ? 'not-allowed' : 'pointer',
+                            marginTop: '0.5rem',
+                            transition: 'all 0.3s ease'
                         }}>
                             {loading ? 'Verifying...' : 'Verify OTP'}
                         </button>
+
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginTop: '1.5rem',
+                            borderTop: '1px solid #f3f4f6',
+                            paddingTop: '1rem'
+                        }}>
+                            <button
+                                type="button"
+                                onClick={handleResendOtp}
+                                disabled={!canResend || resending}
+                                style={{
+                                    background: 'none', border: 'none',
+                                    color: (!canResend || resending) ? '#9ca3af' : '#7c3aed',
+                                    fontWeight: 700,
+                                    cursor: (!canResend || resending) ? 'not-allowed' : 'pointer',
+                                    fontSize: '0.85rem',
+                                    textDecoration: canResend ? 'underline' : 'none',
+                                    transition: 'color 0.2s',
+                                    padding: 0
+                                }}
+                            >
+                                {resending ? 'Sending...' : 'Resend OTP'}
+                            </button>
+
+                            <div style={{
+                                fontSize: '0.85rem',
+                                color: isExpired ? '#ef4444' : '#6b7280',
+                                fontWeight: 600,
+                                background: '#f9fafb',
+                                padding: '4px 10px',
+                                borderRadius: '6px',
+                                minWidth: '45px',
+                                textAlign: 'center'
+                            }}>
+                                {timer}s
+                            </div>
+                        </div>
                     </form>
                 )}
             </div>

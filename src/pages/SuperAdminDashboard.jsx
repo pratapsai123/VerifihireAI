@@ -3,34 +3,31 @@ import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 
 const STATUS_TABS = [
-    { key: 'all', label: 'All Companies', icon: '🏢' },
-    { key: 'pending', label: 'Pending', icon: '⏳' },
-    { key: 'approved', label: 'Approved', icon: '✅' },
-    { key: 'rejected', label: 'Rejected', icon: '❌' },
+    { key: 'pending', label: 'Pending Requests', icon: '⏳' },
+    { key: 'approved', label: 'Approved Users', icon: '✅' },
+    { key: 'all_companies', label: 'Company Overview', icon: '🏢' },
 ];
 
 const STATUS_COLORS = {
-    pending: { bg: '#fef3c7', text: '#92400e', border: '#fbbf24' },
-    approved: { bg: '#d1fae5', text: '#065f46', border: '#34d399' },
-    rejected: { bg: '#fee2e2', text: '#991b1b', border: '#f87171' },
+    pending: { bg: 'rgba(255, 181, 71, 0.12)', text: '#FFB547', border: 'rgba(255, 181, 71, 0.2)' },
+    approved: { bg: 'rgba(5, 205, 153, 0.12)', text: '#05CD99', border: 'rgba(5, 205, 153, 0.2)' },
+    rejected: { bg: 'rgba(238, 93, 80, 0.12)', text: '#EE5D50', border: 'rgba(238, 93, 80, 0.2)' },
 };
 
 function StatusBadge({ status }) {
     const c = STATUS_COLORS[status] || { bg: '#f3f4f6', text: '#374151', border: '#d1d5db' };
     return (
         <span style={{
-            padding: '3px 12px',
+            padding: '4px 12px',
             borderRadius: '999px',
-            fontSize: '0.75rem',
+            fontSize: '0.7rem',
             fontWeight: 700,
             letterSpacing: '0.03em',
             background: c.bg,
             color: c.text,
             border: `1px solid ${c.border}`,
-            textTransform: 'capitalize',
-        }}>
-            {status}
-        </span>
+            textTransform: 'uppercase',
+        }}>{status}</span>
     );
 }
 
@@ -42,14 +39,11 @@ function Toast({ message, type, onClose }) {
     return (
         <div style={{
             position: 'fixed', bottom: 30, right: 30, zIndex: 9999,
-            padding: '14px 22px',
-            borderRadius: 12,
-            background: type === 'success' ? '#065f46' : '#991b1b',
-            color: '#fff',
-            fontWeight: 600,
-            fontSize: '0.9rem',
-            boxShadow: '0 8px 30px rgba(0,0,0,0.25)',
-            display: 'flex', alignItems: 'center', gap: 10,
+            padding: '16px 24px', borderRadius: 16,
+            background: type === 'success' ? 'var(--status-success)' : 'var(--status-error)',
+            color: '#fff', fontWeight: 600, fontSize: '0.85rem',
+            boxShadow: '0 12px 30px rgba(0,0,0,0.15)',
+            display: 'flex', alignItems: 'center', gap: 12,
             animation: 'slideIn 0.3s ease',
         }}>
             <span>{type === 'success' ? '✅' : '❌'}</span>
@@ -58,432 +52,198 @@ function Toast({ message, type, onClose }) {
     );
 }
 
-function RejectModal({ company, onConfirm, onCancel }) {
-    const [reason, setReason] = useState('');
+function UserRequestCard({ user, onApprove, actionLoading }) {
+    const isLoading = actionLoading === user.id;
     return (
         <div style={{
-            position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.55)',
-            zIndex: 8000, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-            <div style={{
-                background: '#fff', borderRadius: 16, padding: '2rem',
-                width: '100%', maxWidth: 480, boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
-            }}>
-                <h3 style={{ margin: '0 0 0.5rem', color: '#991b1b' }}>Reject Company</h3>
-                <p style={{ color: '#6b7280', marginBottom: '1rem', fontSize: '0.9rem' }}>
-                    You are about to reject <strong>{company.name}</strong>. An email will be sent to the company admin.
-                </p>
-                <label style={{ display: 'block', fontWeight: 600, marginBottom: 6, fontSize: '0.85rem' }}>
-                    Reason (optional)
-                </label>
-                <textarea
-                    value={reason}
-                    onChange={e => setReason(e.target.value)}
-                    placeholder="e.g. Invalid business domain, duplicate registration, etc."
-                    rows={3}
-                    style={{
-                        width: '100%', padding: '10px 12px', borderRadius: 8,
-                        border: '1px solid #d1d5db', fontSize: '0.9rem', resize: 'vertical',
-                        outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box',
-                    }}
-                />
-                <div style={{ display: 'flex', gap: 12, marginTop: '1.25rem', justifyContent: 'flex-end' }}>
-                    <button onClick={onCancel} style={{
-                        padding: '9px 20px', borderRadius: 8, border: '1px solid #d1d5db',
-                        background: '#f9fafb', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem',
-                    }}>Cancel</button>
-                    <button onClick={() => onConfirm(reason)} style={{
-                        padding: '9px 20px', borderRadius: 8, border: 'none',
-                        background: '#dc2626', color: '#fff', fontWeight: 600, cursor: 'pointer', fontSize: '0.9rem',
-                    }}>Reject Company</button>
-                </div>
-            </div>
-        </div>
-    );
-}
-
-function CompanyCard({ company, onApprove, onReject, actionLoading }) {
-    const admin = company.primary_admin;
-    const isLoading = actionLoading === company.id;
-
-    return (
-        <div style={{
-            background: '#fff',
-            border: '1px solid #e5e7eb',
-            borderRadius: 14,
-            padding: '1.25rem 1.5rem',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '1.25rem',
-            transition: 'box-shadow 0.2s',
-            boxShadow: '0 1px 4px rgba(0,0,0,0.06)',
+            background: '#fff', borderRadius: 20, padding: '20px',
+            display: 'flex', alignItems: 'center', gap: '20px',
+            boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
+            animation: 'slideIn 0.4s ease-out', transition: 'transform 0.2s'
         }}
-            onMouseEnter={e => e.currentTarget.style.boxShadow = '0 4px 18px rgba(0,0,0,0.10)'}
-            onMouseLeave={e => e.currentTarget.style.boxShadow = '0 1px 4px rgba(0,0,0,0.06)'}
+            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
         >
-            {/* Company Avatar */}
             <div style={{
-                width: 52, height: 52, borderRadius: 12,
-                background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
+                width: 48, height: 48, borderRadius: 12,
+                background: 'linear-gradient(135deg, var(--blue-accent), var(--blue-secondary))',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#fff', fontWeight: 700, fontSize: '1.4rem', flexShrink: 0,
-            }}>
-                {company.name.charAt(0).toUpperCase()}
-            </div>
+                color: '#fff', fontWeight: 800, fontSize: '1.2rem',
+                boxShadow: '0 4px 10px rgba(79, 70, 229, 0.2)'
+            }}>{(user.first_name || 'U').charAt(0)}</div>
 
-            {/* Company Info */}
-            <div style={{ flex: 1, minWidth: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-                    <span style={{ fontWeight: 700, fontSize: '1rem', color: '#111827' }}>{company.name}</span>
-                    <StatusBadge status={company.approval_status} />
+            <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                    <span style={{ fontWeight: 700, fontSize: '1rem' }}>{user.first_name} {user.last_name}</span>
+                    <StatusBadge status={user.is_approved ? 'approved' : 'pending'} />
                 </div>
-                {company.domain && (
-                    <div style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: 2 }}>🌐 {company.domain}</div>
-                )}
-                {admin && (
-                    <div style={{ fontSize: '0.82rem', color: '#374151', marginTop: 4 }}>
-                        <span style={{ fontWeight: 600 }}>👤 {admin.first_name} {admin.last_name}</span>
-                        <span style={{ margin: '0 8px', color: '#d1d5db' }}>|</span>
-                        <span>✉️ {admin.email}</span>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '4px 20px' }}>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
+                        🏢 {user.organization_name}
                     </div>
-                )}
-                <div style={{ display: 'flex', gap: 16, marginTop: 4, flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
-                        📅 Registered: {new Date(company.created_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
-                    </span>
-                    <span style={{ fontSize: '0.78rem', color: '#9ca3af' }}>
-                        👥 {company.user_count} user{company.user_count !== 1 ? 's' : ''}
-                    </span>
-                    {company.approval_status === 'approved' && company.approved_at && (
-                        <span style={{ fontSize: '0.78rem', color: '#059669' }}>
-                            ✅ Approved: {new Date(company.approved_at).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}
-                        </span>
-                    )}
-                    {company.approval_status === 'rejected' && company.rejected_reason && (
-                        <span style={{ fontSize: '0.78rem', color: '#dc2626' }}>
-                            Reason: {company.rejected_reason}
-                        </span>
-                    )}
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
+                        ✉️ {user.email}
+                    </div>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
+                        📅 Registered {new Date(user.registered_at).toLocaleDateString()}
+                    </div>
                 </div>
             </div>
 
-            {/* Action Buttons */}
-            <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
-                {company.approval_status !== 'approved' && (
-                    <button
-                        disabled={isLoading}
-                        onClick={() => onApprove(company)}
-                        style={{
-                            padding: '8px 18px', borderRadius: 8, border: 'none',
-                            background: isLoading ? '#d1fae5' : 'linear-gradient(135deg, #059669, #10b981)',
-                            color: '#fff', fontWeight: 700, cursor: isLoading ? 'wait' : 'pointer',
-                            fontSize: '0.85rem', transition: 'opacity 0.2s',
-                            opacity: isLoading ? 0.7 : 1,
-                        }}
-                    >
-                        {isLoading ? '...' : '✅ Approve'}
-                    </button>
-                )}
-                {company.approval_status !== 'rejected' && (
-                    <button
-                        disabled={isLoading}
-                        onClick={() => onReject(company)}
-                        style={{
-                            padding: '8px 18px', borderRadius: 8,
-                            border: '1px solid #fca5a5',
-                            background: '#fff', color: '#dc2626',
-                            fontWeight: 700, cursor: isLoading ? 'wait' : 'pointer',
-                            fontSize: '0.85rem', transition: 'all 0.2s',
-                            opacity: isLoading ? 0.7 : 1,
-                        }}
-                    >
-                        ❌ Reject
-                    </button>
-                )}
-            </div>
+            {!user.is_approved && (
+                <button
+                    disabled={isLoading}
+                    onClick={() => onApprove(user.id)}
+                    style={{
+                        padding: '10px 24px', borderRadius: 10, border: 'none',
+                        background: isLoading ? '#e9edf7' : 'var(--blue-accent)',
+                        color: '#fff', fontWeight: 700, cursor: isLoading ? 'wait' : 'pointer',
+                        fontSize: '0.8rem'
+                    }}
+                >{isLoading ? '...' : 'Approve Access'}</button>
+            )}
         </div>
     );
 }
 
 function SuperAdminDashboard() {
     const [activeTab, setActiveTab] = useState('pending');
+    const [users, setUsers] = useState([]);
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [actionLoading, setActionLoading] = useState(null); // company id being actioned
-    const [rejectTarget, setRejectTarget] = useState(null);
+    const [actionLoading, setActionLoading] = useState(null);
     const [toast, setToast] = useState(null);
     const [search, setSearch] = useState('');
+    const [orgFilter, setOrgFilter] = useState('');
 
-    // Get current user info
-    const user = (() => { try { return JSON.parse(localStorage.getItem('user') || '{}'); } catch { return {}; } })();
-
-    const fetchCompanies = useCallback(async (tabStatus) => {
+    const fetchData = useCallback(async () => {
         setLoading(true);
         try {
-            const params = tabStatus !== 'all' ? `?status=${tabStatus}` : '';
-            const res = await axios.get(`${API_BASE_URL}/superadmin/companies/${params}`);
-            setCompanies(res.data.companies || []);
+            const [usersRes, compRes] = await Promise.all([
+                axios.get(`${API_BASE_URL}/superadmin/users/`),
+                axios.get(`${API_BASE_URL}/superadmin/companies/`)
+            ]);
+            setUsers(usersRes.data.users || []);
+            setCompanies(compRes.data.companies || []);
         } catch (err) {
-            setToast({ type: 'error', message: err.response?.data?.error || 'Failed to load companies.' });
+            const msg = err.response?.data?.error || err.response?.data?.message || 'Failed to synchronize data.';
+            setToast({ type: 'error', message: msg });
         } finally {
             setLoading(false);
         }
     }, []);
 
-    useEffect(() => {
-        fetchCompanies(activeTab);
-    }, [activeTab, fetchCompanies]);
+    useEffect(() => { fetchData(); }, [fetchData]);
 
-    const handleApprove = async (company) => {
-        setActionLoading(company.id);
+    const handleApprove = async (id) => {
+        setActionLoading(id);
         try {
-            await axios.post(`${API_BASE_URL}/superadmin/companies/${company.id}/approve/`);
-            setToast({ type: 'success', message: `"${company.name}" has been approved!` });
-            fetchCompanies(activeTab);
+            await axios.post(`${API_BASE_URL}/superadmin/users/${id}/approve/`);
+            setToast({ type: 'success', message: 'User approved successfully.' });
+            fetchData();
         } catch (err) {
-            setToast({ type: 'error', message: err.response?.data?.error || 'Failed to approve company.' });
+            setToast({ type: 'error', message: 'Approval failed.' });
         } finally {
             setActionLoading(null);
         }
     };
 
-    const handleRejectConfirm = async (reason) => {
-        if (!rejectTarget) return;
-        const company = rejectTarget;
-        setRejectTarget(null);
-        setActionLoading(company.id);
-        try {
-            await axios.post(`${API_BASE_URL}/superadmin/companies/${company.id}/reject/`, { reason });
-            setToast({ type: 'success', message: `"${company.name}" has been rejected.` });
-            fetchCompanies(activeTab);
-        } catch (err) {
-            setToast({ type: 'error', message: err.response?.data?.error || 'Failed to reject company.' });
-        } finally {
-            setActionLoading(null);
-        }
-    };
-
-    const handleLogout = () => {
-        localStorage.clear();
-        window.location.href = '/login';
-    };
-
-    const filtered = companies.filter(c =>
-        c.name.toLowerCase().includes(search.toLowerCase()) ||
-        (c.primary_admin?.email || '').toLowerCase().includes(search.toLowerCase()) ||
-        (c.domain || '').toLowerCase().includes(search.toLowerCase())
-    );
-
-    const tabCounts = {}; // we show counts from current fetched list only for the active tab
-    STATUS_TABS.forEach(t => { tabCounts[t.key] = t.key === activeTab ? companies.length : '–'; });
+    const filteredUsers = users.filter(u => {
+        const matchesSearch = (u.first_name || '').toLowerCase().includes(search.toLowerCase()) ||
+            (u.email || '').toLowerCase().includes(search.toLowerCase()) ||
+            (u.organization_name || '').toLowerCase().includes(search.toLowerCase());
+        const matchesTab = (activeTab === 'pending' && !u.is_approved) ||
+            (activeTab === 'approved' && u.is_approved);
+        const matchesOrg = !orgFilter || u.organization_name === orgFilter || String(u.company_id) === orgFilter;
+        return matchesSearch && matchesTab && matchesOrg;
+    });
 
     return (
-        <div style={{
-            minHeight: '100vh',
-            background: 'linear-gradient(135deg, #f5f3ff 0%, #ede9fe 50%, #f0fdf4 100%)',
-            fontFamily: "'Inter', 'Segoe UI', sans-serif",
-        }}>
+        <>
             <style>{`
-        @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: #c4b5fd; border-radius: 3px; }
-      `}</style>
+                @keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+            `}</style>
 
-            {/* Header */}
-            <header style={{
-                background: 'rgba(255,255,255,0.9)',
-                backdropFilter: 'blur(12px)',
-                borderBottom: '1px solid #e9d5ff',
-                padding: '0 2rem',
-                height: 64,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                position: 'sticky',
-                top: 0,
-                zIndex: 100,
-            }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                    <div style={{
-                        width: 36, height: 36, borderRadius: 10,
-                        background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        color: '#fff', fontWeight: 800, fontSize: '1rem',
-                    }}>V</div>
-                    <div>
-                        <div style={{ fontWeight: 800, fontSize: '1.05rem', color: '#1e1b4b' }}>VeriFiHire</div>
-                        <div style={{ fontSize: '0.7rem', color: '#7c3aed', fontWeight: 600, letterSpacing: '0.04em' }}>PLATFORM ADMIN</div>
-                    </div>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                    <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontWeight: 700, fontSize: '0.9rem', color: '#1e1b4b' }}>
-                            {user.first_name || 'Platform'} {user.last_name || 'Admin'}
-                        </div>
-                        <div style={{ fontSize: '0.75rem', color: '#7c3aed' }}>Superadministrator</div>
-                    </div>
-                    <button onClick={handleLogout} style={{
-                        padding: '7px 16px', borderRadius: 8,
-                        border: '1px solid #e9d5ff', background: '#fff',
-                        color: '#7c3aed', fontWeight: 600, cursor: 'pointer', fontSize: '0.85rem',
-                    }}>Logout</button>
-                </div>
-            </header>
-
-            {/* Main Content */}
-            <main style={{ maxWidth: 1100, margin: '0 auto', padding: '2rem 1.5rem' }}>
-
-                {/* Page Title */}
-                <div style={{ marginBottom: '2rem' }}>
-                    <h1 style={{ margin: 0, fontSize: '1.75rem', fontWeight: 800, color: '#1e1b4b' }}>
-                        Company Approvals
-                    </h1>
-                    <p style={{ margin: '6px 0 0', color: '#6b7280', fontSize: '0.95rem' }}>
-                        Review and manage company registration requests from the VeriFiHire platform.
+            <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                <div>
+                    <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>Registration Approvals</h1>
+                    <p style={{ margin: '4px 0 0', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
+                        Process individual access requests for the <span style={{ color: 'var(--blue-accent)', fontWeight: 700 }}>VeriFiHire</span> platform.
                     </p>
                 </div>
 
-                {/* Tabs + Search */}
-                <div style={{
-                    display: 'flex', gap: 12, flexWrap: 'wrap',
-                    alignItems: 'center', justifyContent: 'space-between',
-                    marginBottom: '1.5rem',
-                }}>
-                    {/* Status Tabs */}
-                    <div style={{
-                        display: 'flex', gap: 6,
-                        background: '#fff',
-                        borderRadius: 10,
-                        padding: 4,
-                        border: '1px solid #e9d5ff',
-                        boxShadow: '0 1px 4px rgba(124,58,237,0.08)',
-                    }}>
-                        {STATUS_TABS.map(tab => (
-                            <button
-                                key={tab.key}
-                                onClick={() => { setActiveTab(tab.key); setSearch(''); }}
-                                style={{
-                                    padding: '7px 16px',
-                                    borderRadius: 7,
-                                    border: 'none',
-                                    background: activeTab === tab.key
-                                        ? 'linear-gradient(135deg, #7c3aed, #4f46e5)'
-                                        : 'transparent',
-                                    color: activeTab === tab.key ? '#fff' : '#6b7280',
-                                    fontWeight: activeTab === tab.key ? 700 : 500,
-                                    cursor: 'pointer',
-                                    fontSize: '0.85rem',
-                                    transition: 'all 0.2s',
-                                    whiteSpace: 'nowrap',
-                                }}
-                            >
-                                {tab.icon} {tab.label}
-                            </button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#fff', padding: '8px 16px', borderRadius: 12, border: '1px solid #e9edf7' }}>
+                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Filter by Org:</span>
+                    <select
+                        value={orgFilter}
+                        onChange={(e) => setOrgFilter(e.target.value)}
+                        style={{ border: 'none', outline: 'none', background: 'transparent', fontWeight: 700, color: 'var(--blue-accent)', fontSize: '0.8rem', cursor: 'pointer' }}
+                    >
+                        <option value="">All Organizations</option>
+                        {companies.map(c => (
+                            <option key={c.id} value={c.name}>{c.name}</option>
                         ))}
-                    </div>
-
-                    {/* Search */}
-                    <div style={{ position: 'relative' }}>
-                        <span style={{
-                            position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)',
-                            fontSize: '1rem', color: '#9ca3af',
-                        }}>🔍</span>
-                        <input
-                            type="text"
-                            placeholder="Search company or email..."
-                            value={search}
-                            onChange={e => setSearch(e.target.value)}
-                            style={{
-                                padding: '9px 14px 9px 36px',
-                                borderRadius: 9,
-                                border: '1px solid #e9d5ff',
-                                fontSize: '0.9rem',
-                                outline: 'none',
-                                width: 250,
-                                background: '#fff',
-                            }}
-                        />
-                    </div>
+                    </select>
                 </div>
+            </div>
 
-                {/* Stats Row */}
-                <div style={{
-                    display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-                    gap: 12, marginBottom: '1.75rem',
-                }}>
-                    {[
-                        { label: 'Showing', value: filtered.length, color: '#4f46e5' },
-                        { label: 'Pending', value: companies.filter(c => c.approval_status === 'pending').length, color: '#d97706' },
-                        { label: 'Approved', value: companies.filter(c => c.approval_status === 'approved').length, color: '#059669' },
-                        { label: 'Rejected', value: companies.filter(c => c.approval_status === 'rejected').length, color: '#dc2626' },
-                    ].map(s => (
-                        <div key={s.label} style={{
-                            background: '#fff', borderRadius: 12, padding: '1rem 1.25rem',
-                            border: '1px solid #e5e7eb',
-                            boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
-                        }}>
-                            <div style={{ fontSize: '1.6rem', fontWeight: 800, color: s.color }}>{s.value}</div>
-                            <div style={{ fontSize: '0.8rem', color: '#6b7280', marginTop: 2 }}>{s.label}</div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '2.5rem' }}>
+                <div style={{ background: '#fff', borderRadius: '20px', padding: '20px', border: '1px solid #f0f3f8', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 8 }}>Pending Users</div>
+                    <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{users.filter(u => !u.is_approved).length}</div>
+                </div>
+                <div style={{ background: '#fff', borderRadius: '20px', padding: '20px', border: '1px solid #f0f3f8', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 8 }}>Approved Entities</div>
+                    <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{companies.filter(c => c.approval_status === 'approved').length}</div>
+                </div>
+                <div style={{ background: '#fff', borderRadius: '20px', padding: '20px', border: '1px solid #f0f3f8', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
+                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 8 }}>Total Companies</div>
+                    <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{companies.length}</div>
+                </div>
+            </div>
+
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', background: '#fff', padding: 8, borderRadius: 16 }}>
+                <div style={{ display: 'flex', gap: 6 }}>
+                    {STATUS_TABS.map(tab => (
+                        <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{
+                            padding: '10px 20px', borderRadius: 10, border: 'none',
+                            background: activeTab === tab.key ? 'var(--blue-accent)' : 'transparent',
+                            color: activeTab === tab.key ? '#fff' : 'var(--text-secondary)',
+                            fontWeight: 700, cursor: 'pointer', fontSize: '0.8rem', transition: 'all 0.2s'
+                        }}>{tab.label}</button>
+                    ))}
+                </div>
+                <input
+                    type="text" placeholder="Search registration..." value={search} onChange={e => setSearch(e.target.value)}
+                    style={{ padding: '10px 15px', borderRadius: 10, border: '1px solid #e9edf7', fontSize: '0.85rem', width: 240, background: '#F4F7FE' }}
+                />
+            </div>
+
+            {loading ? (
+                <div style={{ textAlign: 'center', padding: '4rem' }}>Synchronizing...</div>
+            ) : activeTab === 'all_companies' ? (
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
+                    {companies.map(c => (
+                        <div key={c.id} style={{ background: '#fff', padding: 20, borderRadius: 20, boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #f0f3f8' }}>
+                            <div style={{ fontWeight: 700, marginBottom: 4 }}>{c.name}</div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Status: <StatusBadge status={c.approval_status} /></div>
                         </div>
                     ))}
                 </div>
-
-                {/* Company List */}
-                {loading ? (
-                    <div style={{ textAlign: 'center', padding: '4rem', color: '#9ca3af', fontSize: '1rem' }}>
-                        <div style={{ fontSize: '2rem', marginBottom: 12 }}>⏳</div>
-                        Loading companies...
-                    </div>
-                ) : filtered.length === 0 ? (
-                    <div style={{
-                        textAlign: 'center', padding: '4rem',
-                        background: '#fff', borderRadius: 16, border: '1px solid #e5e7eb',
-                        color: '#9ca3af',
-                    }}>
-                        <div style={{ fontSize: '3rem', marginBottom: 12 }}>
-                            {activeTab === 'pending' ? '🎉' : '🔍'}
-                        </div>
-                        <div style={{ fontWeight: 600, fontSize: '1.1rem', marginBottom: 6, color: '#374151' }}>
-                            {activeTab === 'pending' ? 'No pending approvals!' : 'No companies found'}
-                        </div>
-                        <div style={{ fontSize: '0.9rem' }}>
-                            {activeTab === 'pending'
-                                ? 'All company registrations have been reviewed.'
-                                : 'Try adjusting your search or filter.'}
-                        </div>
-                    </div>
-                ) : (
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                        {filtered.map(company => (
-                            <CompanyCard
-                                key={company.id}
-                                company={company}
-                                onApprove={handleApprove}
-                                onReject={setRejectTarget}
-                                actionLoading={actionLoading}
-                            />
-                        ))}
-                    </div>
-                )}
-            </main>
-
-            {/* Reject Modal */}
-            {rejectTarget && (
-                <RejectModal
-                    company={rejectTarget}
-                    onConfirm={handleRejectConfirm}
-                    onCancel={() => setRejectTarget(null)}
-                />
+            ) : filteredUsers.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '5rem', background: '#fff', borderRadius: 24, color: 'var(--text-secondary)' }}>
+                    No pending {activeTab} user requests.
+                </div>
+            ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+                    {filteredUsers.map(u => (
+                        <UserRequestCard key={u.id} user={u} onApprove={handleApprove} actionLoading={actionLoading} />
+                    ))}
+                </div>
             )}
 
-            {/* Toast */}
-            {toast && (
-                <Toast
-                    message={toast.message}
-                    type={toast.type}
-                    onClose={() => setToast(null)}
-                />
-            )}
-        </div>
+            {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
+        </>
     );
 }
 

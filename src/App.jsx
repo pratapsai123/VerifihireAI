@@ -30,11 +30,32 @@ axios.interceptors.response.use(
   }
 );
 
+import Layout from './components/Layout';
+
+import CompaniesPage from './pages/CompaniesPage';
+import DashboardHome from './pages/DashboardHome';
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<SuperAdminDashboard />} />
+        {/* Approvals (The original main page) */}
+        <Route path="/" element={
+          <Layout>
+            <SuperAdminDashboard />
+          </Layout>
+        } />
+        {/* New Overview Dashboard */}
+        <Route path="/dashboard" element={
+          <Layout>
+            <DashboardHome />
+          </Layout>
+        } />
+        <Route path="/companies" element={
+          <Layout>
+            <CompaniesPage />
+          </Layout>
+        } />
         <Route path="/login" element={<AdminLogin />} />
       </Routes>
     </BrowserRouter>
