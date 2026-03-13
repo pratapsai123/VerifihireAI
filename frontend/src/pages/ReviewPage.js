@@ -8,7 +8,6 @@ import { API_BASE_URL } from '../apiConfig';
 const MANUAL_TOPIC_LABEL = 'Custom Questions';
 const REVIEW_STATE_STORAGE_KEY = 'reviewAssessmentState';
 const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';
-const CUSTOM_ASSESSMENT_STORAGE_KEY = 'customAssessmentFormData';
 
 const DIFFICULTY_WEIGHTS = {
   easy: 1,
@@ -400,9 +399,18 @@ function ReviewPage() {
           apiParams.difficulty = difficulty;
         }
 
-        const response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
+        let response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
           params: apiParams
         });
+
+        // If no questions found for strict difficulty, retry without it
+        if (difficulty && response.data && response.data.count === 0) {
+          console.log(`ReviewPage: No questions found for ${difficulty}, retrying without difficulty filter.`);
+          delete apiParams.difficulty;
+          response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
+            params: apiParams
+          });
+        }
 
         console.log('API Response:', response.data);
 

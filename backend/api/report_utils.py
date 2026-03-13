@@ -905,56 +905,70 @@ def generate_candidate_report(submission_id):
             story.append(Paragraph('The following screenshots were captured automatically when integrity warnings were triggered.', styles['Normal']))
             story.append(Spacer(1, 12))
 
+            from collections import defaultdict
+            groups = defaultdict(list)
             for snap in integrity_screenshots:
-                evt_type = str(snap.event_type).replace('_', ' ').title()
-                ts_str = snap.timestamp.strftime('%d %b %Y, %I:%M:%S %p')
+                evt = str(snap.event_type)
+                if evt in ['window_switch', 'window_blur']:
+                    group_name = 'Window Switch'
+                elif evt in ['no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked']:
+                    group_name = 'No Face Detection'
+                elif evt == 'multiface_detection':
+                    group_name = 'Multipeople Detection'
+                elif evt == 'tab_switch':
+                    group_name = 'Tab Switch'
+                elif evt == 'phone_detection':
+                    group_name = 'Phone Detection'
+                else:
+                    group_name = evt.replace('_', ' ').title()
                 
-                story.append(Paragraph(f"<b>Warning: {evt_type}</b>", styles['InfoValue']))
-                story.append(Paragraph(f"<font color='#64748b'>Time: {ts_str}</font>", styles['Normal']))
+                groups[group_name].append(snap)
+
+            for group_name, snaps in groups.items():
+                story.append(Paragraph(f"<b>Warning: {group_name}</b>", styles['InfoValue']))
                 story.append(Spacer(1, 6))
 
-                # Build images row
-                img_row = []
-                # 1. Screen capture
-                if snap.screenshot and snap.screenshot.name:
-                    try:
-                        path = snap.screenshot.path
-                        if os.path.exists(path):
-                            screen_img = _make_rl_image(path, 3.5 * inch, 2.0 * inch)
-                            if screen_img:
-                                img_row.append([Paragraph("<b>Screen View</b>", styles['InfoLabel']), screen_img])
-                    except Exception as e:
-                        print(f"Failed to load screen snap: {e}")
+                for i in range(0, len(snaps), 3):
+                    chunk = snaps[i:i+3]
+                    
+                    img_row = []
+                    text_row = []
+                    
+                    for snap in chunk:
+                        img = None
+                        if snap.screenshot and snap.screenshot.name and os.path.exists(snap.screenshot.path):
+                            img = _make_rl_image(snap.screenshot.path, 2.2 * inch, 1.6 * inch)
+                        elif snap.webcam_screenshot and snap.webcam_screenshot.name and os.path.exists(snap.webcam_screenshot.path):
+                            img = _make_rl_image(snap.webcam_screenshot.path, 2.2 * inch, 1.6 * inch)
+                        
+                        ts_str = snap.timestamp.strftime('%I:%M:%S %p')
+                        from reportlab.lib.styles import ParagraphStyle
+                        center_style = ParagraphStyle('CenterStyle', parent=styles['Normal'], alignment=1, fontSize=8, textColor=colors.HexColor('#64748b'))
+                        text_row.append(Paragraph(f"{ts_str}", center_style))
+                        
+                        if img:
+                            img_row.append(img)
+                        else:
+                            img_row.append(Paragraph('<i>No image</i>', center_style))
+                    
+                    while len(img_row) < 3:
+                        img_row.append("")
+                        text_row.append("")
 
-                # 2. Webcam capture
-                if snap.webcam_screenshot and snap.webcam_screenshot.name:
-                    try:
-                        path = snap.webcam_screenshot.path
-                        if os.path.exists(path):
-                            cam_img = _make_rl_image(path, 2.5 * inch, 2.0 * inch)
-                            if cam_img:
-                                img_row.append([Paragraph("<b>Webcam View</b>", styles['InfoLabel']), cam_img])
-                    except Exception as e:
-                        print(f"Failed to load webcam snap: {e}")
-
-                if img_row:
-                    # Flatten into a layout table
-                    tbl_data = [[item[0] for item in img_row], [item[1] for item in img_row]]
-                    col_widths = [3.6 * inch, 2.6 * inch] if len(img_row) == 2 else [4.0 * inch]
+                    tbl_data = [img_row, text_row]
+                    col_widths = [2.4 * inch, 2.4 * inch, 2.4 * inch]
                     snap_tbl = Table(tbl_data, colWidths=col_widths)
                     snap_tbl.setStyle(TableStyle([
-                        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
-                        ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-                        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
-                        ('TOPPADDING', (0, 0), (-1, -1), 4),
+                        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                        ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+                        ('TOPPADDING', (0, 0), (-1, -1), 2),
                     ]))
                     story.append(snap_tbl)
-                else:
-                    story.append(Paragraph('<i>Images not available</i>', styles['InfoLabel']))
-
-                story.append(Spacer(1, 12))
-                story.append(HRFlowable(width='100%', thickness=0.5, color=colors.HexColor('#e2e8f0'), spaceAfter=12))
+                    story.append(Spacer(1, 8))
                 
+                story.append(HRFlowable(width='100%', thickness=0.5, color=colors.HexColor('#e2e8f0'), spaceAfter=12))
+
     except Exception as e:
         print(f"Error fetching integrity screenshots for report: {e}")
         import traceback

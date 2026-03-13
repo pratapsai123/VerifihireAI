@@ -1190,6 +1190,16 @@ class AssessmentDetailView(APIView):
             
             submission_data = []
             for sub in submissions:
+                integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=sub).order_by('timestamp')
+                screenshots_data = []
+                for snap in integrity_snapshots:
+                    screenshots_data.append({
+                        "event_type": snap.event_type,
+                        "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
+                        "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
+                        "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                    })
+
                 submission_data.append({
                     "id": sub.id,
                     "candidate_name": sub.candidate_name,
@@ -1203,6 +1213,7 @@ class AssessmentDetailView(APIView):
                     "status": sub.status,
                     "integrity_score": sub.integrity_score,
                     "answers": sub.answers,
+                    "integrity_screenshots": screenshots_data,
                     "submitted_at": sub.submitted_at.strftime("%Y-%m-%d %H:%M") if sub.submitted_at else "In Progress"
                 })
 

@@ -321,6 +321,7 @@ export default function TakeAssessment() {
   const streamRef = useRef(null);
   const detectorRef = useRef(null);
   const lastDetectionTimeRef = useRef(0);
+  const lastCaptureTimeRef = useRef(0); // For throttling tab_switch/window_blur
   const screenStreamRef = useRef(null);
   const screenCanvasRef = useRef(null);
   const [screenShareError, setScreenShareError] = useState('');
@@ -958,8 +959,19 @@ export default function TakeAssessment() {
       return;
     }
 
+    // Throttling for screen-based events (tab_switch, window_blur)
+    const isScreenEvent = ['tab_switch', 'window_blur', 'window_switch'].includes(eventType);
+    if (isScreenEvent) {
+      const now = Date.now();
+      if (now - lastCaptureTimeRef.current < 2000) {
+        console.log(`Throttling duplicate integrity event: ${eventType}`);
+        return;
+      }
+      lastCaptureTimeRef.current = now;
+    }
+
     let screenshot = null;
-    if (['tab_switch', 'window_blur', 'window_switch'].includes(eventType) && screenStreamRef.current && screenCanvasRef.current) {
+    if (isScreenEvent && screenStreamRef.current && screenCanvasRef.current) {
       try {
         const video = document.createElement('video');
         video.srcObject = screenStreamRef.current;
@@ -999,7 +1011,7 @@ export default function TakeAssessment() {
     }
 
     let webcamScreenshot = null;
-    if (['multiface_detection', 'phone_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+    if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
       try {
         const camCanvas = document.createElement('canvas');
         camCanvas.width = videoRef.current.videoWidth || 640;
@@ -1063,7 +1075,7 @@ export default function TakeAssessment() {
               if (preds.find(p => p.class === 'cell phone')) showAiEvent('PHONE DETECTED', true, 'phone_detection');
               const people = preds.filter(p => p.class === 'person');
               if (people.length > 1) showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
-              else if (people.length === 0) showAiEvent('FACE NOT DETECTED', true, 'no_face_detection');
+              else if (people.length === 0) showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
             }
           }
         }, 1000);
@@ -1078,7 +1090,7 @@ export default function TakeAssessment() {
     };
 
     const handleBlur = () => {
-      showAiEvent('WINDOW BLURRED', true, 'tab_switch');
+      showAiEvent('WINDOW BLURRED', true, 'window_switch');
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);

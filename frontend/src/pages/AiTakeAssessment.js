@@ -126,6 +126,7 @@ const AiTakeAssessment = () => {
     const streamRef = useRef(null);
     const detectorRef = useRef(null);
     const lastDetectionTimeRef = useRef(0);
+    const lastCaptureTimeRef = useRef(0); // For throttling tab_switch/window_blur
     const screenStreamRef = useRef(null);
     const screenCanvasRef = useRef(null);
     const timerRef = useRef(null);
@@ -420,8 +421,19 @@ const AiTakeAssessment = () => {
         let webcamScreenshot = null;
 
         if (eventType) {
+            // Throttling for screen-based events (tab_switch, window_blur)
+            const isScreenEvent = ['tab_switch', 'window_blur', 'window_switch'].includes(eventType);
+            if (isScreenEvent) {
+                const now = Date.now();
+                if (now - lastCaptureTimeRef.current < 2000) {
+                    console.log(`Throttling duplicate integrity event: ${eventType}`);
+                    return;
+                }
+                lastCaptureTimeRef.current = now;
+            }
+
             // Capture Screen
-            if (['tab_switch', 'window_blur', 'window_switch'].includes(eventType) && screenStreamRef.current && screenCanvasRef.current) {
+            if (isScreenEvent && screenStreamRef.current && screenCanvasRef.current) {
                 try {
                     const video = document.createElement('video');
                     video.srcObject = screenStreamRef.current;
@@ -495,7 +507,7 @@ const AiTakeAssessment = () => {
             }
         };
         const onHide = () => { if (document.hidden) showAiEvent('TAB SWITCHED', true, 'tab_switch'); };
-        const onBlur = () => showAiEvent('WINDOW BLURRED', true, 'tab_switch');
+        const onBlur = () => showAiEvent('WINDOW BLURRED', true, 'window_switch');
         document.addEventListener('visibilitychange', onHide);
         window.addEventListener('blur', onBlur);
 

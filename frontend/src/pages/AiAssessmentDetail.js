@@ -484,6 +484,64 @@ const AiAssessmentDetail = () => {
                                     </div>
                                 </div>
                             )}
+
+                            {/* Integrity Violations Log */}
+                            {selectedSubmission.integrity_screenshots && selectedSubmission.integrity_screenshots.length > 0 && (
+                                <div style={{ marginTop: '4rem' }}>
+                                    <h4 style={{ color: '#1B254B', marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                        <i className="fa-solid fa-shield-halved" style={{ color: '#EE5D50' }}></i> Integrity Violations Log
+                                    </h4>
+                                    <p style={{ color: '#707EAE', marginBottom: '2rem', fontSize: '0.95rem' }}>
+                                        The following screenshots were captured automatically when integrity warnings were triggered.
+                                    </p>
+
+                                    {(() => {
+                                        // Group by event type
+                                        const groups = selectedSubmission.integrity_screenshots.reduce((acc, snap) => {
+                                            let groupName = snap.event_type;
+                                            const evt = snap.event_type;
+                                            if (['window_switch', 'window_blur'].includes(evt)) groupName = 'Window Switch';
+                                            else if (['face_detection_lost', 'face_detection_lost_rechecked'].includes(evt)) groupName = 'No Face Detection';
+                                            else if (evt === 'multiface_detection') groupName = 'Multipeople Detection';
+                                            else if (evt === 'tab_switch') groupName = 'Tab Switch';
+                                            else if (evt === 'phone_detection') groupName = 'Phone Detection';
+                                            else groupName = evt.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+                                            if (!acc[groupName]) acc[groupName] = [];
+                                            acc[groupName].push(snap);
+                                            return acc;
+                                        }, {});
+
+                                        return Object.entries(groups).map(([groupName, snaps], idx) => (
+                                            <div key={idx} style={{ marginBottom: '3rem' }}>
+                                                <h5 style={{ color: '#1B254B', fontSize: '1.1rem', fontWeight: '800', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                    <span style={{ color: '#EE5D50' }}>Warning:</span> {groupName}
+                                                </h5>
+                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+                                                    {snaps.map((snap, sIdx) => (
+                                                        <div key={sIdx} style={{ background: '#F8F9FF', borderRadius: '15px', padding: '10px', border: '1px solid #E0E5F2', textAlign: 'center' }}>
+                                                            <div style={{ width: '100%', height: '140px', background: '#e2e8f0', borderRadius: '10px', overflow: 'hidden', marginBottom: '10px', position: 'relative' }}>
+                                                                <img 
+                                                                    src={snap.screenshot_url || snap.webcam_screenshot_url} 
+                                                                    alt={snap.event_type}
+                                                                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                                    onError={(e) => { e.target.src = 'https://placehold.co/400x300?text=Image+Not+Found'; }}
+                                                                />
+                                                                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(27, 37, 75, 0.7)', color: 'white', fontSize: '0.7rem', padding: '4px' }}>
+                                                                    {snap.screenshot_url ? 'Screen View' : 'Webcam View'}
+                                                                </div>
+                                                            </div>
+                                                            <div style={{ color: '#707EAE', fontSize: '0.75rem', fontWeight: '600' }}>
+                                                                {new Date(snap.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ));
+                                    })()}
+                                </div>
+                            )}
                         </div>
                     )}
 
