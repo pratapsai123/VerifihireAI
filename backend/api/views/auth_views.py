@@ -454,6 +454,7 @@ def register_view(request):
             organization_name=organization_name,
             company=company,
             user=user,
+            is_approved=False,
         )
 
         # Notify platform admin about the new company registration
@@ -573,6 +574,13 @@ def login_view(request):
                         msg += f' Reason: {reason}'
                     msg += ' Please contact support for more information.'
                     return Response({'error': msg}, status=status.HTTP_403_FORBIDDEN)
+                
+                # ALSO check individual user approval
+                if not user_profile.is_approved:
+                    return Response(
+                        {'error': 'Your account is pending approval by the platform administrator.'},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
         else:
             # Application Admin users (no UserProfile): must exist in ApplicationAdmin table
             auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()

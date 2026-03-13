@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path # Reload trigger
 from . import views
 from . import coding_views
 
@@ -76,5 +76,7 @@ urlpatterns = [
     path('superadmin/companies/', views.superadmin_companies_view, name='superadmin_companies'),
     path('superadmin/companies/<int:company_id>/approve/', views.superadmin_approve_company_view, name='superadmin_approve_company'),
     path('superadmin/companies/<int:company_id>/reject/', views.superadmin_reject_company_view, name='superadmin_reject_company'),
+    path('superadmin/users/', views.superadmin_users_view, name='superadmin_users'),
+    path('superadmin/users/<int:user_id>/approve/', views.superadmin_approve_user_view, name='superadmin_approve_user'),
 ]
 

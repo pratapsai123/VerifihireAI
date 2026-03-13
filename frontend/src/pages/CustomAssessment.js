@@ -914,7 +914,7 @@ function CustomAssessment() {
       formData.append('resume', file);
 
       // Call API to extract skills
-      const response = await axios.post(`${API_BASE_URL} /extract-skills/`, formData, {
+      const response = await axios.post(`${API_BASE_URL}/extract-skills/`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

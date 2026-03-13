@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
+import '../styles/MultipleSelectionQuestion.css';
 
 function MultipleSelectionQuestion() {
   const navigate = useNavigate();

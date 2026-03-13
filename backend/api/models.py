@@ -93,6 +93,9 @@ class UserProfile(models.Model):
         help_text="Optional link to Django User model"
     )
     
+    # Approval tracking
+    is_approved = models.BooleanField(default=False, help_text="Specific user approval from platform admin")
+    
     # Additional timestamp
     updated_at = models.DateTimeField(auto_now=True)
     
