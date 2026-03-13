@@ -12,6 +12,10 @@ const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';
 function CustomAssessment() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const resumeSectionRef = useRef(null);
+  const [uploadMode, setUploadMode] = useState('resume'); // 'resume' or 'jd'
+  const [jdFileName, setJDFileName] = useState('');
+  const [isExtractingJDSkills, setIsExtractingJDSkills] = useState(false);
   const [formData, setFormData] = useState({
     resume: null,
     role: '',
@@ -953,9 +957,57 @@ function CustomAssessment() {
     }
   };
 
+  const handleJDFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setJDFileName(file.name);
+      setErrors({ ...errors, jd: '' });
+      // Extract skills from JD
+      await extractSkillsFromJD(file);
+    }
+  };
+
+  const extractSkillsFromJD = async (file) => {
+    setIsExtractingJDSkills(true);
+    setExtractedSkills([]);
+
+    try {
+      // Create FormData to send file
+      const formData = new FormData();
+      formData.append('resume', file); // Backend expects 'resume' field name
+
+      // Call API to extract skills
+      const response = await axios.post(`${API_BASE_URL}/extract-skills/`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      // Set extracted skills from API response
+      if (response.data && response.data.skills) {
+        setExtractedSkills(response.data.skills);
+      } else {
+        setExtractedSkills([]);
+      }
+    } catch (error) {
+      console.error('Error extracting skills from JD:', error);
+      setExtractedSkills([]);
+    } finally {
+      setIsExtractingJDSkills(false);
+    }
+  };
+
   const handleRemoveResume = () => {
     setFormData({ ...formData, resume: null });
     setResumeFileName('');
+    setExtractedSkills([]);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const handleRemoveJD = () => {
+    setJDFileName('');
     setExtractedSkills([]);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
@@ -966,6 +1018,19 @@ function CustomAssessment() {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  };
+
+  const handleReuploadJD = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const clearAllSkills = () => {
+    setExtractedSkills([]);
+    setRemovedSkills([]);
+    setManualDistribution({});
+    setQuestionDistribution({});
   };
 
   const handleRemoveSkill = (skillToRemove) => {
@@ -1183,7 +1248,7 @@ function CustomAssessment() {
     const totalQuestions = parseInt(formData.numberOfQuestions) || 0;
     const allocated = Object.values(questionDistribution).reduce((sum, c) => sum + (c || 0), 0);
     if (totalQuestions > 0 && allocated !== totalQuestions) {
-      newErrors.distribution = `Please allocate exactly ${totalQuestions} questions(currently ${allocated}).`;
+      newErrors.distribution = `Please allocate exactly ${totalQuestions} questions (currently ${allocated}).`;
       missingFields.push('Question Distribution');
     }
 
@@ -1223,7 +1288,7 @@ function CustomAssessment() {
         apiParams.difficulty = difficulty;
       }
 
-      const response = await axios.get(`${API_BASE_URL} /questions/by - skills / `, {
+      const response = await axios.get(`${API_BASE_URL}/questions/by - skills / `, {
         params: apiParams
       });
 
@@ -1517,27 +1582,88 @@ function CustomAssessment() {
       {/* Main Content */}
       <div className="page-container">
         <div className="form-wrapper">
-          <h1 className="page-title">Custom Assessment</h1>
-          <p className="page-subtitle">Create a custom assessment by uploading a resume and configuring the assessment parameters.</p>
+          <div style={{ position: 'relative', textAlign: 'center', marginBottom: '1.5rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '3rem', padding: '0 120px' }}>
+            <div style={{ position: 'absolute', top: '0', left: '0', display: 'flex', gap: '0.5rem' }}>
+              <button
+                type="button"
+                className={`custom-skip-btn ${uploadMode === 'resume' ? 'active-mode' : ''}`}
+                style={{
+                  marginBottom: 0,
+                  backgroundColor: uploadMode === 'resume' ? '#dbeafe' : '#eff6ff',
+                  borderColor: uploadMode === 'resume' ? '#3b82f6' : '#bfdbfe'
+                }}
+                onClick={() => {
+                  setUploadMode('resume');
+                  clearAllSkills();
+                  if (resumeSectionRef.current) {
+                    resumeSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Single
+              </button>
+              <button
+                type="button"
+                className={`custom-skip-btn ${uploadMode === 'jd' ? 'active-mode' : ''}`}
+                style={{
+                  marginBottom: 0,
+                  backgroundColor: uploadMode === 'jd' ? '#dbeafe' : '#eff6ff',
+                  borderColor: uploadMode === 'jd' ? '#3b82f6' : '#bfdbfe'
+                }}
+                onClick={() => {
+                  setUploadMode('jd');
+                  clearAllSkills();
+                  if (resumeSectionRef.current) {
+                    resumeSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Multiple
+              </button>
+            </div>
+            <h1 className="page-title" style={{ marginBottom: '0.5rem', margin: '0 auto' }}>Custom Assessment</h1>
+            <p className="page-subtitle" style={{ marginBottom: 0, margin: '0 auto' }}>Create a custom assessment by uploading a {uploadMode === 'resume' ? 'resume' : 'job description'} and configuring the assessment parameters.</p>
+            <button
+              type="button"
+              className="custom-skip-btn"
+              style={{ position: 'absolute', top: '0', right: '0', marginBottom: 0 }}
+              onClick={() => navigate('/manual-questions')}
+              aria-label="Skip to creating custom questions"
+            >
+              Skip
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+          </div>
 
           <form className="assessment-form">
-            {/* Upload Resume */}
-            <div className="form-group">
-              <label htmlFor="resume" className="form-label">
-                Upload Resume <span className="required">*</span>
+            {/* Upload Resume or JD */}
+            <div className="form-group" ref={resumeSectionRef}>
+              <label htmlFor="upload-file" className="form-label">
+                {uploadMode === 'resume' ? 'Upload Resume' : 'Upload Job Description'} <span className="required">*</span>
               </label>
               <div className="file-upload-container">
                 <input
                   ref={fileInputRef}
                   type="file"
-                  id="resume"
-                  name="resume"
+                  id="upload-file"
+                  name="upload-file"
                   accept=".pdf,.doc,.docx"
-                  onChange={handleFileChange}
+                  onChange={uploadMode === 'resume' ? handleFileChange : handleJDFileChange}
                   className="file-input"
                 />
-                {!resumeFileName ? (
-                  <label htmlFor="resume" className="file-upload-label">
+                {((uploadMode === 'resume' && !resumeFileName) || (uploadMode === 'jd' && !jdFileName)) ? (
+                  <label htmlFor="upload-file" className="file-upload-label">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                       <path d="M14 2v6h6" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
@@ -1545,7 +1671,7 @@ function CustomAssessment() {
                       <path d="M16 17H8" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                       <path d="M10 9H8" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                     </svg>
-                    <span>Choose file or drag it here</span>
+                    <span>Choose {uploadMode === 'resume' ? 'resume' : 'JD'} or drag it here</span>
                   </label>
                 ) : (
                   <div className="file-uploaded-container">
@@ -1555,19 +1681,19 @@ function CustomAssessment() {
                         <path d="M14 2v6h6" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                         <path d="M9 12l2 2 4-4" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                       </svg>
-                      <span className="file-name-uploaded">{resumeFileName}</span>
+                      <span className="file-name-uploaded">{uploadMode === 'resume' ? resumeFileName : jdFileName}</span>
                     </div>
                     <div className="file-actions">
                       <button
                         type="button"
-                        onClick={handleReuploadResume}
+                        onClick={uploadMode === 'resume' ? handleReuploadResume : handleReuploadJD}
                         className="btn-file-action btn-reupload"
                       >
                         Reupload
                       </button>
                       <button
                         type="button"
-                        onClick={handleRemoveResume}
+                        onClick={uploadMode === 'resume' ? handleRemoveResume : handleRemoveJD}
                         className="btn-file-action btn-remove"
                       >
                         Cancel
@@ -1576,20 +1702,20 @@ function CustomAssessment() {
                   </div>
                 )}
               </div>
-              {errors.resume && <span className="error-message">{errors.resume}</span>}
+              {(uploadMode === 'resume' ? errors.resume : errors.jd) && <span className="error-message">{uploadMode === 'resume' ? errors.resume : errors.jd}</span>}
               <p className="form-hint">Accepted formats: PDF, DOC, DOCX (Max 10MB)</p>
             </div>
 
-            {/* Skills Field - Only show when resume is uploaded */}
-            {resumeFileName && (
+            {/* Skills Field - Only show when file is uploaded */}
+            {((uploadMode === 'resume' && resumeFileName) || (uploadMode === 'jd' && jdFileName)) && (
               <div className="form-group">
                 <label className="form-label">
-                  Skills Found in Resume
+                  Skills Found in {uploadMode === 'resume' ? 'Resume' : 'Job Description'}
                 </label>
-                {isExtractingSkills ? (
+                {(isExtractingSkills || isExtractingJDSkills) ? (
                   <div className="skills-loading">
                     <div className="spinner"></div>
-                    <span>Extracting skills from resume...</span>
+                    <span>Extracting skills from {uploadMode === 'resume' ? 'resume' : 'JD'}...</span>
                   </div>
                 ) : extractedSkills.length > 0 ? (
                   <div className="skills-container">
