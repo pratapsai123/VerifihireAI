@@ -3,9 +3,10 @@ import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 
 const STATUS_TABS = [
-    { key: 'pending', label: 'Pending Requests', icon: '⏳' },
-    { key: 'approved', label: 'Approved Users', icon: '✅' },
-    { key: 'all_companies', label: 'Company Overview', icon: '🏢' },
+    { key: 'pending_users', label: 'User Access', icon: '👤' },
+    { key: 'pending_companies', label: 'Company Requests', icon: '🏢' },
+    { key: 'all_users', label: 'Users List', icon: '📋' },
+    { key: 'all_companies', label: 'Organization Index', icon: '🏢' },
 ];
 
 const STATUS_COLORS = {
@@ -40,7 +41,7 @@ function Toast({ message, type, onClose }) {
         <div style={{
             position: 'fixed', bottom: 30, right: 30, zIndex: 9999,
             padding: '16px 24px', borderRadius: 16,
-            background: type === 'success' ? 'var(--status-success)' : 'var(--status-error)',
+            background: type === 'success' ? '#05CD99' : '#EE5D50',
             color: '#fff', fontWeight: 600, fontSize: '0.85rem',
             boxShadow: '0 12px 30px rgba(0,0,0,0.15)',
             display: 'flex', alignItems: 'center', gap: 12,
@@ -53,40 +54,29 @@ function Toast({ message, type, onClose }) {
 }
 
 function UserRequestCard({ user, onApprove, actionLoading }) {
-    const isLoading = actionLoading === user.id;
+    const isLoading = actionLoading === `user-${user.id}`;
     return (
         <div style={{
             background: '#fff', borderRadius: 20, padding: '20px',
             display: 'flex', alignItems: 'center', gap: '20px',
             boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
-            animation: 'slideIn 0.4s ease-out', transition: 'transform 0.2s'
-        }}
-            onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-2px)'}
-            onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
-        >
+            animation: 'slideIn 0.4s ease-out'
+        }}>
             <div style={{
                 width: 48, height: 48, borderRadius: 12,
-                background: 'linear-gradient(135deg, var(--blue-accent), var(--blue-secondary))',
+                background: 'linear-gradient(135deg, #4318FF, #5E37FF)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#fff', fontWeight: 800, fontSize: '1.2rem',
-                boxShadow: '0 4px 10px rgba(79, 70, 229, 0.2)'
+                color: '#fff', fontWeight: 800, fontSize: '1.2rem'
             }}>{(user.first_name || 'U').charAt(0)}</div>
 
             <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
-                    <span style={{ fontWeight: 700, fontSize: '1rem' }}>{user.first_name} {user.last_name}</span>
+                    <span style={{ fontWeight: 700, fontSize: '1rem', color: '#2B3674' }}>{user.first_name} {user.last_name}</span>
                     <StatusBadge status={user.is_approved ? 'approved' : 'pending'} />
                 </div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '4px 20px' }}>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
-                        🏢 {user.organization_name}
-                    </div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
-                        ✉️ {user.email}
-                    </div>
-                    <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: 500 }}>
-                        📅 Registered {new Date(user.registered_at).toLocaleDateString()}
-                    </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '4px 20px' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>🏢 {user.organization_name}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>✉️ {user.email}</div>
                 </div>
             </div>
 
@@ -95,29 +85,83 @@ function UserRequestCard({ user, onApprove, actionLoading }) {
                     disabled={isLoading}
                     onClick={() => onApprove(user.id)}
                     style={{
-                        padding: '10px 24px', borderRadius: 10, border: 'none',
-                        background: isLoading ? '#e9edf7' : 'var(--blue-accent)',
-                        color: '#fff', fontWeight: 700, cursor: isLoading ? 'wait' : 'pointer',
-                        fontSize: '0.8rem'
+                        padding: '10px 24px', borderRadius: 12, border: 'none',
+                        background: '#4318FF', color: '#fff', fontWeight: 700,
+                        cursor: isLoading ? 'wait' : 'pointer', fontSize: '0.8rem'
                     }}
-                >{isLoading ? '...' : 'Approve Access'}</button>
+                >{isLoading ? '...' : 'Approve'}</button>
+            )}
+        </div>
+    );
+}
+
+function CompanyRequestCard({ company, onApprove, onReject, actionLoading }) {
+    const isLoading = actionLoading === `comp-${company.id}`;
+    return (
+        <div style={{
+            background: '#fff', borderRadius: 20, padding: '20px',
+            display: 'flex', alignItems: 'center', gap: '20px',
+            boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
+            animation: 'slideIn 0.4s ease-out'
+        }}>
+            <div style={{
+                width: 48, height: 48, borderRadius: 12,
+                background: 'linear-gradient(135deg, #05CD99, #00BFA6)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#fff', fontWeight: 800, fontSize: '1.2rem'
+            }}>{company.name.charAt(0).toUpperCase()}</div>
+
+            <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                    <span style={{ fontWeight: 700, fontSize: '1rem', color: '#2B3674' }}>{company.name}</span>
+                    <StatusBadge status={company.approval_status} />
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '4px 20px' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>🌐 {company.domain || 'No domain'}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>✉️ {company.primary_admin?.email}</div>
+                </div>
+            </div>
+
+            {company.approval_status === 'pending' && (
+                <div style={{ display: 'flex', gap: 10 }}>
+                    <button
+                        disabled={isLoading}
+                        onClick={() => onApprove(company.id)}
+                        style={{
+                            padding: '10px 20px', borderRadius: 12, border: 'none',
+                            background: '#05CD99', color: '#fff', fontWeight: 700,
+                            cursor: isLoading ? 'wait' : 'pointer', fontSize: '0.8rem'
+                        }}
+                    >Approve</button>
+                    <button
+                        disabled={isLoading}
+                        onClick={() => {
+                            const reason = prompt('Reject reason?');
+                            if (reason) onReject(company.id, reason);
+                        }}
+                        style={{
+                            padding: '10px 20px', borderRadius: 12, border: '1px solid #EE5D50',
+                            background: 'transparent', color: '#EE5D50', fontWeight: 700,
+                            cursor: isLoading ? 'wait' : 'pointer', fontSize: '0.8rem'
+                        }}
+                    >Reject</button>
+                </div>
             )}
         </div>
     );
 }
 
 function SuperAdminDashboard() {
-    const [activeTab, setActiveTab] = useState('pending');
+    const [activeTab, setActiveTab] = useState('pending_users');
     const [users, setUsers] = useState([]);
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(null);
     const [toast, setToast] = useState(null);
     const [search, setSearch] = useState('');
-    const [orgFilter, setOrgFilter] = useState('');
 
-    const fetchData = useCallback(async () => {
-        setLoading(true);
+    const fetchData = useCallback(async (silent = false) => {
+        if (!silent) setLoading(true);
         try {
             const [usersRes, compRes] = await Promise.all([
                 axios.get(`${API_BASE_URL}/superadmin/users/`),
@@ -126,118 +170,101 @@ function SuperAdminDashboard() {
             setUsers(usersRes.data.users || []);
             setCompanies(compRes.data.companies || []);
         } catch (err) {
-            const msg = err.response?.data?.error || err.response?.data?.message || 'Failed to synchronize data.';
-            setToast({ type: 'error', message: msg });
+            setToast({ type: 'error', message: 'Failed to sync data.' });
         } finally {
-            setLoading(false);
+            if (!silent) setLoading(false);
         }
     }, []);
 
-    useEffect(() => { fetchData(); }, [fetchData]);
+    useEffect(() => { 
+        fetchData(); 
+        const interval = setInterval(() => fetchData(true), 30000); // Auto-update every 30s
+        return () => clearInterval(interval);
+    }, [fetchData]);
 
-    const handleApprove = async (id) => {
-        setActionLoading(id);
+    const handleApproveUser = async (id) => {
+        setActionLoading(`user-${id}`);
         try {
             await axios.post(`${API_BASE_URL}/superadmin/users/${id}/approve/`);
-            setToast({ type: 'success', message: 'User approved successfully.' });
-            fetchData();
-        } catch (err) {
-            setToast({ type: 'error', message: 'Approval failed.' });
-        } finally {
-            setActionLoading(null);
-        }
+            setToast({ type: 'success', message: 'User approved.' });
+            fetchData(true); // Silent update context
+        } catch (err) { 
+            setToast({ type: 'error', message: 'User approval failed.' }); 
+        } finally { setActionLoading(null); }
+    };
+
+    const handleApproveCompany = async (id) => {
+        setActionLoading(`comp-${id}`);
+        try {
+            await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/approve/`);
+            setToast({ type: 'success', message: 'Company approved.' });
+            fetchData(true); // Silent update context
+        } catch (err) { 
+            setToast({ type: 'error', message: 'Company approval failed.' }); 
+        } finally { setActionLoading(null); }
+    };
+
+    const handleRejectCompany = async (id, reason) => {
+        setActionLoading(`comp-${id}`);
+        try {
+            await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/reject/`, { reason });
+            setToast({ type: 'success', message: 'Company rejected.' });
+            fetchData(true); // Silent update context
+        } catch (err) { 
+            setToast({ type: 'error', message: 'Rejection failed.' }); 
+        } finally { setActionLoading(null); }
     };
 
     const filteredUsers = users.filter(u => {
-        const matchesSearch = (u.first_name || '').toLowerCase().includes(search.toLowerCase()) ||
-            (u.email || '').toLowerCase().includes(search.toLowerCase()) ||
-            (u.organization_name || '').toLowerCase().includes(search.toLowerCase());
-        const matchesTab = (activeTab === 'pending' && !u.is_approved) ||
-            (activeTab === 'approved' && u.is_approved);
-        const matchesOrg = !orgFilter || u.organization_name === orgFilter || String(u.company_id) === orgFilter;
-        return matchesSearch && matchesTab && matchesOrg;
+        const matchesSearch = (u.email || '').toLowerCase().includes(search.toLowerCase()) || (u.organization_name || '').toLowerCase().includes(search.toLowerCase());
+        const matchesTab = (activeTab === 'pending_users' && !u.is_approved) || (activeTab === 'all_users');
+        return matchesSearch && matchesTab;
+    });
+
+    const filteredCompanies = companies.filter(c => {
+        const matchesSearch = c.name.toLowerCase().includes(search.toLowerCase());
+        const matchesTab = (activeTab === 'pending_companies' && c.approval_status === 'pending') || (activeTab === 'all_companies');
+        return matchesSearch && matchesTab;
     });
 
     return (
         <>
-            <style>{`
-                @keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-            `}</style>
-
-            <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                <div>
-                    <h1 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800 }}>Registration Approvals</h1>
-                    <p style={{ margin: '4px 0 0', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                        Process individual access requests for the <span style={{ color: 'var(--blue-accent)', fontWeight: 700 }}>VeriFiHire</span> platform.
-                    </p>
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: 12, background: '#fff', padding: '8px 16px', borderRadius: 12, border: '1px solid #e9edf7' }}>
-                    <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Filter by Org:</span>
-                    <select
-                        value={orgFilter}
-                        onChange={(e) => setOrgFilter(e.target.value)}
-                        style={{ border: 'none', outline: 'none', background: 'transparent', fontWeight: 700, color: 'var(--blue-accent)', fontSize: '0.8rem', cursor: 'pointer' }}
-                    >
-                        <option value="">All Organizations</option>
-                        {companies.map(c => (
-                            <option key={c.id} value={c.name}>{c.name}</option>
-                        ))}
-                    </select>
-                </div>
+            <style>{`@keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
+            
+            <div style={{ marginBottom: '2rem' }}>
+                <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 800, color: '#2B3674' }}>Platform Approvals</h1>
+                <p style={{ margin: '4px 0 0', color: '#707EAE', fontSize: '0.9rem', fontWeight: 500 }}>Process individual and organization access requests.</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px', marginBottom: '2.5rem' }}>
-                <div style={{ background: '#fff', borderRadius: '20px', padding: '20px', border: '1px solid #f0f3f8', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
-                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 8 }}>Pending Users</div>
-                    <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{users.filter(u => !u.is_approved).length}</div>
-                </div>
-                <div style={{ background: '#fff', borderRadius: '20px', padding: '20px', border: '1px solid #f0f3f8', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
-                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 8 }}>Approved Entities</div>
-                    <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{companies.filter(c => c.approval_status === 'approved').length}</div>
-                </div>
-                <div style={{ background: '#fff', borderRadius: '20px', padding: '20px', border: '1px solid #f0f3f8', boxShadow: '0 4px 15px rgba(0,0,0,0.02)' }}>
-                    <div style={{ color: 'var(--text-secondary)', fontSize: '0.75rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: 8 }}>Total Companies</div>
-                    <div style={{ fontSize: '1.75rem', fontWeight: 800 }}>{companies.length}</div>
-                </div>
-            </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', background: '#fff', padding: 8, borderRadius: 16 }}>
-                <div style={{ display: 'flex', gap: 6 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', background: '#fff', padding: 10, borderRadius: 16 }}>
+                <div style={{ display: 'flex', gap: 4 }}>
                     {STATUS_TABS.map(tab => (
                         <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{
-                            padding: '10px 20px', borderRadius: 10, border: 'none',
-                            background: activeTab === tab.key ? 'var(--blue-accent)' : 'transparent',
-                            color: activeTab === tab.key ? '#fff' : 'var(--text-secondary)',
+                            padding: '10px 18px', borderRadius: 12, border: 'none',
+                            background: activeTab === tab.key ? '#4318FF' : 'transparent',
+                            color: activeTab === tab.key ? '#fff' : '#707EAE',
                             fontWeight: 700, cursor: 'pointer', fontSize: '0.8rem', transition: 'all 0.2s'
-                        }}>{tab.label}</button>
+                        }}>{tab.icon} {tab.label}</button>
                     ))}
                 </div>
                 <input
-                    type="text" placeholder="Search registration..." value={search} onChange={e => setSearch(e.target.value)}
-                    style={{ padding: '10px 15px', borderRadius: 10, border: '1px solid #e9edf7', fontSize: '0.85rem', width: 240, background: '#F4F7FE' }}
+                    type="text" placeholder="Search requests..." value={search} onChange={e => setSearch(e.target.value)}
+                    style={{ padding: '12px 18px', borderRadius: 12, border: '1px solid #f0f3f8', fontSize: '0.85rem', width: 260, background: '#F4F7FE', outline: 'none' }}
                 />
             </div>
 
             {loading ? (
-                <div style={{ textAlign: 'center', padding: '4rem' }}>Synchronizing...</div>
-            ) : activeTab === 'all_companies' ? (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 20 }}>
-                    {companies.map(c => (
-                        <div key={c.id} style={{ background: '#fff', padding: 20, borderRadius: 20, boxShadow: '0 4px 15px rgba(0,0,0,0.05)', border: '1px solid #f0f3f8' }}>
-                            <div style={{ fontWeight: 700, marginBottom: 4 }}>{c.name}</div>
-                            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Status: <StatusBadge status={c.approval_status} /></div>
-                        </div>
+                <div style={{ textAlign: 'center', padding: '4rem' }}>Synchronizing Directory...</div>
+            ) : activeTab.includes('user') ? (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+                    {filteredUsers.length === 0 ? <p style={{ textAlign: 'center', padding: '4rem', color: '#A3AED0' }}>No users found.</p> : filteredUsers.map(u => (
+                        <UserRequestCard key={u.id} user={u} onApprove={handleApproveUser} actionLoading={actionLoading} />
                     ))}
-                </div>
-            ) : filteredUsers.length === 0 ? (
-                <div style={{ textAlign: 'center', padding: '5rem', background: '#fff', borderRadius: 24, color: 'var(--text-secondary)' }}>
-                    No pending {activeTab} user requests.
                 </div>
             ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
-                    {filteredUsers.map(u => (
-                        <UserRequestCard key={u.id} user={u} onApprove={handleApprove} actionLoading={actionLoading} />
+                    {filteredCompanies.length === 0 ? <p style={{ textAlign: 'center', padding: '4rem', color: '#A3AED0' }}>No companies found.</p> : filteredCompanies.map(c => (
+                        <CompanyRequestCard key={c.id} company={c} onApprove={handleApproveCompany} onReject={handleRejectCompany} actionLoading={actionLoading} />
                     ))}
                 </div>
             )}

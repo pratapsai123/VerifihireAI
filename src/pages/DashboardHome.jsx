@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 
@@ -24,6 +25,7 @@ function StatCard({ title, value, icon, color }) {
 }
 
 function DashboardHome() {
+    const navigate = useNavigate();
     const [stats, setStats] = useState({
         totalCompanies: 0,
         pendingUserRequests: 0,
@@ -35,36 +37,40 @@ function DashboardHome() {
     const [loading, setLoading] = useState(true);
     const [orgFilter, setOrgFilter] = useState('');
 
-    useEffect(() => {
-        const fetchDashboardData = async () => {
-            try {
-                const [compRes, userRes] = await Promise.all([
-                    axios.get(`${API_BASE_URL}/superadmin/companies/`),
-                    axios.get(`${API_BASE_URL}/superadmin/users/`)
-                ]);
+    const fetchDashboardData = useCallback(async (silent = false) => {
+        if (!silent) setLoading(true);
+        try {
+            const [compRes, userRes] = await Promise.all([
+                axios.get(`${API_BASE_URL}/superadmin/companies/`),
+                axios.get(`${API_BASE_URL}/superadmin/users/`)
+            ]);
 
-                const allCompanies = compRes.data.companies || [];
-                const allUsers = userRes.data.users || [];
-                setCompanies(allCompanies);
+            const allCompanies = compRes.data.companies || [];
+            const allUsers = userRes.data.users || [];
+            setCompanies(allCompanies);
 
-                const filteredCompanies = orgFilter ? allCompanies.filter(c => c.name === orgFilter) : allCompanies;
-                const filteredUsers = orgFilter ? allUsers.filter(u => u.organization_name === orgFilter) : allUsers;
+            const filteredCompanies = orgFilter ? allCompanies.filter(c => c.name === orgFilter) : allCompanies;
+            const filteredUsers = orgFilter ? allUsers.filter(u => u.organization_name === orgFilter) : allUsers;
 
-                setStats({
-                    totalCompanies: allCompanies.length,
-                    pendingUserRequests: filteredUsers.filter(u => !u.is_approved).length,
-                    approvedEntities: allCompanies.filter(c => c.approval_status === 'approved').length,
-                    totalPlatformUsers: filteredUsers.length,
-                    recentSignups: filteredUsers.slice(0, 5)
-                });
-            } catch (err) {
-                console.error('Failed to fetch dashboard stats:', err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchDashboardData();
+            setStats({
+                totalCompanies: allCompanies.length,
+                pendingUserRequests: filteredUsers.filter(u => !u.is_approved).length,
+                approvedEntities: allCompanies.filter(c => c.approval_status === 'approved').length,
+                totalPlatformUsers: filteredUsers.length,
+                recentSignups: filteredUsers.slice(0, 5)
+            });
+        } catch (err) {
+            console.error('Failed to fetch dashboard stats:', err);
+        } finally {
+            if (!silent) setLoading(false);
+        }
     }, [orgFilter]);
+
+    useEffect(() => {
+        fetchDashboardData();
+        const interval = setInterval(() => fetchDashboardData(true), 30000);
+        return () => clearInterval(interval);
+    }, [fetchDashboardData]);
 
     if (loading) {
         return (
@@ -117,7 +123,7 @@ function DashboardHome() {
                 <div style={{ background: '#fff', borderRadius: '24px', padding: '24px', boxShadow: '0 10px 20px rgba(112, 144, 176, 0.05)', border: '1px solid #f0f3f8' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                         <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Recent User Signups</h3>
-                        <button onClick={() => window.location.href = '/dashboard'} style={{ background: 'transparent', border: 'none', color: 'var(--blue-accent)', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>View All</button>
+                        <button onClick={() => navigate('/')} style={{ background: 'transparent', border: 'none', color: 'var(--blue-accent)', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>View All</button>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                         {stats.recentSignups.map(user => (
