@@ -11,6 +11,16 @@ const ResultsAI = () => {
     const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'resume');
     const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail'
     const [currentPage, setCurrentPage] = useState(1);
+    
+    // Auth context
+    const me = (() => {
+        try { return JSON.parse(localStorage.getItem('user') || '{}'); } 
+        catch { return {}; }
+    })();
+    const myRole = (me?.role || '').toLowerCase();
+    const canDelete = myRole === 'application_admin' || (myRole !== 'company_admin'); 
+    // Note: HR can still see it (maybe they request deletion), 
+    // but the user specifically said "Admin" can't delete.
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -212,23 +222,26 @@ const ResultsAI = () => {
     const requestDelete = (items) => setConfirmDelete({ items });
     const cancelDelete = () => setConfirmDelete(null);
 
-    const performDelete = async (items) => {
+    const performDelete = async (items, reason) => {
         const ids = new Set(items.map(i => i._deleteKey));
         setDeletingIds(prev => new Set([...prev, ...ids]));
 
         let successCount = 0;
         let failCount = 0;
+        let requestMessage = '';
 
         await Promise.all(items.map(async (item) => {
             try {
+                let resp;
                 if (item._type === 'candidate') {
-                    await axios.delete(`${API_BASE_URL}/ai-candidates/${item.id}/`);
+                    resp = await axios.delete(`${API_BASE_URL}/ai-candidates/${item.id}/`, { data: { reason } });
                     successCount++;
                 } else if (item._type === 'ai_assessment') {
                     const subId = item.submission_id.replace('ai_', '');
-                    await axios.delete(`${API_BASE_URL}/ai/submission/${subId}/`);
+                    resp = await axios.delete(`${API_BASE_URL}/ai/submission/${subId}/`, { data: { reason } });
                     successCount++;
                 }
+                if (resp?.data?.message && !requestMessage) requestMessage = resp.data.message;
             } catch (err) {
                 console.error('Delete failed for', item._deleteKey, err);
                 failCount++;
@@ -238,24 +251,31 @@ const ResultsAI = () => {
         const deletedCandidateIds = new Set(items.filter(i => i._type === 'candidate').map(i => i.id));
         const deletedAssessmentKeys = new Set(items.filter(i => i._type === 'ai_assessment').map(i => i.submission_id));
 
-        setResumeResults(prev => prev.filter(r => !deletedCandidateIds.has(r.id)));
-        setAiInterviews(prev => prev.filter(r => !deletedCandidateIds.has(r.id)));
-        setAiAssessments(prev => prev.filter(r => !deletedAssessmentKeys.has(r.submission_id)));
-        setSelected(prev => { const s = new Set(prev); ids.forEach(k => s.delete(k)); return s; });
+        // Only remove from UI if it was actually deleted (not just requested)
         setDeletingIds(prev => { const s = new Set(prev); ids.forEach(k => s.delete(k)); return s; });
 
-        if (successCount > 0 && failCount === 0) showToast('success', `${successCount} result${successCount > 1 ? 's' : ''} deleted.`);
-        else if (failCount > 0) showToast('error', `${failCount} deletion(s) failed.`);
+        if (requestMessage) {
+            showToast('info', requestMessage);
+        } else if (successCount > 0 && failCount === 0) {
+            setResumeResults(prev => prev.filter(r => !deletedCandidateIds.has(r.id)));
+            setAiInterviews(prev => prev.filter(r => !deletedCandidateIds.has(r.id)));
+            setAiAssessments(prev => prev.filter(r => !deletedAssessmentKeys.has(r.submission_id)));
+            setSelected(prev => { const s = new Set(prev); ids.forEach(k => s.delete(k)); return s; });
+            showToast('success', `${successCount} result${successCount > 1 ? 's' : ''} deleted.`);
+        } else if (failCount > 0) {
+            showToast('error', `${failCount} deletion(s) failed.`);
+        }
     };
 
-    const confirmAndDelete = async () => {
+    const confirmAndDelete = async (reason) => {
         if (!confirmDelete) return;
         const items = confirmDelete.items;
         setConfirmDelete(null);
-        await performDelete(items);
+        await performDelete(items, reason);
     };
 
     const selectedItems = currentRows.filter(r => selected.has(r._deleteKey));
+
     const selectedCount = selectedItems.length;
 
     const handleRoleClick = (roleName) => {
@@ -299,20 +319,44 @@ const ResultsAI = () => {
                     <div className="glass-modal-content" style={{ padding: '2.5rem', maxWidth: '420px', width: '90%', textAlign: 'center' }}>
                         <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🗑️</div>
                         <h2 style={{ fontSize: '1.4rem', fontWeight: '800', color: '#111827', marginBottom: '0.5rem' }}>
-                            Delete {confirmDelete.items.length > 1 ? `${confirmDelete.items.length} Results` : 'Result'}?
+                            {confirmDelete.items.length > 1 ? `Delete ${confirmDelete.items.length} Results` : 'Delete Result'}?
                         </h2>
-                        <p style={{ color: '#475569', marginBottom: '1.75rem', lineHeight: '1.6', fontSize: '0.95rem' }}>
+                        <p style={{ color: '#475569', marginBottom: '1.25rem', lineHeight: '1.6', fontSize: '0.95rem' }}>
                             {confirmDelete.items.length === 1
-                                ? <>This will permanently delete the result for <strong>{confirmDelete.items[0].full_name || confirmDelete.items[0].candidate?.name || 'this candidate'}</strong>.</>
-                                : <>This will permanently delete <strong>{confirmDelete.items.length} selected results</strong>. This action cannot be undone.</>}
+                                ? <>This will initiate a deletion request for <strong>{confirmDelete.items[0].full_name || confirmDelete.items[0].candidate?.name || 'this candidate'}</strong>.</>
+                                : <>This will initiate a deletion request for <strong>{confirmDelete.items.length} selected results</strong>.</>}
                         </p>
+                        
+                        <div style={{ marginBottom: '1.5rem', textAlign: 'left' }}>
+                            <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#64748b', display: 'block', marginBottom: '0.5rem' }}>Reason for Deletion (Required)</label>
+                            <textarea 
+                                id="delete-reason-input"
+                                style={{ width: '100%', borderRadius: '8px', border: '1px solid #e2e8f0', padding: '0.75rem', fontSize: '0.9rem', minHeight: '80px', fontFamily: 'inherit' }}
+                                placeholder="Please provide a valid reason..."
+                                required
+                            />
+                        </div>
+
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
                             <button onClick={cancelDelete} style={{ padding: '0.7rem 1.5rem', border: '1px solid #cbd5e1', borderRadius: '12px', background: 'white', cursor: 'pointer', fontWeight: '700' }}>Cancel</button>
-                            <button onClick={confirmAndDelete} style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '12px', background: '#EF4444', color: 'white', cursor: 'pointer', fontWeight: '700' }}>Delete</button>
+                            <button 
+                                onClick={() => {
+                                    const reason = document.getElementById('delete-reason-input')?.value;
+                                    if (!reason || reason.trim().length < 5) {
+                                        alert("Please provide a meaningful reason (at least 5 characters).");
+                                        return;
+                                    }
+                                    confirmAndDelete(reason);
+                                }} 
+                                style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '12px', background: '#EF4444', color: 'white', cursor: 'pointer', fontWeight: '700' }}
+                            >
+                                Submit Request
+                            </button>
                         </div>
                     </div>
                 </div>
             )}
+
 
             {summaryModal && (
                 <div className="glass-modal-overlay">
@@ -467,7 +511,7 @@ const ResultsAI = () => {
                                                 <th>Result Data</th>
                                                 <th>Date</th>
                                                 <th>AI Status</th>
-                                                <th style={{ textAlign: 'center' }}>Actions</th>
+                                                {canDelete && <th style={{ textAlign: 'center' }}>Actions</th>}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -501,14 +545,16 @@ const ResultsAI = () => {
                                                                 {getStatusLabel(r.status)}
                                                             </span>
                                                         </td>
-                                                        <td style={{ textAlign: 'center' }}>
-                                                            <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
-                                                                {activeTab !== 'resume' && (
-                                                                    <button onClick={() => activeTab === 'assessment' ? navigate(`/ai-assessments/${r.assessment?.id}?tab=submissions`) : setSummaryModal(r)} style={{ padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', background: 'white', cursor: 'pointer', fontSize: '0.8rem' }}>Review</button>
-                                                                )}
-                                                                <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
-                                                            </div>
-                                                        </td>
+                                                        {canDelete && (
+                                                            <td style={{ textAlign: 'center' }}>
+                                                                <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center' }}>
+                                                                    {activeTab !== 'resume' && (
+                                                                        <button onClick={() => activeTab === 'assessment' ? navigate(`/ai-assessments/${r.assessment?.id}?tab=submissions`) : setSummaryModal(r)} style={{ padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #e2e8f0', background: 'white', cursor: 'pointer', fontSize: '0.8rem' }}>Review</button>
+                                                                    )}
+                                                                    <RowDeleteBtn item={r} isDeleting={isDeleting} onDelete={() => requestDelete([r])} />
+                                                                </div>
+                                                            </td>
+                                                        )}
                                                     </tr>
                                                 );
                                             })}

@@ -294,6 +294,7 @@ export default function Result() {
                                     <th>Final Score</th>
                                     <th>Integrity Score</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -340,6 +341,47 @@ export default function Result() {
                                             <span className={`pill ${r.status === 'selected' ? 'ok' : 'bad'}`}>
                                                 {r.status === 'selected' ? 'Qualified' : 'Not Qualified'}
                                             </span>
+                                        </td>
+                                        <td>
+                                            <button
+                                                className="btn-red"
+                                                style={{ padding: '4px 8px', fontSize: '0.75rem', borderRadius: '4px' }}
+                                                onClick={async () => {
+                                                    const role = JSON.parse(localStorage.getItem('user'))?.role;
+                                                    const isAdmin = role === 'company_admin' || role === 'application_admin';
+
+                                                    if (isAdmin) {
+                                                        if (window.confirm("CRITICAL: Once you delete, you cannot restore. Proceed?")) {
+                                                            try {
+                                                                await axios.delete(`${API_BASE_URL}/submissions/${r.submission_id}/`, {
+                                                                    data: { confirm_permanent_delete: true }
+                                                                });
+                                                                alert("Deleted successfully.");
+                                                                load();
+                                                            } catch (err) {
+                                                                alert("Failed to delete.");
+                                                            }
+                                                        }
+                                                    } else {
+                                                        const reason = prompt("Enter reason for deletion request:");
+                                                        if (reason) {
+                                                            try {
+                                                                const res = await axios.delete(`${API_BASE_URL}/submissions/${r.submission_id}/`, {
+                                                                    data: { reason }
+                                                                });
+                                                                alert(res.data.message);
+                                                                if (res.data.request_pending) {
+                                                                    navigate('/settings');
+                                                                }
+                                                            } catch (err) {
+                                                                alert(err.response?.data?.error || "Failed to request deletion.");
+                                                            }
+                                                        }
+                                                    }
+                                                }}
+                                            >
+                                                {JSON.parse(localStorage.getItem('user'))?.role === 'company_admin' ? 'Delete' : 'Request Delete'}
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}

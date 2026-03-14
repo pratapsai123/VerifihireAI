@@ -38,6 +38,18 @@ class Candidate(models.Model):
     total_questions = models.IntegerField(default=0)
     submission_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    # Ownership Tracking for RBAC
+    user_profile = models.ForeignKey(
+        'api.UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='ai_candidates',
+        help_text="The user who created/owns this candidate record"
+    )
+
+    is_deleted = models.BooleanField(default=False)
     completed_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview was completed")
     link_opened_at = models.DateTimeField(blank=True, null=True, help_text="Timestamp when interview link was first opened")
     interview_summary = models.JSONField(default=list, blank=True, help_text="Stores per-question AI feedback and scores")

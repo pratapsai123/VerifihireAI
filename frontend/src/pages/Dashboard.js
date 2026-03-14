@@ -16,7 +16,8 @@ import {
   PlusCircle,
   ChevronRight,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Settings as SettingsIcon
 } from 'lucide-react';
 import {
   XAxis,
@@ -113,8 +114,21 @@ const Dashboard = () => {
   });
 
 
+  const [pendingCount, setPendingCount] = useState(0);
+
   useEffect(() => {
+    const fetchPendingCount = async () => {
+      try {
+        const res = await axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`);
+        setPendingCount(res.data.count || 0);
+      } catch (err) {
+        console.error("Failed to fetch pending deletion count");
+      }
+    };
+    fetchPendingCount();
+    
     const fetchData = async () => {
+
       try {
         const [resultsRes, candidatesRes, interviewsRes, aiAssessmentsRes, customAssessmentsRes, aiCandidatesRes] = await Promise.all([
           axios.get(`${API_BASE_URL}/results/`),
@@ -290,6 +304,12 @@ const Dashboard = () => {
     },
     { icon: Users, label: 'Candidates', path: '/candidates' },
     { icon: BarChart3, label: 'Reports', path: '/results' },
+    { 
+      icon: SettingsIcon, 
+      label: 'Settings', 
+      path: '/setting', 
+      badge: pendingCount > 0 ? pendingCount : null 
+    },
     { icon: PlusCircle, label: 'Create Role', onClick: () => setIsRoleModalOpen(true), style: { color: '#6366f1', fontWeight: 700 } },
   ];
 
@@ -337,6 +357,19 @@ const Dashboard = () => {
                 <div className="nav-item-content" style={item.style}>
                   <item.icon size={20} />
                   <span>{item.label}</span>
+                  {item.badge && (
+                    <span style={{
+                      marginLeft: 'auto',
+                      backgroundColor: '#ef4444',
+                      color: 'white',
+                      fontSize: '10px',
+                      padding: '2px 6px',
+                      borderRadius: '10px',
+                      fontWeight: 'bold'
+                    }} title={`${item.badge} pending requests`}>
+                      {item.badge}
+                    </span>
+                  )}
                 </div>
                 {item.subItems && !isSidebarCollapsed && (
                   expandedItem === item.label ? <ChevronUp size={16} /> : <ChevronDown size={16} />

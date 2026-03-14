@@ -1,4 +1,4 @@
-﻿from ._imports import *
+from ._imports import *
 
 
 @csrf_exempt
@@ -1556,7 +1556,19 @@ def results_overview_view(request):
         company_id = user_profile.company_id if user_profile and user_profile.company else None
 
         if company_id:
-            qs = CandidateSubmission.objects.filter(invitation__assessment__user_profile__company_id=company_id).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if scoped_ids is None:
+                # Application Admin: all results across the company
+                qs = CandidateSubmission.objects.filter(
+                    invitation__assessment__user_profile__company_id=company_id,
+                    is_deleted=False
+                ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
+            else:
+                # Role-scoped: only results for assessments in this user's hierarchy
+                qs = CandidateSubmission.objects.filter(
+                    invitation__assessment__user_profile_id__in=scoped_ids,
+                    is_deleted=False
+                ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
         else:
             qs = CandidateSubmission.objects.none()
 
@@ -1627,10 +1639,55 @@ def results_overview_view(request):
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while fetching results: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+@method_decorator(csrf_exempt, name='dispatch')
 class CandidateSubmissionDeleteView(generics.DestroyAPIView):
-    queryset = CandidateSubmission.objects.all()
-    # serializer_class not strictly required for DestroyAPIView
-    permission_classes = [AllowAny] # Or IsAuthenticated depending on requirements, kept open for now matching results view
+    """
+    Deletes a candidate submission.
+    SECURED: Requires authentication and strictly scopes deletion to the user's company hierarchy.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        user_profile = getattr(user, 'profile', None)
+        if not user_profile:
+            return CandidateSubmission.objects.none()
+
+        scoped_ids = get_scoped_user_ids(user_profile)
+
+        if scoped_ids is None:
+            # Application Admin: can delete any submission across all companies
+            return CandidateSubmission.objects.all()
+
+        # Company-scoped users: can only delete submissions for assessments 
+        # created by someone within their allowed hierarchy
+        return CandidateSubmission.objects.filter(
+            invitation__assessment__user_profile_id__in=scoped_ids
+        )
+
+    def destroy(self, request, *args, **kwargs):
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile or not user_profile.company:
+            return super().destroy(request, *args, **kwargs)
+
+        instance = self.get_object()
+        
+        # Use centralized helper to handle policy and workflow
+        response, handled = handle_deletion_request(
+            user_profile=user_profile,
+            company=user_profile.company,
+            content_type='CandidateSubmission',
+            object_id=instance.id,
+            object_repr=f"Submission for {instance.invitation.email}",
+            reason=request.data.get('reason')
+        )
+        
+        if handled:
+            return response
+
+        # If not handled by helper (e.g. Superadmin), perform direct deletion
+        return super().destroy(request, *args, **kwargs)
+
 
 
 @csrf_exempt
@@ -1693,9 +1750,19 @@ def candidates_overview_view(request):
         company_id = user_profile.company_id if user_profile and user_profile.company else None
 
         assessment_id = request.GET.get('assessment_id', None)
-        
+
         if company_id:
-            qs = CandidateInvitation.objects.filter(assessment__user_profile__company_id=company_id).select_related('assessment').order_by('-created_at')
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if scoped_ids is None:
+                # Application Admin: all candidates across the company
+                qs = CandidateInvitation.objects.filter(
+                    assessment__user_profile__company_id=company_id
+                ).select_related('assessment').order_by('-created_at')
+            else:
+                # Role-scoped: only candidates for assessments in this user's hierarchy
+                qs = CandidateInvitation.objects.filter(
+                    assessment__user_profile_id__in=scoped_ids
+                ).select_related('assessment').order_by('-created_at')
         else:
             qs = CandidateInvitation.objects.none()
 
@@ -1749,7 +1816,14 @@ def candidates_overview_view(request):
         # Merge results from Resume Matcher (ai_candidates) if no assessment filter is applied
         if not assessment_id:
             try:
-                ai_qs = Candidate.objects.all().order_by('-submission_date')
+                # SECURITY FIX: Scope AI candidates to the requester's company only
+                # The `company` FK already exists on Candidate model (migration 0020)
+                if company_id:
+                    ai_qs = Candidate.objects.filter(
+                        company_id=company_id
+                    ).order_by('-submission_date')
+                else:
+                    ai_qs = Candidate.objects.none()
                 if start_date:
                     ai_qs = ai_qs.filter(submission_date__date__gte=start_date)
                 if end_date:

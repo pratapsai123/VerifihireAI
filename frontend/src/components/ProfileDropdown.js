@@ -1,5 +1,8 @@
 import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { API_BASE_URL } from '../apiConfig';
+
 
 // ProfileDropdown Styles - All in one file
 const profileStyles = {
@@ -104,6 +107,8 @@ function ProfileDropdown() {
   const [profileOpen, setProfileOpen] = useState(false);
   const profileMenuRef = useRef(null);
 
+  const [pendingCount, setPendingCount] = useState(0);
+
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
@@ -113,7 +118,18 @@ function ProfileDropdown() {
         // ignore parse errors
       }
     }
+
+    const fetchPendingCount = async () => {
+        try {
+            const res = await axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`);
+            setPendingCount(res.data.count || 0);
+        } catch (err) {
+            console.error("Failed to fetch pending count");
+        }
+    };
+    fetchPendingCount();
   }, []);
+
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -211,7 +227,26 @@ function ProfileDropdown() {
               <path d="M8 1v2M8 13v2M15 8h-2M3 8H1M13.364 2.636l-1.414 1.414M4.05 11.95l-1.414 1.414M13.364 13.364l-1.414-1.414M4.05 4.05L2.636 2.636" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round"/>
             </svg>
             Setting Options
+            {pendingCount > 0 && (
+              <span style={{
+                marginLeft: 'auto',
+                backgroundColor: '#ef4444',
+                color: 'white',
+                minWidth: '16px',
+                height: '16px',
+                borderRadius: '8px',
+                fontSize: '10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0 4px',
+                fontWeight: 'bold'
+              }}>
+                {pendingCount}
+              </span>
+            )}
           </a>
+
           <a href="/my-account/" style={profileStyles.profileDropdownItem}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
               <circle cx="8" cy="5" r="2.5" fill="#2563eb"/>
