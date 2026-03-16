@@ -39,6 +39,12 @@ class Assessment(models.Model):
         blank=True
     )
     is_deleted = models.BooleanField(default=False)
+    assigned_interviewers = models.ManyToManyField(
+        'api.UserProfile',
+        blank=True,
+        related_name='ai_assigned_assessments',
+        help_text="Interviewers assigned to conduct live interviews for this AI assessment"
+    )
 
     def __str__(self):
         return f"Assessment for {self.required_skills} - {self.total_points} pts"

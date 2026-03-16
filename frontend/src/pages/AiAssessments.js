@@ -22,7 +22,7 @@ const AiAssessments = () => {
     
     // User role check
     const userData = JSON.parse(localStorage.getItem('user') || '{}');
-    const isCompanyAdmin = userData?.role === 'ROLE_COMPANY_ADMIN';
+    const isCompanyAdmin = userData?.role === 'company_admin';
 
     useEffect(() => {
         const fetchAssessments = async () => {

@@ -316,6 +316,7 @@ export default function TeamMembers() {
                       <option value="company_admin">company_admin</option>
                       <option value="hr_manager">hr_manager</option>
                       <option value="hr">hr</option>
+                      <option value="interviewer">interviewer</option>
                       <option value="candidate">candidate</option>
                       {data.scope === 'all' ? <option value="application_admin">application_admin</option> : null}
                     </select>
@@ -373,6 +374,7 @@ export default function TeamMembers() {
                         <option value="">All Invite Roles</option>
                         <option value="hr">hr</option>
                         <option value="hr_manager">hr_manager</option>
+                        <option value="interviewer">interviewer</option>
                       </select>
                     </div>
                   </div>
@@ -387,7 +389,7 @@ export default function TeamMembers() {
               <div style={{ marginTop: 16, background: '#fff', borderRadius: 12, padding: 16, border: '1px solid #e5e7eb' }}>
                 <h3 style={{ marginBottom: 12 }}>Invite a Team Member</h3>
                 <div style={{ fontSize: 13, color: '#374151', marginBottom: 12 }}>
-                  Company Admin can invite <strong>HR Manager</strong> and <strong>HR</strong>. HR Manager can invite only <strong>HR</strong>.
+                  Company Admin can invite <strong>HR Manager</strong>, <strong>HR</strong> and <strong>Interviewer</strong>. HR Manager can invite <strong>HR</strong> and <strong>Interviewer</strong>.
                 </div>
                 <form onSubmit={handleInvite} style={{ display: 'grid', gap: 12, maxWidth: 520 }}>
                   <div style={{ marginBottom: '0.5rem' }}>
@@ -408,12 +410,12 @@ export default function TeamMembers() {
                       className="auth-input"
                       value={inviteRole}
                       onChange={(e) => setInviteRole(e.target.value)}
-                      disabled={inviting || myRole === 'hr_manager'}
-                      title={myRole === 'hr_manager' ? 'HR Manager can only invite HR' : ''}
+                      disabled={inviting}
                       style={{ marginBottom: 0 }}
                     >
                       <option value="hr">HR</option>
                       <option value="hr_manager">HR Manager</option>
+                      <option value="interviewer">Interviewer</option>
                     </select>
                     {fieldErrors.role && (
                       <div className="field-error-text" style={{ marginTop: '0.2rem', marginBottom: '0.5rem' }}>{fieldErrors.role}</div>

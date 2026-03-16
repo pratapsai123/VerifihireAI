@@ -14,7 +14,7 @@ from django.db import models
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 import uuid
 from .models import Assessment, AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
 from ai_candidates.views import extract_json
@@ -1223,6 +1223,10 @@ class AssessmentDetailView(APIView):
                 "share_token": str(assessment.share_token),
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None,
+                "assigned_interviewers": [
+                    {"id": i.id, "name": f"{i.first_name or ''} {i.last_name or ''}".strip() or i.email, "email": i.email, "role": i.role}
+                    for i in assessment.assigned_interviewers.all()
+                ],
                 "submissions": submission_data
             }
             return Response(data, status=status.HTTP_200_OK)
@@ -1625,3 +1629,38 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
             return response
 
         return self.destroy(request, *args, **kwargs)
+
+class AIAssessmentAssignmentView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request, pk):
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile or user_profile.role not in ['company_admin', 'hr_manager', 'ROLE_COMPANY_ADMIN', 'ROLE_HR_MANAGER']:
+            return Response({"error": "Unauthorized"}, status=403)
+            
+        try:
+            assessment = Assessment.objects.get(pk=pk, company=user_profile.company)
+            interviewer_ids = request.data.get('interviewer_ids', [])
+            
+            interviewers = UserProfile.objects.filter(id__in=interviewer_ids, company=user_profile.company)
+            assessment.assigned_interviewers.set(interviewers)
+            
+            return Response({"message": "Interviewers assigned successfully"})
+        except Assessment.DoesNotExist:
+            return Response({"error": "Assessment not found"}, status=404)
+
+class AIAssessmentAvailableInterviewersView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, pk):
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile or not user_profile.company:
+            return Response({"error": "Unauthorized"}, status=403)
+            
+        # exclude candidates
+        members = UserProfile.objects.filter(company=user_profile.company).exclude(role__in=['candidate', 'ROLE_CANDIDATE'])
+        data = [
+            {"id": m.id, "name": f"{m.first_name or ''} {m.last_name or ''}".strip() or m.email, "email": m.email, "role": m.role}
+            for m in members
+        ]
+        return Response(data)

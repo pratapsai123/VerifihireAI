@@ -40,6 +40,8 @@ import ResultsAI from './pages/ResultsAI';
 import FeedbackPage from './pages/FeedbackPage';
 import FeedbackDetails from './pages/FeedbackDetails';
 import Settings from './pages/Settings';
+import BookInterview from './pages/BookInterview';
+import AvailabilityManagement from './pages/AvailabilityManagement';
 import ProtectedRoute from './components/ProtectedRoute';
 import './App.css';
 
@@ -113,6 +115,7 @@ function AppContent() {
     location.pathname.startsWith('/take-assessment/') ||
     location.pathname.startsWith('/take-ai-assessment/') ||
     location.pathname.startsWith('/ai-interview-session/') ||
+    location.pathname.startsWith('/book-interview/') ||
     location.pathname.startsWith('/result/') ||
     location.pathname.endsWith('/attempt');
 
@@ -159,6 +162,7 @@ function AppContent() {
             <Route path="/results" element={<Result />} />
             <Route path="/setting" element={<Settings />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/manage-availability" element={<AvailabilityManagement />} />
           </Route>
 
           {/* Public / Candidate Routes */}
@@ -172,6 +176,7 @@ function AppContent() {
           <Route path="/interview-start/:token" element={<InterviewStart />} />
           <Route path="/take-ai-assessment/:token" element={<AiTakeAssessment />} />
           <Route path="/ai-interview-session/:token" element={<AiInterviewSession />} />
+          <Route path="/book-interview/:token" element={<BookInterview />} />
         </Routes>
 
         {/* Cookie Consent Banner */}

@@ -1,5 +1,6 @@
 from ._imports import *
 from ._imports import _db_call_with_retry
+from api.utils.slot_utils import generate_slots_for_interviewer
 
 
 
@@ -1444,6 +1445,7 @@ def create_assessment_view(request):
         min_objective_pass_percentage = float(request.data.get('min_objective_pass_percentage') or 0.0)
         weightage_objective = int(request.data.get('weightage_objective') or 0)
         weightage_coding = int(request.data.get('weightage_coding') or 100)
+        assigned_interviewer_ids = request.data.get('assigned_interviewer_ids', [])
 
         # Use the custom_assessment's user_profile, fall back to the requesting user's profile
         # This ensures the Assessment is always linked to a company (for dashboard filtering)
@@ -1578,6 +1580,22 @@ def create_assessment_view(request):
                     )
                 )
             AssessmentCodingQuestion.objects.bulk_create(coding_snapshots)
+
+        # Once finalized, auto-generate slots for assigned interviewers if any
+        if assigned_interviewer_ids:
+            assessment.assigned_interviewers.set(assigned_interviewer_ids)
+            
+            # Trigger slot generation for next 7 days
+            try:
+                start_date = timezone.now().date()
+                for interviewer_id in assigned_interviewer_ids:
+                    try:
+                        interviewer = UserProfile.objects.get(id=interviewer_id)
+                        generate_slots_for_interviewer(interviewer, start_date, 7)
+                    except UserProfile.DoesNotExist:
+                        continue
+            except Exception as e:
+                print(f"Error auto-generating slots during create_assessment: {str(e)}")
 
         return Response(
             {

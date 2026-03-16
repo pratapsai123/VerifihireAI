@@ -76,6 +76,19 @@ const Dashboard = () => {
   const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
   const [roleFormData, setRoleFormData] = useState({ title: '', description: '' });
   const [isSubmittingRole, setIsSubmittingRole] = useState(false);
+  const [userRole, setUserRole] = useState('');
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const u = JSON.parse(storedUser);
+        setUserRole(u.role || '');
+      } catch (err) {
+        console.error("Error parsing user data");
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (isSidebarCollapsed) {
@@ -266,12 +279,13 @@ const Dashboard = () => {
     }
   };
 
-  const navItems = [
+  const allNavItems = [
     { icon: LayoutDashboard, label: 'Dashboard', active: true, path: '/dashboard' },
     {
       icon: FileText,
       label: 'Assessments',
       path: '#',
+      role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
       subItems: [
         { label: 'Assessments List', path: '/assessments' },
         { label: 'AI Assessments', path: '/ai-assessments' },
@@ -287,14 +301,16 @@ const Dashboard = () => {
           label: 'Live Interview',
           path: '#',
           nestedItems: [
-            { label: 'Send Invite', path: '/send-invite' },
+            { label: 'Send Invite', path: '/send-invite', role: ['company_admin', 'hr_manager', 'hr'] },
             { label: 'Join Room', path: '/live-interview-list' },
-            { label: 'Interview List', path: '/live-interview-list' }
+            { label: 'Interview List', path: '/live-interview-list' },
+            { label: 'Manage Availability', path: '/manage-availability' }
           ]
         },
         {
           label: 'AI Interview',
           path: '#',
+          role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
           nestedItems: [
             { label: 'Start Session', path: '/ai-interview' },
             { label: 'Result', path: '/results-ai' }
@@ -302,16 +318,38 @@ const Dashboard = () => {
         }
       ]
     },
-    { icon: Users, label: 'Candidates', path: '/candidates' },
-    { icon: BarChart3, label: 'Reports', path: '/results' },
+    { icon: Users, label: 'Candidates', path: '/candidates', role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
+    { icon: BarChart3, label: 'Reports', path: '/results', role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
     { 
       icon: SettingsIcon, 
       label: 'Settings', 
       path: '/setting', 
+      role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
       badge: pendingCount > 0 ? pendingCount : null 
     },
-    { icon: PlusCircle, label: 'Create Role', onClick: () => setIsRoleModalOpen(true), style: { color: '#6366f1', fontWeight: 700 } },
+    { icon: PlusCircle, label: 'Create Role', onClick: () => setIsRoleModalOpen(true), style: { color: '#6366f1', fontWeight: 700 }, role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
   ];
+
+  const navItems = allNavItems.filter(item => {
+    if (!item.role) return true;
+    return item.role.includes(userRole);
+  }).map(item => {
+    if (item.subItems) {
+      return {
+        ...item,
+        subItems: item.subItems.filter(sub => !sub.role || sub.role.includes(userRole)).map(sub => {
+          if (sub.nestedItems) {
+            return {
+              ...sub,
+              nestedItems: sub.nestedItems.filter(nested => !nested.role || nested.role.includes(userRole))
+            };
+          }
+          return sub;
+        })
+      };
+    }
+    return item;
+  });
 
 
   if (loading) {
@@ -481,248 +519,296 @@ const Dashboard = () => {
           </div>
           <div className="topbar-right">
             <div className="topbar-actions">
+              <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 500 }}>
+                Role: <span style={{ color: '#6366f1', textTransform: 'capitalize' }}>{userRole.replace('_', ' ')}</span>
+              </span>
             </div>
           </div>
         </header>
 
         <div className="dashboard-body">
-          {/* Top Row: Core Modules */}
-          <div className="dashboard-grid">
-            {/* AI-Powered Assessment */}
-            <div className="glass-card">
-              <div className="card-header">
-                <div className="card-icon" style={{ background: '#e0e7ff', color: '#4338ca' }}>
-                  <Brain size={20} />
+          {userRole === 'interviewer' ? (
+            <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+              {/* Availability Management for Interviewer */}
+              <div className="glass-card" style={{ minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
+                <div className="card-icon" style={{ background: '#e0e7ff', color: '#4338ca', width: '60px', height: '60px', marginBottom: '1.5rem' }}>
+                  <Clock size={32} />
                 </div>
-                <h3>AI Assessments</h3>
+                <h2 style={{ marginBottom: '1rem' }}>Manage Availability</h2>
+                <p style={{ color: '#64748b', marginBottom: '2rem', maxWidth: '400px' }}>
+                  Set your preferred working hours and 50-minute slots. Candidates will be able to book sessions during these times.
+                </p>
+                <button 
+                  className="btn-premium btn-fill" 
+                  style={{ padding: '1rem 2rem', fontSize: '1rem' }}
+                  onClick={() => navigate('/manage-availability')}
+                >
+                  Configure Slots
+                </button>
               </div>
-              <div className="card-stat-row">
-                <div className="stat-item">
-                  <span className="stat-label">Active Assessments</span>
-                  <span className="stat-value">{data.stats.activeTestsAi}</span>
+
+              {/* Live Interviews for Interviewer */}
+              <div className="glass-card" style={{ minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
+                <div className="card-icon" style={{ background: '#dcfce7', color: '#16a34a', width: '60px', height: '60px', marginBottom: '1.5rem' }}>
+                  <Video size={32} />
                 </div>
-              </div>
-              <div className="card-visual" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
-                <div className="progress-item" style={{ width: '100%' }}>
-                  <div className="progress-label-row"><span>Active Assessments</span><span>{data.stats.activeTestsAi}</span></div>
-                  <div className="progress-bar-bg"><div className="progress-bar-fill" style={{ width: `${Math.min(data.stats.activeTestsAi * 10, 100)}%`, background: '#6366f1' }}></div></div>
+                <h2 style={{ marginBottom: '1rem' }}>Join Interviews</h2>
+                <p style={{ color: '#64748b', marginBottom: '2rem', maxWidth: '400px' }}>
+                  View your upcoming scheduled sessions and join live technical interviews with candidates.
+                </p>
+                <div style={{ display: 'flex', gap: '1rem' }}>
+                  <button 
+                    className="btn-premium btn-fill" 
+                    style={{ padding: '1rem 2rem', fontSize: '1rem' }}
+                    onClick={() => navigate('/live-interview-list')}
+                  >
+                    View Schedule
+                  </button>
                 </div>
-              </div>
-              <div className="card-actions three-cols">
-                <button className="btn-premium btn-fill" onClick={() => navigate('/ai-assessments')}>Assessments</button>
-                <button className="btn-premium btn-outline" onClick={() => navigate('/create-assessment')}>Create</button>
-                <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=assessment')}>Results</button>
               </div>
             </div>
-
-            {/* Custom Assessment */}
-            <div className="glass-card">
-              <div className="card-header">
-                <div className="card-icon" style={{ background: '#f3e8ff', color: '#9333ea' }}>
-                  <SearchCode size={20} />
-                </div>
-                <h3>Custom Assessments</h3>
-              </div>
-              <div className="card-stat-row">
-                <div className="stat-item">
-                  <span className="stat-label">Active Custom Tests</span>
-                  <span className="stat-value">{data.stats.activeTestsCustom}</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-label">Average Score</span>
-                  <span className="stat-value">{data.stats.avgScoreCustom}%</span>
-                </div>
-              </div>
-              <div className="card-visual" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
-                <div className="progress-item" style={{ width: '100%' }}>
-                  <div className="progress-label-row"><span>Active Assessments</span><span>{data.stats.activeTestsCustom}</span></div>
-                  <div className="progress-bar-bg"><div className="progress-bar-fill" style={{ width: `${Math.min(data.stats.activeTestsCustom * 10, 100)}%`, background: '#6366f1' }}></div></div>
-                </div>
-              </div>
-              <div className="card-actions">
-                <button className="btn-premium btn-fill" onClick={() => navigate('/custom-assessment')}>Question Cart</button>
-                <button className="btn-premium btn-outline" onClick={() => navigate('/coding')}>Coding</button>
-              </div>
-            </div>
-
-            {/* Resume Screening */}
-            <div className="glass-card">
-              <div className="card-header">
-                <div className="card-icon" style={{ background: '#e0f2fe', color: '#0284c7' }}>
-                  <FileText size={20} />
-                </div>
-                <h3>Resume Screening</h3>
-              </div>
-              <div className="card-stat-row">
-                <div className="stat-item">
-                  <span className="stat-label">Resumes Analyzed Today</span>
-                  <span className="stat-value">{data.stats.resumesToday}</span>
-                </div>
-              </div>
-              <div className="skills-tags" style={{ marginBottom: '1.5rem' }}>
-                <span className="skill-tag">Resume Screening</span>
-                <span className="skill-tag">AI Matching</span>
-                <span className="skill-tag">Candidate Ranking</span>
-              </div>
-              <div className="card-actions">
-                <button className="btn-premium btn-fill" onClick={() => navigate('/resume-matcher')}>Analyze Resumes</button>
-                <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=resume')}>Results</button>
-              </div>
-            </div>
-          </div>
-
-          {/* Middle Row: Interviews */}
-          <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr 1fr 1fr' }}>
-            <div className="glass-card">
-              <div className="card-header">
-                <div className="card-icon" style={{ background: '#fef3c7', color: '#d97706' }}>
-                  <Sparkles size={20} />
-                </div>
-                <h3>AI Interviews</h3>
-              </div>
-              <div className="card-stat-row">
-                <div className="stat-item">
-                  <span className="stat-label">Scheduled Sessions</span>
-                  <span className="stat-value">{data.stats.aiInterviewsCount}</span>
-                </div>
-              </div>
-              <div className="card-actions">
-                <button className="btn-premium btn-fill" onClick={() => navigate('/ai-interview')}>Start Session</button>
-                <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=interview')}>Results</button>
-              </div>
-            </div>
-
-            <div className="glass-card">
-              <div className="card-header">
-                <div className="card-icon" style={{ background: '#dcfce7', color: '#16a34a' }}>
-                  <Video size={20} />
-                </div>
-                <h3>Live Interviews</h3>
-              </div>
-              <div className="card-stat-row">
-                <div className="stat-item">
-                  <span className="stat-label">Upcoming Live Calls</span>
-                  <span className="stat-value">{data.stats.scheduledInterviews}</span>
-                </div>
-              </div>
-              <div className="card-actions">
-                <button className="btn-premium btn-fill" onClick={() => navigate('/send-invite')}>Send Invite</button>
-                <button className="btn-premium btn-outline" onClick={() => navigate('/live-interview-list')}>Join Room</button>
-              </div>
-            </div>
-
-            <div className="glass-card" style={{ justifyContent: 'center', cursor: 'pointer' }} onClick={() => navigate('/results')}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                <div className="card-icon"><BarChart3 size={24} /></div>
-                <div>
-                  <h3 style={{ margin: 0 }}>Results</h3>
-                  <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748b' }}>View selection outcomes</p>
-                </div>
-                <ChevronRight style={{ marginLeft: 'auto', color: '#ccd6e0' }} />
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Row: Detailed Insights */}
-          <div className="dashboard-grid-wide">
-            {/* Candidates Section */}
-            <div className="glass-card">
-              <div className="chart-header">
-                <h3>Candidates</h3>
-              </div>
-              <div className="card-stat-row" style={{ marginBottom: '2rem' }}>
-                <div className="stat-item">
-                  <span className="stat-label">Total Candidates</span>
-                  <span className="stat-value">{data.stats.totalCandidates}</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-label">In Pipeline</span>
-                  <span className="stat-value">{data.stats.inPipeline}</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-label">Hired</span>
-                  <span className="stat-value">{data.stats.hired}</span>
-                </div>
-              </div>
-
-              <div className="candidate-list">
-                <h4 style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '0.5rem' }}>Recent Candidates</h4>
-                {data.recentCandidates.length > 0 ? data.recentCandidates.map((cand, i) => (
-                  <div key={i} className="candidate-row">
-                    <div className="candidate-info">
-                      <div className="candidate-avatar">{cand.name ? cand.name.charAt(0) : '?'}</div>
-                      <div>
-                        <div className="cand-name">{cand.name || 'Anonymous'}</div>
-                        <div className="cand-email">{cand.email}</div>
-                      </div>
+          ) : (
+            <>
+              {/* Top Row: Core Modules */}
+              <div className="dashboard-grid">
+                {/* Resume Screening */}
+                <div className="glass-card">
+                  <div className="card-header">
+                    <div className="card-icon" style={{ background: '#e0f2fe', color: '#0284c7' }}>
+                      <FileText size={20} />
                     </div>
-                    <span className={`status-badge ${cand.status === 'Submitted' || cand.status === 'Completed' ? 'status-hired' : 'status-in-pipeline'}`}>
-                      {cand.status === 'Submitted' || cand.status === 'Completed' ? 'Completed' : 'In Pipeline'}
-                    </span>
+                    <h3>Resume Screening</h3>
                   </div>
-                )) : (
-                  <p style={{ fontSize: '0.85rem', color: '#94a3b8', textAlign: 'center', padding: '2rem' }}>No recent candidates found</p>
-                )}
-              </div>
-            </div>
+                  <div className="card-stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">Resumes Analyzed Today</span>
+                      <span className="stat-value">{data.stats.resumesToday}</span>
+                    </div>
+                  </div>
+                  <div className="skills-tags" style={{ marginBottom: '1.5rem' }}>
+                    <span className="skill-tag">Resume Screening</span>
+                    <span className="skill-tag">AI Matching</span>
+                    <span className="skill-tag">Candidate Ranking</span>
+                  </div>
+                  <div className="card-actions">
+                    <button className="btn-premium btn-fill" onClick={() => navigate('/resume-matcher')}>Analyze Resumes</button>
+                    <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=resume')}>Results</button>
+                  </div>
+                </div>
 
-            {/* Results Chart Section */}
-            <div className="glass-card">
-              <div className="chart-header">
-                <h3>Results</h3>
-                <div className="chart-filters">
-                  <select className="filter-select"><option>Month</option></select>
-                  <select className="filter-select"><option>Analytics</option></select>
+                {/* AI-Powered Assessment */}
+                <div className="glass-card">
+                  <div className="card-header">
+                    <div className="card-icon" style={{ background: '#e0e7ff', color: '#4338ca' }}>
+                      <Brain size={20} />
+                    </div>
+                    <h3>AI Assessments</h3>
+                  </div>
+                  <div className="card-stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">Active Assessments</span>
+                      <span className="stat-value">{data.stats.activeTestsAi}</span>
+                    </div>
+                  </div>
+                  <div className="card-visual" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <div className="progress-item" style={{ width: '100%' }}>
+                      <div className="progress-label-row"><span>Active Assessments</span><span>{data.stats.activeTestsAi}</span></div>
+                      <div className="progress-bar-bg"><div className="progress-bar-fill" style={{ width: `${Math.min(data.stats.activeTestsAi * 10, 100)}%`, background: '#6366f1' }}></div></div>
+                    </div>
+                  </div>
+                  <div className="card-actions three-cols">
+                    <button className="btn-premium btn-fill" onClick={() => navigate('/ai-assessments')}>Assessments</button>
+                    <button className="btn-premium btn-outline" onClick={() => navigate('/create-assessment')}>Create</button>
+                    <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=assessment')}>Results</button>
+                  </div>
+                </div>
+
+                {/* AI Interviews */}
+                <div className="glass-card">
+                  <div className="card-header">
+                    <div className="card-icon" style={{ background: '#fef3c7', color: '#d97706' }}>
+                      <Sparkles size={20} />
+                    </div>
+                    <h3>AI Interviews</h3>
+                  </div>
+                  <div className="card-stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">Scheduled Sessions</span>
+                      <span className="stat-value">{data.stats.aiInterviewsCount}</span>
+                    </div>
+                  </div>
+                  <div className="card-actions">
+                    <button className="btn-premium btn-fill" onClick={() => navigate('/ai-interview')}>Start Session</button>
+                    <button className="btn-premium btn-outline" onClick={() => navigate('/results-ai?tab=interview')}>Results</button>
+                  </div>
                 </div>
               </div>
-              <div className="chart-container">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={data.trendsTotal}>
-                    <defs>
-                      <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
-                        <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                    <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
-                    <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
-                    <Tooltip content={<CustomTooltip />} />
-                    <Area type="monotone" dataKey="value" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
-                  </AreaChart>
-                </ResponsiveContainer>
+
+              {/* Middle Row: Interviews and Custom Assessments */}
+              <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr 1fr 1fr' }}>
+                {/* Custom Assessment */}
+                <div className="glass-card">
+                  <div className="card-header">
+                    <div className="card-icon" style={{ background: '#f3e8ff', color: '#9333ea' }}>
+                      <SearchCode size={20} />
+                    </div>
+                    <h3>Custom Assessments</h3>
+                  </div>
+                  <div className="card-stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">Active Custom Tests</span>
+                      <span className="stat-value">{data.stats.activeTestsCustom}</span>
+                    </div>
+                    <div className="stat-item">
+                      <span className="stat-label">Average Score</span>
+                      <span className="stat-value">{data.stats.avgScoreCustom}%</span>
+                    </div>
+                  </div>
+                  <div className="card-visual" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '0.5rem' }}>
+                    <div className="progress-item" style={{ width: '100%' }}>
+                      <div className="progress-label-row"><span>Active Assessments</span><span>{data.stats.activeTestsCustom}</span></div>
+                      <div className="progress-bar-bg"><div className="progress-bar-fill" style={{ width: `${Math.min(data.stats.activeTestsCustom * 10, 100)}%`, background: '#6366f1' }}></div></div>
+                    </div>
+                  </div>
+                  <div className="card-actions">
+                    <button className="btn-premium btn-fill" onClick={() => navigate('/custom-assessment')}>Question Cart</button>
+                    <button className="btn-premium btn-outline" onClick={() => navigate('/coding')}>Coding</button>
+                  </div>
+                </div>
+
+                <div className="glass-card">
+                  <div className="card-header">
+                    <div className="card-icon" style={{ background: '#dcfce7', color: '#16a34a' }}>
+                      <Video size={20} />
+                    </div>
+                    <h3>Live Interviews</h3>
+                  </div>
+                  <div className="card-stat-row">
+                    <div className="stat-item">
+                      <span className="stat-label">Upcoming Live Calls</span>
+                      <span className="stat-value">{data.stats.scheduledInterviews}</span>
+                    </div>
+                  </div>
+                  <div className="card-actions">
+                    <button className="btn-premium btn-fill" onClick={() => navigate('/send-invite')}>Send Invite</button>
+                    <button className="btn-premium btn-outline" onClick={() => navigate('/live-interview-list')}>Join Room</button>
+                  </div>
+                </div>
+
+                <div className="glass-card" style={{ justifyContent: 'center', cursor: 'pointer' }} onClick={() => navigate('/results')}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <div className="card-icon"><BarChart3 size={24} /></div>
+                    <div>
+                      <h3 style={{ margin: 0 }}>Results</h3>
+                      <p style={{ margin: 0, fontSize: '0.85rem', color: '#64748b' }}>View selection outcomes</p>
+                    </div>
+                    <ChevronRight style={{ marginLeft: 'auto', color: '#ccd6e0' }} />
+                  </div>
+                </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '2rem' }}>
-                <div className="glass-card" style={{ padding: '1rem', background: 'white' }}>
-                  <h4 style={{ fontSize: '0.8rem', margin: '0 0 1rem' }}>Candidate Success Rate</h4>
-                  <ResponsiveContainer width="100%" height={100}>
-                    <BarChart data={data.successRate}>
-                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
-                      <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-                      <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
-                    </BarChart>
+              {/* Bottom Row: Detailed Insights */}
+            <div className="dashboard-grid-wide">
+              {/* Candidates Section */}
+              <div className="glass-card">
+                <div className="chart-header">
+                  <h3>Candidates</h3>
+                </div>
+                <div className="card-stat-row" style={{ marginBottom: '2rem' }}>
+                  <div className="stat-item">
+                    <span className="stat-label">Total Candidates</span>
+                    <span className="stat-value">{data.stats.totalCandidates}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">In Pipeline</span>
+                    <span className="stat-value">{data.stats.inPipeline}</span>
+                  </div>
+                  <div className="stat-item">
+                    <span className="stat-label">Hired</span>
+                    <span className="stat-value">{data.stats.hired}</span>
+                  </div>
+                </div>
+
+                <div className="candidate-list">
+                  <h4 style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '0.5rem' }}>Recent Candidates</h4>
+                  {data.recentCandidates.length > 0 ? data.recentCandidates.map((cand, i) => (
+                    <div key={i} className="candidate-row">
+                      <div className="candidate-info">
+                        <div className="candidate-avatar">{cand.name ? cand.name.charAt(0) : '?'}</div>
+                        <div>
+                          <div className="cand-name">{cand.name || 'Anonymous'}</div>
+                          <div className="cand-email">{cand.email}</div>
+                        </div>
+                      </div>
+                      <span className={`status-badge ${cand.status === 'Submitted' || cand.status === 'Completed' ? 'status-hired' : 'status-in-pipeline'}`}>
+                        {cand.status === 'Submitted' || cand.status === 'Completed' ? 'Completed' : 'In Pipeline'}
+                      </span>
+                    </div>
+                  )) : (
+                    <p style={{ fontSize: '0.85rem', color: '#94a3b8', textAlign: 'center', padding: '2rem' }}>No recent candidates found</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Results Chart Section */}
+              <div className="glass-card">
+                <div className="chart-header">
+                  <h3>Results</h3>
+                  <div className="chart-filters">
+                    <select className="filter-select"><option>Month</option></select>
+                    <select className="filter-select"><option>Analytics</option></select>
+                  </div>
+                </div>
+                <div className="chart-container">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={data.trendsTotal}>
+                      <defs>
+                        <linearGradient id="colorValue" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} />
+                          <stop offset="95%" stopColor="#6366f1" stopOpacity={0} />
+                        </linearGradient>
+                      </defs>
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                      <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                      <YAxis axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 12 }} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <Area type="monotone" dataKey="value" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorValue)" />
+                    </AreaChart>
                   </ResponsiveContainer>
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Selection Today</span>
-                    <span style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 700 }}>{data.stats.hired}</span>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '2rem' }}>
+                  <div className="glass-card" style={{ padding: '1rem', background: 'white' }}>
+                    <h4 style={{ fontSize: '0.8rem', margin: '0 0 1rem' }}>Candidate Success Rate</h4>
+                    <ResponsiveContainer width="100%" height={100}>
+                      <BarChart data={data.successRate}>
+                        <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: '#94a3b8', fontSize: 10 }} />
+                        <Tooltip cursor={{ fill: '#f1f5f9' }} contentStyle={{ borderRadius: '8px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+                        <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
+                      </BarChart>
+                    </ResponsiveContainer>
                   </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Live Interviews</span>
-                    <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.scheduledInterviews}</span>
-                  </div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <span style={{ fontSize: '0.8rem', color: '#64748b' }}>AI Interviews</span>
-                    <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.aiInterviewsCount}</span>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Selection Today</span>
+                      <span style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 700 }}>{data.stats.hired}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Live Interviews</span>
+                      <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.scheduledInterviews}</span>
+                    </div>
+                    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                      <span style={{ fontSize: '0.8rem', color: '#64748b' }}>AI Interviews</span>
+                      <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.aiInterviewsCount}</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </main>
+          </>
+        )}
+      </div>
+    </main>
       {/* Job Role Modal */}
       {isRoleModalOpen && (
         <div

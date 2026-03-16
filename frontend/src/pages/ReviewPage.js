@@ -83,11 +83,11 @@ function ReviewPage() {
     objectiveTime,
     codingTime,
     hasObjectiveCutoff,
-    objPassPercentage,
     objWeight,
     codingWeight,
     removedQuestionIds
   ]);
+
 
   // Initial Data Loading & Restoration
   useEffect(() => {
@@ -1360,8 +1360,7 @@ function ReviewPage() {
             )}
           </div>
 
-          {/* Action Buttons */}
-          <div className="form-actions">
+          <div className="form-actions" style={{ marginTop: '2.5rem', borderTop: '2px solid #f1f5f9', paddingTop: '2rem' }}>
             <button type="button" onClick={handleBack} className="btn btn-secondary">
               Back
             </button>

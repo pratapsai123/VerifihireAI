@@ -19,6 +19,7 @@ from .user_views import (
     accept_invite_view,
     team_members_view,
     profile_view,
+    add_team_member_view,
 )
 
 from .resume_matcher_views import (
@@ -67,6 +68,12 @@ from .live_interview_views import (
     verify_pan_backend_view,
     download_candidate_report_view,
     get_candidate_details_view,
+    generate_all_interviewer_slots_view,
+    get_available_slots_view,
+    reserve_interview_slot_view,
+    confirm_interview_booking_view,
+    get_interviewer_availability_view,
+    manage_interviewer_availability_view,
 )
 from .job_role_views import (
     job_role_list_create_view,

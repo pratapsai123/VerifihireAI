@@ -16,7 +16,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.utils import timezone
 from datetime import timedelta
-from django.db import models, close_old_connections
+from django.db import models, close_old_connections, transaction
 from django.db.utils import OperationalError
 from django.core.mail import EmailMultiAlternatives
 from django.core.files.base import ContentFile
@@ -48,7 +48,11 @@ from ..models import (
     CandidateIntegrity,
     IntegrityScreenshot,
     DeletionRequest,
+    InterviewSlot,
+    InterviewerAvailability,
 )
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from ..ocr_utils import extract_text_from_image
 from ..report_utils import generate_candidate_report
 
@@ -176,36 +180,40 @@ def get_scoped_user_ids(user_profile) -> list:
         return [user_profile.id]
 
     if role == UserProfile.ROLE_HR_MANAGER:
-        reporting_hr_ids = list(
+        # HR Manager: self + HRs + Interviewers where manager=self
+        subordinate_ids = list(
             UserProfile.objects.filter(
                 manager=user_profile,
-                role=UserProfile.ROLE_HR
+                role__in=[UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER]
             ).values_list('id', flat=True)
         )
-        return [user_profile.id] + reporting_hr_ids
+        return [user_profile.id] + subordinate_ids
 
     if role == UserProfile.ROLE_COMPANY_ADMIN:
+        # Company Admin: self + HRMs + HRs + Interviewers
         hrm_ids = list(
             UserProfile.objects.filter(
                 manager=user_profile,
                 role=UserProfile.ROLE_HR_MANAGER,
             ).values_list('id', flat=True)
         )
-        hr_ids = list(
+        # Users managed by HRMs (HRs and Interviewers)
+        sub_under_hrm_ids = list(
             UserProfile.objects.filter(
                 manager_id__in=hrm_ids,
-                role=UserProfile.ROLE_HR,
+                role__in=[UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER],
             ).values_list('id', flat=True)
         ) if hrm_ids else []
         
-        direct_hr_ids = list(
+        # Users managed directly by Admin (HRs and Interviewers)
+        direct_sub_ids = list(
             UserProfile.objects.filter(
                 manager=user_profile,
-                role=UserProfile.ROLE_HR,
+                role__in=[UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER],
             ).values_list('id', flat=True)
         )
 
-        return [user_profile.id] + hrm_ids + hr_ids + direct_hr_ids
+        return [user_profile.id] + hrm_ids + sub_under_hrm_ids + direct_sub_ids
 
     return [user_profile.id]
 

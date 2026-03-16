@@ -33,8 +33,8 @@ def invite_user_view(request):
 
         if not invitee_email:
             return Response({'email': ['Email is required.']}, status=status.HTTP_400_BAD_REQUEST)
-        if role not in {UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR}:
-            return Response({'role': ['Role must be hr_manager or hr.']}, status=status.HTTP_400_BAD_REQUEST)
+        if role not in {UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
+            return Response({'role': ['Role must be hr_manager, hr or interviewer.']}, status=status.HTTP_400_BAD_REQUEST)
 
         inviter = UserProfile.objects.filter(email=inviter_email).select_related('company').first()
         if not inviter or not inviter.company:
@@ -43,8 +43,8 @@ def invite_user_view(request):
         if inviter.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
             return Response({'error': 'You are not allowed to invite users.'}, status=status.HTTP_403_FORBIDDEN)
 
-        if inviter.role == UserProfile.ROLE_HR_MANAGER and role != UserProfile.ROLE_HR:
-            return Response({'error': 'HR Manager can only invite HR users.'}, status=status.HTTP_403_FORBIDDEN)
+        if inviter.role == UserProfile.ROLE_HR_MANAGER and role not in {UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
+            return Response({'error': 'HR Manager can only invite HR or Interviewer users.'}, status=status.HTTP_403_FORBIDDEN)
 
         company = inviter.company
         company_domain = (company.domain or '').strip().lower()
@@ -562,4 +562,110 @@ def profile_view(request):
             } if profile.company else None,
         }, status=status.HTTP_200_OK)
     except Exception as e:
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_team_member_view(request):
+    """
+    Quickly add an interviewer (team member) to the company.
+    Expected body: { "name": "...", "email": "..." }
+    """
+    try:
+        requester_profile = getattr(request.user, 'profile', None)
+        if not requester_profile or not requester_profile.company:
+            return Response({'error': 'Your account has no company assigned.'}, status=status.HTTP_403_FORBIDDEN)
+        
+        if requester_profile.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
+            return Response({'error': 'Only Company Admins and HR Managers can add team members.'}, status=status.HTTP_403_FORBIDDEN)
+
+        name = (request.data.get('name') or '').strip()
+        email = _normalize_email(request.data.get('email', ''))
+
+        if not name or not email:
+            return Response({'error': 'Name and Email are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Domain Validation Logic
+        company = requester_profile.company
+        company_domain = (company.domain or '').strip().lower()
+        
+        if not company_domain:
+            return Response({'error': 'Your company domain is not configured. Please contact support.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        invitee_domain = _email_domain(email)
+        if not invitee_domain:
+            return Response({'error': 'Please provide a valid email address.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 1. Block free email domains
+        if invitee_domain in _free_email_domains():
+            return Response({
+                'error': f'Generic email accounts (like {invitee_domain}) are not allowed for interviewers. Please use an official "{company_domain}" email.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # 2. Enforce strict company domain match
+        if invitee_domain != company_domain:
+            return Response({
+                'error': f'You can only add team members with an official "{company_domain}" email address. "{invitee_domain}" belongs to another organization.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if already exists
+        existing = UserProfile.objects.filter(email=email).first()
+        if existing:
+            if existing.company_id != requester_profile.company_id:
+                return Response({'error': 'A user with this email already exists in another company.'}, status=status.HTTP_409_CONFLICT)
+            
+            return Response({
+                'message': 'User already exists in your team.',
+                'member': {
+                    'id': existing.id,
+                    'first_name': existing.first_name,
+                    'last_name': existing.last_name,
+                    'email': existing.email,
+                    'role': existing.role,
+                }
+            }, status=status.HTTP_200_OK)
+
+        # Create new user
+        name_parts = name.split(' ', 1)
+        first_name = name_parts[0].strip()
+        last_name = name_parts[1].strip() if len(name_parts) > 1 else ''
+
+        # Use a random password as they might not log in yet
+        temp_password = _generate_temp_password(12)
+        user = User.objects.create_user(
+            username=email,
+            email=email,
+            password=temp_password,
+            first_name=first_name,
+            last_name=last_name,
+        )
+
+        new_profile = UserProfile.objects.create(
+            user=user,
+            email=email,
+            first_name=first_name,
+            last_name=last_name or None,
+            role=UserProfile.ROLE_INTERVIEWER,
+            company=requester_profile.company,
+            organization_name=requester_profile.company.name,
+            manager=requester_profile,
+            invited_by_profile=requester_profile,
+            is_approved=True, # Auto-approve team members added by admin
+        )
+
+        return Response({
+            'message': 'Team member added successfully.',
+            'member': {
+                'id': new_profile.id,
+                'first_name': new_profile.first_name,
+                'last_name': new_profile.last_name,
+                'email': new_profile.email,
+                'role': new_profile.role,
+            }
+        }, status=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        import traceback
+        print(f"Error in add_team_member_view: {str(e)}")
+        print(traceback.format_exc())
         return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

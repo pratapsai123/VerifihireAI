@@ -31,9 +31,6 @@ function ManualQuestions() {
       case 'pdf-upload':
         navigate('/pdf-upload-question', { state: navState });
         break;
-      case 'short-answer':
-        navigate('/short-answer-question');
-        break;
       case 'coding-challenge':
         navigate('/coding-challenge-question', { state: navState });
         break;
@@ -142,27 +139,6 @@ function ManualQuestions() {
             </p>
           </div>
 
-          {/* Short Answer */}
-          <div
-            className="question-type-card"
-            onClick={() => handleQuestionTypeClick('short-answer')}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="question-type-icon">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                <polyline points="14 2 14 8 20 8" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                <line x1="16" y1="13" x2="8" y2="13" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" />
-                <line x1="16" y1="17" x2="8" y2="17" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" />
-                <line x1="10" y1="9" x2="8" y2="9" stroke="#ec4899" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            </div>
-            <h3 className="question-type-title">Short Answer</h3>
-            <p className="question-type-description">
-              Create questions requiring brief text responses
-            </p>
-          </div>
-
           {/* Coding Challenge */}
           <div
             className="question-type-card"
@@ -182,6 +158,7 @@ function ManualQuestions() {
             </p>
           </div>
         </div>
+
       </div>
     </div>
   );

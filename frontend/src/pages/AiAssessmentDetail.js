@@ -16,6 +16,11 @@ const AiAssessmentDetail = () => {
     const [activeTab, setActiveTab] = useState(initialTab);
     const [selectedSubmission, setSelectedSubmission] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+    
+    // Interviewer Assignment State
+    const [availableInterviewers, setAvailableInterviewers] = useState([]);
+    const [loadingInterviewers, setLoadingInterviewers] = useState(false);
+    const [assigning, setAssigning] = useState(false);
 
     useEffect(() => {
         const fetchDetail = async () => {
@@ -31,6 +36,48 @@ const AiAssessmentDetail = () => {
         };
         fetchDetail();
     }, [id]);
+
+    useEffect(() => {
+        if (activeTab === 'interviewers') {
+            const fetchAvailable = async () => {
+                setLoadingInterviewers(true);
+                try {
+                    const response = await axios.get(`${API_BASE_URL}/ai/${id}/available-interviewers/`);
+                    setAvailableInterviewers(response.data);
+                } catch (err) {
+                    console.error('Error fetching available interviewers:', err);
+                } finally {
+                    setLoadingInterviewers(false);
+                }
+            };
+            fetchAvailable();
+        }
+    }, [id, activeTab]);
+
+    const handleToggleInterviewer = async (interviewerId) => {
+        const currentlyAssigned = assessment.assigned_interviewers.map(i => i.id);
+        let newIds;
+        if (currentlyAssigned.includes(interviewerId)) {
+            newIds = currentlyAssigned.filter(id => id !== interviewerId);
+        } else {
+            newIds = [...currentlyAssigned, interviewerId];
+        }
+
+        setAssigning(true);
+        try {
+            await axios.post(`${API_BASE_URL}/ai/${id}/assign-interviewers/`, {
+                interviewer_ids: newIds
+            });
+            // Refresh detail to get updated assigned list
+            const resp = await axios.get(`${API_BASE_URL}/ai/${id}/`);
+            setAssessment(resp.data);
+        } catch (err) {
+            console.error('Error assigning interviewer:', err);
+            alert('Failed to update interviewer assignment.');
+        } finally {
+            setAssigning(false);
+        }
+    };
 
     if (loading) return <div className="loading">Loading...</div>;
     if (error) return <div className="error-message">{error}</div>;
@@ -113,6 +160,12 @@ const AiAssessmentDetail = () => {
                             style={{ padding: '1rem 2rem', background: 'none', border: 'none', borderBottom: activeTab === 'submissions' ? '4px solid #4318FF' : 'none', color: activeTab === 'submissions' ? '#1B254B' : '#A3AED0', fontWeight: '700', fontSize: '1.1rem', cursor: 'pointer' }}
                         >
                             Candidate Submissions
+                        </button>
+                        <button
+                            onClick={() => { setActiveTab('interviewers'); setSelectedSubmission(null); }}
+                            style={{ padding: '1rem 2rem', background: 'none', border: 'none', borderBottom: activeTab === 'interviewers' ? '4px solid #4318FF' : 'none', color: activeTab === 'interviewers' ? '#1B254B' : '#A3AED0', fontWeight: '700', fontSize: '1.1rem', cursor: 'pointer' }}
+                        >
+                            Interviewer Pool
                         </button>
                     </div>
                 )}
@@ -487,9 +540,97 @@ const AiAssessmentDetail = () => {
                         </div>
                     )}
 
+                    {activeTab === 'interviewers' && (
+                        <div>
+                            <div style={{ marginBottom: '2rem' }}>
+                                <h3 style={{ color: '#1B254B', marginBottom: '0.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <i className="fa-solid fa-user-tie" style={{ color: '#4318FF' }}></i> Interviewer Assignment Pool
+                                </h3>
+                                <p style={{ color: '#707EAE', fontSize: '0.95rem' }}>
+                                    Assign team members who will be available to conduct live interviews for candidates of this assessment. 
+                                    Candidates will book slots based on the aggregate availability of this pool.
+                                </p>
+                            </div>
+
+                            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}>
+                                {loadingInterviewers ? (
+                                    <p>Loading team members...</p>
+                                ) : availableInterviewers.length === 0 ? (
+                                    <p>No team members found. Invite them first in the Team Members page.</p>
+                                ) : (
+                                    availableInterviewers.map(member => {
+                                        const isAssigned = assessment.assigned_interviewers.some(i => i.id === member.id);
+                                        return (
+                                            <div 
+                                                key={member.id} 
+                                                style={{ 
+                                                    padding: '1.5rem', 
+                                                    borderRadius: '20px', 
+                                                    border: '2px solid', 
+                                                    borderColor: isAssigned ? '#4318FF' : '#E0E5F2',
+                                                    background: isAssigned ? '#F4F7FE' : 'white',
+                                                    transition: 'all 0.2s',
+                                                    position: 'relative',
+                                                    opacity: assigning ? 0.7 : 1,
+                                                    pointerEvents: assigning ? 'none' : 'auto'
+                                                }}
+                                            >
+                                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                                                    <div style={{ 
+                                                        width: '45px', height: '45px', borderRadius: '12px', background: isAssigned ? '#4318FF' : '#F4F7FE',
+                                                        color: isAssigned ? 'white' : '#4318FF', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                                                        fontSize: '1.2rem', fontWeight: '800'
+                                                    }}>
+                                                        {member.name.charAt(0)}
+                                                    </div>
+                                                    <button 
+                                                        onClick={() => handleToggleInterviewer(member.id)}
+                                                        style={{
+                                                            padding: '0.4rem 1rem', borderRadius: '10px', border: 'none',
+                                                            background: isAssigned ? '#EE5D50' : '#4318FF',
+                                                            color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
+                                                        }}
+                                                    >
+                                                        {isAssigned ? 'Remove' : 'Assign'}
+                                                    </button>
+                                                </div>
+                                                <div style={{ fontWeight: '700', color: '#1B254B', fontSize: '1rem' }}>{member.name}</div>
+                                                <div style={{ color: '#707EAE', fontSize: '0.85rem' }}>{member.email}</div>
+                                                <div style={{ 
+                                                    display: 'inline-block', marginTop: '0.8rem', padding: '2px 8px', 
+                                                    borderRadius: '6px', background: '#E0E5F2', color: '#1B254B', 
+                                                    fontSize: '0.7rem', fontWeight: '800', textTransform: 'uppercase' 
+                                                }}>
+                                                    {member.role.replace('ROLE_', '').replace('_', ' ')}
+                                                </div>
+                                                {isAssigned && (
+                                                    <div style={{ position: 'absolute', top: '10px', right: '10px', color: '#4318FF' }}>
+                                                        <i className="fa-solid fa-circle-check"></i>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        );
+                                    })
+                                )}
+                            </div>
+
+                            {assessment.assigned_interviewers.length > 0 && (
+                                <div style={{ marginTop: '2.5rem', padding: '1.5rem', background: '#E6FBF5', borderRadius: '15px', border: '1px solid #05CD99' }}>
+                                    <div style={{ display: 'flex', gap: '10px', alignItems: 'center', color: '#05CD99', fontWeight: '700' }}>
+                                        <i className="fa-solid fa-circle-info"></i>
+                                        <span>Candidate View Ready</span>
+                                    </div>
+                                    <p style={{ color: '#1B254B', fontSize: '0.9rem', marginTop: '0.5rem', margin: 0 }}>
+                                        Candidates can now book interview slots based on the combined availability of these {assessment.assigned_interviewers.length} interviewers.
+                                    </p>
+                                </div>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
+
     );
 };
 

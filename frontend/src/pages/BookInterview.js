@@ -1,0 +1,434 @@
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { 
+  Calendar as CalendarIcon, 
+  Clock, 
+  User, 
+  CheckCircle, 
+  AlertTriangle,
+  ChevronRight,
+  ChevronLeft,
+  Info,
+  RefreshCw
+} from 'lucide-react';
+import { API_BASE_URL } from '../apiConfig';
+import Lottie from 'lottie-react';
+import './BookInterview.css';
+
+// Public Lottie Animation URL for success
+const SUCCESS_LOTTIE_URL = "https://assets10.lottiefiles.com/packages/lf20_kz9pjc9p.json";
+
+const API_BASE = API_BASE_URL;
+
+const BookInterview = () => {
+    const { token } = useParams();
+    const navigate = useNavigate();
+    
+    const [loading, setLoading] = useState(true);
+    const [slots, setSlots] = useState([]);
+    const [selectedSlot, setSelectedSlot] = useState(null);
+    const [activeDate, setActiveDate] = useState(null);
+    const [viewDate, setViewDate] = useState(new Date()); // For month navigation
+    const [reservationExpiry, setReservationExpiry] = useState(null);
+    const [countdown, setCountdown] = useState(0);
+    const [error, setError] = useState(null);
+    const [bookingSuccess, setBookingSuccess] = useState(false);
+    const [bookingDetails, setBookingDetails] = useState(null);
+    const [submitting, setSubmitting] = useState(false);
+    const [userTimezone, setUserTimezone] = useState('');
+    const [successLottie, setSuccessLottie] = useState(null);
+
+    useEffect(() => {
+        // Detect User Timezone
+        const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        setUserTimezone(tz);
+
+        // Fetch Lottie JSON
+        fetch(SUCCESS_LOTTIE_URL)
+            .then(res => res.json())
+            .then(data => setSuccessLottie(data))
+            .catch(err => console.error("Lottie load error:", err));
+    }, []);
+
+    const fetchSlots = useCallback(async () => {
+        try {
+            const res = await axios.get(`${API_BASE}/interviews/slots/${token}/`);
+            if (res.data.success) {
+                const fetchedSlots = res.data.slots;
+                setSlots(fetchedSlots);
+                
+                // Set initial active date if none selected
+                if (fetchedSlots.length > 0 && !activeDate) {
+                    const firstDate = fetchedSlots[0].date;
+                    setActiveDate(firstDate);
+                    setViewDate(new Date(firstDate));
+                }
+            }
+        } catch (err) {
+            console.error("Error fetching slots:", err);
+            setError(err.response?.data?.error || "Failed to load slots.");
+        } finally {
+            setLoading(false);
+        }
+    }, [token, activeDate]);
+
+    useEffect(() => {
+        fetchSlots();
+        const interval = setInterval(fetchSlots, 10000);
+        return () => clearInterval(interval);
+    }, [fetchSlots]);
+
+    useEffect(() => {
+        if (countdown > 0) {
+            const timer = setInterval(() => {
+                setCountdown(prev => prev - 1);
+            }, 1000);
+            return () => clearInterval(timer);
+        } else if (countdown === 0 && selectedSlot && reservationExpiry) {
+            setSelectedSlot(null);
+            setReservationExpiry(null);
+        }
+    }, [countdown, selectedSlot, reservationExpiry]);
+
+    const handleReserve = async (slotId) => {
+        setError(null);
+        setSubmitting(true);
+        try {
+            const res = await axios.post(`${API_BASE}/interviews/slots/${token}/reserve/`, { slot_id: slotId });
+            if (res.data.success) {
+                setSelectedSlot(slotId);
+                const expiry = new Date(res.data.expiry);
+                setReservationExpiry(expiry);
+                setCountdown(Math.floor((expiry - new Date()) / 1000));
+                fetchSlots();
+            }
+        } catch (err) {
+            setError(err.response?.data?.error || "Failed to reserve slot.");
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    const handleConfirm = async () => {
+        if (!selectedSlot) return;
+        setSubmitting(true);
+        setError(null);
+        try {
+            const res = await axios.post(`${API_BASE}/interviews/slots/${token}/confirm/`, { slot_id: selectedSlot });
+            if (res.data.success) {
+                setBookingSuccess(true);
+                setBookingDetails(res.data.booking_details);
+            }
+        } catch (err) {
+            setError(err.response?.data?.error || "Booking failed.");
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
+    const slotGroups = useMemo(() => {
+        const groups = {};
+        slots.forEach(slot => {
+            if (!groups[slot.date]) groups[slot.date] = [];
+            groups[slot.date].push(slot);
+        });
+        
+        // Sort slots within each date chronologically
+        Object.keys(groups).forEach(date => {
+            groups[date].sort((a, b) => {
+                const timeA = new Date(`1970-01-01 ${a.start_time}`);
+                const timeB = new Date(`1970-01-01 ${b.start_time}`);
+                return timeA - timeB;
+            });
+        });
+        
+        return groups;
+    }, [slots]);
+
+    const availableDates = useMemo(() => Object.keys(slotGroups), [slotGroups]);
+
+    // Calendar Helper Functions
+    const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
+    const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
+
+    const calendarDays = useMemo(() => {
+        const year = viewDate.getFullYear();
+        const month = viewDate.getMonth();
+        const daysInMonth = getDaysInMonth(year, month);
+        const firstDay = getFirstDayOfMonth(year, month);
+        
+        // Lead time calculation (3 days)
+        const minBookingDate = new Date();
+        minBookingDate.setDate(minBookingDate.getDate() + 3);
+        minBookingDate.setHours(0, 0, 0, 0);
+
+        const days = [];
+        // Fill previous month padding
+        for (let i = 0; i < firstDay; i++) days.push(null);
+        // Fill actual days
+        for (let i = 1; i <= daysInMonth; i++) {
+            const currentCellDate = new Date(year, month, i);
+            const dateStr = `${year}-${(month + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`;
+            
+            const isTooSoon = currentCellDate < minBookingDate;
+            
+            days.push({
+                day: i,
+                dateStr,
+                hasSlots: availableDates.includes(dateStr) && !isTooSoon,
+                isToday: new Date().toDateString() === currentCellDate.toDateString(),
+                isTooSoon
+            });
+        }
+        return days;
+    }, [viewDate, availableDates]);
+
+    const handleMonthChange = (offset) => {
+        setViewDate(new Date(viewDate.getFullYear(), viewDate.getMonth() + offset, 1));
+    };
+
+    const formatDateFull = (dateStr) => {
+        return new Date(dateStr).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    };
+
+    const getCalendarLinks = () => {
+        if (!bookingDetails) return {};
+        const dateStr = bookingDetails.date;
+        const startTimeStr = bookingDetails.time.split(' - ')[0];
+        const start = new Date(`${dateStr} ${startTimeStr}`);
+        const end = new Date(start.getTime() + 50 * 60000);
+        const formatISO = (date) => date.toISOString().replace(/-|:|\.\d\d\d/g, "");
+        const subject = encodeURIComponent(`Interview @ VerifiHire`);
+        const body = encodeURIComponent(`Your live interview has been scheduled. Please be on time.\n\nMeeting link will be shared via email.`);
+        return {
+            google: `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${subject}&dates=${formatISO(start)}/${formatISO(end)}&details=${body}`,
+            outlook: `https://outlook.office.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&subject=${subject}&body=${body}&startdt=${start.toISOString()}&enddt=${end.toISOString()}`
+        };
+    };
+
+    if (loading) return (
+        <div className="enterprise-booking-wrapper">
+            <div className="booking-layout">
+                <div className="booking-intro">
+                    <div className="skeleton" style={{ width: '300px', height: '32px', marginBottom: '10px' }}></div>
+                    <div className="skeleton" style={{ width: '450px', height: '18px' }}></div>
+                </div>
+                <div className="booking-main-grid-triple">
+                    <div className="skeleton calendar-skeleton"></div>
+                    <div className="skeleton times-skeleton"></div>
+                    <div className="skeleton sidebar-skeleton"></div>
+                </div>
+            </div>
+        </div>
+    );
+
+    if (bookingSuccess) return (
+        <div className="booking-container success-mode">
+            <div className="booking-card success-card animation-ready">
+                <div className="lottie-success-container">
+                    {successLottie ? (
+                        <Lottie animationData={successLottie} loop={false} />
+                    ) : (
+                        <div className="success-icon-wrapper">
+                            <CheckCircle className="success-icon-svg" size={80} />
+                        </div>
+                    )}
+                </div>
+                <h1 className="success-title">Confirmed!</h1>
+                <p className="success-subtitle">We've reserved your spot. Preparation details have been sent to your inbox.</p>
+                
+                <div className="booking-summary-box">
+                    <div className="summary-item">
+                        <CalendarIcon size={20} className="summary-icon" />
+                        <div className="summary-text">
+                            <label>Scheduled Date</label>
+                            <span>{formatDateFull(bookingDetails.date)}</span>
+                        </div>
+                    </div>
+                    <div className="summary-item">
+                        <Clock size={20} className="summary-icon" />
+                        <div className="summary-text">
+                            <label>Time Slot</label>
+                            <span>{bookingDetails.time}</span>
+                        </div>
+                    </div>
+                    <div className="summary-item">
+                        <User size={20} className="summary-icon" />
+                        <div className="summary-text">
+                            <label>Host</label>
+                            <span>{bookingDetails.interviewer}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="success-info-banner">
+                    <Info size={16} />
+                    <span>A calendar invite has been dispatched.</span>
+                </div>
+
+                <div className="calendar-sync-block">
+                    <p>Or sync manually to your calendar:</p>
+                    <div className="calendar-sync-actions">
+                        <a href={getCalendarLinks().google} target="_blank" rel="noopener noreferrer" className="sync-btn google-sync">
+                            Google Calendar
+                        </a>
+                        <a href={getCalendarLinks().outlook} target="_blank" rel="noopener noreferrer" className="sync-btn outlook-sync">
+                            Outlook
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+    const activeSlots = slotGroups[activeDate] || [];
+
+    return (
+        <div className="enterprise-booking-wrapper">
+            <div className="booking-layout">
+                <div className="booking-intro">
+                    <h1 className="title">Select an Interview Slot</h1>
+                    <div className="timezone-intelligence-badge">
+                        <Clock size={16} className="globe-icon" />
+                        <span>Times are shown in your local time: <span className="timezone-name">{userTimezone}</span></span>
+                    </div>
+                    <p className="description">Choose a time that fits your schedule for the 50-minute live session.</p>
+                </div>
+
+                <div className="booking-main-grid-triple">
+                    {/* Column 1: Professional Month Calendar */}
+                    <div className="calendar-card">
+                        <div className="calendar-header">
+                            <h3>{viewDate.toLocaleString('default', { month: 'long', year: 'numeric' })}</h3>
+                            <div className="calendar-nav">
+                                <button onClick={() => handleMonthChange(-1)}><ChevronLeft size={20} /></button>
+                                <button onClick={() => handleMonthChange(1)}><ChevronRight size={20} /></button>
+                            </div>
+                        </div>
+                        
+                        <div className="calendar-weekdays">
+                            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
+                                <div key={d} className="weekday-label">{d}</div>
+                            ))}
+                        </div>
+                        
+                        <div className="calendar-grid">
+                            {calendarDays.map((dateObj, idx) => {
+                                if (!dateObj) return <div key={`pad-${idx}`} className="calendar-cell empty"></div>;
+                                
+                                const isActive = activeDate === dateObj.dateStr;
+                                return (
+                                    <div 
+                                        key={dateObj.dateStr} 
+                                        className={`calendar-cell ${dateObj.hasSlots ? 'has-slots' : ''} ${isActive ? 'active' : ''} ${dateObj.isToday ? 'today' : ''} ${dateObj.isTooSoon ? 'disabled' : ''}`}
+                                        onClick={() => dateObj.hasSlots && !dateObj.isTooSoon && setActiveDate(dateObj.dateStr)}
+                                    >
+                                        <span className="day-number">{dateObj.day}</span>
+                                        {dateObj.hasSlots && <div className="slot-indicator"></div>}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        
+                        <div className="calendar-footer">
+                            <div className="legend-item">
+                                <span className="dot dot-available"></span> Available
+                            </div>
+                            <div className="legend-item">
+                                <span className="dot dot-selected"></span> Selected
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Column 2: Time selection */}
+                    <div className="times-panel animated fadeIn">
+                        <div className="panel-header">
+                            <h3>{activeDate ? formatDateFull(activeDate) : 'Select a date'}</h3>
+                            <div className="duration-badge">50 Min Session</div>
+                        </div>
+                        
+                        <div className="slots-scroller">
+                            {activeSlots.length > 0 ? (
+                                <div className="slots-list-modern">
+                                    {activeSlots.map(slot => {
+                                        const isMine = slot.is_mine;
+                                        const isBooked = slot.status === 'booked';
+                                        const isOther = (slot.status === 'reserved' && !slot.is_mine) || isBooked;
+                                        const isSelected = selectedSlot === slot.id;
+
+                                        return (
+                                            <button 
+                                                key={slot.id}
+                                                className={`time-slot-btn ${isSelected ? 'selected' : ''} ${isOther ? 'disabled' : ''} ${isMine ? 'mine' : ''} ${isBooked ? 'booked' : ''}`}
+                                                onClick={() => (slot.status === 'available' || isMine) && !isBooked && handleReserve(slot.id)}
+                                                disabled={isOther}
+                                            >
+                                                <Clock size={16} />
+                                                <span>{slot.start_time} - {slot.end_time}</span>
+                                                {isSelected && <CheckCircle size={16} className="check" />}
+                                                {isBooked && <span className="booked-label">Full</span>}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
+                            ) : (
+                                <div className="empty-slots">
+                                    <CalendarIcon size={32} />
+                                    <p>No available times on this date.</p>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Column 3: Booking Action Area */}
+                    <div className="action-sidebar-triple">
+                        <div className={`booking-action-card ${selectedSlot ? 'visible' : ''}`}>
+                            {selectedSlot ? (
+                                <>
+                                    <div className="action-header">
+                                        <h3>Review Your Slot</h3>
+                                        {countdown > 0 && (
+                                            <div className="expiry-badge">
+                                                Holding {Math.floor(countdown / 60)}:{(countdown % 60).toString().padStart(2, '0')}
+                                            </div>
+                                        )}
+                                    </div>
+                                    
+                                    <div className="action-details">
+                                        <div className="a-row"><CalendarIcon size={16} /> {formatDateFull(slots.find(s=>s.id===selectedSlot)?.date)}</div>
+                                        <div className="a-row">
+                                            <Clock size={16} /> 
+                                            {slots.find(s=>s.id===selectedSlot)?.start_time} - {slots.find(s=>s.id===selectedSlot)?.end_time}
+                                        </div>
+                                    </div>
+
+                                    <button 
+                                        className="confirm-btn-extreme"
+                                        disabled={submitting}
+                                        onClick={handleConfirm}
+                                    >
+                                        {submitting ? <RefreshCw className="spin" /> : 'Confirm Interview'}
+                                    </button>
+                                </>
+                            ) : (
+                                <div className="no-selection-placeholder">
+                                    <Clock size={32} className="p-icon" />
+                                    <p>Select a time slot from the middle panel to proceed with your booking.</p>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Additional info to fill space */}
+                        <div className="support-info-card">
+                            <Info size={16} />
+                            <p>Need help? Contact support if you face any booking issues.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default BookInterview;
