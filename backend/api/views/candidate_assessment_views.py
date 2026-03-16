@@ -2006,9 +2006,12 @@ def submit_objective_section(request, token):
         submission.answers = answers # Store current state
         submission.save()
         
+        from api.models import AssessmentCodingQuestion
+        has_coding = AssessmentCodingQuestion.objects.filter(assessment=assessment).exists()
+
         # Check Cutoff
         passed = True
-        next_stage = 'coding'
+        next_stage = 'coding' if has_coding else 'finish'
         message = "Objective section completed."
         
         if assessment.has_objective_cutoff:
@@ -2030,13 +2033,31 @@ def submit_objective_section(request, token):
                 submission.save()
             else:
                 passed = True
-                message = "Objective cutoff passed. Proceeding to coding section."
-                next_stage = 'coding'
+                if has_coding:
+                    message = "Objective cutoff passed. Proceeding to coding section."
+                    next_stage = 'coding'
+                else:
+                    message = "Objective section completed."
+                    next_stage = 'finish'
+                    # Mark as submitted immediately
+                    inv.status = 'submitted'
+                    inv.save()
+
                 # Even if passed, update scoring so partial results are correct
                 _update_submission_scoring_logic(submission)
                 submission.save()
         else:
             # If no cutoff, still update scoring for partial results
+            if not has_coding:
+                next_stage = 'finish'
+                message = "Objective section completed."
+                # Mark as submitted immediately
+                inv.status = 'submitted'
+                inv.save()
+            else:
+                next_stage = 'coding'
+                message = "Objective section completed. Proceeding to coding section."
+
             _update_submission_scoring_logic(submission)
             submission.save()
         

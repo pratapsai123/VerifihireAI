@@ -1018,20 +1018,20 @@ function ReviewPage() {
 
                 <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%' }}>
                   <strong style={{ minWidth: '70px' }}>Weights:</strong>
-                  <span style={{ fontSize: '0.9rem' }}>Objective: {objWeight}%</span>
+                  <span style={{ fontSize: '0.9rem' }}>Coding: {codingWeight}%</span>
                   <input
                     type="range"
                     min="0"
                     max="100"
-                    value={objWeight}
+                    value={codingWeight}
                     onChange={(e) => {
                       const val = Number(e.target.value);
-                      setObjWeight(val);
-                      setCodingWeight(100 - val);
+                      setCodingWeight(val);
+                      setObjWeight(100 - val);
                     }}
                     style={{ flex: 1, cursor: 'pointer' }}
                   />
-                  <span style={{ fontSize: '0.9rem' }}>Coding: {codingWeight}%</span>
+                  <span style={{ fontSize: '0.9rem' }}>Objective: {objWeight}%</span>
                 </div>
               </div>
             </div>

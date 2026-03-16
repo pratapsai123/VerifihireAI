@@ -1442,8 +1442,12 @@ def create_assessment_view(request):
         has_objective_cutoff = bool(has_objective_cutoff_val) if has_objective_cutoff_val is not None else False
         
         min_objective_pass_percentage = float(request.data.get('min_objective_pass_percentage') or 0.0)
-        weightage_objective = int(request.data.get('weightage_objective') or 0)
-        weightage_coding = int(request.data.get('weightage_coding') or 100)
+        
+        w_obj = request.data.get('weightage_objective')
+        weightage_objective = int(w_obj) if w_obj is not None else 50
+        
+        w_cod = request.data.get('weightage_coding')
+        weightage_coding = int(w_cod) if w_cod is not None else 50
 
         # Use the custom_assessment's user_profile, fall back to the requesting user's profile
         # This ensures the Assessment is always linked to a company (for dashboard filtering)

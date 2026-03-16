@@ -1345,8 +1345,8 @@ export default function TakeAssessment() {
         answers: answersById,
       });
       setObjResult(resp.data);
-      if (resp.data.passed === false) {
-        // Redirect to feedback on fail
+      if (resp.data.passed === false || resp.data.next_stage === 'finish') {
+        // Redirect to feedback on fail OR if no coding section (Case 1 Fix)
         navigate(`/result/${token}`, { replace: true });
       } else {
         setAssessmentStage('transition');
@@ -2022,7 +2022,7 @@ export default function TakeAssessment() {
                     {activeQuestionIndex === questions.length - 1 ? (
                       <div style={{ flex: 1, textAlign: 'right' }}>
                         <button className="submit-btn" type="button" onClick={() => submitObjective(false)} disabled={submitting}>
-                          {submitting ? 'Submitting…' : 'Submit Objective Section'}
+                          {submitting ? 'Submitting…' : (codingQuestionsOrdered.length > 0 ? 'Submit Objective Section' : 'Submit Assessment')}
                         </button>
                       </div>
                     ) : (
@@ -2063,11 +2063,13 @@ export default function TakeAssessment() {
                     </div>
                   </div>
 
-                  <div className="sidebar-submit-section">
-                    <button className="submit-btn full-width" type="button" onClick={submit} disabled={submitting}>
-                      {submitting ? 'Submitting…' : 'Submit Exam'}
-                    </button>
-                  </div>
+                  {codingQuestionsOrdered.length === 0 && (
+                    <div className="sidebar-submit-section">
+                      <button className="submit-btn full-width" type="button" onClick={submit} disabled={submitting}>
+                        {submitting ? 'Submitting…' : 'Submit Exam'}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             ) : null}

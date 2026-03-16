@@ -312,14 +312,14 @@ export default function Result() {
                                         <td>
                                             <div className="cell-title">{r.objective_score} / {r.objective_total}</div>
                                             <div className="cell-sub">{fmtPercent(r.objective_percentage)}</div>
-                                            {(r.assessment?.weightage_objective ?? 50) !== 50 && (
+                                            {r.assessment?.weightage_objective !== undefined && r.assessment.weightage_objective !== 50 && (
                                                 <div className="cell-sub" style={{ fontSize: '0.75em', color: '#6b7280' }}>Weight: {r.assessment.weightage_objective}%</div>
                                             )}
                                         </td>
                                         <td>
                                             <div className="cell-title">{r.coding_score} / {r.coding_total}</div>
                                             <div className="cell-sub">{fmtPercent(r.coding_percentage)}</div>
-                                            {(r.assessment?.weightage_coding ?? 50) !== 50 && (
+                                            {r.assessment?.weightage_coding !== undefined && r.assessment.weightage_coding !== 50 && (
                                                 <div className="cell-sub" style={{ fontSize: '0.75em', color: '#6b7280' }}>Weight: {r.assessment.weightage_coding}%</div>
                                             )}
                                         </td>
