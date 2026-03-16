@@ -54,7 +54,7 @@ function DashboardHome() {
 
             setStats({
                 totalCompanies: allCompanies.length,
-                pendingUserRequests: filteredUsers.filter(u => !u.is_approved).length,
+                pendingCompanies: allCompanies.filter(c => c.approval_status === 'pending').length,
                 approvedEntities: allCompanies.filter(c => c.approval_status === 'approved').length,
                 totalPlatformUsers: filteredUsers.length,
                 recentSignups: filteredUsers.slice(0, 5)
@@ -116,14 +116,14 @@ function DashboardHome() {
                 <StatCard title="Total Organizations" value={stats.totalCompanies} icon="🏢" color="var(--blue-accent)" />
                 <StatCard title="Approved Entities" value={stats.approvedEntities} icon="✅" color="var(--status-success)" />
                 <StatCard title="Platform Employees" value={stats.totalPlatformUsers} icon="👥" color="#f6ad55" />
-                <StatCard title="Pending Requests" value={stats.pendingUserRequests} icon="⏳" color="var(--status-warning)" />
+                <StatCard title="Pending Approvals" value={stats.pendingCompanies} icon="⏳" color="var(--status-warning)" />
             </div>
 
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '30px' }}>
                 <div style={{ background: '#fff', borderRadius: '24px', padding: '24px', boxShadow: '0 10px 20px rgba(112, 144, 176, 0.05)', border: '1px solid #f0f3f8' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Recent User Signups</h3>
-                        <button onClick={() => navigate('/')} style={{ background: 'transparent', border: 'none', color: 'var(--blue-accent)', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>View All</button>
+                        <h3 style={{ fontSize: '1.1rem', fontWeight: 700 }}>Latest Registered Users</h3>
+                        <button onClick={() => navigate('/companies')} style={{ background: 'transparent', border: 'none', color: 'var(--blue-accent)', fontWeight: 700, fontSize: '0.8rem', cursor: 'pointer' }}>Manage Companies</button>
                     </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
                         {stats.recentSignups.map(user => (
@@ -135,8 +135,8 @@ function DashboardHome() {
                                         <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>{user.organization_name}</div>
                                     </div>
                                 </div>
-                                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: user.is_approved ? 'var(--status-success)' : 'var(--status-warning)', textTransform: 'uppercase' }}>
-                                    {user.is_approved ? 'APPROVED' : 'PENDING'}
+                                <div style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>
+                                    {new Date(user.registered_at).toLocaleDateString()}
                                 </div>
                             </div>
                         ))}
@@ -155,8 +155,8 @@ function DashboardHome() {
                     <div style={{ background: '#fff', borderRadius: '24px', padding: '24px', boxShadow: '0 10px 20px rgba(112, 144, 176, 0.05)', border: '1px solid #f0f3f8' }}>
                         <h3 style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: '1.2rem' }}>Queue Status</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.8rem', color: stats.pendingUserRequests > 0 ? 'var(--status-warning)' : 'var(--status-success)', fontWeight: 600 }}>
-                                <span>{stats.pendingUserRequests > 0 ? `⚠️ ${stats.pendingUserRequests} individuals awaiting access` : '✅ All users verified'}</span>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.8rem', color: stats.pendingCompanies > 0 ? 'var(--status-warning)' : 'var(--status-success)', fontWeight: 600 }}>
+                                <span>{stats.pendingCompanies > 0 ? `⚠️ ${stats.pendingCompanies} organizations awaiting approval` : '✅ All organizations verified'}</span>
                             </div>
                         </div>
                     </div>

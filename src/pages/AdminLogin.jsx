@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
+import './AdminLogin.css';
 
 function AdminLogin() {
     const navigate = useNavigate();
@@ -54,7 +55,7 @@ function AdminLogin() {
                     if (prev <= 1) {
                         setIsExpired(true);
                         setCanResend(true);
-                        setMessage(''); // Clear success message when OTP expires
+                        setMessage(''); 
                         return 0;
                     }
                     return prev - 1;
@@ -108,109 +109,145 @@ function AdminLogin() {
         navigate('/');
     };
 
+    const [snowflakes, setSnowflakes] = useState([]);
+    const [techDust, setTechDust] = useState([]);
+
+    React.useEffect(() => {
+        const snowCount = 30;
+        const newSnow = [];
+        for (let i = 0; i < snowCount; i++) {
+            newSnow.push({
+                id: `snow-${i}`,
+                left: Math.random() * 100 + '%',
+                size: Math.random() * 4 + 2 + 'px',
+                duration: Math.random() * 5 + 5 + 's',
+                delay: Math.random() * 5 + 's'
+            });
+        }
+        setSnowflakes(newSnow);
+
+        const dustCount = 15;
+        const newDust = [];
+        const hex = '0123456789ABCDEF';
+        for (let i = 0; i < dustCount; i++) {
+            newDust.push({
+                id: `dust-${i}`,
+                left: Math.random() * 100 + '%',
+                top: Math.random() * 100 + '%',
+                text: hex[Math.floor(Math.random() * 16)] + hex[Math.floor(Math.random() * 16)],
+                duration: Math.random() * 10 + 10 + 's',
+                delay: Math.random() * 10 + 's'
+            });
+        }
+        setTechDust(newDust);
+    }, []);
+
     return (
-        <div style={{
-            minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-            background: 'linear-gradient(135deg, #f5f3ff, #ede9fe)', fontFamily: "'Inter', sans-serif"
-        }}>
-            <div style={{
-                background: '#fff', padding: '2.5rem', borderRadius: '16px', boxShadow: '0 10px 30px rgba(124,58,237,0.1)',
-                width: '100%', maxWidth: '400px'
-            }}>
-                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-                    <div style={{
-                        width: '48px', height: '48px', margin: '0 auto 1rem', borderRadius: '12px',
-                        background: 'linear-gradient(135deg, #7c3aed, #4f46e5)', display: 'flex',
-                        alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: '1.5rem', fontWeight: 800
-                    }}>V</div>
-                    <h2 style={{ margin: 0, color: '#1e1b4b' }}>Superadmin Login</h2>
+        <div className="admin-login-wrapper">
+            {/* Cyberpunk Grid */}
+            <div className="grid-overlay"></div>
+
+            {/* Background Smoke Particles */}
+            <div className="smoke-container">
+                <div className="smoke-particle" style={{ width: '400px', height: '400px', top: '10%', left: '5%', animationDelay: '0s' }}></div>
+                <div className="smoke-particle" style={{ width: '500px', height: '500px', top: '50%', left: '60%', animationDelay: '-5s' }}></div>
+                <div className="smoke-particle" style={{ width: '300px', height: '300px', top: '70%', left: '10%', animationDelay: '-10s' }}></div>
+            </div>
+
+            {/* Background Snow Particles */}
+            <div className="snow-container">
+                {snowflakes.map(snow => (
+                    <div 
+                        key={snow.id} 
+                        className="snowflake" 
+                        style={{ 
+                            left: snow.left, 
+                            width: snow.size, 
+                            height: snow.size, 
+                            animationDuration: snow.duration, 
+                            animationDelay: snow.delay 
+                        }}
+                    ></div>
+                ))}
+            </div>
+
+            {/* Tech Dust / Binary Drift */}
+            {techDust.map(dust => (
+                <div 
+                    key={dust.id}
+                    className="tech-dust"
+                    style={{
+                        left: dust.left,
+                        top: dust.top,
+                        animationDuration: dust.duration,
+                        animationDelay: dust.delay
+                    }}
+                >
+                    {dust.text}
+                </div>
+            ))}
+
+            <div className="login-card">
+                <div className="login-header">
+                    <div className="logo-icon">V</div>
+                    <h2>Superadmin Login</h2>
                 </div>
 
-                {error && <div style={{ background: '#fee2e2', color: '#991b1b', padding: '10px', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>{error}</div>}
-                {message && <div style={{ background: '#d1fae5', color: '#065f46', padding: '10px', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>{message}</div>}
-                {isExpired && !error && <div style={{ background: '#fee2e2', color: '#991b1b', padding: '10px', borderRadius: '8px', marginBottom: '1rem', fontSize: '0.9rem' }}>OTP has expired. Please resend or login again.</div>}
+                {error && <div className="error-msg">{error}</div>}
+                {message && <div className="success-msg">{message}</div>}
+                {isExpired && !error && <div className="error-msg">OTP has expired. Please resend or login again.</div>}
 
                 {step === 'login' ? (
-                    <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '4px' }}>Email</label>
+                    <form onSubmit={handleLogin}>
+                        <div className="form-group">
+                            <label>Email</label>
                             <input
                                 type="email" value={email} onChange={(e) => setEmail(e.target.value)} required disabled={loading}
-                                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #d1d5db', boxSizing: 'border-box' }}
+                                placeholder="name@company.com"
                             />
                         </div>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '4px' }}>Password</label>
+                        <div className="form-group">
+                            <label>Password</label>
                             <input
                                 type="password" value={password} onChange={(e) => setPassword(e.target.value)} required disabled={loading}
-                                style={{ width: '100%', padding: '10px 12px', borderRadius: '8px', border: '1px solid #d1d5db', boxSizing: 'border-box' }}
+                                placeholder="••••••••"
                             />
                         </div>
-                        <button type="submit" disabled={loading} style={{
-                            padding: '12px', borderRadius: '8px', border: 'none', background: 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-                            color: '#fff', fontWeight: 600, cursor: loading ? 'wait' : 'pointer', marginTop: '0.5rem'
-                        }}>
-                            {loading ? 'Authenticating...' : 'Login'}
+                        <button type="submit" className="submit-btn" disabled={loading}>
+                            {loading ? 'Authenticating...' : 'Sign In'}
                         </button>
                     </form>
                 ) : (
-                    <form onSubmit={handleVerifyOtp} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                        <div>
-                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '4px' }}>Enter OTP</label>
+                    <form onSubmit={handleVerifyOtp}>
+                        <div className="form-group">
+                            <label>Enter Security Code</label>
                             <input
-                                type="text" value={otp} onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} required disabled={loading}
-                                placeholder="6-digit OTP"
-                                style={{ width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #d1d5db', boxSizing: 'border-box', textAlign: 'center', fontSize: '1.25rem', letterSpacing: '4px' }}
+                                type="text" className="otp-input" value={otp} 
+                                onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))} 
+                                required disabled={loading}
+                                placeholder="000000"
                             />
                         </div>
-                        <button type="submit" disabled={loading || otp.length !== 6 || isExpired} style={{
-                            padding: '12px', borderRadius: '8px', border: 'none',
-                            background: (loading || otp.length !== 6 || isExpired) ? '#9ca3af' : 'linear-gradient(135deg, #7c3aed, #4f46e5)',
-                            color: '#fff', fontWeight: 600,
-                            cursor: (loading || otp.length !== 6 || isExpired) ? 'not-allowed' : 'pointer',
-                            marginTop: '0.5rem',
-                            transition: 'all 0.3s ease'
-                        }}>
-                            {loading ? 'Verifying...' : 'Verify OTP'}
+                        <button type="submit" className="submit-btn" disabled={loading || otp.length !== 6 || isExpired}>
+                            {loading ? 'Verifying...' : 'Complete Login'}
                         </button>
 
-                        <div style={{
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                            alignItems: 'center',
-                            marginTop: '1.5rem',
-                            borderTop: '1px solid #f3f4f6',
-                            paddingTop: '1rem'
-                        }}>
+                        <div className="otp-footer">
                             <button
                                 type="button"
+                                className="resend-btn"
                                 onClick={handleResendOtp}
                                 disabled={!canResend || resending}
                                 style={{
-                                    background: 'none', border: 'none',
-                                    color: (!canResend || resending) ? '#9ca3af' : '#7c3aed',
-                                    fontWeight: 700,
-                                    cursor: (!canResend || resending) ? 'not-allowed' : 'pointer',
-                                    fontSize: '0.85rem',
-                                    textDecoration: canResend ? 'underline' : 'none',
-                                    transition: 'color 0.2s',
-                                    padding: 0
+                                    color: (!canResend || resending) ? 'rgba(255,255,255,0.2)' : '#7c3aed',
+                                    cursor: (!canResend || resending) ? 'not-allowed' : 'pointer'
                                 }}
                             >
-                                {resending ? 'Sending...' : 'Resend OTP'}
+                                {resending ? 'Sending...' : 'Resend Code'}
                             </button>
 
-                            <div style={{
-                                fontSize: '0.85rem',
-                                color: isExpired ? '#ef4444' : '#6b7280',
-                                fontWeight: 600,
-                                background: '#f9fafb',
-                                padding: '4px 10px',
-                                borderRadius: '6px',
-                                minWidth: '45px',
-                                textAlign: 'center'
-                            }}>
-                                {timer}s
+                            <div className="timer-pill">
+                                {String(Math.floor(timer / 60)).padStart(2, '0')}:{String(timer % 60).padStart(2, '0')}
                             </div>
                         </div>
                     </form>
