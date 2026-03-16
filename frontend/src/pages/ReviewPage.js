@@ -8,7 +8,7 @@ import { API_BASE_URL } from '../apiConfig';
 const MANUAL_TOPIC_LABEL = 'Custom Questions';
 const REVIEW_STATE_STORAGE_KEY = 'reviewAssessmentState';
 const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';
-
+const CUSTOM_ASSESSMENT_STORAGE_KEY = 'customAssessmentFormData';
 const DIFFICULTY_WEIGHTS = {
   easy: 1,
   medium: 2,
@@ -610,9 +610,9 @@ function ReviewPage() {
           const newId = response.data.assessment_id;
           alert('Assessment created successfully!');
           try {
-            // localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
-            // localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
-            // localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
+            localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+            localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+            localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
           } catch {
             // ignore
           }
@@ -702,9 +702,9 @@ function ReviewPage() {
         alert('Assessment created successfully!');
         // Once assessment is created, clear draft state so a new flow starts fresh
         try {
-          // localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
-          // localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
-          // localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
+          localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+          localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+          localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
         } catch {
           // ignore
         }

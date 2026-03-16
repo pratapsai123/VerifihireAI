@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path # Reload trigger
 from . import views
 from . import coding_views
 
@@ -71,5 +71,19 @@ urlpatterns = [
     path('submit-interview-feedback/', views.submit_interview_feedback, name='submit_interview_feedback'),
     path('job-roles/', views.job_role_list_create_view, name='job_role_list_create'),
     path('job-roles/<int:pk>/', views.job_role_delete_view, name='job_role_delete'),
+
+    # Superadmin (Platform ApplicationAdmin) endpoints
+    path('superadmin/companies/', views.superadmin_companies_view, name='superadmin_companies'),
+    path('superadmin/companies/<int:company_id>/approve/', views.superadmin_approve_company_view, name='superadmin_approve_company'),
+    path('superadmin/companies/<int:company_id>/reject/', views.superadmin_reject_company_view, name='superadmin_reject_company'),
+    path('superadmin/users/', views.superadmin_users_view, name='superadmin_users'),
+    path('superadmin/users/<int:user_id>/approve/', views.superadmin_approve_user_view, name='superadmin_approve_user'),
+
+    # Workflow / Settings
+    path('settings/deletion/', views.company_deletion_settings_view, name='company_deletion_settings'),
+    path('workflow/deletion-requests/', views.list_deletion_requests_view, name='list_deletion_requests'),
+    path('workflow/deletion-requests/count/', views.pending_deletion_requests_count_view, name='pending_deletion_requests_count'),
+    path('workflow/deletion-requests/<int:request_id>/action/', views.action_deletion_request_view, name='action_deletion_request'),
+    path('workflow/deletion-requests/<int:request_id>/restore/', views.restore_deletion_request_view, name='restore_deletion_request'),
 ]
 

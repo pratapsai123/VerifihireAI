@@ -171,3 +171,65 @@ def superadmin_reject_company_view(request, company_id):
         'approval_status': company.approval_status,
         'rejected_reason': company.rejected_reason,
     }, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def superadmin_users_view(request):
+    """
+    GET /api/superadmin/users/?status=pending|approved
+    List all platform users with approval filter.
+    """
+    auth_user, app_admin = _require_application_admin(request)
+    if not app_admin:
+        return Response({'error': 'Forbidden. Platform superadmin access required.'}, status=status.HTTP_403_FORBIDDEN)
+
+    status_filter = request.query_params.get('status', '').strip().lower()
+    
+    users_qs = UserProfile.objects.all().order_by('-registration_timestamp')
+    if status_filter == 'pending':
+        users_qs = users_qs.filter(is_approved=False)
+    elif status_filter == 'approved':
+        users_qs = users_qs.filter(is_approved=True)
+
+    result = []
+    for profile in users_qs:
+        result.append({
+            'id': profile.id,
+            'first_name': profile.first_name,
+            'last_name': profile.last_name,
+            'email': profile.email,
+            'role': profile.role,
+            'organization_name': profile.organization_name,
+            'company_id': profile.company.id if profile.company else None,
+            'is_approved': profile.is_approved,
+            'registered_at': profile.registration_timestamp.isoformat(),
+        })
+
+    return Response({'users': result, 'total': len(result)}, status=status.HTTP_200_OK)
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def superadmin_approve_user_view(request, user_id):
+    """
+    POST /api/superadmin/users/<id>/approve/
+    Approve an individual user.
+    """
+    auth_user, app_admin = _require_application_admin(request)
+    if not app_admin:
+        return Response({'error': 'Forbidden. Platform superadmin access required.'}, status=status.HTTP_403_FORBIDDEN)
+
+    try:
+        profile = UserProfile.objects.get(pk=user_id)
+    except UserProfile.DoesNotExist:
+        return Response({'error': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    profile.is_approved = True
+    profile.save(update_fields=['is_approved', 'updated_at'])
+
+    return Response({
+        'message': f'User "{profile.email}" has been approved.',
+        'user_id': profile.id,
+        'is_approved': True,
+    }, status=status.HTTP_200_OK)

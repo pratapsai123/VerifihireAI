@@ -71,7 +71,9 @@ class UserProfile(models.Model):
     password = models.CharField(max_length=50, blank=True, null=True)
     role = models.CharField(max_length=100, choices=ROLE_CHOICES, blank=True, null=True)
     organization_name = models.CharField(max_length=50, blank=True, null=True)
+    # Audit timestamps
     registration_timestamp = models.DateTimeField(auto_now_add=True)
+    last_login_at = models.DateTimeField(blank=True, null=True)
     old_password = models.CharField(max_length=50, blank=True, null=True)
 
     company = models.ForeignKey(
@@ -82,7 +84,30 @@ class UserProfile(models.Model):
         related_name='users',
         help_text="Tenant/company this user belongs to",
     )
-    
+
+    # Hierarchy: which Admin or HR Manager directly invited this user.
+    # Set permanently when an invitation is accepted.
+    # Acts as 'created_by' in the RBAC prompt.
+    invited_by_profile = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='invitees_created',
+        help_text="The user who directly created/invited this account",
+    )
+
+    # Reporting Hierarchy: the user who currently manages this user.
+    # Can be reassigned if a manager leaves.
+    manager = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='managed_users',
+        help_text="The current manager in the reporting hierarchy",
+    )
+
     # Optional: Link to Django User model if needed for authentication
     user = models.OneToOneField(
         User, 
@@ -92,6 +117,9 @@ class UserProfile(models.Model):
         null=True,
         help_text="Optional link to Django User model"
     )
+    
+    # Approval tracking
+    is_approved = models.BooleanField(default=False, help_text="Specific user approval from platform admin")
     
     # Additional timestamp
     updated_at = models.DateTimeField(auto_now=True)
@@ -137,6 +165,12 @@ class Company(models.Model):
         help_text="Optional reason provided when rejecting a company registration",
     )
     approved_at = models.DateTimeField(blank=True, null=True, help_text="When the company was approved")
+
+    # Workflow Settings
+    require_delete_permission = models.BooleanField(
+        default=True,
+        help_text="If enabled, HR/HR-Managers need approval to delete records (Candidates, Assessments, etc)"
+    )
 
     class Meta:
         verbose_name = "Company"
@@ -195,6 +229,7 @@ class JobRole(models.Model):
         related_name='job_roles'
     )
     
+    is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -503,6 +538,7 @@ class Assessment(models.Model):
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
 
+    is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -643,6 +679,7 @@ class CandidateInvitation(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     last_error = models.TextField(blank=True, null=True)
 
+    is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -688,6 +725,8 @@ class CandidateSubmission(models.Model):
     coding_score = models.IntegerField(default=0)
     coding_total = models.IntegerField(default=0)
     coding_percentage = models.FloatField(default=0.0)
+
+    is_deleted = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Candidate Submission"
@@ -997,6 +1036,7 @@ class InterviewInvitation(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
     last_error = models.TextField(blank=True, null=True)
 
+    is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -1215,3 +1255,44 @@ class LiveInterviewFeedback(models.Model):
 
     def __str__(self):
         return f"Feedback for Invitation #{self.invitation_id}"
+
+
+class DeletionRequest(models.Model):
+    """
+    Tracks requests to delete data (Candidate Submissions, Assessments, etc.)
+    that require approval from a higher-level role.
+    """
+    STATUS_PENDING = 'pending'
+    STATUS_APPROVED = 'approved'
+    STATUS_REJECTED = 'rejected'
+
+    STATUS_CHOICES = [
+        (STATUS_PENDING, 'Pending Approval'),
+        (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
+    ]
+
+    requester = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='deletion_requests')
+    # Approver is determined by hierarchy (HR -> HRM -> Admin)
+    approver = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='deletion_approvals')
+    
+    content_type = models.CharField(max_length=100, help_text="Model name, e.g. 'CandidateSubmission'")
+    object_id = models.IntegerField(help_text="ID of the object to be deleted")
+    
+    # Optional metadata to show what is being deleted
+    object_repr = models.CharField(max_length=255, blank=True, null=True, help_text="String representation of the object (e.g. candidate name)")
+    
+    reason = models.TextField(blank=True, null=True, help_text="Reason for deletion")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    actioned_at = models.DateTimeField(null=True, blank=True)
+    rejection_reason = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Deletion Request"
+        verbose_name_plural = "Deletion Requests"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Delete Request #{self.id} for {self.content_type}:{self.object_id} by {self.requester.email}"

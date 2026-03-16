@@ -1233,9 +1233,20 @@ def create_assessment_view(request):
         if request.method == 'GET':
             user_profile = getattr(request.user, 'profile', None)
             if user_profile and user_profile.company:
-                qs = Assessment.objects.filter(user_profile__company=user_profile.company).order_by('-created_at')
+                scoped_ids = get_scoped_user_ids(user_profile)
+                if scoped_ids is None:
+                    # Application Admin: see all assessments for the company
+                    qs = Assessment.objects.filter(
+                        user_profile__company=user_profile.company,
+                        is_deleted=False
+                    ).order_by('-created_at')
+                else:
+                    # Role-scoped: only see assessments created by users in their hierarchy
+                    qs = Assessment.objects.filter(
+                        user_profile_id__in=scoped_ids,
+                        is_deleted=False
+                    ).order_by('-created_at')
             else:
-                 # If no company, return nothing or only global
                 qs = Assessment.objects.none()
 
             # Date filtering

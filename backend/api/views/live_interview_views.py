@@ -369,14 +369,22 @@ def interview_invitations_overview_view(request):
 
         interview_id = request.GET.get('interview_id', None)
         if company_id:
-             # Filter by company via the Interview's company field.
-             # Also include legacy invitations where interview.created_by belongs to the same company.
-             qs = InterviewInvitation.objects.filter(
-                 models.Q(interview__company_id=company_id) |
-                 models.Q(interview__created_by__company_id=company_id)
-             ).select_related('interview').order_by('-created_at').distinct()
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if scoped_ids is None:
+                # Application Admin: all interviews for the company
+                qs = InterviewInvitation.objects.filter(
+                    (models.Q(interview__company_id=company_id) |
+                     models.Q(interview__created_by__company_id=company_id)),
+                    is_deleted=False
+                ).select_related('interview').order_by('-created_at').distinct()
+            else:
+                # Role-scoped: interviews created by users in this user's hierarchy
+                qs = InterviewInvitation.objects.filter(
+                    interview__created_by_id__in=scoped_ids,
+                    is_deleted=False
+                ).select_related('interview').order_by('-created_at').distinct()
         else:
-             qs = InterviewInvitation.objects.none()
+            qs = InterviewInvitation.objects.none()
         if interview_id:
             try:
                 qs = qs.filter(interview_id=int(interview_id))
@@ -1023,8 +1031,22 @@ def draft_interview_invitations_view(request, draft_id=None):
             if not draft:
                 return Response({'error': 'Draft not found'}, status=status.HTTP_404_NOT_FOUND)
                 
+            # Use centralized helper to handle policy and workflow
+            response, handled = handle_deletion_request(
+                user_profile=user_profile,
+                company=user_profile.company,
+                content_type='InterviewInvitation',
+                object_id=draft.id,
+                object_repr=f"Interview Draft for {draft.email}",
+                reason=request.data.get('reason')
+            )
+            
+            if handled:
+                return response
+
             draft.delete()
             return Response({'message': 'Draft deleted successfully'}, status=status.HTTP_204_NO_CONTENT)
+
 
     except Exception as e:
         import traceback

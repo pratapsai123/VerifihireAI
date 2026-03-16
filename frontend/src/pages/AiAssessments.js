@@ -19,6 +19,10 @@ const AiAssessments = () => {
     const [inviteData, setInviteData] = useState({ name: '', email: '' });
     const [inviteFile, setInviteFile] = useState(null);
     const [inviting, setInviting] = useState(false);
+    
+    // User role check
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    const isCompanyAdmin = userData?.role === 'ROLE_COMPANY_ADMIN';
 
     useEffect(() => {
         const fetchAssessments = async () => {
@@ -52,17 +56,22 @@ const AiAssessments = () => {
         setShowInviteModal(true);
     };
 
-    const deleteAssessment = async (id) => {
-        if (!window.confirm('Are you sure you want to delete this assessment? This action cannot be undone.')) return;
+    const [confirmDeletion, setConfirmDeletion] = useState(null); // Assessment object
 
+    const deleteAssessment = async (id, reason) => {
         try {
-            await axios.delete(`${API_BASE_URL}/ai/${id}/`);
-            setAssessments(prev => prev.filter(a => a.id !== id));
+            const resp = await axios.delete(`${API_BASE_URL}/ai/${id}/`, { data: { reason } });
+            if (resp.data.message) {
+                alert(resp.data.message);
+            } else {
+                setAssessments(prev => prev.filter(a => a.id !== id));
+            }
         } catch (err) {
             console.error('Delete Error:', err);
-            alert('Failed to delete assessment.');
+            alert(err.response?.data?.error || 'Failed to delete assessment.');
         }
     };
+
 
     const handleInvite = async (e) => {
         e.preventDefault();
@@ -306,13 +315,16 @@ const AiAssessments = () => {
                                                             </button>
                                                         );
                                                     })()}
-                                                    <button
-                                                        className="action-btn"
-                                                        onClick={() => deleteAssessment(assessment.id)}
-                                                        style={{ background: '#FFF5F5', color: '#EE5D50', border: 'none', width: '34px', height: '34px', padding: 0, borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                                                    >
-                                                        <i className="fa-solid fa-trash"></i>
-                                                    </button>
+                                                    {!isCompanyAdmin && (
+                                                        <button
+                                                            className="action-btn"
+                                                            onClick={() => setConfirmDeletion(assessment)}
+                                                            style={{ background: '#FFF5F5', color: '#EE5D50', border: 'none', width: '34px', height: '34px', padding: 0, borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                                                        >
+                                                            <i className="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    )}
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -448,8 +460,56 @@ const AiAssessments = () => {
                     </div>
                 </div>
             )}
+            {/* Deletion Modal */}
+            {confirmDeletion && (
+                <div style={{
+                    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+                    background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center',
+                    justifyContent: 'center', zIndex: 1100, backdropFilter: 'blur(4px)'
+                }}>
+                    <div style={{
+                        background: 'white', padding: '2.5rem', borderRadius: '24px',
+                        width: '420px', textAlign: 'center', boxShadow: '0 20px 50px rgba(0,0,0,0.2)'
+                    }}>
+                        <div style={{ fontSize: '3rem', marginBottom: '0.75rem' }}>🗑️</div>
+                        <h2 style={{ fontSize: '1.5rem', fontWeight: '800', color: '#1B254B', marginBottom: '0.5rem' }}>Delete Assessment?</h2>
+                        <p style={{ color: '#707EAE', fontSize: '0.9rem', marginBottom: '1.5rem', lineHeight: '1.6' }}>
+                            This will initiate a deletion request for <strong>{confirmDeletion.job_description?.substring(0, 30)}...</strong>.
+                        </p>
+
+                        <div style={{ marginBottom: '1.5rem', textAlign: 'left' }}>
+                            <label style={{ fontSize: '0.85rem', fontWeight: '700', color: '#1B254B', display: 'block', marginBottom: '0.5rem' }}>Reason for Deletion (Required)</label>
+                            <textarea
+                                id="assessment-delete-reason"
+                                style={{ width: '100%', borderRadius: '12px', border: '1px solid #E0E5F2', padding: '0.75rem', fontSize: '0.9rem', minHeight: '80px', fontFamily: 'inherit', outline: 'none' }}
+                                placeholder="Please provide a reason..."
+                                required
+                            />
+                        </div>
+
+                        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                            <button onClick={() => setConfirmDeletion(null)} style={{ padding: '0.7rem 1.5rem', border: '1px solid #E0E5F2', borderRadius: '12px', background: 'white', cursor: 'pointer', fontWeight: '700', color: '#1B254B' }}>Cancel</button>
+                            <button
+                                onClick={() => {
+                                    const reason = document.getElementById('assessment-delete-reason')?.value;
+                                    if (!reason || reason.trim().length < 5) {
+                                        alert("Please provide a meaningful reason.");
+                                        return;
+                                    }
+                                    deleteAssessment(confirmDeletion.id, reason);
+                                    setConfirmDeletion(null);
+                                }}
+                                style={{ padding: '0.7rem 1.5rem', border: 'none', borderRadius: '12px', background: '#EE5D50', color: 'white', cursor: 'pointer', fontWeight: '700' }}
+                            >
+                                Submit Request
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
+
 
 export default AiAssessments;

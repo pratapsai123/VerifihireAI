@@ -27,6 +27,8 @@ logger = logging.getLogger(__name__)
 MAX_CODING_TASKS = 50
 
 from api.views import ensure_role_exists
+from api.models import UserProfile
+from api.views._imports import _is_application_admin_email, handle_deletion_request
 
 # Configure Groq
 # groq_api_key = getattr(settings, 'GROQ_API_KEY', None)
@@ -435,15 +437,27 @@ class CandidateListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         user_profile = getattr(self.request.user, 'profile', None)
-        company = user_profile.company if user_profile and user_profile.company else None
-        if not company:
+        if not user_profile or not user_profile.company:
             return Candidate.objects.none()
-        return Candidate.objects.filter(company=company).order_by('-created_at')
+        
+        from api.views._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+        
+        if scoped_ids is None:
+            # Application Admin: all in company
+            return Candidate.objects.filter(company=user_profile.company, is_deleted=False).order_by('-created_at')
+        
+        # Scoped: only candidates created by users in this user's reporting hierarchy
+        return Candidate.objects.filter(
+            company=user_profile.company,
+            user_profile_id__in=scoped_ids,
+            is_deleted=False
+        ).order_by('-created_at')
 
     def perform_create(self, serializer):
         user_profile = getattr(self.request.user, 'profile', None)
         company = user_profile.company if user_profile else None
-        serializer.save(company=company)
+        serializer.save(company=company, user_profile=user_profile)
 
 INTERVIEW_LINK_TTL_MINUTES = 60
 
@@ -453,10 +467,48 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         if self.request.user.is_authenticated:
             user_profile = getattr(self.request.user, 'profile', None)
-            company = user_profile.company if user_profile and user_profile.company else None
-            if company:
-                return Candidate.objects.filter(company=company)
-        return Candidate.objects.all()
+            if not user_profile or not user_profile.company:
+                return Candidate.objects.none()
+
+            from api.views._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
+
+            if scoped_ids is None:
+                return Candidate.objects.filter(company=user_profile.company, is_deleted=False)
+
+            return Candidate.objects.filter(
+                company=user_profile.company,
+                user_profile_id__in=scoped_ids,
+                is_deleted=False
+            )
+        return Candidate.objects.none()
+
+    def destroy(self, request, *args, **kwargs):
+        user = request.user
+        if not user.is_authenticated:
+            return Response({'error': 'Authentication required.'}, status=status.HTTP_401_UNAUTHORIZED)
+            
+        user_profile = getattr(user, 'profile', None)
+        if not user_profile or not user_profile.company:
+            return super().destroy(request, *args, **kwargs)
+
+        instance = self.get_object()
+        
+        # Use centralized helper to handle policy and workflow
+        response, handled = handle_deletion_request(
+            user_profile=user_profile,
+            company=user_profile.company,
+            content_type='Candidate',
+            object_id=instance.id,
+            object_repr=f"Candidate Profile: {instance.name} ({instance.email})",
+            reason=request.data.get('reason')
+        )
+        
+        if handled:
+            return response
+
+        return super().destroy(request, *args, **kwargs)
+
 
     def get(self, request, *args, **kwargs):
         candidate = self.get_object()

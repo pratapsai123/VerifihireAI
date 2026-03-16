@@ -21,6 +21,8 @@ from ai_candidates.views import extract_json
 import traceback
 import base64
 from django.core.files.base import ContentFile
+from api.models import UserProfile, DeletionRequest
+from api.views._imports import _is_application_admin_email, handle_deletion_request
 
 
 def _normalize_difficulty_label(value, *, default='Medium'):
@@ -1145,7 +1147,7 @@ class AssessmentListView(APIView):
         if not company:
             return Response([], status=status.HTTP_200_OK)
 
-        assessments = Assessment.objects.filter(company=company).order_by('-created_at')
+        assessments = Assessment.objects.filter(company=company, is_deleted=False).order_by('-created_at')
         data = []
         for assessment in assessments:
             count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
@@ -1241,9 +1243,24 @@ class AssessmentDetailView(APIView):
     def delete(self, request, pk):
         try:
             user_profile = getattr(request.user, 'profile', None)
-            company = user_profile.company if user_profile else None
+            if not user_profile or not user_profile.company:
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
             
-            assessment = Assessment.objects.get(pk=pk, company=company)
+            assessment = Assessment.objects.get(pk=pk, company=user_profile.company)
+            
+            # Use centralized helper to handle policy and workflow
+            response, handled = handle_deletion_request(
+                user_profile=user_profile,
+                company=user_profile.company,
+                content_type='Assessment',
+                object_id=assessment.id,
+                object_repr=f"AI Assessment: {assessment.required_skills}",
+                reason=request.data.get('reason')
+            )
+            
+            if handled:
+                return response
+
             assessment.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Assessment.DoesNotExist:
@@ -1593,10 +1610,29 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
         company = user_profile.company if user_profile and user_profile.company else None
         if not company:
             return AIAssessmentSubmission.objects.none()
-        return AIAssessmentSubmission.objects.filter(assessment__company=company)
+        return AIAssessmentSubmission.objects.filter(assessment__company=company, is_deleted=False)
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile or not user_profile.company:
+            return super().destroy(request, *args, **kwargs)
+
+        instance = self.get_object()
+        
+        # Use centralized helper to handle policy and workflow
+        response, handled = handle_deletion_request(
+            user_profile=user_profile,
+            company=user_profile.company,
+            content_type='AIAssessmentSubmission',
+            object_id=instance.id,
+            object_repr=f"AI Submission for {instance.candidate_email}",
+            reason=request.data.get('reason')
+        )
+        
+        if handled:
+            return response
+
         return self.destroy(request, *args, **kwargs)

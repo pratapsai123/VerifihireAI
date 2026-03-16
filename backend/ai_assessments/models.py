@@ -38,6 +38,7 @@ class Assessment(models.Model):
         null=True, 
         blank=True
     )
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Assessment for {self.required_skills} - {self.total_points} pts"
@@ -70,6 +71,7 @@ class AIAssessmentSubmission(models.Model):
     started_at = models.DateTimeField(default=timezone.now)
     submitted_at = models.DateTimeField(blank=True, null=True)
     current_question_index = models.IntegerField(default=0)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return f"AI Submission - {self.candidate_name} ({self.candidate_email})"

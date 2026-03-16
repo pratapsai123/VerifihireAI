@@ -52,12 +52,18 @@ export default function TeamMembers() {
     setInvitePage(1);
   }, [q, companyFilter, invStatusFilter, invRoleFilter, memberRoleFilter]);
 
+  // Helper: build the JWT Authorization header from localStorage
+  const authHeader = () => {
+    const token = localStorage.getItem('accessToken');
+    return token ? { Authorization: `Bearer ${token}` } : {};
+  };
+
   const load = async () => {
     setLoading(true);
     setError('');
     try {
       const res = await axios.get(`${API_BASE_URL}/users/team-members/`, {
-        params: { requester_email: myEmail },
+        headers: authHeader(),
       });
       setData(res.data);
     } catch (e) {
@@ -123,7 +129,11 @@ export default function TeamMembers() {
   const handleCancelInvite = async (token) => {
     setError('');
     try {
-      await axios.post(`${API_BASE_URL}/users/invite/${token}/cancel/`, { requester_email: myEmail });
+      await axios.post(
+        `${API_BASE_URL}/users/invite/${token}/cancel/`,
+        {},
+        { headers: authHeader() }
+      );
       await load();
     } catch (e) {
       setError(e?.response?.data?.error || 'Failed to cancel invitation.');
@@ -134,7 +144,11 @@ export default function TeamMembers() {
     setError('');
     setInviteResult(null);
     try {
-      const res = await axios.post(`${API_BASE_URL}/users/invite/${token}/resend/`, { requester_email: myEmail });
+      const res = await axios.post(
+        `${API_BASE_URL}/users/invite/${token}/resend/`,
+        {},
+        { headers: authHeader() }
+      );
       setInviteResult(res.data);
       await load();
     } catch (e) {

@@ -149,26 +149,23 @@ def invite_user_view(request):
 def cancel_invite_view(request, token):
     """
     Cancel a pending invitation.
-
-    Body:
-      { "requester_email": "..." }
+    Uses authenticated user from request.user.
     """
     try:
-        requester_email = _normalize_email(request.data.get('requester_email', ''))
-        if not requester_email:
-            return Response({'error': 'requester_email is required.'}, status=status.HTTP_400_BAD_REQUEST)
-        if _is_application_admin_email(requester_email):
+        requester = getattr(request.user, 'profile', None)
+        if not requester or not requester.role:
+            return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+        if _is_application_admin_email(requester.email):
             return Response({'error': 'Application Admin cannot cancel invitations.'}, status=status.HTTP_403_FORBIDDEN)
 
-        requester = UserProfile.objects.filter(email=requester_email).select_related('company').first()
-        if not requester or not requester.company:
-            return Response({'error': 'Invalid requester.'}, status=status.HTTP_403_FORBIDDEN)
         if requester.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
             return Response({'error': 'Forbidden.'}, status=status.HTTP_403_FORBIDDEN)
 
         inv = UserInvitation.objects.select_related('company').filter(token=token).first()
         if not inv:
             return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
         if inv.company_id != requester.company_id:
             return Response({'error': 'Forbidden.'}, status=status.HTTP_403_FORBIDDEN)
 
@@ -188,26 +185,23 @@ def cancel_invite_view(request, token):
 def resend_invite_view(request, token):
     """
     Resend a pending invitation. Regenerates the temporary password.
-
-    Body:
-      { "requester_email": "..." }
+    Uses authenticated user from request.user.
     """
     try:
-        requester_email = _normalize_email(request.data.get('requester_email', ''))
-        if not requester_email:
-            return Response({'error': 'requester_email is required.'}, status=status.HTTP_400_BAD_REQUEST)
-        if _is_application_admin_email(requester_email):
+        requester = getattr(request.user, 'profile', None)
+        if not requester or not requester.role:
+            return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+        if _is_application_admin_email(requester.email):
             return Response({'error': 'Application Admin cannot resend invitations.'}, status=status.HTTP_403_FORBIDDEN)
 
-        requester = UserProfile.objects.filter(email=requester_email).select_related('company').first()
-        if not requester or not requester.company:
-            return Response({'error': 'Invalid requester.'}, status=status.HTTP_403_FORBIDDEN)
         if requester.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
             return Response({'error': 'Forbidden.'}, status=status.HTTP_403_FORBIDDEN)
 
         inv = UserInvitation.objects.select_related('company').filter(token=token).first()
         if not inv:
             return Response({'error': 'Invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+        
         if inv.company_id != requester.company_id:
             return Response({'error': 'Forbidden.'}, status=status.HTTP_403_FORBIDDEN)
 
@@ -372,6 +366,10 @@ def accept_invite_view(request):
             organization_name=inv.company.name,
             company=inv.company,
             user=user,
+            # Hierarchy: link to the Admin or HR Manager who invited this user.
+            # inv.invited_by acts as both the creator (static) and initial manager (dynamic).
+            invited_by_profile=inv.invited_by,
+            manager=inv.invited_by,
         )
 
         inv.status = UserInvitation.STATUS_ACCEPTED
@@ -403,41 +401,95 @@ def team_members_view(request):
     """
     List team members and invitation details.
 
-    Since this repo doesn't have JWT/session auth wired in, the caller supplies:
-      ?requester_email=...
+    Identity is taken from the verified JWT Bearer token (request.user).
+    No query params needed for authentication.
 
     Access rules:
-    - application_admin: can view all companies' users + invites
-    - company_admin/hr_manager: can view only their company users + invites
-    - hr/candidate/etc: forbidden
+    - application_admin : can view all companies' users + invites
+    - company_admin     : can view their own hierarchy (HRMs + HRs they invited)
+    - hr_manager        : can view only themselves + HRs they directly invited
+    - hr / others       : forbidden (403)
     """
     try:
-        requester_email = _normalize_email(request.query_params.get('requester_email', ''))
-        if not requester_email:
-            return Response({'error': 'requester_email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        # SECURITY FIX: Identity comes from the verified JWT token (request.user),
+        # NOT from an easily-spoofed ?requester_email= query parameter.
+        # @permission_classes([IsAuthenticated]) already validated the JWT above.
+        jwt_user = request.user
 
-        is_app_admin = _is_application_admin_email(requester_email)
+        # Check if this is the Platform Application Admin (Django superuser or specific email)
+        is_app_admin = _is_application_admin_email(getattr(jwt_user, 'email', ''))
+
         requester_profile = None
         if not is_app_admin:
-            requester_profile = UserProfile.objects.filter(email=requester_email).select_related('company').first()
+            requester_profile = (
+                UserProfile.objects
+                .filter(user=jwt_user)
+                .select_related('company')
+                .first()
+            )
             if not requester_profile or not requester_profile.company:
-                return Response({'error': 'Invalid requester.'}, status=status.HTTP_403_FORBIDDEN)
+                return Response({'error': 'Your account has no company assigned.'}, status=status.HTTP_403_FORBIDDEN)
             if requester_profile.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
-                return Response({'error': 'Forbidden.'}, status=status.HTTP_403_FORBIDDEN)
+                return Response({'error': 'Forbidden. Only Company Admins and HR Managers can view team members.'}, status=status.HTTP_403_FORBIDDEN)
 
         if is_app_admin:
             members_qs = UserProfile.objects.select_related('company').order_by('company__name', 'email')
             invites_qs = UserInvitation.objects.select_related('company', 'invited_by').order_by('-created_at')
         else:
             company = requester_profile.company
-            # Never include application admin in company-scoped member lists
-            members_qs = (
-                UserProfile.objects.filter(company=company)
-                .exclude(role=UserProfile.ROLE_APPLICATION_ADMIN)
-                .select_related('company')
-                .order_by('email')
-            )
-            invites_qs = UserInvitation.objects.filter(company=company).select_related('company', 'invited_by').order_by('-created_at')
+            role = (requester_profile.role or '').strip().lower()
+
+            if role == UserProfile.ROLE_HR_MANAGER:
+                # HR Manager: sees only members they directly invited
+                # + invitations they personally sent
+                scoped_ids = get_scoped_user_ids(requester_profile)  # [self + their HRs]
+                members_qs = (
+                    UserProfile.objects.filter(
+                        id__in=scoped_ids,
+                        company=company,
+                    )
+                    .exclude(role=UserProfile.ROLE_APPLICATION_ADMIN)
+                    .select_related('company')
+                    .order_by('email')
+                )
+                invites_qs = (
+                    UserInvitation.objects.filter(
+                        company=company,
+                        invited_by=requester_profile,
+                    )
+                    .select_related('company', 'invited_by')
+                    .order_by('-created_at')
+                )
+            else:
+                # Company Admin: sees their own HR Managers + those HRMs' HRs
+                # (not other Company Admins' sub-trees)
+                scoped_ids = get_scoped_user_ids(requester_profile)  # [self + HRMs + HRs]
+                members_qs = (
+                    UserProfile.objects.filter(
+                        id__in=scoped_ids,
+                        company=company,
+                    )
+                    .exclude(role=UserProfile.ROLE_APPLICATION_ADMIN)
+                    .select_related('company')
+                    .order_by('email')
+                )
+                # Invitations sent by this Admin OR by any HRM under this Admin
+                # Use a single query to find HRM IDs (no per-item loop)
+                hrm_ids = list(
+                    UserProfile.objects.filter(
+                        id__in=scoped_ids,
+                        role=UserProfile.ROLE_HR_MANAGER,
+                        company=company,
+                    ).values_list('id', flat=True)
+                )
+                invites_qs = (
+                    UserInvitation.objects.filter(
+                        company=company,
+                        invited_by_id__in=[requester_profile.id] + hrm_ids,
+                    )
+                    .select_related('company', 'invited_by')
+                    .order_by('-created_at')
+                )
 
         members = []
         for u in members_qs:
@@ -474,7 +526,7 @@ def team_members_view(request):
         return Response(
             {
                 'scope': 'all' if is_app_admin else 'company',
-                'requester_email': requester_email,
+                'requester_email': getattr(jwt_user, 'email', None),
                 'members': members,
                 'invitations': invitations,
             },
