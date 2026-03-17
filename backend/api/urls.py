@@ -1,6 +1,7 @@
-from django.urls import path # Reload trigger
+from django.urls import path # Reload trigger 2
 from . import views
 from . import coding_views
+from .views.user_views import add_team_member_view
 
 urlpatterns = [
     path('login/', views.login_view, name='login'),
@@ -27,6 +28,14 @@ urlpatterns = [
     path('interviews/invitations/<uuid:token>/', views.get_interview_invitation_by_token_view, name='get_interview_invitation_by_token'),
     path('interviews/draft-invites/', views.draft_interview_invitations_view, name='draft_interview_invitations_list'),
     path('interviews/draft-invites/<int:draft_id>/', views.draft_interview_invitations_view, name='draft_interview_invitations_detail'),
+    
+    # Slot Booking
+    path('interviews/slots/generate/', views.generate_all_interviewer_slots_view, name='generate_slots'),
+    path('interviews/slots/<uuid:token>/', views.get_available_slots_view, name='get_available_slots'),
+    path('interviews/slots/<uuid:token>/reserve/', views.reserve_interview_slot_view, name='reserve_slot'),
+    path('interviews/slots/<uuid:token>/confirm/', views.confirm_interview_booking_view, name='confirm_booking'),
+    path('interviews/availability/', views.get_interviewer_availability_view, name='interviewer_availability_list'),
+    path('interviews/availability/manage/', views.manage_interviewer_availability_view, name='interviewer_availability_manage'),
 
     # Internal user invitations (HR Manager / HR)
     path('users/invite/', views.invite_user_view, name='invite_user'),
@@ -35,6 +44,7 @@ urlpatterns = [
     path('users/invite/<uuid:token>/resend/', views.resend_invite_view, name='resend_invite'),
     path('users/accept-invite/', views.accept_invite_view, name='accept_invite'),
     path('users/team-members/', views.team_members_view, name='team_members'),
+    path('users/team-members/add/', add_team_member_view, name='add_team_member'),
     path('profile/', views.profile_view, name='profile'),
 
     path('invitations/public/<uuid:token>/', views.get_invitation_public_view, name='get_invitation_public'),

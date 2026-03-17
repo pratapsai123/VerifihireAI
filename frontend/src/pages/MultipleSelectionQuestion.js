@@ -4,58 +4,22 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
+import { SHARED_ROLES, STORAGE_KEYS } from '../utils/assessmentConstants';
 import '../styles/MultipleSelectionQuestion.css';
 
 function MultipleSelectionQuestion() {
   const navigate = useNavigate();
   const location = useLocation();
-  const assessmentContext = location.state || null;
-  const assessmentOptions = [
-    'Python',
-    'Java',
-    'Java Full Stack',
-    'Python Full Stack',
-    'JavaScript',
-    'TypeScript',
-    'Frontend Development',
-    'Backend Development',
-    'Full Stack (MERN)',
-    'Full Stack (MEAN)',
-    'React',
-    'Angular',
-    'Vue.js',
-    'Node.js',
-    '.NET',
-    'C#',
-    'C++',
-    'Go',
-    'PHP',
-    'Ruby on Rails',
-    'Mobile Development',
-    'Android',
-    'iOS',
-    'React Native',
-    'Flutter',
-    'DevOps',
-    'AWS',
-    'Azure',
-    'GCP',
-    'Kubernetes',
-    'Data Engineering',
-    'Data Science',
-    'Machine Learning',
-    'AI / GenAI',
-    'Cyber Security',
-    'QA Manual',
-    'QA Automation',
-    'Salesforce',
-    'SAP',
-    'Power BI',
-    'Tableau',
-    'UI/UX Design',
-    'Product Management',
-    'Business Analyst',
-  ];
+  // State preservation: Use location.state or fallback to a dedicated storage key if available
+  const assessmentContext = location.state || (window.location.hash.includes('review') ? null : JSON.parse(localStorage.getItem('temp_assessment_context')));
+
+  // Persist context to handle refreshes
+  React.useEffect(() => {
+    if (location.state) {
+      localStorage.setItem('temp_assessment_context', JSON.stringify(location.state));
+    }
+  }, [location.state]);
+  const assessmentOptions = SHARED_ROLES;
 
   const initialAnswers = [
     { label: 'A', text: '', isCorrect: false },

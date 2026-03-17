@@ -199,7 +199,7 @@ export default function Assessment() {
                       <td>{a.submitted ?? 0}</td>
                       <td>{formatDate(a.created_at)}</td>
                       <td style={{ textAlign: 'right' }}>
-                        <div className="row-actions">
+                        <div className="row-actions" style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
                           <button
                             type="button"
                             className="btn-invite"

@@ -45,6 +45,7 @@ class UserProfile(models.Model):
     ROLE_COMPANY_ADMIN = 'company_admin'
     ROLE_HR_MANAGER = 'hr_manager'
     ROLE_HR = 'hr'
+    ROLE_INTERVIEWER = 'interviewer'
     ROLE_CANDIDATE = 'candidate'
 
     ROLE_CHOICES = [
@@ -52,6 +53,7 @@ class UserProfile(models.Model):
         (ROLE_COMPANY_ADMIN, 'Company Admin'),
         (ROLE_HR_MANAGER, 'HR Manager'),
         (ROLE_HR, 'HR'),
+        (ROLE_INTERVIEWER, 'Interviewer'),
         (ROLE_CANDIDATE, 'Candidate'),
 
         # Legacy roles kept for backward compatibility with existing data/UI flows
@@ -538,6 +540,13 @@ class Assessment(models.Model):
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
 
+    assigned_interviewers = models.ManyToManyField(
+        UserProfile,
+        blank=True,
+        related_name='assigned_assessments',
+        help_text="Interviewers assigned to conduct live interviews for this assessment"
+    )
+
     is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -648,6 +657,7 @@ class CandidateInvitation(models.Model):
         ('sent', 'Sent'),
         ('failed', 'Failed'),
         ('submitted', 'Submitted'),
+        ('qualified', 'Qualified'),
     ]
 
     assessment = models.ForeignKey(
@@ -677,6 +687,7 @@ class CandidateInvitation(models.Model):
 
     token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
+    is_auto_schedule = models.BooleanField(default=False)
     last_error = models.TextField(blank=True, null=True)
 
     is_deleted = models.BooleanField(default=False)
@@ -1296,3 +1307,97 @@ class DeletionRequest(models.Model):
 
     def __str__(self):
         return f"Delete Request #{self.id} for {self.content_type}:{self.object_id} by {self.requester.email}"
+
+
+class InterviewSlot(models.Model):
+    """
+    Tracks availability and bookings for live interviews.
+    Supports 45-minute blocks with automatic generation rules.
+    """
+    STATUS_AVAILABLE = 'available'  # White
+    STATUS_RESERVED = 'reserved'    # Orange
+    STATUS_BOOKED = 'booked'        # Green
+
+    STATUS_CHOICES = [
+        (STATUS_AVAILABLE, 'Available'),
+        (STATUS_RESERVED, 'Reserved'),
+        (STATUS_BOOKED, 'Booked'),
+    ]
+
+    interviewer = models.ForeignKey(
+        UserProfile, 
+        on_delete=models.CASCADE, 
+        related_name='interview_slots'
+    )
+    candidate = models.ForeignKey(
+        'CandidateDetails', 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        related_name='booked_slots'
+    )
+    
+    slot_date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    
+    status = models.CharField(
+        max_length=20, 
+        choices=STATUS_CHOICES, 
+        default=STATUS_AVAILABLE
+    )
+    
+    # For temporary 5-minute lock
+    reserved_by_token = models.CharField(max_length=255, blank=True, null=True)
+    reservation_expiry_time = models.DateTimeField(blank=True, null=True)
+    
+    # Link to the invitation this booking belongs to
+    invitation = models.ForeignKey(
+        'CandidateInvitation',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='slots'
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Interview Slot"
+        verbose_name_plural = "Interview Slots"
+        ordering = ['slot_date', 'start_time']
+        # Prevent same interviewer having overlapping slots (basic check)
+        unique_together = ('interviewer', 'slot_date', 'start_time')
+
+    def __str__(self):
+        return f"{self.interviewer.email} - {self.slot_date} {self.start_time}-{self.end_time} ({self.status})"
+
+    def is_reserve_expired(self):
+        if self.status == self.STATUS_RESERVED and self.reservation_expiry_time:
+            return timezone.now() > self.reservation_expiry_time
+        return False
+
+class InterviewerAvailability(models.Model):
+    """
+    Stores granular free windows for an interviewer.
+    Candidates book 45-minute blocks within these windows.
+    """
+    interviewer = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.CASCADE,
+        related_name='availability_windows'
+    )
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Interviewer Availability"
+        verbose_name_plural = "Interviewer Availabilities"
+        ordering = ['date', 'start_time']
+
+    def __str__(self):
+        return f"{self.interviewer.email} - {self.date} ({self.start_time} to {self.end_time})"

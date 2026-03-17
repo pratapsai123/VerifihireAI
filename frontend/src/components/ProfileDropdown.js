@@ -207,45 +207,51 @@ function ProfileDropdown() {
             {user.role ? <small style={profileStyles.profileDropdownHeaderSmall}>{formatRole(user.role)}</small> : null}
             {user.organization_name ? <small style={profileStyles.profileDropdownHeaderSmall}>{user.organization_name}</small> : null}
           </div>
-          <a href="/company-profile/" style={profileStyles.profileDropdownItem}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-              <path d="M8 1L2 4v3c0 4.418 3.582 8 8 8s8-3.582 8-8V4L8 1z" fill="#2563eb"/>
-              <path d="M8 1v14c4.418 0 8-3.582 8-8V4L8 1z" fill="#1d4ed8"/>
-            </svg>
-            Company Profile
-          </a>
-          <button type="button" style={profileStyles.profileDropdownItem}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-              <rect x="2" y="3" width="12" height="10" rx="1" fill="#2563eb"/>
-              <path d="M5 7h6M5 10h4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-            Plan Usage
-          </button>
-          <a href="/setting/" style={profileStyles.profileDropdownItem}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
-              <circle cx="8" cy="8" r="2" fill="#2563eb"/>
-              <path d="M8 1v2M8 13v2M15 8h-2M3 8H1M13.364 2.636l-1.414 1.414M4.05 11.95l-1.414 1.414M13.364 13.364l-1.414-1.414M4.05 4.05L2.636 2.636" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round"/>
-            </svg>
-            Setting Options
-            {pendingCount > 0 && (
-              <span style={{
-                marginLeft: 'auto',
-                backgroundColor: '#ef4444',
-                color: 'white',
-                minWidth: '16px',
-                height: '16px',
-                borderRadius: '8px',
-                fontSize: '10px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                padding: '0 4px',
-                fontWeight: 'bold'
-              }}>
-                {pendingCount}
-              </span>
+            {user.role !== 'interviewer' && (
+              <>
+                <a href="/company-profile/" style={profileStyles.profileDropdownItem}>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
+                    <path d="M8 1L2 4v3c0 4.418 3.582 8 8 8s8-3.582 8-8V4L8 1z" fill="#2563eb"/>
+                    <path d="M8 1v14c4.418 0 8-3.582 8-8V4L8 1z" fill="#1d4ed8"/>
+                  </svg>
+                  Company Profile
+                </a>
+                <button type="button" style={profileStyles.profileDropdownItem}>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
+                    <rect x="2" y="3" width="12" height="10" rx="1" fill="#2563eb"/>
+                    <path d="M5 7h6M5 10h4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                  Plan Usage
+                </button>
+              </>
             )}
-          </a>
+            {user.role !== 'interviewer' && (
+              <a href="/setting/" style={profileStyles.profileDropdownItem}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
+                  <circle cx="8" cy="8" r="2" fill="#2563eb"/>
+                  <path d="M8 1v2M8 13v2M15 8h-2M3 8H1M13.364 2.636l-1.414 1.414M4.05 11.95l-1.414 1.414M13.364 13.364l-1.414-1.414M4.05 4.05L2.636 2.636" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round"/>
+                </svg>
+                Setting Options
+                {pendingCount > 0 && (
+                  <span style={{
+                    marginLeft: 'auto',
+                    backgroundColor: '#ef4444',
+                    color: 'white',
+                    minWidth: '16px',
+                    height: '16px',
+                    borderRadius: '8px',
+                    fontSize: '10px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0 4px',
+                    fontWeight: 'bold'
+                  }}>
+                    {pendingCount}
+                  </span>
+                )}
+              </a>
+            )}
 
           <a href="/my-account/" style={profileStyles.profileDropdownItem}>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>

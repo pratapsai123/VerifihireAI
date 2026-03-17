@@ -68,6 +68,8 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
                 start_grace_minutes = 0
             start_grace_minutes = max(0, start_grace_minutes)
 
+            is_auto_schedule = bool(payload.get('is_auto_schedule', False))
+
             invitation = CandidateInvitation.objects.create(
                 assessment=assessment,
                 name=name,
@@ -79,6 +81,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
                 time_zone=time_zone,
                 start_grace_minutes=start_grace_minutes,
                 status='draft',
+                is_auto_schedule=is_auto_schedule,
             )
 
             start_link = f"{frontend_base.rstrip('/')}/take-assessment/{invitation.token}"
@@ -824,6 +827,9 @@ def submit_invitation_answers_view(request, token):
         if not has_coding:
             inv.status = 'submitted'
             inv.save(update_fields=['status'])
+            # Trigger result email after 5 minutes (300 seconds)
+            from api.tasks import send_custom_assessment_result_task
+            send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
 
         return Response(
             {
@@ -1458,6 +1464,11 @@ def invitation_coding_finalize_view(request, token):
         # Mark invitation as submitted
         inv.status = 'submitted'
         inv.save(update_fields=['status'])
+
+        # Trigger result email after 5 minutes (300 seconds)
+        from api.tasks import send_custom_assessment_result_task
+        # send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=3600)
+        send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
 
         # Update submitted_at to the true final submission time (coding finalized)
         # For mixed assessments, the submission record was created during objective submit
