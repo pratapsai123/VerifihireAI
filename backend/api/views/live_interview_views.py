@@ -1113,6 +1113,19 @@ def get_available_slots_view(request, token):
         interviewer_ids = assessment.assigned_interviewers.values_list('id', flat=True)
         now = timezone.now()
         
+        # Check if this invitation already has a confirmed booking
+        booked_slot = InterviewSlot.objects.filter(invitation=inv, status=InterviewSlot.STATUS_BOOKED).first()
+        if booked_slot:
+            return Response({
+                'success': True,
+                'already_booked': True,
+                'booking_details': {
+                    'date': booked_slot.slot_date.isoformat(),
+                    'time': f"{booked_slot.start_time.strftime('%I:%M %p')} - {booked_slot.end_time.strftime('%I:%M %p')}",
+                    'interviewer': booked_slot.interviewer.first_name or booked_slot.interviewer.email
+                }
+            })
+        
         # Enforce 3-day lead time (72 hours prep buffer)
         today = now.date()
         min_booking_date = (now + datetime.timedelta(days=3)).date()
@@ -1133,17 +1146,16 @@ def get_available_slots_view(request, token):
             date__gte=min_booking_date
         ).select_related('interviewer')
 
-        booked_or_reserved_slots = InterviewSlot.objects.filter(
+        all_real_slots = InterviewSlot.objects.filter(
             interviewer_id__in=interviewer_ids,
             slot_date__gte=min_booking_date
-        ).exclude(status=InterviewSlot.STATUS_AVAILABLE)
+        )
 
         # 4. Generate Combined Map
         # Key: (date_str, start_time_str) -> one slot object
         slots_map = {}
 
         for win in windows:
-            # Current time loop for the window
             curr_dt = datetime.datetime.combine(win.date, win.start_time)
             end_dt = datetime.datetime.combine(win.date, win.end_time)
             
@@ -1156,18 +1168,32 @@ def get_available_slots_view(request, token):
                 slot_start = curr_dt.time()
                 slot_end = (curr_dt + datetime.timedelta(minutes=slot_duration)).time()
                 
-                # Check if THIS specific interviewer is busy
-                is_busy = booked_or_reserved_slots.filter(
+                # Check overlapping slots that ARE booked or reserved (by others)
+                is_busy = all_real_slots.filter(
                     interviewer=win.interviewer,
                     slot_date=slot_date,
-                    start_time=slot_start
+                    start_time__lt=slot_end,
+                    end_time__gt=slot_start,
+                    status__in=[InterviewSlot.STATUS_BOOKED, InterviewSlot.STATUS_RESERVED]
+                ).exclude(
+                    status=InterviewSlot.STATUS_RESERVED,
+                    reserved_by_token=str(token)
                 ).exists()
 
                 if not is_busy:
                     key = (slot_date.isoformat(), slot_start.strftime('%H:%M'))
                     if key not in slots_map:
+                        # Check if a REAL slot already exists for THIS specific start time
+                        # to reuse its ID (helps with frontend consistency)
+                        existing = all_real_slots.filter(
+                            interviewer=win.interviewer,
+                            slot_date=slot_date,
+                            start_time=slot_start,
+                            status=InterviewSlot.STATUS_AVAILABLE
+                        ).first()
+
                         slots_map[key] = {
-                            'id': f"dynamic_{slot_date.isoformat()}_{slot_start.strftime('%H%M')}",
+                            'id': str(existing.id) if existing else f"dynamic_{slot_date.isoformat()}_{slot_start.strftime('%H%M')}",
                             'date': slot_date.isoformat(),
                             'start_time': slot_start.strftime('%I:%M %p'),
                             'end_time': slot_end.strftime('%I:%M %p'),
@@ -1177,20 +1203,18 @@ def get_available_slots_view(request, token):
                 
                 curr_dt += datetime.timedelta(minutes=step)
 
-        # 5. Overlay "My" slots or "Booked" slots (to ensure they are visible)
-        for rs in booked_or_reserved_slots:
+        # 5. Overlay "My" reservations (so they show up even if busy or different time)
+        for rs in all_real_slots:
             is_mine = rs.reserved_by_token == str(token)
-            key = (rs.slot_date.isoformat(), rs.start_time.strftime('%H:%M'))
-            
-            # If it's my own reservation or it's fully booked, it takes priority in the display
-            if is_mine or rs.status == InterviewSlot.STATUS_BOOKED:
+            if is_mine:
+                key = (rs.slot_date.isoformat(), rs.start_time.strftime('%H:%M'))
                 slots_map[key] = {
-                    'id': str(rs.id), # Real ID
+                    'id': str(rs.id), 
                     'date': rs.slot_date.isoformat(),
                     'start_time': rs.start_time.strftime('%I:%M %p'),
                     'end_time': rs.end_time.strftime('%I:%M %p'),
                     'status': rs.status,
-                    'is_mine': is_mine
+                    'is_mine': True
                 }
 
         # 6. Sort by date and time correctly using the keys (which are in 24h format)
@@ -1229,20 +1253,33 @@ def reserve_interview_slot_view(request, token):
         if str(slot_id).startswith('dynamic_'):
             try:
                 parts = str(slot_id).split('_')
+                if len(parts) < 3:
+                    return Response({'error': f'Invalid slot ID format: {slot_id}'}, status=400)
+                    
                 date_str = parts[1]
                 time_code = parts[2]
                 
                 target_date = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
                 target_time = datetime.datetime.strptime(time_code, '%H%M').time()
-                target_datetime = datetime.datetime.combine(target_date, target_time)
-                target_end = (target_datetime + datetime.timedelta(minutes=50)).time()
+                
+                # Combine into datetime for duration calculation
+                base_dt = datetime.datetime.combine(target_date, target_time)
+                target_end = (base_dt + timedelta(minutes=50)).time()
 
-                # Validate 3-day lead time
-                min_booking_datetime = (now + datetime.timedelta(days=3)).replace(hour=0, minute=0, second=0, microsecond=0)
-                if target_datetime < min_booking_datetime:
-                    return Response({'error': 'Interviews must be booked at least 3 days in advance.'}, status=400)
-            except Exception:
-                return Response({'error': 'Invalid dynamic slot format or lead time validation failed'}, status=400)
+                # Robust Lead Time check: must be at least 3 full days away from 'now.date()'
+                # If today is Mar 16, earliest allowed target_date is Mar 19.
+                min_booking_date = now.date() + timedelta(days=3)
+                
+                if target_date < min_booking_date:
+                    return Response({
+                        'error': f'Booking too soon. Earliest available date is {min_booking_date.strftime("%B %d, %Y")}.',
+                        'code': 'LEAD_TIME_VIOLATION'
+                    }, status=400)
+
+            except Exception as e:
+                import traceback
+                print(traceback.format_exc())
+                return Response({'error': f'Failed to process slot selection: {str(e)}'}, status=400)
 
             with transaction.atomic():
                 interviewer_ids = assessment.assigned_interviewers.values_list('id', flat=True)
@@ -1259,10 +1296,11 @@ def reserve_interview_slot_view(request, token):
                 busy = InterviewSlot.objects.filter(
                     interviewer_id__in=has_window,
                     slot_date=target_date,
-                    start_time=target_time
+                    start_time=target_time,
+                    status__in=[InterviewSlot.STATUS_BOOKED, InterviewSlot.STATUS_RESERVED]
                 ).exclude(
                     status=InterviewSlot.STATUS_RESERVED,
-                    reserved_by_token=str(token) # Don't consider yourself busy if you somehow have it
+                    reserved_by_token=str(token)
                 ).values_list('interviewer_id', flat=True)
 
                 available_ids = [idx for idx in has_window if idx not in busy]
@@ -1285,33 +1323,45 @@ def reserve_interview_slot_view(request, token):
                 )
 
                 # Create the new RESERVED slot
-                slot = InterviewSlot.objects.create(
+                # Create or Update the RESERVED slot
+                slot, created = InterviewSlot.objects.update_or_create(
                     interviewer_id=selected_interviewer_id,
                     slot_date=target_date,
                     start_time=target_time,
-                    end_time=target_end,
-                    status=InterviewSlot.STATUS_RESERVED,
-                    reserved_by_token=str(token),
-                    reservation_expiry_time=now + datetime.timedelta(minutes=5),
-                    invitation=inv
+                    defaults={
+                        'end_time': target_end,
+                        'status': InterviewSlot.STATUS_RESERVED,
+                        'reserved_by_token': str(token),
+                        'reservation_expiry_time': now + datetime.timedelta(minutes=5),
+                        'invitation': inv
+                    }
                 )
                 
                 return Response({
                     'success': True,
                     'message': 'Slot reserved for 5 minutes.',
+                    'slot_id': slot.id,
                     'expiry': slot.reservation_expiry_time.isoformat()
                 })
 
         # CASE B: Real Slot Record
+        try:
+            slot = InterviewSlot.objects.get(id=slot_id)
+        except (InterviewSlot.DoesNotExist, ValueError):
+            return Response({'error': 'Slot not found'}, status=404)
+
         with transaction.atomic():
             # Check if this slot belongs to the assigned pool for security
             if not assessment.assigned_interviewers.filter(id=slot.interviewer_id).exists():
                 return Response({'error': 'Unauthorized slot'}, status=403)
 
             # Validate 3-day lead time for static slots
-            min_booking_date = (now + datetime.timedelta(days=3)).date()
+            min_booking_date = now.date() + timedelta(days=3)
             if slot.slot_date < min_booking_date:
-                return Response({'error': 'This slot is no longer available for booking (3-day lead time required).'}, status=400)
+                return Response({
+                    'error': f'This slot is no longer available. (3-day lead time required). Earliest allowed: {min_booking_date.isoformat()}',
+                    'code': 'LEAD_TIME_VIOLATION'
+                }, status=400)
 
             # Check availability
             if slot.status == InterviewSlot.STATUS_BOOKED:
@@ -1340,6 +1390,7 @@ def reserve_interview_slot_view(request, token):
             return Response({
                 'success': True,
                 'message': 'Slot reserved for 5 minutes.',
+                'slot_id': slot.id,
                 'expiry': slot.reservation_expiry_time.isoformat()
             })
             
@@ -1358,14 +1409,18 @@ def confirm_interview_booking_view(request, token):
     slot_id = request.data.get('slot_id')
     try:
         inv = CandidateInvitation.objects.get(token=token)
+        now = timezone.now()
         
         with transaction.atomic():
             slot = InterviewSlot.objects.select_for_update().get(id=slot_id)
             
             # Verification: 3-day lead time
-            min_booking_date = (timezone.now() + datetime.timedelta(days=3)).date()
+            min_booking_date = now.date() + timedelta(days=3)
             if slot.slot_date < min_booking_date:
-                return Response({'error': 'Booking failed: 3-day lead time required.'}, status=400)
+                return Response({
+                    'error': f'Booking failed: 3-day lead time required. Earliest allowed: {min_booking_date.isoformat()}',
+                    'code': 'LEAD_TIME_VIOLATION'
+                }, status=400)
             if slot.status == InterviewSlot.STATUS_RESERVED and slot.reserved_by_token == str(token):
                 if slot.reservation_expiry_time < timezone.now():
                     return Response({'error': 'Reservation expired. Please try again.'}, status=409)
@@ -1403,15 +1458,15 @@ def confirm_interview_booking_view(request, token):
                     'email': inv.email,
                     'interviewer_name': f"{slot.interviewer.first_name or ''} {slot.interviewer.last_name or ''}".strip() or slot.interviewer.email,
                     'interviewer_email': slot.interviewer.email,
-                    'start_time': timezone.make_aware(datetime.combine(slot.slot_date, slot.start_time)),
-                    'end_time': timezone.make_aware(datetime.combine(slot.slot_date, slot.end_time)),
+                    'start_time': timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.start_time)),
+                    'end_time': timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.end_time)),
                     'status': 'accepted', # Mark as accepted for listing
                 }
             )
             if not created:
                 shadow_inv.status = 'accepted'
-                shadow_inv.start_time = timezone.make_aware(datetime.combine(slot.slot_date, slot.start_time))
-                shadow_inv.end_time = timezone.make_aware(datetime.combine(slot.slot_date, slot.end_time))
+                shadow_inv.start_time = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.start_time))
+                shadow_inv.end_time = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.end_time))
                 shadow_inv.interviewer_email = slot.interviewer.email
                 shadow_inv.save()
 
@@ -1420,7 +1475,7 @@ def confirm_interview_booking_view(request, token):
                 from ..tasks import send_interview_confirmation_task
                 send_interview_confirmation_task.delay(slot.id)
             except Exception as e:
-                print(f"Failed to trigger confirmation email: {e}")
+                pass
             
             return Response({
                 'success': True,

@@ -1,4 +1,4 @@
-from django.urls import path # Reload trigger
+from django.urls import path # Reload trigger 2
 from . import views
 from . import coding_views
 from .views.user_views import add_team_member_view

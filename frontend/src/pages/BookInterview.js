@@ -17,7 +17,7 @@ import Lottie from 'lottie-react';
 import './BookInterview.css';
 
 // Public Lottie Animation URL for success
-const SUCCESS_LOTTIE_URL = "https://assets10.lottiefiles.com/packages/lf20_kz9pjc9p.json";
+const SUCCESS_LOTTIE_URL = "https://lottie.host/5456f916-2495-48b4-933e-e64db8061eb0/rM6YclpB4U.json";
 
 const API_BASE = API_BASE_URL;
 
@@ -44,17 +44,31 @@ const BookInterview = () => {
         const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
         setUserTimezone(tz);
 
-        // Fetch Lottie JSON
+        // Fetch Lottie JSON gracefully
         fetch(SUCCESS_LOTTIE_URL)
-            .then(res => res.json())
+            .then(res => {
+                if (res.ok && res.headers.get('content-type')?.includes('application/json')) {
+                    return res.json();
+                }
+                throw new Error('Not a valid JSON lottie');
+            })
             .then(data => setSuccessLottie(data))
-            .catch(err => console.error("Lottie load error:", err));
+            .catch(err => {
+                console.warn("Lottie failed to load, using SVG fallback.");
+                setSuccessLottie(null);
+            });
     }, []);
 
     const fetchSlots = useCallback(async () => {
         try {
             const res = await axios.get(`${API_BASE}/interviews/slots/${token}/`);
             if (res.data.success) {
+                if (res.data.already_booked) {
+                    setBookingDetails(res.data.booking_details);
+                    setBookingSuccess(true);
+                    setLoading(false);
+                    return;
+                }
                 const fetchedSlots = res.data.slots;
                 setSlots(fetchedSlots);
                 
@@ -97,11 +111,21 @@ const BookInterview = () => {
         try {
             const res = await axios.post(`${API_BASE}/interviews/slots/${token}/reserve/`, { slot_id: slotId });
             if (res.data.success) {
-                setSelectedSlot(slotId);
+                const realId = res.data.slot_id;
                 const expiry = new Date(res.data.expiry);
+                
+                // Optimistically update the slot in our local list so the UI updates IMMEDIATELY
+                setSlots(prevSlots => prevSlots.map(s => {
+                    if (String(s.id) === String(slotId)) {
+                        return { ...s, id: realId, status: 'reserved', is_mine: true };
+                    }
+                    return s;
+                }));
+
+                setSelectedSlot(realId);
                 setReservationExpiry(expiry);
                 setCountdown(Math.floor((expiry - new Date()) / 1000));
-                fetchSlots();
+                fetchSlots(); // Still do a background refresh for total sync
             }
         } catch (err) {
             setError(err.response?.data?.error || "Failed to reserve slot.");
@@ -335,9 +359,6 @@ const BookInterview = () => {
                             <div className="legend-item">
                                 <span className="dot dot-available"></span> Available
                             </div>
-                            <div className="legend-item">
-                                <span className="dot dot-selected"></span> Selected
-                            </div>
                         </div>
                     </div>
 
@@ -355,14 +376,14 @@ const BookInterview = () => {
                                         const isMine = slot.is_mine;
                                         const isBooked = slot.status === 'booked';
                                         const isOther = (slot.status === 'reserved' && !slot.is_mine) || isBooked;
-                                        const isSelected = selectedSlot === slot.id;
+                                        const isSelected = selectedSlot && (String(selectedSlot) === String(slot.id));
 
                                         return (
                                             <button 
                                                 key={slot.id}
                                                 className={`time-slot-btn ${isSelected ? 'selected' : ''} ${isOther ? 'disabled' : ''} ${isMine ? 'mine' : ''} ${isBooked ? 'booked' : ''}`}
-                                                onClick={() => (slot.status === 'available' || isMine) && !isBooked && handleReserve(slot.id)}
-                                                disabled={isOther}
+                                                onClick={() => (slot.status === 'available' || isMine) && !isBooked && !submitting && handleReserve(slot.id)}
+                                                disabled={isOther || submitting}
                                             >
                                                 <Clock size={16} />
                                                 <span>{slot.start_time} - {slot.end_time}</span>
@@ -383,23 +404,21 @@ const BookInterview = () => {
 
                     {/* Column 3: Booking Action Area */}
                     <div className="action-sidebar-triple">
-                        <div className={`booking-action-card ${selectedSlot ? 'visible' : ''}`}>
+                        <div className={`booking-action-card ${selectedSlot || error ? 'visible' : ''}`}>
+                            {error && <div className="booking-error-message" style={{ color: '#ef4444', backgroundColor: '#fee2e2', padding: '12px', borderRadius: '12px', marginBottom: '16px', fontSize: '0.85rem', fontWeight: 'bold', border: '1px solid #fecaca' }}>{error}</div>}
+                            
                             {selectedSlot ? (
                                 <>
                                     <div className="action-header">
                                         <h3>Review Your Slot</h3>
-                                        {countdown > 0 && (
-                                            <div className="expiry-badge">
-                                                Holding {Math.floor(countdown / 60)}:{(countdown % 60).toString().padStart(2, '0')}
-                                            </div>
-                                        )}
+                                        {submitting && <RefreshCw className="spin" size={16} />}
                                     </div>
                                     
-                                    <div className="action-details">
-                                        <div className="a-row"><CalendarIcon size={16} /> {formatDateFull(slots.find(s=>s.id===selectedSlot)?.date)}</div>
+                                    <div className="action-details" style={{ opacity: submitting ? 0.6 : 1 }}>
+                                        <div className="a-row"><CalendarIcon size={16} /> {formatDateFull(slots.find(s=>String(s.id)===String(selectedSlot))?.date || activeDate)}</div>
                                         <div className="a-row">
                                             <Clock size={16} /> 
-                                            {slots.find(s=>s.id===selectedSlot)?.start_time} - {slots.find(s=>s.id===selectedSlot)?.end_time}
+                                            {slots.find(s=>String(s.id)===String(selectedSlot))?.start_time || '---'} - {slots.find(s=>String(s.id)===String(selectedSlot))?.end_time || '---'}
                                         </div>
                                     </div>
 
@@ -411,6 +430,11 @@ const BookInterview = () => {
                                         {submitting ? <RefreshCw className="spin" /> : 'Confirm Interview'}
                                     </button>
                                 </>
+                            ) : submitting ? (
+                                <div className="no-selection-placeholder">
+                                    <RefreshCw size={32} className="p-icon spin" />
+                                    <p>Reserving your slot...</p>
+                                </div>
                             ) : (
                                 <div className="no-selection-placeholder">
                                     <Clock size={32} className="p-icon" />
