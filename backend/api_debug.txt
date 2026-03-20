@@ -2261,3 +2261,383 @@ Host: localhost:8001
 [2026-03-13 10:16:24.030080+00:00] PUBLIC ACCESS: Token='9da63f57-0a53-48fc-a6e8-85d8a05374f1'
 Query Params: <QueryDict: {'email': ['edumala.rakesh@iit.org.in'], '_t': ['1773396983887']}>
 Host: localhost:8001
+
+[2026-03-18 11:55:54.697261+00:00] ERROR in GenerateAssessmentView: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '[\n{\n  "mcqs": [\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "Given an array of integers, find the maximum value.",\n         "options": [\n            "int max = arr[0];",\n            "int max = arr.length;",\n            "int max = arr[arr.length - 1];",\n            "int max = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int max = arr[0];",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given a string, find the length of the longest substring without repeating characters.",\n         "options": [\n            "int max = 0;",\n            "int max = str.length;",\n            "int max = str.length() - 1;",\n            "int max = str.length() - str.indexOf(\\\\\\"a\\\\",");"\n         ],\n         "answer": "int max = 0;",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given an array of integers, find the minimum value.",\n         "options": [\n            "int min = arr[0];",\n            "int min = arr.length;",\n            "int min = arr[arr.length - 1];",\n            "int min = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int min = arr[0];",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given a string, find the first non-repeating character.",\n         "options": [\n            "char result = str.charAt(0);",\n            "char result = str.charAt(str.length() - 1);",\n            "char result = str.charAt(str.indexOf(\\\\\\"a\\\\","));",\n            "char result = str.charAt(str.lastIndexOf(\\\\\\"a\\\\","));"\n         ],\n         "answer": "char result = str.charAt(0);",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given an array of integers, find the sum of all elements.",\n         "options": [\n            "int sum = 0;",\n            "int sum = arr.length;",\n            "int sum = arr[arr.length - 1];",\n            "int sum = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int sum = 0;",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given a string, find the reverse of the string.",\n         "options": [\n            "String result = str;",\n            "String result = str.reverse();",\n            "String result = str.substring(0, str.length() - 1);",\n            "String result = str.substring(str.length() - 1, 0);"\n         ],\n         "answer": "String result = str;",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given an array of integers, find the average value.",\n         "options": [\n            "double avg = 0;",\n            "double avg = arr.length;",\n            "double avg = arr[arr.length - 1];",\n            "double avg = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "double avg = 0;",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given a string, find the first occurrence of a substring.",\n         "options": [\n            "int index = str.indexOf(\\\\\\"a\\\\",");",\n            "int index = str.lastIndexOf(\\\\\\"a\\\\",");",\n            "int index = str.indexOf(str.charAt(0));",\n            "int index = str.lastIndexOf(str.charAt(0));"\n         ],\n         "answer": "int index = str.indexOf(\\\\\\"a\\\\",");"null,\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given an array of integers, find the maximum value in a subarray.",\n         "options": [\n            "int max = arr[0];",\n            "int max = arr.length;",\n            "int max = arr[arr.length - 1];",\n            "int max = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int max = arr[0];",\n         "difficulty": "Hard"\n      },\n      {\n         "question": "Given a string, find the longest palindromic substring.",\n         "options": [\n            "String result = str;",\n            "String result = str.substring(0, str.length() - 1);",\n            "String result = str.substring(str.length() - 1, 0);",\n            "String result = str.substring(str.indexOf(\\"a\\"), str.lastIndexOf(\\"a\\"));"\n         ],\n         "answer": "String result = str;",\n         "difficulty": "Hard"\n      },\n      {\n         "question": "Given an array of integers, find the minimum value in a subarray.",\n         "options": [\n            "int min = arr[0];",\n            "int min = arr.length;",\n            "int min = arr[arr.length - 1];",\n            "int min = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int min = arr[0];",\n         "difficulty": "Hard"\n      },\n      {\n         "question": "Given a string, find the first non-repeating character in a substring.",\n         "options": [\n            "char result = str.charAt(0);",\n            "char result = str.charAt(str.length() - 1);",\n            "char result = str.charAt(str.indexOf(\\\\\\"a\\\\","));",\n            "char result = str.charAt(str.lastIndexOf(\\\\\\"a\\\\","));"\n         ],\n         "answer": "char result = str.charAt(0);",\n         "difficulty": "Hard"\n      }\n]'}}
+Traceback (most recent call last):
+  File "C:\Users\D-IT\Desktop\indus4\VerifiHireAI\backend\ai_assessments\views.py", line 776, in post
+    response = local_groq_client.chat.completions.create(
+        model="llama-3.1-8b-instant",
+    ...<5 lines>...
+        temperature=0.1 if attempts == 1 else 0.2
+    )
+  File "C:\Users\D-IT\Desktop\indus4\VerifiHireAI\backend\venv\Lib\site-packages\groq\resources\chat\completions.py", line 461, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/openai/v1/chat/completions",
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<45 lines>...
+        stream_cls=Stream[ChatCompletionChunk],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\D-IT\Desktop\indus4\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1280, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\D-IT\Desktop\indus4\VerifiHireAI\backend\venv\Lib\site-packages\groq\_base_client.py", line 1067, in request
+    raise self._make_status_error_from_response(err.response) from None
+groq.BadRequestError: Error code: 400 - {'error': {'message': "Failed to generate JSON. Please adjust your prompt. See 'failed_generation' for more details.", 'type': 'invalid_request_error', 'code': 'json_validate_failed', 'failed_generation': '[\n{\n  "mcqs": [\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "Hello, World!",\n            "Goodbye, World!",\n            "Error: null",\n            "Error: undefined"\n         ],\n         "answer": "Hello, World!",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "What is the output of the following Java code?",\n         "options": [\n            "10",\n            "20",\n            "30",\n            "Error: undefined"\n         ],\n         "answer": "10",\n         "difficulty": "Easy"\n      },\n      {\n         "question": "Given an array of integers, find the maximum value.",\n         "options": [\n            "int max = arr[0];",\n            "int max = arr.length;",\n            "int max = arr[arr.length - 1];",\n            "int max = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int max = arr[0];",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given a string, find the length of the longest substring without repeating characters.",\n         "options": [\n            "int max = 0;",\n            "int max = str.length;",\n            "int max = str.length() - 1;",\n            "int max = str.length() - str.indexOf(\\\\\\"a\\\\",");"\n         ],\n         "answer": "int max = 0;",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given an array of integers, find the minimum value.",\n         "options": [\n            "int min = arr[0];",\n            "int min = arr.length;",\n            "int min = arr[arr.length - 1];",\n            "int min = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int min = arr[0];",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given a string, find the first non-repeating character.",\n         "options": [\n            "char result = str.charAt(0);",\n            "char result = str.charAt(str.length() - 1);",\n            "char result = str.charAt(str.indexOf(\\\\\\"a\\\\","));",\n            "char result = str.charAt(str.lastIndexOf(\\\\\\"a\\\\","));"\n         ],\n         "answer": "char result = str.charAt(0);",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given an array of integers, find the sum of all elements.",\n         "options": [\n            "int sum = 0;",\n            "int sum = arr.length;",\n            "int sum = arr[arr.length - 1];",\n            "int sum = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int sum = 0;",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given a string, find the reverse of the string.",\n         "options": [\n            "String result = str;",\n            "String result = str.reverse();",\n            "String result = str.substring(0, str.length() - 1);",\n            "String result = str.substring(str.length() - 1, 0);"\n         ],\n         "answer": "String result = str;",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given an array of integers, find the average value.",\n         "options": [\n            "double avg = 0;",\n            "double avg = arr.length;",\n            "double avg = arr[arr.length - 1];",\n            "double avg = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "double avg = 0;",\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given a string, find the first occurrence of a substring.",\n         "options": [\n            "int index = str.indexOf(\\\\\\"a\\\\",");",\n            "int index = str.lastIndexOf(\\\\\\"a\\\\",");",\n            "int index = str.indexOf(str.charAt(0));",\n            "int index = str.lastIndexOf(str.charAt(0));"\n         ],\n         "answer": "int index = str.indexOf(\\\\\\"a\\\\",");"null,\n         "difficulty": "Medium"\n      },\n      {\n         "question": "Given an array of integers, find the maximum value in a subarray.",\n         "options": [\n            "int max = arr[0];",\n            "int max = arr.length;",\n            "int max = arr[arr.length - 1];",\n            "int max = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int max = arr[0];",\n         "difficulty": "Hard"\n      },\n      {\n         "question": "Given a string, find the longest palindromic substring.",\n         "options": [\n            "String result = str;",\n            "String result = str.substring(0, str.length() - 1);",\n            "String result = str.substring(str.length() - 1, 0);",\n            "String result = str.substring(str.indexOf(\\"a\\"), str.lastIndexOf(\\"a\\"));"\n         ],\n         "answer": "String result = str;",\n         "difficulty": "Hard"\n      },\n      {\n         "question": "Given an array of integers, find the minimum value in a subarray.",\n         "options": [\n            "int min = arr[0];",\n            "int min = arr.length;",\n            "int min = arr[arr.length - 1];",\n            "int min = arr[0] + arr[arr.length - 1];"\n         ],\n         "answer": "int min = arr[0];",\n         "difficulty": "Hard"\n      },\n      {\n         "question": "Given a string, find the first non-repeating character in a substring.",\n         "options": [\n            "char result = str.charAt(0);",\n            "char result = str.charAt(str.length() - 1);",\n            "char result = str.charAt(str.indexOf(\\\\\\"a\\\\","));",\n            "char result = str.charAt(str.lastIndexOf(\\\\\\"a\\\\","));"\n         ],\n         "answer": "char result = str.charAt(0);",\n         "difficulty": "Hard"\n      }\n]'}}
+
+RAW: {
+  "mcqs": [
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 5 + 3?",
+         "options": [
+            "8",
+            "5",
+            "3",
+            "10"
+         ],
+         "answer": "8",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 10 - 4?",
+         "options": [
+            "6",
+            "8",
+            "10",
+            "4"
+         ],
+         "answer": "6",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 7 * 2?",
+         "options": [
+            "14",
+            "10",
+            "7",
+            "2"
+         ],
+         "answer": "14",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 9 / 3?",
+         "options": [
+            "3",
+            "2",
+            "9",
+            "1"
+         ],
+         "answer": "3",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 11 + 2?",
+         "options": [
+            "13",
+            "15",
+            "11",
+            "2"
+         ],
+         "answer": "13",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 8 - 1?",
+         "options": [
+            "7",
+            "9",
+            "8",
+            "1"
+         ],
+         "answer": "7",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 6 * 4?",
+         "options": [
+            "24",
+            "20",
+            "6",
+            "4"
+         ],
+         "answer": "24",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 3 + 6?",
+         "options": [
+            "9",
+            "7",
+            "3",
+            "6"
+         ],
+         "answer": "9",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 2 * 9?",
+         "options": [
+            "18",
+            "20",
+            "2",
+            "9"
+         ],
+         "answer": "18",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 4 + 5?",
+         "options": [
+            "9",
+            "7",
+            "4",
+            "5"
+         ],
+         "answer": "9",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 1 + 8?",
+         "options": [
+            "9",
+            "7",
+            "1",
+            "8"
+         ],
+         "answer": "9",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 9 - 2?",
+         "options": [
+            "7",
+            "9",
+            "2",
+            "11"
+         ],
+         "answer": "7",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 6 + 3?",
+         "options": [
+            "9",
+            "7",
+            "6",
+            "3"
+         ],
+         "answer": "9",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 8 + 1?",
+         "options": [
+            "9",
+            "7",
+            "8",
+            "1"
+         ],
+         "answer": "9",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 7 + 4?",
+         "options": [
+            "11",
+            "9",
+            "7",
+            "4"
+         ],
+         "answer": "11",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the output of the following Java code?",
+         "options": [
+            "Hello, World!",
+            "Goodbye, World!",
+            "Error: null",
+            "Error: undefined"
+         ],
+         "answer": "Hello, World!",
+         "difficulty": "Easy"
+      },
+      {
+         "question": "What is the result of the expression 5 + 6?",
+         "options": [
+            "11",
+            "9",
+            "5",
+            "6"
+         ],
+         "answer": "11",
+         "difficulty": "Easy"
+      }]}
