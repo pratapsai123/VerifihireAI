@@ -55,6 +55,9 @@ def get_questions_view(request):
         if difficulty:
             questions = questions.filter(difficulty=difficulty.lower())
         
+        # Jumble questions randomly
+        questions = questions.order_by('?')
+        
         # Apply limit
         if limit:
             try:
@@ -404,12 +407,12 @@ def get_manual_questions_view(request):
         qs = (
             Question.objects.filter(custom_assessment_id=caid)
             .select_related('created_by', 'custom_assessment')
-            .order_by('created_at')
+            .order_by('?')
         )
         q_list = _db_call_with_retry(lambda: list(qs), retries=1)
 
         # Also fetch CodingQuestions for this custom_assessment_id
-        coding_qs = CodingQuestion.objects.filter(custom_assessment_id=caid).order_by('created_at')
+        coding_qs = CodingQuestion.objects.filter(custom_assessment_id=caid).order_by('?')
         coding_list = _db_call_with_retry(lambda: list(coding_qs), retries=1)
 
         results = []
@@ -460,8 +463,9 @@ def get_manual_questions_view(request):
                 }
             )
 
-        # Sort combined results by created_at
-        results.sort(key=lambda x: x.get('created_at') or '', reverse=False)
+        # Randomize combined results
+        import random
+        random.shuffle(results)
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
 
@@ -952,8 +956,8 @@ def get_questions_by_skills_view(request):
             if difficulty:
                 questions = questions.filter(difficulty=difficulty.lower())
             
-            # Order by created_at for consistent results
-            questions = questions.order_by('created_at')
+            # Order randomly
+            questions = questions.order_by('?')
             
             if limit_per_skill:
                 try:
