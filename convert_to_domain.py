@@ -1,5 +1,5 @@
 """
-Script to convert localhost URLs to domain URLs (https://verifyhire.duckdns.org)
+Script to convert localhost URLs to domain URLs (https://verifihireai.com)
 Run this before deploying to production
 """
 
@@ -20,11 +20,11 @@ FILES_TO_MODIFY = [
 
 # Conversion mappings
 REPLACEMENTS = [
-    ("http://localhost:3000", "https://verifyhire.duckdns.org"),
-    ("http://127.0.0.1:3000", "https://verifyhire.duckdns.org"),
-    ("http://localhost:3001", "https://verifyhire.duckdns.org"),
-    ("http://127.0.0.1:3001", "https://verifyhire.duckdns.org"),
-    ("http://192.168.1.22:3001", "https://verifyhire.duckdns.org"),
+    ("http://localhost:3000", "https://verifihireai.com"),
+    ("http://127.0.0.1:3000", "https://verifihireai.com"),
+    ("http://localhost:3001", "https://verifihireai.com"),
+    ("http://127.0.0.1:3001", "https://verifihireai.com"),
+    ("http://192.168.1.22:3001", "https://verifihireai.com"),
 ]
 
 def convert_files():
@@ -63,6 +63,6 @@ def convert_files():
             print(f"❌ Error processing {file_path}: {e}")
 
 if __name__ == "__main__":
-    print("🔄 Converting localhost URLs to: https://verifyhire.duckdns.org\n")
+    print("🔄 Converting localhost URLs to: https://verifihireai.com\n")
     convert_files()
     print("\n✨ Conversion complete!")

@@ -76,7 +76,7 @@ def create_interview_invitations_and_send_email_view(request):
             created_by=req_user_profile,
         )
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0

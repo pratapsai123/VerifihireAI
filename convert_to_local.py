@@ -19,7 +19,7 @@ FILES_TO_MODIFY = [
 
 # Conversion mappings (reverse)
 REPLACEMENTS = [
-    ("https://verifyhire.duckdns.org", "http://localhost:3000"),
+    ("https://verifihireai.com", "http://localhost:3000"),
 ]
 
 def convert_files():

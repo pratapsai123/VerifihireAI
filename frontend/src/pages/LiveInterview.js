@@ -111,7 +111,7 @@ function LiveInterview() {
 
     // 1. Explicit Production URL (Highest Priority for external access)
     if (isProduction) {
-      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/candidate/`);
+      candidates.push(`wss://verifihireai.com/ws/interview/${sessionId}/candidate/`);
     }
 
     // 2. API_BASE_URL derived

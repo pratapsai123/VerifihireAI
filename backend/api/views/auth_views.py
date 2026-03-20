@@ -416,14 +416,13 @@ def register_view(request):
         if not company:
                 company = Company.objects.create(
                     name=organization_name,
-                    approval_status=Company.APPROVAL_APPROVED,
-                    approved_at=timezone.now()
+                    approval_status=Company.APPROVAL_PENDING
                 )
         
         # Ensure company domain is set if not already
         if not company.domain:
             company.domain = domain
-            company.save(update_fields=['domain', 'approval_status', 'approved_at'])
+            company.save(update_fields=['domain'])
         elif company.domain != domain:
              return Response(
                 {'organization_name': [f"Organization '{company.name}' is already registered with a different domain. Please contact your admin."]},
@@ -458,7 +457,7 @@ def register_view(request):
             organization_name=organization_name,
             company=company,
             user=user,
-            is_approved=True,
+            is_approved=False,
         )
 
         # Notify platform admin about the new company registration
@@ -485,8 +484,8 @@ def register_view(request):
 
         return Response(
             {
-                'message': 'Registration successful! You can now log in to the VeriFiHire platform.',
-                'pending_approval': False,
+                'message': 'Registration successful! Your account is pending superadmin approval.',
+                'pending_approval': True,
                 'user': {
                     'id': user_profile.id,
                     'first_name': user_profile.first_name,
@@ -563,8 +562,16 @@ def login_view(request):
                 except Exception:
                     pass
 
-                # User and Company are now auto-approved on registration
-                pass
+            # Check if user and company are approved
+            if not user_profile.is_approved:
+                return Response({'error': 'Your account is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
+            
+            if user_profile.company and user_profile.company.approval_status != Company.APPROVAL_APPROVED:
+                if user_profile.company.approval_status == Company.APPROVAL_REJECTED:
+                    return Response({
+                        'error': f'Your company registration was rejected. Reason: {user_profile.company.rejected_reason or "No reason provided."}'
+                    }, status=status.HTTP_403_FORBIDDEN)
+                return Response({'error': 'Your company registration is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
         else:
             # Application Admin users (no UserProfile): must exist in ApplicationAdmin table
             auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
@@ -701,6 +708,13 @@ def verify_login_otp_view(request):
                     auth_user = user_profile.user
                 else:
                     auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
+                
+                # Double check approval in step 2
+                if not user_profile.is_approved:
+                    return Response({'error': 'Your account is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
+                
+                if user_profile.company and user_profile.company.approval_status != Company.APPROVAL_APPROVED:
+                    return Response({'error': 'Your company registration is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
             
             if not auth_user:
                 return Response({'error': 'Authentication user not found. Please contact support.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

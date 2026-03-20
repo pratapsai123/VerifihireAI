@@ -94,7 +94,7 @@ def invite_user_view(request):
             # request.build_absolute_uri('/') gives http(s)://host/; trim trailing slash
             frontend_base = request.build_absolute_uri('/').rstrip('/')
         if not frontend_base:
-            frontend_base = 'https://verifyhire.duckdns.org'
+            frontend_base = 'https://verifihireai.com'
         activation_link = f"{frontend_base.rstrip('/')}/accept-invite?token={invitation.token}"
 
         subject = f"{company.name} - Account Invitation"
@@ -218,7 +218,7 @@ def resend_invite_view(request, token):
         inv.expires_at = timezone.now() + timedelta(hours=48)
         inv.save(update_fields=['temp_password_hash', 'expires_at'])
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
         activation_link = f"{frontend_base.rstrip('/')}/accept-invite?token={inv.token}"
 
         subject = f"{inv.company.name} - Account Invitation (Resent)"
@@ -370,6 +370,7 @@ def accept_invite_view(request):
             # inv.invited_by acts as both the creator (static) and initial manager (dynamic).
             invited_by_profile=inv.invited_by,
             manager=inv.invited_by,
+            is_approved=True, # Auto-approve users invited by an approved admin/manager
         )
 
         inv.status = UserInvitation.STATUS_ACCEPTED

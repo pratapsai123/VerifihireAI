@@ -306,7 +306,7 @@ function LiveInterviewInterviewer() {
 
     // 1. Explicit Production URL
     if (isProduction) {
-      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/interviewer/`);
+      candidates.push(`wss://verifihireai.com/ws/interview/${sessionId}/interviewer/`);
     }
 
     // 2. API_BASE_URL derived

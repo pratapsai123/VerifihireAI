@@ -1,9 +1,9 @@
 $ErrorActionPreference = "Stop"
 
-$domains = @("verifyhire.duckdns.org")
+$domains = @("verifihireai.com", "www.verifihireai.com")
 $rsa_key_size = 4096
 $data_path = "./certbot"
-$email = "python.nexnoratech@gmail.com" # Updated email from settings.py
+$email = "edumala.rakesh@iit.org.in" # Updated email
 $staging = 0 # Set to 1 if you're testing your setup to avoid hitting request limits
 
 if (Test-Path "$data_path/conf/live/$($domains[0])") {

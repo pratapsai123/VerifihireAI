@@ -135,7 +135,7 @@ def send_interview_confirmation_task(slot_id):
             logger.error(f"Slot {slot_id} has no invitation linked.")
             return
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifyhire.duckdns.org').rstrip('/')
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
         # Join links: /live-interview?token=<inv.token>
         candidate_link = f"{frontend_base}/live-interview?token={inv.token}"
         interviewer_link = f"{frontend_base}/live-interview-interviewer?token={inv.token}"
