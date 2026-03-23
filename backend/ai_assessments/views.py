@@ -692,7 +692,8 @@ class GenerateAssessmentView(APIView):
                 available_from=data.get('available_from'),
                 available_until=data.get('available_until'),
                 pass_threshold=data.get('pass_threshold', 60),
-                company=company
+                company=company,
+                user_profile=user_profile
             )
 
             # Pool multipliers - generate 2x the requested amount for randomization
@@ -1147,7 +1148,16 @@ class AssessmentListView(APIView):
         if not company:
             return Response([], status=status.HTTP_200_OK)
 
-        assessments = Assessment.objects.filter(company=company, is_deleted=False).order_by('-created_at')
+        from api._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+
+        if scoped_ids is None:
+            # Application Admin: all in company
+            assessments = Assessment.objects.filter(company=company, is_deleted=False).order_by('-created_at')
+        else:
+            # Scoped: only assessments created by users in this user's reporting hierarchy
+            assessments = Assessment.objects.filter(company=company, user_profile_id__in=scoped_ids, is_deleted=False).order_by('-created_at')
+
         data = []
         for assessment in assessments:
             count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
@@ -1187,7 +1197,14 @@ class AssessmentDetailView(APIView):
             user_profile = getattr(request.user, 'profile', None)
             company = user_profile.company if user_profile else None
             
-            assessment = Assessment.objects.get(pk=pk, company=company)
+            from api._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
+
+            if scoped_ids is None:
+                assessment = Assessment.objects.get(pk=pk, company=company)
+            else:
+                assessment = Assessment.objects.get(pk=pk, company=company, user_profile_id__in=scoped_ids)
+                
             submissions = AIAssessmentSubmission.objects.filter(assessment=assessment).order_by('-submitted_at')
             
             submission_data = []

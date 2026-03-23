@@ -38,6 +38,14 @@ class Assessment(models.Model):
         null=True, 
         blank=True
     )
+    user_profile = models.ForeignKey(
+        'api.UserProfile',
+        on_delete=models.SET_NULL,
+        related_name='ai_created_assessments',
+        null=True,
+        blank=True,
+        help_text="The user who generated this AI assessment"
+    )
     is_deleted = models.BooleanField(default=False)
     assigned_interviewers = models.ManyToManyField(
         'api.UserProfile',

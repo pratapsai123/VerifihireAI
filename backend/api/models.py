@@ -665,6 +665,14 @@ class CandidateInvitation(models.Model):
         on_delete=models.CASCADE,
         related_name='candidate_invitations',
     )
+    user_profile = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        related_name='invited_candidates',
+        null=True,
+        blank=True,
+        help_text="The user who created this invitation"
+    )
 
     name = models.CharField(max_length=255)
     email = models.EmailField()

@@ -86,6 +86,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
 
             invitation = CandidateInvitation.objects.create(
                 assessment=assessment,
+                user_profile=req_user_profile,
                 name=name,
                 email=email,
                 pan_number=pan_number,
@@ -1589,9 +1590,10 @@ def results_overview_view(request):
                     is_deleted=False
                 ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
             else:
-                # Role-scoped: only results for assessments in this user's hierarchy
+                from django.db.models import Q
+                # Role-scoped: results for candidates either invited by this user's hierarchy OR taking an assessment created by this user's hierarchy
                 qs = CandidateSubmission.objects.filter(
-                    invitation__assessment__user_profile_id__in=scoped_ids,
+                    Q(invitation__user_profile_id__in=scoped_ids) | Q(invitation__assessment__user_profile_id__in=scoped_ids),
                     is_deleted=False
                 ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
         else:
@@ -1607,7 +1609,14 @@ def results_overview_view(request):
             qs = qs.filter(submitted_at__date__lte=end_date)
         
         # Similar logic for AI assessments — exclude ONGOING (not yet submitted)
-        ai_qs = AIAssessmentSubmission.objects.select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+        if scoped_ids is None:
+            ai_qs = AIAssessmentSubmission.objects.filter(
+                assessment__company_id=company_id
+            ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+        else:
+            ai_qs = AIAssessmentSubmission.objects.filter(
+                assessment__user_profile_id__in=scoped_ids
+            ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         
         if start_date:
             ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
@@ -1784,9 +1793,10 @@ def candidates_overview_view(request):
                     assessment__user_profile__company_id=company_id
                 ).select_related('assessment').order_by('-created_at')
             else:
-                # Role-scoped: only candidates for assessments in this user's hierarchy
+                from django.db.models import Q
+                # Role-scoped: candidates either invited by this user's hierarchy OR to an assessment created by this user's hierarchy
                 qs = CandidateInvitation.objects.filter(
-                    assessment__user_profile_id__in=scoped_ids
+                    Q(user_profile_id__in=scoped_ids) | Q(assessment__user_profile_id__in=scoped_ids)
                 ).select_related('assessment').order_by('-created_at')
         else:
             qs = CandidateInvitation.objects.none()
