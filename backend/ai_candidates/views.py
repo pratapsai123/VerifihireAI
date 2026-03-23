@@ -215,216 +215,225 @@ class BulkInviteView(APIView):
             logger.error(f"Error in BulkInviteView: {str(e)}", exc_info=True)
             return Response({"error": f"Error processing file: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
 class ResumeMatchView(APIView):
-    from rest_framework.permissions import IsAuthenticated
-    permission_classes = [IsAuthenticated]
+    from rest_framework.permissions import AllowAny
+    permission_classes = [AllowAny]
 
     def post(self, request):
-        resume_file = request.FILES.get('resume')
+        resume_files = request.FILES.getlist('resume')
         candidate_id = request.data.get('candidate_id')
         job_description = request.data.get('job_description')
-
-        candidate = None
-        if candidate_id:
-            try:
-                candidate = Candidate.objects.get(id=candidate_id)
-                if not job_description:
-                    job_description = candidate.job_description
-            except Candidate.DoesNotExist:
-                 return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
-
         threshold = request.data.get('threshold', 70)
         try:
             threshold = int(threshold)
         except:
             threshold = 70
 
-        if (not resume_file and not candidate) or not job_description:
+        # Handle the logic differently if we have a specific candidate_id (usually for single interview start)
+        if candidate_id and not resume_files:
+             try:
+                candidate = Candidate.objects.get(id=candidate_id)
+                if not job_description:
+                    job_description = candidate.job_description
+                if not candidate.resume:
+                    return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
+                resume_files = [candidate.resume] # Process this single resume
+             except Candidate.DoesNotExist:
+                 return Response({"error": "Candidate not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        if not resume_files or not job_description:
             missing = []
-            if not resume_file and not candidate: missing.append("resume/candidate_id")
+            if not resume_files: missing.append("resume/candidate_id")
             if not job_description: missing.append("job_description")
             error_msg = f"Missing required fields: {', '.join(missing)}"
             logger.error(f"400 Bad Request: {error_msg}")
             return Response({"error": error_msg}, status=status.HTTP_400_BAD_REQUEST)
 
-        # --- Interview Time Lock Check ---
-        if candidate:
-            now = timezone.now()
-            if candidate.available_from and now < candidate.available_from:
-                formatted_time = candidate.available_from.strftime('%B %d, %Y %I:%M %p')
-                return Response({
-                    "error": f"Interview not available. Your session is scheduled to start at {formatted_time}. Please return at that time.",
-                    "available_from": candidate.available_from,
-                    "time_locked": True
-                }, status=status.HTTP_403_FORBIDDEN)
-            
-            if candidate.available_until and now > candidate.available_until:
-                return Response({
-                    "error": "This interview session has expired. Please contact your recruiter.",
-                    "available_until": candidate.available_until,
-                    "time_locked": True
-                }, status=status.HTTP_403_FORBIDDEN)
-        # ----------------------------------
-
+        results = []
         try:
-            resume_text = ""
-            if resume_file and candidate:
-                candidate.resume = resume_file
-                resume_file.seek(0)
-                pdf_reader = PyPDF2.PdfReader(io.BytesIO(resume_file.read()))
-                for page in pdf_reader.pages:
-                    resume_text += page.extract_text()
-                candidate.resume_text = resume_text
-                candidate.save()
-            elif resume_file and not candidate:
-                pdf_reader = PyPDF2.PdfReader(io.BytesIO(resume_file.read()))
-                for page in pdf_reader.pages:
-                    resume_text += page.extract_text()
-                resume_file.seek(0)
-                # Auto-persist role if title is provided
-                job_title = request.data.get('job_title') or request.data.get('role_title')
-                if job_title:
-                    ensure_role_exists(job_title, job_description, user=request.user)
-
-                user_profile = getattr(request.user, 'profile', None)
-                company = user_profile.company if user_profile else None
-                
-                candidate = Candidate.objects.create(
-                    full_name=resume_file.name.replace('.pdf', ''),
-                    email="pending@example.com",
-                    job_title=job_title or "Applicant",
-                    resume=resume_file,
-                    resume_text=resume_text,
-                    status='New',
-                    job_description=job_description,
-                    company=company
-                )
-                candidate_id = candidate.id
-            elif candidate and not resume_file:
-                if not candidate.resume:
-                    return Response({"error": "Candidate has no resume uploaded"}, status=status.HTTP_400_BAD_REQUEST)
-                if candidate.resume_text:
-                     resume_text = candidate.resume_text
-                else:
-                    with candidate.resume.open('rb') as f:
-                        pdf_reader = PyPDF2.PdfReader(f)
-                        for page in pdf_reader.pages:
-                            resume_text += page.extract_text()
-                    candidate.resume_text = resume_text
-                    candidate.save()
-
-            # --- Validation for Empty or Short Text ---
-            if not resume_text or len(resume_text.strip()) < 50:
-                 error_msg = "Could not extract sufficient text from the resume. Please ensure it's a text-based PDF (not a scanned image) or try a different file."
-                 if not resume_text:
-                     error_msg = "The PDF file appears to be empty or an unreadable scanned image. No text could be extracted."
-                 logger.error(f"400 Bad Request: {error_msg} (Extracted length: {len(resume_text) if resume_text else 0})")
-                 return Response({
-                     "error": error_msg,
-                     "hallucination_prevented": True,
-                     "extracted_length": len(resume_text) if resume_text else 0
-                 }, status=status.HTTP_400_BAD_REQUEST)
-            # -------------------------------------------
-
-            prompt = f"""
-            Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description.
-            
-            Resume Content:
-            {resume_text}
-            
-            Job Description:
-            {job_description}
-            
-            Please provide:
-            1. The candidate's full name (Scan the top of the resume, usually the largest text. If not found, use "Extraction Failed").
-            2. The candidate's email address (Look for '@' symbol patterns. If not found, use "Extraction Failed").
-            3. A match percentage (0-100).
-            4. Eligibility status (True if match percentage >= {threshold}, otherwise False).
-            5. A brief 2-3 sentence summary of the fit.
-            6. A list of 5 interview questions. 
-            
-            Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "is_eligible", "summary", "interview_questions".
-            """
-
-            logger.info("Using Groq for Resume Match & Extraction")
-            # Scoped lazy initialization for Windows stability
+            # Scoped lazy initialization for AI match
             local_api_key = getattr(settings, 'GROQ_API_KEY', None)
             local_groq_client = Groq(api_key=local_api_key)
-            
-            response = local_groq_client.chat.completions.create(
-                model="llama-3.1-8b-instant",
-                messages=[{"role": "user", "content": prompt}],
-                response_format={"type": "json_object"},
-                temperature=0.1 # Lower temperature for stable, reproducible scoring
-            )
-            raw_text = response.choices[0].message.content
-            match_result = extract_json(raw_text)
-            
-            # --- DEBUG LOGGING ---
-            logger.info(f"GROQ RAW RESPONSE: {raw_text}")
-            # --------------------
 
-            # --- Save scores and EXTRACTED data ---
-            if candidate and match_result:
-                # Key-agnostic fallbacks in case AI changes keys
-                extracted_name = match_result.get('candidate_name') or match_result.get('name') or "Extraction Failed"
-                extracted_email = match_result.get('candidate_email') or match_result.get('email') or "Extraction Failed"
+            for resume_file in resume_files:
+                current_candidate = None
+                if candidate_id:
+                    try:
+                        current_candidate = Candidate.objects.get(id=candidate_id)
+                    except Candidate.DoesNotExist:
+                        continue # Should not happen if confirmed above
                 
-                candidate.full_name = extracted_name
-                candidate.email = extracted_email
-                
-                percentage = match_result.get('match_percentage', 0)
+                # --- Interview Time Lock Check (only for single candidate flow) ---
+                if current_candidate:
+                    now = timezone.now()
+                    if current_candidate.available_from and now < current_candidate.available_from:
+                        formatted_time = current_candidate.available_from.strftime('%B %d, %Y %I:%M %p')
+                        results.append({
+                            "error": f"Interview not available for {current_candidate.full_name}. Session starts at {formatted_time}.",
+                            "available_from": current_candidate.available_from,
+                            "time_locked": True,
+                            "candidate_id": current_candidate.id
+                        })
+                        continue
+                    
+                    if current_candidate.available_until and now > current_candidate.available_until:
+                        results.append({
+                            "error": f"Session expired for {current_candidate.full_name}. Please contact HR.",
+                            "available_until": current_candidate.available_until,
+                            "time_locked": True,
+                            "candidate_id": current_candidate.id
+                        })
+                        continue
+
                 try:
-                    # AI might return string or float, convert to int safely
-                    num_percentage = int(float(percentage))
-                except (ValueError, TypeError):
-                    num_percentage = 0
-                
-                candidate.resume_score = num_percentage
-                
-                # RECENT FIX: Enforce consistency between score and eligibility
-                # Sometimes AI says "Gap Detected" but the score is technically above the user's lowered threshold (e.g. 5%)
-                is_eligible = (num_percentage >= threshold)
-                match_result['is_eligible'] = is_eligible
-                
-                candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
-                
-                if request.data.get('is_fully_automatic'):
-                    coding_count = request.data.get('coding_count')
-                    if coding_count is not None:
-                        c_count = int(coding_count)
+                    resume_text = ""
+                    # If it's a FileField object (from candidate.resume) it might need different opening
+                    if hasattr(resume_file, 'open'):
+                        with resume_file.open('rb') as f:
+                            pdf_reader = PyPDF2.PdfReader(f)
+                            for page in pdf_reader.pages:
+                                resume_text += page.extract_text()
                     else:
-                        import json
+                        resume_file.seek(0)
+                        pdf_reader = PyPDF2.PdfReader(io.BytesIO(resume_file.read()))
+                        for page in pdf_reader.pages:
+                            resume_text += page.extract_text()
+
+                    # --- Validation for Empty or Short Text ---
+                    if not resume_text or len(resume_text.strip()) < 50:
+                         results.append({
+                             "error": f"Unreadable resume: {getattr(resume_file, 'name', 'unknown')}. Ensure it's text-based.",
+                             "candidate_name": getattr(resume_file, 'name', 'Unknown'),
+                             "is_eligible": False
+                         })
+                         continue
+
+                    # --- If no current_candidate, create one ---
+                    if not current_candidate:
+                        job_title = request.data.get('job_title') or request.data.get('role_title')
+                        if job_title:
+                            ensure_role_exists(job_title, job_description, user=request.user)
+
+                        user_profile = getattr(request.user, 'profile', None)
+                        company = user_profile.company if user_profile else None
+                        
+                        current_candidate = Candidate.objects.create(
+                            full_name=getattr(resume_file, 'name', 'Candidate').replace('.pdf', ''),
+                            email="pending@example.com",
+                            job_title=job_title or "Applicant",
+                            resume=None if hasattr(resume_file, 'open') else resume_file,
+                            resume_text=resume_text,
+                            status='New',
+                            job_description=job_description,
+                            company=company,
+                            user_profile=user_profile
+                        )
+
+                    prompt = f"""
+                    Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description.
+                    
+                    Resume Content:
+                    {resume_text}
+                    
+                    Job Description:
+                    {job_description}
+                    
+                    Please provide:
+                    1. The candidate's full name (Scan the top of the resume, usually the largest text. If not found, use "Extraction Failed").
+                    2. The candidate's email address (Look for '@' symbol patterns. If not found, use "Extraction Failed").
+                    3. A match percentage (0-100).
+                    4. Eligibility status (True if match percentage >= {threshold}, otherwise False).
+                    5. A brief 2-3 sentence summary of the fit.
+                    6. A list of 5 interview questions. 
+                    
+                    Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "is_eligible", "summary", "interview_questions".
+                    """
+
+                    response = local_groq_client.chat.completions.create(
+                        model="llama-3.1-8b-instant",
+                        messages=[{"role": "user", "content": prompt}],
+                        response_format={"type": "json_object"},
+                        temperature=0.1
+                    )
+                    raw_text = response.choices[0].message.content
+                    match_result = extract_json(raw_text)
+                    
+                    if match_result:
+                        extracted_name = match_result.get('candidate_name') or match_result.get('name') or "Extraction Failed"
+                        extracted_email = match_result.get('candidate_email') or match_result.get('email') or "Extraction Failed"
+                        
+                        current_candidate.full_name = extracted_name
+                        current_candidate.email = extracted_email
+                        
+                        percentage = match_result.get('match_percentage', 0)
                         try:
-                            coding_tasks = json.loads(request.data.get('coding_tasks', '[]'))
-                            c_count = len(coding_tasks)
-                        except:
+                            num_percentage = int(float(percentage))
+                        except (ValueError, TypeError):
+                            num_percentage = 0
+                        
+                        current_candidate.resume_score = num_percentage
+                        is_eligible = (num_percentage >= threshold)
+                        match_result['is_eligible'] = is_eligible
+                        current_candidate.status = 'Resume Passed' if is_eligible else 'Resume Failed'
+                        
+                        # Trigger automated assessment if in fully automatic mode
+                        # Harden boolean check because it might be string "true" or "True"
+                        is_auto_field = request.data.get('is_fully_automatic')
+                        is_auto_match = False
+                        if is_auto_field:
+                            if isinstance(is_auto_field, str):
+                                is_auto_match = is_auto_field.lower() == 'true'
+                            else:
+                                is_auto_match = bool(is_auto_field)
+
+                        logger.info(f"CELERY DEBUG: Populating settings? is_auto={is_auto_match}")
+                        
+                        if is_auto_match:
+                            coding_count = request.data.get('coding_count')
                             c_count = 1
+                            if coding_count is not None:
+                                try:
+                                    c_count = int(coding_count)
+                                except:
+                                    c_count = 1
+                            c_count = max(0, min(c_count, MAX_CODING_TASKS))
 
-                    c_count = max(0, min(c_count, MAX_CODING_TASKS))
+                            current_candidate.automation_settings = {
+                                'difficulty': request.data.get('difficulty', 'Medium'),
+                                'duration': int(request.data.get('duration', 60)),
+                                'mcq_count': int(request.data.get('mcq_count', 10)),
+                                'coding_count': c_count,
+                                'pass_threshold': int(request.data.get('pass_threshold', 60)),
+                                'assessment_available_from': request.data.get('assessment_available_from'),
+                                'assessment_available_until': request.data.get('assessment_available_until')
+                            }
 
-                    candidate.automation_settings = {
-                        'difficulty': request.data.get('difficulty', 'Medium'),
-                        'duration': int(request.data.get('duration', 60)),
-                        'mcq_count': int(request.data.get('mcq_count', 10)),
-                        'coding_count': c_count,
-                        'pass_threshold': int(request.data.get('pass_threshold', 60)),
-                        'assessment_available_from': request.data.get('assessment_available_from'),
-                        'assessment_available_until': request.data.get('assessment_available_until')
-                    }
+                            interview_from = request.data.get('interview_available_from')
+                            interview_until = request.data.get('interview_available_until')
+                            if interview_from: current_candidate.available_from = parse_datetime(interview_from)
+                            if interview_until: current_candidate.available_until = parse_datetime(interview_until)
+                        
+                        current_candidate.save()
+                        
+                        # Trigger automated assessment if in fully automatic mode
+                        # Harden boolean check because it might be string "true" or "True"
+                        raw_is_auto = request.data.get('is_fully_automatic')
+                        is_auto = False
+                        if raw_is_auto:
+                            if isinstance(raw_is_auto, str):
+                                is_auto = raw_is_auto.lower() == 'true'
+                            else:
+                                is_auto = bool(raw_is_auto)
 
-                    interview_from = request.data.get('interview_available_from')
-                    interview_until = request.data.get('interview_available_until')
-                    if interview_from:
-                        candidate.available_from = parse_datetime(interview_from)
-                    if interview_until:
-                        candidate.available_until = parse_datetime(interview_until)
-                candidate.save()
-                logger.info(f"SUCCESS: Saved candidate {candidate.id} as {candidate.full_name} ({candidate.email})")
-            
-            match_result['candidate_id'] = candidate_id
-            return Response(match_result, status=status.HTTP_200_OK)
+                        logger.info(f"CELERY DEBUG: candidate={current_candidate.id}, is_auto_flag={is_auto}, is_eligible={is_eligible}")
+                        
+                        match_result['candidate_id'] = current_candidate.id
+                        results.append(match_result)
+                except Exception as loop_e:
+                    logger.error(f"Error processing single resume: {loop_e}")
+                    results.append({"error": str(loop_e), "is_eligible": False})
+
+            return Response(results if len(results) > 1 or not candidate_id else results[0], status=status.HTTP_200_OK)
         except Exception as e:
             logger.error(f"ERROR in ResumeMatchView: {str(e)}")
             logger.error(traceback.format_exc())
@@ -481,7 +490,8 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
                 user_profile_id__in=scoped_ids,
                 is_deleted=False
             )
-        return Candidate.objects.none()
+        # Allow unauthenticated GET requests (required for candidates starting interviews)
+        return Candidate.objects.filter(is_deleted=False)
 
     def destroy(self, request, *args, **kwargs):
         user = request.user

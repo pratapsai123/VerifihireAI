@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
 #    'channels',
-    'api',
+    'api.apps.ApiConfig',
     'ai_assessments',
     'ai_candidates',
     'rest_framework_simplejwt',
@@ -123,9 +123,9 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'verifihire_db',
+        'NAME': 'user',
         'USER': 'postgres',
-        'PASSWORD': 'root',
+        'PASSWORD': '1234',
         'HOST': '127.0.0.1',
         'PORT': '5432',
         **({'OPTIONS': db_options} if db_options else {}),
