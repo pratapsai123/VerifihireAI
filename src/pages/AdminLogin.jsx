@@ -113,6 +113,12 @@ function AdminLogin() {
     const [techDust, setTechDust] = useState([]);
 
     React.useEffect(() => {
+        // Redirect if already logged in
+        const token = localStorage.getItem('authToken');
+        if (token) {
+            navigate('/');
+        }
+
         const snowCount = 30;
         const newSnow = [];
         for (let i = 0; i < snowCount; i++) {

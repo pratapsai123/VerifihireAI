@@ -6,6 +6,8 @@ import { API_BASE_URL } from '../apiConfig';
 const STATUS_TABS = [
     { key: 'pending_companies', label: 'Organization Requests', icon: '🏢' },
     { key: 'all_companies', label: 'Organization Index', icon: '📋' },
+    { key: 'pending_users', label: 'User Requests', icon: '👥' },
+    { key: 'all_users', label: 'User Index', icon: '👤' },
 ];
 
 const STATUS_COLORS = {
@@ -15,7 +17,9 @@ const STATUS_COLORS = {
 };
 
 function StatusBadge({ status }) {
-    const c = STATUS_COLORS[status] || { bg: '#f3f4f6', text: '#374151', border: '#d1d5db' };
+    const c = STATUS_COLORS[status] || (status === true ? STATUS_COLORS.approved : (status === false ? STATUS_COLORS.pending : { bg: '#f3f4f6', text: '#374151', border: '#d1d5db' }));
+    const label = status === true ? 'Approved' : (status === false ? 'Pending' : status);
+    
     return (
         <span style={{
             padding: '4px 12px',
@@ -27,7 +31,7 @@ function StatusBadge({ status }) {
             color: c.text,
             border: `1px solid ${c.border}`,
             textTransform: 'uppercase',
-        }}>{status}</span>
+        }}>{label}</span>
     );
 }
 
@@ -108,10 +112,56 @@ function CompanyRequestCard({ company, onApprove, onReject, actionLoading }) {
     );
 }
 
+function UserRequestCard({ user, onApprove, actionLoading }) {
+    const isLoading = actionLoading === `user-${user.id}`;
+    return (
+        <div style={{
+            background: '#fff', borderRadius: 20, padding: '20px',
+            display: 'flex', alignItems: 'center', gap: '20px',
+            boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
+            animation: 'slideIn 0.4s ease-out'
+        }}>
+            <div style={{
+                width: 48, height: 48, borderRadius: 12,
+                background: 'linear-gradient(135deg, #4318FF, #707EAE)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#fff', fontWeight: 800, fontSize: '1.2rem'
+            }}>{user.first_name.charAt(0).toUpperCase()}</div>
+
+            <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+                    <span style={{ fontWeight: 700, fontSize: '1rem', color: '#2B3674' }}>{user.first_name} {user.last_name}</span>
+                    <StatusBadge status={user.is_approved} />
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '4px 20px' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>🏢 {user.organization_name || 'No organization'}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>✉️ {user.email}</div>
+                    <div style={{ fontSize: '0.8rem', color: '#707EAE', fontWeight: 500 }}>🔑 {user.role}</div>
+                </div>
+            </div>
+
+            {!user.is_approved && (
+                <div style={{ display: 'flex', gap: 10 }}>
+                    <button
+                        disabled={isLoading}
+                        onClick={() => onApprove(user.id)}
+                        style={{
+                            padding: '10px 20px', borderRadius: 12, border: 'none',
+                            background: '#4318FF', color: '#fff', fontWeight: 700,
+                            cursor: isLoading ? 'wait' : 'pointer', fontSize: '0.8rem'
+                        }}
+                    >Approve User</button>
+                </div>
+            )}
+        </div>
+    );
+}
+
 function SuperAdminDashboard() {
     const location = useLocation();
     const [activeTab, setActiveTab] = useState(location.state?.activeTab || 'pending_companies');
     const [companies, setCompanies] = useState([]);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [actionLoading, setActionLoading] = useState(null);
     const [toast, setToast] = useState(null);
@@ -120,8 +170,12 @@ function SuperAdminDashboard() {
     const fetchData = useCallback(async (silent = false) => {
         if (!silent) setLoading(true);
         try {
-            const res = await axios.get(`${API_BASE_URL}/superadmin/companies/`);
-            setCompanies(res.data.companies || []);
+            const [compRes, userRes] = await Promise.all([
+                axios.get(`${API_BASE_URL}/superadmin/companies/`),
+                axios.get(`${API_BASE_URL}/superadmin/users/`)
+            ]);
+            setCompanies(compRes.data.companies || []);
+            setUsers(userRes.data.users || []);
         } catch (err) {
             setToast({ type: 'error', message: 'Failed to sync data.' });
         } finally {
@@ -146,7 +200,7 @@ function SuperAdminDashboard() {
         try {
             await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/approve/`);
             setToast({ type: 'success', message: 'Company approved.' });
-            fetchData(true); // Silent update context
+            fetchData(true);
         } catch (err) { 
             setToast({ type: 'error', message: 'Company approval failed.' }); 
         } finally { setActionLoading(null); }
@@ -157,15 +211,37 @@ function SuperAdminDashboard() {
         try {
             await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/reject/`, { reason });
             setToast({ type: 'success', message: 'Company rejected.' });
-            fetchData(true); // Silent update context
+            fetchData(true);
         } catch (err) { 
             setToast({ type: 'error', message: 'Rejection failed.' }); 
         } finally { setActionLoading(null); }
     };
 
-    const filteredCompanies = companies.filter(c => {
-        const matchesSearch = c.name.toLowerCase().includes(search.toLowerCase());
-        const matchesTab = (activeTab === 'pending_companies' && c.approval_status === 'pending') || (activeTab === 'all_companies');
+    const handleApproveUser = async (id) => {
+        setActionLoading(`user-${id}`);
+        try {
+            await axios.post(`${API_BASE_URL}/superadmin/users/${id}/approve/`);
+            setToast({ type: 'success', message: 'User approved.' });
+            fetchData(true);
+        } catch (err) {
+            setToast({ type: 'error', message: 'User approval failed.' });
+        } finally { setActionLoading(null); }
+    };
+
+    const isCompanyTab = activeTab.includes('companies');
+    const displayItems = isCompanyTab ? companies : users;
+
+    const filteredItems = displayItems.filter(item => {
+        const name = isCompanyTab ? item.name : `${item.first_name} ${item.last_name}`;
+        const matchesSearch = name.toLowerCase().includes(search.toLowerCase()) || 
+                            (item.email && item.email.toLowerCase().includes(search.toLowerCase()));
+        
+        let matchesTab = false;
+        if (activeTab === 'pending_companies') matchesTab = item.approval_status === 'pending';
+        else if (activeTab === 'all_companies') matchesTab = true;
+        else if (activeTab === 'pending_users') matchesTab = !item.is_approved;
+        else if (activeTab === 'all_users') matchesTab = true;
+        
         return matchesSearch && matchesTab;
     });
 
@@ -175,11 +251,11 @@ function SuperAdminDashboard() {
             
             <div style={{ marginBottom: '2rem' }}>
                 <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 800, color: '#2B3674' }}>Platform Approvals</h1>
-                <p style={{ margin: '4px 0 0', color: '#707EAE', fontSize: '0.9rem', fontWeight: 500 }}>Process and manage organization access requests.</p>
+                <p style={{ margin: '4px 0 0', color: '#707EAE', fontSize: '0.9rem', fontWeight: 500 }}>Process and manage organization and user access requests.</p>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', background: '#fff', padding: 10, borderRadius: 16 }}>
-                <div style={{ display: 'flex', gap: 4 }}>
+                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                     {STATUS_TABS.map(tab => (
                         <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{
                             padding: '10px 18px', borderRadius: 12, border: 'none',
@@ -199,8 +275,14 @@ function SuperAdminDashboard() {
                 <div style={{ textAlign: 'center', padding: '4rem' }}>Synchronizing Directory...</div>
             ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
-                    {filteredCompanies.length === 0 ? <p style={{ textAlign: 'center', padding: '4rem', color: '#A3AED0' }}>No companies found.</p> : filteredCompanies.map(c => (
-                        <CompanyRequestCard key={c.id} company={c} onApprove={handleApproveCompany} onReject={handleRejectCompany} actionLoading={actionLoading} />
+                    {filteredItems.length === 0 ? (
+                        <p style={{ textAlign: 'center', padding: '4rem', color: '#A3AED0' }}>No {activeTab.includes('companies') ? 'companies' : 'users'} found.</p>
+                    ) : filteredItems.map(item => (
+                        isCompanyTab ? (
+                            <CompanyRequestCard key={item.id} company={item} onApprove={handleApproveCompany} onReject={handleRejectCompany} actionLoading={actionLoading} />
+                        ) : (
+                            <UserRequestCard key={item.id} user={item} onApprove={handleApproveUser} actionLoading={actionLoading} />
+                        )
                     ))}
                 </div>
             )}

@@ -22,8 +22,8 @@ axios.interceptors.response.use(
     if (error.response && error.response.status === 401) {
       localStorage.removeItem('authToken');
       localStorage.removeItem('user');
-      if (window.location.pathname !== '/login') {
-        window.location.href = '/login';
+      if (window.location.pathname !== '/admin/login') {
+        window.location.href = '/admin/login';
       }
     }
     return Promise.reject(error);
@@ -31,30 +31,37 @@ axios.interceptors.response.use(
 );
 
 import Layout from './components/Layout';
+import ProtectedRoute from './components/ProtectedRoute';
 
 import CompaniesPage from './pages/CompaniesPage';
 import DashboardHome from './pages/DashboardHome';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/admin">
       <Routes>
-        {/* Approvals (The original main page) */}
+        {/* Approvals (The original main page) - Protected */}
         <Route path="/" element={
-          <Layout>
-            <SuperAdminDashboard />
-          </Layout>
+          <ProtectedRoute>
+            <Layout>
+              <SuperAdminDashboard />
+            </Layout>
+          </ProtectedRoute>
         } />
-        {/* New Overview Dashboard */}
+        {/* New Overview Dashboard - Protected */}
         <Route path="/dashboard" element={
-          <Layout>
-            <DashboardHome />
-          </Layout>
+          <ProtectedRoute>
+            <Layout>
+              <DashboardHome />
+            </Layout>
+          </ProtectedRoute>
         } />
         <Route path="/companies" element={
-          <Layout>
-            <CompaniesPage />
-          </Layout>
+          <ProtectedRoute>
+            <Layout>
+              <CompaniesPage />
+            </Layout>
+          </ProtectedRoute>
         } />
         <Route path="/login" element={<AdminLogin />} />
       </Routes>
