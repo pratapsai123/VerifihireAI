@@ -164,7 +164,7 @@ function ProfileDropdown() {
 
   const canSeeTeamMembers = useMemo(() => {
     const r = String(user.role || '').toLowerCase();
-    return r === 'company_admin' || r === 'hr_manager' || r === 'application_admin';
+    return r === 'company_admin' || r === 'hr_manager' || r === 'hr' || r === 'application_admin';
   }, [user.role]);
 
   const handleLogout = (e) => {
@@ -191,12 +191,6 @@ function ProfileDropdown() {
       <div
         ref={profileMenuRef}
         style={profileStyles.profileMenuContainer}
-        onMouseEnter={() => {
-          // Open on hover for better UX
-          if (!profileOpen) {
-            setProfileOpen(true);
-          }
-        }}
         onClick={handleToggleDropdown}
       >
         <div style={profileStyles.profileAvatar}>{initials || 'G'}</div>
