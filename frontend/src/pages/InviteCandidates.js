@@ -101,6 +101,11 @@ export default function InviteCandidates() {
   const [sending, setSending] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [importMsg, setImportMsg] = useState('');
+  const [teamMembers, setTeamMembers] = useState([]);
+  const [selectedInterviewerIds, setSelectedInterviewerIds] = useState([]);
+  const [showBookingModal, setShowBookingModal] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [isAutoSchedule, setIsAutoSchedule] = useState(false);
   const fileRef = useRef(null);
 
   // Scheduling / validity controls (applied to all candidates in this batch)
@@ -139,9 +144,58 @@ export default function InviteCandidates() {
     }
   };
 
+  const fetchTeamMembers = async () => {
+    try {
+      const res = await axios.get(`${API_BASE_URL}/users/team-members/`);
+      if (res.data.members) {
+        // Filter to show ONLY the interviewer role for a focused experience
+        const interviewerRoles = ['interviewer'];
+        const interviewers = res.data.members.filter(m => 
+          interviewerRoles.includes(m.role)
+        ).sort((a, b) => {
+          const nameA = a.first_name || a.email || '';
+          const nameB = b.first_name || b.email || '';
+          return nameA.localeCompare(nameB);
+        });
+        
+        setTeamMembers(interviewers);
+      }
+    } catch (err) {
+      console.error('Error in fetchTeamMembers metadata:', err);
+    }
+  };
+
+  const toggleInterviewer = (id) => {
+    setSelectedInterviewerIds(prev =>
+      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
+    );
+  };
+
+  const handleGenerateSlots = async () => {
+    if (selectedInterviewerIds.length === 0) {
+      alert('Please select at least one interviewer.');
+      return;
+    }
+    setGenerating(true);
+    try {
+      await axios.post(`${API_BASE_URL}/interviews/slots/generate/`, {
+        assessment_id: assessmentId,
+        interviewer_ids: selectedInterviewerIds
+      });
+      alert('Interview slots generated successfully for the next 7 days.');
+      setShowBookingModal(false);
+    } catch (err) {
+      console.error('Error generating slots:', err);
+      alert(err.response?.data?.error || 'Failed to generate interview slots.');
+    } finally {
+      setGenerating(false);
+    }
+  };
+
   useEffect(() => {
     if (!assessmentId) return;
     loadAssessment();
+    fetchTeamMembers();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [assessmentId]);
 
@@ -458,6 +512,7 @@ export default function InviteCandidates() {
       time_zone: tz,
       validity_mode: validityMode,
       start_grace_minutes: validityMode === 'exact_window' ? (sched.start_grace_minutes || 0) : 0,
+      is_auto_schedule: isAutoSchedule,
     }));
 
     setSending(true);
@@ -528,9 +583,6 @@ export default function InviteCandidates() {
           </div>
           <div className="invite-actions">
             <button className="btn-secondary" type="button" onClick={() => navigate('/assessments')}>Back</button>
-            <button className="btn-primary" type="button" onClick={shareInvites} disabled={sending || candidates.length === 0}>
-              {sending ? 'Sharing…' : 'Share'}
-            </button>
           </div>
         </div>
 
@@ -538,7 +590,7 @@ export default function InviteCandidates() {
           <div className="card-title">Schedule / Link Validity</div>
           <div className="form-grid" style={{ marginBottom: 8 }}>
             <div className="field">
-              <label>Validity Type</label>
+              <label>Validity Type <span style={{ color: '#ff4d4f' }}>*</span></label>
               <select
                 className="select"
                 value={validityMode}
@@ -553,7 +605,7 @@ export default function InviteCandidates() {
               </select>
             </div>
             <div className="field">
-              <label>Start Date</label>
+              <label>Start Date <span style={{ color: '#ff4d4f' }}>*</span></label>
               <input
                 type="date"
                 value={scheduleDate}
@@ -590,7 +642,7 @@ export default function InviteCandidates() {
             ) : (
               <>
                 <div className="field">
-                  <label>Start Time</label>
+                  <label>Start Time <span style={{ color: '#ff4d4f' }}>*</span></label>
                   <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
                 </div>
                 <div className="field">
@@ -629,11 +681,24 @@ export default function InviteCandidates() {
 
         <div className="card">
           <div className="card-title">Add Candidate</div>
-          <div className="bulk-row">
-            <button className="btn-secondary" type="button" onClick={downloadTemplate}>
-              Download CSV Template
-            </button>
-            <label className="file-pill" htmlFor="inviteCsv">
+          <div className="bulk-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '15px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+              <button className="btn-secondary" type="button" onClick={downloadTemplate} style={{ whiteSpace: 'nowrap' }}>
+                Download CSV Template
+              </button>
+              
+              <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '14px', fontWeight: '500', color: '#374151', padding: '6px 10px', borderRadius: '8px', background: '#f8fafc', border: '1px solid #e2e8f0' }}>
+                <input 
+                  type="checkbox" 
+                  checked={isAutoSchedule} 
+                  onChange={(e) => setIsAutoSchedule(e.target.checked)}
+                  style={{ width: '16px', height: '16px', cursor: 'pointer' }}
+                />
+                Auto Slot Schedule
+              </label>
+            </div>
+
+            <label className="file-pill" htmlFor="inviteCsv" style={{ marginLeft: 'auto' }}>
               Upload CSV
               <input
                 id="inviteCsv"
@@ -644,31 +709,81 @@ export default function InviteCandidates() {
                 onChange={(e) => handleCSVUpload(e.target.files?.[0])}
               />
             </label>
-
           </div>
           {importMsg ? <div className="hint">{importMsg}</div> : null}
-          <div className="form-grid add-inline">
-            <div className="field">
-              <label>Name *</label>
+          <div style={{ display: 'flex', gap: '10px', alignItems: 'flex-end', flexWrap: 'nowrap', width: '100%', marginTop: '10px' }}>
+            <div className="field" style={{ flex: '1.2' }}>
+              <label>Name <span style={{ color: '#ff4d4f' }}>*</span></label>
               <input value={name} onChange={(e) => { if (/^[a-zA-Z\s]*$/.test(e.target.value)) setName(e.target.value); }} placeholder="Candidate name" maxLength={100} />
             </div>
-            <div className="field">
-              <label>Email *</label>
+            <div className="field" style={{ flex: '1.4' }}>
+              <label>Email <span style={{ color: '#ff4d4f' }}>*</span></label>
               <input value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Candidate email" maxLength={100} />
             </div>
-            <div className="field">
-              <label>PAN Number(Optional)</label>
+            <div className="field" style={{ flex: '1' }}>
+              <label>PAN (Optional)</label>
               <input value={pan} onChange={handlePanChange} placeholder="ABCDE1234F" maxLength={10} />
-              {pan && !isValidPAN(pan) ? <div className="hint error-text">Invalid PAN format.</div> : null}
             </div>
-            <div className="field">
-              <label>Phone NumberOptional</label>
+            <div className="field" style={{ flex: '1' }}>
+              <label>Phone (Optional)</label>
               <input value={phone} onChange={handlePhoneChange} placeholder="1234567890" />
             </div>
-            <div className="field add-btn-cell">
-              <label>&nbsp;</label>
-              <button className="btn-tertiary add-btn" type="button" onClick={addCandidate} disabled={!canAdd}>
+
+            <div style={{ display: 'flex', gap: '8px', marginBottom: '2px' }}>
+              <button
+                className="btn-tertiary"
+                type="button"
+                onClick={addCandidate}
+                disabled={!canAdd}
+                style={{ padding: '10px 20px', fontSize: '14px' }}
+              >
                 Add
+              </button>
+              
+              {isAutoSchedule && (
+                <button
+                  type="button"
+                  onClick={() => setShowBookingModal(true)}
+                  disabled={candidates.length === 0}
+                  className="btn-secondary"
+                  style={{
+                    background: selectedInterviewerIds.length > 0 ? '#f0fdf4' : '#2563eb',
+                    borderColor: selectedInterviewerIds.length > 0 ? '#22c55e' : '#2563eb',
+                    color: selectedInterviewerIds.length > 0 ? '#15803d' : '#ffffff',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    padding: '10px 18px',
+                    fontWeight: '700',
+                    whiteSpace: 'nowrap',
+                    opacity: candidates.length === 0 ? 0.5 : 1,
+                    cursor: candidates.length === 0 ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    boxShadow: selectedInterviewerIds.length > 0 ? 'none' : '0 4px 6px -1px rgba(37, 99, 235, 0.2)'
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                  </svg>
+                  {selectedInterviewerIds.length > 0 ? `Scheduled (${selectedInterviewerIds.length})` : 'Schedule Interview'}
+                </button>
+              )}
+
+              <button
+                className="btn-primary"
+                type="button"
+                onClick={shareInvites}
+                disabled={sending || candidates.length === 0 || (isAutoSchedule && selectedInterviewerIds.length === 0)}
+                style={{ 
+                  padding: '10px 32px', 
+                  fontSize: '14px',
+                  background: (sending || candidates.length === 0 || (isAutoSchedule && selectedInterviewerIds.length === 0)) ? '#cbd5e1' : '#4318FF',
+                  borderColor: (sending || candidates.length === 0 || (isAutoSchedule && selectedInterviewerIds.length === 0)) ? '#cbd5e1' : '#4318FF'
+                }}
+              >
+                {sending ? 'Sharing…' : 'Share Invites'}
               </button>
             </div>
           </div>
@@ -709,6 +824,90 @@ export default function InviteCandidates() {
         </div>
 
       </div>
+      {/* Booking Modal (Interviewer Selection) */}
+      {showBookingModal && (
+        <div className="modal-container" style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1000, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="modal-backdrop" onClick={() => setShowBookingModal(false)} style={{ position: 'absolute', width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)' }} />
+          <div className="modal-content" style={{ position: 'relative', background: 'white', padding: '2rem', borderRadius: '12px', maxWidth: '500px', width: '90%', boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1)' }}>
+            <div className="modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+              <h2 className="modal-title" style={{ margin: 0, fontSize: '1.25rem', fontWeight: 700 }}>Interviewer Setup</h2>
+              <button
+                onClick={() => setShowBookingModal(false)}
+                className="modal-close-btn"
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.5rem', color: '#6b7280' }}
+              >
+                ✕
+              </button>
+            </div>
+            
+            <div className="modal-body">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+                <p style={{ margin: 0, color: '#6b7280', fontSize: '0.85rem' }}>
+                  Select interviewers for this assessment.
+                </p>
+              </div>
+              
+              <div style={{ maxHeight: '250px', overflowY: 'auto', border: '1px solid #e5e7eb', borderRadius: '8px', background: '#fff' }}>
+                {teamMembers.length > 0 ? (
+                  teamMembers.map(member => (
+                    <div 
+                      key={member.id}
+                      onClick={() => toggleInterviewer(member.id)}
+                      style={{
+                        padding: '10px 15px',
+                        borderBottom: '1px solid #f3f4f6',
+                        cursor: 'pointer',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '12px',
+                        backgroundColor: selectedInterviewerIds.includes(member.id) ? '#f0fdf4' : 'transparent',
+                        transition: 'all 0.2s'
+                      }}
+                    >
+                      <input 
+                        type="checkbox" 
+                        readOnly 
+                        checked={selectedInterviewerIds.includes(member.id)} 
+                        style={{ cursor: 'pointer', width: '16px', height: '16px' }}
+                      />
+                      <div style={{ flex: 1 }}>
+                        <div style={{ fontWeight: '600', fontSize: '0.9rem', color: '#1f2937' }}>
+                          {member.first_name ? `${member.first_name} ${member.last_name || ''}`.trim() : member.email}
+                        </div>
+                        {member.first_name && (
+                          <div style={{ fontSize: '0.75rem', color: '#6b7280' }}>{member.email}</div>
+                        )}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div style={{ padding: '40px 20px', textAlign: 'center' }}>
+                    <div style={{ fontSize: '1.5rem', marginBottom: '10px' }}>👥</div>
+                    <div style={{ color: '#9ca3af', fontSize: '0.9rem' }}>No interviewers available.</div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="modal-footer" style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', borderTop: '1px solid #f3f4f6', paddingTop: '1.5rem' }}>
+              <button 
+                onClick={() => setShowBookingModal(false)} 
+                className="btn-secondary" 
+                style={{ padding: '0.75rem 1.5rem' }}
+              >
+                Cancel
+              </button>
+              <button 
+                onClick={handleGenerateSlots} 
+                className="btn-primary" 
+                disabled={generating || selectedInterviewerIds.length === 0}
+                style={{ padding: '0.75rem 1.5rem', minWidth: '160px' }}
+              >
+                {generating ? 'Generating...' : 'Generate Slots'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

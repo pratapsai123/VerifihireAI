@@ -1,5 +1,5 @@
 {
-  "skill": "swift",
+  "skill": "Swift",
   "questions": [
     {
       "question": "Which keyword is used to declare a constant in Swift?",
@@ -442,9 +442,9 @@
     {
       "question": "Which keyword is used to call a method from a superclass?",
       "options": {
+        "0": "parent",
         "A": "this",
         "B": "self",
-        "0": "parent",
         "D": "super"
       },
       "answer": "D"

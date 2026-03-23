@@ -1935,9 +1935,9 @@
       "question": "Which capability is used to specify a custom URL for the WebDriverAgent server on a real iOS device?",
       "options": {
         "A": "wdaUrl",
-        ",B": "webDriverAgentUrl",
         "C": "iosServerPath",
-        "D": "remoteWda"
+        "D": "remoteWda",
+        "B": "webDriverAgentUrl"
       },
       "answer": "B"
     },

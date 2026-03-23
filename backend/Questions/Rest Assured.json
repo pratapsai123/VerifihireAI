@@ -1,0 +1,1901 @@
+{ 
+  "skill": "Rest Assured", 
+  "questions": [
+    {
+    "question": "Which programming language is REST Assured primarily designed for?",
+    "options": {
+      "A": "Python",
+      "B": "Java",
+      "C": "C#",
+      "D": "JavaScript"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: REST Assured follows a BDD (Behavior Driven Development) style syntax using given(), when(), and then().",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In REST Assured syntax, which section is used to specify prerequisites like headers, cookies, or parameters?",
+    "options": {
+      "A": "given()",
+      "B": "when()",
+      "C": "then()",
+      "D": "finally()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'then()' method in a REST Assured test?",
+    "options": {
+      "A": "To define the API endpoint.",
+      "B": "To perform assertions and validate the response.",
+      "C": "To send a physical letter to the server.",
+      "D": "To increase the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common HTTP methods supported by REST Assured? (Select all that apply)",
+    "options": {
+      "A": "GET",
+      "B": "POST",
+      "C": "PUT",
+      "D": "JUMP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'JSON' stand for in the context of API responses?",
+    "options": {
+      "A": "Java Standard Object Network",
+      "B": "JavaScript Object Notation",
+      "C": "Just Simple Online Node",
+      "D": "Joint Software Operational Network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'when()' section is typically where the HTTP request method and endpoint are defined.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status code represents a 'Successful' request in most REST APIs?",
+    "options": {
+      "A": "404 Not Found",
+      "B": "500 Internal Server Error",
+      "C": "200 OK",
+      "D": "401 Unauthorized"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary role of the 'log().all()' method in REST Assured?",
+    "options": {
+      "A": "To delete all logs from the server.",
+      "B": "To print the details of the request or response to the console for debugging.",
+      "C": "A specialized software for poets.",
+      "D": "To increase the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: REST Assured requires a separate browser installation to execute API tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to set the base URL globally in REST Assured?",
+    "options": {
+      "A": "RestAssured.baseURI",
+      "B": "RestAssured.url",
+      "C": "RestAssured.host",
+      "D": "RestAssured.path"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Body' in a POST request? (Select all that apply)",
+    "options": {
+      "A": "The physical body of the tester",
+      "B": "The payload or data being sent to the server",
+      "C": "Often formatted in JSON or XML",
+      "D": "The SQL query parser"
+    },
+    "answer": ["B", "C"]
+  },
+  {
+    "question": "What does the 'statusCode()' method validate?",
+    "options": {
+      "A": "The speed of the network.",
+      "B": "The HTTP response status code (e.g., 201).",
+      "C": "A specialized tool for measuring light.",
+      "D": "The number of lines in the response."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Hamcrest matchers are often used with REST Assured for powerful assertions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Path Parameter' in an API request?",
+    "options": {
+      "A": "A physical path in the office garden.",
+      "B": "A variable that is part of the URL path used to identify a specific resource (e.g., /users/{id}).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to specify a Header in the 'given()' section?",
+    "options": {
+      "A": "addHeader()",
+      "B": "header()",
+      "C": "putHeader()",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'DELETE' HTTP method is used to update an existing record on the server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Serialization' in the context of REST Assured?",
+    "options": {
+      "A": "Taking a series of physical photos.",
+      "B": "The process of converting a Java Object into a JSON or XML string for the request body.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common formats for API data? (Select all that apply)",
+    "options": {
+      "A": "JSON",
+      "B": "XML",
+      "C": "HTML",
+      "D": "MP4"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: REST Assured can be easily integrated with testing frameworks like TestNG or JUnit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Query Parameters' in a GET request?",
+    "options": {
+      "A": "To delete the database.",
+      "B": "To filter or sort the resources returned by the server (e.g., /users?status=active).",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code corresponds to 'Unauthorized' access?",
+    "options": {
+      "A": "200",
+      "B": "401",
+      "C": "404",
+      "D": "503"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In REST Assured, what does 'equalTo()' (from Hamcrest) verify?",
+    "options": {
+      "A": "That the response time is equal to zero.",
+      "B": "That an actual value in the response matches the expected value.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: REST Assured supports 'Gzip' decompression for response bodies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to extract a specific value from the response body?",
+    "options": {
+      "A": "saveValue()",
+      "B": "jsonPath() or path()",
+      "C": "findString()",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deserialization'?",
+    "options": {
+      "A": "Removing a series of physical objects.",
+      "B": "The process of converting a JSON or XML response body back into a Java Object.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: BasePath in REST Assured defines the common part of the URL path after the host (e.g., /api/v1).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is typically 'Idempotent' (making multiple identical requests has the same effect as one)? (Select all that apply)",
+    "options": {
+      "A": "GET",
+      "B": "PUT",
+      "C": "DELETE",
+      "D": "POST"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the status code '201' mean?",
+    "options": {
+      "A": "Request Accepted but not yet processed.",
+      "B": "Created (A resource was successfully created).",
+      "C": "Moving to a new office.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'AssertThat' is a method used within the 'then()' block to start validations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Basic Authentication'?",
+    "options": {
+      "A": "A physical key for the server room.",
+      "B": "An authentication scheme where the client sends a username and password encoded in Base64 in the header.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In REST Assured, which dependency is primarily used to parse JSON? (Select all that apply)",
+    "options": {
+      "A": "Jackson",
+      "B": "Gson",
+      "C": "JSON-B",
+      "D": "Adobe Premiere"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'contentType()' in the request specification?",
+    "options": {
+      "A": "To tell the server what the user's favorite color is.",
+      "B": "To inform the server about the media type of the data being sent (e.g., application/json).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when the API returns a 'String' but the test script tries to parse it as an 'Integer'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method would you use to verify that the response time is less than a certain limit?",
+    "options": {
+      "A": "time()",
+      "B": "timeIn(TimeUnit.SECONDS, lessThan(5L))",
+      "C": "checkSpeed()",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SSL' (Secure Sockets Layer) verification in REST Assured?",
+    "options": {
+      "A": "Verifying a person name SSL.",
+      "B": "Handling secure HTTPS connections, including ignoring certificate errors during testing via 'relaxedHTTPSValidation()'.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Response' time?",
+    "options": {
+      "A": "The time it takes for a human to answer a question.",
+      "B": "The duration from when the request is sent until the response is received from the server.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in APIs refers to a scenario where a request technically succeeds but takes 30 seconds to finish, which is unacceptable to the business.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'API' testing benefits? (Select all that apply)",
+    "options": {
+      "A": "Faster feedback in the development cycle",
+      "B": "Testing without a UI being ready",
+      "C": "Guaranteed to replace all human network engineers",
+      "D": "High reliability for regression testing"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Bearer Token' authentication?",
+    "options": {
+      "A": "A physical coin used for coffee.",
+      "B": "An authentication scheme often used in OAuth 2.0 where a security token is provided in the 'Authorization' header.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Mocking' an API?",
+    "options": {
+      "A": "Making fun of an API in public.",
+      "B": "Simulating the behavior of a real API to test client interactions before the backend is finished.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when the test logs contain too much sensitive data, like passwords, in plain text.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method would you use to validate that a specific header exists in the response?",
+    "options": {
+      "A": "hasHeader()",
+      "B": "header('Key', 'Value')",
+      "C": "findHeader()",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Proxy' configuration in REST Assured?",
+    "options": {
+      "A": "Configuration for a physical office proxy.",
+      "B": "Directing API traffic through a secondary server for monitoring or security purposes.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' for API tests?",
+    "options": {
+      "A": "The percentage of API calls that returned the expected status code and body.",
+      "B": "The rate at which people pass the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a client tries to use HTTP/2 but the server only supports HTTP/1.1, leading to connection failures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'REST' architectural constraints? (Select all that apply)",
+    "options": {
+      "A": "Statelessness",
+      "B": "Client-Server architecture",
+      "C": "Cacheability",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'JSON Schema Validation'?",
+    "options": {
+      "A": "Validating the physical size of a JSON file.",
+      "B": "Verifying that the JSON response follows a specific structure and data type definition.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Multi-part' form data?",
+    "options": {
+      "A": "Data made of physical parts.",
+      "B": "A way to send files (like images) or large amounts of data to a server via a POST request.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in APIs occur when a test is written for v1 of an API but run against v2, leading to broken assertions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'API' 'Security' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Use HTTPS for all calls",
+      "B": "Validate all user inputs",
+      "C": "Share API keys on Public Git Repos",
+      "D": "Implement proper Rate Limiting"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'POJO' in REST Assured automation?",
+    "options": {
+      "A": "A physical person named POJO.",
+      "B": "Plain Old Java Object; used to represent request/response data in a structured way.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'API' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long an API remains stable and functional before an error occur.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encoding' can cause special characters in an API response to appear as corrupted symbols.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Response' 'Time' factors? (Select all that apply)",
+    "options": {
+      "A": "Server processing time",
+      "B": "Network latency",
+      "C": "Database query time",
+      "D": "The color of the UI button"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'API' 'Documentation' (like Swagger)?",
+    "options": {
+      "A": "A physical book in the office.",
+      "B": "An interactive guide that describes the endpoints, parameters, and responses of an API.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'API' 'Versioning'?",
+    "options": {
+      "A": "Creating multiple physical versions of a computer.",
+      "B": "Managing multiple versions of an API (e.g., /v1/, /v2/) to allow changes without breaking existing clients.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when a developer considers an empty list '[]' as success, but the test script expects 'null'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Unified dashboard for team visibility",
+      "B": "Historical trend analysis of API health",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Automated failure alerts to Slack"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an API test?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical details of the request (like auth tokens) are hidden inside helper methods to keep the test readable.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Leakage'?",
+    "options": {
+      "A": "When liquid leaks out of a computer.",
+      "B": "The number of API bugs found in production that the automated suite failed to identify in staging.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated test script polls an API every 10ms, causing 'Rate Limiting' on the server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' API Testing 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "API Developer",
+      "B": "Security Architect",
+      "C": "Business Analyst",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Request' 'Specification' reuse?",
+    "options": {
+      "A": "Reusing a physical paper request.",
+      "B": "Creating a common configuration (like baseURI and headers) once and applying it to multiple tests using RequestSpecBuilder.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' (MTRS)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a security flaw (e.g., weak auth) in an API until a verified patch is deployed.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Types' occur when an API documentation says an ID is a 'Long' but the actual JSON response returns a 'String'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific syntax does REST Assured use to query and filter nested JSON arrays and objects in the response body?",
+    "options": {
+      "A": "Standard SQL SELECT statements",
+      "B": "Groovy GPath expressions",
+      "C": "XPath 2.0 strictly",
+      "D": "Regular Expressions (RegEx) only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a 'ResponseSpecBuilder' allows an architect to define common assertions (like status code and content type) once and apply them to multiple tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In REST Assured, how do you handle an API that requires 'Form Data' (x-www-form-urlencoded) instead of a raw JSON body?",
+    "options": {
+      "A": "By using the .jsonBody() method with a Map.",
+      "B": "By using the .formParam('key', 'value') method in the given() section.",
+      "C": "By manually stringifying the form and sending it as a header.",
+      "D": "REST Assured does not support form-encoded data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical role of a 'Filter' (implementing the Filter interface) in a REST Assured framework?",
+    "options": {
+      "A": "To filter out physical dust from the server hardware.",
+      "B": "To intercept, log, or modify requests and responses globally before they are processed by the test.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Jackson' annotation is used on a POJO field to ensure it is ignored during the serialization process in REST Assured?",
+    "options": {
+      "A": "@JsonInclude",
+      "B": "@JsonIgnore",
+      "C": "@JsonMap",
+      "D": "@JsonDelete"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The '.extract().as(MyClass.class)' method is used to deserialize a JSON response body directly into a Java Object.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Web Services', what is 'Relaxed HTTPS Validation' used for in REST Assured?",
+    "options": {
+      "A": "To make the office internet connection physically more relaxed.",
+      "B": "To allow the test to bypass SSL certificate errors, such as those caused by self-signed certificates in a dev environment.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the video reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which GPath expression would you use to find the 'email' of a user whose 'id' is 10 in a JSON list of users?",
+    "options": {
+      "A": "find { it.id == 10 }.email",
+      "B": "SELECT email FROM users WHERE id=10",
+      "C": "users[id=10].email",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'ObjectMapper' libraries that REST Assured can use for POJO mapping? (Select all that apply)",
+    "options": {
+      "A": "Jackson",
+      "B": "Gson",
+      "C": "Johnzon",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in API testing occurs when the 'Time-to-First-Byte' (TTFB) is 50ms, but the full body download takes 10 seconds due to payload size.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'RequestSpecBuilder' in a large-scale API framework?",
+    "options": {
+      "A": "To build a physical request form for the IT team.",
+      "B": "To modularize and reuse request configurations like Auth, Headers, and BaseURI across different test classes.",
+      "C": "A specialized software for architects to design UIs.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Playwright-like feature does REST Assured provide for 'Multi-part' file uploads?",
+    "options": {
+      "A": "The .file() method",
+      "B": "The .multiPart(new File('path/to/file')) method",
+      "C": "The .upload() method",
+      "D": "API calls cannot send files in REST Assured."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Response' 'Logging' 'Filter' usage?",
+    "options": {
+      "A": "Logging a person name Filter.",
+      "B": "A mechanism to automatically capture and write every API response to a file or database for audit purposes.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Schema Validation' in REST Assured can validate both JSON and XML responses against their respective definition files.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Hamcrest' matcher would you use to verify that a JSON array contains a specific item regardless of its position?",
+    "options": {
+      "A": "equalTo()",
+      "B": "hasItem()",
+      "C": "contains()",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical significance of 'JSONPath' vs 'GPath' in REST Assured context?",
+    "options": {
+      "A": "JSONPath is for XML; GPath is for JSON.",
+      "B": "JSONPath is a cross-language standard; GPath is a Groovy-specific implementation used internally by REST Assured for enhanced flexibility.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font in reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Broken' 'Endpoints' (MTBBE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of API stability before a breaking change is identified by the automation suite.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in API automation occur when Backend developers change the response schema without notifying the QA team, causing 'Silent Failures'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Layered' API architecture is responsible for managing 'Auth Tokens' to avoid passing them manually to every request?",
+    "options": {
+      "A": "The Test Class",
+      "B": "Request Specification / Global Filter",
+      "C": "The Database Layer",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Preemptive' Basic Authentication in REST Assured?",
+    "options": {
+      "A": "Sending credentials only after the server requests them (401).",
+      "B": "Sending the 'Authorization' header immediately with the first request to save a round-trip to the server.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the decompiler window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Configuration' 'Abstraction'?",
+    "options": {
+      "A": "Ensuring the framework can switch between different environments (e.g., Dev, Staging, Prod) by only changing a single config value.",
+      "B": "Hiring a person named Abstraction.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an API test polls for a 'Job Status' every 10ms, potentially causing a self-inflicted Denial of Service (DoS) on the server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Contract' 'Testing' benefits? (Select all that apply)",
+    "options": {
+      "A": "Detecting breaking API changes before they hit production",
+      "B": "Verifying that the server follows the OpenAPI (Swagger) spec",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Reducing the need for expensive E2E UI tests"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Atomic' Testing in an API framework?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "Designing test cases that verify a single endpoint or business rule independently to prevent 'Cascading Failures'.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an API regression?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from identifying an API failure in CI until the fix is verified and merged.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a REST Assured test attempt to communicate with a gRPC-only service using standard HTTP/1.1 JSON requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Attaching the full request and response logs to failed reports",
+      "B": "Instant notification of API uptime status",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Consistent presentation of results across different API versions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in API automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which API request logic can be 'Lifted' from a test script and reused in a Performance or Security suite.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Token' 'Management'?",
+    "options": {
+      "A": "Managing a physical token in the office.",
+      "B": "Automatically detecting when an OAuth token is expired and triggering a refresh flow without failing the active test.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when the API's 'Read Timeout' is shorter than the database query execution time, causing aborted connections.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring that 'Personally Identifiable Information' (PII) is not logged",
+      "B": "Verifying that every API response includes mandatory security headers (e.g., CSP)",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Maintaining encrypted storage for sensitive test credentials"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Maintainability' in REST Assured?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The ease with which the automation codebase can be refactored to support new API versions with minimal code duplication.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an API break?",
+    "options": {
+      "A": "The average duration between a breaking commit in the backend and the first failing API test in the pipeline.",
+      "B": "The time it takes for a team to have lunch.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when an API returns a 200 OK but the response body is an error message, which the test script incorrectly interprets as success.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' API Testing 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "API Architect",
+      "B": "DevOps Engineer",
+      "C": "Technical Writer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an API Service Layer?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical details of the HTTP client (headers, auth) are hidden inside a service class, providing a clean API to the test script.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of API stability before a regression is identified by the automation suite.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in REST Assured occur when the 'Jackson' library version used for serialization is technically incompatible with the 'REST Assured' core version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Trends' in API response times over multiple releases",
+      "B": "Predicting software release dates using current velocity",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing failure patterns to identify 'Fragile' endpoints"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in API testing?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that the data used by one test execution thread (e.g., 'User_A') does not interfere with another parallel thread ('User_B').",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between identifying a significant decline in API stability until the code meets its healthy benchmarks again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an engineering team expects 'Instant' feedback from an API suite that takes 2 hours to run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' API 'Profiling' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Network waterfall charts",
+      "B": "Server-side heap dumps",
+      "C": "Guaranteed to replace all manual performance testers",
+      "D": "Detailed request/response JSON payloads"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' orchestration?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of templates and base classes used to quickly launch a new REST Assured project with standardized logging and auth.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Density' in API code?",
+    "options": {
+      "A": "The weight of an API bug.",
+      "B": "The number of identified defects per 100 API endpoints in a specific microservice.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a tester attempt to use standard JSON serialization for an API that exclusively requires binary Protobuf encoding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring that API keys are rotated regularly via tests",
+      "B": "Consistency in ROI data presentation for the business",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Automatic validation of data retention policies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in API automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to move request models and assertions between REST Assured and other JVM-based tools like Gatling or Jmeter.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an API incident?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from when an API failure is identified as a 'Bug in Code' until the verified production fix is deployed.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a REST Assured runner attempt to execute 100 tests on a machine with 2GB of RAM, causing JVM OOM (Out-of-Memory) errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into API contract health",
+      "B": "Reduction in manual administrative work for developers",
+      "C": "Guaranteed to replace all engineering managers",
+      "D": "Automated failure artifacts for developers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an API 'Factory'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Abstracting the creation of complex request bodies (POJOs) into a factory class to keep test methods focused on assertions.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for an API crash?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The maximum duration allowed between a critical API failure and the initial notification being received by the on-call engineer.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in REST Assured occur when an analyst uses a 2024 automation library set against a legacy 2010 API, leading to incompatible header handling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Enterprise' API Testing 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Lead API Architect",
+      "B": "Security Operations Lead",
+      "C": "Director of Engineering",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'API' 'Bootstrap' orchestration for new microservices?",
+    "options": {
+      "A": "A set of templates and base configurations used to quickly establish a standardized API automation suite for a new team.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Negative' 'Detection' strategy in API testing?",
+    "options": {
+      "A": "A negative value that is actually positive.",
+      "B": "Using secondary verification (like DB checks) to identify bugs that the API response incorrectly reported as successful (200 OK).",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a REST Assured test suite try to run 100 threads on a CI machine that only has 1 physical CPU core, causing extreme timing lag.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Aggregation' 'Challenges' for APIs? (Select all that apply)",
+    "options": {
+      "A": "Normalizing error formats across different backend languages",
+      "B": "Removing duplicate failure alerts from overlapping tests",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Merging contract and functional results into a single view"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well an API endpoint is automated, based on its reliability history, documentation coverage, and historical bug density.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF) for a specific endpoint?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code stability before a regression is identified by the automation suite.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in API testing occur when the remediation timeline is based on 'Fixed Dates' rather than 'Business Criticality'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' API 'Governance' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Principal API Architect",
+      "B": "Director of Quality Engineering",
+      "C": "External Compliance Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Quality' 'API' 'Orchestration'?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of all API testing tools, mocks, data systems, and observability pipelines into a single delivery platform.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' 'Degradation' in API automation?",
+    "options": {
+      "A": "A metric identifying a steady decrease in successful test completions due to framework bugs rather than application bugs.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in architecture refers to a framework that handles 100 API tests but crashes the CI server when running 1,000 tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer":"A"
+  },
+  {
+    "question": "In a distributed microservices environment, how can REST Assured be technically extended to support 'Propagated Distributed Tracing' (e.g., using W3C Trace Context)?",
+    "options": {
+      "A": "By manually adding a static 'Trace-ID' header to every single test method.",
+      "B": "By implementing a custom 'Filter' that automatically injects the parent 'traceparent' and 'tracestate' headers into every outgoing RequestSpecification.",
+      "C": "By increasing the global timeout to 60 seconds to allow traces to settle.",
+      "D": "By disabling the application's service mesh during the test execution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In REST Assured, 'Stateful' testing across multiple HTTP requests can be achieved by utilizing a shared 'SessionFilter' object to automatically manage cookies and session IDs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Strict' JSON Schema validation in REST Assured? (Select all that apply)",
+    "options": {
+      "A": "Ensuring that the response contains no undocumented 'additionalProperties'",
+      "B": "Verifying specific regular expression patterns for string fields (e.g., UUIDs)",
+      "C": "Allowing the test to pass even if the data types do not match the schema",
+      "D": "Validating hierarchical relationships and 'required' field presence"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary technical objective of using 'RequestSpecBuilder' with a multi-layered 'Inheritance' strategy in an enterprise API framework?",
+    "options": {
+      "A": "To make the Java codebase physically heavier for security reasons.",
+      "B": "To create a hierarchical configuration structure where 'BaseSpecs' handle global auth, while 'ChildSpecs' handle service-specific headers and paths.",
+      "C": "A specialized software for architects to design office electrical grids.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Performance Profiling', how can REST Assured be used to identify 'Serialization Latency' in a Java-based API client?",
+    "options": {
+      "A": "By measuring the physical weight of the CPU during the run.",
+      "B": "By integrating a custom 'Filter' that records timestamps immediately before and after the '.body(pojo)' call to isolate object conversion time from network time.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the frame rate of a video rendering process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Deserialization' 'Features' in REST Assured occur when the Jackson ObjectMapper is configured to fail on unknown properties while the API response includes new, non-mapped fields.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Groovy' feature does REST Assured leverage within GPath to allow for complex conditional filtering (e.g., finding items where price > 100 AND stock < 10)?",
+    "options": {
+      "A": "SQL-like JOIN clauses",
+      "B": "The '.find' and '.findAll' closures with logical operators",
+      "C": "Standard Java for-loops strictly",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the strategic objective of 'Response' 'Snapshot' 'Testing' in an API architecture?",
+    "options": {
+      "A": "To save physical storage space on the developer's laptop.",
+      "B": "To compare the entire JSON response body against a 'Golden Master' file to detect unintended schema or data drift without writing hundreds of individual assertions.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the video reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' strategies for handling 'Token-based' Auth expiry in long-running REST Assured suites? (Select all that apply)",
+    "options": {
+      "A": "Implementing a 'Pre-request' hook that checks token TTL and refreshes if < 60s",
+      "B": "Hardcoding a 24-hour token into the CI secrets",
+      "C": "Using a custom Filter to catch 401 errors, re-authenticate, and retry the original request",
+      "D": "Sharing the same physical mouse between all test runners"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SSL' 'Handshakes' in REST Assured occur when the test client is configured for TLS 1.3 but the legacy server only supports specific weak cipher suites required by TLS 1.0.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Polyglot' 'Payload' 'Validation' in an enterprise API framework?",
+    "options": {
+      "A": "Translating API responses into different human languages.",
+      "B": "The ability of a single framework to validate responses in various formats (JSON, XML, HTML, and binary) using a unified assertion logic.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'REST Assured' 'Parallel' 'Safety'?",
+    "options": {
+      "A": "Ensuring the framework uses thread-safe Request and Response specifications to prevent state corruption when running concurrent tests in a single JVM.",
+      "B": "Breaking a physical server into pieces.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Expert' metric is most effective for measuring the 'Assertion' 'Quality' of a REST Assured test suite?",
+    "options": {
+      "A": "Total number of '.statusCode(200)' calls in the codebase.",
+      "B": "The 'Mutation Score'—the percentage of intentionally introduced response data errors that the test suite successfully detects.",
+      "C": "The font size of the pass rate on the dashboard.",
+      "D": "The number of hours the developer worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Patterns' in API orchestration occur when a test client's 'Socket Timeout' is shorter than the database 'Transaction Lock' duration on the server side.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'API' 'Chaos' 'Engineering' using REST Assured Filters? (Select all that apply)",
+    "options": {
+      "A": "Randomly modifying outgoing JSON payloads to include malformed characters",
+      "B": "Injecting artificial 50ms-500ms latency into outgoing requests",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Dropping 'Auth' headers for 1% of requests to test server-side resilience"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Circular' 'Reference' 'Handling' in REST Assured POJO mapping?",
+    "options": {
+      "A": "Handling a person who walks in a circle.",
+      "B": "Configuring the JSON serializer (e.g., Jackson) to handle bidirectional relationships between objects (Parent -> Child -> Parent) without causing a StackOverflowError.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Stability' (MTRS) after an API breaking change?",
+    "options": {
+      "A": "The average duration from an automated contract test failure until the corresponding client/server fix is verified.",
+      "B": "The time it takes to clean the office.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encoding' in REST Assured occurs when the 'Content-Type' header specifies 'UTF-8' but the server sends data encoded in 'ISO-8859-1', leading to corrupted character assertions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'API' 'Governance' factors for an Architect? (Select all that apply)",
+    "options": {
+      "A": "Establishing 'Versioning' policies for breaking changes",
+      "B": "Defining standard 'Rate Limiting' and 'Retry' behaviors for automated suites",
+      "C": "Verification of 'Data Redaction' in logs for compliance (GDPR)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Multipart' 'Streaming' in REST Assured and why is it technically complex?",
+    "options": {
+      "A": "Providing physical snacks for the user journey.",
+      "B": "The process of uploading large binary files (GBs) by streaming data to the server rather than loading the entire file into the JVM memory heap.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Assertion' 'Entropy' in an API suite?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the randomness or redundancy of assertions, identifying areas where too many repetitive checks are slowing down execution without adding quality.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resource' 'State' occurs when an API test assumes a database is empty at startup, while a previous parallel test thread has already populated it with conflicting data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'API' 'Observability' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Verifying that every API request includes a valid 'User-Agent'",
+      "B": "Confirming that 'Request-IDs' are correctly returned in every Response Header",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Validating that 'API-Key' identifiers are not leaked in log output"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Lifting' significance in enterprise-wide API automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to extract successful 'Auth-Provider' or 'Logging-Filter' logic from one project and successfully 'Lift' it into a corporate-wide shared library.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Schema' 'Compliance' 'Index'?",
+    "options": {
+      "A": "Traceability of a person named Schema.",
+      "B": "The technical percentage of active API endpoints that are fully covered by an automated JSON/XML schema validation test.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' in REST Assured refer to attempting to use 'relaxedHTTPSValidation()' for a non-HTTPS connection, leading to configuration overhead but no security gain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'API' 'Orchestration' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Managing 'Mutual TLS' (mTLS) certificate rotation within test code",
+      "B": "Synchronizing test execution with 'Event-Driven' background tasks (e.g., Kafka messages)",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Enforcing 'Idempotency' checks across distributed clusters"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an 'API' 'Proxy' 'Driver' design?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing reusable 'Client' classes that hide technical request details (serialization, URL construction) from the test logic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Insights' (MTBI) for an API Architect?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the framework's automated 'Response Comparison' tools identify a regression that manual testing would have missed.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Serialization' 'Contexts' occur when a Java Object is serialized into JSON using a 2024 'ISO-Date' format, but the legacy API server only accepts the 1990s 'Unix Timestamp' format.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'API' 'Architecture' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Backend Systems Architect",
+      "B": "API Product Manager",
+      "C": "Principal Security Engineer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Risk' in a 'Contract-First' development pipeline?",
+    "options": {
+      "A": "A probability score based on API schema compliance, historical contract breakages, and current dependency 'Churn'.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Leakage' 'Index' (DLI) for APIs?",
+    "options": {
+      "A": "A negative value that is actually positive.",
+      "B": "The ratio of API bugs discovered by 3rd party integrators to the bugs found during internal automated REST Assured testing.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in REST Assured refers to a suite that executes 10 tests in 10 seconds but takes 1 hour to execute 1,000 tests due to 'Synchronous' logging bottlenecks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'API' 'Resilience' 'Modeling'? (Select all that apply)",
+    "options": {
+      "A": "Mapping system recovery times after an automated API server pod restart",
+      "B": "Verifying 'Circuit Breaker' state transitions via API health checks",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Analyzing 'Retry' header compliance across microservices"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' complexity for 'GraphQL' vs 'REST' environments?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of maintaining a single framework that must handle both standard HTTP methods for REST and single-endpoint 'Query/Mutation' logic for GraphQL.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' (MTRS) after an API breach?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration from the identification of an 'Insecure Direct Object Reference' (IDOR) via automation until the production fix is verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when a researcher's debug filter produces 100GB of log data for a 1-second API call, crashing the CI file system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'API' 'Infrastructure' 'Patterns'? (Select all that apply)",
+    "options": {
+      "A": "Global API Gateway (e.g., Kong, Apigee)",
+      "B": "Local persistence for token caching",
+      "C": "Decentralized API documentation silos",
+      "D": "Centralized 'OAuth2' Mock Server for testing"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Declarative' 'vs' 'Imperative' API automation strategy?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Declarative strategy defines 'What' the response should look like; Imperative strategy defines 'How' to step through the validation code.",
+      "C": "Declarative is for beginners; Imperative for experts.",
+      "D": "Declarative is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) by 'HTTP' status code?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A metric track tracking how much faster '500 Server Errors' are resolved compared to '400 Client Errors' in a dev cycle.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in API testing occur when the business expects 'Zero Latency' from an endpoint that involves multiple cross-regional database lookups.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Systemic' failures across different microservice versions",
+      "B": "Correlating 'API Failure Frequency' with 'PR Review' complexity",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Predicting software release delays based on current 'Contract' suite stability"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in multi-region API testing?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that the test data for 'Region_A' never propagates to the 'Region_B' database to prevent cross-border data privacy violations during testing.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Quality' 'Incidents' (MTBQI) for a 'Critical' API?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of production uptime before a major API regression is identified by the automation suite.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in REST Assured refers to a framework that passes with 1 request per second but fails with 100 requests per second due to 'Internal Thread Contention' in the logging filter.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'API' 'Security' 'Disclosure' patterns? (Select all that apply)",
+    "options": {
+      "A": "Scanning response bodies for 'Clear-text' passwords",
+      "B": "Confirming that 'Authorization' tokens are not visible in the server's access logs",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Identifying 'Internal IP Addresses' exposed in error messages"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Spec' 'Logic' 'Drift'?",
+    "options": {
+      "A": "When the implementation of an API (e.g., Spring Boot code) changes but the OAS (OpenAPI Specification) is not updated, leading to a documentation-code mismatch.",
+      "B": "A drift made of physical test reports.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an API contract break?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the point a breaking contract commit is merged until the first automated 'Consumer-Driven' test fails in CI.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a 2024 REST Assured test attempt to use 'HTTP/2' server push features on a 2010 legacy server that only supports 'HTTP/1.1'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'API Documentation' quality standards",
+      "B": "Keeping test suites updated with rapidly changing global 'API Security' laws (e.g., OWASP Top 10)",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if test environments use different 'Auth' providers than production"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'REST' 'Assured' 'Core' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The degree to which the internal framework abstraction allows for switching the HTTP client (e.g., from Apache to OkHttp) without rewriting test scripts.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'API' 'Ecosystem' 'Quality'?",
+    "options": {
+      "A": "A weighted score including average P99 latency, schema compliance percentage, and the ratio of 'Undocumented' vs 'Documented' endpoints.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in REST Assured occur when a developer uses a 2024 automation library that requires Java 17+, but the CI environment is technically limited to Java 8.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Enterprise' 'API' 'Orchestration' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Bulk 'Mock' generation gRPC streams",
+      "B": "Webhooks for 'Schema Breaking' alerts",
+      "C": "REST APIs for triggering 'Global' API regression suites",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'API' 'Bootstrap' complexity for 'Serverless' vs 'Monolithic' environments?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The degree of difficulty in standardizing an API testing suite that must handle thousands of independent Lambda/FaaS endpoints vs. a single unified host.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Auth' 'Failures' (MTBAF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often automated suites fail due to 'Expired Credentials' or 'IAM policy' changes rather than functional API bugs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated API script polls a 'Large-Scale Async Data Processing' job with a fixed 1-second timeout, failing before the job completes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'API' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant availability of 'Request/Response' pairs for rapid triage",
+      "B": "Consistency in ROI data presentation for the business",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Reduction in manual documentation work for developers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an 'API' 'Client' 'Wrapper'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that 'Retry' logic and 'Back-off' strategies are hidden inside the API client library, keeping the test script focused on business logic.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an API regression?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from when an API failure is identified in CI until the verified code fix is merged into the main branch.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when an API framework attempt to run 100 simultaneous requests against a 'Rate-Limited' dev environment, causing 90% of tests to fail with a 429 status code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Trends' in API error rates by geography",
+      "B": "Correlating 'API Performance' with 'Deployment Cluster' health",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing failure patterns to identify 'Systemic' schema drift"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well an API endpoint is maintained, based on its uptime, schema stability, and the percentage of its functional requirements covered by automated tests.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'API' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code stability before a regression is identified by the automation suite.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in API automation occur when the remediation timeline is based on 'Fixed Dates' rather than 'Real-time Risk Impact' as reported by the tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'API' 'Profiling' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Request/Response time waterfall charts",
+      "B": "Flame graphs of server-side JSON parsing time",
+      "C": "Guaranteed to replace all manual performance testers",
+      "D": "Detailed logs of 'Header' vs 'Body' size distributions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Logic' 'Encapsulation' strategy?",
+    "options": {
+      "A": "Ensuring the technical request details (e.g., query params) are hidden from the high-level business test logic, facilitating easier schema updates.",
+      "B": "Hiding the computer in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  }
+  ]
+}

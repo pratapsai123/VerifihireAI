@@ -754,6 +754,7 @@ function CustomAssessment() {
     loadFormDataFromLocalStorage();
   }, []);
 
+
   // Handle browser tab/window close with unsaved changes warning
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -2229,6 +2230,7 @@ function CustomAssessment() {
                 Format: Hours:Minutes:Seconds (e.g., 01:30:00). Auto-calculated at 2 minutes per question: {autoTime || '00:00:00'}.
               </p>
             </div>
+
 
             {/* Action Buttons */}
             <div className="form-actions">

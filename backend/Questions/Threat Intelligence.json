@@ -1,0 +1,2073 @@
+{
+  "skill": "Threat Intelligence",
+  "questions": [
+    {
+      "question": "What is the primary technical objective of Threat Intelligence?",
+      "options": {
+        "A": "To physically arrest hackers in their own countries.",
+        "B": "To provide evidence-based knowledge about existing or emerging threats to inform security decisions.",
+        "C": "To automatically write code for new mobile applications.",
+        "D": "To replace the need for firewalls and antivirus software entirely."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Strategic' Threat Intelligence is typically high-level information designed for non-technical decision-makers (e.g., Executives or the Board).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the context of Threat Intelligence, what does 'IOC' stand for?",
+      "options": {
+        "A": "Internal Operating Command",
+        "B": "Indicator of Compromise",
+        "C": "Integrated Operations Center",
+        "D": "Initial Output Calibration"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific technical artifact is considered at the very bottom (easiest to change) of the 'Pyramid of Pain'?",
+      "options": {
+        "A": "Domain Names",
+        "B": "Hash Values",
+        "C": "IP Addresses",
+        "D": "TTPs (Tactics, Techniques, and Procedures)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which phase of the Threat Intelligence Lifecycle involves defining what the organization needs to know and who needs to know it?",
+      "options": {
+        "A": "Collection",
+        "B": "Planning and Direction",
+        "C": "Dissemination",
+        "D": "Processing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Tactical' Threat Intelligence technically used for?",
+      "options": {
+        "A": "Informing long-term financial investments for the next 5 years.",
+        "B": "Providing technical details about specific attacks (like malware behavior) to help SOC analysts during an investigation.",
+        "C": "A specialized software for architects to design boardrooms.",
+        "D": "Managing the company's employee payroll."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'OSINT' (Open Source Intelligence) refers to information technically gathered from publicly available sources like blogs, social media, and forums.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Threat Analysis', what does 'TTP' stand for?",
+      "options": {
+        "A": "Total Threat Protection",
+        "B": "Tactics, Techniques, and Procedures",
+        "C": "Transferable Target Protocol",
+        "D": "Technical Trace Point"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is technically responsible for sharing threat data between organizations using standardized formats like STIX and TAXII?",
+      "options": {
+        "A": "A physical mailbox in the lobby.",
+        "B": "A Threat Intelligence Platform (TIP).",
+        "C": "A specialized software for poets.",
+        "D": "The system's built-in web browser."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Threat Actor'?",
+      "options": {
+        "A": "A technical entity (individual or group) that conducts malicious activities against systems or networks.",
+        "B": "A physical actor in a movie about cyber warfare.",
+        "C": "A specialized tool for measuring light levels in the office.",
+        "D": "An automated bot that fixes broken code."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Threat Intelligence should technically be actionable, meaning it provides enough detail for a team to take a specific security action.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following describes 'Dark Web' monitoring in a TI context?",
+      "options": {
+        "A": "Checking the physical lighting in the data center basement.",
+        "B": "Technically searching underground forums and markets for mentions of your organization's data or leaked credentials.",
+        "C": "A security scan for database hardware.",
+        "D": "Hiring a professional actor to read logs."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is a 'Flash Report'? (Select all that apply)",
+      "options": {
+        "A": "A high-urgency, concise summary of a new and active threat requiring immediate attention",
+        "B": "A report on the physical flash bulbs used in office photography",
+        "C": "A critical communication used to alert stakeholders of a sudden risk shift",
+        "D": "The SQL query font size"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Technical' Threat Intelligence?",
+      "options": {
+        "A": "Short-lived data such as IP addresses or file hashes used for automated blocking in security tools.",
+        "B": "Hiding the code in a physical capsule.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Pyramid of Pain' explains that IOCs like TTPs are the hardest for an attacker to change, making them high-value for defenders.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Collection' in the TI lifecycle?",
+      "options": {
+        "A": "The technical process of gathering raw data from internal and external sources (logs, feeds, OSINT).",
+        "B": "Collecting physical stamps in the breakroom.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following is a standardized language used to technically describe cyber threat information?",
+      "options": {
+        "A": "Python only",
+        "B": "STIX (Structured Threat Information Expression)",
+        "C": "A security scan for database hardware.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Threat Intelligence and 'Data' are the same thing; raw logs without analysis are considered intelligence.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Threat Modeling' technically used for?",
+      "options": {
+        "A": "Measuring the physical weight of a router.",
+        "B": "Identifying potential technical threats and vulnerabilities in a system's design before it is built or deployed.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Operations', what is a 'Threat Feed'?",
+      "options": {
+        "A": "An automated stream of indicators and threat data from a commercial or open-source provider.",
+        "B": "A physical cover for a computer.",
+        "C": "A security scan of the database.",
+        "D": "The number of hours a team worked."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Operational' Threat Intelligence focuses on the 'Who', 'How', and 'Why' of an attack, often involving the study of specific threat actor groups.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are common TI 'Data Sources'? (Select all that apply)",
+      "options": {
+        "A": "Malware analysis reports",
+        "B": "Honeypot data",
+        "C": "Buying physical snacks for the IT team",
+        "D": "Security researcher blogs"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Analysis and Production' in the TI lifecycle?",
+      "options": {
+        "A": "The phase where raw data is technically evaluated, put into context, and turned into a finished intelligence product.",
+        "B": "Planning a physical party for a server.",
+        "C": "A Strategy for developers to use less memory.",
+        "D": "The SQL query parser"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Operations', what is 'Indicator Aging'?",
+      "options": {
+        "A": "The technical process of expiring old or no longer valid IOCs (like an IP address that an attacker no longer uses).",
+        "B": "Physically tagging a server with a sticker.",
+        "C": "A security scan for database viruses.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Threat Intelligence can technically help prioritize which vulnerabilities should be patched first based on whether they are actively being exploited in the wild.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Actionable' Intelligence benefits? (Select all that apply)",
+      "options": {
+        "A": "Reducing the volume of irrelevant security alerts",
+        "B": "Enabling proactive blocking of malicious domains",
+        "C": "Guaranteed to replace all human security staff",
+        "D": "Improving the accuracy of incident response"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the 'Feedback' loop in the TI lifecycle?",
+      "options": {
+        "A": "A physical cable that loops back into the same port.",
+        "B": "The process of determining if the intelligence provided met the requester's technical and strategic needs.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI)?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "The average duration from when a threat actor gains access until the TI or SOC team officially identifies them.",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a professional actor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Threat Intelligence should technically be shared with competitors through industry groups (like ISACs) to improve the collective defense.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid 'Threat Actor' classifications? (Select all that apply)",
+      "options": {
+        "A": "State-Sponsored (Nation-State)",
+        "B": "Hacktivists",
+        "C": "The SQL query parser",
+        "D": "Cybercriminals (Profit-driven)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Traffic Light Protocol' (TLP)?",
+      "options": {
+        "A": "A physical traffic light in the server room.",
+        "B": "A standard technical framework used to ensure that sensitive threat information is shared only with the intended audience.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Operations', what is 'Threat Enrichment'?",
+      "options": {
+        "A": "The technical process of adding more data to an indicator, such as who owns a malicious IP or what malware it is linked to.",
+        "B": "Hiring a person named Enrichment.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Sinkhole' is a technical method used to redirect traffic from malicious bots away from their intended target to a server controlled by researchers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'MITRE ATT&CK'? (Select all that apply)",
+      "options": {
+        "A": "A globally accessible knowledge base of adversary tactics and techniques",
+        "B": "A physical map of the world's data centers",
+        "C": "Testing if the user is physically wearing glasses",
+        "D": "A technical framework used to categorize and track threat actor behavior"
+      },
+      "answer": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Campaign' tracking in a TI context?",
+      "options": {
+        "A": "Identifying a technical series of related attacks over time conducted by the same threat actor.",
+        "B": "Hiding the code in a physical capsule.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Reporting', what is 'Dwell Time'?",
+      "options": {
+        "A": "The duration a threat actor remains technically undetected within a target network.",
+        "B": "The amount of insurance a resource has.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the keyboard."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Threat Intelligence should focus exclusively on external threats and ignore 'Insider Threats'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are 'Enterprise' Threat Intelligence platforms? (Select all that apply)",
+      "options": {
+        "A": "ThreatConnect",
+        "B": "Anomali",
+        "C": "Record Future",
+        "D": "Microsoft Paint"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Adversary Emulation'?",
+      "options": {
+        "A": "The technical process of simulating a specific threat actor's TTPs to test an organization's defenses.",
+        "B": "Scanning physical shipping containers.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD) a data breach?",
+      "options": {
+        "A": "The average time it takes to clean the office.",
+        "B": "A metric tracking how long it takes for the TI or SOC team to identify that an incident has occurred.",
+        "C": "A security scan for computer viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Data' occurs when Threat Intelligence identifies a malicious IP, but the organization's firewall does not technically have the capability to block it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'TI Readiness'? (Select all that apply)",
+      "options": {
+        "A": "Having established sharing relationships with ISACs",
+        "B": "Maintaining a categorized database of historical internal incidents",
+        "C": "Identifying program satisfaction trends",
+        "D": "Regularly reviewing and updating 'Priority Intelligence Requirements' (PIRs)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Context' in Threat Intelligence?",
+      "options": {
+        "A": "Watching a physical wall on fire.",
+        "B": "The technical and strategic background information that helps analysts understand the relevance and urgency of a threat (e.g., who is being targeted).",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is a 'Security Advisory'?",
+      "options": {
+        "A": "A formal technical document issued to warn users and administrators about a specific vulnerability or threat.",
+        "B": "Reporting a person who is not negative.",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Fidelity' occurs when a threat feed provides 10,000 IPs with no context, causing a high rate of false positive blocks.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' TI stakeholders? (Select all that apply)",
+      "options": {
+        "A": "SOC Analysts",
+        "B": "CISO / Head of Security",
+        "C": "Risk Management Team",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Diamond Model' of Intrusion Analysis?",
+      "options": {
+        "A": "Calculating the physical volume of a diamond.",
+        "B": "A technical framework used to model security incidents based on four core features: Adversary, Infrastructure, Capability, and Victim.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the brightness of the screen."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Intelligence Confidence'?",
+      "options": {
+        "A": "A measure of the auditor's or analyst's technical belief in the accuracy and source reliability of a specific piece of intelligence.",
+        "B": "The amount of insurance a resource has.",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an analyst expects a deep malware analysis report masterfully in exactly 3 seconds.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' TI integration benefits? (Select all that apply)",
+      "options": {
+        "A": "Real-time updates to firewall blocklists",
+        "B": "Predicting future 'Market' trends based on malware variants",
+        "C": "Guaranteed to replace all human IT staff",
+        "D": "Instant alerting when a internal system communicates with a known C2 IP"
+      },
+      "answer": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Signal-to-Noise' ratio in TI?",
+      "options": {
+        "A": "The proportion of useful technical intelligence (signal) compared to irrelevant or false data (noise) in a feed.",
+        "B": "Digging up a physical root in the office garden.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Reporting', what is 'Intel' Attribution?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "The technical and analytical process of assigning responsibility for a cyber attack to a specific actor or group.",
+        "C": "A security scan of the database.",
+        "D": "The number of hours a team worked."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Priorities' occur when TI focuses on mobile threats while the organization technically only uses desktop workstations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' Threat Intelligence formats? (Select all that apply)",
+      "options": {
+        "A": "JSON",
+        "B": "XML",
+        "C": "CSV",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Threat' Landscape?",
+      "options": {
+        "A": "Analyzing the risk of falling off a physical cliff.",
+        "B": "The overall picture of current technical security threats, actors, and trends affecting a specific industry or organization.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean Time Between' Intelligence Updates?",
+      "options": {
+        "A": "The average time it takes to wake up the manager.",
+        "B": "A metric tracking how often the threat intelligence database is technically refreshed with new data.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Hardware' in TI refers to a researcher trying to perform large-scale data mining on a computer that technically lacks the processing power to handle the dataset.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Inclusive' TI planning? (Select all that apply)",
+      "options": {
+        "A": "Ensuring all departments understand their role in reporting suspicious activity",
+        "B": "Conducting 'blind' reporting reviews to reduce investigator bias",
+        "C": "Testing if the user is physically wearing glasses",
+        "D": "Fostering a culture where sharing internal breach data is encouraged for safety"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Dissemination' in the TI lifecycle?",
+      "options": {
+        "A": "The technical distribution of the finished intelligence product to the relevant stakeholders who need it to take action.",
+        "B": "Hiding the code in a physical capsule.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Reporting', what is 'False Positive' rate in a threat feed?",
+      "options": {
+        "A": "The average time it takes to clean the office.",
+        "B": "The percentage of indicators in a feed that technically flag legitimate activity as malicious.",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a full nation-state attribution report 10 minutes after an incident begins.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' Intel sharing benefits? (Select all that apply)",
+      "options": {
+        "A": "Real-time visibility into global threat trends",
+        "B": "Predicting future 'Vulnerability' clusters based on current actor TTPs",
+        "C": "Guaranteed to stop all network lag",
+        "D": "Consistent application of blocklists across global units"
+      },
+      "answer": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Priority Intelligence Requirement' (PIR)?",
+      "options": {
+        "A": "A specific technical or strategic question that the Threat Intelligence team must answer to support organizational security goals.",
+        "B": "A physical cover for a computer.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Reporting', what is 'Information' vs 'Intelligence'?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "Information is raw data (like a list of IPs); Intelligence is that data after it has been technically analyzed and put into context.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'SLA' occurs when a TI vendor fails to deliver a 'Critical' threat update within the time defined in the contract.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' Threat Intelligence standards? (Select all that apply)",
+      "options": {
+        "A": "STIX / TAXII",
+        "C": "CybOX",
+        "D": "The SQL query parser",
+        "B": "B"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Threat' Analysis?",
+      "options": {
+        "A": "The comprehensive technical process of evaluating data to identify patterns, TTPs, and motivations of attackers.",
+        "B": "Building a physical warehouse for cyber data.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the speed of the light."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which technical artifact in the 'Pyramid of Pain' represents the most 'Challenging' layer to disrupt, because it requires the attacker to change their specialized software or scripts?",
+      "options": {
+        "A": "Hash Values",
+        "B": "IP Addresses",
+        "C": "Tools",
+        "D": "The SQL query parser strictly"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: In 'Adversary Emulation', the TI team technically replicates the specific TTPs of a known threat actor to validate if current security controls can detect that specific group.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the technical objective of 'Intelligence Processing' in the TI lifecycle?",
+      "options": {
+        "A": "To physically move server racks to a new building.",
+        "B": "To convert raw data (e.g., a malware sample or log file) into a structured format like JSON or STIX that is ready for human or machine analysis.",
+        "C": "A specialized software for architects to design boardrooms.",
+        "D": "To increase the frame rate of the live threat map."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Strategic' rating is used to describe the degree of certainty an analyst has in a technical source or a specific threat hypothesis?",
+      "options": {
+        "A": "Analytic Confidence Level",
+        "B": "CPU Clock Speed",
+        "C": "Unit Testing Rate",
+        "D": "The SQL query font size"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the 'Diamond Model of Intrusion Analysis', which technical feature links the 'Adversary' to the 'Infrastructure' used in an attack?",
+      "options": {
+        "A": "Victim Metadata",
+        "B": "Capability (The malware or tools used)",
+        "C": "The physical server room key",
+        "D": "Hiring a professional actor to read reports"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Structured Threat Information Expression' (STIX) is technically a graph-based language used to share threat intel in a way that machines can automatically parse and act upon.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Logic' involves verifying if an 'Indicator of Compromise' (IOC) is technically 'Active' or 'Stale' based on its last observed date in global telemetry?",
+      "options": {
+        "A": "Unit Testing",
+        "B": "Indicator Lifecycle Management (Aging Out)",
+        "C": "Smoke Testing",
+        "D": "The SQL query parser"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the technical difference between 'Internal' and 'External' Threat Intelligence?",
+      "options": {
+        "A": "Internal is data gathered from your own SIEM/EDR logs; External is data gathered from third-party feeds, OSINT, and ISACs.",
+        "B": "Internal is for employees; External is for the public.",
+        "C": "A specialized tool for measuring light levels in a dark room.",
+        "D": "To increase the frame rate of a video."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid 'Expert' malware analysis artifacts found during 'Operational' TI research? (Select all that apply)",
+      "options": {
+        "A": "Mutex names used by the malicious process",
+        "B": "Registry keys modified for persistence",
+        "C": "Buying physical snacks for the SOC team",
+        "D": "Hardcoded C2 IP addresses in the binary"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Data' 'Formats' occur when a TI provider sends data in 'STIX 1.2' but the organization's TIP can only technically ingest 'STIX 2.1'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Adversarial' 'Infrastructure' 'Mapping' technically used for?",
+      "options": {
+        "A": "Building a physical warehouse for servers.",
+        "B": "Identifying the technical servers, domains, and IP subnets that a threat actor uses to launch attacks and control malware.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the size of the font in a report."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Actionable' 'Intelligence'?",
+      "options": {
+        "A": "The average time it takes for a team to have lunch.",
+        "B": "Finished intel that provides enough technical detail for a defender to take an immediate specific action (e.g., 'Block this domain' or 'Update this specific rule').",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional actor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Strategy' involves an Architect implementing 'Honeypots' to technically generate high-fidelity internal Threat Intelligence?",
+      "options": {
+        "A": "Passive Observation",
+        "B": "Active Defense / Deception Engineering",
+        "C": "Smoke Testing",
+        "D": "The SQL query font size"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Intelligence' 'Requirements' occur when the TI team focuses on 'ATM Malware' while the organization's business is 100% 'E-commerce'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Threat' 'Hunting' in TI? (Select all that apply)",
+      "options": {
+        "A": "Automatically searching for new IOCs across 10,000 global endpoints",
+        "B": "Flagging 'Anomalous' DNS requests that match a DGA pattern found in a report",
+        "C": "Guaranteed to replace all human security analysts",
+        "D": "Scanning file shares for known malicious hashes from a new report"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Threat' 'Modeling' logic in a DevOps pipeline?",
+      "options": {
+        "A": "Modeling physical clay versions of servers.",
+        "B": "Identifying potential technical threats (like 'Injection' or 'Broken Auth') during the design phase of a feature to mitigate them before deployment.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "A way to count the number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Operations', what is 'Indicator' 'Enrichment'?",
+      "options": {
+        "A": "The technical process of adding metadata (e.g., WHOIS data, Passive DNS, GeoIP) to a raw IP or domain to provide better context for analysts.",
+        "B": "Adding physical gold to a computer chip.",
+        "C": "A security scan for database hardware.",
+        "D": "Hiring a professional actor to read logs."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'STIX' 'Relationship' object is technically used to link an 'Indicator' to an 'Adversary' or a 'Malware' sample.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component in a 'Strategic' TI framework handles 'Cross-Sector' 'Information' 'Sharing'?",
+      "options": {
+        "A": "An ISAC (Information Sharing and Analysis Center)",
+        "B": "The initial Nmap scan strictly",
+        "C": "The physical building floor plan",
+        "D": "The SQL query parser"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Reverse' 'Engineering' in an 'Operational' TI context?",
+      "options": {
+        "A": "Taking a car apart backwards.",
+        "B": "The technical process of deconstructing malware binaries to understand their hidden functionality, C2 protocols, and embedded indicators.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Operations', what is 'Passive' 'DNS' (pDNS)?",
+      "options": {
+        "A": "Historical technical records of DNS resolutions that help an analyst map how a domain's IP address has changed over time.",
+        "B": "Hiring a person named DNS.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the keyboard."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Fidelity' occurs when a TI feed provides 1,000 'Malicious' IPs per hour, causing the firewall to reach its technical limit for blocklist entries.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'Threat' 'Actor' 'Motivations'? (Select all that apply)",
+      "options": {
+        "A": "Financial Gain (e.g., Ransomware)",
+        "B": "Espionage (e.g., APT IP Theft)",
+        "C": "Ideology (e.g., Hacktivism)",
+        "D": "The SQL query font size"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Shadow' 'Infrastructure' risk for a TI researcher?",
+      "options": {
+        "A": "Servers kept in a dark room.",
+        "B": "The risk of an attacker spinning up 'Ephemeral' cloud instances for a single attack phase, which are technically deleted before they can be added to blocklists.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Pivot' (MTTP)?",
+      "options": {
+        "A": "Analytics of a person named Pivot.",
+        "B": "The average duration for an analyst to move from one indicator (e.g., IP) to a related technical artifact (e.g., Domain) during a complex investigation.",
+        "C": "A security scan of the office building.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an analyst expects a 'Malware Sandbox' result to be masterfully delivered in exactly 1 second.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Inclusive' 'TI' 'Planning'? (Select all that apply)",
+      "options": {
+        "A": "Ensuring both 'SOC' and 'Risk' teams provide input on Intelligence Requirements",
+        "B": "Conducting 'blind' evidence reviews to reduce confirmation bias",
+        "C": "Testing if the user is physically wearing glasses",
+        "D": "Fostering a 'No-Blame' culture for reporting false-positive intel detections"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Systemic' 'Threat' 'Intelligence' 'Resilience'?",
+      "options": {
+        "A": "A physical cover for a computer.",
+        "B": "The organization's technical ability to continue making secure decisions even if a primary external TI feed or vendor goes offline.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Indicator' 'Technical' 'Debt'?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "The future cost of labor required to clean up thousands of stale or false-positive IOCs that were never technically aged-out of the system.",
+        "C": "A security scan for computer viruses.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'SLA' occur when a TI vendor promises 'Instant Updates' but their technical 'TAXII' server only syncs every 24 hours.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Indicator' 'Enrichment' benefits? (Select all that apply)",
+      "options": {
+        "A": "Automatically identifying 'False Positive' IPs belonging to Google or Microsoft",
+        "B": "Ensuring 'Indicator Versions' are consistent across global sensors",
+        "C": "Testing if the user is physically wearing glasses",
+        "D": "Reducing the manual time spent performing WHOIS and Reverse-DNS lookups"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Beaconing' 'Pattern' analysis in TI?",
+      "options": {
+        "A": "Hiding a computer in a physical capsule.",
+        "B": "Identifying technical rhythmic network traffic (heartbeats) that indicates malware communicating with a Command and Control server.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Confidence' 'Score' in an Intel report?",
+      "options": {
+        "A": "A numerical value (e.g., 0-100) reflecting the analyst's technical belief that the identified threat is real and accurately described.",
+        "B": "How many times a person smiled during a report.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Priority' 'Intelligence' 'Requirements' (PIRs) occur when the TI team focuses on 'Industrial Control Systems' while the firm technically only uses 'Standard SaaS' platforms.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'TI' 'Drivers'? (Select all that apply)",
+      "options": {
+        "A": "Reduction of 'Dwell Time' through faster detection",
+        "B": "Regulatory Compliance (reporting of nation-state threats)",
+        "C": "Protecting Brand Reputation and Intellectual Property",
+        "D": "The SQL query font size"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Servant' 'Intelligence' logic in a global organization?",
+      "options": {
+        "A": "Hiring servants to type in the TI codes.",
+        "B": "The TI team focuses on provide the 'SOC' and 'Risk' squads with the best automated context and Removing technical roadblocks for the investigators.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the speed of the browser."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Indicator' 'Fidelity'?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "The technical reliability of an IOC; for example, a file hash has higher fidelity than an IP address because IPs can be easily reassigned.",
+        "C": "A security scan for database viruses.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Hardware' in TI refers to a researcher trying to perform memory forensics on a 1TB dump using a computer with only 8GB of RAM.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Incident' 'Contextualization'? (Select all that apply)",
+      "options": {
+        "A": "Identifying high-performer 'Investigators' in the team",
+        "B": "Predicting future 'Attack Vectors' based on current campaign trends",
+        "C": "Guaranteed to replace all human security analysts",
+        "D": "Automatically matching internal alert IPs against current 'Active Campaign' subnets"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Code' 'Lifting' significance in TI automation?",
+      "options": {
+        "A": "Lifting a physical computer up a flight of stairs.",
+        "B": "The ability to 'Lift' a successful 'Malware Signature' (like a YARA rule) from one branch and apply it to a global infrastructure for consistency.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) an Intel source?",
+      "options": {
+        "A": "The average time it takes to clean the office.",
+        "B": "The average duration from receiving a technical tip until the TI lead verifies it as 'True' using internal or external telemetry.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Permissions' occur when a Lead assigns 'Threat Hunting' tasks to a user but does not provide them with 'Read' access to the raw logs.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'TI' 'Succession' 'Stakeholders'? (Select all that apply)",
+      "options": {
+        "A": "Director of Threat Intelligence",
+        "B": "Lead Adversary Researcher",
+        "C": "Principal Security Architect",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Framework' 'Bootstrap' in a newly formed TI squad?",
+      "options": {
+        "A": "A physical strap for a boot.",
+        "B": "The process of quickly establishing standard 'STIX formats', 'TLP policies', and 'Feed Integrations' for a new business acquisition within 48 hours.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of the light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Attribution' 'Hypotheses'?",
+      "options": {
+        "A": "The percentage of 'Incident Attribution' claims that were later verified as correct by external authorities or forensic certainty.",
+        "B": "When people stop passing the office hallway.",
+        "C": "A security scan for computer viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects '100% Attribution' for a breach exactly 5 minutes after it is detected.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for TI leads? (Select all that apply)",
+      "options": {
+        "A": "Identifying high-performer 'Rule Writers' in IT",
+        "B": "Predicting future 'Breach' probability based on actor activity levels",
+        "C": "Guaranteed to replace all human managers",
+        "D": "Analyzing system sentiment to identify 'Intel Fatigue'"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Logical' 'Data' 'Segregation' in a Multi-tenant TI Platform?",
+      "options": {
+        "A": "Isolating data on a deserted island.",
+        "B": "Ensuring that 'Sensitive Intel' for Business Unit A technically cannot be seen or accessed by analysts in Business Unit B.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Intel' 'Violations' (MTB-SIV)?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "A metric tracking organizational safety by measuring how long a 'Intelligence Requirement' remains valid before a configuration or threat landscape change breaks the standard.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'SLA' in TI leadership occur when the remediation timeline for a 'high-confidence threat' is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+      "options": {
+        "A": "Difficulty in automating subjective 'Attacker Motivation' analysis",
+        "B": "Keeping intel templates updated with rapidly changing local 'Privacy' laws",
+        "C": "Guaranteed to replace all human lawyers",
+        "D": "Risk of 'False Risk Confidence' if audit tools only check 'Managed' feeds"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Intel' 'Logic' 'Encapsulation'?",
+      "options": {
+        "A": "Hiding the code in a physical capsule.",
+        "B": "Ensuring that the technical 'How' of an indicator (the raw regex/hash) is isolated from the 'What' (the TTP intent), allowing tools to be swapped without changing the policy.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an 'Underground' 'Mention'?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "The duration between an organization being mentioned on a Dark Web forum and the TI team officially flagging the event.",
+        "C": "A security scan for database viruses.",
+        "D": "The physical speed of the keyboard."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Versions' occur when a Lead enforces 2010 'Signature-only' models for a 2026 'Polymorphic' threat environment.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'TI' 'Stakeholders'? (Select all that apply)",
+      "options": {
+        "A": "Chief Operations Officer (COO)",
+        "B": "Principal Cloud Security Architect",
+        "C": "Corporate Legal / Privacy Lead",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Threat' 'Ecosystem' 'Orchestration' for a Lead?",
+      "options": {
+        "A": "Orchestrating a physical ecosystem of plants in the office.",
+        "B": "The high-level management of SIEM, TIP, EDR, and ISAC feeds to ensure a seamless and safe release pipeline.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Intelligence' 'Posture' (MTRIP)?",
+      "options": {
+        "A": "The average time it takes to clean the office.",
+        "B": "The duration from identifying a significant intelligence control failure (e.g., a broken TAXII feed) until the organization's 'Intel Baseline' is restored.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after performing exactly one malware analysis.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Security' 'Reporting' 'Benefits'? (Select all that apply)",
+      "options": {
+        "A": "Instant visibility into 'Global Attack' heatmaps for the Board",
+        "B": "Reduction in manual spreadsheet work for TI leads",
+        "C": "Guaranteed to replace all human managers",
+        "D": "Consistency in result presentation across different global units"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Logic' 'Encapsulation' in an Intel pipeline?",
+      "options": {
+        "A": "Hiding the code in a physical capsule.",
+        "B": "Designing standardized 'Analysis Sprints' where each phase results in a specific, independently verifiable 'Technical Integrity' score.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in TI?",
+      "options": {
+        "A": "The average time it takes to clean the office.",
+        "B": "The duration from a critical TI expert seat being vacated until the new hire is fully productive in the team.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 10 high-priority forensic investigations to a single Architect with only 40 hours of bandwidth.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Strategic' 'TI' 'Analytics'? (Select all that apply)",
+      "options": {
+        "A": "Identifying business units with the highest 'Breach Probability' scores",
+        "B": "Predicting future market 'Security' needs based on actor data",
+        "C": "Guaranteed to stop all network lag",
+        "D": "Correlating 'TI Training' spend with 'MTTI' reduction scores"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Security' 'Asset' 'Maturity' score in TI?",
+      "options": {
+        "A": "A rating of how well a specific system is развит, based on its reliability, investigation efficiency, and false-positive rate.",
+        "B": "The age of the physical office equipment.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "A metric track tracking the duration of business stability before a major TI strategy error occurs.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'SLA' in TI leadership occur when the remediation timeline for a 'Zero-Day exploit' is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a high-stakes attribution scenario, how should a Lead Analyst technically model the 'Adversary Probability' using a Bayesian weighted matrix?",
+      "options": {
+        "A": "By counting the number of times a specific country's language is found in the code and assuming 100% certainty.",
+        "B": "By weighting TTP consistency, shared infrastructure overlap, and behavioral fingerprints (e.g. keyboard layouts, compiler timestamps) against the 'Risk of Deception' (False Flags).",
+        "C": "By increasing the frequency of the external TAXII feed to 1ms strictly.",
+        "D": "By requiring a manual board-level signature for every 'Nation-State' label applied to a report."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Systemic' 'Intelligence' 'Contagion' occurs when a 'Poisoned' threat feed (intentionally manipulated by an adversary) causes automated security systems globally to block legitimate 'Critical Infrastructure' IP ranges.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Strategic Modeling' technique allows an Architect to predict the 'Campaign Drift' of an APT group based on their historical infrastructure acquisition patterns?",
+      "options": {
+        "A": "Markov Chain Analysis of Adversarial Asset Rotation",
+        "B": "Standard SQL SUM strictly",
+        "C": "Unit Testing",
+        "D": "The SQL query parser"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the technical objective of 'Intelligence Arbitrage' during an international M&A involving the merger of two disparate 'Threat Intelligence Platforms' (TIP)?",
+      "options": {
+        "A": "To ensure both teams use the same brand of mechanical keyboard.",
+        "B": "To normalize conflicting 'Analytic Confidence' scores and disparate tagging schemas into a unified 'Global Intelligence View' without losing regional context.",
+        "C": "A specialized software for architects to design boardrooms.",
+        "D": "To increase the frame rate of the live threat map."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Strategic Engineering', what is 'Counter-Intelligence' (CI) logic and how does it technically protect the TI team's 'Collection' operations?",
+      "options": {
+        "A": "When an employee physically performs the research manually.",
+        "B": "The technical practice of using 'Persona Management' and 'Non-Attributable' infrastructure to prevent adversaries from identifying and fingerprinting the TI researchers.",
+        "C": "A specialized security scan for hardware blueprints.",
+        "D": "Increasing the font size of the research report summary."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Strategic' 'Archetypes' occur when a 'Technical-heavy' TI team provides raw PCAP data to the Board of Directors, leading to systemic 'Decision Failure'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Strategy' involves a Lead Analyst deliberately implementing 'Deception' 'Honeypots' to verify if a suspected 'Insider Threat' is technically leaking intelligence to an external competitor?",
+      "options": {
+        "A": "Laissez-faire Management",
+        "B": "Active Counter-Intelligence (Synthetic Data Lures)",
+        "C": "Transactional Feedback",
+        "D": "The SQL query parser"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Systemic' 'Attribution' 'Contagion' and its relation to 'Shared Code' in a global ecosystem?",
+      "options": {
+        "A": "Leading a team of computer systems only.",
+        "B": "The risk where multiple 'Threat Actor' groups use the same leaked toolkit (cause), resulting in defenders technically mis-attributing attacks and making poor strategic response decisions (effect).",
+        "C": "A specialized tool for measuring light levels in the server room.",
+        "D": "To increase the frame rate of the organizational chart."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Intelligence' ROI calculations for a strategic shift to 'Proactive' TI? (Select all that apply)",
+      "options": {
+        "A": "Reduction in 'Mean Time to Identify' (MTTI) unknown C2 channels",
+        "B": "Financial savings from 'Breach Avoidance' through verified early-warning signals",
+        "C": "The cost of 'Brand Reputation' preserved through 5-minute take-downs of phishing infrastructure",
+        "D": "The number of security cameras in the data center"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Psychological' 'Safety' at the TI Leadership level ensures that 'Analysts' can challenge the 'Attribution' of a high-profile report without fear of termination, preventing 'Analytic Groupthink'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Principal Adversary Researcher?",
+      "options": {
+        "A": "The physical weight of the 'Intelligence Standards' manual.",
+        "B": "The ability to integrate contradictory geopolitical signals (e.g. valid treaty signing vs. anomalous state-sponsored cyber probes) into a cohesive 'Campaign' hypothesis.",
+        "C": "A specialized tool for measuring distance between global offices.",
+        "D": "Hiring a professional actor to simulate a board briefing."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Operations', what is 'Strategic' 'Intelligence' 'Sharding' for forensic preservation?",
+      "options": {
+        "A": "Breaking a physical server into pieces.",
+        "B": "The process of isolating 'Impacted' intelligence segments (e.g. data from a specific region) to ensure it is 'Read-Only' locked while the rest of the TIP continues production collection.",
+        "C": "A security scan for database viruses.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'Expert' TI behavior involves 'Pre-emptive Infrastructure Shunning' during a confirmed nation-state buildup?",
+      "options": {
+        "A": "Waiting for the government to issue an official alert.",
+        "B": "Immediately blocking 'High-Confidence' adversary infrastructure (e.g. known IP subnets) at the edge before an active exploit is observed within the organization.",
+        "C": "Delegation strictly",
+        "D": "Constructive Feedback"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Cultures' in a TI acquisition often result in 'Analytic Rejection', where the acquired firm's researchers find ways to 'Hide' sources to protect their professional reputation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Strategic' 'Intelligence' 'Succession' 'Calibrations'? (Select all that apply)",
+      "options": {
+        "A": "Defining future 'Quantum-Safe' intelligence competencies within the research team",
+        "B": "Standardizing 'Research Lead' readiness criteria across global departments",
+        "C": "Buying physical snacks for the SOC",
+        "D": "Assessing the 'Systemic thinking' capacity of potential TI Directors"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Double-Loop' 'Learning' logic in a TI Post-Mortem?",
+      "options": {
+        "A": "Learning to do a physical double-loop jump.",
+        "B": "Questioning if the 'Collection Strategy' itself (e.g. why we rely on 3rd party feeds instead of raw telemetry) is the cause of systemic failure, rather than just fixing a single indicator gap.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the size of the font on the presentation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Threat Intelligence?",
+      "options": {
+        "A": "The cumulative risk of having all 50 global business units dependent on a single 'Threat Intelligence Feed' that has zero technical diversity.",
+        "B": "Aggregating physical risks like fire in the office.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Strategic' 'Inertia' in TI occurs when a firm continues to rely on 'Legacy Hash-Matching' in 2026, despite modern attackers utilizing 'AI-Driven Polymorphism' in 99% of campaigns.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Strategic' 'TI' 'Governance' metrics? (Select all that apply)",
+      "options": {
+        "A": "Risk Adjusted Return on Intelligence Spend (RARIS)",
+        "B": "Percentage of 'Business Critical' incidents preceded by a verified early-warning TI report",
+        "C": "Velocity of 'Indicator Cleanup' across the top 10% of stale legacy feeds",
+        "D": "The SQL query font size"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Attribution' 'Entrenchment' risk during a 'Deception-aware' TI transformation?",
+      "options": {
+        "A": "When a physical trench is dug in the data center.",
+        "B": "The risk that long-tenured researchers will block 'False Flag Analysis' to protect their historical 'Hard Attribution' records.",
+        "C": "A specialized software for historians.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "A metric tracking how often business units deliberately or accidentally exceed the board-mandated 'Intelligence Risk Appetite' limits.",
+        "C": "A security scan for database viruses.",
+        "D": "The physical speed of the keyboard."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Incentives' occur when a Director demands '100% Attribution Accuracy' while the Board only rewards the team for 'Quantity of Indicators Shared'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Backbone' 'Insight' 'Orchestration' for TI? (Select all that apply)",
+      "options": {
+        "A": "Using AI to correlate 'Adversary Sentiment' with internal breach telemetry",
+        "B": "Automatically identifying 'Analytic Drift' in remote subsidiaries before it results in a false attribution",
+        "C": "Guaranteed to replace all human Architects",
+        "D": "Analyzing global metadata to predict 'Malware Outbreak' shocks in real-time"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Intelligence' 'Ecosystem' 'Architecture' (IEA) for TI?",
+      "options": {
+        "A": "Managing a physical portfolio of paper reports.",
+        "B": "The strategic integration of TIP, SIEM, SOAR, and OSINT into a single 'Unified Intelligence Mesh'.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Operations', what is 'Capability' 'Calibration' in M&A?",
+      "options": {
+        "A": "Trading physical servers for employees.",
+        "B": "The technical process of evaluating whether an acquired firm's 'Intelligence Hygiene' matches the parent company's 'Fidelity Standard' before technical merger.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Forensic Certainty' from a newly hired team that requires 18 months of 'Asset Discovery' to be effective.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'TI' 'Compliance' 'Audit'? (Select all that apply)",
+      "options": {
+        "A": "Generating 'Immutable' evidence of indicator integrity for regulators",
+        "B": "Automatically calculating 'Fair-Response' risk scores across global hubs",
+        "C": "Hiring 100 extra junior manual testers",
+        "D": "Verifying that 'Data Residency' rules are enforced via inventory-based steering"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Logic' 'Encapsulation' in an Organizational TI Model?",
+      "options": {
+        "A": "Hiding the code in a physical capsule.",
+        "B": "Ensuring 'Systemic Governance Policies' (the What) are isolated from 'Local Research Tactics' (the How), allowing local speed while maintaining global safety.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk'?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "The duration between a major external '0-day' release and the Director officially flagging the total internal exposure count.",
+        "C": "A security scan for database viruses.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Visibility' to the board while the internal team is aware that 'Legacy Solaris' units are strictly manual.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'TI' 'Strategy' 'APIs'? (Select all that apply)",
+      "options": {
+        "A": "Linking 'Researcher Performance scores' directly to 'Cloud Resource Access' eligibility",
+        "B": "Connecting 'Real-time Breach News' to 'Automated Internal Scan' triggers",
+        "C": "Guaranteed to fix all network lag",
+        "D": "Syncing 'Intelligence Reporting' data with 'Corporate Legal' case software"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+      "options": {
+        "A": "A physical strap for a boot.",
+        "B": "A pre-defined 'Day-1' playbook that establishes standard Feeds, STIX-mapping, and BCP protocols to stabilize a new offshore office in 30 days.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in TI?",
+      "options": {
+        "A": "A metric track tracking the steady decline in 'Path Quality' as complex new cloud architectures outpace current manual audit cycles.",
+        "B": "When people stop passing the office hallway.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional actor."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Convergence' for a 1M prefix table after exactly 24 hours of router notice.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'TI' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+      "options": {
+        "A": "Consolidated 'Enterprise Risk' heatmaps for the CEO",
+        "B": "Reduction in 'Slide-building' labor for the Intelligence Operations office",
+        "C": "Guaranteed to replace all human Architects",
+        "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Logical' 'Data' 'Isolation' in Global Intelligence Hubs?",
+      "options": {
+        "A": "Isolating data on a deserted island.",
+        "B": "Ensuring that 'Sensitive research data' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the size of the font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Intelligence' 'Trust' (MTRIT)?",
+      "options": {
+        "A": "The average time it takes to clean the office.",
+        "B": "The duration between a high-profile intelligence failure (e.g. false-positive block of critical business) and the point at which 'Trust' scores return to baseline.",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'SLA' in TI strategy refers to an organization promising 'Zero Financial Risk' while utilizing a 'Low-Budget' manual research model.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'Strategic' 'TI' 'Roles'? (Select all that apply)",
+      "options": {
+        "A": "Global Head of Intelligence Operations",
+        "B": "Chief Resilience Architect",
+        "C": "Director of Behavioral Intelligence",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Calculated' 'System' 'Resilience' for a global intelligence mesh?",
+      "options": {
+        "A": "A physical cover for a computer.",
+        "B": "A weighted score including 'Feed Uptime', 'MTTI', 'Control Redundancy', and 'Analytic Integrity Maturity' across all asset paths.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Intelligence' 'Gaps' (MTBCIG)?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "A metric track tracking the duration of organizational stability before a 'Key Intelligence Player' (Single Point of Failure) in the engineering team leaves.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Signature-only' models to manage a 2026 'Cloud-Edge' TI environment.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'TI' 'Verification' 'Challenges'? (Select all that apply)",
+      "options": {
+        "A": "Difficulty in automating subjective 'Adversary Partner' motivation analysis",
+        "B": "Keeping intel playbooks updated with rapidly changing local 'Privacy' laws",
+        "C": "Guaranteed to replace all human analysts",
+        "D": "Risk of 'False Confidence' if test environments lack production-grade network feeds"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Systemic' 'Risk' 'Maintainability' in Intelligence?",
+      "options": {
+        "A": "Hiding the code in a physical capsule.",
+        "B": "The degree to which an organization's 'Intelligence Pipeline' can sustain major technological shifts without a systemic loss of release velocity.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Global' 'Threat'?",
+      "options": {
+        "A": "The average time it takes to wake up the manager.",
+        "B": "The duration between an external '0-day' release and the Lead officially presenting an 'Impact Alert' to the Board.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a professional actor to read reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Data' 'Ownership' in TI auditing occurs when 'Forensic Research' is stored on a server that only the 'Sales' team can access.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'Strategic' 'TI' 'Stakeholders'? (Select all that apply)",
+      "options": {
+        "A": "Institutional Shareholders",
+        "B": "Global Infrastructure Compliance Leads",
+        "C": "Backbone Intelligence Presidents",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A intelligence acquisition?",
+      "options": {
+        "A": "The rapid deployment of 'Adversary Intelligence' tools and 'Maturity Scoring' to a newly acquired network within 30 days.",
+        "B": "A physical strap for a boot.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Intelligence' 'Strategy' 'Refreshes' (MTBISR)?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "A metric tracking how often the organization completely re-evaluates its 'Threat Vision' and 'Tooling Stack' to stay current with global threats.",
+        "C": "A security scan for database viruses.",
+        "D": "The physical speed of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a Research Intern after exactly 48 hours of TI training.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'TI' 'Succession' 'Verification'? (Select all that apply)",
+      "options": {
+        "A": "Automatically flagging if a 'Critical Research Path' has zero identified backup maintainers",
+        "B": "Identifying if a potential successor's 'Leadership Score' matches the Director role requirements",
+        "C": "Guaranteed to replace all human Intelligence Leads",
+        "D": "Tracking the 'Readiness' of the top 10% of global forensic talent in real-time"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Logic' 'Lifting' significance in Intelligence Strategy?",
+      "options": {
+        "A": "Lifting a physical computer up a flight of stairs.",
+        "B": "The degree to which a 'Successful Research Model' can be 'Lifted' from one product line (e.g. Finance research) and applied to another (e.g. Supply Chain research).",
+        "C": "A specialized software for architects.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'TI' 'ROI' (MTR-TROI)?",
+      "options": {
+        "A": "The average time it takes to clean the office.",
+        "B": "The duration between an automated intelligence control becoming 'Inactive' and the point where its 'Reliability' is restored.",
+        "C": "A security scan of the database.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Intelligence Budget Increase' while the Architect is enforcing a 'Global Adversary-aware' hard gate.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Strategic' 'TI' 'Reporting' 'Benefits'? (Select all that apply)",
+      "options": {
+        "A": "Consistency in 'Infrastructure ROI' data presentation for the parent corporate entity",
+        "B": "Reduction in manual 'Audit Prep' build time for Intelligence Directors",
+        "C": "Guaranteed to replace all human risk managers",
+        "D": "Instant generation of 'Profit-per-Intelligence-Level' reports for the CFO"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Logic' 'Encapsulation' in a 'Hold-Co' model?",
+      "options": {
+        "A": "Hiding the code in a physical capsule.",
+        "B": "Designing individual 'Business Unit Intelligence Contexts' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+        "C": "A specialized software for poets.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in research?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "The average duration from when a new network threat vector is identified until the Lead specifies the necessary TI modules to mitigate it.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the keyboard."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Schedules' occur when 'Intelligence Audits' are planned annually, but 'Adversary TTPs' update every 24 hours, leading to permanent strategic vulnerability.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Enterprise' 'Strategic' 'TI' 'Stakeholders'? (Select all that apply)",
+      "options": {
+        "A": "Head of Strategic Transformation",
+        "B": "Global Chief Security Officer",
+        "C": "Corporate Governance Counsel",
+        "D": "The SQL query parser"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Research' 'Bootstrap' complexity for a 'Turnaround' Director?",
+      "options": {
+        "A": "A physical strap for a boot.",
+        "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' intelligence culture into a 'Modern and Data-Driven' organization within 100 days.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+      "options": {
+        "A": "The average time it takes for a team to have a meeting.",
+        "B": "A metric tracking the stability of the leadership layer, identifying if 'Management Burnout' is causing frequent strategic shifts in the Research team.",
+        "C": "A security scan of the database.",
+        "D": "The physical speed of the keyboard."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Strategic' 'TI' 'Analytics' benefits? (Select all that apply)",
+      "options": {
+        "A": "Enabling 'Predictive Threat' mapping across global subsidiaries",
+        "B": "Reducing the 'Intelligence Data Lag' between regional hubs and HQ",
+        "C": "Guaranteed to fix all server crashes",
+        "D": "Consistent application of 'Risk-Scoring' logic across all automated research tools"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Intelligence' 'Self-Calibration'?",
+      "options": {
+        "A": "Calibrating a person name Intelligence.",
+        "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Research' patterns.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the frame rate of a video."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-intelligence-failure?",
+      "options": {
+        "A": "The average time it takes to clean the office.",
+        "B": "The duration from a fundamental strategic shift until the team's 'Operating Margin' returns to its target levels through process correction.",
+        "C": "A security scan for database viruses.",
+        "D": "Hiring a mathematician to count leads."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Mismatched' 'TI' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic commit grid.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+      "options": {
+        "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+        "B": "Identifying business units that are 'Strategic Lagging' based on research history",
+        "C": "Guaranteed to stop all network lag",
+        "D": "Analyzing the ROI of 'Intelligence Automation' tools relative to manual labor"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Strategic' 'Intelligence' 'Logic' 'Encapsulation'?",
+      "options": {
+        "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+        "B": "Hiding the code in a physical capsule.",
+        "C": "A specialized tool for measuring light.",
+        "D": "Increasing the speed of light."
+      },
+      "answer": "A"
+    }
+  ]
+}

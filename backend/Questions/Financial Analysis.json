@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Financial Analysis", 
+  "questions": [
+  {
+    "question": "Which financial statement provides a snapshot of a company's financial position at a specific point in time?",
+    "options": {
+      "A": "Income Statement",
+      "B": "Balance Sheet",
+      "C": "Statement of Retained Earnings",
+      "D": "Cash Flow Statement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the basic Accounting Equation?",
+    "options": {
+      "A": "Assets = Liabilities - Equity",
+      "B": "Assets + Liabilities = Equity",
+      "C": "Assets = Liabilities + Equity",
+      "D": "Equity = Assets + Liabilities"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'ROI' stand for in financial analysis?",
+    "options": {
+      "A": "Rate of Inflation",
+      "B": "Return on Investment",
+      "C": "Risk of Insolvency",
+      "D": "Revenue on Inventory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is considered a 'Current Asset'?",
+    "options": {
+      "A": "Long-term Investments",
+      "B": "Inventory",
+      "C": "Property, Plant, and Equipment",
+      "D": "Goodwill"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Net Income is calculated by subtracting total expenses from:",
+    "options": {
+      "A": "Total Assets",
+      "B": "Total Liabilities",
+      "C": "Total Revenue",
+      "D": "Working Capital"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "The 'Current Ratio' is a measure of a company's:",
+    "options": {
+      "A": "Profitability",
+      "B": "Liquidity",
+      "C": "Solvency",
+      "D": "Market Value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which document reports a company's revenues and expenses over a specific period?",
+    "options": {
+      "A": "Income Statement",
+      "B": "Balance Sheet",
+      "C": "Audit Report",
+      "D": "General Ledger"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Gross Profit'?",
+    "options": {
+      "A": "Net Income minus Taxes",
+      "B": "Revenue minus Cost of Goods Sold (COGS)",
+      "C": "Sales minus Operating Expenses",
+      "D": "Total Assets minus Liabilities"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Cash Flow Statement, which section includes the purchase of new machinery?",
+    "options": {
+      "A": "Operating Activities",
+      "B": "Investing Activities",
+      "C": "Financing Activities",
+      "D": "Equity Activities"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What term describes the cost of a fixed asset spread over its useful life?",
+    "options": {
+      "A": "Accrual",
+      "B": "Amortization",
+      "C": "Depreciation",
+      "D": "Dividend"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is a 'Liability'?",
+    "options": {
+      "A": "Accounts Receivable",
+      "B": "Accounts Payable",
+      "C": "Prepaid Expenses",
+      "D": "Patents"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Working Capital'?",
+    "options": {
+      "A": "Total Assets minus Total Equity",
+      "B": "Current Assets minus Current Liabilities",
+      "C": "Cash minus Debt",
+      "D": "Net Income plus Depreciation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which ratio measures how many cents of profit are generated for each dollar of sales?",
+    "options": {
+      "A": "Current Ratio",
+      "B": "Inventory Turnover",
+      "C": "Net Profit Margin",
+      "D": "Debt-to-Equity Ratio"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'EBITDA' stand for?",
+    "options": {
+      "A": "Earnings Before Interest, Taxes, Debt, and Assets",
+      "B": "Earnings Before Interest, Taxes, Depreciation, and Amortization",
+      "C": "Equity Balance in Total Daily Accounts",
+      "D": "Estimated Budget in Total Direct Analysis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "A 'P/E Ratio' compares a company's stock price to its:",
+    "options": {
+      "A": "Total Assets",
+      "B": "Earnings Per Share (EPS)",
+      "C": "Dividend Yield",
+      "D": "Gross Revenue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an 'Intangible Asset'?",
+    "options": {
+      "A": "Cash",
+      "B": "Office Supplies",
+      "C": "Trademarks",
+      "D": "Delivery Trucks"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Solvency'?",
+    "options": {
+      "A": "The ability to meet long-term financial obligations.",
+      "B": "The ability to turn inventory into cash quickly.",
+      "C": "The total amount of cash in the bank.",
+      "D": "The rate at which employees are hired."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "If a company has a Current Ratio of 0.5, it generally indicates:",
+    "options": {
+      "A": "The company is highly profitable.",
+      "B": "The company may have trouble paying short-term debts.",
+      "C": "The company has zero debt.",
+      "D": "The company is growing rapidly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of cash flow comes from issuing stock or paying dividends?",
+    "options": {
+      "A": "Operating Cash Flow",
+      "B": "Investing Cash Flow",
+      "C": "Financing Cash Flow",
+      "D": "Internal Cash Flow"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Revenue Recognition'?",
+    "options": {
+      "A": "The process of counting cash in the register.",
+      "B": "The accounting principle that determines when income is recorded.",
+      "C": "The awards a company wins for its sales.",
+      "D": "A background check on a company's customers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In financial terms, 'Leverage' refers to the use of:",
+    "options": {
+      "A": "New technology to speed up work.",
+      "B": "Borrowed money (Debt) to increase potential returns.",
+      "C": "Social media to market products.",
+      "D": "Legal contracts to protect assets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Book Value'?",
+    "options": {
+      "A": "The price a book sells for in a store.",
+      "B": "The value of an asset as recorded on the balance sheet.",
+      "C": "The market price of a company's stock.",
+      "D": "The total weight of the financial ledgers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these represents the owners' residual interest in the company?",
+    "options": {
+      "A": "Liabilities",
+      "B": "Equity",
+      "C": "Assets",
+      "D": "Revenue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Dividend'?",
+    "options": {
+      "A": "A tax paid to the government.",
+      "B": "A distribution of profits to shareholders.",
+      "C": "An interest payment to a bank.",
+      "D": "The cost of shipping products."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which ratio measures how efficiently a company uses its assets to generate profit?",
+    "options": {
+      "A": "Current Ratio",
+      "B": "Debt-to-Equity",
+      "C": "Return on Assets (ROA)",
+      "D": "Price-to-Earnings"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Quick Ratio' (Acid-test ratio) similar to, but more conservative than?",
+    "options": {
+      "A": "Net Margin",
+      "B": "Current Ratio",
+      "C": "Debt Ratio",
+      "D": "Asset Turnover"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'COGS'?",
+    "options": {
+      "A": "Corporate Overhead and General Sales",
+      "B": "Cost of Goods Sold",
+      "C": "Category of Government Subsidies",
+      "D": "Central Office Global Systems"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Liquidity'?",
+    "options": {
+      "A": "The total volume of water used in a factory.",
+      "B": "The ease with which an asset can be converted into cash.",
+      "C": "The physical state of a company's assets.",
+      "D": "The number of shares a company has issued."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which financial report is usually prepared first?",
+    "options": {
+      "A": "Income Statement",
+      "B": "Balance Sheet",
+      "C": "Cash Flow Statement",
+      "D": "Audit Opinion"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Accounts Receivable'?",
+    "options": {
+      "A": "Money the company owes to suppliers.",
+      "B": "Money owed to the company by its customers.",
+      "C": "The list of employees on the payroll.",
+      "D": "The receipts from physical cash sales."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Retained Earnings'?",
+    "options": {
+      "A": "Money paid out to the CEO.",
+      "B": "Profits kept in the business rather than paid as dividends.",
+      "C": "Revenue that has not been collected yet.",
+      "D": "The value of the company's buildings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Fixed Cost'?",
+    "options": {
+      "A": "Raw materials",
+      "B": "Rent",
+      "C": "Sales commissions",
+      "D": "Electricity based on usage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to the Balance Sheet when a company takes out a bank loan?",
+    "options": {
+      "A": "Assets increase and Equity increases.",
+      "B": "Assets increase and Liabilities increase.",
+      "C": "Liabilities increase and Equity decreases.",
+      "D": "Only Liabilities increase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Financial Modeling' primarily used for?",
+    "options": {
+      "A": "Designing the company's website.",
+      "B": "Forecasting future financial performance.",
+      "C": "Tracking the physical location of inventory.",
+      "D": "Hiring new administrative staff."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fiscal Year'?",
+    "options": {
+      "A": "The period from January 1 to December 31 only.",
+      "B": "A one-year period used for financial reporting and budgeting.",
+      "C": "The time it takes to complete a single project.",
+      "D": "The year a company was founded."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Face Value' of a bond?",
+    "options": {
+      "A": "The market price of the bond.",
+      "B": "The amount the bond will be worth at maturity.",
+      "C": "The interest rate written on the bond.",
+      "D": "The name of the company issuing the bond."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Accrual Accounting'?",
+    "options": {
+      "A": "Recording transactions only when cash changes hands.",
+      "B": "Recording revenue when earned and expenses when incurred.",
+      "C": "Tracking the physical movement of goods.",
+      "D": "Counting physical cash at the end of the day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Common Stock'?",
+    "options": {
+      "A": "A loan made to the company by a bank.",
+      "B": "A security representing ownership in a corporation.",
+      "C": "A list of standard office supplies.",
+      "D": "The cash held in the company's vault."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inventory Turnover' ratio used to measure?",
+    "options": {
+      "A": "How many times a company's inventory is sold and replaced over a period.",
+      "B": "The total weight of the inventory in the warehouse.",
+      "C": "The percentage of inventory that is damaged.",
+      "D": "The number of employees working in the warehouse."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EPS'?",
+    "options": {
+      "A": "Estimated Project Savings",
+      "B": "Earnings Per Share",
+      "C": "Equity Price Standard",
+      "D": "Electronic Payroll System"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Non-Cash Expense'?",
+    "options": {
+      "A": "Rent",
+      "B": "Depreciation",
+      "C": "Wages",
+      "D": "Utilities"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Debt-to-Equity' ratio used for?",
+    "options": {
+      "A": "To measure the speed of sales.",
+      "B": "To assess a company's financial leverage and risk.",
+      "C": "To count the number of shareholders.",
+      "D": "To calculate the tax rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Market Capitalization'?",
+    "options": {
+      "A": "The total amount of debt a company has.",
+      "B": "The total value of a company's outstanding shares of stock.",
+      "C": "The city where a company's headquarters is located.",
+      "D": "The number of products a company sells."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is found on an Income Statement?",
+    "options": {
+      "A": "Cash",
+      "B": "Operating Income",
+      "C": "Inventory",
+      "D": "Long-term Debt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Margin' in a financial sense?",
+    "options": {
+      "A": "The edge of a physical piece of paper.",
+      "B": "The difference between the selling price and the cost of a product.",
+      "C": "The distance between two office buildings.",
+      "D": "The time spent on a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'negative' cash flow from operations typically suggest?",
+    "options": {
+      "A": "The company is making too much profit.",
+      "B": "The company is spending more cash on its core business than it is bringing in.",
+      "C": "The company has paid off all its loans.",
+      "D": "The company's stock price is about to double."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Credit' in accounting?",
+    "options": {
+      "A": "The reputation of the business owner.",
+      "B": "An entry recording a sum received (right side of an account).",
+      "C": "An entry recording an amount owed (left side of an account).",
+      "D": "The name of the bank."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Debit' in accounting?",
+    "options": {
+      "A": "The total amount of debt a company has.",
+      "B": "An entry recording an amount owed (left side of an account).",
+      "C": "A discount given to a customer.",
+      "D": "The password for the online portal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gross Margin Percentage'?",
+    "options": {
+      "A": "Net Income / Total Assets",
+      "B": "(Revenue - COGS) / Revenue",
+      "C": "Revenue / Net Income",
+      "D": "COGS / Inventory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Interest Expense'?",
+    "options": {
+      "A": "The amount of interest a company has in a new project.",
+      "B": "The cost of borrowing money.",
+      "C": "The money earned from savings accounts.",
+      "D": "The price of a company's stock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Variable Cost'?",
+    "options": {
+      "A": "Property Taxes",
+      "B": "Raw Materials",
+      "C": "Annual Insurance Premium",
+      "D": "Manager's Salary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auditing'?",
+    "options": {
+      "A": "Listening to a music file.",
+      "B": "The independent examination of financial information.",
+      "C": "The process of hiring new accountants.",
+      "D": "Writing a press release about earnings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Financial Leverage'?",
+    "options": {
+      "A": "Using more employees to do work.",
+      "B": "Using debt to fund the purchase of assets.",
+      "C": "Increasing the price of products.",
+      "D": "Working in more than one country."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Balance' in a ledger?",
+    "options": {
+      "A": "The physical stability of a server.",
+      "B": "The difference between the total debits and total credits.",
+      "C": "The name of the lead accountant.",
+      "D": "The time it takes to enter data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cash Equivalents'?",
+    "options": {
+      "A": "Physical coins only.",
+      "B": "Short-term, highly liquid investments.",
+      "C": "A list of standard office equipment.",
+      "D": "The value of the company's brand."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Net Worth'?",
+    "options": {
+      "A": "Total Revenue.",
+      "B": "Total Assets minus Total Liabilities.",
+      "C": "The price of the company's building.",
+      "D": "The amount of cash in the CEO's pocket."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Filing' an annual report?",
+    "options": {
+      "A": "Putting paper in a folder.",
+      "B": "Submitting financial statements to a regulatory body (like the SEC).",
+      "C": "Deleting old data from a computer.",
+      "D": "Organizing files by their color."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Asset Allocation'?",
+    "options": {
+      "A": "Dividing the office into sections.",
+      "B": "Distributing investments among different asset categories like stocks and bonds.",
+      "C": "Assigning a desk to a new employee.",
+      "D": "Labeling tools with barcode stickers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Capital'?",
+    "options": {
+      "A": "The city where the government is.",
+      "B": "Wealth in the form of money or other assets owned by a person or organization.",
+      "C": "A large letter at the start of a sentence.",
+      "D": "A specialized software for drawing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Overhead'?",
+    "options": {
+      "A": "The ceiling of the office building.",
+      "B": "Ongoing business expenses not directly attributed to creating a product.",
+      "C": "The speed of the network connection.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Break-even Point'?",
+    "options": {
+      "A": "The moment a physical tool breaks.",
+      "B": "The production level where total revenues equal total expenses.",
+      "C": "The end of the fiscal year.",
+      "D": "When a company goes bankrupt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Internal Audit'?",
+    "options": {
+      "A": "An audit performed by an outside firm.",
+      "B": "An audit performed by a company's own employees.",
+      "C": "Searching for lost files on a computer.",
+      "D": "Hiring a detective to find bugs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fixed Asset'?",
+    "options": {
+      "A": "An asset that has been repaired.",
+      "B": "Long-term tangible piece of property or equipment used in operations.",
+      "C": "Cash in the bank.",
+      "D": "Inventory ready for sale."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Consolidation'?",
+    "options": {
+      "A": "Separating different systems into different buildings.",
+      "B": "Combining the financial statements of a parent company and its subsidiaries.",
+      "C": "Deleting one system to save space.",
+      "D": "A way to count the number of computers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Budgeting'?",
+    "options": {
+      "A": "Spending as much money as possible.",
+      "B": "Creating a plan to spend your money.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a person to count money."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ledger'?",
+    "options": {
+      "A": "A type of ancient religious book.",
+      "B": "The principal book for recording and totaling financial transactions.",
+      "C": "A secret password for a database.",
+      "D": "A way to backup data in three lines."
+    },
+    "answer": "B"
+  },
+{
+    "question": "Which of the following components is NOT part of the traditional three-step DuPont Analysis?",
+    "options": {
+      "A": "Asset Turnover",
+      "B": "Inventory Salvage Value",
+      "C": "Net Profit Margin",
+      "D": "Equity Multiplier"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of calculating the 'Operating Cycle' of a company?",
+    "options": {
+      "A": "To determine the physical speed of the manufacturing assembly line.",
+      "B": "To measure the time between purchasing inventory and receiving cash from its sale.",
+      "C": "To estimate the total lifespan of the company's fixed assets.",
+      "D": "To calculate the number of hours employees work per shift."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does an increase in 'Financial Leverage' typically affect a company's Return on Equity (ROE), assuming the return on assets is higher than the cost of debt?",
+    "options": {
+      "A": "It decreases ROE by increasing interest expenses.",
+      "B": "It has no effect on ROE as equity remains constant.",
+      "C": "It increases ROE by using debt to amplify returns on the equity base.",
+      "D": "It makes ROE equal to the Net Profit Margin."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a Discounted Cash Flow (DCF) model, what does the 'Terminal Value' represent?",
+    "options": {
+      "A": "The value of the company at the very beginning of the projection period.",
+      "B": "The estimated value of all future cash flows beyond the explicit forecast period.",
+      "C": "The total amount of debt to be paid off by the end of the year.",
+      "D": "The liquidation value of the company's office furniture."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Weighted Average Cost of Capital' (WACC) used for in financial analysis?",
+    "options": {
+      "A": "To calculate the average weight of the company's products for shipping.",
+      "B": "To determine the required rate of return for a company's combined debt and equity.",
+      "C": "To find the average salary of the company's executive team.",
+      "D": "To determine the tax rate on international sales."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which ratio is used to assess a company’s ability to pay interest on its outstanding debt?",
+    "options": {
+      "A": "Debt-to-Assets Ratio",
+      "B": "Interest Coverage Ratio (Times Interest Earned)",
+      "C": "Operating Margin",
+      "D": "Price-to-Sales Ratio"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deferred Revenue' classified as on a Balance Sheet?",
+    "options": {
+      "A": "Current Asset",
+      "B": "Liability",
+      "C": "Shareholder Equity",
+      "D": "Operating Expense"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of capital budgeting, what does a 'Net Present Value' (NPV) of zero indicate?",
+    "options": {
+      "A": "The project will lose money every year.",
+      "B": "The project’s expected return is exactly equal to the discount rate.",
+      "C": "The project has zero risk.",
+      "D": "The project should be rejected immediately."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following would cause a company's 'Cash Conversion Cycle' to decrease?",
+    "options": {
+      "A": "An increase in the Days Sales Outstanding (DSO).",
+      "B": "An increase in the Days Payables Outstanding (DPO).",
+      "C": "An increase in the Days Inventory Outstanding (DIO).",
+      "D": "A decrease in the annual revenue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Beta' of a stock used to measure in the Capital Asset Pricing Model (CAPM)?",
+    "options": {
+      "A": "The company's dividend growth rate.",
+      "B": "The stock's volatility relative to the overall market.",
+      "C": "The total amount of cash on the balance sheet.",
+      "D": "The percentage of institutional ownership."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If a company uses 'LIFO' (Last-In, First-Out) during a period of rising prices, how does it affect COGS compared to 'FIFO'?",
+    "options": {
+      "A": "COGS will be lower.",
+      "B": "COGS will be higher.",
+      "C": "COGS will remain the same.",
+      "D": "COGS becomes zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unlevered Free Cash Flow'?",
+    "options": {
+      "A": "Cash flow available to only the equity holders.",
+      "B": "Cash flow available to all capital providers before taking debt payments into account.",
+      "C": "Cash flow that is restricted by legal contracts.",
+      "D": "The amount of cash found in the company's petty cash fund."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is the best indicator of a company's 'Pricing Power'?",
+    "options": {
+      "A": "Inventory Turnover",
+      "B": "Gross Profit Margin",
+      "C": "Current Ratio",
+      "D": "Debt-to-Equity Ratio"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main difference between 'Operating Leases' and 'Finance Leases' under modern accounting standards (ASC 842)?",
+    "options": {
+      "A": "Operating leases are not recorded on the balance sheet at all.",
+      "B": "Finance leases are considered ownership of the asset, while operating leases are purely rentals.",
+      "C": "Both generally appear on the balance sheet as Right-of-Use (ROU) assets, but the expense recognition pattern differs.",
+      "D": "Finance leases only apply to buildings, and operating leases only apply to cars."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does a high 'Asset Turnover Ratio' typically suggest?",
+    "options": {
+      "A": "The company is struggling to sell its products.",
+      "B": "The company is efficiently using its assets to generate sales.",
+      "C": "The company has too much debt.",
+      "D": "The company should buy more land."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In financial modeling, what is 'Sensitivity Analysis'?",
+    "options": {
+      "A": "Checking if the computer screen is sensitive to touch.",
+      "B": "Testing how changes in one variable (like growth rate) affect the final output (like valuation).",
+      "C": "Analyzing the emotional state of the shareholders.",
+      "D": "Calculating the sensitivity of the office's fire alarms."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Goodwill' on a balance sheet?",
+    "options": {
+      "A": "The amount of money donated to charity.",
+      "B": "The premium paid for an acquisition over the fair value of its identifiable net assets.",
+      "C": "A list of the company's most friendly employees.",
+      "D": "The value of the company's physical logo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Dividend Payout Ratio'?",
+    "options": {
+      "A": "The percentage of total assets paid out as dividends.",
+      "B": "The percentage of net income paid out to shareholders as dividends.",
+      "C": "The number of years the company has paid dividends.",
+      "D": "The interest rate paid on preferred stock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Cash Inflow' from Investing Activities?",
+    "options": {
+      "A": "Issuing new bonds.",
+      "B": "Sale of a manufacturing plant.",
+      "C": "Collection of accounts receivable.",
+      "D": "Payment of dividends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Capital Structure'?",
+    "options": {
+      "A": "The physical architecture of the company headquarters.",
+      "B": "The specific mix of debt and equity used to finance a company's operations.",
+      "C": "The total number of cities where the company has offices.",
+      "D": "The list of the company's primary investors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Negative Working Capital'?",
+    "options": {
+      "A": "When a company has zero assets.",
+      "B": "When current liabilities exceed current assets.",
+      "C": "When the company's bank account balance is below zero.",
+      "D": "A mathematical error in the financial report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Accretion' in an M&A context?",
+    "options": {
+      "A": "The process of a company shrinking in size.",
+      "B": "When the Earnings Per Share (EPS) of the combined company is higher than the acquirer's standalone EPS.",
+      "C": "The loss of value in a company's brand.",
+      "D": "A specialized tax on the sale of a business."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Risk-Free Rate' typically based on in financial models?",
+    "options": {
+      "A": "The interest rate on a personal savings account.",
+      "B": "The yield on long-term government bonds (e.g., US Treasury).",
+      "C": "The average growth rate of the S&P 500.",
+      "D": "The inflation rate plus 5%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Enterprise Value' (EV) represent?",
+    "options": {
+      "A": "The market cap plus the value of the company's buildings.",
+      "B": "The total value of a company, including market cap, debt, and minority interest, minus cash.",
+      "C": "The total revenue of the company over 10 years.",
+      "D": "The value of the company if all employees were fired."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Solvency Ratio'?",
+    "options": {
+      "A": "Quick Ratio",
+      "B": "Debt-to-Equity Ratio",
+      "C": "Inventory Turnover",
+      "D": "Gross Margin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Indirect Method' of preparing a Cash Flow Statement, why is Depreciation added back to Net Income?",
+    "options": {
+      "A": "Because depreciation is a source of cash income.",
+      "B": "Because depreciation is a non-cash expense that was subtracted to reach net income.",
+      "C": "To increase the value of the company's assets.",
+      "D": "To correct an error in the balance sheet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operating Leverage'?",
+    "options": {
+      "A": "Using a physical lever to operate machinery.",
+      "B": "The extent to which a company uses fixed costs in its operations.",
+      "C": "The ability to borrow money from an operating bank.",
+      "D": "The ratio of managers to entry-level employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Price-to-Book' (P/B) ratio of less than 1.0 potentially indicate?",
+    "options": {
+      "A": "The stock is extremely overvalued.",
+      "B": "The market value of the company is less than its accounting book value.",
+      "C": "The company has zero liabilities.",
+      "D": "The company is not allowed to sell books."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'EBIT'?",
+    "options": {
+      "A": "Earnings Before International Trade",
+      "B": "Operating Income (Earnings Before Interest and Taxes)",
+      "C": "Equity Balance in Total",
+      "D": "Estimated Budget in Training"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these would increase 'Accounts Payable'?",
+    "options": {
+      "A": "Paying a bill to a supplier.",
+      "B": "Buying inventory on credit.",
+      "C": "Receiving a payment from a customer.",
+      "D": "Selling a piece of old equipment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Internal Rate of Return' (IRR)?",
+    "options": {
+      "A": "The interest rate a bank charges for an internal loan.",
+      "B": "The discount rate that makes the NPV of all cash flows from a project equal to zero.",
+      "C": "The rate at which employees are promoted internally.",
+      "D": "The percentage of revenue kept as profit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Financial Modeling' 'Hardcoding' and why is it generally discouraged?",
+    "options": {
+      "A": "Typing code with one hand; it is slow.",
+      "B": "Entering fixed numbers instead of formulas; it makes the model difficult to update.",
+      "C": "Using a very high-security password; it blocks access.",
+      "D": "Naming a file 'Final_Model_1'; it is confusing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Direct Cost'?",
+    "options": {
+      "A": "Marketing budget.",
+      "B": "Raw materials for production.",
+      "C": "Administrative salaries.",
+      "D": "Corporate office rent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Treasury Stock'?",
+    "options": {
+      "A": "Stock that is owned by the government treasury.",
+      "B": "Shares that were previously issued but have been repurchased by the company.",
+      "C": "A specialized stock for high-net-worth individuals.",
+      "D": "Stock that only pays out in gold."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Common Size Financial Statements', items on the Balance Sheet are typically expressed as a percentage of:",
+    "options": {
+      "A": "Net Income",
+      "B": "Total Assets",
+      "C": "Total Equity",
+      "D": "Gross Sales"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a high 'Dividend Yield' suggest?",
+    "options": {
+      "A": "The company is growing very fast and keeping all profits.",
+      "B": "The dividend payment is high relative to the stock price.",
+      "C": "The company has zero cash on hand.",
+      "D": "The stock price is at an all-time high."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contribution Margin'?",
+    "options": {
+      "A": "The amount of money donated by employees.",
+      "B": "Sales Revenue minus Variable Costs.",
+      "C": "Total Revenue minus Taxes.",
+      "D": "Gross Profit minus Rent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which ratio measures the number of days it takes for a company to collect its receivables?",
+    "options": {
+      "A": "Inventory Turnover",
+      "B": "Days Sales Outstanding (DSO)",
+      "C": "Current Ratio",
+      "D": "Earnings Yield"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fair Value' in accounting?",
+    "options": {
+      "A": "The original price paid for an asset.",
+      "B": "The estimated price at which an asset could be sold in a current market transaction.",
+      "C": "The value of an asset after it has been fully depreciated.",
+      "D": "The value determined by a company's CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Amortization' applied to?",
+    "options": {
+      "A": "Tangible assets like trucks.",
+      "B": "Intangible assets like patents.",
+      "C": "Current assets like cash.",
+      "D": "Inventory like raw materials."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Z-Score' model (Altman) attempt to predict?",
+    "options": {
+      "A": "Future stock price growth.",
+      "B": "Probability of bankruptcy.",
+      "C": "The optimal tax rate.",
+      "D": "Next year's dividend payout."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Horizontal Analysis' of financial statements?",
+    "options": {
+      "A": "Comparing a company to its competitors.",
+      "B": "Comparing financial data over several reporting periods to see trends.",
+      "C": "Expressing every line item as a percentage of assets.",
+      "D": "Reading the balance sheet from left to right only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is NOT an operating expense?",
+    "options": {
+      "A": "Rent",
+      "B": "Interest Expense",
+      "C": "Sales Salaries",
+      "D": "Utilities"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Minority Interest' (Non-controlling interest)?",
+    "options": {
+      "A": "Interest paid on small loans.",
+      "B": "The portion of a subsidiary's equity not owned by the parent company.",
+      "C": "The interest rate for junior employees.",
+      "D": "Stock owned by children under 18."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is commonly used to compare the profitability of companies in the same industry, regardless of their capital structure?",
+    "options": {
+      "A": "Net Income",
+      "B": "EBITDA",
+      "C": "EPS",
+      "D": "ROE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Revenue' minus 'Variable Costs' called in a break-even analysis?",
+    "options": {
+      "A": "Net Profit",
+      "B": "Contribution Margin",
+      "C": "Gross Margin",
+      "D": "Operating Income"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If a company has a 'Debt Ratio' of 0.6, it means:",
+    "options": {
+      "A": "60% of its equity is debt.",
+      "B": "60% of its assets are financed by debt.",
+      "C": "The company has 60 cents of cash for every dollar of debt.",
+      "D": "The interest rate on its debt is 60%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Proxy Statement'?",
+    "options": {
+      "A": "A fake financial report.",
+      "B": "A document providing info to shareholders before a meeting to vote on corporate matters.",
+      "C": "A specialized software for accounting.",
+      "D": "A summary of the CEO's personal expenses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Impairment' of an asset?",
+    "options": {
+      "A": "When an asset is physically broken.",
+      "B": "A permanent reduction in the value of a company asset.",
+      "C": "The process of selling an asset for a profit.",
+      "D": "Increasing the useful life of an asset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Liability' on a Balance Sheet?",
+    "options": {
+      "A": "Prepaid Rent",
+      "B": "Unearned Revenue",
+      "C": "Accounts Receivable",
+      "D": "Accumulated Depreciation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Financial Ratios' 'Benchmarking'?",
+    "options": {
+      "A": "Putting a bench in the finance office.",
+      "B": "Comparing a company's ratios to industry standards or competitors.",
+      "C": "A specialized software for drawing graphs.",
+      "D": "The process of hiring new analysts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'high' Fixed Asset Turnover suggest?",
+    "options": {
+      "A": "The company should sell its machinery.",
+      "B": "The company is generating a high volume of sales from its investment in property and equipment.",
+      "C": "The company has too many fixed assets.",
+      "D": "The company is growing too slowly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Capital' 'Expenditure' (CapEx)?",
+    "options": {
+      "A": "Money spent on daily office supplies.",
+      "B": "Funds used by a company to acquire, upgrade, and maintain physical assets.",
+      "C": "The city where the company pays taxes.",
+      "D": "The total interest paid on a loan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Working' 'Capital' 'Management'?",
+    "options": {
+      "A": "Managing the number of hours employees work.",
+      "B": "The strategy of managing short-term assets and liabilities to ensure liquidity.",
+      "C": "A specialized software for architects.",
+      "D": "The process of hiring a new CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is found in the 'Financing' section of the Cash Flow Statement?",
+    "options": {
+      "A": "Purchasing a competitor.",
+      "B": "Repaying the principal on a bank loan.",
+      "C": "Selling inventory to customers.",
+      "D": "Depreciation of equipment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Synergy' in a merger analysis?",
+    "options": {
+      "A": "The energy used by the computers.",
+      "B": "The concept that the combined value of two companies will be greater than the sum of their individual parts.",
+      "C": "A specialized font for business reports.",
+      "D": "The legal fee for merging two businesses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Discount' 'Rate' in a valuation model?",
+    "options": {
+      "A": "The percentage off a product during a sale.",
+      "B": "The rate used to convert future cash flows into present value.",
+      "C": "The speed at which the company grows.",
+      "D": "The rate of tax on dividends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Accounting', what is 'Conservatism'?",
+    "options": {
+      "A": "Saving electricity in the office.",
+      "B": "Recognizing expenses and liabilities immediately, but only recognizing revenues when they are certain.",
+      "C": "Hiring researchers with traditional views.",
+      "D": "Using old-fashioned paper ledgers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vertical' 'Analysis'?",
+    "options": {
+      "A": "Comparing a company to its top competitor.",
+      "B": "Reporting each item on a financial statement as a percentage of a base figure (e.g., total sales).",
+      "C": "Reading the income statement from bottom to top.",
+      "D": "Analyzing the height of a company's office building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operating' 'Margin'?",
+    "options": {
+      "A": "The edge of a factory floor.",
+      "B": "Operating Income / Total Revenue.",
+      "C": "Net Income / Gross Profit.",
+      "D": "Total Assets / Total Liabilities."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Return' on 'Invested' 'Capital' (ROIC)?",
+    "options": {
+      "A": "Returning a product to the store.",
+      "B": "A measure of how well a company generates cash flow relative to the capital it has invested in its business.",
+      "C": "The total amount of cash in the CEO's pocket.",
+      "D": "A specialized software for accountants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these represents 'Equity'?",
+    "options": {
+      "A": "Accounts Payable",
+      "B": "Additional Paid-in Capital",
+      "C": "Inventory",
+      "D": "Notes Payable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Liquidation' 'Value'?",
+    "options": {
+      "A": "The value of a company if it grows 100%.",
+      "B": "The net amount a company's physical assets would fetch if it went out of business.",
+      "C": "The value of all the water in a factory.",
+      "D": "The stock price on a Friday afternoon."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'EBITDA' 'Exit' 'Multiple'?",
+    "options": {
+      "A": "Hiring multiple people to exit a building.",
+      "B": "A valuation method that assumes the company is sold for a multiple of its EBITDA at the end of a projection.",
+      "C": "A specialized software for architects.",
+      "D": "The number of exits in a company's warehouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an 'Asset'?",
+    "options": {
+      "A": "Accrued Expenses",
+      "B": "Prepaid Insurance",
+      "C": "Income Tax Payable",
+      "D": "Common Stock"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gross' 'Margin' vs 'Net' 'Margin'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Gross margin excludes operating and tax expenses; Net margin includes all expenses.",
+      "C": "Gross margin is 100x larger.",
+      "D": "Gross margin is for text; Net for images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is the most accurate formula for calculating 'Free Cash Flow to Equity' (FCFE)?",
+    "options": {
+      "A": "Net Income + Depreciation - CapEx - Change in Working Capital + Net Debt Issued",
+      "B": "EBITDA - Taxes - CapEx + Change in Net Working Capital",
+      "C": "Operating Cash Flow - Dividends Paid - Principal Repayments",
+      "D": "Net Income + Interest Expense * (1 - Tax Rate) - CapEx"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Leveraged Buyout (LBO) model, what is the primary source of the 'returns' for the Private Equity firm?",
+    "options": {
+      "A": "The increase in the company's dividend payout ratio over time.",
+      "B": "De-leveraging through debt paydown and exit multiple expansion.",
+      "C": "The immediate liquidation of the company's intangible assets.",
+      "D": "The reduction of the corporate tax rate to zero via offshore structuring."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Deferred Tax Liability' (DTL) represent on a company's balance sheet?",
+    "options": {
+      "A": "Taxes that have been paid in advance to the government.",
+      "B": "A future cash tax payment arising from a temporary timing difference between GAAP and tax accounting.",
+      "C": "A permanent reduction in the corporate tax rate granted by the IRS.",
+      "D": "A refund expected from the government due to overpayment in the prior fiscal year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Modigliani-Miller Theorem' (without taxes)?",
+    "options": {
+      "A": "The value of a firm increases as it takes on more debt.",
+      "B": "The value of a firm is independent of its capital structure.",
+      "C": "The cost of equity decreases as leverage increases.",
+      "D": "Dividends are the only factor that determines a stock's market price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the impact of an 'Asset Write-Down' on the Three Financial Statements?",
+    "options": {
+      "A": "Income Statement: No change; Balance Sheet: Assets decrease; Cash Flow: Cash increases.",
+      "B": "Income Statement: Pre-tax Income decreases; Balance Sheet: Assets and Retained Earnings decrease; Cash Flow: Cash increases due to tax shield.",
+      "C": "Income Statement: Net Income increases; Balance Sheet: Assets increase; Cash Flow: No change.",
+      "D": "Income Statement: Operating Expense decreases; Balance Sheet: Liabilities increase; Cash Flow: Cash decreases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How is the 'Cost of Debt' calculated for use in the WACC formula?",
+    "options": {
+      "A": "The coupon rate of the oldest outstanding bond.",
+      "B": "The yield to maturity (YTM) on the company's current debt, adjusted for the marginal tax rate.",
+      "C": "The risk-free rate plus the company's beta.",
+      "D": "The total interest expense divided by the total assets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Enterprise Value' primarily used to determine in a valuation context?",
+    "options": {
+      "A": "The total value available only to common shareholders.",
+      "B": "The theoretical takeover price of a company, applicable to all capital providers.",
+      "C": "The book value of the company's tangible assets.",
+      "D": "The amount of cash a company has after paying off its short-term liabilities."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Merger Model', what does it mean if a deal is 'Dilutive'?",
+    "options": {
+      "A": "The combined company's revenue is lower than the sum of the two individual revenues.",
+      "B": "The acquirer's Earnings Per Share (EPS) decreases after the acquisition.",
+      "C": "The target company's shareholders receive only cash and no stock.",
+      "D": "The combined company's debt-to-equity ratio exceeds 5.0."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which valuation method is most likely to produce the highest valuation for a company?",
+    "options": {
+      "A": "Public Comps (Trading Multiples)",
+      "B": "Precedent Transactions",
+      "C": "Discounted Cash Flow (DCF)",
+      "D": "Liquidation Value"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Unlevered Beta' (Asset Beta) intended to isolate?",
+    "options": {
+      "A": "The volatility of the company's stock price over the last 10 years.",
+      "B": "The business risk of the company, removing the effects of its specific financial leverage.",
+      "C": "The total risk of the company's debt providers.",
+      "D": "The probability that the company will default on its next interest payment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Negative Goodwill' (Bargain Purchase) situation imply?",
+    "options": {
+      "A": "The acquirer paid more than the fair market value.",
+      "B": "The purchase price was less than the fair value of the net assets acquired.",
+      "C": "The target company has a bad reputation in the market.",
+      "D": "The acquisition was funded entirely by high-interest debt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true about 'PIK Interest' (Payment-in-Kind) in a debt instrument?",
+    "options": {
+      "A": "It is paid in cash at the end of every quarter.",
+      "B": "It is non-cash interest that is added to the principal balance of the loan.",
+      "C": "It is a dividend payment made in the form of physical assets.",
+      "D": "It is a tax penalty for companies with too much leverage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a DCF, if you use 'Terminal Multiple' method instead of 'Gordon Growth' method, what are you assuming?",
+    "options": {
+      "A": "The company will grow at a constant rate forever.",
+      "B": "The company will be sold at the end of the projection period for a multiple of its financial metrics.",
+      "C": "The discount rate will eventually drop to zero.",
+      "D": "The company's working capital will become positive in the terminal year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Interest Tax Shield'?",
+    "options": {
+      "A": "A legal structure that hides interest income from the government.",
+      "B": "The reduction in income tax expense resulting from the tax-deductibility of interest payments.",
+      "C": "The process of using insurance to protect against rising interest rates.",
+      "D": "A specialized bond that pays zero taxes to the holder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which financial metric is most relevant for a 'Capital Intensive' industry like Telecommunications?",
+    "options": {
+      "A": "Inventory Turnover",
+      "B": "EV / EBITDA",
+      "C": "Price / Sales",
+      "D": "Revenue per Click"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an LBO, what is 'Management Rollover'?",
+    "options": {
+      "A": "Firing the existing management team after the buyout.",
+      "B": "When existing management reinvests a portion of their proceeds into the new equity of the private company.",
+      "C": "The process of management taking over the debt payments of the firm.",
+      "D": "A bonus paid to managers if they stay for more than 5 years."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Equity Multiplier' in the DuPont model?",
+    "options": {
+      "A": "Net Income / Shareholder Equity",
+      "B": "Total Assets / Shareholder Equity",
+      "C": "Total Liabilities / Total Assets",
+      "D": "Revenue / Total Equity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'High Days Payables Outstanding' (DPO) indicate about a company's relationship with suppliers?",
+    "options": {
+      "A": "The company is paying its bills too quickly and losing cash.",
+      "B": "The company has significant leverage or bargaining power over its suppliers.",
+      "C": "The company is in immediate danger of bankruptcy.",
+      "D": "The suppliers are providing a discount for early payments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Capital Asset Pricing Model' (CAPM), what is the formula for the Cost of Equity?",
+    "options": {
+      "A": "Risk-Free Rate + Beta",
+      "B": "Risk-Free Rate + Beta * (Equity Risk Premium)",
+      "C": "Dividend Yield + Growth Rate",
+      "D": "EBIT / Total Equity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following would be an 'Add-back' to EBITDA?",
+    "options": {
+      "A": "Routine utility payments.",
+      "B": "One-time legal settlement costs.",
+      "C": "Marketing expenses for a new product launch.",
+      "D": "The salary of a junior accountant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mid-Year Convention' in a DCF model designed to account for?",
+    "options": {
+      "A": "The fact that a company usually closes its books in June.",
+      "B": "The assumption that cash flows are received evenly throughout the year rather than at year-end.",
+      "C": "The difference between the fiscal year and the calendar year.",
+      "D": "The impact of summer seasonality on retail sales."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operating Leverage' strictly a function of?",
+    "options": {
+      "A": "The amount of debt on the balance sheet.",
+      "B": "The ratio of fixed costs to variable costs in a company's cost structure.",
+      "C": "The number of shares outstanding.",
+      "D": "The credit rating of the company's bonds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a characteristic of 'Mezzanine Debt'?",
+    "options": {
+      "A": "It is the most senior debt in the capital stack.",
+      "B": "It often includes equity 'warrants' to provide additional upside to the lender.",
+      "C": "It has the lowest interest rate of all debt types.",
+      "D": "It is secured by the company's physical inventory only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If a company’s 'Inventory' increases by $100, what is the impact on the Cash Flow Statement?",
+    "options": {
+      "A": "Cash flow from operations increases by $100.",
+      "B": "Cash flow from operations decreases by $100.",
+      "C": "Cash flow from investing decreases by $100.",
+      "D": "There is no impact on cash flow until the inventory is sold."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Normalized' level of Working Capital?",
+    "options": {
+      "A": "Current Assets minus Current Liabilities at year-end.",
+      "B": "The average level of working capital required to run the business, excluding seasonal spikes.",
+      "C": "Zero, as all companies should aim for just-in-time inventory.",
+      "D": "The amount of working capital a company has in a bank account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is the 'best' proxy for a company's recurring cash flow from core operations?",
+    "options": {
+      "A": "Net Income",
+      "B": "Operating Cash Flow (CFO)",
+      "C": "Free Cash Flow (FCF)",
+      "D": "Gross Profit"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Divestiture' of a business unit?",
+    "options": {
+      "A": "Buying a new company in a different industry.",
+      "B": "The partial or full disposal of a business unit or asset through sale or spin-off.",
+      "C": "Merging two internal departments together.",
+      "D": "Increasing the capital expenditure budget for that unit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Comps' analysis, why is it necessary to 'Unlever' and 'Re-lever' Beta?",
+    "options": {
+      "A": "To account for differences in the tax rates of different countries.",
+      "B": "To compare the business risk of companies by removing the distortion of their different capital structures.",
+      "C": "To ensure that the P/E ratio is consistent across the peer group.",
+      "D": "To calculate the terminal value more accurately."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Minority Leakage' in the context of an LBO?",
+    "options": {
+      "A": "When a small amount of cash is lost during a wire transfer.",
+      "B": "The portion of dividends or exit proceeds that must be paid to non-controlling interest holders.",
+      "C": "A decrease in the stock price due to a minority shareholder selling.",
+      "D": "The tax paid on interest income from minority investments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary risk of a 'High Debt-to-EBITDA' ratio (e.g., > 6.0x)?",
+    "options": {
+      "A": "The company will be forced to pay higher dividends.",
+      "B": "The company may fail to meet its debt covenants or interest payments during an economic downturn.",
+      "C": "The company's asset turnover will decrease.",
+      "D": "The CEO's salary will be capped by the government."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Accretion/Dilution' analysis primarily testing in an acquisition?",
+    "options": {
+      "A": "The cultural fit between the two management teams.",
+      "B": "Whether the combined company’s EPS will be higher or lower than the acquirer's standalone EPS.",
+      "C": "The total amount of physical space needed to merge the offices.",
+      "D": "The impact of the deal on the global inflation rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these represents 'Contingent Liabilities'?",
+    "options": {
+      "A": "Regular monthly interest payments.",
+      "B": "Potential obligations that may arise depending on the outcome of a future event (e.g., a lawsuit).",
+      "C": "Debt that has already been repaid.",
+      "D": "Accounts payable that are more than 90 days overdue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Capital Budgeting', what is the 'Profitability Index' (PI)?",
+    "options": {
+      "A": "The ratio of net income to total sales.",
+      "B": "The ratio of the present value of future cash flows to the initial investment.",
+      "C": "The percentage of employees who are productive.",
+      "D": "A ranking of companies based on their gross margin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Net Debt' of a company?",
+    "options": {
+      "A": "Total Debt minus Total Assets.",
+      "B": "Total Debt minus Cash and Cash Equivalents.",
+      "C": "Total Debt plus Interest Expense.",
+      "D": "Long-term Debt minus Short-term Debt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Steepening Yield Curve' usually signal to financial analysts?",
+    "options": {
+      "A": "An impending recession and deflation.",
+      "B": "Expectations of stronger future economic growth and rising inflation.",
+      "C": "That short-term interest rates are higher than long-term rates.",
+      "D": "That the stock market is about to crash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fairness Opinion' in an M&A transaction?",
+    "options": {
+      "A": "A public poll about whether people like the merger.",
+      "B": "A professional evaluation by an investment bank as to whether the deal price is fair from a financial point of view.",
+      "C": "The opinion of the junior employees on the acquisition.",
+      "D": "A legal ruling by a judge on the validity of a contract."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Intercompany Eliminations' during consolidation?",
+    "options": {
+      "A": "To delete small subsidiaries from the balance sheet.",
+      "B": "To remove the effect of transactions between the parent and subsidiary to avoid double-counting.",
+      "C": "To fire employees who work for more than one unit.",
+      "D": "To hide debt from external auditors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an LBO, what is 'Dry Powder'?",
+    "options": {
+      "A": "The cash kept in a physical safe for emergencies.",
+      "B": "The amount of committed but unallocated capital available to a Private Equity firm for new deals.",
+      "C": "A specialized chemical used to clean server racks.",
+      "D": "The proceeds from selling a company for a loss."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Working Capital PEG' in an acquisition agreement?",
+    "options": {
+      "A": "A physical wooden peg used to mark inventory.",
+      "B": "A target level of working capital that must be delivered at the time of closing.",
+      "C": "The ratio of working capital to total equity.",
+      "D": "A penalty for having negative working capital."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an example of 'Revenue Synergy'?",
+    "options": {
+      "A": "Firing the redundant marketing team.",
+      "B": "Cross-selling the acquirer's products to the target company's existing customers.",
+      "C": "Moving to a cheaper office building.",
+      "D": "Refinancing the target's debt at a lower rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Capex-to-Depreciation' ratio used to assess?",
+    "options": {
+      "A": "The speed of the company's sales growth.",
+      "B": "Whether a company is investing enough in its assets to maintain or grow its operations.",
+      "C": "The total amount of debt the company has.",
+      "D": "The tax rate on fixed assets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Asset-Light' business model?",
+    "options": {
+      "A": "A company that sells only lightweight products.",
+      "B": "A business strategy that minimizes the ownership of physical assets to increase flexibility and ROI.",
+      "C": "A company that has zero liabilities on its balance sheet.",
+      "D": "A business that operates only during the daytime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Financial Analysis', what is the 'Cash Burn Rate'?",
+    "options": {
+      "A": "The temperature at which paper money burns.",
+      "B": "The rate at which a new company uses up its venture capital to finance overhead before generating positive cash flow.",
+      "C": "The total amount of cash lost to inflation every year.",
+      "D": "The speed at which cash is physically counted by machines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-Controlling Interest' (NCI) on a Balance Sheet?",
+    "options": {
+      "A": "Stock owned by the company's CEO.",
+      "B": "The portion of equity in a subsidiary not attributable to the parent company.",
+      "C": "Interest paid on loans that are not secured by assets.",
+      "D": "A list of shareholders who do not have voting rights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Internal Rate of Return' (IRR) 'Hurdle Rate'?",
+    "options": {
+      "A": "The speed at which a person can jump over a hurdle.",
+      "B": "The minimum acceptable rate of return that a company requires before investing in a project.",
+      "C": "The average interest rate of the company's total debt.",
+      "D": "The rate of inflation in the country where the project is based."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'M&A', what is a 'Stock-for-Stock' deal?",
+    "options": {
+      "A": "Trading physical inventory for company shares.",
+      "B": "When the acquirer uses its own shares as the primary 'currency' to buy the target company.",
+      "C": "Buying stock from the open market to increase the price.",
+      "D": "Giving stock to employees instead of a cash bonus."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Enterprise Value' / 'EBITDA' multiple used for?",
+    "options": {
+      "A": "To measure the happiness of the employees.",
+      "B": "To compare the value of companies across different capital structures and tax environments.",
+      "C": "To determine the physical size of the enterprise.",
+      "D": "To calculate the total interest expense."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Debt' 'Service' 'Coverage' 'Ratio' (DSCR)?",
+    "options": {
+      "A": "The ratio of debt to total assets.",
+      "B": "A measure of the cash flow available to pay current debt obligations.",
+      "C": "The percentage of debt that is secured by collateral.",
+      "D": "The time it takes to pay off a single bond."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DCF', what is 'Gordon Growth Method' for terminal value?",
+    "options": {
+      "A": "Assuming the company stops growing in year 5.",
+      "B": "Applying a constant growth rate to the final projected year's cash flow in perpetuity.",
+      "C": "Assuming the company is sold to a competitor for cash.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Goodwill' 'Impairment'?",
+    "options": {
+      "A": "When a company donates too much to charity.",
+      "B": "The process of writing down the value of goodwill when its fair value falls below its carrying amount.",
+      "C": "A specialized software for non-profits.",
+      "D": "The loss of the company's physical office building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Financing' 'Activity' in the Cash Flow Statement?",
+    "options": {
+      "A": "Purchasing a new laptop for the office.",
+      "B": "Paying back a loan from the bank.",
+      "C": "Receiving a payment from a client.",
+      "D": "Depreciation of a factory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Synergy' 'Cost' vs 'Synergy' 'Revenue'?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "Cost synergies come from cutting overlapping expenses; Revenue synergies come from increasing sales.",
+      "C": "Revenue synergy is 100x easier to achieve.",
+      "D": "Cost synergy is for text; Revenue for images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deferred' 'Tax' 'Asset' (DTA)?",
+    "options": {
+      "A": "A tax that the company will never have to pay.",
+      "B": "An asset on the balance sheet that represents a future reduction in income taxes.",
+      "C": "A physical document stored in a tax office.",
+      "D": "The total amount of tax paid last year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Valuation', what is 'Precedent' 'Transactions'?",
+    "options": {
+      "A": "Looking at the company's own historical sales.",
+      "B": "Evaluating a company based on the prices paid for similar companies in recent M&A deals.",
+      "C": "A specialized software for lawyers.",
+      "D": "A list of the company's first 10 customers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stock' 'Buyback' (Repurchase)?",
+    "options": {
+      "A": "Buying a physical stock of products.",
+      "B": "When a company buys its own outstanding shares to reduce the number of shares available on the open market.",
+      "C": "A security scan of the database.",
+      "D": "Hiring multiple people to read code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Equity' 'Value' vs 'Enterprise' 'Value'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Equity value is only for shareholders; Enterprise value is for all capital providers (including debt holders).",
+      "C": "Enterprise value is 10x smaller.",
+      "D": "Equity value is for text; Enterprise for images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Accounting', what is 'Matching' 'Principle'?",
+    "options": {
+      "A": "Matching the colors of the company logo.",
+      "B": "Reporting an expense on the income statement in the same period as the related revenue.",
+      "C": "A specialized software for architects.",
+      "D": "The process of hiring a person with the same skills."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Return' on 'Equity' (ROE)?",
+    "options": {
+      "A": "The speed at which stock prices change.",
+      "B": "A measure of a corporation's profitability in relation to stockholders' equity.",
+      "C": "The amount of cash in the CEO's pocket.",
+      "D": "The price of the company's headquarters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DCF', what is 'Weighted' 'Average' 'Cost' 'of' 'Capital' (WACC) 'Weighting'?",
+    "options": {
+      "A": "Using a physical scale to weigh paper reports.",
+      "B": "The proportion of debt and equity based on their market values, not book values.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operational' 'Synergy'?",
+    "options": {
+      "A": "The energy used by the computers.",
+      "B": "Gains in efficiency achieved through combining the operations of two businesses.",
+      "C": "A way to count the number of characters.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Terminal' 'Growth' 'Rate'?",
+    "options": {
+      "A": "The speed of a train at a terminal.",
+      "B": "The rate at which a company is expected to grow indefinitely after the forecast period.",
+      "C": "A specialized software for architects.",
+      "D": "The total interest paid on a loan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dividend' 'Discount' 'Model' (DDM)?",
+    "options": {
+      "A": "A model for discounting the price of products.",
+      "B": "A procedure for valuing the price of a stock by using predicted dividends and discounting them to the present value.",
+      "C": "A specialized software for poets.",
+      "D": "A way to backup data in three lines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Financial' 'Analysis', what is 'Margin' 'Expansion'?",
+    "options": {
+      "A": "Making the edge of a paper wider.",
+      "B": "The process of increasing the percentage of revenue that turns into profit.",
+      "C": "A specialized software for architects.",
+      "D": "The number of hours the researcher was online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Leverage' 'Ratio'?",
+    "options": {
+      "A": "The ratio of red pixels to blue pixels.",
+      "B": "Financial ratios that indicate the level of debt incurred by a business entity against other accounts in its balance sheet.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Accounting', what is 'Revenue' 'Recognition' 'Policy'?",
+    "options": {
+      "A": "The policy for wearing business clothes.",
+      "B": "A specific rule that dictates how and when a company records its income.",
+      "C": "A security certificate for a database.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Asset' 'Turnover'?",
+    "options": {
+      "A": "Rotating a physical asset 180 degrees.",
+      "B": "An efficiency ratio that measures a company's ability to generate sales from its assets.",
+      "C": "Hiring multiple people to enter data.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Financial' 'Modeling', what is 'Sensitivity' 'Analysis' 'Tornado' 'Chart'?",
+    "options": {
+      "A": "A chart showing the speed of a storm.",
+      "B": "A special type of bar chart used to show the sensitivity of a result to changes in multiple variables.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A security firewall for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'EBIT' 'Margin'?",
+    "options": {
+      "A": "The edge of an office desk.",
+      "B": "Operating income divided by total revenue.",
+      "C": "The price of the company's software.",
+      "D": "The number of project managers."
+    },
+    "answer": "B"
+  }
+  ]
+}

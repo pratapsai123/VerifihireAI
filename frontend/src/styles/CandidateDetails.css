@@ -47,6 +47,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 24px;
   margin-bottom: 18px;
+  align-items: start;
 }
 
 .candidate-row-single {

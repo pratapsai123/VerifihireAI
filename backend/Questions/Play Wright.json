@@ -1,0 +1,1911 @@
+{ 
+  "skill": "Play Wright", 
+  "questions": [
+    {
+    "question": "What is Playwright primarily used for in software development?",
+    "options": {
+      "A": "Writing documentation for APIs.",
+      "B": "Automated end-to-end testing and web scraping across modern browsers.",
+      "C": "Managing physical server cooling systems.",
+      "D": "Automatically generating CSS styles for mobile apps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Playwright supports cross-browser testing for Chromium, Firefox, and WebKit using a single API.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a primary benefit of Playwright's 'Auto-waiting' feature?",
+    "options": {
+      "A": "It automatically pauses the test for 10 seconds before every click.",
+      "B": "It performs a range of actionability checks on elements before performing actions, reducing test flakiness.",
+      "C": "It waits for the developer to finish writing the code.",
+      "D": "It increases the physical RAM available to the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Playwright, what is a 'BrowserContext'?",
+    "options": {
+      "A": "A physical box containing a laptop.",
+      "B": "An isolated, incognito-like session within a browser instance that allows for independent testing.",
+      "C": "A specialized software for architects to design UIs.",
+      "D": "The history of all websites visited by the developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these programming languages are officially supported by Playwright? (Select all that apply)",
+    "options": {
+      "A": "JavaScript / TypeScript",
+      "B": "Python",
+      "C": "Java",
+      "D": "C++"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Playwright can record and generate test scripts automatically using a tool called 'CodeGen'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Playwright CLI command is used to run all tests in a project?",
+    "options": {
+      "A": "npx playwright test",
+      "B": "npx playwright start",
+      "C": "npm run build",
+      "D": "git commit -m 'run tests'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Headless Mode' mean in Playwright testing?",
+    "options": {
+      "A": "Testing without a project lead.",
+      "B": "Running the browser without a graphical user interface (GUI) to save resources.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the frame rate of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Locator' strategy is generally recommended by Playwright for its resiliency to UI changes?",
+    "options": {
+      "A": "Absolute XPath",
+      "B": "User-visible attributes (e.g., getByRole, getByText)",
+      "C": "Hardcoded CSS IDs",
+      "D": "Random pixel coordinates"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A single Playwright 'Browser' instance can host multiple 'BrowserContexts'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'playwright.config.ts' file?",
+    "options": {
+      "A": "To store the user's personal passwords.",
+      "B": "To define global configurations like base URLs, timeouts, and browser projects.",
+      "C": "A specialized software for poets.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Actionability Checks' Playwright performs before clicking a button? (Select all that apply)",
+    "options": {
+      "A": "Visible",
+      "B": "Enabled",
+      "C": "Stable (not animating)",
+      "D": "Colored Green"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In Playwright, what does 'page.goto(url)' do?",
+    "options": {
+      "A": "Deletes the specified URL from the internet.",
+      "B": "Navigates the current page to the specified web address.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Playwright 'Selectors' are strictly limited to CSS and XPath only.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Trace Viewer' in Playwright?",
+    "options": {
+      "A": "A person who traces physical drawings.",
+      "B": "A GUI tool that allows you to investigate recorded test traces to see snapshots, actions, and logs.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Playwright method is used to wait for an element to contain a certain text?",
+    "options": {
+      "A": "expect(locator).toHaveText('value')",
+      "B": "wait.for('value')",
+      "C": "findText('value')",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Playwright can be used to intercept and mock network requests (APIs).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'page.screenshot()'?",
+    "options": {
+      "A": "To record the developer's face during the test.",
+      "B": "To capture a visual image of the current page state.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the brightness of the monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Built-in' Playwright reporters? (Select all that apply)",
+    "options": {
+      "A": "List",
+      "B": "Dot",
+      "C": "HTML",
+      "D": "Podcast"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Playwright requires the installation of separate 'WebDriver' binaries (like chromedriver) for each browser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'fixtures' in Playwright Test?",
+    "options": {
+      "A": "Physical lights in the office.",
+      "B": "Encapsulated, reusable logic or objects (like 'page' or 'context') passed to test functions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Playwright, what is the default timeout for an 'Action' (like a click)?",
+    "options": {
+      "A": "1 second",
+      "B": "30 seconds",
+      "C": "Unlimited",
+      "D": "500 milliseconds"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Playwright supports testing on mobile devices via 'Emulation' of viewports and user agents.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'expect' matcher is used to verify that a checkbox is currently checked?",
+    "options": {
+      "A": "toBeChecked()",
+      "B": "isTrue()",
+      "C": "checkStatus()",
+      "D": "The SQL query font size"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'npx playwright show-report' command do?",
+    "options": {
+      "A": "Shows a physical report on a printer.",
+      "B": "Opens the HTML test results in a browser for review.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Actionability' check logic?",
+    "options": {
+      "A": "Checking if a person is actionable.",
+      "B": "The process of verifying that an element is visible, enabled, and stable before interacting with it to prevent errors.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Browsers' occur when you run a test on Chromium but expect it to behave exactly like Safari without testing on WebKit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid Playwright 'Selectors'? (Select all that apply)",
+    "options": {
+      "A": "css=button",
+      "B": "xpath=//div",
+      "C": "text='Login'",
+      "D": "color='blue'"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'UI Mode' in Playwright?",
+    "options": {
+      "A": "A mode for people name UI.",
+      "B": "An interactive testing environment that allows for time-travel debugging and live test execution.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Run' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration required for a specific test suite to finish its execution.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an E2E test takes 10 minutes to run, but the pipeline timeout is set to 5 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'CLI' flag allows you to run tests in 'Headed' mode (visible browser)?",
+    "options": {
+      "A": "--headed",
+      "B": "--visible",
+      "C": "--show",
+      "D": "--ui"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Soft Assertion' in Playwright?",
+    "options": {
+      "A": "An assertion that is physically soft.",
+      "B": "An assertion that allows the test to continue executing even if it fails, reporting all failures at the end.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Global Setup'?",
+    "options": {
+      "A": "Setting up a physical office globally.",
+      "B": "A configuration that runs once before all tests, often used for authenticating once and reusing the state.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the Playwright NPM package version does not match the version of the browser binaries installed on the system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Functional' tests Playwright can assist with? (Select all that apply)",
+    "options": {
+      "A": "Accessibility auditing",
+      "B": "Performance navigation timing",
+      "C": "Visual comparison",
+      "D": "Cleaning the physical office"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Codegen'?",
+    "options": {
+      "A": "Generating code for a person name Gen.",
+      "B": "A Playwright tool that opens a browser and generates code as the user interacts with the page.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect Density'?",
+    "options": {
+      "A": "The physical weight of a bug report.",
+      "B": "The number of identified bugs per automated user journey.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when a test expects a specific order ID in the UI that was deleted by a previous test run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Accessibility' checks in Playwright? (Select all that apply)",
+    "options": {
+      "A": "Using the @axe-core/playwright library",
+      "B": "Scanning for missing alt text",
+      "C": "Testing if the keyboard is physically broken",
+      "D": "Verifying ARIA roles"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Locating' by role (getByRole)?",
+    "options": {
+      "A": "Locating a person by their job title.",
+      "B": "Finding elements by their ARIA role (e.g., 'button', 'heading') to ensure accessibility and reliability.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Test Parallelization'?",
+    "options": {
+      "A": "Running tests in a parallel universe.",
+      "B": "Running multiple test files simultaneously across different worker processes to reduce total execution time.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Timezones' occur when a test is written in NYC but runs on a CI server in Dublin, causing date/time UI assertions to fail.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Playwright' 'Projects'? (Select all that apply)",
+    "options": {
+      "A": "Defining a group of tests to run on Chromium",
+      "B": "Defining a group of tests to run on 'Mobile Safari'",
+      "C": "Buying physical snack for the office",
+      "D": "Setting specific environment variables for a subset of tests"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Atomic' Testing in Playwright?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "Writing tests that are small, focused, and independent of other tests for better stability.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass Rate'?",
+    "options": {
+      "A": "The percentage of tests that passed during a specific run.",
+      "B": "The rate at which people pass the office hallway.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a script polls for an element every 10ms while the network takes 2000ms to respond.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in data presentation",
+      "B": "Instant generation of failure videos/traces",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual bug tracking effort"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Decoupling' in a Playwright framework?",
+    "options": {
+      "A": "Removing the physical cables from the computer.",
+      "B": "Separating test data and page objects from the actual test scripts to improve maintainability.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Fix' (MTTF)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from a test failure being reported until the fix is merged.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scale' in Playwright refers to a framework that works for 5 tests but crashes the CI server when running 5,000 tests in parallel.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Visual' 'Baselines'? (Select all that apply)",
+    "options": {
+      "A": "Storing a 'Known Good' screenshot in the repo",
+      "B": "Using toHaveScreenshot() to compare current state",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Enforcing pixel-perfect layout compliance"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap'?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of scripts or templates used to quickly start a new Playwright project with standard configurations.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Artifact' 'Retention'?",
+    "options": {
+      "A": "Retaining ancient artifacts in the office.",
+      "B": "The policy of saving traces, videos, and logs for a certain period for audit and debugging.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a Playwright script attempt to test a legacy application that only supports HTTP/1.0 using modern WebSocket features.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' Playwright features? (Select all that apply)",
+    "options": {
+      "A": "API Request Context",
+      "B": "Clock mocking (Time-travel)",
+      "C": "Visual comparison (Pixelmatch)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logical' 'Isolation' in Playwright?",
+    "options": {
+      "A": "Isolating a person name Logical.",
+      "B": "Ensuring that each test runs in a clean BrowserContext to prevent data/session leaking.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from a code commit until a failing test flags the bug.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a global timeout is set to 5 seconds, but a specific heavy page always takes 7 seconds to load.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying the 'Top 10 flakiest tests'",
+      "B": "Tracking test duration trends over time",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Predicting release delays based on current velocity"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Shadow' 'Execution'?",
+    "options": {
+      "A": "Executing a test in a dark room.",
+      "B": "Running a test suite in parallel with production traffic to compare behavior without impacting real users.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Quality' score?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including test pass rate, code coverage, and performance scores.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when the CI logs are set to 'Silent' while a critical test is failing with a complex error.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Playwright 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "SDET (Automation Engineer)",
+      "B": "DevOps Engineer",
+      "C": "Quality Assurance Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in Playwright?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ease with which logic can be extracted from a legacy Selenium framework into a modern Playwright architecture.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A reliability metric representing the average duration a test suite runs without encountering a script or environment error.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a project is configured to use 50 workers on a CI machine that only has 2 CPU cores.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Playwright method is used to share an authenticated state (like cookies and local storage) across multiple test files to avoid repeated logins?",
+    "options": {
+      "A": "browser.shareState()",
+      "B": "browserContext.storageState({ path: 'state.json' })",
+      "C": "page.saveSession()",
+      "D": "context.copyCookies()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Playwright, 'page.route()' can be used to intercept network requests and return a mock response without ever hitting the actual server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When dealing with an element inside a 'Shadow DOM', how does Playwright technically handle the selection process?",
+    "options": {
+      "A": "It requires the use of deep-piercing XPath only.",
+      "B": "Standard CSS selectors in Playwright automatically pierce open shadow roots by default.",
+      "C": "You must manually call 'page.unlockShadow()' before selecting the element.",
+      "D": "It is impossible to test shadow DOM elements with Playwright."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical reason to use 'page.waitForResponse()' instead of a hard sleep?",
+    "options": {
+      "A": "It makes the code look more professional.",
+      "B": "It synchronizes the test with a specific network event, ensuring the data is ready before the script continues, which reduces flakiness.",
+      "C": "It automatically increases the server's bandwidth.",
+      "D": "It is the only way to capture a screenshot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Locator' feature allows you to find an element that contains another specific element (e.g., a row that contains a specific button)?",
+    "options": {
+      "A": "locator.has() or locator.filter({ has: ... })",
+      "B": "locator.containsChild()",
+      "C": "locator.findInside()",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Contexts' occur when a test accidentally tries to use an element handle from one BrowserContext in a different BrowserContext.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Playwright, what is the 'Worker' process logic for parallelization?",
+    "options": {
+      "A": "One worker process runs all tests in the project sequentially.",
+      "B": "Multiple independent OS processes are launched, each running a subset of test files to utilize multi-core CPUs.",
+      "C": "Workers are physical employees who check the test results.",
+      "D": "Increasing the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific method is used to handle a 'Dialog' (like an alert or confirm box) in Playwright?",
+    "options": {
+      "A": "page.on('dialog', dialog => dialog.accept())",
+      "B": "page.click('OK')",
+      "C": "page.handleAlert()",
+      "D": "The browser automatically accepts all dialogs without code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid ways to manage 'Environment Variables' in a Playwright project? (Select all that apply)",
+    "options": {
+      "A": "Using a .env file with the 'dotenv' package",
+      "B": "Setting them in the playwright.config.ts 'use' object",
+      "C": "Passing them via CLI (e.g., URL=test.com npx playwright test)",
+      "D": "Writing them on a physical sticky note"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The 'locator.evaluate()' method allows you to execute a custom JavaScript function within the context of the browser and return the result to the test script.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Visual Regression' testing using 'Pixelmatch' in Playwright?",
+    "options": {
+      "A": "Testing if the user is wearing matching socks.",
+      "B": "Comparing a screenshot against a baseline image and failing if the number of differing pixels exceeds a threshold.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the size of the font in the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Playwright 'Request' method would you use to verify the status code of a background API call?",
+    "options": {
+      "A": "request.status()",
+      "B": "response.status()",
+      "C": "page.checkStatus()",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Test' 'Data' orchestration in Playwright?",
+    "options": {
+      "A": "Hiring a person named Dynamic to type data.",
+      "B": "Using API Request contexts within a test to setup specific data states in the DB before the UI journey begins.",
+      "C": "A security scan of the office building.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Promises' occur when a developer forgets to use 'await' before a Playwright action, leading to unpredictable execution order.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Project' configurations in playwright.config.ts? (Select all that apply)",
+    "options": {
+      "A": "name: 'chromium', use: { ...devices['Desktop Chrome'] }",
+      "B": "name: 'mobile', use: { ...devices['iPhone 12'] }",
+      "C": "name: 'firefox', use: { browserName: 'firefox' }",
+      "D": "name: 'excel', use: { file: 'data.xlsx' }"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Clock' 'Mocking' in Playwright?",
+    "options": {
+      "A": "Making fun of a physical clock in the office.",
+      "B": "A feature that allows the test to manipulate the browser's system time to test time-dependent features like timeouts or scheduled events.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Trace' 'Snapshot' logic?",
+    "options": {
+      "A": "A snapshot of a person name Trace.",
+      "B": "The ability within the Trace Viewer to see the full DOM state and visual appearance of the page at the exact moment a test action was performed.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Capabilities' occur when a test attempt to use a feature like 'Geolocation' without granting the necessary permissions in the BrowserContext.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Playwright command allows you to debug a single test file using the interactive 'Playwright Inspector'?",
+    "options": {
+      "A": "npx playwright test --debug filename.spec.ts",
+      "B": "npx playwright inspect",
+      "C": "npm run debug",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical purpose of 'page.waitForLoadState('networkidle')'?",
+    "options": {
+      "A": "To wait until the network is physically disconnected.",
+      "B": "To wait until there are no active network requests for at least 500ms, indicating the page has likely finished loading data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a flaky test?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from when a test is identified as 'Flaky' until it is stabilized or refactored.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Viewports' occur when a test is written assuming a 1280x720 screen but the configuration forces a 320x480 mobile viewport, causing elements to hide.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Assertion' options in Playwright? (Select all that apply)",
+    "options": {
+      "A": "expect(locator).toBeVisible()",
+      "B": "expect(locator).toBeEnabled()",
+      "C": "expect(page).toHaveTitle('value')",
+      "D": "expect(user).toBeHappy()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Persistent' 'Context' in Playwright?",
+    "options": {
+      "A": "A context that refuses to leave the room.",
+      "B": "A browser context that saves its state (profiles, downloads, cache) to a specific disk directory between sessions.",
+      "C": "A specialized tool for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Cross-Tab' synchronization in Playwright?",
+    "options": {
+      "A": "Synchronizing two different physical tablets.",
+      "B": "The ability to manage and interact with multiple open pages or tabs within the same BrowserContext using 'context.pages()'.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Playwright refers to the difference between 'Execution Time' on a local developer machine and the 'Execution Time' on a resource-constrained CI runner.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Accessibility' 'Reporting' in Playwright? (Select all that apply)",
+    "options": {
+      "A": "Generating an HTML report of accessibility violations",
+      "B": "Identifying elements with poor color contrast",
+      "C": "Guaranteed to fix all CSS bugs",
+      "D": "Failing the build if 'Critical' accessibility issues are found"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Locator' 'Chaining' in Playwright?",
+    "options": {
+      "A": "Connecting locators with physical metal chains.",
+      "B": "The practice of narrowing down a search by calling another locator method on an existing locator (e.g., page.locator('div').locator('button')).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Execution' 'Heatmap' in a large Playwright suite?",
+    "options": {
+      "A": "A physical map showing the temperature of the server room.",
+      "B": "A visual report identifying which tests take the longest or fail most frequently, used for optimization.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a global timeout is shorter than the time it takes for a 'Heavy' Playwright fixture to initialize.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Video' 'Recording' in Playwright? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'recordVideo' in the config to see test failures",
+      "B": "Recording only on the first failure of a test",
+      "C": "Streaming the video to YouTube live",
+      "D": "Saving video files as part of the test artifacts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'P-Code' significance in Playwright's under-the-hood execution?",
+    "options": {
+      "A": "Code for a person name P.",
+      "B": "Playwright uses a CDP (Chrome DevTools Protocol) or internal protocol to send high-level commands that are translated into browser micro-actions.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A reliability metric representing the average time the automation suite runs successfully before an infrastructure or script error occur.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in Playwright occur when the browser binaries on the CI server are older than the Playwright library version used in the code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Playwright 'Governance' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Test Automation Architect",
+      "B": "Lead DevOps Engineer",
+      "C": "Product Quality Manager",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Playwright' 'Bootstrap' orchestration?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of templates and base configurations used to quickly spin up a new, standardized Playwright project for a new team.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Leakage' in automation?",
+    "options": {
+      "A": "The number of bugs found in production that the Playwright suite should have caught.",
+      "B": "When liquid spills on the server.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in Playwright occur when developers refuse to fix tests they broke because 'QA owns the automation'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Unified dashboard for Web and Mobile results",
+      "B": "Instant notification of critical journey failures",
+      "C": "Guaranteed to replace all manual testers",
+      "D": "Reduction in manual triage time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Page Object?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical details of element interaction (like waits and selectors) are hidden inside the class, providing a clean API to the test.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a regression?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from when a buggy commit is made until the Playwright suite flags the failure in the CI pipeline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a script polls for an element every 100ms, but the backend API has a 2-second cold start latency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Environment' 'Provisioning'? (Select all that apply)",
+    "options": {
+      "A": "Launching an ephemeral environment for every test run",
+      "B": "Tearing down the environment after tests complete",
+      "C": "Buying physical snack for the developers",
+      "D": "Scaling the number of test runners based on load"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in Playwright?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ease with which business logic can be 'Lifted' from a legacy Selenium framework into a modern Playwright architecture.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The average duration between a test suite completion and the failure notification being delivered to the team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when an automated test runs with 'Full Admin' rights while the user scenario it is testing only has 'Guest' rights.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resilience' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Injecting network latency during a Playwright run",
+      "B": "Verifying that the UI shows a 'Retry' button when an API fails",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Checking if 'Circuit Breakers' trigger correctly under load"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Shadow' 'Execution' in a Playwright strategy?",
+    "options": {
+      "A": "Executing a test in a dark room.",
+      "B": "Running a new version of the test suite in parallel with the stable version to compare outputs without affecting the release gate.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Quality' score?",
+    "options": {
+      "A": "A weighted score that includes automated pass rates, performance metrics, and security vulnerability counts.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' occurs when a Playwright suite is designed for 10 tests but crashes the CI server when running 100 tests due to memory leaks in fixtures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Playwright 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Quality Architect",
+      "B": "DevOps Lead",
+      "C": "Principal Engineer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The degree to which the Playwright framework can be updated or fixed with minimal effort as the application UI evolves.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between identifying a significant decline in quality until the code meets its healthy benchmarks again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an engineering team expects 'Instant' feedback from a Playwright suite that takes 2 hours to run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'UX' requirements",
+      "B": "Keeping tools updated with rapidly changing local laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if tests are written to bypass security rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an API test?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Creating reusable functions to handle repetitive tasks like 'GetAuthToken' or 'CreateUser', hiding technical request details from the test.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the average duration of system stability before a regression is identified by Playwright.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when the framework generates 100GB of trace data for a 5-minute test, crashing the CI node.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Playwright 'Orchestration' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "RESTful test initiation endpoints",
+      "B": "Webhook callbacks for test completion",
+      "C": "Bulk asset ingestion gRPC streams",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' complexity?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The degree of difficulty in initializing a multi-platform Playwright project across different cloud providers.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) by suite severity?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking how much faster 'Sanity' failures are fixed compared to 'Regression' failures.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Playwright occurs when the business expects 'Zero Flakiness' in a system that utilizes 50 different third-party external integrations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Standardized failure artifacts across all teams",
+      "B": "Reduction in manual administrative work for developers",
+      "C": "Guaranteed to replace all engineering managers",
+      "D": "Instant availability of project health data"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a custom fixture?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Abstracting complex setup steps (like creating a user with specific DB flags) into a reusable fixture that is cleanly called by the test.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a defect?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between when a code regression is committed and when it is officially identified as a defect by an automated Playwright run.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in Playwright occur when a researcher uses a 2024 automation library set against a legacy 2010 application, leading to incompatible DOM interaction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a high-scale CI/CD pipeline, how does Playwright technically handle 'Parallelism' at the worker level to ensure zero state leakage between tests?",
+    "options": {
+      "A": "By running all tests in the same browser tab sequentially.",
+      "B": "By spawning multiple independent OS processes, each with its own isolated BrowserContext and file system permissions.",
+      "C": "By using a shared global variable to track test progress across workers.",
+      "D": "By requiring a physical server for every individual test case."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Playwright's 'Route.continue()' method can be used to modify request headers or payloads dynamically before they reach the network, allowing for 'Chaos Engineering' style testing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Playwright feature is technically required to automate a user journey that spans across a primary web application and a third-party OAuth provider with a different domain?",
+    "options": {
+      "A": "page.waitForSelector()",
+      "B": "BrowserContext (handling multiple pages/tabs within the same isolated session)",
+      "C": "The SQL query parser",
+      "D": "Hardcoded Thread.sleep(5000)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When developing a custom 'Fixture' in Playwright, what is the technical purpose of the 'use' callback?",
+    "options": {
+      "A": "To tell the test which physical keyboard to use.",
+      "B": "To provide the fixture value to the test and define the teardown logic that executes after the test completes.",
+      "C": "A specialized software for architects to design UIs.",
+      "D": "To increase the frame rate of the browser window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Performance Profiling', how can Playwright be used to identify 'Main Thread Junk' in a React application?",
+    "options": {
+      "A": "By measuring the physical weight of the CPU.",
+      "B": "By utilizing the 'CDP' (Chrome DevTools Protocol) session to capture and analyze 'Long Tasks' during a user interaction journey.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Binary' 'Architectures' occur when a Playwright test script attempts to launch a Chromium binary compiled for Linux-x64 on a macOS-ARM64 (M-series) runner without Rosetta emulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced' locator strategy is technically most efficient for finding an element inside a deeply nested 'Closed' Shadow DOM (not accessible via standard selectors)?",
+    "options": {
+      "A": "locator.nth(0)",
+      "B": "Using page.evaluate() to bypass the DOM wrapper and access the shadowRoot directly via JavaScript.",
+      "C": "Setting the timeout to 99999ms.",
+      "D": "Deleting the .css file to make the shadow root 'open'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the strategic objective of using 'Storage State' to bypass login in a suite of 5,000 Playwright tests?",
+    "options": {
+      "A": "To save physical storage space on the developer's laptop.",
+      "B": "To significantly reduce total execution time and load on the Authentication service by performing login once and injecting session tokens into all subsequent workers.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the video reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' Playwright configurations for handling 'Flakiness' in distributed grids? (Select all that apply)",
+    "options": {
+      "A": "Implementing custom 'Expect' poll intervals and timeouts",
+      "B": "Using 'Retries' with specialized logic for 'First-failure-only' trace capturing",
+      "C": "Setting 'fullyParallel: true' to maximize multi-core utilization",
+      "D": "Sharing the same physical mouse between all test runners"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Certificate' 'Authorities' in Playwright occur when a test fails because the browser context is not configured to 'ignoreHTTPSErrors' while testing against a local UAT environment with self-signed certs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Client-Side' 'Network' 'Interception' in Playwright?",
+    "options": {
+      "A": "Hiring a person to intercept network cables.",
+      "B": "Using page.route() to provide mock JSON responses to the frontend, enabling the testing of UI edge cases (like 500 errors) without backend modification.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Playwright' 'Sharding'?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of splitting a single test suite into N parts to be executed simultaneously across N different CI machines/nodes.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' metric is most effective for measuring the 'Quality' of a Playwright framework's locator strategy?",
+    "options": {
+      "A": "Total number of XPaths used in the codebase.",
+      "B": "The 'Locator Stability Index' (Mean Time Between Failures caused by DOM changes vs. actual functional bugs).",
+      "C": "The font size of the pass rate on the dashboard.",
+      "D": "The number of hours the developer worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Playwright occurs when a test script utilizes a 30s timeout while the backend service it is testing has a 60s cold-start latency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Playwright' 'Chaos' 'Engineering'? (Select all that apply)",
+    "options": {
+      "A": "Aborting specific API requests (route.abort()) during a user flow",
+      "B": "Throttling network speeds to 2G levels for specific workers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Simulating 'Memory Pressure' in the browser via page.evaluate()"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Differential' 'Analysis' (Pixelmatch) complexity in Playwright?",
+    "options": {
+      "A": "Comparing actual physical pixels on a monitor screen.",
+      "B": "The technical difficulty of ignoring 'Dynamic Anti-aliasing' and 'Pixel-shfiting' noise when comparing screenshots across different OS font-rendering engines.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ) in a Playwright project?",
+    "options": {
+      "A": "The average duration between a test failure being flagged as a 'Script Issue' and the fix being verified in the main branch.",
+      "B": "The time it takes to clean the office.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Browser' 'Versions' in a Playwright grid occur when the local developer uses Playwright v1.45 while the CI runner uses v1.30, leading to 'Protocol Error' crashes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Playwright' 'Governance' factors? (Select all that apply)",
+    "options": {
+      "A": "Establishing 'Quality Gates' based on P95 execution speed",
+      "B": "Defining standard 'Tags' for smoke vs. regression suites",
+      "C": "Verification of 'Test Data Privacy' in non-prod environments",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Just-In-Time' (JIT) 'State' 'Injection' in Playwright?",
+    "options": {
+      "A": "Providing physical snacks for the user journey.",
+      "B": "Dynamically creating a unique user account via API Request Contexts immediately before the browser journey begins to ensure test isolation.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Flaky' 'Failures' (MTBFF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the reliability of the automation suite by measuring how long it runs before an inconsistent failure occurs.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Context' 'Permissions' occur when a test assumes the browser has 'Microphone' access while the BrowserContext configuration has explicitly denied it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Visual' 'Regression' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Using 'mask' to hide dynamic elements like timestamps",
+      "B": "Setting a 'threshold' for acceptable pixel variance",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Enforcing layout consistency across different viewport sizes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in Playwright framework maintenance?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which generic automation logic (like 'ClickAndRetry') can be extracted into a shared library used across multiple different product teams.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability' in Playwright?",
+    "options": {
+      "A": "Traceability of a person named Requirement.",
+      "B": "The automated mapping of Playwright test IDs back to specific high-level Jira user stories to verify 'Functional Coverage'.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' in Playwright refer to using a browser-based automation tool to test a legacy application that utilizes 'Flash' or 'Silverlight' which are not supported by the CDP.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Playwright' 'Orchestration' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Managing 'Secrets' rotation within CI/CD YAML files",
+      "B": "Synchronizing parallel workers across multi-region cloud nodes",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Enforcing 'Storage State' expiry and refresh logic"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a 'Component' 'Driver' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing reusable classes for specific UI components (e.g., a 'Grid' or 'Modal') that expose a high-level API to Page Objects, hiding complex selectors.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a system regression via Playwright?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the commit timestamp until the Playwright CI job flags the failure and notifies the developer.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an 'Explicit Wait' polls the DOM every 100ms while the browser's main thread is locked for 500ms due to heavy JS execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Playwright' 'Infrastructure' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Site Reliability Engineer (SRE)",
+      "B": "Cloud Infrastructure Architect",
+      "C": "Principal SDET",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Quality' in a Playwright dashboard?",
+    "options": {
+      "A": "A weighted score combining test pass rates, frontend P90 performance scores, and backend API contract validation success.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Negative' 'Impact' in Playwright?",
+    "options": {
+      "A": "A negative value that is actually positive.",
+      "B": "When a test passes even though the UI is visually broken, often due to 'Missing Assertions' or over-mocking the backend.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in Playwright refers to a framework that works locally with 1 worker but fails when running 20 workers due to 'Port Contention' in the app-under-test.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resilience' 'Verification' for Playwright? (Select all that apply)",
+    "options": {
+      "A": "Testing how the UI handles 401/403 status codes via route mocking",
+      "B": "Verifying 'Offline Mode' behavior using browser context emulation",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Confirming the UI shows a 'Retry' state when an API call times out"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' complexity for multi-project repos?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of configuring a single Playwright engine to run different test suites across 50 independent micro-frontends with varying dependencies.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) threshold?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The maximum duration allowed between a Playwright CI failure and the developer receiving a Slack/Teams notification with the trace link.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when a researcher's debug script produces 100GB of log data for a 30-second test, crashing the CI node.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Playwright' 'Quality' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Product Owner",
+      "B": "Quality Assurance Manager",
+      "C": "Frontend Tech Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Atomic' 'vs' 'Stateful' automation strategy?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Atomic strategy uses independent tests that setup their own data; Stateful strategy uses a sequence of tests where Test B depends on Test A.",
+      "C": "Atomic is for beginners; Stateful for experts.",
+      "D": "Atomic is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' (MTRS)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a security flaw (e.g., token leakage) via Playwright until the code fix is verified clean.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Playwright occurs when the business expects 'Zero Execution Cost' in a cloud environment where browser instances consume high CPU/RAM.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying the 'Top 5 flakiest' tests over a 30-day period",
+      "B": "Correlating failure rates with specific browser types (e.g., WebKit-only bugs)",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Predicting release delays based on current 'Sanity' suite stability"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in parallel Playwright runs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Using unique UUIDs for all test data to ensure that Worker A's actions do not modify the data currently being read by Worker B.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code stability before a regression is identified by the automation suite.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in Playwright refers to a suite that passes on a local machine but fails when scaled to 50 shards due to 'Database Connection Pool' exhaustion.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Security' 'Disclosure' patterns? (Select all that apply)",
+    "options": {
+      "A": "Scanning UI logs for sensitive data exposure",
+      "B": "Verifying that 'Auth tokens' are not visible in the browser's console history",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Confirming 'Secure' flags on all authenticated cookies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Playwright' 'Logic' 'Drift'?",
+    "options": {
+      "A": "When the frontend code updates the UI framework (e.g., React upgrade) but the Playwright framework's internal 'Actionability' logic becomes outdated.",
+      "B": "A drift made of physical test reports.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) by test tier?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how much faster 'Critical Smoke' failures are resolved compared to 'UI Polish' regression failures.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when Playwright attempt to use 'HTTP/3' features on a legacy server that only supports 'HTTP/1.1', causing timeout errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Usability' standards",
+      "B": "Keeping tools updated with rapidly changing local data laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if test environments lack production-grade security"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Playwright' 'Framework' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The ease with which the automation codebase can be refactored to support new browser versions or major application UI redesigns without code duplication.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Quality' score for Playwright?",
+    "options": {
+      "A": "A weighted score that includes test pass rate, code coverage percentage, and the 'Stability' score of the CI/CD runners.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in Playwright occur when a developer uses a 2024 Playwright v1.45 for an application that utilizes a 2012 'deprecated' DOM rendering library.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Enterprise' 'Playwright' 'Orchestration' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Webhooks for 'Test Suite Status' updates",
+      "B": "REST APIs for triggering 'On-demand' regression runs",
+      "C": "Bulk asset ingestion gRPC streams",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Playwright' 'Bootstrap' complexity for global teams?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The degree of difficulty in standardizing a Playwright framework across global teams with different coding standards, languages, and network environments.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a flaky test?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the first 'Pass-after-Retry' event until the test is officially flagged in the dashboard as 'At-Risk'.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an 'Explicit Wait' polls every 5ms, consuming excessive browser CPU and slowing down the overall test execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Playwright' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant availability of 'Trace Files' for rapid failure triage",
+      "B": "Consistency in ROI data presentation for the business",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Reduction in manual administrative work for developers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a 'Playwright' 'Fixture'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Encapsulating complex environmental setup (like 'Global Login' or 'Database Cleanup') within a reusable fixture to keep test code clean and focused.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an automation regression?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from when an E2E failure is identified as a 'Bug in Code' until the production fix is verified by the same test.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Playwright runner attempt to execute 100 tests on a machine with 2GB of RAM, causing the browser processes to be OOM (Out-of-Memory) killed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Trends' in test duration over multiple releases",
+      "B": "Correlating 'Failure Rate' with 'System Load' in production",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing failure patterns to identify 'Fragile' UI components"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Playwright' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well an automated test journey is maintained, based on its reliability, execution speed, and historical flake rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of system stability before a regression is identified by Playwright.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Playwright occur when the remediation timeline is based on 'Fixed Dates' rather than 'Business Criticality'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'UI' 'Profiling' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Har files (Network traffic analysis)",
+      "B": "CDP traces (Detailed browser performance events)",
+      "C": "Guaranteed to replace all manual performance testers",
+      "D": "Console logs and failure screenshots"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Playwright' 'Logic' 'Encapsulation' strategy?",
+    "options": {
+      "A": "Ensuring the technical details (like selectors) are hidden from the high-level test scripts, facilitating maintenance.",
+      "B": "Hiding the computer in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  }
+  ]
+}

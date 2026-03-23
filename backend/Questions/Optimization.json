@@ -1,0 +1,1861 @@
+{ 
+  "skill": "Optimization", 
+  "questions": [
+    {
+    "question": "In the context of software optimization, what does 'Big O Notation' primarily describe?",
+    "options": {
+      "A": "The physical size of the server needed to run the code.",
+      "B": "The upper bound of an algorithm's time or space complexity in relation to the input size.",
+      "C": "The number of bugs found in a specific function.",
+      "D": "The total number of lines of code in a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Code optimization should always be the first priority during the initial development of a new feature.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Premature Optimization'?",
+    "options": {
+      "A": "Optimizing code after it has been identified as a bottleneck in production.",
+      "B": "Spending time making code efficient before you even know if the current implementation is too slow or if the feature is needed.",
+      "C": "Using a faster programming language like C++ instead of Python.",
+      "D": "Increasing the RAM of a developer's laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which complexity represents 'Constant Time', meaning the execution time remains the same regardless of input size?",
+    "options": {
+      "A": "O(n)",
+      "B": "O(1)",
+      "C": "O(log n)",
+      "D": "O(n^2)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Caching' data?",
+    "options": {
+      "A": "To delete old data to save disk space.",
+      "B": "To store frequently accessed data in a fast-access layer to reduce latency and redundant processing.",
+      "C": "To encrypt the data for better security.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Linear Search' algorithm has a time complexity of O(n).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Code-Level' optimization techniques? (Select all that apply)",
+    "options": {
+      "A": "Reducing the number of nested loops",
+      "B": "Using efficient data structures (e.g., HashSets instead of Lists for lookups)",
+      "C": "Avoiding redundant database queries",
+      "D": "Changing the variable names to be shorter"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Refactoring' in the context of optimization?",
+    "options": {
+      "A": "Rewriting the entire application in a different language.",
+      "B": "Restructuring existing computer code without changing its external behavior to improve non-functional attributes like readability or efficiency.",
+      "C": "Deleting the database to start over.",
+      "D": "Hiring new developers to finish the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of optimization focuses on reducing the amount of RAM an application uses?",
+    "options": {
+      "A": "Time Optimization",
+      "B": "Space Optimization (or Memory Optimization)",
+      "C": "Network Optimization",
+      "D": "UI Optimization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a 'Binary Search' is generally faster than a 'Linear Search' for finding an item in a large, sorted array.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Algorithm Efficiency' refer to?",
+    "options": {
+      "A": "How pretty the code looks to other developers.",
+      "B": "How well an algorithm uses resources like time and memory to solve a problem.",
+      "C": "The total cost of the software license.",
+      "D": "The number of comments in the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is considered the 'Worst' time complexity for a large dataset among the following?",
+    "options": {
+      "A": "O(1)",
+      "B": "O(n^2)",
+      "C": "O(n)",
+      "D": "O(log n)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dead Code Elimination' involves removing code that is never executed to reduce the program's size and complexity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Bottleneck' in a software system?",
+    "options": {
+      "A": "A physical blockage in the water cooling of a server.",
+      "B": "A single component or function that limits the overall performance of the system.",
+      "C": "A specialized software for drawing graphs.",
+      "D": "The end of the development cycle."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are benefits of 'Database Indexing'? (Select all that apply)",
+    "options": {
+      "A": "Faster data retrieval for search queries",
+      "B": "Improved performance for 'JOIN' operations",
+      "C": "Reduced storage space for the database",
+      "D": "Faster 'INSERT' operations"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Lazy Loading'?",
+    "options": {
+      "A": "When a developer takes a nap during the build process.",
+      "B": "The practice of delaying the initialization of an object or data until the point at which it is actually needed.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Compilers can automatically perform some optimizations, such as 'Loop Unrolling' or 'Inlining' functions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In web optimization, what is 'Minification'?",
+    "options": {
+      "A": "Making the website icons very small.",
+      "B": "Removing unnecessary characters (like spaces and comments) from source code to reduce file size without changing functionality.",
+      "C": "Hiring a professional actor to read reports.",
+      "D": "Reducing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which complexity represents 'Logarithmic Time'?",
+    "options": {
+      "A": "O(n^2)",
+      "B": "O(log n)",
+      "C": "O(n!)",
+      "D": "O(n)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a 'Global Variable' for every value is an efficient way to optimize memory usage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memoization'?",
+    "options": {
+      "A": "The process of memorizing the code by heart.",
+      "B": "An optimization technique where the results of expensive function calls are cached and returned when the same inputs occur again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these tools can help identify performance bottlenecks in code? (Select all that apply)",
+    "options": {
+      "A": "Profilers",
+      "B": "Debugger breakpoints",
+      "C": "Static Analysis tools",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is the result of 'Inefficient Memory Management' in a long-running application?",
+    "options": {
+      "A": "The application runs faster over time.",
+      "B": "Memory Leaks, which eventually lead to the application crashing or slowing down significantly.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: O(n log n) is generally better than O(n^2) for sorting large datasets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Load Balancing'?",
+    "options": {
+      "A": "Balancing the physical weight of servers.",
+      "B": "Distributing incoming network traffic across multiple servers to ensure no single server is overwhelmed.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the term 'Trade-off' mean in optimization?",
+    "options": {
+      "A": "Trading a developer for a designer.",
+      "B": "Giving up one benefit (e.g., low memory usage) to gain another (e.g., faster execution speed).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Front-end' optimization techniques? (Select all that apply)",
+    "options": {
+      "A": "Image Compression",
+      "B": "Code Bundling",
+      "C": "Using a Content Delivery Network (CDN)",
+      "D": "Optimizing SQL JOINs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Throughput' in a performance context?",
+    "options": {
+      "A": "The time it takes to finish a single task.",
+      "B": "The amount of work or data processed by a system in a given amount of time.",
+      "C": "A way to count the number of users.",
+      "D": "The size of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using an O(n^3) algorithm is usually acceptable for enterprise-scale data processing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function would you use to measure the execution time of a specific block of code?",
+    "options": {
+      "A": "WAIT()",
+      "B": "TIMER (or system clock functions)",
+      "C": "COUNT()",
+      "D": "SLEEP()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Profiling'?",
+    "options": {
+      "A": "Writing a biography of the developer.",
+      "B": "Measuring the space (memory) and time complexity of an application while it is running to find hot spots.",
+      "C": "A security scan for network firewalls.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hardware Scaling' is the process of adding more resources (CPU/RAM) to handle performance issues without changing the code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Algorithmic Optimization'? (Select all that apply)",
+    "options": {
+      "A": "Replacing a nested loop with a Hash Map",
+      "B": "Using Merge Sort instead of Bubble Sort for large lists",
+      "C": "Increasing the RAM of the server",
+      "D": "Finding the shortest path in a graph more efficiently"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Latency'?",
+    "options": {
+      "A": "The total throughput of the system.",
+      "B": "The delay before a transfer of data begins following an instruction for its transfer.",
+      "C": "A specialized tool for measuring light.",
+      "D": "The frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Baseline'?",
+    "options": {
+      "A": "The lowest floor in the data center.",
+      "B": "A starting point or standard against which the performance of an optimized system is measured.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Reducing the number of HTTP requests can significantly speed up website loading times.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Database' optimization methods? (Select all that apply)",
+    "options": {
+      "A": "Query Caching",
+      "B": "Connection Pooling",
+      "C": "Normalization/Denormalization",
+      "D": "Compressing the CSS files"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Resource Contention'?",
+    "options": {
+      "A": "A competition between developers for the best keyboard.",
+      "B": "A situation where multiple processes are competing for the same limited system resource (like a database lock).",
+      "C": "A specialized software for architects.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Management', what is the 'Optimization Lifecycle'?",
+    "options": {
+      "A": "Measure -> Identify -> Optimize -> Verify.",
+      "B": "Write code -> Ship it -> Forget it.",
+      "C": "Hire designers -> Build UI -> Delete backend.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vertical Scaling' means adding more server instances to a cluster.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pre-computation'?",
+    "options": {
+      "A": "Calculating everything while the user is waiting.",
+      "B": "Performing complex calculations in advance and storing the results for later use to save execution time.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component helps reduce the distance data travels by storing it closer to the end-user?",
+    "options": {
+      "A": "Mainframe",
+      "B": "CDN (Content Delivery Network)",
+      "C": "Local Printer",
+      "D": "Keyboard Driver"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every piece of code needs to be 100% optimized even if it only runs once a year.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Network Optimization'? (Select all that apply)",
+    "options": {
+      "A": "Reducing payload sizes using JSON instead of XML",
+      "B": "Enabling GZIP compression",
+      "C": "Decreasing the number of Round Trips (RTT)",
+      "D": "Replacing the CPU of the client machine"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Hot Path' optimization?",
+    "options": {
+      "A": "Optimizing code that is physically hot.",
+      "B": "Focusing optimization efforts on the most frequently executed parts of a program.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Auto-scaling'?",
+    "options": {
+      "A": "Scaling a fish automatically.",
+      "B": "Dynamically adjusting the number of computing resources based on the current load.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An algorithm with O(n^2) complexity is always slower than O(n) for every possible input size.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Waste' in a software system? (Select all that apply)",
+    "options": {
+      "A": "Unnecessary data transfers",
+      "B": "Redundant calculations",
+      "C": "Unused library imports",
+      "D": "Comments in the code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Asymptotic Analysis'?",
+    "options": {
+      "A": "Analyzing how a program behaves as its input size grows toward infinity.",
+      "B": "A specialized tool for measuring light.",
+      "C": "Hiring a new manager for the project.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Respond' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric measuring how long a system takes to respond to a user request.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' can be an optimization for handling large volumes of data by processing them in groups rather than individually.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Memory' optimization tools? (Select all that apply)",
+    "options": {
+      "A": "Heap Dumps",
+      "B": "Garbage Collection logs",
+      "C": "Valgrind",
+      "D": "Microsoft Excel"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code Inlining'?",
+    "options": {
+      "A": "Putting code in a physical line.",
+      "B": "Replacing a function call with the actual body of the function to save the overhead of the call.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Cold Cache'?",
+    "options": {
+      "A": "A cache stored in a freezer.",
+      "B": "A state where the cache is empty, requiring the system to fetch data from a slower source for initial requests.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' occurs when high-performance software is run on outdated servers, creating an artificial bottleneck.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Scalability'? (Select all that apply)",
+    "options": {
+      "A": "The ability to handle more users by adding resources",
+      "B": "Vertical Scaling (Bigger server)",
+      "C": "Horizontal Scaling (More servers)",
+      "D": "Deleting the software to save space"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'JIT' (Just-In-Time) compilation optimization?",
+    "options": {
+      "A": "Compiling everything years in advance.",
+      "B": "Compiling parts of a program into machine code at runtime based on which parts are used most often.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Apdex' (Application Performance Index)?",
+    "options": {
+      "A": "An index of actual physical papers.",
+      "B": "A standard that measures user satisfaction with the response time of applications.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a 'Distributed' system always makes an individual request run faster than a single powerful machine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Asset' optimization techniques for web? (Select all that apply)",
+    "options": {
+      "A": "SVG instead of PNG for icons",
+      "B": "WebP instead of JPEG for photos",
+      "C": "Removing metadata from images",
+      "D": "Printing the assets on paper"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Critical Path' optimization?",
+    "options": {
+      "A": "Optimizing a path that is physically dangerous.",
+      "B": "Identifying and shortening the sequence of tasks that determines the total duration of a process.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Load Shedding'?",
+    "options": {
+      "A": "Shedding actual physical weight from a server.",
+      "B": "Intentionally dropping or rejecting some incoming requests to prevent a system from crashing under extreme load.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Optimization can sometimes make code harder for humans to read and maintain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'IO Bound' optimization? (Select all that apply)",
+    "options": {
+      "A": "Reducing disk read/writes",
+      "B": "Optimizing network requests",
+      "C": "Increasing CPU speed",
+      "D": "Using asynchronous I/O"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Memory Footprint'?",
+    "options": {
+      "A": "A physical footprint left on a memory stick.",
+      "B": "The amount of main memory that a program uses or references while running.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Optimization' refers to spending effort optimizing parts of the system that aren't actually causing performance issues.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'N+1 Query Problem' in the context of database optimization?",
+    "options": {
+      "A": "When a developer adds one extra column to every table.",
+      "B": "A performance issue where an application makes one initial query to fetch a list of objects, followed by N additional queries to fetch details for each object.",
+      "C": "When a database requires N+1 servers to achieve high availability.",
+      "D": "A mathematical formula used to predict the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Horizontal Scaling' is generally more effective than 'Vertical Scaling' for a monolithic application that cannot share session state across servers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are common technical strategies to mitigate the 'N+1 Query' issue? (Select all that apply)",
+    "options": {
+      "A": "Using Eager Loading (JOINs)",
+      "B": "Implementing Batch Fetching",
+      "C": "Increasing the CPU speed of the database server",
+      "D": "Using a Cache layer for frequently accessed entities"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Tail Latency' (P99) specifically represent in a performance profile?",
+    "options": {
+      "A": "The average response time for all users.",
+      "B": "The response time that the slowest 1% of users experience, often indicating deep-seated bottlenecks.",
+      "C": "The time it takes to delete the last record in a database.",
+      "D": "The physical length of the server's ethernet cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In memory optimization, what is the role of a 'Weak Reference'?",
+    "options": {
+      "A": "A reference that is easily broken by a hacker.",
+      "B": "A reference that does not prevent its referent from being made eligible for garbage collection.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "A way to count the number of users in a system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Loop Unrolling' is a compiler optimization that increases the binary size to reduce the overhead of loop control instructions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced' caching strategy involves updating the cache and the underlying database simultaneously in a single transaction?",
+    "options": {
+      "A": "Write-around caching",
+      "B": "Write-through caching",
+      "C": "Write-back caching",
+      "D": "Lazy Loading"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'String Interning' and how does it optimize memory?",
+    "options": {
+      "A": "Translating strings into different languages.",
+      "B": "Storing only one copy of each distinct string value in a pool to reduce redundant object allocation.",
+      "C": "A security scan that hides passwords.",
+      "D": "Increasing the frame rate of the UI text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are typical symptoms of 'Garbage Collection (GC) Thrashing'? (Select all that apply)",
+    "options": {
+      "A": "High CPU utilization with low application throughput",
+      "B": "Frequent 'Stop-the-World' pauses in execution",
+      "C": "The server room temperature dropping rapidly",
+      "D": "Application memory usage staying near the maximum heap limit"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Indexes' occur when a database index exists but the query engine refuses to use it because the query contains a function on the indexed column (e.g., WHERE YEAR(date) = 2024).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Thundering Herd' problem in distributed system optimization?",
+    "options": {
+      "A": "When a physical herd of animals enters the data center.",
+      "B": "When a large number of processes waiting for an event are all awoken at once, causing a sudden spike in resource contention.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring 100 extra junior developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which performance metric is most critical for a 'Write-Heavy' application like a logging service?",
+    "options": {
+      "A": "Read Latency",
+      "B": "Disk I/O Throughput (IOPS)",
+      "C": "Browser rendering speed",
+      "D": "CSS Z-index complexity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical impact of 'Cold Start' in Serverless (Lambda) functions?",
+    "options": {
+      "A": "The server room is literally too cold for the CPU.",
+      "B": "The significant latency spike experienced when a function is invoked for the first time or after a period of inactivity due to environment initialization.",
+      "C": "A security certificate for a database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Denormalization' is a database optimization technique where redundant data is intentionally added to a schema to improve read performance by reducing JOINs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Memory Profiling' tools used to identify leaks? (Select all that apply)",
+    "options": {
+      "A": "VisualVM",
+      "B": "Eclipse MAT (Memory Analyzer Tool)",
+      "C": "Valgrind",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Connection Pooling' and why is it an optimization?",
+    "options": {
+      "A": "Sharing a physical pool with the developers.",
+      "B": "Maintaining a set of open database connections that can be reused, reducing the overhead of establishing a new connection for every request.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Interaction' (TTI) for a web application?",
+    "options": {
+      "A": "The time it takes for a developer to talk to a client.",
+      "B": "The time it takes for a page to become fully interactive and responsive to user input.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'In-lining' a function always makes the program faster regardless of the function size.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Data Structure' provides O(1) average time complexity for both insertions and lookups?",
+    "options": {
+      "A": "Balanced Binary Tree",
+      "B": "Hash Map (or Hash Table)",
+      "C": "Linked List",
+      "D": "Sorted Array"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cache Invalidation' and why is it considered one of the hardest problems in CS?",
+    "options": {
+      "A": "Turning off the physical cache.",
+      "B": "The process of ensuring that data in the cache is removed or updated when the underlying source data changes to prevent serving stale data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Gzip' or 'Brotli' compression optimize network performance?",
+    "options": {
+      "A": "By increasing the speed of light in the cables.",
+      "B": "By reducing the size of the data payload before transmission, leading to faster download times.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in optimization occur when the DevOps team optimizes for 'Cost' while the Product team optimizes for 'Performance' without alignment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' optimization factors? (Select all that apply)",
+    "options": {
+      "A": "Rightsizing instances to match actual workload",
+      "B": "Using Reserved Instances for predictable loads",
+      "C": "Enabling Auto-scaling groups",
+      "D": "The brand of the computer mouse"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Branch Prediction' in modern CPU optimization?",
+    "options": {
+      "A": "Predicting the growth of trees outside the office.",
+      "B": "A feature where the CPU tries to guess which way a conditional (if-else) logic will go to pre-load the next instructions.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Throughput' variance?",
+    "options": {
+      "A": "Hiring a person named Variance.",
+      "B": "The fluctuation in the amount of data processed per second, which can indicate unstable network or resource contention.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An O(n log n) algorithm is technically more efficient than O(n) for very small datasets (e.g., n=2).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Statistical' method is used in A/B testing to verify if an optimization truly improved user behavior?",
+    "options": {
+      "A": "Linear Regression",
+      "B": "Hypothesis Testing (P-value analysis)",
+      "C": "Standard Deviation",
+      "D": "Simple Averaging"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Jitter' in a high-performance network?",
+    "options": {
+      "A": "The physical jitter of a user's hand.",
+      "B": "The variation in latency over time, which can disrupt real-time communication apps.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Blue-Green' deployment optimization?",
+    "options": {
+      "A": "Choosing the right colors for the UI.",
+      "B": "A strategy that reduces downtime and risk by running two identical production environments and switching traffic between them.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'MTU' (Maximum Transmission Unit) sizes on a network path can cause packet fragmentation and severe performance drops.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Front-end' rendering optimizations? (Select all that apply)",
+    "options": {
+      "A": "Debouncing/Throttling scroll events",
+      "B": "Using Virtual DOM (like in React)",
+      "C": "Minifying CSS",
+      "D": "Optimizing SQL JOINs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Memory Alignment' in low-level code optimization?",
+    "options": {
+      "A": "Aligning physical memory sticks in a row.",
+      "B": "Arranging data in memory to match the CPU's word size, allowing for faster read/write operations.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric that tracks the average time required to fix a system after a failure or bottleneck is detected.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Atomic' operations are inherently slower than non-atomic operations because they require synchronization at the hardware level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Payload' optimization? (Select all that apply)",
+    "options": {
+      "A": "Using Protobuf instead of JSON for internal APIs",
+      "B": "Removing unused fields from API responses",
+      "C": "Encrypting the payload with AES-256",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Database Sharding'?",
+    "options": {
+      "A": "Sharding the physical server into pieces.",
+      "B": "A horizontal scaling technique where data is partitioned across multiple independent database instances.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Circuit Breaker' pattern optimization?",
+    "options": {
+      "A": "A physical switch in the office.",
+      "B": "A mechanism that prevents an application from repeatedly trying an operation that is likely to fail, saving resources and preventing cascading failures.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Garbage' 'Collectors' (e.g., using a collector optimized for throughput on an app that needs low latency) can lead to poor user experience.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' optimization 'Anti-patterns'? (Select all that apply)",
+    "options": {
+      "A": "Optimizing code that is only executed once a month",
+      "B": "Ignoring database indexes during a schema migration",
+      "C": "Hardcoding configuration values",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Vectorization' in the context of data processing?",
+    "options": {
+      "A": "Drawing vectors in a math class.",
+      "B": "Performing the same operation on multiple data elements simultaneously using SIMD (Single Instruction, Multiple Data) CPU instructions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Request' 'Queue' 'Depth'?",
+    "options": {
+      "A": "The depth of a physical hole in the office.",
+      "B": "The number of incoming requests waiting to be processed; a high value indicates the system is saturated.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cores' refers to an application that is single-threaded and cannot benefit from a multi-core CPU.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Static' 'Asset' 'Caching'? (Select all that apply)",
+    "options": {
+      "A": "Using 'Cache-Control' headers for images and JS files",
+      "B": "Setting long expiration times for versioned assets",
+      "C": "Caching dynamic user profile data",
+      "D": "Using a CDN"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heap' vs 'Stack' allocation in memory optimization?",
+    "options": {
+      "A": "Stack is for books; Heap is for trash.",
+      "B": "Stack allocation is very fast and automatic; Heap allocation is for long-lived objects but requires more overhead for management/GC.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Scaling'?",
+    "options": {
+      "A": "Scaling a 3D model while it's moving.",
+      "B": "The process of automatically adding or removing resources based on real-time demand metrics like CPU or traffic.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when a developer optimizes for 'Latency' while the business actually needs 'Throughput'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Load' 'Generation'? (Select all that apply)",
+    "options": {
+      "A": "Using JMeter or K6 to simulate 10,000 users",
+      "B": "Testing if the server can physically hold the computer",
+      "C": "Finding the breaking point of the system",
+      "D": "Measuring response times under load"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is 'Pagination' and why is it an optimization?",
+    "options": {
+      "A": "Changing the page of a physical book.",
+      "B": "Fetching only a small subset of records at a time (e.g., 20 results per page) to reduce database and network load.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Error' 'Rate' threshold?",
+    "options": {
+      "A": "The rate of people making mistakes in the office.",
+      "B": "The maximum allowed percentage of failed requests before an optimization is considered a failure or an alert is triggered.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when optimization is performed on a developer's high-end laptop but production runs on low-cost, resource-constrained VMs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Network' latency factors? (Select all that apply)",
+    "options": {
+      "A": "Propagation delay (physical distance)",
+      "B": "Serialization delay",
+      "C": "Queuing delay in routers",
+      "D": "The brand of the fiber optic cable"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' 'Splitting' in modern web development?",
+    "options": {
+      "A": "Cutting the physical computer in half.",
+      "B": "Breaking a large JS bundle into smaller chunks that are loaded only when needed, reducing initial page load time.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Transactions per Second' (TPS)?",
+    "options": {
+      "A": "The speed at which a person walks.",
+      "B": "A metric that measures the total volume of business-level tasks a system can complete in one second.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a system optimized for HTTP/2 is forced to fall back to HTTP/1.1 due to an old load balancer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Hardware' 'Offloading'? (Select all that apply)",
+    "options": {
+      "A": "Using a GPU for parallel calculations",
+      "B": "Moving SSL/TLS decryption to a dedicated hardware accelerator",
+      "C": "Carrying a physical server out of the room",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Self-Tuning' software?",
+    "options": {
+      "A": "Software that plays a physical guitar.",
+      "B": "Systems that automatically adjust their own configuration parameters (like memory limits or thread counts) based on observed workload.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Pre-warming' a load balancer?",
+    "options": {
+      "A": "Putting the load balancer in a physically warm room.",
+      "B": "A request to a cloud provider to ensure a load balancer is scaled up in advance of a predicted massive traffic spike.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a microservices environment can cause performance drops if one service uses a slower, legacy API version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Canary' 'Analysis' (ACA)? (Select all that apply)",
+    "options": {
+      "A": "Automatically comparing performance metrics of a new release against the stable version",
+      "B": "Checking if a physical bird is healthy",
+      "C": "Identifying regressions before a full rollout",
+      "D": "Guaranteed to stop all network lag"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Waste' 'Elimination' in Lean software development?",
+    "options": {
+      "A": "Throwing actual trash in the office garbage bin.",
+      "B": "The systematic removal of any activity or code that does not add direct value to the end-user or the system's performance.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resource' 'Saturation' metric?",
+    "options": {
+      "A": "The point where a resource is being used at 100% and requests start to queue or fail.",
+      "B": "A list of developers who are saturated with work.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an optimization meets the technical goal (e.g., <100ms response) but fails to meet the business goal (e.g., >1000 orders/sec).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Database' query plan steps? (Select all that apply)",
+    "options": {
+      "A": "Index Scan",
+      "B": "Nested Loop Join",
+      "C": "Sequential Scan (Table Scan)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Loop' 'Invariant' 'Extraction'?",
+    "options": {
+      "A": "Extracting a tooth in a circle.",
+      "B": "Moving calculations that do not change inside a loop to the outside to save redundant execution time.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Storage' refers to choosing a Relational DB for a use case that requires a high-performance Graph DB or Key-Value store.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'N+1 Query Problem' in the context of database optimization?",
+    "options": {
+      "A": "When a developer adds one extra column to every table.",
+      "B": "A performance issue where an application makes one initial query to fetch a list of objects, followed by N additional queries to fetch details for each object.",
+      "C": "When a database requires N+1 servers to achieve high availability.",
+      "D": "A mathematical formula used to predict the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Horizontal Scaling' is generally more effective than 'Vertical Scaling' for a monolithic application that cannot share session state across servers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are common technical strategies to mitigate the 'N+1 Query' issue? (Select all that apply)",
+    "options": {
+      "A": "Using Eager Loading (JOINs)",
+      "B": "Implementing Batch Fetching",
+      "C": "Increasing the CPU speed of the database server",
+      "D": "Using a Cache layer for frequently accessed entities"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Tail Latency' (P99) specifically represent in a performance profile?",
+    "options": {
+      "A": "The average response time for all users.",
+      "B": "The response time that the slowest 1% of users experience, often indicating deep-seated bottlenecks.",
+      "C": "The time it takes to delete the last record in a database.",
+      "D": "The physical length of the server's ethernet cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In memory optimization, what is the role of a 'Weak Reference'?",
+    "options": {
+      "A": "A reference that is easily broken by a hacker.",
+      "B": "A reference that does not prevent its referent from being made eligible for garbage collection.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "A way to count the number of users in a system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Loop Unrolling' is a compiler optimization that increases the binary size to reduce the overhead of loop control instructions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced' caching strategy involves updating the cache and the underlying database simultaneously in a single transaction?",
+    "options": {
+      "A": "Write-around caching",
+      "B": "Write-through caching",
+      "C": "Write-back caching",
+      "D": "Lazy Loading"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'String Interning' and how does it optimize memory?",
+    "options": {
+      "A": "Translating strings into different languages.",
+      "B": "Storing only one copy of each distinct string value in a pool to reduce redundant object allocation.",
+      "C": "A security scan that hides passwords.",
+      "D": "Increasing the frame rate of the UI text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are typical symptoms of 'Garbage Collection (GC) Thrashing'? (Select all that apply)",
+    "options": {
+      "A": "High CPU utilization with low application throughput",
+      "B": "Frequent 'Stop-the-World' pauses in execution",
+      "C": "The server room temperature dropping rapidly",
+      "D": "Application memory usage staying near the maximum heap limit"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Indexes' occur when a database index exists but the query engine refuses to use it because the query contains a function on the indexed column (e.g., WHERE YEAR(date) = 2024).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Thundering Herd' problem in distributed system optimization?",
+    "options": {
+      "A": "When a physical herd of animals enters the data center.",
+      "B": "When a large number of processes waiting for an event are all awoken at once, causing a sudden spike in resource contention.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring 100 extra junior developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which performance metric is most critical for a 'Write-Heavy' application like a logging service?",
+    "options": {
+      "A": "Read Latency",
+      "B": "Disk I/O Throughput (IOPS)",
+      "C": "Browser rendering speed",
+      "D": "CSS Z-index complexity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical impact of 'Cold Start' in Serverless (Lambda) functions?",
+    "options": {
+      "A": "The server room is literally too cold for the CPU.",
+      "B": "The significant latency spike experienced when a function is invoked for the first time or after a period of inactivity due to environment initialization.",
+      "C": "A security certificate for a database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Denormalization' is a database optimization technique where redundant data is intentionally added to a schema to improve read performance by reducing JOINs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Memory Profiling' tools used to identify leaks? (Select all that apply)",
+    "options": {
+      "A": "VisualVM",
+      "B": "Eclipse MAT (Memory Analyzer Tool)",
+      "C": "Valgrind",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Connection Pooling' and why is it an optimization?",
+    "options": {
+      "A": "Sharing a physical pool with the developers.",
+      "B": "Maintaining a set of open database connections that can be reused, reducing the overhead of establishing a new connection for every request.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Interaction' (TTI) for a web application?",
+    "options": {
+      "A": "The time it takes for a developer to talk to a client.",
+      "B": "The time it takes for a page to become fully interactive and responsive to user input.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'In-lining' a function always makes the program faster regardless of the function size.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Data Structure' provides O(1) average time complexity for both insertions and lookups?",
+    "options": {
+      "A": "Balanced Binary Tree",
+      "B": "Hash Map (or Hash Table)",
+      "C": "Linked List",
+      "D": "Sorted Array"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cache Invalidation' and why is it considered one of the hardest problems in CS?",
+    "options": {
+      "A": "Turning off the physical cache.",
+      "B": "The process of ensuring that data in the cache is removed or updated when the underlying source data changes to prevent serving stale data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Gzip' or 'Brotli' compression optimize network performance?",
+    "options": {
+      "A": "By increasing the speed of light in the cables.",
+      "B": "By reducing the size of the data payload before transmission, leading to faster download times.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in optimization occur when the DevOps team optimizes for 'Cost' while the Product team optimizes for 'Performance' without alignment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' optimization factors? (Select all that apply)",
+    "options": {
+      "A": "Rightsizing instances to match actual workload",
+      "B": "Using Reserved Instances for predictable loads",
+      "C": "Enabling Auto-scaling groups",
+      "D": "The brand of the computer mouse"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Branch Prediction' in modern CPU optimization?",
+    "options": {
+      "A": "Predicting the growth of trees outside the office.",
+      "B": "A feature where the CPU tries to guess which way a conditional (if-else) logic will go to pre-load the next instructions.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Throughput' variance?",
+    "options": {
+      "A": "Hiring a person named Variance.",
+      "B": "The fluctuation in the amount of data processed per second, which can indicate unstable network or resource contention.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An O(n log n) algorithm is technically more efficient than O(n) for very small datasets (e.g., n=2).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Statistical' method is used in A/B testing to verify if an optimization truly improved user behavior?",
+    "options": {
+      "A": "Linear Regression",
+      "B": "Hypothesis Testing (P-value analysis)",
+      "C": "Standard Deviation",
+      "D": "Simple Averaging"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Jitter' in a high-performance network?",
+    "options": {
+      "A": "The physical jitter of a user's hand.",
+      "B": "The variation in latency over time, which can disrupt real-time communication apps.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Blue-Green' deployment optimization?",
+    "options": {
+      "A": "Choosing the right colors for the UI.",
+      "B": "A strategy that reduces downtime and risk by running two identical production environments and switching traffic between them.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'MTU' (Maximum Transmission Unit) sizes on a network path can cause packet fragmentation and severe performance drops.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Front-end' rendering optimizations? (Select all that apply)",
+    "options": {
+      "A": "Debouncing/Throttling scroll events",
+      "B": "Using Virtual DOM (like in React)",
+      "C": "Minifying CSS",
+      "D": "Optimizing SQL JOINs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Memory Alignment' in low-level code optimization?",
+    "options": {
+      "A": "Aligning physical memory sticks in a row.",
+      "B": "Arranging data in memory to match the CPU's word size, allowing for faster read/write operations.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric that tracks the average time required to fix a system after a failure or bottleneck is detected.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Atomic' operations are inherently slower than non-atomic operations because they require synchronization at the hardware level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Payload' optimization? (Select all that apply)",
+    "options": {
+      "A": "Using Protobuf instead of JSON for internal APIs",
+      "B": "Removing unused fields from API responses",
+      "C": "Encrypting the payload with AES-256",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Database Sharding'?",
+    "options": {
+      "A": "Sharding the physical server into pieces.",
+      "B": "A horizontal scaling technique where data is partitioned across multiple independent database instances.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Circuit Breaker' pattern optimization?",
+    "options": {
+      "A": "A physical switch in the office.",
+      "B": "A mechanism that prevents an application from repeatedly trying an operation that is likely to fail, saving resources and preventing cascading failures.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Garbage' 'Collectors' (e.g., using a collector optimized for throughput on an app that needs low latency) can lead to poor user experience.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' optimization 'Anti-patterns'? (Select all that apply)",
+    "options": {
+      "A": "Optimizing code that is only executed once a month",
+      "B": "Ignoring database indexes during a schema migration",
+      "C": "Hardcoding configuration values",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Vectorization' in the context of data processing?",
+    "options": {
+      "A": "Drawing vectors in a math class.",
+      "B": "Performing the same operation on multiple data elements simultaneously using SIMD (Single Instruction, Multiple Data) CPU instructions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Request' 'Queue' 'Depth'?",
+    "options": {
+      "A": "The depth of a physical hole in the office.",
+      "B": "The number of incoming requests waiting to be processed; a high value indicates the system is saturated.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cores' refers to an application that is single-threaded and cannot benefit from a multi-core CPU.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Static' 'Asset' 'Caching'? (Select all that apply)",
+    "options": {
+      "A": "Using 'Cache-Control' headers for images and JS files",
+      "B": "Setting long expiration times for versioned assets",
+      "C": "Caching dynamic user profile data",
+      "D": "Using a CDN"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heap' vs 'Stack' allocation in memory optimization?",
+    "options": {
+      "A": "Stack is for books; Heap is for trash.",
+      "B": "Stack allocation is very fast and automatic; Heap allocation is for long-lived objects but requires more overhead for management/GC.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Scaling'?",
+    "options": {
+      "A": "Scaling a 3D model while it's moving.",
+      "B": "The process of automatically adding or removing resources based on real-time demand metrics like CPU or traffic.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when a developer optimizes for 'Latency' while the business actually needs 'Throughput'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Load' 'Generation'? (Select all that apply)",
+    "options": {
+      "A": "Using JMeter or K6 to simulate 10,000 users",
+      "B": "Testing if the server can physically hold the computer",
+      "C": "Finding the breaking point of the system",
+      "D": "Measuring response times under load"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is 'Pagination' and why is it an optimization?",
+    "options": {
+      "A": "Changing the page of a physical book.",
+      "B": "Fetching only a small subset of records at a time (e.g., 20 results per page) to reduce database and network load.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Error' 'Rate' threshold?",
+    "options": {
+      "A": "The rate of people making mistakes in the office.",
+      "B": "The maximum allowed percentage of failed requests before an optimization is considered a failure or an alert is triggered.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when optimization is performed on a developer's high-end laptop but production runs on low-cost, resource-constrained VMs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Network' latency factors? (Select all that apply)",
+    "options": {
+      "A": "Propagation delay (physical distance)",
+      "B": "Serialization delay",
+      "C": "Queuing delay in routers",
+      "D": "The brand of the fiber optic cable"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' 'Splitting' in modern web development?",
+    "options": {
+      "A": "Cutting the physical computer in half.",
+      "B": "Breaking a large JS bundle into smaller chunks that are loaded only when needed, reducing initial page load time.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Transactions per Second' (TPS)?",
+    "options": {
+      "A": "The speed at which a person walks.",
+      "B": "A metric that measures the total volume of business-level tasks a system can complete in one second.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a system optimized for HTTP/2 is forced to fall back to HTTP/1.1 due to an old load balancer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Hardware' 'Offloading'? (Select all that apply)",
+    "options": {
+      "A": "Using a GPU for parallel calculations",
+      "B": "Moving SSL/TLS decryption to a dedicated hardware accelerator",
+      "C": "Carrying a physical server out of the room",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Self-Tuning' software?",
+    "options": {
+      "A": "Software that plays a physical guitar.",
+      "B": "Systems that automatically adjust their own configuration parameters (like memory limits or thread counts) based on observed workload.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Pre-warming' a load balancer?",
+    "options": {
+      "A": "Putting the load balancer in a physically warm room.",
+      "B": "A request to a cloud provider to ensure a load balancer is scaled up in advance of a predicted massive traffic spike.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a microservices environment can cause performance drops if one service uses a slower, legacy API version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Canary' 'Analysis' (ACA)? (Select all that apply)",
+    "options": {
+      "A": "Automatically comparing performance metrics of a new release against the stable version",
+      "B": "Checking if a physical bird is healthy",
+      "C": "Identifying regressions before a full rollout",
+      "D": "Guaranteed to stop all network lag"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Waste' 'Elimination' in Lean software development?",
+    "options": {
+      "A": "Throwing actual trash in the office garbage bin.",
+      "B": "The systematic removal of any activity or code that does not add direct value to the end-user or the system's performance.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resource' 'Saturation' metric?",
+    "options": {
+      "A": "The point where a resource is being used at 100% and requests start to queue or fail.",
+      "B": "A list of developers who are saturated with work.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an optimization meets the technical goal (e.g., <100ms response) but fails to meet the business goal (e.g., >1000 orders/sec).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Database' query plan steps? (Select all that apply)",
+    "options": {
+      "A": "Index Scan",
+      "B": "Nested Loop Join",
+      "C": "Sequential Scan (Table Scan)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Loop' 'Invariant' 'Extraction'?",
+    "options": {
+      "A": "Extracting a tooth in a circle.",
+      "B": "Moving calculations that do not change inside a loop to the outside to save redundant execution time.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Storage' refers to choosing a Relational DB for a use case that requires a high-performance Graph DB or Key-Value store.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  }
+  ]
+}

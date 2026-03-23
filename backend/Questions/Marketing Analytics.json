@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Marketing Analytics", 
+  "questions": [
+    {
+    "question": "What does 'CTR' stand for in digital marketing analytics?",
+    "options": {
+      "A": "Customer Trust Ratio",
+      "B": "Click-Through Rate",
+      "C": "Conversion Timing Record",
+      "D": "Cost Through Revenue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bounce Rate' measures the percentage of visitors who leave a website after viewing only one page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are considered 'Conversion' events in an e-commerce context? (Select all that apply)",
+    "options": {
+      "A": "Completing a purchase",
+      "B": "Signing up for a newsletter",
+      "C": "Downloading a product whitepaper",
+      "D": "Closing the browser tab"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'CAC' in marketing analytics?",
+    "options": {
+      "A": "Customer Acquisition Cost",
+      "B": "Campaign Audit Center",
+      "C": "Channel Analysis Chart",
+      "D": "Consumer Affinity Category"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How is 'Conversion Rate' typically calculated?",
+    "options": {
+      "A": "Total Revenue / Total Clicks",
+      "B": "Number of Conversions / Total Number of Visitors",
+      "C": "Total Marketing Spend / Number of Customers",
+      "D": "Number of Likes / Number of Shares"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'A/B Testing' is used to compare two versions of a webpage or ad to see which performs better.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Demographic' segmentation variables? (Select all that apply)",
+    "options": {
+      "A": "Age",
+      "B": "Gender",
+      "C": "Income Level",
+      "D": "Brand Loyalty Status"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'ROAS' stand for?",
+    "options": {
+      "A": "Reach Of Advertising Services",
+      "B": "Return On Ad Spend",
+      "C": "Rate Of Active Sales",
+      "D": "Revenue On Asset Sharing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric measures the total value a business can expect from a single customer throughout their relationship?",
+    "options": {
+      "A": "CPC",
+      "B": "CLV (Customer Lifetime Value)",
+      "C": "CPM",
+      "D": "NPS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In social media analytics, 'Reach' and 'Impressions' mean exactly the same thing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following help track where a website visitor came from? (Select all that apply)",
+    "options": {
+      "A": "UTM Parameters",
+      "B": "HTTP Referrer data",
+      "C": "Cookies",
+      "D": "Physical GPS coordinates"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Churn Rate'?",
+    "options": {
+      "A": "The rate at which new products are launched.",
+      "B": "The percentage of customers who stop using a service over a period.",
+      "C": "The speed of the website's loading time.",
+      "D": "The amount of content produced per day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Cost Per Click' (CPC) advertising, when does the advertiser pay?",
+    "options": {
+      "A": "When the ad is shown on the screen.",
+      "B": "When a user clicks on the ad.",
+      "C": "When a user makes a purchase.",
+      "D": "At the end of every month regardless of activity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SEO' stands for Search Engine Optimization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metrics are typically found in 'Email Marketing' reports? (Select all that apply)",
+    "options": {
+      "A": "Open Rate",
+      "B": "Click-to-Open Rate (CTOR)",
+      "C": "Unsubscribe Rate",
+      "D": "Physical Mail Delivery Speed"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'CPM' represent in advertising?",
+    "options": {
+      "A": "Cost Per Million",
+      "B": "Cost Per Mille (Thousand Impressions)",
+      "C": "Clicks Per Minute",
+      "D": "Campaign Profit Margin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'KPI'?",
+    "options": {
+      "A": "Keyword Performance Index",
+      "B": "Key Performance Indicator",
+      "C": "Knowledge Process Integration",
+      "D": "Key Profit Increment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Google Analytics 4 (GA4) is an 'event-based' tracking system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which channels are considered 'Owned Media'? (Select all that apply)",
+    "options": {
+      "A": "Company Website",
+      "B": "Company Blog",
+      "C": "Paid Google Search Ads",
+      "D": "Company Email List"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Attribution Modeling' used for?",
+    "options": {
+      "A": "To assign credit to different marketing touchpoints in a customer's journey.",
+      "B": "To attribute a company's logo to a specific designer.",
+      "C": "To calculate the physical weight of a product.",
+      "D": "To verify the identity of the marketing manager."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'NPS' measure?",
+    "options": {
+      "A": "Net Profit Share",
+      "B": "Net Promoter Score (Customer Loyalty)",
+      "C": "Network Page Speed",
+      "D": "New Purchase Statistics"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Organic traffic refers to visitors who arrive via paid advertisements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Psychographic' factors? (Select all that apply)",
+    "options": {
+      "A": "Values",
+      "B": "Interests",
+      "C": "Lifestyle",
+      "D": "Zip Code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Segmentation'?",
+    "options": {
+      "A": "Breaking a single ad into multiple pieces.",
+      "B": "Dividing a broad target market into subsets of consumers with common needs.",
+      "C": "Deleting users who have not purchased in 5 years.",
+      "D": "Hiring a new agency for every product line."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric indicates how many times a single user saw your ad?",
+    "options": {
+      "A": "Reach",
+      "B": "Frequency",
+      "C": "Volume",
+      "D": "Density"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Qualitative data refers to numerical values that can be measured.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common goals of a 'Nurture Campaign'? (Select all that apply)",
+    "options": {
+      "A": "Educating prospects",
+      "B": "Building brand trust",
+      "C": "Moving leads through the funnel",
+      "D": "Sending a physical gift to everyone on the list"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'CPA'?",
+    "options": {
+      "A": "Certified Public Accountant",
+      "B": "Cost Per Acquisition",
+      "C": "Campaign Performance Analysis",
+      "D": "Customer Priority Access"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Market Share'?",
+    "options": {
+      "A": "The number of shares a company has on the stock market.",
+      "B": "The percentage of total sales in an industry generated by a particular company.",
+      "C": "The physical size of a marketplace.",
+      "D": "The number of people who follow a brand on social media."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Quantitative analytics involves interpreting text-based feedback and interviews.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which factors contribute to a 'Lead Score'? (Select all that apply)",
+    "options": {
+      "A": "Job Title",
+      "B": "Website pages visited",
+      "C": "Email engagement",
+      "D": "Number of family members"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Landing Page'?",
+    "options": {
+      "A": "The page where an airplane pilot logs their hours.",
+      "B": "A specific webpage that a visitor 'lands' on after clicking an ad or link.",
+      "C": "The very last page of a website's footer.",
+      "D": "A hidden page used for internal testing only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SaaS' stand for in the context of marketing tools?",
+    "options": {
+      "A": "Sales as a Service",
+      "B": "Software as a Service",
+      "C": "Systematic advertising and Sales",
+      "D": "Standardized Analytics and Statistics"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A high 'Exit Rate' on a specific page always means that page is broken.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Social Media' engagement metrics? (Select all that apply)",
+    "options": {
+      "A": "Shares",
+      "B": "Comments",
+      "C": "Saves/Bookmarks",
+      "D": "Profile view resolution"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Keyword Density'?",
+    "options": {
+      "A": "The physical weight of the printed keywords.",
+      "B": "The percentage of times a keyword appears on a webpage compared to the total number of words.",
+      "C": "The number of keywords a company pays for per month.",
+      "D": "The difficulty of ranking for a specific keyword."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Excel or SQL, what is 'Data Cleaning'?",
+    "options": {
+      "A": "Physically wiping down the server racks.",
+      "B": "The process of fixing or removing incorrect, corrupted, or duplicate data within a dataset.",
+      "C": "Deleting the entire database and starting over.",
+      "D": "Hiring a professional cleaner for the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Retargeting' involves showing ads to users who have previously visited your website.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are parts of a 'Marketing Mix' (4Ps)? (Select all that apply)",
+    "options": {
+      "A": "Product",
+      "B": "Price",
+      "C": "Place",
+      "D": "Personnel"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Lookalike Modeling'?",
+    "options": {
+      "A": "Hiring actors who look like your customers.",
+      "B": "Using data to find new potential customers who share similar characteristics with your best existing customers.",
+      "C": "A way to backup the SQL code.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time on Page'?",
+    "options": {
+      "A": "The actual time a user spends reading a specific webpage.",
+      "B": "The time of day a page was published.",
+      "C": "The time it takes for a page to load.",
+      "D": "The number of hours a team worked on a page design."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SERP' stands for Search Engine Result Page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Paid' marketing channels? (Select all that apply)",
+    "options": {
+      "A": "Facebook Ads",
+      "B": "Google PPC",
+      "C": "Direct Mail",
+      "D": "Word of Mouth"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Engagement Rate'?",
+    "options": {
+      "A": "The speed at which a company gets engaged to a partner.",
+      "B": "The percentage of an audience that interacts with a piece of content.",
+      "C": "The cost of hiring an influencer.",
+      "D": "The number of hours a user stays logged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CPL'?",
+    "options": {
+      "A": "Campaign Profit Limit",
+      "B": "Cost Per Lead",
+      "C": "Customer Priority Level",
+      "D": "Centralized Pricing Log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Cookie' is a small piece of data stored on the user's computer by the web browser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which items are usually tracked in a 'Social Listening' tool? (Select all that apply)",
+    "options": {
+      "A": "Brand Mentions",
+      "B": "Competitor Mentions",
+      "C": "Industry Keywords",
+      "D": "Private phone conversations"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Inbound Marketing'?",
+    "options": {
+      "A": "Cold calling potential customers during dinner.",
+      "B": "Attracting customers through content marketing, social media, and SEO.",
+      "C": "Buying billboard space in every city.",
+      "D": "Sending unsolicited physical mail."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Sales Funnel'?",
+    "options": {
+      "A": "A physical tool used in a laboratory.",
+      "B": "A visual representation of the customer journey from awareness to purchase.",
+      "C": "The group of people who work in the sales department.",
+      "D": "The process of deleting leads that don't convert."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MQL' stands for Marketing Qualified Lead.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Marketing Automation' platforms? (Select all that apply)",
+    "options": {
+      "A": "HubSpot",
+      "B": "Marketo",
+      "C": "Mailchimp",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Conversion Rate Optimization' (CRO)?",
+    "options": {
+      "A": "Hiring a person to talk to every customer.",
+      "B": "The systematic process of increasing the percentage of website visitors who take a desired action.",
+      "C": "A way to speed up the network.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bounce' in email marketing?",
+    "options": {
+      "A": "When an email is deleted by the user.",
+      "B": "When an email cannot be delivered to an email server.",
+      "C": "When a user forwards an email to a friend.",
+      "D": "When an email is opened more than 10 times."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'LTV' is the same as 'CLV'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Direct Response' marketing tactics? (Select all that apply)",
+    "options": {
+      "A": "Click-to-buy ads",
+      "B": "Limited time offer codes",
+      "C": "Brand awareness billboards",
+      "D": "Newsletter sign-up popups"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Sentiment Analysis'?",
+    "options": {
+      "A": "Calculating the emotional state of the CEO.",
+      "B": "Using natural language processing to determine whether data is positive, negative, or neutral.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a psychologist for the marketing team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Session' in web analytics?",
+    "options": {
+      "A": "A group of user interactions with your website that take place within a given time frame.",
+      "B": "A meeting between the developer and the client.",
+      "C": "A specialized software for poets.",
+      "D": "A security scan of the database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'CPI' stands for Cost Per Impression.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Marketing Attribution'? (Select all that apply)",
+    "options": {
+      "A": "First-click attribution",
+      "B": "Last-click attribution",
+      "C": "Linear attribution",
+      "D": "Random attribution"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Heatmap' in analytics?",
+    "options": {
+      "A": "A map showing the temperature of the data center.",
+      "B": "A visualization of where users click, move, and scroll on a page.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Market' 'Penetration'?",
+    "options": {
+      "A": "Hiring more people to sell a product.",
+      "B": "A measure of how much a product is being used by customers compared to the total estimated market for that product.",
+      "C": "A specialized software for architects.",
+      "D": "The speed of light in a vacuum."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard' is a visual display of the most important information needed to achieve one or more objectives.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Lead' sources? (Select all that apply)",
+    "options": {
+      "A": "Web forms",
+      "B": "Social media profiles",
+      "C": "Trade shows",
+      "D": "Physical office furniture"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Customer' 'Journey' 'Mapping'?",
+    "options": {
+      "A": "Drawing a physical map of where customers live.",
+      "B": "Visualizing the entire end-to-end experience a customer has with a brand.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a driver for the customer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Big' 'Data' in marketing?",
+    "options": {
+      "A": "A single very large file on the server.",
+      "B": "Large, complex datasets that are analyzed computationally to reveal patterns, trends, and associations.",
+      "C": "A specialized software for poets.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'ROI' is always expressed as a percentage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of 'Cohort Analysis' in marketing analytics?",
+    "options": {
+      "A": "To track the average age of all customers globally.",
+      "B": "To observe how the behavior of a specific group of users changes over time.",
+      "C": "To calculate the total tax liability of the marketing department.",
+      "D": "To compare the company's revenue against a random competitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Statistically Significant' result in an A/B test means that the observed difference is unlikely to have occurred by chance alone.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are components of 'Marketing Mix Modeling' (MMM)? (Select all that apply)",
+    "options": {
+      "A": "Historical sales data",
+      "B": "External factors like seasonality and economic indicators",
+      "C": "Real-time user mouse-tracking data",
+      "D": "Advertising spend across different channels"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "In 'Linear Attribution', how is credit assigned to the touchpoints in a customer's journey?",
+    "options": {
+      "A": "100% of the credit goes to the first touchpoint.",
+      "B": "100% of the credit goes to the final click before purchase.",
+      "C": "Equal credit is distributed across all touchpoints in the journey.",
+      "D": "Credit is assigned based on the time spent on each page."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does a high 'Customer Churn Rate' combined with a high 'CAC' typically indicate for a business?",
+    "options": {
+      "A": "The business is highly profitable and efficient.",
+      "B": "The business is likely losing money and has an unsustainable growth model.",
+      "C": "The marketing team should increase the CPM budget immediately.",
+      "D": "The product is too popular for the current server capacity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Incrementality' testing aims to measure the lift specifically caused by a marketing ad, excluding what would have happened anyway.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are metrics used to calculate 'Customer Lifetime Value' (CLV)? (Select all that apply)",
+    "options": {
+      "A": "Average Purchase Value",
+      "B": "Average Purchase Frequency",
+      "C": "Customer Lifespan",
+      "D": "Number of social media followers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Confidence Level' in an A/B test?",
+    "options": {
+      "A": "The level of confidence the CEO has in the marketing manager.",
+      "B": "The probability that the test results would be the same if the test were repeated.",
+      "C": "The percentage of users who clicked on the 'Buy' button.",
+      "D": "The total number of days the test was active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which attribution model gives the most credit to the touchpoints closest in time to the conversion?",
+    "options": {
+      "A": "First-Touch",
+      "B": "Time Decay",
+      "C": "Last-Touch",
+      "D": "U-Shaped"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Predictive Analytics' uses historical data to make forecasts about future marketing outcomes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Lagging Indicators' in marketing? (Select all that apply)",
+    "options": {
+      "A": "Quarterly Revenue",
+      "B": "Total Annual Market Share",
+      "C": "Email Open Rate",
+      "D": "Number of new leads generated today"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is a 'Data Silo' and why is it problematic for analytics?",
+    "options": {
+      "A": "A large farm structure; it has no impact on data.",
+      "B": "Isolated data sets held by one department that are not accessible to others, preventing a holistic view.",
+      "C": "A specialized high-speed server used only for marketing.",
+      "D": "A way to backup the SQL code into physical paper folders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'RFM Analysis', what does the 'F' stand for?",
+    "options": {
+      "A": "Financial",
+      "B": "Frequency",
+      "C": "Forecast",
+      "D": "Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Multi-Touch Attribution (MTA) is generally easier to implement than Last-Click attribution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which strategies are used to reduce 'Customer Churn'? (Select all that apply)",
+    "options": {
+      "A": "Improving customer onboarding",
+      "B": "Implementing a loyalty program",
+      "C": "Proactively reaching out to 'at-risk' customers",
+      "D": "Increasing the price of the service randomly"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Break-even ROAS'?",
+    "options": {
+      "A": "The ROAS where the marketing team gets a bonus.",
+      "B": "The point where advertising revenue exactly covers the advertising costs and cost of goods sold.",
+      "C": "A ROAS of exactly 100%.",
+      "D": "The number of hours until an ad campaign starts to make profit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In GA4, what is 'Engagement Rate' the inverse of?",
+    "options": {
+      "A": "Click-through Rate",
+      "B": "Bounce Rate",
+      "C": "Conversion Rate",
+      "D": "Exit Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Lookback Window' refers to the period of time after an ad is seen or clicked during which a conversion can be attributed to that ad.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Qualitative' research methods? (Select all that apply)",
+    "options": {
+      "A": "Focus Groups",
+      "B": "In-depth Interviews",
+      "C": "Large-scale web traffic logs",
+      "D": "Open-ended survey responses"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Media Inflation'?",
+    "options": {
+      "A": "When the file size of an ad becomes too large.",
+      "B": "The increase in the cost of reaching a specific audience over time.",
+      "C": "Increasing the brightness of the colors in a video ad.",
+      "D": "Hiring more people to work in the media department."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is the 'LTV to CAC Ratio' used to measure?",
+    "options": {
+      "A": "The physical speed of the server.",
+      "B": "The long-term profitability and efficiency of customer acquisition.",
+      "C": "The total number of followers on Twitter.",
+      "D": "The percentage of employees who use Python."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Normal Distribution', the mean, median, and mode are all the same value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Middle-of-the-Funnel' (MOFU) metrics? (Select all that apply)",
+    "options": {
+      "A": "Webinar registrations",
+      "B": "Case study downloads",
+      "C": "Broad brand awareness mentions",
+      "D": "Product comparison page views"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Market Basket Analysis' primarily used for?",
+    "options": {
+      "A": "To count the number of physical baskets in a store.",
+      "B": "To identify products that are frequently purchased together.",
+      "C": "To find the name of the project manager.",
+      "D": "To calculate the volume of a sphere using marketing data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Google Analytics', what is a 'Secondary Dimension'?",
+    "options": {
+      "A": "A hidden world inside the data center.",
+      "B": "An additional data parameter used to provide further granularity to a report.",
+      "C": "A way to backup data in two places at once.",
+      "D": "The font size used for the second header."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Programmatic Advertising' uses automated technology for the buying and selling of ad space in real-time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which techniques help avoid 'Overfitting' in a marketing predictive model? (Select all that apply)",
+    "options": {
+      "A": "Cross-validation",
+      "B": "Regularization",
+      "C": "Using a smaller dataset purposely",
+      "D": "Simplifying the number of features/variables"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'View-Through Conversion'?",
+    "options": {
+      "A": "When a user converts while viewing a sunset.",
+      "B": "When a user sees an ad but doesn't click, then later converts on their own.",
+      "C": "A conversion that happens through a window.",
+      "D": "Hiring a professional to view the ads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How is 'NPS' (Net Promoter Score) calculated?",
+    "options": {
+      "A": "Total Revenue minus Total Costs.",
+      "B": "Percentage of Promoters minus Percentage of Detractors.",
+      "C": "The average rating on a 1-5 scale.",
+      "D": "The number of people who follow the brand."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'P-value' in a statistical test tells you the exact probability that the alternative hypothesis is true.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are components of the 'STDP' marketing framework? (Select all that apply)",
+    "options": {
+      "A": "Segmentation",
+      "B": "Targeting",
+      "C": "Differentiation",
+      "D": "Positioning"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Share of Voice' (SOV)?",
+    "options": {
+      "A": "The volume of a person's voice in a meeting.",
+      "B": "A brand's advertising presence compared to its competitors within a specific market.",
+      "C": "A security scan for audio files.",
+      "D": "Hiring an influencer to speak for the brand."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Customer Identity Resolution'?",
+    "options": {
+      "A": "Solving a customer's personal problems.",
+      "B": "Matching different identifiers (email, device ID, cookies) to a single unique customer profile.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Heatmap' can show you where users are clicking, but not how far they are scrolling down a page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which items are found in a 'UTM' string? (Select all that apply)",
+    "options": {
+      "A": "utm_source",
+      "B": "utm_medium",
+      "C": "utm_campaign",
+      "D": "utm_password"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Statistical Power'?",
+    "options": {
+      "A": "The physical durability of a computer.",
+      "B": "The probability that a test will correctly reject a false null hypothesis.",
+      "C": "A security certificate for a database.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Sentiment Analysis', what does 'Polarity' represent?",
+    "options": {
+      "A": "The magnetic field of the server.",
+      "B": "The degree to which a text is positive or negative.",
+      "C": "The speed of light in a vacuum.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'First-party data' is information collected directly by your company from your own audience.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Lead Nurturing' techniques? (Select all that apply)",
+    "options": {
+      "A": "Personalized email sequences",
+      "B": "Retargeting ads",
+      "C": "Educational blog content",
+      "D": "Cold calling every hour"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Marketing Attribution' 'U-Shaped' model?",
+    "options": {
+      "A": "Giving credit to only the middle touchpoint.",
+      "B": "Giving 40% credit to the first touch, 40% to the last touch, and sharing 20% in the middle.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Propensity Modeling'?",
+    "options": {
+      "A": "Modeling a physical prop for a movie.",
+      "B": "Using statistical techniques to predict the likelihood of a customer taking a specific action.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Zero-party data' is data that a customer intentionally and proactively shares with a brand.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of 'Search Engine Results' (SERP)? (Select all that apply)",
+    "options": {
+      "A": "Organic listings",
+      "B": "Paid search ads",
+      "C": "Knowledge panels",
+      "D": "Private user emails"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Customer Effort Score' (CES)?",
+    "options": {
+      "A": "The amount of calories a customer burns.",
+      "B": "A metric used to measure how easy it is for a customer to interact with a company.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Database' marketing, what is 'Suppression'?",
+    "options": {
+      "A": "Hiring a person to stop users from leaving.",
+      "B": "Excluding specific individuals or segments from receiving a marketing communication.",
+      "C": "A security bridge for data.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-selling' involves encouraging customers to purchase a higher-end version of the same product.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Customer Retention' metrics? (Select all that apply)",
+    "options": {
+      "A": "Repeat Purchase Rate",
+      "B": "Churn Rate",
+      "C": "Customer Acquisition Cost",
+      "D": "Renewal Rate"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Marketing' 'Dashboard' 'Interactivity'?",
+    "options": {
+      "A": "Hiring a person to act out the data.",
+      "B": "The ability of a user to filter, drill down, and manipulate the data visualization.",
+      "C": "A way to speed up the network.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Email' marketing, what is 'A/B' 'Subject' 'Line' testing?",
+    "options": {
+      "A": "Sending two different subject lines to two small groups to see which gets more opens.",
+      "B": "Testing if the subject line can be read in two different languages.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a person named Subject."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Lookalike' audiences are created using third-party data to find users similar to your existing customers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Dynamic' 'Creative' Optimization? (Select all that apply)",
+    "options": {
+      "A": "Automatically changing ad elements (image, text) based on the viewer",
+      "B": "Using AI to generate 1000s of ad variations",
+      "C": "Hiring 100 artists to draw manually",
+      "D": "Testing variations in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Marketing' 'Data' 'Warehouse'?",
+    "options": {
+      "A": "A physical building where marketing brochures are kept.",
+      "B": "A central repository that aggregates data from multiple sources for reporting and analysis.",
+      "C": "A specialized software for poets.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web' 'Analytics', what is 'Direct' 'Traffic'?",
+    "options": {
+      "A": "Traffic that drives directly to the data center.",
+      "B": "Visitors who arrive by typing the URL directly into their browser or using a bookmark.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Multivariate' testing is the same as 'A/B' testing but involves testing many elements simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Social' 'Media' 'Listening' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying brand sentiment",
+      "B": "Finding product improvement ideas",
+      "C": "Tracking competitor strategy",
+      "D": "Listening to employees' private talk"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Programmatic' 'Direct'?",
+    "options": {
+      "A": "Buying ad space directly from a person on the phone.",
+      "B": "The automated purchase of specific ad placements directly from a publisher.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Customer' 'Analytics', what is 'Propensity' to 'Pay'?",
+    "options": {
+      "A": "The likelihood that a customer will tip the waiter.",
+      "B": "The statistical probability that a customer will complete a transaction or pay a bill.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Standard' 'Deviation' measures the average distance of data points from the mean.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Marketing' 'Attribution' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Cross-device tracking",
+      "B": "Cookie expiration",
+      "C": "Offline-to-Online gaps",
+      "D": "Choosing a color for the report"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Funnel' 'Visualization'?",
+    "options": {
+      "A": "Drawing a picture of a physical funnel.",
+      "B": "A graphical representation showing the stages of a process and the drop-off at each step.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Marketing' 'Automation', what is 'Lead' 'Scoring' 'Threshold'?",
+    "options": {
+      "A": "The number of leads that can fit in a room.",
+      "B": "The score a lead must reach before it is handed over from Marketing to Sales.",
+      "C": "A security scan of the database.",
+      "D": "The physical durability of a computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Content' 'Marketing' is exclusively about writing blog posts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Dynamic' 'Remarketing'? (Select all that apply)",
+    "options": {
+      "A": "Showing ads for products the user specifically viewed",
+      "B": "Changing the price of the product in the ad",
+      "C": "Showing a general brand ad to everyone",
+      "D": "Highly personalized ad content"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Organic' 'Search' 'Ranking' factor?",
+    "options": {
+      "A": "The amount of money paid to Google.",
+      "B": "Factors like content quality, backlinks, and site speed that influence SEO position.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Customer' 'Service', what is 'First' 'Response' 'Time'?",
+    "options": {
+      "A": "The time it takes for a customer to respond.",
+      "B": "The time it takes for a company to first reply to a customer's inquiry.",
+      "C": "A security scan for computer viruses.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'B2B' marketing analytics often involves longer sales cycles and more stakeholders than 'B2C'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary mathematical challenge when using 'Data-Driven Attribution' (DDA) compared to rule-based models?",
+    "options": {
+      "A": "It requires more storage space for individual cookie files.",
+      "B": "It uses complex cooperative game theory (like Shapley Values) or Markov Chains to calculate the marginal contribution of each touchpoint.",
+      "C": "It only works if the customer makes a purchase within 24 hours of the first click.",
+      "D": "It forces all conversion credit to be an integer rather than a decimal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Marketing Mix Modeling (MMM), 'Adstock' refers to the theory that the effect of advertising is not immediate but decays over time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are significant technical hurdles caused by the 'Death of the Third-Party Cookie'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in cross-site retargeting",
+      "B": "Loss of accuracy in multi-touch attribution (MTA) models",
+      "C": "Inability to track first-party logged-in users on your own site",
+      "D": "Increased reliance on server-side tracking (like CAPI)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Statistical Significance' fail to account for in an A/B test result?",
+    "options": {
+      "A": "The probability that the null hypothesis is true.",
+      "B": "Practical Significance (Effect Size)—the actual business impact of the change.",
+      "C": "The total number of users who participated in the test.",
+      "D": "The variance of the data distribution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does the 'Bayesian' approach to A/B testing differ from the 'Frequentist' approach?",
+    "options": {
+      "A": "Bayesian testing requires a much larger sample size to begin.",
+      "B": "Bayesian testing provides the probability that one version is better than the other, incorporating prior knowledge.",
+      "C": "Frequentist testing allows you to stop the test as soon as you see a trend.",
+      "D": "There is no mathematical difference; they are just different names for the same process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Incremental Lift' can only be calculated by comparing a treatment group (exposed to ads) to a clean control group (unexposed).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which factors are typically included as 'Control Variables' in a Marketing Mix Model? (Select all that apply)",
+    "options": {
+      "A": "Competitor pricing and promotions",
+      "B": "Economic indicators (e.g., GDP, Unemployment)",
+      "C": "Weather patterns for brick-and-mortar sales",
+      "D": "The CEO's personal social media posts"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In the context of 'Privacy Sandbox', what is the purpose of 'Aggregation' in API reporting?",
+    "options": {
+      "A": "To group all users by their physical height.",
+      "B": "To prevent the identification of individual users by combining data into large cohorts before sharing it with advertisers.",
+      "C": "To increase the speed of the SQL JOIN operation.",
+      "D": "To verify that the advertising agency is telling the truth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which econometric issue occurs when a marketing variable is correlated with the error term in a regression model?",
+    "options": {
+      "A": "Multicollinearity",
+      "B": "Endogeneity",
+      "C": "Heteroscedasticity",
+      "D": "Autocorrelation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Customer Equity' is the total discounted lifetime values of all the firm's current and potential customers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Multi-Touch Attribution' (MTA) limitations in a mobile environment? (Select all that apply)",
+    "options": {
+      "A": "App Tracking Transparency (ATT) restrictions on iOS",
+      "B": "Walled Gardens (like Google and Meta) not sharing granular data",
+      "C": "Users having multiple devices (phone, tablet, PC)",
+      "D": "The file size of the mobile app is too small to track"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Diminishing Returns' principle in a marketing saturation curve?",
+    "options": {
+      "A": "The more you spend, the lower the total revenue becomes.",
+      "B": "As advertising spend increases, the incremental gain in sales eventually decreases.",
+      "C": "Advertising has zero effect after the first $1,000 spent.",
+      "D": "The stock price always drops when marketing spend increases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Survival Analysis' for churn prediction, what does the 'Hazard Function' represent?",
+    "options": {
+      "A": "The physical danger to the server hardware.",
+      "B": "The instantaneous probability that a customer will churn at a specific time, given they have stayed until then.",
+      "C": "The total cost of customer acquisition.",
+      "D": "The speed at which a customer navigates the website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Differential Privacy' involves adding mathematical 'noise' to a dataset so that individual records cannot be distinguished while aggregate patterns remain valid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which components are required for 'Media Spend Optimization' using linear programming? (Select all that apply)",
+    "options": {
+      "A": "Objective function (e.g., maximize total conversions)",
+      "B": "Decision variables (spend per channel)",
+      "C": "Constraints (e.g., total budget, minimum spend per channel)",
+      "D": "The number of colors in the ad creative"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Halo Effect' in the context of cross-channel marketing?",
+    "options": {
+      "A": "A specialized lighting effect used in video production.",
+      "B": "When advertising for one product or channel positively influences the sales of another product or channel.",
+      "C": "A security bridge for data transfers.",
+      "D": "Hiring a famous person to wear a physical halo in an ad."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing' (NLP) for marketing, what is 'Word Embedding' used for?",
+    "options": {
+      "A": "Embedding a physical document in a safe.",
+      "B": "Representing words as dense vectors in a continuous vector space to capture semantic relationships in reviews/ads.",
+      "C": "Calculating the total number of words in a blog post.",
+      "D": "Hiring a professional writer to check grammar."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Propensity Score Matching' (PSM) is a statistical technique that attempts to estimate the effect of a treatment by accounting for the covariates that predict receiving the treatment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' segmentation techniques? (Select all that apply)",
+    "options": {
+      "A": "Latent Class Analysis (LCA)",
+      "B": "Hierarchical Clustering",
+      "C": "Principal Component Analysis (PCA) for feature reduction",
+      "D": "Sorting users by their first name"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Media Mix' 'Cannibalization'?",
+    "options": {
+      "A": "One marketing channel stealing budget from another.",
+      "B": "When a new marketing campaign or product takes sales away from an existing product instead of growing the total market.",
+      "C": "A specialized software for architects.",
+      "D": "Deleting data from the future."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is most useful for identifying 'Whale' customers in a mobile game analytics report?",
+    "options": {
+      "A": "DAU (Daily Active Users)",
+      "B": "ARPPU (Average Revenue Per Paying User)",
+      "C": "Total App Downloads",
+      "D": "Average Session Length"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under GDPR, 'Explicit Consent' is required for all types of data processing, including those necessary for the performance of a contract.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Marketing Spend' 'Efficiency' 'Frontier'? (Select all that apply)",
+    "options": {
+      "A": "The curve showing the maximum possible return for a given level of risk/spend",
+      "B": "A way to identify underperforming channels",
+      "C": "A map of the country's physical borders",
+      "D": "Part of Data Envelopment Analysis (DEA)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Predictive' 'CLV' modeling logic?",
+    "options": {
+      "A": "Predicting the name of a customer's first child.",
+      "B": "Using machine learning to estimate the future net profit attributed to the entire future relationship with a customer.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a psychic for the marketing team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Attribution', what is the 'Markov Chain' approach?",
+    "options": {
+      "A": "A chain of physical servers linked by a person named Markov.",
+      "B": "A probabilistic model that calculates the probability of moving from one touchpoint to another and the 'removal effect' on conversions.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-device Graphing' is the process of linking different identifiers from the same person across phone, desktop, and smart TV.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Econometric' models for Marketing? (Select all that apply)",
+    "options": {
+      "A": "Vector Autoregression (VAR)",
+      "B": "Log-Log Regression (for elasticity)",
+      "C": "Switching Regression",
+      "D": "Binary Search Trees"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Brand Equity' 'Decay' rate?",
+    "options": {
+      "A": "The rate at which the company's logo fades in sunlight.",
+      "B": "The speed at which brand awareness or preference decreases when advertising stops.",
+      "C": "A specialized software for non-profits.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you calculate 'Marginal' ROAS?",
+    "options": {
+      "A": "Total Revenue / Total Spend",
+      "B": "Change in Revenue / Change in Advertising Spend",
+      "C": "The ROAS of the smallest channel.",
+      "D": "Profit / Assets"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Survival Analysis' can be used to predict the time until a customer makes their next purchase, not just churn.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Customer' 'Value' 'Segmentation' types? (Select all that apply)",
+    "options": {
+      "A": "High Value, High Risk (at-risk stars)",
+      "B": "Low Value, Low Frequency (hibernating)",
+      "C": "High Value, Low Frequency (potential loyalists)",
+      "D": "Users sorted by the length of their email address"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Market' 'Price' 'Elasticity'?",
+    "options": {
+      "A": "The physical stretchiness of a product's packaging.",
+      "B": "A measure of how sensitive the quantity demanded of a product is to a change in its price.",
+      "C": "A security certificate for a database.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Marketing' 'Science', what is the 'Bass' 'Diffusion' 'Model' used for?",
+    "options": {
+      "A": "Calculating the volume of bass in a radio ad.",
+      "B": "Predicting the adoption rate of a new product based on 'innovators' and 'imitators'.",
+      "C": "A specialized software for marine biologists.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Homoscedasticity' is an assumption in linear regression that the variance of the error term is constant across all levels of the independent variables.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Unsupervised' learning algorithms used in marketing? (Select all that apply)",
+    "options": {
+      "A": "K-Means Clustering",
+      "B": "Self-Organizing Maps (SOM)",
+      "C": "Association Rule Mining",
+      "D": "Linear Regression"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Media' 'Attribution' 'Shapley' 'Value'?",
+    "options": {
+      "A": "The financial value of a person named Shapley.",
+      "B": "A method from cooperative game theory that assigns credit to each channel based on its unique contribution to all possible combinations of channels.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data' 'Privacy', what is 'Right' to 'Be' 'Forgotten'?",
+    "options": {
+      "A": "The right of a computer to be turned off.",
+      "B": "The right of individuals to have their personal data erased from a company's records under specific conditions (GDPR).",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Lookalike' audience accuracy decreases as the seed audience becomes more niche and specific.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Bayesian' 'Structural' 'Time' 'Series' (BSTS) applications? (Select all that apply)",
+    "options": {
+      "A": "Causal impact analysis for marketing events",
+      "B": "Forecasting sales with uncertainty intervals",
+      "C": "Decomposing time series into trend, seasonal, and holiday effects",
+      "D": "Generating AI images for social media"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Customer' 'Experience' (CX) 'Path' 'Analysis'?",
+    "options": {
+      "A": "A physical path in a company's office.",
+      "B": "Analyzing the sequence of touchpoints and interactions a customer has across multiple channels to reach a goal.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Marketing Mix Modeling', what is 'Multicollinearity'?",
+    "options": {
+      "A": "When the ad creative has too many colors.",
+      "B": "A statistical phenomenon where two or more independent variables are highly correlated, making it difficult to isolate their individual effects.",
+      "C": "A security scan of the database.",
+      "D": "The number of users currently active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cohort' 'Retention' 'Curve' typically shows a steep drop-off in the first few periods followed by a plateau for loyal users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Marketing' 'Data' 'Enrichment' sources? (Select all that apply)",
+    "options": {
+      "A": "Third-party credit score data",
+      "B": "Public social media profiles",
+      "C": "Weather data",
+      "D": "The private text messages of the marketing team"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Statistical' 'Significance' 'vs' 'Power'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Significance is the risk of a false positive; Power is the ability to detect a true positive.",
+      "C": "Power is for beginners; Significance for experts.",
+      "D": "Significance is 100x faster to calculate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Customer' 'Lifetime' 'Value', what is 'Discount' 'Rate'?",
+    "options": {
+      "A": "The percentage off a product during a sale.",
+      "B": "The interest rate used to convert future cash flows into present value.",
+      "C": "The speed at which a customer churns.",
+      "D": "A specialized software for accountants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'A/A' 'Testing' is a test where both groups see the exact same version of a page to check the validity of the testing platform.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Digital' 'Marketing' 'Privacy' regulations? (Select all that apply)",
+    "options": {
+      "A": "GDPR (Europe)",
+      "B": "CCPA (California)",
+      "C": "LGPD (Brazil)",
+      "D": "The Law of Gravity"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Customer' 'Segmentation' 'Tree' (CART)?",
+    "options": {
+      "A": "A physical tree in a customer's garden.",
+      "B": "A decision tree model used to split a customer base into groups based on behavioral or demographic attributes.",
+      "C": "A security scan of the database.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Marketing' 'Analytics', what is 'Feature' 'Importance'?",
+    "options": {
+      "A": "The moral importance of a feature.",
+      "B": "A score that indicates how much each variable in a machine learning model contributed to the prediction.",
+      "C": "The number of pixels in a result.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Exploratory' 'Data' 'Analysis' (EDA) is the first step in any analytical project, used to understand distributions and relationships.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Time' 'Series' 'Forecasting' models? (Select all that apply)",
+    "options": {
+      "A": "ARIMA",
+      "B": "Exponential Smoothing (ETS)",
+      "C": "Prophet",
+      "D": "Linear Regression (without time features)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Marketing' 'Attribution' 'Position-Based' model?",
+    "options": {
+      "A": "Giving credit based on the person's job title.",
+      "B": "Giving 40% credit to the first touch, 40% to the last touch, and 20% to intermediate touches.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web' 'Analytics', what is 'Referrer' 'Spam'?",
+    "options": {
+      "A": "A type of canned meat sent to the office.",
+      "B": "Fake traffic entries in a report designed to get site owners to visit a specific URL.",
+      "C": "A security scan for computer viruses.",
+      "D": "A list of project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'LTV/CAC' ratio of 3:1 is generally considered a healthy benchmark for SaaS companies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Content' 'Analytics' metrics? (Select all that apply)",
+    "options": {
+      "A": "Average Scroll Depth",
+      "B": "Readability Score",
+      "C": "Social Shares per Post",
+      "D": "The weight of the paper the ad is printed on"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Programmatic' 'RTB' (Real-Time Bidding)?",
+    "options": {
+      "A": "Buying ad space via a phone call.",
+      "B": "The automated auction of digital ad impressions in milliseconds while a webpage loads.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Customer' 'Relationship' 'Management' (CRM), what is 'Lead' 'Velocity'?",
+    "options": {
+      "A": "The physical speed of a person named Lead.",
+      "B": "The rate at which leads are moving through the sales funnel.",
+      "C": "A security scan of the database.",
+      "D": "The total number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Akaike' 'Information' 'Criterion' (AIC) is used to compare the fit of different statistical models while penalizing for complexity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Marketing' 'Dashboard' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Defining a clear target audience",
+      "B": "Avoiding 'Vanity Metrics' (like total views)",
+      "C": "Using high-contrast colors for accessibility",
+      "D": "Adding as many charts as possible on one page"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Causal' 'Impact' 'Analysis'?",
+    "options": {
+      "A": "Analyzing the impact of a car crash.",
+      "B": "A methodology to estimate the effect of an intervention (like an ad campaign) on a time series using a synthetic control.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'E-commerce' 'Analytics', what is 'Cart' 'Abandonment' 'Rate'?",
+    "options": {
+      "A": "The rate at which physical carts are abandoned in a store.",
+      "B": "The percentage of shoppers who add items to a cart but leave the site without completing a purchase.",
+      "C": "A security scan for computer viruses.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'RFM' analysis is a technique used to segment customers based on Recency, Frequency, and Monetary value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Predictive' 'Churn' 'Modeling'? (Select all that apply)",
+    "options": {
+      "A": "Using historical data to predict which users will leave",
+      "B": "Using features like usage frequency and customer support tickets",
+      "C": "Deleting user data once they churn",
+      "D": "Helping proactively retain high-value customers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Ad' 'Verification'?",
+    "options": {
+      "A": "Verifying that the ad is pretty.",
+      "B": "Technological services that ensure digital ads are shown on the correct sites, to real people, and in the right context.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Brand' 'Analytics', what is 'Top' 'of' 'Mind' 'Awareness' (TOMA)?",
+    "options": {
+      "A": "When a brand is literally inside a person's brain.",
+      "B": "The first brand that comes to a consumer's mind when asked about a specific category.",
+      "C": "A security scan for database viruses.",
+      "D": "A specialized tool for measuring heat."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Linear' 'Regression' is a supervised learning algorithm used to predict a continuous target variable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Marketing' 'Metric' 'Normalization' methods? (Select all that apply)",
+    "options": {
+      "A": "Min-Max Scaling",
+      "B": "Z-score standardization",
+      "C": "Log transformation",
+      "D": "Sorting alphabetically"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cohort' 'Analysis' 'Drill-down'?",
+    "options": {
+      "A": "Using a physical drill to fix the data center.",
+      "B": "The process of analyzing specific subsets within a cohort to find deeper patterns.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  }
+  ]
+}

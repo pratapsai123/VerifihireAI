@@ -1,0 +1,1865 @@
+{ 
+  "skill": "Xamarin", 
+  "questions": [
+    {
+"question":"What is Xamarin primarily used for?",
+"options":{
+"A":"Cross-platform mobile app development",
+"B":"Database management",
+"C":"Operating system development",
+"D":"Web hosting"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin allows developers to build apps for Android and iOS using C#.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which company originally developed Xamarin?",
+"options":{
+"A":"Google",
+"B":"Microsoft",
+"C":"Xamarin Inc.",
+"D":"Oracle"
+},
+"answer":"C"
+},
+
+{
+"question":"Which programming language is mainly used in Xamarin?",
+"options":{
+"A":"C#",
+"B":"Java",
+"C":"Swift",
+"D":"Python"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin apps run on the .NET framework.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which IDE is commonly used for Xamarin development?",
+"options":{
+"A":"Visual Studio",
+"B":"Eclipse",
+"C":"Android Studio",
+"D":"NetBeans"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin component allows code sharing across platforms?",
+"options":{
+"A":"Shared Project",
+"B":"Shared Memory",
+"C":"Shared Runtime",
+"D":"Shared Package"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Forms allows UI code sharing across platforms.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin framework provides cross-platform UI?",
+"options":{
+"A":"Xamarin.Forms",
+"B":"Xamarin.Native",
+"C":"Xamarin.Runtime",
+"D":"Xamarin.Mobile"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin approach uses platform-specific UI APIs?",
+"options":{
+"A":"Xamarin.Native",
+"B":"Xamarin.Forms",
+"C":"Xamarin.Web",
+"D":"Xamarin.UI"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Native gives full access to native APIs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which languages are used in Xamarin development? (Select all that apply)",
+"options":{
+"A":"C#",
+"B":"XAML",
+"C":"JavaScript",
+"D":"Swift"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"Which file type is used for Xamarin UI layout?",
+"options":{
+"A":"XAML",
+"B":"XML",
+"C":"HTML",
+"D":"CSS"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: XAML stands for eXtensible Application Markup Language.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin component handles UI logic in MVVM architecture?",
+"options":{
+"A":"ViewModel",
+"B":"Model",
+"C":"Controller",
+"D":"Database"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin architecture pattern is commonly used?",
+"options":{
+"A":"MVVM",
+"B":"MVC",
+"C":"MVP",
+"D":"Observer"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: MVVM stands for Model View ViewModel.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class is base class for Xamarin.Forms pages?",
+"options":{
+"A":"Page",
+"B":"Activity",
+"C":"UIView",
+"D":"Fragment"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms page displays list of items?",
+"options":{
+"A":"ListView",
+"B":"TableLayout",
+"C":"StackLayout",
+"D":"GridLayout"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ListView is used to display scrollable lists.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which layout arranges UI elements vertically or horizontally?",
+"options":{
+"A":"StackLayout",
+"B":"Grid",
+"C":"AbsoluteLayout",
+"D":"RelativeLayout"
+},
+"answer":"A"
+},
+
+{
+"question":"Which layout divides screen into rows and columns?",
+"options":{
+"A":"Grid",
+"B":"StackLayout",
+"C":"FrameLayout",
+"D":"FlowLayout"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Grid layout allows defining rows and columns.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which layout allows positioning elements with exact coordinates?",
+"options":{
+"A":"AbsoluteLayout",
+"B":"StackLayout",
+"C":"Grid",
+"D":"TableLayout"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control allows user text input?",
+"options":{
+"A":"Entry",
+"B":"Label",
+"C":"Button",
+"D":"Frame"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Entry control is used for single-line text input.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which control displays static text?",
+"options":{
+"A":"Label",
+"B":"Entry",
+"C":"Editor",
+"D":"Button"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control allows multiline text editing?",
+"options":{
+"A":"Editor",
+"B":"Entry",
+"C":"Label",
+"D":"TextBox"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Editor control supports multiline input.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which control triggers action when pressed?",
+"options":{
+"A":"Button",
+"B":"Label",
+"C":"Entry",
+"D":"Frame"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control displays images?",
+"options":{
+"A":"Image",
+"B":"Picture",
+"C":"Photo",
+"D":"Graphic"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Forms Image control displays local or remote images.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which control provides toggle option?",
+"options":{
+"A":"Switch",
+"B":"Button",
+"C":"Label",
+"D":"Slider"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control allows selecting value from range?",
+"options":{
+"A":"Slider",
+"B":"Switch",
+"C":"Button",
+"D":"Entry"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Slider allows selecting numeric value.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which control allows selecting a date?",
+"options":{
+"A":"DatePicker",
+"B":"TimePicker",
+"C":"Calendar",
+"D":"DateSelector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control allows selecting time?",
+"options":{
+"A":"TimePicker",
+"B":"DatePicker",
+"C":"Clock",
+"D":"Timer"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: DatePicker is used for date selection.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which control displays progress of a task?",
+"options":{
+"A":"ProgressBar",
+"B":"Loader",
+"C":"Indicator",
+"D":"StatusBar"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms navigation method pushes new page?",
+"options":{
+"A":"PushAsync",
+"B":"Navigate",
+"C":"OpenPage",
+"D":"LoadPage"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NavigationPage manages stack-based navigation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Xamarin.Forms page type is used for tab-based navigation?",
+"options":{
+"A":"TabbedPage",
+"B":"NavigationPage",
+"C":"ContentPage",
+"D":"CarouselPage"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: TabbedPage allows switching between multiple tabs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which page type allows swipe navigation between pages?",
+"options":{
+"A":"CarouselPage",
+"B":"TabbedPage",
+"C":"NavigationPage",
+"D":"MasterDetailPage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin page type provides master-detail layout?",
+"options":{
+"A":"MasterDetailPage",
+"B":"TabbedPage",
+"C":"NavigationPage",
+"D":"GridPage"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: MasterDetailPage is often used for navigation menus.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms class represents a page with content?",
+"options":{
+"A":"ContentPage",
+"B":"Page",
+"C":"ViewPage",
+"D":"LayoutPage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms element is the base class for layouts?",
+"options":{
+"A":"Layout",
+"B":"View",
+"C":"Control",
+"D":"Page"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Layout classes manage UI arrangement of child elements.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which layout overlays elements on top of each other?",
+"options":{
+"A":"AbsoluteLayout",
+"B":"StackLayout",
+"C":"Grid",
+"D":"FrameLayout"
+},
+"answer":"A"
+},
+
+{
+"question":"Which layout allows flexible row and column definitions?",
+"options":{
+"A":"Grid",
+"B":"StackLayout",
+"C":"AbsoluteLayout",
+"D":"RelativeLayout"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: StackLayout can arrange elements vertically or horizontally.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms element groups controls visually?",
+"options":{
+"A":"Frame",
+"B":"Panel",
+"C":"Box",
+"D":"Border"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property changes background color of control?",
+"options":{
+"A":"BackgroundColor",
+"B":"Color",
+"C":"FillColor",
+"D":"BgColor"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: FontSize property changes text size.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property controls text color?",
+"options":{
+"A":"TextColor",
+"B":"FontColor",
+"C":"LabelColor",
+"D":"Foreground"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control is used to display lists of data?",
+"options":{
+"A":"ListView",
+"B":"StackLayout",
+"C":"Label",
+"D":"Frame"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control replaces ListView in modern Xamarin apps?",
+"options":{
+"A":"CollectionView",
+"B":"GridView",
+"C":"ListContainer",
+"D":"ViewList"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CollectionView provides better performance than ListView.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which event fires when button is clicked?",
+"options":{
+"A":"Clicked",
+"B":"Pressed",
+"C":"Tapped",
+"D":"Selected"
+},
+"answer":"A"
+},
+
+{
+"question":"Which event occurs when entry text changes?",
+"options":{
+"A":"TextChanged",
+"B":"Changed",
+"C":"InputChanged",
+"D":"ValueChanged"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Forms supports data binding.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which binding mode updates source when UI changes?",
+"options":{
+"A":"TwoWay",
+"B":"OneWay",
+"C":"OneTime",
+"D":"Static"
+},
+"answer":"A"
+},
+
+{
+"question":"Which binding mode updates UI when source changes?",
+"options":{
+"A":"OneWay",
+"B":"TwoWay",
+"C":"Static",
+"D":"Local"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Data binding reduces manual UI updates.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which interface supports property change notification?",
+"options":{
+"A":"INotifyPropertyChanged",
+"B":"IPropertyChanged",
+"C":"IChangeNotify",
+"D":"INotifyValue"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method raises property change event?",
+"options":{
+"A":"OnPropertyChanged",
+"B":"NotifyProperty",
+"C":"RaiseProperty",
+"D":"PropertyUpdated"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: MVVM separates UI from business logic.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which component stores application data in MVVM?",
+"options":{
+"A":"Model",
+"B":"View",
+"C":"Controller",
+"D":"Page"
+},
+"answer":"A"
+},
+
+{
+"question":"Which component represents UI in MVVM?",
+"options":{
+"A":"View",
+"B":"Model",
+"C":"ViewModel",
+"D":"Controller"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ViewModel connects Model and View.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms class represents application object?",
+"options":{
+"A":"Application",
+"B":"AppController",
+"C":"MainApp",
+"D":"RuntimeApp"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method runs when Xamarin app starts?",
+"options":{
+"A":"OnStart",
+"B":"OnLoad",
+"C":"OnBegin",
+"D":"StartApp"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin apps can access device sensors.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin library accesses device APIs?",
+"options":{
+"A":"Xamarin.Essentials",
+"B":"Xamarin.Core",
+"C":"Xamarin.Mobile",
+"D":"Xamarin.Device"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Essentials API retrieves device battery info?",
+"options":{
+"A":"Battery",
+"B":"DevicePower",
+"C":"Energy",
+"D":"PowerStatus"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Essentials provides cross-platform APIs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which API provides GPS location?",
+"options":{
+"A":"Geolocation",
+"B":"GPS",
+"C":"LocationManager",
+"D":"GeoTracker"
+},
+"answer":"A"
+},
+
+{
+"question":"Which API detects device connectivity?",
+"options":{
+"A":"Connectivity",
+"B":"Network",
+"C":"InternetStatus",
+"D":"ConnectionAPI"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Connectivity API checks internet availability.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms element provides navigation stack?",
+"options":{
+"A":"NavigationPage",
+"B":"ContentPage",
+"C":"Grid",
+"D":"StackLayout"
+},
+"answer":"A"
+},
+{
+"question":"Which Xamarin.Essentials API allows sharing content with other apps?",
+"options":{
+"A":"Share",
+"B":"Transfer",
+"C":"Send",
+"D":"Publish"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Essentials provides APIs for device features like battery and connectivity.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Essentials API allows opening web links?",
+"options":{
+"A":"Browser",
+"B":"WebView",
+"C":"LinkOpener",
+"D":"Navigator"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control displays web pages in Xamarin.Forms?",
+"options":{
+"A":"WebView",
+"B":"BrowserView",
+"C":"HTMLView",
+"D":"PageView"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: WebView can display HTML content inside an app.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control allows selecting items from dropdown?",
+"options":{
+"A":"Picker",
+"B":"Selector",
+"C":"Dropdown",
+"D":"ComboBox"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control shows activity indicator while loading?",
+"options":{
+"A":"ActivityIndicator",
+"B":"ProgressBar",
+"C":"Loader",
+"D":"Spinner"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ActivityIndicator shows animated loading spinner.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control represents progress of operation?",
+"options":{
+"A":"ProgressBar",
+"B":"Loader",
+"C":"Indicator",
+"D":"Status"
+},
+"answer":"A"
+},
+
+{
+"question":"Which control groups multiple radio buttons?",
+"options":{
+"A":"RadioButtonGroup",
+"B":"RadioGroup",
+"C":"GroupView",
+"D":"SelectionGroup"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: RadioButton allows selecting one option among many.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which property sets margin around element?",
+"options":{
+"A":"Margin",
+"B":"Padding",
+"C":"Spacing",
+"D":"Border"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property sets spacing inside element?",
+"options":{
+"A":"Padding",
+"B":"Margin",
+"C":"Spacing",
+"D":"Border"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Padding controls inner spacing of layout.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms class represents images from internet or resources?",
+"options":{
+"A":"Image",
+"B":"Picture",
+"C":"Photo",
+"D":"Graphic"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property controls horizontal alignment?",
+"options":{
+"A":"HorizontalOptions",
+"B":"AlignHorizontal",
+"C":"HorizontalAlign",
+"D":"LayoutHorizontal"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: VerticalOptions controls vertical alignment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms layout allows relative positioning of elements?",
+"options":{
+"A":"RelativeLayout",
+"B":"AbsoluteLayout",
+"C":"Grid",
+"D":"StackLayout"
+},
+"answer":"A"
+},
+
+{
+"question":"Which layout arranges children in rows and columns?",
+"options":{
+"A":"Grid",
+"B":"StackLayout",
+"C":"Frame",
+"D":"Panel"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Grid layout supports star sizing.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms element supports gesture recognition?",
+"options":{
+"A":"GestureRecognizer",
+"B":"GestureDetector",
+"C":"TouchHandler",
+"D":"InputListener"
+},
+"answer":"A"
+},
+
+{
+"question":"Which gesture detects tap events?",
+"options":{
+"A":"TapGestureRecognizer",
+"B":"TouchRecognizer",
+"C":"ClickRecognizer",
+"D":"PressRecognizer"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: TapGestureRecognizer detects tapping gestures.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which gesture detects swipe actions?",
+"options":{
+"A":"SwipeGestureRecognizer",
+"B":"SwipeDetector",
+"C":"SwipeEvent",
+"D":"SlideGesture"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property binds UI element to ViewModel property?",
+"options":{
+"A":"BindingContext",
+"B":"DataContext",
+"C":"ViewContext",
+"D":"ContextBinding"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: BindingContext defines source of data binding.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command pattern is commonly used in MVVM for actions?",
+"options":{
+"A":"Command",
+"B":"Action",
+"C":"Handler",
+"D":"Invoker"
+},
+"answer":"A"
+},
+
+{
+"question":"Which interface represents commands in Xamarin?",
+"options":{
+"A":"ICommand",
+"B":"IAction",
+"C":"IExecute",
+"D":"IHandler"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ICommand allows binding UI actions to ViewModel logic.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms feature allows platform-specific customization?",
+"options":{
+"A":"Custom Renderers",
+"B":"Native Bindings",
+"C":"Platform API",
+"D":"Device Code"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms feature provides dependency injection for platform services?",
+"options":{
+"A":"DependencyService",
+"B":"ServiceLocator",
+"C":"ServiceManager",
+"D":"ServiceProvider"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: DependencyService allows calling platform-specific code.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property controls page title?",
+"options":{
+"A":"Title",
+"B":"Header",
+"C":"Caption",
+"D":"PageTitle"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property defines icon for tab page?",
+"options":{
+"A":"IconImageSource",
+"B":"TabIcon",
+"C":"ImageIcon",
+"D":"IconPath"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin apps compile to native platform binaries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which build configuration is used for debugging?",
+"options":{
+"A":"Debug",
+"B":"Release",
+"C":"Production",
+"D":"Runtime"
+},
+"answer":"A"
+},
+
+{
+"question":"Which build configuration optimizes app performance?",
+"options":{
+"A":"Release",
+"B":"Debug",
+"C":"Testing",
+"D":"Preview"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Release builds disable debugging features.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Xamarin.Forms class represents the main application entry point?",
+"options":{
+"A":"Application",
+"B":"AppController",
+"C":"MainPage",
+"D":"RuntimeApp"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin apps can share up to 90% of code across platforms.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control displays images from local resources?",
+"options":{
+"A":"Image",
+"B":"PhotoView",
+"C":"PictureBox",
+"D":"GraphicView"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property defines source of image in Xamarin.Forms?",
+"options":{
+"A":"Source",
+"B":"ImagePath",
+"C":"File",
+"D":"Picture"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ImageSource can load images from URL.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms layout stacks elements vertically by default?",
+"options":{
+"A":"StackLayout",
+"B":"Grid",
+"C":"AbsoluteLayout",
+"D":"RelativeLayout"
+},
+"answer":"A"
+},
+
+{
+"question":"Which layout allows elements to overlap?",
+"options":{
+"A":"AbsoluteLayout",
+"B":"Grid",
+"C":"StackLayout",
+"D":"Frame"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: AbsoluteLayout allows positioning with coordinates.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property controls visibility of element?",
+"options":{
+"A":"IsVisible",
+"B":"Visibility",
+"C":"Show",
+"D":"Display"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property enables or disables user interaction?",
+"options":{
+"A":"IsEnabled",
+"B":"IsClickable",
+"C":"IsActive",
+"D":"AllowInput"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Disabled controls cannot receive user input.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control displays alert dialogs?",
+"options":{
+"A":"DisplayAlert",
+"B":"ShowAlert",
+"C":"AlertView",
+"D":"PopupAlert"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method shows confirmation dialog?",
+"options":{
+"A":"DisplayAlert",
+"B":"ShowDialog",
+"C":"ConfirmBox",
+"D":"DialogBox"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: DisplayAlert returns user response.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property changes font size?",
+"options":{
+"A":"FontSize",
+"B":"TextSize",
+"C":"FontScale",
+"D":"FontLength"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property changes font style?",
+"options":{
+"A":"FontAttributes",
+"B":"FontStyle",
+"C":"FontMode",
+"D":"TextStyle"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: FontAttributes can set Bold or Italic.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control displays scrollable content?",
+"options":{
+"A":"ScrollView",
+"B":"ScrollLayout",
+"C":"Scroller",
+"D":"ListView"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms class handles navigation stack?",
+"options":{
+"A":"NavigationPage",
+"B":"PageManager",
+"C":"NavigationController",
+"D":"PageStack"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NavigationPage maintains page stack history.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property sets page background color?",
+"options":{
+"A":"BackgroundColor",
+"B":"PageColor",
+"C":"BgColor",
+"D":"FillColor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control displays box shapes?",
+"options":{
+"A":"BoxView",
+"B":"ShapeView",
+"C":"RectangleView",
+"D":"Panel"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: BoxView can display colored rectangles.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms feature enables platform-specific styling?",
+"options":{
+"A":"Custom Renderers",
+"B":"Native Styles",
+"C":"Platform Views",
+"D":"Platform Renderer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms feature allows platform-specific service calls?",
+"options":{
+"A":"DependencyService",
+"B":"ServiceProvider",
+"C":"ServiceBridge",
+"D":"NativeService"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: DependencyService resolves services at runtime.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control displays progress spinner?",
+"options":{
+"A":"ActivityIndicator",
+"B":"Loader",
+"C":"Spinner",
+"D":"ProgressSpinner"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property indicates loading state?",
+"options":{
+"A":"IsRunning",
+"B":"IsActive",
+"C":"IsLoading",
+"D":"Loading"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ActivityIndicator spins when IsRunning is true.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms element supports gestures?",
+"options":{
+"A":"GestureRecognizer",
+"B":"GestureHandler",
+"C":"TouchRecognizer",
+"D":"InputGesture"
+},
+"answer":"A"
+},
+
+{
+"question":"Which gesture recognizer detects tapping?",
+"options":{
+"A":"TapGestureRecognizer",
+"B":"TouchGesture",
+"C":"ClickGesture",
+"D":"PressGesture"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Forms supports swipe gestures.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms architecture pattern separates UI and logic?",
+"options":{
+"A":"MVVM",
+"B":"MVC",
+"C":"MVP",
+"D":"Layered"
+},
+"answer":"A"
+},
+
+{
+"question":"Which MVVM component handles business logic?",
+"options":{
+"A":"ViewModel",
+"B":"View",
+"C":"Model",
+"D":"Controller"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: MVVM improves testability of Xamarin apps.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms element is root of UI hierarchy?",
+"options":{
+"A":"Page",
+"B":"Layout",
+"C":"Control",
+"D":"Application"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms layout organizes elements in flexible rows and columns?",
+"options":{
+"A":"Grid",
+"B":"StackLayout",
+"C":"Frame",
+"D":"Panel"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin supports building apps for Android, iOS, and Windows.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which company currently maintains Xamarin?",
+"options":{
+"A":"Microsoft",
+"B":"Google",
+"C":"Apple",
+"D":"Oracle"
+},
+"answer":"A"
+},
+{
+"question":"Which Xamarin.Forms control is used to create clickable links?",
+"options":{
+"A":"Label with TapGestureRecognizer",
+"B":"LinkView",
+"C":"HyperLabel",
+"D":"URLLabel"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Forms supports custom fonts.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property sets text alignment?",
+"options":{
+"A":"HorizontalTextAlignment",
+"B":"TextAlign",
+"C":"AlignText",
+"D":"TextPosition"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property controls vertical text alignment?",
+"options":{
+"A":"VerticalTextAlignment",
+"B":"TextVertical",
+"C":"AlignVertical",
+"D":"TextPositionVertical"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Forms supports animations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms method fades element in or out?",
+"options":{
+"A":"FadeTo",
+"B":"Opacity",
+"C":"FadeIn",
+"D":"FadeEffect"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method moves element position?",
+"options":{
+"A":"TranslateTo",
+"B":"MoveTo",
+"C":"ShiftTo",
+"D":"SlideTo"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Forms animations run asynchronously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms method scales UI element?",
+"options":{
+"A":"ScaleTo",
+"B":"ResizeTo",
+"C":"ZoomTo",
+"D":"StretchTo"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method rotates element?",
+"options":{
+"A":"RotateTo",
+"B":"TurnTo",
+"C":"SpinTo",
+"D":"RotateElement"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: RotateTo rotates UI elements with animation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms element displays popup messages?",
+"options":{
+"A":"DisplayAlert",
+"B":"PopupBox",
+"C":"DialogView",
+"D":"AlertWindow"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control detects swipe gestures?",
+"options":{
+"A":"SwipeGestureRecognizer",
+"B":"SwipeDetector",
+"C":"SwipeHandler",
+"D":"GestureSwipe"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Swipe gestures can trigger navigation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property binds UI to ViewModel?",
+"options":{
+"A":"BindingContext",
+"B":"DataSource",
+"C":"ViewContext",
+"D":"BindProperty"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property sets placeholder text?",
+"options":{
+"A":"Placeholder",
+"B":"Hint",
+"C":"Prompt",
+"D":"TextHint"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Entry supports placeholder text.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control is used to display lists efficiently?",
+"options":{
+"A":"CollectionView",
+"B":"ListView",
+"C":"GridView",
+"D":"RecyclerView"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms feature enables dependency injection?",
+"options":{
+"A":"DependencyService",
+"B":"ServiceInjector",
+"C":"DIService",
+"D":"ServiceLocator"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: DependencyService resolves platform-specific services.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms element represents page container?",
+"options":{
+"A":"Page",
+"B":"Layout",
+"C":"Control",
+"D":"Application"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control displays loading spinner?",
+"options":{
+"A":"ActivityIndicator",
+"B":"Loader",
+"C":"Spinner",
+"D":"ProgressSpinner"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ActivityIndicator has IsRunning property.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms layout stacks children sequentially?",
+"options":{
+"A":"StackLayout",
+"B":"Grid",
+"C":"AbsoluteLayout",
+"D":"Frame"
+},
+"answer":"A"
+},
+
+{
+"question":"Which layout allows flexible row-column design?",
+"options":{
+"A":"Grid",
+"B":"StackLayout",
+"C":"Frame",
+"D":"Panel"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Grid layout supports star sizing.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property sets control opacity?",
+"options":{
+"A":"Opacity",
+"B":"Alpha",
+"C":"Transparency",
+"D":"Visibility"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property hides control?",
+"options":{
+"A":"IsVisible",
+"B":"Hidden",
+"C":"Display",
+"D":"Invisible"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: IsVisible=false hides the control.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms class manages navigation stack?",
+"options":{
+"A":"NavigationPage",
+"B":"PageStack",
+"C":"Navigator",
+"D":"NavigationManager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method removes page from navigation stack?",
+"options":{
+"A":"PopAsync",
+"B":"RemovePage",
+"C":"ClosePage",
+"D":"BackPage"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: PopAsync returns to previous page.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms control displays scrollable content?",
+"options":{
+"A":"ScrollView",
+"B":"Scroller",
+"C":"ListView",
+"D":"PanelScroll"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms property controls page title?",
+"options":{
+"A":"Title",
+"B":"Header",
+"C":"Caption",
+"D":"PageTitle"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Title appears in navigation bar.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms feature enables platform-specific UI?",
+"options":{
+"A":"Custom Renderers",
+"B":"PlatformUI",
+"C":"NativeLayouts",
+"D":"DeviceRender"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Xamarin.Forms library provides device APIs?",
+"options":{
+"A":"Xamarin.Essentials",
+"B":"Xamarin.Core",
+"C":"Xamarin.Device",
+"D":"Xamarin.Mobile"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin.Essentials simplifies access to device hardware.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which API provides device GPS location?",
+"options":{
+"A":"Geolocation",
+"B":"GPS",
+"C":"LocationService",
+"D":"GeoTracker"
+},
+"answer":"A"
+},
+
+{
+"question":"Which API checks network connectivity?",
+"options":{
+"A":"Connectivity",
+"B":"Network",
+"C":"InternetAPI",
+"D":"ConnectionManager"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Xamarin apps compile to native platform apps.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which company maintains Xamarin?",
+"options":{
+"A":"Microsoft",
+"B":"Google",
+"C":"Apple",
+"D":"Oracle"
+},
+"answer":"A"
+}
+  ]
+}

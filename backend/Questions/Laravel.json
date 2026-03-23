@@ -4,32 +4,32 @@
     {
       "question": "What is Laravel?",
       "options": {
-        "a": "A PHP framework",
-        "b": "A JavaScript library",
-        "c": "A Python package",
-        "d": "A Ruby gem"
+        "A": "A PHP framework",
+        "B": "A JavaScript library",
+        "C": "A Python package",
+        "D": "A Ruby gem"
       },
-      "answer": "a"
+      "answer": "A"
     },
     {
       "question": "Which command is used to create a new Laravel project?",
       "options": {
-        "a": "laravel new project-name",
-        "b": "npm install laravel",
-        "c": "composer create-project --prefer-dist laravel/laravel project-name",
-        "d": "laravel create project-name"
+        "A": "laravel new project-name",
+        "B": "npm install laravel",
+        "C": "composer create-project --prefer-dist laravel/laravel project-name",
+        "D": "laravel create project-name"
       },
-      "answer": "c"
+      "answer": "C"
     },
     {
       "question": "What is Eloquent in Laravel?",
       "options": {
-        "a": "A templating engine",
-        "b": "An ORM (Object-Relational Mapping) system",
-        "c": "A routing system",
-        "d": "A testing framework"
+        "A": "A templating engine",
+        "B": "An ORM (Object-Relational Mapping) system",
+        "C": "A routing system",
+        "D": "A testing framework"
       },
-      "answer": "b"
+      "answer": "B"
     },
     {
       "question": "Which PHP design pattern is Laravel primarily based on?",

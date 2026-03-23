@@ -1,0 +1,1704 @@
+{ 
+  "skill": "Apache", 
+  "questions": [
+    {
+  "question": "What does cloud computing provide over the internet?",
+  "options": {
+    "A": "Computing services",
+    "B": "Physical keyboards",
+    "C": "Printed books",
+    "D": "Local-only storage"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which cloud service model provides virtual machines?",
+  "options": {
+    "A": "IaaS",
+    "B": "PaaS",
+    "C": "SaaS",
+    "D": "DaaS"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: SaaS applications are accessed through a web browser.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are examples of cloud providers? (Select all that apply)",
+  "options": {
+    "A": "AWS",
+    "B": "Microsoft Azure",
+    "C": "Google Cloud",
+    "D": "MS Paint"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does IaaS stand for?",
+  "options": {
+    "A": "Infrastructure as a Service",
+    "B": "Internet as a Service",
+    "C": "Integration as a Service",
+    "D": "Interface as a Service"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Cloud computing eliminates the need for physical servers.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "B"
+},
+{
+  "question": "Which cloud model is accessible only to one organization?",
+  "options": {
+    "A": "Private cloud",
+    "B": "Public cloud",
+    "C": "Hybrid cloud",
+    "D": "Community cloud"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are benefits of cloud computing? (Select all that apply)",
+  "options": {
+    "A": "Scalability",
+    "B": "Cost efficiency",
+    "C": "Flexibility",
+    "D": "Manual hardware setup"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does SaaS stand for?",
+  "options": {
+    "A": "Software as a Service",
+    "B": "Server as a Service",
+    "C": "Storage as a System",
+    "D": "Security as a Service"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Cloud storage allows data access from anywhere with internet.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which service provides a development platform in the cloud?",
+  "options": {
+    "A": "PaaS",
+    "B": "IaaS",
+    "C": "SaaS",
+    "D": "NaaS"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are cloud storage services? (Select all that apply)",
+  "options": {
+    "A": "Amazon S3",
+    "B": "Google Cloud Storage",
+    "C": "Azure Blob Storage",
+    "D": "USB Drive"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Virtualization is a key technology used in cloud computing.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "A"
+},
+{
+  "question": "What is scalability in cloud computing?",
+  "options": {
+    "A": "Ability to increase or decrease resources",
+    "B": "Deleting servers",
+    "C": "Formatting disks",
+    "D": "Printing documents"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are examples of SaaS applications? (Select all that apply)",
+  "options": {
+    "A": "Gmail",
+    "B": "Google Docs",
+    "C": "Salesforce",
+    "D": "BIOS"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Cloud computing requires internet connectivity.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which cloud deployment combines public and private clouds?",
+  "options": {
+    "A": "Hybrid cloud",
+    "B": "Private cloud",
+    "C": "Community cloud",
+    "D": "Edge cloud"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are characteristics of cloud computing? (Select all that apply)",
+  "options": {
+    "A": "On-demand self-service",
+    "B": "Broad network access",
+    "C": "Resource pooling",
+    "D": "Manual scaling only"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Cloud services are billed based on usage.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "A"
+},
+{
+  "question": "What is the main purpose of virtualization?",
+  "options": {
+    "A": "Run multiple virtual machines on one physical server",
+    "B": "Delete operating systems",
+    "C": "Reduce internet speed",
+    "D": "Install printers"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are advantages of virtualization? (Select all that apply)",
+  "options": {
+    "A": "Better resource utilization",
+    "B": "Isolation",
+    "C": "Scalability",
+    "D": "Physical wiring"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Containers are lighter than virtual machines.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which technology is commonly used for containerization?",
+  "options": {
+    "A": "Docker",
+    "B": "Excel",
+    "C": "Notepad",
+    "D": "Paint"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are container orchestration tools? (Select all that apply)",
+  "options": {
+    "A": "Kubernetes",
+    "B": "Docker Swarm",
+    "C": "Apache Mesos",
+    "D": "MS Word"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Kubernetes manages container deployment and scaling.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "A"
+},
+{
+  "question": "What is cloud elasticity?",
+  "options": {
+    "A": "Automatic scaling of resources",
+    "B": "Deleting databases",
+    "C": "Installing cables",
+    "D": "Reducing bandwidth"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are examples of cloud networking components? (Select all that apply)",
+  "options": {
+    "A": "Virtual Network",
+    "B": "Load Balancer",
+    "C": "Gateway",
+    "D": "Mouse"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Load balancing distributes traffic across multiple servers.",
+  "options": {
+    "A": "True",
+    "B": "False"
+  },
+  "answer": "A"
+},
+{
+  "question": "What is a data center in cloud computing?",
+  "options": {
+    "A": "Facility that stores cloud servers and infrastructure",
+    "B": "Mobile phone storage",
+    "C": "Printer hub",
+    "D": "Local USB storage"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Public cloud services are available to anyone over the internet.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are cloud storage types? (Select all that apply)",
+  "options": {
+    "A": "Object storage",
+    "B": "Block storage",
+    "C": "File storage",
+    "D": "Keyboard storage"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is object storage mainly used for?",
+  "options": {
+    "A": "Storing large unstructured data",
+    "B": "Running operating systems",
+    "C": "Installing CPUs",
+    "D": "Managing keyboards"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Cloud services can scale automatically based on demand.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are examples of virtualization software? (Select all that apply)",
+  "options": {
+    "A": "VMware",
+    "B": "Hyper-V",
+    "C": "VirtualBox",
+    "D": "PowerPoint"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a virtual machine?",
+  "options": {
+    "A": "Software-based computer running on a physical server",
+    "B": "A physical keyboard",
+    "C": "Internet router",
+    "D": "External hard drive"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Containers share the host operating system kernel.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are benefits of containers? (Select all that apply)",
+  "options": {
+    "A": "Fast deployment",
+    "B": "Lightweight",
+    "C": "Portability",
+    "D": "Requires separate hardware always"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a load balancer used for?",
+  "options": {
+    "A": "Distribute network traffic",
+    "B": "Delete files",
+    "C": "Format disks",
+    "D": "Install software"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Cloud computing helps reduce capital expenditure.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are features of cloud computing? (Select all that apply)",
+  "options": {
+    "A": "Rapid elasticity",
+    "B": "Measured service",
+    "C": "Resource pooling",
+    "D": "Manual server wiring"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a region in cloud computing?",
+  "options": {
+    "A": "Geographic location of data centers",
+    "B": "Type of database",
+    "C": "Computer keyboard layout",
+    "D": "CPU type"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Availability zones improve fault tolerance.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are cloud networking services? (Select all that apply)",
+  "options": {
+    "A": "Virtual Private Cloud",
+    "B": "DNS",
+    "C": "Load Balancer",
+    "D": "Monitor screen"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does DNS do in cloud networking?",
+  "options": {
+    "A": "Converts domain names to IP addresses",
+    "B": "Stores passwords",
+    "C": "Deletes servers",
+    "D": "Formats disks"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Cloud backups help recover data after failures.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are advantages of cloud storage? (Select all that apply)",
+  "options": {
+    "A": "High durability",
+    "B": "Accessibility",
+    "C": "Scalability",
+    "D": "Requires physical USB always"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a cloud API?",
+  "options": {
+    "A": "Interface to interact with cloud services",
+    "B": "Hardware cable",
+    "C": "CPU architecture",
+    "D": "Keyboard shortcut"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: APIs allow applications to communicate with cloud services.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are examples of monitoring tools? (Select all that apply)",
+  "options": {
+    "A": "Prometheus",
+    "B": "CloudWatch",
+    "C": "Grafana",
+    "D": "MS Paint"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does monitoring help with in cloud systems?",
+  "options": {
+    "A": "Tracking system performance",
+    "B": "Deleting servers",
+    "C": "Installing hardware",
+    "D": "Formatting memory"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Auto-scaling automatically adjusts resources.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are examples of Infrastructure as Code tools? (Select all that apply)",
+  "options": {
+    "A": "Terraform",
+    "B": "AWS CloudFormation",
+    "C": "Pulumi",
+    "D": "Calculator"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is Infrastructure as Code?",
+  "options": {
+    "A": "Managing infrastructure using code",
+    "B": "Manual hardware installation",
+    "C": "Physical server assembly",
+    "D": "Installing cables"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Cloud-native applications are designed specifically for cloud environments.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are examples of cloud databases? (Select all that apply)",
+  "options": {
+    "A": "Amazon RDS",
+    "B": "Azure SQL Database",
+    "C": "Google Cloud SQL",
+    "D": "Excel sheet"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a managed cloud database?",
+  "options": {
+    "A": "Database service maintained by cloud provider",
+    "B": "Manual database server",
+    "C": "Local file storage",
+    "D": "Keyboard driver"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are characteristics of cloud-native applications? (Select all that apply)",
+  "options": {
+    "A": "Microservices architecture",
+    "B": "Scalability",
+    "C": "Manual hardware dependency",
+    "D": "Resilience"
+  },
+  "answer": ["A","B","D"]
+},
+{
+  "question": "True or False: Microservices architecture breaks applications into smaller independent services.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "What is the main purpose of a load balancer in cloud infrastructure?",
+  "options": {
+    "A": "Distribute incoming traffic across multiple servers",
+    "B": "Store application logs",
+    "C": "Encrypt databases",
+    "D": "Delete unused instances"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are advantages of microservices architecture? (Select all that apply)",
+  "options": {
+    "A": "Independent deployment",
+    "B": "Better scalability",
+    "C": "Tightly coupled services",
+    "D": "Fault isolation"
+  },
+  "answer": ["A","B","D"]
+},
+{
+  "question": "True or False: Containers provide better portability than traditional virtual machines.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following tools are commonly used for container orchestration? (Select all that apply)",
+  "options": {
+    "A": "Kubernetes",
+    "B": "Docker Swarm",
+    "C": "Apache Mesos",
+    "D": "Git"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the purpose of a container registry?",
+  "options": {
+    "A": "Store and manage container images",
+    "B": "Monitor CPU usage",
+    "C": "Delete virtual machines",
+    "D": "Encrypt network traffic"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Infrastructure as Code ensures consistent infrastructure deployments.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are Infrastructure as Code tools? (Select all that apply)",
+  "options": {
+    "A": "Terraform",
+    "B": "AWS CloudFormation",
+    "C": "Pulumi",
+    "D": "Notepad"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does CI/CD stand for?",
+  "options": {
+    "A": "Continuous Integration / Continuous Deployment",
+    "B": "Cloud Infrastructure / Cloud Deployment",
+    "C": "Central Integration / Central Deployment",
+    "D": "Code Installation / Code Deletion"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Continuous Integration helps detect integration issues early.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are benefits of CI/CD pipelines? (Select all that apply)",
+  "options": {
+    "A": "Faster releases",
+    "B": "Automated testing",
+    "C": "Improved reliability",
+    "D": "Manual deployments only"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a service mesh used for in microservices architecture?",
+  "options": {
+    "A": "Managing service-to-service communication",
+    "B": "Deleting containers",
+    "C": "Storing database backups",
+    "D": "Installing hardware"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Istio is a popular service mesh technology.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are service mesh features? (Select all that apply)",
+  "options": {
+    "A": "Traffic management",
+    "B": "Observability",
+    "C": "Security",
+    "D": "Manual hardware configuration"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is autoscaling in cloud environments?",
+  "options": {
+    "A": "Automatically adjusting compute resources based on demand",
+    "B": "Deleting databases automatically",
+    "C": "Manual server configuration",
+    "D": "Disabling monitoring"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Horizontal scaling adds more instances to handle increased load.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are horizontal scaling examples? (Select all that apply)",
+  "options": {
+    "A": "Adding more servers",
+    "B": "Adding more containers",
+    "C": "Increasing CPU in same server",
+    "D": "Expanding cluster nodes"
+  },
+  "answer": ["A","B","D"]
+},
+{
+  "question": "What is vertical scaling?",
+  "options": {
+    "A": "Increasing resources like CPU or RAM in a single machine",
+    "B": "Adding multiple servers",
+    "C": "Deleting servers",
+    "D": "Installing load balancers"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Horizontal scaling usually provides better fault tolerance than vertical scaling.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are benefits of using managed cloud services? (Select all that apply)",
+  "options": {
+    "A": "Automatic patching",
+    "B": "Automated backups",
+    "C": "Reduced operational overhead",
+    "D": "Manual hardware replacement"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is serverless computing?",
+  "options": {
+    "A": "Running code without managing servers",
+    "B": "Running code without internet",
+    "C": "Running hardware drivers",
+    "D": "Running desktop applications"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: AWS Lambda is an example of serverless computing.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are serverless platforms? (Select all that apply)",
+  "options": {
+    "A": "AWS Lambda",
+    "B": "Azure Functions",
+    "C": "Google Cloud Functions",
+    "D": "Photoshop"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the purpose of cloud monitoring tools?",
+  "options": {
+    "A": "Track system performance and health",
+    "B": "Delete servers",
+    "C": "Install operating systems",
+    "D": "Upgrade CPUs manually"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Observability includes metrics, logs, and traces.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are observability components? (Select all that apply)",
+  "options": {
+    "A": "Metrics",
+    "B": "Logs",
+    "C": "Traces",
+    "D": "Mouse drivers"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a distributed system?",
+  "options": {
+    "A": "Multiple computers working together as a single system",
+    "B": "Single standalone computer",
+    "C": "Offline application",
+    "D": "Local network printer"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are advantages of distributed systems? (Select all that apply)",
+  "options": {
+    "A": "Scalability",
+    "B": "Fault tolerance",
+    "C": "Resource sharing",
+    "D": "Single point of failure"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: In distributed systems, components communicate over a network.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "What is a CDN mainly used for?",
+  "options": {
+    "A": "Deliver content faster by caching it near users",
+    "B": "Delete cloud servers",
+    "C": "Store passwords",
+    "D": "Install operating systems"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are benefits of CDN usage? (Select all that apply)",
+  "options": {
+    "A": "Reduced latency",
+    "B": "Faster content delivery",
+    "C": "Reduced bandwidth usage",
+    "D": "Manual server configuration"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Edge computing processes data closer to where it is generated.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are edge computing benefits? (Select all that apply)",
+  "options": {
+    "A": "Reduced latency",
+    "B": "Improved performance",
+    "C": "Real-time processing",
+    "D": "Increased network congestion"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a message queue used for?",
+  "options": {
+    "A": "Asynchronous communication between services",
+    "B": "Deleting containers",
+    "C": "Formatting disks",
+    "D": "Upgrading RAM"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Message queues help decouple microservices.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are examples of message queue systems? (Select all that apply)",
+  "options": {
+    "A": "RabbitMQ",
+    "B": "Apache Kafka",
+    "C": "Amazon SQS",
+    "D": "MS Excel"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the main purpose of caching in cloud applications?",
+  "options": {
+    "A": "Improve application performance",
+    "B": "Delete user data",
+    "C": "Install databases",
+    "D": "Upgrade CPUs"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Caching stores frequently accessed data temporarily.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are caching technologies? (Select all that apply)",
+  "options": {
+    "A": "Redis",
+    "B": "Memcached",
+    "C": "ElastiCache",
+    "D": "Printer drivers"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is database replication?",
+  "options": {
+    "A": "Copying data across multiple database servers",
+    "B": "Deleting database tables",
+    "C": "Encrypting network packets",
+    "D": "Installing operating systems"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Replication improves database availability.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are database scaling techniques? (Select all that apply)",
+  "options": {
+    "A": "Sharding",
+    "B": "Replication",
+    "C": "Partitioning",
+    "D": "Deleting indexes"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is sharding in databases?",
+  "options": {
+    "A": "Splitting database into smaller parts across servers",
+    "B": "Deleting database records",
+    "C": "Encrypting network traffic",
+    "D": "Installing new hardware"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Database sharding improves scalability.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are cloud security practices? (Select all that apply)",
+  "options": {
+    "A": "Encryption",
+    "B": "Identity and Access Management",
+    "C": "Network security groups",
+    "D": "Sharing passwords publicly"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is IAM used for in cloud environments?",
+  "options": {
+    "A": "Manage user permissions and access",
+    "B": "Delete servers",
+    "C": "Store backups",
+    "D": "Format storage"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Multi-Factor Authentication increases security.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are authentication methods? (Select all that apply)",
+  "options": {
+    "A": "Password",
+    "B": "Biometric verification",
+    "C": "OTP",
+    "D": "Network cable"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is encryption used for?",
+  "options": {
+    "A": "Protect data from unauthorized access",
+    "B": "Delete cloud servers",
+    "C": "Increase CPU speed",
+    "D": "Install software"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Data can be encrypted both at rest and in transit.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are encryption protocols? (Select all that apply)",
+  "options": {
+    "A": "TLS",
+    "B": "SSL",
+    "C": "HTTPS",
+    "D": "FTP without security"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a cloud firewall used for?",
+  "options": {
+    "A": "Control incoming and outgoing network traffic",
+    "B": "Delete user accounts",
+    "C": "Store application logs",
+    "D": "Install CPUs"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Security groups act as virtual firewalls in cloud environments.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are cloud cost optimization strategies? (Select all that apply)",
+  "options": {
+    "A": "Auto-scaling",
+    "B": "Reserved instances",
+    "C": "Monitoring usage",
+    "D": "Leaving unused servers running"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the purpose of cloud tagging?",
+  "options": {
+    "A": "Organize and track cloud resources",
+    "B": "Delete storage buckets",
+    "C": "Install drivers",
+    "D": "Upgrade servers"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Cloud tagging helps with cost management and resource tracking.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are common DevOps tools? (Select all that apply)",
+  "options": {
+    "A": "Jenkins",
+    "B": "Git",
+    "C": "Docker",
+    "D": "Paint"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the role of Git in DevOps?",
+  "options": {
+    "A": "Version control for code",
+    "B": "Running virtual machines",
+    "C": "Managing CPU usage",
+    "D": "Deleting servers"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Version control systems track changes in source code.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are components of Kubernetes architecture? (Select all that apply)",
+  "options": {
+    "A": "API Server",
+    "B": "Scheduler",
+    "C": "Controller Manager",
+    "D": "Printer Driver"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: The Kubernetes API server is the front end for the Kubernetes control plane.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "What is the role of the Kubernetes scheduler?",
+  "options": {
+    "A": "Assign pods to nodes",
+    "B": "Delete containers",
+    "C": "Install operating systems",
+    "D": "Manage databases"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are Kubernetes workload objects? (Select all that apply)",
+  "options": {
+    "A": "Deployment",
+    "B": "StatefulSet",
+    "C": "DaemonSet",
+    "D": "Keyboard"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Pods are the smallest deployable units in Kubernetes.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are Kubernetes networking components? (Select all that apply)",
+  "options": {
+    "A": "Service",
+    "B": "Ingress",
+    "C": "Network Policy",
+    "D": "Mouse"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the CAP theorem?",
+  "options": {
+    "A": "Consistency, Availability, Partition Tolerance trade-off",
+    "B": "CPU Architecture Principle",
+    "C": "Cloud Access Protocol",
+    "D": "Container Application Policy"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: According to CAP theorem, a distributed system cannot guarantee consistency, availability, and partition tolerance simultaneously.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following databases are considered NoSQL? (Select all that apply)",
+  "options": {
+    "A": "MongoDB",
+    "B": "Cassandra",
+    "C": "DynamoDB",
+    "D": "Oracle DB"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is eventual consistency?",
+  "options": {
+    "A": "Data becomes consistent over time",
+    "B": "Data is always immediately consistent",
+    "C": "Data is never synchronized",
+    "D": "Data is deleted automatically"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Eventual consistency is commonly used in distributed NoSQL databases.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are features of Kubernetes autoscaling? (Select all that apply)",
+  "options": {
+    "A": "Horizontal Pod Autoscaler",
+    "B": "Vertical Pod Autoscaler",
+    "C": "Cluster Autoscaler",
+    "D": "Manual CPU installation"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a sidecar container?",
+  "options": {
+    "A": "Helper container running alongside main container",
+    "B": "Container that deletes pods",
+    "C": "Container used only for hardware",
+    "D": "Standalone virtual machine"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Service meshes provide traffic control, security, and observability.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are popular service mesh technologies? (Select all that apply)",
+  "options": {
+    "A": "Istio",
+    "B": "Linkerd",
+    "C": "Consul",
+    "D": "Excel"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is blue-green deployment?",
+  "options": {
+    "A": "Two identical environments for zero-downtime deployment",
+    "B": "Deleting production servers",
+    "C": "Scaling database storage",
+    "D": "Installing new hardware"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Blue-green deployment reduces downtime during releases.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are deployment strategies? (Select all that apply)",
+  "options": {
+    "A": "Canary deployment",
+    "B": "Blue-green deployment",
+    "C": "Rolling deployment",
+    "D": "Manual hardware deployment"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a canary deployment?",
+  "options": {
+    "A": "Release new version to small subset of users first",
+    "B": "Delete old application version",
+    "C": "Install operating systems",
+    "D": "Encrypt storage disks"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Canary deployment helps detect issues before full rollout.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+
+{
+  "question": "Which of the following are principles of Zero Trust security? (Select all that apply)",
+  "options": {
+    "A": "Verify explicitly",
+    "B": "Least privilege access",
+    "C": "Assume breach",
+    "D": "Unlimited network access"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the principle of least privilege?",
+  "options": {
+    "A": "Users get minimum permissions required",
+    "B": "Users get admin access always",
+    "C": "Users can delete all servers",
+    "D": "Users bypass authentication"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Zero Trust assumes no implicit trust in networks.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are cloud disaster recovery strategies? (Select all that apply)",
+  "options": {
+    "A": "Backup and restore",
+    "B": "Pilot light",
+    "C": "Multi-region deployment",
+    "D": "Delete backups"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is RTO in disaster recovery?",
+  "options": {
+    "A": "Recovery Time Objective",
+    "B": "Resource Transfer Operation",
+    "C": "Remote Task Output",
+    "D": "Runtime Transfer Option"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: RPO defines the maximum acceptable data loss.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+
+{
+  "question": "Which of the following are distributed tracing tools? (Select all that apply)",
+  "options": {
+    "A": "Jaeger",
+    "B": "Zipkin",
+    "C": "OpenTelemetry",
+    "D": "WordPad"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is distributed tracing?",
+  "options": {
+    "A": "Tracking requests across microservices",
+    "B": "Deleting network logs",
+    "C": "Installing CPUs",
+    "D": "Formatting disks"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Observability helps diagnose system failures.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+
+{
+  "question": "Which of the following are multi-cloud benefits? (Select all that apply)",
+  "options": {
+    "A": "Vendor lock-in reduction",
+    "B": "High availability",
+    "C": "Flexibility",
+    "D": "Single provider dependency"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is vendor lock-in?",
+  "options": {
+    "A": "Dependency on one cloud provider",
+    "B": "Multiple cloud providers used",
+    "C": "Independent infrastructure",
+    "D": "Local data storage"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Multi-cloud strategies help reduce vendor lock-in risks.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+
+{
+  "question": "Which of the following are characteristics of high availability systems? (Select all that apply)",
+  "options": {
+    "A": "Redundancy",
+    "B": "Failover mechanisms",
+    "C": "Load balancing",
+    "D": "Single server dependency"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is failover in cloud systems?",
+  "options": {
+    "A": "Switching to backup system when primary fails",
+    "B": "Deleting cloud storage",
+    "C": "Formatting database",
+    "D": "Stopping monitoring"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: High availability systems aim to minimize downtime.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which Kubernetes component stores cluster state information?",
+  "options": {
+    "A": "etcd",
+    "B": "Scheduler",
+    "C": "Kubelet",
+    "D": "Ingress"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: etcd is a distributed key-value store used by Kubernetes.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+{
+  "question": "Which of the following are Kubernetes node components? (Select all that apply)",
+  "options": {
+    "A": "Kubelet",
+    "B": "Container Runtime",
+    "C": "Kube-proxy",
+    "D": "API Gateway"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the purpose of Kubernetes Ingress?",
+  "options": {
+    "A": "Expose HTTP and HTTPS routes to services",
+    "B": "Store container images",
+    "C": "Delete pods",
+    "D": "Install operating systems"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Ingress controllers manage external access to Kubernetes services.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+{
+  "question": "Which of the following are types of cloud storage? (Select all that apply)",
+  "options": {
+    "A": "Object storage",
+    "B": "Block storage",
+    "C": "File storage",
+    "D": "Printer storage"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the primary purpose of object storage?",
+  "options": {
+    "A": "Store large unstructured data",
+    "B": "Run operating systems",
+    "C": "Install applications",
+    "D": "Delete logs"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Object storage uses metadata and unique identifiers for objects.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+{
+  "question": "Which of the following are cloud security tools? (Select all that apply)",
+  "options": {
+    "A": "IAM",
+    "B": "WAF",
+    "C": "Security Groups",
+    "D": "Paint"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does WAF stand for?",
+  "options": {
+    "A": "Web Application Firewall",
+    "B": "Wide Area Framework",
+    "C": "Web Access Function",
+    "D": "Wireless Application Format"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: WAF protects web applications from common attacks like SQL injection.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+{
+  "question": "Which of the following are distributed system challenges? (Select all that apply)",
+  "options": {
+    "A": "Network latency",
+    "B": "Partial failures",
+    "C": "Data consistency",
+    "D": "Keyboard failure"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a quorum in distributed systems?",
+  "options": {
+    "A": "Minimum number of nodes required for consensus",
+    "B": "CPU scheduling algorithm",
+    "C": "Storage encryption method",
+    "D": "Network cable"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Consensus algorithms ensure agreement among distributed nodes.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+{
+  "question": "Which of the following are consensus algorithms? (Select all that apply)",
+  "options": {
+    "A": "Raft",
+    "B": "Paxos",
+    "C": "PBFT",
+    "D": "Merge Sort"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a distributed cache?",
+  "options": {
+    "A": "Cache shared across multiple servers",
+    "B": "Local computer memory",
+    "C": "CPU register",
+    "D": "USB storage"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Distributed caching improves application performance and scalability.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+{
+  "question": "Which of the following are distributed cache technologies? (Select all that apply)",
+  "options": {
+    "A": "Redis Cluster",
+    "B": "Hazelcast",
+    "C": "Memcached",
+    "D": "Excel"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is the purpose of rate limiting?",
+  "options": {
+    "A": "Control number of requests from users",
+    "B": "Increase CPU speed",
+    "C": "Delete logs",
+    "D": "Install database"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Rate limiting helps prevent denial-of-service attacks.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+
+{
+  "question": "Which of the following are API gateway features? (Select all that apply)",
+  "options": {
+    "A": "Authentication",
+    "B": "Rate limiting",
+    "C": "Request routing",
+    "D": "Keyboard mapping"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is an API gateway?",
+  "options": {
+    "A": "Entry point for client requests to backend services",
+    "B": "Database backup tool",
+    "C": "Cloud storage device",
+    "D": "Network cable"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: API gateways help manage microservices communication.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+
+{
+  "question": "Which of the following are benefits of containerization? (Select all that apply)",
+  "options": {
+    "A": "Portability",
+    "B": "Consistency",
+    "C": "Fast deployment",
+    "D": "Hardware dependency"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is container orchestration?",
+  "options": {
+    "A": "Automated management of containers",
+    "B": "Deleting applications",
+    "C": "Installing CPU",
+    "D": "Formatting disks"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Kubernetes automates deployment, scaling, and management of containers.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+
+{
+  "question": "Which of the following are Kubernetes storage resources? (Select all that apply)",
+  "options": {
+    "A": "Persistent Volume",
+    "B": "Persistent Volume Claim",
+    "C": "Storage Class",
+    "D": "Mouse"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a Persistent Volume in Kubernetes?",
+  "options": {
+    "A": "Storage resource in a cluster",
+    "B": "Virtual CPU",
+    "C": "Network cable",
+    "D": "Application container"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Persistent Volumes exist independent of pods.",
+  "options": {"A":"True","B":"False"},
+  "answer": "A"
+},
+{
+  "question": "Which of the following are key principles of cloud architecture design? (Select all that apply)",
+  "options": {
+    "A": "Scalability",
+    "B": "Reliability",
+    "C": "Security",
+    "D": "Manual hardware installation"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Fault tolerance ensures systems continue operating even if some components fail.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "What is the purpose of a load balancer health check?",
+  "options": {
+    "A": "Verify backend server availability",
+    "B": "Delete inactive instances",
+    "C": "Install operating systems",
+    "D": "Upgrade CPU cores"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are types of load balancing algorithms? (Select all that apply)",
+  "options": {
+    "A": "Round Robin",
+    "B": "Least Connections",
+    "C": "IP Hash",
+    "D": "Bubble Sort"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Round Robin distributes requests sequentially across servers.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are common cloud monitoring metrics? (Select all that apply)",
+  "options": {
+    "A": "CPU usage",
+    "B": "Memory usage",
+    "C": "Network latency",
+    "D": "Keyboard brightness"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is network latency?",
+  "options": {
+    "A": "Time taken for data to travel across a network",
+    "B": "Amount of RAM used",
+    "C": "Disk storage capacity",
+    "D": "Number of CPU cores"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: High latency negatively impacts application performance.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are microservices communication methods? (Select all that apply)",
+  "options": {
+    "A": "REST APIs",
+    "B": "gRPC",
+    "C": "Message queues",
+    "D": "Keyboard interrupts"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is gRPC?",
+  "options": {
+    "A": "High-performance remote procedure call framework",
+    "B": "Cloud storage protocol",
+    "C": "Network cable standard",
+    "D": "Database indexing tool"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: gRPC uses Protocol Buffers for serialization.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are benefits of message-driven architectures? (Select all that apply)",
+  "options": {
+    "A": "Loose coupling",
+    "B": "Scalability",
+    "C": "Asynchronous communication",
+    "D": "Manual server installation"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is backpressure in distributed systems?",
+  "options": {
+    "A": "Mechanism to control data flow when systems are overloaded",
+    "B": "Deleting messages in queue",
+    "C": "Increasing CPU frequency",
+    "D": "Encrypting network traffic"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Backpressure prevents system overload by slowing producers.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are techniques to improve cloud security? (Select all that apply)",
+  "options": {
+    "A": "Network segmentation",
+    "B": "Encryption",
+    "C": "Regular patching",
+    "D": "Sharing credentials publicly"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is network segmentation?",
+  "options": {
+    "A": "Dividing network into smaller isolated segments",
+    "B": "Deleting network routers",
+    "C": "Installing operating systems",
+    "D": "Formatting network cables"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Network segmentation reduces attack surface.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are characteristics of resilient systems? (Select all that apply)",
+  "options": {
+    "A": "Fault tolerance",
+    "B": "Self-healing",
+    "C": "Redundancy",
+    "D": "Single point of failure"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is self-healing in cloud systems?",
+  "options": {
+    "A": "Automatic recovery from failures",
+    "B": "Manual system reboot",
+    "C": "Deleting server logs",
+    "D": "Increasing storage capacity"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Self-healing systems automatically replace failed components.",
+  "options": { "A": "True", "B": "False" },
+  "answer": "A"
+}
+  ]
+}

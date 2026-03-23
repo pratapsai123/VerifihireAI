@@ -14,7 +14,7 @@ from django.db import models
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status, generics
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 import uuid
 from .models import Assessment, AIAssessmentSubmission, AIAssessmentIntegrityScreenshot
 from ai_candidates.views import extract_json
@@ -32,7 +32,7 @@ import traceback
 import base64
 from django.core.files.base import ContentFile
 from api.models import UserProfile, DeletionRequest
-from api.views._imports import _is_application_admin_email, handle_deletion_request
+from api._imports import _is_application_admin_email, handle_deletion_request
 
 
 # Helper functions moved to ai_logic.py
@@ -292,7 +292,8 @@ class GenerateAssessmentView(APIView):
                 available_from=data.get('available_from'),
                 available_until=data.get('available_until'),
                 pass_threshold=data.get('pass_threshold', 60),
-                company=company
+                company=company,
+                user_profile=user_profile
             )
 
             # Pool multipliers - generate 2x the requested amount for randomization
@@ -747,7 +748,16 @@ class AssessmentListView(APIView):
         if not company:
             return Response([], status=status.HTTP_200_OK)
 
-        assessments = Assessment.objects.filter(company=company, is_deleted=False).order_by('-created_at')
+        from api._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+
+        if scoped_ids is None:
+            # Application Admin: all in company
+            assessments = Assessment.objects.filter(company=company, is_deleted=False).order_by('-created_at')
+        else:
+            # Scoped: only assessments created by users in this user's reporting hierarchy
+            assessments = Assessment.objects.filter(company=company, user_profile_id__in=scoped_ids, is_deleted=False).order_by('-created_at')
+
         data = []
         for assessment in assessments:
             count = AIAssessmentSubmission.objects.filter(assessment=assessment).count()
@@ -787,7 +797,14 @@ class AssessmentDetailView(APIView):
             user_profile = getattr(request.user, 'profile', None)
             company = user_profile.company if user_profile else None
             
-            assessment = Assessment.objects.get(pk=pk, company=company)
+            from api._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
+
+            if scoped_ids is None:
+                assessment = Assessment.objects.get(pk=pk, company=company)
+            else:
+                assessment = Assessment.objects.get(pk=pk, company=company, user_profile_id__in=scoped_ids)
+                
             submissions = AIAssessmentSubmission.objects.filter(assessment=assessment).order_by('-submitted_at')
             
             submission_data = []
@@ -834,6 +851,10 @@ class AssessmentDetailView(APIView):
                 "share_token": str(assessment.share_token),
                 "available_from": assessment.available_from.isoformat() if assessment.available_from else None,
                 "available_until": assessment.available_until.isoformat() if assessment.available_until else None,
+                "assigned_interviewers": [
+                    {"id": i.id, "name": f"{i.first_name or ''} {i.last_name or ''}".strip() or i.email, "email": i.email, "role": i.role}
+                    for i in assessment.assigned_interviewers.all()
+                ],
                 "submissions": submission_data
             }
             return Response(data, status=status.HTTP_200_OK)
@@ -1236,3 +1257,38 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
             return response
 
         return self.destroy(request, *args, **kwargs)
+
+class AIAssessmentAssignmentView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def post(self, request, pk):
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile or user_profile.role not in ['company_admin', 'hr_manager', 'ROLE_COMPANY_ADMIN', 'ROLE_HR_MANAGER']:
+            return Response({"error": "Unauthorized"}, status=403)
+            
+        try:
+            assessment = Assessment.objects.get(pk=pk, company=user_profile.company)
+            interviewer_ids = request.data.get('interviewer_ids', [])
+            
+            interviewers = UserProfile.objects.filter(id__in=interviewer_ids, company=user_profile.company)
+            assessment.assigned_interviewers.set(interviewers)
+            
+            return Response({"message": "Interviewers assigned successfully"})
+        except Assessment.DoesNotExist:
+            return Response({"error": "Assessment not found"}, status=404)
+
+class AIAssessmentAvailableInterviewersView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, pk):
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile or not user_profile.company:
+            return Response({"error": "Unauthorized"}, status=403)
+            
+        # exclude candidates
+        members = UserProfile.objects.filter(company=user_profile.company).exclude(role__in=['candidate', 'ROLE_CANDIDATE'])
+        data = [
+            {"id": m.id, "name": f"{m.first_name or ''} {m.last_name or ''}".strip() or m.email, "email": m.email, "role": m.role}
+            for m in members
+        ]
+        return Response(data)

@@ -1,0 +1,1891 @@
+{ 
+  "skill": "ES6+", 
+  "questions": [
+    {
+    "question": "Which keyword is used to declare a variable that cannot be reassigned?",
+    "options": {
+      "A": "var",
+      "B": "let",
+      "C": "const",
+      "D": "static"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Variables declared with 'let' are function-scoped.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is the correct syntax for an arrow function?",
+    "options": {
+      "A": "function => {}",
+      "B": "() => {}",
+      "C": "=> () {}",
+      "D": "arrow function() {}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What character is used to define Template Literals in ES6?",
+    "options": {
+      "A": "Single quote (')",
+      "B": "Double quote (\")",
+      "C": "Backtick (`)",
+      "D": "Forward slash (/)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you embed an expression inside a Template Literal?",
+    "options": {
+      "A": "{{ expression }}",
+      "B": "$(expression)",
+      "C": "${expression}",
+      "D": "&{expression}"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Arrow functions do not have their own 'this' context.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used to unpack elements from an array or properties from an object?",
+    "options": {
+      "A": "Spread operator (...)",
+      "B": "Rest operator (...)",
+      "C": "Destructuring assignment",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the default value of a variable declared with 'let' but not initialized?",
+    "options": {
+      "A": "null",
+      "B": "0",
+      "C": "undefined",
+      "D": "false"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: ES6 Classes are just syntactical sugar over JavaScript's existing prototype-based inheritance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to create a new array with the results of calling a function on every element in the calling array?",
+    "options": {
+      "A": "forEach()",
+      "B": "filter()",
+      "C": "map()",
+      "D": "reduce()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you set a default value for a function parameter in ES6?",
+    "options": {
+      "A": "function myFunc(x || 10) {}",
+      "B": "function myFunc(x = 10) {}",
+      "C": "function myFunc(x : 10) {}",
+      "D": "function myFunc(default x = 10) {}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'const' objects are immutable, meaning their properties cannot be changed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select all valid ways to export a function in ES6 Modules:",
+    "options": {
+      "A": "export default function myFunc() {}",
+      "B": "module.exports = myFunc",
+      "C": "export { myFunc }",
+      "D": "export function myFunc() {}"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What does the 'find()' method return if no element satisfies the testing function?",
+    "options": {
+      "A": "null",
+      "B": "undefined",
+      "C": "-1",
+      "D": "false"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: String.prototype.includes() is case-sensitive.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which statement is used to import a default export from another module?",
+    "options": {
+      "A": "import { default } from './module'",
+      "B": "import myDefault from './module'",
+      "C": "require('./module').default",
+      "D": "import * as default from './module'"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of `[1, 2, 3].includes(2)`?",
+    "options": {
+      "A": "true",
+      "B": "false",
+      "C": "undefined",
+      "D": "2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Arrow functions can be used as constructors with the 'new' keyword.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to combine multiple arrays into one in a single expression?",
+    "options": {
+      "A": "arr1.push(arr2)",
+      "B": "[...arr1, ...arr2]",
+      "C": "arr1 + arr2",
+      "D": "arr1.append(arr2)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'super()' keyword in a class constructor?",
+    "options": {
+      "A": "To call the constructor of the parent class.",
+      "B": "To make the function run faster.",
+      "C": "To create a static method.",
+      "D": "To export the class."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following creates a new Set?",
+    "options": {
+      "A": "let s = {};",
+      "B": "let s = new Set();",
+      "C": "let s = Set.create();",
+      "D": "let s = [] as Set;"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Set' in JavaScript can contain duplicate values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which ES6 feature allows you to extract properties from an object into variables with the same name?",
+    "options": {
+      "A": "Object.values()",
+      "B": "Object Destructuring",
+      "C": "Object Spread",
+      "D": "Object Nesting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the shortcut for creating an object property when the variable name matches the property name? (e.g. {name: name})",
+    "options": {
+      "A": "{name = name}",
+      "B": "{name}",
+      "C": "{:name}",
+      "D": "{name!!}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ES6 Modules always run in 'strict mode'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method returns an array of a given object's own enumerable property names?",
+    "options": {
+      "A": "Object.keys()",
+      "B": "Object.names()",
+      "C": "Object.entries()",
+      "D": "Object.values()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'rest' parameter syntax look like in a function signature?",
+    "options": {
+      "A": "function(a, b, rest) {}",
+      "B": "function(a, b, ...args) {}",
+      "C": "function(a, b, args...) {}",
+      "D": "function(a, b, *args) {}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In ES6, 'var' is still considered the best practice for variable declaration.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is used to define a multiline string without using '\\n'?",
+    "options": {
+      "A": "Standard strings with double quotes",
+      "B": "Template Literals with backticks",
+      "C": "Joined arrays",
+      "D": "Comments"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does `Array.from('hi')` return?",
+    "options": {
+      "A": "['h', 'i']",
+      "B": "'hi'",
+      "C": "['hi']",
+      "D": "Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Destructuring can be used in function parameters.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used for exponentiation in ES2016 (ES7)?",
+    "options": {
+      "A": "^",
+      "B": "**",
+      "C": "^^",
+      "D": "exp()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of `Number.isInteger(4.5)`?",
+    "options": {
+      "A": "true",
+      "B": "false",
+      "C": "undefined",
+      "D": "NaN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method check if every element in an array passes a specific test?",
+    "options": {
+      "A": "some()",
+      "B": "any()",
+      "C": "every()",
+      "D": "all()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Template literals allow for expression interpolation, but not for multi-line strings.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the correct way to import a specific named export 'data' from 'file.js'?",
+    "options": {
+      "A": "import data from './file.js'",
+      "B": "import { data } from './file.js'",
+      "C": "import * as data from './file.js'",
+      "D": "fetch('./file.js').data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is used to define a constant that cannot be reassigned?",
+    "options": {
+      "A": "var",
+      "B": "let",
+      "C": "const",
+      "D": "immutable"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the method `String.prototype.startsWith('Hello')` return?",
+    "options": {
+      "A": "The index of the string",
+      "B": "A boolean value",
+      "C": "The string itself",
+      "D": "undefined"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Arrow functions have their own 'arguments' object like regular functions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which new primitive type was introduced in ES6 to create unique identifiers?",
+    "options": {
+      "A": "ID",
+      "B": "Symbol",
+      "C": "Unique",
+      "D": "BigInt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In destructuring, how do you assign a default value to a variable if the property is missing?",
+    "options": {
+      "A": "const { x = 10 } = obj;",
+      "B": "const { x : 10 } = obj;",
+      "C": "const { x || 10 } = obj;",
+      "D": "const { x ? 10 } = obj;"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'forEach' method returns a new array after iterating.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method creates a new array by filtering out elements that do not pass a test?",
+    "options": {
+      "A": "map()",
+      "B": "reduce()",
+      "C": "filter()",
+      "D": "slice()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which ES6 feature allows you to define a variable whose scope is limited to a block, statement, or expression?",
+    "options": {
+      "A": "var",
+      "B": "let",
+      "C": "global",
+      "D": "function"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'static' keyword in a class?",
+    "options": {
+      "A": "To create a method that belongs to the class itself rather than an instance.",
+      "B": "To prevent the class from being changed.",
+      "C": "To define a private variable.",
+      "D": "To make the class load faster."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can use 'const' to declare an array and then push new elements into that array.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to check if a string ends with specific characters?",
+    "options": {
+      "A": "hasSuffix()",
+      "B": "endsWith()",
+      "C": "includes()",
+      "D": "finish()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you combine two objects into a new object using the spread operator?",
+    "options": {
+      "A": "let obj3 = obj1 + obj2;",
+      "B": "let obj3 = { ...obj1, ...obj2 };",
+      "C": "let obj3 = [ ...obj1, ...obj2 ];",
+      "D": "let obj3 = Object.spread(obj1, obj2);"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ES6 classes do not support constructors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is NOT a valid modern JavaScript loop?",
+    "options": {
+      "A": "for...in",
+      "B": "for...of",
+      "C": "for...each",
+      "D": "forEach()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the correct syntax for a default export?",
+    "options": {
+      "A": "export default myVar;",
+      "B": "export myVar as default;",
+      "C": "export { myVar as default };",
+      "D": "Both A and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'let' declarations are hoisted to the top of their scope and initialized with 'undefined'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of `['a', 'b', 'c'].find(x => x === 'b')`?",
+    "options": {
+      "A": "true",
+      "B": "1",
+      "C": "'b'",
+      "D": "undefined"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which keyword allows one class to inherit from another?",
+    "options": {
+      "A": "implements",
+      "B": "extends",
+      "C": "inherits",
+      "D": "prototype"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Arrow functions can be used for methods that need to access the object's properties via 'this'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which symbol is used for the Spread operator?",
+    "options": {
+      "A": "...",
+      "B": "..",
+      "C": "*",
+      "D": "&&"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'findindex()' method return if no element satisfies the testing function?",
+    "options": {
+      "A": "0",
+      "B": "null",
+      "C": "-1",
+      "D": "undefined"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Computed property names allow you to use an expression as an object key at declaration.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these allows for easy variable insertion into a string?",
+    "options": {
+      "A": "Single quotes",
+      "B": "Double quotes",
+      "C": "Template literals",
+      "D": "String.concat()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the result of `Math.trunc(4.9)`?",
+    "options": {
+      "A": "4",
+      "B": "5",
+      "C": "4.9",
+      "D": "0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Destructuring can work on both Arrays and Objects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to check if a value is NaN safely?",
+    "options": {
+      "A": "isNaN()",
+      "B": "Number.isNaN()",
+      "C": "isNotANumber()",
+      "D": "value === NaN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In ES6, what happens when you use 'strict mode'?",
+    "options": {
+      "A": "It ignores all errors.",
+      "B": "It catches common coding bloopers and throws exceptions.",
+      "C": "It makes the code run in a loop.",
+      "D": "It forces variables to be global."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Default parameters are only used if the passed argument is 'undefined'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method returns an array of an object's values?",
+    "options": {
+      "A": "Object.keys()",
+      "B": "Object.values()",
+      "C": "Object.entries()",
+      "D": "Object.map()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you declare a private field in a JavaScript class (ES2022)?",
+    "options": {
+      "A": "private myField",
+      "B": "#myField",
+      "C": "_myField",
+      "D": "static myField"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'Promise.all()' and 'Promise.race()'?",
+    "options": {
+      "A": "Promise.all() waits for all promises to resolve; Promise.race() resolves as soon as the first promise resolves or rejects.",
+      "B": "Promise.race() waits for all promises; Promise.all() does not.",
+      "C": "Promise.all() only works with arrays; Promise.race() works with objects.",
+      "D": "There is no difference; they are aliases."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes the 'Temporal Dead Zone' (TDZ)?",
+    "options": {
+      "A": "A period where the CPU is idle.",
+      "B": "The period between a variable's binding and its declaration where accessing it throws a ReferenceError.",
+      "C": "A specific scope in an arrow function.",
+      "D": "The time it takes for a Promise to time out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An async function always returns a Promise.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a class method, what happens if you try to access 'this' before calling 'super()' in the constructor of a derived class?",
+    "options": {
+      "A": "It returns undefined.",
+      "B": "It throws a ReferenceError.",
+      "C": "It refers to the parent class.",
+      "D": "It works normally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used for 'Nullish Coalescing'?",
+    "options": {
+      "A": "||",
+      "B": "&&",
+      "C": "??",
+      "D": "?."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the difference between 'Nullish Coalescing' (??) and the 'OR' (||) operator?",
+    "options": {
+      "A": "?? only checks for null or undefined; || checks for any falsy value.",
+      "B": "|| only checks for null; ?? checks for 0 and false.",
+      "C": "There is no functional difference.",
+      "D": "?? is for numbers; || is for strings."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which feature allows you to read the value of a property located deep within a chain of connected objects without having to check each reference?",
+    "options": {
+      "A": "Deep Nesting",
+      "B": "Optional Chaining (?.)",
+      "C": "Null Check",
+      "D": "Chain Operator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Arrow functions are ideal for defining methods inside an object literal that need to access other properties of that same object.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'yield' keyword do inside a generator function?",
+    "options": {
+      "A": "It stops the script execution permanently.",
+      "B": "It pauses the function execution and returns a value to the caller.",
+      "C": "It acts like a return statement and exits the function.",
+      "D": "It waits for a Promise to resolve."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you identify a Generator function in JavaScript?",
+    "options": {
+      "A": "function generator() {}",
+      "B": "function* myGen() {}",
+      "C": "async function myGen() {}",
+      "D": "let myGen = =>* {}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to merge the enumerable own properties of one or more source objects into a target object?",
+    "options": {
+      "A": "Object.merge()",
+      "B": "Object.assign()",
+      "C": "Object.concat()",
+      "D": "Object.copy()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Variables declared with 'const' are hoisted but not initialized.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Select all valid ways to handle an error in a Promise chain:",
+    "options": {
+      "A": ".catch() method",
+      "B": "The second argument to .then()",
+      "C": "try...catch block (when using async/await)",
+      "D": "throw new Error() inside .then()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the output of `console.log(typeof Symbol('id'))`?",
+    "options": {
+      "A": "\"string\"",
+      "B": "\"object\"",
+      "C": "\"symbol\"",
+      "D": "\"undefined\""
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which method on a Promise will execute regardless of whether the promise was fulfilled or rejected?",
+    "options": {
+      "A": ".then()",
+      "B": ".catch()",
+      "C": ".finally()",
+      "D": ".done()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In ES6, a subclass can have a method with the same name as the parent class (method overriding).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Object Property Value Shorthand'?",
+    "options": {
+      "A": "Using 'val' instead of 'value'.",
+      "B": "Omitting the value if the key and variable name are the same (e.g., { x }).",
+      "C": "Reducing the size of an object.",
+      "D": "Using numbers as keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you swap the values of two variables 'a' and 'b' using destructuring?",
+    "options": {
+      "A": "a = b; b = a;",
+      "B": "[a, b] = [b, a];",
+      "C": "{a, b} = {b, a};",
+      "D": "swap(a, b);"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which collection type should you use if you need to map unique keys to values and the keys can be any data type (including objects)?",
+    "options": {
+      "A": "Set",
+      "B": "Object",
+      "C": "Map",
+      "D": "WeakSet"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Objects are iterable by default using the 'for...of' loop.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true about 'WeakMap'?",
+    "options": {
+      "A": "Keys must be objects.",
+      "B": "It is not iterable.",
+      "C": "It allows for garbage collection of entries if there are no other references to the key.",
+      "D": "All of the above."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does 'Array.prototype.flat()' do?",
+    "options": {
+      "A": "Removes duplicates from an array.",
+      "B": "Creates a new array with all sub-array elements concatenated into it recursively up to a specified depth.",
+      "C": "Sorts an array.",
+      "D": "Converts an array to a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Arrow functions can be used to create 'Generator' functions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which static method returns a promise that resolves after all of the given promises have either fulfilled or rejected?",
+    "options": {
+      "A": "Promise.all()",
+      "B": "Promise.any()",
+      "C": "Promise.allSettled()",
+      "D": "Promise.race()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'Object.entries()' method?",
+    "options": {
+      "A": "To check if an object is empty.",
+      "B": "To return an array of a given object's own enumerable string-keyed property [key, value] pairs.",
+      "C": "To add new entries to an object.",
+      "D": "To sort an object's keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the 'spread' operator on an object performs a deep clone of that object.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature from ES2020 allows you to use a BigInt?",
+    "options": {
+      "A": "Adding a 'b' suffix to a number (10b).",
+      "B": "Using the BigInt() constructor.",
+      "C": "Adding an 'n' suffix to a number (10n).",
+      "D": "Using 'long' keyword."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the correct syntax for 'computed property names'?",
+    "options": {
+      "A": "{ [propName]: value }",
+      "B": "{ {propName}: value }",
+      "C": "{ (propName): value }",
+      "D": "{ propName: value }"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can await a non-promise value in an async function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which array method returns the index of the first element in the array that satisfies the provided testing function?",
+    "options": {
+      "A": "indexOf()",
+      "B": "findIndex()",
+      "C": "searchIndex()",
+      "D": "getPosition()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does `Object.is(NaN, NaN)` return?",
+    "options": {
+      "A": "true",
+      "B": "false",
+      "C": "undefined",
+      "D": "TypeError"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Modules in JavaScript are always executed once, even if they are imported multiple times.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to remove leading and trailing whitespace from a string in ES6+?",
+    "options": {
+      "A": "strip()",
+      "B": "trim()",
+      "C": "clean()",
+      "D": "cut()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to reduce an array to a single value by executing a reducer function on each element?",
+    "options": {
+      "A": "map()",
+      "B": "filter()",
+      "C": "reduce()",
+      "D": "accumulate()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The 'Rest' operator must always be the last parameter in a function definition.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of using the Spread operator on a string, e.g., [...'JS']?",
+    "options": {
+      "A": "['JS']",
+      "B": "['J', 'S']",
+      "C": "'JS'",
+      "D": "Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which static method returns a Promise that fulfills as soon as any of the promises in an iterable fulfills?",
+    "options": {
+      "A": "Promise.all()",
+      "B": "Promise.allSettled()",
+      "C": "Promise.any()",
+      "D": "Promise.race()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Classes in JavaScript are hoisted, meaning you can instantiate a class before it is defined in the code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature allows you to define a property on an object that cannot be changed or deleted?",
+    "options": {
+      "A": "Object.freeze()",
+      "B": "Object.seal()",
+      "C": "Object.defineProperty()",
+      "D": "const"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the difference between 'WeakSet' and 'Set'?",
+    "options": {
+      "A": "WeakSet can only contain objects and is not iterable.",
+      "B": "WeakSet is faster than Set.",
+      "C": "Set can only contain strings.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you handle multiple asynchronous operations in parallel and wait for all to finish using async/await?",
+    "options": {
+      "A": "Use a for-of loop with await inside.",
+      "B": "await Promise.all([async1(), async2()])",
+      "C": "await async1() && async2()",
+      "D": "It is not possible to run them in parallel with async/await."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Array destructuring uses the element's index, whereas object destructuring uses the property's name.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method returns an iterator that yields the [key, value] pairs for each element in a Map?",
+    "options": {
+      "A": "keys()",
+      "B": "values()",
+      "C": "entries()",
+      "D": "iterator()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Array.prototype.flatMap()' do?",
+    "options": {
+      "A": "Flattens an array and then maps it.",
+      "B": "Maps each element using a mapping function, then flattens the result into a new array.",
+      "C": "Removes empty slots from an array.",
+      "D": "Only works on 2D arrays."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Static methods in a class can be accessed through an instance of that class.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which ES2020 feature provides a way to access the global object regardless of the environment (Browser vs Node.js)?",
+    "options": {
+      "A": "window",
+      "B": "global",
+      "C": "globalThis",
+      "D": "this"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a Promise, what is the 'executor' function?",
+    "options": {
+      "A": "The .then() callback.",
+      "B": "The function passed to the Promise constructor that receives resolve and reject.",
+      "C": "The .catch() handler.",
+      "D": "The function that runs after .finally()."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Object.assign()' performs a shallow copy of source objects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'String.prototype.padStart()'?",
+    "options": {
+      "A": "To add spaces to the end of a string.",
+      "B": "To pad the current string with another string until the resulting string reaches a given length, starting from the beginning.",
+      "C": "To capitalize the first letter.",
+      "D": "To check for a prefix."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true regarding 'Top-level await'?",
+    "options": {
+      "A": "It can be used in any standard .js file.",
+      "B": "It allows using the await keyword outside of an async function in ES modules.",
+      "C": "It is only available in Node.js version 10.",
+      "D": "It slows down the browser significantly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of `Object.entries({a: 1, b: 2})`?",
+    "options": {
+      "A": "[['a', 1], ['b', 2]]",
+      "B": "['a', 1, 'b', 2]",
+      "C": "{a: 1, b: 2}",
+      "D": "['a', 'b']"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: If you attempt to reassign a property of a 'const' object, JavaScript will throw an error.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to determine whether an array includes a certain value among its entries, returning true or false?",
+    "options": {
+      "A": "find()",
+      "B": "contains()",
+      "C": "includes()",
+      "D": "has()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Object.fromEntries()' do?",
+    "options": {
+      "A": "Converts an object to an array of entries.",
+      "B": "Transforms a list of key-value pairs into an object.",
+      "C": "Deletes all entries in an object.",
+      "D": "Validates if an object has entries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Map' preserves the insertion order of its elements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a valid way to create a shallow copy of an array 'arr'?",
+    "options": {
+      "A": "const copy = [...arr];",
+      "B": "const copy = arr.slice();",
+      "C": "const copy = Array.from(arr);",
+      "D": "All of the above."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "How do you define a getter in an ES6 class?",
+    "options": {
+      "A": "get propertyName() { ... }",
+      "B": "function getPropertyName() { ... }",
+      "C": "getter: function() { ... }",
+      "D": "property get() { ... }"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Optional Chaining' operator (?.) can also be used for calling functions that might not exist.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Object.values()'?",
+    "options": {
+      "A": "To return an array of keys.",
+      "B": "To return an array of an object's own enumerable string-keyed property values.",
+      "C": "To find a specific value in an object.",
+      "D": "To count the number of properties."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Logical Assignment Operators' (e.g., ||=, &&=, ??=)?",
+    "options": {
+      "A": "They perform an operation and assign the value only if the condition is met.",
+      "B": "They are used for bitwise operations.",
+      "C": "They are only available in TypeScript.",
+      "D": "They replace the 'if' statement entirely."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Proxy' objects allow you to intercept and redefine fundamental operations for another object (like property lookup).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary use case for 'Reflect' API in JavaScript?",
+    "options": {
+      "A": "To create mirror images of objects.",
+      "B": "To provide methods for interceptable JavaScript operations, often used alongside Proxies.",
+      "C": "To handle UI reflections.",
+      "D": "To automate testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a for-of loop, what happens if you try to iterate over an object that doesn't have a [Symbol.iterator] property?",
+    "options": {
+      "A": "It iterates over the keys.",
+      "B": "It throws a TypeError: [object] is not iterable.",
+      "C": "It skips the loop.",
+      "D": "It returns undefined."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'in' operator can be used to check if a property exists in an object's prototype chain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to check if an object has a property as its own (not inherited)?",
+    "options": {
+      "A": "hasProperty()",
+      "B": "Object.hasOwn()",
+      "C": "hasOwnProperty()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which array method is used to determine whether at least one element in the array passes the test implemented by the provided function?",
+    "options": {
+      "A": "every()",
+      "B": "some()",
+      "C": "one()",
+      "D": "includes()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of the JavaScript Event Loop, which of the following is true regarding 'Microtasks' and 'Macrotasks'?",
+    "options": {
+      "A": "Macrotasks (like setTimeout) have higher priority than Microtasks (like Promises).",
+      "B": "All pending Microtasks are executed before the next Macrotask is pulled from the queue.",
+      "C": "The Event Loop executes one Microtask and one Macrotask alternately.",
+      "D": "Microtasks are only used in Node.js, not in the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Shallow Copy' and a 'Deep Copy' when cloning an object with nested structures?",
+    "options": {
+      "A": "A shallow copy clones nested objects, while a deep copy only clones the top level.",
+      "B": "A shallow copy only copies references to nested objects, meaning changes to the original affect the copy.",
+      "C": "A deep copy is faster because it uses the spread operator.",
+      "D": "There is no difference in ES6+."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Object.seal()' prevents new properties from being added and existing properties from being deleted, but allows existing properties to be modified if they are writable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Module Pattern' and how do ES6 Modules improve upon it?",
+    "options": {
+      "A": "It's a way to hide variables; ES6 Modules make variables global by default.",
+      "B": "It uses closures to create private scope; ES6 Modules provide built-in file-based scoping and static analysis.",
+      "C": "It is a design pattern for CSS; ES6 Modules are for HTML.",
+      "D": "The Module Pattern is faster than ES6 Modules."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes a 'Thunk' in JavaScript?",
+    "options": {
+      "A": "A function that has already been executed.",
+      "B": "A function used to delay the evaluation of an expression or to wrap a synchronous operation into an asynchronous one.",
+      "C": "A type of error in the V8 engine.",
+      "D": "A variable that can only be used once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can cancel a native ES6 Promise once it has been initialized.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a JavaScript Class, what is the 'Static Initialization Block' (ES2022) used for?",
+    "options": {
+      "A": "To reset the class every time an instance is created.",
+      "B": "To perform complex initialization logic for static fields, including access to private fields.",
+      "C": "To prevent the class from being exported.",
+      "D": "To speed up the constructor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of `0.1 + 0.2 === 0.3` in JavaScript and why?",
+    "options": {
+      "A": "true; JavaScript handles decimal addition perfectly.",
+      "B": "false; due to floating-point precision errors in the IEEE 754 standard.",
+      "C": "undefined; addition is not allowed for floats.",
+      "D": "true; the V8 engine automatically rounds the result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a key characteristic of 'WeakRef' (ES2021)?",
+    "options": {
+      "A": "It creates a strong link that prevents garbage collection.",
+      "B": "It allows you to hold a weak reference to an object, which does not prevent that object from being garbage collected.",
+      "C": "It is used to speed up array operations.",
+      "D": "It is a replacement for let and const."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Proxy' trap can intercept the 'new' operator used on a constructor function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'currying' technique in functional JavaScript?",
+    "options": {
+      "A": "Executing multiple functions at the same time.",
+      "B": "The process of transforming a function that takes multiple arguments into a sequence of functions that each take a single argument.",
+      "C": "A way to delete properties from an object.",
+      "D": "An optimization for the garbage collector."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code should be used if the request is valid, but the user has reached their monthly quota for the API?",
+    "options": {
+      "A": "401",
+      "B": "403",
+      "C": "429 Too Many Requests",
+      "D": "503"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Tail Call Optimization' (TCO) is a requirement for all JavaScript engines according to the ES6 specification, but currently, only Safari's WebKit supports it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Atomics' in JavaScript (ES2017)?",
+    "options": {
+      "A": "To create tiny variables.",
+      "B": "To provide predictable atomic operations when multiple threads (Web Workers) are sharing memory via SharedArrayBuffer.",
+      "C": "To automate the cleanup of the DOM.",
+      "D": "To replace Promises."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Internal Slot' [[Prototype]] represent in a JavaScript object?",
+    "options": {
+      "A": "The object's constructor.",
+      "B": "A hidden link to the object's prototype from which it inherits properties.",
+      "C": "The object's ID.",
+      "D": "A list of all methods in the object."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'JSON.parse(JSON.stringify(obj))' is a safe way to deep clone an object that contains functions or undefined values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Memoization' pattern?",
+    "options": {
+      "A": "Saving the result of expensive function calls and returning the cached result when the same inputs occur again.",
+      "B": "Naming variables based on memory usage.",
+      "C": "Deleting unused objects manually.",
+      "D": "Using static classes only."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Iterators', what must a [Symbol.iterator]() method return?",
+    "options": {
+      "A": "An array.",
+      "B": "An object that conforms to the iterator protocol (containing a next() method).",
+      "C": "A generator function.",
+      "D": "The object itself."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Private class fields (#field) are accessible via the string name using bracket notation (obj['#field']).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the benefit of using 'Intl' (Internationalization API)?",
+    "options": {
+      "A": "It translates your code into different languages.",
+      "B": "It provides language-sensitive string comparison, number formatting, and date/time formatting.",
+      "C": "It is a plugin for Google Translate.",
+      "D": "It speeds up the loading of images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Hydration' mean in modern JavaScript frameworks (like React or Next.js)?",
+    "options": {
+      "A": "Refreshing the browser page.",
+      "B": "The process where client-side JavaScript attaches event listeners to static HTML sent from the server to make it interactive.",
+      "C": "Cleaning the database.",
+      "D": "Compressing the JS bundle."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Tag' function in the context of Tagged Template Literals?",
+    "options": {
+      "A": "A function that receives an array of strings and a set of values from expressions.",
+      "B": "A function that replaces HTML tags.",
+      "C": "A way to categorize variables.",
+      "D": "A method to export CSS."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Generator' can be used as an infinite data stream because it only produces values on demand.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Partial Application' of a function?",
+    "options": {
+      "A": "Only running half of a function.",
+      "B": "The process of fixing a number of arguments to a function, producing another function of smaller arity.",
+      "C": "A way to handle errors partially.",
+      "D": "A function that returns a boolean."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true regarding 'Symbol.for()' and 'Symbol()'?",
+    "options": {
+      "A": "They are identical.",
+      "B": "Symbol.for() creates a symbol in the global symbol registry, allowing it to be reused; Symbol() creates a unique, local symbol.",
+      "C": "Symbol() is used for strings; Symbol.for() is for numbers.",
+      "D": "Symbol.for() is deprecated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Async Iteration' (for await...of), what type of object is the loop designed to handle?",
+    "options": {
+      "A": "A standard array.",
+      "B": "An object that implements the Symbol.asyncIterator property.",
+      "C": "A Promise that resolves to an object.",
+      "D": "A list of strings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Object.getPrototypeOf(obj)' is the modern and preferred way to access an object's prototype compared to '__proto__'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Composition' pattern in JavaScript?",
+    "options": {
+      "A": "A way to write music with code.",
+      "B": "Creating complex objects or functions by combining simpler ones, favoring aggregation over inheritance.",
+      "C": "Organizing files alphabetically.",
+      "D": "Writing all code in a single file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method on a Promise object would you use to handle 'Any' promise that resolves first, but ignores rejections unless ALL promises reject?",
+    "options": {
+      "A": "Promise.race()",
+      "B": "Promise.any()",
+      "C": "Promise.all()",
+      "D": "Promise.allSettled()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'new.target' property do in a function or class constructor?",
+    "options": {
+      "A": "It targets the DOM for an update.",
+      "B": "It allows you to detect whether a function or constructor was called using the 'new' operator.",
+      "C": "It identifies the next item in an array.",
+      "D": "It marks a variable for garbage collection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Function.prototype.bind()' creates a new function with a permanently bound 'this' context.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dead Code Elimination' (Tree Shaking) in the context of ES6 Modules?",
+    "options": {
+      "A": "Deleting old files.",
+      "B": "An optimization where the bundler removes unused exports from the final JavaScript bundle.",
+      "C": "Fixing bugs in the code.",
+      "D": "A way to handle server crashes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true about 'SharedArrayBuffer'?",
+    "options": {
+      "A": "It is used to store images.",
+      "B": "It allows multiple Web Workers to read and write to the same memory space directly.",
+      "C": "It is a more secure version of an array.",
+      "D": "It is used for string concatenation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of `Object.preventExtensions(obj)`?",
+    "options": {
+      "A": "The object is deleted.",
+      "B": "No new properties can ever be added to the object.",
+      "C": "The object's properties become private.",
+      "D": "The object can no longer be exported."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are characteristics of the 'Proxy' object in JavaScript? (Select all that apply)",
+    "options": {
+      "A": "It can intercept and redefine property lookup (get).",
+      "B": "It can intercept and redefine function calls (apply).",
+      "C": "It can intercept and redefine the 'delete' operator (deleteProperty).",
+      "D": "It can intercept the instantiation of a class (construct)."
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is the primary difference between a 'WeakMap' and a 'Map' regarding memory management?",
+    "options": {
+      "A": "WeakMap keys are not enumerable and allow the garbage collector to remove entries if the key object has no other references.",
+      "B": "Map keys are automatically deleted after 5 minutes.",
+      "C": "WeakMap uses less CPU but more RAM.",
+      "D": "There is no difference in memory management."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Tagged Template Literal', the first argument passed to the tag function is an array of strings that includes a special 'raw' property.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid use cases for the 'Symbol' type? (Select all that apply)",
+    "options": {
+      "A": "Creating unique, non-enumerable keys for object properties.",
+      "B": "Implementing the 'Iterator' protocol via Symbol.iterator.",
+      "C": "Defining 'Well-Known' symbols to change internal language behavior.",
+      "D": "Storing large integer values greater than 2^53 - 1."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In the V8 engine, what is the 'Hidden Class' (or Shape) optimization?",
+    "options": {
+      "A": "A way to hide private class fields from the user.",
+      "B": "An internal mechanism that tracks the structure of objects to allow for faster property access.",
+      "C": "A class that is only loaded during a crash.",
+      "D": "A method to compress the JavaScript source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when 'Promise.any()' receives an empty iterable?",
+    "options": {
+      "A": "It resolves with undefined.",
+      "B": "It rejects with an AggregateError.",
+      "C": "It hangs indefinitely.",
+      "D": "It throws a Synchronous Error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Pipeline Operator' (|>) is currently a fully ratified and supported part of the ES2024 standard.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes a 'Pure Function' in modern JavaScript? (Select all that apply)",
+    "options": {
+      "A": "It returns the same output for the same input.",
+      "B": "It has no side effects (e.g., modifying global variables or console logging).",
+      "C": "It must use the 'async' keyword.",
+      "D": "It depends only on its input arguments."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the 'Module Record' in the context of ES Modules?",
+    "options": {
+      "A": "A history of all imports.",
+      "B": "An internal data structure that represents a module and its dependencies for static analysis.",
+      "C": "The physical file path on the disk.",
+      "D": "A log of errors within the module."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'Async Generators' (async function*), what does the 'next()' method return?",
+    "options": {
+      "A": "The value itself.",
+      "B": "A Promise that resolves to an object { value, done }.",
+      "C": "A callback function.",
+      "D": "A boolean indicating completion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'String.prototype.matchAll()' returns an iterator rather than a simple array to allow for better memory efficiency with large strings.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are considered 'Falsy' values in JavaScript? (Select all that apply)",
+    "options": {
+      "A": "0",
+      "B": "'' (empty string)",
+      "C": "[] (empty array)",
+      "D": "null"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the purpose of 'Object.getOwnPropertyDescriptor()'?",
+    "options": {
+      "A": "To describe the object's name.",
+      "B": "To return information about a specific property's configuration (value, writable, enumerable, configurable).",
+      "C": "To find all methods in the object.",
+      "D": "To change the prototype of the object."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Prototype Chain', what is the value of 'Object.prototype.__proto__'?",
+    "options": {
+      "A": "Object",
+      "B": "null",
+      "C": "undefined",
+      "D": "window"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JavaScript's 'Private' class fields use a 'Hard Private' mechanism, meaning they are completely inaccessible from outside the class even via Reflection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Self-Invoking' or 'IIFE' pattern primarily used for in modern JS (when not using modules)?",
+    "options": {
+      "A": "To speed up the server.",
+      "B": "To create a private scope and avoid polluting the global namespace.",
+      "C": "To automatically refresh the page.",
+      "D": "To handle asynchronous calls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true about 'Tail Call Optimization' (TCO)?",
+    "options": {
+      "A": "It is used for loops.",
+      "B": "It allows a function call to happen without increasing the call stack size if it's the final action of a function.",
+      "C": "It is supported by all browsers except Safari.",
+      "D": "It is a way to compress JavaScript files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hoisting' behavior for 'Function Expressions' assigned to a 'const' variable?",
+    "options": {
+      "A": "The function is hoisted and can be called anywhere.",
+      "B": "Only the variable name is hoisted and initialized to undefined.",
+      "C": "The variable is hoisted but remains uninitialized (TDZ), causing a ReferenceError if accessed before the line.",
+      "D": "Const variables are never hoisted."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Using 'Array.prototype.sort()' without a compare function will sort numbers correctly (e.g., [1, 10, 2] becomes [1, 2, 10]).",
+    "options": {
+      "A": "True",
+      "B": "False (it sorts them as strings, resulting in [1, 10, 2])"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'typeof null' and why?",
+    "options": {
+      "A": "'null'; it is its own type.",
+      "B": "'object'; it is a historical bug in JavaScript's implementation.",
+      "C": "'undefined'; because null has no value.",
+      "D": "'boolean'; it represents false."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Select all that apply: Which of the following are valid ways to create a 'Non-Configurable' property?",
+    "options": {
+      "A": "Using Object.defineProperty() with configurable: false.",
+      "B": "Using Object.freeze().",
+      "C": "Declaring the variable with 'const'.",
+      "D": "Using Object.seal()."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Currying' in functional programming?",
+    "options": {
+      "A": "Passing an object as a function argument.",
+      "B": "Converting a function that takes multiple arguments into a series of functions that each take one argument.",
+      "C": "Combining two arrays.",
+      "D": "Handling errors inside a loop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Promise.allSettled()' will always resolve and never reject, regardless of the outcomes of the input promises.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Atomics.wait()' and 'Atomics.notify()' system provide?",
+    "options": {
+      "A": "A way to pause the entire browser tab.",
+      "B": "Low-level synchronization primitives for workers sharing memory through a SharedArrayBuffer.",
+      "C": "A way to wait for a specific time in a loop.",
+      "D": "Better performance for JSON parsing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Scope Chain' in JavaScript?",
+    "options": {
+      "A": "A list of all global variables.",
+      "B": "The hierarchy of scopes that the engine searches through to find the value of a variable.",
+      "C": "A security feature for modules.",
+      "D": "The order in which files are loaded."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Arrow functions are the only type of function in JavaScript that cannot be used with the 'call', 'apply', or 'bind' methods to change 'this'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes the 'Module Pattern' implementation using an IIFE?",
+    "options": {
+      "A": "It returns an object with public methods while keeping variables private within the closure.",
+      "B": "It exports a default class.",
+      "C": "It uses the 'import' keyword.",
+      "D": "It creates a global variable for every function."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tree Shaking' specifically looking for to work effectively?",
+    "options": {
+      "A": "CommonJS (require/module.exports) syntax.",
+      "B": "Static ES Module (import/export) syntax.",
+      "C": "Comments in the code.",
+      "D": "Large arrays."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'BigInt' can be mixed with regular 'Number' types in mathematical operations without explicit conversion.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Object.is()' compared to the strict equality operator (===)?",
+    "options": {
+      "A": "It is faster.",
+      "B": "It handles edge cases like NaN === NaN (true) and +0 === -0 (false).",
+      "C": "It compares objects by value instead of reference.",
+      "D": "It is only for strings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Side Effects' of a function? (Select all that apply)",
+    "options": {
+      "A": "Modifying a value in an external database.",
+      "B": "Logging a message to the console.",
+      "C": "Changing a variable declared outside the function.",
+      "D": "Returning a new object based on input."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the internal [[Class]] property used for in older JavaScript engines?",
+    "options": {
+      "A": "Defining CSS classes.",
+      "B": "Distinguishing between different types of built-in objects (e.g., [object Array]).",
+      "C": "Creating private variables.",
+      "D": "Managing inheritance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Map' is better than an 'Object' when you need to frequently add and remove key-pair values due to its optimization for such tasks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of '[] == ![]' in JavaScript?",
+    "options": {
+      "A": "true",
+      "B": "false",
+      "C": "TypeError",
+      "D": "undefined"
+    },
+    "answer": "A"
+  }
+  ]
+}

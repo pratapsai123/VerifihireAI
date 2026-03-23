@@ -1,0 +1,1762 @@
+{ 
+  "skill": "SQLite", 
+  "questions": [
+    {
+"question":"What type of database is SQLite?",
+"options":{
+"A":"Embedded relational database",
+"B":"Distributed database",
+"C":"Cloud database",
+"D":"NoSQL database"
+},
+"answer":"A"
+},
+{
+"question":"True or False: SQLite is serverless.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which company developed SQLite?",
+"options":{
+"A":"Oracle",
+"B":"SQLite Consortium",
+"C":"D. Richard Hipp",
+"D":"Microsoft"
+},
+"answer":"C"
+},
+{
+"question":"Which SQL command retrieves data from a SQLite table?",
+"options":{
+"A":"SELECT",
+"B":"FETCH",
+"C":"GET",
+"D":"READ"
+},
+"answer":"A"
+},
+{
+"question":"True or False: SQLite databases are stored in a single file.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are SQLite data types? (Select all that apply)",
+"options":{
+"A":"INTEGER",
+"B":"TEXT",
+"C":"BLOB",
+"D":"FLOAT64"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which SQL command inserts new rows into a table?",
+"options":{
+"A":"INSERT",
+"B":"ADD",
+"C":"CREATE",
+"D":"UPDATE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command removes rows from a table?",
+"options":{
+"A":"DELETE",
+"B":"REMOVE",
+"C":"DROP",
+"D":"CLEAR"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports transactions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword starts a transaction?",
+"options":{
+"A":"BEGIN",
+"B":"START",
+"C":"OPEN",
+"D":"INIT"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword commits a transaction?",
+"options":{
+"A":"COMMIT",
+"B":"SAVE",
+"C":"FINISH",
+"D":"STOP"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword cancels a transaction?",
+"options":{
+"A":"ROLLBACK",
+"B":"STOP",
+"C":"CANCEL",
+"D":"DELETE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports ACID transactions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command creates a new table?",
+"options":{
+"A":"CREATE TABLE",
+"B":"NEW TABLE",
+"C":"ADD TABLE",
+"D":"TABLE CREATE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command removes a table?",
+"options":{
+"A":"DROP TABLE",
+"B":"DELETE TABLE",
+"C":"REMOVE TABLE",
+"D":"CLEAR TABLE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports PRIMARY KEY constraints.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which constraint ensures unique values in a column?",
+"options":{
+"A":"UNIQUE",
+"B":"PRIMARY",
+"C":"KEY",
+"D":"DISTINCT"
+},
+"answer":"A"
+},
+
+{
+"question":"Which constraint prevents NULL values?",
+"options":{
+"A":"NOT NULL",
+"B":"NO EMPTY",
+"C":"NON NULL",
+"D":"REQUIRED"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports FOREIGN KEY constraints.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQL clause filters rows?",
+"options":{
+"A":"WHERE",
+"B":"GROUP",
+"C":"FILTER",
+"D":"HAVING"
+},
+"answer":"A"
+},
+
+{
+"question":"Which clause sorts results?",
+"options":{
+"A":"ORDER BY",
+"B":"SORT BY",
+"C":"ARRANGE",
+"D":"GROUP"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ORDER BY can sort ascending or descending.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which clause groups rows with similar values?",
+"options":{
+"A":"GROUP BY",
+"B":"ORDER BY",
+"C":"WHERE",
+"D":"FILTER"
+},
+"answer":"A"
+},
+
+{
+"question":"Which clause filters grouped results?",
+"options":{
+"A":"HAVING",
+"B":"WHERE",
+"C":"GROUP",
+"D":"FILTER"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: HAVING is used with GROUP BY.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which aggregate function counts rows?",
+"options":{
+"A":"COUNT",
+"B":"SUM",
+"C":"AVG",
+"D":"TOTAL"
+},
+"answer":"A"
+},
+
+{
+"question":"Which function calculates average value?",
+"options":{
+"A":"AVG",
+"B":"MEAN",
+"C":"AVERAGE",
+"D":"MID"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SUM returns total of numeric column.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which function returns maximum value?",
+"options":{
+"A":"MAX",
+"B":"TOP",
+"C":"HIGH",
+"D":"UPPER"
+},
+"answer":"A"
+},
+
+{
+"question":"Which function returns minimum value?",
+"options":{
+"A":"MIN",
+"B":"LOW",
+"C":"BOTTOM",
+"D":"SMALL"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports JOIN operations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which join returns matching rows from both tables?",
+"options":{
+"A":"INNER JOIN",
+"B":"LEFT JOIN",
+"C":"RIGHT JOIN",
+"D":"OUTER JOIN"
+},
+"answer":"A"
+},
+
+{
+"question":"Which join returns all rows from left table?",
+"options":{
+"A":"LEFT JOIN",
+"B":"RIGHT JOIN",
+"C":"INNER JOIN",
+"D":"FULL JOIN"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports LEFT JOIN.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which clause limits number of returned rows?",
+"options":{
+"A":"LIMIT",
+"B":"TOP",
+"C":"FIRST",
+"D":"MAXROWS"
+},
+"answer":"A"
+},
+
+{
+"question":"Which clause skips rows before returning results?",
+"options":{
+"A":"OFFSET",
+"B":"SKIP",
+"C":"PASS",
+"D":"IGNORE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: LIMIT works with OFFSET.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command displays table structure?",
+"options":{
+"A":"PRAGMA table_info",
+"B":"SHOW TABLE",
+"C":"DESCRIBE",
+"D":"INFO TABLE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command renames a table?",
+"options":{
+"A":"ALTER TABLE RENAME",
+"B":"RENAME TABLE",
+"C":"CHANGE TABLE",
+"D":"UPDATE TABLE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports ALTER TABLE.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command adds a column to existing table?",
+"options":{
+"A":"ALTER TABLE ADD COLUMN",
+"B":"ADD COLUMN",
+"C":"INSERT COLUMN",
+"D":"UPDATE COLUMN"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword removes duplicate rows?",
+"options":{
+"A":"DISTINCT",
+"B":"UNIQUE",
+"C":"FILTER",
+"D":"REMOVE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: DISTINCT works with SELECT.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite clause selects rows between two values?",
+"options":{
+"A":"BETWEEN",
+"B":"RANGE",
+"C":"LIMIT",
+"D":"BOUND"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operator checks multiple possible values?",
+"options":{
+"A":"IN",
+"B":"ANY",
+"C":"MULTI",
+"D":"WITH"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: LIKE operator searches patterns.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which wildcard matches multiple characters?",
+"options":{
+"A":"%",
+"B":"_",
+"C":"*",
+"D":"?"
+},
+"answer":"A"
+},
+
+{
+"question":"Which wildcard matches a single character?",
+"options":{
+"A":"_",
+"B":"%",
+"C":"*",
+"D":"?"
+},
+"answer":"A"
+},
+{
+"question":"Which SQLite statement updates existing records in a table?",
+"options":{
+"A":"UPDATE",
+"B":"MODIFY",
+"C":"CHANGE",
+"D":"ALTER"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: UPDATE statement modifies existing rows.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which clause is used with UPDATE to filter rows?",
+"options":{
+"A":"WHERE",
+"B":"GROUP BY",
+"C":"HAVING",
+"D":"LIMIT"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command removes all rows but keeps table structure?",
+"options":{
+"A":"DELETE",
+"B":"DROP",
+"C":"TRUNCATE",
+"D":"REMOVE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports TRUNCATE TABLE command.",
+"options":{"A":"True","B":"False"},
+"answer":"B"
+},
+
+{
+"question":"Which SQLite object improves query performance?",
+"options":{
+"A":"INDEX",
+"B":"VIEW",
+"C":"TRIGGER",
+"D":"SCHEMA"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command creates an index?",
+"options":{
+"A":"CREATE INDEX",
+"B":"ADD INDEX",
+"C":"MAKE INDEX",
+"D":"NEW INDEX"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Indexes speed up SELECT queries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command deletes an index?",
+"options":{
+"A":"DROP INDEX",
+"B":"DELETE INDEX",
+"C":"REMOVE INDEX",
+"D":"CLEAR INDEX"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite object represents virtual tables based on query results?",
+"options":{
+"A":"VIEW",
+"B":"INDEX",
+"C":"TABLE",
+"D":"TRIGGER"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Views store data physically in database.",
+"options":{"A":"True","B":"False"},
+"answer":"B"
+},
+
+{
+"question":"Which command creates a view?",
+"options":{
+"A":"CREATE VIEW",
+"B":"ADD VIEW",
+"C":"NEW VIEW",
+"D":"MAKE VIEW"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command deletes a view?",
+"options":{
+"A":"DROP VIEW",
+"B":"DELETE VIEW",
+"C":"REMOVE VIEW",
+"D":"CLEAR VIEW"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports triggers.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command creates a trigger?",
+"options":{
+"A":"CREATE TRIGGER",
+"B":"ADD TRIGGER",
+"C":"MAKE TRIGGER",
+"D":"START TRIGGER"
+},
+"answer":"A"
+},
+
+{
+"question":"Which trigger event occurs before inserting data?",
+"options":{
+"A":"BEFORE INSERT",
+"B":"AFTER INSERT",
+"C":"ON INSERT",
+"D":"DURING INSERT"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: AFTER triggers execute after database operation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command attaches another database file?",
+"options":{
+"A":"ATTACH DATABASE",
+"B":"ADD DATABASE",
+"C":"IMPORT DATABASE",
+"D":"MERGE DATABASE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command detaches an attached database?",
+"options":{
+"A":"DETACH DATABASE",
+"B":"REMOVE DATABASE",
+"C":"DROP DATABASE",
+"D":"DELETE DATABASE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite can work with multiple databases in one connection.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function returns current date?",
+"options":{
+"A":"date()",
+"B":"today()",
+"C":"current_date()",
+"D":"getdate()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function returns current time?",
+"options":{
+"A":"time()",
+"B":"now()",
+"C":"current_time()",
+"D":"clock()"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite provides built-in date and time functions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which function returns current timestamp?",
+"options":{
+"A":"datetime()",
+"B":"timestamp()",
+"C":"nowtime()",
+"D":"clocktime()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite keyword checks for NULL values?",
+"options":{
+"A":"IS NULL",
+"B":"= NULL",
+"C":"NULL CHECK",
+"D":"CHECK NULL"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NULL means missing or unknown value.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite operator checks if value is not NULL?",
+"options":{
+"A":"IS NOT NULL",
+"B":"!= NULL",
+"C":"NOT NULL",
+"D":"<> NULL"
+},
+"answer":"A"
+},
+
+{
+"question":"Which clause renames column in result set?",
+"options":{
+"A":"AS",
+"B":"ALIAS",
+"C":"RENAME",
+"D":"CHANGE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: AS creates column aliases.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which operator concatenates strings in SQLite?",
+"options":{
+"A":"||",
+"B":"+",
+"C":"&",
+"D":"*"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function converts string to upper case?",
+"options":{
+"A":"UPPER",
+"B":"CAPS",
+"C":"TOUPPER",
+"D":"UPCASE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: LOWER function converts text to lowercase.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which function returns string length?",
+"options":{
+"A":"LENGTH",
+"B":"SIZE",
+"C":"COUNT",
+"D":"LENSTR"
+},
+"answer":"A"
+},
+
+{
+"question":"Which function extracts substring?",
+"options":{
+"A":"SUBSTR",
+"B":"MID",
+"C":"STRING",
+"D":"CUT"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports CASE expressions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which clause removes duplicate rows?",
+"options":{
+"A":"DISTINCT",
+"B":"UNIQUE",
+"C":"FILTER",
+"D":"GROUP"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command shows SQLite version?",
+"options":{
+"A":"SELECT sqlite_version()",
+"B":"SHOW VERSION",
+"C":"DB VERSION",
+"D":"PRAGMA VERSION"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports AUTOINCREMENT.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword automatically increments primary key?",
+"options":{
+"A":"AUTOINCREMENT",
+"B":"AUTO",
+"C":"INCREMENT",
+"D":"NEXT"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command analyzes query performance?",
+"options":{
+"A":"EXPLAIN QUERY PLAN",
+"B":"QUERY PLAN",
+"C":"EXPLAIN",
+"D":"SHOW PLAN"
+},
+"answer":"A"
+},
+{
+"question":"Which SQLite statement is used to rename a table?",
+"options":{
+"A":"ALTER TABLE RENAME TO",
+"B":"RENAME TABLE",
+"C":"CHANGE TABLE",
+"D":"UPDATE TABLE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite allows renaming a table using ALTER TABLE.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command displays SQLite database schema?",
+"options":{
+"A":"SELECT name FROM sqlite_master",
+"B":"SHOW SCHEMA",
+"C":"DESCRIBE DATABASE",
+"D":"LIST TABLES"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite table stores metadata about database objects?",
+"options":{
+"A":"sqlite_master",
+"B":"sqlite_schema",
+"C":"sqlite_table",
+"D":"sqlite_meta"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: sqlite_master contains information about tables and indexes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite statement deletes a database file?",
+"options":{
+"A":"SQLite has no SQL command for this",
+"B":"DROP DATABASE",
+"C":"DELETE DATABASE",
+"D":"REMOVE DATABASE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command retrieves all table names?",
+"options":{
+"A":"SELECT name FROM sqlite_master WHERE type='table'",
+"B":"SHOW TABLES",
+"C":"LIST TABLES",
+"D":"DESCRIBE TABLES"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite supports nested SELECT queries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQL clause allows nested queries?",
+"options":{
+"A":"Subquery",
+"B":"Nested Loop",
+"C":"Inner Query",
+"D":"Secondary Query"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite operator checks if a subquery returns values?",
+"options":{
+"A":"EXISTS",
+"B":"HAS",
+"C":"FOUND",
+"D":"CONTAINS"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: EXISTS returns TRUE if subquery returns rows.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite operator compares value with subquery result set?",
+"options":{
+"A":"IN",
+"B":"ANY",
+"C":"WITH",
+"D":"BETWEEN"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite operator checks value not present in list?",
+"options":{
+"A":"NOT IN",
+"B":"EXCLUDE",
+"C":"WITHOUT",
+"D":"NONE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NOT IN excludes matching values.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite clause limits query results?",
+"options":{
+"A":"LIMIT",
+"B":"TOP",
+"C":"MAXROWS",
+"D":"CAP"
+},
+"answer":"A"
+},
+
+{
+"question":"Which clause skips rows before returning results?",
+"options":{
+"A":"OFFSET",
+"B":"SKIP",
+"C":"PASS",
+"D":"IGNORE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: LIMIT and OFFSET can be used together.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function rounds numbers?",
+"options":{
+"A":"ROUND",
+"B":"CEIL",
+"C":"FLOOR",
+"D":"TRUNC"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function returns absolute value?",
+"options":{
+"A":"ABS",
+"B":"POSITIVE",
+"C":"VALUE",
+"D":"MAG"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ABS removes negative sign from numbers.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function generates random numbers?",
+"options":{
+"A":"RANDOM",
+"B":"RAND",
+"C":"RANDOMIZE",
+"D":"GEN"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function returns random integer?",
+"options":{
+"A":"RANDOM",
+"B":"RANDOMINT",
+"C":"RANDINT",
+"D":"RANDOMNUM"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: RANDOM() returns pseudo-random integer.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite clause is used to combine query results?",
+"options":{
+"A":"UNION",
+"B":"MERGE",
+"C":"JOIN",
+"D":"APPEND"
+},
+"answer":"A"
+},
+
+{
+"question":"Which UNION removes duplicate rows?",
+"options":{
+"A":"UNION",
+"B":"UNION ALL",
+"C":"JOIN",
+"D":"INTERSECT"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: UNION ALL keeps duplicate rows.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which operator returns rows present in both queries?",
+"options":{
+"A":"INTERSECT",
+"B":"JOIN",
+"C":"UNION",
+"D":"MATCH"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operator returns rows from first query not in second?",
+"options":{
+"A":"EXCEPT",
+"B":"DIFFERENCE",
+"C":"MINUS",
+"D":"REMOVE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: EXCEPT removes rows returned by second query.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite keyword creates temporary tables?",
+"options":{
+"A":"TEMP",
+"B":"CACHE",
+"C":"MEMORY",
+"D":"TEMPORARYTABLE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command creates temporary table?",
+"options":{
+"A":"CREATE TEMP TABLE",
+"B":"CREATE TEMPORARY TABLE",
+"C":"Both A and B",
+"D":"CREATE CACHE TABLE"
+},
+"answer":"C"
+},
+
+{
+"question":"True or False: Temporary tables exist only during connection.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command optimizes database file?",
+"options":{
+"A":"VACUUM",
+"B":"OPTIMIZE",
+"C":"CLEAN",
+"D":"REFRESH"
+},
+"answer":"A"
+},
+
+{
+"question":"What does VACUUM do?",
+"options":{
+"A":"Rebuilds database file",
+"B":"Deletes tables",
+"C":"Optimizes indexes only",
+"D":"Backups database"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: VACUUM reduces database size.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command checks database integrity?",
+"options":{
+"A":"PRAGMA integrity_check",
+"B":"CHECK DATABASE",
+"C":"VERIFY DB",
+"D":"SCAN DATABASE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command lists database tables in SQLite CLI?",
+"options":{
+"A":".tables",
+"B":"SHOW TABLES",
+"C":"LIST TABLES",
+"D":"TABLE LIST"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite CLI commands start with a dot.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which SQLite command shows database file location?",
+"options":{
+"A":"PRAGMA database_list",
+"B":"SHOW DATABASE",
+"C":"DB LOCATION",
+"D":"DATABASE PATH"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: PRAGMA commands configure SQLite database behavior.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PRAGMA command enables foreign key constraints?",
+"options":{
+"A":"PRAGMA foreign_keys = ON",
+"B":"ENABLE FOREIGN KEYS",
+"C":"SET FOREIGN KEY",
+"D":"TURN ON FOREIGN KEY"
+},
+"answer":"A"
+},
+
+{
+"question":"Which PRAGMA command disables foreign key constraints?",
+"options":{
+"A":"PRAGMA foreign_keys = OFF",
+"B":"DISABLE FOREIGN KEY",
+"C":"SET FOREIGN KEY OFF",
+"D":"STOP FOREIGN KEYS"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Foreign keys are disabled by default in older SQLite versions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function converts value to integer?",
+"options":{
+"A":"CAST",
+"B":"CONVERT",
+"C":"INT",
+"D":"INTEGER"
+},
+"answer":"A"
+},
+
+{
+"question":"Example of type casting in SQLite?",
+"options":{
+"A":"CAST(value AS INTEGER)",
+"B":"CONVERT(value,INTEGER)",
+"C":"value::INTEGER",
+"D":"TOINTEGER(value)"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite uses dynamic typing.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite storage class stores integers?",
+"options":{
+"A":"INTEGER",
+"B":"NUMBER",
+"C":"INT32",
+"D":"WHOLE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite storage class stores floating point numbers?",
+"options":{
+"A":"REAL",
+"B":"FLOAT",
+"C":"DOUBLE",
+"D":"NUMBER"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: TEXT storage class stores string values.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite storage class stores binary data?",
+"options":{
+"A":"BLOB",
+"B":"BINARY",
+"C":"BYTE",
+"D":"DATA"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite storage class represents NULL values?",
+"options":{
+"A":"NULL",
+"B":"EMPTY",
+"C":"VOID",
+"D":"NONE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite allows storing different data types in same column.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which constraint ensures column values are unique?",
+"options":{
+"A":"UNIQUE",
+"B":"PRIMARY",
+"C":"DISTINCT",
+"D":"IDENTITY"
+},
+"answer":"A"
+},
+
+{
+"question":"Which constraint ensures row identification?",
+"options":{
+"A":"PRIMARY KEY",
+"B":"UNIQUE",
+"C":"FOREIGN KEY",
+"D":"CHECK"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: PRIMARY KEY columns cannot contain NULL values.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which constraint validates data condition?",
+"options":{
+"A":"CHECK",
+"B":"VERIFY",
+"C":"VALIDATE",
+"D":"ASSERT"
+},
+"answer":"A"
+},
+
+{
+"question":"Example of CHECK constraint?",
+"options":{
+"A":"CHECK(age > 18)",
+"B":"VERIFY(age > 18)",
+"C":"VALID(age > 18)",
+"D":"ASSERT(age > 18)"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CHECK ensures data validity during insert or update.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite clause filters aggregated data?",
+"options":{
+"A":"HAVING",
+"B":"WHERE",
+"C":"GROUP",
+"D":"LIMIT"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite clause groups rows?",
+"options":{
+"A":"GROUP BY",
+"B":"ORDER BY",
+"C":"FILTER",
+"D":"COLLECT"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: GROUP BY is used with aggregate functions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite operator compares two values for equality?",
+"options":{
+"A":"=",
+"B":"==",
+"C":"EQUAL",
+"D":"IS"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operator checks inequality?",
+"options":{
+"A":"!=",
+"B":"<>",
+"C":"Both A and B",
+"D":"NOT"
+},
+"answer":"C"
+},
+
+{
+"question":"True or False: SQLite supports both != and <> for inequality.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite logical operator returns true if both conditions are true?",
+"options":{
+"A":"AND",
+"B":"OR",
+"C":"NOT",
+"D":"XOR"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operator returns true if any condition is true?",
+"options":{
+"A":"OR",
+"B":"AND",
+"C":"NOT",
+"D":"MATCH"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NOT operator negates a condition.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite clause sorts query results?",
+"options":{
+"A":"ORDER BY",
+"B":"SORT BY",
+"C":"GROUP BY",
+"D":"ARRANGE"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword sorts results descending?",
+"options":{
+"A":"DESC",
+"B":"DOWN",
+"C":"REVERSE",
+"D":"LOW"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ASC sorts results in ascending order.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function returns total rows count?",
+"options":{
+"A":"COUNT",
+"B":"SUM",
+"C":"TOTAL",
+"D":"NUMBER"
+},
+"answer":"A"
+},
+
+{
+"question":"Which function returns total of numeric column?",
+"options":{
+"A":"SUM",
+"B":"ADD",
+"C":"TOTAL",
+"D":"COMBINE"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: AVG returns average value.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function finds highest value?",
+"options":{
+"A":"MAX",
+"B":"TOP",
+"C":"UPPER",
+"D":"BIG"
+},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function finds lowest value?",
+"options":{
+"A":"MIN",
+"B":"LOW",
+"C":"BOTTOM",
+"D":"SMALL"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite is widely used in mobile applications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which operating systems commonly use SQLite? (Select all that apply)",
+"options":{
+"A":"Android",
+"B":"iOS",
+"C":"Windows",
+"D":"Linux"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"Which application commonly uses SQLite database?",
+"options":{
+"A":"Mobile apps",
+"B":"Embedded systems",
+"C":"Browsers",
+"D":"All of the above"
+},
+"answer":"D"
+},
+{
+"question":"Which SQLite command begins a transaction?",
+"options":{"A":"BEGIN TRANSACTION","B":"START TRANSACTION","C":"OPEN TRANSACTION","D":"CREATE TRANSACTION"},
+"answer":"A"
+},
+
+{
+"question":"True or False: Transactions ensure database consistency.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command finalizes a transaction permanently?",
+"options":{"A":"COMMIT","B":"SAVE","C":"FINISH","D":"STOP"},
+"answer":"A"
+},
+
+{
+"question":"Which command cancels a transaction?",
+"options":{"A":"ROLLBACK","B":"STOP","C":"CANCEL","D":"UNDO"},
+"answer":"A"
+},
+
+{
+"question":"True or False: COMMIT saves changes made in a transaction.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite statement creates a database table?",
+"options":{"A":"CREATE TABLE","B":"NEW TABLE","C":"MAKE TABLE","D":"TABLE CREATE"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command modifies existing table structure?",
+"options":{"A":"ALTER TABLE","B":"UPDATE TABLE","C":"CHANGE TABLE","D":"MODIFY TABLE"},
+"answer":"A"
+},
+
+{
+"question":"True or False: ALTER TABLE can add new columns.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command removes a table completely?",
+"options":{"A":"DROP TABLE","B":"DELETE TABLE","C":"REMOVE TABLE","D":"CLEAR TABLE"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite clause filters results after grouping?",
+"options":{"A":"HAVING","B":"WHERE","C":"GROUP","D":"FILTER"},
+"answer":"A"
+},
+
+{
+"question":"True or False: WHERE filters rows before GROUP BY.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite operator checks pattern matching?",
+"options":{"A":"LIKE","B":"MATCH","C":"SEARCH","D":"FIND"},
+"answer":"A"
+},
+
+{
+"question":"Which wildcard represents any number of characters?",
+"options":{"A":"%","B":"_","C":"*","D":"?"},
+"answer":"A"
+},
+
+{
+"question":"True or False: _ represents a single character wildcard.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function converts text to lowercase?",
+"options":{"A":"LOWER","B":"DOWNCASE","C":"SMALL","D":"MINCASE"},
+"answer":"A"
+},
+
+{
+"question":"Which function trims whitespace from strings?",
+"options":{"A":"TRIM","B":"STRIP","C":"CUT","D":"CLEAN"},
+"answer":"A"
+},
+
+{
+"question":"True or False: TRIM removes leading and trailing spaces.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite clause limits number of returned rows?",
+"options":{"A":"LIMIT","B":"TOP","C":"ROWCOUNT","D":"MAXROWS"},
+"answer":"A"
+},
+
+{
+"question":"Which clause skips rows before returning data?",
+"options":{"A":"OFFSET","B":"SKIP","C":"IGNORE","D":"PASS"},
+"answer":"A"
+},
+
+{
+"question":"True or False: LIMIT can be combined with OFFSET.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite function returns database version?",
+"options":{"A":"sqlite_version()","B":"db_version()","C":"version()","D":"sqlite_db()"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command lists attached databases?",
+"options":{"A":"PRAGMA database_list","B":"SHOW DATABASE","C":"LIST DATABASE","D":"DATABASE INFO"},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite can attach multiple databases to a single connection.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command detaches a database?",
+"options":{"A":"DETACH DATABASE","B":"REMOVE DATABASE","C":"DROP DATABASE","D":"DELETE DATABASE"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command attaches another database file?",
+"options":{"A":"ATTACH DATABASE","B":"ADD DATABASE","C":"LINK DATABASE","D":"IMPORT DATABASE"},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite is widely used in embedded systems.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which application commonly uses SQLite internally?",
+"options":{"A":"Mobile apps","B":"Web browsers","C":"Embedded devices","D":"All of the above"},
+"answer":"D"
+},
+
+{
+"question":"Which SQLite feature reduces database size by rebuilding file?",
+"options":{"A":"VACUUM","B":"OPTIMIZE","C":"REBUILD","D":"CLEAN"},
+"answer":"A"
+},
+
+{
+"question":"True or False: VACUUM reorganizes the database file.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command checks database integrity?",
+"options":{"A":"PRAGMA integrity_check","B":"CHECK DATABASE","C":"VERIFY DB","D":"SCAN DB"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite command analyzes query plan?",
+"options":{"A":"EXPLAIN QUERY PLAN","B":"SHOW PLAN","C":"QUERY ANALYZE","D":"PLAN QUERY"},
+"answer":"A"
+},
+
+{
+"question":"True or False: EXPLAIN QUERY PLAN helps optimize queries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite CLI command lists tables?",
+"options":{"A":".tables","B":"SHOW TABLES","C":"LIST TABLES","D":"TABLE LIST"},
+"answer":"A"
+},
+
+{
+"question":"Which SQLite CLI command shows schema of database?",
+"options":{"A":".schema","B":"SHOW SCHEMA","C":"LIST SCHEMA","D":"SCHEMA SHOW"},
+"answer":"A"
+},
+
+{
+"question":"True or False: SQLite CLI commands start with a dot.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+}
+  ]
+}

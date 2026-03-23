@@ -13,9 +13,9 @@ const getApiBaseUrl = () => {
             return `http://${hostname}:8001/api`;
         }
 
-        // If accessed via duckdns, Nginx handles the /api path.
+        // If accessed via custom domain, Nginx handles the /api path.
         // We use the same protocol and hostname as the frontend.
-        if (hostname === 'verifyhire.duckdns.org') {
+        if (hostname === 'verifihireai.com' || hostname === 'www.verifihireai.com') {
             return `${protocol}//${hostname}/api`;
         }
 
@@ -34,7 +34,7 @@ const getWsBaseUrl = () => {
             return `ws://${hostname}:8001/ws`;
         }
 
-        if (hostname === 'verifyhire.duckdns.org') {
+        if (hostname === 'verifihireai.com' || hostname === 'www.verifihireai.com') {
             // Nginx handles the /ws path
             return `${protocol}//${hostname}/ws`;
         }

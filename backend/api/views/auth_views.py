@@ -1,5 +1,5 @@
-from ._imports import *
-from ._imports import _otp_expiry_seconds, _email_domain, _free_email_domains
+from .._imports import *
+from .._imports import _otp_expiry_seconds, _email_domain, _free_email_domains
 
 
 @api_view(['GET'])
@@ -413,8 +413,11 @@ def register_view(request):
         else:
             # Domain not registered yet, find or create company by name (case-insensitive)
             company = Company.objects.filter(name__iexact=organization_name).first()
-            if not company:
-                company = Company.objects.create(name=organization_name)
+        if not company:
+                company = Company.objects.create(
+                    name=organization_name,
+                    approval_status=Company.APPROVAL_PENDING
+                )
         
         # Ensure company domain is set if not already
         if not company.domain:
@@ -481,7 +484,7 @@ def register_view(request):
 
         return Response(
             {
-                'message': 'Registration submitted! Your company account is pending approval by the platform administrator. You will receive an email once your account is approved.',
+                'message': 'Registration successful! Your account is pending superadmin approval.',
                 'pending_approval': True,
                 'user': {
                     'id': user_profile.id,
@@ -559,28 +562,16 @@ def login_view(request):
                 except Exception:
                     pass
 
-            # Check company approval status before allowing login
-            if user_profile.company:
-                approval_status = user_profile.company.approval_status
-                if approval_status == Company.APPROVAL_PENDING:
-                    return Response(
-                        {'error': 'Your company registration is pending approval by the platform administrator. You will receive an email once your account is approved.'},
-                        status=status.HTTP_403_FORBIDDEN
-                    )
-                elif approval_status == Company.APPROVAL_REJECTED:
-                    reason = user_profile.company.rejected_reason
-                    msg = 'Your company registration has been rejected by the platform administrator.'
-                    if reason:
-                        msg += f' Reason: {reason}'
-                    msg += ' Please contact support for more information.'
-                    return Response({'error': msg}, status=status.HTTP_403_FORBIDDEN)
-                
-                # ALSO check individual user approval
-                if not user_profile.is_approved:
-                    return Response(
-                        {'error': 'Your account is pending approval by the platform administrator.'},
-                        status=status.HTTP_403_FORBIDDEN
-                    )
+            # Check if user and company are approved
+            if not user_profile.is_approved:
+                return Response({'error': 'Your account is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
+            
+            if user_profile.company and user_profile.company.approval_status != Company.APPROVAL_APPROVED:
+                if user_profile.company.approval_status == Company.APPROVAL_REJECTED:
+                    return Response({
+                        'error': f'Your company registration was rejected. Reason: {user_profile.company.rejected_reason or "No reason provided."}'
+                    }, status=status.HTTP_403_FORBIDDEN)
+                return Response({'error': 'Your company registration is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
         else:
             # Application Admin users (no UserProfile): must exist in ApplicationAdmin table
             auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
@@ -717,6 +708,13 @@ def verify_login_otp_view(request):
                     auth_user = user_profile.user
                 else:
                     auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
+                
+                # Double check approval in step 2
+                if not user_profile.is_approved:
+                    return Response({'error': 'Your account is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
+                
+                if user_profile.company and user_profile.company.approval_status != Company.APPROVAL_APPROVED:
+                    return Response({'error': 'Your company registration is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
             
             if not auth_user:
                 return Response({'error': 'Authentication user not found. Please contact support.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

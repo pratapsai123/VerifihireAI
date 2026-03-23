@@ -1,5 +1,5 @@
-from ._imports import *
-from ._imports import _email_domain, _free_email_domains, _generate_temp_password, _normalize_email, _is_application_admin_email
+from .._imports import *
+from .._imports import _email_domain, _free_email_domains, _generate_temp_password, _normalize_email, _is_application_admin_email
 
 
 @csrf_exempt
@@ -33,18 +33,21 @@ def invite_user_view(request):
 
         if not invitee_email:
             return Response({'email': ['Email is required.']}, status=status.HTTP_400_BAD_REQUEST)
-        if role not in {UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR}:
-            return Response({'role': ['Role must be hr_manager or hr.']}, status=status.HTTP_400_BAD_REQUEST)
+        if role not in {UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
+            return Response({'role': ['Role must be hr_manager, hr or interviewer.']}, status=status.HTTP_400_BAD_REQUEST)
 
         inviter = UserProfile.objects.filter(email=inviter_email).select_related('company').first()
         if not inviter or not inviter.company:
             return Response({'error': 'Invalid inviter.'}, status=status.HTTP_403_FORBIDDEN)
 
-        if inviter.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
+        if inviter.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR}:
             return Response({'error': 'You are not allowed to invite users.'}, status=status.HTTP_403_FORBIDDEN)
 
-        if inviter.role == UserProfile.ROLE_HR_MANAGER and role != UserProfile.ROLE_HR:
-            return Response({'error': 'HR Manager can only invite HR users.'}, status=status.HTTP_403_FORBIDDEN)
+        if inviter.role == UserProfile.ROLE_HR_MANAGER and role not in {UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
+            return Response({'error': 'HR Manager can only invite HR or Interviewer users.'}, status=status.HTTP_403_FORBIDDEN)
+
+        if inviter.role == UserProfile.ROLE_HR and role != UserProfile.ROLE_INTERVIEWER:
+            return Response({'error': 'HR can only invite Interviewer users.'}, status=status.HTTP_403_FORBIDDEN)
 
         company = inviter.company
         company_domain = (company.domain or '').strip().lower()
@@ -94,7 +97,7 @@ def invite_user_view(request):
             # request.build_absolute_uri('/') gives http(s)://host/; trim trailing slash
             frontend_base = request.build_absolute_uri('/').rstrip('/')
         if not frontend_base:
-            frontend_base = 'https://verifyhire.duckdns.org'
+            frontend_base = 'https://verifihireai.com'
         activation_link = f"{frontend_base.rstrip('/')}/accept-invite?token={invitation.token}"
 
         subject = f"{company.name} - Account Invitation"
@@ -218,7 +221,7 @@ def resend_invite_view(request, token):
         inv.expires_at = timezone.now() + timedelta(hours=48)
         inv.save(update_fields=['temp_password_hash', 'expires_at'])
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
         activation_link = f"{frontend_base.rstrip('/')}/accept-invite?token={inv.token}"
 
         subject = f"{inv.company.name} - Account Invitation (Resent)"
@@ -370,6 +373,7 @@ def accept_invite_view(request):
             # inv.invited_by acts as both the creator (static) and initial manager (dynamic).
             invited_by_profile=inv.invited_by,
             manager=inv.invited_by,
+            is_approved=True, # Auto-approve users invited by an approved admin/manager
         )
 
         inv.status = UserInvitation.STATUS_ACCEPTED
@@ -429,8 +433,8 @@ def team_members_view(request):
             )
             if not requester_profile or not requester_profile.company:
                 return Response({'error': 'Your account has no company assigned.'}, status=status.HTTP_403_FORBIDDEN)
-            if requester_profile.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
-                return Response({'error': 'Forbidden. Only Company Admins and HR Managers can view team members.'}, status=status.HTTP_403_FORBIDDEN)
+            if requester_profile.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER, UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
+                return Response({'error': 'Forbidden. Only Company Admins, HR Managers, HRs, and Interviewers can view team members.'}, status=status.HTTP_403_FORBIDDEN)
 
         if is_app_admin:
             members_qs = UserProfile.objects.select_related('company').order_by('company__name', 'email')
@@ -443,9 +447,15 @@ def team_members_view(request):
                 # HR Manager: sees only members they directly invited
                 # + invitations they personally sent
                 scoped_ids = get_scoped_user_ids(requester_profile)  # [self + their HRs]
+                
+                # NEW: Add all interviewers from the same Admin's tree
+                from .._imports import get_admin_tree_interviewer_ids
+                interviewer_ids = get_admin_tree_interviewer_ids(requester_profile)
+                all_member_ids = list(set(scoped_ids + interviewer_ids))
+
                 members_qs = (
                     UserProfile.objects.filter(
-                        id__in=scoped_ids,
+                        id__in=all_member_ids,
                         company=company,
                     )
                     .exclude(role=UserProfile.ROLE_APPLICATION_ADMIN)
@@ -460,6 +470,23 @@ def team_members_view(request):
                     .select_related('company', 'invited_by')
                     .order_by('-created_at')
                 )
+            elif role in {UserProfile.ROLE_HR, UserProfile.ROLE_INTERVIEWER}:
+                # HR/Interviewer: sees themselves + all interviewers in the same admin tree
+                scoped_ids = get_scoped_user_ids(requester_profile)
+                from .._imports import get_admin_tree_interviewer_ids
+                interviewer_ids = get_admin_tree_interviewer_ids(requester_profile)
+                all_member_ids = list(set(scoped_ids + interviewer_ids))
+
+                members_qs = (
+                    UserProfile.objects.filter(
+                        id__in=all_member_ids,
+                        company=company,
+                    )
+                    .exclude(role=UserProfile.ROLE_APPLICATION_ADMIN)
+                    .select_related('company')
+                    .order_by('email')
+                )
+                invites_qs = UserInvitation.objects.none()
             else:
                 # Company Admin: sees their own HR Managers + those HRMs' HRs
                 # (not other Company Admins' sub-trees)
@@ -562,4 +589,110 @@ def profile_view(request):
             } if profile.company else None,
         }, status=status.HTTP_200_OK)
     except Exception as e:
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def add_team_member_view(request):
+    """
+    Quickly add an interviewer (team member) to the company.
+    Expected body: { "name": "...", "email": "..." }
+    """
+    try:
+        requester_profile = getattr(request.user, 'profile', None)
+        if not requester_profile or not requester_profile.company:
+            return Response({'error': 'Your account has no company assigned.'}, status=status.HTTP_403_FORBIDDEN)
+        
+        if requester_profile.role not in {UserProfile.ROLE_COMPANY_ADMIN, UserProfile.ROLE_HR_MANAGER}:
+            return Response({'error': 'Only Company Admins and HR Managers can add team members.'}, status=status.HTTP_403_FORBIDDEN)
+
+        name = (request.data.get('name') or '').strip()
+        email = _normalize_email(request.data.get('email', ''))
+
+        if not name or not email:
+            return Response({'error': 'Name and Email are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Domain Validation Logic
+        company = requester_profile.company
+        company_domain = (company.domain or '').strip().lower()
+        
+        if not company_domain:
+            return Response({'error': 'Your company domain is not configured. Please contact support.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        invitee_domain = _email_domain(email)
+        if not invitee_domain:
+            return Response({'error': 'Please provide a valid email address.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # 1. Block free email domains
+        if invitee_domain in _free_email_domains():
+            return Response({
+                'error': f'Generic email accounts (like {invitee_domain}) are not allowed for interviewers. Please use an official "{company_domain}" email.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # 2. Enforce strict company domain match
+        if invitee_domain != company_domain:
+            return Response({
+                'error': f'You can only add team members with an official "{company_domain}" email address. "{invitee_domain}" belongs to another organization.'
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        # Check if already exists
+        existing = UserProfile.objects.filter(email=email).first()
+        if existing:
+            if existing.company_id != requester_profile.company_id:
+                return Response({'error': 'A user with this email already exists in another company.'}, status=status.HTTP_409_CONFLICT)
+            
+            return Response({
+                'message': 'User already exists in your team.',
+                'member': {
+                    'id': existing.id,
+                    'first_name': existing.first_name,
+                    'last_name': existing.last_name,
+                    'email': existing.email,
+                    'role': existing.role,
+                }
+            }, status=status.HTTP_200_OK)
+
+        # Create new user
+        name_parts = name.split(' ', 1)
+        first_name = name_parts[0].strip()
+        last_name = name_parts[1].strip() if len(name_parts) > 1 else ''
+
+        # Use a random password as they might not log in yet
+        temp_password = _generate_temp_password(12)
+        user = User.objects.create_user(
+            username=email,
+            email=email,
+            password=temp_password,
+            first_name=first_name,
+            last_name=last_name,
+        )
+
+        new_profile = UserProfile.objects.create(
+            user=user,
+            email=email,
+            first_name=first_name,
+            last_name=last_name or None,
+            role=UserProfile.ROLE_INTERVIEWER,
+            company=requester_profile.company,
+            organization_name=requester_profile.company.name,
+            manager=requester_profile,
+            invited_by_profile=requester_profile,
+            is_approved=True, # Auto-approve team members added by admin
+        )
+
+        return Response({
+            'message': 'Team member added successfully.',
+            'member': {
+                'id': new_profile.id,
+                'first_name': new_profile.first_name,
+                'last_name': new_profile.last_name,
+                'email': new_profile.email,
+                'role': new_profile.role,
+            }
+        }, status=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        import traceback
+        print(f"Error in add_team_member_view: {str(e)}")
+        print(traceback.format_exc())
         return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -1,5 +1,6 @@
-from ._imports import *
-from ._imports import _db_call_with_retry
+from .._imports import *
+from .._imports import _db_call_with_retry
+from api.utils.slot_utils import generate_slots_for_interviewer
 
 
 
@@ -53,6 +54,9 @@ def get_questions_view(request):
         
         if difficulty:
             questions = questions.filter(difficulty=difficulty.lower())
+        
+        # Jumble questions randomly
+        questions = questions.order_by('?')
         
         # Apply limit
         if limit:
@@ -403,12 +407,12 @@ def get_manual_questions_view(request):
         qs = (
             Question.objects.filter(custom_assessment_id=caid)
             .select_related('created_by', 'custom_assessment')
-            .order_by('created_at')
+            .order_by('?')
         )
         q_list = _db_call_with_retry(lambda: list(qs), retries=1)
 
         # Also fetch CodingQuestions for this custom_assessment_id
-        coding_qs = CodingQuestion.objects.filter(custom_assessment_id=caid).order_by('created_at')
+        coding_qs = CodingQuestion.objects.filter(custom_assessment_id=caid).order_by('?')
         coding_list = _db_call_with_retry(lambda: list(coding_qs), retries=1)
 
         results = []
@@ -459,8 +463,9 @@ def get_manual_questions_view(request):
                 }
             )
 
-        # Sort combined results by created_at
-        results.sort(key=lambda x: x.get('created_at') or '', reverse=False)
+        # Randomize combined results
+        import random
+        random.shuffle(results)
 
         return Response({'count': len(results), 'results': results}, status=status.HTTP_200_OK)
 
@@ -951,8 +956,8 @@ def get_questions_by_skills_view(request):
             if difficulty:
                 questions = questions.filter(difficulty=difficulty.lower())
             
-            # Order by created_at for consistent results
-            questions = questions.order_by('created_at')
+            # Order randomly
+            questions = questions.order_by('?')
             
             if limit_per_skill:
                 try:
@@ -1448,6 +1453,7 @@ def create_assessment_view(request):
         
         w_cod = request.data.get('weightage_coding')
         weightage_coding = int(w_cod) if w_cod is not None else 50
+        assigned_interviewer_ids = request.data.get('assigned_interviewer_ids', [])
 
         # Use the custom_assessment's user_profile, fall back to the requesting user's profile
         # This ensures the Assessment is always linked to a company (for dashboard filtering)
@@ -1582,6 +1588,22 @@ def create_assessment_view(request):
                     )
                 )
             AssessmentCodingQuestion.objects.bulk_create(coding_snapshots)
+
+        # Once finalized, auto-generate slots for assigned interviewers if any
+        if assigned_interviewer_ids:
+            assessment.assigned_interviewers.set(assigned_interviewer_ids)
+            
+            # Trigger slot generation for next 7 days
+            try:
+                start_date = timezone.now().date()
+                for interviewer_id in assigned_interviewer_ids:
+                    try:
+                        interviewer = UserProfile.objects.get(id=interviewer_id)
+                        generate_slots_for_interviewer(interviewer, start_date, 7)
+                    except UserProfile.DoesNotExist:
+                        continue
+            except Exception as e:
+                print(f"Error auto-generating slots during create_assessment: {str(e)}")
 
         return Response(
             {
@@ -1723,6 +1745,21 @@ def get_assessment_detail_view(request, assessment_id: int):
         except Assessment.DoesNotExist:
             return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
 
+        # --- RBAC ownership check ---
+        # Verify the assessment belongs to the requesting user's invite tree.
+        # This prevents Admin A from reading Admin B's assessment even if they
+        # share the same company record.
+        user_profile = getattr(request.user, 'profile', None)
+        if user_profile:
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if scoped_ids is not None:
+                # scoped_ids = None means platform superadmin (can access all)
+                if a.user_profile_id not in scoped_ids:
+                    return Response(
+                        {'error': 'You do not have permission to access this assessment.'},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
+
         if request.method == 'PATCH':
             data = request.data
             if 'name' in data: a.name = data['name']
@@ -1757,6 +1794,7 @@ def get_assessment_detail_view(request, assessment_id: int):
         print(f"Error in get_assessment_detail_view: {str(e)}")
         print(traceback.format_exc())
         return Response({'error': f'An error occurred while fetching assessment: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 
 def _is_valid_pan(pan: str) -> bool:

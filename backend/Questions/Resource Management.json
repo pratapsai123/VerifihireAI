@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Resource Management", 
+  "questions": [
+    {
+    "question": "What is the primary goal of 'Resource Management' in a business environment?",
+    "options": {
+      "A": "To ensure every employee has the same physical brand of desk.",
+      "B": "To efficiently and effectively deploy an organization's resources when they are needed.",
+      "C": "To eliminate the need for project managers entirely.",
+      "D": "To automatically order office snacks every Friday morning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Resource Management, 'Human Resources' refers specifically to the people who work for the organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is considered a 'Physical Resource' in a software project?",
+    "options": {
+      "A": "The Lead Developer's coding skills.",
+      "B": "A specialized testing server or cloud environment.",
+      "C": "The company's brand reputation.",
+      "D": "A SQL query used to fetch user data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Resource Allocation' technically involve?",
+    "options": {
+      "A": "Deleting all files from the office shared drive.",
+      "B": "Assigning available resources to specific tasks or projects over a set period.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "Increasing the frame rate of the team's video calls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are typical challenges in Resource Management? (Select all that apply)",
+    "options": {
+      "A": "Resource overallocation (Burnout)",
+      "B": "Skill mismatches for specific tasks",
+      "C": "Having exactly enough coffee in the breakroom",
+      "D": "Unforeseen resource unavailability (Sick leave)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resource Leveling'?",
+    "options": {
+      "A": "Ensuring the office floors are physically flat.",
+      "B": "A technique used to balance the demand for resources with the available supply to avoid over-utilization.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "Writing a review for the company online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Resource Histogram' is a visual tool used to show the usage of a resource over a specific period of time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific activity helps a manager identify 'Under-utilized' resources?",
+    "options": {
+      "A": "Ignoring the team's output for several weeks.",
+      "B": "Performing regular resource utilization audits and reviewing timesheets.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font in the project report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Capacity Planning'?",
+    "options": {
+      "A": "To count the number of physical chairs in the building.",
+      "B": "To determine the maximum amount of work that a team or system can complete in a given period.",
+      "C": "A specialized software for poets.",
+      "D": "To increase the speed of the office internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Resource Smoothing' is used when the project deadline is fixed and cannot be delayed, even if resources are over-allocated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a common 'Soft Skill' for a resource manager when dealing with competing project demands?",
+    "options": {
+      "A": "SQL Query Optimization.",
+      "B": "Negotiation and Persuasion.",
+      "C": "Hardware Assembly.",
+      "D": "Adobe Photoshop skills."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what does 'Resource Utilization Rate' measure? (Select all that apply)",
+    "options": {
+      "A": "The percentage of time a resource is spent on billable or productive tasks",
+      "B": "The physical weight of the server hardware",
+      "C": "If a team is being overworked or underworked",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is a 'Skill Matrix' in resource management?",
+    "options": {
+      "A": "A physical matrix made of paper requirements.",
+      "B": "A grid used to track the specific skills and proficiency levels of team members.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Soft' resources typically refer to intangible assets like intellectual property or brand reputation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Stakeholder Management' in the context of resource planning?",
+    "options": {
+      "A": "Managing the physical stakes used in construction.",
+      "B": "Ensuring that people impacted by resource decisions are kept informed and their needs are considered.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Resource Forecasting'?",
+    "options": {
+      "A": "Predicting the physical weather for the office commute.",
+      "B": "Estimating future resource needs based on upcoming projects and historical data.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Over-allocation occurs when a resource is assigned more work than can be completed within their normal working hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workload Balancing'?",
+    "options": {
+      "A": "Balancing the physical weight of office equipment.",
+      "B": "Distributing tasks evenly across a team to prevent burnout and ensure efficiency.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Resource Breakdown Structure' (RBS)?",
+    "options": {
+      "A": "A hierarchical list of resources categorized by type and function.",
+      "B": "A report showing how a physical server broke down.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Skills' occur when a project requires a Python expert but the only available resource is a Java developer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid methods to acquire project resources? (Select all that apply)",
+    "options": {
+      "A": "Internal hiring or cross-department transfer",
+      "B": "Outsourcing to a third-party vendor",
+      "C": "Buying physical snack for the office",
+      "D": "Hiring contractors or freelancers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resource Dependency'?",
+    "options": {
+      "A": "When Task B cannot start until a specific resource is finished with Task A.",
+      "B": "Depending on a person named Resource.",
+      "C": "A Strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Conflict' Management regarding resources?",
+    "options": {
+      "A": "Resolving disputes when two project managers need the same resource at the same time.",
+      "B": "A physical fight in the office.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Resource Calendar' identifies the working days and shifts upon which each specific resource is available.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Resource Management benefits? (Select all that apply)",
+    "options": {
+      "A": "Real-time visibility into resource availability",
+      "B": "Easier identification of overallocation",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Improved accuracy in project timelines"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Succession Planning' in a management context?",
+    "options": {
+      "A": "Planning a physical party for a successor.",
+      "B": "The process of identifying and developing internal people with the potential to fill key business leadership positions in the future.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Assign' (MTTA)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between a resource request being made and the resource being officially assigned to a project.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when a resource manager promises a client 10 developers, but the company only has 5 available.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'KPIs' for Resource Management? (Select all that apply)",
+    "options": {
+      "A": "Resource Utilization Rate",
+      "B": "Billable vs. Non-billable hours",
+      "C": "The SQL query parser",
+      "D": "Employee Retention Rate"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Escalation' in Resource Management?",
+    "options": {
+      "A": "Walking up physical stairs in the office.",
+      "B": "The process of raising a resource conflict or shortage to higher management for a decision.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Vendor' Management?",
+    "options": {
+      "A": "Managing the physical people who sell food.",
+      "B": "The process of managing external resource providers to ensure quality and cost-effectiveness.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Location' in resources refers to assigning a task to an employee in a timezone that is incompatible with the project's daily standup.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Diversity' in a resource pool? (Select all that apply)",
+    "options": {
+      "A": "Ensuring a range of technical skill levels",
+      "B": "Actively hiring from different demographic backgrounds",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where different perspectives are valued"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Gap Analysis' in resource planning?",
+    "options": {
+      "A": "Analyzing the gaps between physical floor tiles.",
+      "B": "Comparing the current available resources/skills with the resources/skills required to meet future goals.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Staffing Rate'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The ratio of actual employees filled in positions compared to the total number of open roles.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager expects a new hire to be 100% productive on their first day without any onboarding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Resource Management tools? (Select all that apply)",
+    "options": {
+      "A": "Resource Guru",
+      "B": "Mavenlink (Kantata)",
+      "C": "Smartsheet",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Audit' Readiness in Resource Management?",
+    "options": {
+      "A": "Being ready for a physical audit of the office furniture.",
+      "B": "Ensuring all resource assignments, contracts, and costs are documented and compliant with company policy.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Attrition Rate'?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The rate at which employees leave an organization over a specific period.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a remote worker lacks the necessary high-speed internet to use company cloud resources effectively.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Resource' Training? (Select all that apply)",
+    "options": {
+      "A": "Workshops on time management",
+      "B": "Developing conflict resolution skills for managers",
+      "C": "Identifying program satisfaction trends",
+      "D": "Guaranteed to replace all human managers"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Bench Time'?",
+    "options": {
+      "A": "Sitting on a physical bench in the office lobby.",
+      "B": "The period during which a billable employee is between projects and not currently assigned to client work.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Role' 'Aging'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A report showing how long critical positions have remained vacant within the company.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a manager uses formal written contracts for a casual, internal one-day task.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Resource Governance stakeholders? (Select all that apply)",
+    "options": {
+      "A": "HR Director",
+      "B": "Finance Manager",
+      "C": "Operations Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Availability' Planning?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "Ensuring that the right resources are available at the right time to meet project milestones.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Utilization' Variance?",
+    "options": {
+      "A": "The difference between the planned resource usage and the actual resource usage.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a project waits 4 weeks for a specialized server that was never actually ordered.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Resource Scheduling benefits? (Select all that apply)",
+    "options": {
+      "A": "Instant conflict detection between projects",
+      "B": "Consistency in data presentation for leadership",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual spreadsheet tracking"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Soft' Allocation?",
+    "options": {
+      "A": "Allocating a person named Soft.",
+      "B": "A tentative resource assignment that has not yet been finalized or confirmed.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cost per Resource'?",
+    "options": {
+      "A": "A metric that calculates the total organizational cost of a specific resource, including salary, benefits, and overhead.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when a resource manager fails to document the specific skills of an employee in the company database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Resource management roles? (Select all that apply)",
+    "options": {
+      "A": "Resource Manager",
+      "B": "Talent Acquisition Lead",
+      "C": "Project Coordinator",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Skill' Gap Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "Identifying the difference between the skills a team has and the skills needed to complete a project.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resource' Burn Rate?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The rate at which a project consumes its allocated budget or resource hours over time.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in resource management refers to giving a developer a computer that is too slow to run the necessary compilers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' resource planning? (Select all that apply)",
+    "options": {
+      "A": "Ensuring team members from all backgrounds have access to high-profile projects",
+      "B": "Conducting 'blind' skills audits to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Actively seeking to diverse the resource pool"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cross-Training'?",
+    "options": {
+      "A": "Training employees in multiple different skills to increase team flexibility and reduce dependency on one person.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Onboard' (MTTO)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from a new hire's start date until they are fully productive in their role.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager expects a freelancer to know the internal company culture without any introduction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying future resource shortages based on sales pipeline",
+      "B": "Predicting project delays based on resource overallocation",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Analyzing trends in employee turnover"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Hard' Allocation?",
+    "options": {
+      "A": "Allocating a person named Hard.",
+      "B": "A finalized and confirmed resource assignment that cannot be easily changed.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resource' Yield?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A measure of the actual productive output achieved per unit of resource consumed.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an external vendor fails to provide the number of support hours agreed upon in the contract.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Resource Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "CFO",
+      "B": "Project Sponsor",
+      "C": "Department Manager",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Skill' Inventory?",
+    "options": {
+      "A": "Building a physical warehouse for skills.",
+      "B": "A database or list of all skills possessed by current employees within an organization.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical difference between 'Resource Leveling' and 'Resource Smoothing'?",
+    "options": {
+      "A": "Leveling changes the project finish date to stay within resource limits; Smoothing only adjusts activities within their float to avoid changing the deadline.",
+      "B": "Leveling is for physical objects; Smoothing is for human staff only.",
+      "C": "Smoothing requires hiring 50% more staff; Leveling requires firing 50% of staff.",
+      "D": "There is no difference; they are synonymous terms in management."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Matrix Organization', resource managers often face higher conflict because employees report to both a functional manager and a project manager.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific metric should a manager use to identify a 'Single Point of Failure' (SPOF) within a specialized technical resource pool?",
+    "options": {
+      "A": "Total departmental budget",
+      "B": "Skill Redundancy Ratio (Number of people who can perform a critical task)",
+      "C": "The font size of the employee's name in the directory",
+      "D": "The physical weight of the laptops assigned to the team"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the strategic objective of 'Just-in-Time' (JIT) resourcing in project management?",
+    "options": {
+      "A": "To ensure every employee is in the office exactly at 9:00 AM.",
+      "B": "To acquire or assign resources only when they are needed for a specific task to minimize 'Bench Time' costs.",
+      "C": "A specialized software for poets to write about work.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which aspect of 'Emotional Intelligence' is most critical when a manager must tell a high-performing team member that their requested resource has been diverted to a 'Higher Priority' project?",
+    "options": {
+      "A": "Self-Awareness strictly",
+      "B": "Conflict De-escalation and Empathy",
+      "C": "Owning the fastest computer in the office",
+      "D": "Hiring a professional actor to represent the manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in resource management occurs when a vendor promises '24/7 Support' but their primary resource is located in a timezone with a 12-hour offset and no overnight shift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Strategic Planning', what is a 'Gap Analysis' technically intended to reveal for the HR leadership team?",
+    "options": {
+      "A": "The physical distance between office cubicles.",
+      "B": "The discrepancy between the current skills of the workforce and the skills required to achieve the company's 3-year technology roadmap.",
+      "C": "A specialized security scan for database viruses.",
+      "D": "Increasing the frame rate of the employee training videos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resource' 'Contention' and how should a manager technically resolve it in a multi-project environment?",
+    "options": {
+      "A": "A physical fight over office chairs.",
+      "B": "When multiple projects require the same limited resource simultaneously; resolved via 'Priority Scoring' and 'Resource Leveling'.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the size of the font in the project plan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Human Capital' ROI indicators for a resource manager? (Select all that apply)",
+    "options": {
+      "A": "Revenue per Full-Time Employee (FTE)",
+      "B": "Employee Retention Rate in high-demand skill areas",
+      "C": "The ratio of billable vs. non-billable hours",
+      "D": "The number of emails sent by the project coordinator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Cross-Functional' resource logic assumes that a person with a 'Generalist' skill set can be moved between any department without any loss in productivity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical significance of 'Float' (or Slack) when managing resource availability in a project schedule?",
+    "options": {
+      "A": "Floating on physical water during a team building event.",
+      "B": "The amount of time a task can be delayed without impacting the project finish date, allowing for flexibility in resource reassignment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fulfill' (MTTF) a resource request?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A metric tracking the duration from a project manager's initial resource request until the qualified resource is officially assigned.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Negotiation' strategy should a manager use when two projects both require a 'Critical' database architect for 40 hours a week, but the architect only has 40 hours total?",
+    "options": {
+      "A": "Giving the resource to the manager with the loudest voice.",
+      "B": "Resource Splitting (e.g., 20 hours each) based on the relative risk and milestones of both projects.",
+      "C": "Refusing to speak to both managers until they agree.",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' in management occur when a leader assumes a remote freelancer understands the 'Unwritten' cultural norms of the office without a formal onboarding process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Analytics' benefits for a Director? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'Burnout' risks through workload analysis",
+      "B": "Predicting future hiring needs based on the sales pipeline velocity",
+      "C": "Guaranteed to replace all human HR managers",
+      "D": "Real-time tracking of 'Bench' costs across global business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Succession' 'Readiness' 'Calibration'?",
+    "options": {
+      "A": "A physical manual for building server racks.",
+      "B": "A process where senior leaders objectively score internal candidates on their ability to take over a role 'Now', in '1-2 years', or '3+ years'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Utilization' 'Leakage'?",
+    "options": {
+      "A": "When liquid spills on a physical resource report.",
+      "B": "A metric identifying the gap between 'Billable' hours and 'Actual' hours worked due to administrative overhead or inefficient processes.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' occur when an organization attempts to move from a 'Time-based' (Clocking in) to an 'Output-based' (Result-driven) resourcing model without changing its management KPIs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' resource framework handles 'Contingency' planning?",
+    "options": {
+      "A": "The Reserve Pool (identifying backup contractors or alternate vendors)",
+      "B": "The payroll system strictly",
+      "C": "The company's social media feed",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow' 'Resourcing' and why is it a risk for a large organization?",
+    "options": {
+      "A": "Leading a team in a dark room.",
+      "B": "The practice of departments hiring or acquiring resources outside of the official central procurement or HR process, leading to 'Hidden Costs'.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Talent' 'Mobility'?",
+    "options": {
+      "A": "Putting the employees on a physical bus.",
+      "B": "The strategic ability to move internal employees across different projects, roles, or geographical locations to meet business needs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a project manager waits 6 months to request a resource for a task that starts in 1 week.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resource' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Financial Officer (CFO)",
+      "B": "Project Management Office (PMO) Lead",
+      "C": "Procurement Manager",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Staffing' 'Elasticity'?",
+    "options": {
+      "A": "The physical stretchiness of the office carpet.",
+      "B": "The organization's technical ability to quickly scale its workforce up or down through the use of contractors, gig workers, or automation.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Retention' 'Analytics'?",
+    "options": {
+      "A": "Analytics of a person named Retention.",
+      "B": "Using data models to identify high-risk 'Flight' employees based on patterns like decreased engagement or market salary shifts.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a manager uses a 2015 'Skill Matrix' for a 2026 'Generative AI' project, missing many critical new competencies.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Workload' 'Governance'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging employees assigned more than 40 hours per week",
+      "B": "Consolidating timesheet data across multiple platforms",
+      "C": "Hiring 100 manual auditors to check desks",
+      "D": "Enforcing 'Maximum Utilization' caps to prevent burnout"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Resource' 'Capacity' for a fiscal year?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A calculation: (Total FTEs * Working Days) - (Vacation + Sick Leave + Training + Maintenance Time).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Onboard' (MTTO) a contractor?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the signing of a contract until the external resource has full system access and is working on their first task.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a manager uses a formal 'Request for Proposal' (RFP) process for a $500 software subscription.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' 'Resource' 'Allocation'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all employees have equal access to high-visibility 'Stretch' assignments",
+      "B": "Conducting 'blind' resource audits based solely on skills and output",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Actively rotating 'Maintenance' tasks so they don't fall on one demographic"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cognitive' 'Load' Management in resource planning?",
+    "options": {
+      "A": "The strategic act of ensuring team members are not context-switching between too many different projects, which degrades mental efficiency.",
+      "B": "A bias that is physically small.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Skill' 'Drift'?",
+    "options": {
+      "A": "When an employee's technical expertise becomes obsolete because they haven't been allocated to any projects using modern technologies.",
+      "B": "A drift made of physical paper reports.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager expects 'Instant' productivity from a resource who has just returned from a 12-month sabbatical.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resource' 'Alignment' drivers? (Select all that apply)",
+    "options": {
+      "A": "Strategic Priority of Projects",
+      "B": "Operational Cost Optimization",
+      "C": "Employee Engagement and Satisfaction",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Leadership' logic in Resource Management?",
+    "options": {
+      "A": "Hiring servants to do the planning.",
+      "B": "Focusing on providing the team with the necessary tools, environment, and training so they can perform at their highest capacity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Utilization' 'Saturation'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The point at which a resource is utilized at 100% (or more), meaning any new task will cause an immediate project delay or quality drop.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in resource management refers to a manager giving a 'High-end Video Editor' a laptop with a basic integrated graphics card.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into departmental 'Burn Rates'",
+      "B": "Consistency in result presentation for the Executive Board",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual timesheet reconciliation work"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in resource manager training?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful resource allocation model from one department and scale it across the entire organization.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a staffing gap?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a critical vacancy until the new hire or internal transfer is fully onboarded.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a manager assigns a project to a contractor but does not provide them with the necessary VPN or server access to start the work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Human Resources Director",
+      "B": "Departmental Vice Presidents",
+      "C": "External Executive Headhunters",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Onboarding' 'Bootstrap' in a resource plan?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The automated or standardized process of setting up IT, Finance, and Security profiles for a new resource within 24 hours of hire.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of resource requests?",
+    "options": {
+      "A": "The percentage of resource requests that were filled within the agreed-upon SLA timeframe.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager expects a freelancer to deliver a month's worth of work in 48 hours without prior notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for resource managers? (Select all that apply)",
+    "options": {
+      "A": "Identifying which project teams have the highest 'Burnout' risk scores",
+      "B": "Predicting the financial impact of a 10% increase in contractor rates",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing trends in 'Skill Acquisitions' within the company"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in resource planning confidentiality?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that sensitive salary and performance data for 'Team A' is technically unreachable by the manager of 'Team B'.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Staffing' 'Incidents' (MTBSI)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of staffing stability before a critical resource resigns or becomes unavailable.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the business expects 'Zero Bench Time' in a company with spiky, unpredictable project demand.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges' for HR? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Culture' or 'Diversity' goals",
+      "B": "Keeping records updated with rapidly changing local labor and data laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if resource counts are manipulated in reports"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a resource management system?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the 'How' of assignment (technical API calls to HR systems) is isolated from the 'What' (the business decision of who to assign).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an overallocation issue?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from when an employee is assigned >100% capacity until the resource management software flags the conflict.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when an organization uses a 2010 'Job Description' to hire for a 2026 'Blockchain' engineer role.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resource' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Operations Officer (COO)",
+      "B": "Workforce Planner",
+      "C": "Legal Compliance Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategic' 'Resource' 'Orchestration'?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of employees, vendors, and automation tools to ensure the company can deliver its long-term roadmap.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Productivity' (MTRP) after a key departure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a critical employee leaving and their replacement becoming fully effective in the role.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after working on a project for exactly 48 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into future departmental 'Staffing Gaps'",
+      "B": "Reduction in manual administrative work for directors",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in data presentation across different global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a hiring pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Recruitment Stages' where each phase results in a specific, independently verifiable skill score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a contractor invoice error?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a financial discrepancy in a resource's bill until the payment is corrected and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a manager assigns 5 high-priority projects to a single Lead Developer with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Talent Flight' risk",
+      "B": "Predicting future market 'Salary' trends based on global user data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Training Spend' with 'Team Throughput' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resource' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well an employee is developed, based on their performance history, skill breadth, and leadership potential.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Resource' 'Conflicts' (MTBRC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of resource scheduling stability before two project managers dispute the same person.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in resource management occur when the remediation timeline for a 'Critical Staffing Gap' is based on 'Fixed Quarters' rather than 'Current Project Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global 'Matrix' organization, how should a Resource Director technically model the 'Opportunity Cost' of allocating a specialized engineering team to 'Legacy Maintenance' vs. 'New Product R&D'?",
+    "options": {
+      "A": "By comparing the number of lines of code written in each department.",
+      "B": "By calculating the 'Expected Commercial Value' (ECV) of the R&D project multiplied by its probability of success, minus the 'Operational Risk' cost of deferring maintenance.",
+      "C": "By monitoring the physical electricity usage of the development lab.",
+      "D": "By ensuring every department has exactly the same number of Full-Time Employees (FTEs)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Resource Rebalancing' in a high-velocity environment often faces 'Friction Loss', where the time spent context-switching between projects significantly reduces the net productive capacity of the resource.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Operations Lead to predict the impact of a 10% attrition rate on the 'Critical Path' of a 3-year multi-million dollar transformation project?",
+    "options": {
+      "A": "Monte Carlo Simulation for Resource Constraints",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Skill Set Arbitrage' during an international corporate merger?",
+    "options": {
+      "A": "To ensure both companies use the same physical brand of laptop.",
+      "B": "To identify overlapping competencies and relocate high-value strategic tasks to the lowest-cost regional hub that meets the required proficiency level.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the executive resource dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Organizational Psychology', what is 'Skill Obsolescence' and how does a strategic manager technically mitigate it in a rapidly evolving tech sector?",
+    "options": {
+      "A": "When employees forget where the physical office is located.",
+      "B": "The decline in the market value of a worker's skills; mitigated by implementing 'Continuous Upskilling Sprints' and rotating talent into 'Horizon 3' innovative projects.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the company's internal learning portal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Archetypes' in resource management occur when a 'Generalist' manager is put in charge of a 'Deep-Expert' R&D lab, often leading to the devaluation of specialized knowledge and high attrition of top talent.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Resource Director deliberately creating a 'Shadow Bench' of pre-vetted contractors to ensure 24-hour response times to unforeseen project spikes?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Elastic Capacity Orchestration",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Resource' 'Burnout' and its relation to 'Causal Loops' in a fixed-budget environment?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "A feedback loop where 'High Performance' leads to 'More Assignments', which leads to 'Burnout', which ultimately leads to 'Systemic Failure' of critical projects.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Human Capital' ROI calculations for a strategic staffing shift? (Select all that apply)",
+    "options": {
+      "A": "Increase in 'Revenue-per-Employee' post-automation",
+      "B": "Reduction in 'Time-to-Productivity' for new hires via standardized onboarding",
+      "C": "The financial delta of 'Internal Mobility' vs. 'External Recruitment' costs",
+      "D": "The number of coffee machines in the new regional hub"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Resource Planning level ensures that managers can flag 'Under-capacity' for a project without being labeled as 'unproductive' by executive leadership.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Resource Manager's decision-making process?",
+    "options": {
+      "A": "The physical weight of the manager's laptop.",
+      "B": "The ability to balance conflicting demands from 50+ stakeholders while considering long-term skill decay and short-term revenue targets.",
+      "C": "A specialized tool for measuring distance between global offices.",
+      "D": "Hiring a professional actor to simulate a release decision."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Talent' 'Sharding'?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of distributing 'Subject Matter Experts' (SMEs) across different regional squads to prevent a 'Single Point of Failure' in any one location.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves a manager 'Buffering' the team from 'Scope Creep' to maintain the 'Flow State' required for complex engineering tasks?",
+    "options": {
+      "A": "Micromanagement",
+      "B": "Operational Shielding (Focus Protection)",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a talent acquisition often result in 'Cultural Rejection', where the acquired team's 'Open Source' mindset conflicts with the parent company's 'Proprietary/Closed' mindset.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Human' 'Capital' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Collaboration' competencies before they become industry standard",
+      "B": "Standardizing 'High-Potential' (HiPo) readiness criteria across global business units",
+      "C": "Buying physical snacks for the HR department",
+      "D": "Assessing the 'Strategic Thinking' capacity of potential Managing Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in a Resource Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Staffing Model' (e.g., 100% Full-time) is still valid given the rise of specialized 'Gig-economy' experts.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Knowledge' 'Silo' 'Risk' 'Aggregation'?",
+    "options": {
+      "A": "The cumulative risk of having critical system knowledge trapped in a single individual's head across the entire department.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Staffing' 'Inertia' occurs when an organization continues to hire for 'Legacy' skills (e.g., COBOL) long after the business strategy has shifted to 'Cloud-Native'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Resource' 'Governance' metrics for a COO? (Select all that apply)",
+    "options": {
+      "A": "Billable Utilization vs. Strategic Innovation time ratio",
+      "B": "Resource Pool 'Agility Score' (time taken to re-skill for new technology)",
+      "C": "Percentage of revenue from products launched by 'Internal Mobility' teams",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Skill' 'Entrenchment' risk during a major technology pivot?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that senior experts will resist new tools to protect their 'Expert Status' in a legacy technology that the business is retiring.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Skill' 'Pivot' (MTTSP)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how quickly the workforce can be re-trained to use a new disruptive technology (e.g., LLMs).",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a company demands 'Innovation' but only rewards employees for 'Hitting Ticket Quotas' in a maintenance system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Talent' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using machine learning to automatically correlate 'Employee Engagement' with 'Project Success Rates'",
+      "B": "Automatically identifying 'Knowledge Gaps' in the workforce based on future product roadmaps",
+      "C": "Guaranteed to replace all human Resource Managers",
+      "D": "Analyzing external market data to identify 'Salary Inflation' for critical roles in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Human' 'Capital' 'Ecosystem' 'Architecture' (HCEA)?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of internal staff, external contractors, automation agents, and outsourcing partners into a single 'Productive Unit'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Human' 'Capital' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The process of evaluating the 'Innovation Capacity' and 'Cultural Compatibility' of an acquired company's staff during the due diligence phase.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the CFO expects 'Immediate ROI' from a junior-heavy team that requires a 12-month 'Apprenticeship' period to become effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of contractor certification compliance",
+      "B": "Automatically calculating 'Fair-Pay' compliance across global regions",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Privacy' training is current for all system-access users"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Resource Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Core Capabilities' (Proprietary tech) are isolated from 'Commodity Tasks' (Maintenance), allowing the latter to be outsourced without strategic risk.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'High' 'Impact' 'Staffing' 'Gap'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a critical project milestone being missed and the dashboard flagging the lack of specific senior expertise as the root cause.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when an executive reports '100% Resource Availability' to the board without mentioning that 40% of the team is 'Quiet Quitting'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resource' 'Governance' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Employee Training' scores directly to 'Project Allocation' eligibility",
+      "B": "Connecting 'Project Margin' data to 'Departmental Bonus' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Recruitment Pipeline' data with 'Strategic Roadmap' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Bootstrap' orchestration for a new regional resource hub?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes common IT, Legal, and HR protocols to stabilize a new offshore office immediately.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resource' 'Attrition' Score?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Billable Value' as senior experts leave and are replaced by junior staff.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'New Skill Competency' to be fully mastered by 5,000 employees within a single 48-hour period.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Executive' 'Reporting'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Capacity' heatmaps for the CEO",
+      "B": "Reduction in 'Status-building' labor for Workforce Planners",
+      "C": "Guaranteed to replace all human Resource leads",
+      "D": "Automatic generation of 'Diversity and Inclusion' audit reports for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Resource Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Salary and PII data' from the EU region technically cannot be accessed by Resource Managers in regions with different privacy laws.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Resource' 'Trust' (MTRRT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile organizational failure (e.g., mass layoff) and the point at which 'Internal Engagement' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in resource strategy refers to an organization promising 'Instant Global Support' while utilizing a 'Single-Timezone' staffing model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resource' 'Governance' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Workforce Planning",
+      "B": "Chief Diversity and Inclusion Officer (CDIO)",
+      "C": "Director of Site Reliability (for resource infrastructure)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a Workforce?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Cross-training depth', 'Attrition Buffer', and 'Mean Time to Hire' critical roles.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Resignations' (MTBCR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of staffing stability before a 'Key Player' (Single Point of Failure) leaves the organization.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 1980s 'Time-and-Motion' studies to manage 2026 'Creative Engineering' talent.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Compliance' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Culture Fit' requirements",
+      "B": "Keeping records updated with rapidly changing global 'Labor' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if test environments use different 'Data Masking' than production"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Staffing' 'Maintainability'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Talent Pipeline' can sustain major market shifts without a systemic loss of institutional knowledge.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Staffing' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between a critical project being flagged as 'Under-resourced' and the Executive Board being officially notified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resource' 'Ownership' in QA occurs when 'Contractor' expertise is used to build internal systems without a 'Knowledge Transfer' clause in the contract.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Resource' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Talent Acquisition Leads",
+      "C": "Operational Planning Directors",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Resource' 'Bootstrap' orchestration for a new Global Business Unit?",
+    "options": {
+      "A": "The rapid establishment of local legal entities, core leadership teams, and initial workforce within 60 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Refreshes' (MTBSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Workforce Model' and 'Sourcing Policy' to match industry benchmarks.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Proficiency' from a University Intern after exactly 48 hours of work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Project role' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Resource Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Human Capital Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Staffing Model' can be 'Lifted' from one product line (e.g., Software) and applied to another (e.g., Services).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Staffing' 'ROI' (MTRSR)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an employee's performance becoming 'Sub-standard' and the point where 'Coaching' restores them to full business value.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the COO expects 'Zero Staffing Budget Increase' while the HR Director is enforcing a 'Competitive Salary Market' hard gate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Resource' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Human Capital ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Workforce Audit' build time for Managers",
+      "C": "Guaranteed to replace all human Resource Directors",
+      "D": "Instant generation of 'Profit-per-FTE' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resource' 'Encapsulation' in a 'Hold-Co' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing the workforce structure so that the failure of one business unit's staffing does not technically or financially jeopardize the entire corporate parent.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Resource' 'Gap'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new business demand (e.g., a new contract) is signed until the Workforce Architect identifies the necessary skill sets to fulfill it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Resource Planning' is performed annually, but 'Project Cycles' update every 30 days, making the staffing plan permanently legacy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Resource' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Sourcing",
+      "B": "Global Chief People Officer",
+      "C": "Director of Organizational Design",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Resource' 'Bootstrap' complexity for a 'Post-Digital-Transformation' Manager?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of resetting an organization's 'Manual' resource mindset into an 'Automated and Data-Driven' culture within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Resource' 'Churn' (MTBRC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the workforce layer, identifying if 'Management Toxicity' is causing frequent high-value employee exits.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Director expects 'A Whole New Culture' in a 5,000-person manual organization to be completed in 30 days.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Talent' mapping across global subsidiaries",
+      "B": "Reducing the 'Staffing Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Performance-Scoring' logic across all departments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resource' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Resource.",
+      "B": "The ability of a manager to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Agile Staffing' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Resource' 'Productivity' (MTRRP) post-mass-exit?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical 'Talent Leak' until the organization's 'Productivity' scores return to baseline through replacement and training.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resource' 'Governance' in management refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic budgeting system that restricts autonomy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Resource' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Billable vs. Strategic' work ratio",
+      "B": "Identifying business units that are 'Talent Lagging' based on high turnover",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Cross-training' programs relative to project delivery speed"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resource' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that 'Strategic Workforce Policy' is hidden from 'Tactical Operational Sourcing', allowing for corporate standards to remain stable while vendors evolve.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

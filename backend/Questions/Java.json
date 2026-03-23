@@ -37,7 +37,10 @@
         "C": "int[] arr = {1, 2, 3};",
         "D": "array int arr = [1, 2, 3];"
       },
-      "answer": "A, C"
+      "answer": [
+        "A",
+        "C"
+      ]
     },
     {
       "question": "Which component is responsible for running Java bytecode?",
@@ -173,7 +176,10 @@
         "C": "stop()",
         "D": "exit()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The super() call must be the first statement in a constructor.",
@@ -191,7 +197,10 @@
         "C": "Sortable",
         "D": "Ordered"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: In Java 8, interfaces can have static methods.",
@@ -209,7 +218,10 @@
         "C": "enum",
         "D": "long"
       },
-      "answer": "A, C"
+      "answer": [
+        "A",
+        "C"
+      ]
     },
     {
       "question": "True or False: Anonymous inner classes can have a constructor.",
@@ -227,7 +239,10 @@
         "C": "Implementing Callable interface",
         "D": "Extending Process class"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Garbage collection happens in the Stack memory.",
@@ -245,7 +260,10 @@
         "C": "Encapsulation",
         "D": "Inheritance"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: You can overload the main method.",
@@ -263,7 +281,10 @@
         "C": "ArrayList",
         "D": "Scanner"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: this() and super() can be used together in the same constructor.",
@@ -281,7 +302,10 @@
         "C": "Code Compilation to Machine Code",
         "D": "Visual GUI Design"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A class declared as final cannot be instantiated.",
@@ -299,7 +323,10 @@
         "C": "get()",
         "D": "size()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The finalize() method is guaranteed to be called before an object is garbage collected.",
@@ -317,7 +344,10 @@
         "C": "for",
         "D": "while"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Java is a strictly 'Compiled' language, never interpreted.",
@@ -353,7 +383,10 @@
         "C": "System.getClock()",
         "D": "System.time()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A WeakHashMap entry is automatically removed when its key is no longer in ordinary use.",
@@ -371,7 +404,10 @@
         "C": "enqueue()",
         "D": "dequeue()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: String.intern() returns a canonical representation for the string object.",
@@ -389,7 +425,10 @@
         "C": "ABC",
         "D": "XGC"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: In Java, an array is an object.",
@@ -417,7 +456,10 @@
         "C": "static",
         "D": "native"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The PriorityQueue allows null elements.",
@@ -435,7 +477,10 @@
         "C": "ArrayList",
         "D": "HashSet"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A static nested class can access non-static members of the outer class.",
@@ -471,7 +516,10 @@
         "C": "String",
         "D": "Integer"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The default constructor is only provided if no other constructor is defined.",
@@ -489,7 +537,10 @@
         "C": "stop()",
         "D": "interrupt()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Enumeration is faster than Iterator but lacks the remove() method.",
@@ -507,7 +558,10 @@
         "C": "It uses a HashMap internally.",
         "D": "It is synchronized."
       },
-      "answer": "A, C"
+      "answer": [
+        "A",
+        "C"
+      ]
     },
     {
       "question": "True or False: Local Variable Type Inference (var) can be used for method parameters.",
@@ -525,7 +579,10 @@
         "C": "FileOutputStream",
         "D": "DataOutputStream"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: System.exit(0) will prevent the finally block from executing.",
@@ -543,7 +600,10 @@
         "C": "External Class",
         "D": "Side Class"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A Lambda expression can access non-final variables in the enclosing scope.",
@@ -579,7 +639,10 @@
         "C": "InputStream",
         "D": "OutputStream"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The Socket class is used to implement a server-side connection.",
@@ -597,7 +660,10 @@
         "C": "Simpler code than standard I/O",
         "D": "Automatic file compression"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: 'Composition over Inheritance' suggests using objects with defined behaviors rather than inheriting from a base class.",
@@ -615,7 +681,10 @@
         "C": "Flyweight",
         "D": "Decorator"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The 'Dependency Inversion' principle suggests that high-level modules should depend on low-level modules.",
@@ -651,7 +720,10 @@
         "C": "Variable Extraction",
         "D": "Method Extension"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which class wraps an OutputStream to write primitive Java data types in a portable way?",
@@ -679,7 +751,10 @@
         "C": "open()",
         "D": "read()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: BufferedWriter is generally faster than FileWriter for large amounts of text.",
@@ -697,7 +772,10 @@
         "C": "GzipReader",
         "D": "CompressStream"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: In Java, the Socket class uses a connectionless protocol (UDP) by default.",
@@ -733,7 +811,10 @@
         "C": "FileOutputStream(int bufferSize)",
         "D": "FileOutputStream(URL url)"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A Pipe in Java NIO allows for two-way communication between two threads.",
@@ -769,7 +850,10 @@
         "C": "System.log",
         "D": "System.input"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Externalizable gives the programmer full control over the serialization process.",
@@ -825,7 +909,10 @@
         "C": "PrimitiveConsumer",
         "D": "NumberSupplier"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the result of applying 'flatMap' on a Stream of Streams?",
@@ -853,7 +940,10 @@
         "C": "interrupt()",
         "D": "join()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the 'Diamond Problem' in Java, and how is it resolved?",
@@ -873,7 +963,10 @@
         "C": "Direct hardware register access.",
         "D": "Replacing all 'public' modifiers."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The 'finally' block will execute even if the thread is killed via 'System.exit(0)'.",
@@ -901,7 +994,10 @@
         "C": "The use of the 'volatile' keyword.",
         "D": "The presence of a 'finally' block."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does 'T' represent in the signature 'List<? super T>'?",
@@ -929,7 +1025,10 @@
         "C": "Collections.synchronizedList",
         "D": "LinkedBlockingQueue"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is 'Escape Analysis' performed by the JIT compiler?",
@@ -967,7 +1066,10 @@
         "C": "parallelize()",
         "D": "merge()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which JVM optimization technique replaces a method call with the actual body of the method to eliminate call overhead?",
@@ -1005,7 +1107,10 @@
         "C": "The Young Generation reaching 10% capacity.",
         "D": "Calling System.out.println()."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does 'Biased Locking' (deprecated in recent Java versions) attempt to optimize?",
@@ -1033,7 +1138,10 @@
         "C": "Hardware-accelerated performance for data-parallel operations.",
         "D": "Automatic resizing of underlying arrays."
       },
-      "answer": "A, C"
+      "answer": [
+        "A",
+        "C"
+      ]
     },
     {
       "question": "What is the 'Stop-the-World' (STW) phase in Garbage Collection?",
@@ -1053,7 +1161,10 @@
         "C": "Predicate",
         "D": "Comparator"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Using 'volatile' on a reference object ensures the visibility of the object's internal fields to other threads.",
@@ -1099,7 +1210,10 @@
         "C": "Preventing StackOverflowErrors.",
         "D": "Storing large objects in the thread stack."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the difference between 'CompletableFuture.supplyAsync()' and 'runAsync()'?",
@@ -1119,7 +1233,10 @@
         "C": "They are shared across all threads in the same process.",
         "D": "They are only available in Virtual Threads."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: A 'Default Method' in an interface can be overridden by a subclass.",
@@ -1147,7 +1264,10 @@
         "C": "Garbage Collection",
         "D": "High CPU usage"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the primary benefit of using 'Scoped Values' (Java 21) over 'ThreadLocal'?",
@@ -1185,7 +1305,10 @@
         "C": "They provide lock-free thread safety for single variables.",
         "D": "They prevent all garbage collection of the wrapped value."
       },
-      "answer": "A, C"
+      "answer": [
+        "A",
+        "C"
+      ]
     },
     {
       "question": "What is the 'ABA problem' in lock-free programming, and how is it typically solved in Java?",
@@ -1213,7 +1336,10 @@
         "C": "Processor.start()",
         "D": "Subscription.cancelAll()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'Native Memory Tracking' (NMT) tool help developers monitor?",
@@ -1233,7 +1359,10 @@
         "C": "It occurs when two threads share the same 'this' reference.",
         "D": "It is a type of deadlock that only happens in Virtual Threads."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: Using 'parallelStream()' always results in faster execution than a standard sequential stream.",
@@ -1289,7 +1418,10 @@
         "C": "Dynamic class loading support.",
         "D": "Better peak performance than C2 JIT."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'invokedynamic' instruction (introduced in Java 7) primarily support?",
@@ -1317,7 +1449,10 @@
         "C": "Using 'final' variables.",
         "D": "Frequent Minor GC cycles."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is 'Biased Locking'?",
@@ -1337,7 +1472,10 @@
         "C": "Replacing the need for any synchronization keywords.",
         "D": "Automatically migrating threads between different JVMs."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What happens during 'Stack Walking' in Java 9+?",
@@ -1385,7 +1523,10 @@
         "C": "catchError()",
         "D": "trap()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'volatile' keyword guarantee in the Java Memory Model?",
@@ -1413,7 +1554,10 @@
         "C": "PrimitiveConsumer",
         "D": "NumSupplier"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the purpose of 'Escape Analysis' performed by the JIT compiler?",
@@ -1441,7 +1585,10 @@
         "C": "Local variable declarations",
         "D": "Static method calls"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "Which JVM optimization technique replaces a constant value with the result of a calculation at compile time rather than runtime?",
@@ -1469,7 +1616,10 @@
         "C": "Predicate",
         "D": "Consumer"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the primary benefit of the 'Phaser' class over 'CyclicBarrier' in concurrent programming?",
@@ -1497,7 +1647,10 @@
         "C": "-Xmx",
         "D": "-XX:+UseParallelGC"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'invokedynamic' instruction support in the JVM?",
@@ -1517,7 +1670,10 @@
         "C": "It is cleared immediately during the first Minor GC cycle.",
         "D": "It prevents the object from being finalized."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "True or False: The 'Vector API' (Java 16+) allows developers to write platform-agnostic code that compiles to SIMD (Single Instruction, Multiple Data) hardware instructions.",
@@ -1563,7 +1719,10 @@
         "C": "volatileCast()",
         "D": "atomicUpdate()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the function of the 'Code Cache' area in the JVM?",
@@ -1591,7 +1750,10 @@
         "C": "ArrayList",
         "D": "TreeMap"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does 'T' represent in the wildcard 'List<? extends T>'?",
@@ -1619,7 +1781,10 @@
         "C": "Translating Java to Python.",
         "D": "Managing Docker containers from Java."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is 'On-Stack Replacement' (OSR) in the context of the JIT compiler?",
@@ -1657,7 +1822,10 @@
         "C": "Parallel GC",
         "D": "Serial GC"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the '@Inherited' annotation do when applied to a custom Java annotation?",
@@ -1685,7 +1853,10 @@
         "C": "sharedLock()",
         "D": "exclusiveLock()"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the function of the 'TAPC' (Thread Local Allocation Buffer) in JVM memory management?",
@@ -1713,7 +1884,10 @@
         "C": "Garbage Collection",
         "D": "Instruction Reordering"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the 'ABA problem' in lock-free algorithms, and which class helps solve it in Java?",
@@ -1731,7 +1905,7 @@
         "A": "True",
         "B": "False"
       },
-      "answer": "B (The keyword applies to Java Serialization; JSON libraries often require @JsonIgnore)"
+      "answer": "B"
     },
     {
       "question": "Which TWO are parts of the 'LMAX Disruptor' pattern often used in high-frequency trading apps with Java?",
@@ -1741,7 +1915,10 @@
         "C": "BlockingQueue",
         "D": "ThreadPoolExecutor"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'Xss' JVM parameter control?",
@@ -1769,7 +1946,10 @@
         "C": "It provides performance benefits for data-parallel tasks.",
         "D": "It is used for managing network vectors."
       },
-      "answer": "B, C"
+      "answer": [
+        "B",
+        "C"
+      ]
     },
     {
       "question": "What is the purpose of the 'ReferenceQueue' in Java's memory management?",
@@ -1797,7 +1977,10 @@
         "C": "Predicate",
         "D": "Supplier"
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What is the benefit of 'Compressed OOPs' (Ordinary Object Pointers)?",
@@ -1853,7 +2036,10 @@
         "C": "It is the default collector for Java 8.",
         "D": "It uses a single-threaded 'Stop-the-World' approach."
       },
-      "answer": "A, B"
+      "answer": [
+        "A",
+        "B"
+      ]
     },
     {
       "question": "What does the 'invokedynamic' (indy) instruction facilitate in the JVM?",
@@ -1881,7 +2067,10 @@
         "C": "It can be converted from a read lock to a write lock.",
         "D": "It does not support conditional waiting (Condition)."
       },
-      "answer": "B, D"
+      "answer": [
+        "B",
+        "D"
+      ]
     }
   ]
 }

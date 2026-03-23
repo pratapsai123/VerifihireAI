@@ -2225,9 +2225,9 @@
       "question": "Which architecture introduced the 'Self-Attention' mechanism and revolutionized NLP?",
       "options": {
         "A": "RNN",
-        "  B": "Transformer",
         "C": "CNN",
-        "D": "Perceptron"
+        "D": "Perceptron",
+        "B": "Transformer"
       },
       "answer": "B"
     },

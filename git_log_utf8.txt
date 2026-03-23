@@ -1,0 +1,201 @@
+﻿commit bedd2557b5dda90b7a2a36c8de59eb95e4b03e9f
+Author: vm <edumala.rakesh@iit.org.in>
+Date:   Mon Mar 23 06:19:58 2026 +0000
+
+    role based and interviewers list
+
+diff --git a/backend/api/views/candidate_assessment_views.py b/backend/api/views/candidate_assessment_views.py
+index 68fa326..ebbfde9 100644
+--- a/backend/api/views/candidate_assessment_views.py
++++ b/backend/api/views/candidate_assessment_views.py
+@@ -1,4 +1,4 @@
+-from ._imports import *
++from .._imports import *
+ 
+ 
+ @csrf_exempt
+@@ -31,6 +31,20 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
+         except Assessment.DoesNotExist:
+             return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
+ 
++        # --- RBAC ownership check ---
++        # Prevent users from inviting candidates to assessments outside their invite tree.
++        # This blocks Admin A from using Admin B's assessment_id even if they share a company.
++        req_user_profile = getattr(request.user, 'profile', None)
++        if req_user_profile:
++            scoped_ids = get_scoped_user_ids(req_user_profile)
++            if scoped_ids is not None:
++                # scoped_ids = None means platform superadmin (can access all)
++                if assessment.user_profile_id not in scoped_ids:
++                    return Response(
++                        {'error': 'You do not have permission to invite candidates to this assessment.'},
++                        status=status.HTTP_403_FORBIDDEN
++                    )
++
+         data = request.data or {}
+         candidates = data.get('candidates', [])
+         if not isinstance(candidates, list) or len(candidates) == 0:
+@@ -1827,14 +1841,23 @@ def candidates_overview_view(request):
+         # Merge results from Resume Matcher (ai_candidates) if no assessment filter is applied
+         if not assessment_id:
+             try:
+-                # SECURITY FIX: Scope AI candidates to the requester's company only
+-                # The `company` FK already exists on Candidate model (migration 0020)
+-                if company_id:
++                # RBAC: Scope AI candidates to the requester's invite TREE (not just company).
++                # This ensures Admin A cannot see Admin B's AI candidates even within the same company.
++                if scoped_ids is not None:
++                    # Tree-scoped: filter by the user_profile FK (who uploaded the candidate)
+                     ai_qs = Candidate.objects.filter(
+-                        company_id=company_id
++                        user_profile_id__in=scoped_ids,
++                        is_deleted=False,
++                    ).order_by('-submission_date')
++                elif company_id:
++                    # Platform superadmin: filter by company (sees all)
++                    ai_qs = Candidate.objects.filter(
++                        company_id=company_id,
++                        is_deleted=False,
+                     ).order_by('-submission_date')
+                 else:
+                     ai_qs = Candidate.objects.none()
++
+                 if start_date:
+                     ai_qs = ai_qs.filter(submission_date__date__gte=start_date)
+                 if end_date:
+
+commit ffd6bce1dca915fff9ef1f33a536ad8bb23a0f91
+Author: vm <edumala.rakesh@iit.org.in>
+Date:   Fri Mar 20 06:24:05 2026 +0000
+
+    working correctly in vm
+
+diff --git a/backend/api/views/candidate_assessment_views.py b/backend/api/views/candidate_assessment_views.py
+index 95c3095..68fa326 100644
+--- a/backend/api/views/candidate_assessment_views.py
++++ b/backend/api/views/candidate_assessment_views.py
+@@ -36,7 +36,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
+         if not isinstance(candidates, list) or len(candidates) == 0:
+             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
+ 
+-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
++        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
+ 
+         results = []
+         sent_count = 0
+
+commit dc92c3896e2204572347296d23463c5e8f9aad82
+Merge: 34392d5 c698b5f
+Author: Rakesh <edumala.rakesh@iit.org.in>
+Date:   Tue Mar 17 13:15:11 2026 +0530
+
+    merge17-03-2026 interview schedule
+
+commit 34392d5362ff4956cb1155afad8fd2d748ab5eca
+Author: Rakesh <edumala.rakesh@iit.org.in>
+Date:   Mon Mar 16 18:22:38 2026 +0530
+
+    weightage fixed
+
+diff --git a/backend/api/views/candidate_assessment_views.py b/backend/api/views/candidate_assessment_views.py
+index d1ad9dd..5aaaedd 100644
+--- a/backend/api/views/candidate_assessment_views.py
++++ b/backend/api/views/candidate_assessment_views.py
+@@ -2006,9 +2006,12 @@ def submit_objective_section(request, token):
+         submission.answers = answers # Store current state
+         submission.save()
+         
++        from api.models import AssessmentCodingQuestion
++        has_coding = AssessmentCodingQuestion.objects.filter(assessment=assessment).exists()
++
+         # Check Cutoff
+         passed = True
+-        next_stage = 'coding'
++        next_stage = 'coding' if has_coding else 'finish'
+         message = "Objective section completed."
+         
+         if assessment.has_objective_cutoff:
+@@ -2030,13 +2033,31 @@ def submit_objective_section(request, token):
+                 submission.save()
+             else:
+                 passed = True
+-                message = "Objective cutoff passed. Proceeding to coding section."
+-                next_stage = 'coding'
++                if has_coding:
++                    message = "Objective cutoff passed. Proceeding to coding section."
++                    next_stage = 'coding'
++                else:
++                    message = "Objective section completed."
++                    next_stage = 'finish'
++                    # Mark as submitted immediately
++                    inv.status = 'submitted'
++                    inv.save()
++
+                 # Even if passed, update scoring so partial results are correct
+                 _update_submission_scoring_logic(submission)
+                 submission.save()
+         else:
+             # If no cutoff, still update scoring for partial results
++            if not has_coding:
++                next_stage = 'finish'
++                message = "Objective section completed."
++                # Mark as submitted immediately
++                inv.status = 'submitted'
++                inv.save()
++            else:
++                next_stage = 'coding'
++                message = "Objective section completed. Proceeding to coding section."
++
+             _update_submission_scoring_logic(submission)
+             submission.save()
+         
+
+commit 5493dbc362fdeacdc0c34f5007b40cce28b3af05
+Author: K Sai Pratap Reddy <saipratap.keethireddy@iit.org.in>
+Date:   Mon Mar 16 16:25:05 2026 +0530
+
+    Implemented interviewer availability scheduling and candidate slot booking with frontend UI
+
+diff --git a/backend/api/views/candidate_assessment_views.py b/backend/api/views/candidate_assessment_views.py
+index d1ad9dd..ac7b055 100644
+--- a/backend/api/views/candidate_assessment_views.py
++++ b/backend/api/views/candidate_assessment_views.py
+@@ -68,6 +68,8 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
+                 start_grace_minutes = 0
+             start_grace_minutes = max(0, start_grace_minutes)
+ 
++            is_auto_schedule = bool(payload.get('is_auto_schedule', False))
++
+             invitation = CandidateInvitation.objects.create(
+                 assessment=assessment,
+                 name=name,
+@@ -79,6 +81,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
+                 time_zone=time_zone,
+                 start_grace_minutes=start_grace_minutes,
+                 status='draft',
++                is_auto_schedule=is_auto_schedule,
+             )
+ 
+             start_link = f"{frontend_base.rstrip('/')}/take-assessment/{invitation.token}"
+@@ -824,6 +827,9 @@ def submit_invitation_answers_view(request, token):
+         if not has_coding:
+             inv.status = 'submitted'
+             inv.save(update_fields=['status'])
++            # Trigger result email after 5 minutes (300 seconds)
++            from api.tasks import send_custom_assessment_result_task
++            send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+ 
+         return Response(
+             {
+@@ -1459,6 +1465,11 @@ def invitation_coding_finalize_view(request, token):
+         inv.status = 'submitted'
+         inv.save(update_fields=['status'])
+ 
++        # Trigger result email after 5 minutes (300 seconds)
++        from api.tasks import send_custom_assessment_result_task
++        # send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=3600)
++        send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
++
+         # Update submitted_at to the true final submission time (coding finalized)
+         # For mixed assessments, the submission record was created during objective submit
+         # so submitted_at was set then. We update it now to reflect the real end time.

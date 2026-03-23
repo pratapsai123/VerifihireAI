@@ -1,1885 +1,1996 @@
-{ 
-  "skill": "Webpack", 
-  "questions": [
-  {
-    "question": "What is the default entry point for Webpack 4 and 5?",
-    "options": {
-      "A": "./src/main.js",
-      "B": "./src/index.js",
-      "C": "./app.js",
-      "D": "./index.html"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Webpack is primarily a task runner like Gulp or Grunt.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which property in the configuration file defines where the bundled files should be saved?",
-    "options": {
-      "A": "entry",
-      "B": "destination",
-      "C": "output",
-      "D": "path"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "Select TWO core concepts of Webpack.",
-    "options": {
-      "A": "Loaders",
-      "B": "Plugins",
-      "C": "Routes",
-      "D": "Components"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which Webpack mode enables built-in optimizations like minification and tree shaking?",
-    "options": {
-      "A": "development",
-      "B": "production",
-      "C": "none",
-      "D": "optimized"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Loaders in Webpack are used to transform non-JavaScript files into modules.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which command is used to run the Webpack CLI from the terminal?",
-    "options": {
-      "A": "webpack",
-      "B": "npx webpack",
-      "C": "npm run build",
-      "D": "All of the above"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO common loaders used for processing CSS in Webpack.",
-    "options": {
-      "A": "css-loader",
-      "B": "style-loader",
-      "C": "text-loader",
-      "D": "design-loader"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the default output folder name created by Webpack?",
-    "options": {
-      "A": "build",
-      "B": "public",
-      "C": "dist",
-      "D": "bundle"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "True or False: Webpack creates a dependency graph starting from the entry point.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which configuration property is used to apply loaders to specific file types?",
-    "options": {
-      "A": "plugins",
-      "B": "module.rules",
-      "C": "loaders.apply",
-      "D": "transform"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO modes available in Webpack configuration.",
-    "options": {
-      "A": "development",
-      "B": "production",
-      "C": "staging",
-      "D": "testing"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'HtmlWebpackPlugin'?",
-    "options": {
-      "A": "To minify HTML files",
-      "B": "To automatically generate an HTML file that includes your bundles",
-      "C": "To convert HTML to JavaScript",
-      "D": "To serve HTML via a local server"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Webpack 5 requires a configuration file to run basic bundling.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which loader is typically used to transpile modern JavaScript (ES6+) to ES5?",
-    "options": {
-      "A": "es6-loader",
-      "B": "babel-loader",
-      "C": "js-loader",
-      "D": "script-loader"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO valid output filename patterns in Webpack.",
-    "options": {
-      "A": "[name].bundle.js",
-      "B": "[contenthash].js",
-      "C": "file.output",
-      "D": "bundle.exe"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: A Plugin can perform a wider range of tasks than a Loader, such as asset management or bundle optimization.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property allows you to alias paths for easier imports (e.g., '@' for 'src/')?",
-    "options": {
-      "A": "alias",
-      "B": "resolve.alias",
-      "C": "path.alias",
-      "D": "module.alias"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'webpack-dev-server'?",
-    "options": {
-      "A": "To host the production website",
-      "B": "To provide live reloading during development",
-      "C": "To store backup copies of the code",
-      "D": "To encrypt the bundle"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: By default, Webpack only understands JavaScript and JSON files.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which file is the default configuration file for Webpack?",
-    "options": {
-      "A": "webpack.js",
-      "B": "webpack.config.js",
-      "C": "config.webpack.js",
-      "D": ".webpackrc"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Webpack 5 supports 'Automatic Node.js Polyfills' by default.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO file types that Webpack can bundle out of the box without extra loaders.",
-    "options": {
-      "A": "JavaScript (.js)",
-      "B": "JSON (.json)",
-      "C": "CSS (.css)",
-      "D": "HTML (.html)"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which property inside 'module.rules' is used to identify which files should be transformed?",
-    "options": {
-      "A": "include",
-      "B": "test",
-      "C": "match",
-      "D": "filter"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the 'clean-webpack-plugin' do?",
-    "options": {
-      "A": "Minifies the code",
-      "B": "Removes unused CSS",
-      "C": "Removes the build folder before each build",
-      "D": "Fixes linting errors"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "True or False: The 'output.publicPath' property is used to determine the URL of the output directory when referenced in a browser.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader allows you to import images as Base64 strings or files?",
-    "options": {
-      "A": "file-loader",
-      "B": "url-loader",
-      "C": "image-loader",
-      "D": "asset-loader"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO valid ways to define multiple entry points in Webpack.",
-    "options": {
-      "A": "entry: { app: './app.js', admin: './admin.js' }",
-      "B": "entry: ['./app.js', './admin.js']",
-      "C": "entry: 'multiple'",
-      "D": "entry: './src/*.js'"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which CLI flag is used to see the progress of the build in the terminal?",
-    "options": {
-      "A": "--status",
-      "B": "--progress",
-      "C": "--verbose",
-      "D": "--details"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Plugins are instances of classes and are added to the 'plugins' array in the config.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property specifies the target environment (e.g., 'web' or 'node') for the bundle?",
-    "options": {
-      "A": "platform",
-      "B": "env",
-      "C": "target",
-      "D": "mode"
-    },
-    "answer": "C"
-  },
-  {
-    "question": "Select TWO loaders required to load CSS and inject it into the DOM.",
-    "options": {
-      "A": "css-loader",
-      "B": "style-loader",
-      "C": "dom-loader",
-      "D": "inject-loader"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is 'Tree Shaking' in Webpack?",
-    "options": {
-      "A": "Re-ordering files alphabetically",
-      "B": "Removing dead/unused code during the build process",
-      "C": "Compressed folder structure",
-      "D": "Splitting code into smaller chunks"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Loaders are executed from right to left (or bottom to top) in the 'use' array.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader is used to load SASS/SCSS files?",
-    "options": {
-      "A": "scss-loader",
-      "B": "sass-loader",
-      "C": "css-pre-loader",
-      "D": "style-loader"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO methods to provide environment variables to your Webpack bundle.",
-    "options": {
-      "A": "DefinePlugin",
-      "B": "EnvironmentPlugin",
-      "C": "VarPlugin",
-      "D": "ConfigPlugin"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Webpack can bundle TypeScript files using 'ts-loader'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property is used to include or exclude specific directories from a loader's processing?",
-    "options": {
-      "A": "filter/reject",
-      "B": "include/exclude",
-      "C": "path/ignore",
-      "D": "start/stop"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of the '[contenthash]' placeholder in filenames?",
-    "options": {
-      "A": "To make filenames look complex for security",
-      "B": "To ensure long-term caching by changing names only when content changes",
-      "C": "To identify the version of Webpack used",
-      "D": "To compress the filename size"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Webpack 5 introduced 'Asset Modules' to replace file-loader and url-loader.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which command-line option specifies a custom configuration file path?",
-    "options": {
-      "A": "--file",
-      "B": "--config",
-      "C": "-c",
-      "D": "Both B and C"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO types of 'Asset Modules' in Webpack 5.",
-    "options": {
-      "A": "asset/resource",
-      "B": "asset/inline",
-      "C": "asset/image",
-      "D": "asset/file"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does 'Source Mapping' help with?",
-    "options": {
-      "A": "Finding files on the server",
-      "B": "Debugging original source code in the browser even after bundling",
-      "C": "Drawing a map of the module dependencies",
-      "D": "Speeding up the network request"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Minification is enabled by default in 'development' mode.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which loader would you use to lint your JavaScript files during the build?",
-    "options": {
-      "A": "lint-loader",
-      "B": "eslint-loader (or eslint-webpack-plugin)",
-      "C": "check-loader",
-      "D": "valid-loader"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO valid values for the 'devtool' property in development mode.",
-    "options": {
-      "A": "eval",
-      "B": "cheap-module-source-map",
-      "C": "hidden-source-map",
-      "D": "no-source-map"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Webpack can be used to bundle assets for a Node.js backend application.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is a 'Dependency Graph' in the context of Webpack?",
-    "options": {
-      "A": "A list of developers working on the project",
-      "B": "A map of how modules refer to each other via imports/exports",
-      "C": "A chart showing build time vs. file size",
-      "D": "A security scan of third-party libraries"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which configuration key allows you to handle files with missing extensions during imports?",
-    "options": {
-      "A": "resolve.extensions",
-      "B": "module.extensions",
-      "C": "path.suffixes",
-      "D": "input.extensions"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'Hot Module Replacement' (HMR) exchanges modules without a full page refresh.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property in the output config defines the directory name for all output assets?",
-    "options": {
-      "A": "folder",
-      "B": "path",
-      "C": "root",
-      "D": "dir"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO benefits of using Webpack.",
-    "options": {
-      "A": "Reduced HTTP requests due to bundling",
-      "B": "Support for modern JS features via loaders",
-      "C": "Automatic hosting on AWS",
-      "D": "Elimination of all bugs"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Webpack 5 uses a persistent filesystem cache to speed up subsequent builds.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader is used to process Vue.js single-file components?",
-    "options": {
-      "A": "v-loader",
-      "B": "vue-loader",
-      "C": "sfc-loader",
-      "D": "component-loader"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What is the purpose of 'mode: none' in Webpack configuration?",
-    "options": {
-      "A": "It disables all default optimizations",
-      "B": "It crashes the build",
-      "C": "It defaults to production",
-      "D": "It only bundles JavaScript"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO properties that belong inside the 'devServer' configuration object.",
-    "options": {
-      "A": "port",
-      "B": "hot",
-      "C": "entry",
-      "D": "plugins"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Loaders are applied only to files that match the 'test' regex.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader handles importing CSS files into JavaScript as strings?",
-    "options": {
-      "A": "style-loader",
-      "B": "css-loader",
-      "C": "string-loader",
-      "D": "text-loader"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "What does the 'npm install webpack-cli --save-dev' command do?",
-    "options": {
-      "A": "Installs Webpack command line tool as a production dependency",
-      "B": "Installs Webpack command line tool as a development dependency",
-      "C": "Updates Webpack to the latest version",
-      "D": "Deletes the old Webpack CLI"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Every loader must be installed as an npm package before use.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property in 'output' specifies the name of each output bundle?",
-    "options": {
-      "A": "bundleName",
-      "B": "filename",
-      "C": "outputName",
-      "D": "file"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO ways to use Webpack.",
-    "options": {
-      "A": "Command Line Interface (CLI)",
-      "B": "Node.js API",
-      "C": "Browser Console",
-      "D": "Excel Plugin"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Webpack can handle images and fonts as modules.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the 'watch' property in the config do?",
-    "options": {
-      "A": "Rebuilds the project automatically when files change",
-      "B": "Logs all errors to a file",
-      "C": "Records the developer's screen",
-      "D": "Measures build speed"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader is typically used for transpiling modern CSS features?",
-    "options": {
-      "A": "css-loader",
-      "B": "postcss-loader",
-      "C": "future-css-loader",
-      "D": "modern-loader"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: The 'entry' point can only be a single string path.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Which configuration property is used to configure how Webpack splits bundles into smaller chunks for better caching?",
-    "options": {
-      "A": "optimization.splitChunks",
-      "B": "module.split",
-      "C": "plugins.chunkSplitter",
-      "D": "output.bundleSplitting"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'DefinePlugin' allows you to create global constants which can be configured at compile time.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid 'devtool' values that are suitable for production (provide source maps without exposing source code in the main bundle).",
-    "options": {
-      "A": "source-map",
-      "B": "hidden-source-map",
-      "C": "eval",
-      "D": "cheap-eval-source-map"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "How do you specify a proxy in 'webpack-dev-server' to redirect API calls to a backend server?",
-    "options": {
-      "A": "devServer.proxy",
-      "B": "devServer.redirect",
-      "C": "network.proxy",
-      "D": "plugins.apiProxy"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader is used to extract CSS into separate files instead of injecting them into the DOM via style tags?",
-    "options": {
-      "A": "style-loader",
-      "B": "MiniCssExtractPlugin.loader",
-      "C": "css-extract-loader",
-      "D": "file-loader"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: Using 'import()' syntax in your JavaScript code automatically triggers code splitting in Webpack.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the 'externals' configuration option do?",
-    "options": {
-      "A": "It excludes certain dependencies from the bundle and expects them to be provided by the environment (e.g., via CDN).",
-      "B": "It allows you to use local files outside the project root.",
-      "C": "It force-installs missing npm packages.",
-      "D": "It minifies external library code only."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO placeholders that can be used in 'output.filename' to handle long-term caching.",
-    "options": {
-      "A": "[contenthash]",
-      "B": "[chunkhash]",
-      "C": "[fileid]",
-      "D": "[version]"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which property allows you to change the file extensions that Webpack will process in order (e.g., searching for .ts before .js)?",
-    "options": {
-      "A": "resolve.extensions",
-      "B": "module.fileTypes",
-      "C": "output.suffixes",
-      "D": "input.priority"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'EnvironmentPlugin' is a shorthand for using 'DefinePlugin' specifically for process.env variables.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which optimization property prevents Webpack from emitting assets if there are errors during compilation?",
-    "options": {
-      "A": "optimization.noEmitOnErrors",
-      "B": "optimization.emitOnSuccess",
-      "C": "module.noError",
-      "D": "output.cleanErrors"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to improve Webpack build performance.",
-    "options": {
-      "A": "Using 'include' in loader rules to limit processing to the src folder.",
-      "B": "Using 'filesystem' caching in Webpack 5.",
-      "C": "Running multiple instances of Webpack at once.",
-      "D": "Using the 'production' mode during active development."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of 'optimization.runtimeChunk'?",
-    "options": {
-      "A": "It moves the Webpack boilerplate/manifest into a separate chunk to improve caching.",
-      "B": "It runs the bundle in a worker thread.",
-      "C": "It speeds up the runtime execution of JavaScript.",
-      "D": "It compresses the bundle at runtime."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Webpack can be configured to produce multiple bundles for different languages (i18n) from a single build.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which plugin is used to provide a visual interactive treemap of the size of all your dependencies?",
-    "options": {
-      "A": "WebpackBundleAnalyzer",
-      "B": "SizePlugin",
-      "C": "BundleMapper",
-      "D": "StatsPlugin"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods to tell Webpack to ignore certain files from being watched in DevServer.",
-    "options": {
-      "A": "watchOptions.ignored",
-      "B": "devServer.static.watch.ignored",
-      "C": "ignore.files",
-      "D": "watch.exclude"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'sideEffects: false' in package.json tells Webpack that it can safely tree-shake unused exports from that package.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which option in 'devServer' allows the server to stay accessible via the local network (not just localhost)?",
-    "options": {
-      "A": "host: '0.0.0.0'",
-      "B": "network: true",
-      "C": "port: 'auto'",
-      "D": "open: true"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the 'providePlugin' do?",
-    "options": {
-      "A": "Automatically loads modules instead of having to import or require them everywhere.",
-      "B": "Provides security patches to the bundle.",
-      "C": "Generates a list of all licenses used in the project.",
-      "D": "Provides a download link for the bundle."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO features enabled by 'optimization.minimizer'.",
-    "options": {
-      "A": "TerserPlugin (JS Minification)",
-      "B": "CssMinimizerPlugin (CSS Minification)",
-      "C": "BabelPlugin (Transpilation)",
-      "D": "HtmlPlugin (Compression)"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Webpack supports WebAssembly (WASM) out of the box in version 5.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader property allows passing configuration options directly to the loader?",
-    "options": {
-      "A": "options",
-      "B": "params",
-      "C": "config",
-      "D": "settings"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the result of setting 'devServer.historyApiFallback' to true?",
-    "options": {
-      "A": "It redirects 404s to index.html, which is useful for Single Page Applications (SPAs).",
-      "B": "It saves a history of all user requests.",
-      "C": "It allows the user to use the 'Back' button in the browser.",
-      "D": "It prevents the browser from caching files."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Code splitting can only be done based on the entry points.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property allows you to define 'fallback' modules when a dependency is missing in the target environment (common in Webpack 5 Node polyfills)?",
-    "options": {
-      "A": "resolve.fallback",
-      "B": "module.fallback",
-      "C": "output.polyFill",
-      "D": "resolve.missing"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to implement lazy loading in a React application with Webpack.",
-    "options": {
-      "A": "React.lazy() with dynamic import()",
-      "B": "Loadable Components library",
-      "C": "static import statements",
-      "D": "require.context()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: By default, Webpack 5 treats files larger than 8kb as separate files when using 'asset/auto'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'devServer' option enables Gzip compression for all served assets?",
-    "options": {
-      "A": "compress: true",
-      "B": "gzip: true",
-      "C": "zip: true",
-      "D": "minify: true"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'shimming' in Webpack?",
-    "options": {
-      "A": "Modifying a library that expects a certain global variable to be present.",
-      "B": "Reducing the size of an image.",
-      "C": "Splitting code into layers.",
-      "D": "Encrypting the source code."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Using 'eval-source-map' is recommended for production because it is the fastest.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid targets for the 'target' configuration property.",
-    "options": {
-      "A": "node",
-      "B": "web",
-      "C": "mobile",
-      "D": "chrome"
-    },
-    "answer": "A, B"
-  },
 {
-    "question": "Which property in the configuration allows you to define 'alias' names for complex module paths?",
-    "options": {
-      "A": "resolve.alias",
-      "B": "module.paths",
-      "C": "input.alias",
-      "D": "output.shortcuts"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'CopyWebpackPlugin' is used to copy individual files or entire directories to the build directory.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO benefits of using the 'TerserWebpackPlugin'.",
-    "options": {
-      "A": "Minifies JavaScript code",
-      "B": "Removes dead code (Tree Shaking support)",
-      "C": "Transpiles ES6 to ES5",
-      "D": "Injects CSS into the DOM"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "In Webpack 5, what is the purpose of 'module.parser.javascript.dynamicImportMode'?",
-    "options": {
-      "A": "To specify how dynamic imports should be bundled (e.g., 'lazy', 'eager')",
-      "B": "To disable imports entirely",
-      "C": "To change the speed of the import",
-      "D": "To rename imported chunks"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader is used to make a global variable (like jQuery) available to a library that expects it?",
-    "options": {
-      "A": "imports-loader",
-      "B": "exports-loader",
-      "C": "expose-loader",
-      "D": "global-loader"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'optimization.moduleIds: \"deterministic\"' is recommended for long-term caching in production.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Webpack feature allows you to load modules from a different build at runtime?",
-    "options": {
-      "A": "Module Federation",
-      "B": "External Linking",
-      "C": "Remote Modules",
-      "D": "Bundle Sharing"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid ways to specify 'rules' for different file types.",
-    "options": {
-      "A": "Using 'test' with a Regex",
-      "B": "Using 'include' with a directory path",
-      "C": "Using 'name' with a string",
-      "D": "Using 'type' with 'binary'"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does 'devServer.client.overlay' do when set to true?",
-    "options": {
-      "A": "Shows a full-screen overlay in the browser when there are compiler errors",
-      "B": "Adds a watermark to the website",
-      "C": "Displays the build progress bar in the browser",
-      "D": "Overlays the source map over the code"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Using '[hash]' is exactly the same as using '[contenthash]' for caching purposes.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which plugin is used to manage and minify CSS assets in production?",
-    "options": {
-      "A": "CssMinimizerPlugin",
-      "B": "OptimizeCssAssetsPlugin",
-      "C": "CleanCssPlugin",
-      "D": "Both A and B are common (A is standard for Webpack 5)"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Select TWO things that 'webpack-merge' helps with.",
-    "options": {
-      "A": "Merging common config with env-specific config",
-      "B": "Keeping DRY (Don't Repeat Yourself) code in configs",
-      "C": "Merging two different JS bundles into one",
-      "D": "Merging pull requests"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Webpack 5 Asset Modules can replace 'raw-loader' by using 'type: \"asset/source\"'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'optimization' property is used to tell Webpack to find and remove duplicate modules?",
-    "options": {
-      "A": "None (Webpack 5 does this automatically)",
-      "B": "optimization.dedupe",
-      "C": "optimization.removeDuplicates",
-      "D": "plugins.DedupePlugin"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "How do you define a 'library' bundle that can be consumed by other projects via a global variable?",
-    "options": {
-      "A": "output.library",
-      "B": "entry.type: 'library'",
-      "C": "plugins.LibraryPlugin",
-      "D": "module.exports.library"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'sideEffects: [\"*.css\"]' prevents CSS files from being tree-shaken even if they aren't explicitly used in JS.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which option allows you to limit the maximum number of parallel requests for a chunk?",
-    "options": {
-      "A": "optimization.splitChunks.maxAsyncRequests",
-      "B": "output.maxParallel",
-      "C": "network.requestLimit",
-      "D": "devServer.maxRequests"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid values for 'output.libraryTarget'.",
-    "options": {
-      "A": "umd",
-      "B": "window",
-      "C": "global",
-      "D": "browser"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: In Webpack 5, 'nodejs' globals like '__dirname' are not provided by default in the 'web' target.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader is required to process imports of modern JavaScript inside of a worker thread?",
-    "options": {
-      "A": "worker-loader",
-      "B": "thread-loader",
-      "C": "task-loader",
-      "D": "script-loader"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does setting 'optimization.usedExports' to true do?",
-    "options": {
-      "A": "Enables the analysis for Tree Shaking",
-      "B": "Exports all modules to the global scope",
-      "C": "Lists all used exports in a text file",
-      "D": "Minifies the export names"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'cross-env' is used in the package.json scripts to set environment variables across different OS platforms.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property allows you to define a list of directories where Webpack should look for modules?",
-    "options": {
-      "A": "resolve.modules",
-      "B": "module.search",
-      "C": "input.sources",
-      "D": "path.libraries"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods to use the 'DefinePlugin'.",
-    "options": {
-      "A": "new webpack.DefinePlugin({ 'process.env.NODE_ENV': '\"production\"' })",
-      "B": "new webpack.DefinePlugin({ API_URL: JSON.stringify('http://api.com') })",
-      "C": "define: { key: 'value' } in config root",
-      "D": "module.define({ key: 'value' })"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: The 'thread-loader' can be placed before other loaders to run them in a worker pool.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Webpack CLI flag allows you to pass a custom name to the environment object in the config?",
-    "options": {
-      "A": "--env",
-      "B": "--name",
-      "C": "--config-name",
-      "D": "--var"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'Polyfilling' in the context of Webpack?",
-    "options": {
-      "A": "Providing modern functionality on older browsers that do not natively support it.",
-      "B": "Filling the gaps between different bundles.",
-      "C": "Optimizing images by filling pixels.",
-      "D": "Adding comments to the code."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'optimization.concatenateModules' (Module Concatenation Plugin) is used to speed up the execution of the bundle in the browser.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'devServer' option allows you to manually specify the public URL of the dev server?",
-    "options": {
-      "A": "devServer.public",
-      "B": "devServer.client.webSocketURL",
-      "C": "devServer.host",
-      "D": "devServer.url"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "Select TWO ways to reduce the size of the Webpack bundle.",
-    "options": {
-      "A": "Using 'import()' for lazy loading",
-      "B": "Using 'Tree Shaking' with ESM",
-      "C": "Adding more plugins to the config",
-      "D": "Using 'inline-source-map'"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Webpack can transpile JSX to JS using 'babel-loader'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which loader allows you to load files as a string (e.g., raw text or HTML templates)?",
-    "options": {
-      "A": "raw-loader",
-      "B": "text-loader",
-      "C": "string-loader",
-      "D": "Both A and C are common"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "What is the purpose of 'optimization.emitOnErrors: false'?",
-    "options": {
-      "A": "It ensures that if the build has errors, no output files are written to the disk.",
-      "B": "It ignores all errors.",
-      "C": "It sends errors to an external API.",
-      "D": "It minifies the error messages."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'webpack --profile --json > stats.json' is used to generate a file for analyzing build performance.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'resolve' property allows you to define a list of fields in 'package.json' to use when resolving a module?",
-    "options": {
-      "A": "resolve.mainFields",
-      "B": "resolve.exportsFields",
-      "C": "resolve.priorityFields",
-      "D": "resolve.packageFields"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Webpack 'Compiler' hook is the best place to perform tasks before the compilation starts, such as cleaning the output directory manually?",
-    "options": {
-      "A": "run",
-      "B": "beforeRun",
-      "C": "emit",
-      "D": "compile"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "True or False: A custom Webpack Loader is essentially a JavaScript function that receives the source of the resource and returns the transformed source.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods provided by the 'loader-utils' or the loader context (this) to handle asynchronous operations in a custom loader.",
-    "options": {
-      "A": "this.async()",
-      "B": "this.callback()",
-      "C": "this.wait()",
-      "D": "this.defer()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "In Module Federation, what is the role of the 'exposes' property?",
-    "options": {
-      "A": "It defines which modules from the current build can be consumed by other builds.",
-      "B": "It lists the remote URLs of other applications.",
-      "C": "It exposes the Webpack configuration to the browser console.",
-      "D": "It determines which node_modules are shared."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which hook should a plugin use if it needs to modify the assets right before they are written to the output directory?",
-    "options": {
-      "A": "emit",
-      "B": "afterCompile",
-      "C": "make",
-      "D": "done"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'Tapable' instance is the backbone of Webpack's plugin system, allowing for synchronous and asynchronous hooks.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property in Module Federation allows multiple versions of a library to coexist if their version ranges don't match?",
-    "options": {
-      "A": "singleton: false",
-      "B": "requiredVersion: 'auto'",
-      "C": "strictVersion: false",
-      "D": "versioning: 'multi'"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO types of 'Tapable' hooks used in Webpack development.",
-    "options": {
-      "A": "SyncHook",
-      "B": "AsyncSeriesHook",
-      "C": "ParallelHook",
-      "D": "StreamHook"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of 'pitch' methods in Webpack loaders?",
-    "options": {
-      "A": "To intercept the loader execution order and potentially return a result early.",
-      "B": "To set the priority of the loader.",
-      "C": "To compress the source code before transformation.",
-      "D": "To log the time taken by each loader."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Webpack 5's 'Module Federation' enables a micro-frontend architecture without the need for a central orchestrator.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Webpack object is responsible for managing the dependency graph and building the module chunks?",
-    "options": {
-      "A": "Compilation",
-      "B": "Resolver",
-      "C": "Template",
-      "D": "Parser"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "In a custom plugin, how do you access the 'compilation' object from the 'compiler' object?",
-    "options": {
-      "A": "compiler.hooks.compilation.tap('MyPlugin', (compilation) => { ... })",
-      "B": "compiler.getCompilation()",
-      "C": "compiler.on('compile', (compilation) => { ... })",
-      "D": "new Compilation(compiler)"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid ways to pass options to a custom Webpack loader.",
-    "options": {
-      "A": "Via the 'options' object in webpack.config.js",
-      "B": "Via query parameters in the import string (e.g., loader?param=value)",
-      "C": "Via environment variables only",
-      "D": "Via a global .loaderrc file"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: The 'NormalModuleFactory' is the hook responsible for creating module instances from the dependency graph.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Module Federation configuration option ensures that only a single instance of a library (like React) is loaded across all federated apps?",
-    "options": {
-      "A": "singleton: true",
-      "B": "eager: true",
-      "C": "shared: ['react']",
-      "D": "Both A and C are required"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "What is the result of returning 'null' from a Loader's pitch method?",
-    "options": {
-      "A": "The loader continues to the next pitch method or the loader itself.",
-      "B": "The entire build fails.",
-      "C": "The module is ignored.",
-      "D": "Webpack skips the rest of the loaders in the chain."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: A Webpack 'Chunk' is a collection of modules that will be emitted into a single file or a set of files.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which optimization setting is used to provide a custom name for the 'runtime' chunk to avoid hash changes in the main bundle?",
-    "options": {
-      "A": "optimization.runtimeChunk: { name: 'manifest' }",
-      "B": "output.runtimeName: 'manifest'",
-      "C": "plugins.RuntimePlugin({ name: 'manifest' })",
-      "D": "module.runtime: 'manifest'"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods used by Webpack to resolve modules internally.",
-    "options": {
-      "A": "enhanced-resolve",
-      "B": "HasteResolver",
-      "C": "Node.js require.resolve()",
-      "D": "internal-path-finder"
-    },
-    "answer": "A, C"
-  },
-  {
-    "question": "True or False: Webpack 5 uses 'Deterministic' module and chunk IDs by default in production to improve long-term caching.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the function of the 'BannerPlugin' in a production build?",
-    "options": {
-      "A": "To add a comment block (like license info) to the top of the generated bundles.",
-      "B": "To display a progress bar in the CLI.",
-      "C": "To inject ad banners into the HTML.",
-      "D": "To rename the bundle with a specific prefix."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'Tapable' hook type runs each tapped function one after another, passing the return value of the previous function to the next?",
-    "options": {
-      "A": "AsyncWaterfallHook",
-      "B": "SyncWaterfallHook",
-      "C": "AsyncSeriesBailHook",
-      "D": "Both A and B"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "True or False: A loader can be configured to return a Buffer instead of a String by setting the 'raw' property to true on the loader function.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What happens during the 'seal' phase of the Webpack Compilation?",
-    "options": {
-      "A": "The dependency graph is frozen and chunks are created.",
-      "B": "The output files are compressed.",
-      "C": "The dev server starts.",
-      "D": "The source maps are generated."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO advanced techniques for reducing the 'initial' bundle size.",
-    "options": {
-      "A": "Module Federation 'remotes' dynamic loading",
-      "B": "Dynamic imports with 'webpackChunkName'",
-      "C": "Inlining all CSS into the JS bundle",
-      "D": "Using 'eval' source maps in production"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: 'ModuleConcatenationPlugin' can only concatenate modules that use ES2015 modules (ESM).",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Module Federation setting allows a host to load a remote module even if the remote application is offline (using a local fallback)?",
-    "options": {
-      "A": "externalType: 'promise'",
-      "B": "fallback: './local-module'",
-      "C": "retry: 3",
-      "D": "Module Federation does not natively support fallbacks without custom code."
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Which Webpack internal object contains all the templates used to generate the final source code of a chunk?",
-    "options": {
-      "A": "MainTemplate",
-      "B": "ChunkTemplate",
-      "C": "ModuleTemplate",
-      "D": "All of the above"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "True or False: Custom Webpack plugins must have an 'apply' method in their prototype.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which hook is triggered when the compiler is closing or being interrupted (useful for cleanup)?",
-    "options": {
-      "A": "shutdown",
-      "B": "close",
-      "C": "end",
-      "D": "failed"
-    },
-    "answer": "B"
-  },
-  {
-    "question": "In a custom Webpack loader, what is the purpose of 'this.cacheable(false)'?",
-    "options": {
-      "A": "It forces Webpack to re-run the loader every time, even if the source file hasn't changed.",
-      "B": "It prevents the loader from being used in production.",
-      "C": "It disables the persistent filesystem cache for the entire project.",
-      "D": "It marks the output as a non-serializable object."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'HotModuleReplacementPlugin' is required to be added manually to the plugins array if you use 'devServer.hot: true' in modern Webpack CLI.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO internal 'Compilation' hooks used to optimize the chunk graph.",
-    "options": {
-      "A": "optimizeChunks",
-      "B": "optimizeModules",
-      "C": "graphClean",
-      "D": "linkDependencies"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the 'externalsType' configuration do when set to 'promise'?",
-    "options": {
-      "A": "It allows an external dependency to be loaded asynchronously as a Promise.",
-      "B": "It converts all output bundles into Promises.",
-      "C": "It forces the build to wait for all network requests.",
-      "D": "It mocks the external module as a resolved promise."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which Tapable hook type allows you to intercept the call and return a value, preventing subsequent plugins from running?",
-    "options": {
-      "A": "SyncBailHook",
-      "B": "AsyncSeriesBailHook",
-      "C": "SyncWaterfallHook",
-      "D": "Both A and B"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "True or False: A Loader's 'pitch' phase runs from left-to-right, while the normal phase runs from right-to-left.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'optimization' property is used to ensure that the module IDs do not change when a new module is added, preserving the hash of unrelated chunks?",
-    "options": {
-      "A": "moduleIds: 'deterministic'",
-      "B": "chunkIds: 'named'",
-      "C": "stableIds: true",
-      "D": "idPersistence: 'high'"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO things that can be modified via the 'Parser' hooks in a custom plugin.",
-    "options": {
-      "A": "The AST (Abstract Syntax Tree) of the module",
-      "B": "The resolution of specific 'require' calls",
-      "C": "The output file permissions",
-      "D": "The dev server port"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "In Webpack's HMR, what is the 'manifest' file used for?",
-    "options": {
-      "A": "It contains the hash of the new compilation and a list of updated chunks.",
-      "B": "It lists all the developers who contributed code.",
-      "C": "It is a backup of the original source code.",
-      "D": "It contains the user's browser history."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Using 'cache.type: \"filesystem\"' in Webpack 5 requires you to manually manage the '.cache' directory to prevent disk overflow.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method on the 'compilation' object is used to add a new asset (file) to the build output manually?",
-    "options": {
-      "A": "emitAsset()",
-      "B": "addAsset()",
-      "C": "createFile()",
-      "D": "pushOutput()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the function of the 'LazyCompilation' feature introduced in Webpack 5.17+?",
-    "options": {
-      "A": "It only compiles entry points and dynamic imports when they are actually requested by the browser.",
-      "B": "It delays the build start until the developer presses enter.",
-      "C": "It reduces the CPU usage by running the compiler at low priority.",
-      "D": "It automatically implements React.lazy() for all components."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid 'snapshot' strategies for Webpack 5 persistent caching.",
-    "options": {
-      "A": "timestamp",
-      "B": "contenthash",
-      "C": "metadata",
-      "D": "git-commit"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: The 'target: \"electron-renderer\"' target automatically treats Node.js built-ins as externals.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which hook in the 'NormalModuleFactory' allows you to change the request string before it is resolved?",
-    "options": {
-      "A": "beforeResolve",
-      "B": "factorize",
-      "C": "resolve",
-      "D": "afterResolve"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which built-in Webpack plugin is used to handle 'Cyclic Dependencies'?",
-    "options": {
-      "A": "There is no built-in plugin; you need a third-party one like 'circular-dependency-plugin'.",
-      "B": "CyclePlugin",
-      "C": "DependencyGraphPlugin",
-      "D": "StrictModulePlugin"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: A loader can access the global Webpack configuration through 'this.query'.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of 'infrastructureLogging' in the Webpack config?",
-    "options": {
-      "A": "To configure the logging output related to the compiler's internal processes (not the build itself).",
-      "B": "To log the server uptime.",
-      "C": "To track the electricity usage of the build.",
-      "D": "To send logs to a database."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO components of the Webpack 'Module' object internally.",
-    "options": {
-      "A": "buildMeta",
-      "B": "buildInfo",
-      "C": "userSettings",
-      "D": "gitStatus"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: In a multi-compiler setup (array of configs), compilers run in parallel by default.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which CLI argument allows you to profile the filesystem cache performance?",
-    "options": {
-      "A": "--profile",
-      "B": "--cache-type",
-      "C": "--verbose",
-      "D": "None; must be checked in the logs via infrastructureLogging."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the 'splitChunks.cacheGroups' property allow you to do?",
-    "options": {
-      "A": "Define custom rules for how specific modules should be grouped into chunks.",
-      "B": "Enable the persistent filesystem cache.",
-      "C": "Group chunks by their browser cache expiration time.",
-      "D": "Delete old chunks from the cache."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'ModuleFederationPlugin' uses a 'Container' and 'ContainerReference' module internally to bridge builds.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which internal template is used to generate the logic for loading chunks (e.g., creating a script tag)?",
-    "options": {
-      "A": "RuntimeTemplate",
-      "B": "ScriptTemplate",
-      "C": "TagTemplate",
-      "D": "LoadTemplate"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO methods for identifying performance bottlenecks in a slow Webpack build.",
-    "options": {
-      "A": "speed-measure-webpack-plugin",
-      "B": "Webpack 'profile' flag",
-      "C": "Increasing the RAM allocation",
-      "D": "Using 'eval' source maps"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Custom Loaders must return either a String or a Buffer.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which property in the 'Compilation' object stores all the modules that failed to build?",
-    "options": {
-      "A": "errors",
-      "B": "failedModules",
-      "C": "missingDependencies",
-      "D": "compilationFailures"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the 'Dependency' class in Webpack internals used for?",
-    "options": {
-      "A": "It is a base class representing a connection between two modules (like an import).",
-      "B": "It is a list of all npm packages.",
-      "C": "It is a tool to install missing packages.",
-      "D": "It is used for security auditing."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'ignore-loader' can be used to prevent certain files from being included in the bundle at all.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'devServer' property allows for a custom middleware to be executed before all other middlewares?",
-    "options": {
-      "A": "setupMiddlewares",
-      "B": "before",
-      "C": "onBeforeSetupMiddleware",
-      "D": "Both A and C are valid in different Webpack versions (A is 5+)."
-    },
-    "answer": "D"
-  },
-  {
-    "question": "Which plugin is used to limit the total number of chunks to reduce HTTP requests?",
-    "options": {
-      "A": "LimitChunkCountPlugin",
-      "B": "AggressiveMergingPlugin",
-      "C": "MinChunkSizePlugin",
-      "D": "All of the above"
-    },
-    "answer": "D"
-  },
-  {
-    "question": "True or False: Webpack 5's Module Federation requires the host and remote to be on the same domain.",
-    "options": {
-      "A": "False",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which hook is called when the compilation has finished and the assets have been written to disk?",
-    "options": {
-      "A": "done",
-      "B": "afterEmit",
-      "C": "finished",
-      "D": "complete"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the function of the 'PrefetchPlugin'?",
-    "options": {
-      "A": "It tells Webpack to start resolving and building a module before the first 'require' call is reached.",
-      "B": "It downloads files from a CDN before the build starts.",
-      "C": "It predicts which files the user will click on.",
-      "D": "It caches the node_modules folder."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid ways to configure 'Source Maps' for maximum security in production.",
-    "options": {
-      "A": "hidden-source-map",
-      "B": "nosources-source-map",
-      "C": "eval-source-map",
-      "D": "inline-source-map"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "True or False: Webpack can be extended to support custom module types (beyond JS, JSON, WASM) via the 'Rule.type' property and a custom generator.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which 'optimization' property allows Webpack to skip over modules that are already included in a parent chunk?",
-    "options": {
-      "A": "removeAvailableModules",
-      "B": "skipDuplicateModules",
-      "C": "optimization.dedupe",
-      "D": "parentChunkInlining"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the 'MainTemplate' responsible for?",
-    "options": {
-      "A": "Generating the entry point boilerplate that bootstraps the entire application.",
-      "B": "Creating the index.html file.",
-      "C": "Minifying the CSS code.",
-      "D": "Managing the dev server hot reload UI."
-    },
-    "answer": "A"
-  }
+  "skill": "Webpack",
+  "questions": [
+    {
+      "question": "What is the default entry point for Webpack 4 and 5?",
+      "options": {
+        "A": "./src/main.js",
+        "B": "./src/index.js",
+        "C": "./app.js",
+        "D": "./index.html"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Webpack is primarily a task runner like Gulp or Grunt.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in the configuration file defines where the bundled files should be saved?",
+      "options": {
+        "A": "entry",
+        "B": "destination",
+        "C": "output",
+        "D": "path"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select TWO core concepts of Webpack.",
+      "options": {
+        "A": "Loaders",
+        "B": "Plugins",
+        "C": "Routes",
+        "D": "Components"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which Webpack mode enables built-in optimizations like minification and tree shaking?",
+      "options": {
+        "A": "development",
+        "B": "production",
+        "C": "none",
+        "D": "optimized"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Loaders in Webpack are used to transform non-JavaScript files into modules.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command is used to run the Webpack CLI from the terminal?",
+      "options": {
+        "A": "webpack",
+        "B": "npx webpack",
+        "C": "npm run build",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO common loaders used for processing CSS in Webpack.",
+      "options": {
+        "A": "css-loader",
+        "B": "style-loader",
+        "C": "text-loader",
+        "D": "design-loader"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the default output folder name created by Webpack?",
+      "options": {
+        "A": "build",
+        "B": "public",
+        "C": "dist",
+        "D": "bundle"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Webpack creates a dependency graph starting from the entry point.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which configuration property is used to apply loaders to specific file types?",
+      "options": {
+        "A": "plugins",
+        "B": "module.rules",
+        "C": "loaders.apply",
+        "D": "transform"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO modes available in Webpack configuration.",
+      "options": {
+        "A": "development",
+        "B": "production",
+        "C": "staging",
+        "D": "testing"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'HtmlWebpackPlugin'?",
+      "options": {
+        "A": "To minify HTML files",
+        "B": "To automatically generate an HTML file that includes your bundles",
+        "C": "To convert HTML to JavaScript",
+        "D": "To serve HTML via a local server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Webpack 5 requires a configuration file to run basic bundling.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which loader is typically used to transpile modern JavaScript (ES6+) to ES5?",
+      "options": {
+        "A": "es6-loader",
+        "B": "babel-loader",
+        "C": "js-loader",
+        "D": "script-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO valid output filename patterns in Webpack.",
+      "options": {
+        "A": "[name].bundle.js",
+        "B": "[contenthash].js",
+        "C": "file.output",
+        "D": "bundle.exe"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: A Plugin can perform a wider range of tasks than a Loader, such as asset management or bundle optimization.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to alias paths for easier imports (e.g., '@' for 'src/')?",
+      "options": {
+        "A": "alias",
+        "B": "resolve.alias",
+        "C": "path.alias",
+        "D": "module.alias"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'webpack-dev-server'?",
+      "options": {
+        "A": "To host the production website",
+        "B": "To provide live reloading during development",
+        "C": "To store backup copies of the code",
+        "D": "To encrypt the bundle"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: By default, Webpack only understands JavaScript and JSON files.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which file is the default configuration file for Webpack?",
+      "options": {
+        "A": "webpack.js",
+        "B": "webpack.config.js",
+        "C": "config.webpack.js",
+        "D": ".webpackrc"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Webpack 5 supports 'Automatic Node.js Polyfills' by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO file types that Webpack can bundle out of the box without extra loaders.",
+      "options": {
+        "A": "JavaScript (.js)",
+        "B": "JSON (.json)",
+        "C": "CSS (.css)",
+        "D": "HTML (.html)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property inside 'module.rules' is used to identify which files should be transformed?",
+      "options": {
+        "A": "include",
+        "B": "test",
+        "C": "match",
+        "D": "filter"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'clean-webpack-plugin' do?",
+      "options": {
+        "A": "Minifies the code",
+        "B": "Removes unused CSS",
+        "C": "Removes the build folder before each build",
+        "D": "Fixes linting errors"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: The 'output.publicPath' property is used to determine the URL of the output directory when referenced in a browser.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader allows you to import images as Base64 strings or files?",
+      "options": {
+        "A": "file-loader",
+        "B": "url-loader",
+        "C": "image-loader",
+        "D": "asset-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO valid ways to define multiple entry points in Webpack.",
+      "options": {
+        "A": "entry: { app: './app.js', admin: './admin.js' }",
+        "B": "entry: ['./app.js', './admin.js']",
+        "C": "entry: 'multiple'",
+        "D": "entry: './src/*.js'"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which CLI flag is used to see the progress of the build in the terminal?",
+      "options": {
+        "A": "--status",
+        "B": "--progress",
+        "C": "--verbose",
+        "D": "--details"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Plugins are instances of classes and are added to the 'plugins' array in the config.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property specifies the target environment (e.g., 'web' or 'node') for the bundle?",
+      "options": {
+        "A": "platform",
+        "B": "env",
+        "C": "target",
+        "D": "mode"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select TWO loaders required to load CSS and inject it into the DOM.",
+      "options": {
+        "A": "css-loader",
+        "B": "style-loader",
+        "C": "dom-loader",
+        "D": "inject-loader"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Tree Shaking' in Webpack?",
+      "options": {
+        "A": "Re-ordering files alphabetically",
+        "B": "Removing dead/unused code during the build process",
+        "C": "Compressed folder structure",
+        "D": "Splitting code into smaller chunks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Loaders are executed from right to left (or bottom to top) in the 'use' array.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader is used to load SASS/SCSS files?",
+      "options": {
+        "A": "scss-loader",
+        "B": "sass-loader",
+        "C": "css-pre-loader",
+        "D": "style-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO methods to provide environment variables to your Webpack bundle.",
+      "options": {
+        "A": "DefinePlugin",
+        "B": "EnvironmentPlugin",
+        "C": "VarPlugin",
+        "D": "ConfigPlugin"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Webpack can bundle TypeScript files using 'ts-loader'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to include or exclude specific directories from a loader's processing?",
+      "options": {
+        "A": "filter/reject",
+        "B": "include/exclude",
+        "C": "path/ignore",
+        "D": "start/stop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the '[contenthash]' placeholder in filenames?",
+      "options": {
+        "A": "To make filenames look complex for security",
+        "B": "To ensure long-term caching by changing names only when content changes",
+        "C": "To identify the version of Webpack used",
+        "D": "To compress the filename size"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Webpack 5 introduced 'Asset Modules' to replace file-loader and url-loader.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command-line option specifies a custom configuration file path?",
+      "options": {
+        "A": "--file",
+        "B": "--config",
+        "C": "-c",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO types of 'Asset Modules' in Webpack 5.",
+      "options": {
+        "A": "asset/resource",
+        "B": "asset/inline",
+        "C": "asset/image",
+        "D": "asset/file"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'Source Mapping' help with?",
+      "options": {
+        "A": "Finding files on the server",
+        "B": "Debugging original source code in the browser even after bundling",
+        "C": "Drawing a map of the module dependencies",
+        "D": "Speeding up the network request"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Minification is enabled by default in 'development' mode.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which loader would you use to lint your JavaScript files during the build?",
+      "options": {
+        "A": "lint-loader",
+        "B": "eslint-loader (or eslint-webpack-plugin)",
+        "C": "check-loader",
+        "D": "valid-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO valid values for the 'devtool' property in development mode.",
+      "options": {
+        "A": "eval",
+        "B": "cheap-module-source-map",
+        "C": "hidden-source-map",
+        "D": "no-source-map"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Webpack can be used to bundle assets for a Node.js backend application.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Dependency Graph' in the context of Webpack?",
+      "options": {
+        "A": "A list of developers working on the project",
+        "B": "A map of how modules refer to each other via imports/exports",
+        "C": "A chart showing build time vs. file size",
+        "D": "A security scan of third-party libraries"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which configuration key allows you to handle files with missing extensions during imports?",
+      "options": {
+        "A": "resolve.extensions",
+        "B": "module.extensions",
+        "C": "path.suffixes",
+        "D": "input.extensions"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Hot Module Replacement' (HMR) exchanges modules without a full page refresh.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property in the output config defines the directory name for all output assets?",
+      "options": {
+        "A": "folder",
+        "B": "path",
+        "C": "root",
+        "D": "dir"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO benefits of using Webpack.",
+      "options": {
+        "A": "Reduced HTTP requests due to bundling",
+        "B": "Support for modern JS features via loaders",
+        "C": "Automatic hosting on AWS",
+        "D": "Elimination of all bugs"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Webpack 5 uses a persistent filesystem cache to speed up subsequent builds.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader is used to process Vue.js single-file components?",
+      "options": {
+        "A": "v-loader",
+        "B": "vue-loader",
+        "C": "sfc-loader",
+        "D": "component-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'mode: none' in Webpack configuration?",
+      "options": {
+        "A": "It disables all default optimizations",
+        "B": "It crashes the build",
+        "C": "It defaults to production",
+        "D": "It only bundles JavaScript"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that belong inside the 'devServer' configuration object.",
+      "options": {
+        "A": "port",
+        "B": "hot",
+        "C": "entry",
+        "D": "plugins"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Loaders are applied only to files that match the 'test' regex.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader handles importing CSS files into JavaScript as strings?",
+      "options": {
+        "A": "style-loader",
+        "B": "css-loader",
+        "C": "string-loader",
+        "D": "text-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'npm install webpack-cli --save-dev' command do?",
+      "options": {
+        "A": "Installs Webpack command line tool as a production dependency",
+        "B": "Installs Webpack command line tool as a development dependency",
+        "C": "Updates Webpack to the latest version",
+        "D": "Deletes the old Webpack CLI"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Every loader must be installed as an npm package before use.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property in 'output' specifies the name of each output bundle?",
+      "options": {
+        "A": "bundleName",
+        "B": "filename",
+        "C": "outputName",
+        "D": "file"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO ways to use Webpack.",
+      "options": {
+        "A": "Command Line Interface (CLI)",
+        "B": "Node.js API",
+        "C": "Browser Console",
+        "D": "Excel Plugin"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Webpack can handle images and fonts as modules.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'watch' property in the config do?",
+      "options": {
+        "A": "Rebuilds the project automatically when files change",
+        "B": "Logs all errors to a file",
+        "C": "Records the developer's screen",
+        "D": "Measures build speed"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader is typically used for transpiling modern CSS features?",
+      "options": {
+        "A": "css-loader",
+        "B": "postcss-loader",
+        "C": "future-css-loader",
+        "D": "modern-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'entry' point can only be a single string path.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which configuration property is used to configure how Webpack splits bundles into smaller chunks for better caching?",
+      "options": {
+        "A": "optimization.splitChunks",
+        "B": "module.split",
+        "C": "plugins.chunkSplitter",
+        "D": "output.bundleSplitting"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'DefinePlugin' allows you to create global constants which can be configured at compile time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid 'devtool' values that are suitable for production (provide source maps without exposing source code in the main bundle).",
+      "options": {
+        "A": "source-map",
+        "B": "hidden-source-map",
+        "C": "eval",
+        "D": "cheap-eval-source-map"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How do you specify a proxy in 'webpack-dev-server' to redirect API calls to a backend server?",
+      "options": {
+        "A": "devServer.proxy",
+        "B": "devServer.redirect",
+        "C": "network.proxy",
+        "D": "plugins.apiProxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader is used to extract CSS into separate files instead of injecting them into the DOM via style tags?",
+      "options": {
+        "A": "style-loader",
+        "B": "MiniCssExtractPlugin.loader",
+        "C": "css-extract-loader",
+        "D": "file-loader"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'import()' syntax in your JavaScript code automatically triggers code splitting in Webpack.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'externals' configuration option do?",
+      "options": {
+        "A": "It excludes certain dependencies from the bundle and expects them to be provided by the environment (e.g., via CDN).",
+        "B": "It allows you to use local files outside the project root.",
+        "C": "It force-installs missing npm packages.",
+        "D": "It minifies external library code only."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO placeholders that can be used in 'output.filename' to handle long-term caching.",
+      "options": {
+        "A": "[contenthash]",
+        "B": "[chunkhash]",
+        "C": "[fileid]",
+        "D": "[version]"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property allows you to change the file extensions that Webpack will process in order (e.g., searching for .ts before .js)?",
+      "options": {
+        "A": "resolve.extensions",
+        "B": "module.fileTypes",
+        "C": "output.suffixes",
+        "D": "input.priority"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'EnvironmentPlugin' is a shorthand for using 'DefinePlugin' specifically for process.env variables.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which optimization property prevents Webpack from emitting assets if there are errors during compilation?",
+      "options": {
+        "A": "optimization.noEmitOnErrors",
+        "B": "optimization.emitOnSuccess",
+        "C": "module.noError",
+        "D": "output.cleanErrors"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to improve Webpack build performance.",
+      "options": {
+        "A": "Using 'include' in loader rules to limit processing to the src folder.",
+        "B": "Using 'filesystem' caching in Webpack 5.",
+        "C": "Running multiple instances of Webpack at once.",
+        "D": "Using the 'production' mode during active development."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of 'optimization.runtimeChunk'?",
+      "options": {
+        "A": "It moves the Webpack boilerplate/manifest into a separate chunk to improve caching.",
+        "B": "It runs the bundle in a worker thread.",
+        "C": "It speeds up the runtime execution of JavaScript.",
+        "D": "It compresses the bundle at runtime."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Webpack can be configured to produce multiple bundles for different languages (i18n) from a single build.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which plugin is used to provide a visual interactive treemap of the size of all your dependencies?",
+      "options": {
+        "A": "WebpackBundleAnalyzer",
+        "B": "SizePlugin",
+        "C": "BundleMapper",
+        "D": "StatsPlugin"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to tell Webpack to ignore certain files from being watched in DevServer.",
+      "options": {
+        "A": "watchOptions.ignored",
+        "B": "devServer.static.watch.ignored",
+        "C": "ignore.files",
+        "D": "watch.exclude"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'sideEffects: false' in package.json tells Webpack that it can safely tree-shake unused exports from that package.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which option in 'devServer' allows the server to stay accessible via the local network (not just localhost)?",
+      "options": {
+        "A": "host: '0.0.0.0'",
+        "B": "network: true",
+        "C": "port: 'auto'",
+        "D": "open: true"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'providePlugin' do?",
+      "options": {
+        "A": "Automatically loads modules instead of having to import or require them everywhere.",
+        "B": "Provides security patches to the bundle.",
+        "C": "Generates a list of all licenses used in the project.",
+        "D": "Provides a download link for the bundle."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO features enabled by 'optimization.minimizer'.",
+      "options": {
+        "A": "TerserPlugin (JS Minification)",
+        "B": "CssMinimizerPlugin (CSS Minification)",
+        "C": "BabelPlugin (Transpilation)",
+        "D": "HtmlPlugin (Compression)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Webpack supports WebAssembly (WASM) out of the box in version 5.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader property allows passing configuration options directly to the loader?",
+      "options": {
+        "A": "options",
+        "B": "params",
+        "C": "config",
+        "D": "settings"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of setting 'devServer.historyApiFallback' to true?",
+      "options": {
+        "A": "It redirects 404s to index.html, which is useful for Single Page Applications (SPAs).",
+        "B": "It saves a history of all user requests.",
+        "C": "It allows the user to use the 'Back' button in the browser.",
+        "D": "It prevents the browser from caching files."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Code splitting can only be done based on the entry points.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to define 'fallback' modules when a dependency is missing in the target environment (common in Webpack 5 Node polyfills)?",
+      "options": {
+        "A": "resolve.fallback",
+        "B": "module.fallback",
+        "C": "output.polyFill",
+        "D": "resolve.missing"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to implement lazy loading in a React application with Webpack.",
+      "options": {
+        "A": "React.lazy() with dynamic import()",
+        "B": "Loadable Components library",
+        "C": "static import statements",
+        "D": "require.context()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: By default, Webpack 5 treats files larger than 8kb as separate files when using 'asset/auto'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'devServer' option enables Gzip compression for all served assets?",
+      "options": {
+        "A": "compress: true",
+        "B": "gzip: true",
+        "C": "zip: true",
+        "D": "minify: true"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'shimming' in Webpack?",
+      "options": {
+        "A": "Modifying a library that expects a certain global variable to be present.",
+        "B": "Reducing the size of an image.",
+        "C": "Splitting code into layers.",
+        "D": "Encrypting the source code."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'eval-source-map' is recommended for production because it is the fastest.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid targets for the 'target' configuration property.",
+      "options": {
+        "A": "node",
+        "B": "web",
+        "C": "mobile",
+        "D": "chrome"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property in the configuration allows you to define 'alias' names for complex module paths?",
+      "options": {
+        "A": "resolve.alias",
+        "B": "module.paths",
+        "C": "input.alias",
+        "D": "output.shortcuts"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'CopyWebpackPlugin' is used to copy individual files or entire directories to the build directory.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using the 'TerserWebpackPlugin'.",
+      "options": {
+        "A": "Minifies JavaScript code",
+        "B": "Removes dead code (Tree Shaking support)",
+        "C": "Transpiles ES6 to ES5",
+        "D": "Injects CSS into the DOM"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In Webpack 5, what is the purpose of 'module.parser.javascript.dynamicImportMode'?",
+      "options": {
+        "A": "To specify how dynamic imports should be bundled (e.g., 'lazy', 'eager')",
+        "B": "To disable imports entirely",
+        "C": "To change the speed of the import",
+        "D": "To rename imported chunks"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader is used to make a global variable (like jQuery) available to a library that expects it?",
+      "options": {
+        "A": "imports-loader",
+        "B": "exports-loader",
+        "C": "expose-loader",
+        "D": "global-loader"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'optimization.moduleIds: \"deterministic\"' is recommended for long-term caching in production.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Webpack feature allows you to load modules from a different build at runtime?",
+      "options": {
+        "A": "Module Federation",
+        "B": "External Linking",
+        "C": "Remote Modules",
+        "D": "Bundle Sharing"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to specify 'rules' for different file types.",
+      "options": {
+        "A": "Using 'test' with a Regex",
+        "B": "Using 'include' with a directory path",
+        "C": "Using 'name' with a string",
+        "D": "Using 'type' with 'binary'"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'devServer.client.overlay' do when set to true?",
+      "options": {
+        "A": "Shows a full-screen overlay in the browser when there are compiler errors",
+        "B": "Adds a watermark to the website",
+        "C": "Displays the build progress bar in the browser",
+        "D": "Overlays the source map over the code"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using '[hash]' is exactly the same as using '[contenthash]' for caching purposes.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which plugin is used to manage and minify CSS assets in production?",
+      "options": {
+        "A": "CssMinimizerPlugin",
+        "B": "OptimizeCssAssetsPlugin",
+        "C": "CleanCssPlugin",
+        "D": "Both A and B are common (A is standard for Webpack 5)"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO things that 'webpack-merge' helps with.",
+      "options": {
+        "A": "Merging common config with env-specific config",
+        "B": "Keeping DRY (Don't Repeat Yourself) code in configs",
+        "C": "Merging two different JS bundles into one",
+        "D": "Merging pull requests"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Webpack 5 Asset Modules can replace 'raw-loader' by using 'type: \"asset/source\"'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'optimization' property is used to tell Webpack to find and remove duplicate modules?",
+      "options": {
+        "A": "None (Webpack 5 does this automatically)",
+        "B": "optimization.dedupe",
+        "C": "optimization.removeDuplicates",
+        "D": "plugins.DedupePlugin"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you define a 'library' bundle that can be consumed by other projects via a global variable?",
+      "options": {
+        "A": "output.library",
+        "B": "entry.type: 'library'",
+        "C": "plugins.LibraryPlugin",
+        "D": "module.exports.library"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'sideEffects: [\"*.css\"]' prevents CSS files from being tree-shaken even if they aren't explicitly used in JS.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which option allows you to limit the maximum number of parallel requests for a chunk?",
+      "options": {
+        "A": "optimization.splitChunks.maxAsyncRequests",
+        "B": "output.maxParallel",
+        "C": "network.requestLimit",
+        "D": "devServer.maxRequests"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid values for 'output.libraryTarget'.",
+      "options": {
+        "A": "umd",
+        "B": "window",
+        "C": "global",
+        "D": "browser"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: In Webpack 5, 'nodejs' globals like '__dirname' are not provided by default in the 'web' target.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader is required to process imports of modern JavaScript inside of a worker thread?",
+      "options": {
+        "A": "worker-loader",
+        "B": "thread-loader",
+        "C": "task-loader",
+        "D": "script-loader"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does setting 'optimization.usedExports' to true do?",
+      "options": {
+        "A": "Enables the analysis for Tree Shaking",
+        "B": "Exports all modules to the global scope",
+        "C": "Lists all used exports in a text file",
+        "D": "Minifies the export names"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'cross-env' is used in the package.json scripts to set environment variables across different OS platforms.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to define a list of directories where Webpack should look for modules?",
+      "options": {
+        "A": "resolve.modules",
+        "B": "module.search",
+        "C": "input.sources",
+        "D": "path.libraries"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to use the 'DefinePlugin'.",
+      "options": {
+        "A": "new webpack.DefinePlugin({ 'process.env.NODE_ENV': '\"production\"' })",
+        "B": "new webpack.DefinePlugin({ API_URL: JSON.stringify('http://api.com') })",
+        "C": "define: { key: 'value' } in config root",
+        "D": "module.define({ key: 'value' })"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'thread-loader' can be placed before other loaders to run them in a worker pool.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Webpack CLI flag allows you to pass a custom name to the environment object in the config?",
+      "options": {
+        "A": "--env",
+        "B": "--name",
+        "C": "--config-name",
+        "D": "--var"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Polyfilling' in the context of Webpack?",
+      "options": {
+        "A": "Providing modern functionality on older browsers that do not natively support it.",
+        "B": "Filling the gaps between different bundles.",
+        "C": "Optimizing images by filling pixels.",
+        "D": "Adding comments to the code."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'optimization.concatenateModules' (Module Concatenation Plugin) is used to speed up the execution of the bundle in the browser.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'devServer' option allows you to manually specify the public URL of the dev server?",
+      "options": {
+        "A": "devServer.public",
+        "B": "devServer.client.webSocketURL",
+        "C": "devServer.host",
+        "D": "devServer.url"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO ways to reduce the size of the Webpack bundle.",
+      "options": {
+        "A": "Using 'import()' for lazy loading",
+        "B": "Using 'Tree Shaking' with ESM",
+        "C": "Adding more plugins to the config",
+        "D": "Using 'inline-source-map'"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Webpack can transpile JSX to JS using 'babel-loader'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which loader allows you to load files as a string (e.g., raw text or HTML templates)?",
+      "options": {
+        "A": "raw-loader",
+        "B": "text-loader",
+        "C": "string-loader",
+        "D": "Both A and C are common"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of 'optimization.emitOnErrors: false'?",
+      "options": {
+        "A": "It ensures that if the build has errors, no output files are written to the disk.",
+        "B": "It ignores all errors.",
+        "C": "It sends errors to an external API.",
+        "D": "It minifies the error messages."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'webpack --profile --json > stats.json' is used to generate a file for analyzing build performance.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'resolve' property allows you to define a list of fields in 'package.json' to use when resolving a module?",
+      "options": {
+        "A": "resolve.mainFields",
+        "B": "resolve.exportsFields",
+        "C": "resolve.priorityFields",
+        "D": "resolve.packageFields"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Webpack 'Compiler' hook is the best place to perform tasks before the compilation starts, such as cleaning the output directory manually?",
+      "options": {
+        "A": "run",
+        "B": "beforeRun",
+        "C": "emit",
+        "D": "compile"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A custom Webpack Loader is essentially a JavaScript function that receives the source of the resource and returns the transformed source.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods provided by the 'loader-utils' or the loader context (this) to handle asynchronous operations in a custom loader.",
+      "options": {
+        "A": "this.async()",
+        "B": "this.callback()",
+        "C": "this.wait()",
+        "D": "this.defer()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In Module Federation, what is the role of the 'exposes' property?",
+      "options": {
+        "A": "It defines which modules from the current build can be consumed by other builds.",
+        "B": "It lists the remote URLs of other applications.",
+        "C": "It exposes the Webpack configuration to the browser console.",
+        "D": "It determines which node_modules are shared."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook should a plugin use if it needs to modify the assets right before they are written to the output directory?",
+      "options": {
+        "A": "emit",
+        "B": "afterCompile",
+        "C": "make",
+        "D": "done"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Tapable' instance is the backbone of Webpack's plugin system, allowing for synchronous and asynchronous hooks.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property in Module Federation allows multiple versions of a library to coexist if their version ranges don't match?",
+      "options": {
+        "A": "singleton: false",
+        "B": "requiredVersion: 'auto'",
+        "C": "strictVersion: false",
+        "D": "versioning: 'multi'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO types of 'Tapable' hooks used in Webpack development.",
+      "options": {
+        "A": "SyncHook",
+        "B": "AsyncSeriesHook",
+        "C": "ParallelHook",
+        "D": "StreamHook"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of 'pitch' methods in Webpack loaders?",
+      "options": {
+        "A": "To intercept the loader execution order and potentially return a result early.",
+        "B": "To set the priority of the loader.",
+        "C": "To compress the source code before transformation.",
+        "D": "To log the time taken by each loader."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Webpack 5's 'Module Federation' enables a micro-frontend architecture without the need for a central orchestrator.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Webpack object is responsible for managing the dependency graph and building the module chunks?",
+      "options": {
+        "A": "Compilation",
+        "B": "Resolver",
+        "C": "Template",
+        "D": "Parser"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a custom plugin, how do you access the 'compilation' object from the 'compiler' object?",
+      "options": {
+        "A": "compiler.hooks.compilation.tap('MyPlugin', (compilation) => { ... })",
+        "B": "compiler.getCompilation()",
+        "C": "compiler.on('compile', (compilation) => { ... })",
+        "D": "new Compilation(compiler)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to pass options to a custom Webpack loader.",
+      "options": {
+        "A": "Via the 'options' object in webpack.config.js",
+        "B": "Via query parameters in the import string (e.g., loader?param=value)",
+        "C": "Via environment variables only",
+        "D": "Via a global .loaderrc file"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'NormalModuleFactory' is the hook responsible for creating module instances from the dependency graph.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Module Federation configuration option ensures that only a single instance of a library (like React) is loaded across all federated apps?",
+      "options": {
+        "A": "singleton: true",
+        "B": "eager: true",
+        "C": "shared: ['react']",
+        "D": "Both A and C are required"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the result of returning 'null' from a Loader's pitch method?",
+      "options": {
+        "A": "The loader continues to the next pitch method or the loader itself.",
+        "B": "The entire build fails.",
+        "C": "The module is ignored.",
+        "D": "Webpack skips the rest of the loaders in the chain."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A Webpack 'Chunk' is a collection of modules that will be emitted into a single file or a set of files.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which optimization setting is used to provide a custom name for the 'runtime' chunk to avoid hash changes in the main bundle?",
+      "options": {
+        "A": "optimization.runtimeChunk: { name: 'manifest' }",
+        "B": "output.runtimeName: 'manifest'",
+        "C": "plugins.RuntimePlugin({ name: 'manifest' })",
+        "D": "module.runtime: 'manifest'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods used by Webpack to resolve modules internally.",
+      "options": {
+        "A": "enhanced-resolve",
+        "B": "HasteResolver",
+        "C": "Node.js require.resolve()",
+        "D": "internal-path-finder"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Webpack 5 uses 'Deterministic' module and chunk IDs by default in production to improve long-term caching.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'BannerPlugin' in a production build?",
+      "options": {
+        "A": "To add a comment block (like license info) to the top of the generated bundles.",
+        "B": "To display a progress bar in the CLI.",
+        "C": "To inject ad banners into the HTML.",
+        "D": "To rename the bundle with a specific prefix."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'Tapable' hook type runs each tapped function one after another, passing the return value of the previous function to the next?",
+      "options": {
+        "A": "AsyncWaterfallHook",
+        "B": "SyncWaterfallHook",
+        "C": "AsyncSeriesBailHook",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: A loader can be configured to return a Buffer instead of a String by setting the 'raw' property to true on the loader function.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens during the 'seal' phase of the Webpack Compilation?",
+      "options": {
+        "A": "The dependency graph is frozen and chunks are created.",
+        "B": "The output files are compressed.",
+        "C": "The dev server starts.",
+        "D": "The source maps are generated."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO advanced techniques for reducing the 'initial' bundle size.",
+      "options": {
+        "A": "Module Federation 'remotes' dynamic loading",
+        "B": "Dynamic imports with 'webpackChunkName'",
+        "C": "Inlining all CSS into the JS bundle",
+        "D": "Using 'eval' source maps in production"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'ModuleConcatenationPlugin' can only concatenate modules that use ES2015 modules (ESM).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Module Federation setting allows a host to load a remote module even if the remote application is offline (using a local fallback)?",
+      "options": {
+        "A": "externalType: 'promise'",
+        "B": "fallback: './local-module'",
+        "C": "retry: 3",
+        "D": "Module Federation does not natively support fallbacks without custom code."
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which Webpack internal object contains all the templates used to generate the final source code of a chunk?",
+      "options": {
+        "A": "MainTemplate",
+        "B": "ChunkTemplate",
+        "C": "ModuleTemplate",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: Custom Webpack plugins must have an 'apply' method in their prototype.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook is triggered when the compiler is closing or being interrupted (useful for cleanup)?",
+      "options": {
+        "A": "shutdown",
+        "B": "close",
+        "C": "end",
+        "D": "failed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a custom Webpack loader, what is the purpose of 'this.cacheable(false)'?",
+      "options": {
+        "A": "It forces Webpack to re-run the loader every time, even if the source file hasn't changed.",
+        "B": "It prevents the loader from being used in production.",
+        "C": "It disables the persistent filesystem cache for the entire project.",
+        "D": "It marks the output as a non-serializable object."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'HotModuleReplacementPlugin' is required to be added manually to the plugins array if you use 'devServer.hot: true' in modern Webpack CLI.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO internal 'Compilation' hooks used to optimize the chunk graph.",
+      "options": {
+        "A": "optimizeChunks",
+        "B": "optimizeModules",
+        "C": "graphClean",
+        "D": "linkDependencies"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'externalsType' configuration do when set to 'promise'?",
+      "options": {
+        "A": "It allows an external dependency to be loaded asynchronously as a Promise.",
+        "B": "It converts all output bundles into Promises.",
+        "C": "It forces the build to wait for all network requests.",
+        "D": "It mocks the external module as a resolved promise."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tapable hook type allows you to intercept the call and return a value, preventing subsequent plugins from running?",
+      "options": {
+        "A": "SyncBailHook",
+        "B": "AsyncSeriesBailHook",
+        "C": "SyncWaterfallHook",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: A Loader's 'pitch' phase runs from left-to-right, while the normal phase runs from right-to-left.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'optimization' property is used to ensure that the module IDs do not change when a new module is added, preserving the hash of unrelated chunks?",
+      "options": {
+        "A": "moduleIds: 'deterministic'",
+        "B": "chunkIds: 'named'",
+        "C": "stableIds: true",
+        "D": "idPersistence: 'high'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO things that can be modified via the 'Parser' hooks in a custom plugin.",
+      "options": {
+        "A": "The AST (Abstract Syntax Tree) of the module",
+        "B": "The resolution of specific 'require' calls",
+        "C": "The output file permissions",
+        "D": "The dev server port"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In Webpack's HMR, what is the 'manifest' file used for?",
+      "options": {
+        "A": "It contains the hash of the new compilation and a list of updated chunks.",
+        "B": "It lists all the developers who contributed code.",
+        "C": "It is a backup of the original source code.",
+        "D": "It contains the user's browser history."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'cache.type: \"filesystem\"' in Webpack 5 requires you to manually manage the '.cache' directory to prevent disk overflow.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method on the 'compilation' object is used to add a new asset (file) to the build output manually?",
+      "options": {
+        "A": "emitAsset()",
+        "B": "addAsset()",
+        "C": "createFile()",
+        "D": "pushOutput()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'LazyCompilation' feature introduced in Webpack 5.17+?",
+      "options": {
+        "A": "It only compiles entry points and dynamic imports when they are actually requested by the browser.",
+        "B": "It delays the build start until the developer presses enter.",
+        "C": "It reduces the CPU usage by running the compiler at low priority.",
+        "D": "It automatically implements React.lazy() for all components."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid 'snapshot' strategies for Webpack 5 persistent caching.",
+      "options": {
+        "A": "timestamp",
+        "B": "contenthash",
+        "C": "metadata",
+        "D": "git-commit"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'target: \"electron-renderer\"' target automatically treats Node.js built-ins as externals.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook in the 'NormalModuleFactory' allows you to change the request string before it is resolved?",
+      "options": {
+        "A": "beforeResolve",
+        "B": "factorize",
+        "C": "resolve",
+        "D": "afterResolve"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in Webpack plugin is used to handle 'Cyclic Dependencies'?",
+      "options": {
+        "A": "There is no built-in plugin; you need a third-party one like 'circular-dependency-plugin'.",
+        "B": "CyclePlugin",
+        "C": "DependencyGraphPlugin",
+        "D": "StrictModulePlugin"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A loader can access the global Webpack configuration through 'this.query'.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'infrastructureLogging' in the Webpack config?",
+      "options": {
+        "A": "To configure the logging output related to the compiler's internal processes (not the build itself).",
+        "B": "To log the server uptime.",
+        "C": "To track the electricity usage of the build.",
+        "D": "To send logs to a database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO components of the Webpack 'Module' object internally.",
+      "options": {
+        "A": "buildMeta",
+        "B": "buildInfo",
+        "C": "userSettings",
+        "D": "gitStatus"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: In a multi-compiler setup (array of configs), compilers run in parallel by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI argument allows you to profile the filesystem cache performance?",
+      "options": {
+        "A": "--profile",
+        "B": "--cache-type",
+        "C": "--verbose",
+        "D": "None; must be checked in the logs via infrastructureLogging."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'splitChunks.cacheGroups' property allow you to do?",
+      "options": {
+        "A": "Define custom rules for how specific modules should be grouped into chunks.",
+        "B": "Enable the persistent filesystem cache.",
+        "C": "Group chunks by their browser cache expiration time.",
+        "D": "Delete old chunks from the cache."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'ModuleFederationPlugin' uses a 'Container' and 'ContainerReference' module internally to bridge builds.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal template is used to generate the logic for loading chunks (e.g., creating a script tag)?",
+      "options": {
+        "A": "RuntimeTemplate",
+        "B": "ScriptTemplate",
+        "C": "TagTemplate",
+        "D": "LoadTemplate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for identifying performance bottlenecks in a slow Webpack build.",
+      "options": {
+        "A": "speed-measure-webpack-plugin",
+        "B": "Webpack 'profile' flag",
+        "C": "Increasing the RAM allocation",
+        "D": "Using 'eval' source maps"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Custom Loaders must return either a String or a Buffer.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property in the 'Compilation' object stores all the modules that failed to build?",
+      "options": {
+        "A": "errors",
+        "B": "failedModules",
+        "C": "missingDependencies",
+        "D": "compilationFailures"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Dependency' class in Webpack internals used for?",
+      "options": {
+        "A": "It is a base class representing a connection between two modules (like an import).",
+        "B": "It is a list of all npm packages.",
+        "C": "It is a tool to install missing packages.",
+        "D": "It is used for security auditing."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'ignore-loader' can be used to prevent certain files from being included in the bundle at all.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'devServer' property allows for a custom middleware to be executed before all other middlewares?",
+      "options": {
+        "A": "setupMiddlewares",
+        "B": "before",
+        "C": "onBeforeSetupMiddleware",
+        "D": "Both A and C are valid in different Webpack versions (A is 5+)."
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which plugin is used to limit the total number of chunks to reduce HTTP requests?",
+      "options": {
+        "A": "LimitChunkCountPlugin",
+        "B": "AggressiveMergingPlugin",
+        "C": "MinChunkSizePlugin",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: Webpack 5's Module Federation requires the host and remote to be on the same domain.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook is called when the compilation has finished and the assets have been written to disk?",
+      "options": {
+        "A": "done",
+        "B": "afterEmit",
+        "C": "finished",
+        "D": "complete"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'PrefetchPlugin'?",
+      "options": {
+        "A": "It tells Webpack to start resolving and building a module before the first 'require' call is reached.",
+        "B": "It downloads files from a CDN before the build starts.",
+        "C": "It predicts which files the user will click on.",
+        "D": "It caches the node_modules folder."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to configure 'Source Maps' for maximum security in production.",
+      "options": {
+        "A": "hidden-source-map",
+        "B": "nosources-source-map",
+        "C": "eval-source-map",
+        "D": "inline-source-map"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Webpack can be extended to support custom module types (beyond JS, JSON, WASM) via the 'Rule.type' property and a custom generator.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'optimization' property allows Webpack to skip over modules that are already included in a parent chunk?",
+      "options": {
+        "A": "removeAvailableModules",
+        "B": "skipDuplicateModules",
+        "C": "optimization.dedupe",
+        "D": "parentChunkInlining"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'MainTemplate' responsible for?",
+      "options": {
+        "A": "Generating the entry point boilerplate that bootstraps the entire application.",
+        "B": "Creating the index.html file.",
+        "C": "Minifying the CSS code.",
+        "D": "Managing the dev server hot reload UI."
+      },
+      "answer": "A"
+    }
   ]
 }

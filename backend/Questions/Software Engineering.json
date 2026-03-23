@@ -1,0 +1,1901 @@
+{ 
+  "skill": "Software Engineering", 
+  "questions": [
+    {
+    "question": "What does the acronym 'SDLC' stand for in software engineering?",
+    "options": {
+      "A": "System Design Logic Center",
+      "B": "Software Development Life Cycle",
+      "C": "Secure Data Link Connection",
+      "D": "Standardized Developer Level Code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In the Waterfall methodology, development moves through distinct phases linearly, and one phase must generally be completed before the next begins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a primary characteristic of the 'Agile' methodology?",
+    "options": {
+      "A": "Extensive documentation before any code is written.",
+      "B": "Iterative development and frequent feedback from stakeholders.",
+      "C": "A strict 'No-Changes' policy once the design is finalized.",
+      "D": "Only testing the software at the very end of a two-year project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is the industry standard for distributed version control?",
+    "options": {
+      "A": "Slack",
+      "B": "Git",
+      "C": "Trello",
+      "D": "Adobe Photoshop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In software engineering, what is 'Unit Testing'?",
+    "options": {
+      "A": "Testing the physical weight of a computer unit.",
+      "B": "Testing individual components or functions of code in isolation.",
+      "C": "Testing the entire software system by a group of users.",
+      "D": "A way to count the number of developers in a team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Refactoring' refers to the process of changing a software system's internal structure without changing its external behavior to improve code quality.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are considered 'Non-Functional' requirements? (Select all that apply)",
+    "options": {
+      "A": "Performance and speed",
+      "B": "Security and encryption",
+      "C": "Scalability",
+      "D": "The 'Add to Cart' button functionality"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Bug' in software engineering?",
+    "options": {
+      "A": "A physical insect inside the server room.",
+      "B": "An error, flaw, or fault in a computer program that causes it to produce an incorrect or unexpected result.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role is primarily responsible for translating business requirements into technical specifications?",
+    "options": {
+      "A": "QA Tester",
+      "B": "Systems Analyst (or Business Analyst)",
+      "C": "Database Administrator",
+      "D": "Marketing Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Open Source' software is software with source code that anyone can inspect, modify, and enhance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of a 'Code Review'?",
+    "options": {
+      "A": "To find typos in the user manual.",
+      "B": "To improve code quality and identify bugs by having other developers examine the source code.",
+      "C": "To slow down the development process on purpose.",
+      "D": "Hiring a professional actor to read the code out loud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Technical Debt'?",
+    "options": {
+      "A": "A physical debt owed to a hardware store.",
+      "B": "The implied cost of additional rework caused by choosing an easy, short-term solution now instead of a better approach that takes longer.",
+      "C": "A specialized software for accountants.",
+      "D": "Increasing the size of the font in a code editor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what does 'CI/CD' stand for?",
+    "options": {
+      "A": "Computer Interaction / Code Design",
+      "B": "Continuous Integration / Continuous Deployment",
+      "C": "Critical Intelligence / Core Delivery",
+      "D": "Circuit Integration / Constant Development"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Monolithic' architecture is one where the entire application is built as a single, unified unit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Agile' ceremonies? (Select all that apply)",
+    "options": {
+      "A": "Daily Stand-up",
+      "B": "Sprint Planning",
+      "C": "Sprint Retrospective",
+      "D": "The Annual Shareholders Meeting"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Commit' in version control?",
+    "options": {
+      "A": "Making a physical promise to a teammate.",
+      "B": "Saving a snapshot of the current changes to the source code repository.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Backend' development refers to the parts of a computer application or a program's code that allow it to operate and that cannot be seen by a user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which document describes how a software system is intended to function and what users can do with it?",
+    "options": {
+      "A": "Software Requirement Specification (SRS)",
+      "B": "Employee Performance Review",
+      "C": "Company Tax Return",
+      "D": "Marketing Brochure"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Object-Oriented Programming' (OOP) primarily based on?",
+    "options": {
+      "A": "Programming using only physical objects found in the office.",
+      "B": "A paradigm based on the concept of 'objects', which can contain data and code (methods).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'API' stands for Application Programming Interface.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deployment' in the SDLC?",
+    "options": {
+      "A": "Hiring a new manager for the IT department.",
+      "B": "The process of making a software system available for use.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are benefits of using 'Microservices' architecture? (Select all that apply)",
+    "options": {
+      "A": "Individual services can be deployed independently",
+      "B": "Services can be written in different programming languages",
+      "C": "Easier to scale specific parts of the system",
+      "D": "It makes the codebase much smaller than a monolith"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Frontend' of an application?",
+    "options": {
+      "A": "The physical front of the computer case.",
+      "B": "The user interface (UI) and user experience (UX) that a person interacts with directly.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dry' (Don't Repeat Yourself) is a principle aimed at reducing repetition of software patterns.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is a 'Rollback'?",
+    "options": {
+      "A": "Rolling a physical computer across the floor.",
+      "B": "Returning the software to a previous stable state after a failed deployment.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regression Testing'?",
+    "options": {
+      "A": "Testing a feature for the very first time.",
+      "B": "Testing to ensure that new code changes haven't adversely affected existing features.",
+      "C": "Testing only the older versions of a software.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'User Stories' are short, simple descriptions of a feature told from the perspective of the person who desires the new capability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' deployment models? (Select all that apply)",
+    "options": {
+      "A": "Public Cloud",
+      "B": "Private Cloud",
+      "C": "Hybrid Cloud",
+      "D": "Sky Cloud"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Scalability'?",
+    "options": {
+      "A": "The ability of a system to handle a growing amount of work by adding resources.",
+      "B": "Building a physical scale to weigh the servers.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Burndown Chart'?",
+    "options": {
+      "A": "A chart showing how many computers were physically burned.",
+      "B": "A visual representation of how much work is left to do versus time in a sprint.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pair Programming' is a technique where two programmers work together at one workstation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Legacy Code'?",
+    "options": {
+      "A": "Code that is given as a gift in a will.",
+      "B": "Older source code that is still in use but may be difficult to maintain or integrate with newer systems.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Sandbox' environment?",
+    "options": {
+      "A": "A physical box of sand for employees to play in.",
+      "B": "An isolated testing environment that mimics production but allows for experimentation without risk.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'IDE' stands for Integrated Development Environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'DevOps'? (Select all that apply)",
+    "options": {
+      "A": "The combination of cultural philosophies, practices, and tools",
+      "B": "Focuses on increasing an organization's ability to deliver applications at high velocity",
+      "C": "Unifies software development (Dev) and software operations (Ops)",
+      "D": "It is a specific piece of software you install on a laptop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'UAT'?",
+    "options": {
+      "A": "Universal Application Tool",
+      "B": "User Acceptance Testing",
+      "C": "United Architecture Terminal",
+      "D": "Unique Asset Tracking"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A reliability metric tracking the predicted elapsed time between inherent failures of a system during normal system operation.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MVC' stands for Model-View-Controller, a popular design pattern.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to manage 'Tasks' in a software project? (Select all that apply)",
+    "options": {
+      "A": "Jira",
+      "B": "Asana",
+      "C": "Trello",
+      "D": "Wireshark"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Merge Request' (or Pull Request)?",
+    "options": {
+      "A": "A request to merge two physical office desks.",
+      "B": "A request for a developer to merge their code changes into a main branch of the repository.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Load Balancing'?",
+    "options": {
+      "A": "Balancing the physical weight of the server racks.",
+      "B": "The process of distributing network traffic across multiple servers to ensure no single server is overwhelmed.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Gitflow' is a popular branching model for Git.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are types of 'Software Maintenance'? (Select all that apply)",
+    "options": {
+      "A": "Corrective (Fixing bugs)",
+      "B": "Adaptive (Updating to work with new OS)",
+      "C": "Perfective (Improving performance)",
+      "D": "Physical (Dusting the server)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code Obfuscation'?",
+    "options": {
+      "A": "Making the code physically small.",
+      "B": "The practice of making code difficult for humans to understand to prevent reverse engineering.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Code Coverage'?",
+    "options": {
+      "A": "The amount of insurance for the code.",
+      "B": "A metric that measures the percentage of source code that is executed during a test suite.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SQL' stands for Structured Query Language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Frontend' technologies? (Select all that apply)",
+    "options": {
+      "A": "HTML",
+      "B": "CSS",
+      "C": "JavaScript",
+      "D": "PostgreSQL"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Docker'?",
+    "options": {
+      "A": "A person who works at a physical dock.",
+      "B": "A platform for developers to develop, ship, and run applications inside containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Blue-Green Deployment'?",
+    "options": {
+      "A": "A deployment using actual blue and green colors.",
+      "B": "A technique that reduces downtime and risk by running two identical production environments.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'JSON' stands for JavaScript Object Notation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Clean Code' principles? (Select all that apply)",
+    "options": {
+      "A": "Meaningful names for variables",
+      "B": "Small, single-purpose functions",
+      "C": "Using comments sparingly (code should be self-documenting)",
+      "D": "Writing as much code as possible on one line"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Scrum'?",
+    "options": {
+      "A": "A physical move in rugby.",
+      "B": "An Agile framework for managing complex software development projects.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect Density'?",
+    "options": {
+      "A": "The physical weight of a bug.",
+      "B": "The number of confirmed defects identified in a software/component during a period of development/operation divided by the size of the component.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'API' endpoints are often documented using 'Swagger' (now OpenAPI).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Backend' programming languages? (Select all that apply)",
+    "options": {
+      "A": "Java",
+      "B": "Python",
+      "C": "Node.js",
+      "D": "CSS"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Version Control'?",
+    "options": {
+      "A": "Controlling the physical version of the office chairs.",
+      "B": "The practice of tracking and managing changes to software code.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Monitoring'?",
+    "options": {
+      "A": "Buying a large physical monitor for the desk.",
+      "B": "The process of collecting and analyzing data from IT systems to ensure they are performing correctly.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sprint' is a fixed period of time (e.g., 2 weeks) during which specific work has to be completed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Integration Testing'? (Select all that apply)",
+    "options": {
+      "A": "Testing how different modules or services work together",
+      "B": "Ensuring data flows correctly between systems",
+      "C": "Testing the mental health of the team",
+      "D": "Identifying interface defects"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Static Analysis'?",
+    "options": {
+      "A": "Analyzing code without executing it to find potential errors.",
+      "B": "Analyzing the physical static on a screen.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Recovery' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time it takes to restore a system to full functionality after a failure.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mocking' is a technique used in testing to simulate the behavior of complex objects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Infrastructure as Code' (IaC)? (Select all that apply)",
+    "options": {
+      "A": "Managing and provisioning infrastructure through machine-readable definition files",
+      "B": "Using tools like Terraform or CloudFormation",
+      "C": "Building a physical wall with code",
+      "D": "Applying software engineering practices to infrastructure"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Architecture' in software engineering?",
+    "options": {
+      "A": "The physical architecture of the office building.",
+      "B": "The high-level structure of a software system and the discipline of creating such structures.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Zero Downtime Deployment'?",
+    "options": {
+      "A": "Deployment where no one is allowed to sit down.",
+      "B": "A deployment strategy where the application remains fully available to users throughout the update process.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'K8s' is a common shorthand for Kubernetes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the SOLID principles of object-oriented design, what does the 'L' (Liskov Substitution Principle) technically imply?",
+    "options": {
+      "A": "Large classes should be split into smaller, more manageable files.",
+      "B": "Objects of a superclass should be replaceable with objects of its subclasses without affecting the correctness of the program.",
+      "C": "Logical operations should always be placed in the backend controller.",
+      "D": "Legacy code must be substituted with modern code every two years."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a microservices architecture, 'Eventual Consistency' means that the data across all services will be consistent immediately after a write operation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are characteristics of the 'CAP Theorem' in distributed systems? (Select all that apply)",
+    "options": {
+      "A": "Consistency (Every read receives the most recent write)",
+      "B": "Availability (Every request receives a response)",
+      "C": "Partition Tolerance (The system continues to operate despite network failures)",
+      "D": "Performance (The system always runs at maximum CPU speed)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary difference between a 'Git Rebase' and a 'Git Merge'?",
+    "options": {
+      "A": "Merge deletes the history; Rebase preserves it exactly.",
+      "B": "Merge creates a new commit that joins the two histories, while Rebase moves the entire branch to begin on the tip of the main branch, creating a linear history.",
+      "C": "Merge is only for frontend code; Rebase is only for backend code.",
+      "D": "Rebase is 100% automated and never results in conflicts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which design pattern is most appropriate for creating an object that should only have a single instance throughout the application's lifecycle?",
+    "options": {
+      "A": "Factory Pattern",
+      "B": "Singleton Pattern",
+      "C": "Observer Pattern",
+      "D": "Strategy Pattern"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dependency Injection' is a technique where an object receives its dependent objects from an external source rather than creating them itself, promoting loose coupling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Web Engineering', what is 'Load Balancing' at Layer 7 (Application Layer) compared to Layer 4 (Transport Layer)?",
+    "options": {
+      "A": "Layer 7 balancing is based on physical weight; Layer 4 is based on volume.",
+      "B": "Layer 7 can make routing decisions based on HTTP headers, cookies, or URL paths, whereas Layer 4 only sees IP addresses and ports.",
+      "C": "Layer 7 is only used for mobile apps.",
+      "D": "Layer 4 is 100x slower than Layer 7."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'HTTP' caching mechanisms? (Select all that apply)",
+    "options": {
+      "A": "ETags (Entity Tags)",
+      "B": "Cache-Control headers",
+      "C": "Last-Modified headers",
+      "D": "The physical temperature of the cache server"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code Splitting' in a modern frontend framework like React or Vue?",
+    "options": {
+      "A": "Splitting the code between two different developers.",
+      "B": "Breaking down a large bundle into smaller chunks that can be loaded on demand to improve initial page load time.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Containerization' (e.g., Docker) allows an application to share the host OS kernel, making it more lightweight than a Virtual Machine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Message Broker' (like RabbitMQ or Kafka) in an asynchronous architecture?",
+    "options": {
+      "A": "To translate messages into different human languages.",
+      "B": "To decouple services by allowing them to communicate via messages without needing to be online at the same time.",
+      "C": "To act as a physical post office for the data center.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Blue-Green Deployment' strategy logic?",
+    "options": {
+      "A": "Using blue and green server cases.",
+      "B": "Maintaining two identical production environments and switching the router to the new version (Green) once it is verified, with the old version (Blue) as a standby for rollback.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Database' concept ensures that a transaction is either completed entirely or not at all?",
+    "options": {
+      "A": "Consistency",
+      "B": "Atomicity",
+      "C": "Isolation",
+      "D": "Durability"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Horizontal Scaling' involves adding more power (CPU/RAM) to an existing server, while 'Vertical Scaling' involves adding more servers to the pool.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'GoF' (Gang of Four) Structural design patterns? (Select all that apply)",
+    "options": {
+      "A": "Adapter",
+      "B": "Facade",
+      "C": "Proxy",
+      "D": "Builder"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Polyglot Persistence' in a modern backend architecture?",
+    "options": {
+      "A": "Storing data in many different human languages.",
+      "B": "The practice of using different data storage technologies (e.g., SQL, NoSQL, Cache) within the same application to handle different data requirements.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cyclomatic Complexity'?",
+    "options": {
+      "A": "A measure of the physical complexity of a computer cycle.",
+      "B": "A quantitative measure of the number of linearly independent paths through a program's source code, used to identify complex functions.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in software engineering often refers to 'Dev' teams prioritizing speed while 'Security' teams prioritize strict risk management.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Git' command is used to combine multiple small commits into a single, clean commit before merging into the main branch?",
+    "options": {
+      "A": "git push --force",
+      "B": "git rebase -i (Interactive Squash)",
+      "C": "git branch -d",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Idempotency' in the context of REST API design?",
+    "options": {
+      "A": "An API that only works on even-numbered days.",
+      "B": "A property where making the same request multiple times has the same effect as making it once (e.g., a PUT request).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Churn Rate' for a software codebase?",
+    "options": {
+      "A": "The rate at which physical butter is churned in the office kitchen.",
+      "B": "The frequency with which files or functions are modified over a specific period, often used to find unstable areas of the code.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Graceful Degradation' is a design philosophy where a system remains functional (at a lower level) even when some of its components fail.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' Native architectural principles? (Select all that apply)",
+    "options": {
+      "A": "Infrastructure as Code (IaC)",
+      "B": "Self-healing systems",
+      "C": "Auto-scaling",
+      "D": "Using only physical on-premise hardware"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Database' 'Normalization' intended to reduce?",
+    "options": {
+      "A": "Data redundancy and dependency.",
+      "B": "The physical size of the server rack.",
+      "C": "The number of users allowed to connect.",
+      "D": "The frame rate of the UI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Service Level Indicator' (SLI)?",
+    "options": {
+      "A": "A physical light on the server.",
+      "B": "A specific quantitative measure of some aspect of the level of service that is provided (e.g., latency, throughput).",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Dependencies' occur when a project requires two different versions of the same library that cannot coexist.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Load' 'Testing' techniques? (Select all that apply)",
+    "options": {
+      "A": "Using tools like JMeter or k6 to simulate concurrent users",
+      "B": "Identifying the 'Breaking Point' of the system",
+      "C": "Testing the mental health of the developer",
+      "D": "Enabling bottleneck identification"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Deadlock' in concurrent programming?",
+    "options": {
+      "A": "A lock that is physically broken.",
+      "B": "A situation where two or more processes are unable to proceed because each is waiting for the other to release a resource.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Density' per KLOC?",
+    "options": {
+      "A": "The weight of a bug in grams.",
+      "B": "The number of defects identified per 1,000 lines of code.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a service timeout is shorter than the average latency of the downstream dependency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Technical' 'Leadership' goals? (Select all that apply)",
+    "options": {
+      "A": "Reducing Technical Debt",
+      "B": "Improving Developer Productivity",
+      "C": "Aligning technology stack with long-term business goals",
+      "D": "Buying physical snack for the office"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Micro-Frontend' architecture?",
+    "options": {
+      "A": "A frontend using a physical microscope.",
+      "B": "An architectural style where a frontend app is decomposed into individual, semi-independent 'micro' apps that work together.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Canary Deployment'?",
+    "options": {
+      "A": "Deploying code with a physical bird in the office.",
+      "B": "Rolling out a change to a small subset of users before making it available to everybody.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in engineering refers to a scenario where code optimized for high-performance GPUs is run on a low-power IoT CPU.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Diversity' and 'Inclusion' in engineering teams? (Select all that apply)",
+    "options": {
+      "A": "Actively hiring from underrepresented groups",
+      "B": "Ensuring all team members feel safe sharing their technical opinions",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Eliminating biased language from code comments and documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Immutable' Infrastructure?",
+    "options": {
+      "A": "Infrastructure that cannot be physically moved.",
+      "B": "The practice where servers or components are never modified after they're deployed; instead, new ones are created from a common image for any update.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) for a production bug?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a bug is reported until a verified fix is deployed to production.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in engineering occurs when the business expects 99.999% uptime but the infrastructure only supports 99.9%.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Release' 'Notes' benefits? (Select all that apply)",
+    "options": {
+      "A": "Instant generation of changes for customers",
+      "B": "Consistency in change reporting",
+      "C": "Guaranteed to replace all human project managers",
+      "D": "Reduction in manual administrative work"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an OOP class?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Bundling the data and the methods that operate on that data into a single unit, restricting direct access to some of the object's components.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a system failure?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The average duration from a system failure until the monitoring system triggers a notification.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Storage' in engineering refers to using a high-latency cold storage solution for real-time transactional data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Engineering' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Technology Officer (CTO)",
+      "B": "Product Manager",
+      "C": "Cybersecurity Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in legacy migration?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ease with which business logic can be moved from an old platform to a new one without a complete rewrite.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Efficiency'?",
+    "options": {
+      "A": "The ratio of useful work performed by a system to the total resources consumed (CPU, RAM, Power).",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for computer viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a client-side library retries a connection faster than the server can recover from a restart.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Scalability' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Enabling the system to handle sudden traffic spikes without manual intervention",
+      "B": "Reducing cloud costs by scaling down during off-peak hours",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent user experience regardless of load"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' orchestration?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of scripts or templates used to quickly initialize and configure a new project with the organization's standard libraries and CI/CD settings.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant regression in quality until the code is verified as 'Healthy' again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a developer expects a 2024 software build to complete on hardware from the year 2000 in under 5 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Engineering' 'Debugging' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Heap Dumps",
+      "B": "Thread Dumps",
+      "C": "Network HAR files",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' 'Decoupling' logic?",
+    "options": {
+      "A": "Removing the physical cables from the computer.",
+      "B": "An architectural approach where components have little or no knowledge of the internal workings of other components, making the system easier to change.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a system anomaly?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the start of an unusual behavior until it is officially identified as an anomaly by the engineering team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in engineering occurs when a client expects a 'Real-time' data sync but the backend uses an 'Hourly Batch' process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in metric presentation across different squads",
+      "B": "Reduction in manual administrative work for developers",
+      "C": "Guaranteed to replace all engineering managers",
+      "D": "Instant availability of project health data"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Microservice?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the service own its own data and business logic, providing only a clean API to other services.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code stability before a new production failure is identified.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when 'Prod' logs are set to 'DEBUG' for an extended time, generating TBs of data and increasing cloud storage costs significantly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Engineering' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Principal Engineer",
+      "B": "Release Manager",
+      "C": "Site Reliability Engineer (SRE)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Software' 'Scalability' 'Risk'?",
+    "options": {
+      "A": "The risk that a system will crash or slow down significantly when the number of users increases beyond the original design limits.",
+      "B": "The risk of falling off a physical scale.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) threshold in DevOps?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The maximum duration allowed between a high-priority incident and the initial alert being received by the on-call engineer.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a modern frontend attempts to connect to a legacy backend using 'WebSockets' when the backend only supports 'REST'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Super-Coders' who consistently have zero bugs",
+      "B": "Predicting release delays based on current sprint velocity",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing commit patterns to identify 'At-Risk' code areas"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in a Multi-tenant backend?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Using software logic (like TenantIDs) to ensure that one customer's data is never visible to another, even on shared hardware.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Deploys' (MTBD)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the frequency of code releases to the production environment.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an engineering team expects 'Instant' feedback from an automated test suite that takes 12 hours to run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a distributed system, how does the 'SAGA Pattern' technically resolve the lack of ACID compliance across multiple microservices during a transactional failure?",
+    "options": {
+      "A": "By utilizing a global shared lock on all involved databases until the transaction is complete.",
+      "B": "By executing a sequence of local transactions and utilizing 'Compensating Transactions' to undo previous successful steps if a subsequent step fails.",
+      "C": "By converting all databases to a single monolithic instance temporarily.",
+      "D": "By ignoring the failure and assuming the data will eventually be corrected by a manual audit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: According to the CAP Theorem, in the presence of a network partition (P), a distributed system must choose between either Consistency (C) or Availability (A).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes the 'CQRS' (Command Query Responsibility Segregation) pattern? (Select all that apply)",
+    "options": {
+      "A": "It separates read and update operations for a data store into different models.",
+      "B": "It allows the read database to be optimized for complex queries while the write database is optimized for performance.",
+      "C": "It requires the use of physical paper logs for all write commands.",
+      "D": "It often utilizes Event Sourcing to keep the read and write models synchronized."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the technical objective of using the 'Circuit Breaker' pattern in a high-concurrency microservices environment?",
+    "options": {
+      "A": "To provide physical electricity to the server racks during a power outage.",
+      "B": "To prevent a cascading failure by stopping requests to a service that is failing or high-latency, allowing it time to recover.",
+      "C": "A specialized software for architects to design office electrical grids.",
+      "D": "To increase the frame rate of the system monitoring dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Performance Engineering', what is 'Tail Latency' and why is it critical for user experience?",
+    "options": {
+      "A": "The physical length of the server's power cable.",
+      "B": "The high-percentile response times (e.g., P99 or P99.9) that represent the slowest requests, which often impact the most active users.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the frame rate of a video rendering process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Database Sharding' is a horizontal scaling technique that partitions data across multiple independent database instances to reduce load on a single server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Distributed Consensus' algorithm is designed for simplicity and used by tools like etcd and HashiCorp Consul?",
+    "options": {
+      "A": "The Waterfall Algorithm",
+      "B": "Raft",
+      "C": "Bubble Sort",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ambassador' pattern in a Kubernetes/Service Mesh architecture?",
+    "options": {
+      "A": "Hiring a diplomat to talk to the IT department.",
+      "B": "A helper container that handles common network tasks (like logging, monitoring, or security) for a main application container in the same pod.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Advanced' Garbage Collection (GC) tuning strategies for high-throughput JVM applications? (Select all that apply)",
+    "options": {
+      "A": "Tuning 'Survivor' space ratios",
+      "B": "Switching to the ZGC or Shenandoah collectors for low-pause times",
+      "C": "Optimizing 'Heap' size to avoid excessive 'Full GC' cycles",
+      "D": "Deleting the source code to clear memory"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Kernel' 'Architectures' occur when a developer attempts to deploy a containerized binary compiled for x86_64 onto an ARM64-based cloud cluster without binary translation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sidecar' proxying in a Service Mesh (like Istio or Linkerd)?",
+    "options": {
+      "A": "Providing a physical seat for the developer in the data center.",
+      "B": "Running a network proxy alongside every service instance to manage mutual TLS, load balancing, and traffic routing automatically.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Infrastructure' 'Drift' and how do GitOps tools like ArgoCD address it?",
+    "options": {
+      "A": "When physical servers move across the floor.",
+      "B": "When the actual state of the cloud environment deviates from the intended state defined in code; GitOps tools automatically re-sync the environment to match the Git repository.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' architectural metric identifies the degree to which a system's components are interdependent (Cohesion vs. Coupling)?",
+    "options": {
+      "A": "Total line count of the codebase",
+      "B": "Afferent and Efferent Coupling (Ca/Ce) scores",
+      "C": "The font size of the architectural diagram",
+      "D": "The number of meetings held per week"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Linearizability' in a distributed database guarantees that if one operation finishes before another starts, it must appear to the system in that exact chronological order.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Blue-Green' vs 'Canary' deployment strategies? (Select all that apply)",
+    "options": {
+      "A": "Blue-Green switches 100% of traffic at once after verification",
+      "B": "Canary shifts traffic incrementally (e.g., 1%, 10%, 50%) based on performance health",
+      "C": "Blue-Green requires a physical bird in the office",
+      "D": "Canary is more effective for detecting low-frequency runtime bugs in production"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Backpressure' in a reactive streams or message-driven architecture?",
+    "options": {
+      "A": "Physical pressure on the back of the computer.",
+      "B": "A mechanism that allows a data consumer to signal to a producer that it is overwhelmed, preventing system-wide crashes due to buffer overflows.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' (MTTR) significance for SRE teams?",
+    "options": {
+      "A": "The average time it takes for a team to have a lunch break.",
+      "B": "A key reliability metric representing the average duration from the start of a production outage until the service is fully operational again.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Consistency' 'Models' occur when an application assumes 'Strong Consistency' while the underlying distributed database is configured for 'Eventual Consistency', leading to 'Stale Data' bugs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Database' 'Indexing' types? (Select all that apply)",
+    "options": {
+      "A": "B-Tree / B+ Tree",
+      "B": "LSM-Tree (Log-Structured Merge-Tree)",
+      "C": "Inverted Index (for full-text search)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Database' 'Connection' 'Pooling' 'Saturation'?",
+    "options": {
+      "A": "When the pool is full of water.",
+      "B": "When an application reaches the maximum limit of simultaneous database connections, causing incoming requests to queue or fail.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic' engineering, what is the 'Strangler Fig Pattern' used for?",
+    "options": {
+      "A": "Killing actual physical trees in the office garden.",
+      "B": "Incrementally migrating a legacy monolithic system by replacing specific functional modules with new microservices until the monolith is 'strangled' and retired.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in engineering occurs when the front-end team promises a 100ms page load, but the back-end API has a 500ms P50 latency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Incident' 'Response' (AIOps)? (Select all that apply)",
+    "options": {
+      "A": "Using machine learning to automatically correlate logs and find root causes",
+      "B": "Automatically scaling a cluster when a traffic spike is predicted",
+      "C": "Hiring 100 junior developers to watch a screen",
+      "D": "Triggering 'Self-healing' scripts to restart failing nodes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Event' 'Sourcing' and its primary benefit for data auditing?",
+    "options": {
+      "A": "Sourcing events from a physical ticket office.",
+      "B": "A pattern where every change to the state of an application is stored as a sequence of events, allowing the state to be reconstructed at any point in time for audit or recovery.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Change' 'Failure' 'Rate'?",
+    "options": {
+      "A": "The percentage of code deployments that lead to a failure in production (e.g., incident, rollback, or patch required).",
+      "B": "The rate at which physical office furniture is changed.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' in distributed systems occur when a client retransmission timer is shorter than the server's TCP handshake completion time, causing a 'Retry Storm'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Zero' 'Trust' 'Architecture' for engineering? (Select all that apply)",
+    "options": {
+      "A": "Enforcing mutual TLS (mTLS) for all service-to-service communication",
+      "B": "Verifying the identity of every request, even within the internal network",
+      "C": "Assuming the network is already breached",
+      "D": "Giving all developers root access for convenience"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Technical' 'Debt' 'Interest'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The measurable impact on developer velocity and system maintenance costs caused by previous sub-optimal technical decisions.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Incidents' (MTBI)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of system stability before a new production failure occurs.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' occurs when application logs are stored in a database that only the DBA can access, preventing the on-call engineer from troubleshooting a crash.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Engineering' 'Leadership' 'Frameworks'? (Select all that apply)",
+    "options": {
+      "A": "DORA (DevOps Research and Assessment) metrics",
+      "B": "The SPACE framework (Satisfaction, Performance, Activity, Communication, Efficiency)",
+      "C": "ITIL (Information Technology Infrastructure Library)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Architecture' 'Decision' 'Record' (ADR)?",
+    "options": {
+      "A": "Recording architecture meetings on physical cassette tapes.",
+      "B": "A short text document that captures an important architectural decision, including its context and consequences, to provide historical context for future developers.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Polyglot' 'Programming'?",
+    "options": {
+      "A": "Programming using only one language.",
+      "B": "The practice of writing a software system in multiple programming languages to take advantage of the strengths of each (e.g., Python for ML, Go for networking).",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when an automated CI/CD service account is granted 'Owner' rights in a production cloud environment, violating the principle of 'Least Privilege'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Canary' 'Analysis' (ACA)? (Select all that apply)",
+    "options": {
+      "A": "Using statistical algorithms to compare performance of a new version against the stable baseline",
+      "B": "Automatically rolling back a canary deployment if its error rate is 1% higher than the baseline",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Reducing the risk of a manual error during traffic shifting"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Decoupling' through 'Event-Driven' architecture?",
+    "options": {
+      "A": "Removing the physical cables from the computer.",
+      "B": "Using an intermediate message bus so that the 'Sender' service has no technical knowledge or direct connection to the 'Receiver' service.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability' in software engineering?",
+    "options": {
+      "A": "Traceability of a person named Requirement.",
+      "B": "The ability to map every piece of code and every test case back to the original business requirement or user story.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a front-end framework (like Angular) polls for data every 50ms while the backend API has a 100ms response time, causing 'Polling Overload'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant availability of 'Release Readiness' data",
+      "B": "Consistency in project tracking across multi-national teams",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual effort for status update reporting"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an API Gateway?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that authentication, rate limiting, and request routing are handled by the gateway, hiding internal infrastructure details from external clients.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between identifying a significant decline in code quality (e.g., high defect density) and the point at which the code meets healthy benchmarks again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an engineering team expects a 2024 AI model to train on hardware from the year 2010 in under 1 hour.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Engineering' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Architect",
+      "B": "Site Reliability Lead",
+      "C": "Head of Engineering Operations",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Engineering' 'Bootstrap' orchestration for new startups?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of templates and 'Service Chassis' used to quickly launch a standardized, secure, and monitorable tech stack for a new product.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Efficiency'?",
+    "options": {
+      "A": "A metric comparing the 'Value-Added' coding time vs. 'Waste' time (e.g., waiting for builds or manual testing) within a sprint.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occur when an enterprise production environment is set to 'TRACE' level for all microservices, leading to millions in excess cloud logging costs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'At-Risk' projects based on declining commit frequency",
+      "B": "Predicting software release dates using current velocity trends",
+      "C": "Guaranteed to replace all human project managers",
+      "D": "Analyzing PR comments to identify areas with high 'Review Friction'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in a cloud backend?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The use of row-level security or specific database identifiers to ensure one customer's data can never be accessed by another in a multi-tenant application.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a critical system outage?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The maximum duration allowed between the occurrence of a high-severity production incident and the initial alert being received by the on-call responder.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a 2024 microservice attempts to communicate with a 1990s legacy mainframe via gRPC, when the mainframe only supports COBOL-based record files.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Governance'? (Select all that apply)",
+    "options": {
+      "A": "Blocking code merges if security vulnerability scans find critical issues",
+      "B": "Enforcing 80% unit test coverage as a hard requirement for deployment",
+      "C": "Guaranteed to replace all QA engineers",
+      "D": "Identifying 'Stale' libraries in the build manifest automatically"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in modern microservice migration?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree of effort required to move 'Domain Logic' out of a legacy codebase and into a containerized, cloud-native environment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a software defect?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between when a code regression is committed and when it is officially identified as a defect by an automated test or human reviewer.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in software engineering occur when the business expects 'Instant Global Data Replication' while utilizing a database configured for 'Lazy Async Background Sync'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Engineering' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Principal Software Architect",
+      "B": "Head of Release Engineering",
+      "C": "Internal Compliance Officer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' complexity for a multi-regional rollout?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of initializing a globally distributed tech stack that accounts for local data laws, latency, and regional cloud availability.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Deploys' (MTBD)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the frequency of successful code releases to the production environment.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated test expects an 'Instant' response from a system that is currently performing a 'Large Batch Database Cleanup'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Real-time visibility into technical debt trends for the board",
+      "B": "Consistency in ROI data presentation for the business",
+      "C": "Guaranteed to replace all human engineering managers",
+      "D": "Reduction in manual administrative work for developers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a serverless function (FaaS)?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the function is completely stateless and contains only the logic required to process a single event, independent of external system state.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an incident?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from when an incident is officially acknowledged until a permanent software fix is verified and deployed.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a multi-threaded application is deployed to a server environment that is physically limited to a single CPU core, causing lock contention.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Infrastructure' 'Compliance'? (Select all that apply)",
+    "options": {
+      "A": "Automatically deleting cloud resources that do not have mandatory security tags",
+      "B": "Verifying that no public-facing S3 buckets are created",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Blocking deployments if the IAM policy is too permissive"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' 'Fidelity' in a compiler migration?",
+    "options": {
+      "A": "The fidelity of a person name Code.",
+      "B": "How accurately the logic of a legacy application is preserved when moving it to a new programming language or framework.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an anomaly?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the first signal of an unusual system behavior until it is officially identified as an anomaly by the SRE team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a microservices environment occur when a 'Consumer' service uses a 2024 API contract while the 'Producer' service is still running the 2018 version.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Engineering' 'Leadership' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "VP of Engineering",
+      "B": "Principal Site Reliability Engineer",
+      "C": "Quality Assurance Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Engineering' 'Ecosystem' 'Orchestration'?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The strategic management of all tools, platforms, and cultural practices to ensure a high-velocity development lifecycle.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  }
+  ]
+}

@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Sketch", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of an 'Artboard' in Sketch?",
+    "options": {
+      "A": "To act as a physical frame for a printed painting.",
+      "B": "To masterfully provide a fixed technical boundary representing a specific screen or device size within your design file.",
+      "C": "A specialized software for designing physical office furniture strictly.",
+      "D": "To increase the frame rate of the macOS operating system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical feature masterfully allows you to create reusable design elements (like buttons or headers) that update globally when changed?",
+    "options": {
+      "A": "Standard Groups",
+      "B": "Symbols",
+      "C": "Masks strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Sketch is technically a vector-based design tool, meaning designs can be masterfully scaled to any size technicaly without losing quality.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical panel in Sketch acts as the primary 'Control Center' for masterfully adjusting layer properties like size, color, and technical shadows?",
+    "options": {
+      "A": "The Toolbar",
+      "B": "The Inspector",
+      "C": "The Layer List strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Overrides' when working with Symbols in Sketch?",
+    "options": {
+      "A": "To permanently delete the original master symbol.",
+      "B": "To technically customize specific content (like text or images) within a Symbol instance masterfully without affecting the Master Symbol.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To physically lock the layer after one click."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pages' in Sketch technically allow you to masterfully organize different sections of a project (e.g., Mobile, Desktop, Components) within a single technical file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using 'Boolean Operations' (Union, Subtract) to technically combine multiple vector shapes into a single masterfully designed object?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Vector Path Orchestration / Boolean Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Layer List' technically used for in the Sketch workspace?",
+    "options": {
+      "A": "Counting the physical sheets of paper in the office.",
+      "B": "To masterfully display and organize all Artboards and layers in a hierarchical technical structure.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Mask' in Sketch technically hides parts of a layer masterfully using the shape of another layer technicaly placed below it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of the 'Export' preset?",
+    "options": {
+      "A": "A button used to physically eject the hard drive.",
+      "B": "A masterfully configured set of technical rules for saving assets in multiple formats (PNG, SVG, PDF) and masterfully defined scales (1x, 2x, 3x).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Sketch benefits for 'UI Consistency'? (Select all that apply)",
+    "options": {
+      "A": "Implementing technical 'Shared Styles' for text and layers masterfully",
+      "B": "Using masterfully managed 'Symbol Libraries' across multiple files",
+      "C": "Buying physical snacks for the design team",
+      "D": "Ensuring technical 'Alignment' through the masterfully applied Layout Grid"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Smart Layout' masterfully used for in Sketch Symbols?",
+    "options": {
+      "A": "Ensuring the computer is physically level.",
+      "B": "The technical ability of a Symbol to masterfully resize technicaly and maintain padding when its content changes.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Style Sync' is a technical process where changes to a 'Layer Style' are masterfully applied to all other technical layers using that same style.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Grids and Layouts' in Sketch?",
+    "options": {
+      "A": "Using a physical ruler on the screen glass.",
+      "B": "The technical process of masterfully defining columns and gutters to ensure visual technical structure and alignment.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Bézier Curve' technically?",
+    "options": {
+      "A": "A technical path masterfully created using anchor points and control handles to technicaly define complex vector shapes.",
+      "B": "A physical curve in a server rack.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Sketch technically masterfully supports 'Cloud Collaboration,' allowing multiple designers to technicaly work on the same document masterfully in real-time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Detaching from Symbol' in Sketch?",
+    "options": {
+      "A": "Deleting the original file.",
+      "B": "The technical act of masterfully converting a Symbol instance technicaly back into a regular group of layers.",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sketch Cloud' technically intended to achieve?",
+    "options": {
+      "A": "Predicting the weather for the design studio.",
+      "B": "A technical platform masterfully used for sharing design prototypes, masterfully collecting feedback, and technicaly managing design handoff.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Gaussian Blur' is a technical masterfully applied effect used to technicaly soften the edges of a layer masterfully within the Inspector.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Design' 'Audit' using Sketch?",
+    "options": {
+      "A": "To technically verify that all layers masterfully follow naming conventions and technical symbol standards.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Export' formats in Sketch? (Select all that apply)",
+    "options": {
+      "A": "SVG",
+      "B": "PDF",
+      "C": "The SQL query parser",
+      "D": "WebP"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Opacity' significance in UI design layers?",
+    "options": {
+      "A": "Hiring a person named Opacity.",
+      "B": "The technical property that masterfully defines the masterfully perceived level of transparency for a layer or technical object.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Pixel' 'Fitting' technically?",
+    "options": {
+      "A": "A technical feature that masterfully ensures vector points and technical layers align masterfully to the pixel grid to prevent blurry edges.",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Color Profiles' (e.g., sRGB vs. P3) can technically cause masterfully confusing visual technical color shifts between devices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Sketch benefits for 'Prototyping'? (Select all that apply)",
+    "options": {
+      "A": "Creating masterfully linked 'Hotspots' to technically simulate user flows",
+      "B": "Ensuring technical 'Interactive' consistency masterfully across screens",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Enabling masterfully easy technical sharing of clickable designs masterfully"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Library' technically used for in an enterprise design team?",
+    "options": {
+      "A": "A physical room filled with books.",
+      "B": "A masterfully assigned technical Sketch file masterfully containing shared Symbols and Styles that technically sync across multiple projects and team members.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Visual' 'Consistency' audit?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of how masterfully well a design masterfully adheres to technical color, type, and symbol standards.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Resizing Constraints' are technical masterfully applied rules that technicaly define how an object behaves masterfully when its parent Artboard is masterfully resized.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common Sketch extensions/plugins? (Select all that apply)",
+    "options": {
+      "A": "Abstract",
+      "B": "Zeplin",
+      "C": "The number of security cameras in the office",
+      "D": "Sketch Runner"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Canvas' logic in the Sketch workspace?",
+    "options": {
+      "A": "Building a physical warehouse for paintings.",
+      "B": "The technical masterfully infinite area where you masterfully place and technicaly organize your Artboards.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Components' 'View' technically?",
+    "options": {
+      "A": "A masterfully managed window technicaly showing a masterfully curated set of Symbols, Text Styles, and Layer Styles for quick masterfully applied reuse.",
+      "B": "Hiring a person named Components.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Fonts' occur when a designer masterfully assumes a font is installed technicaly on a collaborator's machine when it technically is masterfully missing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Design' Strategy in Sketch? (Select all that apply)",
+    "options": {
+      "A": "Standardizing layer technical naming masterfully for global consistency",
+      "B": "Scanning physical shipping containers",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Templates' for automated screen technical layout masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Data' 'Insertion' technically used for in a Sketch mock-up?",
+    "options": {
+      "A": "To technically populate layers masterfully with real technical content (like names or photos) masterfully from a local folder or JSON source.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Design' 'Technical' 'Debt' in Sketch?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' detached symbols and manual style overrides, which makes the file technicaly 'Riskier' over time.",
+      "B": "The amount of insurance a database has.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Workspace' is a technicalAlways-On standard that masterfully allows designers to masterfully manage files and technical teams masterfully via the Sketch web interface.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Fills' in the Sketch Inspector? (Select all that apply)",
+    "options": {
+      "A": "Solid Color",
+      "B": "Gradient",
+      "C": "The number of security cameras in the office",
+      "D": "Pattern/Image"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Ruler' 'Guide' significance in layout technical support?",
+    "options": {
+      "A": "The technical mechanism masterfully used to place masterfully aligned technical reference lines across Artboards to technically ensure visual precision.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a symbol mismatch?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a Symbol masterfully drifting from its library masterfully until it is masterfully flagged by the 'Sync' indicator.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Raster-only' requirements for a 2026 'Vector-Native' architectural era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Design 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Symbols' are masterfully mapped",
+      "B": "Validating the security technical certificates on design cloud",
+      "C": "Identifying program satisfaction trends",
+      "D": "Checking if the Artboard technical dimensions masterfully match the device specs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Text' 'Style' significance in Sketch?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where font, technical size, and weight masterfully are saved to technically ensure masterfully consistent typography across Artboards.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Layer' 'Event' log in a Sketch audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about layer additions, technical naming changes, and masterfully applied effects.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Sketch technically includes 'Inspect' mode by masterfully allowing developers to masterfully measure technical dimensions and copy code technicaly via the web.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Design stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Lead Visual Designer",
+      "B": "Product Design Architect",
+      "C": "Brand Governance Specialist",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Asset' 'Optimization' technically used for in Sketch?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "To masterfully reduce the technical file size of images masterfully before they are masterfully finalized and technically exported.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Design Flaws' (MTBDF)?",
+    "options": {
+      "A": "The average technical duration that a Sketch document masterfully remains performance-stable before an unplanned technical visual disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully masterfully assumes Sketch can handle 100GB files when the CSP technically only masterfully guarantees 1GB.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Workflow' Strategy? (Select all that apply)",
+    "options": {
+      "A": "Standardizing Symbol technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for multi-page document organization masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Prototyping' 'Hotspot' significance?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully established clickable area masterfully used to transition a user technicaly between Artboards in a preview.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Asset' 'Transit' 'Volume'?",
+    "options": {
+      "A": "The technical percentage of design assets masterfully successfully moving between Sketch and technical handoff tools within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Magic Mirror' is a technical Always-On standard that masterfully allows designers to masterfully transform images into technical perspective mockups masterfully.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Design priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical availability for design cloud",
+      "B": "Minimizing technical data transit costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical design library documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Artboard' 'Layout' Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of visual elements to masterfully identify technical bottlenecks in a global design file.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a Sketch workspace masterfully remains stable before an unplanned technical service disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resolution' occur when a user masterfully masterfully assumes high-res output when the Artboard technicaly has low-res technical exports.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring design portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' architectural reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical component naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Data' 'Residency' significance in Sketch Cloud?",
+    "options": {
+      "A": "Technically ensuring that design data masterfully follows all legal architectural rules after every technical transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Component' 'Transit' tracking?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well design components (like symbols) are masterfully moved between masterfully defined technical libraries.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Manual-only' requirements for a 2026 'Library-Native' architectural era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying design inconsistencies",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing design technical files masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Symbol' 'Shadowing' significance?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup design library masterfully mirrors the technical configuration of a primary Symbol.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the design integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cloud regions' occur when a lead masterfully masterfully assumes a service is available globally when it technically is regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Design roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Visual Designer",
+      "B": "Product Design Specialist",
+      "C": "Brand Governance Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Sketch' 'Architecture' Analysis?",
+    "options": {
+      "A": "The technical evaluation of Artboards, Symbols, and Pages to masterfully optimize the entire technical design fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical feature in Sketch masterfully allows a Symbol instance to technicaly maintain its internal spacing and padding when its text overrides change in length?",
+    "options": {
+      "A": "Auto-Flattening",
+      "B": "Smart Layout",
+      "C": "Vector Rasterization strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Nested Symbols' are technically Symbols masterfully placed inside of other Symbols, enabling the creation of masterfully complex and modular UI components.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of using 'Shared Libraries' in a team-based Sketch environment?",
+    "options": {
+      "A": "To physically lock the design file in a metal vault.",
+      "B": "To masterfully provide a single source of truth for Symbols and Styles that technically sync across multiple designers and document versions.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live prototype preview."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', which technical concept masterfully describes the process of linking a 'JSON' file to a Sketch layer to technically populate UI mockups with real technical data?",
+    "options": {
+      "A": "Flat Mocking",
+      "B": "Data Provisioning / Sketch Data",
+      "C": "The Recycle Bin strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Vector Engineering', what is the technical significance of 'Boolean Operations' forensics when a complex shape masterfully fails to render correctly?",
+    "options": {
+      "A": "It defines the physical color of the design mouse.",
+      "B": "A technical verification of the masterfully established hierarchy of 'Subtract', 'Intersect', and 'Union' sub-paths within a combined shape layer.",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the size of the font on the admin console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Color Variables' technically enable a designer to masterfully define a reusable color (cause) that, when updated, technically propagates across all Layer Styles and Symbols masterfully using that variable (effect).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves configuring 'Prototyping Interaction' to technically trigger an 'Overlay' that masterfully slides in from the bottom of the technical screen?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Transition Flow Orchestration / Interaction Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Symbol' 'Swapping' technically used for in a high-fidelity Sketch mockup?",
+    "options": {
+      "A": "Trading physical routers for icons.",
+      "B": "The technical act of masterfully replacing one Symbol instance with another (of the same masterfully defined size) via the Inspector panel.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' technical methods for managing 'Symbol Overrides' in complex components? (Select all that apply)",
+    "options": {
+      "A": "Utilizing masterfully configured 'Locked' layers to technically prevent unwanted overrides",
+      "B": "Applying 'Symbol Selection' logic to technically filter which nested symbols can be swapped",
+      "C": "Buying physical snacks for the design leads",
+      "D": "Organizing masterfully established 'Naming Slashing' (e.g., Icon/Social/Twitter) to group override menus"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Library Versions' technically occur when an Artboard masterfully utilizes a Symbol that has a masterfully newer definition available in the cloud library.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Responsive' 'Resizing' logic (Pinning) significance in a cross-platform Sketch architecture?",
+    "options": {
+      "A": "Building a physical wall against layout changes.",
+      "B": "A technical property masterfully applied to individual layers to technically define if they should stretch or remain pinned to an edge when the Artboard size changes.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Sync' (MTS) a global Symbol update?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A technical metric tracking organizational responsiveness by measuring how masterfully fast an update masterfully propagates from the Master Library to all connected documents.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'Shared Text Styles' to technically enforce masterfully consistent vertical rhythm across 50+ Artboards?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Typography Hierarchy Orchestration / Style Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Detaching' a Symbol instance is a technical process that masterfully breaks the link to the Master, technically preventing future masterfully global updates from affecting that layer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Sketch' 'Plugin' technical capabilities? (Select all that apply)",
+    "options": {
+      "A": "Technically masterfully automating repetitive tasks via JavaScript/CocoaScript",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Extending the technical masterfully established Inspector with custom data-management features"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Layout' 'Settings' (Columns/Gutter) significance in a responsive design audit?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The technical framework masterfully used to technically align UI elements to a 12-column grid, masterfully ensuring visual technical consistency.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Style' 'Drift' monitoring?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical metric tracking the frequency of masterfully un-styled text or layers, identifying a 'Shadow' technical design baseline that technically bypasses the style guide.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Pixel' 'Fitting' technically occurs when a vector point is masterfully placed between technical pixels, causing masterfully blurry technical edges on export.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' design framework handles 'Automated' 'Cloud' 'Backups'?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "Sketch Cloud Versioning / Workspace API",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tint' significance in a Sketch Symbol mockup?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "A technical property that masterfully allows a single masterfully designed vector icon to technicaly adopt a new color override without creating multiple symbol versions.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Slice' 'Layer' technically used for in Sketch?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "A technical object masterfully used to technicaly define a specific area of the canvas for masterfully managed technical asset export.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' expectations occur when a designer masterfully promises '100% Real-Time Rendering' on a 500-page Sketch document technically masterfully over-burdened with high-res bitmaps.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Sketch' 'Strategy' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Design Ops Lead (Defining symbol taxonomy and library sync schedules)",
+      "B": "Security Compliance Lead (Enforcing technical cloud file-sharing and SSO standards)",
+      "C": "Brand Manager (Monitoring technical visual consistency across global assets)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Symbol' discovery in an organizational design audit?",
+    "options": {
+      "A": "Designing icons in a dark room.",
+      "B": "The technical process of identifying 'Detached' or locally modified components (cause) that masterfully bypass the approved technical enterprise library (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an 'Unlinked' 'Style'?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "A metric tracking organizational responsiveness by measuring how long a technical design deviation exists before the masterfully configured 'Linter' plugin flags the error.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Borders' (Inside vs Outside) in a Layer Style will technically prevent a masterfully designed technical component from masterfully aligning to the pixel grid correctly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Symbol' 'Optimization' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical Symbols with high 'Detachment' ratios automatically",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Automatically technicaly suggesting 'Library' updates based on masterfully tracked component usage"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Visual' 'Resilience' in Sketch?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Symbol reusability', 'MTTR for recent design bugs', 'Resolution coverage', and 'Identity integrity maturity'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Library' 'Regressions' (MTBLR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational stability by measuring how long the masterfully shared library baseline remains masterfully stable before a breaking change occurs.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an executive masterfully expects a 'Full Global Sync' in exactly 1 second after a primary library dashboard commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sketch' 'Analytics' for leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical files with the highest 'Non-Standard' layer waste",
+      "B": "Predicting future 'Storage' needs based on historical growth in technical high-res bitmap imports",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Analyzing metadata to identify 'Accessibility Blindspots' in color variables"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Sketch Symbol?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a component (the layer structure) is isolated from the content 'What', allowing for central masterfully updated logic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Design' 'Technical' 'Debt' in a Sketch context?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated library symbols and manual local overrides, which makes the infrastructure technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead masterfully assigns a complex multi-region 'Design Sprint' to an automation masterfully lacking the bandwidth to sync 1,000 screens simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Sketch' 'Maturity' Drivers? (Select all that apply)",
+    "options": {
+      "A": "Enforcing 'Architecture Policy' (e.g. Mandatory Shared Styles) via automated compliance plugins",
+      "B": "Accelerating 'Designer Onboarding' through standardized Library Blueprints",
+      "C": "Ensuring 'Systemic' integrity for global component logic",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Resiliency' orchestration in a Sketch squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The central Platform team focuses on providing 'Pre-vetted Component Modules' and 'Style Sinks' so local units can manage their own technical design health without manual roadblocks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Symbol' 'Sync' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of 'Library' updates and resets, identifying an unstable technical environment or masterfully inconsistent design logic.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in design leadership refers to a manager giving a 'Bitmap-heavy' designer a local machine that is technicaly too slow to run modern Sketch plugins masterfully.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in Sketch? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical files with the highest 'Layer Count' waste automatically",
+      "B": "Predicting future market 'Tooling' needs based on technical adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Design Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'State' 'Lifting' significance in Sketch automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful configuration state (like a proven Navigation pattern) from one file and apply it globally for enterprise-wide consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a design fix?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from an update being committed until 'Automated Visual Checks' masterfully confirm the file integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Procedural-only' requirements for a 2026 'Symbol-Native' design environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Sketch' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Global Design Health",
+      "B": "Principal Design System Architect",
+      "C": "Lead Regulatory Transit Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment' 'Bootstrap' in a newly formed Sketch squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Global Style Sinks', 'Library Permissions', and 'Linter Rules' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Visual' 'Simulations'?",
+    "options": {
+      "A": "The percentage of 'Dry-Runs' where the organization's technical design logic masterfully maintained 100% visual accuracy.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive masterfully expects a 'Full Global Library Sync' in exactly 1 second after a primary dashboard commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' in Design? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unmapped components) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead designers",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across different global regional centers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant Design Hubs?",
+    "options": {
+      "A": "Isolating routers on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' technical libraries masterfully cannot be seen or searched by 'Business Unit B' through restricted metadata visibility or Workspace RBAC.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the design platform baseline remains effective before a technical update breaks the architecture logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in design leadership occurs when the remediation timeline for a 'style' discovery is based on 'Fixed Dates' rather than 'Current User Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Managed' and ignores 'Shadow' technical files"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Sketch' 'Support' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a design control (the Symbol logic) is isolated from the visual 'What' (the availability target), allowing for easy tool migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Sensor' 'Failure' in monitoring?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an Automated technical sensor going 'Offline' until the 'Log Analytics' itself masterfully flags the loss of visibility.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead masterfully enforces 2010 'Signature-only' models to manage a 2026 'Cloud-Edge' design environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Sketch' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Connectivity Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Design' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Shared Symbols, Design Audits, Extended Events, and Secret Managers to ensure a seamless and safe service release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant design control failure until the organization's 'Safety Baseline' is masterfully restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one complex Symbol simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded instances) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead designers",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Design Sprints' where each phase masterfully results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in Sketch Engineering?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical Sketch expert seat being vacated until the new hire is masterfully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead masterfully assigns 10 high-priority forensic investigations to a single designer with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Credential Exposure' rates",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Design Training' spend with 'MTTR' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in Sketch?",
+    "options": {
+      "A": "A rating of how well a specific segment is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major design strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in design leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global enterprise design system, how should a Principal Architect technically model 'Symbol Inheritance' to predict the impact of modifying a 'Base Atom' on 5,000+ multi-platform Artboards?",
+    "options": {
+      "A": "By assuming a flat 10-minute propagation time for every document sync.",
+      "B": "By utilizing 'Directed Acyclic Graph' (DAG) modeling to calculate dependency paths and applying a stochastic model to the 'Instance-to-Override' mapping variance.",
+      "C": "By limiting the number of global Symbols to exactly 10 to prevent metadata overhead strictly.",
+      "D": "By requiring a manual board-level signature for every increase in the Layer count."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Underlay' 'Decoupling' in Sketch refers to the technical practice of utilizing 'Color Variables' and 'Text Styles' to ensure that a change in the physical brand guidelines (cause) does not systemically force a manual pixel-level revision for the logical component baseline (effect).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Engineer to predict the 'Analytical ROI' of shifting from 'Local Symbols' to a 'Token-Native' Cloud Library architecture for a multi-tenant design studio?",
+    "options": {
+      "A": "Probabilistic Analysis of 'Maintenance Labor' reduction costs vs. the fixed technical amortization of building a library-distribution layer.",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Asset Arbitrage' during an international M&A involving the merger of a firm using 'Sketch Libraries' and a firm using legacy 'Isolated PSD' archetypes?",
+    "options": {
+      "A": "To ensure both teams use the same brand of physical keyboard.",
+      "B": "To normalize disparate 'Visual Archetypes' into a unified 'Design Fabric' that technically satisfies the multi-platform resolution and accessibility requirements of the parent Organization.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live Sketch interaction monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Symbol' 'Splicing' (Library Mapping) and how does it technically enable 'A/B Resilience' during a live multi-variant user study?",
+    "options": {
+      "A": "When an employee physically cuts the power to a design server.",
+      "B": "A technical design pattern where the prototype masterfully manages 'Logical Modes' via mapped Symbols, technically allowing for instantaneous theme or logic switching without duplicating screens (effect).",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the component override panel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'Fixed-Layout' policy is technically applied to a 'Multi-Device' edge prototype in Sketch, leading to systemic 'Layout Breaks' if the user agent masterfully triggers a viewport change.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Interaction' 'Chaos' (injecting 500ms jitter on click-to-load transitions) to verify if the 'Sketch Prototype' technically maintains 'State Invariants'?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection Prototype Testing)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Symbol' 'Contagion' and its relation to 'Library Dependency' exhaustion in a massive 10,000-layer design file?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a change in a core Master Symbol (cause) masterfully triggers a surge in re-renders across nested instances, resulting in a systemic 'Performance Freeze' that masterfully blocks design updates (effect).",
+      "C": "A specialized tool for measuring light levels in the design studio.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Experience Fabric' ROI calculations for a strategic shift to 'Code-Generated' design handoff? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'TCO' by automatically identifying and masterfully purging 90% of redundant detached Symbols",
+      "B": "Financial savings from 'Handoff' reclamation by utilizing AI-assisted technical CSS mapping plugins",
+      "C": "The value of 'Accessibility Integrity' gained through 100% verified color-contrast compliance tokens",
+      "D": "The number of physical CPU fans in the Google data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Design Leadership level ensures that 'Designers' can flag 'Technical Debt in the Symbol Library' to the Board without fear of termination, allowing for transparent 'Structural Hardening'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Architect's 'Smart Layout' logic for a high-concurrency multi-state UI?",
+    "options": {
+      "A": "The physical weight of the 'Sketch' user manual.",
+      "B": "The ability to integrate contradictory technical signals (e.g. valid 'Symbol Value' vs. anomalous 'Layout Loop' in nested resizing triggers) into a cohesive 'State Divergence' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Asset' 'Splicing' logic during a high-throughput high-res Sketch asset loading event?",
+    "options": {
+      "A": "Breaking a physical router into pieces.",
+      "B": "The process of masterfully isolating 'High-Resolution' bitmaps from 'UI Logic' on dedicated memory tiers to ensure that 'Graphic Spikes' technically cannot impact 'Interaction' accessibility.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Symbol Dampening' during a suspected 'Input-Delay' event on a core mobile checkout mockup?",
+    "options": {
+      "A": "Waiting for the usability testers to complain about lag.",
+      "B": "Immediately initiating a 'Simplified-Interaction' policy and technically diverting complex shadows to a 'Static-Fallback' before the Sketch engine masterfully enters a 'Memory Stall' state.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a design acquisition often result in 'System Rejection', where the acquired firm's designers find ways to 'Side-load' custom hex codes to bypass parent firm's 'Token-Strict' guardrails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Design' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Assisted Design' and 'Zero-Knowledge Token' competencies within the team",
+      "B": "Standardizing 'Resilience Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the design team",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Design Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in a Sketch Design Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Design Strategy' itself (e.g. why we use Sketch instead of Figma for this collaborative stage) is the cause of systemic failure, rather than just fixing a single 'Broken Symbol'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Design Design?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'Symbol Set' that technically has zero redundant maintainers.",
+      "B": "Aggregating physical risks like fire in the design studio.",
+      "C": "A security scan of the design file.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Design Ops occurs when a firm continues to rely on 'Static Page Mockups' in 2026, despite modern business requirements necessitating 'Logic-Native' dynamic prototypes in Sketch.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Prototyping' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Design Spend (RARODS)",
+      "B": "Percentage of 'Business Critical' components with 100% verified 'Symbol Compliance' coverage",
+      "C": "Velocity of 'Legacy Mockup' retirement across the top 10% of high-debt projects",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during a 'Local-to-Cloud' Sketch transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the design studio.",
+      "B": "The risk that long-tenured 'Static Design Admins' will block 'Collaborative-Native' adoption to protect their manual 'File-Version' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally bypass the board-mandated 'Symbol-Only' or 'Accessibility-Strict' policies.",
+      "C": "A security scan for design files.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a CDO demands 'Zero Detached Symbols' while the Board only rewards the team for '100% Feature Delivery Velocity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sketch' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Visual Patterns' with potential 'Kernel-level' data exfiltration attempts",
+      "B": "Automatically identifying 'Asset Owner' gaps in real-time as a new Artboard is provisioned",
+      "C": "Guaranteed to replace all human Lead Designers",
+      "D": "Analyzing global metadata to predict 'Symbol drift' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Experience' 'Ecosystem' 'Architecture' (EEA) for a Design Lead?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Smart Layouts, Global Symbol Mesh, Semantic Styles, and Behavioral Telemetry Hubs into a single 'Unified Insight Fabric'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in Design M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Interaction' logic matches the parent company's 'Safety Standard' before library merger.",
+      "C": "A security scan of the design file.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Design ROI' from a newly hired team that requires 12 months of 'Historic Asset Mapping' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sketch' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of Symbol integrity for Regulatory auditors",
+      "B": "Automatically calculating 'Resilience Maturity' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Accessibility' rules are enforced during automated multi-region design replication"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Design Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Governance Policies' (the What) are isolated from 'Local Departmental Design Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in interaction loops?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'Symbol Pattern' vulnerability release and the Lead officially flagging the total internal exposure count based on library scans.",
+      "C": "A security scan for design files.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Library Readiness' to the board while the internal team is aware that 'Branch B' is technically suffering from symbol drift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Design' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Staff Performance scores' directly to 'Production Library Write' eligibility",
+      "B": "Connecting 'Real-time UX Breach News' to 'Automated Library Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Audit Reporting' data with 'Corporate Legal' case software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Interaction Settings, CIM-tags, and RBAC to stabilize a new offshore design studio in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in Design architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Policy Effectiveness' as complex new data flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the design file.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed visual metadata after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sketch' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Design Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Design Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Raw interaction logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile design failure (e.g. data loss during forced Symbol switch) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for design files.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in design strategy refers to an organization promising 'Zero Experience Loss' while utilizing a 'Low-Budget' asynchronous sync model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Visual Resilience",
+      "B": "Chief Design Architect",
+      "C": "Director of Behavioral Telemetry",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global design firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Library Uptime', 'MTTI for logic findings', 'Symbol Redundancy', and 'Identity Integrity Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the Design team leaves.",
+      "C": "A security scan of the design file.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Signature-only' models to manage a 2026 'Cloud-Edge' design environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Design' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Business Owner' intent analysis",
+      "B": "Keeping hardware artifacts updated with rapidly changing cloud API versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade network topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Design Platforms?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Experience Pipeline' can sustain major technological shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Experience' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect officialy presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the design file.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in design auditing occurs when 'Evidence Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Design Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A design acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Interaction Intelligence' tools and 'Maturity Scoring' to a newly acquired library within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Design' 'Strategy' 'Refreshes' (MTBCSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Experience Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for design files.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a Design Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Design' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Design Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global insight talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Design Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Interaction Model' can be 'Lifted' from one product line (e.g. Corporate VPN) and applied to another (e.g. Mobile App backend).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated data service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the design file.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Configuration Cost' while the Architect is enforcing a 'Global Multi-Region' design rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Design' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Experience ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' run time for Design Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Experience-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' design model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Insight Hubs' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new sharding vulnerability is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the design file.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Design Audits' are planned annually, but 'TTPs' update every 24 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Platform' 'Bootstrap' complexity for a 'Turnaround' Design Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' design culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic design shifts.",
+      "C": "A security scan of the design file.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits in Sketch Design?",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Design' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person named Design.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Symbol and AIOps' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-visual-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through design process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic asset grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on audit history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Design' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

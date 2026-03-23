@@ -1,0 +1,1903 @@
+{ 
+  "skill": "GitHub Actions", 
+  "questions": [
+    {
+    "question": "What is the primary technical purpose of GitHub Actions?",
+    "options": {
+      "A": "To physically manage the hardware servers in GitHub's data center.",
+      "B": "To automate, customize, and execute software development workflows directly in a repository.",
+      "C": "To replace the Git version control system with a new protocol.",
+      "D": "To increase the social media followers of a developer's profile."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In which specific directory must GitHub Actions workflow files technically be stored to be recognized by GitHub?",
+    "options": {
+      "A": ".github/workflows/",
+      "B": "scripts/actions/",
+      "C": "ci-cd/github/",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Workflow' in GitHub Actions?",
+    "options": {
+      "A": "A physical map of how developers walk through the office.",
+      "B": "A configurable automated process made up of one or more jobs defined in a YAML file.",
+      "C": "A specialized software for tracking human heart rates.",
+      "D": "A list of all contributors to a specific project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term describes an activity that triggers a workflow, such as a 'push' or a 'pull_request'?",
+    "options": {
+      "A": "Action",
+      "B": "Event",
+      "C": "Runner",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A single GitHub repository can technically have multiple different workflow files running for different events.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Runner' in the context of GitHub Actions?",
+    "options": {
+      "A": "A person who physically runs errands for the IT team.",
+      "B": "A server that executes the jobs defined in a GitHub Actions workflow.",
+      "C": "A specialized software for athletes.",
+      "D": "A technical term for the fast-forward button in Git."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which YAML keyword is used to define the name of the event that should trigger the workflow?",
+    "options": {
+      "A": "trigger",
+      "B": "on",
+      "C": "start",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In GitHub Actions, what is a 'Job' technically defined as?",
+    "options": {
+      "A": "A set of steps in a workflow that are executed on the same runner.",
+      "B": "A physical task given to a new employee.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "The SQL query used to find deleted files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: By default, multiple jobs defined in the same workflow file technically run in parallel.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Action' in GitHub Actions terminology?",
+    "options": {
+      "A": "A physical button on the computer keyboard.",
+      "B": "A custom application for the GitHub Actions platform that performs a complex but frequently repeated task.",
+      "C": "A security scan of the database.",
+      "D": "A specialized software for movie directors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific keyword is used to specify the operating system (e.g., ubuntu-latest) that a job should run on?",
+    "options": {
+      "A": "platform",
+      "B": "runs-on",
+      "C": "os-type",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GitHub Actions workflows are technically written using the YAML (YAML Ain't Markup Language) format.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'steps' keyword in a job definition?",
+    "options": {
+      "A": "To list the physical steps needed to reach the server room.",
+      "B": "To define a sequence of tasks (commands or actions) that the job will execute.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is technically used within a step to execute a shell command or script?",
+    "options": {
+      "A": "exec",
+      "B": "run",
+      "C": "shell",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'GitHub-hosted runner' is a machine maintained by GitHub that automatically handles software updates and security for you.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Self-hosted runner'?",
+    "options": {
+      "A": "A machine that you manage and maintain yourself to run GitHub Actions jobs.",
+      "B": "A person who hosts a physical party for the team.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the purpose of the 'uses' keyword in a step?",
+    "options": {
+      "A": "To technically reference and execute a specific action (e.g., actions/checkout@v3).",
+      "B": "To list the physical tools used by the developer.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the significance of the 'GITHUB_TOKEN' secret?",
+    "options": {
+      "A": "A physical coin used in GitHub's cafeteria.",
+      "B": "An automatically generated technical token that allows the workflow to authenticate with GitHub APIs.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GitHub Actions can technically be used to deploy code to cloud providers like AWS, Azure, or Google Cloud.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to provide environmental variables to a job or a specific step?",
+    "options": {
+      "A": "config",
+      "B": "env",
+      "C": "params",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Checkout' (actions/checkout) technically used for in almost every workflow?",
+    "options": {
+      "A": "To physically check out of the office at the end of the day.",
+      "B": "To download the repository's source code onto the runner so the workflow can access it.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GitHub Actions 'Secrets' are technically encrypted environment variables that are hidden in logs and used for sensitive data like API keys.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Build' in GitHub Actions?",
+    "options": {
+      "A": "The average technical duration of a successful workflow run.",
+      "B": "The amount of insurance a repository has.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'needs' keyword used for in a job definition?",
+    "options": {
+      "A": "To technically define dependencies, ensuring a job only runs if the jobs it 'needs' have passed.",
+      "B": "To list the physical items a developer needs to work.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can technically schedule a workflow to run at specific times (like every Monday) using the 'schedule' event with POSIX cron syntax.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid GitHub Actions operating systems for runners? (Select all that apply)",
+    "options": {
+      "A": "ubuntu-latest",
+      "B": "windows-latest",
+      "C": "macos-latest",
+      "D": "The brand of the office snacks"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'workflow_dispatch' technically used for?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "An event that allows a user to manually trigger a workflow from the GitHub UI.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "The SQL query parser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Action Versioning' (e.g., @v3)?",
+    "options": {
+      "A": "The technical practice of specifying a specific version of an action to ensure workflow stability and prevent breaking changes.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: GitHub Actions technically allows you to store files (Artifacts) for up to 90 days by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'CI/CD' (Continuous Integration / Continuous Deployment) benefits? (Select all that apply)",
+    "options": {
+      "A": "Automating the software release process",
+      "B": "Scanning physical shipping containers",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring code is tested automatically after every change"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Artifact' Upload (actions/upload-artifact) technically used for?",
+    "options": {
+      "A": "To save files produced by a job so they can be viewed or used later in the workflow.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Job Status'?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A technical indicator showing if a specific job succeeded, failed, or was cancelled.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can technically use 'Conditionals' (if statements) to determine if a job or step should execute.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Matrix' strategy technically used for in GitHub Actions?",
+    "options": {
+      "A": "Watching a physical movie in the office.",
+      "B": "To run a single job across multiple technical configurations (e.g., different versions of Node.js or different OSs) simultaneously.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Job Context'?",
+    "options": {
+      "A": "A set of technical information about the workflow run, runner, jobs, and steps available to you during execution.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: GitHub Actions technically supports running Docker containers as a service alongside your jobs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' GitHub Actions stakeholders? (Select all that apply)",
+    "options": {
+      "A": "DevOps Engineer",
+      "B": "Release Manager",
+      "C": "Cloud Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Workflow' Linting?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical process of checking the YAML file for syntax errors or invalid keywords before running it.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Runner Utilization'?",
+    "options": {
+      "A": "The average technical percentage of time a runner is busy executing jobs versus being idle.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Labels' occur when a workflow requests a runner with specific technical tags that no runner in the pool possesses.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Security scanning in GitHub Actions? (Select all that apply)",
+    "options": {
+      "A": "Running SAST (Static Application Security Testing) on code changes",
+      "B": "Consistency in result presentation",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Scanning container images for vulnerabilities"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Action' Metadata?",
+    "options": {
+      "A": "Physically showing a piece of paper to a colleague.",
+      "B": "The technical definition of an action (inputs, outputs, and entrypoint) stored in an action.yml file.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pipeline Efficiency'?",
+    "options": {
+      "A": "A technical metric tracking the ratio of successful deployments to total runner minutes consumed.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Event' occur when a developer expects a 'push' workflow to trigger on a 'pull_request' event that wasn't technically defined.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' GitHub Actions priorities? (Select all that apply)",
+    "options": {
+      "A": "Securing release pipelines",
+      "B": "Reducing total CI/CD costs",
+      "C": "The SQL query parser",
+      "D": "Standardizing automation across projects"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Environment' management in GitHub Actions?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "Technically defining targets like 'Production' or 'Staging' with specific protection rules and secrets.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a workflow failure?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration from a workflow job failing until the team is officially notified.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Token Permissions' occur when the GITHUB_TOKEN technically lacks the 'write' permission required to create a release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' workflow design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring workflow logs are accessible to all relevant team members",
+      "B": "Conducting 'blind' code reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where identifying CI/CD errors is a technical asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Expression' syntax in GitHub Actions?",
+    "options": {
+      "A": "Technically using '${{ }}' to evaluate programmatic values and context at runtime.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Workflow Success Rate'?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The percentage of technical workflow runs that reach a 'Completed' status successfully compared to failures.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in GitHub Actions leadership refers to trying to compile a massive app on a runner with insufficient CPU or RAM.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Secrets rotation benefits? (Select all that apply)",
+    "options": {
+      "A": "Reducing the risk of long-lived credential theft",
+      "B": "Consistency in result presentation across global units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Ensuring API keys are technically updated without manual effort"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Composite' Actions?",
+    "options": {
+      "A": "The technical ability to combine multiple workflow steps into a single reusable action.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Deployment'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a code commit until it is successfully running in a production environment via GitHub Actions.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Path' occur when a workflow technically tries to execute a script that is not in the directory it was expected to be.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' GitHub Actions roles? (Select all that apply)",
+    "options": {
+      "A": "Automation Engineer",
+      "B": "CI/CD Architect",
+      "C": "Developer Experience Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'GitHub Actions' Analysis?",
+    "options": {
+      "A": "The technical evaluation of automation patterns to ensure security, performance, and scalability.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword allows you to technically store the output of a step for use in a later step or job?",
+    "options": {
+      "A": "export",
+      "B": "outputs",
+      "C": "result",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Node Version' occurs when a workflow step technically requires Node 18 but the runner only has Node 14 installed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'concurrency' keyword technically used for in GitHub Actions?",
+    "options": {
+      "A": "To ensure only one instance of a specific workflow or job group runs at a time, preventing race conditions.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Clean-up benefits? (Select all that apply)",
+    "options": {
+      "A": "Automatically deleting temporary test environments",
+      "B": "Consistency in result presentation across global units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Reducing technical waste and cloud storage costs"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Reusable' Workflows logic?",
+    "options": {
+      "A": "Technically calling a workflow from within another workflow to avoid duplication and standardize processes.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Build Queue Time'?",
+    "options": {
+      "A": "The technical duration a job waits in the queue before a runner becomes available.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: GitHub Actions allows you to use 'Conditions' (like 'always()') to run a step even if a previous step failed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'GitHub Actions' Marketplace technically used for?",
+    "options": {
+      "A": "To find and share pre-built actions created by GitHub and the community to simplify your workflows.",
+      "B": "Building a physical warehouse for data.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific GitHub Actions feature technically allows an architect to define a multi-step process in a standalone repository and reference it as a single step in other workflows?",
+    "options": {
+      "A": "Internal Scripting",
+      "B": "Composite Actions",
+      "C": "YAML Anchors",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Reusable Workflow,' the caller workflow technically passes 'inputs' and 'secrets' to the called workflow, allowing for standardized CI/CD patterns across an entire GitHub Organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of using OIDC (OpenID Connect) for cloud authentication (AWS/GCP/Azure) within a GitHub Action?",
+    "options": {
+      "A": "To physically move the server to a different data center.",
+      "B": "To eliminate the need for long-lived cloud credentials (like IAM User keys) by using short-lived, identity-based tokens generated by GitHub.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the workflow logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical component is used to prevent a single GitHub repository from consuming all available 'Concurrent Job' slots in an enterprise account?",
+    "options": {
+      "A": "The 'concurrency' group key",
+      "B": "Microsoft Paint",
+      "C": "A physical thermometer",
+      "D": "The SQL query font size"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Environment Protection Rules'?",
+    "options": {
+      "A": "They define the physical location of the office.",
+      "B": "They allow for manual 'Approval Gates' and 'Wait Timers' that must technically be satisfied before a job can deploy to a specific environment.",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Matrix Strategy' in GitHub Actions can technically use 'fail-fast: false' to ensure that if one configuration (e.g., Node 14) fails, the others (Node 16, 18) continue to execute.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using 'if: always()' or 'if: failure()' to technically ensure a cleanup job runs even if previous steps in the workflow failed?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Workflow Status Check Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Artifact' 'Retention' 'Policy' technically used for in a repository lifecycle?",
+    "options": {
+      "A": "Storing physical objects in a vault.",
+      "B": "The technical process of automatically deleting old build outputs after a set number of days (default 90) to manage GitHub storage costs.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' technical methods for speeding up GitHub Actions? (Select all that apply)",
+    "options": {
+      "A": "Utilizing 'actions/cache' to persist large dependencies like 'node_modules'",
+      "B": "Implementing 'Docker Layer Caching' within the runner environment",
+      "C": "Buying physical snacks for the IT team",
+      "D": "Using 'Self-hosted Runners' on high-performance infrastructure"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: The 'permissions' key technically allows an architect to implement the 'Principle of Least Privilege' by restricting the GITHUB_TOKEN to only 'read' or 'write' access for specific scopes like 'contents' or 'packages'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Runner' 'Group' logic in GitHub Enterprise?",
+    "options": {
+      "A": "Grouping physical people into teams.",
+      "B": "The technical ability to organize 'Self-hosted Runners' into groups and restrict their use to specific repositories or organizations within an Enterprise account.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' (MTTR) using 'Workflow' 'Dispatch'?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "The technical duration from identifying a failed deployment until a manual 'Workflow Dispatch' run successfully restores the production state.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'Job Outputs' to technically pass data (like a generated Docker Image ID) from one job to a downstream job in the same workflow?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Inter-Job Metadata Orchestration",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Runner' 'Labels' occur when a workflow YAML requests 'runs-on: high-mem' but the self-hosted runners are technically tagged only with 'ubuntu-22.04'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'GitHub' 'Action' 'State' (e.g., save-state/set-output) capabilities? (Select all that apply)",
+    "options": {
+      "A": "Allowing an action to technically store information to be used by its own post-execution cleanup",
+      "B": "Passing technical variables between steps in a job",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Enabling cross-job communication via the 'GITHUB_OUTPUT' file"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Environment' 'Secrets' orchestration in GitHub Actions?",
+    "options": {
+      "A": "Whispering secrets in a dark room.",
+      "B": "The technical process of defining separate values for the same variable name (e.g., DB_URL) based on whether the workflow is deploying to 'Production' or 'Staging'.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Action' 'Drift'?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical scenario where using 'branch tags' (like @v1) instead of 'commit SHAs' results in the workflow running updated code that hasn't been masterfully vetted.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Token' 'Permissions' occur when a workflow technically attempts to create a Pull Request but the GITHUB_TOKEN has only been granted 'contents: read' access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' GitHub Action framework handles 'Automated' 'Dependency' 'Updates'?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "Dependabot / GitHub Action integration",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Workflow' 'Call' (workflow_call) significance in Reusable Workflows?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "A technical trigger that allows one workflow to be 'called' by another, enabling the centralized management of deployment logic for hundreds of repositories.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Matrix' 'Generation'?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "The technical process of using a job to generate a JSON list of environments (e.g., a list of modified folders) and passing it as a matrix to a downstream job.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Architecture' occurs when a workflow technically specifies 'runs-on: windows-latest' but includes shell scripts written exclusively in 'Bash' without an emulator layer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'GitHub' 'Actions' 'Strategy' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Platform Architect (Orchestrating reusable templates)",
+      "B": "Cyber Security Lead (OIDC and Secret management)",
+      "C": "Compliance Auditor (Immutable run history and provenance)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Workflow' discovery in a GitHub Organization?",
+    "options": {
+      "A": "Running workflows in a dark room.",
+      "B": "The technical process of identifying repositories (cause) that are running workflows not compliant with central Enterprise security or billing policies (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a Runner failure?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "A metric tracking how long a job sits in a 'Pending' state before the 'Runner Monitor' masterfully flags a connectivity issue to the DevOps team.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Secrets' occur when a Reusable Workflow technically requires a secret that was not explicitly passed by the caller workflow using the 'with' or 'secrets' keyword.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Workflow' 'Validation' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying workflows that technically 'Drift' from the corporate security standard",
+      "B": "Ensuring 'Billing Consistency' by enforcing runner-type restrictions",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing a technical 'Gate' for PRs that lack required testing jobs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Automation' 'Reliability'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Workflow Success Rate', 'MTTR', 'Cache Effectiveness', and 'Credential Rotation Frequency'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Workflow' 'Errors' (MTBWE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the workflow baseline remains technically effective before a dependency update breaks the CI.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in GitHub Actions leadership occurs when a Lead promises '5-minute builds' while the self-hosted runners are technically throttled by legacy network hardware.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in GitHub Actions? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Runner Minute' waste",
+      "B": "Predicting future market 'Tooling' needs based on developer adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Workflow Training' spend with 'MTTI' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a GitHub Action Template?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a CI task (the JavaScript or Docker code) is isolated from the 'What' (the workflow YAML), allowing for easy tool versioning.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'GitHub' 'Technical' 'Debt'?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' un-maintained Actions and outdated Runner versions, which makes the organization technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead assigns 20 parallel matrix jobs to a self-hosted runner pool that technically only has 2 active nodes, causing massive queueing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'GitHub' 'Maturity' Drivers? (Select all that apply)",
+    "options": {
+      "A": "Enforcing 'Security Policy' (e.g. Mandatory SAST) via organization-wide workflows",
+      "B": "Accelerating 'Time-to-Market' through standardized Reusable Workflows",
+      "C": "Ensuring 'Supply Chain' integrity for Third-party Actions",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Automation' logic in a DevOps squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The central Platform team focuses on providing 'Self-Service' Reusable Workflows and 'Runner Pools' so developers can manage their own CI without manual bottlenecks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Action' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of 'Semantic Version' updates for third-party actions used in the enterprise, identifying unstable dependencies.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager giving a 'DevOps Architect' a computer that is too slow to run modern IDEs or local 'act' simulations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in GitHub Actions? (Select all that apply)",
+    "options": {
+      "A": "Identifying workflows with the highest 'Cache Miss' rates",
+      "B": "Predicting future market 'Action' needs based on developer adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'GitHub Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in GitHub automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful security configuration or reusable workflow from one product line and apply it globally for enterprise-wide consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a workflow fix?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from a workflow bug being fixed until a 'Green Check' masterfully confirms the repo is deployable again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead enforces 2010 'Waterfall' requirements for a 2026 'Actions-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'GitHub' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Platform Engineering",
+      "B": "Principal Automation Architect",
+      "C": "Lead Regulatory CI/CD Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment' 'Bootstrap' in a newly formed GitHub squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Self-hosted Runners', 'OIDC Trust', and 'Secrets' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Disaster' 'Restore' 'Workflows'?",
+    "options": {
+      "A": "The percentage of 'Simulated Recovery Runs' where the organization's technical failover was found to be 100% effective via GitHub Actions.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an analyst expects a 'Full Environment Rebuild' masterfully in exactly 5 seconds after a GitHub event.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' in GitHub Actions? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' for the Board",
+      "B": "Reduction in manual spreadsheet work for release leads",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant GitHub Actions?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' workflow telemetry technically cannot be seen or searched by 'Business Unit B' through restricted metadata scopes.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the automation baseline remains effective before a technical update breaks the workflow logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in GitHub Actions leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Managed' and ignores 'Shadow' Actions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Workflow' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of an automation control (the step script) is isolated from the 'What' (the policy intent), allowing for easy tool migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Sensor' 'Failure' in workflows?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an Action going 'Offline' or becoming corrupt until the 'Monitoring Platform' itself flags the loss of visibility.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead enforces 2010 'Signature-only' models to manage a 2026 'Cloud-Edge' environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'GitHub' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Privacy Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Automation' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Reusable Workflows, OIDC Trust, Runner Pools, and Secret Managers to ensure a seamless and safe release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant GitHub control failure until the organization's 'Safety Baseline' is technically restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one workflow optimization simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' for the Board",
+      "B": "Reduction in manual spreadsheet work for database leads",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Workflow Sprints' where each phase results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in Automation Engineering?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical GitHub expert seat being vacated until the new hire is fully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead assigns 10 high-priority forensic investigations to a single architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Credential Exposure' rates",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'GitHub Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in GitHub Actions?",
+    "options": {
+      "A": "A rating of how well a specific system is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major automation strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in GitHub Actions leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global enterprise utilizing 2,000+ repositories, how should a Principal Architect technically model 'Runner Saturation' to determine the optimal 'max-parallel' setting for a large-scale Matrix strategy?",
+    "options": {
+      "A": "By assuming a flat 5-minute build time and dividing available runners by active users.",
+      "B": "By utilizing 'Little's Law' to calculate required concurrency and applying a stochastic model to 'Startup Latency' and 'I/O Wait' of the specific runner-hosted OS.",
+      "C": "By limiting the matrix to exactly 5 jobs to prevent API rate limiting strictly.",
+      "D": "By requiring a manual board-level signature for every increase in the organizational runner quota."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Runner' 'Decoupling' refers to the technical practice of deploying 'Ephemeral Self-hosted Runners' in a separate cloud region than the GitHub platform itself, ensuring that a regional outage of the primary cloud provider does not systemically freeze the entire CI/CD recovery pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Engineer to predict the 'FinOps ROI' of shifting from 'Standard Hosted Runners' to 'Larger Runner' instances for high-concurrency builds?",
+    "options": {
+      "A": "Probabilistic Cost-Benefit Analysis of Execution Time vs. Core-Minute Billing Units",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'OIDC Arbitrage' during an international M&A where one firm uses 'Static IAM Secrets' and the other uses 'GitHub-Identity-based' short-lived tokens?",
+    "options": {
+      "A": "To ensure both teams use the same brand of physical keyboard.",
+      "B": "To normalize disparate 'Identity Archetypes' into a unified 'Zero-Trust' framework that technically satisfies the security requirements of the parent Organization.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the GitHub Actions log stream."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Binary' 'Authorization' and how does it technically enable 'Supply Chain' security for artifacts produced by GitHub Actions?",
+    "options": {
+      "A": "When an employee physically signs a paper for every code commit.",
+      "B": "A framework where the workflow generates an 'Attestation' that is signed by the Runner's identity, ensuring only verified and scanned images can be deployed to Kubernetes.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the workflow YAML file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'Regional' GitHub runner group is technically applied to a 'Global' multi-region deployment strategy, leading to systemic 'Regional Lock-in' during a total cloud geography outage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Workflow' 'Chaos' (injecting 500ms jitter on the Runner-to-API network) to verify if the 'Step Retries' technically maintain the 'Release Invariants'?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection Automation Testing)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Step' 'Contagion' and its relation to 'Third-party Actions' in a large organization?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a single compromised or broken action (cause) technically breaks 100% of the production CI/CD pipelines across all repositories (effect).",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Automation' ROI calculations for a strategic shift to 'Reusable Workflows'? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Identify' (MTTI) logical errors in CI scripts",
+      "B": "Financial savings from 'Config Maintenance' reduction",
+      "C": "The value of 'Developer Productivity' gained through 100% verified template consistency",
+      "D": "The number of physical CPU fans in the GitHub data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Automation Leadership level ensures that 'DevOps Engineers' can flag 'Analytical Bias' in the runner scaling algorithms to the Board without fear of termination, allowing for 'Strategic Alignment'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Architect's 'Action' logic during a multi-cloud outage?",
+    "options": {
+      "A": "The physical weight of the 'Incident Management' manual.",
+      "B": "The ability to integrate contradictory technical signals (e.g. valid 'Ping' vs. anomalous 'WebHook Latency') into a cohesive 'Root Cause' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Telemetry' 'Sharding' during a massive global security incident in GitHub Actions?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of isolating 'Privileged' runner logs into a restricted shard to ensure that investigators' queries technically cannot be seen by the compromised repositories.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Token Revocation' during a suspected 'Supply Chain' breach of a GitHub Marketplace tool?",
+    "options": {
+      "A": "Waiting for a CVE to be assigned to the marketplace tool.",
+      "B": "Immediately initiating a 'Global Secret Rotation' and technically fencing the Runner's 'IAM Scope' before a data exfiltration event is observed.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in an automation acquisition often result in 'Governance Rejection', where the acquired firm's IT staff finds ways to 'Hard-code' local secrets to bypass the parent firm's 'Environment' guardrails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Automation' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'Quantum-Safe' and 'AI-Native' infrastructure competencies within the team",
+      "B": "Standardizing 'Automation Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the SOC",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Release Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in a GitHub Action Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Architecture Strategy' itself (e.g. why we rely on Matrix for 500 jobs instead of Reusable flows) is the cause of systemic failure, rather than just fixing a single 'Broken YAML'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in GitHub Actions?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'Organization-level' Secret that is technically un-audited.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Release Ops occurs when a firm continues to rely on 'Manual Jenkins' models in 2026, despite modern business requirements necessitating 'Autonomous' GitHub Actions scaling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Automation' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Release Spend (RARORS)",
+      "B": "Percentage of 'Business Critical' functions with 100% verified 'OIDC' trust perimeters",
+      "C": "Velocity of 'Legacy Workflow' cleanup across the top 10% of high-cost orphaned repos",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during a 'Jenkins-to-Actions' transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured 'Release Admins' will block 'GitHub Actions' adoption to protect their manual 'Job Trigger' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally bypass the board-mandated 'Security Lockdown' or 'Runner Policy' requirements.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a CISO demands 'Zero Security Incidents' while the Board only rewards the team for '100% Release Velocity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Workflow' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'External Threat News' with internal 'OIDC' violation logs",
+      "B": "Automatically identifying 'Pipeline Owner' gaps in real-time as a new repo is provisioned",
+      "C": "Guaranteed to replace all human Lead Architects",
+      "D": "Analyzing global metadata to predict 'Runner Pool' capacity shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Automation' 'Ecosystem' 'Architecture' (AEA) for an Architect?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Reusable flows, OIDC, Runners, and Environments into a single 'Unified Governance Mesh'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Workflow Verbosity' matches the parent company's 'Safety Standard' before project merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant ROI' from a newly hired team that requires 12 months of 'Infrastructure Baselining' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'GitHub Actions' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of run configuration for HIPAA/PCI regulators",
+      "B": "Automatically calculating 'Fair-Response' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residency' rules are enforced during cross-region artifact replication"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Automation Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Governance Policies' (the What) are isolated from 'Local Repo YAML Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in release data?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'Action Vulnerability' release and the Lead officially flagging the total internal exposure count to the Board.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Control Coverage' to the board while the internal team is aware that 'Legacy Systems' are technically un-automated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Automation' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Developer Performance scores' directly to 'Workflow Access' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Repo Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Audit Reporting' data with 'Corporate Legal' case software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Runner Groups, OIDC trust, and RBAC to stabilize a new offshore project in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in GitHub architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Model Effectiveness' as complex new release flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed run logs after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'GitHub' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Platform Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Platform Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Raw run logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile release failure (e.g. data leak from misconfigured runner) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Automation strategy refers to an organization promising 'Zero Financial Risk' while utilizing a 'Low-Budget' manual compliance model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Automation' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Release Platforms",
+      "B": "Chief Resilience Architect",
+      "C": "Director of Telemetry Intelligence",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Runner Uptime', 'MTTI for findings', 'Group Redundancy', and 'Identity Integrity Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the Release team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Audit-only' models to manage a 2026 'Cloud-Edge' metadata environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'GitHub' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Business Owner' approval analysis",
+      "B": "Keeping artifacts updated with rapidly changing cloud API versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade network topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Automation Platforms?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Workflow Pipeline' can sustain major technological shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect officialy presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in release auditing occurs when 'Run Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Automation' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Release Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Availability Intelligence' tools and 'Maturity Scoring' to a newly acquired repo within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Release' 'Strategy' 'Refreshes' (MTBRSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Release Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from an Automation Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'GitHub' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical workflow Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global forensic talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Automation Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Workflow Model' can be 'Lifted' from one product line (e.g. Corporate VPN) and applied to another (e.g. Mobile App backend).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated release service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Configuration Cost' while the Architect is enforcing a 'Global Multi-Region' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'GitHub' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Infrastructure ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' run time for Platform Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Availability-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Workflow Hubs' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in automation operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new network disruption vector is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Architecture Audits' are planned annually, but 'Workflow TTPs' update every 24 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Automation' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Backbone' 'Bootstrap' complexity for a 'Turnaround' Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' release culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic shifts in the release team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits in GitHub Actions?",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Metadata' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Metadata.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Infrastructure' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-release-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'GitHub' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic commit grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on release history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Platform' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

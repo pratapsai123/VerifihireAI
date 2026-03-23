@@ -1,0 +1,1893 @@
+{ 
+  "skill": "Calculated Fields", 
+  "questions": [
+    {
+    "question": "What is a 'Calculated Field' in a data visualization or spreadsheet tool?",
+    "options": {
+      "A": "A physical field where computers are stored.",
+      "B": "A new data field created by applying a mathematical or logical formula to existing fields.",
+      "C": "A field that is automatically deleted if it contains errors.",
+      "D": "A specialized script used to hide data from users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated fields can only be used to perform addition and subtraction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following operators is used for multiplication in most calculated field formulas?",
+    "options": {
+      "A": "x",
+      "B": "*",
+      "C": "&",
+      "D": "^"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of an 'IF' statement in a calculated field?",
+    "options": {
+      "A": "To create a loop that runs forever.",
+      "B": "To perform different calculations based on whether a condition is true or false.",
+      "C": "To translate the data into a different language.",
+      "D": "To change the color of the data points on a chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function would you use to combine two text fields, such as 'First Name' and 'Last Name'?",
+    "options": {
+      "A": "SUM",
+      "B": "CONCATENATE (or +/& operators)",
+      "C": "SPLIT",
+      "D": "UPPER"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A calculated field formula like '[Sales] * 0.1' would calculate a 10% commission for every row of data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common types of functions used in calculated fields? (Select all that apply)",
+    "options": {
+      "A": "Arithmetic (SUM, AVG)",
+      "B": "Logical (IF, CASE)",
+      "C": "String (LEFT, LEN)",
+      "D": "Psychic (PREDICT_MOOD)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'SUM' function do in a calculated field?",
+    "options": {
+      "A": "Finds the smallest number in a group.",
+      "B": "Adds all the values in a specified field together.",
+      "C": "Counts the number of blank rows.",
+      "D": "Multiplies the first and last numbers in a list."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In most BI tools, what characters are often used to enclose field names (e.g., [Revenue])?",
+    "options": {
+      "A": "Parentheses ( )",
+      "B": "Square Brackets [ ]",
+      "C": "Curly Braces { }",
+      "D": "Angle Brackets < >"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A calculated field always creates a permanent change to the original source database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to convert all characters in a text field to capital letters?",
+    "options": {
+      "A": "LOWER",
+      "B": "UPPER",
+      "C": "PROPER",
+      "D": "CAPS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Aggregation' in the context of calculated fields?",
+    "options": {
+      "A": "Hiding data from unauthorized users.",
+      "B": "Combining multiple rows of data into a single value (e.g., Total Sales).",
+      "C": "Increasing the size of the font in a report.",
+      "D": "Hiring a new team of data entry clerks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used for division in calculated fields?",
+    "options": {
+      "A": "\\",
+      "B": "/",
+      "C": "%",
+      "D": "÷"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use a calculated field as an input for another calculated field.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe a 'Boolean' calculated field? (Select all that apply)",
+    "options": {
+      "A": "It returns only 'True' or 'False' results",
+      "B": "It is often used for filtering data",
+      "C": "It can store large paragraphs of text",
+      "D": "It results from a comparison like [Profit] > 0"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does the 'AVERAGE' (or AVG) function calculate?",
+    "options": {
+      "A": "The difference between the max and min values.",
+      "B": "The mathematical mean of a set of values.",
+      "C": "The most frequent value in a dataset.",
+      "D": "The total number of rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function would you use to find the number of characters in a text string?",
+    "options": {
+      "A": "COUNT",
+      "B": "LEN (or LENGTH)",
+      "C": "SIZE",
+      "D": "CHARS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If a calculated field encounters a 'Null' (blank) value, it may return a 'Null' result unless handled specifically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which logical function is a more compact alternative to multiple nested 'IF' statements?",
+    "options": {
+      "A": "AND",
+      "B": "CASE (or SWITCH)",
+      "C": "NOT",
+      "D": "OR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of the formula 'IF 5 > 10 THEN \"Yes\" ELSE \"No\" END'?",
+    "options": {
+      "A": "Yes",
+      "B": "No",
+      "C": "Error",
+      "D": "Null"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns the current date and time?",
+    "options": {
+      "A": "TODAY",
+      "B": "NOW",
+      "C": "CURRENT_CLOCK",
+      "D": "TIME_STAMP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated fields are processed at the time the data is rendered or refreshed in the report.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Date' functions? (Select all that apply)",
+    "options": {
+      "A": "DATEDIFF",
+      "B": "DATEPART",
+      "C": "DATEADD",
+      "D": "DATE_COLOR"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'Rounding' functions like ROUND or CEILING?",
+    "options": {
+      "A": "To make the edges of a chart circular.",
+      "B": "To reduce the number of decimal places in a numeric result.",
+      "C": "To group data into different categories.",
+      "D": "To increase the security of the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Row-Level' calculation mean?",
+    "options": {
+      "A": "A calculation performed for every single row in the data source.",
+      "B": "A calculation that only looks at the first row.",
+      "C": "A calculation that counts the number of rows.",
+      "D": "Hiring a person to manually check each row."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: String functions can be used to extract a specific part of a text field (e.g., the first 3 letters).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function would you use to count only the *unique* entries in a column?",
+    "options": {
+      "A": "COUNT",
+      "B": "COUNTD (or DISTINCTCOUNT)",
+      "C": "SUM",
+      "D": "UNIQUE_SUM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Constant' in a calculated field formula?",
+    "options": {
+      "A": "A value that changes every time the report runs.",
+      "B": "A fixed value that does not change (e.g., multiplying a field by 1.05).",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Parentheses ( ) are used in formulas to control the order of mathematical operations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to replace 'Null' values with a specific value (like 0)?",
+    "options": {
+      "A": "REPLACE",
+      "B": "ZN (or IFNULL/COALESCE)",
+      "C": "REMOVE",
+      "D": "CLEAN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Mathematical' operators? (Select all that apply)",
+    "options": {
+      "A": "+",
+      "B": "-",
+      "C": "/",
+      "D": "AND"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'ABS' function do?",
+    "options": {
+      "A": "Calculates the abdominal strength of a user.",
+      "B": "Returns the absolute (positive) value of a number.",
+      "C": "Finds the abbreviation of a long string.",
+      "D": "Increases the brightness of the monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Remainder' of a division operation called in many formula languages?",
+    "options": {
+      "A": "EXTRA",
+      "B": "MOD (or %)",
+      "C": "LEFT",
+      "D": "DIFF"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Spaces are usually allowed within field names inside a formula if they are enclosed in brackets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function extracts the 'Month' from a full date field?",
+    "options": {
+      "A": "DAY",
+      "B": "MONTH",
+      "C": "YEAR",
+      "D": "TIME"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Literal' in a formula?",
+    "options": {
+      "A": "A book about data analysis.",
+      "B": "A fixed value typed directly into the code (e.g., \"Red\" or 100).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using too many complex calculated fields can sometimes slow down report performance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used to check if two values are 'Not Equal' to each other?",
+    "options": {
+      "A": "==",
+      "B": "!= (or <> )",
+      "C": "><",
+      "D": "!!"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Logical' operators? (Select all that apply)",
+    "options": {
+      "A": "AND",
+      "B": "OR",
+      "C": "NOT",
+      "D": "ADD"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'DATEDIFF' typically calculate?",
+    "options": {
+      "A": "The total number of dates in a year.",
+      "B": "The difference (time span) between two dates.",
+      "C": "The distance between two physical servers.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a text formula, what is 'Truncation'?",
+    "options": {
+      "A": "Adding more words to a sentence.",
+      "B": "Shortening a string by removing characters from the end.",
+      "C": "Translating text into code.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'MAX' function can be used to find the latest date in a list of dates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function would you use to remove leading and trailing spaces from a text field?",
+    "options": {
+      "A": "CLEAN",
+      "B": "TRIM",
+      "C": "DELETE",
+      "D": "CUT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Syntax' of a calculated field?",
+    "options": {
+      "A": "A tax paid on data storage.",
+      "B": "The set of rules defining the correct arrangement of symbols and words in a formula.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated fields can be used to create 'Binned' data (grouping continuous numbers into ranges).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function checks if a field is 'Null' and returns a True/False result?",
+    "options": {
+      "A": "CHECKNULL",
+      "B": "ISNULL",
+      "C": "FINDNULL",
+      "D": "GETNULL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Numeric' data types? (Select all that apply)",
+    "options": {
+      "A": "Integer (Whole number)",
+      "B": "Decimal (Floating point)",
+      "C": "Currency",
+      "D": "Paragraph"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Nested' function?",
+    "options": {
+      "A": "A function that lives in a bird's nest.",
+      "B": "A function that is placed inside another function as an argument.",
+      "C": "A function that has been deleted.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'MIN' function return?",
+    "options": {
+      "A": "The largest value in a set.",
+      "B": "The smallest value in a set.",
+      "C": "The middle value in a set.",
+      "D": "The total count of values."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A calculated field can be used to hide sensitive data by masking certain characters.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function changes a numeric field into a text string?",
+    "options": {
+      "A": "CONVERT_NUM",
+      "B": "STR (or TEXT/STRING)",
+      "C": "ABC",
+      "D": "FORMAT_VAL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Parameter' in the context of a calculated field?",
+    "options": {
+      "A": "A physical fence around the office.",
+      "B": "A global placeholder value that can be changed by the user to dynamically affect the formula.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated fields can use logical comparisons like 'Greater than or equal to' ( >= ).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Table Calculations' versus basic calculated fields in some tools?",
+    "options": {
+      "A": "Table calculations look at physical furniture.",
+      "B": "Table calculations are performed on the results already visible in a specific view or table.",
+      "C": "Calculated fields are only for Excel.",
+      "D": "Table calculations are 100x slower."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'LEFT' function do?",
+    "options": {
+      "A": "Moves the chart to the left side of the screen.",
+      "B": "Returns a specific number of characters from the start of a text string.",
+      "C": "Deletes the left-most column.",
+      "D": "Calculates the remaining data after a filter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the 'Order of Precedence'?",
+    "options": {
+      "A": "Hiring a person named Precedence.",
+      "B": "The standard mathematical order (PEMDAS/BODMAS) used to solve formulas.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use a calculated field to calculate the percentage of a total.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'String' data types? (Select all that apply)",
+    "options": {
+      "A": "Text",
+      "B": "Varchar",
+      "C": "Char",
+      "D": "Decimal"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Calculation Error'?",
+    "options": {
+      "A": "A mistake in the formula that prevents it from running.",
+      "B": "A physical failure in the computer's CPU.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a mathematician to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function would you use to find the 'Year' of a specific date?",
+    "options": {
+      "A": "DAY",
+      "B": "YEAR",
+      "C": "TIME",
+      "D": "MONTH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated fields can be used to create 'Ad-hoc' groupings of data for a specific report.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Aggregation' mismatch error?",
+    "options": {
+      "A": "When the colors of two charts don't match.",
+      "B": "An error that occurs when mixing aggregated values (like SUM) with non-aggregated values (like a row-level ID) in the same formula.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function checks if a string 'Contains' a specific substring?",
+    "options": {
+      "A": "SEARCH (or CONTAINS/FIND)",
+      "B": "LOOKUP",
+      "C": "GET",
+      "D": "WHERE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Dynamic' calculated field?",
+    "options": {
+      "A": "A field that literally moves across the screen.",
+      "B": "A field that updates its value automatically when the underlying data or filters change.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A calculated field formula must always end with a semicolon in every tool.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific function would you use to find the number of months between a 'Start Date' and an 'End Date' in most BI formula languages?",
+    "options": {
+      "A": "MONTHS_BETWEEN",
+      "B": "DATEDIFF('month', [Start Date], [End Date])",
+      "C": "DATEPART('m', [Start Date]) - DATEPART('m', [End Date])",
+      "D": "TIME_SPAN([Start Date], [End Date], 'month')"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Level of Detail' (LOD) expression allows you to compute values at a specific dimension level without being restricted by the current view's dimensions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical difference between the 'ZN' and 'IFNULL' functions?",
+    "options": {
+      "A": "ZN only works with text; IFNULL only works with numbers.",
+      "B": "ZN specifically converts Nulls to 0; IFNULL allows you to specify a custom replacement value.",
+      "C": "IFNULL is 10x faster than ZN.",
+      "D": "ZN is used for multiplication; IFNULL is used for addition."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator or function is used to find the 'Modulo' (remainder) of two numbers in a calculated field?",
+    "options": {
+      "A": "REM",
+      "B": "% (or MOD function)",
+      "C": "&",
+      "D": "DIV"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a nested logical expression, which logic is evaluated first: 'AND' or 'OR' (assuming no parentheses)?",
+    "options": {
+      "A": "OR",
+      "B": "AND",
+      "C": "They are evaluated from left to right equally.",
+      "D": "The engine chooses randomly based on data size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the '+' operator to combine a string and a numeric field will usually result in an 'Incompatible Data Type' error unless one is explicitly converted.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function allows you to extract the 4th through 8th characters of a product ID string?",
+    "options": {
+      "A": "LEFT([ID], 8)",
+      "B": "MID([ID], 4, 5)",
+      "C": "SUBSTR([ID], 4, 8)",
+      "D": "RIGHT([ID], 5)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'FIXED' LOD expression do in a tool like Tableau?",
+    "options": {
+      "A": "It fixes a bug in the data source.",
+      "B": "It calculates a value using only the specified dimensions, regardless of what is in the visualization.",
+      "C": "It prevents the user from changing the filter settings.",
+      "D": "It calculates the running total of a measure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a symptom of 'Aggregate vs. Non-Aggregate' errors? (Select all that apply)",
+    "options": {
+      "A": "Mixing SUM([Sales]) and [Profit] in the same calculation",
+      "B": "Dividing a total by a row-level constant",
+      "C": "Using an IF statement where one result is a SUM and the other is a literal string",
+      "D": "The dashboard failing to load images"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "True or False: The 'CASE' statement is generally more efficient than a long string of 'ELSEIF' statements for simple equality checks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'ATTR' (Attribute) function in calculated fields?",
+    "options": {
+      "A": "To change the physical attribute of the computer.",
+      "B": "To return the value of a dimension if it has a single unique value for all rows in the group, otherwise returning an asterisk (*).",
+      "C": "To count the number of characters in a string.",
+      "D": "To increase the brightness of a chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function would you use to find the absolute difference between two numbers, ensuring the result is never negative?",
+    "options": {
+      "A": "DIFF",
+      "B": "ABS",
+      "C": "POS",
+      "D": "SQRT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Date' logic, what does 'DATEPART' return?",
+    "options": {
+      "A": "A new date object.",
+      "B": "An integer representing a specific part of a date (e.g., 2024 for the year).",
+      "C": "A specialized software for architects.",
+      "D": "The total number of seconds in a day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Row-level' calculated field is calculated before data is aggregated into a chart.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Type Conversion' functions? (Select all that apply)",
+    "options": {
+      "A": "INT()",
+      "B": "STR()",
+      "C": "DATETIME()",
+      "D": "COLOR()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the function of 'SPLIT' in text manipulation?",
+    "options": {
+      "A": "To split the computer screen in half.",
+      "B": "To break a string into multiple parts based on a delimiter (like a comma or space).",
+      "C": "To delete every second row of data.",
+      "D": "To calculate the percentage of a total."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'ISNULL' function specifically return?",
+    "options": {
+      "A": "A zero if the value is null.",
+      "B": "A Boolean value (True or False).",
+      "C": "The text string \"NULL\".",
+      "D": "An error message to the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'COUNT([Field])' ignores Null values, while 'COUNTD([Field])' counts unique non-null values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a 'Table Calculation' as opposed to a standard calculation? (Select all that apply)",
+    "options": {
+      "A": "Running Total",
+      "B": "Percent of Total",
+      "C": "Moving Average",
+      "D": "Standard SUM"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary risk of using 'String' comparisons inside high-volume calculated fields?",
+    "options": {
+      "A": "They take up more physical space on the screen.",
+      "B": "They are significantly slower to process than numeric or boolean comparisons.",
+      "C": "They automatically delete the database logs.",
+      "D": "They force the user to type in all capital letters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Logical' formulas, what is 'Short-circuiting'?",
+    "options": {
+      "A": "A physical electrical failure in the server.",
+      "B": "The engine stopping evaluation of a formula as soon as the outcome is determined (e.g., if the first part of an OR is true).",
+      "C": "A specialized security scan.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'INCLUDE' LOD expressions calculate at a level of detail that includes the dimensions in the view plus any specified in the formula.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function would you use to find the first position of the '@' symbol in an email string?",
+    "options": {
+      "A": "WHERE",
+      "B": "FIND (or CHARINDEX/INDEXOF)",
+      "C": "GET_CHAR",
+      "D": "LOOKUP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Z-Score' calculation typically used for in a dashboard?",
+    "options": {
+      "A": "To sort the alphabet backwards.",
+      "B": "To identify outliers by measuring how many standard deviations a data point is from the mean.",
+      "C": "A specialized software for architects.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Date' manipulation, what does 'DATETRUNC' do?",
+    "options": {
+      "A": "Deletes the date entirely.",
+      "B": "Rounds a date to the beginning of a specified interval (e.g., rounding May 15 to May 1).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read dates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated fields in some BI tools are 'Static', meaning they only update when the entire data source is reloaded.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Boolean' operators for combining conditions? (Select all that apply)",
+    "options": {
+      "A": "AND",
+      "B": "OR",
+      "C": "NOT",
+      "D": "PLUS"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'String Concatenation'?",
+    "options": {
+      "A": "Breaking a string into pieces.",
+      "B": "Linking two or more text strings together end-to-end.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code in a 'Logical' calculated field indicates a mismatch in aggregation levels?",
+    "options": {
+      "A": "Error 404",
+      "B": "Cannot mix aggregate and non-aggregate arguments",
+      "C": "Null pointer exception",
+      "D": "SQL Syntax error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'ROUND' function can accept negative numbers for the decimal argument to round to the nearest tens or hundreds place.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'COALESCE' (or IFNULL) function in multi-source data?",
+    "options": {
+      "A": "To merge two physical servers.",
+      "B": "To return the first non-null value from a list of fields.",
+      "C": "A security certificate for a database.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical function would you use to calculate 'Compound Interest' in a calculated field?",
+    "options": {
+      "A": "SUM",
+      "B": "POWER (or ^ operator)",
+      "C": "LOG",
+      "D": "SIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'EXCLUDE' LOD expression explicitly removes dimensions from the visualization's level of detail for its calculation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Relative Date' calculations? (Select all that apply)",
+    "options": {
+      "A": "Sales in the 'Last 7 Days'",
+      "B": "Total Profit in 'Year 2020'",
+      "C": "Orders placed 'Yesterday'",
+      "D": "Comparing dates to the current date (TODAY)"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is 'Dimensionality' in the context of calculated fields?",
+    "options": {
+      "A": "The number of dimensions in a 3D model.",
+      "B": "The set of fields that define the level of detail at which data is grouped and calculated.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Nested IF'?",
+    "options": {
+      "A": "An IF statement that has been deleted.",
+      "B": "An IF statement contained within the result branch of another IF statement.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Mathematical operations like division (/ ) always return a decimal even if both inputs are integers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Mathematical' functions for identifying high/low values? (Select all that apply)",
+    "options": {
+      "A": "MAX()",
+      "B": "MIN()",
+      "C": "MEDIAN()",
+      "D": "START()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Row-Level Security' (RLS) calculated field typically used for?",
+    "options": {
+      "A": "Calculating the speed of light.",
+      "B": "Creating a field that checks a user's login and filters the rows they are allowed to see.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of 'Standard Deviation' functions in calculated fields?",
+    "options": {
+      "A": "To measure the deviation of the project manager.",
+      "B": "To calculate the amount of variation or dispersion in a set of values.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'UPPER' or 'LOWER' on a field before comparing it to a literal string is a best practice for 'Case-Insensitive' matching.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Iterative' calculations in some BI tools? (Select all that apply)",
+    "options": {
+      "A": "Running a calculation row-by-row and then summing the result (e.g., SUMX in Power BI)",
+      "B": "Calculating the total once and applying it to all rows",
+      "C": "Useful for calculating accurate Profit Margins at the aggregate level",
+      "D": "Requires a 100-core CPU"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Calculation Context'?",
+    "options": {
+      "A": "The text written next to a calculation.",
+      "B": "The specific environment (filters, rows, columns) that determines which data is included in a formula's result.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A security firewall for the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Cross-Database' calculated field?",
+    "options": {
+      "A": "A field that literally crosses a database.",
+      "B": "A calculation that uses fields from two different joined or blended data sources.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Tableau' calculated fields can be used to generate 'Groups' that are not present in the original data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Date' extraction parts? (Select all that apply)",
+    "options": {
+      "A": "Year",
+      "B": "Quarter",
+      "C": "Week",
+      "D": "Century"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Aggregation' 'Coalescence'?",
+    "options": {
+      "A": "Merging physical servers.",
+      "B": "The internal process of combining results from multiple sub-calculations into a final total.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Division by Zero' error prevention?",
+    "options": {
+      "A": "Forbidding the number zero in the database.",
+      "B": "Using logic like 'IF [Denominator] <> 0 THEN [Numerator]/[Denominator] ELSE 0 END'.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In most tools, 'COUNT' and 'SUM' will return the same result if applied to a numeric ID column with unique values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Logical' comparison operators? (Select all that apply)",
+    "options": {
+      "A": "IN",
+      "B": "BETWEEN",
+      "C": "LIKE",
+      "D": "COLOR"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Parameter' 'Passing' in a formula?",
+    "options": {
+      "A": "Passing a physical folder to a developer.",
+      "B": "Integrating a user-controlled input value into a calculation to make the result dynamic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Field' 'Aliasing'?",
+    "options": {
+      "A": "Giving a field a secret nickname.",
+      "B": "Renaming a calculated field for display purposes in the report without changing its underlying formula.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated fields can be used to convert 'Unix Timestamps' (seconds since 1970) into readable dates.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'LOD' 'Scope' 'Context'? (Select all that apply)",
+    "options": {
+      "A": "LODs are calculated at the source level",
+      "B": "LODs allow 'fixing' the calculation to a specific dimension",
+      "C": "LODs ignore all visual filters by default",
+      "D": "LODs can be used to compare a row to a group total"
+    },
+    "answer": ["B", "D"]
+  },
+  {
+    "question": "What is 'Syntax' 'Highlighting' in a calculation editor?",
+    "options": {
+      "A": "Using a highlighter on physical paper.",
+      "B": "Color-coding different parts of a formula (functions, fields, literals) to make it easier to read and debug.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Dynamic' 'Binning'?",
+    "options": {
+      "A": "Throwing data into a physical bin.",
+      "B": "Using a calculated field to group data into ranges where the size of the ranges can be adjusted by a user parameter.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Most BI tools allow you to 'Hide' a calculated field from the end-user while still using it in background logic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'String' manipulation methods? (Select all that apply)",
+    "options": {
+      "A": "REPLACE()",
+      "B": "REVERSE()",
+      "C": "REPEAT()",
+      "D": "RELOAD()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Measure' 'Aggregation' 'Override'?",
+    "options": {
+      "A": "Overriding a person name Aggregation.",
+      "B": "Forcing a calculation to use a specific aggregation type (e.g., MEDIAN) even if the default for that field is SUM.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Data' 'Normalization' calculation?",
+    "options": {
+      "A": "Calculations used to scale different numeric ranges to a common scale (e.g., 0 to 1) for comparison.",
+      "B": "Hiring a person to normalize the office.",
+      "C": "A specialized software for architects.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An 'IF' statement in a calculated field must always contain an 'ELSE' branch to be valid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Window' functions in calculated fields? (Select all that apply)",
+    "options": {
+      "A": "They look at a physical window.",
+      "B": "They perform calculations across a set of table rows related to the current row.",
+      "C": "Examples include WINDOW_AVG and WINDOW_MAX.",
+      "D": "They only work in Microsoft Windows."
+    },
+    "answer": ["B", "C"]
+  },
+  {
+    "question": "What is 'Self-Referencing' calculation error?",
+    "options": {
+      "A": "When a field refers to itself in its own formula, creating an infinite loop.",
+      "B": "When a field is shy and only talks to itself.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'User' 'Specific' 'Calculated' 'Field'?",
+    "options": {
+      "A": "A field that only calculates users.",
+      "B": "A formula that uses functions like USERNAME() to customize data or security based on the person viewing the report.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated fields can be used to generate 'Lat/Long' coordinates from text-based city names using internal geocoding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Mathematical' constant values often used in formulas? (Select all that apply)",
+    "options": {
+      "A": "PI()",
+      "B": "EXP()",
+      "C": "LN()",
+      "D": "SQL()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In advanced LOD theory, what is the technical impact of using a 'FIXED' expression versus an 'INCLUDE' expression when a Dimension filter is applied to the view?",
+    "options": {
+      "A": "FIXED expressions are always recalculated based on the dimension filter; INCLUDE expressions are not.",
+      "B": "FIXED expressions are calculated before Dimension filters (ignoring them), whereas INCLUDE expressions are calculated after.",
+      "C": "FIXED expressions only work on numeric data; INCLUDE works on all types.",
+      "D": "FIXED expressions are 10x slower because they bypass the primary cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Table Calculation', the 'Restarting Every' setting allows the engine to reset the calculation (e.g., a Running Total) whenever the value of a specific dimension changes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid 'Predictive' or 'Statistical' functions often found in advanced calculated field libraries? (Select all that apply)",
+    "options": {
+      "A": "MODEL_QUANTILE",
+      "B": "CORR (Correlation Coefficient)",
+      "C": "STDEV (Standard Deviation)",
+      "D": "PREDICT_FUTURE_REVENUE"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Densification' in the context of calculated fields and table calculations?",
+    "options": {
+      "A": "The process of deleting duplicate rows to save space.",
+      "B": "The engine generating extra marks for missing data points (like missing dates) to allow for continuous calculations.",
+      "C": "A specialized software bridge for data transfers.",
+      "D": "Increasing the physical density of the server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to return the value of a measure in a previous row based on a specific sort order within the table?",
+    "options": {
+      "A": "PREVIOUS_VAL",
+      "B": "LOOKUP([Measure], -1)",
+      "C": "OFFSET([Measure], 1)",
+      "D": "BACKUP_ROW"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'LOD' expressions can be used to compare a specific row's value to the 'Global Average' of the entire dataset.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced' logical function is specifically designed to handle 'Null' values by returning the first non-null expression in a list?",
+    "options": {
+      "A": "IFNULL_SERIES",
+      "B": "COALESCE",
+      "C": "ZN_EXTENDED",
+      "D": "FIRST_VALUE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical danger of 'Nested Table Calculations'?",
+    "options": {
+      "A": "They take up more physical space in the UI.",
+      "B": "Each layer can have different 'Compute Using' settings, making the final result highly sensitive to changes in visual layout.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Performance' tuning, why is it recommended to perform complex row-level logic (like Regex) at the database level rather than in a calculated field?",
+    "options": {
+      "A": "The database uses prettier fonts for regex.",
+      "B": "Databases are optimized for bulk row processing, whereas BI tools may perform these calculations in single-threaded memory.",
+      "C": "Calculated fields are only for mobile apps.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Context Filter' in Tableau is the only way to force a FIXED LOD expression to respect a specific filter applied to the view.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Recursive' table calculations? (Select all that apply)",
+    "options": {
+      "A": "A calculation that refers to its own previous result (e.g., Compound Growth)",
+      "B": "PREVIOUS_VALUE function usage",
+      "C": "A calculation that never ends",
+      "D": "Using a dimension as its own filter"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Aggregated Data' materialization in a BI extract?",
+    "options": {
+      "A": "Converting a measure into a physical book.",
+      "B": "Pre-calculating and storing the results of formulas at a specific level of detail to speed up dashboard rendering.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Statistical' modeling, what does a 'Window Correlation' calculated field measure?",
+    "options": {
+      "A": "The correlation between two physical windows.",
+      "B": "The degree to which two measures move together within a specific moving timeframe (window).",
+      "C": "A specialized software for architects.",
+      "D": "The physical speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Aggregation' errors can sometimes be solved by wrapping the non-aggregated dimension in an ATTR() function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Window' aggregation types? (Select all that apply)",
+    "options": {
+      "A": "WINDOW_SUM",
+      "B": "WINDOW_MEDIAN",
+      "C": "WINDOW_STDEV",
+      "D": "WINDOW_RELOAD"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Level of Detail' (LOD) 'Scalar' behavior?",
+    "options": {
+      "A": "Hiring a person named Scalar.",
+      "B": "When an LOD expression (like {FIXED : SUM(Sales)}) returns a single constant value across every row of the entire dataset.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculation' 'Materialization' 'Lag'?",
+    "options": {
+      "A": "The delay in the CEO's response.",
+      "B": "The time it takes for the engine to compute calculated fields before the visual can be drawn.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Table' 'Calculations' are computed on the final result set returned from the database, not on the raw rows of the source data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Set' operations available via calculated fields? (Select all that apply)",
+    "options": {
+      "A": "Checking if a dimension exists in a specific Set",
+      "B": "Dynamic Set membership based on a threshold",
+      "C": "Intersecting two Sets in a formula",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Rank' 'Uniqueness' in calculated fields?",
+    "options": {
+      "A": "Ranking only unique people.",
+      "B": "Choosing between RANK (where ties share a number) and RANK_UNIQUE (where every row gets a unique number even in a tie).",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Cross-tab' calculation validation?",
+    "options": {
+      "A": "Validating the physical table in the room.",
+      "B": "Verifying that a calculation remains accurate when dimensions are moved from rows to columns (pivoting).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Origins' occur when a calculated field tries to subtract two dates that are in different time zones without normalization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Forecasting' calculations? (Select all that apply)",
+    "options": {
+      "A": "Using Exponential Smoothing in a formula",
+      "B": "Calculating confidence intervals (Upper/Lower bounds)",
+      "C": "Guaranteed to predict the exact stock price",
+      "D": "Identifying seasonality patterns"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculation' 'Dependency' 'Mapping'?",
+    "options": {
+      "A": "Drawing a physical map for a calculation.",
+      "B": "The process of auditing which calculated fields rely on which source fields to ensure a change in the source doesn't break the report.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Percentile' 'Calculation' 'Interpolation'?",
+    "options": {
+      "A": "Interpolating a person name Percentile.",
+      "B": "The mathematical method used to estimate a value between two data points when calculating a specific percentile (e.g., the 95th percentile).",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Granularity' occurs when an LOD expression is FIXED at a level higher (e.g., Region) than the dimension in the view (e.g., City).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'BI' 'Optimization' 'Flags'? (Select all that apply)",
+    "options": {
+      "A": "Minimize the number of nested IFs",
+      "B": "Use boolean logic instead of string logic",
+      "C": "Move row-level calculations to the ETL process",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Window' 'Frame' 'Definition'?",
+    "options": {
+      "A": "The physical size of a window frame.",
+      "B": "The specific subset of rows (e.g., '3 rows before to current row') that a window function uses for its calculation.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Data' 'Densification' 'Side-effect'?",
+    "options": {
+      "A": "Hiring an extra developer.",
+      "B": "An increase in memory usage because the engine is creating 'virtual' rows to represent empty data points for the calculation.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Table' 'Calculations' are the only type of calculation that can perform a 'Running Sum' across multiple distinct categories in a view.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'LOD' 'Inheritance' logic? (Select all that apply)",
+    "options": {
+      "A": "FIXED LODs do not inherit any filters from the view (unless in context)",
+      "B": "INCLUDE LODs inherit all dimensions currently in the view",
+      "C": "LODs inherit the user's login password",
+      "D": "EXCLUDE LODs inherit all dimensions except those specified"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Custom' 'Geocoding' calculated field?",
+    "options": {
+      "A": "Coding a physical map with blue ink.",
+      "B": "Using a calculated field to map custom regions or sales territories that are not standard geographical units.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Formula' 'Short-Circuit' logic?",
+    "options": {
+      "A": "An electrical failure in the server.",
+      "B": "Evaluating only the minimum necessary parts of a logical chain (like AND/OR) to determine the result, saving processing time.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Sort' 'Order' in a table calculation can lead to a 'Running Total' that adds values in a nonsensical sequence (e.g., Alphabetical instead of Chronological).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Aggregation' 'Methods'? (Select all that apply)",
+    "options": {
+      "A": "Weighted Average",
+      "B": "Geometric Mean",
+      "C": "Standard Deviation (Population vs Sample)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculation' 'Recursion' 'Depth' in BI tools?",
+    "options": {
+      "A": "The depth of a physical hole in the room.",
+      "B": "The maximum number of times a formula can refer to itself or another calculated field before the engine stops (stack overflow prevention).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'User' 'Parameter' 'Sensitivity'?",
+    "options": {
+      "A": "A parameter that is easily offended.",
+      "B": "How much a calculated field's final result fluctuates based on small changes to a user-controlled input parameter.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Joins' can be corrected by using a calculated field to 'Clean' or 'Trim' the join key values on the fly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Table' 'Calculation' 'Addressing' and 'Partitioning'? (Select all that apply)",
+    "options": {
+      "A": "Partitioning defines the groups (buckets) for the calculation",
+      "B": "Addressing defines the direction and order of the calculation",
+      "C": "They only work for physical office addresses",
+      "D": "They are critical for determining 'Compute Using' settings"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Data' 'Type' 'Inference' 'Override'?",
+    "options": {
+      "A": "Overriding a person named Inference.",
+      "B": "Manually forcing a calculated field to be treated as a specific type (e.g., treating a numeric ID as a String) to enable certain functions.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Complex' 'Binning' via calculated fields?",
+    "options": {
+      "A": "Hiring a person to bin the data.",
+      "B": "Creating uneven or dynamically sized ranges (e.g., 0-10, 10-50, 50-1000) that standard binning tools cannot handle.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'LOD' 'FIXED' expressions can be used to count how many distinct customers placed an order in *every* month of a year.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'String' 'Functions'? (Select all that apply)",
+    "options": {
+      "A": "REGEXP_REPLACE()",
+      "B": "SOUNDEX() (Phonetic matching)",
+      "C": "LEVENSHTEIN() (Distance between strings)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Window' 'Cumulative' 'Aggregation'?",
+    "options": {
+      "A": "Aggregating physical windows in a building.",
+      "B": "A calculation that adds the current value to the sum of all previous values in the defined window frame.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculation' 'Explosion' risk?",
+    "options": {
+      "A": "When the server physically explodes.",
+      "B": "A performance bottleneck caused by creating thousands of interdependent calculated fields that all need to refresh at once.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Table' 'Calculations' can be used to filter the view *after* aggregations are performed, allowing you to hide rows without changing the totals.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Date' 'Calculations'? (Select all that apply)",
+    "options": {
+      "A": "Calculating the 3rd Friday of every month",
+      "B": "Handling Leap Years in a custom day-count",
+      "C": "Finding the number of 'Business Days' (excluding weekends/holidays)",
+      "D": "The color of the calendar"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Field' 'Masking' via calculated fields?",
+    "options": {
+      "A": "Putting a physical mask on the computer.",
+      "B": "Using string functions to replace sensitive parts of a field (e.g., 'xxxx-xxxx-1234') for unauthorized users.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Threshold' calculation?",
+    "options": {
+      "A": "A threshold that physically moves.",
+      "B": "Using a calculated field to set a goal or limit that changes based on a statistical measure (like 2x the Standard Deviation).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Aggregations' in a single formula (e.g., [Sales] / SUM([Sales])) can be resolved by using a 'Level of Detail' expression for one of the parts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Parameter' 'Use-cases'? (Select all that apply)",
+    "options": {
+      "A": "Switching the Measure shown in a chart dynamically",
+      "B": "Changing the Sort Order via a dropdown",
+      "C": "Swapping entire Dimensions on the X-axis",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Table' 'Calculation' 'Rank' 'Competition' vs 'Dense'?",
+    "options": {
+      "A": "Competition between developers.",
+      "B": "Choosing whether tied values should leave a 'gap' in numbering (1, 2, 2, 4) or have no gap (1, 2, 2, 3).",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculation' 'Validation' 'Edge-case'?",
+    "options": {
+      "A": "Validating the edge of the computer.",
+      "B": "Testing how a formula behaves with extreme values, like the maximum possible integer or a date 100 years in the future.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'LOD' 'EXCLUDE' expressions are useful for calculating a subtotal that remains the same even when the view is filtered to a more granular level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Advanced' 'Boolean' 'Chaining'? (Select all that apply)",
+    "options": {
+      "A": "Using nested XOR logic",
+      "B": "Creating complex 'Flag' fields for multi-criteria filtering",
+      "C": "Combining AND/OR with specific precedence (parentheses)",
+      "D": "Deleting the database automatically"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'String' 'Distance' calculation (e.g., Levenshtein)?",
+    "options": {
+      "A": "The physical distance between two strings of yarn.",
+      "B": "A mathematical measurement of how many edits are required to change one word into another, used for fuzzy matching.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Formula' 'Readability' 'Optimization'?",
+    "options": {
+      "A": "Making a formula easier to read.",
+      "B": "Using comments, consistent indentation, and clear naming conventions to ensure a calculation can be maintained by other developers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Table' 'Calculations' like 'TOTAL()' and 'WINDOW_SUM()' are technically different because TOTAL() calculates at the database level while WINDOW_SUM() calculates on the visible marks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Numeric' 'Precision' 'Functions'? (Select all that apply)",
+    "options": {
+      "A": "FLOOR()",
+      "B": "CEILING()",
+      "C": "EXP()",
+      "D": "RELOAD()"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dynamic' 'Labeling' via calculated fields?",
+    "options": {
+      "A": "Labels that physically move across the screen.",
+      "B": "A formula that changes the text label of a chart based on whether a value is above or below a specific threshold.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Standard' 'Error' calculation in a formula?",
+    "options": {
+      "A": "Hiring a person to check for errors.",
+      "B": "A statistical measure of the precision of an estimate, often used to create 'Error Bars' on a dashboard.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Contexts' in an LOD expression occur when a FIXED dimension is not related to the primary data source's primary key.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Set' 'Manipulation' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Using Sets to perform cohort analysis",
+      "B": "Combining multiple Sets with 'In/Out' logic",
+      "C": "Using Sets to calculate Running Totals",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Calculated' 'Field' 'Inheritance'?",
+    "options": {
+      "A": "Inheriting money from a field.",
+      "B": "There is no true inheritance; a calculated field simply references the values of its underlying fields as they currently exist in the context.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Aggregation' 'Level' 'Awareness'?",
+    "options": {
+      "A": "Awareness of a person name Aggregation.",
+      "B": "The ability of a developer to choose the correct aggregation (SUM vs AVG vs ATTR) based on whether the data is additive or non-additive.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Filter' 'Precedence' occurs when a dimension filter is applied after a 'FIXED' LOD is computed, potentially showing unexpected results.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Table' 'Calculation' 'Compute' options? (Select all that apply)",
+    "options": {
+      "A": "Table (Across then Down)",
+      "B": "Pane (Down)",
+      "C": "Specific Dimensions (Custom)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Recursive' 'Growth' 'Calculation'?",
+    "options": {
+      "A": "A physical growth on the computer.",
+      "B": "A table calculation where each result is based on the result of the previous calculation (e.g., PREVIOUS_VALUE(1) * [Rate]).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  }
+  ]
+}

@@ -1,0 +1,1735 @@
+{ 
+  "skill": "Azure devops", 
+  "questions": [
+    {
+"question":"What is Azure DevOps?",
+"options":{
+"A":"A set of development tools for CI/CD and project management",
+"B":"A database service",
+"C":"A cloud storage service",
+"D":"A networking platform"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services are part of Azure DevOps? (Select all that apply)",
+"options":{
+"A":"Azure Repos",
+"B":"Azure Pipelines",
+"C":"Azure Boards",
+"D":"Azure Artifacts"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps supports continuous integration and continuous delivery.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service provides Git repositories?",
+"options":{
+"A":"Azure Repos",
+"B":"Azure Pipelines",
+"C":"Azure Boards",
+"D":"Azure Test Plans"
+},
+"answer":"A"
+},
+
+{
+"question":"Which version control systems are supported in Azure Repos? (Select all that apply)",
+"options":{
+"A":"Git",
+"B":"TFVC",
+"C":"SVN",
+"D":"Mercurial"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Azure Repos allows collaborative code development.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service is used for CI/CD pipelines?",
+"options":{
+"A":"Azure Pipelines",
+"B":"Azure Boards",
+"C":"Azure Repos",
+"D":"Azure Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which pipeline types are supported in Azure Pipelines? (Select all that apply)",
+"options":{
+"A":"Build pipelines",
+"B":"Release pipelines",
+"C":"YAML pipelines",
+"D":"Classic pipelines"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Pipelines supports both Microsoft-hosted and self-hosted agents.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service helps track work items and tasks?",
+"options":{
+"A":"Azure Boards",
+"B":"Azure Repos",
+"C":"Azure Pipelines",
+"D":"Azure Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which work items are available in Azure Boards? (Select all that apply)",
+"options":{
+"A":"User Stories",
+"B":"Tasks",
+"C":"Bugs",
+"D":"Epics"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Boards supports agile project management.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service manages packages and dependencies?",
+"options":{
+"A":"Azure Artifacts",
+"B":"Azure Pipelines",
+"C":"Azure Boards",
+"D":"Azure Repos"
+},
+"answer":"A"
+},
+
+{
+"question":"Which package types are supported in Azure Artifacts? (Select all that apply)",
+"options":{
+"A":"NuGet",
+"B":"npm",
+"C":"Maven",
+"D":"Python"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Artifacts allows sharing packages across teams.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service is used for manual and automated testing?",
+"options":{
+"A":"Azure Test Plans",
+"B":"Azure Repos",
+"C":"Azure Pipelines",
+"D":"Azure Boards"
+},
+"answer":"A"
+},
+
+{
+"question":"Which testing types are supported in Azure Test Plans? (Select all that apply)",
+"options":{
+"A":"Manual testing",
+"B":"Exploratory testing",
+"C":"Automated testing",
+"D":"Load testing"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Azure Test Plans integrates with Azure Pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which file format is used to define Azure Pipelines in code?",
+"options":{
+"A":"YAML",
+"B":"JSON",
+"C":"XML",
+"D":"INI"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages does YAML pipelines provide? (Select all that apply)",
+"options":{
+"A":"Version control",
+"B":"Reusable templates",
+"C":"Infrastructure as Code",
+"D":"Automation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: YAML pipelines are stored in the source repository.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature manages build and release automation?",
+"options":{
+"A":"Pipelines",
+"B":"Boards",
+"C":"Repos",
+"D":"Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which pipeline triggers exist in Azure DevOps? (Select all that apply)",
+"options":{
+"A":"CI triggers",
+"B":"Scheduled triggers",
+"C":"Manual triggers",
+"D":"Pull request triggers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CI triggers run pipelines automatically when code is pushed.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps component manages permissions and security?",
+"options":{
+"A":"Project Settings",
+"B":"Azure Boards",
+"C":"Azure Repos",
+"D":"Azure Pipelines"
+},
+"answer":"A"
+},
+
+{
+"question":"Which security features are available in Azure DevOps? (Select all that apply)",
+"options":{
+"A":"Role-based access control",
+"B":"Branch policies",
+"C":"Pipeline permissions",
+"D":"Repository permissions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps supports role-based access control.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"What is Azure DevOps?",
+"options":{
+"A":"A set of development tools for CI/CD and project management",
+"B":"A database service",
+"C":"A cloud storage service",
+"D":"A networking platform"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services are part of Azure DevOps? (Select all that apply)",
+"options":{
+"A":"Azure Repos",
+"B":"Azure Pipelines",
+"C":"Azure Boards",
+"D":"Azure Artifacts"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps supports continuous integration and continuous delivery.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service provides Git repositories?",
+"options":{
+"A":"Azure Repos",
+"B":"Azure Pipelines",
+"C":"Azure Boards",
+"D":"Azure Test Plans"
+},
+"answer":"A"
+},
+
+{
+"question":"Which version control systems are supported in Azure Repos? (Select all that apply)",
+"options":{
+"A":"Git",
+"B":"TFVC",
+"C":"SVN",
+"D":"Mercurial"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Azure Repos allows collaborative code development.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service is used for CI/CD pipelines?",
+"options":{
+"A":"Azure Pipelines",
+"B":"Azure Boards",
+"C":"Azure Repos",
+"D":"Azure Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which pipeline types are supported in Azure Pipelines? (Select all that apply)",
+"options":{
+"A":"Build pipelines",
+"B":"Release pipelines",
+"C":"YAML pipelines",
+"D":"Classic pipelines"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Pipelines supports both Microsoft-hosted and self-hosted agents.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service helps track work items and tasks?",
+"options":{
+"A":"Azure Boards",
+"B":"Azure Repos",
+"C":"Azure Pipelines",
+"D":"Azure Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which work items are available in Azure Boards? (Select all that apply)",
+"options":{
+"A":"User Stories",
+"B":"Tasks",
+"C":"Bugs",
+"D":"Epics"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Boards supports agile project management.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service manages packages and dependencies?",
+"options":{
+"A":"Azure Artifacts",
+"B":"Azure Pipelines",
+"C":"Azure Boards",
+"D":"Azure Repos"
+},
+"answer":"A"
+},
+
+{
+"question":"Which package types are supported in Azure Artifacts? (Select all that apply)",
+"options":{
+"A":"NuGet",
+"B":"npm",
+"C":"Maven",
+"D":"Python"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Artifacts allows sharing packages across teams.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps service is used for manual and automated testing?",
+"options":{
+"A":"Azure Test Plans",
+"B":"Azure Repos",
+"C":"Azure Pipelines",
+"D":"Azure Boards"
+},
+"answer":"A"
+},
+
+{
+"question":"Which testing types are supported in Azure Test Plans? (Select all that apply)",
+"options":{
+"A":"Manual testing",
+"B":"Exploratory testing",
+"C":"Automated testing",
+"D":"Load testing"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Azure Test Plans integrates with Azure Pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which file format is used to define Azure Pipelines in code?",
+"options":{
+"A":"YAML",
+"B":"JSON",
+"C":"XML",
+"D":"INI"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages does YAML pipelines provide? (Select all that apply)",
+"options":{
+"A":"Version control",
+"B":"Reusable templates",
+"C":"Infrastructure as Code",
+"D":"Automation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: YAML pipelines are stored in the source repository.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature manages build and release automation?",
+"options":{
+"A":"Pipelines",
+"B":"Boards",
+"C":"Repos",
+"D":"Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which pipeline triggers exist in Azure DevOps? (Select all that apply)",
+"options":{
+"A":"CI triggers",
+"B":"Scheduled triggers",
+"C":"Manual triggers",
+"D":"Pull request triggers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CI triggers run pipelines automatically when code is pushed.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps component manages permissions and security?",
+"options":{
+"A":"Project Settings",
+"B":"Azure Boards",
+"C":"Azure Repos",
+"D":"Azure Pipelines"
+},
+"answer":"A"
+},
+
+{
+"question":"Which security features are available in Azure DevOps? (Select all that apply)",
+"options":{
+"A":"Role-based access control",
+"B":"Branch policies",
+"C":"Pipeline permissions",
+"D":"Repository permissions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps supports role-based access control.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Azure DevOps feature helps manage source code branches and merges?",
+"options":{
+"A":"Branch Policies",
+"B":"Work Items",
+"C":"Build Pipelines",
+"D":"Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which branch policy features exist in Azure Repos? (Select all that apply)",
+"options":{
+"A":"Minimum reviewers",
+"B":"Build validation",
+"C":"Comment resolution",
+"D":"Merge strategy"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Branch policies help enforce code quality before merging.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature manages pull requests?",
+"options":{
+"A":"Azure Repos",
+"B":"Azure Boards",
+"C":"Azure Pipelines",
+"D":"Azure Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions are possible during pull requests? (Select all that apply)",
+"options":{
+"A":"Code review",
+"B":"Commenting",
+"C":"Merge approval",
+"D":"Automated build validation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pull requests help review code before merging changes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows storing compiled build outputs?",
+"options":{
+"A":"Artifacts",
+"B":"Boards",
+"C":"Repos",
+"D":"Pipelines"
+},
+"answer":"A"
+},
+
+{
+"question":"Which artifact types can Azure DevOps store? (Select all that apply)",
+"options":{
+"A":"Build outputs",
+"B":"Packages",
+"C":"Libraries",
+"D":"Deployment files"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Artifacts helps manage dependency packages.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature helps plan project backlogs?",
+"options":{
+"A":"Azure Boards",
+"B":"Azure Repos",
+"C":"Azure Pipelines",
+"D":"Azure Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Agile tools exist in Azure Boards? (Select all that apply)",
+"options":{
+"A":"Backlogs",
+"B":"Sprint boards",
+"C":"Kanban boards",
+"D":"Dashboards"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Boards supports Scrum and Kanban methodologies.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps component is used to automate deployments?",
+"options":{
+"A":"Release Pipeline",
+"B":"Azure Boards",
+"C":"Azure Repos",
+"D":"Azure Test Plans"
+},
+"answer":"A"
+},
+
+{
+"question":"Which deployment targets can Azure Pipelines deploy to? (Select all that apply)",
+"options":{
+"A":"Azure App Service",
+"B":"Kubernetes",
+"C":"Virtual Machines",
+"D":"Containers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Pipelines can deploy applications to multiple environments.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which pipeline agent runs jobs in Azure Pipelines?",
+"options":{
+"A":"Build Agent",
+"B":"Worker Node",
+"C":"Execution Agent",
+"D":"Pipeline Host"
+},
+"answer":"A"
+},
+
+{
+"question":"Which agent types exist in Azure Pipelines? (Select all that apply)",
+"options":{
+"A":"Microsoft-hosted agents",
+"B":"Self-hosted agents",
+"C":"Container agents",
+"D":"Virtual machine agents"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Self-hosted agents run pipelines on your own infrastructure.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature monitors pipeline execution results?",
+"options":{
+"A":"Pipeline Logs",
+"B":"Build Boards",
+"C":"Test Dashboard",
+"D":"Deployment Metrics"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can pipeline logs show? (Select all that apply)",
+"options":{
+"A":"Execution steps",
+"B":"Errors",
+"C":"Warnings",
+"D":"Task outputs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pipeline logs help troubleshoot build failures.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows integrating external services?",
+"options":{
+"A":"Service Connections",
+"B":"Integration Links",
+"C":"External Pipelines",
+"D":"Connector APIs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services can be connected using service connections? (Select all that apply)",
+"options":{
+"A":"Azure subscriptions",
+"B":"Docker registries",
+"C":"GitHub",
+"D":"Kubernetes clusters"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Service connections allow Azure DevOps pipelines to access external resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature provides reporting and visualization of project data?",
+"options":{
+"A":"Dashboards",
+"B":"Reports",
+"C":"Boards",
+"D":"Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which widgets can be added to Azure DevOps dashboards? (Select all that apply)",
+"options":{
+"A":"Build status",
+"B":"Work item queries",
+"C":"Sprint burndown charts",
+"D":"Release status"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Dashboards provide visual insights into project progress.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Azure DevOps feature allows running automated tests in pipelines?",
+"options":{
+"A":"Test Tasks",
+"B":"Azure Boards",
+"C":"Azure Repos",
+"D":"Azure Artifacts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which types of tests can run in Azure Pipelines? (Select all that apply)",
+"options":{
+"A":"Unit tests",
+"B":"Integration tests",
+"C":"UI tests",
+"D":"Load tests"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Pipelines can automatically run tests after code builds.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature tracks code quality and test coverage?",
+"options":{
+"A":"Code Coverage Reports",
+"B":"Pipeline Logs",
+"C":"Artifact Storage",
+"D":"Service Connections"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do code coverage reports provide? (Select all that apply)",
+"options":{
+"A":"Measure tested code",
+"B":"Improve software quality",
+"C":"Identify untested code",
+"D":"Support CI pipelines"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Code coverage indicates how much code is executed during testing.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature supports containerized builds?",
+"options":{
+"A":"Container Jobs",
+"B":"Docker Pipelines",
+"C":"Build Containers",
+"D":"Container Repos"
+},
+"answer":"A"
+},
+
+{
+"question":"Which container technologies integrate with Azure DevOps? (Select all that apply)",
+"options":{
+"A":"Docker",
+"B":"Kubernetes",
+"C":"Azure Container Registry",
+"D":"Helm"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Pipelines can build and push Docker images.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows defining reusable pipeline logic?",
+"options":{
+"A":"Pipeline Templates",
+"B":"Pipeline Modules",
+"C":"Pipeline Scripts",
+"D":"Pipeline Functions"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do pipeline templates provide? (Select all that apply)",
+"options":{
+"A":"Code reuse",
+"B":"Standardization",
+"C":"Simplified pipelines",
+"D":"Maintainability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pipeline templates allow sharing pipeline steps across projects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature helps manage secrets securely in pipelines?",
+"options":{
+"A":"Secure Variables",
+"B":"Secret Storage",
+"C":"Vault Pipelines",
+"D":"Credential Manager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which methods secure secrets in Azure DevOps? (Select all that apply)",
+"options":{
+"A":"Secret variables",
+"B":"Azure Key Vault integration",
+"C":"Variable groups",
+"D":"Secure files"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Secret variables hide sensitive values in pipeline logs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows sharing variables across pipelines?",
+"options":{
+"A":"Variable Groups",
+"B":"Parameter Groups",
+"C":"Pipeline Variables",
+"D":"Environment Variables"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do variable groups provide? (Select all that apply)",
+"options":{
+"A":"Centralized configuration",
+"B":"Secret management",
+"C":"Reusable variables",
+"D":"Pipeline consistency"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Variable groups can integrate with Azure Key Vault.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature enables environment-specific deployments?",
+"options":{
+"A":"Environments",
+"B":"Deployment Targets",
+"C":"Release Zones",
+"D":"Pipeline Stages"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do environments provide? (Select all that apply)",
+"options":{
+"A":"Deployment history",
+"B":"Approval workflows",
+"C":"Resource monitoring",
+"D":"Security checks"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps environments track deployment history.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature manages approval workflows before deployment?",
+"options":{
+"A":"Approvals and Checks",
+"B":"Security Gates",
+"C":"Pipeline Reviews",
+"D":"Deployment Validation"
+},
+"answer":"A"
+},
+
+{
+"question":"Which checks can be configured before deployment? (Select all that apply)",
+"options":{
+"A":"Manual approval",
+"B":"Business hours check",
+"C":"Azure Monitor alerts",
+"D":"Security policies"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Approvals can pause pipeline execution until approval is granted.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature supports infrastructure automation using scripts?",
+"options":{
+"A":"Tasks",
+"B":"Steps",
+"C":"Stages",
+"D":"Jobs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which script types can be used in Azure Pipelines? (Select all that apply)",
+"options":{
+"A":"Bash",
+"B":"PowerShell",
+"C":"Python",
+"D":"Batch"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure Pipelines can execute scripts during pipeline execution.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Azure DevOps feature allows defining reusable pipeline logic across multiple pipelines?",
+"options":{
+"A":"Pipeline Templates",
+"B":"Pipeline Variables",
+"C":"Pipeline Scripts",
+"D":"Pipeline Libraries"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do pipeline templates provide? (Select all that apply)",
+"options":{
+"A":"Code reuse",
+"B":"Standardized pipelines",
+"C":"Simplified configuration",
+"D":"Maintainability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pipeline templates allow sharing common steps across multiple pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows running multiple jobs simultaneously?",
+"options":{
+"A":"Parallel Jobs",
+"B":"Batch Jobs",
+"C":"Task Pools",
+"D":"Execution Groups"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages do parallel jobs provide? (Select all that apply)",
+"options":{
+"A":"Faster pipeline execution",
+"B":"Concurrent builds",
+"C":"Improved performance",
+"D":"Better resource usage"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Parallel jobs allow multiple pipelines to run concurrently.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature helps manage infrastructure deployments?",
+"options":{
+"A":"Infrastructure Pipelines",
+"B":"Deployment Jobs",
+"C":"Deployment Groups",
+"D":"Environment Deployments"
+},
+"answer":"C"
+},
+
+{
+"question":"Which deployment targets can deployment groups include? (Select all that apply)",
+"options":{
+"A":"Virtual machines",
+"B":"On-prem servers",
+"C":"Cloud instances",
+"D":"Containers"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Deployment groups help deploy applications to multiple machines simultaneously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature supports infrastructure provisioning using code?",
+"options":{
+"A":"Infrastructure as Code",
+"B":"Deployment Scripts",
+"C":"Resource Templates",
+"D":"Automation Tasks"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools support Infrastructure as Code in Azure DevOps pipelines? (Select all that apply)",
+"options":{
+"A":"Terraform",
+"B":"ARM Templates",
+"C":"Bicep",
+"D":"Azure CLI"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps pipelines can automate infrastructure deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature manages pipeline execution environments?",
+"options":{
+"A":"Agents",
+"B":"Jobs",
+"C":"Tasks",
+"D":"Stages"
+},
+"answer":"A"
+},
+
+{
+"question":"Which environments can pipeline agents run on? (Select all that apply)",
+"options":{
+"A":"Windows",
+"B":"Linux",
+"C":"macOS",
+"D":"Containers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps agents execute pipeline jobs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature enables automated notifications for pipeline events?",
+"options":{
+"A":"Service Hooks",
+"B":"Alerts",
+"C":"Pipeline Logs",
+"D":"Monitoring"
+},
+"answer":"A"
+},
+
+{
+"question":"Which external services can receive service hook notifications? (Select all that apply)",
+"options":{
+"A":"Slack",
+"B":"Teams",
+"C":"GitHub",
+"D":"Jenkins"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Service hooks notify external systems when pipeline events occur.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows querying work items?",
+"options":{
+"A":"Queries",
+"B":"Filters",
+"C":"Boards",
+"D":"Reports"
+},
+"answer":"A"
+},
+
+{
+"question":"Which query types exist in Azure Boards? (Select all that apply)",
+"options":{
+"A":"Flat list queries",
+"B":"Tree queries",
+"C":"Direct link queries",
+"D":"Custom queries"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Queries allow filtering work items based on conditions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature provides graphical reporting tools?",
+"options":{
+"A":"Analytics Views",
+"B":"Dashboards",
+"C":"Reports",
+"D":"Metrics"
+},
+"answer":"A"
+},
+
+{
+"question":"Which reporting tools integrate with Azure DevOps analytics? (Select all that apply)",
+"options":{
+"A":"Power BI",
+"B":"Excel",
+"C":"Azure Dashboards",
+"D":"REST APIs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Analytics views help generate reports from Azure DevOps data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature enables automated code scanning for vulnerabilities?",
+"options":{
+"A":"Security Scanning",
+"B":"Code Analysis",
+"C":"Security Policies",
+"D":"Pipeline Security"
+},
+"answer":"B"
+},
+
+{
+"question":"Which tools integrate for code analysis in pipelines? (Select all that apply)",
+"options":{
+"A":"SonarQube",
+"B":"CodeQL",
+"C":"ESLint",
+"D":"StyleCop"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Static code analysis tools can run in Azure DevOps pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Azure DevOps feature allows defining reusable pipeline logic across multiple pipelines?",
+"options":{
+"A":"Pipeline Templates",
+"B":"Pipeline Variables",
+"C":"Pipeline Scripts",
+"D":"Pipeline Libraries"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do pipeline templates provide? (Select all that apply)",
+"options":{
+"A":"Code reuse",
+"B":"Standardized pipelines",
+"C":"Simplified configuration",
+"D":"Maintainability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Pipeline templates allow sharing common steps across multiple pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows running multiple jobs simultaneously?",
+"options":{
+"A":"Parallel Jobs",
+"B":"Batch Jobs",
+"C":"Task Pools",
+"D":"Execution Groups"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages do parallel jobs provide? (Select all that apply)",
+"options":{
+"A":"Faster pipeline execution",
+"B":"Concurrent builds",
+"C":"Improved performance",
+"D":"Better resource usage"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Parallel jobs allow multiple pipelines to run concurrently.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature helps manage infrastructure deployments?",
+"options":{
+"A":"Infrastructure Pipelines",
+"B":"Deployment Jobs",
+"C":"Deployment Groups",
+"D":"Environment Deployments"
+},
+"answer":"C"
+},
+
+{
+"question":"Which deployment targets can deployment groups include? (Select all that apply)",
+"options":{
+"A":"Virtual machines",
+"B":"On-prem servers",
+"C":"Cloud instances",
+"D":"Containers"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Deployment groups help deploy applications to multiple machines simultaneously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature supports infrastructure provisioning using code?",
+"options":{
+"A":"Infrastructure as Code",
+"B":"Deployment Scripts",
+"C":"Resource Templates",
+"D":"Automation Tasks"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools support Infrastructure as Code in Azure DevOps pipelines? (Select all that apply)",
+"options":{
+"A":"Terraform",
+"B":"ARM Templates",
+"C":"Bicep",
+"D":"Azure CLI"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps pipelines can automate infrastructure deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature manages pipeline execution environments?",
+"options":{
+"A":"Agents",
+"B":"Jobs",
+"C":"Tasks",
+"D":"Stages"
+},
+"answer":"A"
+},
+
+{
+"question":"Which environments can pipeline agents run on? (Select all that apply)",
+"options":{
+"A":"Windows",
+"B":"Linux",
+"C":"macOS",
+"D":"Containers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps agents execute pipeline jobs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature enables automated notifications for pipeline events?",
+"options":{
+"A":"Service Hooks",
+"B":"Alerts",
+"C":"Pipeline Logs",
+"D":"Monitoring"
+},
+"answer":"A"
+},
+
+{
+"question":"Which external services can receive service hook notifications? (Select all that apply)",
+"options":{
+"A":"Slack",
+"B":"Teams",
+"C":"GitHub",
+"D":"Jenkins"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Service hooks notify external systems when pipeline events occur.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows querying work items?",
+"options":{
+"A":"Queries",
+"B":"Filters",
+"C":"Boards",
+"D":"Reports"
+},
+"answer":"A"
+},
+
+{
+"question":"Which query types exist in Azure Boards? (Select all that apply)",
+"options":{
+"A":"Flat list queries",
+"B":"Tree queries",
+"C":"Direct link queries",
+"D":"Custom queries"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Queries allow filtering work items based on conditions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature provides graphical reporting tools?",
+"options":{
+"A":"Analytics Views",
+"B":"Dashboards",
+"C":"Reports",
+"D":"Metrics"
+},
+"answer":"A"
+},
+
+{
+"question":"Which reporting tools integrate with Azure DevOps analytics? (Select all that apply)",
+"options":{
+"A":"Power BI",
+"B":"Excel",
+"C":"Azure Dashboards",
+"D":"REST APIs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Analytics views help generate reports from Azure DevOps data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature enables automated code scanning for vulnerabilities?",
+"options":{
+"A":"Security Scanning",
+"B":"Code Analysis",
+"C":"Security Policies",
+"D":"Pipeline Security"
+},
+"answer":"B"
+},
+
+{
+"question":"Which tools integrate for code analysis in pipelines? (Select all that apply)",
+"options":{
+"A":"SonarQube",
+"B":"CodeQL",
+"C":"ESLint",
+"D":"StyleCop"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Static code analysis tools can run in Azure DevOps pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Azure DevOps feature allows defining approval gates before deployments?",
+"options":{
+"A":"Approvals and Checks",
+"B":"Security Gates",
+"C":"Pipeline Validation",
+"D":"Deployment Review"
+},
+"answer":"A"
+},
+
+{
+"question":"Which checks can be configured before a deployment? (Select all that apply)",
+"options":{
+"A":"Manual approval",
+"B":"Business hours check",
+"C":"Azure Monitor alert check",
+"D":"REST API check"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Approval gates pause pipeline execution until approval is granted.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows storing sensitive configuration values?",
+"options":{
+"A":"Secret Variables",
+"B":"Secure Files",
+"C":"Pipeline Parameters",
+"D":"Configuration Groups"
+},
+"answer":"A"
+},
+
+{
+"question":"Which methods protect secrets in Azure DevOps pipelines? (Select all that apply)",
+"options":{
+"A":"Secret variables",
+"B":"Azure Key Vault integration",
+"C":"Secure files",
+"D":"Variable groups"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Secret variables are masked in Azure DevOps pipeline logs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature enables storing encrypted files like certificates?",
+"options":{
+"A":"Secure Files",
+"B":"Secret Files",
+"C":"Encrypted Storage",
+"D":"Certificate Vault"
+},
+"answer":"A"
+},
+
+{
+"question":"Which types of files are commonly stored as secure files? (Select all that apply)",
+"options":{
+"A":"Certificates",
+"B":"SSH keys",
+"C":"Provisioning profiles",
+"D":"Configuration files"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Secure files are protected and only accessible by authorized pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature enables defining reusable variables across pipelines?",
+"options":{
+"A":"Variable Groups",
+"B":"Pipeline Variables",
+"C":"Parameter Sets",
+"D":"Environment Variables"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do variable groups provide? (Select all that apply)",
+"options":{
+"A":"Centralized configuration",
+"B":"Reusable variables",
+"C":"Secret management",
+"D":"Environment configuration"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Variable groups can integrate with Azure Key Vault.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature helps integrate monitoring tools with pipelines?",
+"options":{
+"A":"Service Hooks",
+"B":"Alerts",
+"C":"Monitoring Tasks",
+"D":"Pipeline Events"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools can receive service hook notifications? (Select all that apply)",
+"options":{
+"A":"Slack",
+"B":"Microsoft Teams",
+"C":"Jenkins",
+"D":"GitHub"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Service hooks notify external systems about Azure DevOps events.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature helps manage multiple pipeline stages?",
+"options":{
+"A":"Stages",
+"B":"Jobs",
+"C":"Tasks",
+"D":"Steps"
+},
+"answer":"A"
+},
+
+{
+"question":"Which components are part of Azure Pipelines architecture? (Select all that apply)",
+"options":{
+"A":"Stages",
+"B":"Jobs",
+"C":"Steps",
+"D":"Tasks"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Stages represent major phases of a pipeline.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature enables environment-specific deployments?",
+"options":{
+"A":"Environments",
+"B":"Deployment Zones",
+"C":"Release Groups",
+"D":"Pipeline Targets"
+},
+"answer":"A"
+},
+
+{
+"question":"Which features are supported in Azure DevOps environments? (Select all that apply)",
+"options":{
+"A":"Deployment history",
+"B":"Approval workflows",
+"C":"Resource monitoring",
+"D":"Security checks"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps environments track deployments to infrastructure resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure DevOps feature allows retrieving project data programmatically?",
+"options":{
+"A":"REST API",
+"B":"Automation API",
+"C":"Pipeline API",
+"D":"Service API"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can be automated using Azure DevOps REST APIs? (Select all that apply)",
+"options":{
+"A":"Managing pipelines",
+"B":"Accessing work items",
+"C":"Managing repositories",
+"D":"Triggering builds"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Azure DevOps REST APIs enable integration with external applications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+}
+
+  ]
+}

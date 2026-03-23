@@ -1,0 +1,1957 @@
+{ 
+  "skill": "Powershell", 
+  "questions": [
+    {
+"question":"What is PowerShell primarily used for?",
+"options":{
+"A":"Task automation and configuration management",
+"B":"Web browsing",
+"C":"Graphic design",
+"D":"Database storage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which platforms support PowerShell? (Select all that apply)",
+"options":{
+"A":"Windows",
+"B":"Linux",
+"C":"macOS",
+"D":"Android"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: PowerShell is both a scripting language and a command-line shell.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command retrieves help information in PowerShell?",
+"options":{
+"A":"Get-Help",
+"B":"Show-Help",
+"C":"Help-Command",
+"D":"Find-Help"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are commonly used with Get-Help? (Select all that apply)",
+"options":{
+"A":"-Examples",
+"B":"-Detailed",
+"C":"-Full",
+"D":"-Online"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-Help displays documentation for PowerShell commands.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell command lists all available commands?",
+"options":{
+"A":"Get-Command",
+"B":"Show-Commands",
+"C":"List-Commands",
+"D":"Find-Command"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command types can Get-Command return? (Select all that apply)",
+"options":{
+"A":"Cmdlets",
+"B":"Functions",
+"C":"Scripts",
+"D":"Aliases"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Cmdlets are lightweight commands used in PowerShell.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell cmdlet retrieves system processes?",
+"options":{
+"A":"Get-Process",
+"B":"Show-Process",
+"C":"List-Process",
+"D":"Fetch-Process"
+},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlets retrieve system information? (Select all that apply)",
+"options":{
+"A":"Get-Process",
+"B":"Get-Service",
+"C":"Get-EventLog",
+"D":"Get-Date"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-Service retrieves information about system services.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell operator is used for piping output?",
+"options":{
+"A":"|",
+"B":">",
+"C":"&",
+"D":"%"
+},
+"answer":"A"
+},
+
+{
+"question":"Which commands commonly use pipelines? (Select all that apply)",
+"options":{
+"A":"Get-Process",
+"B":"Where-Object",
+"C":"Sort-Object",
+"D":"Select-Object"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: The pipeline passes objects from one command to another.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet filters objects in the pipeline?",
+"options":{
+"A":"Where-Object",
+"B":"Filter-Object",
+"C":"Find-Object",
+"D":"Select-Object"
+},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlets manipulate pipeline output? (Select all that apply)",
+"options":{
+"A":"Select-Object",
+"B":"Sort-Object",
+"C":"Group-Object",
+"D":"Measure-Object"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Where-Object filters objects based on specified conditions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet sorts objects in PowerShell?",
+"options":{
+"A":"Sort-Object",
+"B":"Order-Object",
+"C":"Arrange-Object",
+"D":"Sequence-Object"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Sort-Object? (Select all that apply)",
+"options":{
+"A":"-Property",
+"B":"-Descending",
+"C":"-Unique",
+"D":"-CaseSensitive"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Sort-Object can sort objects by specified properties.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet selects specific object properties?",
+"options":{
+"A":"Select-Object",
+"B":"Pick-Object",
+"C":"Filter-Object",
+"D":"Choose-Object"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Select-Object? (Select all that apply)",
+"options":{
+"A":"-Property",
+"B":"-First",
+"C":"-Last",
+"D":"-Skip"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Select-Object allows choosing specific properties from objects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"What is PowerShell primarily used for?",
+"options":{
+"A":"Task automation and configuration management",
+"B":"Web browsing",
+"C":"Graphic design",
+"D":"Database storage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which platforms support PowerShell? (Select all that apply)",
+"options":{
+"A":"Windows",
+"B":"Linux",
+"C":"macOS",
+"D":"Android"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: PowerShell is both a scripting language and a command-line shell.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which command retrieves help information in PowerShell?",
+"options":{
+"A":"Get-Help",
+"B":"Show-Help",
+"C":"Help-Command",
+"D":"Find-Help"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are commonly used with Get-Help? (Select all that apply)",
+"options":{
+"A":"-Examples",
+"B":"-Detailed",
+"C":"-Full",
+"D":"-Online"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-Help displays documentation for PowerShell commands.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell command lists all available commands?",
+"options":{
+"A":"Get-Command",
+"B":"Show-Commands",
+"C":"List-Commands",
+"D":"Find-Command"
+},
+"answer":"A"
+},
+
+{
+"question":"Which command types can Get-Command return? (Select all that apply)",
+"options":{
+"A":"Cmdlets",
+"B":"Functions",
+"C":"Scripts",
+"D":"Aliases"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Cmdlets are lightweight commands used in PowerShell.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell cmdlet retrieves system processes?",
+"options":{
+"A":"Get-Process",
+"B":"Show-Process",
+"C":"List-Process",
+"D":"Fetch-Process"
+},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlets retrieve system information? (Select all that apply)",
+"options":{
+"A":"Get-Process",
+"B":"Get-Service",
+"C":"Get-EventLog",
+"D":"Get-Date"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-Service retrieves information about system services.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell operator is used for piping output?",
+"options":{
+"A":"|",
+"B":">",
+"C":"&",
+"D":"%"
+},
+"answer":"A"
+},
+
+{
+"question":"Which commands commonly use pipelines? (Select all that apply)",
+"options":{
+"A":"Get-Process",
+"B":"Where-Object",
+"C":"Sort-Object",
+"D":"Select-Object"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: The pipeline passes objects from one command to another.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet filters objects in the pipeline?",
+"options":{
+"A":"Where-Object",
+"B":"Filter-Object",
+"C":"Find-Object",
+"D":"Select-Object"
+},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlets manipulate pipeline output? (Select all that apply)",
+"options":{
+"A":"Select-Object",
+"B":"Sort-Object",
+"C":"Group-Object",
+"D":"Measure-Object"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Where-Object filters objects based on specified conditions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet sorts objects in PowerShell?",
+"options":{
+"A":"Sort-Object",
+"B":"Order-Object",
+"C":"Arrange-Object",
+"D":"Sequence-Object"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Sort-Object? (Select all that apply)",
+"options":{
+"A":"-Property",
+"B":"-Descending",
+"C":"-Unique",
+"D":"-CaseSensitive"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Sort-Object can sort objects by specified properties.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet selects specific object properties?",
+"options":{
+"A":"Select-Object",
+"B":"Pick-Object",
+"C":"Filter-Object",
+"D":"Choose-Object"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Select-Object? (Select all that apply)",
+"options":{
+"A":"-Property",
+"B":"-First",
+"C":"-Last",
+"D":"-Skip"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Select-Object allows choosing specific properties from objects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which PowerShell cmdlet retrieves environment variables?",
+"options":{
+"A":"Get-ChildItem Env:",
+"B":"Get-Env",
+"C":"Show-Env",
+"D":"List-Env"
+},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell drives exist by default? (Select all that apply)",
+"options":{
+"A":"Env:",
+"B":"HKLM:",
+"C":"HKCU:",
+"D":"Cert:"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: PowerShell uses providers to expose data stores like drives.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet displays system date and time?",
+"options":{
+"A":"Get-Date",
+"B":"Show-Date",
+"C":"Current-Date",
+"D":"Fetch-Date"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Get-Date? (Select all that apply)",
+"options":{
+"A":"-Format",
+"B":"-DisplayHint",
+"C":"-UFormat",
+"D":"-Date"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-Date retrieves the current system date and time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves command history in PowerShell?",
+"options":{
+"A":"Get-History",
+"B":"Show-History",
+"C":"List-History",
+"D":"Fetch-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can be performed with command history? (Select all that apply)",
+"options":{
+"A":"View history",
+"B":"Invoke commands again",
+"C":"Clear history",
+"D":"Export history"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-History shows commands executed in the current session.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet executes commands stored in history?",
+"options":{
+"A":"Invoke-History",
+"B":"Run-History",
+"C":"Execute-History",
+"D":"Replay-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Invoke-History? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Count",
+"C":"-Newest",
+"D":"-Command"
+},
+"answer":["A"]
+},
+
+{
+"question":"True or False: Invoke-History runs previously executed commands.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet clears command history?",
+"options":{
+"A":"Clear-History",
+"B":"Remove-History",
+"C":"Delete-History",
+"D":"Erase-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Clear-History? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Count",
+"C":"-Newest",
+"D":"-Confirm"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Clear-History removes entries from session command history.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves running PowerShell jobs?",
+"options":{
+"A":"Get-Job",
+"B":"Show-Job",
+"C":"List-Job",
+"D":"Fetch-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlets manage PowerShell jobs? (Select all that apply)",
+"options":{
+"A":"Start-Job",
+"B":"Stop-Job",
+"C":"Receive-Job",
+"D":"Remove-Job"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: PowerShell jobs allow background execution of commands.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet starts a background job?",
+"options":{
+"A":"Start-Job",
+"B":"Begin-Job",
+"C":"Run-Job",
+"D":"Execute-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Start-Job? (Select all that apply)",
+"options":{
+"A":"-ScriptBlock",
+"B":"-Name",
+"C":"-ArgumentList",
+"D":"-Credential"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Start-Job runs commands asynchronously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves results from a background job?",
+"options":{
+"A":"Receive-Job",
+"B":"Get-JobResult",
+"C":"Fetch-Job",
+"D":"Read-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Receive-Job? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Name",
+"C":"-Keep",
+"D":"-Wait"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Receive-Job collects output from background jobs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which PowerShell cmdlet retrieves environment variables?",
+"options":{
+"A":"Get-ChildItem Env:",
+"B":"Get-Env",
+"C":"Show-Env",
+"D":"List-Env"
+},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell drives exist by default? (Select all that apply)",
+"options":{
+"A":"Env:",
+"B":"HKLM:",
+"C":"HKCU:",
+"D":"Cert:"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: PowerShell uses providers to expose data stores like drives.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet displays system date and time?",
+"options":{
+"A":"Get-Date",
+"B":"Show-Date",
+"C":"Current-Date",
+"D":"Fetch-Date"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Get-Date? (Select all that apply)",
+"options":{
+"A":"-Format",
+"B":"-DisplayHint",
+"C":"-UFormat",
+"D":"-Date"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-Date retrieves the current system date and time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves command history in PowerShell?",
+"options":{
+"A":"Get-History",
+"B":"Show-History",
+"C":"List-History",
+"D":"Fetch-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can be performed with command history? (Select all that apply)",
+"options":{
+"A":"View history",
+"B":"Invoke commands again",
+"C":"Clear history",
+"D":"Export history"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-History shows commands executed in the current session.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet executes commands stored in history?",
+"options":{
+"A":"Invoke-History",
+"B":"Run-History",
+"C":"Execute-History",
+"D":"Replay-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Invoke-History? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Count",
+"C":"-Newest",
+"D":"-Command"
+},
+"answer":["A"]
+},
+
+{
+"question":"True or False: Invoke-History runs previously executed commands.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet clears command history?",
+"options":{
+"A":"Clear-History",
+"B":"Remove-History",
+"C":"Delete-History",
+"D":"Erase-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Clear-History? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Count",
+"C":"-Newest",
+"D":"-Confirm"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Clear-History removes entries from session command history.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves running PowerShell jobs?",
+"options":{
+"A":"Get-Job",
+"B":"Show-Job",
+"C":"List-Job",
+"D":"Fetch-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlets manage PowerShell jobs? (Select all that apply)",
+"options":{
+"A":"Start-Job",
+"B":"Stop-Job",
+"C":"Receive-Job",
+"D":"Remove-Job"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: PowerShell jobs allow background execution of commands.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet starts a background job?",
+"options":{
+"A":"Start-Job",
+"B":"Begin-Job",
+"C":"Run-Job",
+"D":"Execute-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Start-Job? (Select all that apply)",
+"options":{
+"A":"-ScriptBlock",
+"B":"-Name",
+"C":"-ArgumentList",
+"D":"-Credential"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Start-Job runs commands asynchronously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves results from a background job?",
+"options":{
+"A":"Receive-Job",
+"B":"Get-JobResult",
+"C":"Fetch-Job",
+"D":"Read-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Receive-Job? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Name",
+"C":"-Keep",
+"D":"-Wait"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Receive-Job collects output from background jobs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which cmdlet retrieves environment variables in PowerShell?",
+"options":{
+"A":"Get-ChildItem Env:",
+"B":"Get-Env",
+"C":"Show-Env",
+"D":"List-Env"
+},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell providers expose system data stores? (Select all that apply)",
+"options":{
+"A":"FileSystem",
+"B":"Registry",
+"C":"Environment",
+"D":"Certificate"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Providers allow PowerShell to access different data stores like file systems and registries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves the current date and time?",
+"options":{
+"A":"Get-Date",
+"B":"Show-Date",
+"C":"Current-Date",
+"D":"Fetch-Date"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Get-Date? (Select all that apply)",
+"options":{
+"A":"-Format",
+"B":"-DisplayHint",
+"C":"-UFormat",
+"D":"-Date"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-Date retrieves the current system time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet displays command history?",
+"options":{
+"A":"Get-History",
+"B":"Show-History",
+"C":"List-History",
+"D":"Fetch-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can be performed with command history? (Select all that apply)",
+"options":{
+"A":"View commands",
+"B":"Re-run commands",
+"C":"Clear commands",
+"D":"Export commands"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Get-History shows commands executed in the current session.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet executes a command from history?",
+"options":{
+"A":"Invoke-History",
+"B":"Run-History",
+"C":"Replay-History",
+"D":"Execute-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Invoke-History? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Count",
+"C":"-Newest",
+"D":"-Command"
+},
+"answer":["A"]
+},
+
+{
+"question":"True or False: Invoke-History runs a previously executed command.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet clears PowerShell command history?",
+"options":{
+"A":"Clear-History",
+"B":"Remove-History",
+"C":"Delete-History",
+"D":"Erase-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters can be used with Clear-History? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Count",
+"C":"-Newest",
+"D":"-Confirm"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Clear-History deletes entries from the session history.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet lists PowerShell background jobs?",
+"options":{
+"A":"Get-Job",
+"B":"Show-Job",
+"C":"List-Job",
+"D":"Fetch-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlets manage PowerShell jobs? (Select all that apply)",
+"options":{
+"A":"Start-Job",
+"B":"Stop-Job",
+"C":"Receive-Job",
+"D":"Remove-Job"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Jobs allow PowerShell commands to run in the background.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet starts a PowerShell background job?",
+"options":{
+"A":"Start-Job",
+"B":"Begin-Job",
+"C":"Run-Job",
+"D":"Execute-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Start-Job? (Select all that apply)",
+"options":{
+"A":"-ScriptBlock",
+"B":"-Name",
+"C":"-ArgumentList",
+"D":"-Credential"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Start-Job runs commands asynchronously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves results from a job?",
+"options":{
+"A":"Receive-Job",
+"B":"Get-JobResult",
+"C":"Fetch-Job",
+"D":"Read-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Receive-Job? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Name",
+"C":"-Keep",
+"D":"-Wait"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Receive-Job collects output from completed jobs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet removes a background job?",
+"options":{
+"A":"Remove-Job",
+"B":"Delete-Job",
+"C":"Erase-Job",
+"D":"Stop-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Remove-Job? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Name",
+"C":"-Force",
+"D":"-Confirm"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Remove-Job deletes jobs from the job list.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which variable stores PowerShell version details?",
+"options":{
+"A":"$PSVersionTable",
+"B":"$VersionInfo",
+"C":"$PSVersion",
+"D":"$PowerShellVersion"
+},
+"answer":"A"
+},
+
+{
+"question":"Which properties exist in $PSVersionTable? (Select all that apply)",
+"options":{
+"A":"PSVersion",
+"B":"PSEdition",
+"C":"BuildVersion",
+"D":"CLRVersion"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: $PSVersionTable shows the installed PowerShell version.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which cmdlet retrieves environment variables in PowerShell?",
+"options":{
+"A":"Get-ChildItem Env:",
+"B":"Get-Env",
+"C":"Show-Env",
+"D":"List-Env"
+},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell providers expose system data stores? (Select all that apply)",
+"options":{
+"A":"FileSystem",
+"B":"Registry",
+"C":"Environment",
+"D":"Certificate"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Providers allow PowerShell to access different data stores like file systems and registries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves the current date and time?",
+"options":{
+"A":"Get-Date",
+"B":"Show-Date",
+"C":"Current-Date",
+"D":"Fetch-Date"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Get-Date? (Select all that apply)",
+"options":{
+"A":"-Format",
+"B":"-DisplayHint",
+"C":"-UFormat",
+"D":"-Date"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-Date retrieves the current system time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet displays command history?",
+"options":{
+"A":"Get-History",
+"B":"Show-History",
+"C":"List-History",
+"D":"Fetch-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can be performed with command history? (Select all that apply)",
+"options":{
+"A":"View commands",
+"B":"Re-run commands",
+"C":"Clear commands",
+"D":"Export commands"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Get-History shows commands executed in the current session.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet executes a command from history?",
+"options":{
+"A":"Invoke-History",
+"B":"Run-History",
+"C":"Replay-History",
+"D":"Execute-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Invoke-History? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Count",
+"C":"-Newest",
+"D":"-Command"
+},
+"answer":["A"]
+},
+
+{
+"question":"True or False: Invoke-History runs a previously executed command.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet clears PowerShell command history?",
+"options":{
+"A":"Clear-History",
+"B":"Remove-History",
+"C":"Delete-History",
+"D":"Erase-History"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters can be used with Clear-History? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Count",
+"C":"-Newest",
+"D":"-Confirm"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Clear-History deletes entries from the session history.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet lists PowerShell background jobs?",
+"options":{
+"A":"Get-Job",
+"B":"Show-Job",
+"C":"List-Job",
+"D":"Fetch-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlets manage PowerShell jobs? (Select all that apply)",
+"options":{
+"A":"Start-Job",
+"B":"Stop-Job",
+"C":"Receive-Job",
+"D":"Remove-Job"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Jobs allow PowerShell commands to run in the background.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet starts a PowerShell background job?",
+"options":{
+"A":"Start-Job",
+"B":"Begin-Job",
+"C":"Run-Job",
+"D":"Execute-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Start-Job? (Select all that apply)",
+"options":{
+"A":"-ScriptBlock",
+"B":"-Name",
+"C":"-ArgumentList",
+"D":"-Credential"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Start-Job runs commands asynchronously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves results from a job?",
+"options":{
+"A":"Receive-Job",
+"B":"Get-JobResult",
+"C":"Fetch-Job",
+"D":"Read-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Receive-Job? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Name",
+"C":"-Keep",
+"D":"-Wait"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Receive-Job collects output from completed jobs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet removes a background job?",
+"options":{
+"A":"Remove-Job",
+"B":"Delete-Job",
+"C":"Erase-Job",
+"D":"Stop-Job"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Remove-Job? (Select all that apply)",
+"options":{
+"A":"-Id",
+"B":"-Name",
+"C":"-Force",
+"D":"-Confirm"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Remove-Job deletes jobs from the job list.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which variable stores PowerShell version details?",
+"options":{
+"A":"$PSVersionTable",
+"B":"$VersionInfo",
+"C":"$PSVersion",
+"D":"$PowerShellVersion"
+},
+"answer":"A"
+},
+
+{
+"question":"Which properties exist in $PSVersionTable? (Select all that apply)",
+"options":{
+"A":"PSVersion",
+"B":"PSEdition",
+"C":"BuildVersion",
+"D":"CLRVersion"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: $PSVersionTable shows the installed PowerShell version.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which PowerShell cmdlet retrieves information about installed modules?",
+"options":{
+"A":"Get-Module",
+"B":"Show-Module",
+"C":"List-Module",
+"D":"Fetch-Module"
+},
+"answer":"A"
+},
+
+{
+"question":"Which module management cmdlets exist in PowerShell? (Select all that apply)",
+"options":{
+"A":"Install-Module",
+"B":"Update-Module",
+"C":"Uninstall-Module",
+"D":"Find-Module"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Modules extend PowerShell functionality by adding commands.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet installs modules from PowerShell Gallery?",
+"options":{
+"A":"Install-Module",
+"B":"Add-Module",
+"C":"Get-Module",
+"D":"Import-Module"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are commonly used with Install-Module? (Select all that apply)",
+"options":{
+"A":"-Name",
+"B":"-Repository",
+"C":"-Scope",
+"D":"-Force"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Install-Module downloads modules from online repositories.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet loads a module into the current PowerShell session?",
+"options":{
+"A":"Import-Module",
+"B":"Load-Module",
+"C":"Start-Module",
+"D":"Run-Module"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Import-Module? (Select all that apply)",
+"options":{
+"A":"-Name",
+"B":"-Force",
+"C":"-Verbose",
+"D":"-Global"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Import-Module loads cmdlets from a module.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet publishes a module to a repository?",
+"options":{
+"A":"Publish-Module",
+"B":"Export-Module",
+"C":"Push-Module",
+"D":"Upload-Module"
+},
+"answer":"A"
+},
+
+{
+"question":"Which repositories can store PowerShell modules? (Select all that apply)",
+"options":{
+"A":"PowerShell Gallery",
+"B":"Private repository",
+"C":"Azure Artifacts",
+"D":"Local repository"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: PowerShell modules can be shared through repositories.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell variable stores version details?",
+"options":{
+"A":"$PSVersionTable",
+"B":"$PowerShellVersion",
+"C":"$PSVersion",
+"D":"$VersionInfo"
+},
+"answer":"A"
+},
+
+{
+"question":"Which properties exist in $PSVersionTable? (Select all that apply)",
+"options":{
+"A":"PSVersion",
+"B":"PSEdition",
+"C":"BuildVersion",
+"D":"CLRVersion"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: $PSVersionTable provides environment version information.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell cmdlet writes output to the console?",
+"options":{
+"A":"Write-Output",
+"B":"Show-Output",
+"C":"Display-Output",
+"D":"Print-Output"
+},
+"answer":"A"
+},
+
+{
+"question":"Which write cmdlets exist in PowerShell? (Select all that apply)",
+"options":{
+"A":"Write-Output",
+"B":"Write-Host",
+"C":"Write-Error",
+"D":"Write-Warning"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Write-Host displays text directly in the console.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet pauses script execution for a specified time?",
+"options":{
+"A":"Start-Sleep",
+"B":"Pause-Script",
+"C":"Wait-Time",
+"D":"Delay-Command"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters can be used with Start-Sleep? (Select all that apply)",
+"options":{
+"A":"-Seconds",
+"B":"-Milliseconds",
+"C":"-Minutes",
+"D":"-Delay"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Start-Sleep pauses execution temporarily.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell cmdlet tests network connectivity?",
+"options":{
+"A":"Test-Connection",
+"B":"Check-Network",
+"C":"Ping-Connection",
+"D":"Verify-Network"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Test-Connection? (Select all that apply)",
+"options":{
+"A":"-ComputerName",
+"B":"-Count",
+"C":"-Quiet",
+"D":"-TimeoutSeconds"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Test-Connection works similarly to the ping command.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves computer system information?",
+"options":{
+"A":"Get-ComputerInfo",
+"B":"Get-SystemInfo",
+"C":"Show-System",
+"D":"Fetch-SystemInfo"
+},
+"answer":"A"
+},
+
+{
+"question":"Which types of information can Get-ComputerInfo retrieve? (Select all that apply)",
+"options":{
+"A":"OS information",
+"B":"Hardware details",
+"C":"BIOS version",
+"D":"Network configuration"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-ComputerInfo retrieves detailed system information.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which PowerShell cmdlet retrieves information about installed modules?",
+"options":{
+"A":"Get-Module",
+"B":"Show-Module",
+"C":"List-Module",
+"D":"Fetch-Module"
+},
+"answer":"A"
+},
+
+{
+"question":"Which module management cmdlets exist in PowerShell? (Select all that apply)",
+"options":{
+"A":"Install-Module",
+"B":"Update-Module",
+"C":"Uninstall-Module",
+"D":"Find-Module"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Modules extend PowerShell functionality by adding commands.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet installs modules from PowerShell Gallery?",
+"options":{
+"A":"Install-Module",
+"B":"Add-Module",
+"C":"Get-Module",
+"D":"Import-Module"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are commonly used with Install-Module? (Select all that apply)",
+"options":{
+"A":"-Name",
+"B":"-Repository",
+"C":"-Scope",
+"D":"-Force"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Install-Module downloads modules from online repositories.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet loads a module into the current PowerShell session?",
+"options":{
+"A":"Import-Module",
+"B":"Load-Module",
+"C":"Start-Module",
+"D":"Run-Module"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Import-Module? (Select all that apply)",
+"options":{
+"A":"-Name",
+"B":"-Force",
+"C":"-Verbose",
+"D":"-Global"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Import-Module loads cmdlets from a module.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet publishes a module to a repository?",
+"options":{
+"A":"Publish-Module",
+"B":"Export-Module",
+"C":"Push-Module",
+"D":"Upload-Module"
+},
+"answer":"A"
+},
+
+{
+"question":"Which repositories can store PowerShell modules? (Select all that apply)",
+"options":{
+"A":"PowerShell Gallery",
+"B":"Private repository",
+"C":"Azure Artifacts",
+"D":"Local repository"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: PowerShell modules can be shared through repositories.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell variable stores version details?",
+"options":{
+"A":"$PSVersionTable",
+"B":"$PowerShellVersion",
+"C":"$PSVersion",
+"D":"$VersionInfo"
+},
+"answer":"A"
+},
+
+{
+"question":"Which properties exist in $PSVersionTable? (Select all that apply)",
+"options":{
+"A":"PSVersion",
+"B":"PSEdition",
+"C":"BuildVersion",
+"D":"CLRVersion"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: $PSVersionTable provides environment version information.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell cmdlet writes output to the console?",
+"options":{
+"A":"Write-Output",
+"B":"Show-Output",
+"C":"Display-Output",
+"D":"Print-Output"
+},
+"answer":"A"
+},
+
+{
+"question":"Which write cmdlets exist in PowerShell? (Select all that apply)",
+"options":{
+"A":"Write-Output",
+"B":"Write-Host",
+"C":"Write-Error",
+"D":"Write-Warning"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Write-Host displays text directly in the console.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet pauses script execution for a specified time?",
+"options":{
+"A":"Start-Sleep",
+"B":"Pause-Script",
+"C":"Wait-Time",
+"D":"Delay-Command"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters can be used with Start-Sleep? (Select all that apply)",
+"options":{
+"A":"-Seconds",
+"B":"-Milliseconds",
+"C":"-Minutes",
+"D":"-Delay"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Start-Sleep pauses execution temporarily.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which PowerShell cmdlet tests network connectivity?",
+"options":{
+"A":"Test-Connection",
+"B":"Check-Network",
+"C":"Ping-Connection",
+"D":"Verify-Network"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters are used with Test-Connection? (Select all that apply)",
+"options":{
+"A":"-ComputerName",
+"B":"-Count",
+"C":"-Quiet",
+"D":"-TimeoutSeconds"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Test-Connection works similarly to the ping command.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which cmdlet retrieves computer system information?",
+"options":{
+"A":"Get-ComputerInfo",
+"B":"Get-SystemInfo",
+"C":"Show-System",
+"D":"Fetch-SystemInfo"
+},
+"answer":"A"
+},
+
+{
+"question":"Which types of information can Get-ComputerInfo retrieve? (Select all that apply)",
+"options":{
+"A":"OS information",
+"B":"Hardware details",
+"C":"BIOS version",
+"D":"Network configuration"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Get-ComputerInfo retrieves detailed system information.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+}
+  ]
+}

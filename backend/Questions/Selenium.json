@@ -844,10 +844,10 @@
     {
       "question": "Which annotation is used in JUnit to mark a method as a test case?",
       "options": {
+        "0": "@After",
         "A": "@Before",
         "B": "@Test",
-        "C": "@Ignore",
-        "0": "@After"
+        "C": "@Ignore"
       },
       "answer": "B"
     },

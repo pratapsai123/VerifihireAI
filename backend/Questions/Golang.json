@@ -1645,9 +1645,9 @@
       "question": "What is the 'Ref Cleanup' function introduced in React 19?",
       "options": {
         "A": "A method to delete all references from the database",
-        "&B": "A function that can be returned from a ref callback to handle cleanup when a component unmounts",
         "C": "A tool to clean the cache of a React application",
-        "D": "A way to reset a ref's value to an empty string"
+        "D": "A way to reset a ref's value to an empty string",
+        "B": "A function that can be returned from a ref callback to handle cleanup when a component unmounts"
       },
       "answer": "B"
     },

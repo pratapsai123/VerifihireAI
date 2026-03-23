@@ -38,7 +38,21 @@ class Assessment(models.Model):
         null=True, 
         blank=True
     )
+    user_profile = models.ForeignKey(
+        'api.UserProfile',
+        on_delete=models.SET_NULL,
+        related_name='ai_created_assessments',
+        null=True,
+        blank=True,
+        help_text="The user who generated this AI assessment"
+    )
     is_deleted = models.BooleanField(default=False)
+    assigned_interviewers = models.ManyToManyField(
+        'api.UserProfile',
+        blank=True,
+        related_name='ai_assigned_assessments',
+        help_text="Interviewers assigned to conduct live interviews for this AI assessment"
+    )
 
     def __str__(self):
         return f"Assessment for {self.required_skills} - {self.total_points} pts"

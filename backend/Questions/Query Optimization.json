@@ -1,0 +1,1895 @@
+{ 
+  "skill": "Query Optimization", 
+  "questions": [
+    {
+    "question": "What is the primary goal of query optimization in a database system?",
+    "options": {
+      "A": "To make the SQL code look more professional and readable.",
+      "B": "To find the most efficient way to execute a query by minimizing resource usage.",
+      "C": "To delete old data automatically after it has been queried.",
+      "D": "To ensure that all table names are written in uppercase letters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Full Table Scan' is generally faster than an 'Index Scan' for retrieving a single row from a million-row table.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are types of indexes commonly used in SQL databases? (Select all that apply)",
+    "options": {
+      "A": "B-Tree Index",
+      "B": "Hash Index",
+      "C": "Color Index",
+      "D": "Clustered Index"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "Which SQL command is most frequently used to view the execution plan of a query?",
+    "options": {
+      "A": "SHOW PLAN",
+      "B": "EXPLAIN",
+      "C": "VIEW_PATH",
+      "D": "OPTIMIZE_NOW"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Clustered Index' determine in a database table?",
+    "options": {
+      "A": "The color of the data rows on the screen.",
+      "B": "The physical order of data storage on the disk.",
+      "C": "The total number of users who can access the table.",
+      "D": "The encryption key used for the primary key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'SELECT *' is considered a best practice for query performance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these factors can lead to 'SARGability' issues (preventing index usage)? (Select all that apply)",
+    "options": {
+      "A": "Using functions on indexed columns in the WHERE clause",
+      "B": "Wildcards at the beginning of a LIKE string (e.g., '%term')",
+      "C": "Using the '=' operator on a primary key",
+      "D": "Data type mismatches between the column and the variable"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is an 'Execution Plan'?",
+    "options": {
+      "A": "A list of developers assigned to write SQL code.",
+      "B": "A roadmap used by the database engine to retrieve requested data.",
+      "C": "A backup schedule for the database server.",
+      "D": "A security policy for executing shell scripts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which join type is often used by optimizers when joining two large, sorted datasets?",
+    "options": {
+      "A": "Nested Loop Join",
+      "B": "Merge Join",
+      "C": "Random Join",
+      "D": "Cross Product"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Creating an index on every single column in a table will always improve overall database performance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are common performance bottlenecks for queries? (Select all that apply)",
+    "options": {
+      "A": "High Disk I/O",
+      "B": "CPU Contention",
+      "C": "Memory (RAM) pressure",
+      "D": "Monitor resolution"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Database Statistics' used for by the Query Optimizer?",
+    "options": {
+      "A": "To track the company's monthly revenue.",
+      "B": "To estimate data distribution and row counts to choose the best plan.",
+      "C": "To find the name of the database administrator.",
+      "D": "To count the number of characters in a query string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Composite Index' on columns (A, B), which query can use the index efficiently?",
+    "options": {
+      "A": "WHERE B = 5",
+      "B": "WHERE A = 10",
+      "C": "WHERE A = 10 AND B = 5",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'Non-Clustered Index' contains a pointer to the actual data row rather than the data itself.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these techniques can help optimize a slow query? (Select all that apply)",
+    "options": {
+      "A": "Adding appropriate indexes",
+      "B": "Refactoring subqueries into JOINs",
+      "C": "Updating out-of-date statistics",
+      "D": "Adding more comments to the code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of a 'Covering Index'?",
+    "options": {
+      "A": "To cover the database server with a physical cloth.",
+      "B": "To include all columns needed by a query in the index itself, avoiding a table lookup.",
+      "C": "To hide sensitive data columns from the public.",
+      "D": "To ensure that the index size is exactly the same as the table size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Selectivity' in the context of query optimization?",
+    "options": {
+      "A": "The speed at which the user selects a query from a menu.",
+      "B": "The ratio of the number of distinct values to the total number of rows.",
+      "C": "The ability to select only one row at a time.",
+      "D": "The number of keywords used in the SELECT statement."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Query Optimizer' is a component of the DBMS that determines the most efficient way to execute a SQL statement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Join Algorithms'? (Select all that apply)",
+    "options": {
+      "A": "Hash Join",
+      "B": "Bubble Join",
+      "C": "Nested Loop Join",
+      "D": "Sort-Merge Join"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is a 'Cardinality Estimate'?",
+    "options": {
+      "A": "An estimate of the total number of databases in a cluster.",
+      "B": "The optimizer's guess of how many rows will be returned by a query operator.",
+      "C": "The number of birds found near the data center.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which index type is best for equality searches on columns with low cardinality (like Gender)?",
+    "options": {
+      "A": "B-Tree Index",
+      "B": "Bitmap Index",
+      "C": "Primary Key Index",
+      "D": "Full-text Index"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'UNION ALL' is generally faster than 'UNION' because it doesn't perform a distinct check.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Logical' query operators? (Select all that apply)",
+    "options": {
+      "A": "Project",
+      "B": "Select (Filter)",
+      "C": "Join",
+      "D": "B-Tree Search"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Index Fragmentation'?",
+    "options": {
+      "A": "When the index file is split into many different languages.",
+      "B": "When the logical order of index pages does not match the physical order on disk.",
+      "C": "When a table has too many indexes.",
+      "D": "The process of deleting an index from the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Cost' value in an execution plan represent?",
+    "options": {
+      "A": "The actual monetary price of running the query in dollars.",
+      "B": "An abstract unit representing the estimated relative effort (CPU/IO) to run the query.",
+      "C": "The number of seconds the query took to execute.",
+      "D": "The storage size of the query results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Primary Key' automatically creates a unique index on that column in most RDBMS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common SQL performance tuning practices? (Select all that apply)",
+    "options": {
+      "A": "Eliminating unnecessary Joins",
+      "B": "Using CTEs for better readability and sometimes materialization",
+      "C": "Updating table statistics regularly",
+      "D": "Formatting the SQL with four spaces instead of tabs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Parameter Sniffing'?",
+    "options": {
+      "A": "Using a physical sensor to detect network packets.",
+      "B": "The database engine creating an execution plan based on the specific parameter values passed the first time.",
+      "C": "A security scan of the SQL connection string.",
+      "D": "The process of deleting parameters from a stored procedure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is most likely to cause a Full Table Scan if used on an indexed column?",
+    "options": {
+      "A": "=",
+      "B": "IS NOT NULL",
+      "C": "IN (list)",
+      "D": "!="
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Normalization' of a database always makes read queries faster.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Query Refactoring'? (Select all that apply)",
+    "options": {
+      "A": "Rewriting a subquery as a JOIN",
+      "B": "Replacing a cursor with a set-based operation",
+      "C": "Changing the color of the text in the SQL editor",
+      "D": "Removing redundant WHERE clauses"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the role of the 'Query Parser'?",
+    "options": {
+      "A": "To run the query and return the results to the user.",
+      "B": "To check the SQL syntax and convert it into a logical tree structure.",
+      "C": "To find the best index for a table.",
+      "D": "To increase the brightness of the console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Heap' table?",
+    "options": {
+      "A": "A table that is stacked on top of another table.",
+      "B": "A table without a clustered index where data is stored in no particular order.",
+      "C": "A table used specifically for storing trash data.",
+      "D": "A specialized software for drawing database diagrams."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'ORDER BY' clause can sometimes use an index to avoid a sort operation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Physical' join types? (Select all that apply)",
+    "options": {
+      "A": "Hash Join",
+      "B": "Merge Join",
+      "C": "Left Join",
+      "D": "Nested Loop"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'I/O Cost' refer to in a database plan?",
+    "options": {
+      "A": "The price of the internet connection.",
+      "B": "The estimated number of disk pages that need to be read or written.",
+      "C": "The time spent typing the query.",
+      "D": "The number of rows in the result set."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In indexing, what is 'Density'?",
+    "options": {
+      "A": "The weight of the database server.",
+      "B": "The average number of duplicates for a given column value.",
+      "C": "The physical space an index takes on the disk.",
+      "D": "The number of users currently querying the table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Stored procedures are always faster than raw SQL queries.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these helps reduce 'Network Latency' in large queries? (Select all that apply)",
+    "options": {
+      "A": "Retrieving only necessary columns",
+      "B": "Paging results with LIMIT/OFFSET",
+      "C": "Using a faster Ethernet cable",
+      "D": "Filtering data on the server side instead of client side"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Query Rewrite'?",
+    "options": {
+      "A": "Hiring a new developer to rewrite the code.",
+      "B": "The optimizer transforming a query into a semantically equivalent but more efficient form.",
+      "C": "Saving a query as a different filename.",
+      "D": "Deleting the query and starting over."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Index Maintenance'?",
+    "options": {
+      "A": "To fix a broken index with a screwdriver.",
+      "B": "To rebuild or reorganize indexes to remove fragmentation and improve performance.",
+      "C": "To change the name of the index.",
+      "D": "To count the number of rows in an index."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Composite Index' must follow the 'Left-most Prefix' rule to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are parts of a SQL Optimizer? (Select all that apply)",
+    "options": {
+      "A": "Cost Estimator",
+      "B": "Plan Generator",
+      "C": "Metadata Catalog",
+      "D": "SQL Syntax Highlighter"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Deadlock' in a database?",
+    "options": {
+      "A": "A lock that has lost its key.",
+      "B": "A situation where two queries are waiting for each other to release locks, preventing both from finishing.",
+      "C": "A specialized software for locking doors.",
+      "D": "The end of a project's timeline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Schema' optimization?",
+    "options": {
+      "A": "Drawing a very beautiful diagram.",
+      "B": "Designing tables, data types, and indexes to support efficient data access patterns.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the memory usage of a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'IN' is always slower than using 'EXISTS' for subqueries.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are characteristics of 'Good' primary keys? (Select all that apply)",
+    "options": {
+      "A": "Narrow (small data size)",
+      "B": "Static (rarely or never changes)",
+      "C": "Unique",
+      "D": "Randomly generated UUIDs (depending on RDBMS storage)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Caching' in the context of query performance?",
+    "options": {
+      "A": "Storing physical cash in a database vault.",
+      "B": "Storing frequently accessed data or query plans in memory for rapid retrieval.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vertical Partitioning'?",
+    "options": {
+      "A": "Breaking a building into different floors.",
+      "B": "Splitting a table into multiple tables with fewer columns to reduce I/O.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adding a 'WHERE' clause to a query can sometimes make it slower if the filter is not indexed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Set-based' operations? (Select all that apply)",
+    "options": {
+      "A": "SELECT",
+      "B": "UNION",
+      "C": "Cursors",
+      "D": "INTERSECT"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Data Skew'?",
+    "options": {
+      "A": "Data that is written in a slanted font.",
+      "B": "When some values in a column occur much more frequently than others, affecting optimizer estimates.",
+      "C": "A specialized tool for measuring angles.",
+      "D": "The process of deleting non-numeric data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Query Hint'?",
+    "options": {
+      "A": "A small tip given to a developer.",
+      "B": "A directive in the SQL code that tells the optimizer to use a specific plan or index.",
+      "C": "A secret password for the database.",
+      "D": "A specialized software for novelists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'DISTINCT' always adds an extra sorting or hashing step to the execution plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these can cause an Index to be ignored? (Select all that apply)",
+    "options": {
+      "A": "Data type mismatch between column and constant",
+      "B": "Large percentage of the table is being returned",
+      "C": "The column is the first part of a composite index",
+      "D": "The table is very small (fewer than 10 rows)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Search Argumentable' (SARGable) code?",
+    "options": {
+      "A": "Code that can be found using Google search.",
+      "B": "SQL code written in a way that allows the database engine to use indexes efficiently.",
+      "C": "A security certificate for a database.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Denormalization'?",
+    "options": {
+      "A": "Making a database act very strangely.",
+      "B": "Intentionally adding redundant data to a schema to improve read performance.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Execution plans are static and never change once they are created.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are typical 'Aggregation' operators? (Select all that apply)",
+    "options": {
+      "A": "SUM",
+      "B": "AVG",
+      "C": "GROUP BY",
+      "D": "SELECT"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Materialized View'?",
+    "options": {
+      "A": "A view that is made of physical material like paper.",
+      "B": "A database object that contains the results of a query and is physically stored on disk.",
+      "C": "A specialized software for architects.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Table Statistics' Update?",
+    "options": {
+      "A": "Hiring a person to count the rows in a table.",
+      "B": "Refreshing the distribution information about data so the optimizer can make better choices.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Nested Loop Join' is most efficient when at least one of the datasets is very small.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are ways to reduce 'Disk I/O'? (Select all that apply)",
+    "options": {
+      "A": "Using column compression",
+      "B": "Implementing a covering index",
+      "C": "Filtering data early in the query",
+      "D": "Increasing the number of columns in the table"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Index Scan' vs 'Index Seek'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Scan reads the entire index; Seek uses the index structure to jump to specific values.",
+      "C": "Seek is for beginners; Scan for experts.",
+      "D": "Scan is 100x faster than Seek."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Query Profiling'?",
+    "options": {
+      "A": "Hiring a person to look at a user's profile.",
+      "B": "Measuring the resources used (CPU, IO, Time) during the execution of a query.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical durability of a computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a common reason why an optimizer might choose a 'Full Table Scan' over an 'Index Scan'?",
+    "options": {
+      "A": "The table is stored on an SSD instead of a traditional hard drive.",
+      "B": "The query is expected to return a large percentage (e.g., >20%) of the total rows in the table.",
+      "C": "The table names are alphabetically sorted in the database schema.",
+      "D": "The index was created using a case-sensitive collation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hash Join' is generally more efficient than a 'Nested Loop Join' when both tables being joined are very large and unsorted.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which factors influence the 'Cardinality' estimation of a query filter? (Select all that apply)",
+    "options": {
+      "A": "Histograms stored in the database statistics",
+      "B": "Density of the column values",
+      "C": "The total number of rows in the table",
+      "D": "The font size used in the SQL editor"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary benefit of a 'Filtered Index' (also known as a Partial Index)?",
+    "options": {
+      "A": "It automatically filters out users who do not have admin permissions.",
+      "B": "It reduces index size and maintenance costs by only indexing rows that meet a specific predicate.",
+      "C": "It increases the speed of 'SELECT *' queries by 50%.",
+      "D": "It prevents the database from crashing during a power outage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Sort-Merge Join', what must happen before the merging phase can begin?",
+    "options": {
+      "A": "Both input datasets must be sorted on the join keys.",
+      "B": "The database must be restarted to clear the cache.",
+      "C": "A primary key must be deleted from the smaller table.",
+      "D": "The query must be converted into a stored procedure."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'DISTINCT' in a query can prevent the optimizer from using a 'Stream Aggregate' and force a 'Hash Aggregate'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Anti-Patterns' that usually degrade query performance? (Select all that apply)",
+    "options": {
+      "A": "Using OR conditions across multiple columns without proper indexing",
+      "B": "Correlated subqueries in the SELECT list for large datasets",
+      "C": "Joining tables on columns with different data types (causing implicit conversion)",
+      "D": "Using Aliases for table names to improve readability"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does a 'Key Lookup' (or Bookmark Lookup) in an execution plan indicate?",
+    "options": {
+      "A": "The query is searching for a physical key in the data center.",
+      "B": "The non-clustered index used does not contain all the columns requested, requiring a visit to the base table.",
+      "C": "A user is trying to access a table without the correct password.",
+      "D": "The database engine has found a duplicate primary key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to manually update the statistics for a specific table in SQL Server?",
+    "options": {
+      "A": "OPTIMIZE TABLE",
+      "B": "UPDATE STATISTICS",
+      "C": "REFRESH DATA",
+      "D": "ANALYZE TABLE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Clustered Index Scan' is essentially the same as a 'Full Table Scan' in most database systems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Index Intersection'?",
+    "options": {
+      "A": "When two indexes are deleted at the same time.",
+      "B": "The optimizer combining the results of two different indexes to satisfy a query with multiple predicates.",
+      "C": "The physical point where two cables meet in a server rack.",
+      "D": "A security error caused by overlapping permissions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Fill Factor' setting used for during index creation?",
+    "options": {
+      "A": "To determine how much of the hard drive the database can fill.",
+      "B": "To leave empty space on index pages to accommodate future growth and reduce page splits.",
+      "C": "To set the maximum number of rows a table can hold.",
+      "D": "To calculate the percentage of successful queries per hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which join algorithm creates a temporary in-memory build table from the smaller of the two datasets?",
+    "options": {
+      "A": "Nested Loop Join",
+      "B": "Hash Join",
+      "C": "Merge Join",
+      "D": "Cross Join"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SARGable' stands for 'Search Argumentable'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these strategies can mitigate the 'Parameter Sniffing' problem? (Select all that apply)",
+    "options": {
+      "A": "Using the 'OPTIMIZE FOR UNKNOWN' query hint",
+      "B": "Recompiling the stored procedure on every execution",
+      "C": "Using local variables instead of parameters in the WHERE clause",
+      "D": "Changing the table names to be longer and more descriptive"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Predicate Pushing' (or Predicate Pushdown)?",
+    "options": {
+      "A": "A physical button used to reset the database.",
+      "B": "Moving a filter as close to the data source as possible to reduce the volume of data processed early.",
+      "C": "Deleting a WHERE clause to see more results.",
+      "D": "Hiring a professional to push the data through the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a B-tree index, where is the actual row data stored in a 'Clustered' index?",
+    "options": {
+      "A": "In a separate hidden table.",
+      "B": "In the leaf level of the index itself.",
+      "C": "Only in the root node.",
+      "D": "Randomly distributed throughout the branch nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Semi-Join' returns only one row from the first table for each matching row in the second table, even if multiple matches exist.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these tools are used to analyze query performance in PostgreSQL? (Select all that apply)",
+    "options": {
+      "A": "EXPLAIN ANALYZE",
+      "B": "pg_stat_statements",
+      "C": "SQL Profiler",
+      "D": "pg_buffercache"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'TempDB' (or temporary tablespace) pressure usually a result of?",
+    "options": {
+      "A": "Queries having too many comments.",
+      "B": "Large sorts, hashes, or row-versioning operations that exceed available RAM.",
+      "C": "The database server being physically too hot.",
+      "D": "Too many users logged in at the same time without querying."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Logical' join type returns all rows from both tables, matching them where possible?",
+    "options": {
+      "A": "Inner Join",
+      "B": "Full Outer Join",
+      "C": "Cross Join",
+      "D": "Left Semi Join"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Denormalization' can improve read performance by reducing the number of JOINs required to retrieve data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are components of an 'Index's maintenance cost'? (Select all that apply)",
+    "options": {
+      "A": "Slowed INSERT operations",
+      "B": "Increased disk space usage",
+      "C": "Slowed UPDATE operations on the indexed column",
+      "D": "Increased CPU usage during SELECT * queries"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Logical I/O' represent in query metrics?",
+    "options": {
+      "A": "The number of rows return to the user.",
+      "B": "The number of data pages read from the buffer cache (memory).",
+      "C": "The cost of the internet cable.",
+      "D": "The number of syntax errors in a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Blocking' operator in an execution plan?",
+    "options": {
+      "A": "An operator that blocks unauthorized users from viewing data.",
+      "B": "An operator (like Sort) that must consume its entire input before it can produce any output.",
+      "C": "A firewall rule that prevents SQL injections.",
+      "D": "The point where the query execution stops and waits for a human."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adding 'WITH (NOLOCK)' in SQL Server can prevent a query from being blocked by other transactions, but may result in 'dirty reads'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Parallelism' operators? (Select all that apply)",
+    "options": {
+      "A": "Gather Streams",
+      "B": "Repartition Streams",
+      "C": "Distribute Streams",
+      "D": "Delete Streams"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Implicit Conversion' in a SQL query?",
+    "options": {
+      "A": "When a user converts to a different database vendor.",
+      "B": "When the database engine automatically converts data types to compare them, often preventing index usage.",
+      "C": "A security feature that converts text to binary.",
+      "D": "When the SELECT statement is converted to a DELETE statement."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'B-Tree' and a 'Bitmap' index?",
+    "options": {
+      "A": "B-Trees are only for numbers; Bitmaps are for images.",
+      "B": "B-Trees are better for high-cardinality data; Bitmaps are better for low-cardinality data and complex AND/OR queries.",
+      "C": "Bitmaps are 100x slower.",
+      "D": "B-Trees require a specialized license."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Materialized View' is updated in real-time every time the underlying tables change, without any performance overhead.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following can cause an 'Execution Plan' to be removed from the cache? (Select all that apply)",
+    "options": {
+      "A": "Running out of memory in the plan cache",
+      "B": "Updating statistics on a table used by the plan",
+      "C": "Running a 'DBCC FREEPROCCACHE' command",
+      "D": "Changing the desktop wallpaper of the database server"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'Horizontal Partitioning' (Sharding)?",
+    "options": {
+      "A": "To split a table into many different columns.",
+      "B": "To distribute rows across different physical tables or servers based on a key to improve scalability.",
+      "C": "To rotate the database monitor 90 degrees.",
+      "D": "To increase the number of characters allowed in a column name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Query Flattening'?",
+    "options": {
+      "A": "Making the query text all on one line.",
+      "B": "The process of the optimizer converting subqueries or views into a simple JOIN structure.",
+      "C": "A specialized tool for compressing database files.",
+      "D": "Hiring a professional mathematician to simplify code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Composite Index' on (LastName, FirstName), a query with 'WHERE FirstName = 'John'' will use the index efficiently.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are metrics monitored during 'Query Profiling'? (Select all that apply)",
+    "options": {
+      "A": "CPU Time",
+      "B": "Elapsed Time",
+      "C": "Number of Page Reads",
+      "D": "Number of comments in the code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Index Fragmentation' 'Reorganization'?",
+    "options": {
+      "A": "Breaking an index into small pieces.",
+      "B": "An online process that defragments the leaf level of an index without taking it offline.",
+      "C": "Deleting an index and building it again.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Caching', what is a 'Buffer Hit Ratio'?",
+    "options": {
+      "A": "The percentage of times a user hits the database with a heavy query.",
+      "B": "The percentage of data requests satisfied from the memory buffer rather than disk.",
+      "C": "The ratio of successful logins to failed logins.",
+      "D": "A specialized software for measuring distance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Optimizer 'Hints' should be used as a last resort because they can prevent the optimizer from adapting to changing data patterns.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these can prevent a query from being 'SARGable'? (Select all that apply)",
+    "options": {
+      "A": "WHERE YEAR(OrderDate) = 2023",
+      "B": "WHERE ColumnName + 10 = 100",
+      "C": "WHERE ColumnName LIKE '%Value'",
+      "D": "WHERE ColumnName = @Value"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Wait Type' (or Wait Event) in database performance diagnostics?",
+    "options": {
+      "A": "A type of table that only holds data for a short time.",
+      "B": "A metric indicating why a query thread is suspended (e.g., waiting for Disk I/O or a Lock).",
+      "C": "The time a user spends waiting for the website to load.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Selectivity' vs 'Cardinality'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Selectivity is the percentage of rows returned; Cardinality is the actual number of rows.",
+      "C": "Cardinality is for beginners; Selectivity for experts.",
+      "D": "Selectivity is 100x faster to calculate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'UNION' instead of 'UNION ALL' requires the database to perform a distinct sort, which adds overhead.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Input' factors for a Cost-Based Optimizer (CBO)? (Select all that apply)",
+    "options": {
+      "A": "Number of rows in the table",
+      "B": "Average size of the data rows",
+      "C": "Disk transfer speed estimates",
+      "D": "The weather outside the data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Covering Index' 'INCLUDE' column?",
+    "options": {
+      "A": "A column that is automatically included in every query.",
+      "B": "A non-key column added to the leaf level of an index to satisfy more queries without increasing index depth.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Query Optimization', what is 'Search Space'?",
+    "options": {
+      "A": "The amount of space left on the hard drive.",
+      "B": "The set of all possible execution plans the optimizer considers for a given query.",
+      "C": "A security scan of the database.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Nested Loop Join' is always the best choice for joining two tables with 10 million rows each.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Query Refactoring' best practices? (Select all that apply)",
+    "options": {
+      "A": "Eliminating redundant JOINs",
+      "B": "Simplifying complex CASE statements",
+      "C": "Using temp tables to break up huge logic blocks",
+      "D": "Using emoji in column aliases for better visibility"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cost-Based Optimization' (CBO)?",
+    "options": {
+      "A": "Optimizing a query based on the monetary cost of the server.",
+      "B": "An approach where the optimizer chooses a plan based on the lowest estimated resource usage (CPU/IO/Memory).",
+      "C": "A way to backup data in the sky.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cardinality Estimation' 'Skew'?",
+    "options": {
+      "A": "When the data is written in a slanted font.",
+      "B": "The difference between the optimizer's predicted row count and the actual row count returned.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A specialized software for psychologists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'SELECT *' is generally faster than specifying column names because the database doesn't have to parse the names.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are parts of the 'SQL Tuning' cycle? (Select all that apply)",
+    "options": {
+      "A": "Identifying slow queries",
+      "B": "Analyzing execution plans",
+      "C": "Implementing changes (indexing/refactoring)",
+      "D": "Buying more RAM as the first step"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Index Scan' vs 'Index Seek' in terms of efficiency?",
+    "options": {
+      "A": "Scan is always better than Seek.",
+      "B": "Seek is generally more efficient as it navigates the tree to find specific data.",
+      "C": "There is no difference between the two.",
+      "D": "Scan is 100x faster than Seek."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'PostgreSQL', what does the 'ANALYZE' command (without EXPLAIN) do?",
+    "options": {
+      "A": "Runs the query and shows the timing.",
+      "B": "Collects statistics about the contents of tables and stores the results in the catalog.",
+      "C": "A specialized software for accountants.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Deadlocks' can be completely prevented by always accessing tables in the same order across all queries.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Set-based' SQL operations? (Select all that apply)",
+    "options": {
+      "A": "UNION",
+      "B": "EXCEPT",
+      "C": "INTERSECT",
+      "D": "WHILE Loops"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logical' 'Query' 'Tree'?",
+    "options": {
+      "A": "A tree planted in the data center.",
+      "B": "A tree-like representation of a query where each node represents an algebraic operator.",
+      "C": "A security scan of the database.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Rule-Based Optimizer' (RBO)?",
+    "options": {
+      "A": "An optimizer that only uses binary rules.",
+      "B": "An older approach where plans are chosen based on a fixed set of precedence rules regardless of data volume.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Full-text' indexes are used for complex searches on large text columns that standard indexes cannot handle efficiently.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Resource' 'Governing' techniques? (Select all that apply)",
+    "options": {
+      "A": "Setting a maximum memory limit for a specific user group",
+      "B": "Limiting the CPU percentage a query can use",
+      "C": "Setting a query timeout value",
+      "D": "Deleting the user account after 100 queries"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Plan' 'Guide' (or SQL Profile)?",
+    "options": {
+      "A": "A physical book used to find database tables.",
+      "B": "A feature used to fix the execution plan of a query that cannot be easily modified in the application code.",
+      "C": "A security certificate for a database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Oracle', what is 'AWR' (Automatic Workload Repository)?",
+    "options": {
+      "A": "A way to backup data in the sky.",
+      "B": "A built-in tool that collects, processes, and maintains performance statistics for problem detection and tuning.",
+      "C": "A specialized software for poets.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'EXISTS' is generally more efficient than 'IN' when the subquery returns a large dataset but only a few rows match.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Storage' 'Engine' components? (Select all that apply)",
+    "options": {
+      "A": "Buffer Manager",
+      "B": "Lock Manager",
+      "C": "Transaction Log",
+      "D": "Query Parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Histogram' 'Update' freqency significance?",
+    "options": {
+      "A": "How many times a histogram is printed.",
+      "B": "The accuracy of cardinality estimates depends on histograms being up-to-date with current data distribution.",
+      "C": "A way to backup the storage layer.",
+      "D": "A specialized tool for measuring distance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Query' 'Optimization', what is 'Trivial' 'Plan'?",
+    "options": {
+      "A": "A plan that is for beginners only.",
+      "B": "A plan where there is only one viable way to execute the query, and the optimizer skips the full search process.",
+      "C": "A security bridge for data.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Parallel Query' always executes faster than a serial query, regardless of the overhead for thread management.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Hash Join' and an 'Adaptive Join' in modern optimizers?",
+    "options": {
+      "A": "Hash joins are only for numeric data; Adaptive joins are for strings.",
+      "B": "Adaptive joins allow the engine to switch between Nested Loop and Hash joins at runtime based on actual row counts.",
+      "C": "Adaptive joins require an active internet connection to update statistics.",
+      "D": "Hash joins are 100x faster but use 10x more memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Lock Escalation' occurs when a database engine converts many fine-grained locks (like rows) into a single coarse-grained lock (like a table) to save memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following scenarios can cause 'Plan Regression' after an upgrade or configuration change? (Select all that apply)",
+    "options": {
+      "A": "A change in the Cardinality Estimator version",
+      "B": "Outdated statistics causing a shift from an Index Seek to a Scan",
+      "C": "Changes in the cost threshold for parallelism",
+      "D": "Renaming a non-indexed column in a minor table"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In the context of 'Latch Contention', what does the 'PAGELATCH_EX' wait type usually indicate?",
+    "options": {
+      "A": "The disk drive is physically disconnected.",
+      "B": "Heavy contention for in-memory data pages, often seen in high-concurrency 'hot' pages.",
+      "C": "The database is waiting for a user to type a password.",
+      "D": "The network bandwidth is insufficient for the query result size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Query Optimization' (Semi-join transformation) used for in federated databases?",
+    "options": {
+      "A": "To distribute the SQL code to all employees via email.",
+      "B": "To reduce the volume of data transferred across the network by sending a list of keys to the remote server first.",
+      "C": "To encrypt data while it is moving between different cloud providers.",
+      "D": "To merge two different database vendors into a single binary file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bitmap Filter' in an execution plan is used to skip rows that cannot possibly match a join condition before they reach the join operator.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Columnstore' indexes compared to Rowstore? (Select all that apply)",
+    "options": {
+      "A": "Highly effective for aggregate queries (SUM, AVG) over large datasets",
+      "B": "Utilizes heavy compression by grouping similar data together",
+      "C": "Optimized for singleton 'point' lookups of a single row",
+      "D": "Processes data in batches rather than row-by-row"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Memoization' in a query execution plan?",
+    "options": {
+      "A": "Forcing the developer to memorize the SQL syntax.",
+      "B": "Caching the results of internal function calls or scalar subqueries within the scope of a single execution.",
+      "C": "A specialized tool for drawing database schema diagrams.",
+      "D": "The process of deleting temporary tables after a crash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL Server wait type is associated with a query waiting for a worker thread to become available?",
+    "options": {
+      "A": "ASYNC_NETWORK_IO",
+      "B": "THREADPOOL",
+      "C": "PAGEIOLATCH_SH",
+      "D": "WRITELOG"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Implicit Conversion' always results in a plan that is at least 10% faster because the data is standardized.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'Dynamic Partition Elimination'?",
+    "options": {
+      "A": "To delete partitions that have zero users.",
+      "B": "To allow the engine to skip reading irrelevant partitions at runtime based on join values.",
+      "C": "To rotate the storage of partitions between SSD and HDD.",
+      "D": "To increase the security of partitioned tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Anti-Join' logic in an execution plan? (Select all that apply)",
+    "options": {
+      "A": "Used for 'NOT EXISTS' queries",
+      "B": "Used for 'NOT IN' queries with NULL-safe handling",
+      "C": "Used to find rows that have a match in both tables",
+      "D": "Used to find rows in one table that do not have a match in another"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Spilling to Workdb/TempDB' indicate during a Sort or Hash operation?",
+    "options": {
+      "A": "The database has successfully finished the task.",
+      "B": "The memory grant was insufficient, forcing the operation to use the slow disk-based temporary space.",
+      "C": "The query is being backed up to a secondary server.",
+      "D": "The user has exceeded their daily query limit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Deterministic' function will always return the same result given the same inputs, allowing for better optimization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are advanced 'Optimizer Hints'? (Select all that apply)",
+    "options": {
+      "A": "FORCE ORDER",
+      "B": "RECOMPILE",
+      "C": "USE PLAN",
+      "D": "MAKE FASTER"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Intra-query Parallelism' Skew?",
+    "options": {
+      "A": "When the SQL text is slanted on the screen.",
+      "B": "When one thread does significantly more work than others in a parallel plan, creating a bottleneck.",
+      "C": "A specialized software for psychologists.",
+      "D": "The ratio of CPU cores to database tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Oracle optimization, what is 'Star Transformation'?",
+    "options": {
+      "A": "Converting a database into a star shape.",
+      "B": "A technique to optimize joins between a large fact table and multiple small dimension tables.",
+      "C": "A security scan of the cloud environment.",
+      "D": "Increasing the brightness of the star rating in the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ghost Records' are rows that have been logically deleted but not yet physically removed from the data page.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these metrics can be found in a 'PostgreSQL' EXPLAIN ANALYZE output? (Select all that apply)",
+    "options": {
+      "A": "Actual time for each node",
+      "B": "Number of loops",
+      "C": "Planning time",
+      "D": "The name of the Linux kernel"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Index Scan' vs 'Index Seek' in terms of I/O performance?",
+    "options": {
+      "A": "Seek is better for range scans; Scan is better for specific values.",
+      "B": "Seek is generally better for selective queries; Scan is better when reading a large portion of the index.",
+      "C": "Scan is always preferred by the optimizer.",
+      "D": "Seek requires a physical key to be inserted into the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predicate Correlation'?",
+    "options": {
+      "A": "The relationship between two columns where the value of one predicts the other (e.g., City and Zip Code).",
+      "B": "The speed at which a predicate is executed.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Cost-Based Optimization' always finds the absolute fastest plan, never a 'good enough' plan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are parts of the 'Storage Engine' (not the Query Processor)? (Select all that apply)",
+    "options": {
+      "A": "Access Methods",
+      "B": "Buffer Manager",
+      "C": "Transaction Manager",
+      "D": "Query Optimizer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logical Read' vs 'Physical Read'?",
+    "options": {
+      "A": "Logical is for beginners; Physical for experts.",
+      "B": "Logical is reading from RAM; Physical is reading from disk.",
+      "C": "Logical is always 100x slower.",
+      "D": "Physical read is only for text files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Blocking' operator in a parallel execution plan?",
+    "options": {
+      "A": "An operator that blocks hackers.",
+      "B": "An operator that must consume all input before passing any rows to the next operator (e.g., Sort).",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'UNION' instead of 'UNION ALL' can cause a query to use significantly more memory due to the distinct sort.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Wait Statistics' related to storage? (Select all that apply)",
+    "options": {
+      "A": "PAGEIOLATCH_SH",
+      "B": "WRITELOG",
+      "C": "IO_COMPLETION",
+      "D": "CXPACKET"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Selectivity' of a predicate?",
+    "options": {
+      "A": "The speed of the select button.",
+      "B": "The fraction of rows from the input set that satisfy the predicate.",
+      "C": "A specialized software for architects.",
+      "D": "The number of columns in the result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Plan Forcing'?",
+    "options": {
+      "A": "Forcing the developer to work on the weekend.",
+      "B": "Using a specific mechanism (like Query Store or Hints) to ensure the engine uses a known-good execution plan.",
+      "C": "A security certificate for a database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hash Join' uses a hash table built from the 'Probe' input.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Cardinality Estimator' (CE) improvements? (Select all that apply)",
+    "options": {
+      "A": "Better handling of ascending key columns",
+      "B": "Improved joining of multi-column predicates",
+      "C": "Removing the need for indexes entirely",
+      "D": "Handling data skew more accurately"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Memory Grant' in query execution?",
+    "options": {
+      "A": "A financial grant for the database team.",
+      "B": "The amount of RAM allocated to a query for workspace operations like sorting or hashing.",
+      "C": "A way to backup the storage layer.",
+      "D": "The total size of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'B-Tree' Page Splitting?",
+    "options": {
+      "A": "Breaking a physical book into two pieces.",
+      "B": "The process of reorganizing index data into two pages when one becomes full during an insert/update.",
+      "C": "A security bridge for data.",
+      "D": "A specialized tool for measuring distance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Statistics IO' shows the number of logical and physical reads performed by a query in SQL Server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of 'Execution Context'? (Select all that apply)",
+    "options": {
+      "A": "DOP (Degree of Parallelism)",
+      "B": "User permissions",
+      "C": "Query plan",
+      "D": "Physical server location"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Recursive CTE' optimization?",
+    "options": {
+      "A": "Optimizing a query that calls itself indefinitely.",
+      "B": "Using an iterative approach to handle hierarchical data efficiently.",
+      "C": "A way to speed up the network.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cost' 'Threshold' 'for' 'Parallelism'?",
+    "options": {
+      "A": "The price of buying a parallel computer.",
+      "B": "A setting that determines the estimated cost a query must exceed before it is considered for a parallel plan.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SARGability' is improved by using 'ISNULL' or 'COALESCE' on an indexed column in the WHERE clause.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Query' 'Optimizer' 'Stages'? (Select all that apply)",
+    "options": {
+      "A": "Simplification",
+      "B": "Trivial Plan search",
+      "C": "Full Optimization (phases)",
+      "D": "Deleting the database"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Histogram' 'Step' limit in most RDBMS?",
+    "options": {
+      "A": "10 steps.",
+      "B": "200 steps.",
+      "C": "1,000 steps.",
+      "D": "Unlimited."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'SQL' 'Server', what is 'Query' 'Store'?",
+    "options": {
+      "A": "A store where you can buy SQL queries.",
+      "B": "A feature that automatically captures query history, plans, and runtime statistics for performance troubleshooting.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Materialized' 'CTEs' (Common Table Expressions) are always faster than non-materialized ones.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Lock' 'Modes'? (Select all that apply)",
+    "options": {
+      "A": "Shared (S)",
+      "B": "Exclusive (X)",
+      "C": "Intent (I)",
+      "D": "Hidden (H)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Batch' 'Execution' 'Mode'?",
+    "options": {
+      "A": "Running queries only in the middle of the night.",
+      "B": "A query execution method that processes groups of rows together to optimize CPU cache usage.",
+      "C": "A way to count the number of characters.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latch' 'vs' 'Lock'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Locks protect logical data (rows/tables); Latches protect internal physical memory structures.",
+      "C": "Locks are for beginners; Latches for experts.",
+      "D": "Latches are 100x faster than locks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Deadlock' 'Monitor' is a background process that periodically checks for cycles in the wait-for graph.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Parallel' 'Scan' 'types'? (Select all that apply)",
+    "options": {
+      "A": "Parallel Clustered Index Scan",
+      "B": "Parallel Table Scan",
+      "C": "Parallel Bookmark Lookup",
+      "D": "Parallel Deletion"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Optimizer' 'Timeout'?",
+    "options": {
+      "A": "The time the developer takes to eat lunch.",
+      "B": "The point where the optimizer stops looking for a better plan because the search cost has exceeded the potential gain.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Oracle', what is 'Hint' 'SQL_PLAN_BASELINE'?",
+    "options": {
+      "A": "A way to backup the SQL code.",
+      "B": "A set of accepted execution plans that the optimizer is allowed to use for a specific SQL statement.",
+      "C": "A specialized software for poets.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Covering' 'Index' 'Scan' is always more efficient than a 'Table' 'Scan'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Adaptive' 'Query' 'Processing' features? (Select all that apply)",
+    "options": {
+      "A": "Batch Mode Adaptive Joins",
+      "B": "Batch Mode Memory Grant Feedback",
+      "C": "Interleaved Execution",
+      "D": "Automatic Table Creation"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Query' 'Parallelism' 'CXPACKET' wait?",
+    "options": {
+      "A": "A type of packet used in network cables.",
+      "B": "A wait type that occurs when a parallel thread is waiting for other threads in the same process to complete.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Optimizer' 'Search' 'Phases' significance?",
+    "options": {
+      "A": "How many times a plan is printed.",
+      "B": "The process of gradually applying more complex rules to find an efficient plan without wasting too much time.",
+      "C": "A way to backup data in the sky.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Index' 'Fragmentation' 'Scan' 'Density' of 100% is the ideal state.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Statistics' 'Object' components? (Select all that apply)",
+    "options": {
+      "A": "Header (metadata)",
+      "B": "Density Vector",
+      "C": "Histogram",
+      "D": "The source code of the table"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Plan' 'Guide' 'Template'?",
+    "options": {
+      "A": "A template for writing SQL code.",
+      "B": "A way to apply a fixed plan to a class of queries that match a specific parameter pattern.",
+      "C": "A security firewall.",
+      "D": "Hiring a person named Guide."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'SQL' 'Server', what is 'Resource' 'Governor' 'Workload' 'Group'?",
+    "options": {
+      "A": "A group of people who govern the data center.",
+      "B": "A container for session requests that have similar resource usage characteristics.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Adaptive' 'Threshold' 'level' in parallel queries allows for serial execution if the data volume is too small.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Query' 'Memory' 'Grant' 'Wait' types? (Select all that apply)",
+    "options": {
+      "A": "RESOURCE_SEMAPHORE",
+      "B": "RESERVED_MEMORY_GRANT_EXPLAIN",
+      "C": "MEMORY_ALLOCATION_EXT",
+      "D": "DISK_IDLE_WAIT"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Sort' 'Operator' 'Pass' limit?",
+    "options": {
+      "A": "One pass.",
+      "B": "Multiple passes if data doesn't fit in memory (External Sort).",
+      "C": "Zero passes.",
+      "D": "Hiring multiple people to sort."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cardinality' 'Estimator' 'Correction'?",
+    "options": {
+      "A": "Correcting the grammar in a SQL statement.",
+      "B": "Manually or automatically adjusting the row count estimates using feedback or hints.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Index' 'Intersection' 'Merge' is always faster than a 'Hash Match'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Join' 'Physical' 'Iterators'? (Select all that apply)",
+    "options": {
+      "A": "Nested Loops",
+      "B": "Merge Join",
+      "C": "Hash Match",
+      "D": "Bubble Join"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Plan' 'Abstraction' level?",
+    "options": {
+      "A": "The level of mystery in a query.",
+      "B": "The degree to which the optimizer hides physical storage details from the execution logic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'PostgreSQL', what is 'JIT' (Just-In-Time) compilation significance?",
+    "options": {
+      "A": "It compiles queries into machine code at runtime to speed up complex logic.",
+      "B": "It is a specialized software for time-keeping.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Predicate' 'Inference' is the ability of the optimizer to derive new filters from existing ones (e.g., A=B and B=5 implies A=5).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Lock' 'Granularity' levels? (Select all that apply)",
+    "options": {
+      "A": "Row",
+      "B": "Page",
+      "C": "Table",
+      "D": "Database"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Query' 'Rewrite' 'Integrity'?",
+    "options": {
+      "A": "The moral integrity of the developer.",
+      "B": "Ensuring that an optimized query returns the exact same result set as the original query.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical durability of the data."
+    },
+    "answer": "B"
+  }
+]
+}

@@ -1,0 +1,1647 @@
+{ 
+  "skill": "Scalibility", 
+  "questions": [
+    {
+    "question": "What is the primary definition of 'Scalability' in a software system?",
+    "options": {
+      "A": "The ability to make the source code shorter.",
+      "B": "The measure of a system’s ability to handle growing amounts of work by adding resources.",
+      "C": "The speed at which a single user can navigate the site.",
+      "D": "The physical size of the server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vertical Scaling' (Scaling Up) involves adding more power (CPU, RAM) to an existing server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are benefits of 'Horizontal Scaling' (Scaling Out)? (Select all that apply)",
+    "options": {
+      "A": "Easier to achieve high availability and redundancy.",
+      "B": "No theoretical limit to how much you can scale.",
+      "C": "Generally more cost-effective using commodity hardware.",
+      "D": "Decreases the number of servers you have to manage."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Elasticity' refer to in cloud computing?",
+    "options": {
+      "A": "The ability of a system to grow and shrink resources automatically based on demand.",
+      "B": "The physical flexibility of network cables.",
+      "C": "The ability to use different programming languages.",
+      "D": "A system that never crashes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Horizontal scaling usually requires a Load Balancer to distribute traffic among multiple servers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Bottlenecks' that prevent a system from scaling? (Select all that apply)",
+    "options": {
+      "A": "Database CPU usage.",
+      "B": "Network bandwidth.",
+      "C": "Poorly optimized code/algorithms.",
+      "D": "The color of the website's logo."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Latency' in the context of system performance?",
+    "options": {
+      "A": "The total number of users on the site.",
+      "B": "The time it takes for a request to travel from the sender to the receiver and back.",
+      "C": "The amount of data stored in the database.",
+      "D": "The number of lines of code written per day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Vertical scaling is limited by the maximum capacity of a single machine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Stateless' components (easier to scale)? (Select all that apply)",
+    "options": {
+      "A": "Web servers that don't store session data locally.",
+      "B": "Image processing microservices.",
+      "C": "A primary SQL database.",
+      "D": "A local file system used for temporary storage."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the primary role of a 'Load Balancer'?",
+    "options": {
+      "A": "To encrypt all data on the server.",
+      "B": "To distribute incoming network traffic across a group of backend servers.",
+      "C": "To write code automatically.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Adding more servers always results in a linear increase in performance (e.g., 2x servers = 2x speed).",
+    "options": {
+      "A": "True",
+      "B": "False (Overhead of communication usually prevents perfect linearity)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are strategies to improve 'Database Scalability'? (Select all that apply)",
+    "options": {
+      "A": "Read Replicas.",
+      "B": "Sharding (Partitioning).",
+      "C": "Caching.",
+      "D": "Deleting old data."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Single Point of Failure' (SPOF)?",
+    "options": {
+      "A": "A bug in a single line of code.",
+      "B": "A part of a system that, if it fails, will stop the entire system from working.",
+      "C": "A user who logs in only once.",
+      "D": "A server that has only one CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Caching can improve scalability by reducing the load on the primary database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What are the common layers where 'Caching' can be implemented? (Select all that apply)",
+    "options": {
+      "A": "Client-side (Browser).",
+      "B": "Content Delivery Network (CDN).",
+      "C": "Database-level (e.g., Redis/Memcached).",
+      "D": "Physical CPU cache."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Throughput' measure?",
+    "options": {
+      "A": "The time it takes to process a single request.",
+      "B": "The number of requests a system can handle in a given time period (e.g., Requests Per Second).",
+      "C": "The weight of the server racks.",
+      "D": "The number of developers working on the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A system that is 'Highly Available' is always 100% scalable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a key characteristic of a 'Microservices' architecture regarding scalability?",
+    "options": {
+      "A": "It requires all services to be on the same server.",
+      "B": "It allows individual features to be scaled independently based on their specific demand.",
+      "C": "It eliminates the need for a database.",
+      "D": "It makes the code harder to read."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Load Balancing' algorithms are commonly used? (Select all that apply)",
+    "options": {
+      "A": "Round Robin.",
+      "B": "Least Connections.",
+      "C": "IP Hash.",
+      "D": "Random Walk."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Scaling out is generally more complex to implement than scaling up.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Read/Write Splitting'?",
+    "options": {
+      "A": "Dividing the code into two files.",
+      "B": "Directing all 'read' queries to replica databases and all 'write' queries to a primary database.",
+      "C": "Using two different keyboards for coding.",
+      "D": "Sorting data by alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which factors contribute to 'High Availability' (HA)? (Select all that apply)",
+    "options": {
+      "A": "Redundancy.",
+      "B": "Failover mechanisms.",
+      "C": "Geographic distribution.",
+      "D": "Using a dark mode theme."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A CDN (Content Delivery Network) helps scale by serving static content from servers closer to the user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Asynchronous Processing'?",
+    "options": {
+      "A": "Processing everything at the exact same time.",
+      "B": "Offloading time-consuming tasks to a background worker so the main application can remain responsive.",
+      "C": "Deleting tasks that take too long.",
+      "D": "A way to encrypt data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Vertical Scaling' upgrades? (Select all that apply)",
+    "options": {
+      "A": "Upgrading from 8GB to 64GB RAM.",
+      "B": "Moving from a 4-core to a 32-core CPU.",
+      "C": "Adding 10 more identical servers.",
+      "D": "Switching from HDD to NVMe SSD."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: Stateless applications are easier to scale horizontally than stateful applications.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Database Sharding'?",
+    "options": {
+      "A": "Backing up the database every hour.",
+      "B": "Horizontal partitioning of data across multiple database instances.",
+      "C": "Converting SQL to NoSQL.",
+      "D": "Deleting old user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metrics are used to measure 'Reliability'? (Select all that apply)",
+    "options": {
+      "A": "MTBF (Mean Time Between Failures).",
+      "B": "Uptime percentage (e.g., 99.9%).",
+      "C": "Error rates.",
+      "D": "Total lines of documentation."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In a 'Shared-Nothing' architecture, each node is independent and self-sufficient.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the '99th Percentile' (P99) latency represent?",
+    "options": {
+      "A": "The average latency of all users.",
+      "B": "The maximum latency experienced by the slowest 1% of users.",
+      "C": "The speed of the server's CPU.",
+      "D": "The percentage of users who liked the site."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these can help handle sudden 'Traffic Spikes'? (Select all that apply)",
+    "options": {
+      "A": "Auto-scaling groups.",
+      "B": "Queueing systems.",
+      "C": "Rate limiting.",
+      "D": "Manual server restarts."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Over-provisioning (keeping extra resources 'just in case') is the most cost-effective way to scale.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Failover'?",
+    "options": {
+      "A": "When a system crashes and stays down.",
+      "B": "The automatic switching to a redundant or standby computer server, system, or network upon the failure of the previously active one.",
+      "C": "A way to uninstall software.",
+      "D": "The process of moving code to production."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of scaling, what is the 'Master-Slave' (Primary-Secondary) database pattern primarily used for?",
+    "options": {
+      "A": "To encrypt the database keys.",
+      "B": "To distribute read traffic across multiple replicas while keeping writes on a single node.",
+      "C": "To delete old data automatically.",
+      "D": "To make the database look more organized."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Scalability' and 'Performance' are the same thing; if a system is fast, it is also scalable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Cloud Elasticity'? (Select all that apply)",
+    "options": {
+      "A": "Automatic scaling up or down.",
+      "B": "Pay-as-you-go pricing based on actual resource usage.",
+      "C": "Requires manual hardware installation for every spike.",
+      "D": "Enables cost optimization during low-traffic periods."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Stateful' vs 'Stateless' scaling?",
+    "options": {
+      "A": "Stateful apps are easier to scale because they remember the user.",
+      "B": "Stateless apps are easier to scale because any server can handle any request without local session data.",
+      "C": "They are the same thing in modern cloud environments.",
+      "D": "Stateful scaling only works for CSS files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Single Point of Failure' (SPOF) can be eliminated by adding redundancy to critical components.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid methods for 'Session Management' in a scalable web cluster? (Select all that apply)",
+    "options": {
+      "A": "Sticky Sessions (Session Affinity).",
+      "B": "Distributed Cache (e.g., Redis).",
+      "C": "Client-side storage (e.g., JWT tokens).",
+      "D": "Storing sessions in a local text file on each server."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'SLA' stand for in system operations?",
+    "options": {
+      "A": "System Level Architecture.",
+      "B": "Service Level Agreement.",
+      "C": "Standard Loading Action.",
+      "D": "Simple Log Analysis."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Horizontal scaling is generally more difficult for relational databases (SQL) than for web servers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Frontend' scaling techniques? (Select all that apply)",
+    "options": {
+      "A": "Minifying JS and CSS files.",
+      "B": "Using a Content Delivery Network (CDN).",
+      "C": "Compressing images.",
+      "D": "Changing the font size."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Response Time'?",
+    "options": {
+      "A": "The time it takes to write the code.",
+      "B": "The total time from when a user sends a request until they receive a response.",
+      "C": "The speed of the user's typing.",
+      "D": "The time the server is turned off."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Vertical scaling (Scaling Up) usually requires downtime to upgrade hardware (RAM/CPU).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following metrics are key to monitoring 'Scalability'? (Select all that apply)",
+    "options": {
+      "A": "CPU Utilization.",
+      "B": "Memory Usage.",
+      "C": "Requests Per Second (RPS).",
+      "D": "Number of coffee cups on the developer's desk."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Geographic Redundancy'?",
+    "options": {
+      "A": "Having two servers in the same room.",
+      "B": "Deploying the same system in different physical locations (regions) to protect against local disasters.",
+      "C": "Translating the app into different languages.",
+      "D": "Naming servers after different cities."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: NoSQL databases (like MongoDB) are often designed to scale out (horizontally) more easily than traditional SQL databases.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Caching' eviction policies? (Select all that apply)",
+    "options": {
+      "A": "LRU (Least Recently Used).",
+      "B": "FIFO (First In First Out).",
+      "C": "LFU (Least Frequently Used).",
+      "D": "ABC (Alphabetical Order)."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cold Start' latency in the context of serverless scaling?",
+    "options": {
+      "A": "The time it takes to start the server in a cold room.",
+      "B": "The delay that occurs when a serverless function is triggered for the first time after being idle.",
+      "C": "The time it takes to boot a computer in winter.",
+      "D": "A type of database error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Auto-scaling' allows you to add servers automatically when CPU usage exceeds a certain threshold.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Availability' (The 'A' in High Availability)?",
+    "options": {
+      "A": "How fast the site is.",
+      "B": "The percentage of time the system is operational and accessible to users.",
+      "C": "The number of features available in the app.",
+      "D": "The size of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are benefits of 'Asynchronous Workflows'? (Select all that apply)",
+    "options": {
+      "A": "Reduced blocking on the main application thread.",
+      "B": "Better handling of bursty traffic.",
+      "C": "Ability to retry failed background tasks without user impact.",
+      "D": "Makes every request 100% instantaneous."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Using a 'Microservices' architecture eliminates the need for load balancers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Global Load Balancer' (GSLB)?",
+    "options": {
+      "A": "A load balancer that works for the whole world.",
+      "B": "A system that routes traffic to different data centers based on the user's location or server health.",
+      "C": "A very large physical machine.",
+      "D": "A way to balance the weight of global servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these contribute to 'Database Bottlenecks'? (Select all that apply)",
+    "options": {
+      "A": "Missing indexes on frequently searched columns.",
+      "B": "Too many concurrent connections.",
+      "C": "Extremely large table sizes without partitioning.",
+      "D": "Using a pretty font for the database console."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Scalability' can be achieved by writing more efficient code (Optimization).",
+    "options": {
+      "A": "True (It's the first step before adding hardware)",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Discovery' in a scalable architecture?",
+    "options": {
+      "A": "Finding new services to buy online.",
+      "B": "The automatic detection of network locations for service instances.",
+      "C": "Writing a list of services in a Word document.",
+      "D": "Naming the microservices correctly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Cloud' features assist in building scalable systems? (Select all that apply)",
+    "options": {
+      "A": "Managed Database Services (e.g., RDS).",
+      "B": "Object Storage (e.g., S3).",
+      "C": "Serverless Functions (e.g., Lambda).",
+      "D": "Physical hard drive shredding."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: All bottlenecks in a system are related to hardware.",
+    "options": {
+      "A": "True",
+      "B": "False (Software configuration and algorithms are often bottlenecks)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throttling' (Rate Limiting)?",
+    "options": {
+      "A": "Speeding up the server.",
+      "B": "Purposely limiting the number of requests a user or client can make in a specific timeframe.",
+      "C": "A type of database compression.",
+      "D": "Deleting slow users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following can cause 'Network Latency'? (Select all that apply)",
+    "options": {
+      "A": "Physical distance between client and server.",
+      "B": "Large numbers of network 'hops'.",
+      "C": "High network congestion.",
+      "D": "The color of the ethernet cables."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Horizontal scaling usually makes the system more resilient to hardware failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Over-provisioning'?",
+    "options": {
+      "A": "Not having enough resources.",
+      "B": "Allocating more resources than are currently needed to ensure capacity for spikes.",
+      "C": "Using only one server.",
+      "D": "Buying too much coffee for the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Scale-Out' architectures? (Select all that apply)",
+    "options": {
+      "A": "Peer-to-Peer (P2P).",
+      "B": "Client-Server with multiple backends.",
+      "C": "Cluster computing.",
+      "D": "A single mainframe computer."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Failover' should ideally be transparent to the end user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Stateless' service?",
+    "options": {
+      "A": "A service that has no country.",
+      "B": "A service that does not store any data about previous requests locally.",
+      "C": "A service that is always turned off.",
+      "D": "A service with no code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'C' in the CAP Theorem as it relates to distributed systems?",
+    "options": {
+      "A": "Every request receives a response about whether it succeeded or failed.",
+      "B": "Every read receives the most recent write or an error.",
+      "C": "The system continues to operate despite an arbitrary number of messages being dropped.",
+      "D": "The system can handle a high number of concurrent users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary problem solved by 'Consistent Hashing' in a distributed caching system?",
+    "options": {
+      "A": "It encrypts the cache keys.",
+      "B": "It minimizes the number of keys that need to be remapped when a cache node is added or removed.",
+      "C": "It ensures that all cache nodes have the exact same data.",
+      "D": "It speeds up the database write operations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: According to the CAP Theorem, a distributed system can simultaneously provide more than two out of the three guarantees (Consistency, Availability, Partition Tolerance).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Database Sharding' strategies? (Select all that apply)",
+    "options": {
+      "A": "Key-based (Hash) sharding.",
+      "B": "Range-based sharding.",
+      "C": "Directory-based sharding.",
+      "D": "Vertical sharding (splitting by column)."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Write Amplification' in the context of distributed databases?",
+    "options": {
+      "A": "Writing data to multiple replicas to ensure safety.",
+      "B": "The phenomenon where the amount of data physically written to storage is a multiple of the data logically written by the application.",
+      "C": "Increasing the volume of the server's alarm.",
+      "D": "A way to speed up SQL queries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Quorum-based' writes ensure that a write is considered successful only after a majority of replicas acknowledge it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are challenges associated with 'Database Sharding'? (Select all that apply)",
+    "options": {
+      "A": "Complex cross-shard joins.",
+      "B": "Difficulty in maintaining referential integrity (Foreign Keys).",
+      "C": "Rebalancing data when a shard becomes too large.",
+      "D": "Making the database schema too simple."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Split-Brain' scenario in a distributed cluster?",
+    "options": {
+      "A": "When a developer forgets how the system works.",
+      "B": "When a network partition causes a cluster to divide into two independent groups, both believing they are the leader.",
+      "C": "A type of CPU failure.",
+      "D": "When the database is split into two tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Eventual Consistency' guarantees that if no new updates are made to a data item, eventually all accesses will return the last updated value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Distributed Consensus' algorithms? (Select all that apply)",
+    "options": {
+      "A": "Paxos.",
+      "B": "Raft.",
+      "C": "Zab (Zookeeper Atomic Broadcast).",
+      "D": "QuickSort."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In the context of scaling, what does 'Amhdahl's Law' describe?",
+    "options": {
+      "A": "The theoretical speedup in latency of the execution of a task at a fixed workload that can be expected of a system whose resources are improved.",
+      "B": "The number of transistors on a chip doubles every two years.",
+      "C": "The price of servers decreases over time.",
+      "D": "The speed of light limits network latency."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strong Consistency' is easier to scale horizontally than 'Eventual Consistency'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are techniques for 'Cache Warming'? (Select all that apply)",
+    "options": {
+      "A": "Pre-populating the cache with frequently accessed data during startup.",
+      "B": "Using a script to simulate user traffic after a deployment.",
+      "C": "Leaving the servers on a high temperature.",
+      "D": "Replaying production logs to fill the cache."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Hot Partition' (or Hot Key) in a distributed system?",
+    "options": {
+      "A": "A server that is physically overheating.",
+      "B": "A single shard or key that receives a disproportionately high amount of traffic, leading to a bottleneck.",
+      "C": "A partition that contains deleted data.",
+      "D": "A way to speed up the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Load Shedding' is the practice of intentionally dropping low-priority requests to keep the system stable during extreme overload.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Global Secondary Index' (GSI) strategies? (Select all that apply)",
+    "options": {
+      "A": "Asynchronous index updates.",
+      "B": "Synchronous index updates.",
+      "C": "Local secondary indexes on every shard.",
+      "D": "Storing the index in a physical book."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Backpressure' in a distributed pipeline?",
+    "options": {
+      "A": "Pressure from the manager to finish the project.",
+      "B": "The resistance or force opposed to the flow of data in a software system, signaling a downstream component is overwhelmed.",
+      "C": "Air pressure inside the server chassis.",
+      "D": "A type of network error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sticky Sessions' can cause load imbalance if a few sessions are much more 'heavy' than others.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Gossip Protocol' used for in a distributed cluster?",
+    "options": {
+      "A": "For developers to talk about their coworkers.",
+      "B": "For nodes to periodically share state and membership information with a few random neighbors to ensure eventual cluster-wide awareness.",
+      "C": "To broadcast errors to the user.",
+      "D": "To encrypt the network traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe the 'Saga Pattern' for distributed transactions? (Select all that apply)",
+    "options": {
+      "A": "A sequence of local transactions.",
+      "B": "Compensating transactions to undo changes if a step fails.",
+      "C": "Using a single global lock on the whole database.",
+      "D": "Coordinating via an orchestrator or events."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Active-Active' multi-region deployments are generally simpler to manage than 'Active-Passive'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Cache Aside' pattern?",
+    "options": {
+      "A": "Putting the cache server in a different room.",
+      "B": "The application first checks the cache; if not found, it hits the database and then updates the cache.",
+      "C": "The database automatically updates the cache.",
+      "D": "Deleting the cache every hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following can cause 'Cascading Failures'? (Select all that apply)",
+    "options": {
+      "A": "Improperly configured retry logic without exponential backoff.",
+      "B": "A single service failure increasing the load on remaining healthy services.",
+      "C": "Lack of circuit breakers.",
+      "D": "Using a consistent naming convention."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In a 'Write-Through' cache, data is written into the cache and the corresponding database at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Database Federation'?",
+    "options": {
+      "A": "A group of databases forming a government.",
+      "B": "Splitting a single monolithic database into several separate databases based on functional areas (e.g., User DB, Order DB).",
+      "C": "Merging all databases into one.",
+      "D": "A type of database backup."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Caching' consistency challenges? (Select all that apply)",
+    "options": {
+      "A": "Stale data (Cache contains old values).",
+      "B": "Thundering Herd (Many requests hit the DB at once on cache miss).",
+      "C": "Cache Penetration (Requests for non-existent keys hit the DB).",
+      "D": "Cache servers running out of disk space."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Consistent Hashing' requires a centralized server to keep track of which node holds which key.",
+    "options": {
+      "A": "True",
+      "B": "False (It uses a hash ring logic that nodes can compute independently)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Optimistic Concurrency Control' (OCC)?",
+    "options": {
+      "A": "Hoping that no two users update the same record.",
+      "B": "Allowing multiple transactions to proceed without locks, then checking for conflicts before committing.",
+      "C": "Using a lock for every single read operation.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are true about 'Vector Clocks'? (Select all that apply)",
+    "options": {
+      "A": "They are used to determine the partial ordering of events in a distributed system.",
+      "B": "They help detect causality violations and conflicts.",
+      "C": "They are used to sync the actual time of day on all servers.",
+      "D": "They grow in size as the number of nodes in the cluster increases."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Two-Phase Commit' (2PC) is a blocking protocol that can lead to performance bottlenecks in high-scale systems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jitter' in the context of network latency or retries?",
+    "options": {
+      "A": "The physical shaking of the server.",
+      "B": "Random variation in timing to prevent synchronized requests from overwhelming a system.",
+      "C": "The speed of the mouse cursor.",
+      "D": "A type of network noise."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'High Availability' deployment models? (Select all that apply)",
+    "options": {
+      "A": "Active-Passive with Failover.",
+      "B": "Active-Active with Load Balancing.",
+      "C": "N+1 Redundancy.",
+      "D": "Single Instance with RAID 1."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Write-Back' (Write-Behind) caching improves write performance by writing to the cache first and asynchronously updating the database later.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Mesh' (e.g., Istio, Linkerd)?",
+    "options": {
+      "A": "A type of physical network cable.",
+      "B": "A dedicated infrastructure layer for handling service-to-service communication, providing security, observability, and traffic management.",
+      "C": "A tool for designing websites.",
+      "D": "A way to compress the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'Distributed Tracing' concepts? (Select all that apply)",
+    "options": {
+      "A": "Trace ID.",
+      "B": "Span.",
+      "C": "Parent/Child relationship.",
+      "D": "Database index."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Connection Pooling' reduces the overhead of establishing a new database connection for every request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Stateless' vs 'Stateful' in a Load Balancer?",
+    "options": {
+      "A": "Stateless load balancers are physically smaller.",
+      "B": "Stateful load balancers maintain information about existing connections; stateless ones treat every packet independently.",
+      "C": "They are the same thing.",
+      "D": "Stateful load balancers are only for SQL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Data Locality' strategies? (Select all that apply)",
+    "options": {
+      "A": "Caching data near the compute resources.",
+      "B": "Storing data in the same region as the user.",
+      "C": "Moving code to where the data is (Edge computing).",
+      "D": "Deleting data to save space."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Linearizability' is the strongest consistency model, where every operation appears to take place atomically at some point between its invocation and completion.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Head-of-Line Blocking' in a network context?",
+    "options": {
+      "A": "When the boss blocks a project.",
+      "B": "When a single slow request blocks subsequent requests in a queue or on a shared connection.",
+      "C": "A type of physical network jam.",
+      "D": "A way to speed up the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describe 'Bloom Filters'? (Select all that apply)",
+    "options": {
+      "A": "A space-efficient probabilistic data structure.",
+      "B": "Used to test whether an element is a member of a set.",
+      "C": "It can have false positives but no false negatives.",
+      "D": "It can be used to store actual values of the items."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Server-Side Rendering' (SSR) is generally easier to scale than 'Client-Side Rendering' (CSR) because the server does less work per request.",
+    "options": {
+      "A": "True",
+      "B": "False (The server does more work in SSR)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Locking'?",
+    "options": {
+      "A": "Locking the office door from home.",
+      "B": "A mechanism to ensure that only one process in a distributed system can access a shared resource at a time (e.g., using Redis or Zookeeper).",
+      "C": "Putting a password on every file.",
+      "D": "A way to encrypt the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Blue-Green' deployment? (Select all that apply)",
+    "options": {
+      "A": "Two identical production environments.",
+      "B": "One environment (Blue) is live, the other (Green) is idle/testing.",
+      "C": "Instant cutover via a load balancer.",
+      "D": "Gradually rolling out to 10% of users."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Quorum' in a distributed system (N replicas) is typically defined as W + R > N (where W is write quorum and R is read quorum).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tail Latency'?",
+    "options": {
+      "A": "The speed of the network cable.",
+      "B": "The high-percentile latency (e.g., P99, P99.9) experienced by a small fraction of users.",
+      "C": "The latency at the end of the day.",
+      "D": "A type of database error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Database Consistency' levels in NoSQL? (Select all that apply)",
+    "options": {
+      "A": "Strong.",
+      "B": "Eventual.",
+      "C": "Bounded Staleness.",
+      "D": "High."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Rate Limiting' at the API Gateway level can prevent 'Brute Force' attacks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Database Denormalization'?",
+    "options": {
+      "A": "Following the standard rules of database design.",
+      "B": "Purposefully adding redundant data to a database to improve read performance by avoiding complex joins.",
+      "C": "Deleting all indexes.",
+      "D": "A way to encrypt the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Scalability' trade-offs? (Select all that apply)",
+    "options": {
+      "A": "Complexity vs. Ease of Development.",
+      "B": "Cost vs. Performance.",
+      "C": "Consistency vs. Availability.",
+      "D": "Dark Mode vs. Light Mode."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Horizontal Partitioning' and 'Sharding' refer to the same basic concept of splitting data across nodes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pre-computation' in a scalable system?",
+    "options": {
+      "A": "Doing the math before the meeting.",
+      "B": "Calculating and storing results (e.g., reports, aggregates) in advance so they can be retrieved instantly.",
+      "C": "A way to speed up the CPU.",
+      "D": "Deleting unused data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Health Check' methods? (Select all that apply)",
+    "options": {
+      "A": "Liveness Probe.",
+      "B": "Readiness Probe.",
+      "C": "Startup Probe.",
+      "D": "Physical Pulse Check."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'CDN' is only useful for images and videos, not for JSON data.",
+    "options": {
+      "A": "True",
+      "B": "False (Dynamic content can also be cached/accelerated)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exponential Backoff'?",
+    "options": {
+      "A": "Leaving the room very quickly.",
+      "B": "A retry strategy that increases the wait time between retries exponentially to avoid overwhelming a failing system.",
+      "C": "A type of mathematical formula.",
+      "D": "A way to shut down a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are true about 'Micro-frontends'? (Select all that apply)",
+    "options": {
+      "A": "They allow for independent scaling of different parts of the UI.",
+      "B": "They enable independent team deployments.",
+      "C": "They eliminate the need for CSS.",
+      "D": "They can lead to duplicated dependencies if not managed."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Sticky Load Balancing' is required for all stateful applications.",
+    "options": {
+      "A": "True (Unless using a distributed session store)",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fan-out' in a messaging architecture?",
+    "options": {
+      "A": "Using a fan to cool the servers.",
+      "B": "Sending a single message to multiple queues or subscribers simultaneously.",
+      "C": "The process of many users logging out.",
+      "D": "A type of network error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Scalability' patterns? (Select all that apply)",
+    "options": {
+      "A": "Command Query Responsibility Segregation (CQRS).",
+      "B": "Event Sourcing.",
+      "C": "Database Mirroring.",
+      "D": "Manual Data Entry."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Caching' at the database level is always faster than 'Caching' at the application level.",
+    "options": {
+      "A": "True",
+      "B": "False (App-level cache avoids network round-trip to DB)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Graceful Degradation'?",
+    "options": {
+      "A": "When a server falls down politely.",
+      "B": "The ability of a system to maintain at least partial functionality when some portions are inoperative.",
+      "C": "A type of code cleanup.",
+      "D": "A way to uninstall software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between Vertical and Horizontal scaling?",
+    "options": {
+      "A": "Vertical adds more machines; Horizontal adds more RAM to one machine.",
+      "B": "Vertical increases the capacity of a single node; Horizontal adds more nodes to the system.",
+      "C": "Horizontal is for databases; Vertical is for web servers.",
+      "D": "There is no difference in modern cloud environments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Availability' is a measure of the percentage of time a system remains operational and accessible to users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are benefits of Horizontal Scaling? (Select all that apply)",
+    "options": {
+      "A": "Provides better redundancy and fault tolerance.",
+      "B": "Allows for virtually infinite scaling by adding more commodity hardware.",
+      "C": "Reduces the complexity of application state management.",
+      "D": "Enables zero-downtime upgrades by using rolling deployments."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "In the context of scalability, what does 'Latency' represent?",
+    "options": {
+      "A": "The number of requests a system can handle per second.",
+      "B": "The time delay between a user request and the system's response.",
+      "C": "The physical size of the data stored in the database.",
+      "D": "The amount of power consumed by the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Single Point of Failure' (SPOF) is a component that, if it fails, stops the entire system from functioning.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Caching' layers in a web architecture? (Select all that apply)",
+    "options": {
+      "A": "CDN (Content Delivery Network).",
+      "B": "In-memory database (e.g., Redis).",
+      "C": "Browser/Client-side cache.",
+      "D": "Physical CPU L1/L2 cache."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Elasticity' in cloud computing?",
+    "options": {
+      "A": "The ability to stretch network cables over long distances.",
+      "B": "The ability of a system to automatically scale resources up or down based on real-time demand.",
+      "C": "The flexibility of the database schema.",
+      "D": "A system that can recover from a physical crash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Vertical scaling (Scaling Up) usually requires no downtime for hardware changes.",
+    "options": {
+      "A": "True",
+      "B": "False (It often requires a restart or migration to a larger instance)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which factors typically contribute to 'Database Bottlenecks'? (Select all that apply)",
+    "options": {
+      "A": "Lack of proper indexing on high-traffic tables.",
+      "B": "Extremely high numbers of concurrent read/write operations.",
+      "C": "Using a normalized schema.",
+      "D": "Slow disk I/O performance."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary function of a 'Load Balancer'?",
+    "options": {
+      "A": "To compress images for faster delivery.",
+      "B": "To distribute incoming network traffic across a group of backend servers.",
+      "C": "To encrypt the primary database.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Stateless' applications are generally harder to scale horizontally than 'Stateful' applications.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Load Balancing' algorithms are considered industry standards? (Select all that apply)",
+    "options": {
+      "A": "Round Robin.",
+      "B": "Least Connections.",
+      "C": "IP Hashing.",
+      "D": "Alphabetical Sequencing."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Database Sharding'?",
+    "options": {
+      "A": "Cleaning up deleted records to save space.",
+      "B": "Horizontal partitioning of data across multiple independent database instances.",
+      "C": "Merging several small databases into one large one.",
+      "D": "Encrypting the database for security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Content Delivery Network (CDN) helps scale by serving static content from edge locations closer to the user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Throughput' measure in a system?",
+    "options": {
+      "A": "The time it takes to process a single request.",
+      "B": "The number of units of information a system can process in a given amount of time.",
+      "C": "The percentage of users who stayed on the site.",
+      "D": "The number of lines of code in the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Failover' is the process of switching to a redundant or standby server when the primary server fails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common strategies for 'Session Management' in a scalable system? (Select all that apply)",
+    "options": {
+      "A": "Sticky Sessions (Session Affinity).",
+      "B": "Centralized Session Store (e.g., Redis).",
+      "C": "Client-side Session (e.g., Signed Cookies/JWT).",
+      "D": "Local file-based storage on each web node."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Read/Write Splitting' in a database cluster?",
+    "options": {
+      "A": "Deleting half of the database to make it faster.",
+      "B": "Directing all read queries to replicas while keeping all write operations on a primary node.",
+      "C": "Using different languages for reading and writing data.",
+      "D": "Splitting the database by alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Horizontal scaling usually makes a system more resilient to hardware failures compared to vertical scaling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metrics are essential for monitoring a system's 'Scalability' health? (Select all that apply)",
+    "options": {
+      "A": "CPU and Memory Utilization.",
+      "B": "Network I/O Wait times.",
+      "C": "Request Error Rates (5xx).",
+      "D": "Total number of Git commits."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Asynchronous Processing'?",
+    "options": {
+      "A": "Processing everything in the order it was received without delay.",
+      "B": "Offloading tasks to a background queue to allow the main application thread to remain responsive.",
+      "C": "Stopping all requests until the database finishes an update.",
+      "D": "A type of database compression."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Auto-scaling' is a cloud-native feature that adds or removes server instances automatically based on defined metrics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of using a CDN (Content Delivery Network)?",
+    "options": {
+      "A": "It secures the backend database with encryption.",
+      "B": "It reduces latency by serving static assets from edge servers located closer to the user.",
+      "C": "It replaces the need for an application server.",
+      "D": "It automatically generates CSS for the frontend."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Stateless' architecture, any server in a cluster can handle any incoming request because no session data is stored locally on the server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following help mitigate a 'Single Point of Failure' (SPOF)? (Select all that apply)",
+    "options": {
+      "A": "Implementing redundancy for critical components.",
+      "B": "Using automated failover mechanisms.",
+      "C": "Deploying across multiple geographic regions.",
+      "D": "Consolidating all services onto one high-powered server."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "Which term describes a system's ability to automatically grow and shrink resources based on current demand?",
+    "options": {
+      "A": "Reliability",
+      "B": "Elasticity",
+      "C": "Persistence",
+      "D": "Normalization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Vertical scaling (Scaling Up) is usually more cost-effective than horizontal scaling for very large-scale systems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are common triggers for an 'Auto-scaling' event? (Select all that apply)",
+    "options": {
+      "A": "High CPU utilization percentage.",
+      "B": "Increased number of active network connections.",
+      "C": "Low memory availability.",
+      "D": "The number of lines of code in a pull request."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "According to the CAP Theorem, when a network partition occurs (P), what must a distributed system choose between?",
+    "options": {
+      "A": "Latency and Throughput",
+      "B": "Consistency (C) and Availability (A)",
+      "C": "Security and Performance",
+      "D": "Storage and Memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Eventual Consistency' guarantees that if no new updates are made to a data item, eventually all accesses will return the last updated value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid 'Database Sharding' strategies? (Select all that apply)",
+    "options": {
+      "A": "Key-based (Hash) Sharding.",
+      "B": "Range-based Sharding.",
+      "C": "Directory-based Sharding.",
+      "D": "Vertical Sharding (moving columns to different tables)."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Thundering Herd' problem in a caching system?",
+    "options": {
+      "A": "A physical failure of the cache hardware.",
+      "B": "Many concurrent requests hitting the database simultaneously when a popular cache key expires.",
+      "C": "When the cache stores too much data for the RAM.",
+      "D": "A security vulnerability involving duplicate keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sticky Sessions' (Session Affinity) are required if an application stores user session data in the local memory of a specific web server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which techniques help manage 'State' in a horizontally scaled environment? (Select all that apply)",
+    "options": {
+      "A": "Using a distributed cache like Redis.",
+      "B": "Storing state in a centralized SQL database.",
+      "C": "Using JWT (JSON Web Tokens) to store state on the client side.",
+      "D": "Saving state to the local hard drive of the web server."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Database Federation'?",
+    "options": {
+      "A": "Merging all databases into a single global instance.",
+      "B": "Splitting a monolithic database into multiple functional databases (e.g., User DB, Product DB).",
+      "C": "A backup protocol for cloud databases.",
+      "D": "Using only NoSQL databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Circuit Breaker' pattern is used to prevent a failing service from causing a cascading failure across the entire system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Blue-Green' deployment? (Select all that apply)",
+    "options": {
+      "A": "Two identical production environments running simultaneously.",
+      "B": "Traffic is switched from the old version (Blue) to the new version (Green) via a load balancer.",
+      "C": "Allows for near-instant rollback if the new version fails.",
+      "D": "Requires users to re-install the application."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary purpose of 'Read Replicas'?",
+    "options": {
+      "A": "To handle the write-heavy load of the application.",
+      "B": "To scale read throughput by offloading SELECT queries from the primary database.",
+      "C": "To act as the primary source of truth for transactions.",
+      "D": "To encrypt the data at rest."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Write-Through' caching ensures that data is written to the cache and the backend store simultaneously, providing high consistency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these can result in 'Cache Invalidation' issues? (Select all that apply)",
+    "options": {
+      "A": "Stale data appearing to users because the cache wasn't updated after a database write.",
+      "B": "Race conditions where two processes update the cache with different values.",
+      "C": "The cache server running out of memory.",
+      "D": "The database being too fast for the cache."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What problem does 'Consistent Hashing' solve when scaling a distributed cache cluster?",
+    "options": {
+      "A": "It ensures all data is encrypted before storage.",
+      "B": "It minimizes the number of keys that need to be remapped when a node is added or removed from the cluster.",
+      "C": "It prevents the 'Thundering Herd' problem.",
+      "D": "It synchronizes the system clock across all nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The PACELC theorem states that if there is a partition (P), one must choose between Availability (A) and Consistency (C); Else (E), when the system is running normally, one must choose between Latency (L) and Consistency (C).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Gossip Protocols' in distributed systems? (Select all that apply)",
+    "options": {
+      "A": "Information is spread across the cluster in an exponential manner.",
+      "B": "It is highly resilient to node failures.",
+      "C": "It is used for cluster membership and failure detection.",
+      "D": "It requires a centralized master node to coordinate messages."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In a distributed database, what is a 'Quorum' for a successful write operation?",
+    "options": {
+      "A": "All replicas must acknowledge the write.",
+      "B": "A defined number of replicas (usually W + R > N) must acknowledge the operation to ensure consistency.",
+      "C": "Only the master node needs to acknowledge the write.",
+      "D": "The user must refresh their browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Linearizability' is a stronger consistency guarantee than 'Eventual Consistency'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Write Amplification' in distributed systems? (Select all that apply)",
+    "options": {
+      "A": "A single logical write resulting in multiple physical writes across different replicas.",
+      "B": "Increased storage I/O due to background compaction or index updates.",
+      "C": "The user sending the same request twice.",
+      "D": "The database growing in size due to log-structured merge-trees."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Backpressure' in a streaming or message-based architecture?",
+    "options": {
+      "A": "The physical air pressure inside a server chassis.",
+      "B": "A mechanism where a downstream service signals to an upstream service to slow down because it is overwhelmed.",
+      "C": "A way to speed up the database.",
+      "D": "A security protocol for firewalls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vector Clocks' are used to determine the partial ordering of events in a distributed system and detect causality violations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are challenges associated with 'Multi-Master' replication? (Select all that apply)",
+    "options": {
+      "A": "Conflict resolution when two masters update the same record simultaneously.",
+      "B": "Increased write latency to ensure all masters are in sync.",
+      "C": "Complexity in maintaining global unique identifiers (GUIDs).",
+      "D": "It is impossible to use with SQL databases."
+    },
+    "answer": ["A", "B", "C"]
+  }
+  ]
+}

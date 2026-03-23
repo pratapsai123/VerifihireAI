@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../styles/LiveInterviewInterviewer.css';
 import VideoPlaceholder from '../components/VideoPlaceholder';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL, WS_BASE_URL } from '../apiConfig';
 
 function LiveInterviewInterviewer() {
   const navigate = useNavigate();
@@ -306,21 +306,27 @@ function LiveInterviewInterviewer() {
 
     // 1. Explicit Production URL
     if (isProduction) {
-      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/interviewer/`);
+      candidates.push(`wss://verifihireai.com/ws/interview/${sessionId}/interviewer/`);
     }
 
     // 2. API_BASE_URL derived
     if (apiUrl && apiUrl !== 'localhost') {
       candidates.push(`${protocol}//${apiUrl}/ws/interview/${sessionId}/interviewer/`);
     }
+    // 1. Primary WS_BASE_URL
+    candidates.push(`${WS_BASE_URL}/interview/${sessionId}/interviewer/`);
 
-    // 3. Current Host
+    // 2. Current Host (if different from WS_BASE_URL's host)
+    const wsBaseUrlHost = new URL(WS_BASE_URL).host;
     const currentHost = window.location.host;
-    candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/interviewer/`);
 
-    // 4. Localhost Fallback
-    if (window.location.hostname === 'localhost') {
-      candidates.push(`ws://localhost:8000/ws/interview/${sessionId}/interviewer/`);
+    if (currentHost !== wsBaseUrlHost) {
+      candidates.push(`${protocol}//${currentHost}/ws/interview/${sessionId}/interviewer/`);
+    }
+
+    // 3. Localhost Fallback (for mixed environments, if not already covered)
+    if (window.location.hostname === 'localhost' && wsBaseUrlHost !== 'localhost:8001') {
+      candidates.push(`ws://localhost:8001/ws/interview/${sessionId}/interviewer/`);
     }
 
     return candidates;

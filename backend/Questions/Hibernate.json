@@ -515,9 +515,9 @@
       "question": "Which annotation is used to map a collection of basic types (like a List of Strings) that are not entities themselves?",
       "options": {
         "A": "@OneToMany",
-        "text": "@ElementCollection",
         "C": "@BasicCollection",
-        "D": "@Embedded"
+        "D": "@Embedded",
+        "B": "@ElementCollection"
       },
       "answer": "B"
     },

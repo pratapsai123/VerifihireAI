@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import '../styles/LiveInterview.css';
 import VideoPlaceholder from '../components/VideoPlaceholder';
-import { API_BASE_URL } from '../apiConfig';
+import { API_BASE_URL, WS_BASE_URL } from '../apiConfig';
 
 function LiveInterview() {
   const navigate = useNavigate();
@@ -111,7 +111,7 @@ function LiveInterview() {
 
     // 1. Explicit Production URL (Highest Priority for external access)
     if (isProduction) {
-      candidates.push(`wss://verifyhire.duckdns.org/ws/interview/${sessionId}/candidate/`);
+      candidates.push(`wss://verifihireai.com/ws/interview/${sessionId}/candidate/`);
     }
 
     // 2. API_BASE_URL derived
@@ -127,7 +127,7 @@ function LiveInterview() {
 
     // 4. Localhost Fallback (for mixed environments)
     if (window.location.hostname === 'localhost') {
-      candidates.push(`ws://localhost:8000/ws/interview/${sessionId}/candidate/`);
+      candidates.push(`${WS_BASE_URL}/interview/${sessionId}/candidate/`);
     }
 
     let socket;

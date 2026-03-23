@@ -1,4 +1,4 @@
-from ._imports import *
+from .._imports import *
 
 
 def _require_application_admin(request):
@@ -94,7 +94,10 @@ def superadmin_approve_company_view(request, company_id):
             .order_by('registration_timestamp')
             .first()
         )
-        if admin_profile and admin_profile.email:
+        if admin_profile:
+            admin_profile.is_approved = True
+            admin_profile.save(update_fields=['is_approved', 'updated_at'])
+            
             send_mail(
                 subject='VeriFiHire - Your Company Registration Has Been Approved!',
                 message=(

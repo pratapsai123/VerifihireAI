@@ -1,0 +1,1671 @@
+{ 
+  "skill": "Cloud", 
+  "questions": [
+    {
+    "question": "True or False: Cloud computing provides on-demand access to computing resources over the internet.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud service models? (Select all that apply)",
+    "options": {
+      "A": "IaaS",
+      "B": "PaaS",
+      "C": "SaaS",
+      "D": "LAN"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does IaaS stand for?",
+    "options": {
+      "A": "Internet as a Service",
+      "B": "Infrastructure as a Service",
+      "C": "Integration as a Service",
+      "D": "Instance as a Service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SaaS applications are managed entirely by the cloud provider.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of public cloud providers? (Select all that apply)",
+    "options": {
+      "A": "AWS",
+      "B": "Microsoft Azure",
+      "C": "Google Cloud",
+      "D": "Local Data Center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is scalability in cloud computing?",
+    "options": {
+      "A": "Reducing storage permanently",
+      "B": "Ability to increase or decrease resources as needed",
+      "C": "Deleting unused users",
+      "D": "Blocking internet access"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Elasticity allows automatic resource adjustment based on demand.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud deployment models? (Select all that apply)",
+    "options": {
+      "A": "Public Cloud",
+      "B": "Private Cloud",
+      "C": "Hybrid Cloud",
+      "D": "Standalone Cloud"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does PaaS provide?",
+    "options": {
+      "A": "Only networking hardware",
+      "B": "Platform for application development",
+      "C": "Physical security",
+      "D": "End-user software only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In IaaS, users manage the operating system.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are benefits of cloud computing? (Select all that apply)",
+    "options": {
+      "A": "Cost efficiency",
+      "B": "High availability",
+      "C": "Manual scaling only",
+      "D": "Global access"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a virtual machine (VM)?",
+    "options": {
+      "A": "Physical server",
+      "B": "Software-based emulation of a computer",
+      "C": "Network cable",
+      "D": "Database query"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Containers share the host OS kernel.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of container platforms? (Select all that apply)",
+    "options": {
+      "A": "Docker",
+      "B": "Kubernetes",
+      "C": "VMware",
+      "D": "OpenShift"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is serverless computing?",
+    "options": {
+      "A": "No servers exist",
+      "B": "Cloud provider manages infrastructure automatically",
+      "C": "Manual provisioning only",
+      "D": "Local hosting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Pay-as-you-go pricing is common in cloud computing.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are storage types in cloud? (Select all that apply)",
+    "options": {
+      "A": "Object storage",
+      "B": "Block storage",
+      "C": "File storage",
+      "D": "Paper storage"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is multi-tenancy?",
+    "options": {
+      "A": "Single user per server",
+      "B": "Multiple customers sharing same infrastructure",
+      "C": "Offline hosting",
+      "D": "Private LAN usage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Cloud computing eliminates the need for internet connectivity.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are examples of managed database services? (Select all that apply)",
+    "options": {
+      "A": "Amazon RDS",
+      "B": "Azure SQL Database",
+      "C": "Google Cloud SQL",
+      "D": "Local Excel sheet"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is fault tolerance in cloud?",
+    "options": {
+      "A": "System stops working on failure",
+      "B": "System continues operating despite failures",
+      "C": "Manual restart only",
+      "D": "Deleting backups"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Load balancing distributes traffic across multiple servers.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud security practices? (Select all that apply)",
+    "options": {
+      "A": "IAM policies",
+      "B": "Encryption",
+      "C": "Open public buckets",
+      "D": "Network security groups"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does SLA stand for?",
+    "options": {
+      "A": "Secure Login Access",
+      "B": "Service Level Agreement",
+      "C": "System Load Architecture",
+      "D": "Server Link Access"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Hybrid cloud combines public and private cloud.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Auto-scaling automatically adjusts resources based on traffic demand.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of cloud computing? (Select all that apply)",
+    "options": {
+      "A": "On-demand self-service",
+      "B": "Broad network access",
+      "C": "Resource pooling",
+      "D": "Manual provisioning only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud region?",
+    "options": {
+      "A": "A specific geographic area containing data centers",
+      "B": "A software update",
+      "C": "A type of database",
+      "D": "A network cable"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Availability Zones are isolated locations within a cloud region.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of Infrastructure as Code (IaC) tools? (Select all that apply)",
+    "options": {
+      "A": "Terraform",
+      "B": "AWS CloudFormation",
+      "C": "Ansible",
+      "D": "Microsoft Word"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is object storage best suited for?",
+    "options": {
+      "A": "Storing large unstructured data like images and videos",
+      "B": "Running operating systems",
+      "C": "Physical hardware management",
+      "D": "Printing documents"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Block storage is typically used for databases.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud networking components? (Select all that apply)",
+    "options": {
+      "A": "Virtual Private Cloud (VPC)",
+      "B": "Subnets",
+      "C": "Route tables",
+      "D": "USB cable"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a CDN (Content Delivery Network)?",
+    "options": {
+      "A": "A distributed network for delivering content faster",
+      "B": "A local hard drive",
+      "C": "A database schema",
+      "D": "A firewall rule"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Serverless computing charges only for actual execution time.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are benefits of containerization? (Select all that apply)",
+    "options": {
+      "A": "Lightweight deployment",
+      "B": "Portability",
+      "C": "Faster startup times",
+      "D": "Requires full VM for each app"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a snapshot in cloud storage?",
+    "options": {
+      "A": "A backup copy of data at a specific time",
+      "B": "A firewall rule",
+      "C": "A database query",
+      "D": "A type of VM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud monitoring tools help track performance and usage.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of serverless platforms? (Select all that apply)",
+    "options": {
+      "A": "AWS Lambda",
+      "B": "Azure Functions",
+      "C": "Google Cloud Functions",
+      "D": "Local Desktop App"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is cloud bursting?",
+    "options": {
+      "A": "Deleting cloud data",
+      "B": "Using public cloud during peak demand",
+      "C": "Restarting servers",
+      "D": "Compressing files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Private cloud is dedicated to a single organization.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are database types available in cloud? (Select all that apply)",
+    "options": {
+      "A": "Relational databases",
+      "B": "NoSQL databases",
+      "C": "In-memory databases",
+      "D": "Paper-based database"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is IAM used for in cloud?",
+    "options": {
+      "A": "Managing identities and access permissions",
+      "B": "Deleting backups",
+      "C": "Increasing CPU speed",
+      "D": "Formatting storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Encryption at rest protects stored data in cloud.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common cloud security measures? (Select all that apply)",
+    "options": {
+      "A": "MFA",
+      "B": "Encryption",
+      "C": "Network segmentation",
+      "D": "Public open access to all resources"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is horizontal scaling?",
+    "options": {
+      "A": "Adding more servers",
+      "B": "Increasing CPU of one server",
+      "C": "Deleting instances",
+      "D": "Reducing storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Vertical scaling increases resources of an existing instance.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of cloud cost optimization techniques? (Select all that apply)",
+    "options": {
+      "A": "Reserved instances",
+      "B": "Auto-scaling",
+      "C": "Right-sizing",
+      "D": "Ignoring unused resources"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is disaster recovery in cloud?",
+    "options": {
+      "A": "Deleting backups",
+      "B": "Plan to recover systems after failure",
+      "C": "Disabling monitoring",
+      "D": "Restarting local PC"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A cloud load balancer improves application availability.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A cloud region can contain multiple availability zones.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are advantages of hybrid cloud? (Select all that apply)",
+    "options": {
+      "A": "Flexibility",
+      "B": "Cost optimization",
+      "C": "Scalability",
+      "D": "No internet required"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud gateway?",
+    "options": {
+      "A": "A device connecting on-premises systems to cloud",
+      "B": "A type of database",
+      "C": "A physical hard disk",
+      "D": "A printer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud computing eliminates the need for backups.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are types of cloud storage classes? (Select all that apply)",
+    "options": {
+      "A": "Standard",
+      "B": "Infrequent Access",
+      "C": "Archive",
+      "D": "Offline Paper"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is edge computing in cloud?",
+    "options": {
+      "A": "Processing data closer to users",
+      "B": "Deleting unused files",
+      "C": "Expanding local storage",
+      "D": "Running local LAN only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Kubernetes is used for container orchestration.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are serverless use cases? (Select all that apply)",
+    "options": {
+      "A": "Event-driven applications",
+      "B": "Real-time file processing",
+      "C": "Microservices",
+      "D": "Installing physical routers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud service broker?",
+    "options": {
+      "A": "An intermediary managing cloud services",
+      "B": "A firewall rule",
+      "C": "A database engine",
+      "D": "A storage device"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud APIs allow programmatic access to cloud services.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are key components of DevOps in cloud? (Select all that apply)",
+    "options": {
+      "A": "CI/CD pipelines",
+      "B": "Infrastructure as Code",
+      "C": "Monitoring",
+      "D": "Manual deployment only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is blue-green deployment?",
+    "options": {
+      "A": "Deploying two identical environments to reduce downtime",
+      "B": "Deleting old servers",
+      "C": "Installing antivirus",
+      "D": "Adding more RAM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A cloud sandbox is used for testing without affecting production.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud compliance standards? (Select all that apply)",
+    "options": {
+      "A": "ISO 27001",
+      "B": "PCI-DSS",
+      "C": "GDPR",
+      "D": "USB 3.0"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is data residency in cloud?",
+    "options": {
+      "A": "Location where data is stored geographically",
+      "B": "Deleting old data",
+      "C": "Increasing RAM",
+      "D": "Installing drivers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud logging services help in auditing and troubleshooting.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are benefits of managed cloud services? (Select all that apply)",
+    "options": {
+      "A": "Reduced operational overhead",
+      "B": "Automatic updates",
+      "C": "Built-in monitoring",
+      "D": "No internet usage"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud firewall?",
+    "options": {
+      "A": "Security control filtering cloud traffic",
+      "B": "Local hardware switch",
+      "C": "Printer device",
+      "D": "Storage type"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Containers are heavier than virtual machines.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are container orchestration features? (Select all that apply)",
+    "options": {
+      "A": "Auto-scaling",
+      "B": "Self-healing",
+      "C": "Load balancing",
+      "D": "Manual wiring"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is cloud migration?",
+    "options": {
+      "A": "Moving applications and data to cloud",
+      "B": "Deleting data permanently",
+      "C": "Upgrading local PC",
+      "D": "Changing USB cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A cold backup site has minimal pre-configured infrastructure.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of cloud monitoring metrics? (Select all that apply)",
+    "options": {
+      "A": "CPU utilization",
+      "B": "Memory usage",
+      "C": "Network traffic",
+      "D": "Paper print count"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is containerization primarily used for?",
+    "options": {
+      "A": "Packaging applications with dependencies",
+      "B": "Deleting servers",
+      "C": "Increasing hardware weight",
+      "D": "Blocking internet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud-native applications are designed specifically for cloud environments.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A hot disaster recovery site is fully operational and ready to take over immediately.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of disaster recovery sites? (Select all that apply)",
+    "options": {
+      "A": "Hot site",
+      "B": "Warm site",
+      "C": "Cold site",
+      "D": "Dry site"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is RTO in cloud disaster recovery?",
+    "options": {
+      "A": "Recovery Time Objective",
+      "B": "Remote Transfer Operation",
+      "C": "Resource Tracking Option",
+      "D": "Runtime Optimization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: RPO defines the maximum acceptable data loss measured in time.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud cost management strategies? (Select all that apply)",
+    "options": {
+      "A": "Right-sizing resources",
+      "B": "Using spot instances",
+      "C": "Monitoring usage",
+      "D": "Ignoring idle instances"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud marketplace?",
+    "options": {
+      "A": "Platform to buy and deploy cloud solutions",
+      "B": "Local hardware store",
+      "C": "A firewall rule",
+      "D": "Database index"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Multi-cloud strategy uses services from multiple cloud providers.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud networking connectivity options? (Select all that apply)",
+    "options": {
+      "A": "VPN",
+      "B": "Direct Connect",
+      "C": "ExpressRoute",
+      "D": "HDMI cable"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud-native architecture?",
+    "options": {
+      "A": "Architecture optimized for cloud scalability and resilience",
+      "B": "Local desktop setup",
+      "C": "Offline storage system",
+      "D": "USB-based computing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: API gateways manage and secure API traffic in cloud environments.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are microservices characteristics? (Select all that apply)",
+    "options": {
+      "A": "Independent deployment",
+      "B": "Loose coupling",
+      "C": "Scalable components",
+      "D": "Single monolithic codebase only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a service mesh?",
+    "options": {
+      "A": "Infrastructure layer managing service-to-service communication",
+      "B": "A storage bucket",
+      "C": "A local router",
+      "D": "A database table"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Observability includes metrics, logs, and traces.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are components of cloud governance? (Select all that apply)",
+    "options": {
+      "A": "Policies",
+      "B": "Compliance monitoring",
+      "C": "Cost controls",
+      "D": "Random manual changes"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is autoscaling group primarily used for?",
+    "options": {
+      "A": "Maintaining desired number of instances",
+      "B": "Deleting all instances",
+      "C": "Reducing backups",
+      "D": "Installing antivirus"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Cloud Key Management Services (KMS) manage encryption keys securely.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are zero-downtime deployment strategies? (Select all that apply)",
+    "options": {
+      "A": "Blue-green deployment",
+      "B": "Canary release",
+      "C": "Rolling update",
+      "D": "Shutdown deployment"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a canary deployment?",
+    "options": {
+      "A": "Releasing new version to small subset of users first",
+      "B": "Deleting old version immediately",
+      "C": "Stopping all services",
+      "D": "Upgrading hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud data lakes store structured and unstructured data.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud AI/ML services examples? (Select all that apply)",
+    "options": {
+      "A": "Amazon SageMaker",
+      "B": "Azure ML",
+      "C": "Google Vertex AI",
+      "D": "Notepad"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is cloud orchestration?",
+    "options": {
+      "A": "Automated management of cloud resources",
+      "B": "Manual configuration only",
+      "C": "Deleting instances",
+      "D": "Formatting disks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Edge locations are used by CDNs to cache content closer to users.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud analytics services? (Select all that apply)",
+    "options": {
+      "A": "BigQuery",
+      "B": "Redshift",
+      "C": "Azure Synapse",
+      "D": "Calculator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is Infrastructure as Code (IaC)?",
+    "options": {
+      "A": "Managing infrastructure using code templates",
+      "B": "Physical server installation",
+      "C": "Manual cabling",
+      "D": "Deleting storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud elasticity and scalability mean the same thing.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Cloud computing supports rapid provisioning of resources.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud migration strategies? (Select all that apply)",
+    "options": {
+      "A": "Rehost",
+      "B": "Refactor",
+      "C": "Retire",
+      "D": "Repaint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud tenant?",
+    "options": {
+      "A": "A customer using shared cloud infrastructure",
+      "B": "A type of database",
+      "C": "A physical server",
+      "D": "A storage device"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Public cloud resources are shared among multiple customers.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are features of object storage? (Select all that apply)",
+    "options": {
+      "A": "Metadata support",
+      "B": "Scalability",
+      "C": "Flat address space",
+      "D": "Block-level editing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud instance?",
+    "options": {
+      "A": "A virtual server running in cloud",
+      "B": "A database backup",
+      "C": "A firewall rule",
+      "D": "A router cable"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Containers require a full operating system for each instance.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are types of NoSQL databases in cloud? (Select all that apply)",
+    "options": {
+      "A": "Key-value",
+      "B": "Document",
+      "C": "Graph",
+      "D": "Spreadsheet"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is cloud elasticity?",
+    "options": {
+      "A": "Automatic scaling based on demand",
+      "B": "Deleting unused users",
+      "C": "Manual resizing only",
+      "D": "Stopping monitoring"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A CDN reduces latency by caching content closer to users.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are cloud identity providers? (Select all that apply)",
+    "options": {
+      "A": "Azure AD",
+      "B": "AWS IAM",
+      "C": "Google Identity",
+      "D": "USB Driver"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is vertical scaling?",
+    "options": {
+      "A": "Increasing CPU/RAM of an existing instance",
+      "B": "Adding more servers",
+      "C": "Deleting instances",
+      "D": "Reducing bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud-native apps are typically built using microservices.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are storage optimization techniques? (Select all that apply)",
+    "options": {
+      "A": "Lifecycle policies",
+      "B": "Compression",
+      "C": "Tiered storage",
+      "D": "Ignoring unused data"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is cloud federation?",
+    "options": {
+      "A": "Collaboration between multiple cloud providers",
+      "B": "Deleting instances",
+      "C": "Local hosting only",
+      "D": "Physical cabling"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Cloud billing is typically usage-based.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are container benefits? (Select all that apply)",
+    "options": {
+      "A": "Portability",
+      "B": "Lightweight",
+      "C": "Faster deployment",
+      "D": "Requires full VM per container"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud data warehouse?",
+    "options": {
+      "A": "Central repository for analytics data",
+      "B": "Physical storage room",
+      "C": "Router device",
+      "D": "Firewall configuration"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: IAM roles define permissions for cloud resources.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common cloud backup types? (Select all that apply)",
+    "options": {
+      "A": "Full backup",
+      "B": "Incremental backup",
+      "C": "Differential backup",
+      "D": "Manual deletion"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is cloud peering?",
+    "options": {
+      "A": "Connecting two cloud networks privately",
+      "B": "Deleting VPC",
+      "C": "Formatting disk",
+      "D": "Upgrading CPU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Spot instances are cheaper but can be interrupted.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud automation tools? (Select all that apply)",
+    "options": {
+      "A": "Terraform",
+      "B": "Ansible",
+      "C": "CloudFormation",
+      "D": "Calculator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a managed Kubernetes service?",
+    "options": {
+      "A": "Cloud-managed container orchestration",
+      "B": "Local hardware setup",
+      "C": "Firewall device",
+      "D": "Storage disk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud logging helps in performance monitoring.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are examples of SaaS applications? (Select all that apply)",
+    "options": {
+      "A": "Google Workspace",
+      "B": "Microsoft 365",
+      "C": "Salesforce",
+      "D": "Local Notepad"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is cloud orchestration primarily used for?",
+    "options": {
+      "A": "Automating deployment and management",
+      "B": "Deleting data",
+      "C": "Stopping internet",
+      "D": "Manual cabling"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cold storage is cheaper but slower to access.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are API security practices? (Select all that apply)",
+    "options": {
+      "A": "Authentication",
+      "B": "Rate limiting",
+      "C": "Encryption",
+      "D": "Public open access"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is container registry used for?",
+    "options": {
+      "A": "Storing container images",
+      "B": "Deleting VMs",
+      "C": "Physical storage",
+      "D": "Firewall control"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Multi-region deployment improves availability.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are DevOps benefits in cloud? (Select all that apply)",
+    "options": {
+      "A": "Faster releases",
+      "B": "Automation",
+      "C": "Continuous integration",
+      "D": "Manual-only deployment"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is cloud tagging?",
+    "options": {
+      "A": "Assigning metadata to resources for management",
+      "B": "Deleting files",
+      "C": "Upgrading storage",
+      "D": "Formatting database"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A load balancer can distribute traffic across regions.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are microservices deployment tools? (Select all that apply)",
+    "options": {
+      "A": "Docker",
+      "B": "Kubernetes",
+      "C": "Helm",
+      "D": "Printer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A hot standby architecture keeps duplicate systems running simultaneously.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are disaster recovery metrics? (Select all that apply)",
+    "options": {
+      "A": "RTO",
+      "B": "RPO",
+      "C": "MTTR",
+      "D": "CPU clock speed"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a service-level objective (SLO)?",
+    "options": {
+      "A": "Target performance metric for a service",
+      "B": "Hardware configuration",
+      "C": "Database schema",
+      "D": "Firewall rule"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A service-level indicator (SLI) measures actual service performance.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud cost components? (Select all that apply)",
+    "options": {
+      "A": "Compute",
+      "B": "Storage",
+      "C": "Data transfer",
+      "D": "Keyboard"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud landing zone?",
+    "options": {
+      "A": "Pre-configured environment for cloud setup",
+      "B": "Airport data center",
+      "C": "Database table",
+      "D": "Local storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Reserved instances offer discounted pricing for long-term commitment.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are observability tools? (Select all that apply)",
+    "options": {
+      "A": "Prometheus",
+      "B": "Grafana",
+      "C": "CloudWatch",
+      "D": "USB driver"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is infrastructure drift?",
+    "options": {
+      "A": "Difference between desired and actual infrastructure state",
+      "B": "Deleting VMs",
+      "C": "Upgrading CPU",
+      "D": "Formatting disk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Immutable infrastructure means servers are replaced instead of modified.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are benefits of multi-region architecture? (Select all that apply)",
+    "options": {
+      "A": "High availability",
+      "B": "Fault tolerance",
+      "C": "Reduced latency",
+      "D": "Offline processing only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud workload?",
+    "options": {
+      "A": "Application or service running in cloud",
+      "B": "Physical cable",
+      "C": "Local PC file",
+      "D": "Printer job"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud bursting allows overflow traffic to public cloud.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud-native design principles? (Select all that apply)",
+    "options": {
+      "A": "Microservices",
+      "B": "Automation",
+      "C": "Loose coupling",
+      "D": "Manual scaling only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a sidecar container?",
+    "options": {
+      "A": "Auxiliary container supporting main container",
+      "B": "Database index",
+      "C": "Physical server",
+      "D": "Storage disk"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Cloud-native apps often use CI/CD pipelines.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are Kubernetes components? (Select all that apply)",
+    "options": {
+      "A": "Pod",
+      "B": "Node",
+      "C": "Cluster",
+      "D": "Printer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a rolling deployment?",
+    "options": {
+      "A": "Gradually replacing instances with new version",
+      "B": "Deleting all instances at once",
+      "C": "Stopping application permanently",
+      "D": "Upgrading hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud APIs enable integration with third-party systems.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are encryption types in cloud? (Select all that apply)",
+    "options": {
+      "A": "Encryption at rest",
+      "B": "Encryption in transit",
+      "C": "Client-side encryption",
+      "D": "Plain text storage"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is cloud governance?",
+    "options": {
+      "A": "Policies controlling cloud usage",
+      "B": "Deleting servers",
+      "C": "Physical cabling",
+      "D": "Formatting disks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A warm standby site has partially configured infrastructure.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are managed messaging services? (Select all that apply)",
+    "options": {
+      "A": "Amazon SQS",
+      "B": "Azure Service Bus",
+      "C": "Google Pub/Sub",
+      "D": "Calculator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is autoscaling cooldown period?",
+    "options": {
+      "A": "Time between scaling actions",
+      "B": "Deleting instances",
+      "C": "CPU upgrade time",
+      "D": "Disk formatting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud resource tagging helps in cost allocation.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are cloud monitoring metrics? (Select all that apply)",
+    "options": {
+      "A": "Latency",
+      "B": "Throughput",
+      "C": "Error rate",
+      "D": "Keyboard size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is blue-green deployment primarily used for?",
+    "options": {
+      "A": "Zero-downtime releases",
+      "B": "Deleting backups",
+      "C": "Stopping internet",
+      "D": "Hardware upgrade"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Edge computing reduces latency by processing data closer to users.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud audit benefits? (Select all that apply)",
+    "options": {
+      "A": "Compliance verification",
+      "B": "Security review",
+      "C": "Cost optimization",
+      "D": "Manual cabling"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud service mesh used for?",
+    "options": {
+      "A": "Managing microservice communication",
+      "B": "Storing backups",
+      "C": "Deleting databases",
+      "D": "Formatting storage"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Data sovereignty refers to laws governing data location.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are container security practices? (Select all that apply)",
+    "options": {
+      "A": "Image scanning",
+      "B": "Least privilege",
+      "C": "Runtime monitoring",
+      "D": "Public root access"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud workload balancer?",
+    "options": {
+      "A": "Distributes application traffic",
+      "B": "Deletes instances",
+      "C": "Local printer driver",
+      "D": "Physical switch"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps integrates security into DevOps pipelines.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud scaling strategies? (Select all that apply)",
+    "options": {
+      "A": "Horizontal scaling",
+      "B": "Vertical scaling",
+      "C": "Auto-scaling",
+      "D": "Manual shutdown only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A cloud control plane manages configuration and orchestration of resources.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of cloud scaling policies? (Select all that apply)",
+    "options": {
+      "A": "Target tracking",
+      "B": "Step scaling",
+      "C": "Scheduled scaling",
+      "D": "Manual reboot"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud sandbox environment used for?",
+    "options": {
+      "A": "Testing without affecting production",
+      "B": "Deleting backups",
+      "C": "Formatting disk",
+      "D": "Installing drivers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud-native databases are designed for horizontal scalability.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of cloud storage redundancy? (Select all that apply)",
+    "options": {
+      "A": "Zone-redundant storage",
+      "B": "Geo-redundant storage",
+      "C": "Local redundancy",
+      "D": "Single-disk redundancy only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud service catalog?",
+    "options": {
+      "A": "List of approved cloud services",
+      "B": "Database backup",
+      "C": "Firewall setting",
+      "D": "Network cable"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Autoscaling groups can replace unhealthy instances automatically.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of distributed computing frameworks in cloud? (Select all that apply)",
+    "options": {
+      "A": "Hadoop",
+      "B": "Spark",
+      "C": "Dataproc",
+      "D": "Notepad"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is cloud refactoring?",
+    "options": {
+      "A": "Modifying application to optimize for cloud",
+      "B": "Deleting servers",
+      "C": "Replacing keyboard",
+      "D": "Formatting disk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud-native security emphasizes automation and continuous monitoring.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are benefits of serverless computing? (Select all that apply)",
+    "options": {
+      "A": "No server management",
+      "B": "Automatic scaling",
+      "C": "Pay per execution",
+      "D": "Manual provisioning only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud configuration drift detection tool used for?",
+    "options": {
+      "A": "Detecting unintended infrastructure changes",
+      "B": "Deleting databases",
+      "C": "Upgrading RAM",
+      "D": "Installing antivirus"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud-native apps typically use stateless architecture.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are managed container services? (Select all that apply)",
+    "options": {
+      "A": "EKS",
+      "B": "AKS",
+      "C": "GKE",
+      "D": "MS Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud edge location?",
+    "options": {
+      "A": "Data center closer to users for low latency",
+      "B": "Local PC",
+      "C": "Firewall device",
+      "D": "Database table"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Cloud compliance requires adherence to regulatory standards.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud-native logging practices? (Select all that apply)",
+    "options": {
+      "A": "Centralized logging",
+      "B": "Structured logs",
+      "C": "Log aggregation",
+      "D": "Deleting logs immediately"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is infrastructure provisioning?",
+    "options": {
+      "A": "Creating and configuring cloud resources",
+      "B": "Deleting applications",
+      "C": "Stopping servers permanently",
+      "D": "Formatting disks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud-native CI/CD pipelines automate testing and deployment.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are benefits of edge computing in cloud? (Select all that apply)",
+    "options": {
+      "A": "Reduced latency",
+      "B": "Bandwidth optimization",
+      "C": "Faster response time",
+      "D": "Offline-only usage"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Cloud-native applications are typically designed to be resilient and scalable.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common cloud authentication mechanisms? (Select all that apply)",
+    "options": {
+      "A": "OAuth",
+      "B": "SAML",
+      "C": "Multi-Factor Authentication",
+      "D": "Plain text password sharing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud resource group?",
+    "options": {
+      "A": "Logical container for managing resources",
+      "B": "Physical server rack",
+      "C": "Network cable",
+      "D": "Database index"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud-native security promotes the principle of least privilege.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are features of managed cloud databases? (Select all that apply)",
+    "options": {
+      "A": "Automated backups",
+      "B": "Automatic patching",
+      "C": "Built-in monitoring",
+      "D": "Manual hardware installation"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud-native message queue used for?",
+    "options": {
+      "A": "Asynchronous communication between services",
+      "B": "Deleting instances",
+      "C": "Upgrading RAM",
+      "D": "Formatting storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Infrastructure as Code helps maintain consistent environments.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of cloud-native caching services? (Select all that apply)",
+    "options": {
+      "A": "Redis",
+      "B": "Memcached",
+      "C": "ElastiCache",
+      "D": "Printer driver"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a cloud service endpoint?",
+    "options": {
+      "A": "Network address used to access a cloud service",
+      "B": "Physical disk",
+      "C": "Local cable",
+      "D": "Database backup"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud-native monitoring includes real-time metrics and alerting.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  }
+  ]
+}

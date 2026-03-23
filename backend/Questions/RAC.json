@@ -1,0 +1,1901 @@
+{ 
+  "skill": "RAC", 
+  "questions": [
+    {
+    "question": "What does the acronym 'RAC' stand for in Oracle Database technology?",
+    "options": {
+      "A": "Remote Access Console",
+      "B": "Real Application Clusters",
+      "C": "Redundant Array of Computers",
+      "D": "Reliable Application Connection"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an Oracle RAC environment, how many database instances typically access a single shared database (set of data files)?",
+    "options": {
+      "A": "Exactly one instance only.",
+      "B": "Multiple instances from different servers.",
+      "C": "One instance per every 100 users.",
+      "D": "Zero instances; the data is stored in the cloud only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical objective of implementing Oracle RAC?",
+    "options": {
+      "A": "To physically reduce the size of the server room.",
+      "B": "To provide high availability, scalability, and fault tolerance by running a database across multiple nodes.",
+      "C": "To automatically delete user data after 30 days.",
+      "D": "To increase the monitor refresh rate for developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Oracle RAC, all instances in the cluster share the same physical storage (data files, control files, and redo logs).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical component is required to manage cluster resources and provide the foundation for Oracle RAC?",
+    "options": {
+      "A": "Adobe Acrobat Reader",
+      "B": "Oracle Grid Infrastructure",
+      "C": "Microsoft Excel",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Interconnect' in an Oracle RAC environment?",
+    "options": {
+      "A": "A physical bridge between two office buildings.",
+      "B": "A high-speed, private network used for communication between the nodes in the cluster.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "The public internet connection used by end users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific background process is responsible for 'Global Cache Service' (GCS) and coordinating block access between instances?",
+    "options": {
+      "A": "DBWR (Database Writer)",
+      "B": "LMS (Global Cache Service Process)",
+      "C": "LGWR (Log Writer)",
+      "D": "PMON (Process Monitor)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Oracle RAC allows a database to stay online even if one of the servers (nodes) in the cluster fails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VIP' (Virtual IP) used for in a RAC cluster?",
+    "options": {
+      "A": "To provide special access to high-ranking executives.",
+      "B": "To allow client applications to quickly failover to a surviving node without waiting for a TCP timeout.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term describes the ability to add more nodes to a cluster to handle increased workload?",
+    "options": {
+      "A": "Encryption",
+      "B": "Scalability",
+      "C": "Compression",
+      "D": "Fragmentation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ASM' (Automatic Storage Management)?",
+    "options": {
+      "A": "A person manually moving hard drives.",
+      "B": "A technical volume manager and file system that provides shared storage for RAC databases.",
+      "C": "A security scan for database hardware blueprints.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a RAC environment, each instance has its own set of 'Undo Tablespaces'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'OCR' (Oracle Cluster Registry) technically used for?",
+    "options": {
+      "A": "Storing physical paper records of the database.",
+      "B": "Maintaining configuration information about the cluster and its resources.",
+      "C": "A specialized tool for measuring distance between servers.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common RAC background processes? (Select all that apply)",
+    "options": {
+      "A": "LMON (Global Enqueue Service Monitor)",
+      "B": "LMS (Global Cache Service Process)",
+      "C": "LCK0 (Instance Enqueue Process)",
+      "D": "The brand of the office snacks"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Voting File' technically used for in Grid Infrastructure?",
+    "options": {
+      "A": "To allow DBAs to vote on their favorite features.",
+      "B": "To help nodes in the cluster determine which nodes are active members and avoid split-brain scenarios.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An Oracle RAC database can only run on a single operating system type across all nodes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cache Fusion'?",
+    "options": {
+      "A": "A new flavor of coffee in the office kitchen.",
+      "B": "The technical process of transferring data blocks directly from one instance's memory to another via the interconnect.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific tool is used to manage RAC database instances and services from the command line?",
+    "options": {
+      "A": "srvctl",
+      "B": "Notepad++",
+      "C": "A physical thermometer",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a RAC cluster, each instance has its own unique 'Thread' of redo logs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'SCAN' (Single Client Access Name)?",
+    "options": {
+      "A": "A physical device used to scan paper documents.",
+      "B": "A single technical name used by clients to connect to any instance in the cluster regardless of how many nodes exist.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Instance Recovery' in a RAC environment?",
+    "options": {
+      "A": "Hiring a person named Recovery.",
+      "B": "The technical process where a surviving instance performs recovery for a failed instance using its redo logs.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Oracle RAC requires the use of shared storage such as a SAN (Storage Area Network) or NAS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which background process manages the cluster membership and monitors node health?",
+    "options": {
+      "A": "LMON",
+      "B": "DBWR",
+      "C": "LGWR",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'TAF' (Transparent Application Failover)?",
+    "options": {
+      "A": "A physical fan used to cool the server.",
+      "B": "A technical feature that allows client connections to automatically reconnect to another instance if their current instance fails.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: All nodes in an Oracle RAC cluster must technically have synchronized clocks (e.g., via NTP).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Enqueue Service' (GES) responsible for?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Managing locks that are shared among all instances in the cluster.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'RAC Overhead'?",
+    "options": {
+      "A": "The physical cost of the server rack.",
+      "B": "The technical processing and network cost required to coordinate data across multiple instances.",
+      "C": "A security scan for database hardware.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Oracle Flex Cluster' (introduced in 12c)?",
+    "options": {
+      "A": "A physical server made of flexible plastic.",
+      "B": "A technical architecture allowing for Hub nodes and Leaf nodes to support massive clusters.",
+      "C": "Hiring a person named Flex.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Single-Node RAC' is technically a cluster that contains only one active node but has the RAC software installed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Grid Home'?",
+    "options": {
+      "A": "The physical house where the DBA lives.",
+      "B": "The technical directory where the Oracle Grid Infrastructure software is installed.",
+      "C": "A specialized software for architects.",
+      "D": "The database storage location."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Rolling Upgrade' in RAC?",
+    "options": {
+      "A": "Upgrading a server while it is rolling down a hill.",
+      "B": "The technical process of patching one node at a time while the other nodes continue to serve users, ensuring zero downtime.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific network is used for the SCAN VIPs?",
+    "options": {
+      "A": "The Private Interconnect",
+      "B": "The Public Network",
+      "C": "The Storage Network",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In RAC, data is technically replicated across the disks of every node in the cluster.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Service' management in RAC?",
+    "options": {
+      "A": "Hiring waiters to serve the IT team.",
+      "B": "The technical process of defining groups of instances to handle specific application workloads.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'GCS Wait Time'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the time spent waiting for data blocks to be transferred between instances via the interconnect.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Oracle RAC instances must technically use the same Oracle Home binary path on all nodes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OHASD' in Oracle Grid Infrastructure?",
+    "options": {
+      "A": "A physical security guard.",
+      "B": "Oracle High Availability Services Daemon, the root process that starts the cluster stack.",
+      "C": "A specialized tool for measuring light.",
+      "D": "The SQL query parser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Load Balancing Advisory'?",
+    "options": {
+      "A": "Advice given by a physical doctor about heavy lifting.",
+      "B": "A technical feature that tells the client which instance has the most available capacity in real-time.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Oracle RAC supports both 'Policy-managed' and 'Administrator-managed' databases.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OVM' (Oracle VM) relation to RAC?",
+    "options": {
+      "A": "A physical box for storing CDs.",
+      "B": "A technical virtualization platform where Oracle RAC is commonly deployed.",
+      "C": "A specialized tool for measuring light.",
+      "D": "The SQL query parser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file is technically checked by the cluster to identify if a node is 'Evicted' from membership?",
+    "options": {
+      "A": "The Voting File",
+      "B": "The Init.ora file",
+      "C": "The Tnsnames.ora",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fan' (Fast Application Notification)?",
+    "options": {
+      "A": "A physical fan in the data center.",
+      "B": "A technical mechanism that notifies applications immediately when a cluster component fails.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'CVU' (Cluster Verification Utility)?",
+    "options": {
+      "A": "A physical badge for cluster access.",
+      "B": "A technical tool used to check if the environment is ready for RAC installation or if the cluster is healthy.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Redo log files in RAC must be technically stored on shared storage accessible by all nodes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Multiplexing' in the context of OCR or Voting Files?",
+    "options": {
+      "A": "Using a physical multi-plex cinema.",
+      "B": "The technical process of keeping multiple copies of critical cluster files on different disks for redundancy.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Node Eviction'?",
+    "options": {
+      "A": "Physically throwing a server out of a window.",
+      "B": "The technical process where a node is removed from the cluster membership because it is unresponsive or unhealthy.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Client connection strings for RAC typically use the 'SCAN' address rather than individual node IPs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'GPNP' (Grid Plug and Play)?",
+    "options": {
+      "A": "A physical toy for DBAs.",
+      "B": "A technical framework that allows nodes to join a cluster with minimal manual configuration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component manages 'Dynamic Service Registration' in a RAC cluster?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "The LREG (Listener Registration) background process",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multicast' used for in older Grid Infrastructure versions?",
+    "options": {
+      "A": "Broadcasting the physical office party.",
+      "B": "A technical network protocol used for node discovery and cluster communication.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In RAC, an instance can technically be associated with multiple services at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ONS' (Oracle Notification Service)?",
+    "options": {
+      "A": "A physical mail delivery service.",
+      "B": "The technical transport used to send FAN events between cluster nodes and clients.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Shared Oracle Home'?",
+    "options": {
+      "A": "Two DBAs living in the same apartment.",
+      "B": "A technical configuration where the Oracle binary files are stored on a shared disk and accessed by all nodes.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Oracle RAC is technically the same thing as Oracle Data Guard.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Enterprise' RAC monitoring tools? (Select all that apply)",
+    "options": {
+      "A": "Oracle Enterprise Manager (OEM)",
+      "B": "Cluster Health Advisor (CHA)",
+      "C": "The SQL query parser",
+      "D": "ADRCI (Incident Command Tool)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Split Brain' in a cluster context?",
+    "options": {
+      "A": "A physical medical condition.",
+      "B": "A technical failure where multiple nodes think they have exclusive control over the data, potentially causing corruption.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'ADVM' (ASM Dynamic Volume Manager)?",
+    "options": {
+      "A": "A physical volume knob.",
+      "B": "A technical tool that provides standard disk device files (like /dev/asm/...) for non-Oracle files on top of ASM.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In RAC, each instance has its own unique 'SGA' (System Global Area).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ACFS' (ASM Cluster File System)?",
+    "options": {
+      "A": "A physical file cabinet.",
+      "B": "A multi-node technical file system that runs on top of ASM to store general-purpose files (binaries, logs, etc.).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which process handles the 'Global Enqueue Service' (GES) monitor tasks?",
+    "options": {
+      "A": "LMON",
+      "B": "DBWR",
+      "C": "PMON",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Interconnect' Latency?",
+    "options": {
+      "A": "The speed of the physical office elevator.",
+      "B": "A technical measure of the time it takes for data packets to travel between nodes in the cluster.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Oracle RAC technically requires a specialized license separate from the standard Enterprise Edition license.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'CR' (Consistent Read) block processing in RAC?",
+    "options": {
+      "A": "Reading a physical book.",
+      "B": "The technical process of creating a version of a data block for an instance that needs to see the data as it existed at a previous point in time.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Instance Affinity'?",
+    "options": {
+      "A": "A DBA's love for their favorite server node.",
+      "B": "A technical configuration where a specific job or task is assigned to run on a specific RAC instance.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a RAC environment, a single SQL query can technically be executed by multiple instances working in parallel.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Database' Analysis in a RAC context?",
+    "options": {
+      "A": "Building a physical warehouse for data.",
+      "B": "Evaluating the performance and health of the multi-instance environment using tools like AWR (Automatic Workload Repository).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical component acts as a central repository for tracking the location and status of all data blocks currently residing in the buffer caches of all instances in a RAC cluster?",
+    "options": {
+      "A": "The Local Management Table (LMT)",
+      "B": "The Global Resource Directory (GRD)",
+      "C": "The System Monitor (SMON)",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Remastering' in Oracle RAC technically refers to the process where a surviving node takes over the management of resources previously owned by a failed node within the Global Resource Directory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Fan' (Fast Application Notification) when integrated with 'Universal Connection Pool' (UCP)?",
+    "options": {
+      "A": "To physically cool the application servers.",
+      "B": "To allow the connection pool to immediately purge connections to a failed node and rebalance them to healthy nodes before a client timeout occurs.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the application UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific background process is technically responsible for 'Instance Membership' and ensuring that all nodes agree on the current cluster configuration?",
+    "options": {
+      "A": "LMON (Global Enqueue Service Monitor)",
+      "B": "DBWR (Database Writer)",
+      "C": "PMON (Process Monitor)",
+      "D": "Increasing the font size of the alert log"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Cluster Health Advisor' (CHA)?",
+    "options": {
+      "A": "A person who gives medical advice to IT staff.",
+      "B": "A machine-learning-based technical tool that monitors RAC environments to predict and detect performance bottlenecks and node failures before they occur.",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Interconnect' 'MTU' (Maximum Transmission Unit) sizes between nodes can technically cause 'Cache Fusion' failures and frequent node evictions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves moving 'Voting Files' from one ASM disk group to another while the cluster is technically online?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Dynamic Grid Infrastructure Migration",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Load' 'Balancing' 'Advisory' (LBA) technically used for in a RAC service configuration?",
+    "options": {
+      "A": "Counting the physical weight of the servers.",
+      "B": "Providing real-time technical feedback to connection pools about which instance is currently providing the best service quality for a specific workload.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' technical methods for troubleshooting high 'gc cr multi block request' wait events? (Select all that apply)",
+    "options": {
+      "A": "Analyzing Interconnect throughput and packet drops",
+      "B": "Reviewing SQL execution plans to identify high-volume table scans",
+      "C": "Buying physical snacks for the IT team",
+      "D": "Checking for 'Hot Blocks' being accessed by multiple nodes simultaneously"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Policy-Managed' databases technically use 'Server Pools' to automatically manage the placement of instances based on the minimum and maximum server requirements defined by the DBA.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global' 'Enqueue' 'Service' (GES) locking logic?",
+    "options": {
+      "A": "Hiring a person named Enqueue to sort files.",
+      "B": "The technical management of library cache locks and dictionary locks across multiple instances to ensure metadata consistency.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Node' 'Evictions' (MTBNE)?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A metric tracking the technical stability of the cluster by measuring the frequency of automated node removals due to health failures.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'Singleton' services to technically ensure that a specific background job only runs on one node at a time in a 4-node cluster?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Workload Isolation / Singleton Service Configuration",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SGA' (System Global Area) sizes between RAC nodes can technically lead to performance 'Skew,' where queries perform significantly worse on one node than another.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Oracle' 'ASM' 'Flex' Disk Group benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Quotas' on storage usage per database",
+      "B": "Providing technical support for 'Point-in-Time' database cloning",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Supporting a higher number of ASM files and disks compared to standard groups"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in a Multi-tenant (CDB/PDB) RAC environment?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Technically restricting specific PDB services to run only on a subset of RAC instances to prevent 'Noisy Neighbor' effects in a shared cluster.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Interconnect' 'Packet' 'Loss' rate?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical metric indicating the percentage of 'Cache Fusion' data packets that must be retransmitted due to network errors, leading to severe performance drops.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Synchronization' (NTP drift) exceeding the cluster threshold can technically cause an automated 'Node Eviction' to protect data integrity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' framework handles 'Automated' 'Node' 'Fencing'?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "The CSS (Cluster Synchronization Services) via Voting Disks",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GPNP' (Grid Plug and Play) Profile significance?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "A technical XML file that contains the bootstrap configuration (network and storage) required for a node to join the cluster without pre-defined static local files.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Resource' 'Remastering'?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "The technical process where the cluster redistributes ownership of metadata in the GRD to ensure an even load across all surviving instances.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Storage' 'Latency' between nodes in an ASM cluster can technically cause the cluster to 'Hang' as it waits for the slowest node to acknowledge a write.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'RAC' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Global Database Architect (Consistency and Design)",
+      "B": "Lead Infrastructure Engineer (Storage and Networking)",
+      "C": "Application SRE (Availability and Uptime)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Service' discovery in a RAC audit?",
+    "options": {
+      "A": "Auditing data in a dark room.",
+      "B": "Identifying database services that have been technically created by developers (cause) but are not monitored or governed by the central DBA team (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Repair' (MTTR) a node?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "The technical duration from a node being evicted until it is masterfully re-synchronized and returned to 'Full Service' state in the cluster.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Kernel' 'Parameters' (e.g., hugepages) between RAC nodes can technically cause instance startup failures or severe memory fragmentation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Cluster' 'Verification' (CVU) benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Node Connectivity' issues before an upgrade begins",
+      "B": "Ensuring 'Shared Storage' permissions are consistent across global units",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Real-time updates to 'Readiness' dashboards for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Interconnect' 'Health'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Throughput', 'UDP/RDS Latency', 'Retransmissions', and 'Physical Link Redundancy'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Re-silver' (MTTR) an ASM disk?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a disk failure until ASM has completed the redundant technical reconstruction of data on surviving disks.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' versions occur when a lead enforces 2010 'Single-Instance' logic for a 2026 'Autonomous' cluster era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Failover' 'Orchestration' benefits? (Select all that apply)",
+    "options": {
+      "A": "Instantly promoting a 'Standby' service to 'Active' without human intervention",
+      "B": "Consistency in result presentation across global units",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Reducing the 'Mean Time to Recovery' during a node-level hardware failure"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a RAC management pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical 'How' of a service start (the srvctl script) is isolated from the 'What' (the availability policy), allowing for easy infrastructure migrations.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'RAC' 'Technical' 'Debt'?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' un-patched cluster nodes, which makes the organization technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead assigns 20 high-priority queries to a single RAC instance that technically only has 4 CPU cores assigned.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'RAC' 'Succession' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "VP of Database Platforms",
+      "B": "Principal Site Reliability Architect",
+      "C": "Lead Infrastructure Compliance Officer",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'RAC' logic in a DevOps squad?",
+    "options": {
+      "A": "Hiring servants to type in the database passwords.",
+      "B": "The central DBA team focuses on providing 'Self-Service' instance provisioning APIs so developers can scale their own clusters without manual bottlenecks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Wait' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of spikes in 'Global Cache' wait events, identifying instability in the Interconnect layer.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager giving a 'RAC Architect' a computer that is too slow to run modern traffic-pattern forecasting or local cluster simulations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' in RAC? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'DB-Security-Audit' failure rates",
+      "B": "Predicting future market 'Tooling' needs based on user data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Training' spend with 'Mean Time to Repair' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in RAC automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful service-configuration script from one cluster and apply it to a global infrastructure for enterprise-wide consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV)?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from a node joining the cluster until the 'Health Monitor' confirms it is 100% consistent and serving traffic.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead enforces 2010 'Signature' requirements for a 2026 'Autonomous' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'RAC' 'Governance' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Privacy Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a newly formed RAC squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Grid Settings', 'ASM layouts', and 'RBAC' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Failover' 'Simulations'?",
+    "options": {
+      "A": "The percentage of 'Sample Failovers' that technically resulted in 100% application uptime during a periodic audit.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Full Global Cluster Report' masterfully in exactly 1 second after a new node joins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' for the Board",
+      "B": "Reduction in manual spreadsheet work for database leads",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant RAC?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' cluster logs technically cannot be seen or searched by 'Business Unit B' through restricted roles.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the cluster baseline remains effective before a technical update breaks the cluster logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in RAC leadership occur when the remediation timeline for a 'blocker bug' is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Digital' and ignores 'Physical' security"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Replication' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a cluster sync (the script) is isolated from the 'What' (the consistency policy), allowing for easy tool migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Sensor' 'Failure'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a cluster log source going offline until the 'Monitoring Platform' itself flags the loss of visibility.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead enforces 2010 'Signature-only' models to manage a 2026 'Cloud-Edge' environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'RAC' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Privacy Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'RAC' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Grid, ASM, RMAN, and OEM platforms to ensure a seamless and safe release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant cluster control failure until the organization's 'Safety Baseline' is technically restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one node promotion simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' for the Board",
+      "B": "Reduction in manual spreadsheet work for database leads",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Cluster Sprints' where each phase results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in RAC Engineering?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical cluster expert seat being vacated until the new hire is fully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead assigns 10 high-priority forensic investigations to a single architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'DB-Risk' scores",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in RAC?",
+    "options": {
+      "A": "A rating of how well a specific system is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major cluster strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in RAC leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a petabyte-scale RAC environment on Exadata, how should a Principal Architect technically model 'Interconnect Saturation' to predict the point at which 'Cache Fusion' overhead outweighs the horizontal scaling benefits of adding a 16th node?",
+    "options": {
+      "A": "By assuming a linear 5% performance drop for every node added to the cluster.",
+      "B": "By utilizing 'Universal Scalability Law' (USL) modeling to account for 'Contention' and 'Coherency' penalties, and calculating the 'Kros' coefficient for global cache synchronization.",
+      "C": "By limiting the total number of parallel query slaves to exactly 64 per node strictly.",
+      "D": "By requiring a manual board-level signature for every increase in the 'db_block_checking' level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Instance' 'Decoupling' refers to the technical practice of pinning 'Critical Batch' workloads to a dedicated subset of nodes via 'Service Singleton' affinity, ensuring that a 'Global Enqueue' hang on the 'OLTP' nodes does not systemically freeze the reporting shard.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Engineer to predict the 'Recovery Time Objective' (RTO) for a 'Full Cluster Cold Start' based on the 'OCR/Voting File' re-silvering speed across a high-latency SAN?",
+    "options": {
+      "A": "Stochastic Modeling of Grid Infrastructure Bootstrap Latency",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Storage Arbitrage' during an international M&A involving the merger of a 'Traditional SAN' RAC cluster and an 'ASM-Flex' cloud-based RAC environment?",
+    "options": {
+      "A": "To ensure both teams use the same physical brand of keyboard.",
+      "B": "To normalize disparate 'Disk Group Attributes' and 'Failure Groups' into a unified 'Resilience Schema' that technically satisfies the data durability requirements of the parent entity.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live ASM rebalance dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Inter-Instance' 'PMEM' 'Acceleration' and how does it technically reduce 'gc current block' wait events in a multi-node cluster?",
+    "options": {
+      "A": "When an employee physically installs more RAM in the servers manually.",
+      "B": "A framework where 'Persistent Memory' is used as a technical high-speed cache for the 'Global Resource Directory', allowing block metadata to be shared at RDMA speeds without CPU interrupts.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the AWR report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'Policy-Managed' server pool strategy is technically applied to a cluster with 'Heterogeneous' hardware, leading to systemic 'Workload Imbalance' and periodic node evictions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Cluster' 'Chaos' (injecting 500ms network jitter on the interconnect) to verify if the 'LMS' processes technically maintain 'Consistent Read' (CR) integrity?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection Cluster Testing)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Queue' 'Contagion' and its relation to 'LMON' during a massive cluster-wide reconfiguration event?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a failure to remaster a single 'Hot Block' (cause) technically stalls the 'Enqueue' pipeline for 100% of the nodes, resulting in a total 'Database Hang' (effect).",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'RAC' ROI calculations for a strategic shift to 'Autonomous' Data Guard integrated with RAC? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Identify' (MTTI) for 'Split-Brain' scenarios",
+      "B": "Financial savings from 'Rolling Patching' labor reduction",
+      "C": "The value of 'IP Protection' preserved through 100% verified 'Application Continuity' failover",
+      "D": "The number of security cameras in the data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Data Leadership level ensures that 'Junior DBAs' can flag 'Corruption in ASM Metadata' to the Board without fear of termination, allowing for transparent 'Systemic Recovery'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead RAC Architect’s decision logic during a 'Node Eviction' storm?",
+    "options": {
+      "A": "The physical weight of the 'Oracle Documentation' binder.",
+      "B": "The ability to integrate contradictory technical signals (e.g. valid 'Ping' vs. anomalous 'UDP Retransmission' stats) into a cohesive 'Root Cause' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Resource' 'Sharding' during a global-scale storage firmware bug?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of logically dividing 'Cluster Capacity' so that one 'Server Pool' remains on an older, stable storage path while the other tests the fix to prevent systemic data loss.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Node Fencing' during a suspected 'Storage Controller' intermittent failure?",
+    "options": {
+      "A": "Waiting for an ORA-600 error to be logged in the alert file.",
+      "B": "Immediately initiating a 'Service Relocation' and technically fencing the suspect node from ASM before the 'Voting Disk' heartbeat is officially lost.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a RAC-centric merger often result in 'Configuration Rejection', where the acquired firm's IT staff finds ways to 'Hard-code' local parameters to hide legacy technical debt.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'RAC' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Assisted Performance Tuning' competencies within the team",
+      "B": "Standardizing 'Cluster Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the SOC",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Platform Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in an Oracle RAC Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'High Availability Strategy' itself (e.g. why we rely on 2-node RAC instead of Multi-region Guard) is the cause of systemic failure, rather than just fixing a single 'Broken Disk'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Oracle RAC?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'SCAN Listener' architecture that technically lacks cross-site redundancy.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in RAC Management occurs when a firm continues to rely on 'Manual SQL Tuning' in 2026, despite modern business requirements necessitating 'Autonomous' machine-learning indexing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'RAC' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Cluster Spend (RAROCS)",
+      "B": "Percentage of 'Business Critical' functions with 100% verified 'Application Continuity' coverage",
+      "C": "Velocity of 'Grid Infrastructure' cleanup across the top 10% of high-debt clusters",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during an 'Oracle-to-Open-Source' migration project?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured Oracle DBAs will block 'Distributed PostgreSQL' adoption to protect their manual 'RAC Management' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally bypass the board-mandated 'Security Lockdown' or 'Patch' policies.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a CTO demands 'Zero Cluster Downtime' while the CFO only rewards the team for '10% Annual Licensing Cost Reduction'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Cluster' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Interconnect Jitter' with potential session deadlock storms",
+      "B": "Automatically identifying 'ASM Failure Group' gaps in real-time as a new node is provisioned",
+      "C": "Guaranteed to replace all human DB Architects",
+      "D": "Analyzing global metadata to predict 'Storage Controller' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Data' 'Platform' 'Ecosystem' 'Architecture' (DPEA) for an Architect?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of RAC, GoldenGate, Data Guard, and Enterprise Manager into a single 'Unified Availability Mesh'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'AWR Metrics' match the parent company's 'Performance Standard' before cluster merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Query Performance' from a newly hired team that requires 12 months of 'AWR Baselining' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'RAC' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of database user audit for HIPAA/PCI regulators",
+      "B": "Automatically calculating 'Fair-Response' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residency' rules are enforced during cross-region ASM replication"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational RAC Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Database Policies' (the What) are isolated from 'Local Departmental SQL Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in RAC performance?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'Oracle Exploit' release and the Lead officially flagging the total internal exposure count to the Board.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Patch Compliance' to the board while the internal team is aware that 'Legacy AIX' units are technically un-patched.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'RAC' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'DBA Performance scores' directly to 'Cluster Access' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated User Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Audit Reporting' data with 'Corporate Legal' case software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Grid Repos, ASM-tags, and RBAC to stabilize a new offshore cluster in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in RAC architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Model Effectiveness' as complex new cloud flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Recovery' of a 10PB searchable database index after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'RAC' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Platform Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global RAC Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Raw audit logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile cluster failure (e.g. data corruption in ASM) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in RAC strategy refers to an organization promising 'Zero Data Loss' while utilizing a 'Low-Budget' manual backup model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'RAC' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Database Reliability",
+      "B": "Chief Resilience Architect",
+      "C": "Director of Performance Intelligence",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global RAC cluster?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Grid Uptime', 'MTTI for findings', 'Node Redundancy', and 'Data Integrity Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the RAC team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Signature-only' models to manage a 2026 'Autonomous' cloud environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Cluster' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Business Owner' approval analysis",
+      "B": "Keeping artifacts updated with rapidly changing cloud API versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade network topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Database Platforms?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Availability Pipeline' can sustain major technological shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect officialy presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in cluster auditing occurs when 'Evidence Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'RAC' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Database Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Availability Intelligence' tools and 'Maturity Scoring' to a newly acquired cluster within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Cluster' 'Strategy' 'Refreshes' (MTBCSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Platform Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a RAC Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'RAC' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Grid Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Platform Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global forensic talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in RAC Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful RAC Model' can be 'Lifted' from one product line (e.g. Corporate VPN) and applied to another (e.g. Mobile App backend).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated cluster service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Budget Increase' while the Architect is enforcing a 'Global Multi-Region' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'RAC' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Infrastructure ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for Database Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Availability-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Cluster Shards' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in RAC operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new network disruption vector is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Architecture Audits' are planned annually, but 'Cluster TTPs' update every 24 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'RAC' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Platform' 'Bootstrap' complexity for a 'Turnaround' Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' database culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic shifts in the database team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits in RAC? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cluster' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Cluster.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Infrastructure' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-cluster-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'RAC' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic commit grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-DB' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on performance history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'RAC Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Platform' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

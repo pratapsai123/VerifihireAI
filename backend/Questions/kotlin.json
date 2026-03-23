@@ -1,5 +1,5 @@
 {
-  "skill": "kotlin",
+  "skill": "Kotlin",
   "questions": [
     {
       "question": "Which keyword is used to declare a read-only (immutable) variable in Kotlin?",

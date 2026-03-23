@@ -1,0 +1,1869 @@
+{ 
+  "skill": "EC2", 
+  "questions": [
+    {
+"question":"What does EC2 stand for in AWS?",
+"options":{
+"A":"Elastic Compute Cloud",
+"B":"Elastic Cloud Container",
+"C":"Enterprise Compute Cluster",
+"D":"Elastic Core Compute"
+},
+"answer":"A"
+},
+
+{
+"question":"Which features are provided by Amazon EC2? (Select all that apply)",
+"options":{
+"A":"Virtual servers",
+"B":"Scalable compute capacity",
+"C":"Pay-as-you-go pricing",
+"D":"Database engine"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Amazon EC2 allows users to launch virtual machines in the cloud.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"What is an EC2 instance?",
+"options":{
+"A":"Virtual machine running in AWS",
+"B":"Database service",
+"C":"Storage bucket",
+"D":"Networking gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operating systems can run on EC2 instances? (Select all that apply)",
+"options":{
+"A":"Linux",
+"B":"Windows",
+"C":"macOS",
+"D":"Unix"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: EC2 instances can be stopped and restarted.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which component defines the configuration of an EC2 instance?",
+"options":{
+"A":"Instance Type",
+"B":"Subnet",
+"C":"Bucket",
+"D":"Lambda"
+},
+"answer":"A"
+},
+
+{
+"question":"Which factors determine EC2 instance performance? (Select all that apply)",
+"options":{
+"A":"CPU",
+"B":"Memory",
+"C":"Network performance",
+"D":"Storage type"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: EC2 instance types are optimized for different workloads.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"What is an AMI in EC2?",
+"options":{
+"A":"Amazon Machine Image",
+"B":"Amazon Managed Instance",
+"C":"Application Machine Interface",
+"D":"Amazon Memory Instance"
+},
+"answer":"A"
+},
+
+{
+"question":"What does an AMI contain? (Select all that apply)",
+"options":{
+"A":"Operating system",
+"B":"Application server",
+"C":"Configuration settings",
+"D":"Database backups"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: AMIs are used to launch EC2 instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which storage service is commonly attached to EC2 instances?",
+"options":{
+"A":"EBS",
+"B":"S3",
+"C":"Glacier",
+"D":"DynamoDB"
+},
+"answer":"A"
+},
+
+{
+"question":"Which storage options are available with EC2? (Select all that apply)",
+"options":{
+"A":"EBS",
+"B":"Instance Store",
+"C":"S3",
+"D":"EFS"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: EC2 instances can attach multiple EBS volumes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which networking feature assigns public IP to EC2 instance?",
+"options":{
+"A":"Elastic IP",
+"B":"NAT Gateway",
+"C":"Route Table",
+"D":"Subnet"
+},
+"answer":"A"
+},
+
+{
+"question":"Which networking components interact with EC2? (Select all that apply)",
+"options":{
+"A":"VPC",
+"B":"Subnet",
+"C":"Security Group",
+"D":"Internet Gateway"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Security groups act as virtual firewalls for EC2 instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which protocol is commonly used to connect to Linux EC2 instances?",
+"options":{
+"A":"SSH",
+"B":"RDP",
+"C":"FTP",
+"D":"SMTP"
+},
+"answer":"A"
+},
+
+{
+"question":"Which protocols can be used to access EC2 instances? (Select all that apply)",
+"options":{
+"A":"SSH",
+"B":"RDP",
+"C":"HTTPS",
+"D":"HTTP"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: SSH is used to access Linux EC2 instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which protocol is used to connect to Windows EC2 instances?",
+"options":{
+"A":"RDP",
+"B":"SSH",
+"C":"FTP",
+"D":"HTTP"
+},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 pricing models exist? (Select all that apply)",
+"options":{
+"A":"On-Demand",
+"B":"Reserved",
+"C":"Spot",
+"D":"Savings Plans"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Spot instances offer unused EC2 capacity at discounted prices.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature automatically scales instance count?",
+"options":{
+"A":"Auto Scaling",
+"B":"Elastic Load Balancing",
+"C":"CloudFront",
+"D":"CloudTrail"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Auto Scaling benefits exist? (Select all that apply)",
+"options":{
+"A":"High availability",
+"B":"Cost optimization",
+"C":"Automatic scaling",
+"D":"Fault tolerance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Auto Scaling can increase or decrease EC2 instances automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service distributes traffic across EC2 instances?",
+"options":{
+"A":"Elastic Load Balancer",
+"B":"CloudFront",
+"C":"Route 53",
+"D":"API Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which load balancer types exist in AWS? (Select all that apply)",
+"options":{
+"A":"Application Load Balancer",
+"B":"Network Load Balancer",
+"C":"Gateway Load Balancer",
+"D":"Classic Load Balancer"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Load balancers improve availability of EC2 applications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 monitoring service tracks instance performance?",
+"options":{
+"A":"CloudWatch",
+"B":"CloudTrail",
+"C":"Config",
+"D":"Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which metrics can CloudWatch monitor for EC2? (Select all that apply)",
+"options":{
+"A":"CPU utilization",
+"B":"Network traffic",
+"C":"Disk reads",
+"D":"Disk writes"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudWatch alarms trigger actions based on metrics.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"What does EC2 stand for in AWS?",
+"options":{
+"A":"Elastic Compute Cloud",
+"B":"Elastic Cloud Container",
+"C":"Enterprise Compute Cluster",
+"D":"Elastic Core Compute"
+},
+"answer":"A"
+},
+
+{
+"question":"Which features are provided by Amazon EC2? (Select all that apply)",
+"options":{
+"A":"Virtual servers",
+"B":"Scalable compute capacity",
+"C":"Pay-as-you-go pricing",
+"D":"Database engine"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Amazon EC2 allows users to launch virtual machines in the cloud.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"What is an EC2 instance?",
+"options":{
+"A":"Virtual machine running in AWS",
+"B":"Database service",
+"C":"Storage bucket",
+"D":"Networking gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operating systems can run on EC2 instances? (Select all that apply)",
+"options":{
+"A":"Linux",
+"B":"Windows",
+"C":"macOS",
+"D":"Unix"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: EC2 instances can be stopped and restarted.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which component defines the configuration of an EC2 instance?",
+"options":{
+"A":"Instance Type",
+"B":"Subnet",
+"C":"Bucket",
+"D":"Lambda"
+},
+"answer":"A"
+},
+
+{
+"question":"Which factors determine EC2 instance performance? (Select all that apply)",
+"options":{
+"A":"CPU",
+"B":"Memory",
+"C":"Network performance",
+"D":"Storage type"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: EC2 instance types are optimized for different workloads.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"What is an AMI in EC2?",
+"options":{
+"A":"Amazon Machine Image",
+"B":"Amazon Managed Instance",
+"C":"Application Machine Interface",
+"D":"Amazon Memory Instance"
+},
+"answer":"A"
+},
+
+{
+"question":"What does an AMI contain? (Select all that apply)",
+"options":{
+"A":"Operating system",
+"B":"Application server",
+"C":"Configuration settings",
+"D":"Database backups"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: AMIs are used to launch EC2 instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which storage service is commonly attached to EC2 instances?",
+"options":{
+"A":"EBS",
+"B":"S3",
+"C":"Glacier",
+"D":"DynamoDB"
+},
+"answer":"A"
+},
+
+{
+"question":"Which storage options are available with EC2? (Select all that apply)",
+"options":{
+"A":"EBS",
+"B":"Instance Store",
+"C":"S3",
+"D":"EFS"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: EC2 instances can attach multiple EBS volumes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which networking feature assigns public IP to EC2 instance?",
+"options":{
+"A":"Elastic IP",
+"B":"NAT Gateway",
+"C":"Route Table",
+"D":"Subnet"
+},
+"answer":"A"
+},
+
+{
+"question":"Which networking components interact with EC2? (Select all that apply)",
+"options":{
+"A":"VPC",
+"B":"Subnet",
+"C":"Security Group",
+"D":"Internet Gateway"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Security groups act as virtual firewalls for EC2 instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which protocol is commonly used to connect to Linux EC2 instances?",
+"options":{
+"A":"SSH",
+"B":"RDP",
+"C":"FTP",
+"D":"SMTP"
+},
+"answer":"A"
+},
+
+{
+"question":"Which protocols can be used to access EC2 instances? (Select all that apply)",
+"options":{
+"A":"SSH",
+"B":"RDP",
+"C":"HTTPS",
+"D":"HTTP"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: SSH is used to access Linux EC2 instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which protocol is used to connect to Windows EC2 instances?",
+"options":{
+"A":"RDP",
+"B":"SSH",
+"C":"FTP",
+"D":"HTTP"
+},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 pricing models exist? (Select all that apply)",
+"options":{
+"A":"On-Demand",
+"B":"Reserved",
+"C":"Spot",
+"D":"Savings Plans"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Spot instances offer unused EC2 capacity at discounted prices.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature automatically scales instance count?",
+"options":{
+"A":"Auto Scaling",
+"B":"Elastic Load Balancing",
+"C":"CloudFront",
+"D":"CloudTrail"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Auto Scaling benefits exist? (Select all that apply)",
+"options":{
+"A":"High availability",
+"B":"Cost optimization",
+"C":"Automatic scaling",
+"D":"Fault tolerance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Auto Scaling can increase or decrease EC2 instances automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which AWS service distributes traffic across EC2 instances?",
+"options":{
+"A":"Elastic Load Balancer",
+"B":"CloudFront",
+"C":"Route 53",
+"D":"API Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which load balancer types exist in AWS? (Select all that apply)",
+"options":{
+"A":"Application Load Balancer",
+"B":"Network Load Balancer",
+"C":"Gateway Load Balancer",
+"D":"Classic Load Balancer"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Load balancers improve availability of EC2 applications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 monitoring service tracks instance performance?",
+"options":{
+"A":"CloudWatch",
+"B":"CloudTrail",
+"C":"Config",
+"D":"Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which metrics can CloudWatch monitor for EC2? (Select all that apply)",
+"options":{
+"A":"CPU utilization",
+"B":"Network traffic",
+"C":"Disk reads",
+"D":"Disk writes"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudWatch alarms trigger actions based on metrics.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which EC2 feature allows creating a copy of an instance configuration?",
+"options":{
+"A":"Launch Template",
+"B":"Elastic IP",
+"C":"Security Group",
+"D":"Subnet"
+},
+"answer":"A"
+},
+
+{
+"question":"Which configurations can be included in a Launch Template? (Select all that apply)",
+"options":{
+"A":"AMI",
+"B":"Instance type",
+"C":"Security groups",
+"D":"Key pair"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Launch templates simplify deploying multiple EC2 instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 service helps manage instance access securely?",
+"options":{
+"A":"IAM",
+"B":"CloudTrail",
+"C":"CloudFront",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which IAM components are used with EC2? (Select all that apply)",
+"options":{
+"A":"Roles",
+"B":"Policies",
+"C":"Users",
+"D":"Groups"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: IAM roles allow EC2 instances to access AWS services securely.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 tool allows managing instances through a web interface?",
+"options":{
+"A":"AWS Management Console",
+"B":"AWS CLI",
+"C":"SDK",
+"D":"PowerShell"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools can be used to manage EC2 instances? (Select all that apply)",
+"options":{
+"A":"AWS Console",
+"B":"AWS CLI",
+"C":"AWS SDK",
+"D":"Terraform"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: EC2 instances can be managed using AWS CLI.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature allows assigning DNS names to EC2 instances?",
+"options":{
+"A":"Route 53",
+"B":"CloudFront",
+"C":"Elastic IP",
+"D":"IAM"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Route 53 features integrate with EC2? (Select all that apply)",
+"options":{
+"A":"DNS routing",
+"B":"Health checks",
+"C":"Traffic policies",
+"D":"Domain registration"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Route 53 can route traffic to EC2 instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows running code without managing servers?",
+"options":{
+"A":"Lambda",
+"B":"EC2 Auto Scaling",
+"C":"CloudWatch",
+"D":"EBS"
+},
+"answer":"A"
+},
+
+{
+"question":"Which AWS compute services are alternatives to EC2? (Select all that apply)",
+"options":{
+"A":"Lambda",
+"B":"Fargate",
+"C":"Elastic Beanstalk",
+"D":"Lightsail"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Lambda is a serverless compute service.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows scheduled instance start and stop?",
+"options":{
+"A":"Instance Scheduler",
+"B":"Auto Restart",
+"C":"Instance Timer",
+"D":"Elastic Start"
+},
+"answer":"A"
+},
+
+{
+"question":"Which automation tools can manage EC2 tasks? (Select all that apply)",
+"options":{
+"A":"AWS Systems Manager",
+"B":"Lambda",
+"C":"CloudWatch Events",
+"D":"EventBridge"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: AWS Systems Manager can manage EC2 instances remotely.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 monitoring feature checks instance health?",
+"options":{
+"A":"Status Checks",
+"B":"Health Logs",
+"C":"Instance Logs",
+"D":"Resource Monitor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which types of EC2 status checks exist? (Select all that apply)",
+"options":{
+"A":"System status checks",
+"B":"Instance status checks",
+"C":"Network checks",
+"D":"Application checks"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Failed status checks may require instance restart.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows instance placement strategies?",
+"options":{
+"A":"Placement Groups",
+"B":"Cluster Groups",
+"C":"Network Groups",
+"D":"Compute Groups"
+},
+"answer":"A"
+},
+
+{
+"question":"Which placement group strategies exist? (Select all that apply)",
+"options":{
+"A":"Cluster",
+"B":"Spread",
+"C":"Partition",
+"D":"Distributed"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Placement groups influence instance network performance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature provides dedicated hardware for instances?",
+"options":{
+"A":"Dedicated Hosts",
+"B":"Spot Instances",
+"C":"Reserved Instances",
+"D":"Burst Instances"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do Dedicated Hosts provide? (Select all that apply)",
+"options":{
+"A":"Regulatory compliance",
+"B":"Hardware-level isolation",
+"C":"License management",
+"D":"Full host control"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Dedicated Hosts give customers visibility into physical servers.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 pricing model offers long-term discounts?",
+"options":{
+"A":"Reserved Instances",
+"B":"Spot Instances",
+"C":"On-Demand",
+"D":"Savings Plan"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do Reserved Instances provide? (Select all that apply)",
+"options":{
+"A":"Lower cost",
+"B":"Capacity reservation",
+"C":"Flexible billing",
+"D":"Long-term commitment"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: Reserved Instances require long-term commitment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which EC2 feature allows storing instance metadata?",
+"options":{
+"A":"Instance Metadata Service",
+"B":"Instance Manager",
+"C":"Metadata Console",
+"D":"Instance Storage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can be retrieved from EC2 instance metadata? (Select all that apply)",
+"options":{
+"A":"Instance ID",
+"B":"AMI ID",
+"C":"Security groups",
+"D":"Public IP"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Instance metadata can be accessed from within the running EC2 instance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature automatically replaces unhealthy instances?",
+"options":{
+"A":"Auto Scaling Group",
+"B":"Elastic IP",
+"C":"Placement Group",
+"D":"Reserved Instance"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters define an Auto Scaling Group? (Select all that apply)",
+"options":{
+"A":"Minimum size",
+"B":"Maximum size",
+"C":"Desired capacity",
+"D":"Scaling policies"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Auto Scaling can terminate unhealthy EC2 instances automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature enables secure login to instances without SSH keys?",
+"options":{
+"A":"EC2 Instance Connect",
+"B":"SSH Manager",
+"C":"Secure Login Service",
+"D":"Cloud Connect"
+},
+"answer":"A"
+},
+
+{
+"question":"Which methods can be used to access EC2 instances? (Select all that apply)",
+"options":{
+"A":"SSH",
+"B":"RDP",
+"C":"EC2 Instance Connect",
+"D":"AWS Systems Manager Session Manager"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Session Manager allows connecting to EC2 instances without opening inbound ports.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 service helps automate patching and configuration?",
+"options":{
+"A":"AWS Systems Manager",
+"B":"CloudWatch",
+"C":"CloudTrail",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tasks can AWS Systems Manager perform for EC2? (Select all that apply)",
+"options":{
+"A":"Patch management",
+"B":"Configuration management",
+"C":"Remote commands",
+"D":"Session management"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Systems Manager can manage EC2 instances without SSH access.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature enables tagging resources?",
+"options":{
+"A":"Resource Tags",
+"B":"Instance Labels",
+"C":"Tag Manager",
+"D":"Resource Groups"
+},
+"answer":"A"
+},
+
+{
+"question":"Which purposes do EC2 tags serve? (Select all that apply)",
+"options":{
+"A":"Resource organization",
+"B":"Cost tracking",
+"C":"Automation",
+"D":"Access control"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Tags are key-value pairs assigned to EC2 resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows scaling storage performance?",
+"options":{
+"A":"EBS Volume Types",
+"B":"Instance Store",
+"C":"Elastic IP",
+"D":"Route Tables"
+},
+"answer":"A"
+},
+
+{
+"question":"Which EBS volume types exist? (Select all that apply)",
+"options":{
+"A":"General Purpose SSD",
+"B":"Provisioned IOPS SSD",
+"C":"Throughput Optimized HDD",
+"D":"Cold HDD"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Provisioned IOPS SSD volumes provide high performance for databases.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature enables encrypted storage?",
+"options":{
+"A":"EBS Encryption",
+"B":"Storage Lock",
+"C":"Disk Shield",
+"D":"Secure Storage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which encryption options exist for EC2 storage? (Select all that apply)",
+"options":{
+"A":"EBS encryption",
+"B":"Snapshot encryption",
+"C":"AMI encryption",
+"D":"Instance store encryption"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: AWS Key Management Service (KMS) can manage EC2 encryption keys.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature supports high-performance computing clusters?",
+"options":{
+"A":"Placement Groups",
+"B":"Security Groups",
+"C":"Elastic IP",
+"D":"Auto Scaling"
+},
+"answer":"A"
+},
+
+{
+"question":"Which placement strategies exist in EC2? (Select all that apply)",
+"options":{
+"A":"Cluster",
+"B":"Spread",
+"C":"Partition",
+"D":"Balanced"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Cluster placement groups improve network performance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 pricing option offers spare capacity at lower cost?",
+"options":{
+"A":"Spot Instances",
+"B":"Reserved Instances",
+"C":"On-Demand Instances",
+"D":"Dedicated Hosts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do Spot Instances provide? (Select all that apply)",
+"options":{
+"A":"Lower cost",
+"B":"Flexible scaling",
+"C":"Unused capacity usage",
+"D":"Batch processing suitability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Spot Instances can be interrupted by AWS.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature provides long-term cost savings?",
+"options":{
+"A":"Reserved Instances",
+"B":"Elastic IP",
+"C":"Placement Groups",
+"D":"Auto Scaling"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Reserved Instance options exist? (Select all that apply)",
+"options":{
+"A":"Standard",
+"B":"Convertible",
+"C":"Scheduled",
+"D":"Flexible"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Convertible Reserved Instances allow instance type changes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which EC2 feature allows viewing instance logs during boot?",
+"options":{
+"A":"EC2 Instance Console Output",
+"B":"CloudWatch Logs",
+"C":"Boot Monitor",
+"D":"Instance Logs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can be found in EC2 console output? (Select all that apply)",
+"options":{
+"A":"Boot messages",
+"B":"Kernel logs",
+"C":"System errors",
+"D":"Initialization status"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Console output helps diagnose instance startup issues.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows capturing instance configuration as an image?",
+"options":{
+"A":"AMI creation",
+"B":"Snapshot",
+"C":"Backup",
+"D":"Clone"
+},
+"answer":"A"
+},
+
+{
+"question":"Which components are stored in an AMI? (Select all that apply)",
+"options":{
+"A":"Operating system",
+"B":"Application server",
+"C":"Configuration",
+"D":"Block device mapping"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: AMIs can be shared with other AWS accounts.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows reserving compute capacity for compliance?",
+"options":{
+"A":"Dedicated Hosts",
+"B":"Spot Instances",
+"C":"Reserved Instances",
+"D":"Auto Scaling"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do Dedicated Hosts provide? (Select all that apply)",
+"options":{
+"A":"Compliance support",
+"B":"License management",
+"C":"Hardware isolation",
+"D":"Control of physical servers"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Dedicated Hosts provide visibility into the physical server.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature provides burstable CPU performance?",
+"options":{
+"A":"T-series instances",
+"B":"C-series instances",
+"C":"R-series instances",
+"D":"P-series instances"
+},
+"answer":"A"
+},
+
+{
+"question":"Which instance families exist in EC2? (Select all that apply)",
+"options":{
+"A":"Compute optimized",
+"B":"Memory optimized",
+"C":"Storage optimized",
+"D":"GPU instances"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Different EC2 instance families are optimized for specific workloads.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature provides high I/O storage performance?",
+"options":{
+"A":"Provisioned IOPS SSD",
+"B":"Cold HDD",
+"C":"Standard HDD",
+"D":"Instance Store"
+},
+"answer":"A"
+},
+
+{
+"question":"Which EBS features improve reliability? (Select all that apply)",
+"options":{
+"A":"Snapshots",
+"B":"Replication",
+"C":"Encryption",
+"D":"Durability"
+},
+"answer":["A","C","D"]
+},
+
+{
+"question":"True or False: EBS volumes are replicated within an Availability Zone.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows scaling storage without stopping instance?",
+"options":{
+"A":"Elastic Volumes",
+"B":"Dynamic Storage",
+"C":"EBS Scaling",
+"D":"Auto Storage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operations are supported by Elastic Volumes? (Select all that apply)",
+"options":{
+"A":"Increase size",
+"B":"Change volume type",
+"C":"Increase IOPS",
+"D":"Resize performance"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Elastic Volumes allow modifying EBS volumes dynamically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature helps recover instances automatically?",
+"options":{
+"A":"Auto Recovery",
+"B":"Restart Manager",
+"C":"Recovery Service",
+"D":"Instance Guard"
+},
+"answer":"A"
+},
+
+{
+"question":"Which actions can CloudWatch alarms trigger? (Select all that apply)",
+"options":{
+"A":"Auto Scaling",
+"B":"Stop instance",
+"C":"Terminate instance",
+"D":"Recover instance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: EC2 Auto Recovery restores instances on hardware failure.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 networking feature enables private communication between instances?",
+"options":{
+"A":"Private IP",
+"B":"Elastic IP",
+"C":"Public IP",
+"D":"NAT Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which networking components support EC2 connectivity? (Select all that apply)",
+"options":{
+"A":"Internet Gateway",
+"B":"NAT Gateway",
+"C":"Route Tables",
+"D":"Security Groups"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Private IP addresses enable communication inside a VPC.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature distributes workloads across instances?",
+"options":{
+"A":"Elastic Load Balancer",
+"B":"CloudFront",
+"C":"CloudWatch",
+"D":"API Gateway"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do load balancers provide? (Select all that apply)",
+"options":{
+"A":"High availability",
+"B":"Fault tolerance",
+"C":"Traffic distribution",
+"D":"Improved scalability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Load balancers help prevent single points of failure.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows tagging resources for organization?",
+"options":{
+"A":"Resource Tags",
+"B":"Instance Labels",
+"C":"Resource Groups",
+"D":"Instance Categories"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do resource tags provide? (Select all that apply)",
+"options":{
+"A":"Cost allocation",
+"B":"Automation",
+"C":"Organization",
+"D":"Security policies"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Tags are key-value pairs assigned to AWS resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which EC2 feature allows retrieving instance configuration from within the instance?",
+"options":{
+"A":"Instance Metadata Service",
+"B":"Instance Manager",
+"C":"Instance Monitor",
+"D":"Config Viewer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which data can be retrieved from EC2 instance metadata? (Select all that apply)",
+"options":{
+"A":"Instance ID",
+"B":"AMI ID",
+"C":"Security groups",
+"D":"Public IP"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Instance metadata is accessible only from inside the EC2 instance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature enables remote command execution without SSH?",
+"options":{
+"A":"AWS Systems Manager",
+"B":"CloudWatch",
+"C":"EC2 Auto Scaling",
+"D":"Elastic Load Balancer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Systems Manager features help manage EC2 instances? (Select all that apply)",
+"options":{
+"A":"Session Manager",
+"B":"Run Command",
+"C":"Patch Manager",
+"D":"Automation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Session Manager allows connecting to EC2 instances without opening SSH ports.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows high network throughput for HPC workloads?",
+"options":{
+"A":"Enhanced Networking",
+"B":"Elastic IP",
+"C":"Auto Scaling",
+"D":"Instance Scheduler"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does enhanced networking provide? (Select all that apply)",
+"options":{
+"A":"Lower latency",
+"B":"Higher packet throughput",
+"C":"Lower jitter",
+"D":"Improved network performance"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Enhanced networking improves network performance using SR-IOV.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature provides high-speed storage for temporary data?",
+"options":{
+"A":"Instance Store",
+"B":"EBS",
+"C":"S3",
+"D":"EFS"
+},
+"answer":"A"
+},
+
+{
+"question":"Which workloads benefit from Instance Store? (Select all that apply)",
+"options":{
+"A":"Temporary buffers",
+"B":"Caching",
+"C":"Scratch data",
+"D":"Database logs"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Instance store volumes persist after instance termination.",
+"options":{"A":"True","B":"False"},
+"answer":"B"
+},
+
+{
+"question":"Which EC2 feature allows defining instance startup scripts?",
+"options":{
+"A":"User Data",
+"B":"Launch Script",
+"C":"Startup Template",
+"D":"Init Script"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tasks can user data scripts perform? (Select all that apply)",
+"options":{
+"A":"Install software",
+"B":"Configure services",
+"C":"Run initialization commands",
+"D":"Start applications"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: User data scripts run when an EC2 instance launches.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature helps isolate instances physically across hardware?",
+"options":{
+"A":"Spread Placement Group",
+"B":"Cluster Placement Group",
+"C":"Partition Placement Group",
+"D":"Dedicated Host"
+},
+"answer":"A"
+},
+
+{
+"question":"Which placement strategies exist in EC2? (Select all that apply)",
+"options":{
+"A":"Cluster",
+"B":"Spread",
+"C":"Partition",
+"D":"Distributed"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: Placement groups affect how instances are distributed across hardware.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 pricing model charges per second for compute usage?",
+"options":{
+"A":"On-Demand Instances",
+"B":"Reserved Instances",
+"C":"Spot Instances",
+"D":"Dedicated Hosts"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do On-Demand instances provide? (Select all that apply)",
+"options":{
+"A":"No upfront cost",
+"B":"Flexible scaling",
+"C":"Pay per usage",
+"D":"No long-term commitment"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: On-Demand instances require long-term contracts.",
+"options":{"A":"True","B":"False"},
+"answer":"B"
+},
+
+{
+"question":"Which EC2 pricing model offers spare compute capacity at discount?",
+"options":{
+"A":"Spot Instances",
+"B":"Reserved Instances",
+"C":"Dedicated Hosts",
+"D":"Savings Plans"
+},
+"answer":"A"
+},
+
+{
+"question":"Which workloads are suitable for Spot instances? (Select all that apply)",
+"options":{
+"A":"Batch processing",
+"B":"Data analysis",
+"C":"Fault-tolerant workloads",
+"D":"CI/CD pipelines"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Spot instances can be interrupted by AWS.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature monitors instance health automatically?",
+"options":{
+"A":"Status Checks",
+"B":"Health Monitor",
+"C":"Cloud Inspector",
+"D":"System Monitor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which types of EC2 status checks exist? (Select all that apply)",
+"options":{
+"A":"System status checks",
+"B":"Instance status checks",
+"C":"Network checks",
+"D":"Application checks"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Failed status checks may require instance restart.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows scheduled instance start and stop?",
+"options":{
+"A":"Instance Scheduler",
+"B":"Auto Restart",
+"C":"Start Manager",
+"D":"Compute Timer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which services can automate EC2 scheduling? (Select all that apply)",
+"options":{
+"A":"Lambda",
+"B":"EventBridge",
+"C":"CloudWatch Events",
+"D":"Systems Manager"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: EC2 instances can be automatically started or stopped on a schedule.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which EC2 feature allows users to assign a fixed public IP to an instance?",
+"options":{
+"A":"Elastic IP",
+"B":"Public Gateway",
+"C":"Static Route",
+"D":"NAT Instance"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does Elastic IP provide? (Select all that apply)",
+"options":{
+"A":"Static public IP",
+"B":"Remapping to another instance",
+"C":"Improved availability",
+"D":"Easy failover"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Elastic IP addresses remain the same even if the instance stops and starts.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature enables monitoring of instance logs and metrics?",
+"options":{
+"A":"Amazon CloudWatch",
+"B":"CloudTrail",
+"C":"AWS Config",
+"D":"Route 53"
+},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 metrics can CloudWatch monitor? (Select all that apply)",
+"options":{
+"A":"CPU utilization",
+"B":"Network traffic",
+"C":"Disk operations",
+"D":"Instance status"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudWatch alarms can trigger automated actions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature allows grouping instances for scaling policies?",
+"options":{
+"A":"Auto Scaling Group",
+"B":"Placement Group",
+"C":"Instance Group",
+"D":"Elastic Group"
+},
+"answer":"A"
+},
+
+{
+"question":"Which features are part of Auto Scaling Groups? (Select all that apply)",
+"options":{
+"A":"Scaling policies",
+"B":"Health checks",
+"C":"Instance replacement",
+"D":"Load balancing integration"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Auto Scaling Groups can automatically replace unhealthy instances.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature helps manage infrastructure using code templates?",
+"options":{
+"A":"AWS CloudFormation",
+"B":"AWS Config",
+"C":"CloudWatch",
+"D":"AWS Inspector"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tasks can CloudFormation perform with EC2? (Select all that apply)",
+"options":{
+"A":"Create instances",
+"B":"Configure networking",
+"C":"Attach storage",
+"D":"Automate deployments"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: CloudFormation templates are written in JSON or YAML.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which EC2 feature supports infrastructure automation and repeatable deployments?",
+"options":{
+"A":"Launch Templates",
+"B":"Elastic IP",
+"C":"Placement Groups",
+"D":"Security Groups"
+},
+"answer":"A"
+},
+
+{
+"question":"Which settings can be included in Launch Templates? (Select all that apply)",
+"options":{
+"A":"AMI ID",
+"B":"Instance type",
+"C":"Security groups",
+"D":"Key pairs"
+},
+"answer":["A","B","C","D"]
+}
+
+  ]
+}

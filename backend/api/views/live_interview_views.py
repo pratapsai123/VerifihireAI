@@ -1,4 +1,5 @@
-from ._imports import *
+from .._imports import *
+import datetime
 
 
 @api_view(['GET'])
@@ -75,7 +76,7 @@ def create_interview_invitations_and_send_email_view(request):
             created_by=req_user_profile,
         )
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0
@@ -374,13 +375,15 @@ def interview_invitations_overview_view(request):
                 # Application Admin: all interviews for the company
                 qs = InterviewInvitation.objects.filter(
                     (models.Q(interview__company_id=company_id) |
-                     models.Q(interview__created_by__company_id=company_id)),
+                     models.Q(interview__created_by__company_id=company_id) |
+                     models.Q(interviewer_email=user_profile.email)),
                     is_deleted=False
                 ).select_related('interview').order_by('-created_at').distinct()
             else:
-                # Role-scoped: interviews created by users in this user's hierarchy
+                # Role-scoped: interviews created by users in hierarchy OR where user is the interviewer
                 qs = InterviewInvitation.objects.filter(
-                    interview__created_by_id__in=scoped_ids,
+                    (models.Q(interview__created_by_id__in=scoped_ids) |
+                     models.Q(interviewer_email=user_profile.email)),
                     is_deleted=False
                 ).select_related('interview').order_by('-created_at').distinct()
         else:
@@ -1056,3 +1059,493 @@ def draft_interview_invitations_view(request, draft_id=None):
 
 
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def generate_all_interviewer_slots_view(request):
+    """
+    Admin/HR utility to generate slots for all assigned interviewers of an assessment.
+    Query params/Body: { "assessment_id": 12, "days": 7 }
+    """
+    from api.utils.slot_utils import generate_slots_for_interviewer
+    
+    assessment_id = request.data.get('assessment_id')
+    interviewer_ids = request.data.get('interviewer_ids', [])
+    days = int(request.data.get('days', 5))
+    
+    try:
+        assessment = Assessment.objects.get(id=assessment_id)
+    except Assessment.DoesNotExist:
+        return Response({'error': 'Assessment not found'}, status=404)
+        
+    # Update assignments if provided
+    if interviewer_ids:
+        assessment.assigned_interviewers.set(interviewer_ids)
+        
+    interviewers = assessment.assigned_interviewers.all()
+    if not interviewers.exists():
+        # Fallback: maybe the HR who created it?
+        interviewers = [assessment.user_profile] if assessment.user_profile else []
+        
+    total_slots = 0
+    start_date = timezone.now().date()
+    
+    for interviewer in interviewers:
+        count = generate_slots_for_interviewer(interviewer, start_date, days)
+        total_slots += count
+        
+    return Response({
+        'success': True,
+        'message': f'Generated {total_slots} slots for {len(interviewers)} interviewers.',
+    })
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_available_slots_view(request, token):
+    """
+    Dynamically generates 45-minute slots based on interviewer availability windows.
+    Subtracts existing booked/reserved slots to show real-time "Effective Availability".
+    """
+    try:
+        inv = CandidateInvitation.objects.get(token=token)
+        assessment = inv.assessment
+        
+        # 1. Assigned Pool
+        interviewer_ids = assessment.assigned_interviewers.values_list('id', flat=True)
+        now = timezone.now()
+        
+        # Check if this invitation already has a confirmed booking
+        booked_slot = InterviewSlot.objects.filter(invitation=inv, status=InterviewSlot.STATUS_BOOKED).first()
+        if booked_slot:
+            return Response({
+                'success': True,
+                'already_booked': True,
+                'booking_details': {
+                    'date': booked_slot.slot_date.isoformat(),
+                    'time': f"{booked_slot.start_time.strftime('%I:%M %p')} - {booked_slot.end_time.strftime('%I:%M %p')}",
+                    'interviewer': booked_slot.interviewer.first_name or booked_slot.interviewer.email
+                }
+            })
+        
+        # Enforce 3-day lead time (72 hours prep buffer)
+        today = now.date()
+        min_booking_date = (now + datetime.timedelta(days=3)).date()
+
+        # 2. Reservation Cleanup
+        InterviewSlot.objects.filter(
+            status=InterviewSlot.STATUS_RESERVED,
+            reservation_expiry_time__lt=now
+        ).update(
+            status=InterviewSlot.STATUS_AVAILABLE,
+            reserved_by_token=None,
+            reservation_expiry_time=None
+        )
+
+        # 3. Get Windows & Existing Slots
+        windows = InterviewerAvailability.objects.filter(
+            interviewer_id__in=interviewer_ids,
+            date__gte=min_booking_date
+        ).select_related('interviewer')
+
+        all_real_slots = InterviewSlot.objects.filter(
+            interviewer_id__in=interviewer_ids,
+            slot_date__gte=min_booking_date
+        )
+
+        # 4. Generate Combined Map
+        # Key: (date_str, start_time_str) -> one slot object
+        slots_map = {}
+
+        for win in windows:
+            curr_dt = datetime.datetime.combine(win.date, win.start_time)
+            end_dt = datetime.datetime.combine(win.date, win.end_time)
+            
+            slot_duration = 50
+            break_duration = 10
+            step = slot_duration + break_duration
+
+            while curr_dt + datetime.timedelta(minutes=slot_duration) <= end_dt:
+                slot_date = curr_dt.date()
+                slot_start = curr_dt.time()
+                slot_end = (curr_dt + datetime.timedelta(minutes=slot_duration)).time()
+                
+                # Check overlapping slots that ARE booked or reserved (by others)
+                is_busy = all_real_slots.filter(
+                    interviewer=win.interviewer,
+                    slot_date=slot_date,
+                    start_time__lt=slot_end,
+                    end_time__gt=slot_start,
+                    status__in=[InterviewSlot.STATUS_BOOKED, InterviewSlot.STATUS_RESERVED]
+                ).exclude(
+                    status=InterviewSlot.STATUS_RESERVED,
+                    reserved_by_token=str(token)
+                ).exists()
+
+                if not is_busy:
+                    key = (slot_date.isoformat(), slot_start.strftime('%H:%M'))
+                    if key not in slots_map:
+                        # Check if a REAL slot already exists for THIS specific start time
+                        # to reuse its ID (helps with frontend consistency)
+                        existing = all_real_slots.filter(
+                            interviewer=win.interviewer,
+                            slot_date=slot_date,
+                            start_time=slot_start,
+                            status=InterviewSlot.STATUS_AVAILABLE
+                        ).first()
+
+                        slots_map[key] = {
+                            'id': str(existing.id) if existing else f"dynamic_{slot_date.isoformat()}_{slot_start.strftime('%H%M')}",
+                            'date': slot_date.isoformat(),
+                            'start_time': slot_start.strftime('%I:%M %p'),
+                            'end_time': slot_end.strftime('%I:%M %p'),
+                            'status': 'available',
+                            'is_mine': False
+                        }
+                
+                curr_dt += datetime.timedelta(minutes=step)
+
+        # 5. Overlay "My" reservations (so they show up even if busy or different time)
+        for rs in all_real_slots:
+            is_mine = rs.reserved_by_token == str(token)
+            if is_mine:
+                key = (rs.slot_date.isoformat(), rs.start_time.strftime('%H:%M'))
+                slots_map[key] = {
+                    'id': str(rs.id), 
+                    'date': rs.slot_date.isoformat(),
+                    'start_time': rs.start_time.strftime('%I:%M %p'),
+                    'end_time': rs.end_time.strftime('%I:%M %p'),
+                    'status': rs.status,
+                    'is_mine': True
+                }
+
+        # 6. Sort by date and time correctly using the keys (which are in 24h format)
+        sorted_keys = sorted(slots_map.keys())
+        sorted_slots = [slots_map[k] for k in sorted_keys]
+
+        return Response({
+            'success': True,
+            'slots': sorted_slots
+        })
+        
+    except CandidateInvitation.DoesNotExist:
+        return Response({'error': 'Invalid invitation'}, status=404)
+    except Exception as e:
+        print(f"Error in dynamic slots: {e}")
+        return Response({'error': str(e)}, status=500)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@csrf_exempt
+def reserve_interview_slot_view(request, token):
+    """
+    Temporarily reserves a slot for 5 minutes.
+    Handles both virtual (dynamic) slot IDs and real (existing) slot IDs.
+    """
+    slot_id = request.data.get('slot_id')
+    if not slot_id:
+        return Response({'error': 'slot_id required'}, status=400)
+        
+    try:
+        inv = CandidateInvitation.objects.get(token=token)
+        assessment = inv.assessment
+        now = timezone.now()
+
+        # CASE A: Virtual Slot (dynamic_YYYY-MM-DD_HHMM)
+        if str(slot_id).startswith('dynamic_'):
+            try:
+                parts = str(slot_id).split('_')
+                if len(parts) < 3:
+                    return Response({'error': f'Invalid slot ID format: {slot_id}'}, status=400)
+                    
+                date_str = parts[1]
+                time_code = parts[2]
+                
+                target_date = datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
+                target_time = datetime.datetime.strptime(time_code, '%H%M').time()
+                
+                # Combine into datetime for duration calculation
+                base_dt = datetime.datetime.combine(target_date, target_time)
+                target_end = (base_dt + timedelta(minutes=50)).time()
+
+                # Robust Lead Time check: must be at least 3 full days away from 'now.date()'
+                # If today is Mar 16, earliest allowed target_date is Mar 19.
+                min_booking_date = now.date() + timedelta(days=3)
+                
+                if target_date < min_booking_date:
+                    return Response({
+                        'error': f'Booking too soon. Earliest available date is {min_booking_date.strftime("%B %d, %Y")}.',
+                        'code': 'LEAD_TIME_VIOLATION'
+                    }, status=400)
+
+            except Exception as e:
+                import traceback
+                print(traceback.format_exc())
+                return Response({'error': f'Failed to process slot selection: {str(e)}'}, status=400)
+
+            with transaction.atomic():
+                interviewer_ids = assessment.assigned_interviewers.values_list('id', flat=True)
+                
+                # Find interviwers who HAVE a window covering this time
+                has_window = InterviewerAvailability.objects.filter(
+                    interviewer_id__in=interviewer_ids,
+                    date=target_date,
+                    start_time__lte=target_time,
+                    end_time__gte=target_end
+                ).values_list('interviewer_id', flat=True)
+
+                # Subtract those who are already BUSY (Booked or Reserved by someone else)
+                busy = InterviewSlot.objects.filter(
+                    interviewer_id__in=has_window,
+                    slot_date=target_date,
+                    start_time=target_time,
+                    status__in=[InterviewSlot.STATUS_BOOKED, InterviewSlot.STATUS_RESERVED]
+                ).exclude(
+                    status=InterviewSlot.STATUS_RESERVED,
+                    reserved_by_token=str(token)
+                ).values_list('interviewer_id', flat=True)
+
+                available_ids = [idx for idx in has_window if idx not in busy]
+
+                if not available_ids:
+                    return Response({'error': 'No interviewer available at this time anymore.'}, status=409)
+
+                # Pick the one with the least interviews this week (simple load balancing)
+                # For now, just pick the first available
+                selected_interviewer_id = available_ids[0]
+
+                # Clear old reservations for this token
+                InterviewSlot.objects.filter(
+                    reserved_by_token=str(token),
+                    status=InterviewSlot.STATUS_RESERVED
+                ).update(
+                    status=InterviewSlot.STATUS_AVAILABLE,
+                    reserved_by_token=None,
+                    reservation_expiry_time=None
+                )
+
+                # Create the new RESERVED slot
+                # Create or Update the RESERVED slot
+                slot, created = InterviewSlot.objects.update_or_create(
+                    interviewer_id=selected_interviewer_id,
+                    slot_date=target_date,
+                    start_time=target_time,
+                    defaults={
+                        'end_time': target_end,
+                        'status': InterviewSlot.STATUS_RESERVED,
+                        'reserved_by_token': str(token),
+                        'reservation_expiry_time': now + datetime.timedelta(minutes=5),
+                        'invitation': inv
+                    }
+                )
+                
+                return Response({
+                    'success': True,
+                    'message': 'Slot reserved for 5 minutes.',
+                    'slot_id': slot.id,
+                    'expiry': slot.reservation_expiry_time.isoformat()
+                })
+
+        # CASE B: Real Slot Record
+        try:
+            slot = InterviewSlot.objects.get(id=slot_id)
+        except (InterviewSlot.DoesNotExist, ValueError):
+            return Response({'error': 'Slot not found'}, status=404)
+
+        with transaction.atomic():
+            # Check if this slot belongs to the assigned pool for security
+            if not assessment.assigned_interviewers.filter(id=slot.interviewer_id).exists():
+                return Response({'error': 'Unauthorized slot'}, status=403)
+
+            # Validate 3-day lead time for static slots
+            min_booking_date = now.date() + timedelta(days=3)
+            if slot.slot_date < min_booking_date:
+                return Response({
+                    'error': f'This slot is no longer available. (3-day lead time required). Earliest allowed: {min_booking_date.isoformat()}',
+                    'code': 'LEAD_TIME_VIOLATION'
+                }, status=400)
+
+            # Check availability
+            if slot.status == InterviewSlot.STATUS_BOOKED:
+                return Response({'error': 'Slot already booked'}, status=409)
+                
+            if slot.status == InterviewSlot.STATUS_RESERVED:
+                if slot.reserved_by_token != str(token) and slot.reservation_expiry_time > now:
+                    return Response({'error': 'Slot is temporarily reserved by another candidate'}, status=409)
+            
+            # Clear old reservations
+            InterviewSlot.objects.filter(
+                reserved_by_token=str(token),
+                status=InterviewSlot.STATUS_RESERVED
+            ).exclude(id=slot.id).update(
+                status=InterviewSlot.STATUS_AVAILABLE,
+                reserved_by_token=None,
+                reservation_expiry_time=None
+            )
+
+            # Refresh reservation
+            slot.status = InterviewSlot.STATUS_RESERVED
+            slot.reserved_by_token = str(token)
+            slot.reservation_expiry_time = now + datetime.timedelta(minutes=5)
+            slot.save()
+            
+            return Response({
+                'success': True,
+                'message': 'Slot reserved for 5 minutes.',
+                'slot_id': slot.id,
+                'expiry': slot.reservation_expiry_time.isoformat()
+            })
+            
+    except InterviewSlot.DoesNotExist:
+        return Response({'error': 'Slot not found'}, status=404)
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@csrf_exempt
+def confirm_interview_booking_view(request, token):
+    """
+    Finalizes the booking. Green status.
+    """
+    slot_id = request.data.get('slot_id')
+    try:
+        inv = CandidateInvitation.objects.get(token=token)
+        now = timezone.now()
+        
+        with transaction.atomic():
+            slot = InterviewSlot.objects.select_for_update().get(id=slot_id)
+            
+            # Verification: 3-day lead time
+            min_booking_date = now.date() + timedelta(days=3)
+            if slot.slot_date < min_booking_date:
+                return Response({
+                    'error': f'Booking failed: 3-day lead time required. Earliest allowed: {min_booking_date.isoformat()}',
+                    'code': 'LEAD_TIME_VIOLATION'
+                }, status=400)
+            if slot.status == InterviewSlot.STATUS_RESERVED and slot.reserved_by_token == str(token):
+                if slot.reservation_expiry_time < timezone.now():
+                    return Response({'error': 'Reservation expired. Please try again.'}, status=409)
+            elif slot.status == InterviewSlot.STATUS_AVAILABLE:
+                # Allow direct booking if nobody else reserved it
+                pass
+            else:
+                return Response({'error': 'Slot unavailable'}, status=409)
+                
+            # Finalize
+            slot.status = InterviewSlot.STATUS_BOOKED
+            
+            # Find candidate details. 
+            # 1. Direct link to invitation
+            candidate_details = inv.candidate_details.first()
+            
+            # 2. Fallback: Search by email if not directly linked (sometimes details are cached/shared)
+            if not candidate_details:
+                candidate_details = CandidateDetails.objects.filter(email=inv.email).first()
+                
+            slot.candidate = candidate_details
+            slot.invitation = inv
+            slot.save()
+            
+            # Update Invitation status?
+            # User might want invitation status to change to 'interview_scheduled'
+            inv.status = 'interview_scheduled'
+            inv.save(update_fields=['status'])
+
+            # Create a shadow InterviewInvitation so it appears in standard Interview Lists for the interviewer
+            shadow_inv, created = InterviewInvitation.objects.get_or_create(
+                token=inv.token, # Use same token for consistency
+                defaults={
+                    'name': inv.name,
+                    'email': inv.email,
+                    'interviewer_name': f"{slot.interviewer.first_name or ''} {slot.interviewer.last_name or ''}".strip() or slot.interviewer.email,
+                    'interviewer_email': slot.interviewer.email,
+                    'start_time': timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.start_time)),
+                    'end_time': timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.end_time)),
+                    'status': 'accepted', # Mark as accepted for listing
+                }
+            )
+            if not created:
+                shadow_inv.status = 'accepted'
+                shadow_inv.start_time = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.start_time))
+                shadow_inv.end_time = timezone.make_aware(datetime.datetime.combine(slot.slot_date, slot.end_time))
+                shadow_inv.interviewer_email = slot.interviewer.email
+                shadow_inv.save()
+
+            # Send confirmation emails
+            try:
+                from ..tasks import send_interview_confirmation_task
+                send_interview_confirmation_task.delay(slot.id)
+            except Exception as e:
+                pass
+            
+            return Response({
+                'success': True,
+                'message': 'Interview booked successfully!',
+                'booking_details': {
+                    'date': slot.slot_date.isoformat(),
+                    'time': f"{slot.start_time.strftime('%I:%M %p')} - {slot.end_time.strftime('%I:%M %p')}",
+                    'interviewer': slot.interviewer.first_name or slot.interviewer.email
+                }
+            })
+            
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+
+def _broadcast_slot_change(slot_id, status_str, reserved_by):
+    # Helper for real-time updates via Channels
+    try:
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            'interview_slots_global',
+            {
+                'type': 'slot_status_update',
+                'slot_id': slot_id,
+                'status': status_str,
+                'token': reserved_by
+            }
+        )
+    except:
+        pass
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_interviewer_availability_view(request):
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+        windows = InterviewerAvailability.objects.filter(
+            interviewer=profile,
+            date__gte=timezone.now().date()
+        )
+        data = [{
+            'id': w.id,
+            'date': w.date.isoformat(),
+            'start_time': w.start_time.strftime('%H:%M'),
+            'end_time': w.end_time.strftime('%H:%M'),
+        } for w in windows]
+        return Response({'success': True, 'windows': data})
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)
+
+@api_view(['POST', 'DELETE'])
+@permission_classes([IsAuthenticated])
+@csrf_exempt
+def manage_interviewer_availability_view(request):
+    try:
+        profile = UserProfile.objects.get(user=request.user)
+        if request.method == 'POST':
+            date_str = request.data.get('date')
+            start_str = request.data.get('start_time')
+            end_str = request.data.get('end_time')
+            InterviewerAvailability.objects.create(
+                interviewer=profile,
+                date=date_str,
+                start_time=start_str,
+                end_time=end_str
+            )
+            return Response({'success': True, 'message': 'Availability saved.'})
+        elif request.method == 'DELETE':
+            window_id = request.data.get('id')
+            InterviewerAvailability.objects.filter(id=window_id, interviewer=profile).delete()
+            return Response({'success': True, 'message': 'Availability removed.'})
+    except Exception as e:
+        return Response({'error': str(e)}, status=500)

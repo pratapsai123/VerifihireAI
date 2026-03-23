@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Code Review", 
+  "questions": [
+    {
+    "question": "What is the primary technical goal of a 'Code Review' process?",
+    "options": {
+      "A": "To find a reason to fire the developer who wrote the code.",
+      "B": "To improve code quality, find bugs early, and ensure the code is maintainable.",
+      "C": "To automatically rewrite the entire codebase in a different language.",
+      "D": "To eliminate the need for any automated testing tools."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Code Review should focus only on finding syntax errors and ignored semicolons.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Best Practice' when providing feedback during a code review?",
+    "options": {
+      "A": "Using personal attacks to make the author learn faster.",
+      "B": "Providing constructive, objective feedback and explaining the 'Why' behind a suggestion.",
+      "C": "Approving every pull request without looking at the code to save time.",
+      "D": "Hiring a professional actor to read the comments aloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the acronym 'PR' technically stand for in the context of modern version control (like GitHub or GitLab)?",
+    "options": {
+      "A": "Public Relations",
+      "B": "Pull Request",
+      "C": "Private Repository",
+      "D": "Performance Review"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these aspects should a reviewer check for during a standard code review? (Select all that apply)",
+    "options": {
+      "A": "Code Readability and Naming Conventions",
+      "B": "Logical Errors and Edge Cases",
+      "C": "Adherence to the project's Style Guide",
+      "D": "The physical brand of the developer's keyboard"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Nitpicking' in a code review context?",
+    "options": {
+      "A": "Finding actual physical bugs in the server hardware.",
+      "B": "Focusing on very minor, subjective stylistic issues that don't affect code functionality or maintainability.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "Increasing the frame rate of a video call."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automated tools (Linters/Static Analyzers) should ideally catch style issues before the code reaches a human reviewer.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific benefit does 'Knowledge Sharing' provide during a code review?",
+    "options": {
+      "A": "It ensures only one person knows how the code works.",
+      "B": "It helps disseminate technical best practices and project context across the whole team.",
+      "C": "It allows the reviewer to take credit for the author's work.",
+      "D": "It increases the physical speed of the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Dry Run' or 'Self-Review' by the author before submitting a PR?",
+    "options": {
+      "A": "To pour water on the computer to see if it's dry.",
+      "B": "To find and fix obvious errors, typos, or missing comments themselves to respect the reviewer's time.",
+      "C": "A specialized software for poets.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A code review should always be performed by a more senior developer; juniors should never review senior code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a sign of 'Clean Code' that a reviewer should look for?",
+    "options": {
+      "A": "Functions that are 1,000 lines long.",
+      "B": "Variables named 'a', 'b', and 'c' only.",
+      "C": "Small, single-purpose functions with descriptive names.",
+      "D": "Hardcoded passwords in the source files."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Operations', what is a 'LGTM' comment common in reviews? (Select all that apply)",
+    "options": {
+      "A": "Looks Good To Me",
+      "B": "Log General Technical Metrics",
+      "C": "Indicating the reviewer has no further concerns and the PR can be merged",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Code Smell'?",
+    "options": {
+      "A": "A physical odor coming from the server.",
+      "B": "A surface indication in the code that usually corresponds to a deeper problem in the system design.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Refactoring' code during a review means changing its external behavior while keeping the internal structure the same.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Context Switching' and why should code reviews be scheduled to minimize it?",
+    "options": {
+      "A": "Switching the physical light switches in the office.",
+      "B": "The mental cost of moving between deep coding tasks and review tasks, which can decrease individual productivity.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Defensive Programming' that a reviewer might suggest?",
+    "options": {
+      "A": "Writing code while wearing physical armor.",
+      "B": "Anticipating potential failure cases and including error handling or input validation to prevent crashes.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If a piece of code is very difficult for a reviewer to understand, it is likely a sign that the code needs better documentation or refactoring.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Technical Debt' in the context of code review decisions?",
+    "options": {
+      "A": "A physical debt owed to a computer store.",
+      "B": "The future cost of additional rework caused by choosing an easy, 'hacky' solution now instead of a better approach.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Review Coverage'?",
+    "options": {
+      "A": "The percentage of total code changes that have been reviewed by at least one other person.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A reviewer should always prioritize 'Functionality' (does it work?) over 'Maintainability' (can we fix it later?).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Reviewer' roles? (Select all that apply)",
+    "options": {
+      "A": "Primary Reviewer (focus on logic)",
+      "B": "Security Reviewer (focus on vulnerabilities)",
+      "C": "Style Reviewer (focus on linting/formatting)",
+      "D": "Snack Coordinator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code Ownership'?",
+    "options": {
+      "A": "The idea that specific people or teams are responsible for the quality and maintenance of specific parts of the codebase.",
+      "B": "Buying a physical copy of the source code.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Peer Review'?",
+    "options": {
+      "A": "A process where colleagues at the same level review each other's work.",
+      "B": "A physical fight in the office hallway.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'TODO' comments in code is generally acceptable if they include a clear explanation and a linked ticket or issue number.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Constructive Feedback'? (Select all that apply)",
+    "options": {
+      "A": "Pointing out a problem and suggesting a specific solution",
+      "B": "Asking clarifying questions instead of making assumptions",
+      "C": "Saying 'this code is bad' without further explanation",
+      "D": "Highlighting parts of the code that were written well"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Over-Engineering'?",
+    "options": {
+      "A": "Building a physical bridge that is too tall.",
+      "B": "Designing a solution that is significantly more complex than necessary for the current requirements.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Review Cycle Time'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The total duration from when a PR is opened until it is officially approved and merged.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in reviews occurs when the team expects a 2-hour review turnaround, but reviewers are only given 30 minutes of dedicated time per day.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Red Flags' in a code review? (Select all that apply)",
+    "options": {
+      "A": "Duplicate code (Copy-paste patterns)",
+      "B": "Missing Unit Tests for new logic",
+      "C": "The SQL query parser",
+      "D": "Inconsistent indentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Rubber Duck Debugging' in a review context?",
+    "options": {
+      "A": "Buying a physical rubber duck for the office.",
+      "B": "An author explaining their code line-by-line to a reviewer (or a duck), which often helps the author find their own bugs.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Pair Programming' as an alternative to async reviews?",
+    "options": {
+      "A": "Two developers working together at one workstation, providing continuous, real-time code review.",
+      "B": "Hiring a person named Pair.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A reviewer should comment on 'Variable Names' if they are ambiguous (e.g., 'data1', 'tempVar') even if the code works perfectly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Code Review tools? (Select all that apply)",
+    "options": {
+      "A": "Static Analysis Security Testing (SAST)",
+      "B": "Linting tools (e.g., ESLint, Pylint)",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Complexity analyzers (e.g., Cyclomatic Complexity)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code Consistency'?",
+    "options": {
+      "A": "Ensuring the whole codebase follows the same patterns, styles, and architecture.",
+      "B": "Making sure the code is physically consistent like a liquid.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Comment Density'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric showing the number of review comments per 100 lines of changed code.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a developer polls the PR status every 10 seconds, creating unnecessary stress.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Code Review platforms? (Select all that apply)",
+    "options": {
+      "A": "GitHub Enterprise",
+      "B": "Gerrit",
+      "C": "Bitbucket",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Audit' Readiness in a review framework?",
+    "options": {
+      "A": "Being ready for a physical audit of the office furniture.",
+      "B": "Ensuring all PRs have at least one approval and linked requirement tickets to meet compliance standards (e.g., SOC2).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Approve' (MTA)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from when a PR is 'Ready for Review' until it receives its final required approval.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a reviewer tests the code on a different OS than the one it was designed for, leading to false errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Reviewer' Awareness Training? (Select all that apply)",
+    "options": {
+      "A": "Workshops on how to spot subtle security flaws",
+      "B": "Developing empathy and better communication skills",
+      "C": "Identifying program satisfaction trends",
+      "D": "Guaranteed to replace all human managers"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Logic' Separation?",
+    "options": {
+      "A": "Separating two people named Logic.",
+      "B": "Separating 'What' the code is doing (Business Logic) from 'How' it interacts with external systems (Infrastructure/UI).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Rejection Rate'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The percentage of PRs that are sent back for rework versus those approved immediately.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a team uses a highly formal review process for a 1-line CSS typo fix.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Code Governance stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Engineering Manager",
+      "B": "Technical Lead",
+      "C": "Quality Assurance (QA) Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Scope' Control in a PR?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "Ensuring a Pull Request only addresses the specific feature or bug it was intended for, avoiding unrelated 'Sneaky' changes.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Reviewer' Workload?",
+    "options": {
+      "A": "A report showing how many active PRs each developer is currently assigned to review.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a developer expects a review for a 5,000-line code change to be completed in under 10 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Linting benefits? (Select all that apply)",
+    "options": {
+      "A": "Instant identification of formatting issues",
+      "B": "Consistency in indentation and naming across the team",
+      "C": "Guaranteed to replace all human developers",
+      "D": "Reduction in manual 'Nitpicking' during reviews"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Legacy' Code?",
+    "options": {
+      "A": "Hiring a person named Legacy.",
+      "B": "Code that is already in production, often older, which might lack tests or follow outdated standards, making reviews of it more complex.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Code' Churn?",
+    "options": {
+      "A": "A metric showing how often a specific file or module is changed; high churn during review identifies 'Fragile' code.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when a developer adds 100 'console.log' statements to production code and the reviewer fails to catch it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Review management roles? (Select all that apply)",
+    "options": {
+      "A": "Release Manager",
+      "B": "Compliance Auditor",
+      "C": "Senior Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dependency' Analysis in a review?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "Identifying how new code changes affect existing modules or third-party libraries.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Merge' (MTM)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The total average time from PR creation to successful integration into the main branch.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in code review refers to giving a developer a screen that is physically too small to see a side-by-side diff clearly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' Review practices? (Select all that apply)",
+    "options": {
+      "A": "Ensuring comments are respectful and non-exclusionary",
+      "B": "Rotating review assignments so everyone gets to see different parts of the system",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Valuing feedback from junior developers equally with senior developers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Separation of Concerns' (SoC)?",
+    "options": {
+      "A": "A design principle for separating a computer program into distinct sections such that each section addresses a separate concern.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Refactors' (MTBR)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A metric tracking how long a module stays stable before it requires a significant rewrite based on review feedback.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager expects a full security audit of a complex cryptosystem to be masterfully completed in 2 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Bottleneck' reviewers who have a high backlog",
+      "B": "Predicting release delays based on PR volume",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Analyzing trends in common review comments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' Hardening?",
+    "options": {
+      "A": "Putting code in a physical freezer.",
+      "B": "The process of making code more resilient against attack or failure, often a key focus of security reviews.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'PR' Throughput?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The total number of Pull Requests successfully reviewed and merged within a specific sprint or timeframe.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an external security auditor takes 4 weeks to review a PR that the team needed merged in 2 days.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Quality stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Product Owner",
+      "B": "Security Architect",
+      "C": "Compliance Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' Documentation?",
+    "options": {
+      "A": "Building a physical warehouse for paper manuals.",
+      "B": "Comments or external files that explain what the code does, why it does it, and how to use it—often a mandatory check in reviews.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical anti-pattern is a reviewer identifying when they point out a class that has too many responsibilities and knows too much about other parts of the system?",
+    "options": {
+      "A": "The Singleton Pattern",
+      "B": "God Object (or Large Class)",
+      "C": "Factory Method",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a React application review, identifying a missing 'dependency array' in a 'useEffect' hook is a critical technical check to prevent infinite re-render loops.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When reviewing a SQL query within a backend PR, which technical issue is a reviewer addressing by suggesting the use of 'Indexes'?",
+    "options": {
+      "A": "Ensuring the code is physically small.",
+      "B": "Optimizing data retrieval performance by reducing full table scans.",
+      "C": "A specialized software for architects to design databases.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of identifying 'Tight Coupling' during a code review?",
+    "options": {
+      "A": "To physically tie the servers together with rope.",
+      "B": "To ensure that modules are independent enough that changes in one do not require simultaneous changes in many others, improving maintainability.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are technically valid 'Security' checks during a code review? (Select all that apply)",
+    "options": {
+      "A": "Checking for hardcoded API keys or secrets",
+      "B": "Verifying that user input is sanitized before being used in SQL queries",
+      "C": "Ensuring the developer is physically wearing a security badge",
+      "D": "Identifying insecure direct object references (IDOR)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cyclomatic Complexity' and why should a reviewer monitor it?",
+    "options": {
+      "A": "The physical complexity of the computer's motherboard.",
+      "B": "A quantitative measure of the number of linearly independent paths through a program's source code; higher scores indicate code that is harder to test and maintain.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Abstractions' occur when a developer uses a complex Design Pattern (like Visitor or Command) for a very simple logic task that could be solved with a single 'if' statement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Chrome DevTools' feature can a reviewer use to verify the performance claims of a Frontend PR?",
+    "options": {
+      "A": "The Console Tab",
+      "B": "The Performance Profiler (recording a trace)",
+      "C": "The Memory Profiler",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the strategic objective of 'Architectural' 'Verification' during a senior-level code review?",
+    "options": {
+      "A": "To save physical storage space on the developer's laptop.",
+      "B": "To ensure that the new code follows the established system design (e.g., proper layering, service boundaries) and doesn't introduce circular dependencies.",
+      "C": "A specialized tool for measuring light.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' in an asynchronous logic review occur when a developer uses a hardcoded 'setTimeout' instead of a proper 'Promise' or 'Await' signal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mutation' 'Testing' logic and how does it relate to review quality?",
+    "options": {
+      "A": "Checking for physical mutations in the server hardware.",
+      "B": "A technique where small changes are made to the code to see if the existing unit tests fail; if they don't, the tests are considered technically weak.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' metric identifies the percentage of code changes that had to be 'Reverted' shortly after being merged due to issues missed during review?",
+    "options": {
+      "A": "Defect Density",
+      "B": "Reversion Rate (or Rollback Rate)",
+      "C": "Pass Rate",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Test' 'Data' 'Hardening' in a PR?",
+    "options": {
+      "A": "Hardening a physical object in a freezer.",
+      "B": "The process of ensuring that unit test data is realistic and covers edge cases (NULLs, empty strings, max integers) rather than just 'Happy Path' scenarios.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static' 'Code' 'Analysis' tools (like SonarQube) technically help reviewers by automatically flagging 'Cognitive Complexity' issues before the human review begins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' technical review focus areas? (Select all that apply)",
+    "options": {
+      "A": "Thread safety and race condition potential",
+      "B": "Memory leak identification in long-running processes",
+      "C": "API backward compatibility (Breaking changes)",
+      "D": "Hiring 100 manual testers to click buttons"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Gray-box' Thinking in a code review context?",
+    "options": {
+      "A": "Reviewing code in a gray-colored room.",
+      "B": "A mindset where the reviewer understands the internal code but also considers how external system inputs (DB, 3rd party APIs) might cause failure.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Approve' (MTTA) for a technical PR?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a PR is marked 'Ready' until a qualified reviewer provides a final decision (Approve/Request Changes).",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encodings' in a PR (e.g., UTF-8 vs. Latin-1) can cause logical data corruption even if the code syntax is 100% correct.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Security' check involves verifying that an application does not log sensitive system information (like session tokens) in error messages?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Information Disclosure Review",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Container' 'Definition' 'Review' (e.g., for Dockerfiles)?",
+    "options": {
+      "A": "Testing the physical strength of shipping containers.",
+      "B": "Verifying that the environment setup code doesn't use 'Root' users, includes only necessary libraries, and follows security best practices.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Log' 'Consistency' in a technical review?",
+    "options": {
+      "A": "Ensuring that error logs follow a standard format (e.g., JSON) and include correlation IDs so they can be technically indexed by tools like ELK.",
+      "B": "Hiring a person named Log.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scalability' occurs when a developer writes an O(n^2) nested loop that works for 10 items but will technically crash the server when the production list reaches 100,000 items.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Accessibility' (a11y) checks a reviewer might suggest? (Select all that apply)",
+    "options": {
+      "A": "Checking for valid ARIA roles in the HTML",
+      "B": "Verifying WCAG color contrast standards via CSS",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring 'alt' attributes are present on image tags"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Environment' 'Parity' and how does it affect code reviews?",
+    "options": {
+      "A": "When a server physically drifts across the data center floor.",
+      "B": "The degree of similarity between the dev, staging, and prod environments; reviewers must ensure code doesn't rely on 'Local-only' configurations.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Branch' 'Coverage' logic?",
+    "options": {
+      "A": "A metric representing the percentage of logical decision points (if/else) that have been executed by the test suite.",
+      "B": "Traceability of a person named Branch.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Levels' occur when a developer uses 'ERROR' level for a standard 'INFO' event, causing false alarms in the monitoring system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Code Quality Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Director of Engineering",
+      "B": "Release Manager",
+      "C": "Security Architect",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data' 'Consistency' verification in a PR?",
+    "options": {
+      "A": "Planting physical seeds in the office garden.",
+      "B": "Ensuring that database schema changes include proper migration scripts and don't orphan existing records.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Parallel' 'Development' 'Conflict'?",
+    "options": {
+      "A": "A situation where two PRs modify the same file/logic simultaneously, requiring a complex 'Merge' or 'Rebase' decision.",
+      "B": "Executing a person in a parallel dimension.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Memory' 'Limits' occur when a PR works on a developer machine with 64GB RAM but will technically fail on a 512MB RAM cloud container.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Logic' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Unit tests that cover boundary conditions",
+      "B": "Integration tests for external API calls",
+      "C": "Guaranteed to replace all QA managers",
+      "D": "Property-based testing for randomized input validation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heuristic' Analysis in a technical review?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "An experience-based approach that uses known 'Bad Patterns' (like hardcoded retry counts) to find potential system instability.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Review' 'Failures' (MTBRF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long a codebase remains stable after merge before a bug found by users requires a fix.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Communication' 'Protocols' occur when a PR attempt to send a 'JSON' request to a server that only accepts 'XML' or 'gRPC'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Verification' (Policy as Code)? (Select all that apply)",
+    "options": {
+      "A": "Checking if dependencies have prohibited licenses (e.g., GPL in a proprietary app)",
+      "B": "Verifying that cloud storage is configured as 'Private' by default",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Validating that commit messages follow the organization's standard format"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Idempotency' and why should a reviewer check for it in API handlers?",
+    "options": {
+      "A": "Finding all possible combinations of a person's clothes.",
+      "B": "The technical property where making the same request multiple times has the same effect as making it once, preventing duplicate data creation.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'State' 'Management' Review?",
+    "options": {
+      "A": "Verifying that technical data is correctly passed between UI components and that global 'State' (Redux/Context) is not being overused.",
+      "B": "Hiring a person named State.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in reviews occur when the author expects a 5-minute approval but the code technically requires 3 hours of manual testing in a lab.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Technical' 'Style' 'Governance'? (Select all that apply)",
+    "options": {
+      "A": "Enforcing standard 'Variable Naming' across all microservices",
+      "B": "Standardizing SQL formatting for easier auditing",
+      "C": "Guaranteed to replace all human project managers",
+      "D": "Defining 'Clean Code' metrics for automated build failures"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Isolation' in a unit test suite?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that each test runs in a clean state and mocks external dependencies so tests don't fail due to network or DB issues.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'First' 'Comment' (MTTFC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the responsiveness of the team by measuring how long a PR sits before a reviewer provides initial feedback.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the PR is developed using 'Node 20' features while the production server is still technically locked to 'Node 14'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Review' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Principal Engineer",
+      "B": "Staff Security Engineer",
+      "C": "Code Owner (for a specific module)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Race' 'Condition' detection in a code review?",
+    "options": {
+      "A": "Testing a person's tolerance for races.",
+      "B": "Identifying logic where two threads access shared data simultaneously, potentially causing unpredictable 'Crashes' or 'Data Corruption'.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Technical' 'Debt' 'Interest'?",
+    "options": {
+      "A": "The ongoing cost of slower development and increased bugs caused by previously merged 'Hack' solutions that were never refactored.",
+      "B": "When the server is full of water.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an 'Explicit Wait' in a test suite polls every 5ms, consuming excessive backend CPU during review execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant availability of 'Code Coverage' reports for the PR",
+      "B": "Consistency in ROI data presentation across different tech stacks",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Reduction in manual data entry for release sign-offs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Sustainability' in a code review?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "Evaluating whether a new library or tool introduced in a PR will be technically maintainable by the team for the next 3-5 years.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'God Class' bottleneck?",
+    "options": {
+      "A": "The average duration between a monolithic file being created and a reviewer flagging it for architectural refactoring.",
+      "B": "The time it takes for a team to have lunch.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' occurs when code works for 1 concurrent user but fails for 1,000 due to 'Global Mutex' locking identified during review.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Technical' 'Review' 'Patterns'? (Select all that apply)",
+    "options": {
+      "A": "Analyzing 'Heap Dumps' triggered by PR load tests",
+      "B": "Verifying 'Circuit Breaker' logic for 3rd party API failures",
+      "C": "Hiring 100 manual testers to type in records",
+      "D": "Checking for 'PII Leakage' in error handling code"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Code' 'Maturity' for a PR merge?",
+    "options": {
+      "A": "A weighted score including test pass rate, linting compliance, and documentation completion.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ) post-revert?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a buggy merge until the corrected code is reviewed, approved, and successfully re-merged.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a developer expects a 2026 'Cloud' PR to merge on a computer from the year 1990 in under 1 second.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Verifying all APIs follow the organization's 'Versioning' policy",
+      "B": "Confirming all new database tables have 'Audit Columns'",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring all dependencies are from an 'Approved' list"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in reviewer refactoring?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' successful logic from one module and generalize it into a reusable 'Shared Component' during the review phase.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Technical' 'Regression' 'Bugs' (MTBTRB)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long a system remains bug-free in production before a previously working feature fails due to a new merge.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a PR fails because the 'CI/CD Service Account' lacks 'Execute' rights on the new shell script file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Trends' in memory usage over 30 PR merges",
+      "B": "Predicting performance bottlenecks based on code change patterns",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Analyzing failure patterns to identify 'Fragile' modules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Architecture' 'Verification' 'Testing' (Technical)?",
+    "options": {
+      "A": "Verifying the physical architecture of the office.",
+      "B": "Using automated tools (like ArchUnit) to ensure code follows architectural rules (e.g., 'Persistence layer' cannot call 'UI controller').",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a technical flake?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between the first inconsistent test result and the point where it is officially flagged as an 'Infrastructure Flake' in the review dashboard.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a 2024 PR attempt to use 'HTTP/3' features on a 2015 server that only supports 'HTTP/1.1'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'UX Design' standards",
+      "B": "Ensuring technical logs cover all required regulatory 'Proof of Review'",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if test environments are less secure than production"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring the 'How' of code execution (e.g. raw SQL) is hidden from the 'What' (the business logic), allowing for easier technical updates without rewriting the whole app.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a significant technical failure (like a production crash) until the system's quality benchmarks return to baseline levels.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the PR uses a library version that is technically incompatible with the production application's runtime environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+{
+    "question": "In a high-throughput Java-based microservice PR, how should a reviewer technically identify potential 'Memory Leaks' caused by improper use of 'ThreadLocal' variables?",
+    "options": {
+      "A": "By checking if the code uses too many 'if' statements.",
+      "B": "By verifying if the code explicitly calls 'ThreadLocal.remove()' in a 'finally' block to prevent references from persisting after the thread is returned to a thread pool.",
+      "C": "By ensuring all 'ThreadLocal' variables are marked as 'final' to lock them in memory.",
+      "D": "By requiring a physical server restart after every 100 requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Clock' 'Skew' in a distributed system PR can lead to technical failures in 'Liveness' checks if the code relies on local system time for global event sequencing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific architectural pattern should a reviewer enforce when a PR introduces a 'Long-Running' synchronous API call that risks exhausting the server's thread pool?",
+    "options": {
+      "A": "The Singleton Pattern",
+      "B": "The Asynchronous Request-Reply Pattern (using a Task Queue and Polling/Webhooks)",
+      "C": "The Decorator Pattern",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When reviewing a React application using 'Server-Side Rendering' (SSR), which technical issue is a reviewer addressing by flagging the use of 'window' or 'document' objects directly in the component's body?",
+    "options": {
+      "A": "The physical temperature of the CPU.",
+      "B": "Hydration Mismatch (ReferenceError), as these objects are not available during the Node.js server execution phase.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "Increasing the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is the technical significance of 'Backpressure' logic in a stream-processing PR?",
+    "options": {
+      "A": "It is a physical valve used to control water pressure in the office.",
+      "B": "A mechanism that allows a slow consumer to signal a fast producer to slow down, preventing 'Buffer Overflow' and system crashes under heavy load.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the performance report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Kernel' 'Parameters' occur when a PR optimized for 'High-Concurrency' is merged into an environment where the 'Max File Descriptors' (ulimit) is technically too low to support the new connection logic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Expert' strategy is technically most efficient for identifying 'N+1' Query problems in an ORM-based backend PR?",
+    "options": {
+      "A": "Increasing the sleep() time between tests.",
+      "B": "Analyzing SQL logs or using a 'Query Profiler' to count the number of database roundtrips generated by a single API request.",
+      "C": "Using only physical hardware for testing.",
+      "D": "Deleting the .css files to make the application run faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the strategic objective of 'Static Analysis' for 'Cyclic Dependencies' during an architectural review?",
+    "options": {
+      "A": "To save physical storage space on the developer's laptop.",
+      "B": "To ensure that Package A does not depend on Package B while Package B depends on Package A, which prevents modular testing and causes 'Spaghetti Code'.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' configurations for managing 'Multi-tenant' code isolation? (Select all that apply)",
+    "options": {
+      "A": "Implementing 'Schema-per-Tenant' database isolation logic",
+      "B": "Using 'Discriminator' columns in shared tables with Row-Level Security (RLS)",
+      "C": "Hardcoding tenant IDs directly into the frontend components",
+      "D": "Utilizing specialized 'Namespace' logic in the caching layer"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Consistency' 'Models' occur when a developer assumes 'Read-After-Write' consistency in a PR that interacts with an 'Eventually Consistent' NoSQL database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Binary' 'Compatibility' in the context of a library update PR?",
+    "options": {
+      "A": "Hiring a person to manually type in zeros and ones.",
+      "B": "The ability of the new library version to run with existing compiled code without requiring the dependent applications to be recompiled.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Service' 'Mesh' 'Configuration' review?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "Verifying that traffic routing, retries, and 'Mutual TLS' (mTLS) settings in YAML files (like Istio virtual services) are technically correct and secure.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' metric is most effective for measuring the 'Risk' of a large code change?",
+    "options": {
+      "A": "Total number of lines added to the codebase.",
+      "B": "The 'Change Failure Rate'—the percentage of deployments that result in a failure (revert/hotfix) in production.",
+      "C": "The font size of the pass rate on the dashboard.",
+      "D": "The number of hours the developer worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Thread' 'Safety' in a Node.js PR is technically impossible because Node.js is 'Single-Threaded' and has no shared memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Architecture' 'Compliance' verification? (Select all that apply)",
+    "options": {
+      "A": "Using ArchUnit to prevent 'Domain' logic from importing 'Infrastructure' classes",
+      "B": "Checking for circular package dependencies via Static Analysis",
+      "C": "Guaranteed to stop all server crashes",
+      "D": "Ensuring that no 'UI' components directly call the 'Database' driver"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heap' 'Fragmentation' analysis in a system-level review?",
+    "options": {
+      "A": "Testing actual physical heaps of dirt in the office.",
+      "B": "Identifying allocation patterns that result in many small 'holes' in memory, leading to an 'Out of Memory' error even when total free space is sufficient.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Isolate' (MTTI) a complex logic error?",
+    "options": {
+      "A": "The average duration from a failure occurring until the specific 'Microservice' or 'Code Block' causing the error is identified.",
+      "B": "The time it takes to clean the office.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Precision' in a financial PR (e.g., using 'Float' instead of 'Decimal' for currency) can lead to 'Rounding Errors' that result in significant financial loss.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Technical' 'Debt' factors? (Select all that apply)",
+    "options": {
+      "A": "The cost of maintaining 'Duplicate' logic across 5 different services",
+      "B": "The risk of using a 'Deprecated' library that no longer receives security patches",
+      "C": "The complexity of a 2,000-line 'Switch' statement that cannot be tested",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Escaping' 'Reference' logic in a memory review?",
+    "options": {
+      "A": "Providing physical snacks for the user journey.",
+      "B": "Identifying when a method returns a direct reference to a 'Private' internal mutable object, allowing external code to modify the internal state of a class.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Review' 'Entropy'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the randomness of review comments; high entropy identifies a lack of 'Standardized' coding guidelines in the team.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Concurrency' 'Primitives' occur when a developer uses a 'ReentrantLock' for a simple counter that could be solved more efficiently with an 'AtomicInteger'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Network' 'Efficiency' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Verifying that all API responses utilize 'Gzip' or 'Brotli' compression",
+      "B": "Confirming that 'N+1' SQL patterns are flagged in integration tests",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Validating that 'CDN' headers are present for all static assets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in enterprise-wide architectural refactoring?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to extract successful 'Domain Logic' from a Monolith and 'Lift' it into a new Microservice with minimal changes.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Refactors' (MTBR)?",
+    "options": {
+      "A": "Traceability of a person named Refactor.",
+      "B": "The average duration a module remains 'Stable' in production before a technical flaw requires a complete rewrite of its internal logic.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encoding' in a review refers to using 'UTF-16' in the database while the application code strictly expects 'UTF-8', causing character corruption.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Review' 'Orchestration' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Managing 'Code Ownership' across 500+ microservices",
+      "B": "Synchronizing PR reviews across teams in 10 different timezones",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Ensuring 'Compliance' sign-offs for regulated financial code"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an 'API-First' design review?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the 'Internal' data schema is hidden from external consumers through a well-defined 'Data Transfer Object' (DTO) layer.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'God Class' bottleneck?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from a monolithic file being introduced until a Staff Engineer flags it for architectural decomposition.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a PR attempt to use 'HTTP/2' multiplexing on a legacy Load Balancer that only supports 'HTTP/1.1'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Quality' 'Stakeholders' in a PR? (Select all that apply)",
+    "options": {
+      "A": "Site Reliability Engineer (SRE)",
+      "B": "Data Privacy Officer (DPO)",
+      "C": "Principal Security Engineer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Architectural' 'Maturity' score?",
+    "options": {
+      "A": "A weighted score combining 'Unit Test Coverage', 'Lack of Circular Dependencies', and 'Adherence to Design Patterns'.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Positive' 'Impact' in automated reviews?",
+    "options": {
+      "A": "A positive value that is actually negative.",
+      "B": "When a linter or SAST tool flags 'Secure' code as a 'Vulnerability', wasting the engineering team's time during the review phase.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in code testing refers to a PR that passes with 1 record but crashes when attempting to sort 10 million records due to $O(n^2)$ complexity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Vulnerability' 'Assessment' in a PR? (Select all that apply)",
+    "options": {
+      "A": "Scanning the PR for 'Secrets' or 'Private Keys' committed to the repo",
+      "B": "Verifying that 'Auth tokens' are not logged to the console",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Identifying use of 'Insecure' functions (e.g. eval() or dangerouslySetInnerHTML)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Bootstrap' complexity for a new Microservice PR?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical overhead of setting up shared libraries, logging, telemetry, and CI/CD pipelines for a new, independent service.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Approve' (MTTA) for a 'Critical' fix?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration from a 'Production Hotfix' PR being opened until the final architect sign-off is recorded.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when a PR produces 10GB of 'DEBUG' logs for a 2-second API call, crashing the centralized logging server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Review' 'Governance' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Staff Software Engineer",
+      "B": "Compliance Auditor",
+      "C": "Chief Technology Officer (CTO)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Binary' 'vs' 'Semantic' code review?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Binary review verifies if the code 'Builds'; Semantic review verifies if the code's 'Logic' achieves the intended business goal.",
+      "C": "Binary is for beginners; Semantic for experts.",
+      "D": "Binary is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Master' 'Stability' (MTRMS)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a 'Broken Build' in the main branch until a fix is merged and the build turns green.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in reviews occur when the business expects 'Zero Merge Conflict' in a repo where 50 developers are modifying the same file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Review' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying the 'Top 5 most commented lines' in the codebase",
+      "B": "Correlating 'Review Comments' with 'Production Bug Rates' automatically",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Predicting release delays based on current 'PR Backlog' growth"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Code' 'Isolation' in a Monorepo?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Using tools (like Nx or Bazel) to ensure that a change in 'App A' technically cannot trigger a build or test run for 'App B'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Review' 'Regressions' (MTBRR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code stability before a merged PR re-introduces a bug that was previously fixed.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in reviews refers to a team that can handle 5 PRs a day but fails to review 50 PRs a day during a 'Feature Freeze' rush.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Audits'? (Select all that apply)",
+    "options": {
+      "A": "Scanning PRs for 'Hardcoded' credentials in configuration files",
+      "B": "Verifying that 'Auth tokens' are handled via secure 'Headers' only",
+      "C": "Guaranteed to stop all data theft",
+      "D": "Identifying 'Clear-text' passwords in log() statements"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Logic' 'Drift'?",
+    "options": {
+      "A": "When the underlying DB schema updates but the 'Code Validators' (like Zod schemas) are not updated, leading to production runtime errors.",
+      "B": "A drift made of physical code reports.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) by technical tier?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how much faster 'Typo/Style' fixes are applied compared to 'Logic/Performance' fixes after a review.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a 2026 PR attempts to use 'WebSockets' on a 2010 legacy server that only supports short-polling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Review' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'UX Design' or 'Accessibility' standards",
+      "B": "Ensuring technical audit logs cover all 'Reviewer Approval' events",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if linters are configured too leniently"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Framework' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The degree to which the chosen technical stack (React, Node, Go) allows the team to onboard new members and fix bugs efficiently over a 5-year period.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Efficiency'?",
+    "options": {
+      "A": "The ratio of 'Feature Coding Time' to 'Review/Rework Time' across a sprint.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a PR occur when a developer uses a 'Beta' library version that is technically incompatible with the production build system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Enterprise' 'Review' 'Orchestration' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Webhooks for 'Review Completion' alerts to Slack",
+      "B": "REST APIs for triggering 'Automated' smoke tests on a PR",
+      "C": "Bulk code ingestion gRPC streams",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Architecture' 'Bootstrap' complexity for a legacy refactor PR?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of introducing 'Modern' patterns (like Dependency Injection) into a 'Legacy' codebase without breaking existing features.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'God Object'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from a monolithic file being merged until the 'Maintenance Pain' becomes high enough to flag it as a systemic failure.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a CI/CD pipeline polls for build results every 1 second, consuming excessive runner credits during the review phase.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Review' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant availability of 'Cyclomatic Complexity' scores for the PR",
+      "B": "Consistency in 'Quality ROI' data presentation for the engineering board",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Reduction in manual administrative work for lead reviewers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a 'React' 'Hook' review?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Encapsulating complex side-effects (like 'Data Fetching' or 'Subscription logic') within a custom reusable Hook to keep components clean.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a PR block?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a 'Requested Change' until the author pushes the corrected code and re-triggers the review.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a review framework attempts to execute 100 linting jobs on a single-core build agent.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for code review?",
+    "options": {
+      "A": "Identifying 'Hotspots' in the code that receive the most negative feedback",
+      "B": "Correlating 'File Size' with 'Review Duration' in production",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing failure patterns to identify 'Fragile' test suites"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well a specific module is developed, based on its test coverage, bug history, and maintainability scores.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Review' 'Cycles' (MTBRC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code stability before a new PR requires a review for a specific module.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in code leadership occur when the remediation timeline is based on 'Fixed Quarters' rather than 'Current System Risk'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Technical' 'Review' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Flame graphs (Performance analysis)",
+      "B": "Dependency graphs (Architectural analysis)",
+      "C": "Guaranteed to replace all manual code reviewers",
+      "D": "Audit logs (Compliance analysis)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Review' 'Logic' 'Encapsulation' strategy?",
+    "options": {
+      "A": "Ensuring the technical interaction details (like SQL strings) are hidden from the high-level test scripts, facilitating maintenance.",
+      "B": "Hiding the computer in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  }
+  ]
+}

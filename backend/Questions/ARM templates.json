@@ -1,0 +1,1958 @@
+{ 
+  "skill": "ARM templates", 
+  "questions": [
+    {
+"question":"What are ARM Templates in Azure?",
+"options":{
+"A":"Infrastructure as Code for Azure resources",
+"B":"Azure networking templates",
+"C":"Security configuration files",
+"D":"Database schema files"
+},
+"answer":"A"
+},
+
+{
+"question":"Which file formats are used for ARM Templates? (Select all that apply)",
+"options":{
+"A":"JSON",
+"B":"YAML",
+"C":"XML",
+"D":"INI"
+},
+"answer":["A"]
+},
+
+{
+"question":"True or False: ARM Templates allow declarative infrastructure deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure service processes ARM Templates?",
+"options":{
+"A":"Azure Resource Manager",
+"B":"Azure DevOps",
+"C":"Azure Monitor",
+"D":"Azure CLI"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages do ARM Templates provide? (Select all that apply)",
+"options":{
+"A":"Automation",
+"B":"Repeatable deployments",
+"C":"Version control",
+"D":"Consistency"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: ARM Templates define infrastructure using a declarative syntax.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section defines Azure resources in an ARM template?",
+"options":{
+"A":"resources",
+"B":"parameters",
+"C":"variables",
+"D":"outputs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which sections exist in ARM Templates? (Select all that apply)",
+"options":{
+"A":"parameters",
+"B":"variables",
+"C":"resources",
+"D":"outputs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: The resources section is mandatory in ARM templates.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template section accepts user input during deployment?",
+"options":{
+"A":"parameters",
+"B":"variables",
+"C":"resources",
+"D":"outputs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameter types are supported in ARM templates? (Select all that apply)",
+"options":{
+"A":"string",
+"B":"int",
+"C":"bool",
+"D":"array"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Parameters allow customizing deployments.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template section stores reusable computed values?",
+"options":{
+"A":"variables",
+"B":"parameters",
+"C":"resources",
+"D":"outputs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do variables provide? (Select all that apply)",
+"options":{
+"A":"Reuse values",
+"B":"Simplify templates",
+"C":"Improve readability",
+"D":"Reduce duplication"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Variables cannot accept values from users.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template section returns values after deployment?",
+"options":{
+"A":"outputs",
+"B":"parameters",
+"C":"variables",
+"D":"resources"
+},
+"answer":"A"
+},
+
+{
+"question":"Which values can outputs return? (Select all that apply)",
+"options":{
+"A":"Resource IDs",
+"B":"Connection strings",
+"C":"Endpoints",
+"D":"Public IP addresses"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Outputs can be used by other deployments.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function concatenates strings?",
+"options":{
+"A":"concat()",
+"B":"join()",
+"C":"merge()",
+"D":"combine()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template functions manipulate strings? (Select all that apply)",
+"options":{
+"A":"concat()",
+"B":"substring()",
+"C":"toLower()",
+"D":"toUpper()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: ARM template functions help generate dynamic values.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM function retrieves resource information?",
+"options":{
+"A":"reference()",
+"B":"resourceId()",
+"C":"getResource()",
+"D":"lookup()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions are commonly used for resource referencing? (Select all that apply)",
+"options":{
+"A":"reference()",
+"B":"resourceId()",
+"C":"subscription()",
+"D":"resourceGroup()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: resourceId() generates the fully qualified resource ID.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template deployment mode deletes resources not defined in the template?",
+"options":{
+"A":"Complete mode",
+"B":"Incremental mode",
+"C":"Full mode",
+"D":"Overwrite mode"
+},
+"answer":"A"
+},
+
+{
+"question":"Which deployment modes exist in ARM templates? (Select all that apply)",
+"options":{
+"A":"Incremental",
+"B":"Complete",
+"C":"Partial",
+"D":"Update"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Incremental mode only adds or updates resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"What are ARM Templates in Azure?",
+"options":{
+"A":"Infrastructure as Code for Azure resources",
+"B":"Azure networking templates",
+"C":"Security configuration files",
+"D":"Database schema files"
+},
+"answer":"A"
+},
+
+{
+"question":"Which file formats are used for ARM Templates? (Select all that apply)",
+"options":{
+"A":"JSON",
+"B":"YAML",
+"C":"XML",
+"D":"INI"
+},
+"answer":["A"]
+},
+
+{
+"question":"True or False: ARM Templates allow declarative infrastructure deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure service processes ARM Templates?",
+"options":{
+"A":"Azure Resource Manager",
+"B":"Azure DevOps",
+"C":"Azure Monitor",
+"D":"Azure CLI"
+},
+"answer":"A"
+},
+
+{
+"question":"Which advantages do ARM Templates provide? (Select all that apply)",
+"options":{
+"A":"Automation",
+"B":"Repeatable deployments",
+"C":"Version control",
+"D":"Consistency"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: ARM Templates define infrastructure using a declarative syntax.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which section defines Azure resources in an ARM template?",
+"options":{
+"A":"resources",
+"B":"parameters",
+"C":"variables",
+"D":"outputs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which sections exist in ARM Templates? (Select all that apply)",
+"options":{
+"A":"parameters",
+"B":"variables",
+"C":"resources",
+"D":"outputs"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: The resources section is mandatory in ARM templates.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template section accepts user input during deployment?",
+"options":{
+"A":"parameters",
+"B":"variables",
+"C":"resources",
+"D":"outputs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameter types are supported in ARM templates? (Select all that apply)",
+"options":{
+"A":"string",
+"B":"int",
+"C":"bool",
+"D":"array"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Parameters allow customizing deployments.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template section stores reusable computed values?",
+"options":{
+"A":"variables",
+"B":"parameters",
+"C":"resources",
+"D":"outputs"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do variables provide? (Select all that apply)",
+"options":{
+"A":"Reuse values",
+"B":"Simplify templates",
+"C":"Improve readability",
+"D":"Reduce duplication"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Variables cannot accept values from users.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template section returns values after deployment?",
+"options":{
+"A":"outputs",
+"B":"parameters",
+"C":"variables",
+"D":"resources"
+},
+"answer":"A"
+},
+
+{
+"question":"Which values can outputs return? (Select all that apply)",
+"options":{
+"A":"Resource IDs",
+"B":"Connection strings",
+"C":"Endpoints",
+"D":"Public IP addresses"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Outputs can be used by other deployments.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function concatenates strings?",
+"options":{
+"A":"concat()",
+"B":"join()",
+"C":"merge()",
+"D":"combine()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template functions manipulate strings? (Select all that apply)",
+"options":{
+"A":"concat()",
+"B":"substring()",
+"C":"toLower()",
+"D":"toUpper()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: ARM template functions help generate dynamic values.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM function retrieves resource information?",
+"options":{
+"A":"reference()",
+"B":"resourceId()",
+"C":"getResource()",
+"D":"lookup()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions are commonly used for resource referencing? (Select all that apply)",
+"options":{
+"A":"reference()",
+"B":"resourceId()",
+"C":"subscription()",
+"D":"resourceGroup()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: resourceId() generates the fully qualified resource ID.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template deployment mode deletes resources not defined in the template?",
+"options":{
+"A":"Complete mode",
+"B":"Incremental mode",
+"C":"Full mode",
+"D":"Overwrite mode"
+},
+"answer":"A"
+},
+
+{
+"question":"Which deployment modes exist in ARM templates? (Select all that apply)",
+"options":{
+"A":"Incremental",
+"B":"Complete",
+"C":"Partial",
+"D":"Update"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: Incremental mode only adds or updates resources.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which ARM template function retrieves the current resource group information?",
+"options":{
+"A":"resourceGroup()",
+"B":"subscription()",
+"C":"deployment()",
+"D":"environment()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template functions return deployment metadata? (Select all that apply)",
+"options":{
+"A":"deployment()",
+"B":"subscription()",
+"C":"resourceGroup()",
+"D":"environment()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: deployment() returns details about the current ARM deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves subscription information?",
+"options":{
+"A":"subscription()",
+"B":"tenant()",
+"C":"account()",
+"D":"resourceGroup()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can subscription() return? (Select all that apply)",
+"options":{
+"A":"Subscription ID",
+"B":"Tenant ID",
+"C":"Display name",
+"D":"Resource location"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: subscription() returns metadata about the Azure subscription.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function generates unique names?",
+"options":{
+"A":"uniqueString()",
+"B":"guid()",
+"C":"newId()",
+"D":"generate()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions generate unique identifiers? (Select all that apply)",
+"options":{
+"A":"uniqueString()",
+"B":"guid()",
+"C":"newGuid()",
+"D":"utcNow()"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: uniqueString() generates deterministic values based on input.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function returns the Azure environment details?",
+"options":{
+"A":"environment()",
+"B":"subscription()",
+"C":"deployment()",
+"D":"tenant()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which values can environment() return? (Select all that apply)",
+"options":{
+"A":"Azure environment name",
+"B":"Resource manager endpoint",
+"C":"Storage endpoint suffix",
+"D":"Active directory endpoint"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: environment() helps ARM templates work across Azure clouds.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature enables conditional resource deployment?",
+"options":{
+"A":"condition property",
+"B":"if statement",
+"C":"deployment condition",
+"D":"resource filter"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios use ARM template conditions? (Select all that apply)",
+"options":{
+"A":"Environment-specific deployments",
+"B":"Optional resources",
+"C":"Feature toggles",
+"D":"Region-based resources"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Conditions allow resources to deploy only when specific criteria are met.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template property defines resource dependencies?",
+"options":{
+"A":"dependsOn",
+"B":"dependency",
+"C":"order",
+"D":"resourceDependency"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits does dependsOn provide? (Select all that apply)",
+"options":{
+"A":"Ensures correct deployment order",
+"B":"Prevents race conditions",
+"C":"Manages resource dependencies",
+"D":"Improves deployment reliability"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: dependsOn ensures resources deploy in a specified sequence.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature allows modular infrastructure definitions?",
+"options":{
+"A":"Linked Templates",
+"B":"Nested Templates",
+"C":"Modules",
+"D":"Sub Templates"
+},
+"answer":"B"
+},
+
+{
+"question":"Which advantages do nested templates provide? (Select all that apply)",
+"options":{
+"A":"Reusability",
+"B":"Modular deployments",
+"C":"Better organization",
+"D":"Simplified management"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Nested templates allow dividing large templates into smaller parts.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature allows referencing external templates?",
+"options":{
+"A":"Linked Templates",
+"B":"External Modules",
+"C":"Remote Templates",
+"D":"Template Links"
+},
+"answer":"A"
+},
+
+{
+"question":"Which benefits do linked templates provide? (Select all that apply)",
+"options":{
+"A":"Reuse templates",
+"B":"Separate infrastructure layers",
+"C":"Modular deployments",
+"D":"Scalable infrastructure design"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Linked templates allow referencing templates stored in external locations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure tool validates ARM templates before deployment?",
+"options":{
+"A":"ARM Template Validator",
+"B":"Azure CLI",
+"C":"ARM Template Toolkit",
+"D":"Azure Resource Manager Test Tool"
+},
+"answer":"C"
+},
+
+{
+"question":"Which tools can validate ARM templates? (Select all that apply)",
+"options":{
+"A":"Azure CLI",
+"B":"Azure PowerShell",
+"C":"ARM Template Toolkit",
+"D":"Visual Studio Code extensions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: ARM Template Toolkit helps enforce template best practices.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which ARM template function returns the current UTC timestamp?",
+"options":{
+"A":"utcNow()",
+"B":"timeNow()",
+"C":"currentTime()",
+"D":"dateNow()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions help manipulate date and time values in ARM templates? (Select all that apply)",
+"options":{
+"A":"utcNow()",
+"B":"addDays()",
+"C":"dateTimeAdd()",
+"D":"dateTimeFromEpoch()"
+},
+"answer":["A","C","D"]
+},
+
+{
+"question":"True or False: utcNow() returns the current time in UTC format.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function merges two JSON objects?",
+"options":{
+"A":"union()",
+"B":"merge()",
+"C":"combine()",
+"D":"append()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions work with arrays in ARM templates? (Select all that apply)",
+"options":{
+"A":"length()",
+"B":"contains()",
+"C":"first()",
+"D":"last()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: length() returns the number of elements in an array.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function checks whether a value exists in an array?",
+"options":{
+"A":"contains()",
+"B":"exists()",
+"C":"find()",
+"D":"match()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions help manipulate JSON objects? (Select all that apply)",
+"options":{
+"A":"union()",
+"B":"intersection()",
+"C":"contains()",
+"D":"json()"
+},
+"answer":["A","B","D"]
+},
+
+{
+"question":"True or False: json() converts a string into a JSON object.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function converts values to lowercase?",
+"options":{
+"A":"toLower()",
+"B":"lower()",
+"C":"stringLower()",
+"D":"convertLower()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which string functions exist in ARM templates? (Select all that apply)",
+"options":{
+"A":"toLower()",
+"B":"toUpper()",
+"C":"trim()",
+"D":"substring()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: substring() extracts part of a string.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves a specific element from an array?",
+"options":{
+"A":"indexOf()",
+"B":"elementAt()",
+"C":"take()",
+"D":"skip()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which functions help manipulate arrays in ARM templates? (Select all that apply)",
+"options":{
+"A":"take()",
+"B":"skip()",
+"C":"concat()",
+"D":"union()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: concat() can combine arrays and strings.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template property specifies the API version of a resource?",
+"options":{
+"A":"apiVersion",
+"B":"version",
+"C":"resourceVersion",
+"D":"deploymentVersion"
+},
+"answer":"A"
+},
+
+{
+"question":"Which elements define a resource in ARM templates? (Select all that apply)",
+"options":{
+"A":"type",
+"B":"name",
+"C":"apiVersion",
+"D":"location"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: apiVersion determines which resource API is used during deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature allows deploying resources across multiple resource groups?",
+"options":{
+"A":"Subscription deployment",
+"B":"Multi-resource deployment",
+"C":"Cross-resource deployment",
+"D":"Resource group linking"
+},
+"answer":"A"
+},
+
+{
+"question":"Which ARM deployment scopes exist? (Select all that apply)",
+"options":{
+"A":"Resource group",
+"B":"Subscription",
+"C":"Management group",
+"D":"Tenant"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: ARM templates can deploy resources at the subscription level.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature allows defining deployment outputs for automation scripts?",
+"options":{
+"A":"Outputs",
+"B":"Variables",
+"C":"Parameters",
+"D":"Results"
+},
+"answer":"A"
+},
+
+{
+"question":"Which use cases exist for outputs? (Select all that apply)",
+"options":{
+"A":"Passing values to scripts",
+"B":"Returning resource endpoints",
+"C":"Providing deployment metadata",
+"D":"Referencing resources"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Outputs allow retrieving deployment results programmatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Azure CLI command deploys an ARM template?",
+"options":{
+"A":"az deployment group create",
+"B":"az template deploy",
+"C":"az arm deploy",
+"D":"az resource create"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools can deploy ARM templates? (Select all that apply)",
+"options":{
+"A":"Azure CLI",
+"B":"Azure PowerShell",
+"C":"Azure Portal",
+"D":"Azure DevOps pipelines"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: ARM templates can be deployed through Azure DevOps pipelines.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which ARM template function converts a value to a string?",
+"options":{
+"A":"string()",
+"B":"toString()",
+"C":"convertString()",
+"D":"valueToString()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which conversion functions are available in ARM templates? (Select all that apply)",
+"options":{
+"A":"string()",
+"B":"int()",
+"C":"bool()",
+"D":"json()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: The string() function converts values to string format.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function returns the first element of an array?",
+"options":{
+"A":"first()",
+"B":"start()",
+"C":"elementFirst()",
+"D":"arrayFirst()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which array helper functions exist in ARM templates? (Select all that apply)",
+"options":{
+"A":"first()",
+"B":"last()",
+"C":"length()",
+"D":"contains()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: last() returns the final element of an array.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function generates a GUID?",
+"options":{
+"A":"guid()",
+"B":"newGuid()",
+"C":"uniqueGuid()",
+"D":"generateGuid()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios commonly use GUID generation? (Select all that apply)",
+"options":{
+"A":"Unique resource names",
+"B":"Deployment identifiers",
+"C":"Storage account naming",
+"D":"Resource tagging"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: guid() generates deterministic GUIDs based on provided inputs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves the resource ID for a resource?",
+"options":{
+"A":"resourceId()",
+"B":"reference()",
+"C":"getId()",
+"D":"resource()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters can resourceId() accept? (Select all that apply)",
+"options":{
+"A":"Resource type",
+"B":"Resource name",
+"C":"Resource group",
+"D":"Subscription ID"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: resourceId() returns the full Azure resource identifier.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves runtime properties of a deployed resource?",
+"options":{
+"A":"reference()",
+"B":"resourceId()",
+"C":"resourceGroup()",
+"D":"subscription()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which data can reference() return? (Select all that apply)",
+"options":{
+"A":"Resource properties",
+"B":"Connection endpoints",
+"C":"IP addresses",
+"D":"Provisioning state"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: reference() retrieves runtime information after resource deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template property defines child resources?",
+"options":{
+"A":"resources",
+"B":"childResources",
+"C":"subResources",
+"D":"nestedResources"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources are commonly defined as child resources? (Select all that apply)",
+"options":{
+"A":"Subnets",
+"B":"Database tables",
+"C":"Storage containers",
+"D":"App service slots"
+},
+"answer":["A","C","D"]
+},
+
+{
+"question":"True or False: Child resources are defined inside the parent resource block.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature supports looping resource creation?",
+"options":{
+"A":"copy loop",
+"B":"forEach",
+"C":"repeat block",
+"D":"resource loop"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios use ARM template copy loops? (Select all that apply)",
+"options":{
+"A":"Deploy multiple VMs",
+"B":"Create multiple storage accounts",
+"C":"Deploy repeated resources",
+"D":"Create multiple subnets"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Copy loops allow repeating resource definitions multiple times.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template property specifies loop count?",
+"options":{
+"A":"count",
+"B":"iterations",
+"C":"repeatCount",
+"D":"loopCount"
+},
+"answer":"A"
+},
+
+{
+"question":"Which loop-related functions exist in ARM templates? (Select all that apply)",
+"options":{
+"A":"copyIndex()",
+"B":"range()",
+"C":"length()",
+"D":"concat()"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: copyIndex() returns the current iteration index.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function generates a sequence of numbers?",
+"options":{
+"A":"range()",
+"B":"sequence()",
+"C":"numbers()",
+"D":"listNumbers()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios use the range() function? (Select all that apply)",
+"options":{
+"A":"Loop iterations",
+"B":"Resource numbering",
+"C":"Array generation",
+"D":"Index calculation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: range() returns an array of integers.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which ARM template function converts a value to a string?",
+"options":{
+"A":"string()",
+"B":"toString()",
+"C":"convertString()",
+"D":"valueToString()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which conversion functions are available in ARM templates? (Select all that apply)",
+"options":{
+"A":"string()",
+"B":"int()",
+"C":"bool()",
+"D":"json()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: The string() function converts values to string format.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function returns the first element of an array?",
+"options":{
+"A":"first()",
+"B":"start()",
+"C":"elementFirst()",
+"D":"arrayFirst()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which array helper functions exist in ARM templates? (Select all that apply)",
+"options":{
+"A":"first()",
+"B":"last()",
+"C":"length()",
+"D":"contains()"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: last() returns the final element of an array.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function generates a GUID?",
+"options":{
+"A":"guid()",
+"B":"newGuid()",
+"C":"uniqueGuid()",
+"D":"generateGuid()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios commonly use GUID generation? (Select all that apply)",
+"options":{
+"A":"Unique resource names",
+"B":"Deployment identifiers",
+"C":"Storage account naming",
+"D":"Resource tagging"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: guid() generates deterministic GUIDs based on provided inputs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves the resource ID for a resource?",
+"options":{
+"A":"resourceId()",
+"B":"reference()",
+"C":"getId()",
+"D":"resource()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters can resourceId() accept? (Select all that apply)",
+"options":{
+"A":"Resource type",
+"B":"Resource name",
+"C":"Resource group",
+"D":"Subscription ID"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: resourceId() returns the full Azure resource identifier.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves runtime properties of a deployed resource?",
+"options":{
+"A":"reference()",
+"B":"resourceId()",
+"C":"resourceGroup()",
+"D":"subscription()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which data can reference() return? (Select all that apply)",
+"options":{
+"A":"Resource properties",
+"B":"Connection endpoints",
+"C":"IP addresses",
+"D":"Provisioning state"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: reference() retrieves runtime information after resource deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template property defines child resources?",
+"options":{
+"A":"resources",
+"B":"childResources",
+"C":"subResources",
+"D":"nestedResources"
+},
+"answer":"A"
+},
+
+{
+"question":"Which resources are commonly defined as child resources? (Select all that apply)",
+"options":{
+"A":"Subnets",
+"B":"Database tables",
+"C":"Storage containers",
+"D":"App service slots"
+},
+"answer":["A","C","D"]
+},
+
+{
+"question":"True or False: Child resources are defined inside the parent resource block.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature supports looping resource creation?",
+"options":{
+"A":"copy loop",
+"B":"forEach",
+"C":"repeat block",
+"D":"resource loop"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios use ARM template copy loops? (Select all that apply)",
+"options":{
+"A":"Deploy multiple VMs",
+"B":"Create multiple storage accounts",
+"C":"Deploy repeated resources",
+"D":"Create multiple subnets"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Copy loops allow repeating resource definitions multiple times.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template property specifies loop count?",
+"options":{
+"A":"count",
+"B":"iterations",
+"C":"repeatCount",
+"D":"loopCount"
+},
+"answer":"A"
+},
+
+{
+"question":"Which loop-related functions exist in ARM templates? (Select all that apply)",
+"options":{
+"A":"copyIndex()",
+"B":"range()",
+"C":"length()",
+"D":"concat()"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: copyIndex() returns the current iteration index.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function generates a sequence of numbers?",
+"options":{
+"A":"range()",
+"B":"sequence()",
+"C":"numbers()",
+"D":"listNumbers()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios use the range() function? (Select all that apply)",
+"options":{
+"A":"Loop iterations",
+"B":"Resource numbering",
+"C":"Array generation",
+"D":"Index calculation"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: range() returns an array of integers.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which ARM template function retrieves the deployment name?",
+"options":{
+"A":"deployment().name",
+"B":"deploymentName()",
+"C":"getDeploymentName()",
+"D":"deploymentId()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can deployment() return? (Select all that apply)",
+"options":{
+"A":"Deployment name",
+"B":"Deployment location",
+"C":"Deployment properties",
+"D":"Deployment ID"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: deployment() returns metadata about the current deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves resource group location?",
+"options":{
+"A":"resourceGroup().location",
+"B":"resourceLocation()",
+"C":"groupLocation()",
+"D":"deploymentLocation()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information does resourceGroup() provide? (Select all that apply)",
+"options":{
+"A":"Resource group name",
+"B":"Resource group location",
+"C":"Resource group ID",
+"D":"Resource group tags"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: resourceGroup() retrieves metadata of the resource group used in deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves subscription ID?",
+"options":{
+"A":"subscription().subscriptionId",
+"B":"getSubscription()",
+"C":"subscriptionId()",
+"D":"accountId()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which properties can subscription() return? (Select all that apply)",
+"options":{
+"A":"Subscription ID",
+"B":"Tenant ID",
+"C":"Display name",
+"D":"Subscription state"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: subscription() retrieves details about the current Azure subscription.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves Azure tenant ID?",
+"options":{
+"A":"tenant().tenantId",
+"B":"tenantId()",
+"C":"getTenant()",
+"D":"azureTenant()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which values can tenant() return? (Select all that apply)",
+"options":{
+"A":"Tenant ID",
+"B":"Tenant domain",
+"C":"Tenant display name",
+"D":"Tenant metadata"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: tenant() provides information about the Azure Active Directory tenant.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature supports deploying multiple resource instances dynamically?",
+"options":{
+"A":"Copy loops",
+"B":"Parallel deployments",
+"C":"Batch deployment",
+"D":"Multi-resource block"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios commonly use copy loops? (Select all that apply)",
+"options":{
+"A":"Creating multiple VMs",
+"B":"Creating multiple storage accounts",
+"C":"Deploying repeated resources",
+"D":"Creating multiple subnets"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Copy loops allow creating multiple instances of a resource from a single definition.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves the current loop index?",
+"options":{
+"A":"copyIndex()",
+"B":"loopIndex()",
+"C":"index()",
+"D":"iterationIndex()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters can copyIndex() accept? (Select all that apply)",
+"options":{
+"A":"Loop name",
+"B":"Offset value",
+"C":"Resource index",
+"D":"Iteration number"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: copyIndex() returns the current index of a copy loop.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function creates an array of numbers?",
+"options":{
+"A":"range()",
+"B":"arrayRange()",
+"C":"numbers()",
+"D":"sequence()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which uses exist for the range() function? (Select all that apply)",
+"options":{
+"A":"Loop generation",
+"B":"Array creation",
+"C":"Resource numbering",
+"D":"Index calculations"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: range() returns an array of sequential integers.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature validates templates before deployment?",
+"options":{
+"A":"ARM Template Toolkit",
+"B":"Azure Policy",
+"C":"Deployment Monitor",
+"D":"Template Analyzer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools validate ARM templates? (Select all that apply)",
+"options":{
+"A":"ARM Template Toolkit",
+"B":"Azure CLI",
+"C":"Azure PowerShell",
+"D":"Visual Studio Code extensions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Template validation helps detect syntax and configuration errors before deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which ARM template function retrieves the deployment name?",
+"options":{
+"A":"deployment().name",
+"B":"deploymentName()",
+"C":"getDeploymentName()",
+"D":"deploymentId()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information can deployment() return? (Select all that apply)",
+"options":{
+"A":"Deployment name",
+"B":"Deployment location",
+"C":"Deployment properties",
+"D":"Deployment ID"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: deployment() returns metadata about the current deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves resource group location?",
+"options":{
+"A":"resourceGroup().location",
+"B":"resourceLocation()",
+"C":"groupLocation()",
+"D":"deploymentLocation()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which information does resourceGroup() provide? (Select all that apply)",
+"options":{
+"A":"Resource group name",
+"B":"Resource group location",
+"C":"Resource group ID",
+"D":"Resource group tags"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: resourceGroup() retrieves metadata of the resource group used in deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves subscription ID?",
+"options":{
+"A":"subscription().subscriptionId",
+"B":"getSubscription()",
+"C":"subscriptionId()",
+"D":"accountId()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which properties can subscription() return? (Select all that apply)",
+"options":{
+"A":"Subscription ID",
+"B":"Tenant ID",
+"C":"Display name",
+"D":"Subscription state"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: subscription() retrieves details about the current Azure subscription.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves Azure tenant ID?",
+"options":{
+"A":"tenant().tenantId",
+"B":"tenantId()",
+"C":"getTenant()",
+"D":"azureTenant()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which values can tenant() return? (Select all that apply)",
+"options":{
+"A":"Tenant ID",
+"B":"Tenant domain",
+"C":"Tenant display name",
+"D":"Tenant metadata"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: tenant() provides information about the Azure Active Directory tenant.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature supports deploying multiple resource instances dynamically?",
+"options":{
+"A":"Copy loops",
+"B":"Parallel deployments",
+"C":"Batch deployment",
+"D":"Multi-resource block"
+},
+"answer":"A"
+},
+
+{
+"question":"Which scenarios commonly use copy loops? (Select all that apply)",
+"options":{
+"A":"Creating multiple VMs",
+"B":"Creating multiple storage accounts",
+"C":"Deploying repeated resources",
+"D":"Creating multiple subnets"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Copy loops allow creating multiple instances of a resource from a single definition.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function retrieves the current loop index?",
+"options":{
+"A":"copyIndex()",
+"B":"loopIndex()",
+"C":"index()",
+"D":"iterationIndex()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which parameters can copyIndex() accept? (Select all that apply)",
+"options":{
+"A":"Loop name",
+"B":"Offset value",
+"C":"Resource index",
+"D":"Iteration number"
+},
+"answer":["A","B"]
+},
+
+{
+"question":"True or False: copyIndex() returns the current index of a copy loop.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template function creates an array of numbers?",
+"options":{
+"A":"range()",
+"B":"arrayRange()",
+"C":"numbers()",
+"D":"sequence()"
+},
+"answer":"A"
+},
+
+{
+"question":"Which uses exist for the range() function? (Select all that apply)",
+"options":{
+"A":"Loop generation",
+"B":"Array creation",
+"C":"Resource numbering",
+"D":"Index calculations"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: range() returns an array of sequential integers.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which ARM template feature validates templates before deployment?",
+"options":{
+"A":"ARM Template Toolkit",
+"B":"Azure Policy",
+"C":"Deployment Monitor",
+"D":"Template Analyzer"
+},
+"answer":"A"
+},
+
+{
+"question":"Which tools validate ARM templates? (Select all that apply)",
+"options":{
+"A":"ARM Template Toolkit",
+"B":"Azure CLI",
+"C":"Azure PowerShell",
+"D":"Visual Studio Code extensions"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"True or False: Template validation helps detect syntax and configuration errors before deployment.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+}
+
+  ]
+}

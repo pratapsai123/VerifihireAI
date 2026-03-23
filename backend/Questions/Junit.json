@@ -1,1918 +1,2014 @@
-{ 
-  "skill": "Junit", 
+{
+  "skill": "Junit",
   "questions": [
     {
-    "question": "Which annotation is used to mark a method as a test method in JUnit 5?",
-    "options": {
-      "A": "@Test",
-      "B": "@TestCase",
-      "C": "@TestInfo",
-      "D": "@Execute"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In JUnit 5, test methods and lifecycle methods do not need to be 'public'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion method is used to verify that two values are equal?",
-    "options": {
-      "A": "assertEquals()",
-      "B": "assertSame()",
-      "C": "assertMatch()",
-      "D": "assertCheck()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO annotations used to run code once before any tests in the current class execute.",
-    "options": {
-      "A": "@BeforeAll",
-      "B": "@BeforeClass (JUnit 4 legacy)",
-      "C": "@BeforeEach",
-      "D": "@Initialize"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the '@Disabled' annotation?",
-    "options": {
-      "A": "To skip the execution of a test class or method.",
-      "B": "To mark a test as failed automatically.",
-      "C": "To indicate a test is only for documentation.",
-      "D": "To run a test only on certain operating systems."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The '@BeforeEach' annotation runs a method before every individual test method in a class.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion is used to ensure a block of code throws a specific exception?",
-    "options": {
-      "A": "assertThrows()",
-      "B": "assertException()",
-      "C": "assertFail()",
-      "D": "assertError()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO standard JUnit 5 assertion methods.",
-    "options": {
-      "A": "assertTrue()",
-      "B": "assertNotNull()",
-      "C": "assertExists()",
-      "D": "assertValid()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "In JUnit 5, what is the 'Jupiter' engine?",
-    "options": {
-      "A": "The core programming and extension model for writing tests.",
-      "B": "The tool used to generate HTML reports.",
-      "C": "A bridge to run JUnit 3 tests.",
-      "D": "The command-line interface for the build tool."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 is composed of three different sub-projects: Platform, Jupiter, and Vintage.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows you to define a custom name for a test class or method that is displayed in reports?",
-    "options": {
-      "A": "@DisplayName",
-      "B": "@TestName",
-      "C": "@Alias",
-      "D": "@ReportName"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO traits of a 'Unit Test'.",
-    "options": {
-      "A": "It tests the smallest piece of code in isolation.",
-      "B": "It should be fast and automated.",
-      "C": "It requires a database connection to run.",
-      "D": "It involves testing multiple systems at once."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does 'assertTimeout()' do in JUnit 5?",
-    "options": {
-      "A": "It fails the test if the execution of the supplied code takes longer than the specified duration.",
-      "B": "It pauses the test for a specific amount of time.",
-      "C": "It limits the total number of tests that can run.",
-      "D": "It checks how long the database is offline."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The '@AfterAll' method must be 'static' by default in JUnit 5 (unless using 'Per-class' lifecycle).",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion is used to group multiple assertions so that all of them are executed, even if some fail?",
-    "options": {
-      "A": "assertAll()",
-      "B": "assertGroup()",
-      "C": "assertMultiple()",
-      "D": "assertBulk()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO annotations provided by JUnit 5 for cleanup logic.",
-    "options": {
-      "A": "@AfterEach",
-      "B": "@AfterAll",
-      "C": "@TearDown",
-      "D": "@Finalize"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of '@Tag' in JUnit 5?",
-    "options": {
-      "A": "To filter and group tests for specific execution environments (e.g., 'fast', 'slow').",
-      "B": "To name the author of the test.",
-      "C": "To indicate the ticket number for a bug.",
-      "D": "To mark a test as ready for production."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'assertNull()' fails if the object being tested is not null.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to run a test multiple times with different arguments?",
-    "options": {
-      "A": "@ParameterizedTest",
-      "B": "@RepeatedTest",
-      "C": "@MultiTest",
-      "D": "@ArgTest"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common IDEs that have built-in support for running JUnit 5 tests.",
-    "options": {
-      "A": "IntelliJ IDEA",
-      "B": "Eclipse",
-      "C": "Notepad++",
-      "D": "Adobe Photoshop"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which annotation is used to execute a test multiple times in a row?",
-    "options": {
-      "A": "@RepeatedTest",
-      "B": "@LoopTest",
-      "C": "@Retry",
-      "D": "@Duplicate"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @EnabledOnOs annotation can be used to run a test only on specific operating systems like Linux or macOS.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which object can be injected into a @RepeatedTest method to get information about the current repetition?",
-    "options": {
-      "A": "RepetitionInfo",
-      "B": "TestInfo",
-      "C": "IterationStatus",
-      "D": "LoopContext"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion verifies that a specific block of code does NOT exceed a certain time limit?",
-    "options": {
-      "A": "assertTimeout()",
-      "B": "assertSpeed()",
-      "C": "assertDuration()",
-      "D": "assertFast()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 requires Java 8 or higher to run.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of the @BeforeEach annotation?",
-    "options": {
-      "A": "To initialize common test data before every test method.",
-      "B": "To set up the database once for the whole class.",
-      "C": "To skip the next test if a condition is met.",
-      "D": "To verify the test results."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to group tests into categories like 'Production' or 'Integration'?",
-    "options": {
-      "A": "@Tag",
-      "B": "@Category",
-      "C": "@Group",
-      "D": "@Labels"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In JUnit 5, @BeforeAll methods must be static by default.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion should be used to check if two object references point to the exact same object?",
-    "options": {
-      "A": "assertSame()",
-      "B": "assertEquals()",
-      "C": "assertReference()",
-      "D": "assertIdentity()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the @EnabledIfSystemProperty annotation do?",
-    "options": {
-      "A": "Runs a test only if a specific JVM system property matches a defined value.",
-      "B": "Changes the system properties of the computer.",
-      "C": "Enables the test if the internet is connected.",
-      "D": "Automatically sets the version of Java."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: If an assertion fails inside an assertAll() block, the remaining assertions in that block are still executed.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to provide a human-readable name for a test class or method?",
-    "options": {
-      "A": "@DisplayName",
-      "B": "@Alias",
-      "C": "@TestName",
-      "D": "@Description"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid values for the @EnabledOnOs annotation.",
-    "options": {
-      "A": "OS.WINDOWS",
-      "B": "OS.LINUX",
-      "C": "OS.ANDROID",
-      "D": "OS.CHROMEBOOK"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the difference between @BeforeEach and @BeforeAll?",
-    "options": {
-      "A": "@BeforeEach runs before every test; @BeforeAll runs once before the class.",
-      "B": "@BeforeEach is for JUnit 4; @BeforeAll is for JUnit 5.",
-      "C": "@BeforeEach is only for methods; @BeforeAll is only for classes.",
-      "D": "There is no difference."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 test classes can have constructors with parameters if a ParameterResolver is registered.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion checks if a condition is false?",
-    "options": {
-      "A": "assertFalse()",
-      "B": "assertNotTrue()",
-      "C": "assertNegative()",
-      "D": "assertFail()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is 'JUnit Vintage' used for?",
-    "options": {
-      "A": "Running tests written in JUnit 3 or JUnit 4.",
-      "B": "Running tests on old versions of Java.",
-      "C": "Creating visual reports for the client.",
-      "D": "Running tests on old servers."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO annotations related to conditional test execution.",
-    "options": {
-      "A": "@EnabledIfEnvironmentVariable",
-      "B": "@DisabledOnJre",
-      "C": "@ConditionalTest",
-      "D": "@RunOnlyIf"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What happens if a test method is annotated with @Disabled?",
-    "options": {
-      "A": "The test is bypassed during execution and reported as skipped.",
-      "B": "The test is deleted from the source code.",
-      "C": "The test is marked as 'failed'.",
-      "D": "The test runs twice to check for errors."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @TestInstance(Lifecycle.PER_CLASS) annotation allows @BeforeAll methods to be non-static.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows a test to be executed only on a specific range of Java Runtime Environments (JRE)?",
-    "options": {
-      "A": "@EnabledForJreRange",
-      "B": "@JavaRange",
-      "C": "@TargetJre",
-      "D": "@OnlyOnJava"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does 'fail()' method do in JUnit 5?",
-    "options": {
-      "A": "It explicitly fails a test with a given message.",
-      "B": "It stops the whole build process.",
-      "C": "It marks the test as a 'success' if it crashes.",
-      "D": "It restarts the server."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 test methods must be defined as 'public' to be discovered by the engine.",
-    "options": {
-      "A": "False (They can be package-private).",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion is used to check if an array of objects is equal to another array?",
-    "options": {
-      "A": "assertArrayEquals()",
-      "B": "assertListEquals()",
-      "C": "assertCollection()",
-      "D": "assertEquals()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid lifecycle annotations for JUnit 5.",
-    "options": {
-      "A": "@AfterEach",
-      "B": "@BeforeAll",
-      "C": "@Startup",
-      "D": "@Teardown"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the default behavior of JUnit 5 when a test method throws an unhandled exception?",
-    "options": {
-      "A": "The test fails immediately.",
-      "B": "The test is ignored.",
-      "C": "The test is retried.",
-      "D": "The server crashes."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In JUnit 5, you can use @DisplayName with emojis.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion ensures that two floating-point numbers are equal within a certain 'delta' or margin of error?",
-    "options": {
-      "A": "assertEquals(expected, actual, delta)",
-      "B": "assertClose()",
-      "C": "assertFloat()",
-      "D": "assertAlmostEqual()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the @Order annotation do in JUnit 5?",
-    "options": {
-      "A": "Specifies the sequence in which test methods are executed (when used with a MethodOrderer).",
-      "B": "Categorizes tests by price.",
-      "C": "Limits the number of concurrent tests.",
-      "D": "Sorts the imports in the Java file."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 supports 'Constructor Injection' for test classes.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to run a test only if an environment variable exists?",
-    "options": {
-      "A": "@EnabledIfEnvironmentVariable",
-      "B": "@EnvTest",
-      "C": "@RunIfVar",
-      "D": "@CheckEnv"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common Assertion classes in the JUnit Jupiter API.",
-    "options": {
-      "A": "Assertions",
-      "B": "Assumptions",
-      "C": "Expectations",
-      "D": "Verifications"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the role of @TestInfo in a test method?",
-    "options": {
-      "A": "It provides metadata about the current test, such as its display name or tags.",
-      "B": "It prints the test result to the console.",
-      "C": "It stores the test results in a database.",
-      "D": "It calculates the code coverage."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @Disabled can be applied to an entire class to skip all its tests.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion is used to check that an object is an instance of a specific class?",
-    "options": {
-      "A": "assertInstanceOf()",
-      "B": "assertType()",
-      "C": "assertClass()",
-      "D": "assertEquals()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What happens if an 'Assumption' (Assumptions.assumeTrue) fails during a test?",
-    "options": {
-      "A": "The test is aborted and marked as 'skipped' rather than 'failed'.",
-      "B": "The test fails immediately.",
-      "C": "The test is retried with different data.",
-      "D": "The build process stops."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is required to enable the use of @Mock and @InjectMocks with JUnit 5 Jupiter?",
-    "options": {
-      "A": "@ExtendWith(MockitoExtension.class)",
-      "B": "@RunWith(MockitoJUnitRunner.class)",
-      "C": "@MockingEnabled",
-      "D": "@JupiterMockito"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the primary advantage of @Nested test classes in JUnit 5?",
-    "options": {
-      "A": "They allow for hierarchical organization of tests to represent complex scenarios or states.",
-      "B": "They automatically share all static variables between different classes.",
-      "C": "They prevent the Garbage Collector from cleaning up test data.",
-      "D": "They allow running JUnit 4 and JUnit 5 tests in the same file."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows you to provide a method name as a source of arguments for a @ParameterizedTest?",
-    "options": {
-      "A": "@MethodSource",
-      "B": "@ArgumentsSource",
-      "C": "@FunctionProvider",
-      "D": "@DataSource"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: By default, @Nested classes cannot contain static members like @BeforeAll unless the lifecycle is set to PER_CLASS.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which @ParameterizedTest source is best used for simple literal values like strings or primitives?",
-    "options": {
-      "A": "@ValueSource",
-      "B": "@CsvSource",
-      "C": "@EnumSource",
-      "D": "@MethodSource"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the 'Arguments' interface represent in a @MethodSource?",
-    "options": {
-      "A": "A container for a set of parameters to be passed to a single execution of a parameterized test.",
-      "B": "A list of all tests in the suite.",
-      "C": "The command-line arguments of the JVM.",
-      "D": "A way to pass data between @BeforeEach and @Test."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @TempDir can be used to inject a temporary directory into a class field or a method parameter.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to execute a test only if a specific Java system property is present?",
-    "options": {
-      "A": "@EnabledIfSystemProperty",
-      "B": "@ConditionSystem",
-      "C": "@RequireProperty",
-      "D": "@OnlyIfProperty"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid return types for a method used with @MethodSource.",
-    "options": {
-      "A": "Stream<Arguments>",
-      "B": "Iterable<Object>",
-      "C": "Map<String, Object>",
-      "D": "Optional<Arguments>"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'ArgumentsAggregator' interface?",
-    "options": {
-      "A": "To combine multiple parameters from a source into a single custom object.",
-      "B": "To count the number of tests executed.",
-      "C": "To group multiple classes into a suite.",
-      "D": "To handle exceptions in parameterized tests."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 allows injecting TestInfo into constructors, @BeforeEach, and @Test methods.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to perform conditional test execution based on a custom Boolean method?",
-    "options": {
-      "A": "@EnabledIf",
-      "B": "@RunIf",
-      "C": "@CheckBoolean",
-      "D": "@ValidIf"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the default 'display name' for a parameterized test invocation?",
-    "options": {
-      "A": "The index of the invocation and the values of the arguments.",
-      "B": "The name of the test method only.",
-      "C": "A random UUID.",
-      "D": "The word 'Parameterized'."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO traits of @RepeatedTest.",
-    "options": {
-      "A": "It can inject RepetitionInfo to access the current iteration.",
-      "B": "It supports a custom name pattern for each repetition.",
-      "C": "It can take different parameters in each loop.",
-      "D": "It replaces the need for @Test."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "How do you apply a custom DisplayNameGenerator to a whole class?",
-    "options": {
-      "A": "@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)",
-      "B": "@GenerateNames(Type.UNDERSCORE)",
-      "C": "@TestNameFormat(\"clean\")",
-      "D": "@UseGenerator(MyGenerator.class)"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @CsvSource annotation allows you to define 'null' values by using an empty string or a specific 'nullValue' literal.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which component is responsible for providing 'TestReporter' to test methods for publishing metadata?",
-    "options": {
-      "A": "ParameterResolver",
-      "B": "ExecutionCondition",
-      "C": "TestEngine",
-      "D": "TestInstancePostProcessor"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What happens when using @EnumSource with 'mode = EXCLUDE'?",
-    "options": {
-      "A": "The test runs for all enum constants EXCEPT the ones specified in 'names'.",
-      "B": "The test is completely disabled.",
-      "C": "Only the constants specified in 'names' are used.",
-      "D": "The enum is converted to a string array."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO interfaces used for creating custom extensions in JUnit 5.",
-    "options": {
-      "A": "BeforeEachCallback",
-      "B": "ParameterResolver",
-      "C": "LifecycleListener",
-      "D": "TestInterceptor"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which annotation is used to run tests in a specific order within a class?",
-    "options": {
-      "A": "@TestMethodOrder",
-      "B": "@OrderTests",
-      "C": "@Sequence",
-      "D": "@SortBy"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows a @ParameterizedTest to use a CSV file located in the 'src/test/resources' folder as a data source?",
-    "options": {
-      "A": "@CsvFileSource",
-      "B": "@ExternalCsv",
-      "C": "@ResourceSource",
-      "D": "@FileSource"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Using @TestInstance(Lifecycle.PER_CLASS) allows you to use @BeforeAll and @AfterAll on non-static methods.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which functional interface is commonly used with 'DynamicTest.dynamicTest()' to define the actual logic of a dynamic test?",
-    "options": {
-      "A": "Executable",
-      "B": "Runnable",
-      "C": "Consumer",
-      "D": "Supplier"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO default DisplayNameGenerators provided by JUnit 5.",
-    "options": {
-      "A": "ReplaceUnderscores",
-      "B": "IndicativeSentences",
-      "C": "CamelCaseToSpace",
-      "D": "HumanReadable"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'ExtensionContext.Store' in the JUnit 5 extension model?",
-    "options": {
-      "A": "To save and retrieve data across different lifecycle phases of a test without using static variables.",
-      "B": "To download external dependencies.",
-      "C": "To store the HTML report results.",
-      "D": "To manage the JVM's memory heap."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: A method annotated with @MethodSource can reside in a different class as long as its fully qualified name is provided.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to create a test suite by selecting multiple classes or packages in JUnit 5?",
-    "options": {
-      "A": "@Suite",
-      "B": "@TestSuite",
-      "C": "@TestCollection",
-      "D": "@GroupTests"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid ways to pass data to a @ParameterizedTest using @CsvSource.",
-    "options": {
-      "A": "@CsvSource({ 'apple, 1', 'banana, 2' })",
-      "B": "@CsvSource(useHeadersInDisplayName = true, textBlock = 'fruit, quantity \\n apple, 1')",
-      "C": "@CsvSource(delimiter = ';', value = 'apple;1')",
-      "D": "@CsvSource(externalFile = 'data.csv')"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the 'ArgumentsAccessor' used for in a @ParameterizedTest?",
-    "options": {
-      "A": "To programmatically access all parameters in a row without declaring them individually in the method signature.",
-      "B": "To change the values of the parameters at runtime.",
-      "C": "To connect to a SQL database for parameters.",
-      "D": "To skip specific rows based on a condition."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @EnabledIfEnvironmentVariable supports regular expressions (regex) for matching the variable's value.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface must be implemented to create a custom 'ArgumentsProvider' for @ArgumentsSource?",
-    "options": {
-      "A": "ArgumentsProvider",
-      "B": "TestDataProvider",
-      "C": "ParameterResolver",
-      "D": "SourceFactory"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO benefits of using @Nested classes over a single flat test class.",
-    "options": {
-      "A": "Encapsulation of common setup logic for groups of related tests.",
-      "B": "Cleaner and more readable test reports (hierarchical view).",
-      "C": "Faster execution speed of the tests.",
-      "D": "Automatic mocking of all private fields."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "How does 'assertTimeoutPreemptively' differ from 'assertTimeout'?",
-    "options": {
-      "A": "It kills the execution of the code immediately if the timeout is reached, instead of waiting for it to finish.",
-      "B": "It only works with multi-core processors.",
-      "C": "It is used specifically for database connections.",
-      "D": "It automatically retries the test if it times out."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 allows you to register multiple extensions on a single test class using the @ExtendWith annotation.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows you to run a test class only if the JVM version is within a specific range?",
-    "options": {
-      "A": "@EnabledForJreRange",
-      "B": "@JavaVersion",
-      "C": "@JreOnly",
-      "D": "@TargetJre"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO traits of JUnit 5 'Tagging'.",
-    "options": {
-      "A": "Tags can be used to include or exclude tests during build execution.",
-      "B": "Tags can be applied to both methods and classes.",
-      "C": "Tags must be unique across the entire project.",
-      "D": "Tags automatically change the test's priority."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is 'Constructor Injection' used for in JUnit 5 test classes?",
-    "options": {
-      "A": "To inject objects like TestInfo or RepetitionInfo directly into the test class instance.",
-      "B": "To instantiate private static fields.",
-      "C": "To bypass the need for @BeforeEach.",
-      "D": "To mock the class being tested."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @RepeatedTest annotation supports a 'failureThreshold' to stop repetitions after a certain number of failures.",
-    "options": {
-      "A": "True (Introduced in recent JUnit 5 versions).",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which @ParameterizedTest source allows you to pass a list of enum constants to a test?",
-    "options": {
-      "A": "@EnumSource",
-      "B": "@ConstantSource",
-      "C": "@TypeSource",
-      "D": "@ListSource"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to order tests in JUnit 5 using @TestMethodOrder.",
-    "options": {
-      "A": "MethodOrderer.OrderAnnotation.class",
-      "B": "MethodOrderer.Alphanumeric.class (Deprecated/Replaced)",
-      "C": "MethodOrderer.Random.class",
-      "D": "MethodOrderer.Priority.class"
-    },
-    "answer": "A, C"
-  },
-  {
-    "question": "What is a 'Dynamic Test' in JUnit 5?",
-    "options": {
-      "A": "A test generated at runtime by a @TestFactory method.",
-      "B": "A test that changes its logic based on the time of day.",
-      "C": "A test that is written in JavaScript.",
-      "D": "A test that only runs on the cloud."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @AfterAll methods are executed even if some tests in the class failed.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion verifies that an object is an instance of a specific type?",
-    "options": {
-      "A": "assertInstanceOf()",
-      "B": "assertType()",
-      "C": "assertClass()",
-      "D": "assertEquals()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface must be implemented to create a custom Extension that can prevent a test from executing based on complex runtime logic?",
-    "options": {
-      "A": "ExecutionCondition",
-      "B": "TestExecutionListener",
-      "C": "BeforeTestCallback",
-      "D": "InvocationInterceptor"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In JUnit 5 parallel execution, the 'Fixed' parallelism strategy uses a pool size calculated by: factor * number of available processors.",
-    "options": {
-      "A": "False (That is the 'Dynamic' strategy; 'Fixed' uses a specific integer value).",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of the '@RegisterExtension' annotation compared to '@ExtendWith'?",
-    "options": {
-      "A": "It allows extensions to be registered programmatically via fields, enabling data to be passed to the extension constructor.",
-      "B": "It is used only for static extensions.",
-      "C": "It is the only way to use Mockito with JUnit 5.",
-      "D": "It automatically registers the extension for every class in the project."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO isolation modes for parallel execution in JUnit 5 to handle shared resources.",
-    "options": {
-      "A": "ResourceLock",
-      "B": "ExecutionMode.SAME_THREAD",
-      "C": "IsolatedProcess",
-      "D": "ThreadSafe"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the '@TestFactory' annotation return to allow JUnit to generate tests dynamically at runtime?",
-    "options": {
-      "A": "A Stream, Collection, Iterable, or Iterator of DynamicNode (DynamicTest or DynamicContainer).",
-      "B": "A List of strings representing test names.",
-      "C": "A Boolean value indicating success.",
-      "D": "A void return type with a lambda body."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'ExtensionContext.Store' automatically handles object cleanup if the stored values implement the 'CloseableResource' interface.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which JUnit Platform component is responsible for orchestrating the discovery and execution of tests by delegating to specific TestEngines?",
-    "options": {
-      "A": "Launcher",
-      "B": "JupiterEngine",
-      "C": "VintageEngine",
-      "D": "DiscoverySelector"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid 'ResourceLock' modes used to synchronize access to shared resources in parallel tests.",
-    "options": {
-      "A": "ResourceAccessMode.READ",
-      "B": "ResourceAccessMode.READ_WRITE",
-      "C": "ResourceAccessMode.EXCLUSIVE",
-      "D": "ResourceAccessMode.PRIVATE"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is 'Parameter Resolution' in the JUnit 5 extension model?",
-    "options": {
-      "A": "A mechanism that allows custom extensions to inject data (like mocks or context) into test constructors or methods at runtime.",
-      "B": "The process of converting CSV strings into Integers.",
-      "C": "A way to rename parameters in the report.",
-      "D": "The method JUnit uses to sort test methods alphabetically."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: Dynamic tests created via @TestFactory do not support lifecycle callbacks like @BeforeEach or @AfterEach for the individual dynamic tests.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to turn on parallel execution for a specific test class or method when the global configuration is set to 'same_thread'?",
-    "options": {
-      "A": "@Execution(ExecutionMode.CONCURRENT)",
-      "B": "@Parallel",
-      "C": "@Threaded",
-      "D": "@Concurrent"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO characteristics of 'DynamicContainers' in JUnit 5.",
-    "options": {
-      "A": "They allow for nested grouping of dynamic tests.",
-      "B": "They are produced by @TestFactory methods.",
-      "C": "They automatically run @BeforeAll before each group.",
-      "D": "They can only contain one test method."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the function of 'TestTemplateInvocationContextProvider'?",
-    "options": {
-      "A": "It provides a mechanism to run a single @TestTemplate method multiple times with different execution contexts.",
-      "B": "It generates HTML templates for test reports.",
-      "C": "It acts as a bridge between JUnit 4 and JUnit 5.",
-      "D": "It handles file uploads during testing."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'Lifecycle.PER_CLASS' mode allows the use of non-static methods for @BeforeAll and @AfterAll because JUnit reuses the same test instance for all methods in the class.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface is used to intercept and wrap the invocation of a test method, potentially changing its arguments or suppressing exceptions?",
-    "options": {
-      "A": "InvocationInterceptor",
-      "B": "TestWatcher",
-      "C": "BeforeEachCallback",
-      "D": "ExecutionCondition"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO requirements for using JUnit 5 Extensions via Java's 'ServiceLoader' mechanism.",
-    "options": {
-      "A": "Enabling the 'junit.jupiter.extensions.autodetection.enabled' configuration property.",
-      "B": "Providing the fully qualified class name in META-INF/services/org.junit.jupiter.api.extension.Extension.",
-      "C": "Applying the @AutoRegister annotation to the class.",
-      "D": "Restarting the IDE after every build."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "How can you implement a 'Custom Tag' in JUnit 5 that combines @Tag and @Test into a single annotation?",
-    "options": {
-      "A": "By creating a meta-annotation that is itself annotated with @Tag and @Test.",
-      "B": "By extending the Test class and overriding the tag() method.",
-      "C": "JUnit 5 does not support meta-annotations.",
-      "D": "By using the @AliasFor annotation from Spring."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In parallel execution, if a test is annotated with @ResourceLock(value = 'SYSTEM_PROPERTIES', mode = READ_WRITE), it will be prevented from running concurrently with any other test that reads or writes system properties.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which configuration property controls the 'keep-alive' time for threads in the JUnit parallel ForkJoinPool?",
-    "options": {
-      "A": "junit.jupiter.execution.parallel.config.fixed.keep-alive",
-      "B": "junit.parallel.thread.timeout",
-      "C": "thread.pool.keepalive",
-      "D": "jupiter.worker.ttl"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO benefits of the 'TestWatcher' extension interface.",
-    "options": {
-      "A": "Capturing logs or taking screenshots specifically when a test fails.",
-      "B": "Reacting to the results of individual test method executions (successful, aborted, failed).",
-      "C": "Changing the source code to fix the failing test.",
-      "D": "Speeding up the execution of the JVM."
-    },
-    "answer": "A, B"
-  },
-  {
-    "level": "Easy",
-    "question": "Which annotation is used to mark a method as a test in JUnit Jupiter?",
-    "options": {
-      "A": "@Test",
-      "B": "@TestCase",
-      "C": "@TestInfo",
-      "D": "@Execute"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Easy",
-    "question": "True or False: JUnit 5 test methods must be public.",
-    "options": {
-      "A": "False (They can be package-private).",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Easy",
-    "question": "Which assertion is used to verify that a specific exception is thrown?",
-    "options": {
-      "A": "assertThrows()",
-      "B": "assertException()",
-      "C": "assertCatch()",
-      "D": "assertError()"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Medium",
-    "question": "What is the primary purpose of the '@TempDir' annotation?",
-    "options": {
-      "A": "To create and inject a temporary directory that is automatically deleted after the test.",
-      "B": "To cache test results in a temporary folder.",
-      "C": "To store environment variables temporarily.",
-      "D": "To limit the memory usage of the test JVM."
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Medium",
-    "question": "True or False: The '@CsvSource' annotation allows you to pass multiple arguments to a single test method invocation.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Medium",
-    "question": "Which annotation is used to create hierarchical/grouped test structures within a single class?",
-    "options": {
-      "A": "@Nested",
-      "B": "@Group",
-      "C": "@Structure",
-      "D": "@SubTest"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Hard",
-    "question": "In the JUnit 5 extension model, which interface is responsible for deciding if a test should be skipped at runtime?",
-    "options": {
-      "A": "ExecutionCondition",
-      "B": "TestWatcher",
-      "C": "ParameterResolver",
-      "D": "InvocationInterceptor"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Hard",
-    "question": "True or False: Dynamic tests generated via '@TestFactory' do not support standard lifecycle callbacks like '@BeforeEach'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Hard",
-    "question": "Which mechanism allows you to synchronize parallel test execution when multiple tests access the same static resource?",
-    "options": {
-      "A": "@ResourceLock",
-      "B": "@Synchronize",
-      "C": "@Isolated",
-      "D": "@Lock"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Easy",
-    "question": "Which annotation replaces the JUnit 4 '@Ignore' annotation?",
-    "options": {
-      "A": "@Disabled",
-      "B": "@Skip",
-      "C": "@IgnoreTest",
-      "D": "@Exclude"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Medium",
-    "question": "What does 'assertAll' ensure during test execution?",
-    "options": {
-      "A": "All grouped assertions are checked even if one or more in the group fail.",
-      "B": "The test runs in all available threads.",
-      "C": "All previous tests in the suite must have passed.",
-      "D": "The test result is saved to all reporting formats."
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Hard",
-    "question": "How do you register an extension programmatically to allow constructor parameters in the extension class?",
-    "options": {
-      "A": "@RegisterExtension",
-      "B": "@ExtendWith",
-      "C": "@InjectExtension",
-      "D": "@ManualExtension"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Easy",
-    "question": "Which annotation runs a method after every test in the class?",
-    "options": {
-      "A": "@AfterEach",
-      "B": "@AfterAll",
-      "C": "@CleanUp",
-      "D": "@PostTest"
-    },
-    "answer": "A"
-  },
-  {
-    "level": "Medium",
-    "question": "Select TWO valid sources for a '@ParameterizedTest'.",
-    "options": {
-      "A": "@EnumSource",
-      "B": "@MethodSource",
-      "C": "@SQLSource",
-      "D": "@WebSource"
-    },
-    "answer": "A, B"
-  },
-  {
-    "level": "Hard",
-    "question": "Which interface is used to intercept the actual call to a test method to perform custom logic around the invocation?",
-    "options": {
-      "A": "InvocationInterceptor",
-      "B": "BeforeTestExecutionCallback",
-      "C": "TestInstancePostProcessor",
-      "D": "LifecycleMethodExecutionExceptionHandler"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface must be implemented to create a custom Extension that decides if a test should run based on runtime conditions?",
-    "options": {
-      "A": "ExecutionCondition",
-      "B": "TestWatcher",
-      "C": "BeforeTestCallback",
-      "D": "InvocationInterceptor"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In JUnit 5 parallel execution, the 'Fixed' strategy uses a pool size calculated as (factor * processors).",
-    "options": {
-      "A": "False (That is the 'Dynamic' strategy).",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the primary advantage of @RegisterExtension over @ExtendWith?",
-    "options": {
-      "A": "It allows programmatic registration via fields, enabling state to be passed to the extension constructor.",
-      "B": "It is the only way to support static methods.",
-      "C": "It automatically applies to all classes in the project.",
-      "D": "It bypasses the JUnit Platform Launcher."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which synchronization mode should be used with @ResourceLock when a test only needs to read a shared resource?",
-    "options": {
-      "A": "ResourceAccessMode.READ",
-      "B": "ResourceAccessMode.READ_WRITE",
-      "C": "ResourceAccessMode.EXCLUSIVE",
-      "D": "ResourceAccessMode.SHARED"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does @TestFactory return to allow JUnit to generate tests dynamically at runtime?",
-    "options": {
-      "A": "A Stream, Collection, Iterable, or Iterator of DynamicNode.",
-      "B": "A List of strings representing test names.",
-      "C": "A Boolean value indicating success.",
-      "D": "A void return type with a lambda body."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The ExtensionContext.Store automatically handles cleanup if values implement CloseableResource.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to run a test multiple times with different arguments from a method?",
-    "options": {
-      "A": "@ParameterizedTest",
-      "B": "@RepeatedTest",
-      "C": "@TestFactory",
-      "D": "@ArgumentsSource"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid sources for a @ParameterizedTest.",
-    "options": {
-      "A": "@CsvSource",
-      "B": "@MethodSource",
-      "C": "@JsonSource",
-      "D": "@XmlSource"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the @TempDir annotation?",
-    "options": {
-      "A": "To create and inject a temporary directory that is deleted after the test.",
-      "B": "To store environment variables.",
-      "C": "To cache test results.",
-      "D": "To measure disk I/O speed."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @BeforeAll methods must be static unless the lifecycle is set to Lifecycle.PER_CLASS.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion ensures that all grouped assertions are executed even if some fail?",
-    "options": {
-      "A": "assertAll()",
-      "B": "assertGroup()",
-      "C": "assertMultiple()",
-      "D": "assertBulk()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to group related tests into hierarchical structures?",
-    "options": {
-      "A": "@Nested",
-      "B": "@SubClass",
-      "C": "@Group",
-      "D": "@Node"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does 'assertTimeoutPreemptively' do that 'assertTimeout' does not?",
-    "options": {
-      "A": "It kills the execution of the code immediately if the timeout is reached.",
-      "B": "It retries the test if it fails.",
-      "C": "It measures CPU cycles instead of time.",
-      "D": "It only works with network connections."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 test methods must be public.",
-    "options": {
-      "A": "False (They can be package-private).",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation replaces the JUnit 4 @Ignore?",
-    "options": {
-      "A": "@Disabled",
-      "B": "@Skip",
-      "C": "@IgnoreTest",
-      "D": "@Exclude"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface must be implemented to create a custom 'ParameterResolver' for dependency injection in test constructors?",
-    "options": {
-      "A": "ParameterResolver",
-      "B": "ArgumentInjector",
-      "C": "DependencyResolver",
-      "D": "TestInstancePostProcessor"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 allows for 'Meta-annotations', meaning you can create a custom annotation that is composed of multiple JUnit annotations like @Tag and @Test.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to specify the execution order of test methods within a class?",
-    "options": {
-      "A": "@TestMethodOrder",
-      "B": "@Order",
-      "C": "@TestSequence",
-      "D": "@Priority"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO built-in MethodOrderer implementations provided by JUnit Jupiter.",
-    "options": {
-      "A": "MethodOrderer.OrderAnnotation",
-      "B": "MethodOrderer.Random",
-      "C": "MethodOrderer.Price",
-      "D": "MethodOrderer.Frequency"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the purpose of the 'TestReporter' parameter in a test method?",
-    "options": {
-      "A": "To publish additional data/metadata about the current test run for reporting tools.",
-      "B": "To restart the test if it fails.",
-      "C": "To print the stack trace to the console.",
-      "D": "To send an email notification when the test finishes."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @AfterAll method will execute even if the @BeforeAll method for the same class failed.",
-    "options": {
-      "A": "False (If @BeforeAll fails, the class is aborted and @AfterAll is not called).",
-      "B": "True"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to specify that a test should be executed only if the JVM is running on a specific 64-bit architecture?",
-    "options": {
-      "A": "@EnabledOnOs",
-      "B": "@EnabledIfSystemProperty",
-      "C": "@EnabledIf",
-      "D": "@Condition"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO traits of @TestTemplate.",
-    "options": {
-      "A": "It is not a test itself but a template for test cases.",
-      "B": "It requires a registered TestTemplateInvocationContextProvider.",
-      "C": "It is used for mocking private methods.",
-      "D": "It replaces the need for @ParameterizedTest."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What happens if you use @TestInstance(Lifecycle.PER_CLASS)?",
-    "options": {
-      "A": "A single instance of the test class is used for all test methods, allowing non-static @BeforeAll/@AfterAll.",
-      "B": "The test class is instantiated once per thread.",
-      "C": "JUnit deletes the instance after every method call.",
-      "D": "The class becomes a singleton in the JVM."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: @EnabledIfEnvironmentVariable is case-sensitive when matching the variable name.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion should be used to verify that a block of code does NOT throw any exception?",
-    "options": {
-      "A": "assertDoesNotThrow()",
-      "B": "assertNoException()",
-      "C": "assertSafe()",
-      "D": "assertValid()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the function of the 'junit-platform.properties' file?",
-    "options": {
-      "A": "To configure global settings like parallel execution, default lifecycles, and auto-detection of extensions.",
-      "B": "To store the database credentials for integration tests.",
-      "C": "To list the names of all developers on the project.",
-      "D": "To define the Java version for the compiler."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: 'DynamicTests' can be marked with the @Tag annotation at the factory level.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface allows an extension to intercept the execution of a test method and handle exceptions thrown by it?",
-    "options": {
-      "A": "TestExecutionExceptionHandler",
-      "B": "ExecutionCondition",
-      "C": "TestWatcher",
-      "D": "ParameterResolver"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO benefits of 'Constructor Injection' in JUnit 5 test classes.",
-    "options": {
-      "A": "Allows final fields to be initialized with injected values.",
-      "B": "Makes the test class more consistent with standard Java dependency injection patterns.",
-      "C": "Speeds up the instantiation of the class.",
-      "D": "Automatically mocks all constructor arguments."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which annotation is used to synchronize access to a shared resource when running tests in parallel?",
-    "options": {
-      "A": "@ResourceLock",
-      "B": "@Synchronized",
-      "C": "@LockResource",
-      "D": "@SharedAccess"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit 5 supports 'Composed Annotations', allowing you to create a single custom annotation that acts as both @Test and @Tag.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which configuration property in 'junit-platform.properties' is used to enable parallel test execution globally?",
-    "options": {
-      "A": "junit.jupiter.execution.parallel.enabled",
-      "B": "junit.parallel.run",
-      "C": "jupiter.parallel.mode",
-      "D": "test.parallel.execution"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the primary function of the '@TestTemplate' annotation?",
-    "options": {
-      "A": "It defines a template for a test that is executed multiple times based on the number of registered invocation providers.",
-      "B": "It creates a visual HTML template for the test report.",
-      "C": "It is a legacy annotation from JUnit 4.",
-      "D": "It is used to mock abstract classes."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The @AfterEach method is executed even if the test method itself threw an AssertionFailedError.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which interface should be implemented to handle exceptions thrown during the execution of a test and potentially suppress them?",
-    "options": {
-      "A": "TestExecutionExceptionHandler",
-      "B": "LifecycleMethodExecutionExceptionHandler",
-      "C": "TestErrorObserver",
-      "D": "ExceptionHandlerExtension"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What does the 'READ_WRITE' mode signify in a @ResourceLock annotation?",
-    "options": {
-      "A": "The test requires exclusive access to the resource and cannot run concurrently with any other test using that resource.",
-      "B": "The test only reads the resource.",
-      "C": "The test can run concurrently with other 'READ' tests.",
-      "D": "The test ignores the resource lock."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid DiscoverySelectors used by the Launcher to find tests.",
-    "options": {
-      "A": "DiscoverySelectors.selectClass()",
-      "B": "DiscoverySelectors.selectPackage()",
-      "C": "DiscoverySelectors.findEverywhere()",
-      "D": "DiscoverySelectors.searchClasspath()"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the 'JUnit Platform Launcher' used for?",
-    "options": {
-      "A": "To programmatically discover and execute tests from outside an IDE or build tool.",
-      "B": "To upload test results to a server.",
-      "C": "To compile the test source code.",
-      "D": "To manage the dependencies of the project."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: By default, JUnit 5 executes all test methods within the same class sequentially in the same thread.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation allows you to conditionally skip a test if a specific environment variable is NOT present?",
-    "options": {
-      "A": "@DisabledIfEnvironmentVariable",
-      "B": "@SkipIfNoEnv",
-      "C": "@OnlyOnEnv",
-      "D": "@RequireEnv"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of '@IndicativeSentencesGeneration'?",
-    "options": {
-      "A": "It is a DisplayNameGenerator that creates sentences by concatenating the class name and method name.",
-      "B": "It checks the grammar of your display names.",
-      "C": "It generates random test data.",
-      "D": "It creates documentation for the API."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In JUnit 5, you can use @Tag on a meta-annotation to apply that tag to any test using the meta-annotation.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which assertion verifies that a block of code completes within a specific time, but does NOT interrupt the execution if it exceeds the limit?",
-    "options": {
-      "A": "assertTimeout()",
-      "B": "assertTimeoutPreemptively()",
-      "C": "assertDuration()",
-      "D": "assertMaxTime()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO default 'ExecutionMode' values for parallel testing.",
-    "options": {
-      "A": "ExecutionMode.CONCURRENT",
-      "B": "ExecutionMode.SAME_THREAD",
-      "C": "ExecutionMode.ISOLATED",
-      "D": "ExecutionMode.STRICT"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "Which interface must a custom test engine implement to be discovered and executed by the JUnit Platform?",
-    "options": {
-      "A": "TestEngine",
-      "B": "ExecutionEngine",
-      "C": "PlatformProvider",
-      "D": "JupiterEngine"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'DiscoverySelector' API allows the Launcher to filter tests based on specific Classpath roots or Package names.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which specific configuration property allows for 'Parallel Execution' to be restricted to specific threads using a custom 'ForkJoinPool.ForkJoinWorkerThreadFactory'?",
-    "options": {
-      "A": "junit.jupiter.execution.parallel.config.strategy",
-      "B": "junit.parallel.factory.class",
-      "C": "jupiter.thread.factory",
-      "D": "platform.worker.strategy"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the primary function of 'TestExecutionListener' when registered with the Launcher?",
-    "options": {
-      "A": "To receive events such as test discovery started, test execution started, and test finished for reporting and logging purposes.",
-      "B": "To modify the source code of the test class.",
-      "C": "To inject parameters into the test method.",
-      "D": "To skip tests based on the operating system."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: JUnit Jupiter supports the execution of tests in parallel even if they are within the same class, provided the 'execution.parallel.mode.default' is set to 'concurrent'.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which annotation is used to create a 'composed annotation' that includes @Test, @Tag('fast'), and @Timeout(5)?",
-    "options": {
-      "A": "Any custom @interface can be used to group these as meta-annotations.",
-      "B": "@ComposedTest",
-      "C": "@TestGroup",
-      "D": "@MetaTest"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO ways to register a 'LauncherDiscoveryListener' with the JUnit Platform.",
-    "options": {
-      "A": "Using the ServiceLoader mechanism (META-INF/services).",
-      "B": "Registering it programmatically via the LauncherDiscoveryRequestBuilder.",
-      "C": "Adding it to the build.gradle plugins block.",
-      "D": "Using the @ExtendWith annotation on a test class."
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What is the 'JUnit Flight Recorder' (JFR) support used for in test execution?",
-    "options": {
-      "A": "To generate events for Java Flight Recorder to profile test execution performance and resource usage.",
-      "B": "To record a video of the test run.",
-      "C": "To save the console output to a file.",
-      "D": "To roll back database transactions automatically."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: In a multi-engine environment, the JUnit Platform can execute Jupiter and Vintage tests simultaneously in the same session.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which DiscoverySelector is used to select a specific method within a class for execution?",
-    "options": {
-      "A": "DiscoverySelectors.selectMethod(String, String)",
-      "B": "DiscoverySelectors.selectFunction(String)",
-      "C": "DiscoverySelectors.byName(String)",
-      "D": "DiscoverySelectors.pick(Method)"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the purpose of the 'PostDiscoveryFilter'?",
-    "options": {
-      "A": "To exclude tests from the test plan after they have been discovered but before they are executed.",
-      "B": "To delete temporary files created during discovery.",
-      "C": "To sort tests alphabetically.",
-      "D": "To rename tests in the final report."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'LauncherConfig' API allows for the creation of a Launcher that is pre-configured with a specific set of TestEngines.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which internal component of the JUnit Platform is used to build a 'TestPlan' based on a 'LauncherDiscoveryRequest'?",
-    "options": {
-      "A": "Launcher",
-      "B": "TestEngine",
-      "C": "EngineDiscoveryRequest",
-      "D": "HierarchicalTestExecutor"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO valid 'Parallel Execution' strategies for thread pool sizing.",
-    "options": {
-      "A": "dynamic",
-      "B": "fixed",
-      "C": "unlimited",
-      "D": "adaptive"
-    },
-    "answer": "A, B"
-  },
-  {
-    "question": "What does the 'HierarchicalTestExecutor' do?",
-    "options": {
-      "A": "It coordinates the execution of nodes in a TestPlan according to the hierarchical structure (Engine -> Class -> Method).",
-      "B": "It sorts tests by their package name.",
-      "C": "It creates a tree-view of the source code.",
-      "D": "It manages the inheritance of Java classes."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: You can provide a custom 'TestDescriptor' to represent a node in the test tree for a custom TestEngine.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which method on the 'Launcher' interface starts the discovery and execution process?",
-    "options": {
-      "A": "execute(LauncherDiscoveryRequest, TestExecutionListener...)",
-      "B": "runTests(Request)",
-      "C": "start(Discovery)",
-      "D": "launch(TestPlan)"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "What is the function of 'EngineExecutionListener'?",
-    "options": {
-      "A": "It is used by a TestEngine to report the status of individual tests back to the JUnit Platform.",
-      "B": "It listens for keyboard input during a test.",
-      "C": "It monitors the temperature of the CPU.",
-      "D": "It generates JAR files from the test classes."
-    },
-    "answer": "A"
-  },
-  {
-    "question": "True or False: The 'UniqueId' class in JUnit Platform ensures that every test node can be uniquely identified across different engines and executions.",
-    "options": {
-      "A": "True",
-      "B": "False"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Which specific 'EngineDiscoveryRequest' property allows a TestEngine to access the raw 'LauncherDiscoveryRequest' configuration?",
-    "options": {
-      "A": "getConfigurationParameters()",
-      "B": "getRawRequest()",
-      "C": "getSettings()",
-      "D": "getDiscoveryContext()"
-    },
-    "answer": "A"
-  },
-  {
-    "question": "Select TWO common causes for a TestEngine failing to be discovered by the JUnit Platform.",
-    "options": {
-      "A": "Missing 'META-INF/services/org.junit.platform.engine.TestEngine' file.",
-      "B": "The engine class does not have a public no-args constructor.",
-      "C": "The engine is written in Kotlin instead of Java.",
-      "D": "The project is using Maven instead of Gradle."
-    },
-    "answer": "A, B"
-  }
+      "question": "Which annotation is used to mark a method as a test method in JUnit 5?",
+      "options": {
+        "A": "@Test",
+        "B": "@TestCase",
+        "C": "@TestInfo",
+        "D": "@Execute"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In JUnit 5, test methods and lifecycle methods do not need to be 'public'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion method is used to verify that two values are equal?",
+      "options": {
+        "A": "assertEquals()",
+        "B": "assertSame()",
+        "C": "assertMatch()",
+        "D": "assertCheck()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO annotations used to run code once before any tests in the current class execute.",
+      "options": {
+        "A": "@BeforeAll",
+        "B": "@BeforeClass (JUnit 4 legacy)",
+        "C": "@BeforeEach",
+        "D": "@Initialize"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the '@Disabled' annotation?",
+      "options": {
+        "A": "To skip the execution of a test class or method.",
+        "B": "To mark a test as failed automatically.",
+        "C": "To indicate a test is only for documentation.",
+        "D": "To run a test only on certain operating systems."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The '@BeforeEach' annotation runs a method before every individual test method in a class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion is used to ensure a block of code throws a specific exception?",
+      "options": {
+        "A": "assertThrows()",
+        "B": "assertException()",
+        "C": "assertFail()",
+        "D": "assertError()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO standard JUnit 5 assertion methods.",
+      "options": {
+        "A": "assertTrue()",
+        "B": "assertNotNull()",
+        "C": "assertExists()",
+        "D": "assertValid()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In JUnit 5, what is the 'Jupiter' engine?",
+      "options": {
+        "A": "The core programming and extension model for writing tests.",
+        "B": "The tool used to generate HTML reports.",
+        "C": "A bridge to run JUnit 3 tests.",
+        "D": "The command-line interface for the build tool."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 is composed of three different sub-projects: Platform, Jupiter, and Vintage.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows you to define a custom name for a test class or method that is displayed in reports?",
+      "options": {
+        "A": "@DisplayName",
+        "B": "@TestName",
+        "C": "@Alias",
+        "D": "@ReportName"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of a 'Unit Test'.",
+      "options": {
+        "A": "It tests the smallest piece of code in isolation.",
+        "B": "It should be fast and automated.",
+        "C": "It requires a database connection to run.",
+        "D": "It involves testing multiple systems at once."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'assertTimeout()' do in JUnit 5?",
+      "options": {
+        "A": "It fails the test if the execution of the supplied code takes longer than the specified duration.",
+        "B": "It pauses the test for a specific amount of time.",
+        "C": "It limits the total number of tests that can run.",
+        "D": "It checks how long the database is offline."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The '@AfterAll' method must be 'static' by default in JUnit 5 (unless using 'Per-class' lifecycle).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion is used to group multiple assertions so that all of them are executed, even if some fail?",
+      "options": {
+        "A": "assertAll()",
+        "B": "assertGroup()",
+        "C": "assertMultiple()",
+        "D": "assertBulk()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO annotations provided by JUnit 5 for cleanup logic.",
+      "options": {
+        "A": "@AfterEach",
+        "B": "@AfterAll",
+        "C": "@TearDown",
+        "D": "@Finalize"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of '@Tag' in JUnit 5?",
+      "options": {
+        "A": "To filter and group tests for specific execution environments (e.g., 'fast', 'slow').",
+        "B": "To name the author of the test.",
+        "C": "To indicate the ticket number for a bug.",
+        "D": "To mark a test as ready for production."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'assertNull()' fails if the object being tested is not null.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to run a test multiple times with different arguments?",
+      "options": {
+        "A": "@ParameterizedTest",
+        "B": "@RepeatedTest",
+        "C": "@MultiTest",
+        "D": "@ArgTest"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common IDEs that have built-in support for running JUnit 5 tests.",
+      "options": {
+        "A": "IntelliJ IDEA",
+        "B": "Eclipse",
+        "C": "Notepad++",
+        "D": "Adobe Photoshop"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which annotation is used to execute a test multiple times in a row?",
+      "options": {
+        "A": "@RepeatedTest",
+        "B": "@LoopTest",
+        "C": "@Retry",
+        "D": "@Duplicate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @EnabledOnOs annotation can be used to run a test only on specific operating systems like Linux or macOS.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which object can be injected into a @RepeatedTest method to get information about the current repetition?",
+      "options": {
+        "A": "RepetitionInfo",
+        "B": "TestInfo",
+        "C": "IterationStatus",
+        "D": "LoopContext"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion verifies that a specific block of code does NOT exceed a certain time limit?",
+      "options": {
+        "A": "assertTimeout()",
+        "B": "assertSpeed()",
+        "C": "assertDuration()",
+        "D": "assertFast()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 requires Java 8 or higher to run.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the @BeforeEach annotation?",
+      "options": {
+        "A": "To initialize common test data before every test method.",
+        "B": "To set up the database once for the whole class.",
+        "C": "To skip the next test if a condition is met.",
+        "D": "To verify the test results."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to group tests into categories like 'Production' or 'Integration'?",
+      "options": {
+        "A": "@Tag",
+        "B": "@Category",
+        "C": "@Group",
+        "D": "@Labels"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In JUnit 5, @BeforeAll methods must be static by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion should be used to check if two object references point to the exact same object?",
+      "options": {
+        "A": "assertSame()",
+        "B": "assertEquals()",
+        "C": "assertReference()",
+        "D": "assertIdentity()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the @EnabledIfSystemProperty annotation do?",
+      "options": {
+        "A": "Runs a test only if a specific JVM system property matches a defined value.",
+        "B": "Changes the system properties of the computer.",
+        "C": "Enables the test if the internet is connected.",
+        "D": "Automatically sets the version of Java."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: If an assertion fails inside an assertAll() block, the remaining assertions in that block are still executed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to provide a human-readable name for a test class or method?",
+      "options": {
+        "A": "@DisplayName",
+        "B": "@Alias",
+        "C": "@TestName",
+        "D": "@Description"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid values for the @EnabledOnOs annotation.",
+      "options": {
+        "A": "OS.WINDOWS",
+        "B": "OS.LINUX",
+        "C": "OS.ANDROID",
+        "D": "OS.CHROMEBOOK"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the difference between @BeforeEach and @BeforeAll?",
+      "options": {
+        "A": "@BeforeEach runs before every test; @BeforeAll runs once before the class.",
+        "B": "@BeforeEach is for JUnit 4; @BeforeAll is for JUnit 5.",
+        "C": "@BeforeEach is only for methods; @BeforeAll is only for classes.",
+        "D": "There is no difference."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 test classes can have constructors with parameters if a ParameterResolver is registered.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion checks if a condition is false?",
+      "options": {
+        "A": "assertFalse()",
+        "B": "assertNotTrue()",
+        "C": "assertNegative()",
+        "D": "assertFail()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'JUnit Vintage' used for?",
+      "options": {
+        "A": "Running tests written in JUnit 3 or JUnit 4.",
+        "B": "Running tests on old versions of Java.",
+        "C": "Creating visual reports for the client.",
+        "D": "Running tests on old servers."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO annotations related to conditional test execution.",
+      "options": {
+        "A": "@EnabledIfEnvironmentVariable",
+        "B": "@DisabledOnJre",
+        "C": "@ConditionalTest",
+        "D": "@RunOnlyIf"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What happens if a test method is annotated with @Disabled?",
+      "options": {
+        "A": "The test is bypassed during execution and reported as skipped.",
+        "B": "The test is deleted from the source code.",
+        "C": "The test is marked as 'failed'.",
+        "D": "The test runs twice to check for errors."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @TestInstance(Lifecycle.PER_CLASS) annotation allows @BeforeAll methods to be non-static.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows a test to be executed only on a specific range of Java Runtime Environments (JRE)?",
+      "options": {
+        "A": "@EnabledForJreRange",
+        "B": "@JavaRange",
+        "C": "@TargetJre",
+        "D": "@OnlyOnJava"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'fail()' method do in JUnit 5?",
+      "options": {
+        "A": "It explicitly fails a test with a given message.",
+        "B": "It stops the whole build process.",
+        "C": "It marks the test as a 'success' if it crashes.",
+        "D": "It restarts the server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 test methods must be defined as 'public' to be discovered by the engine.",
+      "options": {
+        "A": "False (They can be package-private).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion is used to check if an array of objects is equal to another array?",
+      "options": {
+        "A": "assertArrayEquals()",
+        "B": "assertListEquals()",
+        "C": "assertCollection()",
+        "D": "assertEquals()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid lifecycle annotations for JUnit 5.",
+      "options": {
+        "A": "@AfterEach",
+        "B": "@BeforeAll",
+        "C": "@Startup",
+        "D": "@Teardown"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the default behavior of JUnit 5 when a test method throws an unhandled exception?",
+      "options": {
+        "A": "The test fails immediately.",
+        "B": "The test is ignored.",
+        "C": "The test is retried.",
+        "D": "The server crashes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In JUnit 5, you can use @DisplayName with emojis.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion ensures that two floating-point numbers are equal within a certain 'delta' or margin of error?",
+      "options": {
+        "A": "assertEquals(expected, actual, delta)",
+        "B": "assertClose()",
+        "C": "assertFloat()",
+        "D": "assertAlmostEqual()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the @Order annotation do in JUnit 5?",
+      "options": {
+        "A": "Specifies the sequence in which test methods are executed (when used with a MethodOrderer).",
+        "B": "Categorizes tests by price.",
+        "C": "Limits the number of concurrent tests.",
+        "D": "Sorts the imports in the Java file."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 supports 'Constructor Injection' for test classes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to run a test only if an environment variable exists?",
+      "options": {
+        "A": "@EnabledIfEnvironmentVariable",
+        "B": "@EnvTest",
+        "C": "@RunIfVar",
+        "D": "@CheckEnv"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common Assertion classes in the JUnit Jupiter API.",
+      "options": {
+        "A": "Assertions",
+        "B": "Assumptions",
+        "C": "Expectations",
+        "D": "Verifications"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the role of @TestInfo in a test method?",
+      "options": {
+        "A": "It provides metadata about the current test, such as its display name or tags.",
+        "B": "It prints the test result to the console.",
+        "C": "It stores the test results in a database.",
+        "D": "It calculates the code coverage."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @Disabled can be applied to an entire class to skip all its tests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion is used to check that an object is an instance of a specific class?",
+      "options": {
+        "A": "assertInstanceOf()",
+        "B": "assertType()",
+        "C": "assertClass()",
+        "D": "assertEquals()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens if an 'Assumption' (Assumptions.assumeTrue) fails during a test?",
+      "options": {
+        "A": "The test is aborted and marked as 'skipped' rather than 'failed'.",
+        "B": "The test fails immediately.",
+        "C": "The test is retried with different data.",
+        "D": "The build process stops."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is required to enable the use of @Mock and @InjectMocks with JUnit 5 Jupiter?",
+      "options": {
+        "A": "@ExtendWith(MockitoExtension.class)",
+        "B": "@RunWith(MockitoJUnitRunner.class)",
+        "C": "@MockingEnabled",
+        "D": "@JupiterMockito"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary advantage of @Nested test classes in JUnit 5?",
+      "options": {
+        "A": "They allow for hierarchical organization of tests to represent complex scenarios or states.",
+        "B": "They automatically share all static variables between different classes.",
+        "C": "They prevent the Garbage Collector from cleaning up test data.",
+        "D": "They allow running JUnit 4 and JUnit 5 tests in the same file."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows you to provide a method name as a source of arguments for a @ParameterizedTest?",
+      "options": {
+        "A": "@MethodSource",
+        "B": "@ArgumentsSource",
+        "C": "@FunctionProvider",
+        "D": "@DataSource"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: By default, @Nested classes cannot contain static members like @BeforeAll unless the lifecycle is set to PER_CLASS.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which @ParameterizedTest source is best used for simple literal values like strings or primitives?",
+      "options": {
+        "A": "@ValueSource",
+        "B": "@CsvSource",
+        "C": "@EnumSource",
+        "D": "@MethodSource"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'Arguments' interface represent in a @MethodSource?",
+      "options": {
+        "A": "A container for a set of parameters to be passed to a single execution of a parameterized test.",
+        "B": "A list of all tests in the suite.",
+        "C": "The command-line arguments of the JVM.",
+        "D": "A way to pass data between @BeforeEach and @Test."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @TempDir can be used to inject a temporary directory into a class field or a method parameter.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to execute a test only if a specific Java system property is present?",
+      "options": {
+        "A": "@EnabledIfSystemProperty",
+        "B": "@ConditionSystem",
+        "C": "@RequireProperty",
+        "D": "@OnlyIfProperty"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid return types for a method used with @MethodSource.",
+      "options": {
+        "A": "Stream<Arguments>",
+        "B": "Iterable<Object>",
+        "C": "Map<String, Object>",
+        "D": "Optional<Arguments>"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'ArgumentsAggregator' interface?",
+      "options": {
+        "A": "To combine multiple parameters from a source into a single custom object.",
+        "B": "To count the number of tests executed.",
+        "C": "To group multiple classes into a suite.",
+        "D": "To handle exceptions in parameterized tests."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 allows injecting TestInfo into constructors, @BeforeEach, and @Test methods.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to perform conditional test execution based on a custom Boolean method?",
+      "options": {
+        "A": "@EnabledIf",
+        "B": "@RunIf",
+        "C": "@CheckBoolean",
+        "D": "@ValidIf"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the default 'display name' for a parameterized test invocation?",
+      "options": {
+        "A": "The index of the invocation and the values of the arguments.",
+        "B": "The name of the test method only.",
+        "C": "A random UUID.",
+        "D": "The word 'Parameterized'."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of @RepeatedTest.",
+      "options": {
+        "A": "It can inject RepetitionInfo to access the current iteration.",
+        "B": "It supports a custom name pattern for each repetition.",
+        "C": "It can take different parameters in each loop.",
+        "D": "It replaces the need for @Test."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How do you apply a custom DisplayNameGenerator to a whole class?",
+      "options": {
+        "A": "@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)",
+        "B": "@GenerateNames(Type.UNDERSCORE)",
+        "C": "@TestNameFormat(\"clean\")",
+        "D": "@UseGenerator(MyGenerator.class)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @CsvSource annotation allows you to define 'null' values by using an empty string or a specific 'nullValue' literal.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component is responsible for providing 'TestReporter' to test methods for publishing metadata?",
+      "options": {
+        "A": "ParameterResolver",
+        "B": "ExecutionCondition",
+        "C": "TestEngine",
+        "D": "TestInstancePostProcessor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens when using @EnumSource with 'mode = EXCLUDE'?",
+      "options": {
+        "A": "The test runs for all enum constants EXCEPT the ones specified in 'names'.",
+        "B": "The test is completely disabled.",
+        "C": "Only the constants specified in 'names' are used.",
+        "D": "The enum is converted to a string array."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO interfaces used for creating custom extensions in JUnit 5.",
+      "options": {
+        "A": "BeforeEachCallback",
+        "B": "ParameterResolver",
+        "C": "LifecycleListener",
+        "D": "TestInterceptor"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which annotation is used to run tests in a specific order within a class?",
+      "options": {
+        "A": "@TestMethodOrder",
+        "B": "@OrderTests",
+        "C": "@Sequence",
+        "D": "@SortBy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows a @ParameterizedTest to use a CSV file located in the 'src/test/resources' folder as a data source?",
+      "options": {
+        "A": "@CsvFileSource",
+        "B": "@ExternalCsv",
+        "C": "@ResourceSource",
+        "D": "@FileSource"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using @TestInstance(Lifecycle.PER_CLASS) allows you to use @BeforeAll and @AfterAll on non-static methods.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which functional interface is commonly used with 'DynamicTest.dynamicTest()' to define the actual logic of a dynamic test?",
+      "options": {
+        "A": "Executable",
+        "B": "Runnable",
+        "C": "Consumer",
+        "D": "Supplier"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO default DisplayNameGenerators provided by JUnit 5.",
+      "options": {
+        "A": "ReplaceUnderscores",
+        "B": "IndicativeSentences",
+        "C": "CamelCaseToSpace",
+        "D": "HumanReadable"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'ExtensionContext.Store' in the JUnit 5 extension model?",
+      "options": {
+        "A": "To save and retrieve data across different lifecycle phases of a test without using static variables.",
+        "B": "To download external dependencies.",
+        "C": "To store the HTML report results.",
+        "D": "To manage the JVM's memory heap."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A method annotated with @MethodSource can reside in a different class as long as its fully qualified name is provided.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to create a test suite by selecting multiple classes or packages in JUnit 5?",
+      "options": {
+        "A": "@Suite",
+        "B": "@TestSuite",
+        "C": "@TestCollection",
+        "D": "@GroupTests"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to pass data to a @ParameterizedTest using @CsvSource.",
+      "options": {
+        "A": "@CsvSource({ 'apple, 1', 'banana, 2' })",
+        "B": "@CsvSource(useHeadersInDisplayName = true, textBlock = 'fruit, quantity \\n apple, 1')",
+        "C": "@CsvSource(delimiter = ';', value = 'apple;1')",
+        "D": "@CsvSource(externalFile = 'data.csv')"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'ArgumentsAccessor' used for in a @ParameterizedTest?",
+      "options": {
+        "A": "To programmatically access all parameters in a row without declaring them individually in the method signature.",
+        "B": "To change the values of the parameters at runtime.",
+        "C": "To connect to a SQL database for parameters.",
+        "D": "To skip specific rows based on a condition."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @EnabledIfEnvironmentVariable supports regular expressions (regex) for matching the variable's value.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface must be implemented to create a custom 'ArgumentsProvider' for @ArgumentsSource?",
+      "options": {
+        "A": "ArgumentsProvider",
+        "B": "TestDataProvider",
+        "C": "ParameterResolver",
+        "D": "SourceFactory"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using @Nested classes over a single flat test class.",
+      "options": {
+        "A": "Encapsulation of common setup logic for groups of related tests.",
+        "B": "Cleaner and more readable test reports (hierarchical view).",
+        "C": "Faster execution speed of the tests.",
+        "D": "Automatic mocking of all private fields."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How does 'assertTimeoutPreemptively' differ from 'assertTimeout'?",
+      "options": {
+        "A": "It kills the execution of the code immediately if the timeout is reached, instead of waiting for it to finish.",
+        "B": "It only works with multi-core processors.",
+        "C": "It is used specifically for database connections.",
+        "D": "It automatically retries the test if it times out."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 allows you to register multiple extensions on a single test class using the @ExtendWith annotation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows you to run a test class only if the JVM version is within a specific range?",
+      "options": {
+        "A": "@EnabledForJreRange",
+        "B": "@JavaVersion",
+        "C": "@JreOnly",
+        "D": "@TargetJre"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of JUnit 5 'Tagging'.",
+      "options": {
+        "A": "Tags can be used to include or exclude tests during build execution.",
+        "B": "Tags can be applied to both methods and classes.",
+        "C": "Tags must be unique across the entire project.",
+        "D": "Tags automatically change the test's priority."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Constructor Injection' used for in JUnit 5 test classes?",
+      "options": {
+        "A": "To inject objects like TestInfo or RepetitionInfo directly into the test class instance.",
+        "B": "To instantiate private static fields.",
+        "C": "To bypass the need for @BeforeEach.",
+        "D": "To mock the class being tested."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @RepeatedTest annotation supports a 'failureThreshold' to stop repetitions after a certain number of failures.",
+      "options": {
+        "A": "True (Introduced in recent JUnit 5 versions).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which @ParameterizedTest source allows you to pass a list of enum constants to a test?",
+      "options": {
+        "A": "@EnumSource",
+        "B": "@ConstantSource",
+        "C": "@TypeSource",
+        "D": "@ListSource"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to order tests in JUnit 5 using @TestMethodOrder.",
+      "options": {
+        "A": "MethodOrderer.OrderAnnotation.class",
+        "B": "MethodOrderer.Alphanumeric.class (Deprecated/Replaced)",
+        "C": "MethodOrderer.Random.class",
+        "D": "MethodOrderer.Priority.class"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a 'Dynamic Test' in JUnit 5?",
+      "options": {
+        "A": "A test generated at runtime by a @TestFactory method.",
+        "B": "A test that changes its logic based on the time of day.",
+        "C": "A test that is written in JavaScript.",
+        "D": "A test that only runs on the cloud."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @AfterAll methods are executed even if some tests in the class failed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion verifies that an object is an instance of a specific type?",
+      "options": {
+        "A": "assertInstanceOf()",
+        "B": "assertType()",
+        "C": "assertClass()",
+        "D": "assertEquals()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface must be implemented to create a custom Extension that can prevent a test from executing based on complex runtime logic?",
+      "options": {
+        "A": "ExecutionCondition",
+        "B": "TestExecutionListener",
+        "C": "BeforeTestCallback",
+        "D": "InvocationInterceptor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In JUnit 5 parallel execution, the 'Fixed' parallelism strategy uses a pool size calculated by: factor * number of available processors.",
+      "options": {
+        "A": "False (That is the 'Dynamic' strategy; 'Fixed' uses a specific integer value).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the '@RegisterExtension' annotation compared to '@ExtendWith'?",
+      "options": {
+        "A": "It allows extensions to be registered programmatically via fields, enabling data to be passed to the extension constructor.",
+        "B": "It is used only for static extensions.",
+        "C": "It is the only way to use Mockito with JUnit 5.",
+        "D": "It automatically registers the extension for every class in the project."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO isolation modes for parallel execution in JUnit 5 to handle shared resources.",
+      "options": {
+        "A": "ResourceLock",
+        "B": "ExecutionMode.SAME_THREAD",
+        "C": "IsolatedProcess",
+        "D": "ThreadSafe"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the '@TestFactory' annotation return to allow JUnit to generate tests dynamically at runtime?",
+      "options": {
+        "A": "A Stream, Collection, Iterable, or Iterator of DynamicNode (DynamicTest or DynamicContainer).",
+        "B": "A List of strings representing test names.",
+        "C": "A Boolean value indicating success.",
+        "D": "A void return type with a lambda body."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'ExtensionContext.Store' automatically handles object cleanup if the stored values implement the 'CloseableResource' interface.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which JUnit Platform component is responsible for orchestrating the discovery and execution of tests by delegating to specific TestEngines?",
+      "options": {
+        "A": "Launcher",
+        "B": "JupiterEngine",
+        "C": "VintageEngine",
+        "D": "DiscoverySelector"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid 'ResourceLock' modes used to synchronize access to shared resources in parallel tests.",
+      "options": {
+        "A": "ResourceAccessMode.READ",
+        "B": "ResourceAccessMode.READ_WRITE",
+        "C": "ResourceAccessMode.EXCLUSIVE",
+        "D": "ResourceAccessMode.PRIVATE"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Parameter Resolution' in the JUnit 5 extension model?",
+      "options": {
+        "A": "A mechanism that allows custom extensions to inject data (like mocks or context) into test constructors or methods at runtime.",
+        "B": "The process of converting CSV strings into Integers.",
+        "C": "A way to rename parameters in the report.",
+        "D": "The method JUnit uses to sort test methods alphabetically."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Dynamic tests created via @TestFactory do not support lifecycle callbacks like @BeforeEach or @AfterEach for the individual dynamic tests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to turn on parallel execution for a specific test class or method when the global configuration is set to 'same_thread'?",
+      "options": {
+        "A": "@Execution(ExecutionMode.CONCURRENT)",
+        "B": "@Parallel",
+        "C": "@Threaded",
+        "D": "@Concurrent"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of 'DynamicContainers' in JUnit 5.",
+      "options": {
+        "A": "They allow for nested grouping of dynamic tests.",
+        "B": "They are produced by @TestFactory methods.",
+        "C": "They automatically run @BeforeAll before each group.",
+        "D": "They can only contain one test method."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the function of 'TestTemplateInvocationContextProvider'?",
+      "options": {
+        "A": "It provides a mechanism to run a single @TestTemplate method multiple times with different execution contexts.",
+        "B": "It generates HTML templates for test reports.",
+        "C": "It acts as a bridge between JUnit 4 and JUnit 5.",
+        "D": "It handles file uploads during testing."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Lifecycle.PER_CLASS' mode allows the use of non-static methods for @BeforeAll and @AfterAll because JUnit reuses the same test instance for all methods in the class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface is used to intercept and wrap the invocation of a test method, potentially changing its arguments or suppressing exceptions?",
+      "options": {
+        "A": "InvocationInterceptor",
+        "B": "TestWatcher",
+        "C": "BeforeEachCallback",
+        "D": "ExecutionCondition"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO requirements for using JUnit 5 Extensions via Java's 'ServiceLoader' mechanism.",
+      "options": {
+        "A": "Enabling the 'junit.jupiter.extensions.autodetection.enabled' configuration property.",
+        "B": "Providing the fully qualified class name in META-INF/services/org.junit.jupiter.api.extension.Extension.",
+        "C": "Applying the @AutoRegister annotation to the class.",
+        "D": "Restarting the IDE after every build."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How can you implement a 'Custom Tag' in JUnit 5 that combines @Tag and @Test into a single annotation?",
+      "options": {
+        "A": "By creating a meta-annotation that is itself annotated with @Tag and @Test.",
+        "B": "By extending the Test class and overriding the tag() method.",
+        "C": "JUnit 5 does not support meta-annotations.",
+        "D": "By using the @AliasFor annotation from Spring."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In parallel execution, if a test is annotated with @ResourceLock(value = 'SYSTEM_PROPERTIES', mode = READ_WRITE), it will be prevented from running concurrently with any other test that reads or writes system properties.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which configuration property controls the 'keep-alive' time for threads in the JUnit parallel ForkJoinPool?",
+      "options": {
+        "A": "junit.jupiter.execution.parallel.config.fixed.keep-alive",
+        "B": "junit.parallel.thread.timeout",
+        "C": "thread.pool.keepalive",
+        "D": "jupiter.worker.ttl"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of the 'TestWatcher' extension interface.",
+      "options": {
+        "A": "Capturing logs or taking screenshots specifically when a test fails.",
+        "B": "Reacting to the results of individual test method executions (successful, aborted, failed).",
+        "C": "Changing the source code to fix the failing test.",
+        "D": "Speeding up the execution of the JVM."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "level": "Easy",
+      "question": "Which annotation is used to mark a method as a test in JUnit Jupiter?",
+      "options": {
+        "A": "@Test",
+        "B": "@TestCase",
+        "C": "@TestInfo",
+        "D": "@Execute"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Easy",
+      "question": "True or False: JUnit 5 test methods must be public.",
+      "options": {
+        "A": "False (They can be package-private).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Easy",
+      "question": "Which assertion is used to verify that a specific exception is thrown?",
+      "options": {
+        "A": "assertThrows()",
+        "B": "assertException()",
+        "C": "assertCatch()",
+        "D": "assertError()"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Medium",
+      "question": "What is the primary purpose of the '@TempDir' annotation?",
+      "options": {
+        "A": "To create and inject a temporary directory that is automatically deleted after the test.",
+        "B": "To cache test results in a temporary folder.",
+        "C": "To store environment variables temporarily.",
+        "D": "To limit the memory usage of the test JVM."
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Medium",
+      "question": "True or False: The '@CsvSource' annotation allows you to pass multiple arguments to a single test method invocation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Medium",
+      "question": "Which annotation is used to create hierarchical/grouped test structures within a single class?",
+      "options": {
+        "A": "@Nested",
+        "B": "@Group",
+        "C": "@Structure",
+        "D": "@SubTest"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Hard",
+      "question": "In the JUnit 5 extension model, which interface is responsible for deciding if a test should be skipped at runtime?",
+      "options": {
+        "A": "ExecutionCondition",
+        "B": "TestWatcher",
+        "C": "ParameterResolver",
+        "D": "InvocationInterceptor"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Hard",
+      "question": "True or False: Dynamic tests generated via '@TestFactory' do not support standard lifecycle callbacks like '@BeforeEach'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Hard",
+      "question": "Which mechanism allows you to synchronize parallel test execution when multiple tests access the same static resource?",
+      "options": {
+        "A": "@ResourceLock",
+        "B": "@Synchronize",
+        "C": "@Isolated",
+        "D": "@Lock"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Easy",
+      "question": "Which annotation replaces the JUnit 4 '@Ignore' annotation?",
+      "options": {
+        "A": "@Disabled",
+        "B": "@Skip",
+        "C": "@IgnoreTest",
+        "D": "@Exclude"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Medium",
+      "question": "What does 'assertAll' ensure during test execution?",
+      "options": {
+        "A": "All grouped assertions are checked even if one or more in the group fail.",
+        "B": "The test runs in all available threads.",
+        "C": "All previous tests in the suite must have passed.",
+        "D": "The test result is saved to all reporting formats."
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Hard",
+      "question": "How do you register an extension programmatically to allow constructor parameters in the extension class?",
+      "options": {
+        "A": "@RegisterExtension",
+        "B": "@ExtendWith",
+        "C": "@InjectExtension",
+        "D": "@ManualExtension"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Easy",
+      "question": "Which annotation runs a method after every test in the class?",
+      "options": {
+        "A": "@AfterEach",
+        "B": "@AfterAll",
+        "C": "@CleanUp",
+        "D": "@PostTest"
+      },
+      "answer": "A"
+    },
+    {
+      "level": "Medium",
+      "question": "Select TWO valid sources for a '@ParameterizedTest'.",
+      "options": {
+        "A": "@EnumSource",
+        "B": "@MethodSource",
+        "C": "@SQLSource",
+        "D": "@WebSource"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "level": "Hard",
+      "question": "Which interface is used to intercept the actual call to a test method to perform custom logic around the invocation?",
+      "options": {
+        "A": "InvocationInterceptor",
+        "B": "BeforeTestExecutionCallback",
+        "C": "TestInstancePostProcessor",
+        "D": "LifecycleMethodExecutionExceptionHandler"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface must be implemented to create a custom Extension that decides if a test should run based on runtime conditions?",
+      "options": {
+        "A": "ExecutionCondition",
+        "B": "TestWatcher",
+        "C": "BeforeTestCallback",
+        "D": "InvocationInterceptor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In JUnit 5 parallel execution, the 'Fixed' strategy uses a pool size calculated as (factor * processors).",
+      "options": {
+        "A": "False (That is the 'Dynamic' strategy).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary advantage of @RegisterExtension over @ExtendWith?",
+      "options": {
+        "A": "It allows programmatic registration via fields, enabling state to be passed to the extension constructor.",
+        "B": "It is the only way to support static methods.",
+        "C": "It automatically applies to all classes in the project.",
+        "D": "It bypasses the JUnit Platform Launcher."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which synchronization mode should be used with @ResourceLock when a test only needs to read a shared resource?",
+      "options": {
+        "A": "ResourceAccessMode.READ",
+        "B": "ResourceAccessMode.READ_WRITE",
+        "C": "ResourceAccessMode.EXCLUSIVE",
+        "D": "ResourceAccessMode.SHARED"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does @TestFactory return to allow JUnit to generate tests dynamically at runtime?",
+      "options": {
+        "A": "A Stream, Collection, Iterable, or Iterator of DynamicNode.",
+        "B": "A List of strings representing test names.",
+        "C": "A Boolean value indicating success.",
+        "D": "A void return type with a lambda body."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The ExtensionContext.Store automatically handles cleanup if values implement CloseableResource.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to run a test multiple times with different arguments from a method?",
+      "options": {
+        "A": "@ParameterizedTest",
+        "B": "@RepeatedTest",
+        "C": "@TestFactory",
+        "D": "@ArgumentsSource"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid sources for a @ParameterizedTest.",
+      "options": {
+        "A": "@CsvSource",
+        "B": "@MethodSource",
+        "C": "@JsonSource",
+        "D": "@XmlSource"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the @TempDir annotation?",
+      "options": {
+        "A": "To create and inject a temporary directory that is deleted after the test.",
+        "B": "To store environment variables.",
+        "C": "To cache test results.",
+        "D": "To measure disk I/O speed."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @BeforeAll methods must be static unless the lifecycle is set to Lifecycle.PER_CLASS.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion ensures that all grouped assertions are executed even if some fail?",
+      "options": {
+        "A": "assertAll()",
+        "B": "assertGroup()",
+        "C": "assertMultiple()",
+        "D": "assertBulk()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to group related tests into hierarchical structures?",
+      "options": {
+        "A": "@Nested",
+        "B": "@SubClass",
+        "C": "@Group",
+        "D": "@Node"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'assertTimeoutPreemptively' do that 'assertTimeout' does not?",
+      "options": {
+        "A": "It kills the execution of the code immediately if the timeout is reached.",
+        "B": "It retries the test if it fails.",
+        "C": "It measures CPU cycles instead of time.",
+        "D": "It only works with network connections."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 test methods must be public.",
+      "options": {
+        "A": "False (They can be package-private).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation replaces the JUnit 4 @Ignore?",
+      "options": {
+        "A": "@Disabled",
+        "B": "@Skip",
+        "C": "@IgnoreTest",
+        "D": "@Exclude"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface must be implemented to create a custom 'ParameterResolver' for dependency injection in test constructors?",
+      "options": {
+        "A": "ParameterResolver",
+        "B": "ArgumentInjector",
+        "C": "DependencyResolver",
+        "D": "TestInstancePostProcessor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 allows for 'Meta-annotations', meaning you can create a custom annotation that is composed of multiple JUnit annotations like @Tag and @Test.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to specify the execution order of test methods within a class?",
+      "options": {
+        "A": "@TestMethodOrder",
+        "B": "@Order",
+        "C": "@TestSequence",
+        "D": "@Priority"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO built-in MethodOrderer implementations provided by JUnit Jupiter.",
+      "options": {
+        "A": "MethodOrderer.OrderAnnotation",
+        "B": "MethodOrderer.Random",
+        "C": "MethodOrderer.Price",
+        "D": "MethodOrderer.Frequency"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'TestReporter' parameter in a test method?",
+      "options": {
+        "A": "To publish additional data/metadata about the current test run for reporting tools.",
+        "B": "To restart the test if it fails.",
+        "C": "To print the stack trace to the console.",
+        "D": "To send an email notification when the test finishes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @AfterAll method will execute even if the @BeforeAll method for the same class failed.",
+      "options": {
+        "A": "False (If @BeforeAll fails, the class is aborted and @AfterAll is not called).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to specify that a test should be executed only if the JVM is running on a specific 64-bit architecture?",
+      "options": {
+        "A": "@EnabledOnOs",
+        "B": "@EnabledIfSystemProperty",
+        "C": "@EnabledIf",
+        "D": "@Condition"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of @TestTemplate.",
+      "options": {
+        "A": "It is not a test itself but a template for test cases.",
+        "B": "It requires a registered TestTemplateInvocationContextProvider.",
+        "C": "It is used for mocking private methods.",
+        "D": "It replaces the need for @ParameterizedTest."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What happens if you use @TestInstance(Lifecycle.PER_CLASS)?",
+      "options": {
+        "A": "A single instance of the test class is used for all test methods, allowing non-static @BeforeAll/@AfterAll.",
+        "B": "The test class is instantiated once per thread.",
+        "C": "JUnit deletes the instance after every method call.",
+        "D": "The class becomes a singleton in the JVM."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: @EnabledIfEnvironmentVariable is case-sensitive when matching the variable name.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion should be used to verify that a block of code does NOT throw any exception?",
+      "options": {
+        "A": "assertDoesNotThrow()",
+        "B": "assertNoException()",
+        "C": "assertSafe()",
+        "D": "assertValid()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'junit-platform.properties' file?",
+      "options": {
+        "A": "To configure global settings like parallel execution, default lifecycles, and auto-detection of extensions.",
+        "B": "To store the database credentials for integration tests.",
+        "C": "To list the names of all developers on the project.",
+        "D": "To define the Java version for the compiler."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'DynamicTests' can be marked with the @Tag annotation at the factory level.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface allows an extension to intercept the execution of a test method and handle exceptions thrown by it?",
+      "options": {
+        "A": "TestExecutionExceptionHandler",
+        "B": "ExecutionCondition",
+        "C": "TestWatcher",
+        "D": "ParameterResolver"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of 'Constructor Injection' in JUnit 5 test classes.",
+      "options": {
+        "A": "Allows final fields to be initialized with injected values.",
+        "B": "Makes the test class more consistent with standard Java dependency injection patterns.",
+        "C": "Speeds up the instantiation of the class.",
+        "D": "Automatically mocks all constructor arguments."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which annotation is used to synchronize access to a shared resource when running tests in parallel?",
+      "options": {
+        "A": "@ResourceLock",
+        "B": "@Synchronized",
+        "C": "@LockResource",
+        "D": "@SharedAccess"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit 5 supports 'Composed Annotations', allowing you to create a single custom annotation that acts as both @Test and @Tag.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which configuration property in 'junit-platform.properties' is used to enable parallel test execution globally?",
+      "options": {
+        "A": "junit.jupiter.execution.parallel.enabled",
+        "B": "junit.parallel.run",
+        "C": "jupiter.parallel.mode",
+        "D": "test.parallel.execution"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary function of the '@TestTemplate' annotation?",
+      "options": {
+        "A": "It defines a template for a test that is executed multiple times based on the number of registered invocation providers.",
+        "B": "It creates a visual HTML template for the test report.",
+        "C": "It is a legacy annotation from JUnit 4.",
+        "D": "It is used to mock abstract classes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @AfterEach method is executed even if the test method itself threw an AssertionFailedError.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface should be implemented to handle exceptions thrown during the execution of a test and potentially suppress them?",
+      "options": {
+        "A": "TestExecutionExceptionHandler",
+        "B": "LifecycleMethodExecutionExceptionHandler",
+        "C": "TestErrorObserver",
+        "D": "ExceptionHandlerExtension"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'READ_WRITE' mode signify in a @ResourceLock annotation?",
+      "options": {
+        "A": "The test requires exclusive access to the resource and cannot run concurrently with any other test using that resource.",
+        "B": "The test only reads the resource.",
+        "C": "The test can run concurrently with other 'READ' tests.",
+        "D": "The test ignores the resource lock."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid DiscoverySelectors used by the Launcher to find tests.",
+      "options": {
+        "A": "DiscoverySelectors.selectClass()",
+        "B": "DiscoverySelectors.selectPackage()",
+        "C": "DiscoverySelectors.findEverywhere()",
+        "D": "DiscoverySelectors.searchClasspath()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'JUnit Platform Launcher' used for?",
+      "options": {
+        "A": "To programmatically discover and execute tests from outside an IDE or build tool.",
+        "B": "To upload test results to a server.",
+        "C": "To compile the test source code.",
+        "D": "To manage the dependencies of the project."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: By default, JUnit 5 executes all test methods within the same class sequentially in the same thread.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation allows you to conditionally skip a test if a specific environment variable is NOT present?",
+      "options": {
+        "A": "@DisabledIfEnvironmentVariable",
+        "B": "@SkipIfNoEnv",
+        "C": "@OnlyOnEnv",
+        "D": "@RequireEnv"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of '@IndicativeSentencesGeneration'?",
+      "options": {
+        "A": "It is a DisplayNameGenerator that creates sentences by concatenating the class name and method name.",
+        "B": "It checks the grammar of your display names.",
+        "C": "It generates random test data.",
+        "D": "It creates documentation for the API."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In JUnit 5, you can use @Tag on a meta-annotation to apply that tag to any test using the meta-annotation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which assertion verifies that a block of code completes within a specific time, but does NOT interrupt the execution if it exceeds the limit?",
+      "options": {
+        "A": "assertTimeout()",
+        "B": "assertTimeoutPreemptively()",
+        "C": "assertDuration()",
+        "D": "assertMaxTime()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO default 'ExecutionMode' values for parallel testing.",
+      "options": {
+        "A": "ExecutionMode.CONCURRENT",
+        "B": "ExecutionMode.SAME_THREAD",
+        "C": "ExecutionMode.ISOLATED",
+        "D": "ExecutionMode.STRICT"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which interface must a custom test engine implement to be discovered and executed by the JUnit Platform?",
+      "options": {
+        "A": "TestEngine",
+        "B": "ExecutionEngine",
+        "C": "PlatformProvider",
+        "D": "JupiterEngine"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'DiscoverySelector' API allows the Launcher to filter tests based on specific Classpath roots or Package names.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific configuration property allows for 'Parallel Execution' to be restricted to specific threads using a custom 'ForkJoinPool.ForkJoinWorkerThreadFactory'?",
+      "options": {
+        "A": "junit.jupiter.execution.parallel.config.strategy",
+        "B": "junit.parallel.factory.class",
+        "C": "jupiter.thread.factory",
+        "D": "platform.worker.strategy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary function of 'TestExecutionListener' when registered with the Launcher?",
+      "options": {
+        "A": "To receive events such as test discovery started, test execution started, and test finished for reporting and logging purposes.",
+        "B": "To modify the source code of the test class.",
+        "C": "To inject parameters into the test method.",
+        "D": "To skip tests based on the operating system."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: JUnit Jupiter supports the execution of tests in parallel even if they are within the same class, provided the 'execution.parallel.mode.default' is set to 'concurrent'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used to create a 'composed annotation' that includes @Test, @Tag('fast'), and @Timeout(5)?",
+      "options": {
+        "A": "Any custom @interface can be used to group these as meta-annotations.",
+        "B": "@ComposedTest",
+        "C": "@TestGroup",
+        "D": "@MetaTest"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to register a 'LauncherDiscoveryListener' with the JUnit Platform.",
+      "options": {
+        "A": "Using the ServiceLoader mechanism (META-INF/services).",
+        "B": "Registering it programmatically via the LauncherDiscoveryRequestBuilder.",
+        "C": "Adding it to the build.gradle plugins block.",
+        "D": "Using the @ExtendWith annotation on a test class."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'JUnit Flight Recorder' (JFR) support used for in test execution?",
+      "options": {
+        "A": "To generate events for Java Flight Recorder to profile test execution performance and resource usage.",
+        "B": "To record a video of the test run.",
+        "C": "To save the console output to a file.",
+        "D": "To roll back database transactions automatically."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a multi-engine environment, the JUnit Platform can execute Jupiter and Vintage tests simultaneously in the same session.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which DiscoverySelector is used to select a specific method within a class for execution?",
+      "options": {
+        "A": "DiscoverySelectors.selectMethod(String, String)",
+        "B": "DiscoverySelectors.selectFunction(String)",
+        "C": "DiscoverySelectors.byName(String)",
+        "D": "DiscoverySelectors.pick(Method)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'PostDiscoveryFilter'?",
+      "options": {
+        "A": "To exclude tests from the test plan after they have been discovered but before they are executed.",
+        "B": "To delete temporary files created during discovery.",
+        "C": "To sort tests alphabetically.",
+        "D": "To rename tests in the final report."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'LauncherConfig' API allows for the creation of a Launcher that is pre-configured with a specific set of TestEngines.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal component of the JUnit Platform is used to build a 'TestPlan' based on a 'LauncherDiscoveryRequest'?",
+      "options": {
+        "A": "Launcher",
+        "B": "TestEngine",
+        "C": "EngineDiscoveryRequest",
+        "D": "HierarchicalTestExecutor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid 'Parallel Execution' strategies for thread pool sizing.",
+      "options": {
+        "A": "dynamic",
+        "B": "fixed",
+        "C": "unlimited",
+        "D": "adaptive"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'HierarchicalTestExecutor' do?",
+      "options": {
+        "A": "It coordinates the execution of nodes in a TestPlan according to the hierarchical structure (Engine -> Class -> Method).",
+        "B": "It sorts tests by their package name.",
+        "C": "It creates a tree-view of the source code.",
+        "D": "It manages the inheritance of Java classes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can provide a custom 'TestDescriptor' to represent a node in the test tree for a custom TestEngine.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method on the 'Launcher' interface starts the discovery and execution process?",
+      "options": {
+        "A": "execute(LauncherDiscoveryRequest, TestExecutionListener...)",
+        "B": "runTests(Request)",
+        "C": "start(Discovery)",
+        "D": "launch(TestPlan)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of 'EngineExecutionListener'?",
+      "options": {
+        "A": "It is used by a TestEngine to report the status of individual tests back to the JUnit Platform.",
+        "B": "It listens for keyboard input during a test.",
+        "C": "It monitors the temperature of the CPU.",
+        "D": "It generates JAR files from the test classes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'UniqueId' class in JUnit Platform ensures that every test node can be uniquely identified across different engines and executions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'EngineDiscoveryRequest' property allows a TestEngine to access the raw 'LauncherDiscoveryRequest' configuration?",
+      "options": {
+        "A": "getConfigurationParameters()",
+        "B": "getRawRequest()",
+        "C": "getSettings()",
+        "D": "getDiscoveryContext()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common causes for a TestEngine failing to be discovered by the JUnit Platform.",
+      "options": {
+        "A": "Missing 'META-INF/services/org.junit.platform.engine.TestEngine' file.",
+        "B": "The engine class does not have a public no-args constructor.",
+        "C": "The engine is written in Kotlin instead of Java.",
+        "D": "The project is using Maven instead of Gradle."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    }
   ]
 }

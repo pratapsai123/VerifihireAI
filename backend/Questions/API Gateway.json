@@ -1,0 +1,1873 @@
+{ 
+  "skill": "API Gateway", 
+  "questions": [
+    {
+    "question": "What is the primary role of an API Gateway in a microservices architecture?",
+    "options": {
+      "A": "To store the application's primary database.",
+      "B": "To act as a single entry point for all client requests and route them to the appropriate services.",
+      "C": "To compile source code into executable files.",
+      "D": "To provide a physical hardware firewall for the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An API Gateway can handle cross-cutting concerns like authentication and SSL termination.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common features of an API Gateway? (Select all that apply)",
+    "options": {
+      "A": "Request Routing",
+      "B": "Rate Limiting",
+      "C": "Protocol Translation",
+      "D": "Unit Testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Rate Limiting' in the context of an API Gateway?",
+    "options": {
+      "A": "Limiting the number of developers who can access the code.",
+      "B": "Controlling the rate of traffic sent or received by a network interface or service to prevent abuse.",
+      "C": "Reducing the speed of the internet connection.",
+      "D": "Limiting the file size of API responses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An API Gateway can be used to provide a unified interface for multiple different backend services.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are popular API Gateway solutions? (Select all that apply)",
+    "options": {
+      "A": "Kong",
+      "B": "Amazon API Gateway",
+      "C": "Apigee",
+      "D": "React"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Load Balancing' at the API Gateway level?",
+    "options": {
+      "A": "Ensuring the server has a balanced weight.",
+      "B": "Distributing incoming API requests across multiple instances of a backend service to ensure high availability.",
+      "C": "Balancing the number of GET and POST requests.",
+      "D": "Formatting the JSON data to be symmetrical."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An API Gateway is usually placed behind the backend microservices to protect them from the internal network.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which security functions can an API Gateway perform? (Select all that apply)",
+    "options": {
+      "A": "JWT Validation",
+      "B": "IP Whitelisting",
+      "C": "DDoS Protection",
+      "D": "Database Encryption"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Protocol Translation' (or Mediation)?",
+    "options": {
+      "A": "Translating the API documentation into different languages.",
+      "B": "Converting a client's request from one protocol (e.g., HTTP) to another used by the backend (e.g., gRPC).",
+      "C": "Changing the binary code of the server.",
+      "D": "Updating the version of the API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An API Gateway can help reduce latency by caching frequent API responses.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Request Transformation' tasks? (Select all that apply)",
+    "options": {
+      "A": "Adding or removing headers.",
+      "B": "Changing the body format (e.g., XML to JSON).",
+      "C": "Renaming query parameters.",
+      "D": "Deleting the original source code."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Circuit Breaker' pattern in a gateway environment?",
+    "options": {
+      "A": "A physical switch in the data center.",
+      "B": "A mechanism that stops requests to a failing backend service to allow it to recover and prevent cascading failures.",
+      "C": "A tool that deletes slow API keys.",
+      "D": "A way to disconnect users with low credit scores."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using an API Gateway increases the attack surface of your application by adding an extra layer.",
+    "options": {
+      "A": "True",
+      "B": "False (It reduces it by centralizing security and hiding backends)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are metrics an API Gateway typically monitors? (Select all that apply)",
+    "options": {
+      "A": "Request Latency",
+      "B": "Error Rates (4xx, 5xx)",
+      "C": "Throughput (Requests per second)",
+      "D": "Total lines of code in the backend"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Service Discovery' in the context of an API Gateway?",
+    "options": {
+      "A": "Finding new APIs on the internet.",
+      "B": "The process of automatically detecting the network locations (IP/Port) of microservice instances.",
+      "C": "Searching for bugs in the code.",
+      "D": "Naming the microservices correctly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An API Gateway can serve as a central point for logging and auditing all external API traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following can trigger a '429 Too Many Requests' response from a gateway?",
+    "options": {
+      "A": "Authentication failure.",
+      "B": "Rate limit exceeded.",
+      "C": "Backend service timeout.",
+      "D": "Invalid JSON format."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What can an API Gateway do during 'Response Transformation'? (Select all that apply)",
+    "options": {
+      "A": "Filter out sensitive data from the backend response.",
+      "B": "Add custom headers for the client.",
+      "C": "Aggregate data from multiple services into one response.",
+      "D": "Change the backend's database password."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A 'BFF' (Backend For Frontend) is a type of specialized API Gateway designed for a specific UI or device type.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SSL Termination' (or Offloading)?",
+    "options": {
+      "A": "Deleting the SSL certificate.",
+      "B": "Decrypting SSL-encrypted traffic at the gateway before sending it to backend services to reduce their processing load.",
+      "C": "A way to block all secure traffic.",
+      "D": "Updating the expiration date of a certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Target' types can an API Gateway route traffic to? (Select all that apply)",
+    "options": {
+      "A": "HTTP/HTTPS Endpoints",
+      "B": "Lambda/Serverless Functions",
+      "C": "Virtual Machines (EC2/GCE)",
+      "D": "Physical USB drives"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway should generally be stateless to facilitate easy scaling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary risk of having a single API Gateway for an entire enterprise architecture?",
+    "options": {
+      "A": "It is too expensive.",
+      "B": "It becomes a Single Point of Failure (SPOF) if not highly available.",
+      "C": "It makes the APIs too fast.",
+      "D": "It prevents developers from using Python."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which authentication methods can be offloaded to a gateway? (Select all that apply)",
+    "options": {
+      "A": "OAuth2 / OpenID Connect",
+      "B": "API Keys",
+      "C": "Basic Auth",
+      "D": "Biometric scanning on the server"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: API Monetization features allow a gateway to track usage and bill customers based on their API consumption.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canary Deployment' in the context of an API Gateway?",
+    "options": {
+      "A": "A deployment that only happens in the morning.",
+      "B": "Routing a small percentage of traffic to a new version of a service to test its stability before a full rollout.",
+      "C": "Deleting the old version of a service immediately.",
+      "D": "Using yellow icons in the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Gateway Deployment' models? (Select all that apply)",
+    "options": {
+      "A": "Centralized Gateway",
+      "B": "Sidecar Proxy",
+      "C": "Ingress Controller (Kubernetes)",
+      "D": "Database Plugin"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can help with 'Versioning' by routing different URL paths (e.g., /v1 and /v2) to different service versions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Request Aggregation'?",
+    "options": {
+      "A": "Combining multiple client requests into one.",
+      "B": "The gateway calling multiple backend services to fulfill a single client request and merging the results.",
+      "C": "Sorting requests by time.",
+      "D": "Deleting duplicate requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are benefits of using an API Gateway? (Select all that apply)",
+    "options": {
+      "A": "Hiding internal microservice structure.",
+      "B": "Consolidating security policies.",
+      "C": "Reducing the number of round-trips for the client.",
+      "D": "Eliminating the need for backend code."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Sticky Sessions' at the gateway level ensure that a client is always routed to the same backend instance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Ingress' in the context of Kubernetes API Gateways?",
+    "options": {
+      "A": "A type of database.",
+      "B": "An API object that manages external access to the services in a cluster, typically via HTTP.",
+      "C": "The exit point of a cluster.",
+      "D": "A tool for memory management."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Forward Proxy' and an API Gateway (acting as a Reverse Proxy)?",
+    "options": {
+      "A": "A forward proxy sits in front of the client; a gateway sits in front of the backend services.",
+      "B": "A gateway is only for mobile apps; a proxy is for browsers.",
+      "C": "A forward proxy is hardware; a gateway is software.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: CORS (Cross-Origin Resource Sharing) policies can be managed centrally at the API Gateway level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid methods for identifying a client at the Gateway for rate limiting? (Select all that apply)",
+    "options": {
+      "A": "Client IP Address",
+      "B": "API Key",
+      "C": "OAuth2 Client ID",
+      "D": "The user's monitor resolution"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "Which HTTP status code is commonly returned by a Gateway when a backend service takes too long to respond?",
+    "options": {
+      "A": "400 Bad Request",
+      "B": "404 Not Found",
+      "C": "504 Gateway Timeout",
+      "D": "500 Internal Server Error"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An API Gateway can be configured to automatically retry a failed request to a backend service.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What are common ways to secure the communication between the Gateway and the Backend services? (Select all that apply)",
+    "options": {
+      "A": "Mutual TLS (mTLS)",
+      "B": "Private VPC/Internal Networking",
+      "C": "Shared Secret Headers",
+      "D": "Public DNS records"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'IP Whitelisting'?",
+    "options": {
+      "A": "A list of IP addresses that are banned from the API.",
+      "B": "A security configuration that only allows requests from a specific set of trusted IP addresses.",
+      "C": "A way to hide the server's IP.",
+      "D": "A list of websites the server can visit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Host' header in an HTTP request is often used by the Gateway to determine which backend service to route the request to.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which components are typically found in an API Management suite? (Select all that apply)",
+    "options": {
+      "A": "Developer Portal",
+      "B": "API Gateway",
+      "C": "Analytics/Reporting Engine",
+      "D": "IDE for writing Java code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of an 'API Key'?",
+    "options": {
+      "A": "To encrypt the database.",
+      "B": "To identify and authorize the calling application or developer.",
+      "C": "To unlock the server room door.",
+      "D": "To speed up the internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An API Gateway can modify the HTTP status code returned by the backend before it reaches the client.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Caching' strategies for a Gateway? (Select all that apply)",
+    "options": {
+      "A": "Time-To-Live (TTL) based expiration",
+      "B": "Vary by Header (e.g., Cache by Accept-Language)",
+      "C": "Manual cache invalidation via API call",
+      "D": "Caching every POST request by default"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Path-based Routing'?",
+    "options": {
+      "A": "Routing based on the physical path of the cables.",
+      "B": "Routing requests to different backends based on the URL path (e.g., /users vs /orders).",
+      "C": "Sorting files in the server folder.",
+      "D": "A way to choose the shortest network route."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If a Gateway fails, all traffic to the backend services it manages will be blocked unless there is a redundant Gateway in place.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocols can a modern API Gateway handle? (Select all that apply)",
+    "options": {
+      "A": "REST (HTTP/JSON)",
+      "B": "WebSocket",
+      "C": "gRPC",
+      "D": "SMTP (for email sending only)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the role of the 'Developer Portal' in API Management?",
+    "options": {
+      "A": "To host the actual API code.",
+      "B": "To provide documentation, API key management, and self-service onboarding for external developers.",
+      "C": "To act as a chat room for programmers.",
+      "D": "To monitor server CPU usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Serverless API Gateways (like AWS API Gateway) automatically scale the infrastructure based on the volume of incoming traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Request Mirroring' (or Shadowing)?",
+    "options": {
+      "A": "Copying the request to a second database.",
+      "B": "Sending a copy of live traffic to a test service to observe performance without affecting the production response.",
+      "C": "Flipping the JSON body vertically.",
+      "D": "Synchronizing two different gateways."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are common 'Logging' details captured by a Gateway? (Select all that apply)",
+    "options": {
+      "A": "Request timestamp",
+      "B": "Client IP",
+      "C": "HTTP Method and Path",
+      "D": "The backend developer's username"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can enforce a global 'Timeout' policy to ensure no client request hangs indefinitely.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Header Manipulation'?",
+    "options": {
+      "A": "Deleting the header of an HTML page.",
+      "B": "Adding, modifying, or removing HTTP headers as the request/response passes through the gateway.",
+      "C": "Changing the title of the API.",
+      "D": "Formatting the code headers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Authorization' checks at the Gateway? (Select all that apply)",
+    "options": {
+      "A": "Checking if a JWT is expired",
+      "B": "Verifying the 'scope' of an OAuth2 token",
+      "C": "Checking a local blacklist for a specific user ID",
+      "D": "Re-compiling the backend code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: API Gateways can only be used with Microservices; they provide no value for Monolithic architectures.",
+    "options": {
+      "A": "True",
+      "B": "False (They still provide security, caching, and rate limiting)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Query Parameter Mapping'?",
+    "options": {
+      "A": "Searching for parameters in a map.",
+      "B": "Transforming the query parameters from the client request into a format the backend expects.",
+      "C": "Deleting all query strings.",
+      "D": "Using Google Maps in an API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are features of 'Apigee'? (Select all that apply)",
+    "options": {
+      "A": "Traffic Management",
+      "B": "API Monetization",
+      "C": "Threat Protection",
+      "D": "Physical Server Assembly"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The 'X-Forwarded-For' header is often added by the Gateway to inform the backend of the original client's IP address.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Content-Based Routing'?",
+    "options": {
+      "A": "Routing based on the size of the images.",
+      "B": "Routing requests to different services based on the actual content of the request body (e.g., an 'orderType' field).",
+      "C": "Routing traffic to a content delivery network.",
+      "D": "Sorting emails by subject."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Authentication' providers a Gateway can integrate with? (Select all that apply)",
+    "options": {
+      "A": "Okta / Auth0",
+      "B": "AWS Cognito",
+      "C": "Active Directory / LDAP",
+      "D": "The browser's bookmarks"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A Gateway can automatically compress (Gzip) backend responses before sending them to the client to save bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Status' of a Gateway typically indicate in a dashboard?",
+    "options": {
+      "A": "The financial status of the company.",
+      "B": "The health and availability of the gateway instances.",
+      "C": "The mood of the developers.",
+      "D": "The number of lines of code written today."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Gateway Configuration' formats? (Select all that apply)",
+    "options": {
+      "A": "YAML",
+      "B": "JSON",
+      "C": "Admin UI / Dashboard",
+      "D": "Handwritten notes"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Multi-region Gateway deployments help provide low latency for users globally by routing them to the nearest Gateway instance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Blue-Green Deployment' support in a Gateway?",
+    "options": {
+      "A": "A deployment that uses specific colors for the UI.",
+      "B": "The ability to shift 100% of traffic from one environment (Blue) to a new one (Green) instantly via configuration.",
+      "C": "Deleting the old servers once they turn green.",
+      "D": "A way to test the CSS of the page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Backend for Frontend' (BFF) pattern implemented via an API Gateway?",
+    "options": {
+      "A": "A single gateway used for all internal and external traffic.",
+      "B": "Dedicated gateways for specific client types (e.g., one for Mobile, one for Web) to provide optimized responses for each.",
+      "C": "A backend service that acts as its own gateway.",
+      "D": "A gateway that only handles database queries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Traffic Shadowing' (Mirroring) use cases? (Select all that apply)",
+    "options": {
+      "A": "Testing a new version of a service with production traffic without affecting users.",
+      "B": "Profiling the performance of a new database schema under real load.",
+      "C": "Synchronizing two production databases in real-time.",
+      "D": "Debugging transient production issues without risk to the live response."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: In a 'Sidecar' proxy deployment (like Istio), each microservice instance has its own dedicated gateway proxy running alongside it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of 'mTLS' (Mutual TLS) between a Gateway and a Backend service?",
+    "options": {
+      "A": "To speed up the connection.",
+      "B": "To ensure both the Gateway and the Backend service authenticate each other via certificates.",
+      "C": "To compress the data twice.",
+      "D": "To allow the backend to skip the login check."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Circuit Breaker' states? (Select all that apply)",
+    "options": {
+      "A": "Closed (Traffic flows normally)",
+      "B": "Open (Traffic is blocked/rejected)",
+      "C": "Half-Open (Limited traffic allowed to test recovery)",
+      "D": "Locked (Manual intervention required)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can perform 'Payload Validation' to ensure incoming JSON matches a specific Schema (e.g., OpenAPI/Swagger) before hitting the backend.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'gRPC-Web' support in an API Gateway?",
+    "options": {
+      "A": "A way to run gRPC on a website.",
+      "B": "A translation layer that allows browser-based clients to communicate with gRPC backend services via the Gateway.",
+      "C": "A replacement for the HTTP protocol.",
+      "D": "A database format for web apps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which headers can a Gateway use to prevent 'Cache Poisoning'? (Select all that apply)",
+    "options": {
+      "A": "Vary",
+      "B": "Cache-Control",
+      "C": "X-Content-Type-Options",
+      "D": "Content-Security-Policy"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: An API Gateway 'Authorizer' (like a Lambda Authorizer in AWS) must be executed for every single request, even if the response is cached.",
+    "options": {
+      "A": "True",
+      "B": "False (The authorizer result itself can often be cached)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Response Aggregation' (or Fan-out/Fan-in) logic in a gateway?",
+    "options": {
+      "A": "Adding up the total number of requests.",
+      "B": "The gateway calling several microservices in parallel and combining their responses into a single JSON object for the client.",
+      "C": "Sorting responses by their status codes.",
+      "D": "A way to delete duplicate data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which techniques are used by Gateways to handle 'Heavy Payloads'? (Select all that apply)",
+    "options": {
+      "A": "Streaming (chunked transfer encoding)",
+      "B": "Payload compression (Gzip/Brotli)",
+      "C": "Request size limiting",
+      "D": "Automatic database partitioning"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Using a 'Wildcard' CORS policy (*) on an API Gateway is a recommended security practice for production APIs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JWT Claims Augmentation' at the Gateway level?",
+    "options": {
+      "A": "Deleting the JWT.",
+      "B": "The process of the Gateway adding extra user information (like roles or IDs) to the request headers after validating the token.",
+      "C": "Encrypting the JWT twice.",
+      "D": "Changing the user's password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Load Balancing' algorithms used by Gateways? (Select all that apply)",
+    "options": {
+      "A": "Round Robin",
+      "B": "Least Connections",
+      "C": "IP Hash",
+      "D": "Random Walk"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can act as a 'Protocol Buffer' (Protobuf) serializer/deserializer to interact with legacy XML backends.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'IP Throttling' vs 'User-based Throttling'?",
+    "options": {
+      "A": "IP throttling limits by location; user throttling limits by age.",
+      "B": "IP throttling limits based on the request source address; user throttling limits based on the authenticated identity (e.g., API Key).",
+      "C": "They are the same thing.",
+      "D": "IP throttling is faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which features are part of 'API Observability'? (Select all that apply)",
+    "options": {
+      "A": "Distributed Tracing (e.g., Jaeger/Zipkin)",
+      "B": "Structured Logging",
+      "C": "Real-time Metrics Dashboards",
+      "D": "Physical server temperature monitoring"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In an 'OAuth2' flow, the API Gateway usually acts as the Resource Server, validating the Access Token provided by the client.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Custom Domain Name' with SSL/TLS on an API Gateway?",
+    "options": {
+      "A": "To make the URL look shorter.",
+      "B": "To provide a branded, secure entry point for clients that hides the technical infrastructure URL (e.g., execute-api.aws.com).",
+      "C": "To increase the server's RAM.",
+      "D": "To allow the API to work without the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these can cause a '403 Forbidden' error at the Gateway? (Select all that apply)",
+    "options": {
+      "A": "Missing or invalid API Key",
+      "B": "IP address being on a blacklist",
+      "C": "The user's OAuth scope not having permission for the requested resource",
+      "D": "The backend server being turned off"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Request Smuggling' is a vulnerability that can occur when the Gateway and the Backend service interpret HTTP requests differently.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency Overhead' in the context of an API Gateway?",
+    "options": {
+      "A": "The speed of the backend service.",
+      "B": "The additional time added to an API call due to the processing (routing, auth, etc.) performed by the gateway itself.",
+      "C": "The time it takes to write the code.",
+      "D": "The delay caused by the user's browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Retry Policies'? (Select all that apply)",
+    "options": {
+      "A": "Exponential Backoff",
+      "B": "Fixed Interval",
+      "C": "Maximum Retry Attempts",
+      "D": "Infinite Retry"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can be configured to respond with 'Mock Data' for specific endpoints that are still under development.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Rate Limiting'?",
+    "options": {
+      "A": "Limiting the whole world's internet.",
+      "B": "Enforcing a rate limit across all instances of a gateway (usually via a shared cache like Redis) rather than per individual instance.",
+      "C": "A limit set by the government.",
+      "D": "Limiting the number of countries that can access the API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocols are used for 'Streaming' data through a gateway? (Select all that apply)",
+    "options": {
+      "A": "WebSockets",
+      "B": "Server-Sent Events (SSE)",
+      "C": "HTTP/2 Streams",
+      "D": "FTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can resolve 'Query String' conflicts by reordering or normalizing parameters before forwarding the request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'API Versioning' via Header (e.g., Accept: application/vnd.myapi.v2+json)?",
+    "options": {
+      "A": "To keep the URL clean and allow the Gateway to route based on the 'Accept' header value.",
+      "B": "To make the API more expensive.",
+      "C": "To prevent the API from being used by mobile apps.",
+      "D": "To encrypt the version number."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Threat Protection' features in a Web Application Firewall (WAF) integrated with a Gateway? (Select all that apply)",
+    "options": {
+      "A": "SQL Injection protection",
+      "B": "Cross-Site Scripting (XSS) protection",
+      "C": "Bot Detection",
+      "D": "Password strength checking"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Token Introspection' (RFC 7662) is a process where the Gateway asks the Authorization Server if a token is still valid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'North-South' traffic?",
+    "options": {
+      "A": "Traffic between the Arctic and Antarctic.",
+      "B": "Traffic entering or leaving a data center (Client to Gateway).",
+      "C": "Traffic between microservices (Service to Service).",
+      "D": "Traffic that only moves vertically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Response Caching' keys? (Select all that apply)",
+    "options": {
+      "A": "The full URL (including query parameters)",
+      "B": "Authorization Header (for user-specific content)",
+      "C": "The HTTP Method (GET only usually)",
+      "D": "The backend server's IP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can serve as a 'Saga Orchestrator' in distributed transactions.",
+    "options": {
+      "A": "True (In some advanced implementations, though usually handled by a separate service)",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' in the context of an API Gateway?",
+    "options": {
+      "A": "Copying the API code to multiple servers.",
+      "B": "The process of tracking a single request across multiple microservices by injecting a unique Trace ID at the gateway.",
+      "C": "A way to draw the network architecture.",
+      "D": "Monitoring the physical location of the users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Circuit Breaker' parameters to configure? (Select all that apply)",
+    "options": {
+      "A": "Failure threshold (percentage of failed requests).",
+      "B": "Wait duration (how long the circuit stays open).",
+      "C": "Permitted calls in half-open state.",
+      "D": "The color of the dashboard alert."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can handle 'Content Negotiation' by automatically returning different formats (JSON or XML) based on the client's Accept header.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Double Wrapper' (or Envelope) problem in API responses?",
+    "options": {
+      "A": "Sending the same response twice.",
+      "B": "When the gateway wraps a backend response in its own JSON structure, resulting in redundant status codes or metadata fields.",
+      "C": "Encrypting the response twice.",
+      "D": "Compressing the file into two zip folders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid methods for 'Gateway High Availability' (HA)? (Select all that apply)",
+    "options": {
+      "A": "Deploying gateway instances across multiple Availability Zones.",
+      "B": "Using a Global Load Balancer (GSLB) to route traffic between regions.",
+      "C": "Running only one instance on the fastest possible server.",
+      "D": "Configuring health checks that automatically remove unhealthy nodes."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: Protocol translation from gRPC to JSON/HTTP is generally a computationally expensive task for an API Gateway compared to simple proxying.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Key Rotation'?",
+    "options": {
+      "A": "Changing the font of the API keys.",
+      "B": "The security practice of periodically replacing existing API keys with new ones to minimize the impact of a leaked key.",
+      "C": "Moving the keys between different databases.",
+      "D": "Sorting the keys in alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which security headers should a Gateway ideally inject to improve client-side security? (Select all that apply)",
+    "options": {
+      "A": "Strict-Transport-Security (HSTS)",
+      "B": "Content-Security-Policy (CSP)",
+      "C": "X-Content-Type-Options: nosniff",
+      "D": "X-Internal-Backend-Server-IP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can act as a 'Protocol Buffer' to allow legacy SOAP services to be consumed as modern RESTful APIs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a JWT-based system, what is 'Token Revocation' at the Gateway level?",
+    "options": {
+      "A": "Deleting the user's account.",
+      "B": "The ability to immediately invalidate a specific token before its expiration (often using a blacklist in a shared cache like Redis).",
+      "C": "Changing the token's encryption key.",
+      "D": "Downloading the token to a local drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' tools are commonly used inside Gateways? (Select all that apply)",
+    "options": {
+      "A": "Jolt (for JSON-to-JSON transformation).",
+      "B": "Liquid Templates.",
+      "C": "XSLT (for XML transformation).",
+      "D": "Photoshop."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Using an API Gateway allows you to implement 'Zero Trust' architecture by requiring authentication at every single internal request boundary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'IP Pinning' in the context of API security?",
+    "options": {
+      "A": "Linking an IP address to a physical map.",
+      "B": "Restricting an API Key or Access Token so that it can only be used by the specific IP address that originally requested it.",
+      "C": "Saving the IP address in a text file.",
+      "D": "Blocking all IP addresses from a specific country."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are true about 'Gateway Caching' for POST requests? (Select all that apply)",
+    "options": {
+      "A": "It is generally not recommended because POST is typically non-idempotent.",
+      "B": "It can be done if the specific API use case is idempotent and safe to cache.",
+      "C": "It is the default behavior for all gateways.",
+      "D": "It requires a custom cache key based on the request body."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Latency' in a gateway can be significantly affected by the size of the Lua or JavaScript scripts used for custom request processing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Monetization' through 'Usage Tiers'?",
+    "options": {
+      "A": "Charging users for the number of lines of code they write.",
+      "B": "Offering different levels of API access (e.g., Free vs Gold) with different rate limits and features, managed by the gateway.",
+      "C": "Selling the API source code to the highest bidder.",
+      "D": "A way to get more RAM for the gateway."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Gateway Deployment' environments? (Select all that apply)",
+    "options": {
+      "A": "On-premise bare metal servers.",
+      "B": "Cloud-native Serverless environments.",
+      "C": "As an Ingress Controller in Kubernetes.",
+      "D": "Inside a web browser."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway 'Authorizer' can return 'Context' data that is then passed to the backend service as custom headers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throttling' in a 'Token Bucket' algorithm?",
+    "options": {
+      "A": "Putting tokens in a physical bucket.",
+      "B": "A mechanism where a service consumes 'tokens' from a bucket for each request; if the bucket is empty, requests are rejected until it refills.",
+      "C": "Limiting the speed of the CPU.",
+      "D": "A way to sort requests by priority."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Request Filter' types? (Select all that apply)",
+    "options": {
+      "A": "Pre-filters (executed before routing).",
+      "B": "Post-filters (executed after backend response).",
+      "C": "Error-filters (executed only on failure).",
+      "D": "Final-filters (executed after the client receives the data)."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'API Drift' occurs when the gateway configuration and the actual backend implementation become out of sync regarding schemas or endpoints.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Semantic Versioning' for APIs (e.g., v1.2.3)?",
+    "options": {
+      "A": "Naming the API after different animals.",
+      "B": "A versioning scheme where the numbers represent Major (breaking), Minor (feature), and Patch (bug fix) changes.",
+      "C": "Choosing the version number randomly.",
+      "D": "A way to encrypt the version string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Load Balancing' features are common in Service Mesh gateways? (Select all that apply)",
+    "options": {
+      "A": "Locality-aware routing.",
+      "B": "Weighted traffic splitting.",
+      "C": "Automatic retries with jitter.",
+      "D": "Physical hard drive balancing."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The 'Apigee' platform includes an 'Analytics' engine that can identify which specific developers are causing the most errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Server Load Balancing' (GSLB) for a gateway?",
+    "options": {
+      "A": "Balancing the server's temperature.",
+      "B": "Using DNS to route users to the gateway instance in the geographically closest data center.",
+      "C": "Balancing the number of CPUs used by the gateway.",
+      "D": "A way to connect multiple gateways via a single cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Client Identification' methods in a gateway? (Select all that apply)",
+    "options": {
+      "A": "X-API-KEY Header.",
+      "B": "JWT 'sub' claim.",
+      "C": "TLS Client Certificate.",
+      "D": "The user's email password."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A 'Stateless' gateway allows any incoming request to be handled by any instance of the gateway cluster without needing local session data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Hydration' of an API response?",
+    "options": {
+      "A": "Giving the server more water.",
+      "B": "The process where a gateway fetches a lightweight response and then calls other services to 'fill in' missing data before sending it to the client.",
+      "C": "Cleaning the JSON of extra spaces.",
+      "D": "A type of database indexing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are common gateway 'Threats' to protect against? (Select all that apply)",
+    "options": {
+      "A": "XML External Entity (XXE) attacks.",
+      "B": "Slowloris (Slow HTTP) attacks.",
+      "C": "Insecure Deserialization.",
+      "D": "Physical theft of the server."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The 'Vary' header in a response tells the gateway cache which request headers make the response unique (e.g., Accept-Encoding).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cross-Cluster' routing in a gateway?",
+    "options": {
+      "A": "Routing traffic between two different stars.",
+      "B": "Routing traffic from a gateway in one Kubernetes cluster to a service located in a different cluster.",
+      "C": "Merging two different database clusters.",
+      "D": "A way to increase the size of a cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe the 'Sidecar Proxy' pattern? (Select all that apply)",
+    "options": {
+      "A": "The proxy runs in the same pod/container group as the service.",
+      "B": "It handles all inbound and outbound traffic for that specific service.",
+      "C": "It is a centralized gateway for the whole company.",
+      "D": "It is managed by a Service Mesh control plane."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: An API Gateway can be used to convert an asynchronous backend event (like a Kafka message) into a synchronous HTTP response for the client.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latent Vulnerability' in an API Gateway's Rate Limiting implementation?",
+    "options": {
+      "A": "When the gateway is physically too slow.",
+      "B": "A race condition where multiple concurrent requests bypass the limit before the shared counter (e.g., in Redis) is updated.",
+      "C": "A bug in the JSON parser.",
+      "D": "When the rate limit is set to zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid methods for 'Session Persistence' in a multi-region Gateway setup? (Select all that apply)",
+    "options": {
+      "A": "Global Redis/DynamoDB for session state storage.",
+      "B": "JWT-based stateless tokens containing session data.",
+      "C": "Sticky sessions via Global Server Load Balancing (GSLB).",
+      "D": "Hardcoding the user's IP in the gateway source code."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Token Binding' (RFC 8473) ensures that a JWT can only be used over a specific TLS connection, preventing 'Replay Attacks' even if the token is stolen.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Load Balancing' challenge occurs when a Gateway uses Long-Lived connections (like WebSockets) to backends?",
+    "options": {
+      "A": "The connection limit of the backend is never reached.",
+      "B": "Imbalance over time as old connections persist on certain nodes while new nodes remain underutilized.",
+      "C": "The data is encrypted too many times.",
+      "D": "WebSocket data cannot be load balanced."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Gateway Performance' tuning parameters? (Select all that apply)",
+    "options": {
+      "A": "Worker thread pool size.",
+      "B": "Keep-alive timeout for upstream connections.",
+      "C": "Max concurrent TCP connections.",
+      "D": "The number of comments in the YAML config."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can mitigate 'Slowloris' attacks by enforcing a minimum data rate for the request body and headers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema Poisoning' at the Gateway level?",
+    "options": {
+      "A": "Deleting the API documentation.",
+      "B": "Injecting malicious or excessively large schemas into a Gateway's validation engine to cause a Denial of Service (DoS).",
+      "C": "Changing the database schema name.",
+      "D": "An error in the SQL syntax."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are true regarding 'Dynamic Routing' via a Service Discovery engine? (Select all that apply)",
+    "options": {
+      "A": "It removes the need to hardcode IP addresses in the Gateway config.",
+      "B": "It allows the Gateway to automatically route to healthy nodes only.",
+      "C": "It can be integrated with tools like Consul, Eureka, or Kubernetes DNS.",
+      "D": "It makes the API calls 100% free."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Using 'HTTP/2 Multiplexing' between the Client and the Gateway allows for multiple requests to be sent over a single TCP connection, reducing handshake overhead.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Thundering Herd' problem in Gateway Caching?",
+    "options": {
+      "A": "Too many developers using the same API key.",
+      "B": "When a popular cached item expires, causing many concurrent requests to hit the backend at once before the cache is refilled.",
+      "C": "A type of hardware failure in the cache server.",
+      "D": "When the database is too slow to fill the cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which strategies can mitigate the 'Thundering Herd' effect? (Select all that apply)",
+    "options": {
+      "A": "Request Collapsing (Wait for the first request to fill the cache).",
+      "B": "Background Refresh (Refill cache before it expires).",
+      "C": "Probabilistic Cache Early Recomputation (Jitter).",
+      "D": "Deleting the cache entirely."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The 'Phantom Read' anomaly can occur at the Gateway level if the Response Aggregation logic merges data from two different database snapshots.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Downstream Pressure' management?",
+    "options": {
+      "A": "Applying physical force to the server.",
+      "B": "Using the Gateway to signal to the client (via 429 or 503) that the system is overloaded, preventing cascading failures.",
+      "C": "Increasing the voltage of the network cards.",
+      "D": "A way to speed up the client's browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which headers are used for 'Propagating Trace Context' across service boundaries? (Select all that apply)",
+    "options": {
+      "A": "X-B3-TraceId",
+      "B": "traceparent (W3C Trace Context)",
+      "C": "X-Correlation-ID",
+      "D": "X-Auth-Token"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can natively convert 'Binary' Protobuf data into 'JSON' for clients that do not support gRPC.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Double Encryption' (or Re-encryption) at the Gateway?",
+    "options": {
+      "A": "Encrypting the data twice with the same key.",
+      "B": "Terminating SSL at the Gateway, then establishing a new SSL/TLS connection to the backend service for maximum security.",
+      "C": "A way to hide the data from the gateway itself.",
+      "D": "A type of security bug."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Canary' routing triggers at the Gateway? (Select all that apply)",
+    "options": {
+      "A": "Presence of a specific header (e.g., x-canary: true).",
+      "B": "The user's ID belonging to a specific range.",
+      "C": "A percentage of random traffic.",
+      "D": "The time since the user last logged in."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In a 'Serverless' Gateway model (e.g., AWS API Gateway), 'Cold Starts' can contribute to significant latency for rarely used endpoints.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Data Mediation' pattern is used to handle 'Legacy SOAP' services via a 'Modern REST' gateway?",
+    "options": {
+      "A": "JSON-to-XML Transformation.",
+      "B": "SOAP-to-REST Wrapping.",
+      "C": "Payload Filtering.",
+      "D": "Database Mirroring."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which factors can lead to 'Connection Pool Exhaustion' on a Gateway? (Select all that apply)",
+    "options": {
+      "A": "High latency on the backend services.",
+      "B": "Failure to use connection 'Keep-Alive'.",
+      "C": "Sudden traffic spikes (flash crowds).",
+      "D": "The backend service using too much RAM."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Cross-Site Request Forgery' (CSRF) protection is primarily the responsibility of the frontend, but a Gateway can provide an additional layer of defense by checking Referer/Origin headers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of 'Async Request/Response' in an API Gateway?",
+    "options": {
+      "A": "It makes the API calls happen instantly.",
+      "B": "It allows the gateway to free up its worker threads while waiting for long-running backend tasks, using a callback or polling mechanism.",
+      "C": "It removes the need for a gateway entirely.",
+      "D": "It encrypts the data during transmission."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'OAuth2' Token Exchange scenarios? (Select all that apply)",
+    "options": {
+      "A": "Exchanging an external 3rd-party token for an internal service token.",
+      "B": "Exchanging an expired token for a new one using a Refresh Token.",
+      "C": "Exchanging a User Token for a Machine Token to perform background tasks.",
+      "D": "Exchanging an API key for a password."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The 'Apigee' platform uses a 'Message Processor' component to handle the actual execution of policies on the API traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Protocol Mediation' in an Enterprise Service Bus (ESB) vs. an API Gateway?",
+    "options": {
+      "A": "ESBs handle only XML; Gateways handle only JSON.",
+      "B": "ESBs typically handle complex stateful orchestration and legacy protocols; Gateways focus on lightweight, stateless routing and security for modern APIs.",
+      "C": "They are identical in modern architectures.",
+      "D": "Gateways are faster because they don't use protocols."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are 'Gateway Anti-patterns'? (Select all that apply)",
+    "options": {
+      "A": "Implementing complex business logic inside the Gateway scripts.",
+      "B": "Using the Gateway as the primary database for the application.",
+      "C": "Failing to implement a timeout on upstream calls.",
+      "D": "Centralizing authentication logic."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Weighted Round Robin' is a load balancing algorithm where instances with more capacity are sent a higher proportion of requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'HTTP Request Smuggling' (TE.CL or CL.TE) in a Gateway/Backend setup?",
+    "options": {
+      "A": "Hiding a second request inside the body of the first to bypass security controls.",
+      "B": "Sending a request without a URL.",
+      "C": "Changing the HTTP version manually.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Health Check' types used by a Gateway? (Select all that apply)",
+    "options": {
+      "A": "TCP Connect check.",
+      "B": "HTTP GET with specific response code (e.g., 200).",
+      "C": "Passive checks (monitoring actual traffic errors).",
+      "D": "Physical hard drive SMART check."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Token Introspection' (RFC 7662) is more secure but adds more latency than offline 'JWT Validation' because it requires a network call to the Auth Server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a 'Mesh' architecture, what is 'Egress' traffic control?",
+    "options": {
+      "A": "Traffic leaving the data center to the internet.",
+      "B": "Controlling and securing the requests made from internal services to external 3rd-party APIs via a gateway.",
+      "C": "Traffic moving from the North to the South.",
+      "D": "A way to delete old service logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which methods are used to 'Drain' a backend service during a rollout? (Select all that apply)",
+    "options": {
+      "A": "Setting the node's weight to zero in the Gateway.",
+      "B": "Waiting for existing connections to close naturally before removing the node.",
+      "C": "Force-killing all connections immediately.",
+      "D": "Blocking new incoming requests while finishing in-flight ones."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Kong Gateway' uses Nginx as its core engine and provides extensibility via 'Plugins' written in Lua.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic Payload Enrichment'?",
+    "options": {
+      "A": "Adding more RAM to the request.",
+      "B": "The Gateway calling an external service (like a user profile DB) to add data to the request body before it reaches the backend.",
+      "C": "Cleaning the JSON of extra fields.",
+      "D": "Increasing the file size of images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Resiliency' patterns in a Gateway? (Select all that apply)",
+    "options": {
+      "A": "Timeouts.",
+      "B": "Retries with Jitter.",
+      "C": "Circuit Breaking.",
+      "D": "Deleting slow code."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Brotli' compression is generally more efficient for text-based API responses than 'Gzip' but requires more CPU power on the Gateway.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Rate Limiting' via 'Redis' state?",
+    "options": {
+      "A": "A rate limit that applies to the whole world.",
+      "B": "Centralizing the request counters in a distributed cache so that multiple Gateway instances share the same quota for a user.",
+      "C": "Limiting the number of Redis databases.",
+      "D": "A way to speed up the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Authentication' challenges? (Select all that apply)",
+    "options": {
+      "A": "Broken Object Level Authorization (BOLA).",
+      "B": "Broken Function Level Authorization (BFLA).",
+      "C": "Credential Stuffing.",
+      "D": "Poor network signal."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The 'Host' header must be strictly validated by the Gateway to prevent 'Host Header Injection' attacks which can lead to web cache poisoning.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OIDC UserInfo' retrieval at the Gateway?",
+    "options": {
+      "A": "Searching for a user in the phone book.",
+      "B": "The Gateway calling the OpenID Connect UserInfo endpoint to fetch detailed user claims using the Access Token.",
+      "C": "Deleting the user's profile.",
+      "D": "A type of database indexing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which features are found in 'Cloud-Native' API Management platforms (e.g., Kong, Tyk)? (Select all that apply)",
+    "options": {
+      "A": "GitOps-based configuration.",
+      "B": "Kubernetes Ingress support.",
+      "C": "Serverless function integration.",
+      "D": "Physical server maintenance."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A 'Stateless' JWT allows the Gateway to verify a user's identity without performing any database lookups.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'In-flight Request Tracking'?",
+    "options": {
+      "A": "Tracking a request while it's on an airplane.",
+      "B": "The ability of a Gateway to monitor and limit the number of active, unresolved requests currently being processed by a backend.",
+      "C": "Counting the total number of requests per day.",
+      "D": "A way to sort requests by size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Gateway Security' best practices? (Select all that apply)",
+    "options": {
+      "A": "Hiding the 'X-Powered-By' header.",
+      "B": "Limiting the max request body size.",
+      "C": "Implementing an allow-list for HTTP methods.",
+      "D": "Using the default 'admin' password."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can act as a 'Bridge' between different authentication domains (e.g., LDAP to OAuth2).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Scoping' in the context of OAuth2 scopes?",
+    "options": {
+      "A": "Using a telescope to see the API.",
+      "B": "Restricting specific API endpoints or methods based on the permissions granted within the client's access token.",
+      "C": "Naming the API correctly.",
+      "D": "Sorting APIs by their complexity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which factors contribute to 'Gateway Tail Latency'? (Select all that apply)",
+    "options": {
+      "A": "Garbage collection in the Gateway's runtime (e.g., Java).",
+      "B": "Network congestion.",
+      "C": "Cold starts in backend serverless functions.",
+      "D": "The number of users on the site."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Dynamic Payload Transformation' (e.g., using Jolt) allows a Gateway to map a single backend response to multiple different client-specific formats on-the-fly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sticky Session' implementation via 'Cookie Injection'?",
+    "options": {
+      "A": "Putting a cookie in a physical jar.",
+      "B": "The Gateway adding a unique cookie to the client's response that it then uses to route subsequent requests to the same backend instance.",
+      "C": "A way to delete all cookies.",
+      "D": "A type of database indexing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Gateway Integration' tests? (Select all that apply)",
+    "options": {
+      "A": "End-to-End latency testing.",
+      "B": "Testing rate limit enforcement under load.",
+      "C": "Verifying correct routing for edge-case URL paths.",
+      "D": "Unit testing the backend's internal functions."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Protocol Mediation' from HTTP/1.1 to HTTP/2 is a common optimization used by Gateways to improve performance with modern backends.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Control Plane' in a Gateway architecture?",
+    "options": {
+      "A": "To handle the actual API traffic.",
+      "B": "To manage the configuration, deployment, and health monitoring of the Gateway instances (Data Plane).",
+      "C": "To act as the primary database.",
+      "D": "To provide the physical server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Security' logs capturable by a Gateway? (Select all that apply)",
+    "options": {
+      "A": "Unauthorized access attempts.",
+      "B": "Requests matching WAF threat signatures.",
+      "C": "Brute-force patterns from a single IP.",
+      "D": "The user's password in plain text."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can be used to 'Shield' a legacy application by providing a modern, secured API layer on top of a fragile backend.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Query Parameter Stripping'?",
+    "options": {
+      "A": "Taking the query parameter's clothes off.",
+      "B": "Removing specific sensitive or unnecessary query parameters from the client request before forwarding it to the backend.",
+      "C": "A way to speed up the database.",
+      "D": "A type of database indexing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe the 'Ingress Controller' pattern? (Select all that apply)",
+    "options": {
+      "A": "It is specific to Kubernetes environments.",
+      "B": "It acts as the gateway for external traffic entering the cluster.",
+      "C": "It is managed by a central database.",
+      "D": "It can handle SSL termination and path-based routing."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Token Poking' is a process where the Gateway checks the validity of a token by sending it to the backend service.",
+    "options": {
+      "A": "True",
+      "B": "False (It is called Token Introspection and is done with the Auth Server)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Request Hedging' in a high-availability Gateway?",
+    "options": {
+      "A": "Cutting the bushes around the server.",
+      "B": "Sending the same request to multiple backend instances and using the first successful response to minimize tail latency.",
+      "C": "Deleting duplicate requests.",
+      "D": "A way to handle server crashes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global Request ID' propagation and why is it critical for Gateway operations?",
+    "options": {
+      "A": "It is a name given to the server.",
+      "B": "A unique identifier injected by the Gateway that allows logs from disparate microservices to be correlated into a single transaction trace.",
+      "C": "It is used to count the number of users.",
+      "D": "It is a password for the API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Custom Authorizer' response outputs? (Select all that apply)",
+    "options": {
+      "A": "An IAM Policy (Allow/Deny).",
+      "B": "A Principal Identifier.",
+      "C": "A context object containing key-value pairs for the backend.",
+      "D": "The user's full browser history."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Sticky Sessions' can lead to uneven load distribution across a cluster if a few clients generate a disproportionately high volume of traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does an API Gateway handle 'Backpressure' from a slow backend service?",
+    "options": {
+      "A": "It automatically speeds up the backend.",
+      "B": "By using techniques like request queueing, rate limiting, or returning a 503 Service Unavailable once thresholds are met to protect the backend.",
+      "C": "It deletes the slow service.",
+      "D": "It ignores the delay and continues to send traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are true regarding 'Mutual TLS' (mTLS) in a Zero Trust Gateway architecture? (Select all that apply)",
+    "options": {
+      "A": "It requires the client to present a valid X.509 certificate.",
+      "B": "It ensures that only authenticated clients can even establish a TCP connection to the API.",
+      "C": "It completely replaces the need for JWT tokens.",
+      "D": "It can be offloaded at the load balancer level before reaching the Gateway."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Protocol Mediation' can allow a modern Mobile App (JSON) to communicate with a Mainframe system (COBOL/EBCDIC) through a Gateway.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Shadowing' and how is it used for risk mitigation?",
+    "options": {
+      "A": "Hiding the API from the internet.",
+      "B": "The practice of routing a copy of live production traffic to a non-production version of the API to validate behavior without affecting the live response.",
+      "C": "Flipping the API's UI to dark mode.",
+      "D": "Creating a backup of the API key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific headers are commonly removed by a Gateway for security before forwarding to a backend? (Select all that apply)",
+    "options": {
+      "A": "X-Powered-By",
+      "B": "Server",
+      "C": "Authorization (if being exchanged for a new token)",
+      "D": "Content-Type"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: An API Gateway can be used to implement 'Request Debouncing' to prevent duplicate accidental form submissions from hitting the backend.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'High Performance' Gateways, what is 'Zero-Copy' data processing?",
+    "options": {
+      "A": "Not allowing users to copy the API code.",
+      "B": "An optimization where the Gateway avoids copying data between kernel and user-space buffers to minimize CPU usage and latency.",
+      "C": "A way to delete duplicate JSON fields.",
+      "D": "A type of database backup."
+    },
+    "answer": "B"
+  }
+  ]
+}

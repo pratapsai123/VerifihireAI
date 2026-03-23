@@ -1,0 +1,1901 @@
+{ 
+  "skill": "Security Testing", 
+  "questions": [
+    {
+    "question": "What does the 'CIA Triad' stand for in cybersecurity?",
+    "options": {
+      "A": "Central Intelligence Agency",
+      "B": "Confidentiality, Integrity, and Availability",
+      "C": "Control, Identification, and Authentication",
+      "D": "Cloud, Infrastructure, and Applications"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Authentication' is the process of verifying who a user is, while 'Authorization' is verifying what they have access to.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a common security vulnerability where an attacker injects malicious scripts into a web page viewed by other users?",
+    "options": {
+      "A": "SQL Injection",
+      "B": "Cross-Site Scripting (XSS)",
+      "C": "Buffer Overflow",
+      "D": "Denial of Service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of a 'Firewall'?",
+    "options": {
+      "A": "To increase the physical temperature of the server.",
+      "B": "To monitor and control incoming and outgoing network traffic based on security rules.",
+      "C": "To automatically delete old emails.",
+      "D": "To act as a backup power supply for the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are considered 'Social Engineering' attacks? (Select all that apply)",
+    "options": {
+      "A": "Phishing",
+      "B": "Pretexting",
+      "C": "Baiting",
+      "D": "SQL Injection"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'OWASP' stand for?",
+    "options": {
+      "A": "Official Website and Software Protection",
+      "B": "Open Web Application Security Project",
+      "C": "Operational Web Authentication Security Protocol",
+      "D": "Online Wiretap and Security Program"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'HTTP' instead of 'HTTPS' is secure for transmitting credit card information as long as the database is encrypted.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of security testing mimics a real-world attack to identify vulnerabilities in a system?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Penetration Testing",
+      "C": "Regression Testing",
+      "D": "Usability Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SQL Injection' (SQLi)?",
+    "options": {
+      "A": "A way to inject more RAM into a database server.",
+      "B": "A vulnerability that allows an attacker to interfere with the queries an application makes to its database.",
+      "C": "A specialized tool for cleaning physical hardware.",
+      "D": "A method for backing up SQL logs automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Strong Password' should typically include a mix of uppercase letters, lowercase letters, numbers, and symbols.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Vulnerability' occurs when an application includes untrusted data in a dynamic web page without proper validation or escaping?",
+    "options": {
+      "A": "Broken Access Control",
+      "B": "Cross-Site Scripting (XSS)",
+      "C": "Security Misconfiguration",
+      "D": "Insecure Design"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Multi-Factor Authentication' (MFA)?",
+    "options": {
+      "A": "To allow multiple users to share a single password.",
+      "B": "To require two or more verification factors to gain access to a resource.",
+      "C": "To make the login process 100% faster.",
+      "D": "To count the number of login attempts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common types of 'Malware'? (Select all that apply)",
+    "options": {
+      "A": "Viruses",
+      "B": "Ransomware",
+      "C": "Spyware",
+      "D": "Firmware"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Brute Force' attack?",
+    "options": {
+      "A": "Using physical force to open a server rack.",
+      "B": "A trial-and-error method used to guess login info or encryption keys.",
+      "C": "Hiring a professional weightlifter to move servers.",
+      "D": "A way to increase the CPU clock speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vulnerability Scanning' is a manual process where a person reads every line of code to find security holes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code might indicate a failure in 'Authorization' (Forbidden access)?",
+    "options": {
+      "A": "200 OK",
+      "B": "403 Forbidden",
+      "C": "404 Not Found",
+      "D": "500 Internal Server Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Encryption' do to data?",
+    "options": {
+      "A": "It deletes the data to keep it safe.",
+      "B": "It converts data into a secret code (ciphertext) that can only be read with the correct key.",
+      "C": "It makes the data file size much larger.",
+      "D": "It translates the data into 10 different languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Public Wi-Fi' networks are generally less secure than private home networks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Denial of Service' (DoS) attack?",
+    "options": {
+      "A": "An attack that makes a website look ugly.",
+      "B": "An attempt to make a machine or network resource unavailable to its intended users.",
+      "C": "A way to speed up the server's response time.",
+      "D": "Hiring a lawyer to deny service in court."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Security Best Practices' for developers? (Select all that apply)",
+    "options": {
+      "A": "Input Validation",
+      "B": "Using parameterized queries",
+      "C": "Keeping software and libraries updated",
+      "D": "Storing passwords in plain text"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Zero-Day' vulnerability?",
+    "options": {
+      "A": "A vulnerability that only works on the first day of the month.",
+      "B": "A security flaw that is unknown to the software vendor and for which no patch exists.",
+      "C": "A vulnerability that takes exactly zero seconds to fix.",
+      "D": "A bug found in the zero-th line of code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'SSL Certificate' is used to enable encrypted communication between a web browser and a web server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "A hobby involving catching fish in a lake.",
+      "B": "A fraudulent attempt to obtain sensitive information by disguising as a trustworthy entity in an electronic communication.",
+      "C": "A specialized software for architects.",
+      "D": "A way to cool down a server with water."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term refers to the practice of hiding sensitive information within a non-secret file (like an image)?",
+    "options": {
+      "A": "Encryption",
+      "B": "Steganography",
+      "C": "Hashing",
+      "D": "Obfuscation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hashing' is a two-way process that allows you to easily retrieve the original data from the hash value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an 'Access Control' failure?",
+    "options": {
+      "A": "The website loading slowly.",
+      "B": "A regular user being able to access the admin dashboard by changing the URL.",
+      "C": "The font color being hard to read.",
+      "D": "The server restarting at midnight."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Sanitization' in security?",
+    "options": {
+      "A": "Cleaning the physical office space.",
+      "B": "Cleaning or filtering user input to prevent malicious code from being executed.",
+      "C": "Deleting old users from the system.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'VPC' (Virtual Private Cloud) helps isolate cloud resources from the public internet for better security.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Least Privilege' mean in security planning?",
+    "options": {
+      "A": "Giving every user administrative rights to save time.",
+      "B": "Giving users only the minimum access levels they need to perform their job functions.",
+      "C": "A policy where only the CEO has a password.",
+      "D": "Deleting all user accounts that aren't used daily."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Biometric' authentication factors? (Select all that apply)",
+    "options": {
+      "A": "Fingerprint scan",
+      "B": "Facial recognition",
+      "C": "Retina scan",
+      "D": "A secret PIN"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cross-Site Request Forgery' (CSRF)?",
+    "options": {
+      "A": "Forging a physical signature on a contract.",
+      "B": "An attack that tricks a logged-in user into submitting a malicious request to a web application without their consent.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static Analysis' (SAST) involves testing the application while it is running.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code represents a failure in 'Authentication' (Unauthenticated)?",
+    "options": {
+      "A": "200",
+      "B": "401 Unauthorized",
+      "C": "404",
+      "D": "503"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic Analysis' (DAST)?",
+    "options": {
+      "A": "Analyzing a person's personality.",
+      "B": "Testing an application for security vulnerabilities while it is actively running and being exercised.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Default Passwords' (like 'admin' or '1234') on network devices is a major security risk.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of an API request is most likely to be targeted for 'Parameter Tampering'?",
+    "options": {
+      "A": "Query Parameters",
+      "B": "Server Uptime",
+      "C": "Office Location",
+      "D": "The Developer's Name"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Session Hijacking'?",
+    "options": {
+      "A": "Hiring a pilot to hijack a physical airplane.",
+      "B": "Stealing a user's session token to gain unauthorized access to their account.",
+      "C": "A security scan of the office building.",
+      "D": "Increasing the brightness of the monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Man-in-the-Middle' (MitM) attacks involve an attacker intercepting communication between two parties without their knowledge.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Safe' ways to store passwords in a database? (Select all that apply)",
+    "options": {
+      "A": "Using a strong hashing algorithm (like Argon2 or bcrypt)",
+      "B": "Adding a 'Salt' to the password before hashing",
+      "C": "Storing them in plain text for easy recovery",
+      "D": "Using a secret encryption key"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Security Misconfiguration'?",
+    "options": {
+      "A": "Configuring the office furniture incorrectly.",
+      "B": "A failure to implement secure settings for an application, server, or cloud resource (e.g., leaving default ports open).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is a 'Captcha' used for?",
+    "options": {
+      "A": "To take photos of the users.",
+      "B": "To differentiate between human users and automated bots to prevent spam or brute-force attacks.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Most 'SQL Injection' vulnerabilities can be prevented by using 'Parameterized Queries' (Prepared Statements).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe a 'Black Box' security test?",
+    "options": {
+      "A": "The tester has full knowledge of the source code.",
+      "B": "The tester has no prior knowledge of the internal workings of the system.",
+      "C": "Testing the physical durability of a black box.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Credential Stuffing'?",
+    "options": {
+      "A": "Stuffing physical papers into a folder.",
+      "B": "An automated attack where stolen username/password pairs are used to gain unauthorized access to other accounts.",
+      "C": "A security certificate for a database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Security Patch'?",
+    "options": {
+      "A": "A physical patch for a developer's jacket.",
+      "B": "A software update released specifically to fix a security vulnerability.",
+      "C": "A security scan of the network.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Internal Threat' refers to a security risk that originates from within the organization (e.g., a disgruntled employee).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Identity and Access Management' (IAM) tools? (Select all that apply)",
+    "options": {
+      "A": "Okta",
+      "B": "AWS IAM",
+      "C": "Microsoft Entra ID (formerly Azure AD)",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Insecure Direct Object Reference' (IDOR)?",
+    "options": {
+      "A": "Referring to a person incorrectly in an email.",
+      "B": "A type of access control vulnerability where a user can access another user's data by simply changing an ID in the URL.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'WAF' (Web Application Firewall)?",
+    "options": {
+      "A": "A firewall that only works on Wednesdays.",
+      "B": "A security layer specifically designed to protect web applications by filtering and monitoring HTTP traffic.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Privilege Escalation' occurs when a user gains higher-level permissions than they are supposed to have.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Compliance' in security testing? (Select all that apply)",
+    "options": {
+      "A": "Meeting regulatory standards like GDPR or HIPAA",
+      "B": "Following industry frameworks like SOC2",
+      "C": "Ensuring all developers are wearing uniforms",
+      "D": "Validating adherence to legal requirements"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Information Leakage' (or Data Exposure)?",
+    "options": {
+      "A": "When liquid spills on a physical document.",
+      "B": "When an application unintentionally reveals sensitive information (like technical error details or user data) to an unauthorized party.",
+      "C": "A security scan of the data center.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is a 'Security Baseline'?",
+    "options": {
+      "A": "The lowest floor in the building.",
+      "B": "A set of minimum security requirements and configurations that must be met before a product is released.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Automated' security tests should replace all manual penetration testing for maximum safety.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Cloud' security risks? (Select all that apply)",
+    "options": {
+      "A": "Misconfigured S3 buckets (Open to public)",
+      "B": "Insecure API keys stored in source code",
+      "C": "The weather condition at the data center",
+      "D": "Shadow IT (Unauthorized cloud use)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Hardening' a system?",
+    "options": {
+      "A": "Using a physical hammer on the server.",
+      "B": "The process of securing a system by reducing its surface of vulnerability (e.g., closing unused ports).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Assessment'?",
+    "options": {
+      "A": "Calculating the chance of rain.",
+      "B": "Evaluating the potential impact and likelihood of a specific security threat.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Token-based' authentication (like JWT) is often used to maintain state in a stateless REST API environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'White Box' security testing?",
+    "options": {
+      "A": "The tester has no access to the code.",
+      "B": "The tester has full access to the source code, architecture diagrams, and internal documentation.",
+      "C": "Testing the physical transparency of a white box.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Buffer Overflow'?",
+    "options": {
+      "A": "When a physical container for water is full.",
+      "B": "A vulnerability where an application writes more data to a memory buffer than it can hold, potentially overwriting adjacent memory.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is an 'Incident Response Plan'?",
+    "options": {
+      "A": "A plan to fix every bug in 1 minute.",
+      "B": "A set of procedures for responding to and managing a security breach or cyberattack.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Two-Factor Authentication' (2FA) is a subset of Multi-Factor Authentication (MFA).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Network' security tools? (Select all that apply)",
+    "options": {
+      "A": "Wireshark (Packet sniffer)",
+      "B": "Nmap (Port scanner)",
+      "C": "Metasploit",
+      "D": "Microsoft Word"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data Encryption at Rest'?",
+    "options": {
+      "A": "Encrypting data while a person is sleeping.",
+      "B": "Protecting data that is stored on a disk or in a database.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Security Audit'?",
+    "options": {
+      "A": "Auditing a person name Security.",
+      "B": "A systematic evaluation of the security of an organization's information system by measuring how well it conforms to established criteria.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Security through Obscurity' is a recommended primary strategy for protecting critical systems.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Cross-Site Scripting' (XSS) type occurs when the malicious script is permanently stored on the target server (e.g., in a database)?",
+    "options": {
+      "A": "Reflected XSS",
+      "B": "Stored (or Persistent) XSS",
+      "C": "DOM-based XSS",
+      "D": "Blind XSS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Content Security Policy' (CSP) can mitigate the impact of XSS attacks by restricting the sources from which scripts can be loaded and executed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Blind SQL Injection'? (Select all that apply)",
+    "options": {
+      "A": "The server does not return data directly in the HTTP response",
+      "B": "The attacker must infer data by observing server response times (Time-based)",
+      "C": "The attacker must infer data based on True/False responses from the server (Boolean-based)",
+      "D": "The database structure is clearly printed in the error message"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In 'JSON Web Token' (JWT) security, what is the risk of the 'None' algorithm attack?",
+    "options": {
+      "A": "The token becomes impossible to read.",
+      "B": "An attacker can modify the payload and set the algorithm to 'None', tricking some vulnerable servers into accepting the token without a signature check.",
+      "C": "It doubles the size of the header.",
+      "D": "It forces the user to log in every 5 minutes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical difference between 'SAST' (Static Analysis) and 'DAST' (Dynamic Analysis)?",
+    "options": {
+      "A": "SAST is for experts; DAST is for beginners.",
+      "B": "SAST analyzes the source code without executing it; DAST tests the running application from the outside.",
+      "C": "SAST only finds UI bugs; DAST only finds database bugs.",
+      "D": "DAST is 100x faster than SAST."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Setting the 'HttpOnly' flag on a cookie prevents it from being accessed by client-side JavaScript, reducing the risk of token theft via XSS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe a 'Server-Side Request Forgery' (SSRF) attack?",
+    "options": {
+      "A": "Tricking a user into sending a request to the server.",
+      "B": "Tricking the server into making an unauthorized request to an internal or external resource on behalf of the attacker.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the server response."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'CSRF Token'?",
+    "options": {
+      "A": "To encrypt the user's password.",
+      "B": "To provide a unique, secret value that must be included in state-changing requests to prove they originated from the legitimate user.",
+      "C": "To count the number of users online.",
+      "D": "To speed up the database queries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are common 'Broken Access Control' vulnerabilities? (Select all that apply)",
+    "options": {
+      "A": "Bypassing access control checks by modifying the URL",
+      "B": "Insecure Direct Object References (IDOR)",
+      "C": "Elevating privileges to become an admin without authorization",
+      "D": "Using a weak hashing algorithm like MD5"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Directory Traversal' (or Path Traversal) allows an attacker to access files and directories that are stored outside the web root folder.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Clickjacking'?",
+    "options": {
+      "A": "Hacking a physical mouse.",
+      "B": "Tricking a user into clicking something different from what they perceive by using transparent layers or iframes.",
+      "C": "A way to measure the speed of a user's click.",
+      "D": "Increasing the size of all buttons on a page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP security header is used to prevent 'Clickjacking' by instructing the browser not to allow the page to be rendered in a frame?",
+    "options": {
+      "A": "Content-Type",
+      "B": "X-Frame-Options (or CSP frame-ancestors)",
+      "C": "Strict-Transport-Security",
+      "D": "Server-Header"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what does 'HSTS' (HTTP Strict Transport Security) enforce?",
+    "options": {
+      "A": "That the website must use a dark theme.",
+      "B": "That the browser should only communicate with the server over secure HTTPS connections.",
+      "C": "That the user must change their password every 30 days.",
+      "D": "That the database must be backed up daily."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Salted Hashing' makes it significantly harder for attackers to use 'Rainbow Tables' to crack passwords.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Injection' attacks other than SQLi? (Select all that apply)",
+    "options": {
+      "A": "OS Command Injection",
+      "B": "LDAP Injection",
+      "C": "XML Injection (XXE)",
+      "D": "Physical Water Injection"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'XML External Entity' (XXE) processing vulnerability?",
+    "options": {
+      "A": "A way to make XML files look pretty.",
+      "B": "When an XML parser is configured to process external entities, allowing an attacker to read local files or interact with internal systems.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Security Hardening' of a server?",
+    "options": {
+      "A": "Adding actual physical armor to the server rack.",
+      "B": "Disabling unnecessary services, closing unused ports, and applying security patches to reduce the attack surface.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'CORS' (Cross-Origin Resource Sharing) configurations can lead to unauthorized data theft if the 'Access-Control-Allow-Origin' is set to '*'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of an application is primarily responsible for 'Enforcing' authorization logic?",
+    "options": {
+      "A": "The Client-side JavaScript",
+      "B": "The Server-side Application Logic",
+      "C": "The Browser Cache",
+      "D": "The User's Password Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Subdomain Takeover'?",
+    "options": {
+      "A": "Hiring a person to take over a physical domain.",
+      "B": "When an attacker gains control over a subdomain that points to a service (like an S3 bucket) that is no longer active.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'CVSS' (Common Vulnerability Scoring System)?",
+    "options": {
+      "A": "A score given to the office environment.",
+      "B": "A standard for assessing the severity of computer system security vulnerabilities.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environment' security refers to a situation where the 'Dev' environment has more relaxed security controls than 'Production', leading to leaked secrets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Threat Modeling' methodologies? (Select all that apply)",
+    "options": {
+      "A": "STRIDE",
+      "B": "PASTA",
+      "C": "VAST",
+      "D": "PIZZA"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Broken Function Level Authorization' (BFLA)?",
+    "options": {
+      "A": "When a physical function at the office is cancelled.",
+      "B": "When an application fails to check for appropriate permissions before allowing access to a specific function (e.g., an administrative delete).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Secret Management'?",
+    "options": {
+      "A": "Hiring a person to keep secrets.",
+      "B": "Using a dedicated vault (like HashiCorp Vault or AWS Secrets Manager) to store and manage API keys and passwords instead of hardcoding them.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Unvalidated Redirects' occur when an application takes a URL as a parameter and redirects the user to that URL without checking if it is a trusted domain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Automated' security testing types? (Select all that apply)",
+    "options": {
+      "A": "Software Composition Analysis (SCA) for library vulnerabilities",
+      "B": "Infrastructure as Code (IaC) scanning",
+      "C": "Hiring a 100-core CPU",
+      "D": "Container image scanning"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Race Condition' in security?",
+    "options": {
+      "A": "Two hackers racing to finish a job.",
+      "B": "A vulnerability that occurs when a system's behavior depends on the timing or sequence of events, allowing an attacker to perform unauthorized actions during a brief window.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'False Positive' in a security scan?",
+    "options": {
+      "A": "A positive value that is actually zero.",
+      "B": "When a security tool incorrectly flags a legitimate piece of code or behavior as a vulnerability.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cryptographic Failure' is a category in the OWASP Top 10 that focuses on failures related to cryptography (or lack thereof) which often leads to sensitive data exposure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Least Privilege' in a microservices environment? (Select all that apply)",
+    "options": {
+      "A": "Service A can only talk to Service B if it's explicitly required",
+      "B": "Every service has full access to the database to save time",
+      "C": "Using scoped tokens for service-to-service communication",
+      "D": "Limiting permissions to only what is necessary"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is 'Brute Force' protection mechanism 'Rate Limiting'?",
+    "options": {
+      "A": "Limiting the rate of people entering the office.",
+      "B": "Restricting the number of failed login attempts from a single IP address or user account within a certain timeframe.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Penetration Testing' (Pen Testing)?",
+    "options": {
+      "A": "Testing how well a physical pen writes.",
+      "B": "A simulated cyberattack against your computer system to check for exploitable vulnerabilities.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Ciphers' occur when a client and server cannot agree on a mutually supported encryption algorithm, resulting in a failed connection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Mobile' security risks? (Select all that apply)",
+    "options": {
+      "A": "Insecure data storage on the device",
+      "B": "Improper platform usage (e.g., TouchID bypass)",
+      "C": "Reverse engineering of the application binary",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Input Validation' vs 'Output Encoding'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Validation checks data as it enters; Encoding ensures data is safe as it is rendered in the browser.",
+      "C": "Validation is for beginners; Encoding for experts.",
+      "D": "Encoding is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Remediation' (MTTR) for security?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time taken to fix or mitigate a security vulnerability once it is identified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scopes' in OAuth 2.0 can allow a client application to access more user data than the user intended to share.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Secure' 'Coding' 'Guidelines'? (Select all that apply)",
+    "options": {
+      "A": "Avoid using deprecated cryptographic functions",
+      "B": "Implement proper error handling (No sensitive info in errors)",
+      "C": "Use hardcoded passwords for speed",
+      "D": "Enforce strong password policies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Software Composition Analysis' (SCA)?",
+    "options": {
+      "A": "Analyzing the composition of a physical software box.",
+      "B": "An automated process to identify and manage open-source components and their known vulnerabilities within a codebase.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Management'?",
+    "options": {
+      "A": "Managing a list of people who are vulnerable to cold.",
+      "B": "The cyclical practice of identifying, classifying, prioritizing, remediating, and mitigating software vulnerabilities.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Token' 'Expiration' occurs when a refresh token lasts for 10 years while the access token lasts for 5 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Defense in Depth'? (Select all that apply)",
+    "options": {
+      "A": "Using multiple layers of security controls",
+      "B": "Ensuring a single failure doesn't compromise the whole system",
+      "C": "Relying only on a firewall",
+      "D": "Combining physical, network, and application security"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Regression' Testing?",
+    "options": {
+      "A": "Testing if the security has become older.",
+      "B": "Verifying that a security fix didn't break functionality and that previously fixed security holes haven't been reintroduced.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fuzzing' (Fuzz Testing)?",
+    "options": {
+      "A": "Testing if the software is physically fuzzy.",
+      "B": "An automated security testing technique that involves providing invalid, unexpected, or random data as inputs to a computer program.",
+      "C": "A security scan of the office network.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Header' 'Security' occurs when 'Content-Type' is set correctly but 'X-Content-Type-Options' is missing, allowing the browser to 'sniff' the MIME type.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Secure' 'Session' 'Management' techniques? (Select all that apply)",
+    "options": {
+      "A": "Generating long, unpredictable session IDs",
+      "B": "Setting a reasonable session timeout",
+      "C": "Storing the session ID in a global variable",
+      "D": "Regenerating the session ID after login"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Insecure' 'Deserialization'?",
+    "options": {
+      "A": "Deleting the serial numbers of the hardware.",
+      "B": "A vulnerability where untrusted data is used to abuse the logic of an application, leading to RCE or denial of service.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Threat' 'Intelligence'?",
+    "options": {
+      "A": "Calculating the intelligence of a threat actor.",
+      "B": "Information about existing or emerging threats that is used to help an organization understand the risks of common attacks.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hashing' 'Algorithms' (e.g., using MD5 when the standard is SHA-256) is a technical failure in 'Software and Data Integrity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Dynamic' 'Scanning' (DAST) limitations? (Select all that apply)",
+    "options": {
+      "A": "Can only find vulnerabilities reachable from the UI/API",
+      "B": "Often results in high false positives",
+      "C": "Cannot find logic flaws deep in the source code",
+      "D": "Guaranteed to stop all hackers"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Information' 'Leakage' through 'Verbose' error messages?",
+    "options": {
+      "A": "Leaking information about a person name Verbose.",
+      "B": "When an application displays detailed technical info (like stack traces or DB versions) in the error screen, helping an attacker.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Detect' (MTTD) in security?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average amount of time that a security threat remains undiscovered in a network.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Security' 'Ownership' refers to the confusion over whether the 'Dev' team or the 'Security' team is responsible for fixing a specific bug.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' 'Native' security 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Automated security updates",
+      "B": "Centralized visibility through cloud consoles",
+      "C": "Guaranteed 100% security forever",
+      "D": "Scalable protection (e.g., DDoS mitigation)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Debt'?",
+    "options": {
+      "A": "Owing money to a security guard.",
+      "B": "The accumulated cost and risk resulting from ignoring security best practices or delaying vulnerability fixes.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'False' 'Negative' in security?",
+    "options": {
+      "A": "A negative value that is actually positive.",
+      "B": "When a security tool fails to identify a real vulnerability that actually exists in the code.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Certificates' occur when the domain name on an SSL certificate does not match the actual URL being accessed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Static' 'Scanning' (SAST) benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifies vulnerabilities early in the SDLC (Shift Left)",
+      "B": "Full code coverage for reachable and unreachable paths",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Easy to integrate into CI/CD pipelines"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'API' 'Insecure' 'Design'?",
+    "options": {
+      "A": "Designing a building incorrectly.",
+      "B": "A category of risk focusing on missing security controls at the architectural level, regardless of how well the code is written.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC) in an incident?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The average time it takes for security teams to isolate a threat and stop it from causing further damage.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Classification' occurs when sensitive PII is stored with the same security controls as public marketing data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Container' 'Security'? (Select all that apply)",
+    "options": {
+      "A": "Scanning images for known CVEs",
+      "B": "Checking for root user execution in Dockerfiles",
+      "C": "Guaranteed to replace all security engineers",
+      "D": "Validating container network policies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Brute' 'Force' 'Complexity'?",
+    "options": {
+      "A": "The complexity of a physical weightlifter.",
+      "B": "The mathematical difficulty for an attacker to guess a password based on its length and character set entropy.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Threat' 'Modeling' 'Update' frequency?",
+    "options": {
+      "A": "Updating the threat model every 10 years.",
+      "B": "The requirement to review and update threat models whenever a major architectural change is made to the application.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Levels' in security occur when sensitive tokens are logged in 'Dev' but properly hidden in 'Prod'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Broken Access Control', how does a 'Secondary-Order IDOR' typically manifest in an enterprise application?",
+    "options": {
+      "A": "When a user modifies their own profile ID in a URL to see another user's public data.",
+      "B": "When an attacker modifies a resource ID that is stored in the database and later used by a background process or administrative function without re-authorization.",
+      "C": "When the server fails to encrypt the primary key in the browser's local storage.",
+      "D": "When a developer uses a UUID instead of a sequential integer for database records."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Blind OOB (Out-of-Band) XXE' attack, an attacker can exfiltrate sensitive files even if the application does not return any XML response, by forcing the server to make an external request to an attacker-controlled server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Advanced' SSRF exploitation techniques against Cloud Infrastructure? (Select all that apply)",
+    "options": {
+      "A": "Accessing the Metadata Service (e.g., 169.254.169.254) to retrieve IAM credentials",
+      "B": "Using DNS Rebinding to bypass local-host IP filters",
+      "C": "Exploiting URL schema parsers (e.g., using 'gopher://' or 'dict://') to communicate with internal services",
+      "D": "Changing the CSS font size of the error message"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical distinction between 'Insecure Design' and 'Security Misconfiguration' in the OWASP Top 10?",
+    "options": {
+      "A": "Insecure Design is a failure in the code implementation; Misconfiguration is a failure in the server settings.",
+      "B": "Insecure Design refers to missing or ineffective security controls at the architectural level; Misconfiguration refers to the failure to properly implement a secure architecture.",
+      "C": "Insecure Design only applies to front-end UI; Misconfiguration only applies to the back-end database.",
+      "D": "There is no distinction; they were merged into a single category in 2021."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'JSON Web Token' (JWT) attacks, what is a 'Key Confusion' vulnerability?",
+    "options": {
+      "A": "When the user forgets their login password.",
+      "B": "When an application is tricked into verifying an RS256-signed token (Asymmetric) using the public key as an HS256 (Symmetric) secret key.",
+      "C": "When the token payload is larger than 2KB.",
+      "D": "When the developer uses the same key for development and production."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pre-flight' OPTIONS requests in CORS are a security mechanism that prevents a browser from sending a potentially dangerous 'Cross-Site' request without the server's explicit prior approval.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Cryptographic' failure is characterized by the absence of 'Forward Secrecy' in a TLS configuration?",
+    "options": {
+      "A": "Using a self-signed certificate.",
+      "B": "The risk that a compromise of the server's private key could allow an attacker to decrypt previously recorded past traffic sessions.",
+      "C": "Using a weak hashing algorithm like MD5 for passwords.",
+      "D": "Failing to salt the database entries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Dependency Confusion' refer to in 'Software and Data Integrity Failures'?",
+    "options": {
+      "A": "When a developer imports too many libraries.",
+      "B": "An attack where an internal private package name is registered on a public repository (like npm or PyPI), tricking the build system into downloading the malicious public version.",
+      "C": "A specialized software for architects to design databases.",
+      "D": "The failure to update a library for more than 12 months."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are characteristics of 'Second-Order SQL Injection'? (Select all that apply)",
+    "options": {
+      "A": "The malicious payload is stored in the database first",
+      "B": "The vulnerability is triggered when the stored payload is later used in a different query",
+      "C": "It can bypass simple input validation that only checks the initial entry point",
+      "D": "It only occurs in NoSQL databases"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Runtime Application Self-Protection' (RASP) is a technology that sits inside the application and can detect and block attacks in real-time by monitoring internal execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP security header, when set to 'nosniff', prevents a browser from trying to MIME-guess the content type of a response?",
+    "options": {
+      "A": "X-Frame-Options",
+      "B": "X-Content-Type-Options",
+      "C": "Content-Security-Policy",
+      "D": "Strict-Transport-Security"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary risk of 'Prototype Pollution' in JavaScript-based applications?",
+    "options": {
+      "A": "It makes the website load 100% slower.",
+      "B": "An attacker can overwrite inherited properties of the base 'Object' prototype, leading to logic bypass or Remote Code Execution (RCE).",
+      "C": "It changes the color of all buttons to red.",
+      "D": "It deletes the user's browser history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Security Logging and Monitoring', what is the significance of 'Log Injection' (or Log Forging)?",
+    "options": {
+      "A": "Injecting logs into a physical fireplace.",
+      "B": "An attacker adding fake log entries to confuse responders, hide their tracks, or exploit vulnerabilities in the log-viewing software.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the log viewer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Insecure Direct Object Reference' (IDOR) is considered a sub-type of 'Broken Access Control' because it involves a failure to enforce authorization at the object level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'OAuth 2.0' 'State' parameter importance? (Select all that apply)",
+    "options": {
+      "A": "It prevents Cross-Site Request Forgery (CSRF) during the auth flow",
+      "B": "It is a random, unpredictable string generated by the client",
+      "C": "It is used to verify that the authorization response matches the original request",
+      "D": "It stores the user's password securely"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Salt' 'Entropy' in password hashing?",
+    "options": {
+      "A": "The physical weight of the salt crystal.",
+      "B": "The degree of randomness in the salt value; low entropy salts make the hashing process more susceptible to pre-computation attacks.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'HTTP Request Smuggling'?",
+    "options": {
+      "A": "Smuggling a physical server across a border.",
+      "B": "A technique that interferes with how a website processes sequences of HTTP requests received from one or more users by exploiting discrepancies in 'Content-Length' and 'Transfer-Encoding' handling.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Site Scripting' (XSS) can be mitigated by using a Content Security Policy (CSP) that disallows 'unsafe-inline' and 'unsafe-eval'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Software Supply Chain' security measures? (Select all that apply)",
+    "options": {
+      "A": "Using a Software Bill of Materials (SBOM)",
+      "B": "Signing commits in Git",
+      "C": "Verifying binary checksums before deployment",
+      "D": "Hiring 100 extra junior developers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Side-Channel' attack in cryptography?",
+    "options": {
+      "A": "Attacking a server from the physical side.",
+      "B": "An attack based on information gained from the physical implementation of a cryptosystem, such as timing, power consumption, or electromagnetic leaks.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the 'Zero Trust' architecture principle?",
+    "options": {
+      "A": "Trusting no one, including the CEO.",
+      "B": "A security model that requires strict identity verification for every person and device trying to access resources, regardless of their location on the network.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Blind SQL Injection' can be detected by using 'Time-based' payloads that force the database to pause for a specific duration if a condition is true.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'ASVS' (Application Security Verification Standard) Level 3? (Select all that apply)",
+    "options": {
+      "A": "Highest level of security verification",
+      "B": "Reserved for high-value applications (e.g., banking, medical)",
+      "C": "Requires full manual code review and penetration testing",
+      "D": "Only for applications with 5 users"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Deserialization Gadget Chain'?",
+    "options": {
+      "A": "A physical chain for a computer gadget.",
+      "B": "A sequence of method calls within an application's libraries that can be triggered by a malicious serialized object to achieve RCE.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'CVSS Environmental Score'?",
+    "options": {
+      "A": "The score of the office environment temperature.",
+      "B": "A score that modifies the base severity based on factors specific to the organization's unique environment and mitigating controls.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Trust' 'Levels' occur when a high-trust component accepts data from a low-trust component without re-validating the security context.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'XSS' 'Bypass' techniques? (Select all that apply)",
+    "options": {
+      "A": "Using encoding (Hex, Octal, Unicode) to hide the payload",
+      "B": "Exploiting browser-specific DOM parsing quirks",
+      "C": "Using 'polyglot' payloads that work in multiple contexts (HTML/JS/CSS)",
+      "D": "Changing the font color of the script tag"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Honeypot Account' in security monitoring?",
+    "options": {
+      "A": "An account that only buys physical honey.",
+      "B": "A fake, decoy user account designed to attract and detect attackers attempting brute-force or scraping activities.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is the risk of a 'CORS Wildcard' ('*') with credentials?",
+    "options": {
+      "A": "Allowing any card to be used for payment.",
+      "B": "Allowing any origin to access an API while including the user's cookies, which allows malicious sites to steal private session data.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Software Bill of Materials' (SBOM) is a formal record containing the details and supply chain relationships of various components used in building software.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated Threat Modeling' limitations? (Select all that apply)",
+    "options": {
+      "A": "Can miss complex business logic flaws",
+      "B": "Requires significant manual context to be accurate",
+      "C": "Always finds 100% of architectural bugs",
+      "D": "Is most effective when used in combination with human review"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What are 'Insecure Defaults' in Cloud security misconfiguration?",
+    "options": {
+      "A": "Hiring a person named Default.",
+      "B": "When cloud resources (like S3 buckets) are created with wide-open permissions by default, leading to unintentional data exposure.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'OWASP', what is 'DefectDojo'?",
+    "options": {
+      "A": "A physical school for karate.",
+      "B": "An open-source vulnerability management tool that aggregates results from various scanners to streamline security testing.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Man-in-the-Browser' (MitB) attacks occur when malware infects a user's web browser and modifies web pages or transactions in real-time before they are sent to the server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Zero-Day' 'Exploit' characteristics? (Select all that apply)",
+    "options": {
+      "A": "Exploits a vulnerability unknown to the software vendor",
+      "B": "No patch is available at the time of the attack",
+      "C": "Highly valuable to state actors and cybercriminals",
+      "D": "Occurs only on the zero-th day of the month"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Algorithm Agility' in cryptography?",
+    "options": {
+      "A": "How fast a mathematician can run.",
+      "B": "The design property that allows a system to easily switch between cryptographic algorithms without requiring major code changes.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'JSON Hijacking'?",
+    "options": {
+      "A": "Hacking a person named Jason.",
+      "B": "An attack that exploits how older browsers handle JavaScript arrays to steal sensitive data from a JSON response.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Ciphers' occur when a client and server cannot agree on a common encryption algorithm, leading to a connection failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'OWASP' 'Cornucopia' project goals? (Select all that apply)",
+    "options": {
+      "A": "Using a card game to help developers identify security requirements",
+      "B": "Increasing engagement with security-by-design",
+      "C": "Automatically generating secure code",
+      "D": "Making threat modeling fun and interactive"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Server-Side Request Forgery' (SSRF) 'Blind' type?",
+    "options": {
+      "A": "An attack by a person who is blind.",
+      "B": "When the attacker cannot see the server's response but can infer success or failure via timing, status codes, or DNS logs.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Aggregation' complexity?",
+    "options": {
+      "A": "Aggregating physical risks like falling over.",
+      "B": "The difficulty of combining multiple low-severity vulnerabilities that, together, create a high-severity exploit path.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Software Composition Analysis' (SCA) can identify 'License' risks in third-party libraries, not just technical security vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'CSRF' 'Bypasses'? (Select all that apply)",
+    "options": {
+      "A": "Exploiting 'GET' requests used for state-changing actions",
+      "B": "Finding 'XSS' to steal or bypass the CSRF token",
+      "C": "Exploiting weak token generation (low entropy)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'In-Memory' malware?",
+    "options": {
+      "A": "Malware that lives in the user's brain.",
+      "B": "Malicious code that resides entirely in the computer's RAM to avoid detection by traditional file-based antivirus scanners.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'OWASP', what is the 'WSTG'?",
+    "options": {
+      "A": "A specialized tool for measuring wind speed.",
+      "B": "The Web Security Testing Guide, providing a comprehensive framework for testing the security of web applications.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OWASP 'Identification and Authentication Failures' also include the lack of a secure 'Password Reset' workflow.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Identity' 'Protocols'? (Select all that apply)",
+    "options": {
+      "A": "SAML 2.0",
+      "B": "OpenID Connect (OIDC)",
+      "C": "Kerberos",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dynamic' 'Application' 'Security' 'Testing' (DAST) 'Fuzzing'?",
+    "options": {
+      "A": "Fuzzing a physical paper with a brush.",
+      "B": "The ability of a scanner to send thousands of malformed inputs to an endpoint to discover undocumented vulnerabilities.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Security Information and Event Management' (SIEM)?",
+    "options": {
+      "A": "Hiring a person named SIEM.",
+      "B": "A solution that provides real-time analysis of security alerts generated by hardware and applications across a network.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Software and Data Integrity Failures' can lead to 'Ransomware' attacks if an attacker pushes malicious updates to an internal system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'OWASP' 'Risk Rating Methodology' factors? (Select all that apply)",
+    "options": {
+      "A": "Likelihood (e.g., Ease of discovery)",
+      "B": "Impact (e.g., Financial damage)",
+      "C": "Threat Agent (e.g., Motivation)",
+      "D": "The color of the risk chart"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Polyglot Payload' in web attacks?",
+    "options": {
+      "A": "A person who speaks many languages.",
+      "B": "A malicious script that is valid and executable in multiple different file formats or contexts (e.g., JS and JPG).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'Subdomain Takeover'?",
+    "options": {
+      "A": "Taking over a physical domain name.",
+      "B": "When an attacker gains control of an abandoned subdomain that still has DNS records pointing to a third-party service.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocol' 'Versions' (e.g., using TLS 1.3 on a server that only supports TLS 1.0) can lead to 'Protocol Downgrade' attacks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'API Security' best practices? (Select all that apply)",
+    "options": {
+      "A": "Use OAuth 2.0 with Scopes",
+      "B": "Implement strict input schema validation",
+      "C": "Always use TLS for all endpoints",
+      "D": "Sharing the API key in the URL"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Broken Function Level Authorization' (BFLA)?",
+    "options": {
+      "A": "A specialized tool for measuring light.",
+      "B": "When an application fails to check for administrative permissions before executing a sensitive server-side function.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'Strict-Dynamic' in CSP?",
+    "options": {
+      "A": "A person who is very strict.",
+      "B": "A Content-Security-Policy directive that simplifies policy management by trusting scripts loaded by an already-trusted script.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Software and Data Integrity Failures' include the risk of 'CI/CD Pipeline' poisoning, where an attacker modifies the build process to include malicious code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated Incident Response' benefits? (Select all that apply)",
+    "options": {
+      "A": "Reducing Mean Time to Contain (MTTC)",
+      "B": "Handling high-volume, repetitive alerts",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Enabling 24/7 security monitoring"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Content Security Policy' (CSP) 'Report-Only' mode?",
+    "options": {
+      "A": "A mode for reporting only good things.",
+      "B": "A setting that allows developers to see what a policy would block without actually breaking site functionality for users.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Security', what is 'HTTP Response Splitting'?",
+    "options": {
+      "A": "Splitting a physical paper in half.",
+      "B": "A vulnerability occurring when an application fails to sanitize input included in HTTP headers, allowing an attacker to inject additional headers or a new response body.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Security' 'Contexts' occur when an application component assumes a data object is safe because it passed security checks in a different component.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud Native' identity management features? (Select all that apply)",
+    "options": {
+      "A": "Identity Federation",
+      "B": "Just-In-Time (JIT) Provisioning",
+      "C": "Role-Based Access Control (RBAC)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'OWASP Cheat Sheet Series'?",
+    "options": {
+      "A": "A series of sheets for cheating in exams.",
+      "B": "A collection of concise, actionable security guides for developers and architects covering various high-priority security topics.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Application Security', what is a 'False Negative'?",
+    "options": {
+      "A": "A negative value that is actually positive.",
+      "B": "When a security tool fails to identify an actual vulnerability that exists in the code.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Broken Access Control' is currently the #1 risk in the OWASP Top 10.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Injection' 'Types'? (Select all that apply)",
+    "options": {
+      "A": "CSV Injection",
+      "B": "Template Injection (SSTI)",
+      "C": "Expression Language (EL) Injection",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'CORS Misconfiguration' in Access Control?",
+    "options": {
+      "A": "Hiring a person named CORS.",
+      "B": "When a server's CORS policy is too permissive (e.g., using '*' with credentials), allowing any site to read the user's private data via the API.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  }
+  ]
+}

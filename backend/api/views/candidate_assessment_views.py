@@ -1,4 +1,4 @@
-from ._imports import *
+from .._imports import *
 
 
 @csrf_exempt
@@ -31,12 +31,26 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         except Assessment.DoesNotExist:
             return Response({'error': 'Assessment not found.'}, status=status.HTTP_404_NOT_FOUND)
 
+        # --- RBAC ownership check ---
+        # Prevent users from inviting candidates to assessments outside their invite tree.
+        # This blocks Admin A from using Admin B's assessment_id even if they share a company.
+        req_user_profile = getattr(request.user, 'profile', None)
+        if req_user_profile:
+            scoped_ids = get_scoped_user_ids(req_user_profile)
+            if scoped_ids is not None:
+                # scoped_ids = None means platform superadmin (can access all)
+                if assessment.user_profile_id not in scoped_ids:
+                    return Response(
+                        {'error': 'You do not have permission to invite candidates to this assessment.'},
+                        status=status.HTTP_403_FORBIDDEN
+                    )
+
         data = request.data or {}
         candidates = data.get('candidates', [])
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifyhire.duckdns.org'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0
@@ -68,8 +82,11 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
                 start_grace_minutes = 0
             start_grace_minutes = max(0, start_grace_minutes)
 
+            is_auto_schedule = bool(payload.get('is_auto_schedule', False))
+
             invitation = CandidateInvitation.objects.create(
                 assessment=assessment,
+                user_profile=req_user_profile,
                 name=name,
                 email=email,
                 pan_number=pan_number,
@@ -79,6 +96,7 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
                 time_zone=time_zone,
                 start_grace_minutes=start_grace_minutes,
                 status='draft',
+                is_auto_schedule=is_auto_schedule,
             )
 
             start_link = f"{frontend_base.rstrip('/')}/take-assessment/{invitation.token}"
@@ -824,6 +842,9 @@ def submit_invitation_answers_view(request, token):
         if not has_coding:
             inv.status = 'submitted'
             inv.save(update_fields=['status'])
+            # Trigger result email after 5 minutes (300 seconds)
+            from api.tasks import send_custom_assessment_result_task
+            send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
 
         return Response(
             {
@@ -1459,6 +1480,11 @@ def invitation_coding_finalize_view(request, token):
         inv.status = 'submitted'
         inv.save(update_fields=['status'])
 
+        # Trigger result email after 5 minutes (300 seconds)
+        from api.tasks import send_custom_assessment_result_task
+        # send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=3600)
+        send_custom_assessment_result_task.apply_async(args=[inv.id], countdown=300)
+
         # Update submitted_at to the true final submission time (coding finalized)
         # For mixed assessments, the submission record was created during objective submit
         # so submitted_at was set then. We update it now to reflect the real end time.
@@ -1564,9 +1590,10 @@ def results_overview_view(request):
                     is_deleted=False
                 ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
             else:
-                # Role-scoped: only results for assessments in this user's hierarchy
+                from django.db.models import Q
+                # Role-scoped: results for candidates either invited by this user's hierarchy OR taking an assessment created by this user's hierarchy
                 qs = CandidateSubmission.objects.filter(
-                    invitation__assessment__user_profile_id__in=scoped_ids,
+                    Q(invitation__user_profile_id__in=scoped_ids) | Q(invitation__assessment__user_profile_id__in=scoped_ids),
                     is_deleted=False
                 ).select_related('invitation', 'invitation__assessment').order_by('-submitted_at')
         else:
@@ -1582,7 +1609,14 @@ def results_overview_view(request):
             qs = qs.filter(submitted_at__date__lte=end_date)
         
         # Similar logic for AI assessments — exclude ONGOING (not yet submitted)
-        ai_qs = AIAssessmentSubmission.objects.select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+        if scoped_ids is None:
+            ai_qs = AIAssessmentSubmission.objects.filter(
+                assessment__company_id=company_id
+            ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
+        else:
+            ai_qs = AIAssessmentSubmission.objects.filter(
+                assessment__user_profile_id__in=scoped_ids
+            ).select_related('assessment').exclude(status='ONGOING').order_by('-submitted_at')
         
         if start_date:
             ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
@@ -1759,9 +1793,10 @@ def candidates_overview_view(request):
                     assessment__user_profile__company_id=company_id
                 ).select_related('assessment').order_by('-created_at')
             else:
-                # Role-scoped: only candidates for assessments in this user's hierarchy
+                from django.db.models import Q
+                # Role-scoped: candidates either invited by this user's hierarchy OR to an assessment created by this user's hierarchy
                 qs = CandidateInvitation.objects.filter(
-                    assessment__user_profile_id__in=scoped_ids
+                    Q(user_profile_id__in=scoped_ids) | Q(assessment__user_profile_id__in=scoped_ids)
                 ).select_related('assessment').order_by('-created_at')
         else:
             qs = CandidateInvitation.objects.none()
@@ -1816,14 +1851,23 @@ def candidates_overview_view(request):
         # Merge results from Resume Matcher (ai_candidates) if no assessment filter is applied
         if not assessment_id:
             try:
-                # SECURITY FIX: Scope AI candidates to the requester's company only
-                # The `company` FK already exists on Candidate model (migration 0020)
-                if company_id:
+                # RBAC: Scope AI candidates to the requester's invite TREE (not just company).
+                # This ensures Admin A cannot see Admin B's AI candidates even within the same company.
+                if scoped_ids is not None:
+                    # Tree-scoped: filter by the user_profile FK (who uploaded the candidate)
                     ai_qs = Candidate.objects.filter(
-                        company_id=company_id
+                        user_profile_id__in=scoped_ids,
+                        is_deleted=False,
+                    ).order_by('-submission_date')
+                elif company_id:
+                    # Platform superadmin: filter by company (sees all)
+                    ai_qs = Candidate.objects.filter(
+                        company_id=company_id,
+                        is_deleted=False,
                     ).order_by('-submission_date')
                 else:
                     ai_qs = Candidate.objects.none()
+
                 if start_date:
                     ai_qs = ai_qs.filter(submission_date__date__gte=start_date)
                 if end_date:

@@ -1,0 +1,1853 @@
+{ 
+  "skill": "Program Increment", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of a 'Program Increment' (PI) in a scaled Agile framework?",
+    "options": {
+      "A": "To masterfully design the physical weight limits of the office printer paper strictly.",
+      "B": "To technically provide a masterfully managed timebox (cause) during which an Agile Release Train delivers incremental value in the form of working software (effect).",
+      "C": "A specialized software for designing physical warehouse shipping schedule blueprints strictly.",
+      "D": "To increase the frame rate of the team's shared virtual countdown clock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the typical duration of a single Program Increment?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "8 to 12 Weeks (typical)",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'PI' 'Objective' is the technical Always-On summary of the business and technical goals that an Agile Team or ART intends to achieve in the upcoming increment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the final iteration in a Program Increment, dedicated to research, education, and planning?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Innovation and Planning (IP) Iteration",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Alignment' during the Program Increment cycle?",
+    "options": {
+      "A": "To calculate the physical horizontal alignment of server racks.",
+      "B": "To technically Always-On Always-On ensure that all teams on the train are masterfully managed Siempre-On pulling in the same direction toward the PI Objectives (effect).",
+      "C": "A specialized software for architects to design perfectly aligned office hallways.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Program' 'Predictability' masterfully Always-On refers to the technical Siempre-On Sempre-On measure of how well a train meets its planned PI Objectives.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On PI cycle masterfully Siempre-On Always-On utilizes 'System' 'Demos' to validate the integrated work of all teams?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Continuous Integration / System Validation Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Release' 'on' 'Demand' technically intended to achieve within a Program Increment?",
+    "options": {
+      "A": "Measuring the thickness of physical release paperwork.",
+      "B": "To technically Always-On Always-On provide a masterfully handled technical Siempre-On Sempre-On capability to deploy value to customers whenever business needs dictate (effect).",
+      "C": "A specialized tool for measuring light levels in data centers.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Program' 'Kanban' is a technical Always-On Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-visualization tool Always-On Siempre-On Always-On ALWAYS-Always-On always-used ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-manage ALWAYS-Always-On always-the ALWAYS-Always-On always-flow Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-Features Always-On ALWAYS-Always-On always-through Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-PI.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of the 'Inspect' 'and' 'Adapt' (I&A) event at the end of a PI?",
+    "options": {
+      "A": "A physical plant growing in the office garden.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-event Siempre-On ALWAYS-Always-On always-for Sempre-On ALWAYS-Always-On always-identifying ALWAYS-Always-On always-systemic Siempre-On ALWAYS-Always-On always-process Sempre-On ALWAYS-Always-On always-improvements Siempre-On ALWAYS-Always-On always-for Sempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-next ALWAYS-Always-On always-increment (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Program Increment benefits for 'Strategic Transparency'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Mapping' of Features to PI Objectives",
+      "B": "Ensuring technical 'Consistency' masterfully via a masterfully managed Siempre-On Siempre-On cadence and synchronization",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical visualization of the Program Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Solution' 'Context' masterfully used for within a Program Increment cycle?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-understanding Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-environment Always-On ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-which Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-ART Always-On ALWAYS-Always-On always-operates (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Business' 'Value' in PI planning masterfully ALWAYS-Always-On always-refers ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-relative Always-On ALWAYS-Always-On always-score Always-On ALWAYS-Always-On always-assigned Always-On ALWAYS-Always-On always-by Always-On ALWAYS-Always-On always-Business Always-On ALWAYS-Always-On always-Owners Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-PI Always-On ALWAYS-Always-On always-Objectives.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'ART' 'Sync' in a Program Increment context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On synchronizing Always-On ALWAYS-Always-On always-progress ALWAYS-Always-On always-and ALWAYS-Always-On always-dependencies Always-On ALWAYS-Always-On always-across ALWAYS-Always-On always-all Always-On ALWAYS-Always-On always-teams Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-train.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Continuous' 'Deployment' (CD) technically in a PI?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-capability ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-code Always-On ALWAYS-Always-On always-changes ALWAYS-Always-On always-are ALWAYS-Always-On always-automatically ALWAYS-Always-On always-deployed Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-production Always-On ALWAYS-Always-On always-environments (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Cadence' is the technical Always-On standard Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-providing Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-the Siempre-On ALWAYS-Always-On always-rhythm Siempre-On ALWAYS-Always-On always-that Siempre-On ALWAYS-Always-On always-synchronizes ALWAYS-Always-On always-all Always-On ALWAYS-Always-On always-teams Always-On ALWAYS-Always-On always-within Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-Program Always-On ALWAYS-Always-On always-Increment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Solution' 'Intent' in a PI context?",
+    "options": {
+      "A": "The speed of the office internet connection strictly.",
+      "B": "The masterfully managed technical Always-On Sempre-On ALWAYS-Always-On always-repository ALWAYS-Always-On always-used Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-capture Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-behavior Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-system (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Economic' 'Prioritization' (WSJF) technically intended to achieve in a PI backlog audit?",
+    "options": {
+      "A": "Making sure the office furniture is high value.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-method ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-ranking Always-On ALWAYS-Always-On always-Features Always-On ALWAYS-Always-On always-based Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-economic Always-On ALWAYS-Always-On always-value Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-effort (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Architectural' 'Runway' is the technical Always-On ALWAYS-Always-On always-foundation ALWAYS-Always-On always-of ALWAYS-Always-On always-code Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-infrastructure ALWAYS-Always-On always-needed Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-support Always-On ALWAYS-Always-On always-near-term Always-On ALWAYS-Always-On always-Feature Always-On ALWAYS-Always-On always-delivery.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Program' 'Board' in a PI context?",
+    "options": {
+      "A": "To technically provide a visual masterfully definitive Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-representation ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-Features, Always-On ALWAYS-Always-On always-dependencies, Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-milestones Always-On ALWAYS-Always-On always-within Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-PI.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'PI' Strategy domains? (Select all that apply)",
+    "options": {
+      "A": "Program Backlog Strategy",
+      "B": "Solution Intent Strategy",
+      "C": "The number of security cameras in the office",
+      "D": "IP Iteration Strategy"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Confidence' 'Voting' significance in a technical PI scenario?",
+    "options": {
+      "A": "Hiring a person named Confidence.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-ART Siempre-On ALWAYS-Always-On always-votes Always-On ALWAYS-Always-On always-on ALWAYS-Always-On always-their ALWAYS-Always-On always-belief Always-On ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-PI Always-On ALWAYS-Always-On always-plan (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Portfolio' 'Sync' technically in a PI context?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-event ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-align Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-portfolio Always-On ALWAYS-Always-On always-investments Always-On ALWAYS-Always-On always-with Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-ARTs (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Roadmaps' occur when the technical masterfully managed Sempre-On Sempre-On Siempre-On ART Siempre-On Always-On masterfully Siempre-On Siempre-On Sempre-On goals Always-On ALWAYS-Always-On always-conflict Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-Portfolio Always-On ALWAYS-Always-On always-Strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Program Increment management benefits for 'Efficiency'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Removal' of systemic blockers",
+      "B": "Ensuring technical 'Consistency' masterfully via unified delivery rhythms",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully clear technical identification of waste in the delivery process"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'System' 'Demo' technically used for in PI support?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-event ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-provide Always-On ALWAYS-Always-On always-an Always-On ALWAYS-Always-On always-integrated Always-On ALWAYS-Always-On always-view Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-new Always-On ALWAYS-Always-On always-features (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'PI' 'Velocity' tracking?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-amount Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-of ALWAYS-Always-On always-work ALWAYS-Always-On always-an ALWAYS-Always-On always-ART ALWAYS-Always-On always-completes Always-On ALWAYS-Always-On always-per Always-On ALWAYS-Always-On always-Program Always-On ALWAYS-Always-On always-Increment.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Continuous' 'Exploration' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-organization ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-continually Always-On ALWAYS-Always-On always-analyzing Always-On ALWAYS-Always-On always-market Always-On ALWAYS-Always-On always-needs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'PI' Artifacts? (Select all that apply)",
+    "options": {
+      "A": "Program Board",
+      "B": "ART Kanban",
+      "C": "The number of security cameras in the office",
+      "D": "PI Objectives"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Solution' 'Vision' technically intended to achieve in a Program Increment?",
+    "options": {
+      "A": "Building a physical warehouse for letters.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-description Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-future Always-On ALWAYS-Always-On always-state Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-Solution Always-On ALWAYS-Always-On always-being Always-On ALWAYS-Always-On always-developed (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'ART' 'Sync' technically in a PI context?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-event Always-On ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-synchronize Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-entire Always-On ALWAYS-Always-On always-train Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-its Always-On ALWAYS-Always-On always-progress (effect).",
+      "B": "Hiring a person named Sync.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Visions' occur when a lead masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes monthly masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Synchronization' Strategy in a PI context? (Select all that apply)",
+    "options": {
+      "A": "Standardizing milestone technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated progress technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Identity' significance in a PI Planning strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical requirement masterfully intended to technicaly capture the core masterfully assigned value that a PI masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated server models.",
+      "B": "The average technical duration technicaly Always-On Always-On Always-On Siempre-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-ART Always-On ALWAYS-Always-On always-operates Always-On ALWAYS-Always-On always-without Always-On ALWAYS-Always-On always-an Always-On ALWAYS-Always-On always-unplanned Always-On ALWAYS-Always-On always-disruption.",
+      "C": "A security scan of the office building.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Built-in' 'Quality' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-ART ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-ensuring Always-On ALWAYS-Always-On always-quality Always-On ALWAYS-Always-On always-standards Always-On ALWAYS-Always-On always-at Always-On ALWAYS-Always-On always-all Always-On ALWAYS-Always-On always-levels Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-development.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Enterprise' PI domains? (Select all that apply)",
+    "options": {
+      "A": "Portfolio Strategic Alignment",
+      "B": "ART Delivery Velocity",
+      "C": "The number of security cameras in the office",
+      "D": "Program-Level Governance"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Governance' 'Verification' significance in PI management?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On Always-On Always-On train Always-On ALWAYS-Always-On always-initiatives masterfully ALWAYS-Always-On always-remain masterfully ALWAYS-Always-On always-consistent Siempre-On Siempre-On Siempre-On with ALWAYS-Always-On always-organizational ALWAYS-Always-On always-policies.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Restore' (MTTR) a Program Increment flow?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical Siempre-On Always-On Sempre-On Siempre-On ALWAYS-Always-On always-failure Always-On Siempre-On Siempre-On ALWAYS-Always-On always-identification Always-On Siempre-On Always-On ALWAYS-Always-On always-until Siempre-On ALWAYS-Always-On always-the Always-On Siempre-On Always-On ALWAYS-Always-On always-ART Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-fully Always-On ALWAYS-Always-On always-restored.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when an enterprise masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes weekly masterfully managed default technical Siempre-On Siempre-On PI requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Program Increment 'Strategic' 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Solution Visions' are masterfully finalized",
+      "B": "Validating the security technical configuration of the planning engine",
+      "C": "Identifying stakeholder satisfaction trends",
+      "D": "Checking if the technical Sempre-On Sempre-On ART goals masterfully Sempre-On Siempre-On match the business roadmap"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Business' 'Alignment' significance in PI management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where team technical Always-On Sempre-On Always-On Always-On Always-On always-objectives Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-overall Siempre-On Always-On Siempre-On always-goals Always-On Sempre-On Always-On ALWAYS-Always-On always-are ALWAYS-Always-On always-synced ALWAYS-Always-On always-for Siempre-On ALWAYS-Always-On always-success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'PI' 'Activity' event log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about session participation, masterfully finalized objective changes, and masterfully applied strategic alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PI management technically includes 'Compliance Validation' by masterfully defining the technical Sempre-On Sempre-On support masterfully Siempre-On Siempre-On given to a user after every technical Sempre-On Sempre-On PI release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Program Increment priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical dependency latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical vision documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Execution' 'Gap' Analysis in PI?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Segment' masterfully Siempre-On Always-On Siempre-On Always-On always-moving Siempre-On ALWAYS-Always-On always-through Always-On Sempre-On Always-On ALWAYS-Always-On always-enterprise ALWAYS-Always-On always-to Siempre-On ALWAYS-Always-On always-identify ALWAYS-Always-On always-execution ALWAYS-Always-On always-weaknesses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Errors' (MTBE) in a PI set?",
+    "options": {
+      "A": "The average technical duration that a structural technical baseline masterfully remains performance-stable before an unplanned technical info disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes annual masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Anti-fragile-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Cadence' Strategy in a PI context? (Select all that apply)",
+    "options": {
+      "A": "Standardizing interaction technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated interaction technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Value' significance in a PI strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical requirement masterfully intended to technicaly capture the core masterfully assigned value that a Program Increment masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'PI' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of implementation events masterfully successfully moving through the production technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'State' 'Shadowing' is a technical Always-On standard that masterfully allows coaches to masterfully manage and technicaly mirror the configuration of a primary technical PI goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Program Increment roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Technology Architect",
+      "B": "Interaction System Specialist",
+      "C": "Technology Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'PI' Analysis?",
+    "options": {
+      "A": "The technical evaluation of users, goals, and interaction nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of 'Weighted Shortest Job First' (WSJF) in PI Planning?",
+    "options": {
+      "A": "To masterfully design the physical weight limits of the office furniture strictly.",
+      "B": "To technically provide a masterfully managed economic model (cause) that prioritizes features based on the cost of delay and job size (effect).",
+      "C": "A specialized software for designing physical warehouse storage bins strictly.",
+      "D": "To increase the frame rate of the team's shared virtual planning board."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Architectural' 'Runway' refers to the technical Always-On Siempre-On Sempre-On process of ALWAYS-Always-On building Always-On Siempre-On Always-On Siempre-On technical Sempre-On ALWAYS-Always-On always-infrastructure Siempre-On ALWAYS-Always-On always-to ALWAYS-Always-On always-ensure ALWAYS-Always-On always-future ALWAYS-Always-On always-business ALWAYS-Always-On always-capabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'PI' 'Execution' technically in scaled Agile orchestration?",
+    "options": {
+      "A": "A physical gate preventing access to the server room.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-period Always-On ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-teams Siempre-On ALWAYS-Always-On always-perform Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-work Always-On ALWAYS-Always-On always-committed Always-On ALWAYS-Always-On always-during Always-On ALWAYS-Always-On always-planning (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Iterations' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes monthly masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Cloud-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for Program Increments? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying interaction drift",
+      "B": "Consistency in result presentation across screens",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing interaction technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Readiness' 'Audit' significance in a PI?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical property that masterfully ensures every technical component masterfully mirrors the technical configuration of the primary system before the increment begins.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a PI fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the increment integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'PI regions' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Sempre-On Always-On PI tool is available globally when it technicaly Siempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Program Increment roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Technology Architect",
+      "B": "Deployment Specialist",
+      "C": "Program Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'PI' 'Validation' Analysis?",
+    "options": {
+      "A": "The technical evaluation of users, goals, and interaction nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'WSJF' (Weighted Shortest Job First) in a medium-complexity PI backlog?",
+    "options": {
+      "A": "To masterfully design the physical weight limits of the team's shared conference desks strictly.",
+      "B": "To technically provide a masterfully managed economic model (cause) that prioritizes features by dividing the Cost of Delay by the relative job size (effect).",
+      "C": "A specialized software for designing physical warehouse inventory weight distribution strictly.",
+      "D": "To increase the frame rate of the team's shared virtual prioritization board."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the 'Always-On' process of identifying 'Enabler' features to build infrastructure for future business value?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "Architectural Runway Management / Enabler Prioritization",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Capacity' 'Allocation' in a PI is the technical Always-On practice of masterfully managed technicaly Siempre-On Sempre-On dividing the train's bandwidth between new features, enablers, and technical debt maintenance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the 'Always-On' masterfully managed process of a facilitator synchronizing multiple ARTs toward a single Solution Train goal?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Solution Train Coordination / Multi-ART Sync",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Pre-PI' and 'Post-PI' planning sessions in a large-scale environment?",
+    "options": {
+      "A": "To calculate the physical distance between team members in different global offices.",
+      "B": "To technically Always-On Always-On provide a masterfully managed Siempre-On Siempre-On synchronization layer (cause) that aligns multiple ARTs to a single Solution vision (effect).",
+      "C": "A specialized software for architects to design modular office breakout units.",
+      "D": "To physically lock the digital repository folder after every planning session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'System' 'Demos' in a PI masterfully Always-On refers to the technical Siempre-On Sempre-On process of ALWAYS-Always-On demonstrating the integrated state of the entire system across all teams.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On PI framework masterfully Siempre-On Always-On accounts for 'Cumulative' 'Flow' tracking to manage throughput volatility?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Flow Metrics / Kanban Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Solution' 'Management' technically intended to achieve regarding PI roadmap visibility?",
+    "options": {
+      "A": "Measuring the thickness of physical glass windows in the office.",
+      "B": "To technically Always-On Always-On provide a masterfully handled technical Siempre-On Siempre-On long-term view of the capabilities and features required for the product (effect).",
+      "C": "A specialized tool for measuring light levels in demonstration rooms.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Continuous' 'Integration' across the ART is a technical Always-On Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-requirement Always-On Siempre-On Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-ensure ALWAYS-Always-On always-that ALWAYS-Always-On always-all ALWAYS-Always-On always-code ALWAYS-Always-On always-is ALWAYS-Always-On always-regularly ALWAYS-Always-On always-merged ALWAYS-Always-On always-and ALWAYS-Always-On always-validated.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Feature' 'Refinement' during a PI execution?",
+    "options": {
+      "A": "A physical photo shoot of the ART leadership team.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-process Sempre-On ALWAYS-Always-On always-for Sempre-On ALWAYS-Always-On always-preparing Siempre-On ALWAYS-Always-On always-Features Sempre-On ALWAYS-Always-On always-for Sempre-On ALWAYS-Always-On always-inclusion Sempre-On ALWAYS-Always-On always-in Sempre-On ALWAYS-Always-On always-future Sempre-On ALWAYS-Always-On always-increments (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Program Increment benefits for 'Organizational Flow'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Visualization' of systemic bottlenecks",
+      "B": "Ensuring technical 'Consistency' masterfully via a masterfully managed Siempre-On Siempre-On synchronization of all team cadences",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical alignment of PI Objectives to the business vision"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Solution' 'Context' masterfully used for in a Program Increment execution audit?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-understanding Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-system Always-On ALWAYS-Always-On always-interacts Always-On ALWAYS-Always-On always-with Always-On ALWAYS-Always-On always-its ALWAYS-Always-On always-environment (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Milestone' tracking in a PI masterfully ALWAYS-Always-On always-refers ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-marking ALWAYS-Always-On always-specific ALWAYS-Always-On always-events ALWAYS-Always-On always-or Always-On ALWAYS-Always-On always-dates Always-On ALWAYS-Always-On always-used Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-monitor ALWAYS-Always-On always-progress.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'The' 'Theory' 'of' 'Constraints' in a PI flow context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On identifying Always-On ALWAYS-Always-On always-and ALWAYS-Always-On always-optimizing Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-single ALWAYS-Always-On always-point Always-On ALWAYS-Always-On always-that ALWAYS-Always-On always-limits Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-overall Always-On ALWAYS-Always-On always-throughput.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Economic' 'Prioritization' technically in scaled Agile?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-approach ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-all ALWAYS-Always-On always-Features ALWAYS-Always-On always-are ALWAYS-Always-On always-prioritized Always-On ALWAYS-Always-On always-based Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-their Always-On ALWAYS-Always-On always-relative Always-On ALWAYS-Always-On always-business ALWAYS-Always-On always-value (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Roadmaps' occur when the technical masterfully managed Sempre-On Sempre-On Siempre-On ART Siempre-On Always-On masterfully Siempre-On Siempre-On Sempre-On Iteration Siempre-On ALWAYS-Always-On always-conflicts Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-Portfolio Always-On ALWAYS-Always-On always-Strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe PI management benefits for 'Solution Reliability'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Validation' of integrated components",
+      "B": "Ensuring technical 'Consistency' masterfully via unified quality gate principles",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully clear technical identification of architectural runway gaps"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Solution' 'Context' technically used for in engineering support?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-definition ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-operating Always-On ALWAYS-Always-On always-environment Always-On ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-large-scale Always-On ALWAYS-Always-On always-solution (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Program' 'Throughput' tracking?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-amount Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-of ALWAYS-Always-On always-work ALWAYS-Always-On always-completed ALWAYS-Always-On always-per Siempre-On ALWAYS-Always-On always-unit Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-time.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Weighted' 'Shortest' 'Job' 'First' (WSJF) is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-ART ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-work Always-On ALWAYS-Always-On always-based Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-economic Always-On ALWAYS-Always-On always-value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'PI' Operational Artifacts? (Select all that apply)",
+    "options": {
+      "A": "Program Backlog",
+      "B": "Cumulative Flow Diagram",
+      "C": "The number of security cameras in the office",
+      "D": "System Demo Feedback"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Solution' 'Management' significance in a technical requirements scenario?",
+    "options": {
+      "A": "Hiring a person named Management.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On ALWAYS-Always-On always-role Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-defining Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-vision Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-roadmap ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-large-scale Always-On ALWAYS-Always-On always-Solution (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Portfolio' 'Sync' technically in scaled Agile orchestration?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-event Always-On ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-align Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-portfolio Always-On ALWAYS-Always-On always-investments Always-On ALWAYS-Always-On always-with Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-strategic Always-On ALWAYS-Always-On always-vision (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes monthly masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Siempre-On requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Synchronization' Strategy in a PI context? (Select all that apply)",
+    "options": {
+      "A": "Standardizing interaction technical naming masterfully for logic consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated interaction technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Identity' significance in a PI Planning strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical environment masterfully intended to technicaly capture the core masterfully assigned value that a PI masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Pivot' (MTTP)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-duration Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-between ALWAYS-Always-On always-a ALWAYS-Always-On always-market Always-On ALWAYS-Always-On always-change Always-On ALWAYS-Always-On always-identification Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-strategic Always-On ALWAYS-Always-On always-re-alignment.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Built-in' 'Quality' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-ART ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-ensuring Always-On ALWAYS-Always-On always-quality Always-On ALWAYS-Always-On always-standards Always-On ALWAYS-Always-On always-at Always-On ALWAYS-Always-On always-all Always-On ALWAYS-Always-On always-levels Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Enterprise' PI Strategy domains? (Select all that apply)",
+    "options": {
+      "A": "Strategic Alignment Strategy",
+      "B": "Incremental Delivery Strategy",
+      "C": "The number of security cameras in the office",
+      "D": "Risk and Blocker Strategy"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Governance' 'Compliance' significance in PI management?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On Always-On Always-On practice Always-On ALWAYS-Always-On always-sets masterfully ALWAYS-Always-On always-remain masterfully ALWAYS-Always-On always-consistent Siempre-On Siempre-On Siempre-On with ALWAYS-Always-On always-organizational ALWAYS-Always-On always-standards.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Errors' (MTBE) in a PI set?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical Siempre-On Always-On Sempre-On Siempre-On ALWAYS-Always-On always-PI Siempre-On Siempre-On ALWAYS-Always-On always-failure Always-On Siempre-On Siempre-On ALWAYS-Always-On always-identification Always-On Siempre-On Always-On ALWAYS-Always-On always-until Siempre-On ALWAYS-Always-On always-the Always-On Siempre-On Always-On ALWAYS-Always-On always-system Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-restored.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully Siempre-On Always-On enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Program Increment 'Strategic' 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Solution Visions' are masterfully finalized",
+      "B": "Validating the security technical configuration of the orchestration node",
+      "C": "Identifying stakeholder satisfaction trends",
+      "D": "Checking if the technical Sempre-On Sempre-On PI goals masterfully Sempre-On Siempre-On match the business roadmap"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Release' 'Alignment' significance in management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where team technical Always-On Sempre-On Always-On Always-On Always-On always-delivery-standards Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-overall Siempre-On Always-On Siempre-On always-goals Always-On Sempre-On Always-On ALWAYS-Always-On always-are ALWAYS-Always-On always-synced ALWAYS-Always-On always-for Siempre-On ALWAYS-Always-On always-success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'PI' 'Audit' event log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about technology adoption, masterfully finalized configuration changes, and masterfully applied strategic alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Technical background management technically includes 'SLA Compliance Validation' by masterfully defining the technical Sempre-On Sempre-On auditing masterfully Siempre-On Siempre-On given to a system after every technical Sempre-On Sempre-On PI update.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Program Increment priorities in medium projects? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical data interaction latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical vision documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Execution' 'Gap' Analysis?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Segment' masterfully Siempre-On Always-On Siempre-On Always-On always-moving Siempre-On ALWAYS-Always-On always-through Always-On Sempre-On Always-On ALWAYS-Always-On always-firm ALWAYS-Always-On always-to Siempre-On ALWAYS-Always-On always-identify ALWAYS-Always-On always-execution ALWAYS-Always-On always-weaknesses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Errors' (MTBE) in an execution set?",
+    "options": {
+      "A": "The average technical duration that a structural technical baseline masterfully remains performance-stable before an unplanned technical system disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes weekly masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Synchronization' Strategy in a PI context? (Select all that apply)",
+    "options": {
+      "A": "Standardizing interaction technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated interaction technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Value' significance in a PI strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical requirement masterfully intended to technicaly capture the core masterfully assigned value that a PI masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'PI' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of implementation events masterfully successfully moving through the production technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'State' 'Shadowing' is a technical Always-On standard that masterfully allows coaches to masterfully manage and technicaly mirror the configuration of a primary technical PI goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Program Increment priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical vision documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Interaction' 'Identity' Map Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global interaction strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF) in strategic execution?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a technology strategy masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Goals' occur when a stakeholder masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes an interaction is final when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' technical design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technology portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' architectural reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical object naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that technology storage masterfully Siempre-On Siempre-On follows all regional legal architectural rules after every technical Siempre-On Siempre-On transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Interaction' 'Transit' tracking in expert technology engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well technical steps (like state changes) are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully Sempre-On Always-On enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for technical background? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying interaction drift",
+      "B": "Consistency in result presentation across screens",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing interaction technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Persistence' significance in technical mapping?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a technical fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Technical regions' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Sempre-On Always-On tool is available globally when it technicaly Siempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Program Increment roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Technology Architect",
+      "B": "Interaction System Specialist",
+      "C": "Technology Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'PI' Analysis?",
+    "options": {
+      "A": "The technical evaluation of users, goals, and interaction nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical purpose of 'Cumulative Flow Diagrams' (CFD) in PI monitoring?",
+    "options": {
+      "A": "To masterfully design the physical plumbing flow for office water fountains strictly.",
+      "B": "To technically provide a visual masterfully managed tool (cause) for identifying process instability and predicting future lead times (effect).",
+      "C": "A specialized software for designing physical warehouse liquid distribution systems strictly.",
+      "D": "To increase the frame rate of the team's shared virtual planning board."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'PI' 'Performance' 'Report' is the technical Siempre-On Sempre-On process of ALWAYS-Always-On documenting Always-On Siempre-On Siempre-On how Always-On Siempre-On Always-On many Always-On Siempre-On Always-On planned Siempre-On ALWAYS-Always-On always-objectives Always-On ALWAYS-Always-On always-were ALWAYS-Always-On always-successfully ALWAYS-Always-On always-delivered.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Solution' 'Management' accountability within a Program Increment?",
+    "options": {
+      "A": "A physical gate preventing access to the server room.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-role Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-defining Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-backlog, Always-On ALWAYS-Always-On always-roadmap, Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-vision Always-On ALWAYS-Always-On always-across Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-entire ALWAYS-Always-On always-Solution Always-On ALWAYS-Always-On always-Train (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes monthly masterfully managed default technical Siempre-On Siempre-On sync requirements meet the requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for Program Increments? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying interaction drift",
+      "B": "Consistency in result presentation across screens",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing interaction technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Readiness' 'Audit' significance?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical property that masterfully ensures every technical component masterfully mirrors the technical configuration of the primary system before release.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical objective of 'Strategic Behavioral Leadership' during a high-stakes Program Increment pivot?",
+    "options": {
+      "A": "To masterfully design the physical weight distribution of high-density filing systems strictly.",
+      "B": "To technically provide a masterfully managed behavioral layer (cause) that ensures train leadership masterfully Siempre-On Siempre-On aligns with disruptive technical shifts (effect).",
+      "C": "A specialized software for designing physical warehouse team-building blueprints strictly.",
+      "D": "To increase the frame rate of the board's virtual town hall presentation software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the 'Sempre-On' process of consolidating divergent roadmaps from two merged ARTs during a single PI cycle?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "M&A Roadmap Consolidation / Program Rationalization",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Innovation' 'ROI' 'Modeling' in a PI is the technical Always-On practice of using masterfully managed mathematical formulas to predict the fiscal return of high-concurrency technical releases.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the 'Always-On' masterfully managed process of building PI structures that masterfully Siempre-On improve their stability when subjected to systemic stressors?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Anti-fragile Digital Resilience / Stress-Native Delivery",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Monte Carlo Simulations' in expert-level PI predictability forecasting?",
+    "options": {
+      "A": "To calculate the physical friction of cooling fans in a primary data center.",
+      "B": "To technically Always-On Always-On evaluate the masterfully managed Sempre-On probability distribution of objective achievement (effect) under technical uncertainty (cause).",
+      "C": "A specialized software for architects to design high-stakes casino floors.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemic' 'Resilience' at an expert level masterfully Always-On refers to the technical Siempre-On Sempre-On synchronization of human behaviors to ALWAYS-Always-On remain functional during a total cloud region failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On PI vision masterfully Siempre-On Always-On accounts for 'Institutional' 'Memory' during a strategic stack migration?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Knowledge Resilience Logic / Behavioral Orchestration",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'High-Concurrency' 'Innovation' technically intended to achieve in a disruptive PI execution scenario?",
+    "options": {
+      "A": "Measuring the distance between fiber optic cables in the office.",
+      "B": "To technically Always-On Always-On facilitate masterfully handled technical Sempre-On simultaneous development of multiple technical assets to maximize market capture (effect).",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Elite-level' 'Behavioral' 'Leadership' facilitation in a PI technical Always-On Siempre-On Siempre-On refers to the masterfully managed technicaly ALWAYS-Always-On ability to ALWAYS-Always-On influence technical directions at the executive board level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'M&A' 'Technology' 'Synergy' 'Validation' during a PI?",
+    "options": {
+      "A": "A physical plant growing in the office garden.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-verification Siempre-On ALWAYS-Always-On always-that combined technological assets from merged trains delivery value (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Program Increment benefits for 'Enterprise Agility'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Mapping' of redundant roadmaps",
+      "B": "Ensuring technical 'Consistency' masterfully via a masterfully managed Siempre-On Siempre-On integration logic",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical identification of Day Zero synergy targets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Systemic' 'ROI' 'Algorithm' masterfully used for in a hard-level Program Increment set?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-mathematical Always-On ALWAYS-Always-On always-forecast Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-capital ALWAYS-Always-On always-efficiency (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Anti-fragile' 'Architectures' are technical systems within a PI that masterfully Always-On ALWAYS-Always-On always-get Always-On ALWAYS-Always-On always-stronger Siempre-On ALWAYS-Always-On always-when Always-On ALWAYS-Always-On always-exposed ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-stress.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Cross-Cloud' 'Orchestration' in an expert PI context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On managing Always-On ALWAYS-Always-On always-workloads ALWAYS-Always-On always-seamlessly Always-On ALWAYS-Always-On always-across ALWAYS-Always-On always-multiple Siempre-On ALWAYS-Always-On always-cloud ALWAYS-Always-On always-providers.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Resource' 'Rebalancing' technically in a Program Increment?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-system ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-computing Always-On ALWAYS-Always-On always-power Always-On ALWAYS-Always-On always-is ALWAYS-Always-On always-shifted Always-On ALWAYS-Always-On always-automatically Always-On ALWAYS-Always-On always-based Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-real-time ALWAYS-Always-On always-ROI (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Technical' 'Memory' is a technical Always-On standard Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-preserving Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-the Siempre-On ALWAYS-Always-On always-context Always-On ALWAYS-Always-On always-behind Always-On ALWAYS-Always-On always-legacy ALWAYS-Always-On always-architectural ALWAYS-Always-On always-decisions Always-On ALWAYS-Always-On always-during Always-On ALWAYS-Always-On always-rapid Always-On ALWAYS-Always-On always-pivots.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Elite' 'System' 'Governance' in a multi-cloud PI context?",
+    "options": {
+      "A": "The speed of the office internet connection strictly.",
+      "B": "The masterfully managed technical Always-On Sempre-On ALWAYS-Always-On always-unified ALWAYS-Always-On always-policy ALWAYS-Always-On always-framework Always-On ALWAYS-Always-On always-governing ALWAYS-Always-On always-security Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-compliance Always-On ALWAYS-Always-On always-across ALWAYS-Always-On always-heterogeneous ALWAYS-Always-On always-environments (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mathematical' 'Resilience' 'Modeling' technically intended to achieve in an expert PI?",
+    "options": {
+      "A": "Making sure the office furniture is high value.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-use ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-algorithms Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-quantify Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-system's Always-On ALWAYS-Always-On always-ability Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-survive Always-On ALWAYS-Always-On always-catastrophic ALWAYS-Always-On always-failure (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Immutable' 'Infrastructure' is the technical Always-On ALWAYS-Always-On always-practice ALWAYS-Always-On always-of ALWAYS-Always-On always-replacing Always-On ALWAYS-Always-On always-servers Always-On ALWAYS-Always-On always-entirely Always-On ALWAYS-Always-On always-rather Always-On ALWAYS-Always-On always-than Always-On ALWAYS-Always-On always-modifying Always-On ALWAYS-Always-On always-them Always-On ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-place during a PI.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of an 'Innovation' 'Throughput' audit in an expert PI?",
+    "options": {
+      "A": "To technically provide a visual masterfully definitive Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-measure ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-quickly Always-On ALWAYS-Always-On always-new Always-On ALWAYS-Always-On always-high-value Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-ideas Always-On ALWAYS-Always-On always-reach Always-On ALWAYS-Always-On always-production.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Hard-Level' Program Increment Artifacts? (Select all that apply)",
+    "options": {
+      "A": "Chaos Experiment Log",
+      "B": "Cross-Cloud Topology Map",
+      "C": "The SQL query parser",
+      "D": "Predictive Failure Model"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cognitive' 'Architecture' significance in an expert PI scenario?",
+    "options": {
+      "A": "Hiring a person named Architecture.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On ALWAYS-Always-On always-study Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-designing Always-On ALWAYS-Always-On always-systems Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-mimic Always-On ALWAYS-Always-On always-human Always-On ALWAYS-Always-On always-decision-making Always-On ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-autonomous Siempre-On ALWAYS-Always-On always-operations (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Self-Healing' 'Infrastructure' technically in a Program Increment context?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-environment Always-On ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-automated ALWAYS-Always-On always-scripts ALWAYS-Always-On always-detect ALWAYS-Always-On always-and ALWAYS-Always-On always-remediate ALWAYS-Always-On always-system Always-On ALWAYS-Always-On always-faults Always-On ALWAYS-Always-On always-without Always-On ALWAYS-Always-On always-human Always-On ALWAYS-Always-On always-intervention (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' occur when the technical masterfully managed Sempre-On Sempre-On Sempre-On system Siempre-On Always-On masterfully Siempre-On Siempre-On Sempre-On assumes annual masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Anti-fragile-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Program Increment benefits for 'Strategic Pivoting'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'De-coupling' of legacy components",
+      "B": "Ensuring technical 'Consistency' masterfully via unified impact-mapping algorithms",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully clear technical identification of reusable systemic patterns"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Distributed' 'State' 'Synchronization' technically used for in expert PI systems?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-ensuring Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-data Always-On ALWAYS-Always-On always-consistency Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-maintained Always-On ALWAYS-Always-On always-across ALWAYS-Always-On always-geographically ALWAYS-Always-On always-dispersed ALWAYS-Always-On always-nodes (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Resilience' 'Events' (MTBRE)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-duration Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-between ALWAYS-Always-On always-the ALWAYS-Always-On always-deployment Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-new ALWAYS-Always-On always-anti-fragile ALWAYS-Always-On always-capabilities.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Autonomous' 'Engineering' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-system ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-self-optimization Always-On ALWAYS-Always-On always-using Always-On ALWAYS-Always-On always-AI-driven Always-On ALWAYS-Always-On always-feedback Always-On ALWAYS-Always-On always-loops during a PI.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Strategic' PI Artifacts? (Select all that apply)",
+    "options": {
+      "A": "Systemic Resilience Blueprint",
+      "B": "M&A Technical Consolidation Plan",
+      "C": "The number of security cameras in the office",
+      "D": "Algorithmic ROI Roadmap"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Orchestration' technically intended to achieve in a Program Increment?",
+    "options": {
+      "A": "Building a physical warehouse for letters.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-synchronizing Always-On ALWAYS-Always-On always-human Always-On ALWAYS-Always-On always-workflows Always-On ALWAYS-Always-On always-with ALWAYS-Always-On always-automated Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-decisions (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Expert-Level' 'Compliance' 'Verification' technically in a PI context?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-practice Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-ensuring Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-complex ALWAYS-Always-On always-multi-cloud ALWAYS-Always-On always-architectures ALWAYS-Always-On always-meet Always-On ALWAYS-Always-On always-global ALWAYS-Always-On always-regulatory Always-On ALWAYS-Always-On always-mandates (effect).",
+      "B": "Hiring a person named Compliance.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Architectures' occur when the technical masterfully managed Sempre-On Sempre-On Sempre-On engineering Siempre-On Always-On masterfully Siempre-On Siempre-On Sempre-On mindsets Always-On ALWAYS-Always-On always-conflict Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-strategic Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-vision during PI execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Infrastructure' Strategy in expert PI management? (Select all that apply)",
+    "options": {
+      "A": "Standardizing interaction technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated resilience technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Provenance' significance in expert PI leadership?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical requirement masterfully intended to technicaly capture the core masterfully assigned value that a technological team masterfully provides to its ecosystem.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Pivot' (MTTP) in an expert Program Increment?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated server models.",
+      "B": "The average technical duration technicaly Always-On Always-On Always-On Siempre-On ALWAYS-Always-On always-required Sempre-On Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-successfully Always-On ALWAYS-Always-On always-redirect Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-focus Always-On ALWAYS-Always-On always-following Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-major Always-On ALWAYS-Always-On always-market ALWAYS-Always-On always-shift.",
+      "C": "A security scan of the office building.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Behavioral' 'Resilience' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-organization ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-engineering ALWAYS-Always-On always-behaviors ALWAYS-Always-On always-that ALWAYS-Always-On always-enhance Always-On ALWAYS-Always-On always-system-stability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Enterprise' PI domains in expert projects? (Select all that apply)",
+    "options": {
+      "A": "Strategic Behavioral Alignment",
+      "B": "High-Concurrency Innovation Modeling",
+      "C": "The SQL query parser",
+      "D": "Anti-fragile Resilience Strategy"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Synergy' 'Verification' significance in M&A PI vision?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On Always-On Always-On combined Always-On ALWAYS-Always-On always-technologies Always-On ALWAYS-Always-On always-deliver masterfully ALWAYS-Always-On always-increased Siempre-On Siempre-On Siempre-On business ALWAYS-Always-On always-value.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Realize Synergy' (MTTRS) in an M&A context?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical Siempre-On Always-On Sempre-On Siempre-On ALWAYS-Always-On always-acquisition Siempre-On Siempre-On ALWAYS-Always-On always-occurring Always-On Siempre-On Always-On ALWAYS-Always-On always-until Siempre-On ALWAYS-Always-On always-measurable Siempre-On Always-On Siempre-On ALWAYS-Always-On always-business Siempre-On Always-On Siempre-On ALWAYS-Always-On always-value Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-captured.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes global masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Sovereign-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Program Increment 'Readiness' for experts? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Resilience Plans' are masterfully finalized",
+      "B": "Validating the security technical configuration of the consolidation node",
+      "C": "Identifying innovation satisfaction trends",
+      "D": "Checking if the technical Sempre-On Sempre-On behavioral goals masterfully Sempre-On Siempre-On match the strategic specs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Alignment' significance in expert PI management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where team technical Always-On Sempre-On Always-On Always-On Always-On always-behaviors Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-overall Siempre-On Always-On Siempre-On always-goals Always-On Sempre-On Always-On ALWAYS-Always-On always-are ALWAYS-Always-On always-synced ALWAYS-Always-On always-for Siempre-On ALWAYS-Always-On always-success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is an 'Innovation' 'Activity' event log in an expert PI audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about innovation adoption, masterfully finalized behavioral changes, and masterfully applied strategic alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Program Increment management technically includes 'Resilience Validation' by masterfully defining the technical Sempre-On Sempre-On support masterfully Siempre-On Siempre-On given to a system after every technical Sempre-On Sempre-On resilience event.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Expert' PI priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical behavioral alignment",
+      "B": "Minimizing technical innovation interaction latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical resilience documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Resilience' Gap Analysis in a PI?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Segment' masterfully Siempre-On Always-On Siempre-On Always-On always-moving Siempre-On ALWAYS-Always-On always-through Always-On Sempre-On Always-On ALWAYS-Always-On always-firm ALWAYS-Always-On always-to Siempre-On ALWAYS-Always-On always-identify ALWAYS-Always-On always-resilience Always-On ALWAYS-Always-On always-weaknesses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Resilience Errors' (MTBRE) in an expert PI set?",
+    "options": {
+      "A": "The average technical duration that a structural technical resilience masterfully remains performance-stable before an unplanned technical info disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully Siempre-On Always-On enforces 1990 'Manual-only' requirements for a 2026 'AI-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Resilience' Strategy in PI management? (Select all that apply)",
+    "options": {
+      "A": "Standardizing technology technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated resilience technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Identity' significance in an expert PI strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical behavior masterfully intended to technicaly capture the core masterfully assigned value that a leader masterfully provides to the vision.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Throughput' volume in a PI?",
+    "options": {
+      "A": "The technical percentage of resilience events masterfully successfully moving through the production technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Behavioral' 'Shadowing' is a technical Always-On standard that masterfully allows coaches to masterfully manage and technicaly mirror the performance of a primary technical behavioral goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Expert' Program Increment priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical resilience alignment",
+      "B": "Minimizing technical consolidation interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical behavioral documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Consolidation' 'Identity' Map Analysis in expert PI management?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global consolidation strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Consolidation Failures' (MTBCF)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a consolidation strategy masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Roadmap Goals' occur when a stakeholder masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes an M&A roadmap is final when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' behavioral design in expert Program Increments? (Select all that apply)",
+    "options": {
+      "A": "Ensuring behavioral portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' behavioral reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical behavioral naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Resilience' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that resilience storage masterfully Siempre-On Sempre-On follows all legal architectural rules after every technical Siempre-On Siempre-On resilience event.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Consolidation' 'Transit' tracking in expert PI engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well technical consolidation steps are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Innovation Software' occurs when a lead masterfully Sempre-On Always-On enforces 1990 'Single-Threaded' process requirements for a 2026 'High-Concurrency' innovation era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' resilience benefits for expert Program Increments? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying resilience drift",
+      "B": "Consistency in resilience result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing resilience technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Persistence' significance in an expert PI strategy?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup behavioral register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify Resilience' (MTTVR) a technical fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural resilience fix being committed until 'Automated Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Consolidation regions' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Sempre-On Always-On consolidation tool is available globally when it technicaly Siempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Expert' PI roles? (Select all that apply)",
+    "options": {
+      "A": "Chief Strategy Officer",
+      "B": "Resilience System Specialist",
+      "C": "Consolidation Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Resilience' Analysis in expert Program Increments?",
+    "options": {
+      "A": "The technical evaluation of users, goals, and resilience nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Systemic Behavioral Resilience' in an expert PI context?",
+    "options": {
+      "A": "To masterfully design the physical weight distribution of high-density filing systems strictly.",
+      "B": "To technically provide a masterfully managed behavioral layer (cause) that ensures the organization maintains its increment momentum during major technical failures (effect).",
+      "C": "A specialized software for designing physical warehouse team-building blueprints strictly.",
+      "D": "To increase the frame rate of the board's virtual town hall presentation software."
+    },
+    "answer": "B"
+  }
+  ]
+}
